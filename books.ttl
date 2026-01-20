@@ -1,0 +1,434 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+@prefix : <urn:stklug84:BooksOntology:2024-12-18> .
+@base <urn:stklug84:BooksOntology:2024-12-18> .
+
+<urn:stklug84:BooksOntology:2024-12-18> rdf:type owl:Ontology ;
+										rdfs:label "Book Ontology" ;
+										rdfs:comment "An ontology containing information about books" ;
+										owl:imports <urn:stklug84:BooksOntology:2024-12-18> .
+
+
+# #############################################################################
+#
+# Enumeration Classes for Grades
+#
+# #############################################################################
+
+:Grade rdf:type owl:Class ;
+       rdfs:label "Grade" ;
+	   rdfs:comment "A mark indicating the quality of a work."@en .
+
+:A rdf:type owl:Class ;
+   rdfs:subClassOf :Grade ;
+   rdfs:label "A" ;
+   rdfs:comment "The highest grade."@en .
+
+:B rdf:type owl:Class ;
+   rdfs:subClassOf :Grade ;
+   rdfs:label "B" ;
+   rdfs:comment "The second highest grade."@en .
+
+:C rdf:type owl:Class ;
+   rdfs:subClassOf :Grade ;
+   rdfs:label "C" ;
+   rdfs:comment "The third highest grade."@en .
+
+:D rdf:type owl:Class ;
+   rdfs:subClassOf :Grade ;
+   rdfs:label "D" ;
+   rdfs:comment "The fourth highest grade."@en .
+
+:E rdf:type owl:Class ;
+   rdfs:subClassOf :Grade ;
+   rdfs:label "E" ;
+   rdfs:comment "The fifth highest grade."@en .
+
+:F rdf:type owl:Class ;
+   rdfs:subClassOf :Grade ;
+   rdfs:label "F" ;
+   rdfs:comment "The lowest grade."@en .
+
+
+# #############################################################################
+#
+# Enumeration Classes for Time Periods
+#
+# #############################################################################
+
+:Date rdf:type owl:Class ;
+	  rdfs:label "Date" ;
+	  rdfs:comment "A particular day of the month or year."@en .
+
+:Time rdf:type owl:Class ;
+	  rdfs:label "Time" ;
+	  rdfs:comment "A period during which an action, process, or condition exists or continues."@en .
+
+:Once rdf:type owl:Class ;
+	  rdfs:subClassOf :Time ;
+	  rdfs:label "Once" ;
+	  rdfs:comment "A periodical that is published only once."@en .
+
+:Daily rdf:type owl:Class ;
+	   rdfs:subClassOf :Time ;
+	   rdfs:label "Daily" ;
+	   rdfs:comment "A periodical that is published every day."@en .
+
+:Weekly rdf:type owl:Class ;
+	    rdfs:subClassOf :Time ;
+		rdfs:label "Weekly" ;
+		rdfs:comment "A periodical that is published every week."@en .
+
+:Monthly rdf:type owl:Class ;
+		 rdfs:subClassOf :Time ;
+		 rdfs:label "Monthly" ;
+		 rdfs:comment "A periodical that is published every month."@en .
+
+:EveryYear rdf:type owl:Class ;
+		   rdfs:subClassOf :Time ;
+		   rdfs:label "Every-Year" ;
+		   rdfs:comment "A periodical that is published every year."@en .
+
+
+# #############################################################################
+#
+# Enumeration Classes for Sizes
+#
+# #############################################################################
+
+:Size rdf:type owl:Class ;
+	  rdfs:label "Size" ;
+	  rdfs:comment "The physical dimensions of an object."@en .
+
+:VerySmall rdf:type owl:Class ;
+		   rdfs:subClassOf :Size ;
+		   rdfs:label "Very-Small" ;
+		   rdfs:comment "A size that is very small."@en .
+
+:Small rdf:type owl:Class ;
+	   rdfs:subClassOf :Size ;
+	   rdfs:label "Small" ;
+	   rdfs:comment "A size that is not big."@en .
+
+:Medium rdf:type owl:Class ;
+  		rdfs:subClassOf :Size ;
+  		rdfs:label "Medium" ;
+  		rdfs:comment "A size that is neither small nor large."@en .
+
+:Large rdf:type owl:Class ;
+	   rdfs:subClassOf :Size ;
+	   rdfs:label "Large" ;
+	   rdfs:comment "A size that is big."@en .
+
+:VeryLarge rdf:type owl:Class ;
+		   rdfs:subClassOf :Size ;
+		   rdfs:label "Very-Large" ;
+		   rdfs:comment "A size that is very big."@en .
+
+
+# #############################################################################
+#
+# Classes for Textual Content
+#
+# #############################################################################
+
+:ExpressionContent rdf:type owl:Class ;
+				   rdfs:label "ExpressionContent" ;
+				   rdfs:comment "The content of an expression."@en .
+
+:LinguisticExpression rdf:type owl:Class ;
+					  rdfs:subClassOf :ExpressionContent ;
+					  rdfs:label "Linguistic Expression" ;
+					  rdfs:comment "A form of communication that is spoken, written, or signed."@en .
+
+:Text rdf:type owl:Class ;
+	  rdfs:subClassOf :LinguisticExpression ,
+					  [ rdf:type owl:Restriction ;
+						owl:allValuesFrom :Author ;
+						owl:onProperty :writtenBy ] ;
+	  rdfs:label "Text" ;
+	  rdfs:comment "A written or printed work consisting of pages glued or sewn together along one side and bound in covers."@en .
+
+:Article rdf:type owl:Class ;
+		 rdfs:subClassOf :Text ;
+		 rdfs:label "Article" ;
+		 rdfs:comment "A written composition in prose, usually nonfiction, on a specific topic, forming an independent part of a book or other publication, as a newspaper or magazine."@en .
+
+
+# #############################################################################
+#
+# Classes for Books
+#
+# #############################################################################
+
+<http://127.0.0.1:3001/ontology/simplified_sumo.owl#Object> a owl:Class .
+
+<http://127.0.0.1:3001/ontology/books.owl#PrintedMaterial>
+  a owl:Class ;
+  rdfs:subClassOf <http://127.0.0.1:3001/ontology/simplified_sumo.owl#Object> .
+
+<http://127.0.0.1:3001/ontology/books.owl#Publication>
+  a owl:Class ;
+  rdfs:subClassOf <http://127.0.0.1:3001/ontology/books.owl#PrintedMaterial>, [
+    a owl:Restriction ;
+    owl:allValuesFrom <http://127.0.0.1:3001/ontology/books.owl#Date> ;
+    owl:onProperty <http://127.0.0.1:3001/ontology/books.owl#datePublished>
+  ], [
+    a owl:Restriction ;
+    owl:allValuesFrom <http://127.0.0.1:3001/ontology/books.owl#Publisher> ;
+    owl:onProperty <http://127.0.0.1:3001/ontology/books.owl#publishedBy>
+  ] .
+
+:Monograph rdf:type owl:Class ;
+		   rdfs:subClassOf :Publication ,
+						   [ rdf:type owl:Restriction ;
+							 owl:allValuesFrom :Once ;
+							 owl:onProperty :timePublished
+						   ] ;
+		   rdfs:label "Monograph" ;
+		   rdfs:comment "A detailed written study of a single specialized subject or an aspect of it."@en .
+
+:Author rdf:type owl:Class ;
+		rdfs:subClassOf :Person ;
+		rdfs:label "Author" ;
+		rdfs:comment "A writer of a book, article, or report."@en .
+
+:Book rdf:type owl:Class ;
+	  rdfs:subClassOf :Monograph ,
+	  				  [ rdf:type owl:Restriction ;
+						owl:allValuesFrom :Author ;
+						owl:onProperty :writtenBy ] ,
+					  [ rdf:type owl:Restriction ;
+						owl:allValuesFrom :Book-Type ;
+						owl:onProperty :hasType  ] ,
+					  [ rdf:type owl:Restriction ;
+						owl:allValuesFrom :Title ;
+						owl:onProperty :isTitled ] .
+
+:BookType rdf:type owl:Class ;
+		  rdfs:label "Book-Type" ;
+		  rdfs:comment "The type of a book."@en .
+
+
+
+:Comic rdf:type owl:Class ;
+	   rdfs:subClassOf :Genre ;
+	   rdfs:label "Comic" ;
+	   rdfs:comment "A book or a series of books that tells a story using a combination of words and pictures."@en .
+
+
+
+
+
+
+
+:Encyclopedia rdf:type owl:Class ;
+			  rdfs:subClassOf :Book ,
+							  [ rdf:type owl:Restriction ;
+								owl:allValuesFrom :VeryLarge ;
+								owl:onProperty :hasSize
+							  ] ;
+			  rdfs:label "Encyclopedia" ;
+			  rdfs:comment "A book or set of books giving information on many subjects or on many aspects of one subject and typically arranged alphabetically."@en .
+
+
+
+
+
+:FantasyNovel rdf:type owl:Class ;
+			  rdfs:subClassOf :Novel ;
+			  rdfs:label "Fantasy Novel" ;
+			  rdfs:comment "A novel that is based on imaginative or fanciful concepts."@en .
+
+:Fantasy rdf:type owl:Class ;
+		 rdfs:subClassOf :Genre ;
+		 rdfs:label "Fantasy" ;
+		 rdfs:comment "A genre of fiction that commonly uses magic and other supernatural phenomena as a primary element of plot, theme, or setting."@en .
+
+:Genre rdf:type owl:Class ;
+	   rdfs:label "Genre" ;
+	   rdfs:comment "A category of artistic composition, as in music or literature, characterized by similarities in form, style, or subject matter."@en .
+
+
+
+:HardCover rdf:type owl:Class ;
+		   rdfs:subClassOf :BookType ;
+		   rdfs:label "HardCover" ;
+		   rdfs:comment "A book with a rigid cover."@en .
+
+:Journals rdf:type owl:Class ;
+		  rdfs:subClassOf :SerialPublications ;
+		  rdfs:label "Journals" ;
+		  rdfs:comment "A periodical that is published regularly, typically weekly or monthly."@en .
+
+
+
+
+
+:Magazine rdf:type owl:Class ;
+		  rdfs:subClassOf :SerialPublications ;
+		  rdfs:label "Magazine" ;
+		  rdfs:comment "A periodical that is published weekly or monthly."@en .
+
+
+
+
+
+
+
+<http://127.0.0.1:3001/ontology/books.owl#Newspaper>
+  a owl:Class ;
+  rdfs:subClassOf <http://127.0.0.1:3001/ontology/books.owl#Serial-Publications> .
+
+<http://127.0.0.1:3001/ontology/books.owl#Novel>
+  a owl:Class ;
+  rdfs:subClassOf <http://127.0.0.1:3001/ontology/books.owl#Book>, [
+    a owl:Restriction ;
+    owl:allValuesFrom <http://127.0.0.1:3001/ontology/books.owl#Medium> ;
+    owl:onProperty <http://127.0.0.1:3001/ontology/books.owl#hasSize>
+  ] .
+
+
+
+<http://127.0.0.1:3001/ontology/books.owl#Paper-Back>
+  a owl:Class ;
+  rdfs:subClassOf <http://127.0.0.1:3001/ontology/books.owl#Book-Type> .
+
+:Person rdf:type owl:Class ;
+		rdfs:label "Person" ;
+		rdfs:comment "A human being regarded as an individual."@en .
+
+
+
+
+
+<http://127.0.0.1:3001/ontology/books.owl#Publisher>
+  a owl:Class ;
+  rdfs:subClassOf <http://127.0.0.1:3001/ontology/books.owl#Person> .
+
+<http://127.0.0.1:3001/ontology/books.owl#Reader>
+  a owl:Class ;
+  rdfs:subClassOf <http://127.0.0.1:3001/ontology/books.owl#Person> .
+
+<http://127.0.0.1:3001/ontology/books.owl#Recommanded-Science-Fiction-Short-Story>
+  a owl:Class ;
+  rdfs:subClassOf <http://127.0.0.1:3001/ontology/books.owl#Recommended-Short-Story>, <http://127.0.0.1:3001/ontology/books.owl#Science-Fiction-Short-Story> .
+
+<http://127.0.0.1:3001/ontology/books.owl#Recommended-Short-Story>
+  a owl:Class ;
+  rdfs:subClassOf <http://127.0.0.1:3001/ontology/books.owl#ReviewedObject>, <http://127.0.0.1:3001/ontology/books.owl#Short-Story>, [
+    a owl:Restriction ;
+    owl:allValuesFrom <http://127.0.0.1:3001/ontology/books.owl#A> ;
+    owl:onProperty <http://127.0.0.1:3001/ontology/books.owl#hasGrade>
+  ] .
+
+<http://127.0.0.1:3001/ontology/books.owl#Review> a owl:Class .
+<http://127.0.0.1:3001/ontology/books.owl#ReviewedObject>
+  a owl:Class ;
+  rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:allValuesFrom <http://127.0.0.1:3001/ontology/books.owl#Grade> ;
+    owl:onProperty <http://127.0.0.1:3001/ontology/books.owl#hasGrade>
+  ] .
+
+<http://127.0.0.1:3001/ontology/books.owl#RomanticNovel>
+  a owl:Class ;
+  rdfs:subClassOf <http://127.0.0.1:3001/ontology/books.owl#Novel> .
+
+<http://127.0.0.1:3001/ontology/books.owl#Science-Fiction>
+  a owl:Class ;
+  rdfs:subClassOf <http://127.0.0.1:3001/ontology/books.owl#Genre> .
+
+<http://127.0.0.1:3001/ontology/books.owl#Science-Fiction-Novel>
+  a owl:Class ;
+  rdfs:subClassOf <http://127.0.0.1:3001/ontology/books.owl#Novel>, <http://127.0.0.1:3001/ontology/books.owl#ScienceFictionBook>, _:genid11 .
+
+<http://127.0.0.1:3001/ontology/books.owl#Science-Fiction-Short-Story>
+  a owl:Class ;
+  rdfs:subClassOf <http://127.0.0.1:3001/ontology/books.owl#Short-Story>, _:genid11 .
+
+<http://127.0.0.1:3001/ontology/books.owl#ScienceFictionBook>
+  a owl:Class ;
+  rdfs:subClassOf <http://127.0.0.1:3001/ontology/books.owl#Book> .
+
+<http://127.0.0.1:3001/ontology/books.owl#Serial-Publications>
+  a owl:Class ;
+  rdfs:subClassOf <http://127.0.0.1:3001/ontology/books.owl#Publication>, [
+    a owl:Restriction ;
+    owl:allValuesFrom <http://127.0.0.1:3001/ontology/books.owl#Article> ;
+    owl:onProperty <http://127.0.0.1:3001/ontology/books.owl#contains>
+  ] .
+
+<http://127.0.0.1:3001/ontology/books.owl#Short-Story>
+  a owl:Class ;
+  rdfs:subClassOf <http://127.0.0.1:3001/ontology/books.owl#Book>, [
+    a owl:Restriction ;
+    owl:allValuesFrom <http://127.0.0.1:3001/ontology/books.owl#Paper-Back> ;
+    owl:onProperty <http://127.0.0.1:3001/ontology/books.owl#hasType>
+  ], [
+    a owl:Restriction ;
+    owl:allValuesFrom <http://127.0.0.1:3001/ontology/books.owl#Small> ;
+    owl:onProperty <http://127.0.0.1:3001/ontology/books.owl#hasSize>
+  ] .
+
+
+
+
+
+
+<http://127.0.0.1:3001/ontology/books.owl#Thesis>
+  a owl:Class ;
+  rdfs:subClassOf <http://127.0.0.1:3001/ontology/books.owl#PrintedMaterial> .
+
+
+<http://127.0.0.1:3001/ontology/books.owl#Title>
+  a owl:Class ;
+  rdfs:subClassOf <http://127.0.0.1:3001/ontology/books.owl#LinguisticExpression> .
+
+<http://127.0.0.1:3001/ontology/books.owl#User>
+  a owl:Class ;
+  rdfs:subClassOf <http://127.0.0.1:3001/ontology/books.owl#Person> .
+
+<http://127.0.0.1:3001/ontology/books.owl#UserReview>
+  a owl:Class ;
+  rdfs:subClassOf <http://127.0.0.1:3001/ontology/books.owl#Review> .
+
+
+
+
+
+<http://127.0.0.1:3001/ontology/simplified_sumo.owl#CorpuscularObject> a owl:Class .
+
+<http://127.0.0.1:3001/ontology/books.owl#contains> a owl:ObjectProperty .
+<http://127.0.0.1:3001/ontology/books.owl#datePublished> a owl:ObjectProperty .
+<http://127.0.0.1:3001/ontology/books.owl#hasGenre> a owl:ObjectProperty .
+<http://127.0.0.1:3001/ontology/books.owl#hasGrade> a owl:ObjectProperty .
+<http://127.0.0.1:3001/ontology/books.owl#hasName> a owl:ObjectProperty .
+<http://127.0.0.1:3001/ontology/books.owl#hasSize> a owl:ObjectProperty .
+<http://127.0.0.1:3001/ontology/books.owl#hasType> a owl:ObjectProperty .
+<http://127.0.0.1:3001/ontology/books.owl#isTitled> a owl:ObjectProperty .
+<http://127.0.0.1:3001/ontology/books.owl#publishedBy> a owl:ObjectProperty .
+<http://127.0.0.1:3001/ontology/books.owl#timePublished> a owl:ObjectProperty .
+<http://127.0.0.1:3001/ontology/books.owl#writtenBy> a owl:ObjectProperty .
+<http://127.0.0.1:3001/ontology/books.owl#isReserved>
+  a owl:ObjectProperty ;
+  rdfs:domain <http://127.0.0.1:3001/ontology/books.owl#Book> ;
+  rdfs:comment "A reservation has been made by a person for a book."^^xsd:string .
+
+<http://127.0.0.1:3001/ontology/books.owl#isNotReserved>
+  a owl:ObjectProperty ;
+  rdfs:domain <http://127.0.0.1:3001/ontology/books.owl#Book> ;
+  rdfs:comment "The given book is available in the library."^^xsd:string .
+
+_:genid1
+  a owl:Restriction ;
+  owl:allValuesFrom <http://127.0.0.1:3001/ontology/books.owl#Author> ;
+  owl:onProperty <http://127.0.0.1:3001/ontology/books.owl#writtenBy> .
+
+_:genid11
+  a owl:Restriction ;
+  owl:allValuesFrom <http://127.0.0.1:3001/ontology/books.owl#Science-Fiction> ;
+  owl:onProperty <http://127.0.0.1:3001/ontology/books.owl#hasGenre> .
