@@ -1,0 +1,697 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+@prefix : <urn:stklug84:ComputerGamesOntology:2024-09-22> .
+@base <urn:stklug84:ComputerGamesOntology:2024-09-22> .
+
+
+<urn:stklug84:ComputerGamesOntology:2024-09-22> rdf:type owl:Ontology ;
+                                                rdfs:label "Computer Games Ontology" ;
+                                                rdfs:comment "Describes all my computer games"@en .
+
+
+#################################################
+#
+#  Class Definitions
+#
+#################################################
+
+:Machine rdf:type owl:Class ;
+         rdfs:label "Machine Class" ;
+         rdfs:comment "A Machine that runs an installed computer game"@en .
+
+:Computer rdf:type owl:Class ;
+          rdfs:subClassOf :Machine ;
+          owl:equivalentClass [
+              rdf:type owl:Class ;
+              owl:oneOf (
+                     :m18
+                     :G5587
+              )
+          ] ;
+          rdfs:label "Computer/Notebook Class" ;
+          rdfs:comment "A notebook or gaming machine that runs a computer game"@en .
+
+:Storage rdf:type owl:Class ;
+         rdfs:subClassOf :Machine ;
+         owl:equivalentClass [
+              rdf:type owl:Class ;
+              owl:oneOf (
+                     :icyBox
+                     :icyBoxS
+                     :inaTek
+                     :m18DriveD
+              )
+          ] ;
+         rdfs:label "Harddisk Class" ;
+         rdfs:comment "A harddisk that can store games"@en .
+
+:Smartphone rdf:type owl:Class ;
+            rdfs:subClassOf :Machine ;
+            rdfs:label "Smartphone Class" ;
+            rdfs:comment "A smartphone that can run games inside an emulator"@en .
+
+:OperatingSystem rdf:type owl:Class ;
+                 owl:equivalentClass [
+                     rdf:type owl:Class ;
+                     owl:oneOf (
+                            :linux
+                            :windows
+                     )
+                 ] ;
+                 rdfs:label "Operating System Class" ;
+                 rdfs:comment "Operating system installed on a machine"@en .
+
+:GamingPlatform rdf:type owl:Class ;
+                owl:equivalentClass [
+                     rdf:type owl:Class ;
+                     owl:oneOf (
+                            :battle.net
+                            :gog
+                            :steam
+                     )
+                ] ;
+                rdfs:label "Gaming Platform Class" ;
+                rdfs:comment "Platform to buy and stream computer games"@en .
+
+:ComputerGame rdf:type owl:Class ;
+              rdfs:label "Computer Games Class" ;
+              rdfs:comment "Describes an individual computer game"@en .
+
+:SCummVMGame rdf:type owl:Class ;
+             rdfs:subClassOf :ComputerGame ;
+             rdfs:label "ScummVM Games Class" ;
+             rdfs:comment "Describes a ScummVM Game that can run on the ScummVM platform"@en .
+
+:DownloadableContent rdf:type owl:Class ;
+                     rdfs:subClassOf :ComputerGame ;
+                     rdfs:label "Downloadable Content Class" ;
+                     rdfs:comment "Downloadable content for computer games"@en .
+
+:Tier rdf:type owl:Class ;
+      owl:equivalentClass [
+              rdf:type owl:Class ;
+              owl:oneOf (
+                     :tier1
+                     :tier2
+                     :tier3
+                     :tier4
+              )
+      ] ;
+      rdfs:label "Gaming Tier Class" ;
+      rdfs:comment "Tier classification for computer games"@en .
+
+
+#################################################
+#
+#  Property Definitions
+#
+#################################################
+
+:isAvailableOn rdf:type owl:ObjectProperty ;
+               rdfs:domain :ComputerGame ;
+               rdfs:range :GamingPlatform ;
+               rdfs:label "Availability on Platforms Property" ;
+               rdfs:comment "Describes on which Gaming Platform a Computer Game is available"@en .
+
+:isInstalledOn rdf:type owl:ObjectProperty ;
+               rdfs:domain :ComputerGame ;
+               rdfs:range :GamingPlatform ;
+               rdfs:label "Installation on Gaming Platform Property" ;
+               rdfs:comment "Describes which Gaming Platform a Computer Game is installed"@en .
+
+:isProvidedOn rdf:type owl:ObjectProperty ;
+               rdfs:domain :GamingPlatform ;
+               rdfs:range :Machine ;
+               rdfs:label "Installation on Machine Property" ;
+               rdfs:comment "Describes on which system a Computer Game is installed"@en .
+
+:runsOn rdf:type owl:ObjectProperty ;
+        rdfs:domain :Machine ;
+        rdfs:range :OperatingSystem ;
+        rdfs:label "Runs on OS Property" ;
+        rdfs:comment "The Operating System running on the Machine"@en .
+
+:runsOnStorage rdf:type owl:ObjectProperty ,
+                        owl:FunctionalProperty ;
+               rdfs:subPropertyOf :runsOn ;
+               rdfs:domain :Tier ;
+               rdfs:range :Storage ;
+               rdfs:label "Runs on Storage Property" ;
+               rdfs:comment "The Storage device that holds Computer Games belonging to a certain tier"@en .
+
+:belongsToTier rdf:type owl:ObjectProperty ,
+                        owl:FunctionalProperty ;
+               rdfs:domain :ComputerGame ;
+               rdfs:range :Tier ;
+               rdfs:label "Tier Property" ;
+               rdfs:comment "Describes the tier a Computer Game belongs to"@en .
+
+:releasedOn rdf:type owl:DatatypeProperty ,
+                     owl:FunctionalProperty ;
+            rdfs:domain :ComputerGame ;
+            rdfs:range xsd:date ;
+            rdfs:label "Release Date Property" ;
+            rdfs:comment "The release date of a Computer Game or Downloadable Content"@en .
+
+:hasDLCsOn rdf:type owl:ObjectProperty ;
+           rdfs:domain :ComputerGame ;
+           rdfs:range :GamingPlatform ;
+           rdfs:label "DLCs Exist Property" ;
+           rdfs:comment "DLCs are available on that Gaming PLatform"@en .
+
+:availableDLCs rdf:type owl:ObjectProperty ;
+               rdfs:domain :ComputerGame ;
+               rdfs:range :DownloadableContent ;
+               rdfs:label "DLCs Available Property" ;
+               rdfs:comment "DLCs available and not yet bought on Gaming Platform"@en .
+
+:isOnWishlist rdf:type owl:DatatypeProperty ,
+                       owl:FunctionalProperty ;
+                  rdfs:domain :DownloadableContent ;
+                  rdfs:range xsd:boolean ;
+                  rdfs:label "Wishlist Status Property" ;
+                  rdfs:comment "Flags if a Computer Game is on the wishlist of a Gaming Platform"@en .
+
+:ownsDLCs rdf:type owl:ObjectProperty ;
+          rdfs:domain :ComputerGame ;
+          rdfs:range :DownloadableContent ;
+          rdfs:label "DLCs in Library Property" ;
+          rdfs:comment "DLCs bought on Gaming Platform"@en .
+
+:areAllDLCspurchased rdf:type owl:DatatypeProperty ,
+                           owl:FunctionalProperty ;
+                  rdfs:domain :ComputerGame ;
+                  rdfs:range xsd:boolean ;
+                  rdfs:label "DLC Purchase Status Propery" ;
+                  rdfs:comment "Flags if all DLCs have been purchased for a Computer Game"@en .
+
+:issueOnInstallation rdf:type owl:DatatypeProperty ;
+                     rdfs:domain :ComputerGame ;
+                     rdfs:range xsd:string ;
+                     rdfs:label "Installation Issue Property" ;
+                     rdfs:comment "Describes any issues encountered during installation of the Computer Game"@en .
+
+:issueOnRun rdf:type owl:DatatypeProperty ;
+            rdfs:domain :ComputerGame ;
+            rdfs:range xsd:string ;
+            rdfs:label "Run Issue Property" ;
+            rdfs:comment "Describes any issues encountered during execution of the Computer Game"@en .
+
+:alternativeTitle rdf:type owl:DatatypeProperty ;
+                  rdfs:domain :ComputerGame ;
+                  rdfs:range xsd:string ;
+                  rdfs:label "Alternative Title Property" ;
+                  rdfs:comment "An alternative title for the Computer Game"@en .
+
+
+#################################################
+#
+#  Machine Individuals
+#
+#################################################
+
+:m18 rdf:type :Computer ;
+     :runsOn :windows ;
+     rdfs:label "Alienware m18" ;
+     rdfs:comment "Alienware m18 Windows Gaming Notebook"@en .
+
+:G5587 rdf:type :Computer ;
+       :runsOn :windows ,
+               :linux ;
+       rdfs:label "Dell G5587" ;
+       rdfs:comment "Dell G5587 Notebook"@en .
+
+
+#################################################
+#
+#  Storage Individuals
+#
+#################################################
+
+:icyBox rdf:type :Storage ;
+        rdfs:label "ICY BOX IB-3660-U3" ;
+        rdfs:comment "ICY BOX"@en .
+
+:icyBoxS rdf:type :Storage ;
+         rdfs:label "ICY BOX IB-3660-U3-S" ;
+         rdfs:comment "ICY BOX Silver"@en .
+
+:inaTek rdf:type :Storage ;
+        rdfs:label "Inatek FE2005" ;
+        rdfs:comment "Inatek FE2005"@en .
+
+:m18DriveD rdf:type :Storage ;
+           rdfs:label "Alienware m18 Drive D" ;
+           rdfs:comment "Internal Drive D of Alienware m18"@en .
+
+
+#################################################
+#
+#  Operating System Individuals
+#
+#################################################
+
+:windows rdf:type :OperatingSystem ;
+         rdfs:label "Windows 11" ;
+         rdfs:comment "Windows 11 Operating System installation"@en .
+
+:linux rdf:type :OperatingSystem ;
+       rdfs:label "Debian 12" ;
+       rdfs:comment "Debian 12 Operating System installation"@en .
+
+
+#################################################
+#
+#  Gaming Platform Individuals
+#
+#################################################
+
+:battle.net rdf:type :GamingPlatform ;
+            :isProvidedOn :m18 ;
+            rdfs:label "Blizzard Battle.net" ;
+            rdfs:comment "Blizzard Battle.net Gaming Platform Client"@en .
+
+:steam rdf:type :GamingPlatform ;
+       :isProvidedOn :m18 ,
+                     :G5587 ;
+       rdfs:label "Steam" ;
+       rdfs:comment "Valve's Steam Gaming Platform Client"@en .
+
+:gog rdf:type :GamingPlatform ;
+     :isProvidedOn :m18 ;
+     rdfs:label "Good Old Games" ;
+     rdfs:comment "Good Old Games provide mainly DRM free game installers"@en .
+
+
+#################################################
+#
+#  Tier Individuals
+#
+#################################################
+
+:tier1 rdf:type :Tier ;
+       :runsOnStorage :m18DriveD ;
+       rdfs:label "Tier 1 Gaming Category" ;
+       rdfs:comment "Games that we need to be able to play while not being home"@en .
+
+:tier2 rdf:type :Tier ;
+       :runsOnStorage :inaTek ;
+       rdfs:label "Tier 2 Gaming Category" ;
+       rdfs:comment "Games to be played at big living room screen with Elly"@en .
+
+:tier3 rdf:type :Tier ;
+       :runsOnStorage :icyBox ;
+       rdfs:label "Tier 3 Gaming Category" ;
+       rdfs:comment "Games played at home"@en .
+
+#:tier4 rdf:type :Tier ;
+#       :runsOnStorage :icyBoxS ;
+#       rdfs:label "Tier 4 Gaming Category" ;
+#       rdfs:comment "Games that are rarely played"@en .
+
+:tier4 rdf:type :Tier ;
+       rdfs:label "Tier 4 Gaming Category" ;
+       rdfs:comment "Games that are not installed"@en .
+       
+
+#################################################
+#
+#  Computer Game Individuals
+#
+#################################################
+
+# :game rdf:type :ComputerGame ;
+#       :isAvailableOn [<GamingPlatform>] ;
+#       :isInstalledOn [<GamingPlatform>] ;
+#       :belongsToTier <Tier> ;
+#       :releasedOn "YYYY-MM-DD"^^xsd:date ;
+#       :hasDLCsOn [<GamingPlatform>] ;
+#       :availableDLCs [<DownloadableContent>] ;
+#       :ownsDLCs [<DownloadableContent>] ;
+#       :areAllDLCspurchased <xsd:boolean> ;
+#       :issueOnInstallation "Installation issue description" ;
+#       :issueOnRun "Run issue description" ;
+#       :alternativeTitle "Alternative Game Title" ;
+
+#################################################
+#
+#  Battle.Net Computer Game Individuals
+#
+#################################################
+
+:blizzardArcadeCollection rdf:type :ComputerGame ;
+                          :isAvailableOn :battle.net ;
+                          :isInstalledOn :battle.net ;
+                          :belongsToTier :tier3 ;
+                          #:releasedOn "YYYY-MM-DD"^^xsd:date ;
+                          #:hasDLCsOn [ ] ;
+                          #:availableDLCs [ ] ;
+                          #:ownsDLCs [ ] ;
+                          #:areAllDLCspurchased "true"^^xsd:boolean ;
+                          #:issueOnInstallation "" ;
+                          #:issueOnRun "" ;
+                          #:alternativeTitle "" ;
+                          rdfs:label "Blizzard Arcade Collection" ;
+                          rdfs:comment "Blizzard Arcade Collection featuring several games"@en .
+
+:callOfDutyWarzone rdf:type :ComputerGame ;
+                   :isAvailableOn :battle.net ;
+                   :isInstalledOn :battle.net ;
+                   :belongsToTier :tier3 ;
+                   :releasedOn "2019-10-25"^^xsd:date ;
+                   #:hasDLCsOn [ ] ;
+                   #:availableDLCs [ ] ;
+                   #:ownsDLCs [ ] ;
+                   #:areAllDLCspurchased "true"^^xsd:boolean ;
+                   #:issueOnInstallation "" ;
+                   #:issueOnRun "" ;
+                   :alternativeTitle "Call of Duty" ;
+                   rdfs:label "Call of Duty: Warzone" ;
+                   rdfs:comment "Blizzard's free-to-play first person shooter"@en .
+
+:diablo2Resurrected rdf:type :ComputerGame ;
+                    :isAvailableOn :battle.net ;
+                    :isInstalledOn :battle.net ;;
+                    :belongsToTier :tier3 ;
+                    :releasedOn "2021-09-22"^^xsd:date ;
+                    #:hasDLCsOn [ ] ;
+                    #:availableDLCs [ ] ;
+                    #:ownsDLCs [ ] ;
+                    #:areAllDLCspurchased "true"^^xsd:boolean ;
+                    #:issueOnInstallation "" ;
+                    #:issueOnRun "" ;
+                    #:alternativeTitle "Diablo II: Res." ;
+                    rdfs:label "Diablo II: Resurrected" ;
+                    rdfs:comment "Remastered version of orginal Diablo II including Lord of Destruction expansion"@en .
+
+:diablo3 rdf:type :ComputerGame ;
+         :isAvailableOn :battle.net ;
+         :isInstalledOn :battle.net ;
+         :belongsToTier :tier3 ;
+         :releasedOn "2012-05-12"^^xsd:date ;
+         :hasDLCsOn :battle.net ;
+         #:availableDLCs [ ] ;
+         :ownsDLCs [
+              rdf:type :DownloadableContent ;
+              :isOnWishlist "false"^^xsd:boolean ;
+              rdfs:label "Reaper of Souls Expansion" ;
+              rdfs:comment "Diablo III: Reaper of Souls expansion pack"@en
+         ] ,
+         [
+              rdf:type :DownloadableContent ;
+              :isOnWishlist "false"^^xsd:boolean ;
+              rdfs:label "Rise of the Necromancer Expansion" ;
+              rdfs:comment "Diablo III: Rise of the Necromancer expansion pack"@en
+         ] ;
+         :areAllDLCspurchased "true"^^xsd:boolean ;
+         #:issueOnInstallation "" ;
+         #:issueOnRun "" ;
+         #:alternativeTitle "" ;
+         rdfs:label "Diablo III" ;
+         rdfs:comment "Diablo III Action RPG Game"@en .
+
+:hearthstone rdf:type :ComputerGame ;
+             :isAvailableOn :battle.net ;
+             :isInstalledOn :battle.net ;
+             :belongsToTier :tier3 ;
+             :releasedOn "2014-03-11"^^xsd:date ;
+             #:hasDLCsOn [ ] ;
+             #:availableDLCs [ ] ;
+             #:ownsDLCs [ ] ;
+             #:areAllDLCspurchased "true"^^xsd:boolean ;
+             #:issueOnInstallation "" ;
+             #:issueOnRun "" ;
+             #:alternativeTitle "" ;
+             rdfs:label "Hearthstone" ;
+             rdfs:comment "Blizzard's free-to-play online digital collectible card game"@en .
+
+:herosOfTheStorm rdf:type :ComputerGame ;
+                 :isAvailableOn :battle.net ;
+                 :isInstalledOn :battle.net ;
+                 :belongsToTier :tier3 ;
+                 :releasedOn "2015-06-02"^^xsd:date ;
+                 #:hasDLCsOn [ ] ;
+                 #:availableDLCs [ ] ;
+                 #:ownsDLCs [ ] ;
+                 #:areAllDLCspurchased "true"^^xsd:boolean ;
+                 #:issueOnInstallation "" ;
+                 #:issueOnRun "" ;
+                 #:alternativeTitle "HotS" ;
+                 rdfs:label "Heroes of the Storm" ;
+                 rdfs:comment "Blizzard's free-to-play multiplayer online battle arena game"@en .
+
+:overwatch2 rdf:type :ComputerGame ;
+            :isAvailableOn :battle.net ;
+            :isInstalledOn :battle.net ;
+            :belongsToTier :tier3 ;
+            #:releasedOn "YYYY-MM-DD"^^xsd:date ;
+            #:hasDLCsOn [ ] ;
+            #:availableDLCs [ ] ;
+            #:ownsDLCs [ ] ;
+            #:areAllDLCspurchased "true"^^xsd:boolean ;
+            #:issueOnInstallation "" ;
+            #:issueOnRun "" ;
+            #:alternativeTitle "" ;
+            rdfs:label "Overwatch 2" ;
+            rdfs:comment "Blizzard's free-to-play team-based multiplayer first-person shooter game"@en .
+
+:starCraft rdf:type :ComputerGame ;
+           :isAvailableOn :battle.net ;
+           :isInstalledOn :battle.net ;
+           :belongsToTier :tier1 ;
+           :releasedOn "1998-03-31"^^xsd:date ;
+           #:hasDLCsOn [ ] ;
+           #:availableDLCs [ ] ;
+           #:ownsDLCs [ ] ;
+           #:areAllDLCspurchased "true"^^xsd:boolean ;
+           #:issueOnInstallation "" ;
+           #:issueOnRun "" ;
+           :alternativeTitle "StarCraft Remastered + Cartooned" ;
+           rdfs:label "StarCraft" ;
+           rdfs:comment "Remastered version of the StarCraft real-time strategy game"@en .
+
+:starCraft2 rdf:type :ComputerGame ;
+            :isAvailableOn :battle.net ;
+            :isInstalledOn :battle.net ;
+            :belongsToTier :tier1 ;
+            :releasedOn "2010-07-27"^^xsd:date ;
+            #:hasDLCsOn [ ] ;
+            #:availableDLCs [ ] ;
+            #:ownsDLCs [ ] ;
+            #:areAllDLCspurchased "true"^^xsd:boolean ;
+            #:issueOnInstallation "" ;
+            #:issueOnRun "" ;
+            :alternativeTitle "StarCraft II Campaign Collection" ;
+            rdfs:label "StarCraft II" ;
+            rdfs:comment "StarCraft II real-time strategy game"@en .
+
+:warcraft rdf:type :ComputerGame ;
+          :isAvailableOn :battle.net ;
+          :isInstalledOn :battle.net ;
+          :belongsToTier :tier1 ;
+          #:releasedOn "YYYY-MM-DD"^^xsd:date ;
+          #:hasDLCsOn [ ] ;
+          #:availableDLCs [ ] ;
+          #:ownsDLCs [ ] ;
+          #:areAllDLCspurchased "true"^^xsd:boolean ;
+          #:issueOnInstallation "" ;
+          #:issueOnRun "" ;
+          :alternativeTitle "Warcraft: Orcs & Humans Remastered" ;
+          rdfs:label "Warcraft I: Remastered " ;
+          rdfs:comment "Remastered version of the Warcraft: Orcs & Humans real-time strategy game"@en .
+
+:warcraftOrcsAndHumans rdf:type :ComputerGame ;
+                       :isAvailableOn :battle.net ,
+                                      :gog ;
+                       #:isInstalledOn :battle.net ;
+                       :belongsToTier :tier1 ;
+                       :releasedOn "1994-11-23"^^xsd:date ;
+                       #:hasDLCsOn [ ] ;
+                       #:availableDLCs [ ] ;
+                       #:ownsDLCs [ ] ;
+                       #:areAllDLCspurchased "true"^^xsd:boolean ;
+                       #:issueOnInstallation "" ;
+                       #:issueOnRun "" ;
+                       :alternativeTitle "@GOG Warcraft: Orcs and Humans" ;
+                       rdfs:label "Warcraft: Orcs & Humans" ;
+                       rdfs:comment "Original version of Warcraft: Orcs & Humans real-time strategy game"@en .
+
+:warcraft2 rdf:type :ComputerGame ;
+           :isAvailableOn :battle.net ;
+           :isInstalledOn :battle.net ;
+           :belongsToTier :tier1 ;
+           #:releasedOn "YYYY-MM-DD"^^xsd:date ;
+           #:hasDLCsOn [ ] ;
+           #:availableDLCs [ ] ;
+           #:ownsDLCs [ ] ;
+           #:areAllDLCspurchased "true"^^xsd:boolean ;
+           #:issueOnInstallation "" ;
+           #:issueOnRun "" ;
+           #:alternativeTitle "" ;
+           rdfs:label "Warcraft II: Remastered" ;
+           rdfs:comment "Remastered version of the Warcraft II real-time strategy game"@en .
+
+:warcraft2BattleNetEdition rdf:type :ComputerGame ;
+                           :isAvailableOn :battle.net ,
+                                          :gog ;
+                           #:isInstalledOn :battle.net ;
+                           :belongsToTier :tier1 ;
+                           :releasedOn "1999-09-30"^^xsd:date ;
+                           #:hasDLCsOn [ ] ;
+                           #:availableDLCs [ ] ;
+                           #:ownsDLCs [ ] ;
+                           #:areAllDLCspurchased "true"^^xsd:boolean ;
+                           #:issueOnInstallation "" ;
+                           #:issueOnRun "" ;
+                           :alternativeTitle "@GOG Warcraft II Battle.net Edition" ;
+                           rdfs:label "Warcraft II: Battle.net Edition" ;
+                           rdfs:comment "The Battle.net Edition of the Warcraft II real-time strategy game"@en .
+
+:warcraft3Reforged rdf:type :ComputerGame ;
+                   :isAvailableOn :battle.net ;
+                   :isInstalledOn :battle.net ;
+                   :belongsToTier :tier1 ;
+                   :releasedOn "2020-01-28"^^xsd:date ;
+                   #:hasDLCsOn [ ] ;
+                   #:availableDLCs [ ] ;
+                   #:ownsDLCs [ ] ;
+                   #:areAllDLCspurchased "true"^^xsd:boolean ;
+                   #:issueOnInstallation "" ;
+                   #:issueOnRun "" ;
+                   :alternativeTitle "Warcraft III: Reforged" ;
+                   rdfs:label "Warcraft III" ;
+                   rdfs:comment "Remastered version of the Warcraft III real-time strategy game"@en .
+
+
+#################################################
+#  GOG Computer Game Individuals
+#################################################
+
+:diabloHellfire rdf:type :ComputerGame ;
+                :isAvailableOn :gog ;
+                #:isInstalledOn :gog ;
+                :belongsToTier :tier3 ;
+                :releasedOn "1996-12-31"^^xsd:date ;
+                #:hasDLCsOn [ ] ;
+                #:availableDLCs [ ] ;
+                #:ownsDLCs [ ] ;
+                #:areAllDLCspurchased "true"^^xsd:boolean ;
+                #:issueOnInstallation "" ;
+                #:issueOnRun "" ;
+                #:alternativeTitle "" ;
+                rdfs:label "Diablo + Hellfire" ;
+                rdfs:comment "First Diablo installment plus Hellfire extension"@en .
+
+
+#################################################
+#  Steam Computer Game Individuals
+#################################################
+
+:crusaderKings2 rdf:type :ComputerGame ;
+                :isAvailableOn :steam ;
+                :isInstalledOn :steam ;
+                :belongsToTier :tier3 ;
+                :releasedOn "2012-02-14"^^xsd:date ;
+                :hasDLCsOn :steam ;
+                :availableDLCs [ 
+                     rdf:type :DownloadableContent ;
+                                 :releasedOn "2021-02-18"^^xsd:date ;
+                                 :isOnWishlist "false"^^xsd:boolean ;
+                                 rdfs:label "Crusader Kings II - Expansion Subscription" ;
+                                 rdfs:comment "Subscription service for Crusader Kings II that provides all expansions and content"@en
+                               ] ,
+                               [ rdf:type :DownloadableContent ;
+                                 :releasedOn "2017-04-03"^^xsd:date ;
+                                 :isOnWishlist "true"^^xsd:boolean ;
+                                 rdfs:label "Collection - Crusader Kings II: Dynasty Shield Pack" ;
+                                 rdfs:comment "Includes all Dynasty Shield packs ever released for Crusader Kings II"@en
+                               ] ;
+                :ownsDLCs [ rdf:type :DownloadableContent ;
+                            :releasedOn "2012-02-15"^^xsd:date ;
+                            rdfs:label "Crusader Kings II: Dynasty Shields" ;
+                            rdfs:comment "This pack contains 50 unique dynastic shields for the 50 most famous families of Medieval Europe"@en
+                          ] ,
+                          [ rdf:type :DownloadableContent ;
+                            :releasedOn "2013-05-28"^^xsd:date ;
+                            rdfs:label "Expansion - Crusader Kings II: The Old Gods" ;
+                            rdfs:comment "The Old Gods expansion for Crusader Kings II focuses on the 9th and 10th centuries, a time of great upheaval and change in Europe"@en
+                          ] ;
+                :areAllDLCspurchased "false"^^xsd:boolean ;
+                #:issueOnInstallation "" ;
+                #:issueOnRun "" ;
+                #:alternativeTitle "" ;
+                rdfs:label "Crusader Kings II" ;
+                rdfs:comment "Paradox Crusader Kings II grand strategy game"@en .
+
+:crusaderKings3 rdf:type :ComputerGame ;
+                :isAvailableOn :steam ;
+                :isInstalledOn :steam ;
+                :belongsToTier :tier3 ;
+                :releasedOn "2020-09-01"^^xsd:date ;
+                :hasDLCsOn :steam ;
+                #:availableDLCs [ ] ;
+                #:ownsDLCs [ ] ;
+                :areAllDLCspurchased "true"^^xsd:boolean ;
+                #:issueOnInstallation "" ;
+                #:issueOnRun "" ;
+                #:alternativeTitle "" ;
+                rdfs:label "Crusader Kings III" ;
+                rdfs:comment "Paradox Crusader Kings III grand strategy game"@en .
+
+
+#################################################
+#  Steam & GOG Computer Game Individuals
+#################################################
+
+:crusaderKingsComplete rdf:type :ComputerGame ;
+                       :isAvailableOn :gog ,
+                                      :steam ;
+                       :isInstalledOn :gog ;
+                       :belongsToTier :tier3 ;
+                       :releasedOn "2004-04-23"^^xsd:date ;
+                       #:hasDLCsOn [ ] ;
+                       #:availableDLCs [ ] ;
+                       #:ownsDLCs [ ] ;
+                       #:areAllDLCspurchased "false"^^xsd:boolean ;
+                       :issueOnInstallation "@Steam MS C++ Redistribution packed installation does not complete" ;
+                       :issueOnRun "@Steam Game freezes on start screen" ;
+                       #:alternativeTitle "" ;                                          
+                       rdfs:label "Crusader Kings Complete" ;
+                       rdfs:comment "Complete edition of Paradox Crusader Kings I"@en .
+
+:victoriaComplete rdf:type :ComputerGame ;
+                  :isAvailableOn :gog ,
+                                 :steam ;
+                  :isInstalledOn :steam ;
+                  :belongsToTier :tier3 ;
+                  :releasedOn "2003-11-14"^^xsd:date ;
+                  #:hasDLCsOn [ ] ;
+                  #:availableDLCs [ ] ;
+                  #:ownsDLCs [ ] ;
+                  #:areAllDLCspurchased "false"^^xsd:boolean ;
+                  #:issueOnInstallation "" ;
+                  #:issueOnRun "" ;
+                  :alternativeTitle "@GOG Victoria Complete; @Steam Victoria I Complete" ;                                          
+                  rdfs:label "Victoria: Revolutions" ;
+                  rdfs:comment "Complete edition of Paradox Victoria I"@en .
+
+:victoria2 rdf:type :ComputerGame ;
+           :isAvailableOn :gog ,
+                          :steam ;
+           :isInstalledOn :steam ;
+           :belongsToTier :tier3 ;
+           :releasedOn "2010-08-31"^^xsd:date ;
+           :hasDLCsOn :steam ;
+           #:availableDLCs [ ] ;
+           :ownsDLCs [ ] ;
+           :areAllDLCspurchased "true"^^xsd:boolean ;
+           #:issueOnInstallation "" ;
+           #:issueOnRun "" ;
+           :alternativeTitle "@GOG Victoria II: Civil War Edition";
+           rdfs:label "Victoria II" ;
+           rdfs:comment "Paradox Victoria II grand strategy game"@en .
+                    
+                     
