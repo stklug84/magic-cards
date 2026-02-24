@@ -21,9 +21,44 @@
       rdfs:label "Magic Card" ;
       rdfs:comment "A specific Magic: The Gathering card"@en .
 
+:Deck rdf:type owl:Class ;
+      rdfs:label "Deck" ;
+      rdfs:comment "A generic constructed or limited deck"@en .
+
 :CommanderDeck rdf:type owl:Class ;
+               rdfs:subClassOf :Deck ;
                rdfs:label "Commander Deck" ;
                rdfs:comment "A constructed deck for the Commander format"@en .
+
+:StandardDeck rdf:type owl:Class ;
+              rdfs:subClassOf :Deck ;
+              rdfs:label "Standard Deck" ;
+              rdfs:comment "A constructed deck for the Standard format"@en .
+
+:ModernDeck rdf:type owl:Class ;
+            rdfs:subClassOf :Deck ;
+            rdfs:label "Modern Deck" ;
+            rdfs:comment "A constructed deck for the Modern format"@en .
+
+:PioneerDeck rdf:type owl:Class ;
+             rdfs:subClassOf :Deck ;
+             rdfs:label "Pioneer Deck" ;
+             rdfs:comment "A constructed deck for the Pioneer format"@en .
+
+:LegacyDeck rdf:type owl:Class ;
+            rdfs:subClassOf :Deck ;
+            rdfs:label "Legacy Deck" ;
+            rdfs:comment "A constructed deck for the Legacy format"@en .
+
+:VintageDeck rdf:type owl:Class ;
+             rdfs:subClassOf :Deck ;
+             rdfs:label "Vintage Deck" ;
+             rdfs:comment "A constructed deck for the Vintage format"@en .
+
+:PauperDeck rdf:type owl:Class ;
+            rdfs:subClassOf :Deck ;
+            rdfs:label "Pauper Deck" ;
+            rdfs:comment "A constructed deck for the Pauper format"@en .
 
 :Color rdf:type owl:Class ;
        owl:equivalentClass [
@@ -40,6 +75,73 @@
        rdfs:label "Color" ;
        rdfs:comment " The five colors of Magic plus Colorless"@en .
 
+:SuperType rdf:type owl:Class ;
+           owl:equivalentClass [
+               rdf:type owl:Class ;
+               owl:oneOf (
+                   :Basic
+                   :Elite
+                   :Host
+                   :Kindred
+                   :Legendary
+                   :Ongoing
+                   :Snow
+                   :Token
+                   :World
+               )
+           ] ;
+           rdfs:label "Super Type" ;
+           rdfs:comment "An additional classification that precedes the card type and provides additional rules or characteristics to a card."@en .
+
+:CardType rdf:type owl:Class ;
+          owl:equivalentClass [
+              rdf:type owl:Class ;
+              owl:oneOf (
+                  :Artifact
+                  :Battle
+                  :Conspiracy
+                  :Creature
+                  :Dungeon
+                  :Emblem
+                  :Enchantment
+                  :Hero
+                  :Instant
+                  :Land
+                  :Phenomenon
+                  :Plane
+                  :Planeswalker
+                  :Scheme
+                  :Sorcery
+                  :Summon
+                  :Vanguard
+              )
+          ] ;
+          rdfs:label "Card Type" ;
+          rdfs:comment "The primary classification of a card."@en .
+
+:SubType rdf:type owl:Class ;
+         owl:equivalentClass [
+             rdf:type owl:Class ;
+             owl:oneOf (
+                 :Dragon
+                 :Equipment
+                 :Golem
+                 :Horizon
+                 :Human
+                 :Hybrid
+                 :Mutant
+                 :Ooze
+                 :Plague
+                 :Soldier
+                 :Spirit
+                 :Vehicle
+                 :Wizard
+                 :Zombie
+             )
+         ] ;
+         rdfs:label "Sub Type" ;
+         rdfs:comment "A sub-classification that provides more specific categorical information to the primary card type."@en .
+
 :Rarity rdf:type owl:Class ;
         owl:equivalentClass [
             rdf:type owl:Class ;
@@ -50,59 +152,44 @@
                 :MythicRare
                 :Special
                 :Bonus
+                :Promo
+                :Land
             )
         ] ;
         rdfs:label "Rarity" ;
         rdfs:comment "Rarity of a Magic card"@en .
 
-:SuperType rdf:type owl:Class ;
-           owl:equivalentClass [
-               rdf:type owl:Class ;
-               owl:oneOf (
-                   :Legendary
-                   :Snow
-               )
-           ] ;
-           rdfs:label "Super Type" ;
-           rdfs:comment "Super types like Legendary, Snow, World, etc."@en .
-
-:CardType rdf:type owl:Class ;
-          owl:equivalentClass [
-              rdf:type owl:Class ;
-              owl:oneOf (
-                  :Creature
-                  :Artifact
-                  :Enchantment
-                  :Instant
-                  :Sorcery
-                  :Land
-                  :Planeswalker
-              )
-          ] ;
-          rdfs:label "Card Type" ;
-          rdfs:comment "Primary card types like Creature, Instant, Sorcery, etc."@en .
-
-:SubType rdf:type owl:Class ;
-         owl:equivalentClass [
-             rdf:type owl:Class ;
-             owl:oneOf (
-                 :Human
-                 :Soldier
-                 :Wizard
-                 :Dragon
-                 :Equipment
-             )
-         ] ;
-         rdfs:label "Sub Type" ;
-         rdfs:comment "Sub types (Creature types, Artifact types, etc.)"@en .
-
 :Set rdf:type owl:Class ;
+     owl:hasKey ( :setName ) ;
+     owl:hasKey ( :setCode ) ;
      rdfs:label "Set" ;
      rdfs:comment "A Magic: The Gathering expansion or set"@en .
 
 :Language rdf:type owl:Class ;
+          owl:equivalentClass [
+              rdf:type owl:Class ;
+              owl:oneOf (
+                  :English
+                  :German
+                  :Japanese
+                  :Spanish
+              )
+          ] ;
           rdfs:label "Language" ;
           rdfs:comment "Language of the card print"@en .
+
+:Legality rdf:type owl:Class ;
+          owl:equivalentClass [
+              rdf:type owl:Class ;
+              owl:oneOf (
+                  :Legal
+                  :NotLegal
+                  :Banned
+                  :Restricted
+              )
+          ] ;
+          rdfs:label "Legality" ;
+          rdfs:comment "The tournament legality status of a card."@en .
 
 :Format rdf:type owl:Class ;
         owl:equivalentClass [
@@ -140,9 +227,14 @@
         rdfs:label "Format" ;
         rdfs:comment "A game format like Commander, Standard, etc."@en .
 
+:LegalityMapping rdf:type owl:Class ;
+                 rdfs:label "Legality Mapping" ;
+                 rdfs:comment "An intermediate class associating a Card, a Format, and a Legality Status"@en .
+
 :Ruling rdf:type owl:Class ;
         rdfs:label "Ruling" ;
         rdfs:comment "Specific rules clarifications for a card"@en .
+
 
 #################################################
 #
@@ -152,10 +244,11 @@
 
 # --- Data Properties ---
 
-:name rdf:type owl:DatatypeProperty ;
+:cardName rdf:type owl:DatatypeProperty ;
       rdfs:domain :Card ;
       rdfs:range xsd:string ;
-      rdfs:label "Card Name" .
+      rdfs:label "Card Name" ;
+      rdfs:comment "The name of the card"@en .
 
 :manaCost rdf:type owl:DatatypeProperty ;
           rdfs:domain :Card ;
@@ -167,7 +260,13 @@
            rdfs:domain :Card ;
            rdfs:range xsd:integer ;
            rdfs:label "Mana Value" ;
-           rdfs:comment "Converted mana cost (CMC)"@en .
+           rdfs:comment "Total amount of mana required to casts the spell. Formerly known as converted mana cost (CMC)"@en .
+
+:printedText rdf:type owl:DatatypeProperty ;
+            rdfs:domain :Card ;
+            rdfs:range xsd:string ;
+            rdfs:label "Printed Text" ;
+            rdfs:comment " The text printed on the card"@en .
 
 :oracleText rdf:type owl:DatatypeProperty ;
             rdfs:domain :Card ;
@@ -178,7 +277,14 @@
 :flavorText rdf:type owl:DatatypeProperty ;
             rdfs:domain :Card ;
             rdfs:range xsd:string ;
-            rdfs:label "Flavor Text" .
+            rdfs:label "Flavor Text" ;
+            rdfs:comment "The flavor text of the card"@en .
+
+:artist rdf:type owl:DatatypeProperty ;
+        rdfs:domain :Card ;
+        rdfs:range xsd:string ;
+        rdfs:label "Artist" ;
+        rdfs:comment "The artist who illustrated the card"@en .
 
 :power rdf:type owl:DatatypeProperty ;
        rdfs:domain :Card ;
@@ -195,27 +301,65 @@
          rdfs:range xsd:string ;
          rdfs:comment "Starting loyalty of a Planeswalker"@en .
 
+:setName rdf:type owl:DatatypeProperty , owl:FunctionalProperty ;
+         rdfs:domain :Set ;
+         rdfs:range xsd:string ;
+         rdfs:label "Set Name" ;
+         rdfs:comment "The full name of the Magic set"@en .
+
+:setCode rdf:type owl:DatatypeProperty , owl:FunctionalProperty ;
+         rdfs:domain :Set ;
+         rdfs:range xsd:string ;
+         rdfs:label "Set Code" ;
+         rdfs:comment "The 3-letter code of the Magic set"@en .
+
 :cardNumber rdf:type owl:DatatypeProperty ;
             rdfs:domain :Card ;
-            rdfs:range xsd:string ;
+            rdfs:range xsd:integer ;
             rdfs:label "Card Number" ;
-            rdfs:comment "The collector number of the card in a set"@en .
+            rdfs:comment "The collector number of the card in a set when totals are not provided"@en .
 
-:artist rdf:type owl:DatatypeProperty ;
-        rdfs:domain :Card ;
-        rdfs:range xsd:string ;
-        rdfs:label "Artist" ;
-        rdfs:comment "The artist who illustrated the card"@en .
+:cardNumberString rdf:type owl:DatatypeProperty ;
+                  rdfs:domain :Card ;
+                  rdfs:range xsd:string ;
+                  rdfs:label "Card Number String" ;
+                  rdfs:comment "The collector number of the card in a set as a string (e.g., '123a')"@en .
+
+:cardNumberNumerator rdf:type owl:DatatypeProperty ;
+                     rdfs:domain :Card ;
+                     rdfs:range xsd:integer ;
+                     rdfs:label "Card Number Numerator" ;
+                     rdfs:comment "The specific collector number of the card in a set, represented as an integer for proper sorting"@en .
+
+:cardNumberDenominator rdf:type owl:DatatypeProperty ;
+                       rdfs:domain :Card ;
+                       rdfs:range xsd:integer ;
+                       rdfs:label "Card Number Denominator" ;
+                       rdfs:comment "The total number of cards in the set (e.g., the '250' in '123/250')"@en .
 
 :rulingText rdf:type owl:DatatypeProperty ;
             rdfs:domain :Ruling ;
             rdfs:range xsd:string ;
-            rdfs:label "Ruling Text" .
+            rdfs:label "Ruling Text" ;
+            rdfs:comment "The ruling text of the card"@en .
 
 :rulingDate rdf:type owl:DatatypeProperty ;
             rdfs:domain :Ruling ;
             rdfs:range xsd:date ;
-            rdfs:label "Ruling Date" .
+            rdfs:label "Ruling Date" ;
+            rdfs:comment "The date of the ruling"@en .
+
+:gathererUrl rdf:type owl:DatatypeProperty ;
+             rdfs:domain :Card ;
+             rdfs:range xsd:anyURI ;
+             rdfs:label "Gatherer URL" ;
+             rdfs:comment "The URL to the card's entry on gatherer.wizards.com"@en .
+
+:releaseDate rdf:type owl:DatatypeProperty ;
+             rdfs:domain :Card ;
+             rdfs:range xsd:date ;
+             rdfs:label "Release Date" ;
+             rdfs:comment "The release date of the card"@en .
 
 # --- Object Properties ---
 
@@ -225,25 +369,35 @@
                   rdfs:label "Color Identity" ;
                   rdfs:comment "The color identity of the card for Commander deck building"@en .
 
-:hasRarity rdf:type owl:ObjectProperty ;
-           rdfs:domain :Card ;
-           rdfs:range :Rarity ;
-           rdfs:label "Rarity" .
-
 :hasSuperType rdf:type owl:ObjectProperty ;
               rdfs:domain :Card ;
               rdfs:range :SuperType ;
-              rdfs:label "Has Super Type" .
+              rdfs:label "Has Super Type" ;
+              rdfs:comment "The super type of the card"@en .
+
+:isPermanent rdf:type owl:DatatypeProperty ;
+             rdfs:domain :CardType ;
+             rdfs:range xsd:boolean ;
+             rdfs:label "Is Permanent" ;
+             rdfs:comment "Indicates whether the card type is a permanent (true) or non-permanent (false)."@en .
 
 :hasCardType rdf:type owl:ObjectProperty ;
              rdfs:domain :Card ;
              rdfs:range :CardType ;
-             rdfs:label "Has Card Type" .
+             rdfs:label "Has Card Type" ;
+             rdfs:comment "The card type of the card"@en .
 
 :hasSubType rdf:type owl:ObjectProperty ;
             rdfs:domain :Card ;
             rdfs:range :SubType ;
-            rdfs:label "Has Sub Type" .
+            rdfs:label "Has Sub Type" ;
+            rdfs:comment "The sub type of the card"@en .
+
+:hasRarity rdf:type owl:ObjectProperty ;
+           rdfs:domain :Card ;
+           rdfs:range :Rarity ;
+           rdfs:label "Rarity" ;
+           rdfs:comment "The rarity of the card"@en .
 
 :hasSet rdf:type owl:ObjectProperty ;
         rdfs:domain :Card ;
@@ -254,38 +408,38 @@
 :hasLanguage rdf:type owl:ObjectProperty ;
              rdfs:domain :Card ;
              rdfs:range :Language ;
-             rdfs:label "Language" .
+             rdfs:label "Language" ;
+             rdfs:comment "The language of the card print"@en .
 
-:legalIn rdf:type owl:ObjectProperty ;
-         rdfs:domain :Card ;
-         rdfs:range :Format ;
-         rdfs:label "Legal In" .
+:hasLegality rdf:type owl:ObjectProperty ;
+             rdfs:domain :Card ;
+             rdfs:range :LegalityMapping ;
+             rdfs:label "Has Legality" ;
+             rdfs:comment "Connects a card to its format legality statuses"@en .
 
-:notLegalIn rdf:type owl:ObjectProperty ;
-            rdfs:domain :Card ;
-            rdfs:range :Format ;
-            rdfs:label "Not Legal In" .
-
-:bannedIn rdf:type owl:ObjectProperty ;
-          rdfs:domain :Card ;
+:inFormat rdf:type owl:ObjectProperty ;
+          rdfs:domain :LegalityMapping ;
           rdfs:range :Format ;
-          rdfs:label "Banned In" .
+          rdfs:label "In Format" ;
+          rdfs:comment "The format a legality mapping applies to"@en .
 
-:restrictedIn rdf:type owl:ObjectProperty ;
-              rdfs:domain :Card ;
-              rdfs:range :Format ;
-              rdfs:label "Restricted In" .
+:hasLegalityStatus rdf:type owl:ObjectProperty ;
+                   rdfs:domain :LegalityMapping ;
+                   rdfs:range :Legality ;
+                   rdfs:label "Has Legality Status" ;
+                   rdfs:comment "The specific legality status applied"@en .
 
 :hasRuling rdf:type owl:ObjectProperty ;
            rdfs:domain :Card ;
            rdfs:range :Ruling ;
-           rdfs:label "Has Ruling" .
+           rdfs:label "Has Ruling" ;
+           rdfs:comment "The ruling for the card"@en .
 
 :isInDeck rdf:type owl:ObjectProperty ;
           rdfs:domain :Card ;
-          rdfs:range :CommanderDeck ;
+          rdfs:range :Deck ;
           rdfs:label "Is In Deck" ;
-          rdfs:comment "Indicates a card is part of the 99 in a Commander deck"@en .
+          rdfs:comment "Indicates a card is included in a deck"@en .
 
 :isCommanderOf rdf:type owl:ObjectProperty ;
                rdfs:subPropertyOf :isInDeck ;
@@ -301,84 +455,302 @@
 #################################################
 
 # --- Colors ---
-:White rdf:type :Color ; rdfs:label "White" .
-:Blue rdf:type :Color ; rdfs:label "Blue" .
-:Black rdf:type :Color ; rdfs:label "Black" .
-:Red rdf:type :Color ; rdfs:label "Red" .
-:Green rdf:type :Color ; rdfs:label "Green" .
-:Colorless rdf:type :Color ; rdfs:label "Colorless" .
+:White rdf:type :Color ;
+       rdfs:label "White" ;
+       rdfs:comment "The color of law, order, and structure, typically powered by Plains."@en .
+:Blue rdf:type :Color ;
+      rdfs:label "Blue" ;
+      rdfs:comment "The color of logic, knowledge, and illusion, typically powered by Islands."@en .
+:Black rdf:type :Color ;
+       rdfs:label "Black" ;
+       rdfs:comment "The color of death, ambition, and sacrifice, typically powered by Swamps."@en .
+:Red rdf:type :Color ;
+     rdfs:label "Red" ;
+     rdfs:comment "The color of chaos, emotion, and impulse, typically powered by Mountains."@en .
+:Green rdf:type :Color ;
+       rdfs:label "Green" ;
+       rdfs:comment "The color of nature, instinct, and interdependence, typically powered by Forests."@en .
+:Colorless rdf:type :Color ;
+           rdfs:label "Colorless" ;
+           rdfs:comment "Cards and mana that have no color affiliation."@en .
 
 # --- Rarities ---
-:Common rdf:type :Rarity ; rdfs:label "Common" .
-:Uncommon rdf:type :Rarity ; rdfs:label "Uncommon" .
-:Rare rdf:type :Rarity ; rdfs:label "Rare" .
-:MythicRare rdf:type :Rarity ; rdfs:label "Mythic Rare" .
-:Special rdf:type :Rarity ; rdfs:label "Special" .
-:Bonus rdf:type :Rarity ; rdfs:label "Bonus" .
+:Common rdf:type :Rarity ;
+        rdfs:label "Common" ;
+        rdfs:comment "The most frequently found cards in a booster pack, denoted by a black expansion symbol."@en .
+:Uncommon rdf:type :Rarity ;
+          rdfs:label "Uncommon" ;
+          rdfs:comment "Cards that appear less frequently than Commons, denoted by a silver expansion symbol."@en .
+:Rare rdf:type :Rarity ;
+      rdfs:label "Rare" ;
+      rdfs:comment "Cards that typically appear once per regular booster pack, denoted by a gold expansion symbol."@en .
+:MythicRare rdf:type :Rarity ;
+            rdfs:label "Mythic Rare" ;
+            rdfs:comment "The rarest standard cards, typically appearing once in every eight packs, denoted by an orange-red expansion symbol."@en .
+:Special rdf:type :Rarity ;
+         rdfs:label "Special" ;
+         rdfs:comment "A rarity used for specialty subsets of cards such as Timeshifted cards, often denoted by a purple expansion symbol."@en .
+:Bonus rdf:type :Rarity ;
+       rdfs:label "Bonus" ;
+       rdfs:comment "A rarity level used (e.g. by Scryfall) for special inserts or promotional materials not part of the standard set."@en .
+:Promo rdf:type :Rarity ;
+       rdfs:label "Promo" ;
+       rdfs:comment "Cards distributed at promotional events like Prereleases or FNM, often featuring alternate art."@en .
+:Land rdf:type :Rarity ;
+      rdfs:label "Land" ;
+      rdfs:comment "A rarity designation used explicitly for basic lands in booster packs."@en .
 
-# --- Languages ---
-:English rdf:type :Language ; rdfs:label "English" .
-:German rdf:type :Language ; rdfs:label "German" .
-:Japanese rdf:type :Language ; rdfs:label "Japanese" .
+# --- Super Types ---
+:Basic rdf:type :SuperType ;
+       rdfs:label "Basic" ;
+       rdfs:comment "A supertype that removes the four-of deck limit for a card."@en .
+:Elite rdf:type :SuperType ;
+       rdfs:label "Elite" ;
+       rdfs:comment "A supertype denoting powerful versions of enemies, often used in supplementary sets."@en .
+:Host rdf:type :SuperType ;
+      rdfs:label "Host" ;
+      rdfs:comment "A supertype used on silver-bordered and un-set creatures that can be augmented."@en .
+:Kindred rdf:type :SuperType ;
+         rdfs:label "Kindred" ;
+         rdfs:comment "A card type denoting tribal synergies for non-creature cards."@en .
+:Legendary rdf:type :SuperType ;
+           rdfs:label "Legendary" ;
+           rdfs:comment "A supertype representing specific, unique entities. Can only exist as one on the battlefield at a time."@en .
+:Ongoing rdf:type :SuperType ;
+         rdfs:label "Ongoing" ;
+         rdfs:comment "A supertype used exclusively on scheme cards in the Archenemy format."@en .
+:Snow rdf:type :SuperType ;
+      rdfs:label "Snow" ;
+      rdfs:comment "A supertype representing cold or winter-themed permanents and spells."@en .
+:Token rdf:type :SuperType ;
+       rdfs:label "Token" ;
+       rdfs:comment "A supertype representing permanents that are created during gameplay rather than cast from cards."@en .
+:World rdf:type :SuperType ;
+       rdfs:label "World" ;
+       rdfs:comment "An obsolete supertype representing global enchantments where only one can exist on the battlefield at a time."@en .
+
+# --- Card Types  ---
+:Artifact rdf:type :CardType ;
+          :isPermanent true ;
+          rdfs:label "Artifact" ;
+          rdfs:comment "A permanent type representing magical items, constructs, or relics."@en .
+:Battle rdf:type :CardType ;
+        :isPermanent true ;
+        rdfs:label "Battle" ;
+        rdfs:comment "A permanent type representing a conflict that can be attacked and defeated for a reward."@en .
+:Creature rdf:type :CardType ;
+          :isPermanent true ;
+          rdfs:label "Creature" ;
+          rdfs:comment "A permanent type that can attack and block."@en .
+:Enchantment rdf:type :CardType ;
+             :isPermanent true ;
+             rdfs:label "Enchantment" ;
+             rdfs:comment "A permanent type representing lasting magical effects."@en .
+:Instant rdf:type :CardType ;
+         :isPermanent false ;
+         rdfs:label "Instant" ;
+         rdfs:comment "A non-permanent spell that can be cast at almost any time."@en .
+:Land rdf:type :CardType ;
+      :isPermanent true ;
+      rdfs:label "Land" ;
+      rdfs:comment "A permanent type that is played rather than cast, used primarily to produce mana."@en .
+:Phenomenon rdf:type :CardType ;
+             :isPermanent false ;
+             rdfs:label "Phenomenon" ;
+             rdfs:comment "A multiplayer card type used specifically in the Planechase format."@en .
+:Planeswalker rdf:type :CardType ;
+              :isPermanent true ;
+              rdfs:label "Planeswalker" ;
+              rdfs:comment "A permanent type representing powerful conjurers with loyalty abilities."@en .
+:Scheme rdf:type :CardType ;
+        :isPermanent false ;
+        rdfs:label "Scheme" ;
+        rdfs:comment "A multiplayer card type used specifically in the Archenemy format."@en .
+:Sorcery rdf:type :CardType ;
+         :isPermanent false ;
+         rdfs:label "Sorcery" ;
+         rdfs:comment "A non-permanent spell that can only be cast during a player's main phase."@en .
+:Summon rdf:type :CardType ;
+        :isPermanent true ;
+        rdfs:label "Summon" ;
+        rdfs:comment "An obsolete card type formerly used for creature spells."@en .
+:Vanguard rdf:type :CardType ;
+          :isPermanent false ;
+          rdfs:label "Vanguard" ;
+          rdfs:comment "A casual card type representing a specific character that modifies starting life and hand size."@en .
+
+# --- Sub Types ---
+:Dragon rdf:type :SubType ;
+        rdfs:label "Dragon" ;
+        rdfs:comment "A creature type representing large, reptilian, often flying creatures with a breath weapon."@en .
+:Equipment rdf:type :SubType ;
+           rdfs:label "Equipment" ;
+           rdfs:comment "An artifact type representing weapons, armor, or items that can be attached to creatures."@en .
+:Golem rdf:type :SubType ;
+       rdfs:label "Golem" ;
+       rdfs:comment "An artifact creature type representing animated constructs of unyielding materials."@en .
+:Horizon rdf:type :SubType ;
+         rdfs:label "Horizon" ;
+         rdfs:comment "A land or plane type representing a specific horizon or environment."@en .
+:Human rdf:type :SubType ;
+       rdfs:label "Human" ;
+       rdfs:comment "A creature type representing ordinary people, one of the most populous races."@en .
+:Hybrid rdf:type :SubType ;
+        rdfs:label "Hybrid" ;
+        rdfs:comment "A creature type representing a being composed of multiple disparate species or magic."@en .
+:Mutant rdf:type :SubType ;
+        rdfs:label "Mutant" ;
+        rdfs:comment "A creature type representing physically altered or evolved beings."@en .
+:Ooze rdf:type :SubType ;
+       rdfs:label "Ooze" ;
+       rdfs:comment "A creature type representing amorphous, gelatinous entities that consume matter."@en .
+:Plague rdf:type :SubType ;
+        rdfs:label "Plague" ;
+        rdfs:comment "An enchantment or creature type representing infectious diseases and afflictions."@en .
+:Soldier rdf:type :SubType ;
+         rdfs:label "Soldier" ;
+         rdfs:comment "A creature type representing trained martial combatants and military personnel."@en .
+:Spirit rdf:type :SubType ;
+        rdfs:label "Spirit" ;
+        rdfs:comment "A creature type representing incorporeal undead, ghosts, or nature kami."@en .
+:Vehicle rdf:type :SubType ;
+         rdfs:label "Vehicle" ;
+         rdfs:comment "An artifact type representing modes of transport that can be crewed to become creatures."@en .
+:Wizard rdf:type :SubType ;
+        rdfs:label "Wizard" ;
+        rdfs:comment "A creature type representing practitioners of spells and arcane magic."@en .
+:Zombie rdf:type :SubType ;
+        rdfs:label "Zombie" ;
+        rdfs:comment "A creature type representing reanimated corpses and mindless undead."@en .
 
 # --- Formats ---
-:Alchemy rdf:type :Format ; rdfs:label "Alchemy" ; rdfs:comment "Digital-only format played on MTG Arena" .
-:Archenemy rdf:type :Format ; rdfs:label "Archenemy" ; rdfs:comment "One vs many multiplayer format" .
-:ArchenemyCommander rdf:type :Format ; rdfs:label "Archenemy Commander" ; rdfs:comment "Archenemy played with Commander decks" .
-:BoosterDraft rdf:type :Format ; rdfs:label "Booster Draft" ; rdfs:comment "Players draft cards from booster packs" .
-:Brawl rdf:type :Format ; rdfs:label "Brawl" ; rdfs:comment "Commander variant played on MTG Arena" .
-:Commander rdf:type :Format ; rdfs:label "Commander" ; rdfs:comment "100-card singleton multiplayer format" .
-:Commander1v1 rdf:type :Format ; rdfs:label "Commander 1v1" ; rdfs:comment "Commander played as a duel" .
-:CommanderLimited rdf:type :Format ; rdfs:label "Commander Limited" ; rdfs:comment "Draft or Sealed with Commander rules" .
-:Conspiracy rdf:type :Format ; rdfs:label "Conspiracy" ; rdfs:comment "Draft format designed for multiplayer games" .
-:Freeform rdf:type :Format ; rdfs:label "Freeform" ; rdfs:comment "Play with any cards in your collection" .
-:Historic rdf:type :Format ; rdfs:label "Historic" ; rdfs:comment "Non-rotating digital format on MTG Arena" .
-:Legacy rdf:type :Format ; rdfs:label "Legacy" ; rdfs:comment "Eternal format allowing cards from all Magic sets" .
-:Limited rdf:type :Format ; rdfs:label "Limited" ; rdfs:comment "Formats where players build decks from opened packs" .
-:Modern rdf:type :Format ; rdfs:label "Modern" ; rdfs:comment "Non-rotating format from 8th Edition onwards" .
-:MomirBasic rdf:type :Format ; rdfs:label "Momir Basic" ; rdfs:comment "Digital format using Momir Vig avatar" .
-:Oathbreaker rdf:type :Format ; rdfs:label "Oathbreaker" ; rdfs:comment "Singleton format with Planeswalker commander and signature spell" .
-:Pauper rdf:type :Format ; rdfs:label "Pauper" ; rdfs:comment "Format using only common cards" .
-:PickTwoDraft rdf:type :Format ; rdfs:label "Pick-Two Draft" ; rdfs:comment "Special 4-player draft format" .
-:Pioneer rdf:type :Format ; rdfs:label "Pioneer" ; rdfs:comment "Non-rotating format from Return to Ravnica onwards" .
-:Planechase rdf:type :Format ; rdfs:label "Planechase" ; rdfs:comment "Casual format using oversized planar cards" .
-:SealedDeck rdf:type :Format ; rdfs:label "Sealed Deck" ; rdfs:comment "Build a deck from 6 booster packs" .
-:Standard rdf:type :Format ; rdfs:label "Standard" ; rdfs:comment "Rotating format using recent sets" .
-:TeamBoosterDraft rdf:type :Format ; rdfs:label "Team Booster Draft" ; rdfs:comment "Draft played in teams" .
-:TeamSealedDeck rdf:type :Format ; rdfs:label "Team Sealed Deck" ; rdfs:comment "Sealed played in teams" .
-:Timeless rdf:type :Format ; rdfs:label "Timeless" ; rdfs:comment "Digital format with no bans on MTG Arena" .
-:TwoHeadedGiant rdf:type :Format ; rdfs:label "Two-Headed Giant" ; rdfs:comment "2v2 Team format" .
-:Vintage rdf:type :Format ; rdfs:label "Vintage" ; rdfs:comment "Eternal format allowing almost all cards" .
+:Alchemy rdf:type :Format ;
+         rdfs:label "Alchemy" ;
+         rdfs:comment "Digital-only format played on MTG Arena" .
+:Archenemy rdf:type :Format ;
+           rdfs:label "Archenemy" ;
+           rdfs:comment "One vs many multiplayer format" .
+:ArchenemyCommander rdf:type :Format ;
+                    rdfs:label "Archenemy Commander" ;
+                    rdfs:comment "Archenemy played with Commander decks" .
+:BoosterDraft rdf:type :Format ;
+              rdfs:label "Booster Draft" ;
+              rdfs:comment "Players draft cards from booster packs" .
+:Brawl rdf:type :Format ;
+       rdfs:label "Brawl" ;
+       rdfs:comment "Commander variant played on MTG Arena" .
+:Commander rdf:type :Format ;
+           rdfs:label "Commander" ;
+           rdfs:comment "100-card singleton multiplayer format" .
+:Commander1v1 rdf:type :Format ;
+              rdfs:label "Commander 1v1" ;
+              rdfs:comment "Commander played as a duel" .
+:CommanderLimited rdf:type :Format ;
+                  rdfs:label "Commander Limited" ;
+                  rdfs:comment "Draft or Sealed with Commander rules" .
+:Conspiracy rdf:type :Format ;
+            rdfs:label "Conspiracy" ;
+            rdfs:comment "Draft format designed for multiplayer games" .
+:Freeform rdf:type :Format ;
+          rdfs:label "Freeform" ;
+          rdfs:comment "Play with any cards in your collection" .
+:Historic rdf:type :Format ;
+          rdfs:label "Historic" ;
+          rdfs:comment "Non-rotating digital format on MTG Arena" .
+:Legacy rdf:type :Format ;
+        rdfs:label "Legacy" ;
+        rdfs:comment "Eternal format allowing cards from all Magic sets" .
+:Limited rdf:type :Format ;
+         rdfs:label "Limited" ;
+         rdfs:comment "Formats where players build decks from opened packs" .
+:Modern rdf:type :Format ;
+        rdfs:label "Modern" ;
+        rdfs:comment "Non-rotating format from 8th Edition onwards" .
+:MomirBasic rdf:type :Format ;
+            rdfs:label "Momir Basic" ;
+            rdfs:comment "Digital format using Momir Vig avatar" .
+:Oathbreaker rdf:type :Format ;
+             rdfs:label "Oathbreaker" ;
+             rdfs:comment "Singleton format with Planeswalker commander and signature spell" .
+:Pauper rdf:type :Format ;
+        rdfs:label "Pauper" ;
+        rdfs:comment "Format using only common cards" .
+:PickTwoDraft rdf:type :Format ;
+              rdfs:label "Pick-Two Draft" ;
+              rdfs:comment "Special 4-player draft format" .
+:Pioneer rdf:type :Format ;
+         rdfs:label "Pioneer" ;
+         rdfs:comment "Non-rotating format from Return to Ravnica onwards" .
+:Planechase rdf:type :Format ;
+            rdfs:label "Planechase" ;
+            rdfs:comment "Casual format using oversized planar cards" .
+:SealedDeck rdf:type :Format ;
+            rdfs:label "Sealed Deck" ;
+            rdfs:comment "Build a deck from 6 booster packs" .
+:Standard rdf:type :Format ;
+          rdfs:label "Standard" ;
+          rdfs:comment "Rotating format using recent sets" .
+:TeamBoosterDraft rdf:type :Format ;
+                  rdfs:label "Team Booster Draft" ;
+                  rdfs:comment "Draft played in teams" .
+:TeamSealedDeck rdf:type :Format ;
+                rdfs:label "Team Sealed Deck" ;
+                rdfs:comment "Sealed played in teams" .
+:Timeless rdf:type :Format ;
+          rdfs:label "Timeless" ;
+          rdfs:comment "Digital format with no bans on MTG Arena" .
+:TwoHeadedGiant rdf:type :Format ;
+                rdfs:label "Two-Headed Giant" ;
+                rdfs:comment "2v2 Team format" .
+:Vintage rdf:type :Format ;
+         rdfs:label "Vintage" ;
+         rdfs:comment "Eternal format allowing almost all cards" .
+
+# --- Languages ---
+:English rdf:type :Language ;
+         rdfs:label "English" ;
+         rdfs:comment "The English language print of the card."@en .
+:German rdf:type :Language ;
+        rdfs:label "German" ;
+        rdfs:comment "The German language print of the card."@en .
+:Japanese rdf:type :Language ;
+          rdfs:label "Japanese" ;
+          rdfs:comment "The Japanese language print of the card."@en .
+:Spanish rdf:type :Language ;
+         rdfs:label "Spanish" ;
+         rdfs:comment "The Spanish language print of the card."@en .
 
 # --- Sets ---
-:Commander2017 rdf:type :Set ; rdfs:label "Commander 2017" ; rdfs:comment "C17" .
-:Kaldheim rdf:type :Set ; rdfs:label "Kaldheim" ; rdfs:comment "KHM" .
-:LimitedEditionAlpha rdf:type :Set ; rdfs:label "Limited Edition Alpha" ; rdfs:comment "LEA" .
+:Commander2017 rdf:type :Set ;
+               :setName "Commander 2017" ;
+               :setCode "C17" .
+:Kaldheim rdf:type :Set ;
+          :setName "Kaldheim" ;
+          :setCode "KHM" .
+:LimitedEditionAlpha rdf:type :Set ;
+                     :setName "Limited Edition Alpha" ;
+                     :setCode "LEA" .
 
-# --- Rulings (Examples) ---
-:UrDragonRuling1 rdf:type :Ruling ;
-                 :rulingDate "2017-08-25"^^xsd:date ;
-                 :rulingText "You can't reduce the cost to cast a Dragon spell to less than 0 mana." .
+# --- Legalities ---
+:Legal rdf:type :Legality ;
+       rdfs:label "Legal" ;
+       rdfs:comment "The card is fully legal to play in the format."@en .
+:NotLegal rdf:type :Legality ;
+          rdfs:label "Not Legal" ;
+          rdfs:comment "The card is not legal because it was never printed in a set legal for this format."@en .
+:Banned rdf:type :Legality ;
+        rdfs:label "Banned" ;
+        rdfs:comment "The card is explicitly forbidden from being played in the format."@en .
+:Restricted rdf:type :Legality ;
+            rdfs:label "Restricted" ;
+            rdfs:comment "The card is limited to a single copy per deck in the format (primarily Vintage)."@en .
 
-# --- Card Types (Examples) ---
-:Creature rdf:type :CardType ; rdfs:label "Creature" .
-:Artifact rdf:type :CardType ; rdfs:label "Artifact" .
-:Enchantment rdf:type :CardType ; rdfs:label "Enchantment" .
-:Instant rdf:type :CardType ; rdfs:label "Instant" .
-:Sorcery rdf:type :CardType ; rdfs:label "Sorcery" .
-:Land rdf:type :CardType ; rdfs:label "Land" .
-:Planeswalker rdf:type :CardType ; rdfs:label "Planeswalker" .
 
-# --- Super Types (Examples) ---
-:Legendary rdf:type :SuperType ; rdfs:label "Legendary" .
-:Snow rdf:type :SuperType ; rdfs:label "Snow" .
-
-# --- Sub Types (Examples) ---
-:Human rdf:type :SubType ; rdfs:label "Human" .
-:Soldier rdf:type :SubType ; rdfs:label "Soldier" .
-:Wizard rdf:type :SubType ; rdfs:label "Wizard" .
-:Dragon rdf:type :SubType ; rdfs:label "Dragon" .
-:Equipment rdf:type :SubType ; rdfs:label "Equipment" .
+#################################################
+#
+#  Examples
+#
+#################################################
 
 # --- Decks ---
 
@@ -405,13 +777,29 @@
              :toughness "10" ;
              :oracleText "Eminence — As long as The Ur-Dragon is in the command zone or on the battlefield, other Dragon spells you cast cost {1} less to cast.\nFlying\nWhenever one or more Dragons you control attack, draw that many cards, then you may put a permanent card from your hand onto the battlefield." ;
              :isCommanderOf :UrDragonDeck ;
-             :cardNumber "048" ;
+             :cardNumber 48 ;
              :artist "Jaime Jones" ;
              :hasSet :Commander2017 ;
              :hasLanguage :English ;
-             :legalIn :Commander , :Legacy , :Vintage ;
-             :notLegalIn :Standard ;
-             :hasRuling :UrDragonRuling1 .
+             :hasLegality [ rdf:type :LegalityMapping ;
+                            :inFormat :Commander ;
+                            :hasLegalityStatus :Legal
+                          ] ;
+             :hasLegality [ rdf:type :LegalityMapping ;
+                            :inFormat :Legacy ;
+                            :hasLegalityStatus :Legal
+                          ] ;
+             :hasLegality [ rdf:type :LegalityMapping ;
+                            :inFormat :Vintage ;
+                            :hasLegalityStatus :Legal
+                          ] ;
+             :hasLegality [ rdf:type :LegalityMapping ;
+                            :inFormat :Standard ;
+                            :hasLegalityStatus :NotLegal
+                          ] ;
+             :hasRuling [rdf:type :Ruling ;
+                          :rulingDate "2017-08-25"^^xsd:date ;
+                          :rulingText "You can't reduce the cost to cast a Dragon spell to less than 0 mana." ] .
 
 :SolRing rdf:type :Card ;
          :name "Sol Ring" ;
@@ -426,9 +814,18 @@
          :artist "Mark Tedin" ;
          :hasSet :LimitedEditionAlpha ;
          :hasLanguage :English ;
-         :legalIn :Commander , :Vintage ;
-         :restrictedIn :Vintage ;
-         :bannedIn :Legacy .
+         :hasLegality [ rdf:type :LegalityMapping ;
+                        :inFormat :Commander ;
+                        :hasLegalityStatus :Legal
+                      ] ;
+         :hasLegality [ rdf:type :LegalityMapping ;
+                        :inFormat :Vintage ;
+                        :hasLegalityStatus :Restricted
+                      ] ;
+         :hasLegality [ rdf:type :LegalityMapping ;
+                        :inFormat :Legacy ;
+                        :hasLegalityStatus :Banned
+                      ] .
 
 :LathrilBladeOfTheElves rdf:type :Card ;
                         :name "Lathril, Blade of the Elves" ;
@@ -447,7 +844,14 @@
                         :artist "Caroline Gariba" ;
                         :hasSet :Kaldheim ;
                         :hasLanguage :English ;
-                        :legalIn :Commander , :Legacy .
+                        :hasLegality [ rdf:type :LegalityMapping ;
+                                       :inFormat :Commander ;
+                                       :hasLegalityStatus :Legal
+                                     ] ;
+                        :hasLegality [ rdf:type :LegalityMapping ;
+                                       :inFormat :Legacy ;
+                                       :hasLegalityStatus :Legal
+                                     ] .
 
 :CommandTower rdf:type :Card ;
               :name "Command Tower" ;
@@ -460,4 +864,7 @@
               :isInDeck :UrDragonDeck , :LathrilDeck ;
               :artist "Ryan Yee" ;
               :hasSet :Commander2017 ;
-              :legalIn :Commander .
+              :hasLegality [ rdf:type :LegalityMapping ;
+                             :inFormat :Commander ;
+                             :hasLegalityStatus :Legal
+                           ] .
