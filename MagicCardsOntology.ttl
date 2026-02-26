@@ -75,6 +75,8 @@
        rdfs:label "Color" ;
        rdfs:comment " The five colors of Magic plus Colorless"@en .
 
+# Note: It is called supertype in the rules, but it is not a real supertype
+#       but should be considered as a modifier of the card type.
 :SuperType rdf:type owl:Class ;
            owl:equivalentClass [
                rdf:type owl:Class ;
@@ -82,7 +84,6 @@
                    :Basic
                    :Elite
                    :Host
-                   :Kindred
                    :Legendary
                    :Ongoing
                    :Snow
@@ -106,6 +107,7 @@
                   :Enchantment
                   :Hero
                   :Instant
+                  :Kindred
                   :Land
                   :Phenomenon
                   :Plane
@@ -120,27 +122,135 @@
           rdfs:comment "The primary classification of a card."@en .
 
 :SubType rdf:type owl:Class ;
-         owl:equivalentClass [
-             rdf:type owl:Class ;
-             owl:oneOf (
-                 :Dragon
-                 :Equipment
-                 :Golem
-                 :Horizon
-                 :Human
-                 :Hybrid
-                 :Mutant
-                 :Ooze
-                 :Plague
-                 :Soldier
-                 :Spirit
-                 :Vehicle
-                 :Wizard
-                 :Zombie
-             )
-         ] ;
          rdfs:label "Sub Type" ;
          rdfs:comment "A sub-classification that provides more specific categorical information to the primary card type."@en .
+
+:ArtifactTypes rdf:type owl:Class ;
+               rdfs:subClassOf :SubType ;
+               owl:equivalentClass [
+                   rdf:type owl:Class ;
+                   owl:oneOf (
+                       :Attraction
+                       :Blood
+                       :Bobblehead
+                       :Clue
+                       :Contraption
+                       :Equipment
+                       :Food
+                       :Fortification
+                       :Gold
+                       :Incubator
+                       :Infinity
+                       :Junk
+                       :Lander
+                       :Map
+                       :Mutagen
+                       :Powerstone
+                       :Spacecraft
+                       :Stone
+                       :Treasure
+                       :Vehicle
+                   )
+               ] ;
+               rdfs:label "Artifact Types" ;
+               rdfs:comment "A subtype that's correlated to the artifact card type."@en .
+
+:EnchantmentTypes rdf:type owl:Class ;
+                  rdfs:subClassOf :SubType ;
+                  owl:equivalentClass [
+                      rdf:type owl:Class ;
+                      owl:oneOf (
+                          :Aura
+                          :Background
+                          :Cartouche
+                          :Case
+                          :Class
+                          :Curse
+                          :Role
+                          :Room
+                          :Rune
+                          :Saga
+                          :Shard
+                          :Shrine
+                      )
+                  ] ;
+                  rdfs:label "Enchantment Types" ;
+                  rdfs:comment "A subtype that's correlated to the enchantment card type."@en .
+
+:PlaneswalkerTypes rdf:type owl:Class ;
+                   rdfs:subClassOf :SubType ;
+                   owl:equivalentClass [
+                       rdf:type owl:Class ;
+                       owl:oneOf (
+                           :Ajani :Aminatou :Angrath :Arlinn :Ashiok :Bahamut
+                           :Basri :Bolas :Calix :Chandra :Comet :Dack :Dakkon
+                           :Daretti :Davriel :Dihada :Domri :Dovin :Ellywick
+                           :Elminster :Elspeth :Estrid :Freyalise :Garruk
+                           :Gideon :Grist :Guff :Huatli :Jace :Jared :Jaya
+                           :Jeska :Kaito :Karn :Kasmina :Kaya :Kiora :Koth
+                           :Liliana :Lolth :Lukka :Minsc :Mordenkainen :Nahiri
+                           :Narset :Niko :Nissa :Nixilis :Oko :Quintorius :Ral
+                           :Rowan :Saheeli :Samut :Sarkhan :Serra :Sivitri
+                           :Sorin :Szat :Tamiyo :Tasha :Teferi :Teyo :Tezzeret
+                           :Tibalt :Tyvar :Ugin :Urza :Venser :Vivien :Vraska
+                           :Vronos :Will :Windgrace :Wrenn :Xenagos :Yanggu
+                           :Yanling :Zariel
+                       )
+                   ] ;
+                   rdfs:label "Planeswalker Types" ;
+                   rdfs:comment "A subtype that's correlated to the planeswalker card type."@en .
+
+:SpellTypes rdf:type owl:Class ;
+            rdfs:subClassOf :SubType ;
+            owl:equivalentClass [
+                rdf:type owl:Class ;
+                owl:oneOf (
+                    :Adventure
+                    :Arcane
+                    :Lesson
+                    :Omen
+                    :Trap
+                )
+            ] ;
+            rdfs:label "Spell Types" ;
+            rdfs:comment "A subtype that's correlated to the instant or sorcery card type."@en .
+
+:LandTypes rdf:type owl:Class ;
+           rdfs:subClassOf :SubType ;
+           owl:equivalentClass [
+               rdf:type owl:Class ;
+               owl:oneOf (
+                :Cave
+                :Desert
+                :Gate
+                :Lair
+                :Locus
+                :Mine
+                :Planet
+                :PowerPlant
+                :Sphere
+                :Tower
+                :Town
+                :Urzas
+               )
+           ] ;
+           rdfs:label "Land Types" ;
+           rdfs:comment "A subtype that's correlated to the land card type."@en .
+
+:BasicLandTypes rdf:type owl:Class ;
+                rdfs:subClassOf :LandTypes ;
+                owl:equivalentClass [
+                    rdf:type owl:Class ;
+                    owl:oneOf (
+                        :Plains
+                        :Island
+                        :Swamp
+                        :Mountain
+                        :Forest
+                    )
+                ] ;
+                rdfs:label "Basic Land Types" ;
+                rdfs:comment "Basic land types implicitly define the color of a land card"
 
 :Rarity rdf:type owl:Class ;
         owl:equivalentClass [
@@ -254,7 +364,7 @@
           rdfs:domain :Card ;
           rdfs:range xsd:string ;
           rdfs:label "Mana Cost" ;
-          rdfs:comment "The mana symbols required to cast the card (e.g., {3}{U}{B})"@en .
+          rdfs:comment "The mana symbols required to cast the card, where each symbol is represented by a string like {W}, {U}, {B}, {R}, {G}, {C}, {X}, or {0}"@en .
 
 :manaValue rdf:type owl:DatatypeProperty ;
            rdfs:domain :Card ;
@@ -510,9 +620,6 @@
 :Host rdf:type :SuperType ;
       rdfs:label "Host" ;
       rdfs:comment "A supertype used on silver-bordered and un-set creatures that can be augmented."@en .
-:Kindred rdf:type :SuperType ;
-         rdfs:label "Kindred" ;
-         rdfs:comment "A card type denoting tribal synergies for non-creature cards."@en .
 :Legendary rdf:type :SuperType ;
            rdfs:label "Legendary" ;
            rdfs:comment "A supertype representing specific, unique entities. Can only exist as one on the battlefield at a time."@en .
@@ -550,6 +657,9 @@
          :isPermanent false ;
          rdfs:label "Instant" ;
          rdfs:comment "A non-permanent spell that can be cast at almost any time."@en .
+:Kindred rdf:type :CardType ;
+         rdfs:label "Kindred" ;
+         rdfs:comment "A card type denoting tribal synergies for non-creature cards. Specifically it allows creatures as subtypes."@en .
 :Land rdf:type :CardType ;
       :isPermanent true ;
       rdfs:label "Land" ;
@@ -579,49 +689,411 @@
           rdfs:label "Vanguard" ;
           rdfs:comment "A casual card type representing a specific character that modifies starting life and hand size."@en .
 
-# --- Sub Types ---
-:Dragon rdf:type :SubType ;
-        rdfs:label "Dragon" ;
-        rdfs:comment "A creature type representing large, reptilian, often flying creatures with a breath weapon."@en .
+# --- Enchantment Types ---
+:Aura rdf:type :SubType ;
+      rdfs:label "Aura" ;
+      rdfs:comment "An enchantment type that attaches to another permanent or player."@en .
+:Background rdf:type :SubType ;
+            rdfs:label "Background" ;
+            rdfs:comment "An enchantment type used in Commander drafting to act as a second commander."@en .
+:Cartouche rdf:type :SubType ;
+           rdfs:label "Cartouche" ;
+           rdfs:comment "An Aura enchantment type representing a specific Amonkhet trial."@en .
+:Case rdf:type :SubType ;
+      rdfs:label "Case" ;
+      rdfs:comment "An enchantment type representing an investigation that can be 'solved' for an extra effect."@en .
+:Class rdf:type :SubType ;
+       rdfs:label "Class" ;
+       rdfs:comment "An enchantment type representing a character class that levels up over time."@en .
+:Curse rdf:type :SubType ;
+       rdfs:label "Curse" ;
+       rdfs:comment "An Aura enchantment type that enchants and negatively impacts a player."@en .
+:Role rdf:type :SubType ;
+      rdfs:label "Role" ;
+      rdfs:comment "An Aura enchantment type representing a specific role assigned to a creature."@en .
+:Room rdf:type :SubType ;
+      rdfs:label "Room" ;
+      rdfs:comment "An enchantment type representing a location within a house or dungeon."@en .
+:Rune rdf:type :SubType ;
+      rdfs:label "Rune" ;
+      rdfs:comment "An Aura enchantment type representing powerful Kaldheim magic."@en .
+:Shard rdf:type :SubType ;
+       rdfs:label "Shard" ;
+       rdfs:comment "An enchantment type representing a fragment of Niko Aris's magic."@en .
+:Shrine rdf:type :SubType ;
+        rdfs:label "Shrine" ;
+        rdfs:comment "An enchantment type depicting a place of worship that scales based on the number of Shrines."@en .
+
+# --- Planeswalker Types ---
+:Ajani rdf:type :SubType ;
+       rdfs:label "Ajani" ;
+       rdfs:comment "A leonin planeswalker who wields white and green magic to heal and protect."@en .
+:Aminatou rdf:type :SubType ;
+          rdfs:label "Aminatou" ;
+          rdfs:comment "A child planeswalker with the power to manipulate fate."@en .
+:Angrath rdf:type :SubType ;
+         rdfs:label "Angrath" ;
+         rdfs:comment "A minotaur pirate planeswalker who uses red and black magic."@en .
+:Arlinn rdf:type :SubType ;
+        rdfs:label "Arlinn" ;
+        rdfs:comment "A werewolf planeswalker from Innistrad."@en .
+:Ashiok rdf:type :SubType ;
+        rdfs:label "Ashiok" ;
+        rdfs:comment "A nightmare-weaving planeswalker of unknown origin."@en .
+:Bahamut rdf:type :SubType ;
+         rdfs:label "Bahamut" ;
+         rdfs:comment "A dragon god of justice from the Forgotten Realms."@en .
+:Basri rdf:type :SubType ;
+       rdfs:label "Basri" ;
+       rdfs:comment "A human paladin planeswalker from Amonkhet."@en .
+:Bolas rdf:type :SubType ;
+       rdfs:label "Bolas" ;
+       rdfs:comment "Nicol Bolas, an elder dragon and one of the most powerful planeswalkers."@en .
+:Calix rdf:type :SubType ;
+       rdfs:label "Calix" ;
+       rdfs:comment "An enchantment-based planeswalker created by Klothys to enforce destiny."@en .
+:Chandra rdf:type :SubType ;
+       rdfs:label "Chandra" ;
+       rdfs:comment "A passionate human pyromancer planeswalker."@en .
+:Comet rdf:type :SubType ;
+       rdfs:label "Comet" ;
+       rdfs:comment "A stellar dog planeswalker."@en .
+:Dack rdf:type :SubType ;
+      rdfs:label "Dack" ;
+      rdfs:comment "Dack Fayden, the greatest thief in the multiverse."@en .
+:Dakkon rdf:type :SubType ;
+        rdfs:label "Dakkon" ;
+        rdfs:comment "Dakkon Blackblade, an ancient warrior and smith."@en .
+:Daretti rdf:type :SubType ;
+         rdfs:label "Daretti" ;
+         rdfs:comment "A goblin artificer planeswalker from Fiora."@en .
+:Davriel rdf:type :SubType ;
+         rdfs:label "Davriel" ;
+         rdfs:comment "A diabolical planeswalker who steals spells, from Innistrad."@en .
+:Dihada rdf:type :SubType ;
+        rdfs:label "Dihada" ;
+        rdfs:comment "Geyadrone Dihada, an ancient demonic planeswalker."@en .
+:Domri rdf:type :SubType ;
+       rdfs:label "Domri" ;
+       rdfs:comment "A young human planeswalker from Ravnica's Gruul Clans."@en .
+:Dovin rdf:type :SubType ;
+      rdfs:label "Dovin" ;
+      rdfs:comment "A vedalken planeswalker with the ability to see the flaws in any system."@en .
+:Ellywick rdf:type :SubType ;
+          rdfs:label "Ellywick" ;
+          rdfs:comment "A gnome bard planeswalker from the Forgotten Realms."@en .
+:Elminster rdf:type :SubType ;
+          rdfs:label "Elminster" ;
+          rdfs:comment "A powerful wizard from the Forgotten Realms."@en .
+:Elspeth rdf:type :SubType ;
+         rdfs:label "Elspeth" ;
+         rdfs:comment "A human knight planeswalker who wields white magic."@en .
+:Estrid rdf:type :SubType ;
+        rdfs:label "Estrid" ;
+        rdfs:comment "A human planeswalker who uses masks and enchantments."@en .
+:Freyalise rdf:type :SubType ;
+           rdfs:label "Freyalise" ;
+           rdfs:comment "An elven planeswalker who protected Dominaria."@en .
+:Garruk rdf:type :SubType ;
+        rdfs:label "Garruk" ;
+        rdfs:comment "A fierce human planeswalker who hunts the greatest predators."@en .
+:Gideon rdf:type :SubType ;
+        rdfs:label "Gideon" ;
+        rdfs:comment "A human planeswalker known for his invulnerability and sense of justice."@en .
+:Grist rdf:type :SubType ;
+       rdfs:label "Grist" ;
+       rdfs:comment "An insect planeswalker that commands a swarm."@en .
+:Guff rdf:type :SubType ;
+      rdfs:label "Guff" ;
+      rdfs:comment "Commodore Guff, an ancient planeswalker who breaks the fourth wall."@en .
+:Huatli rdf:type :SubType ;
+        rdfs:label "Huatli" ;
+        rdfs:comment "A human planeswalker from Ixalan who commands dinosaurs."@en .
+:Jace rdf:type :SubType ;
+      rdfs:label "Jace" ;
+      rdfs:comment "A human planeswalker specializing in telepathy and illusions."@en .
+:Jared rdf:type :SubType ;
+       rdfs:label "Jared" ;
+       rdfs:comment "Jared Carthalion, a true heir possessing all colors of magic."@en .
+:Jaya rdf:type :SubType ;
+      rdfs:label "Jaya" ;
+      rdfs:comment "Jaya Ballard, an incredibly powerful human pyromancer."@en .
+:Jeska rdf:type :SubType ;
+       rdfs:label "Jeska" ;
+       rdfs:comment "A human warrior who ascended to planeswalker and then became Phage."@en .
+:Kaito rdf:type :SubType ;
+       rdfs:label "Kaito" ;
+       rdfs:comment "A human ninja planeswalker from Kamigawa."@en .
+:Karn rdf:type :SubType ;
+      rdfs:label "Karn" ;
+      rdfs:comment "A silver golem planeswalker created by Urza."@en .
+:Kasmina rdf:type :SubType ;
+         rdfs:label "Kasmina" ;
+         rdfs:comment "A mysterious planeswalker who mentors other mages."@en .
+:Kaya rdf:type :SubType ;
+      rdfs:label "Kaya" ;
+      rdfs:comment "A human assassin planeswalker who can become intangible."@en .
+:Kiora rdf:type :SubType ;
+       rdfs:label "Kiora" ;
+       rdfs:comment "A merfolk planeswalker who commands the creatures of the deep."@en .
+:Koth rdf:type :SubType ;
+      rdfs:label "Koth" ;
+      rdfs:comment "A vulshok planeswalker from Mirrodin specializing in geomancy."@en .
+:Liliana rdf:type :SubType ;
+         rdfs:label "Liliana" ;
+         rdfs:comment "A powerful human necromancer planeswalker who wields black magic."@en .
+:Lolth rdf:type :SubType ;
+       rdfs:label "Lolth" ;
+       rdfs:comment "The Spider Queen, a deity from the Forgotten Realms."@en .
+:Lukka rdf:type :SubType ;
+       rdfs:label "Lukka" ;
+       rdfs:comment "A human planeswalker who bonds with monsters."@en .
+:Minsc rdf:type :SubType ;
+       rdfs:label "Minsc" ;
+       rdfs:comment "A ranger from the Forgotten Realms, always accompanied by his hamster Boo."@en .
+:Mordenkainen rdf:type :SubType ;
+              rdfs:label "Mordenkainen" ;
+              rdfs:comment "A legendary wizard from the Forgotten Realms."@en .
+:Nahiri rdf:type :SubType ;
+        rdfs:label "Nahiri" ;
+        rdfs:comment "A kor lithomancer planeswalker from Zendikar."@en .
+:Narset rdf:type :SubType ;
+        rdfs:label "Narset" ;
+        rdfs:comment "A human planeswalker from Tarkir seeking knowledge."@en .
+:Niko rdf:type :SubType ;
+      rdfs:label "Niko" ;
+      rdfs:comment "A human athlete planeswalker from Theros who wields shards."@en .
+:Nissa rdf:type :SubType ;
+       rdfs:label "Nissa" ;
+       rdfs:comment "An elven animist planeswalker with a deep connection to nature."@en .
+:Nixilis rdf:type :SubType ;
+        rdfs:label "Nixilis" ;
+        rdfs:comment "Ob Nixilis, a former human tyrant turned demon planeswalker."@en .
+:Oko rdf:type :SubType ;
+     rdfs:label "Oko" ;
+     rdfs:comment "A fey planeswalker known for shapeshifting and trickery."@en .
+:Quintorius rdf:type :SubType ;
+            rdfs:label "Quintorius" ;
+            rdfs:comment "A loxodon planeswalker studying archaeology."@en .
+:Ral rdf:type :SubType ;
+     rdfs:label "Ral" ;
+     rdfs:comment "A human planeswalker from Ravnica, brilliant with storm magic."@en .
+:Rowan rdf:type :SubType ;
+       rdfs:label "Rowan" ;
+       rdfs:comment "A human planeswalker from Eldraine who wields electricity."@en .
+:Saheeli rdf:type :SubType ;
+         rdfs:label "Saheeli" ;
+         rdfs:comment "A human artificer planeswalker from Kaladesh."@en .
+:Samut rdf:type :SubType ;
+       rdfs:label "Samut" ;
+       rdfs:comment "A human planeswalker from Amonkhet specializing in speed."@en .
+:Sarkhan rdf:type :SubType ;
+         rdfs:label "Sarkhan" ;
+         rdfs:comment "A human planeswalker from Tarkir who worships dragons."@en .
+:Serra rdf:type :SubType ;
+       rdfs:label "Serra" ;
+       rdfs:comment "An ancient human planeswalker who created an angelic realm."@en .
+:Sivitri rdf:type :SubType ;
+         rdfs:label "Sivitri" ;
+         rdfs:comment "Sivitri Scarzam, an ancient dragon-riding planeswalker."@en .
+:Sorin rdf:type :SubType ;
+       rdfs:label "Sorin" ;
+       rdfs:comment "A vampire planeswalker from Innistrad who created Avacyn."@en .
+:Szat rdf:type :SubType ;
+      rdfs:label "Szat" ;
+      rdfs:comment "Tevesh Szat, an ancient human turned demonic doom planeswalker."@en .
+:Tamiyo rdf:type :SubType ;
+        rdfs:label "Tamiyo" ;
+        rdfs:comment "A moonfolk planeswalker who studies the multiverse."@en .
+:Tasha rdf:type :SubType ;
+       rdfs:label "Tasha" ;
+       rdfs:comment "A powerful witch from the Forgotten Realms."@en .
+:Teferi rdf:type :SubType ;
+        rdfs:label "Teferi" ;
+        rdfs:comment "A human planeswalker from Dominaria with time-manipulating magic."@en .
+:Teyo rdf:type :SubType ;
+      rdfs:label "Teyo" ;
+      rdfs:comment "A human shieldmage planeswalker from Ravnica."@en .
+:Tezzeret rdf:type :SubType ;
+          rdfs:label "Tezzeret" ;
+          rdfs:comment "A human artificer planeswalker from Alara who bends metal."@en .
+:Tibalt rdf:type :SubType ;
+        rdfs:label "Tibalt" ;
+        rdfs:comment "A half-devil planeswalker who revels in pain and chaos."@en .
+:Tyvar rdf:type :SubType ;
+       rdfs:label "Tyvar" ;
+       rdfs:comment "An elven planeswalker from Kaldheim who transmutes his body."@en .
+:Ugin rdf:type :SubType ;
+      rdfs:label "Ugin" ;
+      rdfs:comment "An ancient spirit dragon planeswalker of colorless magic."@en .
+:Urza rdf:type :SubType ;
+      rdfs:label "Urza" ;
+      rdfs:comment "An ancient and incredibly powerful human artificer planeswalker."@en .
+:Venser rdf:type :SubType ;
+        rdfs:label "Venser" ;
+        rdfs:comment "A human artificer planeswalker skilled in teleportation."@en .
+:Vivien rdf:type :SubType ;
+        rdfs:label "Vivien" ;
+        rdfs:comment "A human planeswalker who preserves spirits of extinct creatures."@en .
+:Vraska rdf:type :SubType ;
+        rdfs:label "Vraska" ;
+        rdfs:comment "A gorgon planeswalker from Ravnica."@en .
+:Vronos rdf:type :SubType ;
+        rdfs:label "Vronos" ;
+        rdfs:comment "A human planeswalker and inquisitor."@en .
+:Will rdf:type :SubType ;
+      rdfs:label "Will" ;
+      rdfs:comment "A human planeswalker from Eldraine who wields ice magic."@en .
+:Windgrace rdf:type :SubType ;
+         rdfs:label "Windgrace" ;
+         rdfs:comment "A panther warrior planeswalker from Dominaria."@en .
+:Wrenn rdf:type :SubType ;
+       rdfs:label "Wrenn" ;
+       rdfs:comment "A dryad planeswalker who bonds with treefolk."@en .
+:Xenagos rdf:type :SubType ;
+         rdfs:label "Xenagos" ;
+         rdfs:comment "A satyr planeswalker from Theros who ascended to godhood."@en .
+:Yanggu rdf:type :SubType ;
+        rdfs:label "Yanggu" ;
+        rdfs:comment "A human planeswalker from the Plane of Mountains and Seas."@en .
+:Yanling rdf:type :SubType ;
+        rdfs:label "Yanling" ;
+        rdfs:comment "A human planeswalker who controls water and ice."@en .
+:Zariel rdf:type :SubType ;
+        rdfs:label "Zariel" ;
+        rdfs:comment "An archdevil from the Forgotten Realms."@en .
+
+# --- Spell Types ---
+:Adventure rdf:type :SubType ;
+           rdfs:label "Adventure" ;
+           rdfs:comment "A spell type that allows casting an alternate spell from a permanent card."@en .
+:Arcane rdf:type :SubType ;
+        rdfs:label "Arcane" ;
+        rdfs:comment "A spell type originating from Kamigawa that can be spliced onto."@en .
+:Lesson rdf:type :SubType ;
+        rdfs:label "Lesson" ;
+        rdfs:comment "A spell type that can be retrieved from outside the game by the Learn mechanic."@en .
+:Omen rdf:type :SubType ;
+      rdfs:label "Omen" ;
+      rdfs:comment "A spell type with path-based magic."@en .
+:Trap rdf:type :SubType ;
+      rdfs:label "Trap" ;
+      rdfs:comment "A spell type that can be cast for a reduced cost if a certain condition is met."@en .
+
+# --- Artifact Types ---
+:Attraction rdf:type :SubType ;
+            rdfs:label "Attraction" ;
+            rdfs:comment "An artifact type representing a theme park attraction visited during gameplay."@en .
+:Blood rdf:type :SubType ;
+       rdfs:label "Blood" ;
+       rdfs:comment "An artifact type representing blood tokens, typically sacrificed to discard and draw a card."@en .
+:Bobblehead rdf:type :SubType ;
+            rdfs:label "Bobblehead" ;
+            rdfs:comment "An artifact type originally from the *Fallout* set representing collectible figurines."@en .
+:Clue rdf:type :SubType ;
+      rdfs:label "Clue" ;
+      rdfs:comment "An artifact type representing investigative evidence, typically sacrificed to draw a card."@en .
+:Contraption rdf:type :SubType ;
+             rdfs:label "Contraption" ;
+             rdfs:comment "An artifact type representing a device assembled by riggers."@en .
 :Equipment rdf:type :SubType ;
            rdfs:label "Equipment" ;
            rdfs:comment "An artifact type representing weapons, armor, or items that can be attached to creatures."@en .
-:Golem rdf:type :SubType ;
-       rdfs:label "Golem" ;
-       rdfs:comment "An artifact creature type representing animated constructs of unyielding materials."@en .
-:Horizon rdf:type :SubType ;
-         rdfs:label "Horizon" ;
-         rdfs:comment "A land or plane type representing a specific horizon or environment."@en .
-:Human rdf:type :SubType ;
-       rdfs:label "Human" ;
-       rdfs:comment "A creature type representing ordinary people, one of the most populous races."@en .
-:Hybrid rdf:type :SubType ;
-        rdfs:label "Hybrid" ;
-        rdfs:comment "A creature type representing a being composed of multiple disparate species or magic."@en .
-:Mutant rdf:type :SubType ;
-        rdfs:label "Mutant" ;
-        rdfs:comment "A creature type representing physically altered or evolved beings."@en .
-:Ooze rdf:type :SubType ;
-       rdfs:label "Ooze" ;
-       rdfs:comment "A creature type representing amorphous, gelatinous entities that consume matter."@en .
-:Plague rdf:type :SubType ;
-        rdfs:label "Plague" ;
-        rdfs:comment "An enchantment or creature type representing infectious diseases and afflictions."@en .
-:Soldier rdf:type :SubType ;
-         rdfs:label "Soldier" ;
-         rdfs:comment "A creature type representing trained martial combatants and military personnel."@en .
-:Spirit rdf:type :SubType ;
-        rdfs:label "Spirit" ;
-        rdfs:comment "A creature type representing incorporeal undead, ghosts, or nature kami."@en .
+:Food rdf:type :SubType ;
+      rdfs:label "Food" ;
+      rdfs:comment "An artifact type representing sustenance, typically sacrificed to gain life."@en .
+:Fortification rdf:type :SubType ;
+               rdfs:label "Fortification" ;
+               rdfs:comment "An artifact type representing defensive structures that can be attached to lands."@en .
+:Gold rdf:type :SubType ;
+      rdfs:label "Gold" ;
+      rdfs:comment "An artifact type representing currency, typically sacrificed for mana."@en .
+:Incubator rdf:type :SubType ;
+           rdfs:label "Incubator" ;
+           rdfs:comment "An artifact type representing Phyrexian gestation pods that transform into creatures."@en .
+:Infinity rdf:type :SubType ;
+          rdfs:label "Infinity" ;
+          rdfs:comment "An artifact type associated with un-set mechanics."@en .
+:Junk rdf:type :SubType ;
+      rdfs:label "Junk" ;
+      rdfs:comment "An artifact type representing scrap, typically sacrificed to impulse draw."@en .
+:Lander rdf:type :SubType ;
+        rdfs:label "Lander" ;
+        rdfs:comment "An artifact type representing spacecraft landers."@en .
+:Map rdf:type :SubType ;
+     rdfs:label "Map" ;
+     rdfs:comment "An artifact type representing navigational aids, typically sacrificed to explore."@en .
+:Mutagen rdf:type :SubType ;
+         rdfs:label "Mutagen" ;
+         rdfs:comment "An artifact type associated with mutation tokens."@en .
+:Powerstone rdf:type :SubType ;
+            rdfs:label "Powerstone" ;
+            rdfs:comment "An artifact type representing a mana battery."@en .
+:Spacecraft rdf:type :SubType ;
+            rdfs:label "Spacecraft" ;
+            rdfs:comment "An artifact type from the *Edge of Eternities* set representing ships that often require "Stationing" to function."@en .
+:Stone rdf:type :SubType ;
+       rdfs:label "Stone" ;
+       rdfs:comment "An artifact type representing a rock or specific mineral."@en .
+:Treasure rdf:type :SubType ;
+          rdfs:label "Treasure" ;
+          rdfs:comment "An artifact type representing wealth, typically sacrificed for mana of any color."@en .
 :Vehicle rdf:type :SubType ;
          rdfs:label "Vehicle" ;
          rdfs:comment "An artifact type representing modes of transport that can be crewed to become creatures."@en .
-:Wizard rdf:type :SubType ;
-        rdfs:label "Wizard" ;
-        rdfs:comment "A creature type representing practitioners of spells and arcane magic."@en .
-:Zombie rdf:type :SubType ;
-        rdfs:label "Zombie" ;
-        rdfs:comment "A creature type representing reanimated corpses and mindless undead."@en .
+
+# --- Land Types ---
+:Cave rdf:type :SubType ;
+      rdfs:label "Cave" ;
+      rdfs:comment "A land type representing subterranean caverns."@en .
+:Desert rdf:type :SubType ;
+        rdfs:label "Desert" ;
+        rdfs:comment "A land type representing arid, barren landscapes."@en .
+:Forest rdf:type :SubType ;
+        rdfs:label "Forest" ;
+        rdfs:comment "A basic land type that inherently produces green mana."@en .
+:Gate rdf:type :SubType ;
+      rdfs:label "Gate" ;
+      rdfs:comment "A land type representing magical portals or city gates."@en .
+:Island rdf:type :SubType ;
+        rdfs:label "Island" ;
+        rdfs:comment "A basic land type that inherently produces blue mana."@en .
+:Lair rdf:type :SubType ;
+      rdfs:label "Lair" ;
+      rdfs:comment "A land type representing the sovereign domain of a powerful creature."@en .
+:Locus rdf:type :SubType ;
+       rdfs:label "Locus" ;
+       rdfs:comment "A land type representing a center of magical power."@en .
+:Mine rdf:type :SubType ;
+      rdfs:label "Mine" ;
+      rdfs:comment "A land type, one of the three Urza's land types."@en .
+:Mountain rdf:type :SubType ;
+          rdfs:label "Mountain" ;
+          rdfs:comment "A basic land type that inherently produces red mana."@en .
+:Plains rdf:type :SubType ;
+        rdfs:label "Plains" ;
+        rdfs:comment "A basic land type that inherently produces white mana."@en .
+:Planet rdf:type :SubType ;
+        rdfs:label "Planet" ;
+        rdfs:comment "A land type representing an entire world or celestial body."@en .
+:PowerPlant rdf:type :SubType ;
+            rdfs:label "Power-Plant" ;
+            rdfs:comment "A land type, one of the three Urza's land types."@en .
+:Sphere rdf:type :SubType ;
+        rdfs:label "Sphere" ;
+        rdfs:comment "A land type representing distinct spherical or layered planar environments."@en .
+:Swamp rdf:type :SubType ;
+       rdfs:label "Swamp" ;
+       rdfs:comment "A basic land type that inherently produces black mana."@en .
+:Tower rdf:type :SubType ;
+       rdfs:label "Tower" ;
+       rdfs:comment "A land type, one of the three Urza's land types."@en .
+:Town rdf:type :SubType ;
+      rdfs:label "Town" ;
+      rdfs:comment "A land type representing a settlement or community."@en .
+:Urzas rdf:type :SubType ;
+       rdfs:label "Urza's" ;
+       rdfs:comment "A land type representing an association with the legendary artificer Urza."@en .
 
 # --- Formats ---
 :Alchemy rdf:type :Format ;
@@ -635,7 +1107,7 @@
                     rdfs:comment "Archenemy played with Commander decks" .
 :BoosterDraft rdf:type :Format ;
               rdfs:label "Booster Draft" ;
-              rdfs:comment "Players draft cards from booster packs" .
+              rdfs:comment "Players draft cards from booster packs and build a 40 card deck" .
 :Brawl rdf:type :Format ;
        rdfs:label "Brawl" ;
        rdfs:comment "Commander variant played on MTG Arena" .
@@ -689,7 +1161,7 @@
             rdfs:comment "Build a deck from 6 booster packs" .
 :Standard rdf:type :Format ;
           rdfs:label "Standard" ;
-          rdfs:comment "Rotating format using recent sets" .
+          rdfs:comment "Rotating format using recent sets with 60 card decks and maximal four copies of any card" .
 :TeamBoosterDraft rdf:type :Format ;
                   rdfs:label "Team Booster Draft" ;
                   rdfs:comment "Draft played in teams" .
@@ -744,6 +1216,175 @@
 :Restricted rdf:type :Legality ;
             rdfs:label "Restricted" ;
             rdfs:comment "The card is limited to a single copy per deck in the format (primarily Vintage)."@en .
+
+
+#################################################
+#
+#  Constraints
+#
+#################################################
+
+# --- Land Constraints ---
+:LandCard rdf:type owl:Class ;
+    rdfs:subClassOf :Card ;
+    owl:equivalentClass [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasCardType ;
+        owl:hasValue :Land
+    ] ;
+    rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSuperType ;
+        owl:allValuesFrom [
+            rdf:type owl:Class ;
+            owl:oneOf ( :Basic :Snow :Legendary )
+        ]
+    ] ;
+    rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSuperType ;
+        owl:maxCardinality "3"^^xsd:nonNegativeInteger
+    ] ;
+    rdfs:label "Land Card" ;
+    rdfs:comment "A class representing any card with the Land card type to enforce constraints."@en .
+
+# --- Artifact Constraints ---
+:ArtifactCard rdf:type owl:Class ;
+    rdfs:subClassOf :Card ;
+    owl:equivalentClass [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasCardType ;
+        owl:hasValue :Artifact
+    ] ;
+    rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSuperType ;
+        owl:allValuesFrom [
+            rdf:type owl:Class ;
+            owl:oneOf ( :Legendary :Host :Snow )
+        ]
+    ] ;
+    rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSuperType ;
+        owl:maxCardinality "3"^^xsd:nonNegativeInteger
+    ] ;
+    rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSubType ;
+        owl:allValuesFrom :ArtifactTypes
+    ] ;
+    rdfs:label "Artifact Card" ;
+    rdfs:comment "A class representing any card with the Artifact card type to enforce constraints."@en .
+
+# --- Enchantment Constraints ---
+:EnchantmentCard rdf:type owl:Class ;
+    rdfs:subClassOf :Card ;
+    owl:equivalentClass [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasCardType ;
+        owl:hasValue :Enchantment
+    ] ;
+    rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSuperType ;
+        owl:allValuesFrom [
+            rdf:type owl:Class ;
+            owl:oneOf ( :Legendary :Snow :World )
+        ]
+    ] ;
+    rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSuperType ;
+        owl:maxCardinality "3"^^xsd:nonNegativeInteger
+    ] ;
+    rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSubType ;
+        owl:allValuesFrom :EnchantmentTypes
+    ] ;
+    rdfs:label "Enchantment Card" ;
+    rdfs:comment "A class representing any card with the Enchantment card type to enforce constraints."@en .
+
+# --- Planeswalker Constraints ---
+:PlaneswalkerCard rdf:type owl:Class ;
+    rdfs:subClassOf :Card ;
+    owl:equivalentClass [
+        rdf:type owl:Class ;
+        owl:intersectionOf (
+            [
+                rdf:type owl:Restriction ;
+                owl:onProperty :hasCardType ;
+                owl:hasValue :Planeswalker
+            ]
+            [
+                rdf:type owl:Restriction ;
+                owl:onProperty :hasSuperType ;
+                owl:hasValue :Legendary
+            ]
+        )
+    ] ;
+    rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSubType ;
+        owl:allValuesFrom :PlaneswalkerTypes
+    ] ;
+    rdfs:label "Planeswalker Card" ;
+    rdfs:comment "A class representing planeswalker cards, which must have the Legendary supertype."@en .
+
+# --- Spell Constraints ---
+:SpellCardConstraint rdf:type owl:Class ;
+    rdfs:subClassOf :Card ;
+    owl:equivalentClass [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasCardType ;
+        owl:someValuesFrom [
+            rdf:type owl:Class ;
+            owl:oneOf ( :Instant :Sorcery )
+        ]
+    ] ;
+    rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSuperType ;
+        owl:allValuesFrom [
+            rdf:type owl:Class ;
+            owl:oneOf ( :Legendary :Snow )
+        ]
+    ] ;
+    rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSuperType ;
+        owl:maxCardinality "2"^^xsd:nonNegativeInteger
+    ] ;
+    rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSubType ;
+        owl:allValuesFrom :SpellTypes
+    ] ;
+    rdfs:label "Spell Card Constraint" ;
+    rdfs:comment "A class representing any card with the Instant or Sorcery card type to enforce constraints."@en .
+
+# --- Basic Land Constraints ---
+:BasicLandCard rdf:type owl:Class ;
+    rdfs:subClassOf :Card ;
+    owl:equivalentClass [
+        rdf:type owl:Class ;
+        owl:intersectionOf (
+            :LandCard
+            [
+                rdf:type owl:Restriction ;
+                owl:onProperty :hasSuperType ;
+                owl:hasValue :Basic
+            ]
+        )
+    ] ;
+    rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSubType ;
+        owl:allValuesFrom :BasicLandTypes
+    ] ;
+    rdfs:label "Basic Land Card" ;
+    rdfs:comment "A class representing land cards with the Basic supertype."@en .
 
 
 #################################################
