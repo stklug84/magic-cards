@@ -103,9 +103,7 @@
                   :Conspiracy
                   :Creature
                   :Dungeon
-                  :Emblem
                   :Enchantment
-                  :Hero
                   :Instant
                   :Kindred
                   :Land
@@ -215,6 +213,69 @@
             rdfs:label "Spell Types" ;
             rdfs:comment "A subtype that's correlated to the instant or sorcery card type."@en .
 
+:CreatureType rdf:type owl:Class ;
+               rdfs:subClassOf :SubType ;
+               owl:equivalentClass [
+                   rdf:type owl:Class ;
+                   owl:oneOf (
+                       :Advisor :Aetherborn :Alien :Ally :Angel :Antelope
+                       :Ape :Archer :Archon :Armadillo :Army :Artificer
+                       :Assassin :AssemblyWorker :Astartes :Atog :Aurochs :Avatar
+                       :Azra :Badger :Balloon :Barbarian :Bard :Basilisk
+                       :Bat :Bear :Beast :Beaver :Beeble :Beholder
+                       :Berserker :Bird :Bison :Blinkmoth :Boar :Bringer
+                       :Brushwagg :Camarid :Camel :Capybara :Caribou :Carrier
+                       :Cat :Centaur :Child :Chimera :Citizen :Cleric
+                       :Clown :Cockatrice :Construct :Coward :Coyote :Crab
+                       :Crocodile :Custodes :Cyberman :Cyclops :Ctan :Dalek
+                       :Dauthi :Demigod :Demon :Deserter :Detective :Devil
+                       :Dinosaur :Djinn :Doctor :Dog :Dragon :Drake
+                       :Dreadnought :Drix :Drone :Druid :Dryad :Dwarf
+                       :Echidna :Efreet :Egg :Elder :Eldrazi :Elemental
+                       :Elephant :Elf :Elk :Employee :Eye :Faerie
+                       :Ferret :Fish :Flagbearer :Fox :Fractal :Frog
+                       :Fungus :Gamer :Gargoyle :Germ :Giant :Gith
+                       :Glimmer :Gnoll :Gnome :Goat :Goblin :God
+                       :Golem :Gorgon :Graveborn :Gremlin :Griffin :Guest
+                       :Hag :Halfling :Hamster :Harpy :Hedgehog :Hellion
+                       :Hero :Hippo :Hippogriff :Homarid :Homunculus :Horror
+                       :Horse :Human :Hydra :Hyena :Illusion :Imp
+                       :Incarnation :Inkling :Inquisitor :Insect :Jackal :Jellyfish
+                       :Juggernaut :Kangaroo :Kavu :Kirin :Kithkin :Knight
+                       :Kobold :Kor :Kraken :Lamia :Lammasu :Leech
+                       :Lemur :Leviathan :Lhurgoyf :Licid :Lizard :Llama
+                       :Lobster :Manticore :Masticore :Mercenary :Merfolk :Metathran
+                       :Minion :Minotaur :Mite :Mole :Monger :Mongoose
+                       :Monk :Monkey :Moogle :Moonfolk :Mount :Mouse
+                       :Mutant :Myr :Mystic :Nautilus :Necron :Nephilim
+                       :Nightmare :Nightstalker :Ninja :Noble :Noggle :Nomad
+                       :Nymph :Octopus :Ogre :Ooze :Orb :Orc
+                       :Orgg :Otter :Ouphe :Ox :Oyster :Pangolin
+                       :Peasant :Pegasus :Pentavite :Performer :Pest :Phelddagrif
+                       :Phoenix :Phyrexian :Pilot :Pincher :Pirate :Plant
+                       :Platypus :Porcupine :Possum :Praetor :Primarch :Prism
+                       :Processor :Qu :Rabbit :Raccoon :Ranger :Rat
+                       :Rebel :Reflection :Rhino :Rigger :Robot :Rogue
+                       :Sable :Salamander :Samurai :Sand :Saproling :Satyr
+                       :Scarecrow :Scientist :Scion :Scorpion :Scout :Sculpture
+                       :Seal :Serf :Serpent :Servo :Shade :Shaman
+                       :Shapeshifter :Shark :Sheep :Siren :Skeleton :Skunk
+                       :Slith :Sliver :Sloth :Slug :Snail :Snake
+                       :Soldier :Soltari :Sorcerer :Spawn :Specter :Spellshaper
+                       :Sphinx :Spider :Spike :Spirit :Splinter :Sponge
+                       :Squid :Squirrel :Starfish :Surrakar :Survivor :Symbiote
+                       :Synth :Tentacle :Tetravite :Thalakos :Thopter :Thrull
+                       :Tiefling :TimeLord :Toy :Treefolk :Trilobite :Triskelavite
+                       :Troll :Turtle :Tyranid :Unicorn :Utrom :Vampire
+                       :Varmint :Vedalken :Villain :Volver :Wall :Walrus
+                       :Warlock :Warrior :Weasel :Weird :Werewolf :Whale
+                       :Wizard :Wolf :Wolverine :Wombat :Worm :Wraith
+                       :Wurm :Yeti :Zombie :Zubera
+                   )
+               ] ;
+               rdfs:label "Creature Type" ;
+               rdfs:comment "A subtype that's correlated to the creature card type."@en .
+
 :LandTypes rdf:type owl:Class ;
            rdfs:subClassOf :SubType ;
            owl:equivalentClass [
@@ -251,6 +312,52 @@
                 ] ;
                 rdfs:label "Basic Land Types" ;
                 rdfs:comment "Basic land types implicitly define the color of a land card"
+
+:PlanarType rdf:type owl:Class ;
+           rdfs:subClassOf :SubType ;
+           owl:equivalentClass [
+               rdf:type owl:Class ;
+               owl:oneOf (
+                   :Alara :AlfavaMetraxis :Amonkhet :AndrozaniMinor :Antausia :Apalapucia
+                   :Arcavios :Arkhos :Avishkar :Azgol :Belenon :BolassMeditationRealm
+                   :Capenna :Cridhe :Darillium :Dominaria :Earth :Echoir
+                   :Eldraine :Equilor :Ergamon :Fabacin :Fiora :Gallifrey
+                   :Gargantikar :Gobakhan :HorseheadNebula :Ikoria :Innistrad :Iquatana
+                   :Ir :Ixalan :Kaldheim :Kamigawa :Kandoka :Karsus
+                   :Kephalai :Kinshala :Kolbahan :Kylem :Kyneth :Lorwyn
+                   :Luvion :Mars :Mercadia :Mirrodin :Moag :Mongseng
+                   :Moon :Muraganda :Necros :NewEarth :NewPhyrexia :OutsideMuttersSpiral
+                   :Phyrexia :Pyrulea :Rabiah :Rath :Ravnica :Regatha
+                   :Segovia :SerrasRealm :Shadowmoor :Shandalar :Shenmeng :Skaro
+                   :Spacecraft :Tarkir :TheAbyss :TheDalekAsylum :TheLibrary :Theros
+                   :Time :Trenzalore :Ulgrotha :UnknownPlanet :Valla :Vryn
+                   :Wildfire :Xerex :Zendikar :Zhalfir
+               )
+           ] ;
+           rdfs:label "Planar Types" ;
+           rdfs:comment "A subtype that's correlated to the plane card type."@en .
+
+:DungeonType rdf:type owl:Class ;
+               rdfs:subClassOf :SubType ;
+               owl:equivalentClass [
+                   rdf:type owl:Class ;
+                   owl:oneOf (
+                       :Undercity
+                   )
+               ] ;
+               rdfs:label "Dungeon Types" ;
+               rdfs:comment "A subtype that's correlated to the dungeon card type."@en .
+
+:BattleType rdf:type owl:Class ;
+               rdfs:subClassOf :SubType ;
+               owl:equivalentClass [
+                   rdf:type owl:Class ;
+                   owl:oneOf (
+                       :Siege
+                   )
+               ] ;
+               rdfs:label "Battle Types" ;
+               rdfs:comment "A subtype that's correlated to the battle card type."@en .
 
 :Rarity rdf:type owl:Class ;
         owl:equivalentClass [
@@ -398,17 +505,17 @@
 
 :power rdf:type owl:DatatypeProperty ;
        rdfs:domain :Card ;
-       rdfs:range xsd:string ;
+       rdfs:range xsd:integer ;
        rdfs:comment "Power of a creature card (string to handle *, 1+*, etc.)"@en .
 
 :toughness rdf:type owl:DatatypeProperty ;
            rdfs:domain :Card ;
-           rdfs:range xsd:string ;
+           rdfs:range xsd:integer ;
            rdfs:comment "Toughness of a creature card"@en .
 
 :loyalty rdf:type owl:DatatypeProperty ;
          rdfs:domain :Card ;
-         rdfs:range xsd:string ;
+         rdfs:range xsd:integer ;
          rdfs:comment "Starting loyalty of a Planeswalker"@en .
 
 :setName rdf:type owl:DatatypeProperty , owl:FunctionalProperty ;
@@ -435,17 +542,14 @@
                   rdfs:label "Card Number String" ;
                   rdfs:comment "The collector number of the card in a set as a string (e.g., '123a')"@en .
 
-:cardNumberNumerator rdf:type owl:DatatypeProperty ;
-                     rdfs:domain :Card ;
-                     rdfs:range xsd:integer ;
-                     rdfs:label "Card Number Numerator" ;
-                     rdfs:comment "The specific collector number of the card in a set, represented as an integer for proper sorting"@en .
-
-:cardNumberDenominator rdf:type owl:DatatypeProperty ;
-                       rdfs:domain :Card ;
-                       rdfs:range xsd:integer ;
-                       rdfs:label "Card Number Denominator" ;
-                       rdfs:comment "The total number of cards in the set (e.g., the '250' in '123/250')"@en .
+:cardCount rdf:type owl:DatatypeProperty ;
+           rdfs:domain [
+               rdf:type owl:Class ;
+               owl:unionOf ( :Card :Set )
+           ] ;
+           rdfs:range xsd:integer ;
+           rdfs:label "Card Count" ;
+           rdfs:comment "The total number of cards in the set"@en .
 
 :rulingText rdf:type owl:DatatypeProperty ;
             rdfs:domain :Ruling ;
@@ -466,10 +570,10 @@
              rdfs:comment "The URL to the card's entry on gatherer.wizards.com"@en .
 
 :releaseDate rdf:type owl:DatatypeProperty ;
-             rdfs:domain :Card ;
+             rdfs:domain :Set ;
              rdfs:range xsd:date ;
              rdfs:label "Release Date" ;
-             rdfs:comment "The release date of the card"@en .
+             rdfs:comment "The release date of the set"@en .
 
 # --- Object Properties ---
 
@@ -689,6 +793,956 @@
           rdfs:label "Vanguard" ;
           rdfs:comment "A casual card type representing a specific character that modifies starting life and hand size."@en .
 
+# --- Creature Types ---
+:Advisor rdf:type :SubType ;
+       rdfs:label "Advisor" ;
+       rdfs:comment "Individuals who offer counsel, wisdom, and administrative guidance."@en .
+:Aetherborn rdf:type :SubType ;
+       rdfs:label "Aetherborn" ;
+       rdfs:comment "A short-lived being composed of aether, native to Kaladesh."@en .
+:Alien rdf:type :SubType ;
+       rdfs:label "Alien" ;
+       rdfs:comment "An extraterrestrial being from another world or dimension."@en .
+:Ally rdf:type :SubType ;
+       rdfs:label "Ally" ;
+       rdfs:comment "A creature working together with others, often sharing combat strategies."@en .
+:Angel rdf:type :SubType ;
+       rdfs:label "Angel" ;
+       rdfs:comment "A manifestation of white mana, representing purity, law, and justice."@en .
+:Antelope rdf:type :SubType ;
+       rdfs:label "Antelope" ;
+       rdfs:comment "A creature type representing a real-world antelope."@en .
+:Ape rdf:type :SubType ;
+       rdfs:label "Ape" ;
+       rdfs:comment "A creature type representing a real-world ape or monkey."@en .
+:Archer rdf:type :SubType ;
+       rdfs:label "Archer" ;
+       rdfs:comment "A warrior skilled in the use of bows and ranged weapons."@en .
+:Archon rdf:type :SubType ;
+       rdfs:label "Archon" ;
+       rdfs:comment "A mysterious, armor-clad entity of law and justice that typically rides a winged beast."@en .
+:Armadillo rdf:type :SubType ;
+       rdfs:label "Armadillo" ;
+       rdfs:comment "A creature type representing a real-world armadillo."@en .
+:Army rdf:type :SubType ;
+       rdfs:label "Army" ;
+       rdfs:comment "A creature type representing a massive collective force or legion."@en .
+:Artificer rdf:type :SubType ;
+       rdfs:label "Artificer" ;
+       rdfs:comment "A mage or inventor who crafts and manipulates magical artifacts."@en .
+:Assassin rdf:type :SubType ;
+       rdfs:label "Assassin" ;
+       rdfs:comment "A trained killer who strikes with stealth and precision."@en .
+:AssemblyWorker rdf:type :SubType ;
+       rdfs:label "Assembly-Worker" ;
+       rdfs:comment "A mechanical worker originally built in Urza's factories."@en .
+:Astartes rdf:type :SubType ;
+       rdfs:label "Astartes" ;
+       rdfs:comment "Genetically enhanced, power-armored super-soldiers from the Warhammer 40,000 universe."@en .
+:Atog rdf:type :SubType ;
+       rdfs:label "Atog" ;
+       rdfs:comment "A bizarre creature known for devouring unusual materials, such as artifacts or lands."@en .
+:Aurochs rdf:type :SubType ;
+       rdfs:label "Aurochs" ;
+       rdfs:comment "A herd animal reminiscent of ancient, robust cattle."@en .
+:Avatar rdf:type :SubType ;
+       rdfs:label "Avatar" ;
+       rdfs:comment "The physical manifestation of a god, plane, or abstract concept."@en .
+:Azra rdf:type :SubType ;
+       rdfs:label "Azra" ;
+       rdfs:comment "A humanoid race with demonic ancestry, known for their agility and magic, native to Kylem."@en .
+:Badger rdf:type :SubType ;
+       rdfs:label "Badger" ;
+       rdfs:comment "A creature type representing a real-world badger."@en .
+:Balloon rdf:type :SubType ;
+       rdfs:label "Balloon" ;
+       rdfs:comment "A creature type representing an animate or piloted balloon."@en .
+:Barbarian rdf:type :SubType ;
+       rdfs:label "Barbarian" ;
+       rdfs:comment "A fierce, primal warrior who relies on rage and physical might."@en .
+:Bard rdf:type :SubType ;
+       rdfs:label "Bard" ;
+       rdfs:comment "A storyteller, musician, or entertainer who weaves magic into their art."@en .
+:Basilisk rdf:type :SubType ;
+       rdfs:label "Basilisk" ;
+       rdfs:comment "A reptilian beast whose gaze or touch can turn living beings to stone."@en .
+:Bat rdf:type :SubType ;
+       rdfs:label "Bat" ;
+       rdfs:comment "A creature type representing a real-world bat."@en .
+:Bear rdf:type :SubType ;
+       rdfs:label "Bear" ;
+       rdfs:comment "A creature type representing a real-world bear, often a 2/2 creature."@en .
+:Beast rdf:type :SubType ;
+       rdfs:label "Beast" ;
+       rdfs:comment "A feral, untamed creature, often large and associated with green mana."@en .
+:Beaver rdf:type :SubType ;
+       rdfs:label "Beaver" ;
+       rdfs:comment "A creature type representing a real-world beaver."@en .
+:Beeble rdf:type :SubType ;
+       rdfs:label "Beeble" ;
+       rdfs:comment "A small, annoying, pill-shaped creature that swarms and distracts."@en .
+:Beholder rdf:type :SubType ;
+       rdfs:label "Beholder" ;
+       rdfs:comment "A floating aberration with a central eye and eyestalks, originating from Dungeons & Dragons."@en .
+:Berserker rdf:type :SubType ;
+       rdfs:label "Berserker" ;
+       rdfs:comment "A warrior who fights in a state of frenzied, uncontrollable rage."@en .
+:Bird rdf:type :SubType ;
+       rdfs:label "Bird" ;
+       rdfs:comment "A creature type representing a real-world or magical bird."@en .
+:Bison rdf:type :SubType ;
+       rdfs:label "Bison" ;
+       rdfs:comment "A creature type representing a real-world bison."@en .
+:Blinkmoth rdf:type :SubType ;
+       rdfs:label "Blinkmoth" ;
+       rdfs:comment "A small, glowing, artificial moth-like creature from Mirrodin."@en .
+:Boar rdf:type :SubType ;
+       rdfs:label "Boar" ;
+       rdfs:comment "A creature type representing a real-world boar."@en .
+:Bringer rdf:type :SubType ;
+       rdfs:label "Bringer" ;
+       rdfs:comment "A massive elemental manifestation of mana from Mirrodin's core."@en .
+:Brushwagg rdf:type :SubType ;
+       rdfs:label "Brushwagg" ;
+       rdfs:comment "A bizarre creature that rolls into a ball of thorny vines for defense."@en .
+:Camarid rdf:type :SubType ;
+       rdfs:label "Camarid" ;
+       rdfs:comment "A small crustacean-like creature, often a spawn of Homarids."@en .
+:Camel rdf:type :SubType ;
+       rdfs:label "Camel" ;
+       rdfs:comment "A creature type representing a real-world camel."@en .
+:Capybara rdf:type :SubType ;
+       rdfs:label "Capybara" ;
+       rdfs:comment "A creature type representing a real-world capybara."@en .
+:Caribou rdf:type :SubType ;
+       rdfs:label "Caribou" ;
+       rdfs:comment "A creature type representing a real-world caribou."@en .
+:Carrier rdf:type :SubType ;
+       rdfs:label "Carrier" ;
+       rdfs:comment "A creature afflicted with and carrying the Phyrexian plague."@en .
+:Cat rdf:type :SubType ;
+       rdfs:label "Cat" ;
+       rdfs:comment "A feline creature, ranging from domestic cats to leonins and panthers."@en .
+:Centaur rdf:type :SubType ;
+       rdfs:label "Centaur" ;
+       rdfs:comment "A creature with the upper body of a human and the lower body of a horse."@en .
+:Child rdf:type :SubType ;
+       rdfs:label "Child" ;
+       rdfs:comment "A youth or infant entity."@en .
+:Chimera rdf:type :SubType ;
+       rdfs:label "Chimera" ;
+       rdfs:comment "A hybrid monstrosity created by combining different creatures."@en .
+:Citizen rdf:type :SubType ;
+       rdfs:label "Citizen" ;
+       rdfs:comment "An ordinary inhabitant of a city or society."@en .
+:Cleric rdf:type :SubType ;
+       rdfs:label "Cleric" ;
+       rdfs:comment "A religious figure who channels divine magic for healing and protection."@en .
+:Clown rdf:type :SubType ;
+       rdfs:label "Clown" ;
+       rdfs:comment "An entertainer known for comedic and sometimes unsettling performances."@en .
+:Cockatrice rdf:type :SubType ;
+       rdfs:label "Cockatrice" ;
+       rdfs:comment "A mythical avian-reptilian hybrid with a petrifying touch."@en .
+:Construct rdf:type :SubType ;
+       rdfs:label "Construct" ;
+       rdfs:comment "A type of animated artifact or automaton."@en .
+:Coward rdf:type :SubType ;
+       rdfs:label "Coward" ;
+       rdfs:comment "A creature defined by its fear and reluctance to fight."@en .
+:Coyote rdf:type :SubType ;
+       rdfs:label "Coyote" ;
+       rdfs:comment "A creature type representing a real-world coyote."@en .
+:Crab rdf:type :SubType ;
+       rdfs:label "Crab" ;
+       rdfs:comment "A crustacean creature, often found in coastal and aquatic environments."@en .
+:Crocodile rdf:type :SubType ;
+       rdfs:label "Crocodile" ;
+       rdfs:comment "A large aquatic reptile."@en .
+:Custodes rdf:type :SubType ;
+       rdfs:label "Custodes" ;
+       rdfs:comment "An elite, genetically engineered bodyguard of the Emperor of Mankind."@en .
+:Cyberman rdf:type :SubType ;
+       rdfs:label "Cyberman" ;
+       rdfs:comment "A cold, emotionless cyborg from the Doctor Who universe."@en .
+:Cyclops rdf:type :SubType ;
+       rdfs:label "Cyclops" ;
+       rdfs:comment "A giant with a single eye in the middle of its forehead."@en .
+:Ctan rdf:type :SubType ;
+       rdfs:label "C’tan" ;
+       rdfs:comment "An ancient, god-like star vampire from the Warhammer 40,000 universe."@en .
+:Dalek rdf:type :SubType ;
+       rdfs:label "Dalek" ;
+       rdfs:comment "A ruthless, xenophobic mutant encased in mechanical armor from the Doctor Who universe."@en .
+:Dauthi rdf:type :SubType ;
+       rdfs:label "Dauthi" ;
+       rdfs:comment "A dark, shade-like humanoid race trapped in the shadow realm of Rath."@en .
+:Demigod rdf:type :SubType ;
+       rdfs:label "Demigod" ;
+       rdfs:comment "A powerful being of partially divine origin."@en .
+:Demon rdf:type :SubType ;
+       rdfs:label "Demon" ;
+       rdfs:comment "A malevolent entity formed of black mana, associated with ambition and contracts."@en .
+:Deserter rdf:type :SubType ;
+       rdfs:label "Deserter" ;
+       rdfs:comment "A soldier who has abandoned their post or duty."@en .
+:Detective rdf:type :SubType ;
+       rdfs:label "Detective" ;
+       rdfs:comment "An investigator skilled at solving mysteries and finding clues."@en .
+:Devil rdf:type :SubType ;
+       rdfs:label "Devil" ;
+       rdfs:comment "A chaotic, destructive entity of red mana, prone to mischief and violence."@en .
+:Dinosaur rdf:type :SubType ;
+       rdfs:label "Dinosaur" ;
+       rdfs:comment "A massive, prehistoric reptilian creature."@en .
+:Djinn rdf:type :SubType ;
+       rdfs:label "Djinn" ;
+       rdfs:comment "A powerful, often mischievous elemental spirit of the air."@en .
+:Doctor rdf:type :SubType ;
+       rdfs:label "Doctor" ;
+       rdfs:comment "A healer, scientist, or the iconic Time Lord from Doctor Who."@en .
+:Dog rdf:type :SubType ;
+       rdfs:label "Dog" ;
+       rdfs:comment "A canine creature ranging from loyal hounds to wild feral dogs."@en .
+:Dragon rdf:type :SubType ;
+       rdfs:label "Dragon" ;
+       rdfs:comment "A massive, flying, breath-weapon-wielding magical reptile."@en .
+:Drake rdf:type :SubType ;
+       rdfs:label "Drake" ;
+       rdfs:comment "A smaller, two-legged draconic creature lacking the immense power of a true Dragon."@en .
+:Dreadnought rdf:type :SubType ;
+       rdfs:label "Dreadnought" ;
+       rdfs:comment "An extraordinarily massive and destructive machine or vessel."@en .
+:Drix rdf:type :SubType ;
+       rdfs:label "Drix" ;
+       rdfs:comment "A unique, unusual creature type occasionally found in supplementary material."@en .
+:Drone rdf:type :SubType ;
+       rdfs:label "Drone" ;
+       rdfs:comment "A mindless worker or combatant part of a larger swarm, like Eldrazi."@en .
+:Druid rdf:type :SubType ;
+       rdfs:label "Druid" ;
+       rdfs:comment "A nature mage who draws power from the land and its creatures."@en .
+:Dryad rdf:type :SubType ;
+       rdfs:label "Dryad" ;
+       rdfs:comment "A mystical forest spirit bound to a tree or grove."@en .
+:Dwarf rdf:type :SubType ;
+       rdfs:label "Dwarf" ;
+       rdfs:comment "A stout, subterranean humanoid known for mining and artifice."@en .
+:Echidna rdf:type :SubType ;
+       rdfs:label "Echidna" ;
+       rdfs:comment "A creature type representing a real-world echidna."@en .
+:Efreet rdf:type :SubType ;
+       rdfs:label "Efreet" ;
+       rdfs:comment "A fiery, volatile elemental spirit of flame."@en .
+:Egg rdf:type :SubType ;
+       rdfs:label "Egg" ;
+       rdfs:comment "The unhatched stage of an oviparous creature."@en .
+:Elder rdf:type :SubType ;
+       rdfs:label "Elder" ;
+       rdfs:comment "An ancient and incredibly powerful being of its kind, like Elder Dragons."@en .
+:Eldrazi rdf:type :SubType ;
+       rdfs:label "Eldrazi" ;
+       rdfs:comment "A cosmic, world-devouring entity from the Blind Eternities."@en .
+:Elemental rdf:type :SubType ;
+       rdfs:label "Elemental" ;
+       rdfs:comment "A physical manifestation of a fundamental force of nature or mana."@en .
+:Elephant rdf:type :SubType ;
+       rdfs:label "Elephant" ;
+       rdfs:comment "A large pachyderm, including loxodons and mammoths."@en .
+:Elf rdf:type :SubType ;
+       rdfs:label "Elf" ;
+       rdfs:comment "A forest-dwelling humanoid with a deep connection to nature magic."@en .
+:Elk rdf:type :SubType ;
+       rdfs:label "Elk" ;
+       rdfs:comment "A majestic horned herbivore of the forest."@en .
+:Employee rdf:type :SubType ;
+       rdfs:label "Employee" ;
+       rdfs:comment "A worker for a larger organization, often found in Un-sets."@en .
+:Eye rdf:type :SubType ;
+       rdfs:label "Eye" ;
+       rdfs:comment "A floating, perceptive ocular entity."@en .
+:Faerie rdf:type :SubType ;
+       rdfs:label "Faerie" ;
+       rdfs:comment "A small, mischievous winged sprite associated with illusions."@en .
+:Ferret rdf:type :SubType ;
+       rdfs:label "Ferret" ;
+       rdfs:comment "A small, fast mustelid creature."@en .
+:Fish rdf:type :SubType ;
+       rdfs:label "Fish" ;
+       rdfs:comment "An aquatic gill-bearing creature."@en .
+:Flagbearer rdf:type :SubType ;
+       rdfs:label "Flagbearer" ;
+       rdfs:comment "A standard-bearer that magnetically draws enemy spells."@en .
+:Fox rdf:type :SubType ;
+       rdfs:label "Fox" ;
+       rdfs:comment "A cunning vulpine creature, ranging from animals to kitsune."@en .
+:Fractal rdf:type :SubType ;
+       rdfs:label "Fractal" ;
+       rdfs:comment "A mathematical, self-replicating creature of Quandrix."@en .
+:Frog rdf:type :SubType ;
+       rdfs:label "Frog" ;
+       rdfs:comment "A leaping amphibian, sometimes growing to monstrous sizes."@en .
+:Fungus rdf:type :SubType ;
+       rdfs:label "Fungus" ;
+       rdfs:comment "A sentient mushroom or fungal colony, often associated with saprolings."@en .
+:Gamer rdf:type :SubType ;
+       rdfs:label "Gamer" ;
+       rdfs:comment "A creature that plays games, breaking the fourth wall in un-sets."@en .
+:Gargoyle rdf:type :SubType ;
+       rdfs:label "Gargoyle" ;
+       rdfs:comment "An animated stone statue, usually winged and guarding a location."@en .
+:Germ rdf:type :SubType ;
+       rdfs:label "Germ" ;
+       rdfs:comment "A microscopic, infectious entity or Phyrexian biological weapon."@en .
+:Giant rdf:type :SubType ;
+       rdfs:label "Giant" ;
+       rdfs:comment "A massive, towering humanoid."@en .
+:Gith rdf:type :SubType ;
+       rdfs:label "Gith" ;
+       rdfs:comment "A psionic humanoid race originating from the astral plane."@en .
+:Glimmer rdf:type :SubType ;
+       rdfs:label "Glimmer" ;
+       rdfs:comment "A luminous, ephemeral entity of light."@en .
+:Gnoll rdf:type :SubType ;
+       rdfs:label "Gnoll" ;
+       rdfs:comment "A savage, hyena-like humanoid."@en .
+:Gnome rdf:type :SubType ;
+       rdfs:label "Gnome" ;
+       rdfs:comment "A small, inventive humanoid known for artifice and tinkering."@en .
+:Goat rdf:type :SubType ;
+       rdfs:label "Goat" ;
+       rdfs:comment "A sure-footed horned herbivore."@en .
+:Goblin rdf:type :SubType ;
+       rdfs:label "Goblin" ;
+       rdfs:comment "A chaotic, reckless, and prolific mountain-dwelling humanoid."@en .
+:God rdf:type :SubType ;
+       rdfs:label "God" ;
+       rdfs:comment "A supreme entity of immense divine power."@en .
+:Golem rdf:type :SubType ;
+       rdfs:label "Golem" ;
+       rdfs:comment "A large animated construct typically made of stone or metal."@en .
+:Gorgon rdf:type :SubType ;
+       rdfs:label "Gorgon" ;
+       rdfs:comment "A serpentine humanoid with snakes for hair and a petrifying gaze."@en .
+:Graveborn rdf:type :SubType ;
+       rdfs:label "Graveborn" ;
+       rdfs:comment "An undead creature born strictly from the grave."@en .
+:Gremlin rdf:type :SubType ;
+       rdfs:label "Gremlin" ;
+       rdfs:comment "A destructive, diminutive creature that feeds on artifacts and aether."@en .
+:Griffin rdf:type :SubType ;
+       rdfs:label "Griffin" ;
+       rdfs:comment "A majestic flying beast with the front half of an eagle and back half of a lion."@en .
+:Guest rdf:type :SubType ;
+       rdfs:label "Guest" ;
+       rdfs:comment "A visitor or attendee type, typical of Un-sets."@en .
+:Hag rdf:type :SubType ;
+       rdfs:label "Hag" ;
+       rdfs:comment "A grotesque, malevolent witch of the wild."@en .
+:Halfling rdf:type :SubType ;
+       rdfs:label "Halfling" ;
+       rdfs:comment "A short, nimble, and lucky humanoid."@en .
+:Hamster rdf:type :SubType ;
+       rdfs:label "Hamster" ;
+       rdfs:comment "A small rodent, sometimes surprisingly fierce (like Miniature Giant Space Hamsters)."@en .
+:Harpy rdf:type :SubType ;
+       rdfs:label "Harpy" ;
+       rdfs:comment "A vicious, screeching hybrid of woman and bird."@en .
+:Hedgehog rdf:type :SubType ;
+       rdfs:label "Hedgehog" ;
+       rdfs:comment "A small, spiky mammal."@en .
+:Hellion rdf:type :SubType ;
+       rdfs:label "Hellion" ;
+       rdfs:comment "A massive, subterranean wurm-like beast composed of magma and rage."@en .
+:Hero rdf:type :SubType ;
+       rdfs:label "Hero" ;
+       rdfs:comment "A brave protagonist or champion, performing heroic deeds."@en .
+:Hippo rdf:type :SubType ;
+       rdfs:label "Hippo" ;
+       rdfs:comment "A large, semi-aquatic African mammal."@en .
+:Hippogriff rdf:type :SubType ;
+       rdfs:label "Hippogriff" ;
+       rdfs:comment "A flying beast combining the features of a horse and a griffon."@en .
+:Homarid rdf:type :SubType ;
+       rdfs:label "Homarid" ;
+       rdfs:comment "An intelligent, lobster-like humanoid race native to Sarpadia."@en .
+:Homunculus rdf:type :SubType ;
+       rdfs:label "Homunculus" ;
+       rdfs:comment "A small, artificially created servant."@en .
+:Horror rdf:type :SubType ;
+       rdfs:label "Horror" ;
+       rdfs:comment "A terrifying, nightmarish monstrosity that defies natural classification."@en .
+:Horse rdf:type :SubType ;
+       rdfs:label "Horse" ;
+       rdfs:comment "An equine creature, often ridden as a mount."@en .
+:Human rdf:type :SubType ;
+       rdfs:label "Human" ;
+       rdfs:comment "The most widespread and diverse humanoid race in the multiverse."@en .
+:Hydra rdf:type :SubType ;
+       rdfs:label "Hydra" ;
+       rdfs:comment "A multi-headed reptilian beast that grows more heads when severed."@en .
+:Hyena rdf:type :SubType ;
+       rdfs:label "Hyena" ;
+       rdfs:comment "A scavenging, pack-hunting carnivore."@en .
+:Illusion rdf:type :SubType ;
+       rdfs:label "Illusion" ;
+       rdfs:comment "A phantom entity composed of magic and deceit."@en .
+:Imp rdf:type :SubType ;
+       rdfs:label "Imp" ;
+       rdfs:comment "A small, malicious, winged fiend."@en .
+:Incarnation rdf:type :SubType ;
+       rdfs:label "Incarnation" ;
+       rdfs:comment "The physical embodiment of an abstract concept, like Anger or Wonder."@en .
+:Inkling rdf:type :SubType ;
+       rdfs:label "Inkling" ;
+       rdfs:comment "A living entity made of magical ink from Strixhaven."@en .
+:Inquisitor rdf:type :SubType ;
+       rdfs:label "Inquisitor" ;
+       rdfs:comment "A zealous investigator of heresy and forbidden magic."@en .
+:Insect rdf:type :SubType ;
+       rdfs:label "Insect" ;
+       rdfs:comment "A multi-legged invertebrate, ranging from tiny bugs to massive monstrosities."@en .
+:Jackal rdf:type :SubType ;
+       rdfs:label "Jackal" ;
+       rdfs:comment "A wild canine, characteristic of the khenra on Amonkhet."@en .
+:Jellyfish rdf:type :SubType ;
+       rdfs:label "Jellyfish" ;
+       rdfs:comment "A gelatinous aquatic creature."@en .
+:Juggernaut rdf:type :SubType ;
+       rdfs:label "Juggernaut" ;
+       rdfs:comment "An unstoppable, destructive machine that must attack if able."@en .
+:Kangaroo rdf:type :SubType ;
+       rdfs:label "Kangaroo" ;
+       rdfs:comment "A leaping marsupial."@en .
+:Kavu rdf:type :SubType ;
+       rdfs:label "Kavu" ;
+       rdfs:comment "An ancient, reptilian beast created by Gaea to defend Dominaria."@en .
+:Kirin rdf:type :SubType ;
+       rdfs:label "Kirin" ;
+       rdfs:comment "A mythical, hooved spirit beast associated with Kamigawa."@en .
+:Kithkin rdf:type :SubType ;
+       rdfs:label "Kithkin" ;
+       rdfs:comment "A community-focused, short-statured humanoid native to Lorwyn."@en .
+:Knight rdf:type :SubType ;
+       rdfs:label "Knight" ;
+       rdfs:comment "An armored, mounted warrior bound by code or duty."@en .
+:Kobold rdf:type :SubType ;
+       rdfs:label "Kobold" ;
+       rdfs:comment "A weak but swarming reptilian or subterranean humanoid."@en .
+:Kor rdf:type :SubType ;
+       rdfs:label "Kor" ;
+       rdfs:comment "A nomadic humanoid race known for their mastery of ropes and hooks."@en .
+:Kraken rdf:type :SubType ;
+       rdfs:label "Kraken" ;
+       rdfs:comment "A colossal, destructive sea monster of the deep."@en .
+:Lamia rdf:type :SubType ;
+       rdfs:label "Lamia" ;
+       rdfs:comment "A predatory humanoid with the lower body of a serpent or beast."@en .
+:Lammasu rdf:type :SubType ;
+       rdfs:label "Lammasu" ;
+       rdfs:comment "A majestic sphinx-like spirit beast of order."@en .
+:Leech rdf:type :SubType ;
+       rdfs:label "Leech" ;
+       rdfs:comment "A bloodsucking, parasitic worm-like creature."@en .
+:Lemur rdf:type :SubType ;
+       rdfs:label "Lemur" ;
+       rdfs:comment "A small, nocturnal primate-like animal."@en .
+:Leviathan rdf:type :SubType ;
+       rdfs:label "Leviathan" ;
+       rdfs:comment "An inexplicably massive, ancient beast of the ocean depths."@en .
+:Lhurgoyf rdf:type :SubType ;
+       rdfs:label "Lhurgoyf" ;
+       rdfs:comment "A predatory monster that feeds on and grows stronger from the dead."@en .
+:Licid rdf:type :SubType ;
+       rdfs:label "Licid" ;
+       rdfs:comment "A parasitic organism that attaches itself to control or drain a host."@en .
+:Lizard rdf:type :SubType ;
+       rdfs:label "Lizard" ;
+       rdfs:comment "A scaly reptile of various sizes."@en .
+:Llama rdf:type :SubType ;
+       rdfs:label "Llama" ;
+       rdfs:comment "A domesticated South American camelid."@en .
+:Lobster rdf:type :SubType ;
+       rdfs:label "Lobster" ;
+       rdfs:comment "A heavily armored marine crustacean."@en .
+:Manticore rdf:type :SubType ;
+       rdfs:label "Manticore" ;
+       rdfs:comment "A fierce beast with the head of a man, body of a lion, and a scorpion tail."@en .
+:Masticore rdf:type :SubType ;
+       rdfs:label "Masticore" ;
+       rdfs:comment "A metallic, manticore-like construct that constantly demands fuel or cards."@en .
+:Mercenary rdf:type :SubType ;
+       rdfs:label "Mercenary" ;
+       rdfs:comment "A soldier who fights for profit rather than allegiance."@en .
+:Merfolk rdf:type :SubType ;
+       rdfs:label "Merfolk" ;
+       rdfs:comment "An aquatic humanoid race at home in the oceans and rivers."@en .
+:Metathran rdf:type :SubType ;
+       rdfs:label "Metathran" ;
+       rdfs:comment "A genetically engineered warrior created by Urza to fight Phyrexia."@en .
+:Minion rdf:type :SubType ;
+       rdfs:label "Minion" ;
+       rdfs:comment "A servant or underling bound to a dark master."@en .
+:Minotaur rdf:type :SubType ;
+       rdfs:label "Minotaur" ;
+       rdfs:comment "A powerful humanoid with the head and strength of a bull."@en .
+:Mite rdf:type :SubType ;
+       rdfs:label "Mite" ;
+       rdfs:comment "A diminutive, often toxic Phyrexian creature."@en .
+:Mole rdf:type :SubType ;
+       rdfs:label "Mole" ;
+       rdfs:comment "A small, burrowing mammal."@en .
+:Monger rdf:type :SubType ;
+       rdfs:label "Monger" ;
+       rdfs:comment "A merchant or peddler who offers their services to the highest bidder."@en .
+:Mongoose rdf:type :SubType ;
+       rdfs:label "Mongoose" ;
+       rdfs:comment "A nimble mammal known for fighting venomous snakes."@en .
+:Monk rdf:type :SubType ;
+       rdfs:label "Monk" ;
+       rdfs:comment "A disciplined ascetic who hones their body and spirit."@en .
+:Monkey rdf:type :SubType ;
+       rdfs:label "Monkey" ;
+       rdfs:comment "A small, agile primate."@en .
+:Moogle rdf:type :SubType ;
+       rdfs:label "Moogle" ;
+       rdfs:comment "A diminutive, furry creature with wings and a pom-pom, native to Final Fantasy."@en .
+:Moonfolk rdf:type :SubType ;
+       rdfs:label "Moonfolk" ;
+       rdfs:comment "Also known as Soratami, a race of rabbit-like scholars from Kamigawa's sky."@en .
+:Mount rdf:type :SubType ;
+       rdfs:label "Mount" ;
+       rdfs:comment "A creature specifically designated or trained to be ridden."@en .
+:Mouse rdf:type :SubType ;
+       rdfs:label "Mouse" ;
+       rdfs:comment "A tiny rodent, known for stealth and speed."@en .
+:Mutant rdf:type :SubType ;
+       rdfs:label "Mutant" ;
+       rdfs:comment "A lifeform radically altered by magic, science, or radiation."@en .
+:Myr rdf:type :SubType ;
+       rdfs:label "Myr" ;
+       rdfs:comment "An avian-like metallic worker construct native to Mirrodin."@en .
+:Mystic rdf:type :SubType ;
+       rdfs:label "Mystic" ;
+       rdfs:comment "A spellcaster who focuses on spiritual or esoteric magic."@en .
+:Nautilus rdf:type :SubType ;
+       rdfs:label "Nautilus" ;
+       rdfs:comment "A shelled cephalopod of the deep sea."@en .
+:Necron rdf:type :SubType ;
+       rdfs:label "Necron" ;
+       rdfs:comment "An ancient, undying skeletal robotic race from the Warhammer 40,000 universe."@en .
+:Nephilim rdf:type :SubType ;
+       rdfs:label "Nephilim" ;
+       rdfs:comment "An ancient, enigmatic four-color being from Ravnica's forgotten past."@en .
+:Nightmare rdf:type :SubType ;
+       rdfs:label "Nightmare" ;
+       rdfs:comment "A terrifying entity born of dark dreams or shadow magic."@en .
+:Nightstalker rdf:type :SubType ;
+       rdfs:label "Nightstalker" ;
+       rdfs:comment "A shadowy, evil creature from Dominaria's dark plains."@en .
+:Ninja rdf:type :SubType ;
+       rdfs:label "Ninja" ;
+       rdfs:comment "A stealthy assassin and spy skilled in the art of ninjutsu."@en .
+:Noble rdf:type :SubType ;
+       rdfs:label "Noble" ;
+       rdfs:comment "An aristocrat, lord, or leader of high social standing."@en .
+:Noggle rdf:type :SubType ;
+       rdfs:label "Noggle" ;
+       rdfs:comment "A stubborn, donkey-headed humanoid from Lorwyn/Shadowmoor."@en .
+:Nomad rdf:type :SubType ;
+       rdfs:label "Nomad" ;
+       rdfs:comment "A wanderer who travels constantly without a permanent home."@en .
+:Nymph rdf:type :SubType ;
+       rdfs:label "Nymph" ;
+       rdfs:comment "A nature spirit bound to rivers, trees, or celestial bodies."@en .
+:Octopus rdf:type :SubType ;
+       rdfs:label "Octopus" ;
+       rdfs:comment "An intelligent, eight-armed cephalopod."@en .
+:Ogre rdf:type :SubType ;
+       rdfs:label "Ogre" ;
+       rdfs:comment "A brutal, large, and savage humanoid."@en .
+:Ooze rdf:type :SubType ;
+       rdfs:label "Ooze" ;
+       rdfs:comment "An amorphous, acidic blob that engulfs everything in its path."@en .
+:Orb rdf:type :SubType ;
+       rdfs:label "Orb" ;
+       rdfs:comment "A spherical entity or magical construct."@en .
+:Orc rdf:type :SubType ;
+       rdfs:label "Orc" ;
+       rdfs:comment "A fierce, warmongering humanoid species."@en .
+:Orgg rdf:type :SubType ;
+       rdfs:label "Orgg" ;
+       rdfs:comment "A massive, foul-tempered monstrous humanoid."@en .
+:Otter rdf:type :SubType ;
+       rdfs:label "Otter" ;
+       rdfs:comment "A playful, aquatic mustelid."@en .
+:Ouphe rdf:type :SubType ;
+       rdfs:label "Ouphe" ;
+       rdfs:comment "A mischievous creature known for interfering with magic or artifacts."@en .
+:Ox rdf:type :SubType ;
+       rdfs:label "Ox" ;
+       rdfs:comment "A strong, bovine beast of burden."@en .
+:Oyster rdf:type :SubType ;
+       rdfs:label "Oyster" ;
+       rdfs:comment "A bivalve mollusk protecting a pearl or sitting idle."@en .
+:Pangolin rdf:type :SubType ;
+       rdfs:label "Pangolin" ;
+       rdfs:comment "A scale-covered, ant-eating mammal."@en .
+:Peasant rdf:type :SubType ;
+       rdfs:label "Peasant" ;
+       rdfs:comment "A low-status commoner or farmer."@en .
+:Pegasus rdf:type :SubType ;
+       rdfs:label "Pegasus" ;
+       rdfs:comment "A majestic, winged horse of white mana."@en .
+:Pentavite rdf:type :SubType ;
+       rdfs:label "Pentavite" ;
+       rdfs:comment "A modular construct part of a larger Pentavus machine."@en .
+:Performer rdf:type :SubType ;
+       rdfs:label "Performer" ;
+       rdfs:comment "An entertainer putting on a show, typically found in Un-sets."@en .
+:Pest rdf:type :SubType ;
+       rdfs:label "Pest" ;
+       rdfs:comment "A nuisance creature, often a life-draining grub from Strixhaven."@en .
+:Phelddagrif rdf:type :SubType ;
+       rdfs:label "Phelddagrif" ;
+       rdfs:comment "A magical, flying hippo-like creature that grants boons to friends and foes."@en .
+:Phoenix rdf:type :SubType ;
+       rdfs:label "Phoenix" ;
+       rdfs:comment "A fiery bird of myth that constantly rebirths itself from its own ashes."@en .
+:Phyrexian rdf:type :SubType ;
+       rdfs:label "Phyrexian" ;
+       rdfs:comment "A biomechanical horror corrupted by glistening oil, seeking to compleat the multiverse."@en .
+:Pilot rdf:type :SubType ;
+       rdfs:label "Pilot" ;
+       rdfs:comment "A skilled operator of vehicles or spacecraft."@en .
+:Pincher rdf:type :SubType ;
+       rdfs:label "Pincher" ;
+       rdfs:comment "A crab-like or clawed construct."@en .
+:Pirate rdf:type :SubType ;
+       rdfs:label "Pirate" ;
+       rdfs:comment "A seafaring rogue who plunders for treasure."@en .
+:Plant rdf:type :SubType ;
+       rdfs:label "Plant" ;
+       rdfs:comment "Applies to animate flora and aggressive vegetation."@en .
+:Platypus rdf:type :SubType ;
+       rdfs:label "Platypus" ;
+       rdfs:comment "An unusual, egg-laying semi-aquatic mammal."@en .
+:Porcupine rdf:type :SubType ;
+       rdfs:label "Porcupine" ;
+       rdfs:comment "A mammal covered in sharp, defensive quills."@en .
+:Possum rdf:type :SubType ;
+       rdfs:label "Possum" ;
+       rdfs:comment "A marsupial known to play dead."@en .
+:Praetor rdf:type :SubType ;
+       rdfs:label "Praetor" ;
+       rdfs:comment "A high-ranking leader of a Phyrexian faction."@en .
+:Primarch rdf:type :SubType ;
+       rdfs:label "Primarch" ;
+       rdfs:comment "A genetically engineered demigod created by the Emperor of Mankind."@en .
+:Prism rdf:type :SubType ;
+       rdfs:label "Prism" ;
+       rdfs:comment "A crystalline entity that filters or refracts mana."@en .
+:Processor rdf:type :SubType ;
+       rdfs:label "Processor" ;
+       rdfs:comment "An Eldrazi drone that interacts with exiled spells and permanents."@en .
+:Qu rdf:type :SubType ;
+       rdfs:label "Qu" ;
+       rdfs:comment "A mysterious creature type."@en .
+:Rabbit rdf:type :SubType ;
+       rdfs:label "Rabbit" ;
+       rdfs:comment "A fast, long-eared leaping mammal."@en .
+:Raccoon rdf:type :SubType ;
+       rdfs:label "Raccoon" ;
+       rdfs:comment "A clever, masked omnivorous mammal."@en .
+:Ranger rdf:type :SubType ;
+       rdfs:label "Ranger" ;
+       rdfs:comment "A survivalist warrior deeply connected to the wilderness."@en .
+:Rat rdf:type :SubType ;
+       rdfs:label "Rat" ;
+       rdfs:comment "A cunning, disease-carrying rodent that often swarms."@en .
+:Rebel rdf:type :SubType ;
+       rdfs:label "Rebel" ;
+       rdfs:comment "A defiant fighter opposing an oppressive regime."@en .
+:Reflection rdf:type :SubType ;
+       rdfs:label "Reflection" ;
+       rdfs:comment "A magical mirror-image or duplicate brought to life."@en .
+:Rhino rdf:type :SubType ;
+       rdfs:label "Rhino" ;
+       rdfs:comment "A massive, tough-skinned horned herbivore."@en .
+:Rigger rdf:type :SubType ;
+       rdfs:label "Rigger" ;
+       rdfs:comment "An artificer subclass focused on assembling contraptions."@en .
+:Robot rdf:type :SubType ;
+       rdfs:label "Robot" ;
+       rdfs:comment "An automated mechanical being."@en .
+:Rogue rdf:type :SubType ;
+       rdfs:label "Rogue" ;
+       rdfs:comment "A stealthy, deceptive individual skilled in thievery and trickery."@en .
+:Sable rdf:type :SubType ;
+       rdfs:label "Sable" ;
+       rdfs:comment "A small, agile mustelid."@en .
+:Salamander rdf:type :SubType ;
+       rdfs:label "Salamander" ;
+       rdfs:comment "An amphibious creature, historically associated with fire."@en .
+:Samurai rdf:type :SubType ;
+       rdfs:label "Samurai" ;
+       rdfs:comment "A highly disciplined, honorable warrior bound by Bushido."@en .
+:Sand rdf:type :SubType ;
+       rdfs:label "Sand" ;
+       rdfs:comment "An elemental creature composed of shifting desert sands."@en .
+:Saproling rdf:type :SubType ;
+       rdfs:label "Saproling" ;
+       rdfs:comment "A semi-sentient, plant-like fungus offshoot."@en .
+:Satyr rdf:type :SubType ;
+       rdfs:label "Satyr" ;
+       rdfs:comment "A hedonistic, goat-legged humanoid reveler."@en .
+:Scarecrow rdf:type :SubType ;
+       rdfs:label "Scarecrow" ;
+       rdfs:comment "An animated, often creepy construct of straw and wood."@en .
+:Scientist rdf:type :SubType ;
+       rdfs:label "Scientist" ;
+       rdfs:comment "A scholar dedicated to empirical research and experimentation."@en .
+:Scion rdf:type :SubType ;
+       rdfs:label "Scion" ;
+       rdfs:comment "An heir or descendant, famously characteristic of lesser Eldrazi spawn."@en .
+:Scorpion rdf:type :SubType ;
+       rdfs:label "Scorpion" ;
+       rdfs:comment "A venomous, stinging arachnid."@en .
+:Scout rdf:type :SubType ;
+       rdfs:label "Scout" ;
+       rdfs:comment "A vanguard or pathfinder who explores ahead of the main force."@en .
+:Sculpture rdf:type :SubType ;
+       rdfs:label "Sculpture" ;
+       rdfs:comment "An animated piece of art or stone."@en .
+:Seal rdf:type :SubType ;
+       rdfs:label "Seal" ;
+       rdfs:comment "A marine mammal."@en .
+:Serf rdf:type :SubType ;
+       rdfs:label "Serf" ;
+       rdfs:comment "A feudal peasant, thrall, or bound laborer."@en .
+:Serpent rdf:type :SubType ;
+       rdfs:label "Serpent" ;
+       rdfs:comment "A massive, aquatic, snake-like sea monster."@en .
+:Servo rdf:type :SubType ;
+       rdfs:label "Servo" ;
+       rdfs:comment "A small, utilitarian clockwork construct from Kaladesh."@en .
+:Shade rdf:type :SubType ;
+       rdfs:label "Shade" ;
+       rdfs:comment "A shadow-entity that grows stronger as black mana is channeled into it."@en .
+:Shaman rdf:type :SubType ;
+       rdfs:label "Shaman" ;
+       rdfs:comment "A spiritual spellcaster attuned to nature and the elements."@en .
+:Shapeshifter rdf:type :SubType ;
+       rdfs:label "Shapeshifter" ;
+       rdfs:comment "A being capable of changing its physical form, like a changeling."@en .
+:Shark rdf:type :SubType ;
+       rdfs:label "Shark" ;
+       rdfs:comment "A predatory marine fish."@en .
+:Sheep rdf:type :SubType ;
+       rdfs:label "Sheep" ;
+       rdfs:comment "A docile, woolly herd animal."@en .
+:Siren rdf:type :SubType ;
+       rdfs:label "Siren" ;
+       rdfs:comment "An avian or aquatic humanoid whose song lures sailors to their doom."@en .
+:Skeleton rdf:type :SubType ;
+       rdfs:label "Skeleton" ;
+       rdfs:comment "An undead creature reduced to animated bones."@en .
+:Skunk rdf:type :SubType ;
+       rdfs:label "Skunk" ;
+       rdfs:comment "A small mammal known for its foul-smelling defensive spray."@en .
+:Slith rdf:type :SubType ;
+       rdfs:label "Slith" ;
+       rdfs:comment "A metallic humanoid native to Mirrodin that grows as it strikes its enemies."@en .
+:Sliver rdf:type :SubType ;
+       rdfs:label "Sliver" ;
+       rdfs:comment "A hive-mind species of mutable creatures that share genetic traits with kin."@en .
+:Sloth rdf:type :SubType ;
+       rdfs:label "Sloth" ;
+       rdfs:comment "A slow-moving, tree-dwelling mammal."@en .
+:Slug rdf:type :SubType ;
+       rdfs:label "Slug" ;
+       rdfs:comment "A slow, shell-less gastropod."@en .
+:Snail rdf:type :SubType ;
+       rdfs:label "Snail" ;
+       rdfs:comment "A shelled gastropod."@en .
+:Snake rdf:type :SubType ;
+       rdfs:label "Snake" ;
+       rdfs:comment "A legless reptile, encompassing tiny vipers to massive orochi."@en .
+:Soldier rdf:type :SubType ;
+       rdfs:label "Soldier" ;
+       rdfs:comment "A disciplined, organized combatant of a military force."@en .
+:Soltari rdf:type :SubType ;
+       rdfs:label "Soltari" ;
+       rdfs:comment "An honorable, shadow-dwelling humanoid race trapped on Rath."@en .
+:Sorcerer rdf:type :SubType ;
+       rdfs:label "Sorcerer" ;
+       rdfs:comment "A wielders of powerful, innate magic."@en .
+:Spawn rdf:type :SubType ;
+       rdfs:label "Spawn" ;
+       rdfs:comment "The offspring or lesser drones of a greater entity, like the Eldrazi."@en .
+:Specter rdf:type :SubType ;
+       rdfs:label "Specter" ;
+       rdfs:comment "An intimidating flying spirit that attacks the minds of its victims."@en .
+:Spellshaper rdf:type :SubType ;
+       rdfs:label "Spellshaper" ;
+       rdfs:comment "A mage capable of transforming raw magic into specific, repeatable spells."@en .
+:Sphinx rdf:type :SubType ;
+       rdfs:label "Sphinx" ;
+       rdfs:comment "A highly intelligent, winged leonine riddler associated with blue mana."@en .
+:Spider rdf:type :SubType ;
+       rdfs:label "Spider" ;
+       rdfs:comment "An eight-legged arachnid renowned for catching flying prey in its webs."@en .
+:Spike rdf:type :SubType ;
+       rdfs:label "Spike" ;
+       rdfs:comment "A genetically modified symbiotic creature created in Volrath's laboratories."@en .
+:Spirit rdf:type :SubType ;
+       rdfs:label "Spirit" ;
+       rdfs:comment "The spectral soul or ethereal essence of a deceased or divine being."@en .
+:Splinter rdf:type :SubType ;
+       rdfs:label "Splinter" ;
+       rdfs:comment "A creature fractured or split off from a larger wooden entity."@en .
+:Sponge rdf:type :SubType ;
+       rdfs:label "Sponge" ;
+       rdfs:comment "An absorbent, aquatic invertebrate."@en .
+:Squid rdf:type :SubType ;
+       rdfs:label "Squid" ;
+       rdfs:comment "An aquatic cephalopod with tentacles."@en .
+:Squirrel rdf:type :SubType ;
+       rdfs:label "Squirrel" ;
+       rdfs:comment "A small, nut-hoarding rodent."@en .
+:Starfish rdf:type :SubType ;
+       rdfs:label "Starfish" ;
+       rdfs:comment "A marine, star-shaped echinoderm."@en .
+:Surrakar rdf:type :SubType ;
+       rdfs:label "Surrakar" ;
+       rdfs:comment "An amphibious, subterranean humanoid native to Zendikar."@en .
+:Survivor rdf:type :SubType ;
+       rdfs:label "Survivor" ;
+       rdfs:comment "One who endures extreme hardship or apocalyptic scenarios."@en .
+:Symbiote rdf:type :SubType ;
+       rdfs:label "Symbiote" ;
+       rdfs:comment "An organism that physically merges with a host to share strength."@en .
+:Synth rdf:type :SubType ;
+       rdfs:label "Synth" ;
+       rdfs:comment "A synthetic humanoid."@en .
+:Tentacle rdf:type :SubType ;
+       rdfs:label "Tentacle" ;
+       rdfs:comment "A writhing appendage severed or acting independently of a larger creature."@en .
+:Tetravite rdf:type :SubType ;
+       rdfs:label "Tetravite" ;
+       rdfs:comment "A modular construct part of a larger Tetravus machine."@en .
+:Thalakos rdf:type :SubType ;
+       rdfs:label "Thalakos" ;
+       rdfs:comment "A deceitful, illusion-focused humanoid race trapped in Rath's shadow realm."@en .
+:Thopter rdf:type :SubType ;
+       rdfs:label "Thopter" ;
+       rdfs:comment "A small, flying mechanical construct."@en .
+:Thrull rdf:type :SubType ;
+       rdfs:label "Thrull" ;
+       rdfs:comment "An undead servant bred by the Order of the Ebon Hand and the Orzhov."@en .
+:Tiefling rdf:type :SubType ;
+       rdfs:label "Tiefling" ;
+       rdfs:comment "A humanoid with fiendish or demonic ancestry."@en .
+:TimeLord rdf:type :SubType ;
+       rdfs:label "Time Lord" ;
+       rdfs:comment "A legendary time-traveling humanoid race from Gallifrey in Doctor Who."@en .
+:Toy rdf:type :SubType ;
+       rdfs:label "Toy" ;
+       rdfs:comment "An animate plaything."@en .
+:Treefolk rdf:type :SubType ;
+       rdfs:label "Treefolk" ;
+       rdfs:comment "A massive, sentient, and long-lived walking tree."@en .
+:Trilobite rdf:type :SubType ;
+       rdfs:label "Trilobite" ;
+       rdfs:comment "An extinct marine arthropod, revived by magic."@en .
+:Triskelavite rdf:type :SubType ;
+       rdfs:label "Triskelavite" ;
+       rdfs:comment "A modular construct part of a larger Triskelavus machine."@en .
+:Troll rdf:type :SubType ;
+       rdfs:label "Troll" ;
+       rdfs:comment "A resilient humanoid capable of rapid regeneration."@en .
+:Turtle rdf:type :SubType ;
+       rdfs:label "Turtle" ;
+       rdfs:comment "A slow, heavily armored reptile."@en .
+:Tyranid rdf:type :SubType ;
+       rdfs:label "Tyranid" ;
+       rdfs:comment "An extragalactic alien swarm that consumes all biological matter."@en .
+:Unicorn rdf:type :SubType ;
+       rdfs:label "Unicorn" ;
+       rdfs:comment "A pure, magical equine with a single horn on its forehead."@en .
+:Utrom rdf:type :SubType ;
+       rdfs:label "Utrom" ;
+       rdfs:comment "A brain-like alien species."@en .
+:Vampire rdf:type :SubType ;
+       rdfs:label "Vampire" ;
+       rdfs:comment "An undead or cursed aristocrat that feeds on the blood or life of others."@en .
+:Varmint rdf:type :SubType ;
+       rdfs:label "Varmint" ;
+       rdfs:comment "A troublesome wild animal or pest."@en .
+:Vedalken rdf:type :SubType ;
+       rdfs:label "Vedalken" ;
+       rdfs:comment "A blue-skinned, highly logical and inventive humanoid race."@en .
+:Villain rdf:type :SubType ;
+       rdfs:label "Villain" ;
+       rdfs:comment "A designated antagonist or evil character."@en .
+:Volver rdf:type :SubType ;
+       rdfs:label "Volver" ;
+       rdfs:comment "A mutated creature from Dominaria that adapts with extra colors of mana."@en .
+:Wall rdf:type :SubType ;
+       rdfs:label "Wall" ;
+       rdfs:comment "A stationary defensive structure or barrier that relies on blocking."@en .
+:Walrus rdf:type :SubType ;
+       rdfs:label "Walrus" ;
+       rdfs:comment "A large marine mammal with tusks."@en .
+:Warlock rdf:type :SubType ;
+       rdfs:label "Warlock" ;
+       rdfs:comment "A spellcaster who frequently deals in dark magic and pacts."@en .
+:Warrior rdf:type :SubType ;
+       rdfs:label "Warrior" ;
+       rdfs:comment "A skilled fighter specializing in physical combat."@en .
+:Weasel rdf:type :SubType ;
+       rdfs:label "Weasel" ;
+       rdfs:comment "A sleek, carnivorous mammal."@en .
+:Weird rdf:type :SubType ;
+       rdfs:label "Weird" ;
+       rdfs:comment "An unstable elemental forged from conflicting types of mana by the Izzet."@en .
+:Werewolf rdf:type :SubType ;
+       rdfs:label "Werewolf" ;
+       rdfs:comment "A cursed human who transforms into a feral wolf-beast under the moon."@en .
+:Whale rdf:type :SubType ;
+       rdfs:label "Whale" ;
+       rdfs:comment "An enormous marine mammal."@en .
+:Wizard rdf:type :SubType ;
+       rdfs:label "Wizard" ;
+       rdfs:comment "A scholar and practitioner of esoteric or scholastic magic."@en .
+:Wolf rdf:type :SubType ;
+       rdfs:label "Wolf" ;
+       rdfs:comment "A wild canine predator of the forests."@en .
+:Wolverine rdf:type :SubType ;
+       rdfs:label "Wolverine" ;
+       rdfs:comment "A fierce and resilient mustelid."@en .
+:Wombat rdf:type :SubType ;
+       rdfs:label "Wombat" ;
+       rdfs:comment "A stout, burrowing marsupial."@en .
+:Worm rdf:type :SubType ;
+       rdfs:label "Worm" ;
+       rdfs:comment "A legless invertebrate that burrows through the earth."@en .
+:Wraith rdf:type :SubType ;
+       rdfs:label "Wraith" ;
+       rdfs:comment "A sinister, incorporeal undead spirit, often with swampwalk."@en .
+:Wurm rdf:type :SubType ;
+       rdfs:label "Wurm" ;
+       rdfs:comment "A massive, ancient, dragon-like serpent without limbs or wings."@en .
+:Yeti rdf:type :SubType ;
+       rdfs:label "Yeti" ;
+       rdfs:comment "A furry, ape-like hominid of the snowy mountains."@en .
+:Zombie rdf:type :SubType ;
+       rdfs:label "Zombie" ;
+       rdfs:comment "A reanimated corpse driven by dark magic or hunger."@en .
+:Zubera rdf:type :SubType ;
+       rdfs:label "Zubera" ;
+       rdfs:comment "A faceless spirit from Kamigawa that grows stronger when kin perish."@en .
+
 # --- Enchantment Types ---
 :Aura rdf:type :SubType ;
       rdfs:label "Aura" ;
@@ -723,6 +1777,264 @@
 :Shrine rdf:type :SubType ;
         rdfs:label "Shrine" ;
         rdfs:comment "An enchantment type depicting a place of worship that scales based on the number of Shrines."@en .
+
+# --- Planar Types ---
+:Alara rdf:type :SubType ;
+       rdfs:label "Alara" ;
+       rdfs:comment "A plane formerly shattered into five shards that have now merged back together."@en .
+:AlfavaMetraxis rdf:type :SubType ;
+       rdfs:label "Alfava Metraxis" ;
+       rdfs:comment "A planar designation representing Alfava Metraxis."@en .
+:Amonkhet rdf:type :SubType ;
+       rdfs:label "Amonkhet" ;
+       rdfs:comment "An Egyptian-inspired plane formerly ruled by God-Pharaoh Nicol Bolas."@en .
+:AndrozaniMinor rdf:type :SubType ;
+       rdfs:label "Androzani Minor" ;
+       rdfs:comment "A planar designation representing Androzani Minor."@en .
+:Antausia rdf:type :SubType ;
+       rdfs:label "Antausia" ;
+       rdfs:comment "A planar designation representing Antausia."@en .
+:Apalapucia rdf:type :SubType ;
+       rdfs:label "Apalapucia" ;
+       rdfs:comment "A planar designation representing Apalapucia."@en .
+:Arcavios rdf:type :SubType ;
+       rdfs:label "Arcavios" ;
+       rdfs:comment "The plane where Strixhaven University is located."@en .
+:Arkhos rdf:type :SubType ;
+       rdfs:label "Arkhos" ;
+       rdfs:comment "A planar designation representing Arkhos."@en .
+:Avishkar rdf:type :SubType ;
+       rdfs:label "Avishkar" ;
+       rdfs:comment "A planar designation representing Avishkar."@en .
+:Azgol rdf:type :SubType ;
+       rdfs:label "Azgol" ;
+       rdfs:comment "A planar designation representing Azgol."@en .
+:Belenon rdf:type :SubType ;
+       rdfs:label "Belenon" ;
+       rdfs:comment "A planar designation representing Belenon."@en .
+:BolassMeditationRealm rdf:type :SubType ;
+       rdfs:label "Bolas’s Meditation Realm" ;
+       rdfs:comment "A personal demi-plane formerly controlled by Nicol Bolas."@en .
+:Capenna rdf:type :SubType ;
+       rdfs:label "Capenna" ;
+       rdfs:comment "A city-plane constructed by angels and ruled by demon crime families."@en .
+:Cridhe rdf:type :SubType ;
+       rdfs:label "Cridhe" ;
+       rdfs:comment "A planar designation representing Cridhe."@en .
+:Darillium rdf:type :SubType ;
+       rdfs:label "Darillium" ;
+       rdfs:comment "A planar designation representing Darillium."@en .
+:Dominaria rdf:type :SubType ;
+       rdfs:label "Dominaria" ;
+       rdfs:comment "The central nexus of the multiverse and setting of many early MTG stories."@en .
+:Earth rdf:type :SubType ;
+       rdfs:label "Earth" ;
+       rdfs:comment "A planet in the Doctor Who universe frequently visited by the Doctor."@en .
+:Echoir rdf:type :SubType ;
+       rdfs:label "Echoir" ;
+       rdfs:comment "A planar designation representing Echoir."@en .
+:Eldraine rdf:type :SubType ;
+       rdfs:label "Eldraine" ;
+       rdfs:comment "A plane inspired by Arthurian legends and fairy tales."@en .
+:Equilor rdf:type :SubType ;
+       rdfs:label "Equilor" ;
+       rdfs:comment "A planar designation representing Equilor."@en .
+:Ergamon rdf:type :SubType ;
+       rdfs:label "Ergamon" ;
+       rdfs:comment "A planar designation representing Ergamon."@en .
+:Fabacin rdf:type :SubType ;
+       rdfs:label "Fabacin" ;
+       rdfs:comment "A planar designation representing Fabacin."@en .
+:Fiora rdf:type :SubType ;
+       rdfs:label "Fiora" ;
+       rdfs:comment "A plane known for its political intrigue, assassinations, and the city of Paliano."@en .
+:Gallifrey rdf:type :SubType ;
+       rdfs:label "Gallifrey" ;
+       rdfs:comment "The home planet of the Time Lords from Doctor Who."@en .
+:Gargantikar rdf:type :SubType ;
+       rdfs:label "Gargantikar" ;
+       rdfs:comment "A planar designation representing Gargantikar."@en .
+:Gobakhan rdf:type :SubType ;
+       rdfs:label "Gobakhan" ;
+       rdfs:comment "A planar designation representing Gobakhan."@en .
+:HorseheadNebula rdf:type :SubType ;
+       rdfs:label "Horsehead Nebula" ;
+       rdfs:comment "A planar designation representing Horsehead Nebula."@en .
+:Ikoria rdf:type :SubType ;
+       rdfs:label "Ikoria" ;
+       rdfs:comment "A dangerous plane characterized by its mutating monsters and massive crystals."@en .
+:Innistrad rdf:type :SubType ;
+       rdfs:label "Innistrad" ;
+       rdfs:comment "A gothic horror plane filled with vampires, werewolves, zombies, and spirits."@en .
+:Iquatana rdf:type :SubType ;
+       rdfs:label "Iquatana" ;
+       rdfs:comment "A planar designation representing Iquatana."@en .
+:Ir rdf:type :SubType ;
+       rdfs:label "Ir" ;
+       rdfs:comment "A planar designation representing Ir."@en .
+:Ixalan rdf:type :SubType ;
+       rdfs:label "Ixalan" ;
+       rdfs:comment "A plane originally known for its warring dinosaur-riding humans, merfolk, vampires, and pirates."@en .
+:Kaldheim rdf:type :SubType ;
+       rdfs:label "Kaldheim" ;
+       rdfs:comment "A Norse-inspired plane featuring ten distinct realms connected by the World Tree."@en .
+:Kamigawa rdf:type :SubType ;
+       rdfs:label "Kamigawa" ;
+       rdfs:comment "A Japanese-inspired plane that blends futuristic cyberpunk technology with traditional spirits."@en .
+:Kandoka rdf:type :SubType ;
+       rdfs:label "Kandoka" ;
+       rdfs:comment "A planar designation representing Kandoka."@en .
+:Karsus rdf:type :SubType ;
+       rdfs:label "Karsus" ;
+       rdfs:comment "A planar designation representing Karsus."@en .
+:Kephalai rdf:type :SubType ;
+       rdfs:label "Kephalai" ;
+       rdfs:comment "A planar designation representing Kephalai."@en .
+:Kinshala rdf:type :SubType ;
+       rdfs:label "Kinshala" ;
+       rdfs:comment "A planar designation representing Kinshala."@en .
+:Kolbahan rdf:type :SubType ;
+       rdfs:label "Kolbahan" ;
+       rdfs:comment "A planar designation representing Kolbahan."@en .
+:Kylem rdf:type :SubType ;
+       rdfs:label "Kylem" ;
+       rdfs:comment "A planar designation representing Kylem."@en .
+:Kyneth rdf:type :SubType ;
+       rdfs:label "Kyneth" ;
+       rdfs:comment "A planar designation representing Kyneth."@en .
+:Lorwyn rdf:type :SubType ;
+       rdfs:label "Lorwyn" ;
+       rdfs:comment "A sunny, idyllic plane inhabited entirely by non-humans, shifting to Shadowmoor."@en .
+:Luvion rdf:type :SubType ;
+       rdfs:label "Luvion" ;
+       rdfs:comment "A planar designation representing Luvion."@en .
+:Mars rdf:type :SubType ;
+       rdfs:label "Mars" ;
+       rdfs:comment "A planar designation representing Mars."@en .
+:Mercadia rdf:type :SubType ;
+       rdfs:label "Mercadia" ;
+       rdfs:comment "A planar designation representing Mercadia."@en .
+:Mirrodin rdf:type :SubType ;
+       rdfs:label "Mirrodin" ;
+       rdfs:comment "An artificial, metallic plane created by Karn, now compleated into New Phyrexia."@en .
+:Moag rdf:type :SubType ;
+       rdfs:label "Moag" ;
+       rdfs:comment "A planar designation representing Moag."@en .
+:Mongseng rdf:type :SubType ;
+       rdfs:label "Mongseng" ;
+       rdfs:comment "A planar designation representing Mongseng."@en .
+:Moon rdf:type :SubType ;
+       rdfs:label "Moon" ;
+       rdfs:comment "A planar designation representing Moon."@en .
+:Muraganda rdf:type :SubType ;
+       rdfs:label "Muraganda" ;
+       rdfs:comment "A planar designation representing Muraganda."@en .
+:Necros rdf:type :SubType ;
+       rdfs:label "Necros" ;
+       rdfs:comment "A planar designation representing Necros."@en .
+:NewEarth rdf:type :SubType ;
+       rdfs:label "New Earth" ;
+       rdfs:comment "A planar designation representing New Earth."@en .
+:NewPhyrexia rdf:type :SubType ;
+       rdfs:label "New Phyrexia" ;
+       rdfs:comment "The compleated form of Mirrodin, ruled by the Phyrexian Praetors."@en .
+:OutsideMuttersSpiral rdf:type :SubType ;
+       rdfs:label "Outside Mutter’s Spiral" ;
+       rdfs:comment "A planar designation representing Outside Mutter’s Spiral."@en .
+:Phyrexia rdf:type :SubType ;
+       rdfs:label "Phyrexia" ;
+       rdfs:comment "An artificial hellscape plane of biomechanical horrors created by Yawgmoth."@en .
+:Pyrulea rdf:type :SubType ;
+       rdfs:label "Pyrulea" ;
+       rdfs:comment "A planar designation representing Pyrulea."@en .
+:Rabiah rdf:type :SubType ;
+       rdfs:label "Rabiah" ;
+       rdfs:comment "A planar designation representing Rabiah."@en .
+:Rath rdf:type :SubType ;
+       rdfs:label "Rath" ;
+       rdfs:comment "An artificial plane created by Phyrexians to overlay and invade Dominaria."@en .
+:Ravnica rdf:type :SubType ;
+       rdfs:label "Ravnica" ;
+       rdfs:comment "A massive, world-spanning city-plane governed by ten magical guilds."@en .
+:Regatha rdf:type :SubType ;
+       rdfs:label "Regatha" ;
+       rdfs:comment "A planar designation representing Regatha."@en .
+:Segovia rdf:type :SubType ;
+       rdfs:label "Segovia" ;
+       rdfs:comment "A planar designation representing Segovia."@en .
+:SerrasRealm rdf:type :SubType ;
+       rdfs:label "Serra’s Realm" ;
+       rdfs:comment "A planar designation representing Serra’s Realm."@en .
+:Shadowmoor rdf:type :SubType ;
+       rdfs:label "Shadowmoor" ;
+       rdfs:comment "The darkened, twisted counterpart to the plane of Lorwyn."@en .
+:Shandalar rdf:type :SubType ;
+       rdfs:label "Shandalar" ;
+       rdfs:comment "A planar designation representing Shandalar."@en .
+:Shenmeng rdf:type :SubType ;
+       rdfs:label "Shenmeng" ;
+       rdfs:comment "A planar designation representing Shenmeng."@en .
+:Skaro rdf:type :SubType ;
+       rdfs:label "Skaro" ;
+       rdfs:comment "The ruined home world of the Dalek race."@en .
+:Spacecraft rdf:type :SubType ;
+       rdfs:label "Spacecraft" ;
+       rdfs:comment "A planar designation representing Spacecraft."@en .
+:Tarkir rdf:type :SubType ;
+       rdfs:label "Tarkir" ;
+       rdfs:comment "A plane ruled by warlords and khans, and later by five elder dragons."@en .
+:TheAbyss rdf:type :SubType ;
+       rdfs:label "The Abyss" ;
+       rdfs:comment "A planar designation representing The Abyss."@en .
+:TheDalekAsylum rdf:type :SubType ;
+       rdfs:label "The Dalek Asylum" ;
+       rdfs:comment "A planar designation representing The Dalek Asylum."@en .
+:TheLibrary rdf:type :SubType ;
+       rdfs:label "The Library" ;
+       rdfs:comment "A planar designation representing The Library."@en .
+:Theros rdf:type :SubType ;
+       rdfs:label "Theros" ;
+       rdfs:comment "A Greek-mythology-inspired plane where dreams and beliefs shape reality."@en .
+:Time rdf:type :SubType ;
+       rdfs:label "Time" ;
+       rdfs:comment "A planar designation representing Time."@en .
+:Trenzalore rdf:type :SubType ;
+       rdfs:label "Trenzalore" ;
+       rdfs:comment "A planet known as the final resting place of the Doctor."@en .
+:Ulgrotha rdf:type :SubType ;
+       rdfs:label "Ulgrotha" ;
+       rdfs:comment "A planar designation representing Ulgrotha."@en .
+:UnknownPlanet rdf:type :SubType ;
+       rdfs:label "Unknown Planet" ;
+       rdfs:comment "A planar designation representing Unknown Planet."@en .
+:Valla rdf:type :SubType ;
+       rdfs:label "Valla" ;
+       rdfs:comment "A planar designation representing Valla."@en .
+:Vryn rdf:type :SubType ;
+       rdfs:label "Vryn" ;
+       rdfs:comment "A planar designation representing Vryn."@en .
+:Wildfire rdf:type :SubType ;
+       rdfs:label "Wildfire" ;
+       rdfs:comment "A planar designation representing Wildfire."@en .
+:Xerex rdf:type :SubType ;
+       rdfs:label "Xerex" ;
+       rdfs:comment "A planar designation representing Xerex."@en .
+:Zendikar rdf:type :SubType ;
+       rdfs:label "Zendikar" ;
+       rdfs:comment "A wild, mana-rich plane originally serving as a prison for the Eldrazi."@en .
+:Zhalfir rdf:type :SubType ;
+       rdfs:label "Zhalfir" ;
+       rdfs:comment "A technologically and magically advanced kingdom phased to its own space by Teferi."@en .
+
+# --- Dungeon Types ---
+:Undercity rdf:type :SubType ;
+       rdfs:label "Undercity" ;
+       rdfs:comment "A sprawling, multi-leveled dungeon beneath Baldur's Gate."@en .
+
+# --- Battle Types ---
+:Siege rdf:type :SubType ;
+       rdfs:label "Siege" ;
+       rdfs:comment "A battle that represents an attack on a location or plane."@en .
 
 # --- Planeswalker Types ---
 :Ajani rdf:type :SubType ;
@@ -1193,15 +2505,31 @@
          rdfs:comment "The Spanish language print of the card."@en .
 
 # --- Sets ---
-:Commander2017 rdf:type :Set ;
-               :setName "Commander 2017" ;
-               :setCode "C17" .
+:Unsanctioned rdf:type :Set ;
+              :setName "Unsanctioned" ;
+              :setCode "UND" ;
+              :cardCount 96 ;
+              :releaseDate "2022-02-13"^^xsd:date .
 :Kaldheim rdf:type :Set ;
           :setName "Kaldheim" ;
-          :setCode "KHM" .
+          :setCode "KHM" ;
+          :cardCount 432 ;
+          :releaseDate "2021-01-06"^^xsd:date .
+:Commander2017 rdf:type :Set ;
+               :setName "Commander 2017" ;
+               :setCode "C17" ;
+               :cardCount 309 ;
+               :releaseDate "2017-07-25"^^xsd:date .
+:Unhinged rdf:type :Set ;
+          :setName "Unhinged" ;
+          :setCode "UNH" ;
+          :cardCount 142 ;
+          :releaseDate "2004-11-19"^^xsd:date .
 :LimitedEditionAlpha rdf:type :Set ;
                      :setName "Limited Edition Alpha" ;
-                     :setCode "LEA" .
+                     :setCode "1E" ;
+                     :cardCount 295;
+                     :releaseDate "1993-08-05"^^xsd:date .
 
 # --- Legalities ---
 :Legal rdf:type :Legality ;
@@ -1216,6 +2544,59 @@
 :Restricted rdf:type :Legality ;
             rdfs:label "Restricted" ;
             rdfs:comment "The card is limited to a single copy per deck in the format (primarily Vintage)."@en .
+
+# --- Summon Card ---
+:OldFogey rdf:type :Card ;
+          :name "Old Fogey" ;
+          :manaCost "{G}{G}" ;
+          :manaValue 2 ;
+          :hasCardType :Summon ;
+          :hasSubType :Dinosaur ;
+          :hasRarity :Rare ;
+          :hasColorIdentity :Green ;
+          :hasSet :Unsanctioned ;
+          :cardNumber 67 ;
+          :artist "Douglas Shuler" ;
+          :hasLanguage :English ;
+          :power 7 ;
+          :toughness 7 ;
+          :printedText "Phasing, cumulative upkeep {1}, echo, fading 3, bands with other Dinosaurs, protection from Homarids, snow-covered plainswalk, flanking, rampage 2" ;
+          :oracleText "Phasing, cumulative upkeep {1}, echo {G}{G}, fading 3, bands with other Dinosaurs, protection from Homarids, snow-covered plainswalk, flanking, rampage 2" ;
+          :flavorText "These kids today with their collector numbers and their newfangled tap symbol. Twenty Black Lotuses and twenty Plague Rats. Now that's real Magic." ;
+          :gathererUrl "https://gatherer.wizards.com/UND/en-us/67/old-fogey"^^xsd:anyURI ;
+          # Not Legal Formats missing
+          :hasLegality [ rdf:type :LegalityMapping ;
+                         :inFormat :Commander ;
+                         :hasLegalityStatus :NotLegal
+                       ] ;
+          :hasLegality [ rdf:type :LegalityMapping ;
+                         :inFormat :Legacy ;
+                         :hasLegalityStatus :NotLegal
+                       ] ;
+          :hasLegality [ rdf:type :LegalityMapping ;
+                         :inFormat :Vintage ;
+                         :hasLegalityStatus :NotLegal
+                       ] ;
+          :hasLegality [ rdf:type :LegalityMapping ;
+                         :inFormat :Standard ;
+                         :hasLegalityStatus :NotLegal
+                       ] ;
+          :hasLegality [ rdf:type :LegalityMapping ;
+                         :inFormat :Modern ;
+                         :hasLegalityStatus :NotLegal
+                       ] ;
+          :hasLegality [ rdf:type :LegalityMapping ;
+                         :inFormat :Pioneer ;
+                         :hasLegalityStatus :NotLegal
+                       ] ;
+          :hasLegality [ rdf:type :LegalityMapping ;
+                         :inFormat :Pauper ;
+                         :hasLegalityStatus :NotLegal
+                       ]
+          :hasRuling [rdf:type :Ruling ;
+                      :rulingDate "2020-02-29"^^xsd:date ;
+                      :rulingText "Due to changes in how echo and phasing work since Old Fogey was originally printed, echo mostly does nothing in this case. This is, as they say, a bit weird. Old Fogey is phased out when its echo ability would trigger, so that ability doesn't trigger at the beginning of the upkeep after Old Fogey enters the battlefield. Phasing in doesn't cause Old Fogey to enter the battlefield, so echo ends up not really doing much at all." ] .
+
 
 
 #################################################
@@ -1276,6 +2657,121 @@
     ] ;
     rdfs:label "Artifact Card" ;
     rdfs:comment "A class representing any card with the Artifact card type to enforce constraints."@en .
+
+# --- Creature Constraints ---
+:CreatureCard rdf:type owl:Class ;
+    rdfs:subClassOf :Card ;
+    owl:equivalentClass [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasCardType ;
+        owl:hasValue :Creature
+    ] ;
+    rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSuperType ;
+        owl:allValuesFrom [
+            rdf:type owl:Class ;
+            owl:oneOf ( :Legendary :Host :Snow )
+        ]
+    ] ;
+    rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSuperType ;
+        owl:maxCardinality "3"^^xsd:nonNegativeInteger
+    ] ;
+    rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSubType ;
+        owl:allValuesFrom :CreatureType
+    ] ;
+    rdfs:label "Creature Card" ;
+    rdfs:comment "A class representing any card with the Creature card type to enforce constraints."@en .
+
+# --- Kindred Constraints ---
+:KindredCard rdf:type owl:Class ;
+    rdfs:subClassOf :Card ;
+    owl:equivalentClass [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasCardType ;
+        owl:hasValue :Kindred
+    ] ;
+    rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSuperType ;
+        owl:maxCardinality "0"^^xsd:nonNegativeInteger
+    ] ;
+    rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSubType ;
+        owl:allValuesFrom :CreatureType
+    ] ;
+    rdfs:label "Kindred Card" ;
+    rdfs:comment "A class representing any card with the Kindred card type to enforce constraints."@en .
+
+
+# --- Plane Constraints ---
+:PlaneCard rdf:type owl:Class ;
+    rdfs:subClassOf :Card ;
+    owl:equivalentClass [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasCardType ;
+        owl:hasValue :Plane
+    ] ;
+    rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSuperType ;
+        owl:maxCardinality "0"^^xsd:nonNegativeInteger
+    ] ;
+    rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSubType ;
+        owl:allValuesFrom :PlanarType
+    ] ;
+    rdfs:label "Plane Card" ;
+    rdfs:comment "A class representing any card with the Plane card type to enforce restrictions."@en .
+
+
+# --- Dungeon Constraints ---
+:DungeonCard rdf:type owl:Class ;
+    rdfs:subClassOf :Card ;
+    owl:equivalentClass [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasCardType ;
+        owl:hasValue :Dungeon
+    ] ;
+    rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSuperType ;
+        owl:maxCardinality "0"^^xsd:nonNegativeInteger
+    ] ;
+    rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSubType ;
+        owl:allValuesFrom :DungeonType
+    ] ;
+    rdfs:label "Dungeon Card" ;
+    rdfs:comment "A class representing any card with the Dungeon card type to enforce restrictions."@en .
+
+# --- Battle Constraints ---
+:BattleCard rdf:type owl:Class ;
+    rdfs:subClassOf :Card ;
+    owl:equivalentClass [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasCardType ;
+        owl:hasValue :Battle
+    ] ;
+    rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSuperType ;
+        owl:maxCardinality "0"^^xsd:nonNegativeInteger
+    ] ;
+    rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSubType ;
+        owl:allValuesFrom :BattleType
+    ] ;
+    rdfs:label "Battle Card" ;
+    rdfs:comment "A class representing any card with the Battle card type to enforce restrictions."@en .
 
 # --- Enchantment Constraints ---
 :EnchantmentCard rdf:type owl:Class ;
@@ -1386,6 +2882,113 @@
     rdfs:label "Basic Land Card" ;
     rdfs:comment "A class representing land cards with the Basic supertype."@en .
 
+# --- Phenomenon Constraints ---
+:PhenomenonCard rdf:type owl:Class ;
+    rdfs:subClassOf :Card ;
+    owl:equivalentClass [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasCardType ;
+        owl:hasValue :Phenomenon
+    ] ;
+    rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSuperType ;
+        owl:maxCardinality "0"^^xsd:nonNegativeInteger
+    ] ;
+    rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSubType ;
+        owl:maxCardinality "0"^^xsd:nonNegativeInteger
+    ] ;
+    rdfs:label "Phenomenon Card" ;
+    rdfs:comment "A class representing any card with the Phenomenon card type to enforce restrictions."@en .
+
+# --- Scheme Constraints ---
+:SchemeCard rdf:type owl:Class ;
+    rdfs:subClassOf :Card ;
+    owl:equivalentClass [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasCardType ;
+        owl:hasValue :Scheme
+    ] ;
+    rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSuperType ;
+        owl:allValuesFrom [
+            rdf:type owl:Class ;
+            owl:oneOf ( :Ongoing )
+        ]
+    ] ;
+    rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSuperType ;
+        owl:maxCardinality "1"^^xsd:nonNegativeInteger
+    ] ;
+    rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSubType ;
+        owl:maxCardinality "0"^^xsd:nonNegativeInteger
+    ] ;
+    rdfs:label "Scheme Card" ;
+    rdfs:comment "A class representing any card with the Scheme card type to enforce restrictions."@en .
+
+# --- Vanguard Constraints ---
+:VanguardCard rdf:type owl:Class ;
+    rdfs:subClassOf :Card ;
+    owl:equivalentClass [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasCardType ;
+        owl:hasValue :Vanguard
+    ] ;
+    rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSuperType ;
+        owl:maxCardinality "0"^^xsd:nonNegativeInteger
+    ] ;
+    rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSubType ;
+        owl:maxCardinality "0"^^xsd:nonNegativeInteger
+    ] ;
+    rdfs:label "Vanguard Card" ;
+    rdfs:comment "A class representing any card with the Vanguard card type to enforce restrictions."@en .
+
+# --- Conspiracy Constraints ---
+:ConspiracyCard rdf:type owl:Class ;
+    rdfs:subClassOf :Card ;
+    owl:equivalentClass [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasCardType ;
+        owl:hasValue :Conspiracy
+    ] ;
+    rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSuperType ;
+        owl:maxCardinality "0"^^xsd:nonNegativeInteger
+    ] ;
+    rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSubType ;
+        owl:maxCardinality "0"^^xsd:nonNegativeInteger
+    ] ;
+    rdfs:label "Conspiracy Card" ;
+    rdfs:comment "A class representing any card with the Conspiracy card type to enforce restrictions."@en .
+
+# --- Summon Constraints ---
+:SummonCard rdf:type owl:Class ;
+    rdfs:subClassOf :Card ;
+    owl:equivalentClass [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasCardType ;
+        owl:hasValue :Summon
+    ] ;
+    owl:equivalentClass [
+        rdf:type owl:Class ;
+        owl:oneOf ( :OldFogey )
+    ] ;
+    rdfs:label "Summon Card" ;
+    rdfs:comment "A class representing the Summon card type, which only applies to the card Old Fogey."@en .
+
 
 #################################################
 #
@@ -1414,8 +3017,8 @@
              :hasSubType :Dragon , :Avatar ;
              :hasColorIdentity :White , :Blue , :Black , :Red , :Green ;
              :hasRarity :MythicRare ;
-             :power "10" ;
-             :toughness "10" ;
+             :power 10 ;
+             :toughness 10 ;
              :oracleText "Eminence — As long as The Ur-Dragon is in the command zone or on the battlefield, other Dragon spells you cast cost {1} less to cast.\nFlying\nWhenever one or more Dragons you control attack, draw that many cards, then you may put a permanent card from your hand onto the battlefield." ;
              :isCommanderOf :UrDragonDeck ;
              :cardNumber 48 ;
@@ -1451,7 +3054,7 @@
          :hasRarity :Uncommon ;
          :oracleText "{T}: Add {C}{C}." ;
          :isUsedInDeck :UrDragonDeck , :LathrilDeck ;
-         :cardNumber "256" ;
+         :cardNumber 256 ;
          :artist "Mark Tedin" ;
          :hasSet :LimitedEditionAlpha ;
          :hasLanguage :English ;
@@ -1477,11 +3080,11 @@
                         :hasSubType :Elf , :Noble ;
                         :hasColorIdentity :Black , :Green ;
                         :hasRarity :MythicRare ;
-                        :power "2" ;
-                        :toughness "3" ;
+                        :power 2 ;
+                        :toughness 3 ;
                         :oracleText "Menace\nWhenever Lathril, Blade of the Elves deals combat damage to a player, create that many 1/1 green Elf Warrior creature tokens.\n{T}, Tap ten untapped Elves you control: Each opponent loses 10 life and you gain 10 life." ;
                         :isCommanderOf :LathrilDeck ;
-                        :cardNumber "001" ;
+                        :cardNumber 1 ;
                         :artist "Caroline Gariba" ;
                         :hasSet :Kaldheim ;
                         :hasLanguage :English ;
