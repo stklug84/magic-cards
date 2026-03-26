@@ -9,17 +9,19 @@
 
 <urn:stklug84:MagicCardsOntology:2026-02-14#> rdf:type owl:Ontology ;
                                               rdfs:label "Magic Cards Ontology" ;
-                                              rdfs:comment "A detailed ontology for Magic: The Gathering cards, decks, and attributes."@en .
+                                              rdfs:comment """A detailed
+ontology for Magic: The Gathering cards, decks, and attributes.
+This ontology is based on the Comprehensive Rules of Magic: The Gathering,
+version 2026-02-27."""@en .
 
-#################################################
+
+################################################################################
 #
 #  Class Definitions
 #
-#################################################
+################################################################################
 
-:Card rdf:type owl:Class ;
-      rdfs:label "Magic Card" ;
-      rdfs:comment "A specific Magic: The Gathering card"@en .
+# --- Deck Classes ---
 
 :Deck rdf:type owl:Class ;
       rdfs:label "Deck" ;
@@ -60,6 +62,23 @@
             rdfs:label "Pauper Deck" ;
             rdfs:comment "A constructed deck for the Pauper format"@en .
 
+# ------------------------------------------------------------------------------
+# Card Classes (including its attribute classes)
+# - Color
+# - Super Type
+# - Card Type
+# - Sub Type
+# - Rarity
+# - Set
+# - Language
+# - Legality
+# - Format
+# ------------------------------------------------------------------------------
+:Card rdf:type owl:Class ;
+      rdfs:label "Magic Card" ;
+      rdfs:comment "A specific Magic: The Gathering card"@en .
+
+# --- Color Attribute Class ---
 :Color rdf:type owl:Class ;
        owl:equivalentClass [
            rdf:type owl:Class ;
@@ -75,8 +94,7 @@
        rdfs:label "Color" ;
        rdfs:comment " The five colors of Magic plus Colorless"@en .
 
-# Note: It is called supertype in the rules, but it is not a real supertype
-#       but should be considered as a modifier of the card type.
+# --- Super Type Attribute Class ---
 :SuperType rdf:type owl:Class ;
            owl:equivalentClass [
                rdf:type owl:Class ;
@@ -92,8 +110,12 @@
                )
            ] ;
            rdfs:label "Super Type" ;
-           rdfs:comment "An additional classification that precedes the card type and provides additional rules or characteristics to a card."@en .
+           rdfs:comment """An additional classification that precedes the card
+type and provides additional rules or characteristics to a card.
+It is called supertype in the rules, but it is not a real supertype
+but should be considered as a modifier of the card type."""@en .
 
+# --- Card Type Attribute Class ---
 :CardType rdf:type owl:Class ;
           owl:equivalentClass [
               rdf:type owl:Class ;
@@ -117,12 +139,42 @@
               )
           ] ;
           rdfs:label "Card Type" ;
-          rdfs:comment "The primary classification of a card."@en .
+          rdfs:comment """The primary classification of a card.
+A card can have one or more card types, separated by a space."""@en .
 
+# ------------------------------------------------------------------------------
+# --- Sub Type Attribute Class ---
+# - Artifact Types
+# - Enchantment Types
+# - Planeswalker Types
+# - Spell Types
+# - Creature Types
+# - Land Types
+# - Planar Types
+# - Dungeon Types
+# - Battle Types
+# ------------------------------------------------------------------------------
 :SubType rdf:type owl:Class ;
+         owl:equivalentClass [
+             rdf:type owl:Class ;
+             owl:unionOf (
+                 :ArtifactTypes
+                 :EnchantmentTypes
+                 :PlaneswalkerTypes
+                 :SpellTypes
+                 :CreatureType
+                 :LandTypes
+                 :PlanarType
+                 :DungeonType
+                 :BattleType
+             )
+         ] ;
          rdfs:label "Sub Type" ;
-         rdfs:comment "A sub-classification that provides more specific categorical information to the primary card type."@en .
+         rdfs:comment """A sub-classification that provides more specific
+categorical information to the primary card type, separated by a long dash.
+Each word after the dash is a separate subtype."""@en .
 
+# --- Sub Type Classes ---
 :ArtifactTypes rdf:type owl:Class ;
                rdfs:subClassOf :SubType ;
                owl:equivalentClass [
@@ -151,7 +203,9 @@
                    )
                ] ;
                rdfs:label "Artifact Types" ;
-               rdfs:comment "A subtype that's correlated to the artifact card type."@en .
+               rdfs:comment """Artifact subtypes are always a single word and
+are listed after a long dash. Artifact subtypes are also called artifact types,
+and artifacts may have multiple subtypes. See rules 301.3 and 205.3g."""@en .
 
 :EnchantmentTypes rdf:type owl:Class ;
                   rdfs:subClassOf :SubType ;
@@ -173,7 +227,10 @@
                       )
                   ] ;
                   rdfs:label "Enchantment Types" ;
-                  rdfs:comment "A subtype that's correlated to the enchantment card type."@en .
+                  rdfs:comment """Enchantment subtypes are always a single word
+and are listed after a long dash. Each word after the dash is a separate subtype.
+Enchantment subtypes are also called enchantment types, and enchantments may
+have multiple subtypes. See rules 303.3 and 205.3h."""@en .
 
 :PlaneswalkerTypes rdf:type owl:Class ;
                    rdfs:subClassOf :SubType ;
@@ -196,7 +253,10 @@
                        )
                    ] ;
                    rdfs:label "Planeswalker Types" ;
-                   rdfs:comment "A subtype that's correlated to the planeswalker card type."@en .
+                   rdfs:comment """Planeswalker subtypes are always a single
+word and are listed after a long dash. Each word after the dash is a separate
+subtype. Planeswalker subtypes are also called planeswalker types, and
+planeswalkers may have multiple subtypes. See rules 306.3 and 205.3j."""@en .
 
 :SpellTypes rdf:type owl:Class ;
             rdfs:subClassOf :SubType ;
@@ -211,7 +271,10 @@
                 )
             ] ;
             rdfs:label "Spell Types" ;
-            rdfs:comment "A subtype that's correlated to the instant or sorcery card type."@en .
+            rdfs:comment """Instant and sorcery subtypes are called spell types.
+They are always a single word and are listed after a long dash, and instants
+and sorceries may have multiple subtypes. See rules 304.3, 307.3, and 205.3k.
+"""@en .
 
 :CreatureType rdf:type owl:Class ;
                rdfs:subClassOf :SubType ;
@@ -274,7 +337,10 @@
                    )
                ] ;
                rdfs:label "Creature Type" ;
-               rdfs:comment "A subtype that's correlated to the creature card type."@en .
+               rdfs:comment """Creature and kindred subtypes are called creature
+types. Creature subtypes are usually a single word long and are listed after a
+long dash, and creatures and kindreds may have multiple subtypes.
+See rules 302.3, 308.2, and 205.3m."""@en .
 
 :LandTypes rdf:type owl:Class ;
            rdfs:subClassOf :SubType ;
@@ -296,7 +362,9 @@
                )
            ] ;
            rdfs:label "Land Types" ;
-           rdfs:comment "A subtype that's correlated to the land card type."@en .
+           rdfs:comment """Land subtypes are always a single word and are listed
+ after a long dash. Land subtypes are also called land types, and lands may have
+ multiple subtypes. See rules 305.5 and 205.3i."""@en .
 
 :BasicLandTypes rdf:type owl:Class ;
                 rdfs:subClassOf :LandTypes ;
@@ -311,7 +379,10 @@
                     )
                 ] ;
                 rdfs:label "Basic Land Types" ;
-                rdfs:comment "Basic land types implicitly define the color of a land card"
+                rdfs:comment """The basic land types are Plains, Island, Swamp,
+Mountain, and Forest. An object with the land card type and a basic land type
+has the intrinsic mana ability associated with that type. See rules 305.6 and
+205.3i."""@en .
 
 :PlanarType rdf:type owl:Class ;
            rdfs:subClassOf :SubType ;
@@ -335,7 +406,10 @@
                )
            ] ;
            rdfs:label "Planar Types" ;
-           rdfs:comment "A subtype that's correlated to the plane card type."@en .
+           rdfs:comment """Plane subtypes are called planar types. They are
+listed after a long dash and may be multiple words; all words after the dash are
+collectively a single subtype, and a plane can have only one subtype. See rules
+311.3 and 205.3n."""@en .
 
 :DungeonType rdf:type owl:Class ;
                rdfs:subClassOf :SubType ;
@@ -346,7 +420,8 @@
                    )
                ] ;
                rdfs:label "Dungeon Types" ;
-               rdfs:comment "A subtype that's correlated to the dungeon card type."@en .
+               rdfs:comment """One dungeon card, Undercity, has a subtype; this
+subtype is called a dungeon type. See rule 205.3p."""@en .
 
 :BattleType rdf:type owl:Class ;
                rdfs:subClassOf :SubType ;
@@ -357,8 +432,11 @@
                    )
                ] ;
                rdfs:label "Battle Types" ;
-               rdfs:comment "A subtype that's correlated to the battle card type."@en .
+               rdfs:comment """Battle subtypes are always a single word and are
+listed after a long dash. Battle subtypes are also called battle types, and the
+only battle type is Siege. See rules 310.3 and 205.3q."""@en .
 
+# --- Rarity Attribute Class ---
 :Rarity rdf:type owl:Class ;
         owl:equivalentClass [
             rdf:type owl:Class ;
@@ -376,12 +454,14 @@
         rdfs:label "Rarity" ;
         rdfs:comment "Rarity of a Magic card"@en .
 
+# --- Set Attribute Class ---
 :Set rdf:type owl:Class ;
      owl:hasKey ( :setName ) ;
      owl:hasKey ( :setCode ) ;
      rdfs:label "Set" ;
      rdfs:comment "A Magic: The Gathering expansion or set"@en .
 
+# --- Language Attribute Class ---
 :Language rdf:type owl:Class ;
           owl:equivalentClass [
               rdf:type owl:Class ;
@@ -395,6 +475,7 @@
           rdfs:label "Language" ;
           rdfs:comment "Language of the card print"@en .
 
+# --- Legality Attribute Classes ---
 :Legality rdf:type owl:Class ;
           owl:equivalentClass [
               rdf:type owl:Class ;
@@ -408,6 +489,12 @@
           rdfs:label "Legality" ;
           rdfs:comment "The tournament legality status of a card."@en .
 
+:LegalityMapping rdf:type owl:Class ;
+                 rdfs:label "Legality Mapping" ;
+                 rdfs:comment """An intermediate class associating a Card,
+a Format, and a Legality Status."""@en .
+
+# --- Format Attribute Class ---
 :Format rdf:type owl:Class ;
         owl:equivalentClass [
             rdf:type owl:Class ;
@@ -442,15 +529,225 @@
             )
         ] ;
         rdfs:label "Format" ;
-        rdfs:comment "A game format like Commander, Standard, etc."@en .
-
-:LegalityMapping rdf:type owl:Class ;
-                 rdfs:label "Legality Mapping" ;
-                 rdfs:comment "An intermediate class associating a Card, a Format, and a Legality Status"@en .
+        rdfs:comment "A game format extracted from the Magic Webpage."@en .
 
 :Ruling rdf:type owl:Class ;
         rdfs:label "Ruling" ;
         rdfs:comment "Specific rules clarifications for a card"@en .
+
+# ------------------------------------------------------------------------------
+# Card text related classes: Keyword Classes
+# - Keyword Action
+# - Keyword Ability
+# ------------------------------------------------------------------------------
+
+:CardText rdf:type owl:Class ;
+          rdfs:subClassOf owl:Literal ;
+          rdfs:label "Card Text" ;
+          rdfs:comment """The text of a card, including the card name,
+mana cost, oracle text, flavor text, and card text."""@en .
+
+:Keyword rdf:type owl:Class ;
+		 rdfs:subClassOf :CardText ;
+         owl:equivalentClass [
+             rdf:type owl:Class ;
+             owl:unionOf (
+                 :KeywordAction
+                 :KeywordAbility
+             )
+         ] ;
+         rdfs:label "Keyword" ;
+         rdfs:comment """A Magic game mechanic represented as a keyword action
+ or keyword ability. A keyword is a word or phrase that is used to describe a
+ game mechanic."""@en .
+
+:KeywordAction rdf:type owl:Class ;
+               rdfs:subClassOf :Keyword ;
+               owl:disjointWith :KeywordAbility ;
+               owl:equivalentClass [
+                   rdf:type owl:Class ;
+                   owl:oneOf (
+                        :Abandon
+                        :Activate
+                        :Adapt
+                        :Amass
+                        :Assemble
+                        :Attach
+                        :Behold
+                        :Bolster
+                        :Cast
+                        :Clash
+                        :Cloak
+                        :Connive
+                        :Convert
+                        :Counter
+                        :Create
+                        :Destroy
+                        :Detain
+                        :Discard
+                        :Discover
+                        :Double
+                        :Endure
+                        :Exchange
+                        :Exert
+                        :Exile
+                        :Explore
+                        :Fateseal
+                        :Fight
+                        :Goad
+                        :Incubate
+                        :Investigate
+                        :Learn
+                        :Manifest
+                        :Meld
+                        :Mill
+                        :Monstrosity
+                        :Planeswalk
+                        :Play
+                        :Populate
+                        :Proliferate
+                        :Regenerate
+                        :Reveal
+                        :Sacrifice
+                        :Scry
+                        :Search
+                        :Shuffle
+                        :Support
+                        :Surveil
+                        :Tap
+                        :Transform
+                        :Untap
+                        :Vote
+                   )
+               ] ;
+               rdfs:label "Keyword Action" ;
+               rdfs:comment "A keyword that represents a defined game action in Magic."@en .
+
+:KeywordAbility rdf:type owl:Class ;
+                rdfs:subClassOf :Keyword ;
+                owl:equivalentClass [
+                    rdf:type owl:Class ;
+                    owl:oneOf (
+                        :Absorb
+                        :Affinity
+                        :Afflict
+                        :Afterlife
+                        :Aftermath
+                        :Amplify
+                        :Annihilator
+                        :Ascend
+                        :Assist
+                        :AuraSwap
+                        :Awaken
+                        :Backup
+                        :Banding
+                        :Bargain
+                        :BattleCry
+                        :Bestow
+                        :Blitz
+                        :Bloodthirst
+                        :Boast
+                        :Bushido
+                        :Buyback
+                        :Cascade
+                        :Casualty
+                        :Champion
+                        :Changeling
+                        :Cipher
+                        :Cleave
+                        :Companion
+                        :Compleated
+                        :Conspire
+                        :Convoke
+                        :Craft
+                        :Crew
+                        :CumulativeUpkeep
+                        :Devour
+                        :Disguise
+                        :Disturb
+                        :Extort
+                        :Fabricate
+                        :Fading
+                        :Fear
+                        :Firebending
+                        :FirstStrike
+                        :Flanking
+                        :Flash
+                        :Flashback
+                        :Flying
+                        :ForMirrodin
+                        :Impending
+                        :Madness
+                        :MaxSpeed
+                        :Overload
+                        :Partner
+                        :Persist
+                        :Phasing
+                        :Plot
+                        :Poisonous
+                        :Protection
+                        :Prototype
+                        :Provoke
+                        :Prowess
+                        :Prowl
+                        :Rampage
+                        :Ravenous
+                        :Reach
+                        :ReadAhead
+                        :Rebound
+                        :Reconfigure
+                        :Recover
+                        :Reinforce
+                        :Renown
+                        :Replicate
+                        :Retrace
+                        :Riot
+                        :Ripple
+                        :Saddle
+                        :Scavenge
+                        :Shadow
+                        :Shroud
+                        :Skulk
+                        :Sneak
+                        :Solved
+                        :Soulbond
+                        :Soulshift
+                        :SpaceSculptor
+                        :Spectacle
+                        :Splice
+                        :SplitSecond
+                        :Spree
+                        :Squad
+                        :StartYourEngines
+                        :Station
+                        :Storm
+                        :Sunburst
+                        :Surge
+                        :Suspend
+                        :Tiered
+                        :Toxic
+                        :Training
+                        :Trample
+                        :Transfigure
+                        :Transmute
+                        :Tribute
+                        :UmbraArmor
+                        :Undaunted
+                        :Undying
+                        :Unearth
+                        :Unleash
+                        :Vanishing
+                        :Vigilance
+                        :Visit
+                        :Ward
+                        :Warp
+                        :WebSlinging
+                        :Wither
+                    )
+                ] ;
+                rdfs:label "Keyword Ability" ;
+                rdfs:comment "A keyword that represents an ability with defined rules meaning in Magic."@en .
+
 
 
 #################################################
@@ -459,19 +756,19 @@
 #
 #################################################
 
-# --- Data Properties ---
+# --- Card-related Data Properties ---
 
 :cardName rdf:type owl:DatatypeProperty ;
-      rdfs:domain :Card ;
-      rdfs:range xsd:string ;
-      rdfs:label "Card Name" ;
-      rdfs:comment "The name of the card"@en .
+      	  rdfs:domain :Card ;
+          rdfs:range xsd:string ;
+          rdfs:label "Card Name" ;
+          rdfs:comment "The name of the card"@en .
 
 :manaCost rdf:type owl:DatatypeProperty ;
           rdfs:domain :Card ;
           rdfs:range xsd:string ;
           rdfs:label "Mana Cost" ;
-          rdfs:comment "The mana symbols required to cast the card, where each symbol is represented by a string like {W}, {U}, {B}, {R}, {G}, {C}, {X}, or {0}"@en .
+          rdfs:comment "The mana symbols required to cast the card, with values represented using standard Magic mana notation enclosed in braces, such as W, U, B, R, G, C, X, or 0."@en .
 
 :manaValue rdf:type owl:DatatypeProperty ;
            rdfs:domain :Card ;
@@ -480,20 +777,20 @@
            rdfs:comment "Total amount of mana required to casts the spell. Formerly known as converted mana cost (CMC)"@en .
 
 :printedText rdf:type owl:DatatypeProperty ;
-            rdfs:domain :Card ;
-            rdfs:range xsd:string ;
-            rdfs:label "Printed Text" ;
-            rdfs:comment " The text printed on the card"@en .
+             rdfs:domain :Card ;
+             rdfs:range :CardText ;
+             rdfs:label "Printed Text" ;
+             rdfs:comment " The text printed on the card, including the card name, mana cost, oracle text, flavor text, and card text."@en .
 
 :oracleText rdf:type owl:DatatypeProperty ;
             rdfs:domain :Card ;
-            rdfs:range xsd:string ;
+            rdfs:range :CardText ;
             rdfs:label "Oracle Text" ;
             rdfs:comment " The official rules text of the card"@en .
 
 :flavorText rdf:type owl:DatatypeProperty ;
             rdfs:domain :Card ;
-            rdfs:range xsd:string ;
+            rdfs:range :CardText ;
             rdfs:label "Flavor Text" ;
             rdfs:comment "The flavor text of the card"@en .
 
@@ -518,13 +815,15 @@
          rdfs:range xsd:integer ;
          rdfs:comment "Starting loyalty of a Planeswalker"@en .
 
-:setName rdf:type owl:DatatypeProperty , owl:FunctionalProperty ;
+:setName rdf:type owl:DatatypeProperty ,
+				  owl:FunctionalProperty ;
          rdfs:domain :Set ;
          rdfs:range xsd:string ;
          rdfs:label "Set Name" ;
          rdfs:comment "The full name of the Magic set"@en .
 
-:setCode rdf:type owl:DatatypeProperty , owl:FunctionalProperty ;
+:setCode rdf:type owl:DatatypeProperty ,
+                  owl:FunctionalProperty ;
          rdfs:domain :Set ;
          rdfs:range xsd:string ;
          rdfs:label "Set Code" ;
@@ -545,7 +844,10 @@
 :cardCount rdf:type owl:DatatypeProperty ;
            rdfs:domain [
                rdf:type owl:Class ;
-               owl:unionOf ( :Card :Set )
+               owl:unionOf (
+			     :Card
+				 :Set
+			   )
            ] ;
            rdfs:range xsd:integer ;
            rdfs:label "Card Count" ;
@@ -563,7 +865,8 @@
             rdfs:label "Ruling Date" ;
             rdfs:comment "The date of the ruling"@en .
 
-:gathererUrl rdf:type owl:DatatypeProperty ;
+:gathererUrl rdf:type owl:DatatypeProperty ,
+                      owl:FunctionalProperty ;
              rdfs:domain :Card ;
              rdfs:range xsd:anyURI ;
              rdfs:label "Gatherer URL" ;
@@ -650,10 +953,18 @@
            rdfs:comment "The ruling for the card"@en .
 
 :isInDeck rdf:type owl:ObjectProperty ;
+          owl:inverseOf :hasCard ;
           rdfs:domain :Card ;
           rdfs:range :Deck ;
           rdfs:label "Is In Deck" ;
           rdfs:comment "Indicates a card is included in a deck"@en .
+
+:hasCard rdf:type owl:ObjectProperty ;
+         owl:inverseOf :isInDeck ;
+         rdfs:domain :Deck ;
+         rdfs:range :Card ;
+         rdfs:label "Has Card" ;
+         rdfs:comment "Indicates a deck that has a specific card"@en .
 
 :isCommanderOf rdf:type owl:ObjectProperty ;
                rdfs:subPropertyOf :isInDeck ;
@@ -2343,7 +2654,7 @@
             rdfs:comment "An artifact type representing a mana battery."@en .
 :Spacecraft rdf:type :SubType ;
             rdfs:label "Spacecraft" ;
-            rdfs:comment "An artifact type from the *Edge of Eternities* set representing ships that often require "Stationing" to function."@en .
+            rdfs:comment "An artifact type from the *Edge of Eternities* set representing ships that often require \"Stationing\" to function."@en .
 :Stone rdf:type :SubType ;
        rdfs:label "Stone" ;
        rdfs:comment "An artifact type representing a rock or specific mineral."@en .
@@ -2504,6 +2815,785 @@
          rdfs:label "Spanish" ;
          rdfs:comment "The Spanish language print of the card."@en .
 
+# --- Keywords ---
+# --- Keyword Actions ---
+:Abandon rdf:type :KeywordAction ;
+                 rdfs:label "Abandon" ;
+                 rdfs:comment "To turn a face-up ongoing scheme card face down and put it on the bottom of its owner’s scheme deck."@en .
+:Activate rdf:type :KeywordAction ;
+                 rdfs:label "Activate" ;
+                 rdfs:comment "To put an activated ability onto the stack and pay its costs, so that it will eventually resolve and have its effect."@en .
+:Adapt rdf:type :KeywordAction ;
+                 rdfs:label "Adapt" ;
+                 rdfs:comment "A keyword action that puts +1/+1 counters on a creature that doesn’t have any yet."@en .
+:Airbend rdf:type :KeywordAction ;
+                 rdfs:label "Airbend" ;
+                 rdfs:comment "A keyword action that exiles one or more permanents and/or spells. The owner of each card exiled with airbend may cast it from exile by paying {2} rather than paying its mana cost."@en .
+:Amass rdf:type :KeywordAction ;
+                 rdfs:label "Amass" ;
+                 rdfs:comment "A keyword action that gives you a Zombie Army creature token or grows an Army you already have."@en .
+:Assemble rdf:type :KeywordAction ;
+                 rdfs:label "Assemble" ;
+                 rdfs:comment "A keyword action that puts Contraptions onto the battlefield."@en .
+:Attach rdf:type :KeywordAction ;
+                 rdfs:label "Attach" ;
+                 rdfs:comment "To take an Aura, Equipment, or Fortification from where it currently is and put it onto a specified object or player."@en .
+:Behold rdf:type :KeywordAction ;
+                 rdfs:label "Behold" ;
+                 rdfs:comment "A keyword action that allows a player to choose a permanent they control of a particular quality or reveal a card of that quality from their hand, usually to pay a cost or get an additional effect."@en .
+:Blight rdf:type :KeywordAction ;
+                 rdfs:label "Blight" ;
+                 rdfs:comment "A keyword action. To blight N means to put N -1/-1 counters on a creature you control."@en .
+:Bolster rdf:type :KeywordAction ;
+                 rdfs:label "Bolster" ;
+                 rdfs:comment "A keyword action that puts +1/+1 counters on the weakest creature a player controls."@en .
+:Cast rdf:type :KeywordAction ;
+                 rdfs:label "Cast" ;
+                 rdfs:comment "To take a card from where it is (usually the hand), put it on the stack, and pay its costs, so that it will eventually resolve and have its effect."@en .
+:Clash rdf:type :KeywordAction ;
+                 rdfs:label "Clash" ;
+                 rdfs:comment "To have a mini-contest involving the top cards of players’ libraries."@en .
+:Cloak rdf:type :KeywordAction ;
+                 rdfs:label "Cloak" ;
+                 rdfs:comment "A keyword action that puts a card onto the battlefield face down as a 2/2 creature with ward {2}."@en .
+:CollectEvidence rdf:type :KeywordAction ;
+                 rdfs:label "Collect Evidence" ;
+                 rdfs:comment "A keyword action. To “collect evidence N” means to exile any number of cards from your graveyard with total mana value N or greater."@en .
+:Connive rdf:type :KeywordAction ;
+                 rdfs:label "Connive" ;
+                 rdfs:comment "A keyword action that causes a player to draw a card, discard a card, and then to put a +1/+1 counter on a creature if a nonland card was discarded this way."@en .
+:Convert rdf:type :KeywordAction ;
+                 rdfs:label "Convert" ;
+                 rdfs:comment "To turn a double-faced card so its other face is up."@en .
+:Counter rdf:type :KeywordAction ;
+                 rdfs:label "Counter" ;
+                 rdfs:comment "A keyword action that cancels a spell or ability so it does not resolve and none of its effects occur."@en .
+:Create rdf:type :KeywordAction ;
+                 rdfs:label "Create" ;
+                 rdfs:comment "To create a token is to put a token onto the battlefield."@en .
+:Destroy rdf:type :KeywordAction ;
+                 rdfs:label "Destroy" ;
+                 rdfs:comment "To move a permanent from the battlefield to its owner’s graveyard."@en .
+:Detain rdf:type :KeywordAction ;
+                 rdfs:label "Detain" ;
+                 rdfs:comment "A keyword action that temporarily stops a permanent from attacking, blocking, or having its activated abilities activated."@en .
+:Discard rdf:type :KeywordAction ;
+                 rdfs:label "Discard" ;
+                 rdfs:comment "To move a card from its owner’s hand to that player’s graveyard."@en .
+:Discover rdf:type :KeywordAction ;
+                 rdfs:label "Discover" ;
+                 rdfs:comment "A keyword action that exiles cards from the top of your library until you exile a nonland card with the required mana value, then lets you cast it for free or put it into your hand."@en .
+:Double rdf:type :KeywordAction ;
+                 rdfs:label "Double" ;
+                 rdfs:comment "A keyword action used in a variety of contexts."@en .
+:Earthbend rdf:type :KeywordAction ;
+                 rdfs:label "Earthbend" ;
+                 rdfs:comment "A keyword action that makes a land you control into a hasty 0/0 land creature, puts N +1/+1 counters on it, and returns it tapped under your control when it dies or is exiled."@en .
+:Endure rdf:type :KeywordAction ;
+                 rdfs:label "Endure" ;
+                 rdfs:comment "A keyword action that lets a permanent’s controller either create an N/N white Spirit creature token or put N +1/+1 counters on that permanent."@en .
+:Exchange rdf:type :KeywordAction ;
+                 rdfs:label "Exchange" ;
+                 rdfs:comment "To swap two things, such as objects, sets of objects, or life totals."@en .
+:Exert rdf:type :KeywordAction ;
+                 rdfs:label "Exert" ;
+                 rdfs:comment "A keyword action that stops a permanent from untapping during the next untap step of the player who exerted it."@en .
+:Exile rdf:type :KeywordAction ;
+                 rdfs:label "Exile" ;
+                 rdfs:comment "A keyword action that puts an object into the exile zone."@en .
+:Explore rdf:type :KeywordAction ;
+                 rdfs:label "Explore" ;
+                 rdfs:comment "A keyword action that causes a player to reveal the top card of their library and then to take different actions depending on whether a land card is revealed this way."@en .
+:FaceAVillainousChoice rdf:type :KeywordAction ;
+                 rdfs:label "Face a Villainous Choice" ;
+                 rdfs:comment "A keyword action that causes a player to choose one of two listed choices."@en .
+:Fateseal rdf:type :KeywordAction ;
+                 rdfs:label "Fateseal" ;
+                 rdfs:comment "To manipulate some of the cards on top of an opponent’s library."@en .
+:Fight rdf:type :KeywordAction ;
+                 rdfs:label "Fight" ;
+                 rdfs:comment "A keyword action where each of two creatures deals damage equal to its power to the other."@en .
+:Forage rdf:type :KeywordAction ;
+                 rdfs:label "Forage" ;
+                 rdfs:comment "To pay a cost of exiling three cards from your graveyard or sacrificing a Food."@en .
+:Goad rdf:type :KeywordAction ;
+                 rdfs:label "Goad" ;
+                 rdfs:comment "A keyword action that causes a creature to be goaded until a player’s next turn."@en .
+:Harness rdf:type :KeywordAction ;
+                 rdfs:label "Harness" ;
+                 rdfs:comment "A keyword action that grants a permanent the harnessed designation."@en .
+:Incubate rdf:type :KeywordAction ;
+                 rdfs:label "Incubate" ;
+                 rdfs:comment "A keyword action that creates an Incubator token with a specified number of +1/+1 counters on it."@en .
+:Investigate rdf:type :KeywordAction ;
+                 rdfs:label "Investigate" ;
+                 rdfs:comment "A keyword action that creates a Clue artifact token."@en .
+:Learn rdf:type :KeywordAction ;
+                 rdfs:label "Learn" ;
+                 rdfs:comment "A keyword action that lets a player add a Lesson card to their hand from outside the game or discard a card to draw a card."@en .
+:Manifest rdf:type :KeywordAction ;
+                 rdfs:label "Manifest" ;
+                 rdfs:comment "A keyword action that puts a card onto the battlefield face down as a 2/2 creature."@en .
+:ManifestDread rdf:type :KeywordAction ;
+                 rdfs:label "Manifest Dread" ;
+                 rdfs:comment "A keyword action that puts one of the top two cards of your library onto the battlefield face down as a 2/2 creature."@en .
+:Meld rdf:type :KeywordAction ;
+                 rdfs:label "Meld" ;
+                 rdfs:comment "To turn two members of a meld pair so their back faces are up and combined into one oversized Magic card."@en .
+:Mill rdf:type :KeywordAction ;
+                 rdfs:label "Mill" ;
+                 rdfs:comment "To mill a number of cards, a player puts that many cards from the top of their library into their graveyard."@en .
+:Monstrosity rdf:type :KeywordAction ;
+                 rdfs:label "Monstrosity" ;
+                 rdfs:comment "A keyword action that puts +1/+1 counters on a creature and makes it become monstrous."@en .
+:OpenAnAttraction rdf:type :KeywordAction ;
+                 rdfs:label "Open an Attraction" ;
+                 rdfs:comment "A keyword action that puts the top card of your Attraction deck onto the battlefield face up under your control."@en .
+:Planeswalk rdf:type :KeywordAction ;
+                 rdfs:label "Planeswalk" ;
+                 rdfs:comment "To put each face-up plane card or phenomenon card on the bottom of its owner’s planar deck face down, then move the top card of your planar deck off that planar deck and turn it face up in a Planechase game."@en .
+:Play rdf:type :KeywordAction ;
+                 rdfs:label "Play" ;
+                 rdfs:comment "A keyword action that lets a player play a land or cast a card, whichever is appropriate."@en .
+:Populate rdf:type :KeywordAction ;
+                 rdfs:label "Populate" ;
+                 rdfs:comment "A keyword action that creates a copy of a creature token you control."@en .
+:Proliferate rdf:type :KeywordAction ;
+                 rdfs:label "Proliferate" ;
+                 rdfs:comment "To give an additional counter to any number of players and/or permanents of each kind they already have."@en .
+:Regenerate rdf:type :KeywordAction ;
+                 rdfs:label "Regenerate" ;
+                 rdfs:comment "To replace a permanent’s destruction with an alternate sequence of events."@en .
+:Reveal rdf:type :KeywordAction ;
+                 rdfs:label "Reveal" ;
+                 rdfs:comment "To show a card to all players for a brief time."@en .
+:RollToVisitYourAttractions rdf:type :KeywordAction ;
+                 rdfs:label "Roll to Visit Your Attractions" ;
+                 rdfs:comment "A keyword action that rolls a six-sided die and visits each Attraction you control with that lit-up number, causing its visit ability to trigger."@en .
+:Sacrifice rdf:type :KeywordAction ;
+                 rdfs:label "Sacrifice" ;
+                 rdfs:comment "To move a permanent you control to its owner’s graveyard."@en .
+:Scry rdf:type :KeywordAction ;
+                 rdfs:label "Scry" ;
+                 rdfs:comment "To manipulate some of the cards on top of your library."@en .
+:Search rdf:type :KeywordAction ;
+                 rdfs:label "Search" ;
+                 rdfs:comment "To look at all cards in a stated zone and possibly find a card that matches a given description."@en .
+:SetInMotion rdf:type :KeywordAction ;
+                 rdfs:label "Set in Motion" ;
+                 rdfs:comment "To move a scheme card off the top of your scheme deck and turn it face up."@en .
+:Shuffle rdf:type :KeywordAction ;
+                 rdfs:label "Shuffle" ;
+                 rdfs:comment "To randomize the cards in a deck (before a game) or library (during a game)."@en .
+:Support rdf:type :KeywordAction ;
+                 rdfs:label "Support" ;
+                 rdfs:comment "A keyword action that lets you put +1/+1 counters on creatures."@en .
+:Surveil rdf:type :KeywordAction ;
+                 rdfs:label "Surveil" ;
+                 rdfs:comment "To manipulate some of the cards on top of your library, sending some of them to your graveyard and rearranging the rest."@en .
+:Suspect rdf:type :KeywordAction ;
+                 rdfs:label "Suspect" ;
+                 rdfs:comment "A keyword action that makes a creature suspected, giving it menace and preventing it from blocking for as long as it remains suspected."@en .
+:Tap rdf:type :KeywordAction ;
+                 rdfs:label "Tap" ;
+                 rdfs:comment "To turn a permanent sideways from an upright position."@en .
+:TheRingTemptsYou rdf:type :KeywordAction ;
+                 rdfs:label "The Ring Tempts You" ;
+                 rdfs:comment "A keyword action that causes a player to choose a creature they control to be their legendary Ring-bearer and may cause them to create an emblem called The Ring."@en .
+:TimeTravel rdf:type :KeywordAction ;
+                 rdfs:label "Time Travel" ;
+                 rdfs:comment "To add a time counter to or remove a time counter from any number of permanents you control with a time counter on them or suspended cards you own in exile with time counters on them."@en .
+:Transform rdf:type :KeywordAction ;
+                 rdfs:label "Transform" ;
+                 rdfs:comment "To turn a double-faced card so its other face is up."@en .
+:Triple rdf:type :KeywordAction ;
+                 rdfs:label "Triple" ;
+                 rdfs:comment "A keyword action that increases a creature’s power and/or toughness."@en .
+:Untap rdf:type :KeywordAction ;
+                 rdfs:label "Untap" ;
+                 rdfs:comment "To rotate a permanent back to the upright position from a sideways position."@en .
+:VentureIntoTheDungeon rdf:type :KeywordAction ;
+                 rdfs:label "Venture into the Dungeon" ;
+                 rdfs:comment "A keyword action that can bring dungeon cards into the game from outside the game or move a player’s venture marker."@en .
+:Vote rdf:type :KeywordAction ;
+                 rdfs:label "Vote" ;
+                 rdfs:comment "A keyword action that instructs players to vote from among given options."@en .
+:Waterbend rdf:type :KeywordAction ;
+                 rdfs:label "Waterbend" ;
+                 rdfs:comment "A keyword action. “Waterbend [cost]” means to pay that cost and, for each {1} in that cost, you may tap an untapped artifact or creature you control rather than pay mana."@en .
+
+# --- Keyword Abilities ---
+:Absorb rdf:type :KeywordAbility ;
+                 rdfs:label "Absorb" ;
+                 rdfs:comment "A keyword ability that prevents damage."@en .
+:Affinity rdf:type :KeywordAbility ;
+                 rdfs:label "Affinity" ;
+                 rdfs:comment "A keyword ability that reduces how much mana you need to spend to cast a spell."@en .
+:Afflict rdf:type :KeywordAbility ;
+                 rdfs:label "Afflict" ;
+                 rdfs:comment "A keyword ability that makes the defending player lose life for blocking."@en .
+:Afterlife rdf:type :KeywordAbility ;
+                 rdfs:label "Afterlife" ;
+                 rdfs:comment "A keyword ability that leaves behind Spirit creature tokens when certain creatures die."@en .
+:Aftermath rdf:type :KeywordAbility ;
+                 rdfs:label "Aftermath" ;
+                 rdfs:comment "A keyword ability that lets a player cast one half of a split card only from their graveyard."@en .
+:Amplify rdf:type :KeywordAbility ;
+                 rdfs:label "Amplify" ;
+                 rdfs:comment "A keyword ability than can have a creature enter the battlefield with +1/+1 counters on it."@en .
+:Annihilator rdf:type :KeywordAbility ;
+                 rdfs:label "Annihilator" ;
+                 rdfs:comment "A keyword ability that can make a creature particularly brutal when it attacks."@en .
+:Ascend rdf:type :KeywordAbility ;
+                 rdfs:label "Ascend" ;
+                 rdfs:comment "A keyword causing a player to get the designation of the city’s blessing once they control ten permanents."@en .
+:Assist rdf:type :KeywordAbility ;
+                 rdfs:label "Assist" ;
+                 rdfs:comment "A keyword ability that lets another player help you pay for a spell."@en .
+:AuraSwap rdf:type :KeywordAbility ;
+                 rdfs:label "Aura Swap" ;
+                 rdfs:comment "A keyword ability that lets you exchange an Aura on the battlefield with one in your hand."@en .
+:Awaken rdf:type :KeywordAbility ;
+                 rdfs:label "Awaken" ;
+                 rdfs:comment "A keyword ability that lets you turn a land you control into a creature."@en .
+:Backup rdf:type :KeywordAbility ;
+                 rdfs:label "Backup" ;
+                 rdfs:comment "A keyword ability that lets a creature give +1/+1 counters to itself or another when it enters the battlefield. If a different creature is chosen, that creature also temporarily gains one or more abilities."@en .
+:Banding rdf:type :KeywordAbility ;
+                 rdfs:label "Banding" ;
+                 rdfs:comment "A keyword ability that modifies the rules for declaring attackers and assigning combat damage."@en .
+:Bargain rdf:type :KeywordAbility ;
+                 rdfs:label "Bargain" ;
+                 rdfs:comment "Bargain is a keyword ability that represents an optional additional cost of sacrificing an artifact, enchantment, or token. A spell has been bargained if its controller declared the intention to pay that cost."@en .
+:BattleCry rdf:type :KeywordAbility ;
+                 rdfs:label "Battle Cry" ;
+                 rdfs:comment "A keyword ability that makes other attacking creatures better in combat."@en .
+:Bestow rdf:type :KeywordAbility ;
+                 rdfs:label "Bestow" ;
+                 rdfs:comment "A keyword ability that lets a creature card be cast as an Aura."@en .
+:Blitz rdf:type :KeywordAbility ;
+                 rdfs:label "Blitz" ;
+                 rdfs:comment "A keyword ability found on creature cards that allows them to be cast for an alternative cost."@en .
+:Bloodthirst rdf:type :KeywordAbility ;
+                 rdfs:label "Bloodthirst" ;
+                 rdfs:comment "A keyword ability that can have a creature enter the battlefield with +1/+1 counters on it."@en .
+:Boast rdf:type :KeywordAbility ;
+                 rdfs:label "Boast" ;
+                 rdfs:comment "A special kind of activated ability that can be activated only once each turn if the creature with the boast ability attacked that turn."@en .
+:Bushido rdf:type :KeywordAbility ;
+                 rdfs:label "Bushido" ;
+                 rdfs:comment "A keyword ability that can make a creature better in combat."@en .
+:Buyback rdf:type :KeywordAbility ;
+                 rdfs:label "Buyback" ;
+                 rdfs:comment "A keyword ability of instants and sorceries that can let the spell return to its owner’s hand as it resolves."@en .
+:Cascade rdf:type :KeywordAbility ;
+                 rdfs:label "Cascade" ;
+                 rdfs:comment "A keyword ability that may let a player cast a random extra spell for no cost."@en .
+:Casualty rdf:type :KeywordAbility ;
+                 rdfs:label "Casualty" ;
+                 rdfs:comment "A keyword ability that lets you sacrifice a creature with enough power as an additional cost to copy the spell."@en .
+:Champion rdf:type :KeywordAbility ;
+                 rdfs:label "Champion" ;
+                 rdfs:comment "A keyword ability that lets one creature temporarily replace another."@en .
+:Changeling rdf:type :KeywordAbility ;
+                 rdfs:label "Changeling" ;
+                 rdfs:comment "A characteristic-defining ability that grants the object it’s on every creature type."@en .
+:Cipher rdf:type :KeywordAbility ;
+                 rdfs:label "Cipher" ;
+                 rdfs:comment "A keyword ability that allows you to encode a card on a creature and cast that card whenever that creature deals combat damage to a player."@en .
+:Cleave rdf:type :KeywordAbility ;
+                 rdfs:label "Cleave" ;
+                 rdfs:comment "A keyword ability that allows you to pay an alternative cost to remove some of a spell’s text."@en .
+:Companion rdf:type :KeywordAbility ;
+                 rdfs:label "Companion" ;
+                 rdfs:comment "A keyword ability that allows a player to choose one creature card from outside the game as a companion if the restriction of that card’s companion ability is met. Once a player has chosen a companion, that player may pay {3} to put it into their hand once during the game."@en .
+:Compleated rdf:type :KeywordAbility ;
+                 rdfs:label "Compleated" ;
+                 rdfs:comment "A keyword ability that causes a planeswalker to enter the battlefield with fewer loyalty counters if a player chose to pay life for Phyrexian mana symbols in its cost."@en .
+:Conspire rdf:type :KeywordAbility ;
+                 rdfs:label "Conspire" ;
+                 rdfs:comment "A keyword ability that creates a copy of a spell."@en .
+:Convoke rdf:type :KeywordAbility ;
+                 rdfs:label "Convoke" ;
+                 rdfs:comment "A keyword ability that lets you tap creatures rather than pay mana to cast a spell."@en .
+:Craft rdf:type :KeywordAbility ;
+                 rdfs:label "Craft" ;
+                 rdfs:comment "Craft is an activated ability that allows a player to exile cards from their graveyard and/or permanents they control to exile the permanent with the craft ability and return it onto the battlefield transformed."@en .
+:Crew rdf:type :KeywordAbility ;
+                 rdfs:label "Crew" ;
+                 rdfs:comment "A keyword ability that lets you tap creatures to turn a Vehicle into an artifact creature."@en .
+:CumulativeUpkeep rdf:type :KeywordAbility ;
+                 rdfs:label "Cumulative Upkeep" ;
+                 rdfs:comment "A keyword ability that imposes an increasing cost to keep a permanent on the battlefield."@en .
+:Cycling rdf:type :KeywordAbility ;
+                 rdfs:label "Cycling" ;
+                 rdfs:comment "A keyword ability that lets a card be discarded and replaced with a new card."@en .
+:Dash rdf:type :KeywordAbility ;
+                 rdfs:label "Dash" ;
+                 rdfs:comment "A keyword ability found on creature cards that allows them to be cast for an alternative cost."@en .
+:Daybound rdf:type :KeywordAbility ;
+                 rdfs:label "Daybound" ;
+                 rdfs:comment "An ability found on the front faces of some double-faced cards. Cards with daybound and nightbound are face up when it’s day and face down when it’s night."@en .
+:Deathtouch rdf:type :KeywordAbility ;
+                 rdfs:label "Deathtouch" ;
+                 rdfs:comment "A keyword ability that causes damage dealt by an object to be especially effective."@en .
+:Decayed rdf:type :KeywordAbility ;
+                 rdfs:label "Decayed" ;
+                 rdfs:comment "A keyword ability that means “This creature can’t block” and “When this creature attacks, sacrifice it at end of combat.”"@en .
+:Defender rdf:type :KeywordAbility ;
+                 rdfs:label "Defender" ;
+                 rdfs:comment "A keyword ability that prohibits a creature from attacking."@en .
+:Delve rdf:type :KeywordAbility ;
+                 rdfs:label "Delve" ;
+                 rdfs:comment "A keyword ability that lets you exile cards from your graveyard rather than pay generic mana to cast a spell."@en .
+:Demonstrate rdf:type :KeywordAbility ;
+                 rdfs:label "Demonstrate" ;
+                 rdfs:comment "A triggered ability found on some spells that let its controller copy it and choose an opponent to also copy it."@en .
+:Dethrone rdf:type :KeywordAbility ;
+                 rdfs:label "Dethrone" ;
+                 rdfs:comment "A keyword ability that puts a +1/+1 counter on a creature when it attacks the player with the most life."@en .
+:Devoid rdf:type :KeywordAbility ;
+                 rdfs:label "Devoid" ;
+                 rdfs:comment "A characteristic-defining ability that makes an object colorless."@en .
+:Devour rdf:type :KeywordAbility ;
+                 rdfs:label "Devour" ;
+                 rdfs:comment "A keyword ability that can have a creature enter the battlefield with +1/+1 counters on it."@en .
+:Disguise rdf:type :KeywordAbility ;
+                 rdfs:label "Disguise" ;
+                 rdfs:comment "A keyword ability that lets a card be cast face down as a 2/2 creature with ward {2}."@en .
+:Disturb rdf:type :KeywordAbility ;
+                 rdfs:label "Disturb" ;
+                 rdfs:comment "A keyword ability that allows a player to cast a double-faced card transformed from the graveyard."@en .
+:DoubleStrike rdf:type :KeywordAbility ;
+                 rdfs:label "Double Strike" ;
+                 rdfs:comment "A keyword ability that lets a creature deal its combat damage twice."@en .
+:Dredge rdf:type :KeywordAbility ;
+                 rdfs:label "Dredge" ;
+                 rdfs:comment "A keyword ability that lets a player return a card from their graveyard to their hand."@en .
+:Echo rdf:type :KeywordAbility ;
+                 rdfs:label "Echo" ;
+                 rdfs:comment "A keyword ability that imposes a cost to keep a permanent on the battlefield."@en .
+:Embalm rdf:type :KeywordAbility ;
+                 rdfs:label "Embalm" ;
+                 rdfs:comment "A keyword ability that lets a player exile a creature card from their graveyard to create a mummified token version of that card."@en .
+:Emerge rdf:type :KeywordAbility ;
+                 rdfs:label "Emerge" ;
+                 rdfs:comment "A keyword ability that lets a player cast a spell for less by sacrificing a creature."@en .
+:Enchant rdf:type :KeywordAbility ;
+                 rdfs:label "Enchant" ;
+                 rdfs:comment "A keyword ability that defines what an Aura spell can target and what an Aura permanent can be attached to."@en .
+:Encore rdf:type :KeywordAbility ;
+                 rdfs:label "Encore" ;
+                 rdfs:comment "A keyword ability that lets a player exile a creature card from their graveyard to, for each opponent, create a token that’s a copy of that card to attack that opponent."@en .
+:Enlist rdf:type :KeywordAbility ;
+                 rdfs:label "Enlist" ;
+                 rdfs:comment "A keyword ability that allows a creature that could have attacked to support another creature."@en .
+:Entwine rdf:type :KeywordAbility ;
+                 rdfs:label "Entwine" ;
+                 rdfs:comment "A keyword ability that lets a player choose all modes for a spell rather than just the number specified."@en .
+:Epic rdf:type :KeywordAbility ;
+                 rdfs:label "Epic" ;
+                 rdfs:comment "A keyword ability that lets a player copy a spell at the beginning of each of their upkeeps at the expense of casting any other spells for the rest of the game."@en .
+:Equip rdf:type :KeywordAbility ;
+                 rdfs:label "Equip" ;
+                 rdfs:comment "A keyword ability that lets a player attach an Equipment to a creature they control."@en .
+:Escalate rdf:type :KeywordAbility ;
+                 rdfs:label "Escalate" ;
+                 rdfs:comment "A keyword ability on some modal spells that adds a cost for choosing additional modes."@en .
+:Escape rdf:type :KeywordAbility ;
+                 rdfs:label "Escape" ;
+                 rdfs:comment "A keyword ability that lets a player cast a card from their graveyard."@en .
+:Eternalize rdf:type :KeywordAbility ;
+                 rdfs:label "Eternalize" ;
+                 rdfs:comment "A keyword ability that lets a player exile a creature card from their graveyard to create an eternalized token version of that card."@en .
+:Evoke rdf:type :KeywordAbility ;
+                 rdfs:label "Evoke" ;
+                 rdfs:comment "A keyword ability that causes a permanent to be sacrificed when it enters the battlefield."@en .
+:Evolve rdf:type :KeywordAbility ;
+                 rdfs:label "Evolve" ;
+                 rdfs:comment "A keyword ability that lets you put a +1/+1 counter on a creature when a larger creature enters the battlefield under your control."@en .
+:Exalted rdf:type :KeywordAbility ;
+                 rdfs:label "Exalted" ;
+                 rdfs:comment "A keyword ability that can make a creature better in combat."@en .
+:Exhaust rdf:type :KeywordAbility ;
+                 rdfs:label "Exhaust" ;
+                 rdfs:comment "A special kind of activated ability that may be activated only once."@en .
+:Exploit rdf:type :KeywordAbility ;
+                 rdfs:label "Exploit" ;
+                 rdfs:comment "A keyword ability that lets you sacrifice a creature for a benefit."@en .
+:Extort rdf:type :KeywordAbility ;
+                 rdfs:label "Extort" ;
+                 rdfs:comment "A keyword ability that lets you gain life and have opponents lose life whenever you cast a spell."@en .
+:Fabricate rdf:type :KeywordAbility ;
+                 rdfs:label "Fabricate" ;
+                 rdfs:comment "A keyword ability that lets you choose whether to create Servo tokens or put +1/+1 counters on a creature."@en .
+:Fading rdf:type :KeywordAbility ;
+                 rdfs:label "Fading" ;
+                 rdfs:comment "A keyword ability that limits how long a permanent remains on the battlefield."@en .
+:Fear rdf:type :KeywordAbility ;
+                 rdfs:label "Fear" ;
+                 rdfs:comment "A keyword ability that restricts how a creature may be blocked."@en .
+:Firebending rdf:type :KeywordAbility ;
+                 rdfs:label "Firebending" ;
+                 rdfs:comment "A keyword ability that adds red mana until end of combat whenever a creature with that ability attacks."@en .
+:FirstStrike rdf:type :KeywordAbility ;
+                 rdfs:label "First Strike" ;
+                 rdfs:comment "A keyword ability that lets a creature deal its combat damage before other creatures."@en .
+:Flanking rdf:type :KeywordAbility ;
+                 rdfs:label "Flanking" ;
+                 rdfs:comment "A keyword ability that can make a creature better in combat."@en .
+:Flash rdf:type :KeywordAbility ;
+                 rdfs:label "Flash" ;
+                 rdfs:comment "A keyword ability that lets a player play a card any time they could cast an instant."@en .
+:Flashback rdf:type :KeywordAbility ;
+                 rdfs:label "Flashback" ;
+                 rdfs:comment "A keyword ability that lets a player cast a card from their graveyard."@en .
+:Flying rdf:type :KeywordAbility ;
+                 rdfs:label "Flying" ;
+                 rdfs:comment "A keyword ability that restricts how a creature may be blocked."@en .
+:ForMirrodin rdf:type :KeywordAbility ;
+                 rdfs:label "For Mirrodin!" ;
+                 rdfs:comment "A keyword ability that creates a 2/2 red Rebel creature token and then attaches the Equipment with the ability to that token."@en .
+:Forecast rdf:type :KeywordAbility ;
+                 rdfs:label "Forecast" ;
+                 rdfs:comment "A keyword ability that allows an activated ability to be activated from a player’s hand."@en .
+:Foretell rdf:type :KeywordAbility ;
+                 rdfs:label "Foretell" ;
+                 rdfs:comment "A keyword ability that lets a player exile cards from their hand and cast them for an alternative cost on future turns."@en .
+:Fortify rdf:type :KeywordAbility ;
+                 rdfs:label "Fortify" ;
+                 rdfs:comment "A keyword ability that lets a player attach a Fortification to a land they control."@en .
+:Freerunning rdf:type :KeywordAbility ;
+                 rdfs:label "Freerunning" ;
+                 rdfs:comment "A keyword ability that allows certain spells to be cast for an alternative cost."@en .
+:Frenzy rdf:type :KeywordAbility ;
+                 rdfs:label "Frenzy" ;
+                 rdfs:comment "A keyword ability that can make a creature better in combat."@en .
+:Fuse rdf:type :KeywordAbility ;
+                 rdfs:label "Fuse" ;
+                 rdfs:comment "A keyword ability that allows a player to cast both halves of a split card."@en .
+:Gift rdf:type :KeywordAbility ;
+                 rdfs:label "Gift" ;
+                 rdfs:comment "A keyword ability that lets a spell’s caster choose an opponent to receive a benefit as the spell resolves or when the permanent with the ability enters."@en .
+:Graft rdf:type :KeywordAbility ;
+                 rdfs:label "Graft" ;
+                 rdfs:comment "A keyword ability that has a permanent enter the battlefield with +1/+1 counters on it and can move those counters to other creatures."@en .
+:Gravestorm rdf:type :KeywordAbility ;
+                 rdfs:label "Gravestorm" ;
+                 rdfs:comment "A keyword ability that creates copies of a spell."@en .
+:Harmonize rdf:type :KeywordAbility ;
+                 rdfs:label "Harmonize" ;
+                 rdfs:comment "A keyword ability that lets a player cast a card from their graveyard for a specific cost and lets them tap a creature they control to reduce that cost."@en .
+:Haste rdf:type :KeywordAbility ;
+                 rdfs:label "Haste" ;
+                 rdfs:comment "A keyword ability that lets a creature ignore the “summoning sickness” rule."@en .
+:Haunt rdf:type :KeywordAbility ;
+                 rdfs:label "Haunt" ;
+                 rdfs:comment "A keyword ability that exiles cards. A card exiled this way “haunts” a creature targeted by the haunt ability."@en .
+:Hexproof rdf:type :KeywordAbility ;
+                 rdfs:label "Hexproof" ;
+                 rdfs:comment "A keyword ability that precludes a permanent or player from being targeted by an opponent."@en .
+:HiddenAgenda rdf:type :KeywordAbility ;
+                 rdfs:label "Hidden Agenda" ;
+                 rdfs:comment "A keyword ability that allows a conspiracy card to be put into the command zone face down."@en .
+:Hideaway rdf:type :KeywordAbility ;
+                 rdfs:label "Hideaway" ;
+                 rdfs:comment "A keyword ability that lets a player store a secret card."@en .
+:Horsemanship rdf:type :KeywordAbility ;
+                 rdfs:label "Horsemanship" ;
+                 rdfs:comment "A keyword ability that restricts how a creature may be blocked."@en .
+:Impending rdf:type :KeywordAbility ;
+                 rdfs:label "Impending" ;
+                 rdfs:comment "An ability on some creatures that allows them to be cast for an alternative cost. If cast for its impending cost, it isn’t a creature for some period of time."@en .
+:Improvise rdf:type :KeywordAbility ;
+                 rdfs:label "Improvise" ;
+                 rdfs:comment "A keyword ability that lets you tap artifacts rather than pay mana to cast a spell."@en .
+:Indestructible rdf:type :KeywordAbility ;
+                 rdfs:label "Indestructible" ;
+                 rdfs:comment "A keyword ability that precludes a permanent from being destroyed."@en .
+:Infect rdf:type :KeywordAbility ;
+                 rdfs:label "Infect" ;
+                 rdfs:comment "A keyword ability that affects how an object deals damage to creatures and players."@en .
+:InfinityKeyword rdf:type :KeywordAbility ;
+                 rdfs:label "∞ (Infinity)" ;
+                 rdfs:comment "A keyword ability that grants the listed ability for as long as the permanent is harnessed."@en .
+:Ingest rdf:type :KeywordAbility ;
+                 rdfs:label "Ingest" ;
+                 rdfs:comment "A keyword ability that can exile the top card of a player’s library."@en .
+:Intimidate rdf:type :KeywordAbility ;
+                 rdfs:label "Intimidate" ;
+                 rdfs:comment "A keyword ability that restricts how a creature may be blocked."@en .
+:JobSelect rdf:type :KeywordAbility ;
+                 rdfs:label "Job Select" ;
+                 rdfs:comment "A keyword ability that creates a 1/1 colorless Hero creature token and then attaches the Equipment with the ability to that token."@en .
+:JumpStart rdf:type :KeywordAbility ;
+                 rdfs:label "Jump-Start" ;
+                 rdfs:comment "A keyword ability that lets a player cast a card from their graveyard by discarding a card."@en .
+:Kicker rdf:type :KeywordAbility ;
+                 rdfs:label "Kicker" ;
+                 rdfs:comment "A keyword ability that represents an optional additional cost."@en .
+:Landwalk rdf:type :KeywordAbility ;
+                 rdfs:label "Landwalk" ;
+                 rdfs:comment "A generic term for a group of keyword abilities that restrict whether a creature may be blocked."@en .
+:LevelUp rdf:type :KeywordAbility ;
+                 rdfs:label "Level Up" ;
+                 rdfs:comment "A keyword ability that can put level counters on a creature."@en .
+:Lifelink rdf:type :KeywordAbility ;
+                 rdfs:label "Lifelink" ;
+                 rdfs:comment "A keyword ability that causes a player to gain life."@en .
+:LivingMetal rdf:type :KeywordAbility ;
+                 rdfs:label "Living Metal" ;
+                 rdfs:comment "A keyword ability found on some Vehicles that turns them into a creature during your turn."@en .
+:LivingWeapon rdf:type :KeywordAbility ;
+                 rdfs:label "Living Weapon" ;
+                 rdfs:comment "A keyword ability that creates a 0/0 black Phyrexian Germ creature token and then attaches the Equipment with the ability to that token."@en .
+:Madness rdf:type :KeywordAbility ;
+                 rdfs:label "Madness" ;
+                 rdfs:comment "A keyword ability that lets a player cast a card they discard."@en .
+:MaxSpeed rdf:type :KeywordAbility ;
+                 rdfs:label "Max Speed" ;
+                 rdfs:comment "A keyword ability that grants the listed ability as long as your speed is 4."@en .
+:Mayhem rdf:type :KeywordAbility ;
+                 rdfs:label "Mayhem" ;
+                 rdfs:comment "A keyword ability that allows you to play cards you discarded this turn from your graveyard for an alternative cost."@en .
+:Melee rdf:type :KeywordAbility ;
+                 rdfs:label "Melee" ;
+                 rdfs:comment "A keyword ability that improves an attacking creature based on the number of opponents you attacked."@en .
+:Menace rdf:type :KeywordAbility ;
+                 rdfs:label "Menace" ;
+                 rdfs:comment "An evasion ability that makes creatures unblockable by a single creature."@en .
+:Mentor rdf:type :KeywordAbility ;
+                 rdfs:label "Mentor" ;
+                 rdfs:comment "A keyword ability that lets your bigger creatures power up your smaller creatures when they attack together."@en .
+:Miracle rdf:type :KeywordAbility ;
+                 rdfs:label "Miracle" ;
+                 rdfs:comment "A keyword ability that lets you cast a spell for a reduced cost if it’s the first card you draw in a turn."@en .
+:Mobilize rdf:type :KeywordAbility ;
+                 rdfs:label "Mobilize" ;
+                 rdfs:comment "A keyword ability that creates a number of tapped and attacking red Warrior creature tokens that are sacrificed at the beginning of the next end step."@en .
+:Modular rdf:type :KeywordAbility ;
+                 rdfs:label "Modular" ;
+                 rdfs:comment "A keyword ability that has a permanent enter the battlefield with +1/+1 counters on it and can move those counters to other artifact creatures."@en .
+:MoreThanMeetsTheEye rdf:type :KeywordAbility ;
+                 rdfs:label "More Than Meets the Eye" ;
+                 rdfs:comment "A keyword ability that allows some cards to be cast converted."@en .
+:Morph rdf:type :KeywordAbility ;
+                 rdfs:label "Morph" ;
+                 rdfs:comment "A keyword ability that lets a card be cast face down as a 2/2 creature."@en .
+:Mutate rdf:type :KeywordAbility ;
+                 rdfs:label "Mutate" ;
+                 rdfs:comment "A keyword that lets a creature card be cast as a mutating creature spell."@en .
+:Myriad rdf:type :KeywordAbility ;
+                 rdfs:label "Myriad" ;
+                 rdfs:comment "Myriad is a triggered ability that effectively lets a creature attack in all possible directions."@en .
+:Nightbound rdf:type :KeywordAbility ;
+                 rdfs:label "Nightbound" ;
+                 rdfs:comment "An ability found on the back faces of some double-faced cards. Cards with daybound and nightbound are face up when it’s day and face down when it’s night."@en .
+:Ninjutsu rdf:type :KeywordAbility ;
+                 rdfs:label "Ninjutsu" ;
+                 rdfs:comment "A keyword ability that lets a creature suddenly enter combat."@en .
+:Offering rdf:type :KeywordAbility ;
+                 rdfs:label "Offering" ;
+                 rdfs:comment "A keyword ability that modifies when you can cast a spell and how much mana you need to spend to do it."@en .
+:Offspring rdf:type :KeywordAbility ;
+                 rdfs:label "Offspring" ;
+                 rdfs:comment "A keyword ability that allows you to pay an additional cost as you cast a creature spell to create a 1/1 token that’s a copy of that permanent when it enters the battlefield."@en .
+:Outlast rdf:type :KeywordAbility ;
+                 rdfs:label "Outlast" ;
+                 rdfs:comment "A keyword ability that allows a creature to grow larger over time."@en .
+:Overload rdf:type :KeywordAbility ;
+                 rdfs:label "Overload" ;
+                 rdfs:comment "A keyword ability that allows a spell to affect either a single target or many objects."@en .
+:Partner rdf:type :KeywordAbility ;
+                 rdfs:label "Partner" ;
+                 rdfs:comment "A keyword ability that lets two legendary cards be your commander in the Commander variant rather than one."@en .
+:Persist rdf:type :KeywordAbility ;
+                 rdfs:label "Persist" ;
+                 rdfs:comment "A keyword ability that can return a creature from the graveyard to the battlefield."@en .
+:Phasing rdf:type :KeywordAbility ;
+                 rdfs:label "Phasing" ;
+                 rdfs:comment "A keyword ability that causes a permanent to sometimes be treated as though it does not exist."@en .
+:Plot rdf:type :KeywordAbility ;
+                 rdfs:label "Plot" ;
+                 rdfs:comment "A keyword ability that lets a player exile cards from their hand and cast them without paying their mana cost on future turns."@en .
+:Poisonous rdf:type :KeywordAbility ;
+                 rdfs:label "Poisonous" ;
+                 rdfs:comment "A keyword ability that causes a player to get poison counters."@en .
+:Protection rdf:type :KeywordAbility ;
+                 rdfs:label "Protection" ;
+                 rdfs:comment "A keyword ability that provides a range of benefits against objects with a specific quality."@en .
+:Prototype rdf:type :KeywordAbility ;
+                 rdfs:label "Prototype" ;
+                 rdfs:comment "An ability which allows a prototype card to be cast with a secondary set of characteristics."@en .
+:Provoke rdf:type :KeywordAbility ;
+                 rdfs:label "Provoke" ;
+                 rdfs:comment "A keyword ability that can force a creature to block."@en .
+:Prowess rdf:type :KeywordAbility ;
+                 rdfs:label "Prowess" ;
+                 rdfs:comment "A keyword ability that causes a creature to get +1/+1 whenever its controller casts a noncreature spell."@en .
+:Prowl rdf:type :KeywordAbility ;
+                 rdfs:label "Prowl" ;
+                 rdfs:comment "A keyword ability that may allow a spell to be cast for an alternative cost."@en .
+:Rampage rdf:type :KeywordAbility ;
+                 rdfs:label "Rampage" ;
+                 rdfs:comment "A keyword ability that can make a creature better in combat."@en .
+:Ravenous rdf:type :KeywordAbility ;
+                 rdfs:label "Ravenous" ;
+                 rdfs:comment "A keyword ability found on some creature cards with {X} in their mana cost. The creature enters the battlefield with X +1/+1 counters on it, and you draw a card if X is 5 or more."@en .
+:Reach rdf:type :KeywordAbility ;
+                 rdfs:label "Reach" ;
+                 rdfs:comment "A keyword ability that allows a creature to block an attacking creature with flying."@en .
+:ReadAhead rdf:type :KeywordAbility ;
+                 rdfs:label "Read Ahead" ;
+                 rdfs:comment "A keyword ability found on some Sagas that allows their controller to choose which chapter it starts on."@en .
+:Rebound rdf:type :KeywordAbility ;
+                 rdfs:label "Rebound" ;
+                 rdfs:comment "A keyword ability that allows an instant or sorcery spell to be cast a second time."@en .
+:Reconfigure rdf:type :KeywordAbility ;
+                 rdfs:label "Reconfigure" ;
+                 rdfs:comment "A keyword ability that allows an Equipment creature to temporarily stop being a creature and become attached to another creature."@en .
+:Recover rdf:type :KeywordAbility ;
+                 rdfs:label "Recover" ;
+                 rdfs:comment "A keyword ability that lets a player return a card from their graveyard to their hand."@en .
+:Reinforce rdf:type :KeywordAbility ;
+                 rdfs:label "Reinforce" ;
+                 rdfs:comment "A keyword ability that lets a player put +1/+1 counters on a creature."@en .
+:Renown rdf:type :KeywordAbility ;
+                 rdfs:label "Renown" ;
+                 rdfs:comment "A keyword ability that makes a creature stronger after it deals combat damage to a player."@en .
+:Replicate rdf:type :KeywordAbility ;
+                 rdfs:label "Replicate" ;
+                 rdfs:comment "A keyword ability that creates copies of a spell."@en .
+:Retrace rdf:type :KeywordAbility ;
+                 rdfs:label "Retrace" ;
+                 rdfs:comment "A keyword ability that lets a player cast a card from their graveyard."@en .
+:Riot rdf:type :KeywordAbility ;
+                 rdfs:label "Riot" ;
+                 rdfs:comment "A keyword ability that lets a player choose whether certain creatures enter the battlefield with haste or with a +1/+1 counter."@en .
+:Ripple rdf:type :KeywordAbility ;
+                 rdfs:label "Ripple" ;
+                 rdfs:comment "A keyword ability that may let a player cast extra cards from their library for no cost."@en .
+:Saddle rdf:type :KeywordAbility ;
+                 rdfs:label "Saddle" ;
+                 rdfs:comment "A keyword ability that lets you tap creatures to make another creature “saddled” until end of turn."@en .
+:Scavenge rdf:type :KeywordAbility ;
+                 rdfs:label "Scavenge" ;
+                 rdfs:comment "A keyword ability that allows you to exile a creature card from your graveyard to put +1/+1 counters on a creature."@en .
+:Shadow rdf:type :KeywordAbility ;
+                 rdfs:label "Shadow" ;
+                 rdfs:comment "A keyword ability that restricts how a creature may be blocked and which creatures it can block."@en .
+:Shroud rdf:type :KeywordAbility ;
+                 rdfs:label "Shroud" ;
+                 rdfs:comment "A keyword ability that precludes a permanent or player from being targeted."@en .
+:Skulk rdf:type :KeywordAbility ;
+                 rdfs:label "Skulk" ;
+                 rdfs:comment "A keyword ability that restricts how a creature may be blocked."@en .
+:Sneak rdf:type :KeywordAbility ;
+                 rdfs:label "Sneak" ;
+                 rdfs:comment "A keyword ability that allows a spell to be cast for an alternative cost, including returning an unblocked attacking creature to its owner’s hand. Creatures cast this way enter tapped and attacking."@en .
+:Solved rdf:type :KeywordAbility ;
+                 rdfs:label "Solved" ;
+                 rdfs:comment "A keyword ability of Case cards that affects the game only if the Case has the solved designation."@en .
+:Soulbond rdf:type :KeywordAbility ;
+                 rdfs:label "Soulbond" ;
+                 rdfs:comment "A keyword ability that makes creatures better by pairing them together."@en .
+:Soulshift rdf:type :KeywordAbility ;
+                 rdfs:label "Soulshift" ;
+                 rdfs:comment "A keyword ability that lets a player return a card from their graveyard to their hand."@en .
+:SpaceSculptor rdf:type :KeywordAbility ;
+                 rdfs:label "Space Sculptor" ;
+                 rdfs:comment "A keyword ability that splits creatures on the battlefield into sectors."@en .
+:Spectacle rdf:type :KeywordAbility ;
+                 rdfs:label "Spectacle" ;
+                 rdfs:comment "A keyword ability that allows certain spells to be cast for an alternative cost if an opponent has lost life."@en .
+:Splice rdf:type :KeywordAbility ;
+                 rdfs:label "Splice" ;
+                 rdfs:comment "A keyword ability that lets a player add a card’s rules text onto another spell."@en .
+:SplitSecond rdf:type :KeywordAbility ;
+                 rdfs:label "Split Second" ;
+                 rdfs:comment "A keyword ability that makes it nearly impossible for a player to respond to a spell."@en .
+:Spree rdf:type :KeywordAbility ;
+                 rdfs:label "Spree" ;
+                 rdfs:comment "An ability found on some modal spells that allows you to choose one or more modes and requires you to pay additional costs for those modes."@en .
+:Squad rdf:type :KeywordAbility ;
+                 rdfs:label "Squad" ;
+                 rdfs:comment "A keyword ability that creates copies of a creature when it enters the battlefield."@en .
+:StartYourEngines rdf:type :KeywordAbility ;
+                 rdfs:label "Start Your Engines!" ;
+                 rdfs:comment "A keyword ability that gives a player a speed of 1 if they have no speed. Once a player has speed, their speed increases once on each of their turns when an opponent loses life."@en .
+:Station rdf:type :KeywordAbility ;
+                 rdfs:label "Station" ;
+                 rdfs:comment "A keyword ability that lets you tap creatures to add charge counters to station cards."@en .
+:Storm rdf:type :KeywordAbility ;
+                 rdfs:label "Storm" ;
+                 rdfs:comment "A keyword ability that creates copies of a spell."@en .
+:Sunburst rdf:type :KeywordAbility ;
+                 rdfs:label "Sunburst" ;
+                 rdfs:comment "A keyword ability that can have a permanent enter the battlefield with +1/+1 counters or charge counters on it."@en .
+:Surge rdf:type :KeywordAbility ;
+                 rdfs:label "Surge" ;
+                 rdfs:comment "A keyword ability that provides an alternative cost to cast a card if you or one of your teammates has cast another spell in the same turn."@en .
+:Suspend rdf:type :KeywordAbility ;
+                 rdfs:label "Suspend" ;
+                 rdfs:comment "A keyword ability that provides an alternative way to play a card."@en .
+:Tiered rdf:type :KeywordAbility ;
+                 rdfs:label "Tiered" ;
+                 rdfs:comment "A keyword ability found on some modal spells that requires you to pay an additional cost for the mode you choose."@en .
+:Toxic rdf:type :KeywordAbility ;
+                 rdfs:label "Toxic" ;
+                 rdfs:comment "A keyword ability that causes a player to get poison counters due to combat damage from creatures with the ability."@en .
+:Training rdf:type :KeywordAbility ;
+                 rdfs:label "Training" ;
+                 rdfs:comment "A keyword ability that means “Whenever this creature and at least one other creature with power greater than this creature’s power attack, put a +1/+1 counter on this creature.”"@en .
+:Trample rdf:type :KeywordAbility ;
+                 rdfs:label "Trample" ;
+                 rdfs:comment "A keyword ability that modifies how a creature assigns combat damage."@en .
+:Transfigure rdf:type :KeywordAbility ;
+                 rdfs:label "Transfigure" ;
+                 rdfs:comment "A keyword ability that lets a player search their library for a replacement creature card."@en .
+:Transmute rdf:type :KeywordAbility ;
+                 rdfs:label "Transmute" ;
+                 rdfs:comment "A keyword ability that lets a player search their library for a replacement card."@en .
+:Tribute rdf:type :KeywordAbility ;
+                 rdfs:label "Tribute" ;
+                 rdfs:comment "A keyword ability that allows an opponent to choose between a creature entering the battlefield with +1/+1 counters or an additional ability."@en .
+:UmbraArmor rdf:type :KeywordAbility ;
+                 rdfs:label "Umbra Armor" ;
+                 rdfs:comment "A keyword ability that allows an Aura to protect the permanent it’s enchanting."@en .
+:Undaunted rdf:type :KeywordAbility ;
+                 rdfs:label "Undaunted" ;
+                 rdfs:comment "A keyword ability that reduces the cost of a spell based on the number of opponents you have."@en .
+:Undying rdf:type :KeywordAbility ;
+                 rdfs:label "Undying" ;
+                 rdfs:comment "A keyword ability that can return a creature from the graveyard to the battlefield."@en .
+:Unearth rdf:type :KeywordAbility ;
+                 rdfs:label "Unearth" ;
+                 rdfs:comment "A keyword ability that lets a player return a creature card from their graveyard to the battlefield."@en .
+:Unleash rdf:type :KeywordAbility ;
+                 rdfs:label "Unleash" ;
+                 rdfs:comment "A keyword ability that allows a creature to enter the battlefield with a +1/+1 counter on it and stops it from blocking if it has a +1/+1 counter on it."@en .
+:Vanishing rdf:type :KeywordAbility ;
+                 rdfs:label "Vanishing" ;
+                 rdfs:comment "A keyword ability that limits how long a permanent remains on the battlefield."@en .
+:Vigilance rdf:type :KeywordAbility ;
+                 rdfs:label "Vigilance" ;
+                 rdfs:comment "A keyword ability that lets a creature attack without tapping."@en .
+:Visit rdf:type :KeywordAbility ;
+                 rdfs:label "Visit" ;
+                 rdfs:comment "A keyword ability found on Attraction cards. It provides an effect whenever you roll to visit your attractions and get certain results."@en .
+:Ward rdf:type :KeywordAbility ;
+                 rdfs:label "Ward" ;
+                 rdfs:comment "A triggered ability that can counter spells or abilities that target the permanent with ward."@en .
+:Warp rdf:type :KeywordAbility ;
+                 rdfs:label "Warp" ;
+                 rdfs:comment "A keyword ability found on permanent cards that allows them to be cast for an alternative cost."@en .
+:WebSlinging rdf:type :KeywordAbility ;
+                 rdfs:label "Web-slinging" ;
+                 rdfs:comment "A keyword ability that allows spells to be cast for an alternative cost by returning a tapped creature you control to its owner’s hand."@en .
+:Wither rdf:type :KeywordAbility ;
+                 rdfs:label "Wither" ;
+                 rdfs:comment "A keyword ability that affects how an object deals damage to a creature."@en .
+
 # --- Sets ---
 :Unsanctioned rdf:type :Set ;
               :setName "Unsanctioned" ;
@@ -2547,15 +3637,17 @@
 
 # --- Summon Card ---
 :OldFogey rdf:type :Card ;
-          :name "Old Fogey" ;
+          :cardName "Old Fogey" ;
           :manaCost "{G}{G}" ;
           :manaValue 2 ;
+		  # hasSuperType <none> ;
           :hasCardType :Summon ;
           :hasSubType :Dinosaur ;
           :hasRarity :Rare ;
           :hasColorIdentity :Green ;
           :hasSet :Unsanctioned ;
           :cardNumber 67 ;
+          # :cardNumberString <none> ;
           :artist "Douglas Shuler" ;
           :hasLanguage :English ;
           :power 7 ;
@@ -2564,7 +3656,6 @@
           :oracleText "Phasing, cumulative upkeep {1}, echo {G}{G}, fading 3, bands with other Dinosaurs, protection from Homarids, snow-covered plainswalk, flanking, rampage 2" ;
           :flavorText "These kids today with their collector numbers and their newfangled tap symbol. Twenty Black Lotuses and twenty Plague Rats. Now that's real Magic." ;
           :gathererUrl "https://gatherer.wizards.com/UND/en-us/67/old-fogey"^^xsd:anyURI ;
-          # Not Legal Formats missing
           :hasLegality [ rdf:type :LegalityMapping ;
                          :inFormat :Commander ;
                          :hasLegalityStatus :NotLegal
@@ -2592,7 +3683,7 @@
           :hasLegality [ rdf:type :LegalityMapping ;
                          :inFormat :Pauper ;
                          :hasLegalityStatus :NotLegal
-                       ]
+                       ] ;
           :hasRuling [rdf:type :Ruling ;
                       :rulingDate "2020-02-29"^^xsd:date ;
                       :rulingText "Due to changes in how echo and phasing work since Old Fogey was originally printed, echo mostly does nothing in this case. This is, as they say, a bit weird. Old Fogey is phased out when its echo ability would trigger, so that ability doesn't trigger at the beginning of the upkeep after Old Fogey enters the battlefield. Phasing in doesn't cause Old Fogey to enter the battlefield, so echo ends up not really doing much at all." ] .
@@ -2995,120 +4086,3 @@
 #  Examples
 #
 #################################################
-
-# --- Decks ---
-
-:UrDragonDeck rdf:type :CommanderDeck ;
-              rdfs:label "The Ur-Dragon Commander Deck" ;
-              rdfs:comment "5-color Dragon Tribal deck"@en .
-
-:LathrilDeck rdf:type :CommanderDeck ;
-             rdfs:label "Lathril, Blade of the Elves Commander Deck" ;
-             rdfs:comment "Golgari Elfball deck"@en .
-
-# --- Cards ---
-
-:TheUrDragon rdf:type :Card ;
-             :name "The Ur-Dragon" ;
-             :manaCost "{4}{W}{U}{B}{R}{G}" ;
-             :manaValue 9 ;
-             :hasSuperType :Legendary ;
-             :hasCardType :Creature ;
-             :hasSubType :Dragon , :Avatar ;
-             :hasColorIdentity :White , :Blue , :Black , :Red , :Green ;
-             :hasRarity :MythicRare ;
-             :power 10 ;
-             :toughness 10 ;
-             :oracleText "Eminence — As long as The Ur-Dragon is in the command zone or on the battlefield, other Dragon spells you cast cost {1} less to cast.\nFlying\nWhenever one or more Dragons you control attack, draw that many cards, then you may put a permanent card from your hand onto the battlefield." ;
-             :isCommanderOf :UrDragonDeck ;
-             :cardNumber 48 ;
-             :artist "Jaime Jones" ;
-             :hasSet :Commander2017 ;
-             :hasLanguage :English ;
-             :hasLegality [ rdf:type :LegalityMapping ;
-                            :inFormat :Commander ;
-                            :hasLegalityStatus :Legal
-                          ] ;
-             :hasLegality [ rdf:type :LegalityMapping ;
-                            :inFormat :Legacy ;
-                            :hasLegalityStatus :Legal
-                          ] ;
-             :hasLegality [ rdf:type :LegalityMapping ;
-                            :inFormat :Vintage ;
-                            :hasLegalityStatus :Legal
-                          ] ;
-             :hasLegality [ rdf:type :LegalityMapping ;
-                            :inFormat :Standard ;
-                            :hasLegalityStatus :NotLegal
-                          ] ;
-             :hasRuling [rdf:type :Ruling ;
-                          :rulingDate "2017-08-25"^^xsd:date ;
-                          :rulingText "You can't reduce the cost to cast a Dragon spell to less than 0 mana." ] .
-
-:SolRing rdf:type :Card ;
-         :name "Sol Ring" ;
-         :manaCost "{1}" ;
-         :manaValue 1 ;
-         :hasCardType :Artifact ;
-         :hasColorIdentity :Colorless ;
-         :hasRarity :Uncommon ;
-         :oracleText "{T}: Add {C}{C}." ;
-         :isUsedInDeck :UrDragonDeck , :LathrilDeck ;
-         :cardNumber 256 ;
-         :artist "Mark Tedin" ;
-         :hasSet :LimitedEditionAlpha ;
-         :hasLanguage :English ;
-         :hasLegality [ rdf:type :LegalityMapping ;
-                        :inFormat :Commander ;
-                        :hasLegalityStatus :Legal
-                      ] ;
-         :hasLegality [ rdf:type :LegalityMapping ;
-                        :inFormat :Vintage ;
-                        :hasLegalityStatus :Restricted
-                      ] ;
-         :hasLegality [ rdf:type :LegalityMapping ;
-                        :inFormat :Legacy ;
-                        :hasLegalityStatus :Banned
-                      ] .
-
-:LathrilBladeOfTheElves rdf:type :Card ;
-                        :name "Lathril, Blade of the Elves" ;
-                        :manaCost "{2}{B}{G}" ;
-                        :manaValue 4 ;
-                        :hasSuperType :Legendary ;
-                        :hasCardType :Creature ;
-                        :hasSubType :Elf , :Noble ;
-                        :hasColorIdentity :Black , :Green ;
-                        :hasRarity :MythicRare ;
-                        :power 2 ;
-                        :toughness 3 ;
-                        :oracleText "Menace\nWhenever Lathril, Blade of the Elves deals combat damage to a player, create that many 1/1 green Elf Warrior creature tokens.\n{T}, Tap ten untapped Elves you control: Each opponent loses 10 life and you gain 10 life." ;
-                        :isCommanderOf :LathrilDeck ;
-                        :cardNumber 1 ;
-                        :artist "Caroline Gariba" ;
-                        :hasSet :Kaldheim ;
-                        :hasLanguage :English ;
-                        :hasLegality [ rdf:type :LegalityMapping ;
-                                       :inFormat :Commander ;
-                                       :hasLegalityStatus :Legal
-                                     ] ;
-                        :hasLegality [ rdf:type :LegalityMapping ;
-                                       :inFormat :Legacy ;
-                                       :hasLegalityStatus :Legal
-                                     ] .
-
-:CommandTower rdf:type :Card ;
-              :name "Command Tower" ;
-              :manaValue 0 ;
-              :hasCardType :Land ;
-              :hasColorIdentity :Colorless ;
-              :hasRarity :Common ;
-              :oracleText "{T}: Add one mana of any color in your commander's color identity." ;
-              :flavorText "When defeat is near and guidance is scarce, all eyes look in one direction." ;
-              :isInDeck :UrDragonDeck , :LathrilDeck ;
-              :artist "Ryan Yee" ;
-              :hasSet :Commander2017 ;
-              :hasLegality [ rdf:type :LegalityMapping ;
-                             :inFormat :Commander ;
-                             :hasLegalityStatus :Legal
-                           ] .
