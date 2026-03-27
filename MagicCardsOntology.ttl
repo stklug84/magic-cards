@@ -8,7 +8,8 @@
 
 
 <urn:stklug84:MagicCardsOntology:2026-02-27#> rdf:type owl:Ontology ;
-    rdfs:label "Magic Cards Ontology" ;
+                                              rdfs:label """Magic Cards
+                                              Ontology""" ;
                                               rdfs:comment """A detailed
 ontology for Magic: The Gathering cards, decks, and attributes.
 This ontology is based on the Comprehensive Rules of Magic: The Gathering,
@@ -285,7 +286,7 @@ and sorceries may have multiple subtypes. See rules 304.3, 307.3, and 205.3k.
                        :Advisor :Aetherborn :Alien :Ally :Angel :Antelope
                        :Ape :Archer :Archon :Armadillo :Army :Artificer
                        :Assassin :AssemblyWorker :Astartes :Atog :Aurochs
-					   :Avatar :Azra :Badger :Balloon :Barbarian :Bard :Basilisk
+                       :Avatar :Azra :Badger :Balloon :Barbarian :Bard :Basilisk
                        :Bat :Bear :Beast :Beaver :Beeble :Beholder
                        :Berserker :Bird :Bison :Blinkmoth :Boar :Bringer
                        :Brushwagg :Camarid :Camel :Capybara :Caribou :Carrier
@@ -543,14 +544,7 @@ a Format, and a Legality Status."""@en .
 # - Keyword Ability
 # ------------------------------------------------------------------------------
 
-:CardText rdf:type owl:Class ;
-          rdfs:subClassOf owl:Literal ;
-          rdfs:label "Card Text" ;
-          rdfs:comment """The text of a card, including the card name,
-mana cost, oracle text, flavor text, and card text."""@en .
-
 :Keyword rdf:type owl:Class ;
-		 rdfs:subClassOf :CardText ;
          owl:equivalentClass [
              rdf:type owl:Class ;
              owl:unionOf (
@@ -662,6 +656,7 @@ in Magic. See rules 205.3a and 205.3b."""@en .
                         :Awaken
                         :Backup
                         :Banding
+                        :BandsWithOthers
                         :Bargain
                         :BattleCry
                         :Bestow
@@ -779,6 +774,7 @@ in Magic. See rules 205.3a and 205.3b."""@en .
                         :Partner
                         :Persist
                         :Phasing
+                        :Plainswalk
                         :Plot
                         :Poisonous
                         :Protection
@@ -877,20 +873,20 @@ Formerly known as converted mana cost (CMC)."""@en .
 
 :printedText rdf:type owl:DatatypeProperty ;
              rdfs:domain :Card ;
-             rdfs:range :CardText ;
+             rdfs:range rdf:langString ;
              rdfs:label "Printed Text" ;
              rdfs:comment """The text printed on the card, including the card
 name, mana cost, oracle text, flavor text, and card text."""@en .
 
 :oracleText rdf:type owl:DatatypeProperty ;
             rdfs:domain :Card ;
-            rdfs:range :CardText ;
+            rdfs:range rdf:langString ;
             rdfs:label "Oracle Text" ;
-            rdfs:comment " The official rules text of the card"@en .
+            rdfs:comment "The official rules text of the card"@en .
 
 :flavorText rdf:type owl:DatatypeProperty ;
             rdfs:domain :Card ;
-            rdfs:range :CardText ;
+            rdfs:range rdf:langString ;
             rdfs:label "Flavor Text" ;
             rdfs:comment "The flavor text of the card"@en .
 
@@ -971,7 +967,7 @@ string (e.g., '123a')."""@en .
 
 :rulingText rdf:type owl:DatatypeProperty ;
             rdfs:domain :Ruling ;
-            rdfs:range xsd:string ;
+            rdfs:range rdf:langString ;
             rdfs:label "Ruling Text" ;
             rdfs:comment "The ruling text of the card"@en .
 
@@ -1035,7 +1031,21 @@ deck building. See rules 205.3c and 205.3d."""@en .
            rdfs:label "Rarity" ;
            rdfs:comment "The rarity of the card"@en .
 
+:containsCard rdf:type owl:ObjectProperty ;
+              rdfs:domain [
+                  rdf:type owl:Class ;
+                  owl:unionOf (
+                      :Deck
+                      :Set
+                  )
+              ] ;
+              rdfs:range :Card ;
+              rdfs:label "Contains Card" ;
+              rdfs:comment
+              "Relates a deck or set to a card it contains"@en .
+
 :isInSet rdf:type owl:ObjectProperty ;
+         owl:inverseOf :hasSetCard ;
          rdfs:domain :Card ;
          rdfs:range :Set ;
          rdfs:label "Set" ;
@@ -1078,7 +1088,16 @@ deck building. See rules 205.3c and 205.3d."""@en .
           rdfs:label "Is In Deck" ;
           rdfs:comment "Indicates a card is included in a deck"@en .
 
+:hasSetCard rdf:type owl:ObjectProperty ;
+            rdfs:subPropertyOf :containsCard ;
+            owl:inverseOf :isInSet ;
+            rdfs:domain :Set ;
+            rdfs:range :Card ;
+            rdfs:label "Has Set Card" ;
+            rdfs:comment "Indicates a set that has a specific card"@en .
+
 :hasCard rdf:type owl:ObjectProperty ;
+         rdfs:subPropertyOf :containsCard ;
          owl:inverseOf :isInDeck ;
          rdfs:domain :Deck ;
          rdfs:range :Card ;
@@ -1091,6 +1110,452 @@ deck building. See rules 205.3c and 205.3d."""@en .
                rdfs:range :CommanderDeck ;
                rdfs:label "Is Commander Of" ;
                rdfs:comment "Identifies the commander(s) of a deck"@en .
+
+:hasKeyword rdf:type owl:ObjectProperty ;
+            rdfs:domain :Card ;
+            rdfs:range :Keyword ;
+            rdfs:label "Has Keyword" ;
+            rdfs:comment
+            "Relates a card to any keyword (ability or action) it has"@en .
+
+:hasKeywordAbility rdf:type owl:ObjectProperty ;
+                   rdfs:subPropertyOf :hasKeyword ;
+                   rdfs:domain :Card ;
+                   rdfs:range :KeywordAbility ;
+                   rdfs:label "Has Keyword Ability" ;
+                   rdfs:comment
+                   "Relates a card to a keyword ability printed on it"@en .
+
+:hasKeywordAction rdf:type owl:ObjectProperty ;
+                  rdfs:subPropertyOf :hasKeyword ;
+                  rdfs:domain :Card ;
+                  rdfs:range :KeywordAction ;
+                  rdfs:label "Has Keyword Action" ;
+                  rdfs:comment
+                  "Relates a card to a keyword action it references"@en .
+
+
+#################################################
+#
+#  Constraints
+#
+#################################################
+
+# --- Land Constraints ---
+:LandCard rdf:type owl:Class ;
+    rdfs:subClassOf :Card ;
+    owl:equivalentClass [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasCardType ;
+        owl:hasValue :Land
+    ] ;
+    rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSuperType ;
+        owl:allValuesFrom [
+            rdf:type owl:Class ;
+            owl:oneOf ( :Basic :Snow :Legendary )
+        ]
+    ] ;
+    rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSuperType ;
+        owl:maxCardinality "3"^^xsd:nonNegativeInteger
+    ] ;
+    rdfs:label "Land Card" ;
+    rdfs:comment
+    """A class representing any card with the Land card type to enforce
+constraints."""@en .
+
+# --- Artifact Constraints ---
+:ArtifactCard rdf:type owl:Class ;
+    rdfs:subClassOf :Card ;
+    owl:equivalentClass [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasCardType ;
+        owl:hasValue :Artifact
+    ] ;
+    rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSuperType ;
+        owl:allValuesFrom [
+            rdf:type owl:Class ;
+            owl:oneOf ( :Legendary :Host :Snow )
+        ]
+    ] ;
+    rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSuperType ;
+        owl:maxCardinality "3"^^xsd:nonNegativeInteger
+    ] ;
+    rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSubType ;
+        owl:allValuesFrom :ArtifactTypes
+    ] ;
+    rdfs:label "Artifact Card" ;
+    rdfs:comment
+    """A class representing any card with the Artifact card type to enforce
+constraints."""@en .
+
+# --- Creature Constraints ---
+:CreatureCard rdf:type owl:Class ;
+    rdfs:subClassOf :Card ;
+    owl:equivalentClass [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasCardType ;
+        owl:hasValue :Creature
+    ] ;
+    rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSuperType ;
+        owl:allValuesFrom [
+            rdf:type owl:Class ;
+            owl:oneOf ( :Legendary :Host :Snow )
+        ]
+    ] ;
+    rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSuperType ;
+        owl:maxCardinality "3"^^xsd:nonNegativeInteger
+    ] ;
+    rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSubType ;
+        owl:allValuesFrom :CreatureType
+    ] ;
+    rdfs:label "Creature Card" ;
+    rdfs:comment
+    """A class representing any card with the Creature card type to enforce
+constraints."""@en .
+
+# --- Kindred Constraints ---
+:KindredCard rdf:type owl:Class ;
+    rdfs:subClassOf :Card ;
+    owl:equivalentClass [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasCardType ;
+        owl:hasValue :Kindred
+    ] ;
+    rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSuperType ;
+        owl:maxCardinality "0"^^xsd:nonNegativeInteger
+    ] ;
+    rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSubType ;
+        owl:allValuesFrom :CreatureType
+    ] ;
+    rdfs:label "Kindred Card" ;
+    rdfs:comment
+    """A class representing any card with the Kindred card type to enforce
+constraints."""@en .
+
+
+# --- Plane Constraints ---
+:PlaneCard rdf:type owl:Class ;
+    rdfs:subClassOf :Card ;
+    owl:equivalentClass [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasCardType ;
+        owl:hasValue :Plane
+    ] ;
+    rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSuperType ;
+        owl:maxCardinality "0"^^xsd:nonNegativeInteger
+    ] ;
+    rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSubType ;
+        owl:allValuesFrom :PlanarType
+    ] ;
+    rdfs:label "Plane Card" ;
+    rdfs:comment
+    """A class representing any card with the Plane card type to enforce
+restrictions."""@en .
+
+
+# --- Dungeon Constraints ---
+:DungeonCard rdf:type owl:Class ;
+    rdfs:subClassOf :Card ;
+    owl:equivalentClass [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasCardType ;
+        owl:hasValue :Dungeon
+    ] ;
+    rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSuperType ;
+        owl:maxCardinality "0"^^xsd:nonNegativeInteger
+    ] ;
+    rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSubType ;
+        owl:allValuesFrom :DungeonType
+    ] ;
+    rdfs:label "Dungeon Card" ;
+    rdfs:comment
+    """A class representing any card with the Dungeon card type to enforce
+restrictions."""@en .
+
+# --- Battle Constraints ---
+:BattleCard rdf:type owl:Class ;
+    rdfs:subClassOf :Card ;
+    owl:equivalentClass [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasCardType ;
+        owl:hasValue :Battle
+    ] ;
+    rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSuperType ;
+        owl:maxCardinality "0"^^xsd:nonNegativeInteger
+    ] ;
+    rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSubType ;
+        owl:allValuesFrom :BattleType
+    ] ;
+    rdfs:label "Battle Card" ;
+    rdfs:comment
+    """A class representing any card with the Battle card type to enforce
+restrictions."""@en .
+
+# --- Enchantment Constraints ---
+:EnchantmentCard rdf:type owl:Class ;
+    rdfs:subClassOf :Card ;
+    owl:equivalentClass [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasCardType ;
+        owl:hasValue :Enchantment
+    ] ;
+    rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSuperType ;
+        owl:allValuesFrom [
+            rdf:type owl:Class ;
+            owl:oneOf ( :Legendary :Snow :World )
+        ]
+    ] ;
+    rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSuperType ;
+        owl:maxCardinality "3"^^xsd:nonNegativeInteger
+    ] ;
+    rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSubType ;
+        owl:allValuesFrom :EnchantmentTypes
+    ] ;
+    rdfs:label "Enchantment Card" ;
+    rdfs:comment
+    """A class representing any card with the Enchantment card type to enforce
+constraints."""@en .
+
+# --- Planeswalker Constraints ---
+:PlaneswalkerCard rdf:type owl:Class ;
+    rdfs:subClassOf :Card ;
+    owl:equivalentClass [
+        rdf:type owl:Class ;
+        owl:intersectionOf (
+            [
+                rdf:type owl:Restriction ;
+                owl:onProperty :hasCardType ;
+                owl:hasValue :Planeswalker
+            ]
+            [
+                rdf:type owl:Restriction ;
+                owl:onProperty :hasSuperType ;
+                owl:hasValue :Legendary
+            ]
+        )
+    ] ;
+    rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSubType ;
+        owl:allValuesFrom :PlaneswalkerTypes
+    ] ;
+    rdfs:label "Planeswalker Card" ;
+    rdfs:comment
+    """A class representing planeswalker cards, which must have the Legendary
+supertype."""@en .
+
+# --- Spell Constraints ---
+:SpellCardConstraint rdf:type owl:Class ;
+    rdfs:subClassOf :Card ;
+    owl:equivalentClass [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasCardType ;
+        owl:someValuesFrom [
+            rdf:type owl:Class ;
+            owl:oneOf ( :Instant :Sorcery )
+        ]
+    ] ;
+    rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSuperType ;
+        owl:allValuesFrom [
+            rdf:type owl:Class ;
+            owl:oneOf ( :Legendary :Snow )
+        ]
+    ] ;
+    rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSuperType ;
+        owl:maxCardinality "2"^^xsd:nonNegativeInteger
+    ] ;
+    rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSubType ;
+        owl:allValuesFrom :SpellTypes
+    ] ;
+    rdfs:label "Spell Card Constraint" ;
+    rdfs:comment
+    """A class representing any card with the Instant or Sorcery card type to
+enforce constraints."""@en .
+
+# --- Basic Land Constraints ---
+:BasicLandCard rdf:type owl:Class ;
+    rdfs:subClassOf :Card ;
+    owl:equivalentClass [
+        rdf:type owl:Class ;
+        owl:intersectionOf (
+            :LandCard
+            [
+                rdf:type owl:Restriction ;
+                owl:onProperty :hasSuperType ;
+                owl:hasValue :Basic
+            ]
+        )
+    ] ;
+    rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSubType ;
+        owl:allValuesFrom :BasicLandTypes
+    ] ;
+    rdfs:label "Basic Land Card" ;
+    rdfs:comment
+    """A class representing land cards with the Basic supertype."""@en .
+
+# --- Phenomenon Constraints ---
+:PhenomenonCard rdf:type owl:Class ;
+    rdfs:subClassOf :Card ;
+    owl:equivalentClass [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasCardType ;
+        owl:hasValue :Phenomenon
+    ] ;
+    rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSuperType ;
+        owl:maxCardinality "0"^^xsd:nonNegativeInteger
+    ] ;
+    rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSubType ;
+        owl:maxCardinality "0"^^xsd:nonNegativeInteger
+    ] ;
+    rdfs:label "Phenomenon Card" ;
+    rdfs:comment
+    """A class representing any card with the Phenomenon card type to enforce
+restrictions."""@en .
+
+# --- Scheme Constraints ---
+:SchemeCard rdf:type owl:Class ;
+    rdfs:subClassOf :Card ;
+    owl:equivalentClass [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasCardType ;
+        owl:hasValue :Scheme
+    ] ;
+    rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSuperType ;
+        owl:allValuesFrom [
+            rdf:type owl:Class ;
+            owl:oneOf ( :Ongoing )
+        ]
+    ] ;
+    rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSuperType ;
+        owl:maxCardinality "1"^^xsd:nonNegativeInteger
+    ] ;
+    rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSubType ;
+        owl:maxCardinality "0"^^xsd:nonNegativeInteger
+    ] ;
+    rdfs:label "Scheme Card" ;
+    rdfs:comment
+    """A class representing any card with the Scheme card type to enforce
+restrictions."""@en .
+
+# --- Vanguard Constraints ---
+:VanguardCard rdf:type owl:Class ;
+    rdfs:subClassOf :Card ;
+    owl:equivalentClass [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasCardType ;
+        owl:hasValue :Vanguard
+    ] ;
+    rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSuperType ;
+        owl:maxCardinality "0"^^xsd:nonNegativeInteger
+    ] ;
+    rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSubType ;
+        owl:maxCardinality "0"^^xsd:nonNegativeInteger
+    ] ;
+    rdfs:label "Vanguard Card" ;
+    rdfs:comment
+    """A class representing any card with the Vanguard card type to enforce
+restrictions."""@en .
+
+# --- Conspiracy Constraints ---
+:ConspiracyCard rdf:type owl:Class ;
+    rdfs:subClassOf :Card ;
+    owl:equivalentClass [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasCardType ;
+        owl:hasValue :Conspiracy
+    ] ;
+    rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSuperType ;
+        owl:maxCardinality "0"^^xsd:nonNegativeInteger
+    ] ;
+    rdfs:subClassOf [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSubType ;
+        owl:maxCardinality "0"^^xsd:nonNegativeInteger
+    ] ;
+    rdfs:label "Conspiracy Card" ;
+    rdfs:comment
+    """A class representing any card with the Conspiracy card type to enforce
+restrictions."""@en .
+
+# --- Summon Constraints ---
+:SummonCard rdf:type owl:Class ;
+    rdfs:subClassOf :Card ;
+    owl:equivalentClass [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasCardType ;
+        owl:hasValue :Summon
+    ] ;
+    owl:equivalentClass [
+        rdf:type owl:Class ;
+        owl:oneOf ( :OldFogey )
+    ] ;
+    rdfs:label "Summon Card" ;
+    rdfs:comment
+    """A class representing the Summon card type, which only applies to the card
+Old Fogey."""@en .
+
 
 ################################################################################
 #
@@ -3887,6 +4352,12 @@ abilities."""@en .
                  rdfs:comment
                  """A keyword ability that modifies the rules for declaring
 attackers and assigning combat damage."""@en .
+:BandsWithOthers rdf:type :KeywordAbility ;
+                 rdfs:label "Bands with Others" ;
+                 rdfs:comment
+                 """A variant of banding that lets a creature band only with
+other creatures that share a specified quality (usually a creature
+type), rather than with any creature."""@en .
 :Bargain rdf:type :KeywordAbility ;
                  rdfs:label "Bargain" ;
                  rdfs:comment
@@ -4493,6 +4964,12 @@ graveyard to the battlefield."""@en .
                  rdfs:comment
                  """A keyword ability that causes a permanent to sometimes be
 treated as though it does not exist."""@en .
+:Plainswalk rdf:type :KeywordAbility ;
+                 rdfs:label "Plainswalk" ;
+                 rdfs:comment
+                 """A landwalk ability that makes a creature unblockable if the
+defending player controls a Plains. The snow-covered variant requires
+the defending player to control a snow-covered Plains."""@en .
 :Plot rdf:type :KeywordAbility ;
                  rdfs:label "Plot" ;
                  rdfs:comment
@@ -4850,7 +5327,7 @@ format."""@en .
             """The card is limited to a single copy per deck in the format
 (primarily Vintage)."""@en .
 
-# --- Summon Card ---
+# --- Summon Card  (only individual card that is of Summon type) ---
 :OldFogey rdf:type :Card ;
           :cardName "Old Fogey" ;
           :manaCost "{G}{G}" ;
@@ -4874,42 +5351,51 @@ format."""@en .
           :printedText
           """Phasing, cumulative upkeep {1}, echo, fading 3, bands with
 other Dinosaurs, protection from Homarids, snow-covered plainswalk,
-flanking, rampage 2""" ;
+flanking, rampage 2"""@en ;
           :oracleText
           """Phasing, cumulative upkeep {1}, echo {G}{G}, fading 3, bands
 with other Dinosaurs, protection from Homarids, snow-covered
-plainswalk, flanking, rampage 2""" ;
+plainswalk, flanking, rampage 2"""@en ;
           :flavorText
           """These kids today with their collector numbers and their
 newfangled tap symbol. Twenty Black Lotuses and twenty Plague Rats.
-Now that's real Magic.""" ;
+Now that's real Magic."""@en ;
+          :hasKeywordAbility :BandsWithOthers ,
+                             :CumulativeUpkeep ,
+                             :Echo ,
+                             :Fading ,
+                             :Flanking ,
+                             :Phasing ,
+                             :Plainswalk ,
+                             :Protection ,
+                             :Rampage ;
           :gathererUrl
           "https://gatherer.wizards.com/UND/en-us/67/old-fogey"^^xsd:anyURI ;
           :hasLegality [ rdf:type :LegalityMapping ;
                          :inFormat :Commander ;
                          :hasLegalityStatus :NotLegal
-                       ] ;
-          :hasLegality [ rdf:type :LegalityMapping ;
+                       ] ,
+                       [ rdf:type :LegalityMapping ;
                          :inFormat :Legacy ;
                          :hasLegalityStatus :NotLegal
-                       ] ;
-          :hasLegality [ rdf:type :LegalityMapping ;
+                       ] ,
+                       [ rdf:type :LegalityMapping ;
                          :inFormat :Vintage ;
                          :hasLegalityStatus :NotLegal
-                       ] ;
-          :hasLegality [ rdf:type :LegalityMapping ;
+                       ] ,
+                       [ rdf:type :LegalityMapping ;
                          :inFormat :Standard ;
                          :hasLegalityStatus :NotLegal
-                       ] ;
-          :hasLegality [ rdf:type :LegalityMapping ;
+                       ] ,
+                       [ rdf:type :LegalityMapping ;
                          :inFormat :Modern ;
                          :hasLegalityStatus :NotLegal
-                       ] ;
-          :hasLegality [ rdf:type :LegalityMapping ;
+                       ] ,
+                       [ rdf:type :LegalityMapping ;
                          :inFormat :Pioneer ;
                          :hasLegalityStatus :NotLegal
-                       ] ;
-          :hasLegality [ rdf:type :LegalityMapping ;
+                       ] ,
+                       [ rdf:type :LegalityMapping ;
                          :inFormat :Pauper ;
                          :hasLegalityStatus :NotLegal
                        ] ;
@@ -4924,435 +5410,5 @@ This is, as they say, a bit weird. Old Fogey is phased out when
 its echo ability would trigger, so that ability doesn't trigger
 at the beginning of the upkeep after Old Fogey enters the
 battlefield. Phasing in doesn't cause Old Fogey to enter the
-battlefield, so echo ends up not really doing much at all."""
+battlefield, so echo ends up not really doing much at all."""@en
                     ] .
-
-
-
-#################################################
-#
-#  Constraints
-#
-#################################################
-
-# --- Land Constraints ---
-:LandCard rdf:type owl:Class ;
-    rdfs:subClassOf :Card ;
-    owl:equivalentClass [
-        rdf:type owl:Restriction ;
-        owl:onProperty :hasCardType ;
-        owl:hasValue :Land
-    ] ;
-    rdfs:subClassOf [
-        rdf:type owl:Restriction ;
-        owl:onProperty :hasSuperType ;
-        owl:allValuesFrom [
-            rdf:type owl:Class ;
-            owl:oneOf ( :Basic :Snow :Legendary )
-        ]
-    ] ;
-    rdfs:subClassOf [
-        rdf:type owl:Restriction ;
-        owl:onProperty :hasSuperType ;
-        owl:maxCardinality "3"^^xsd:nonNegativeInteger
-    ] ;
-    rdfs:label "Land Card" ;
-    rdfs:comment
-    """A class representing any card with the Land card type to enforce
-constraints."""@en .
-
-# --- Artifact Constraints ---
-:ArtifactCard rdf:type owl:Class ;
-    rdfs:subClassOf :Card ;
-    owl:equivalentClass [
-        rdf:type owl:Restriction ;
-        owl:onProperty :hasCardType ;
-        owl:hasValue :Artifact
-    ] ;
-    rdfs:subClassOf [
-        rdf:type owl:Restriction ;
-        owl:onProperty :hasSuperType ;
-        owl:allValuesFrom [
-            rdf:type owl:Class ;
-            owl:oneOf ( :Legendary :Host :Snow )
-        ]
-    ] ;
-    rdfs:subClassOf [
-        rdf:type owl:Restriction ;
-        owl:onProperty :hasSuperType ;
-        owl:maxCardinality "3"^^xsd:nonNegativeInteger
-    ] ;
-    rdfs:subClassOf [
-        rdf:type owl:Restriction ;
-        owl:onProperty :hasSubType ;
-        owl:allValuesFrom :ArtifactTypes
-    ] ;
-    rdfs:label "Artifact Card" ;
-    rdfs:comment
-    """A class representing any card with the Artifact card type to enforce
-constraints."""@en .
-
-# --- Creature Constraints ---
-:CreatureCard rdf:type owl:Class ;
-    rdfs:subClassOf :Card ;
-    owl:equivalentClass [
-        rdf:type owl:Restriction ;
-        owl:onProperty :hasCardType ;
-        owl:hasValue :Creature
-    ] ;
-    rdfs:subClassOf [
-        rdf:type owl:Restriction ;
-        owl:onProperty :hasSuperType ;
-        owl:allValuesFrom [
-            rdf:type owl:Class ;
-            owl:oneOf ( :Legendary :Host :Snow )
-        ]
-    ] ;
-    rdfs:subClassOf [
-        rdf:type owl:Restriction ;
-        owl:onProperty :hasSuperType ;
-        owl:maxCardinality "3"^^xsd:nonNegativeInteger
-    ] ;
-    rdfs:subClassOf [
-        rdf:type owl:Restriction ;
-        owl:onProperty :hasSubType ;
-        owl:allValuesFrom :CreatureType
-    ] ;
-    rdfs:label "Creature Card" ;
-    rdfs:comment
-    """A class representing any card with the Creature card type to enforce
-constraints."""@en .
-
-# --- Kindred Constraints ---
-:KindredCard rdf:type owl:Class ;
-    rdfs:subClassOf :Card ;
-    owl:equivalentClass [
-        rdf:type owl:Restriction ;
-        owl:onProperty :hasCardType ;
-        owl:hasValue :Kindred
-    ] ;
-    rdfs:subClassOf [
-        rdf:type owl:Restriction ;
-        owl:onProperty :hasSuperType ;
-        owl:maxCardinality "0"^^xsd:nonNegativeInteger
-    ] ;
-    rdfs:subClassOf [
-        rdf:type owl:Restriction ;
-        owl:onProperty :hasSubType ;
-        owl:allValuesFrom :CreatureType
-    ] ;
-    rdfs:label "Kindred Card" ;
-    rdfs:comment
-    """A class representing any card with the Kindred card type to enforce
-constraints."""@en .
-
-
-# --- Plane Constraints ---
-:PlaneCard rdf:type owl:Class ;
-    rdfs:subClassOf :Card ;
-    owl:equivalentClass [
-        rdf:type owl:Restriction ;
-        owl:onProperty :hasCardType ;
-        owl:hasValue :Plane
-    ] ;
-    rdfs:subClassOf [
-        rdf:type owl:Restriction ;
-        owl:onProperty :hasSuperType ;
-        owl:maxCardinality "0"^^xsd:nonNegativeInteger
-    ] ;
-    rdfs:subClassOf [
-        rdf:type owl:Restriction ;
-        owl:onProperty :hasSubType ;
-        owl:allValuesFrom :PlanarType
-    ] ;
-    rdfs:label "Plane Card" ;
-    rdfs:comment
-    """A class representing any card with the Plane card type to enforce
-restrictions."""@en .
-
-
-# --- Dungeon Constraints ---
-:DungeonCard rdf:type owl:Class ;
-    rdfs:subClassOf :Card ;
-    owl:equivalentClass [
-        rdf:type owl:Restriction ;
-        owl:onProperty :hasCardType ;
-        owl:hasValue :Dungeon
-    ] ;
-    rdfs:subClassOf [
-        rdf:type owl:Restriction ;
-        owl:onProperty :hasSuperType ;
-        owl:maxCardinality "0"^^xsd:nonNegativeInteger
-    ] ;
-    rdfs:subClassOf [
-        rdf:type owl:Restriction ;
-        owl:onProperty :hasSubType ;
-        owl:allValuesFrom :DungeonType
-    ] ;
-    rdfs:label "Dungeon Card" ;
-    rdfs:comment
-    """A class representing any card with the Dungeon card type to enforce
-restrictions."""@en .
-
-# --- Battle Constraints ---
-:BattleCard rdf:type owl:Class ;
-    rdfs:subClassOf :Card ;
-    owl:equivalentClass [
-        rdf:type owl:Restriction ;
-        owl:onProperty :hasCardType ;
-        owl:hasValue :Battle
-    ] ;
-    rdfs:subClassOf [
-        rdf:type owl:Restriction ;
-        owl:onProperty :hasSuperType ;
-        owl:maxCardinality "0"^^xsd:nonNegativeInteger
-    ] ;
-    rdfs:subClassOf [
-        rdf:type owl:Restriction ;
-        owl:onProperty :hasSubType ;
-        owl:allValuesFrom :BattleType
-    ] ;
-    rdfs:label "Battle Card" ;
-    rdfs:comment
-    """A class representing any card with the Battle card type to enforce
-restrictions."""@en .
-
-# --- Enchantment Constraints ---
-:EnchantmentCard rdf:type owl:Class ;
-    rdfs:subClassOf :Card ;
-    owl:equivalentClass [
-        rdf:type owl:Restriction ;
-        owl:onProperty :hasCardType ;
-        owl:hasValue :Enchantment
-    ] ;
-    rdfs:subClassOf [
-        rdf:type owl:Restriction ;
-        owl:onProperty :hasSuperType ;
-        owl:allValuesFrom [
-            rdf:type owl:Class ;
-            owl:oneOf ( :Legendary :Snow :World )
-        ]
-    ] ;
-    rdfs:subClassOf [
-        rdf:type owl:Restriction ;
-        owl:onProperty :hasSuperType ;
-        owl:maxCardinality "3"^^xsd:nonNegativeInteger
-    ] ;
-    rdfs:subClassOf [
-        rdf:type owl:Restriction ;
-        owl:onProperty :hasSubType ;
-        owl:allValuesFrom :EnchantmentTypes
-    ] ;
-    rdfs:label "Enchantment Card" ;
-    rdfs:comment
-    """A class representing any card with the Enchantment card type to enforce
-constraints."""@en .
-
-# --- Planeswalker Constraints ---
-:PlaneswalkerCard rdf:type owl:Class ;
-    rdfs:subClassOf :Card ;
-    owl:equivalentClass [
-        rdf:type owl:Class ;
-        owl:intersectionOf (
-            [
-                rdf:type owl:Restriction ;
-                owl:onProperty :hasCardType ;
-                owl:hasValue :Planeswalker
-            ]
-            [
-                rdf:type owl:Restriction ;
-                owl:onProperty :hasSuperType ;
-                owl:hasValue :Legendary
-            ]
-        )
-    ] ;
-    rdfs:subClassOf [
-        rdf:type owl:Restriction ;
-        owl:onProperty :hasSubType ;
-        owl:allValuesFrom :PlaneswalkerTypes
-    ] ;
-    rdfs:label "Planeswalker Card" ;
-    rdfs:comment
-    """A class representing planeswalker cards, which must have the Legendary
-supertype."""@en .
-
-# --- Spell Constraints ---
-:SpellCardConstraint rdf:type owl:Class ;
-    rdfs:subClassOf :Card ;
-    owl:equivalentClass [
-        rdf:type owl:Restriction ;
-        owl:onProperty :hasCardType ;
-        owl:someValuesFrom [
-            rdf:type owl:Class ;
-            owl:oneOf ( :Instant :Sorcery )
-        ]
-    ] ;
-    rdfs:subClassOf [
-        rdf:type owl:Restriction ;
-        owl:onProperty :hasSuperType ;
-        owl:allValuesFrom [
-            rdf:type owl:Class ;
-            owl:oneOf ( :Legendary :Snow )
-        ]
-    ] ;
-    rdfs:subClassOf [
-        rdf:type owl:Restriction ;
-        owl:onProperty :hasSuperType ;
-        owl:maxCardinality "2"^^xsd:nonNegativeInteger
-    ] ;
-    rdfs:subClassOf [
-        rdf:type owl:Restriction ;
-        owl:onProperty :hasSubType ;
-        owl:allValuesFrom :SpellTypes
-    ] ;
-    rdfs:label "Spell Card Constraint" ;
-    rdfs:comment
-    """A class representing any card with the Instant or Sorcery card type to
-enforce constraints."""@en .
-
-# --- Basic Land Constraints ---
-:BasicLandCard rdf:type owl:Class ;
-    rdfs:subClassOf :Card ;
-    owl:equivalentClass [
-        rdf:type owl:Class ;
-        owl:intersectionOf (
-            :LandCard
-            [
-                rdf:type owl:Restriction ;
-                owl:onProperty :hasSuperType ;
-                owl:hasValue :Basic
-            ]
-        )
-    ] ;
-    rdfs:subClassOf [
-        rdf:type owl:Restriction ;
-        owl:onProperty :hasSubType ;
-        owl:allValuesFrom :BasicLandTypes
-    ] ;
-    rdfs:label "Basic Land Card" ;
-    rdfs:comment
-    """A class representing land cards with the Basic supertype."""@en .
-
-# --- Phenomenon Constraints ---
-:PhenomenonCard rdf:type owl:Class ;
-    rdfs:subClassOf :Card ;
-    owl:equivalentClass [
-        rdf:type owl:Restriction ;
-        owl:onProperty :hasCardType ;
-        owl:hasValue :Phenomenon
-    ] ;
-    rdfs:subClassOf [
-        rdf:type owl:Restriction ;
-        owl:onProperty :hasSuperType ;
-        owl:maxCardinality "0"^^xsd:nonNegativeInteger
-    ] ;
-    rdfs:subClassOf [
-        rdf:type owl:Restriction ;
-        owl:onProperty :hasSubType ;
-        owl:maxCardinality "0"^^xsd:nonNegativeInteger
-    ] ;
-    rdfs:label "Phenomenon Card" ;
-    rdfs:comment
-    """A class representing any card with the Phenomenon card type to enforce
-restrictions."""@en .
-
-# --- Scheme Constraints ---
-:SchemeCard rdf:type owl:Class ;
-    rdfs:subClassOf :Card ;
-    owl:equivalentClass [
-        rdf:type owl:Restriction ;
-        owl:onProperty :hasCardType ;
-        owl:hasValue :Scheme
-    ] ;
-    rdfs:subClassOf [
-        rdf:type owl:Restriction ;
-        owl:onProperty :hasSuperType ;
-        owl:allValuesFrom [
-            rdf:type owl:Class ;
-            owl:oneOf ( :Ongoing )
-        ]
-    ] ;
-    rdfs:subClassOf [
-        rdf:type owl:Restriction ;
-        owl:onProperty :hasSuperType ;
-        owl:maxCardinality "1"^^xsd:nonNegativeInteger
-    ] ;
-    rdfs:subClassOf [
-        rdf:type owl:Restriction ;
-        owl:onProperty :hasSubType ;
-        owl:maxCardinality "0"^^xsd:nonNegativeInteger
-    ] ;
-    rdfs:label "Scheme Card" ;
-    rdfs:comment
-    """A class representing any card with the Scheme card type to enforce
-restrictions."""@en .
-
-# --- Vanguard Constraints ---
-:VanguardCard rdf:type owl:Class ;
-    rdfs:subClassOf :Card ;
-    owl:equivalentClass [
-        rdf:type owl:Restriction ;
-        owl:onProperty :hasCardType ;
-        owl:hasValue :Vanguard
-    ] ;
-    rdfs:subClassOf [
-        rdf:type owl:Restriction ;
-        owl:onProperty :hasSuperType ;
-        owl:maxCardinality "0"^^xsd:nonNegativeInteger
-    ] ;
-    rdfs:subClassOf [
-        rdf:type owl:Restriction ;
-        owl:onProperty :hasSubType ;
-        owl:maxCardinality "0"^^xsd:nonNegativeInteger
-    ] ;
-    rdfs:label "Vanguard Card" ;
-    rdfs:comment
-    """A class representing any card with the Vanguard card type to enforce
-restrictions."""@en .
-
-# --- Conspiracy Constraints ---
-:ConspiracyCard rdf:type owl:Class ;
-    rdfs:subClassOf :Card ;
-    owl:equivalentClass [
-        rdf:type owl:Restriction ;
-        owl:onProperty :hasCardType ;
-        owl:hasValue :Conspiracy
-    ] ;
-    rdfs:subClassOf [
-        rdf:type owl:Restriction ;
-        owl:onProperty :hasSuperType ;
-        owl:maxCardinality "0"^^xsd:nonNegativeInteger
-    ] ;
-    rdfs:subClassOf [
-        rdf:type owl:Restriction ;
-        owl:onProperty :hasSubType ;
-        owl:maxCardinality "0"^^xsd:nonNegativeInteger
-    ] ;
-    rdfs:label "Conspiracy Card" ;
-    rdfs:comment
-    """A class representing any card with the Conspiracy card type to enforce
-restrictions."""@en .
-
-# --- Summon Constraints ---
-:SummonCard rdf:type owl:Class ;
-    rdfs:subClassOf :Card ;
-    owl:equivalentClass [
-        rdf:type owl:Restriction ;
-        owl:onProperty :hasCardType ;
-        owl:hasValue :Summon
-    ] ;
-    owl:equivalentClass [
-        rdf:type owl:Class ;
-        owl:oneOf ( :OldFogey )
-    ] ;
-    rdfs:label "Summon Card" ;
-    rdfs:comment
-    """A class representing the Summon card type, which only applies to the card
-Old Fogey."""@en .
-
-
-#################################################
-#
-#  Examples
-#
-#################################################
