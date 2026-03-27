@@ -26,42 +26,50 @@ version 2026-02-27."""@en .
 
 :Deck rdf:type owl:Class ;
       rdfs:label "Deck" ;
-      rdfs:comment "A generic constructed or limited deck"@en .
+      rdfs:comment """A generic constructed or limited deck. See rules
+100.2a, 100.2b, and 100.5."""@en .
 
 :CommanderDeck rdf:type owl:Class ;
                rdfs:subClassOf :Deck ;
                rdfs:label "Commander Deck" ;
-               rdfs:comment "A constructed deck for the Commander format"@en .
+               rdfs:comment """A constructed deck for the Commander format.
+See rule 903."""@en .
 
 :StandardDeck rdf:type owl:Class ;
               rdfs:subClassOf :Deck ;
               rdfs:label "Standard Deck" ;
-              rdfs:comment "A constructed deck for the Standard format"@en .
+              rdfs:comment """A constructed deck for the Standard format.
+See rules 100.2a and 100.6."""@en .
 
 :ModernDeck rdf:type owl:Class ;
             rdfs:subClassOf :Deck ;
             rdfs:label "Modern Deck" ;
-            rdfs:comment "A constructed deck for the Modern format"@en .
+            rdfs:comment """A constructed deck for the Modern format.
+See rules 100.2a and 100.6."""@en .
 
 :PioneerDeck rdf:type owl:Class ;
              rdfs:subClassOf :Deck ;
              rdfs:label "Pioneer Deck" ;
-             rdfs:comment "A constructed deck for the Pioneer format"@en .
+             rdfs:comment """A constructed deck for the Pioneer format.
+See rules 100.2a and 100.6."""@en .
 
 :LegacyDeck rdf:type owl:Class ;
             rdfs:subClassOf :Deck ;
             rdfs:label "Legacy Deck" ;
-            rdfs:comment "A constructed deck for the Legacy format"@en .
+            rdfs:comment """A constructed deck for the Legacy format.
+See rules 100.2a and 100.6."""@en .
 
 :VintageDeck rdf:type owl:Class ;
              rdfs:subClassOf :Deck ;
              rdfs:label "Vintage Deck" ;
-             rdfs:comment "A constructed deck for the Vintage format"@en .
+             rdfs:comment """A constructed deck for the Vintage format.
+See rules 100.2a and 100.6."""@en .
 
 :PauperDeck rdf:type owl:Class ;
             rdfs:subClassOf :Deck ;
             rdfs:label "Pauper Deck" ;
-            rdfs:comment "A constructed deck for the Pauper format"@en .
+            rdfs:comment """A constructed deck for the Pauper format.
+See rules 100.2a and 100.6."""@en .
 
 # ------------------------------------------------------------------------------
 # Card Classes (including its attribute classes)
@@ -77,7 +85,8 @@ version 2026-02-27."""@en .
 # ------------------------------------------------------------------------------
 :Card rdf:type owl:Class ;
       rdfs:label "Magic Card" ;
-      rdfs:comment "A specific Magic: The Gathering card"@en .
+      rdfs:comment """A specific Magic: The Gathering card.
+See rules 108.1 and 108.2."""@en .
 
 # --- Color Attribute Class ---
 :Color rdf:type owl:Class ;
@@ -93,7 +102,8 @@ version 2026-02-27."""@en .
            )
        ] ;
        rdfs:label "Color" ;
-       rdfs:comment " The five colors of Magic plus Colorless"@en .
+       rdfs:comment """The five colors of Magic plus Colorless.
+See rules 105.1 and 105.2."""@en .
 
 # --- Super Type Attribute Class ---
 :SuperType rdf:type owl:Class ;
@@ -114,7 +124,8 @@ version 2026-02-27."""@en .
            rdfs:comment """An additional classification that precedes the card
 type and provides additional rules or characteristics to a card.
 It is called supertype in the rules, but it is not a real supertype
-but should be considered as a modifier of the card type."""@en .
+but should be considered as a modifier of the card type.
+See rules 205.4 and 205.4a."""@en .
 
 # --- Card Type Attribute Class ---
 :CardType rdf:type owl:Class ;
@@ -141,7 +152,8 @@ but should be considered as a modifier of the card type."""@en .
           ] ;
           rdfs:label "Card Type" ;
           rdfs:comment """The primary classification of a card.
-A card can have one or more card types, separated by a space."""@en .
+A card can have one or more card types, separated by a space.
+See rules 205.2a and 300.1."""@en .
 
 # ------------------------------------------------------------------------------
 # --- Sub Type Attribute Class ---
@@ -173,7 +185,7 @@ A card can have one or more card types, separated by a space."""@en .
          rdfs:label "Sub Type" ;
          rdfs:comment """A sub-classification that provides more specific
 categorical information to the primary card type, separated by a long dash.
-Each word after the dash is a separate subtype."""@en .
+Each word after the dash is a separate subtype. See rule 205.3."""@en .
 
 # --- Sub Type Classes ---
 :ArtifactTypes rdf:type owl:Class ;
@@ -455,14 +467,16 @@ only battle type is Siege. See rules 310.3 and 205.3q."""@en .
             )
         ] ;
         rdfs:label "Rarity" ;
-        rdfs:comment "Rarity of a Magic card"@en .
+        rdfs:comment """Rarity of a Magic card. See rules 206.2 and
+213.1b."""@en .
 
 # --- Set Attribute Class ---
 :Set rdf:type owl:Class ;
      owl:hasKey ( :setName ) ;
      owl:hasKey ( :setCode ) ;
      rdfs:label "Set" ;
-     rdfs:comment "A Magic: The Gathering expansion or set"@en .
+       rdfs:comment """A Magic: The Gathering expansion or set.
+See rules 206.1 and 206.5."""@en .
 
 # --- Language Attribute Class ---
 :Language rdf:type owl:Class ;
@@ -476,7 +490,8 @@ only battle type is Siege. See rules 310.3 and 205.3q."""@en .
               )
           ] ;
           rdfs:label "Language" ;
-          rdfs:comment "Language of the card print"@en .
+          rdfs:comment """Language of the card print. See rules 201.2 and
+213.1e."""@en .
 
 # --- Legality Attribute Classes ---
 :Legality rdf:type owl:Class ;
@@ -490,12 +505,13 @@ only battle type is Siege. See rules 310.3 and 205.3q."""@en .
               )
           ] ;
           rdfs:label "Legality" ;
-          rdfs:comment "The tournament legality status of a card."@en .
+          rdfs:comment """The tournament legality status of a card.
+See rules 100.6 and 206.4."""@en .
 
 :LegalityMapping rdf:type owl:Class ;
                  rdfs:label "Legality Mapping" ;
                  rdfs:comment """An intermediate class associating a Card,
-a Format, and a Legality Status."""@en .
+a Format, and a Legality Status. See rules 100.6 and 206.4."""@en .
 
 # --- Format Attribute Class ---
 :Format rdf:type owl:Class ;
@@ -532,11 +548,13 @@ a Format, and a Legality Status."""@en .
             )
         ] ;
         rdfs:label "Format" ;
-        rdfs:comment "A game format extracted from the Magic Webpage."@en .
+        rdfs:comment """A game format extracted from the Magic Webpage.
+See rules 100.6 and 206.4."""@en .
 
 :Ruling rdf:type owl:Class ;
         rdfs:label "Ruling" ;
-        rdfs:comment "Specific rules clarifications for a card"@en .
+        rdfs:comment """Specific rules clarifications for a card, published
+alongside Oracle text. See rule 108.1."""@en .
 
 # ------------------------------------------------------------------------------
 # Card text related classes: Keyword Classes
@@ -555,7 +573,7 @@ a Format, and a Legality Status."""@en .
          rdfs:label "Keyword" ;
          rdfs:comment """A Magic game mechanic represented as a keyword action
  or keyword ability. A keyword is a word or phrase that is used to describe a
- game mechanic."""@en .
+ game mechanic. See rules 701.1 and 702.1."""@en .
 
 :KeywordAction rdf:type owl:Class ;
                rdfs:subClassOf :Keyword ;
@@ -854,7 +872,8 @@ defined rules meaning in Magic. See rules 205.3c and 205.3d."""@en .
       	  rdfs:domain :Card ;
           rdfs:range xsd:string ;
           rdfs:label "Card Name" ;
-          rdfs:comment "The name of the card"@en .
+          rdfs:comment """The name of the card. See rules 201.1 and
+201.2."""@en .
 
 :manaCost rdf:type owl:DatatypeProperty ;
           rdfs:domain :Card ;
@@ -862,96 +881,105 @@ defined rules meaning in Magic. See rules 205.3c and 205.3d."""@en .
           rdfs:label "Mana Cost" ;
           rdfs:comment """The mana symbols required to cast the card, with
 values represented using standard Magic mana notation enclosed in braces,
-such as W, U, B, R, G, C, X, or 0."""@en .
+such as W, U, B, R, G, C, X, or 0. See rule 202.1."""@en .
 
 :manaValue rdf:type owl:DatatypeProperty ;
            rdfs:domain :Card ;
            rdfs:range xsd:integer ;
            rdfs:label "Mana Value" ;
-           rdfs:comment """Total amount of mana required to casts the spell.
-Formerly known as converted mana cost (CMC)."""@en .
+           rdfs:comment """Total amount of mana required to cast the spell.
+Formerly known as converted mana cost (CMC). See rule 202.3."""@en .
 
 :printedText rdf:type owl:DatatypeProperty ;
              rdfs:domain :Card ;
              rdfs:range rdf:langString ;
              rdfs:label "Printed Text" ;
              rdfs:comment """The text printed on the card, including the card
-name, mana cost, oracle text, flavor text, and card text."""@en .
+name, mana cost, oracle text, flavor text, and card text.
+See rule 207.1."""@en .
 
 :oracleText rdf:type owl:DatatypeProperty ;
             rdfs:domain :Card ;
             rdfs:range rdf:langString ;
             rdfs:label "Oracle Text" ;
-            rdfs:comment "The official rules text of the card"@en .
+            rdfs:comment """The official rules text of the card.
+See rule 108.1."""@en .
 
 :flavorText rdf:type owl:DatatypeProperty ;
             rdfs:domain :Card ;
             rdfs:range rdf:langString ;
             rdfs:label "Flavor Text" ;
-            rdfs:comment "The flavor text of the card"@en .
+            rdfs:comment """The flavor text of the card.
+See rule 207.2b."""@en .
 
 :artist rdf:type owl:DatatypeProperty ;
         rdfs:domain :Card ;
         rdfs:range xsd:string ;
         rdfs:label "Artist" ;
-        rdfs:comment "The artist who illustrated the card"@en .
+        rdfs:comment """The artist who illustrated the card.
+See rule 213.1f."""@en .
 
 :power rdf:type owl:DatatypeProperty ;
        rdfs:domain :Card ;
        rdfs:range xsd:string ;
        rdfs:comment """The printed power of a creature card, including
-non-numeric expressions such as "*", "1+*", or "7-*"."""@en .
+non-numeric expressions such as "*", "1+*", or "7-*".
+See rules 208.1 and 208.2."""@en .
 
 :toughness rdf:type owl:DatatypeProperty ;
            rdfs:domain :Card ;
            rdfs:range xsd:string ;
            rdfs:comment """The printed toughness of a creature card, including
-non-numeric expressions such as "*", "1+*", or "7-*"."""@en .
+non-numeric expressions such as "*", "1+*", or "7-*".
+See rules 208.1 and 208.2."""@en .
 
 :powerValue rdf:type owl:DatatypeProperty ;
             rdfs:domain :Card ;
             rdfs:range xsd:integer ;
             rdfs:comment """The numeric power of a creature card when its
-printed power is a plain integer."""@en .
+printed power is a plain integer. See rule 208.1."""@en .
 
 :toughnessValue rdf:type owl:DatatypeProperty ;
                 rdfs:domain :Card ;
                 rdfs:range xsd:integer ;
                 rdfs:comment """The numeric toughness of a creature card when
-its printed toughness is a plain integer."""@en .
+its printed toughness is a plain integer. See rule 208.1."""@en .
 
 :loyalty rdf:type owl:DatatypeProperty ;
          rdfs:domain :Card ;
          rdfs:range xsd:integer ;
-         rdfs:comment "Starting loyalty of a Planeswalker"@en .
+         rdfs:comment """Starting loyalty of a Planeswalker.
+See rules 209.1 and 306.5."""@en .
 
 :setName rdf:type owl:DatatypeProperty ,
                   owl:FunctionalProperty ;
          rdfs:domain :Set ;
          rdfs:range xsd:string ;
          rdfs:label "Set Name" ;
-         rdfs:comment "The full name of the Magic set"@en .
+         rdfs:comment """The full name of the Magic set.
+See rule 206.1."""@en .
 
 :setCode rdf:type owl:DatatypeProperty ,
                   owl:FunctionalProperty ;
          rdfs:domain :Set ;
          rdfs:range xsd:string ;
          rdfs:label "Set Code" ;
-         rdfs:comment "The 3-letter code of the Magic set"@en .
+         rdfs:comment """The 3-letter code of the Magic set.
+See rule 206.1."""@en .
 
 :cardNumber rdf:type owl:DatatypeProperty ;
             rdfs:domain :Card ;
             rdfs:range xsd:integer ;
             rdfs:label "Card Number" ;
             rdfs:comment """The collector number of the card in a set when
-totals are not provided."""@en .
+totals are not provided. See rule 213.1a."""@en .
 
 :cardNumberString rdf:type owl:DatatypeProperty ;
                   rdfs:domain :Card ;
                   rdfs:range xsd:string ;
                   rdfs:label "Card Number String" ;
                   rdfs:comment """The collector number of the card in a set as a
-string (e.g., '123a')."""@en .
+string (e.g., '123a'). See rule 213.1a."""@en .
 
 :cardCount rdf:type owl:DatatypeProperty ;
            rdfs:domain [
@@ -963,19 +991,22 @@ string (e.g., '123a')."""@en .
            ] ;
            rdfs:range xsd:integer ;
            rdfs:label "Card Count" ;
-           rdfs:comment "The total number of cards in the set"@en .
+           rdfs:comment """The total number of cards in the set.
+See rule 213.1a."""@en .
 
 :rulingText rdf:type owl:DatatypeProperty ;
             rdfs:domain :Ruling ;
             rdfs:range rdf:langString ;
             rdfs:label "Ruling Text" ;
-            rdfs:comment "The ruling text of the card"@en .
+            rdfs:comment """The ruling text of the card, published alongside
+Oracle text. See rule 108.1."""@en .
 
 :rulingDate rdf:type owl:DatatypeProperty ;
             rdfs:domain :Ruling ;
             rdfs:range xsd:date ;
             rdfs:label "Ruling Date" ;
-            rdfs:comment "The date of the ruling"@en .
+            rdfs:comment """The date of the ruling, published alongside
+Oracle text. See rule 108.1."""@en .
 
 :gathererUrl rdf:type owl:DatatypeProperty ,
                       owl:FunctionalProperty ;
@@ -983,20 +1014,21 @@ string (e.g., '123a')."""@en .
              rdfs:range xsd:anyURI ;
              rdfs:label "Gatherer URL" ;
              rdfs:comment """The URL to the card's entry on
-gatherer.wizards.com."""@en .
+gatherer.wizards.com. See rule 108.1."""@en .
 
 :releaseDate rdf:type owl:DatatypeProperty ;
              rdfs:domain :Set ;
              rdfs:range xsd:date ;
              rdfs:label "Release Date" ;
-             rdfs:comment "The release date of the set"@en .
+             rdfs:comment """The release date of the set.
+See rule 206.1."""@en .
 
 :isPermanent rdf:type owl:DatatypeProperty ;
              rdfs:domain :CardType ;
              rdfs:range xsd:boolean ;
              rdfs:label "Is Permanent" ;
              rdfs:comment """Indicates whether the card type is a permanent
-(true) or non-permanent (false). See rules 205.3a and 205.3b."""@en .
+(true) or non-permanent (false). See rule 110.4."""@en .
 
 # --- Object Properties ---
 
@@ -1005,31 +1037,35 @@ gatherer.wizards.com."""@en .
                   rdfs:range :Color ;
                   rdfs:label "Color Identity" ;
                   rdfs:comment """The color identity of the card for Commander
-deck building. See rules 205.3c and 205.3d."""@en .
+deck building. See rules 903.4 and 903.4a."""@en .
 
 :hasSuperType rdf:type owl:ObjectProperty ;
               rdfs:domain :Card ;
               rdfs:range :SuperType ;
               rdfs:label "Has Super Type" ;
-              rdfs:comment "The super type of the card"@en .
+              rdfs:comment """The super type of the card.
+See rules 205.4 and 205.4a."""@en .
 
 :hasCardType rdf:type owl:ObjectProperty ;
              rdfs:domain :Card ;
              rdfs:range :CardType ;
              rdfs:label "Has Card Type" ;
-             rdfs:comment "The card type of the card"@en .
+             rdfs:comment """The card type of the card.
+See rules 205.2a and 300.1."""@en .
 
 :hasSubType rdf:type owl:ObjectProperty ;
             rdfs:domain :Card ;
             rdfs:range :SubType ;
             rdfs:label "Has Sub Type" ;
-            rdfs:comment "The sub type of the card"@en .
+            rdfs:comment """The sub type of the card.
+See rule 205.3."""@en .
 
 :hasRarity rdf:type owl:ObjectProperty ;
            rdfs:domain :Card ;
            rdfs:range :Rarity ;
            rdfs:label "Rarity" ;
-           rdfs:comment "The rarity of the card"@en .
+           rdfs:comment """The rarity of the card.
+See rule 206.2."""@en .
 
 :containsCard rdf:type owl:ObjectProperty ;
               rdfs:domain [
@@ -1042,51 +1078,59 @@ deck building. See rules 205.3c and 205.3d."""@en .
               rdfs:range :Card ;
               rdfs:label "Contains Card" ;
               rdfs:comment
-              "Relates a deck or set to a card it contains"@en .
+              """Relates a deck or set to a card it contains.
+See rules 100.2 and 206.1."""@en .
 
 :isInSet rdf:type owl:ObjectProperty ;
          owl:inverseOf :hasSetCard ;
          rdfs:domain :Card ;
          rdfs:range :Set ;
          rdfs:label "Set" ;
-         rdfs:comment "The expansion set the card belongs to"@en .
+         rdfs:comment """The expansion set the card belongs to.
+See rule 206.1."""@en .
 
 :hasLanguage rdf:type owl:ObjectProperty ;
              rdfs:domain :Card ;
              rdfs:range :Language ;
              rdfs:label "Language" ;
-             rdfs:comment "The language of the card print"@en .
+             rdfs:comment """The language of the card print.
+See rule 213.1e."""@en .
 
 :hasLegality rdf:type owl:ObjectProperty ;
              rdfs:domain :Card ;
              rdfs:range :LegalityMapping ;
              rdfs:label "Has Legality" ;
-             rdfs:comment "Connects a card to its format legality statuses"@en .
+             rdfs:comment """Connects a card to its format legality statuses.
+See rules 100.6 and 206.4."""@en .
 
 :inFormat rdf:type owl:ObjectProperty ;
           rdfs:domain :LegalityMapping ;
           rdfs:range :Format ;
           rdfs:label "In Format" ;
-          rdfs:comment "The format a legality mapping applies to"@en .
+          rdfs:comment """The format a legality mapping applies to.
+See rules 100.6 and 206.4."""@en .
 
 :hasLegalityStatus rdf:type owl:ObjectProperty ;
                    rdfs:domain :LegalityMapping ;
                    rdfs:range :Legality ;
                    rdfs:label "Has Legality Status" ;
-                   rdfs:comment "The specific legality status applied"@en .
+                   rdfs:comment """The specific legality status applied.
+See rules 100.6 and 206.4."""@en .
 
 :hasRuling rdf:type owl:ObjectProperty ;
            rdfs:domain :Card ;
            rdfs:range :Ruling ;
            rdfs:label "Has Ruling" ;
-           rdfs:comment "The ruling for the card"@en .
+           rdfs:comment """The ruling for the card, published alongside
+Oracle text. See rule 108.1."""@en .
 
 :isInDeck rdf:type owl:ObjectProperty ;
           owl:inverseOf :hasCard ;
           rdfs:domain :Card ;
           rdfs:range :Deck ;
           rdfs:label "Is In Deck" ;
-          rdfs:comment "Indicates a card is included in a deck"@en .
+          rdfs:comment """Indicates a card is included in a deck.
+See rule 100.2."""@en .
 
 :hasSetCard rdf:type owl:ObjectProperty ;
             rdfs:subPropertyOf :containsCard ;
@@ -1094,7 +1138,8 @@ deck building. See rules 205.3c and 205.3d."""@en .
             rdfs:domain :Set ;
             rdfs:range :Card ;
             rdfs:label "Has Set Card" ;
-            rdfs:comment "Indicates a set that has a specific card"@en .
+            rdfs:comment """Indicates a set that has a specific card.
+See rule 206.1."""@en .
 
 :hasCard rdf:type owl:ObjectProperty ;
          rdfs:subPropertyOf :containsCard ;
@@ -1102,21 +1147,24 @@ deck building. See rules 205.3c and 205.3d."""@en .
          rdfs:domain :Deck ;
          rdfs:range :Card ;
          rdfs:label "Has Card" ;
-         rdfs:comment "Indicates a deck that has a specific card"@en .
+         rdfs:comment """Indicates a deck that has a specific card.
+See rule 100.2."""@en .
 
 :isCommanderOf rdf:type owl:ObjectProperty ;
                rdfs:subPropertyOf :isInDeck ;
                rdfs:domain :Card ;
                rdfs:range :CommanderDeck ;
                rdfs:label "Is Commander Of" ;
-               rdfs:comment "Identifies the commander(s) of a deck"@en .
+               rdfs:comment """Identifies the commander(s) of a deck.
+See rules 903.3 and 903.6."""@en .
 
 :hasKeyword rdf:type owl:ObjectProperty ;
             rdfs:domain :Card ;
             rdfs:range :Keyword ;
             rdfs:label "Has Keyword" ;
             rdfs:comment
-            "Relates a card to any keyword (ability or action) it has"@en .
+            """Relates a card to any keyword (ability or action) it has.
+See rules 701.1 and 702.1."""@en .
 
 :hasKeywordAbility rdf:type owl:ObjectProperty ;
                    rdfs:subPropertyOf :hasKeyword ;
@@ -1124,7 +1172,8 @@ deck building. See rules 205.3c and 205.3d."""@en .
                    rdfs:range :KeywordAbility ;
                    rdfs:label "Has Keyword Ability" ;
                    rdfs:comment
-                   "Relates a card to a keyword ability printed on it"@en .
+                   """Relates a card to a keyword ability printed on it.
+See rule 702.1."""@en .
 
 :hasKeywordAction rdf:type owl:ObjectProperty ;
                   rdfs:subPropertyOf :hasKeyword ;
@@ -1132,7 +1181,8 @@ deck building. See rules 205.3c and 205.3d."""@en .
                   rdfs:range :KeywordAction ;
                   rdfs:label "Has Keyword Action" ;
                   rdfs:comment
-                  "Relates a card to a keyword action it references"@en .
+                  """Relates a card to a keyword action it references.
+See rule 701.1."""@en .
 
 
 #################################################
@@ -1165,7 +1215,7 @@ deck building. See rules 205.3c and 205.3d."""@en .
     rdfs:label "Land Card" ;
     rdfs:comment
     """A class representing any card with the Land card type to enforce
-constraints."""@en .
+constraints. See rule 305."""@en .
 
 # --- Artifact Constraints ---
 :ArtifactCard rdf:type owl:Class ;
@@ -1196,7 +1246,7 @@ constraints."""@en .
     rdfs:label "Artifact Card" ;
     rdfs:comment
     """A class representing any card with the Artifact card type to enforce
-constraints."""@en .
+constraints. See rule 301."""@en .
 
 # --- Creature Constraints ---
 :CreatureCard rdf:type owl:Class ;
@@ -1227,7 +1277,7 @@ constraints."""@en .
     rdfs:label "Creature Card" ;
     rdfs:comment
     """A class representing any card with the Creature card type to enforce
-constraints."""@en .
+constraints. See rule 302."""@en .
 
 # --- Kindred Constraints ---
 :KindredCard rdf:type owl:Class ;
@@ -1250,7 +1300,7 @@ constraints."""@en .
     rdfs:label "Kindred Card" ;
     rdfs:comment
     """A class representing any card with the Kindred card type to enforce
-constraints."""@en .
+constraints. See rule 308."""@en .
 
 
 # --- Plane Constraints ---
@@ -1274,7 +1324,7 @@ constraints."""@en .
     rdfs:label "Plane Card" ;
     rdfs:comment
     """A class representing any card with the Plane card type to enforce
-restrictions."""@en .
+restrictions. See rule 311."""@en .
 
 
 # --- Dungeon Constraints ---
@@ -1298,7 +1348,7 @@ restrictions."""@en .
     rdfs:label "Dungeon Card" ;
     rdfs:comment
     """A class representing any card with the Dungeon card type to enforce
-restrictions."""@en .
+restrictions. See rule 309."""@en .
 
 # --- Battle Constraints ---
 :BattleCard rdf:type owl:Class ;
@@ -1321,7 +1371,7 @@ restrictions."""@en .
     rdfs:label "Battle Card" ;
     rdfs:comment
     """A class representing any card with the Battle card type to enforce
-restrictions."""@en .
+restrictions. See rule 310."""@en .
 
 # --- Enchantment Constraints ---
 :EnchantmentCard rdf:type owl:Class ;
@@ -1352,7 +1402,7 @@ restrictions."""@en .
     rdfs:label "Enchantment Card" ;
     rdfs:comment
     """A class representing any card with the Enchantment card type to enforce
-constraints."""@en .
+constraints. See rule 303."""@en .
 
 # --- Planeswalker Constraints ---
 :PlaneswalkerCard rdf:type owl:Class ;
@@ -1380,7 +1430,7 @@ constraints."""@en .
     rdfs:label "Planeswalker Card" ;
     rdfs:comment
     """A class representing planeswalker cards, which must have the Legendary
-supertype."""@en .
+supertype. See rules 306 and 205.4d."""@en .
 
 # --- Spell Constraints ---
 :SpellCardConstraint rdf:type owl:Class ;
@@ -1414,7 +1464,7 @@ supertype."""@en .
     rdfs:label "Spell Card Constraint" ;
     rdfs:comment
     """A class representing any card with the Instant or Sorcery card type to
-enforce constraints."""@en .
+enforce constraints. See rules 304 and 307."""@en .
 
 # --- Basic Land Constraints ---
 :BasicLandCard rdf:type owl:Class ;
@@ -1437,7 +1487,8 @@ enforce constraints."""@en .
     ] ;
     rdfs:label "Basic Land Card" ;
     rdfs:comment
-    """A class representing land cards with the Basic supertype."""@en .
+    """A class representing land cards with the Basic supertype.
+See rules 305.6 and 305.8."""@en .
 
 # --- Phenomenon Constraints ---
 :PhenomenonCard rdf:type owl:Class ;
@@ -1460,7 +1511,7 @@ enforce constraints."""@en .
     rdfs:label "Phenomenon Card" ;
     rdfs:comment
     """A class representing any card with the Phenomenon card type to enforce
-restrictions."""@en .
+restrictions. See rule 312."""@en .
 
 # --- Scheme Constraints ---
 :SchemeCard rdf:type owl:Class ;
@@ -1491,7 +1542,7 @@ restrictions."""@en .
     rdfs:label "Scheme Card" ;
     rdfs:comment
     """A class representing any card with the Scheme card type to enforce
-restrictions."""@en .
+restrictions. See rule 314."""@en .
 
 # --- Vanguard Constraints ---
 :VanguardCard rdf:type owl:Class ;
@@ -1514,7 +1565,7 @@ restrictions."""@en .
     rdfs:label "Vanguard Card" ;
     rdfs:comment
     """A class representing any card with the Vanguard card type to enforce
-restrictions."""@en .
+restrictions. See rule 313."""@en .
 
 # --- Conspiracy Constraints ---
 :ConspiracyCard rdf:type owl:Class ;
@@ -1537,7 +1588,7 @@ restrictions."""@en .
     rdfs:label "Conspiracy Card" ;
     rdfs:comment
     """A class representing any card with the Conspiracy card type to enforce
-restrictions."""@en .
+restrictions. See rule 315."""@en .
 
 # --- Summon Constraints ---
 :SummonCard rdf:type owl:Class ;
