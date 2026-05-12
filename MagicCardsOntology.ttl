@@ -1296,6 +1296,41 @@ See rule 100.2."""@en .
                """Identifies the commander(s) of a deck.
 See rules 903.3 and 903.6."""@en .
 
+# --- Deck Entry (Reified Deck-Card Quantity) ---
+:DeckEntry rdf:type owl:Class ;
+           rdfs:label "Deck Entry" ;
+           rdfs:comment
+           """A reified association between a deck and a specific card,
+carrying the number of copies of that card in the deck. Used because OWL
+cannot attach a literal (such as a quantity count) directly to an object
+property edge between Deck and Card. See rule 100.2."""@en .
+
+:hasDeckEntry rdf:type owl:ObjectProperty ;
+              rdfs:domain :Deck ;
+              rdfs:range :DeckEntry ;
+              rdfs:label "Has Deck Entry" ;
+              rdfs:comment
+              """Relates a deck to one of its reified deck entries, which
+in turn references a specific card and the number of copies in the deck.
+See rule 100.2."""@en .
+
+:entryCard rdf:type owl:ObjectProperty ,
+                    owl:FunctionalProperty ;
+           rdfs:domain :DeckEntry ;
+           rdfs:range :Card ;
+           rdfs:label "Entry Card" ;
+           rdfs:comment
+           """The card referenced by a deck entry. See rule 100.2."""@en .
+
+:quantity rdf:type owl:DatatypeProperty ,
+                   owl:FunctionalProperty ;
+          rdfs:domain :DeckEntry ;
+          rdfs:range xsd:positiveInteger ;
+          rdfs:label "Quantity" ;
+          rdfs:comment
+          """The number of copies of the entry's card in the deck.
+Must be a positive integer. See rule 100.2."""@en .
+
 :hasKeyword rdf:type owl:ObjectProperty ;
             rdfs:domain :Card ;
             rdfs:range :Keyword ;
@@ -3555,7 +3590,7 @@ wings."""@en .
 :Yeti rdf:type owl:NamedIndividual ,
                :CreatureTypes ;
       rdfs:label "Yeti" ;
-      rdxsfs:comment "A furry, ape-like hominid of the snowy mountains."@en .
+      rdfs:comment "A furry, ape-like hominid of the snowy mountains."@en .
 :Zombie rdf:type owl:NamedIndividual ,
                  :CreatureTypes ;
         rdfs:label "Zombie" ;
@@ -6131,6 +6166,24 @@ hand."""@en .
 damage to a creature."""@en .
 
 # --- Sets (ordered by release date) ---
+:TheHobbit rdf:type owl:NamedIndividual ,
+                    :Set ;
+           :setName "The Hobbit"@en ;
+           :setCode "HOB" ;
+           :cardCount 39 ;
+           :releaseDate "2026-08-14"^^xsd:date .
+:SecretsOfStrixhavenCommander rdf:type owl:NamedIndividual ,
+                                       :Set ;
+                              :setName "Secrets of Strixhaven Commander"@en ;
+                              :setCode "SOC" ;
+                              :cardCount 426 ;
+                              :releaseDate "2026-04-24"^^xsd:date .
+:SecretsOfStrixhaven rdf:type owl:NamedIndividual ,
+                              :Set ;
+                     :setName "Secrets of Strixhaven"@en ;
+                     :setCode "SOS" ;
+                     :cardCount 368 ;
+                     :releaseDate "2026-04-24"^^xsd:date .
 :MagicTheGatheringTeenageMutantNinjaTurtlesCommander rdf:type owl:NamedIndividual ,
                                                               :Set ;
                                                      :setName """Magic: The
