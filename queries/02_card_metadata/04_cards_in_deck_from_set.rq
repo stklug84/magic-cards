@@ -1,19 +1,23 @@
-# All cards in a deck that come from a specific printing/set.
+# Cards that come from a specific printing/set, across all decks in the
+# dataset. Uncomment the VALUES ?deck line to restrict to specific deck(s).
 #
 # PARAMETERS:
-#   ?deck - the deck to query
+#   ?deck - (optional) specific deck(s), via the commented VALUES line
 #   ?set  - the set individual (e.g. mc:AetherdriftCommander, mc:Kaladesh)
 
-PREFIX mc:  <urn:stklug84:MagicCardsOntology:2026-02-27#>
-PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX mc:   <urn:stklug84:MagicCardsOntology:2026-02-27#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
 
-SELECT ?cardName ?cardNumber WHERE {
-  VALUES ?deck { mc:SaheeliRadiantCreatorDeck }
+SELECT ?deckName ?cardName ?cardNumber WHERE {
+  # To restrict to specific deck(s), uncomment and edit:
+  # VALUES ?deck { mc:SaheeliRadiantCreatorDeck }
   VALUES ?set  { mc:AetherdriftCommander }
 
   ?deck mc:hasCard ?c .
+  OPTIONAL { ?deck rdfs:label ?deckName }
   ?c mc:isInSet  ?set ;
      mc:cardName ?cardName .
   OPTIONAL { ?c mc:cardNumber ?cardNumber }
 }
-ORDER BY xsd:integer(?cardNumber) ?cardName
+ORDER BY ?deckName xsd:integer(?cardNumber) ?cardName

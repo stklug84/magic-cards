@@ -1,15 +1,21 @@
-# Total card count of a deck (sum of all entry quantities).
-# For a legal Commander deck this should equal 100.
+# Total card count per deck (sum of all entry quantities), for all decks in
+# the dataset. For a legal Commander deck the total should equal 100.
 #
 # PARAMETERS:
-#   ?deck - the deck to query
+#   ?deck - optional deck filter; uncomment the VALUES line below to restrict
+#           to specific deck(s)
 
-PREFIX mc: <urn:stklug84:MagicCardsOntology:2026-02-27#>
+PREFIX mc:   <urn:stklug84:MagicCardsOntology:2026-02-27#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
-SELECT (SUM(?q) AS ?totalCards) (COUNT(DISTINCT ?card) AS ?uniqueCards) WHERE {
-  VALUES ?deck { mc:SaheeliRadiantCreatorDeck }
+SELECT ?deckName (SUM(?q) AS ?totalCards) (COUNT(DISTINCT ?card) AS ?uniqueCards) WHERE {
+  # To restrict to specific deck(s), uncomment and edit:
+  # VALUES ?deck { mc:SaheeliRadiantCreatorDeck }
 
   ?deck mc:hasDeckEntry ?entry .
   ?entry mc:entryCard ?card ;
          mc:quantity ?q .
+  OPTIONAL { ?deck rdfs:label ?deckName }
 }
+GROUP BY ?deck ?deckName
+ORDER BY ?deckName

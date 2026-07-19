@@ -1,15 +1,20 @@
-# All synergy pairs where BOTH cards are present in a given deck.
-# Each pair is reported once (filter A < B on IRI to avoid duplicates).
+# All synergy pairs where BOTH cards are present in the same deck, across all
+# decks in the dataset. Uncomment the VALUES ?deck line to restrict to
+# specific deck(s).
+# Each pair is reported once per deck (filter A < B on IRI to avoid duplicates).
 #
 # PARAMETERS:
-#   ?deck - the deck to query
+#   ?deck - (optional) specific deck(s), via the commented VALUES line
 
-PREFIX mc: <urn:stklug84:MagicCardsOntology:2026-02-27#>
+PREFIX mc:   <urn:stklug84:MagicCardsOntology:2026-02-27#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
-SELECT DISTINCT ?aName ?bName WHERE {
-  VALUES ?deck { mc:SaheeliRadiantCreatorDeck }
+SELECT DISTINCT ?deckName ?aName ?bName WHERE {
+  # To restrict to specific deck(s), uncomment and edit:
+  # VALUES ?deck { mc:SaheeliRadiantCreatorDeck }
 
   ?deck mc:hasCard ?a , ?b .
+  OPTIONAL { ?deck rdfs:label ?deckName }
   ?a ( mc:hasSynergyWith
      | ^mc:hasSynergyWith
      | mc:amplifies
@@ -24,4 +29,4 @@ SELECT DISTINCT ?aName ?bName WHERE {
   ?b mc:cardName ?bName .
   FILTER(STR(?a) < STR(?b))
 }
-ORDER BY ?aName ?bName
+ORDER BY ?deckName ?aName ?bName

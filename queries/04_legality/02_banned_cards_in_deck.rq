@@ -1,19 +1,23 @@
-# All cards in a deck that are banned in any of the seven tracked formats.
+# All cards across all decks in the dataset that are banned in any of the
+# seven tracked formats. The commented VALUES line restricts results to
+# specific deck(s).
 #
 # PARAMETERS:
-#   ?deck - the deck to query
+#   ?deck - optional deck filter (uncomment the VALUES line to restrict)
 
 PREFIX mc:   <urn:stklug84:MagicCardsOntology:2026-02-27#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
-SELECT DISTINCT ?cardName ?formatLabel WHERE {
-  VALUES ?deck { mc:SaheeliRadiantCreatorDeck }
+SELECT DISTINCT ?deckName ?cardName ?formatLabel WHERE {
+  # To restrict to specific deck(s), uncomment and edit:
+  # VALUES ?deck { mc:SaheeliRadiantCreatorDeck }
 
   ?deck mc:hasCard ?c .
+  OPTIONAL { ?deck rdfs:label ?deckName }
   ?c mc:cardName ?cardName ;
      mc:hasLegality ?lm .
   ?lm mc:inFormat ?fmt ;
       mc:hasLegalityStatus mc:Banned .
   ?fmt rdfs:label ?formatLabel .
 }
-ORDER BY ?cardName ?formatLabel
+ORDER BY ?deckName ?cardName ?formatLabel

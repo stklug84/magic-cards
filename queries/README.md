@@ -5,7 +5,7 @@ Reusable SPARQL 1.1 queries for the **Magic Cards Ontology** (`MagicCardsOntolog
 Every query is a standalone `.rq` file with:
 
 - a header comment describing **what it does**, plus
-- a `# PARAMETERS:` section identifying every `VALUES` clause you can edit to retarget the query (defaults are wired to the Saheeli, Radiant Creator commander deck so every query runs as-is).
+- a `# PARAMETERS:` section identifying every parameter you can edit to retarget the query. Deck-scoped queries cover **all decks** by default and carry an optional, commented-out `VALUES ?deck { … }` filter you can uncomment to restrict them; other parameters (card, keyword, format, …) remain `VALUES`-based, so every query runs as-is.
 
 See [`INDEX.md`](INDEX.md) for the full catalog.
 
@@ -24,36 +24,43 @@ queries/
 ├── 07_graph_patterns/             CONSTRUCT / DESCRIBE / ASK / property paths
 ├── 08_ontology_introspection/     "what's in the schema" queries (no parameters)
 ├── 09_compound/                   multi-criteria queries combining several axes
-└── 10_collection/                 physical inventory: copies, finishes, value
+├── 10_collection/                 physical inventory: copies, finishes, value
+└── 11_mechanic_synergies/         synergy lists per game mechanic (energy, tokens, …)
 ```
 
 ## Conventions
 
-Every query starts with the same prefix and is parameterized via `VALUES`:
+Every query starts with the same prefix. Deck-scoped queries cover all decks by default, project the deck's label first, and carry a commented-out `VALUES ?deck` filter:
 
 ```sparql
 PREFIX mc: <urn:stklug84:MagicCardsOntology:2026-02-27#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
-SELECT ?cardName WHERE {
-  VALUES ?deck { mc:SaheeliRadiantCreatorDeck }
+SELECT ?deckName ?cardName WHERE {
+  # To restrict to specific deck(s), uncomment and edit:
+  # VALUES ?deck { mc:SaheeliRadiantCreatorDeck }
+
+  OPTIONAL { ?deck rdfs:label ?deckName }
 
   ?deck mc:hasCard ?c .
   ?c mc:cardName ?cardName .
 }
-ORDER BY ?cardName
+ORDER BY ?deckName ?cardName
 ```
 
-To retarget, edit the `VALUES` clause:
+To restrict the query to one deck, uncomment and edit the `VALUES` line:
 
 ```sparql
 VALUES ?deck { mc:SomeOtherDeck }
 ```
 
-Multi-value retargeting is fine too:
+Restricting to multiple decks is fine too:
 
 ```sparql
 VALUES ?deck { mc:DeckA mc:DeckB mc:DeckC }
 ```
+
+Other parameters (card, keyword, format, …) remain active `VALUES` clauses that you edit in place.
 
 The single `mc:` prefix covers everything; no `deck:` or default prefix is needed because deck individuals live in the ontology namespace by import.
 

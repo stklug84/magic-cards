@@ -1,10 +1,11 @@
 # Compare two decks: report cards in deck A, cards in deck B, and cards in both,
 # tagged by membership. Useful for diffing two builds or finding shared staples.
 #
-# PARAMETERS:
-#   ?deckA - first deck
-#   ?deckB - second deck (defaults to the same deck for safe execution;
-#            change to compare against another)
+# PARAMETERS (both required — edit the two VALUES clauses below):
+#   ?deckA - first deck to compare
+#   ?deckB - second deck to compare
+# The shipped VALUES lines are placeholders; set each to the deck IRIs you
+# want to diff (they may be set to the same deck for a safe no-op run).
 
 PREFIX mc: <urn:stklug84:MagicCardsOntology:2026-02-27#>
 

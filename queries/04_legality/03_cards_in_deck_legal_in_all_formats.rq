@@ -1,15 +1,20 @@
-# Cards in a deck whose legality status is :Legal across ALL seven tracked
-# formats (Commander, Standard, Modern, Legacy, Vintage, Pioneer, Pauper).
+# Cards across all decks in the dataset whose legality status is :Legal
+# across ALL seven tracked formats (Commander, Standard, Modern, Legacy,
+# Vintage, Pioneer, Pauper). The commented VALUES line restricts results
+# to specific deck(s).
 #
 # PARAMETERS:
-#   ?deck - the deck to query
+#   ?deck - optional deck filter (uncomment the VALUES line to restrict)
 
-PREFIX mc: <urn:stklug84:MagicCardsOntology:2026-02-27#>
+PREFIX mc:   <urn:stklug84:MagicCardsOntology:2026-02-27#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
-SELECT ?cardName WHERE {
-  VALUES ?deck { mc:SaheeliRadiantCreatorDeck }
+SELECT ?deckName ?cardName WHERE {
+  # To restrict to specific deck(s), uncomment and edit:
+  # VALUES ?deck { mc:SaheeliRadiantCreatorDeck }
 
   ?deck mc:hasCard ?c .
+  OPTIONAL { ?deck rdfs:label ?deckName }
   ?c mc:cardName ?cardName .
 
   FILTER NOT EXISTS {
@@ -18,4 +23,4 @@ SELECT ?cardName WHERE {
     FILTER(?status != mc:Legal)
   }
 }
-ORDER BY ?cardName
+ORDER BY ?deckName ?cardName

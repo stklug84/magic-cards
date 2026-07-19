@@ -33,64 +33,2296 @@
     owl:imports <urn:stklug84:MagicCardIndividuals:2026-07-19#> ;
     rdfs:label "Magic Card Synergies"@en ;
     rdfs:comment """An instance graph capturing directional synergy relations
-(:amplifies, :isEnabledBy) and mutual synergies (:hasSynergyWith) between card
-individuals of the collection. This file imports MagicCardsOntology for the
-property definitions and MagicCardIndividuals for the card individuals it
-relates."""@en .
+(:amplifies, :enables and their OWL inverses) and mutual synergies
+(:hasSynergyWith) between the card individuals of the collection. Each
+logical synergy is asserted exactly once: directional relations use the
+forward properties, the inverse directions follow from the owl:inverseOf
+axioms in MagicCardsOntology, and the symmetric :hasSynergyWith is asserted
+once per pair. Relations are deck-independent: they hold for any deck built
+from the collection. Where a card exists in several printings, the relations
+are asserted on one canonical individual per card name. This file imports
+MagicCardsOntology for the property definitions and MagicCardIndividuals for
+the card individuals it relates."""@en .
 
 ################################################################################
 #
-# Card Synergies (Starfield Vocalist focus)
+# Collection-Wide Card Synergies
 #
-# These triples capture the synergies between Starfield Vocalist and other
-# cards in this Commander deck. Vocalist's relevant ability —
-#   "If a permanent entering the battlefield causes a triggered ability of
-#    a permanent you control to trigger, that ability triggers an additional
-#    time."
-# — means it only doubles triggered abilities that fire on a permanent you
-# ALREADY control, not the self-ETB ("when this enters") of the entering
-# permanent itself.
+# Directional and mutual synergies across the named card individuals of the
+# collection aggregated by MagicCardIndividuals.ttl (primarily creatures,
+# artifacts and enchantments, with instants and sorceries where they feed a
+# permanent's engine).
 #
-# Group A (:amplifies)     - Cards whose ETB-watching triggers Vocalist doubles.
-# Group B (:hasSynergyWith) - Same-template trigger doublers that stack
-#                            multiplicatively with Vocalist (Panharmonicon,
-#                            Roaming Throne).
-# Group C (:isEnabledBy)   - Cards that create extra permanents (tokens, copies,
-#                            flicker recursion), feeding Vocalist's amplification
-#                            of Group A and Group B watchers.
+# Modelling conventions:
+#   :amplifies      - subject increases the value, frequency or magnitude of
+#                     the object's abilities (trigger doublers, token/counter/
+#                     energy multipliers, blink/copy engines re-firing ETBs).
+#   :enables        - subject creates the preconditions for the object's
+#                     payoff (resource producers feeding sinks, token
+#                     producers feeding copy/populate payoffs, extra combats
+#                     feeding attack triggers).
+#   :hasSynergyWith - mutual synergy with no clear direction (stacking
+#                     doublers, closed engine loops). Symmetric; asserted once
+#                     per pair.
 #
-# Scope: this section is Vocalist-centric. Synergies between other pairs of
-# cards in this deck are intentionally out of scope here.
+# Only the forward properties are asserted; :isAmplifiedBy and :isEnabledBy
+# follow from the owl:inverseOf axioms in MagicCardsOntology, keeping each
+# logical synergy asserted exactly once.
 #
 ################################################################################
 
-# --- Group A: Vocalist directly amplifies these cards' triggered abilities ---
-:StarfieldVocalistEdgeOfEternities78 :amplifies :ArchitectOfTheUntamed ,
-                              :DecoctionModuleAetherdriftCommander128 ,
-                              :EraOfInnovationAetherdriftCommander75 ,
-                              :GontisAetherHeart ,
-                              :NissaWorldsoulSpeaker ,
-                              :RoilCartographer .
+# --- Aberrant Researcher // Perfected Form ---
+:AberrantResearcher :enables :ArcadeGannon .  # upkeep mill stocks artifact/Human targets
 
-# --- Group B: Multiplicative stacking with same-template amplifiers ---
-:StarfieldVocalistEdgeOfEternities78 :hasSynergyWith :PanharmoniconAetherdriftCommander135 ,
-                                   :RoamingThrone .
+# --- Abundant Growth ---
+:AbundantGrowth :enables :GrimGuardian .  # Aura ETB triggers constellation drain
 
-# --- Group C: Cards that enable Vocalist by creating extra permanent ETBs ---
-:StarfieldVocalistEdgeOfEternities78 :isEnabledBy :SaheeliRadiantCreator ,
-                                :AdrixAndNevTwincasters ,
-                                :BrudicladTelchorEngineer ,
-                                :SaheeliTheSunsBrillianceTheLostCavernsOfIxalan239 ,
-                                :DeterminedIteration ,
-                                :EchoStorm ,
-                                :ExtravagantReplication ,
-                                :MasterfulReplication ,
-                                :MechanizedProductionMurdersAtKarlovManorCommander109 ,
-                                :EsixFractalBloom ,
-                                :AetherRefineryModernHorizons3Commander54 ,
-                                :ConjurersCloset ,
-                                :ElderGargaroth ,
-                                :StoneIdolGenerator ,
-                                :TriplicateTitan ,
-                                :PiaNalaarChiefMechanic ,
-                                :FeldonOfTheThirdPath .
+# --- Abundant Maw ---
+:AbundantMaw :enables :StormkeldProwler .  # Emerge cast is still MV8, cheap way to trigger counters
+
+# --- Academy Manufactor ---
+:AcademyManufactor :amplifies :Blink ,  # Investigate Clue becomes Clue+Food+Treasure
+                              :BootleggersStash ,  # each Treasure becomes Clue+Food+Treasure
+                              :CityOfDeath ,  # Chapter I Treasure becomes three tokens
+                              :CutthroatNegotiator ,  # Parley Treasures become three tokens each
+                              :GildedGoose ,  # Each Food becomes Clue+Food+Treasure
+                              :MagdaTheHoardmaster ,  # crime Treasure becomes three tokens
+                              :NukaColaVendingMachine ,  # Food activation makes all three tokens
+                              :SurvivorsMedKit ,  # Food mode instead yields Clue+Food+Treasure
+                              :TheRani ,  # Each investigate Clue becomes three tokens
+                              :TheSeventhDoctor ,  # Investigate makes Clue+Food+Treasure
+                              :TheThirdDoctor ,  # His ETB token becomes Clue+Food+Treasure
+                              :TirelessProvisioner ,  # landfall Food/Treasure becomes all three
+                              :TirelessTracker ,  # Each investigate Clue becomes Clue+Food+Treasure
+                              :TreasureVaultAetherdriftCommander180 ,  # Each Treasure made becomes Clue+Food+Treasure
+                              :WeirdingWood .  # Investigate Clue becomes Clue+Food+Treasure
+:AcademyManufactor :enables :AceFearlessRebel ,  # extra artifact tokens to sacrifice
+                            :AdaptiveOmnitool ,  # artifact tokens grow +1/+1 per artifact
+                            :AetherworksMarvelAetherdriftCommander123 ,  # sacrificed tokens hit gy for energy
+                            :AidFromTheCowl ,  # sacrificing tokens turns on revolt
+                            :AlpharaelStonechosen ,  # token sac turns on Void attack
+                            :BanishToAnotherUniverse ,  # artifact tokens cut affinity cost
+                            :FiveHundredYearDiary ,  # Extra Clues from replacement grow Diary mana
+                            :GhirapurAetherGrid ,  # Triple token output floods artifacts to tap
+                            :GimbalGremlinProdigyMarchOfTheMachineCommander3 ,  # Three token names grow Gremlin counters
+                            :GontisAetherHeart ,  # Triple artifact tokens yield energy per ETB
+                            :HaliyaGuidedByLight ,  # Triple artifact tokens trigger lifegain
+                            :HedronDetonator ,  # Triple artifact tokens mean triple pings
+                            :HellkiteIgniter ,  # Triple tokens grow artifact count for pump
+                            :HellkiteTyrant ,  # Triple tokens race to twenty-artifact win
+                            :MechanizedProductionMurdersAtKarlovManorCommander109 ,  # Treasures speed 8 same-name artifacts win
+                            :VedalkenHumiliator ,  # Extra artifact tokens fill metalcraft
+                            :WarmakerGunship ,  # Extra artifact tokens boost ETB damage
+                            :WeftstalkerArdent .  # Bonus artifact tokens entering add pings
+
+# --- Ace, Fearless Rebel ---
+:AceFearlessRebel :enables :SzarelGenesisShepherd .  # Sacrifices nontoken artifacts on attack
+
+# --- Adric, Mathematical Genius ---
+:AdricMathematicalGenius :amplifies :AethertideWhaleAetherdriftCommander69 ,  # Copies Whale's ETB trigger for 12 energy instead of 6
+                                    :AetherworksMarvelAetherdriftCommander123 ,  # Copies Marvel's activation for a second free cast off the top six
+                                    :ExtravagantReplication ,  # Copies upkeep trigger to clone a second nonland permanent
+                                    :FeldonOfTheThirdPath ,  # Copies Feldon's ability for an extra hasty graveyard copy token
+                                    :GontisAetherHeart ,  # Copies the 8-energy activation for a second extra turn
+                                    :LightningRunnerAetherdriftCommander103 ,  # Copies Runner's reflexive trigger: extra untap+combat without paying again
+                                    :MechanizedProductionMurdersAtKarlovManorCommander109 ,  # Copies upkeep trigger, doubling copies toward the 8-artifact win
+                                    :SaheeliRadiantCreator ,  # Copies Saheeli's combat token-copy trigger for a second 5/5 copy token
+                                    :SaheeliTheSunsBrillianceTheLostCavernsOfIxalan239 .  # Copies her copy activation for an extra token, new target
+
+# --- Adrix and Nev, Twincasters ---
+:AdrixAndNevTwincasters :amplifies :AcademyManufactor ,  # doubles Clue/Food/Treasure trio
+                                   :AetherChanneler ,  # doubles Bird token mode
+                                   :AetherHerder ,  # doubles attack Servo token
+                                   :AlistairTheBrigadier ,  # doubles Soldier tokens
+                                   :AngelOfInvention ,  # doubles fabricate Servo tokens
+                                   :AnimPakalThousandthMoon ,  # doubles attacking Gnome tokens
+                                   :AutomatedAssemblyLine ,  # doubles Robot token output
+                                   :AuxiliaryBoosters ,  # doubles Robot token
+                                   :BeamsawProspector ,  # doubles Lander token
+                                   :BrudicladTelchorEngineer ,  # Doubles Brudiclad's Myr tokens, growing the copyable token army
+                                   :DeterminedIteration ,  # Doubles the populate token each combat
+                                   :ElderGargaroth ,  # Beast token mode makes two 3/3s per trigger
+                                   :EsixFractalBloom ,  # Doubles the copy tokens Esix substitutes each turn
+                                   :ExtravagantReplication ,  # Doubles the upkeep copy token
+                                   :FeldonOfTheThirdPath ,  # Doubles Feldon's graveyard copy tokens
+                                   :MechanizedProductionMurdersAtKarlovManorCommander109 ,  # Doubles copies, reaching the 8-same-name win twice as fast
+                                   :PhyrexianIronworks ,  # Golem token creation doubled
+                                   :PiaNalaarChiefMechanic ,  # Doubles her Nalaar Aetherjet token creation
+                                   :PriestOfTheBlessedGraf ,  # doubles end-step Spirit tokens
+                                   :SaheeliRadiantCreator ,  # Doubles Saheeli's 5/5 artifact copy tokens each combat
+                                   :SaiMasterThopterist ,  # Thopter token creation doubled
+                                   :StoneIdolGenerator ,  # Doubles the 6/12 Construct token
+                                   :TheMasterMultiplied ,  # Doubles myriad token copies
+                                   :WhirlerVirtuosoAetherdriftCommander122 .  # doubles Thopter output per 3E
+:AdrixAndNevTwincasters :enables :StarfieldVocalistEdgeOfEternities78 .  # Creates extra permanent ETBs, feeding Vocalist's trigger doubling
+
+# --- Aether Herder ---
+:AetherHerder :enables :AetherworksMarvelAetherdriftCommander123 ,  # energy income feeds 6E free-cast sink
+                       :AlibouAncientWitness ,  # Servo tokens fuel artifact attacks
+                       :FabricationModuleKaladesh211 .  # ETB/attack energy triggers counter placement
+
+# --- Aether Refinery ---
+:AetherRefineryModernHorizons3Commander54 :amplifies :AetherHerder ,  # doubles ETB and attack energy
+                                                     :AetherRevolt ,  # doubled E gain doubles damage trigger
+                                                     :AetherfluxConduit ,  # Doubles per-cast energy, drastically speeding the 50E payoff
+                                                     :AethergeodeMiner ,  # doubles attack energy for blink loops
+                                                     :AethersphereHarvester ,  # doubles ETB energy
+                                                     :AethersquallAncientAetherdriftCommander68 ,  # Upkeep gives 6E, funding the 8E mass bounce
+                                                     :AetherstormRoc ,  # doubles per-creature energy
+                                                     :AethertideWhaleAetherdriftCommander69 ,  # Whale ETB gives 12E; 4E self-bounce becomes a net-positive energy engine
+                                                     :AetherwindBasker ,  # Doubles per-creature energy on enter/attack
+                                                     :AmpedRaptor ,  # more E to pay impulse cast
+                                                     :AssaultronDominator ,  # doubles ETB energy
+                                                     :AutomatedAssemblyLine ,  # doubles combat energy for Robots
+                                                     :BehemothOfVault0 ,  # doubles 4E ETB burst
+                                                     :BespokeBattlewagonModernHorizons352 ,  # doubles tap energy
+                                                     :BlasterHulk ,  # doubles attack energy toward 8E blast
+                                                     :BristlingHydra ,  # ETB energy gain doubled
+                                                     :BrotherhoodScribe ,  # Doubles its metalcraft energy
+                                                     :ConsulateTurret ,  # Tapped energy gain doubled
+                                                     :ConversionApparatus ,  # Three-energy activation doubled
+                                                     :CyclopsSuperconductor ,  # Doubles ETB energy gain
+                                                     :DeadlockTrap ,  # Doubles ETB energy gain
+                                                     :DecoctionModuleAetherdriftCommander128 ,  # Doubles each {E} the Module produces
+                                                     :DrMadisonLiMagicTheGatheringFallout3 ,  # Doubles artifact-cast energy
+                                                     :DynavoltTower ,  # Doubles spell-cast energy gain
+                                                     :EmpyrealVoyager ,  # Doubles combat-damage energy gain
+                                                     :EraOfInnovationAetherdriftCommander75 ,  # Each paid trigger yields four {E} instead of two
+                                                     :GontisAetherHeart ,  # Doubles artifact-ETB energy toward 8E extra turns
+                                                     :GuideOfSouls ,  # doubles per-creature energy gain
+                                                     :LibertyPrimeRecharged ,  # Doubles its energy gain
+                                                     :LightningRunnerAetherdriftCommander103 ,  # Doubles Runner's attack energy toward the 8{E} extra-combat cost
+                                                     :NissaWorldsoulSpeaker ,  # Doubles landfall energy toward 8E free permanents
+                                                     :PeemaAetherSeer ,  # Doubles the ETB energy equal to greatest power
+                                                     :PeemaTrailblazer ,  # Doubles combat-damage energy gain
+                                                     :PhyrexianIronworks ,  # Doubles attack-trigger energy gain
+                                                     :PiaNalaarChiefMechanic ,  # Doubles combat-damage energy feeding bigger Aetherjets
+                                                     :PlasmaCaster ,  # Doubles equipped-attack energy gain
+                                                     :RampagingAetherhood ,  # Doubles power-scaled upkeep energy, compounding growth
+                                                     :RazorfieldRipper ,  # Doubles attack energy, bigger pump
+                                                     :ReservoirWalker ,  # ETB grants six energy instead of three
+                                                     :RexCyberHoundMagicTheGatheringFallout117 ,  # Doubles combat-damage energy gain
+                                                     :RoilCartographer ,  # Doubles landfall {E}, fueling the 6{E} draw-three
+                                                     :SaheeliRadiantCreator ,  # Doubles energy from Saheeli's artifact/Artificer cast trigger
+                                                     :SatyaAetherfluxGenius ,  # Doubles attack energy to keep tokens
+                                                     :ScurryOfGremlins ,  # Doubles the E gained from Scurry's per-creature ETB trigger
+                                                     :SentryBot ,  # Doubles per-attacker energy from its ETB
+                                                     :ServantOfTheConduit ,  # Doubles its ETB to 4{E}
+                                                     :SolarTransformerAetherdriftCommander137 ,  # Doubles ETB energy: 3 becomes 6 {E}
+                                                     :SphinxOfTheRevelation ,  # Doubles energy from each lifegain trigger
+                                                     :StoneIdolGenerator ,  # Doubles per-attack energy, halving turns to 6-{E} Construct
+                                                     :SynthEradicator ,  # Doubles its attack energy gain
+                                                     :T45PowerArmor ,  # Doubles its ETB energy for upkeep payments
+                                                     :TerritorialAetherkite ,  # Doubles ETB energy for bigger sweep
+                                                     :TheMotherlodeExcavator ,  # Doubles ETB energy toward land destruction
+                                                     :ThrivingIbex ,  # Doubles ETB and attack-pump energy
+                                                     :WhirlerVirtuosoAetherdriftCommander122 ,  # doubles ETB energy for Thopters
+                                                     :WoodweaversPuzzleknot .  # Doubles energy from ETB and sac: 6 {E} each
+:AetherRefineryModernHorizons3Commander54 :enables :DeterminedIteration ,  # X/X Aetherborn tokens give populate scalable targets
+                                                   :StarfieldVocalistEdgeOfEternities78 .  # Creates extra permanent ETBs, feeding Vocalist's trigger doubling
+
+# --- Aetherflux Conduit ---
+:AetherfluxConduit :enables :AetherRefineryModernHorizons3Commander54 ,  # Energy income feeds Refinery's X/X Aetherborn sink
+                            :AethersquallAncientAetherdriftCommander68 ,  # Fuels the 8E mass bounce
+                            :AetherworksMarvelAetherdriftCommander123 ,  # Fuels repeated 6E free-cast activations
+                            :GontisAetherHeart ,  # Fuels the 8E extra-turn activation
+                            :LightningRunnerAetherdriftCommander103 ,  # Fuels the 8E untap + extra combat payment
+                            :NissaWorldsoulSpeaker ,  # Mass energy income reaches 8E to free-cast permanents
+                            :PiaNalaarChiefMechanic ,  # Big energy stock makes huge X Aetherjet vehicles
+                            :SaheeliRadiantCreator .  # Energy on every cast funds her 3E copy trigger each combat
+
+# --- Aethergeode Miner ---
+:AethergeodeMiner :enables :AetherRevolt ,  # attack energy triggers damage
+                           :AidFromTheCowl ,  # self-exile turns on revolt
+                           :AlpharaelStonechosen .  # self-exile turns on Void
+
+# --- Aetheric Amplifier ---
+:AethericAmplifier :amplifies :RampagingAetherhood .  # Doubles its +1/+1 counters, raising power and upkeep energy gain
+:AethericAmplifier :enables :AetherfluxConduit ,  # Doubling your energy pool is the fastest route to fifty {E}
+                            :AethersquallAncientAetherdriftCommander68 ,  # Doubles stored energy for the 8E bounce
+                            :AetherworksMarvelAetherdriftCommander123 ,  # Doubles stored energy for 6E activations
+                            :GontisAetherHeart ,  # Doubles stored energy to hit the 8E extra-turn cost
+                            :LightningRunnerAetherdriftCommander103 ,  # Doubles stored energy for 8E extra combats
+                            :NissaWorldsoulSpeaker .  # Doubles stored energy to hit 8E free permanents
+
+# --- Aethersquall Ancient ---
+:AethersquallAncientAetherdriftCommander68 :enables :AetherRefineryModernHorizons3Commander54 ,  # Energy income feeds Refinery's X/X Aetherborn sink
+                                                    :AethertideWhaleAetherdriftCommander69 ,  # Mass bounce returns Whale to hand to replay its 6E ETB
+                                                    :AetherworksMarvelAetherdriftCommander123 ,  # Steady energy income funds 6E free casts
+                                                    :GontisAetherHeart ,  # Steady energy income toward the 8E extra turn
+                                                    :LightningRunnerAetherdriftCommander103 ,  # Energy income funds 8E extra combats
+                                                    :NissaWorldsoulSpeaker ,  # Steady 3E/turn builds to 8E free permanents
+                                                    :PrimalPrayers ,  # 3{E} each upkeep sustains free creature casts
+                                                    :RogueRefiner ,  # Mass bounce recycles Refiner's draw + 2E ETB
+                                                    :SaheeliRadiantCreator .  # 3E per upkeep pays her copy trigger every combat
+
+# --- Aethertide Whale ---
+:AethertideWhaleAetherdriftCommander69 :enables :AetherRefineryModernHorizons3Commander54 ,  # ETB energy feeds Refinery's X/X Aetherborn sink
+                                                :AetherRevolt ,  # 6E ETB deals 6 damage via trigger
+                                                :AetherworksMarvelAetherdriftCommander123 ,  # 6E ETB fully pays one Marvel activation
+                                                :BlasterHulk ,  # 6E ETB funds 8E damage sink
+                                                :GontisAetherHeart ,  # 6E ETB burst builds toward the 8E extra turn
+                                                :LightningRunnerAetherdriftCommander103 ,  # Energy burst funds 8E extra combats
+                                                :NissaWorldsoulSpeaker ,  # 6E ETB burst builds toward 8E free permanents
+                                                :PrimalPrayers ,  # ETB energy casts multiple 3-or-less creatures via {E}
+                                                :SaheeliRadiantCreator .  # 6E ETB burst funds two of her copy triggers
+
+# --- Aetherwind Basker ---
+:AetherwindBasker :enables :AetherRefineryModernHorizons3Commander54 ,  # Bulk energy feeds Refinery's X/X Aetherborn sink
+                           :AetherRevolt ,  # mass energy gain converts to damage
+                           :AetherworksMarvelAetherdriftCommander123 ,  # Wide-board energy bursts fund 6E free casts
+                           :GontisAetherHeart ,  # Wide-board energy bursts fund 8E extra turns
+                           :NissaWorldsoulSpeaker ,  # Mass energy per attack reaches 8E free permanents fast
+                           :PiaNalaarChiefMechanic ,  # Bulk energy makes a huge X Aetherjet at end step
+                           :SaheeliRadiantCreator .  # Per-creature energy on attack funds her copy trigger
+
+# --- Alibou, Ancient Witness ---
+:AlibouAncientWitness :amplifies :ApocalypseRunner ,  # Gives crewed Vehicle haste and pings when it attacks
+                                 :BurnerRocket .  # Haste plus damage/scry when the crewed Rocket attacks
+:AlibouAncientWitness :enables :Cryoshatter .  # Any-target damage triggers Cryoshatter's destroy clause
+
+# --- Ambush Viper ---
+:AmbushViper :enables :BrinebornCutthroat ,  # Flash cast on opponent's turn adds +1/+1 counter to Cutthroat
+                      :MeltstridersResolve .  # Deathtouch body turns the ETB fight into removal
+
+# --- An Unearthly Child ---
+:AnUnearthlyChild :enables :ApocalypseRunner ,  # Saga digs to Vehicle cards, finding the Runner
+                           :BessieTheDoctorsRoadster .  # Saga digs to Vehicle cards, finding Bessie
+
+# --- Ancient Den ---
+:AncientDen :enables :AdaptiveOmnitool ,  # artifact land adds to artifact count
+                     :BanishToAnotherUniverse .  # artifact land feeds affinity
+
+# --- Angel of Invention ---
+:AngelOfInvention :enables :AlibouAncientWitness ,  # Servos are hasty artifact attackers
+                           :OdricLunarchMarshal ,  # Flying/vigilance/lifelink shared to team
+                           :YouthfulValkyrie .  # Angel ETB adds a +1/+1 counter
+
+# --- Annie Joins Up ---
+:AnnieJoinsUp :amplifies :AceFearlessRebel ,  # doubles legendary attack sac trigger
+                         :AlistairTheBrigadier ,  # doubles legendary token trigger
+                         :AlpharaelStonechosen ,  # doubles Void attack trigger
+                         :AnimPakalThousandthMoon ,  # doubles legendary attack trigger
+                         :AshadTheLoneCyberman ,  # doubles legendary sac trigger
+                         :DavrosDalekCreatorDoctorWhoCommander1 ,  # Legendary end-step token trigger fires twice
+                         :TannukMemorialEnsign ,  # Legendary Tannuk's landfall triggers extra time, reaching draw mode
+                         :VislorTurlough ,  # Legendary end-step draw trigger fires twice
+                         :YunaGrandSummoner .  # Legendary counter-move trigger fires twice
+
+# --- Apocalypse Runner ---
+:ApocalypseRunner :enables :PiaNalaarChiefMechanic .  # Crewed Vehicle combat damage generates energy for Pia
+
+# --- Arcane Adaptation ---
+:ArcaneAdaptation :enables :ArchghoulOfThraben ,  # makes all deaths Zombie deaths
+                           :BattlegroundGeist ,  # name Spirit; lord pumps everything
+                           :GisaTheHellraiser ,  # all creatures get Zombie lord buff
+                           :Necroduality .  # all creatures Zombies; every ETB copied
+
+# --- Arcbound Hybrid ---
+:ArcboundHybrid :enables :YunaGrandSummoner .  # Modular death counters convert via Yuna
+
+# --- Arcbound Overseer ---
+:ArcboundOverseer :amplifies :ArcboundHybrid ,  # upkeep counter on modular creature
+                             :ArcboundLancer ,  # upkeep counter on modular creature
+                             :ArcboundPrototype ,  # upkeep counter on modular creature
+                             :ArcboundWandererFifthDawn103 .  # upkeep counter on modular creature
+
+# --- Architect of the Untamed ---
+:ArchitectOfTheUntamed :enables :AetherRevolt ,  # steady landfall E pings via trigger
+                                :BrudicladTelchorEngineer ,  # Provides a 6/6 artifact token for Brudiclad to mass-copy
+                                :EsixFractalBloom ,  # Its 6/6 Beast token creation becomes copies of your best creature
+                                :GontisAetherHeart ,  # The Beast artifact token entering triggers Heart for 2E
+                                :PiaNalaarChiefMechanic ,  # 6/6 artifact creature token connecting gives Pia energy
+                                :SaheeliRadiantCreator .  # Landfall energy trickle helps pay her 3E copy trigger
+
+# --- Astral Cornucopia ---
+:AstralCornucopia :enables :LuxArtillery .  # X charge counters count toward 30-counter check
+
+# --- Atmospheric Greenhouse ---
+:AtmosphericGreenhouse :enables :DuskLegionDuelist .  # ETB counter on each creature triggers draw
+
+# --- Aurora Shifter ---
+:AuroraShifter :enables :AetherRevolt ,  # combat energy gain converts to damage
+                        :SaheeliRadiantCreator .  # Combat-damage energy funds her copy trigger
+
+# --- Automated Assembly Line ---
+:AutomatedAssemblyLine :enables :AlibouAncientWitness ,  # Robot tokens attack for damage/scry
+                                :AshadTheLoneCyberman ,  # 3/3 Robots are casualty 2 fodder
+                                :AssaultronDominator .  # Robot attackers to load counters on
+
+# --- Barbara Wright ---
+:BarbaraWright :amplifies :AnUnearthlyChild ,  # read ahead picks best chapter
+                          :Blink ,  # read ahead picks best chapter
+                          :CityOfDeath ,  # read ahead picks best chapter
+                          :DayOfTheMoon ,  # read ahead picks best chapter
+                          :GenesisOfTheDaleks .  # read ahead picks best chapter
+
+# --- Battleground Geist ---
+:BattlegroundGeist :amplifies :PriestOfTheBlessedGraf .  # lord pumps its Spirit tokens
+:BattlegroundGeist :enables :ApothecaryGeist .  # Spirit body satisfies ETB condition
+
+# --- Behemoth of Vault 0 ---
+:BehemothOfVault0 :enables :AetherRevolt .  # 4E ETB burst becomes damage
+
+# --- Bessie, the Doctor's Roadster ---
+:BessieTheDoctorsRoadster :enables :CurieEmergentIntelligence ,  # Unblockable Curie always connects to draw cards
+                                   :LathrilBladeOfTheElves .  # Makes Lathril unblockable for her Elf-token damage payoff
+
+# --- Blaster Hulk ---
+:BlasterHulk :enables :AetherRevolt .  # attack energy gain triggers damage
+
+# --- Blink ---
+:Blink :enables :BrudicladTelchorEngineer .  # Alien Angel token is strong copy target
+
+# --- Blood Artist ---
+:BloodArtist :enables :CliffhavenVampire ,  # Each drain lifegain triggers extra loss
+                      :MaraudingBlightPriestZendikarRising112 ,  # Death lifegain triggers Priest drain
+                      :SphinxOfTheRevelation ,  # Death drains gain life, generating energy
+                      :VitoThornOfTheDuskRose .  # Lifegain converts to matching life loss
+
+# --- Blood Petal Celebrant ---
+:BloodPetalCelebrant :enables :BloodmadVampire .  # Blood token discard turns on madness
+
+# --- Bloodforged Battle-Axe ---
+:BloodforgedBattleAxe :enables :BrudicladTelchorEngineer .  # Equipment tokens to mass-copy
+
+# --- Bloodtithe Harvester ---
+:BloodtitheHarvesterInnistradCrimsonVow232 :enables :BloodmadVampire ,  # Blood token discard enables madness
+                                                    :GimbalGremlinProdigyMarchOfTheMachineCommander3 .  # Blood adds a differently named artifact token
+
+# --- Boon-Bringer Valkyrie ---
+:BoonBringerValkyrie :enables :YouthfulValkyrie .  # Angel ETB adds a +1/+1 counter
+
+# --- Bootleggers' Stash ---
+:BootleggersStash :enables :AdaptiveOmnitool ,  # Treasure count pumps equipped creature
+                           :BrotherhoodScribe ,  # Treasures turn on metalcraft energy tap
+                           :BrotherhoodVertibird ,  # Treasures raise artifact-count power
+                           :CityOfDeath ,  # Makes tokens for chapters to copy
+                           :CombineChrysalis ,  # Treasure tokens sac into 4/4 Beasts
+                           :CyberdriveAwakener ,  # Treasures become 4/4 flying attackers
+                           :GhirapurAetherGrid ,  # Treasure per land floods artifacts to tap
+                           :GontisAetherHeart ,  # Each Treasure ETB yields two energy
+                           :HaliyaGuidedByLight ,  # Treasure ETBs trigger lifegain toward draw
+                           :HedronDetonator ,  # Mass Treasure ETBs ping opponents repeatedly
+                           :HellkiteIgniter ,  # Treasure flood grows +X/+0 pump
+                           :HellkiteTyrant ,  # Treasure per land races to twenty artifacts
+                           :MagdaTheHoardmaster ,  # Mass Treasures fuel 3-Treasure sac payoff
+                           :MechanizedProductionMurdersAtKarlovManorCommander109 ,  # Treasure per land toward 8-copy win
+                           :NyssaOfTraken ,  # Treasure per land fuels attack sacrifices
+                           :ProfessionalFaceBreaker .  # Treasures fuel sac-for-impulse-draw
+
+# --- Brudiclad, Telchor Engineer ---
+:BrudicladTelchorEngineer :enables :DecoctionModuleAetherdriftCommander128 ,  # A Myr creature entering every combat gives repeat energy
+                                   :EraOfInnovationAetherdriftCommander75 ,  # Artifact Myr token entering each combat feeds Era
+                                   :EsixFractalBloom ,  # Combat Myr creation redirects into copies of any creature
+                                   :GontisAetherHeart ,  # Artifact Myr token entering each combat gives 2E repeatedly
+                                   :PiaNalaarChiefMechanic ,  # Hasty artifact creature tokens connecting give Pia energy
+                                   :StarfieldVocalistEdgeOfEternities78 .  # Creates extra permanent ETBs, feeding Vocalist's trigger doubling
+
+# --- Butcher Ghoul ---
+:ButcherGhoul :enables :BloodArtist ,  # Undying gives repeatable death triggers
+                       :ColonelAutumn ,  # Undying body is recurring exploit fodder
+                       :CometCrawler .  # Undying gives repeatable attack-sac fodder
+
+# --- Bygone Colossus ---
+:BygoneColossus :enables :JamieMcCrimmon ,  # Warp casts an MV9 historic twice: +9/+9 pumps with trample
+                         :StormkeldProwler .  # Warp casts MV9 spell cheaply, twice: four counters
+
+# --- Byway Barterer ---
+:BywayBarterer :enables :BloodmadVampire .  # Expend-4 hand discard triggers madness cast
+
+# --- Cathar Commando ---
+:CatharCommando :enables :SiegeVeteran .  # Self-sacrificing nontoken Soldier triggers it
+
+# --- Cathar's Call ---
+:CatharsCall :enables :ColonelAutumn ,  # Token each turn is exploit fodder
+                      :CombineChrysalis ,  # Steady tokens to sacrifice for Beasts
+                      :CrusaderOfOdric ,  # Tokens grow creature-count P/T
+                      :FalkenrathTorturer ,  # Human tokens are premium sac fodder
+                      :HamletCaptain .  # Human tokens sized up by tribal pump
+
+# --- Cayth, Famed Mechanist ---
+:CaythFamedMechanist :amplifies :CoalitionRelic ,  # Proliferate adds charge counters
+                                :HangarbackWalker .  # Proliferate grows its +1/+1 counters
+
+# --- Celes, Rune Knight ---
+:CelesRuneKnight :enables :BloodmadVampire .  # ETB mass discard casts madness for value
+
+# --- Celestial Armor ---
+:CelestialArmor :enables :EmpyreanEagle ,  # Grants flying so Eagle's flier anthem boosts the bearer
+                         :OdricLunarchMarshal .  # Granted flying gets shared to the whole team at combat
+
+# --- Cephalid Inkmage ---
+:CephalidInkmage :enables :CobbledLancer .  # Surveil stocks graveyard for exile costs
+
+# --- Chrome Host Seedshark ---
+:ChromeHostSeedshark :enables :BrudicladTelchorEngineer ,  # Incubator/Phyrexian tokens to copy
+                              :CityOfDeath .  # Incubator tokens as copy targets
+
+# --- Coalition Relic ---
+:CoalitionRelic :enables :LuxArtillery .  # Any-color mana maximizes sunburst counters
+
+# --- Cobbled Wings ---
+:CobbledWings :enables :EmpyreanEagle ,  # Grants flying so Eagle's flier anthem applies
+                       :OdricLunarchMarshal .  # Granted flying is shared team-wide at each combat
+
+# --- Colonel Autumn ---
+:ColonelAutumn :enables :BloodArtist ,  # Exploit sacrifices feed drain triggers
+                        :BloodPetalCelebrant ,  # Exploit sac converts body into Blood value
+                        :CacklingProwler ,  # Exploit deaths switch morbid on
+                        :SiegeVeteran ,  # Exploit sacrifices Soldiers, triggering token maker
+                        :SotheraTheSupervoid .  # Exploit sacrifices feed its death trigger
+
+# --- Combat Celebrant ---
+:CombatCelebrant :amplifies :CometCrawler ,  # Extra combat repeats attack-sac pump
+                            :CultOfSkaro ,  # Extra combat repeats random attack trigger
+                            :CutthroatNegotiator ,  # Extra combat repeats Treasure parley
+                            :Cybermat ,  # Extra combat re-triggers skulk pump
+                            :ElderGargaroth ,  # Extra combat doubles attack-trigger frequency
+                            :GoldspanDragon .  # Extra attack makes extra Treasure
+:CombatCelebrant :enables :AetherwindBasker ,  # Extra combat means another per-creature energy attack trigger
+                          :AuroraShifter ,  # Untap + extra combat yields more combat-damage energy triggers
+                          :BrudicladTelchorEngineer ,  # Extra combat retriggers Brudiclad's begin-combat Myr + mass-copy
+                          :DeterminedIteration ,  # Extra combat retriggers the begin-of-combat populate
+                          :PiaNalaarChiefMechanic ,  # More combats mean more artifact-creature damage energy triggers
+                          :SaheeliRadiantCreator ,  # Extra combat phase retriggers her begin-of-combat copy trigger
+                          :StoneIdolGenerator .  # Extra attacks mean more energy per attacking creature
+
+# --- Combine Chrysalis ---
+:CombineChrysalis :enables :BrudicladTelchorEngineer ,  # 4/4 Beast token is prime copy target
+                           :CaythFamedMechanist .  # Beast token is populate target
+
+# --- Combustible Gearhulk ---
+:CombustibleGearhulkAetherdriftCommander102 :enables :FeldonOfTheThirdPath .  # Self-mill stocks graveyard with creatures for Feldon to copy
+
+# --- Comet Crawler ---
+:CometCrawler :enables :BloodArtist ,  # Attack sacrifices feed death drains
+                       :CacklingProwler .  # Attack sacrifice turns morbid on
+
+# --- Conjurer's Closet ---
+:ConjurersCloset :amplifies :AetherChanneler ,  # end-step blink re-fires modal ETB
+                            :AethertideWhaleAetherdriftCommander69 ,  # Blinking Whale nets six {E} every end step
+                            :AngelOfTheRuins ,  # blink re-fires removal ETB
+                            :BloodtitheHarvesterInnistradCrimsonVow232 ,  # Blink re-fires Blood token ETB
+                            :BoonBringerValkyrie ,  # Blink re-fires Backup ETB
+                            :CampusGuide ,  # Blink repeats land-tutor ETB
+                            :ChompingKavu ,  # Blink re-fires Backup ETB
+                            :CombustibleGearhulkAetherdriftCommander102 ,  # End-step blink re-triggers ETB punisher every turn
+                            :DruidOfPurification ,  # Blink repeats artifact/enchantment sweep each turn
+                            :Duplicant ,  # Blink re-triggers Imprint exile for repeatable removal
+                            :HelpfulHunter ,  # End-step blink re-fires draw ETB
+                            :PeemaAetherSeer ,  # Blink repeats energy gain equal to greatest power
+                            :ReservoirWalker ,  # End-step blink re-fires energy+life ETB
+                            :RogueRefiner ,  # Blink repeats draw plus two {E} each turn
+                            :SkyclaveApparition ,  # End-step blink exiles a new permanent each turn
+                            :SolemnSimulacrumAetherdriftCommander138 ,  # Blink fetches a basic land every end step
+                            :StarfieldShepherd ,  # Nightly blink re-fires tutor ETB
+                            :SycoraxCommander ,  # Blink each end step re-fires ETB villainous choice
+                            :TerritorialAetherkite ,  # Blink re-fires ETB energy and sweep
+                            :ThoughtMonitor ,  # Blink re-fires draw-two ETB
+                            :ThrivingIbex ,  # Blink re-fires ETB energy gain
+                            :TowerGeist ,  # End-step blink re-fires ETB dig
+                            :TyrantOfKherRidges ,  # Blink re-fires ETB 4 damage each turn
+                            :VirusBeetle ,  # Blink re-fires discard each turn
+                            :WanderingMind .  # Blink re-fires the dig each turn
+:ConjurersCloset :enables :DecoctionModuleAetherdriftCommander128 ,  # Blinked creature re-enters, triggering energy gain each turn
+                          :PeemaAetherSeer ,  # End-step blink repeats her power-scaled energy ETB
+                          :RogueRefiner ,  # End-step blink repeats draw + 2{E} every turn
+                          :ServantOfTheConduit ,  # End-step blink repeats the 2{E} ETB every turn
+                          :SolemnSimulacrumAetherdriftCommander138 ,  # End-step flicker repeats land-search ETB every turn
+                          :StarfieldVocalistEdgeOfEternities78 .  # Creates extra permanent ETBs, feeding Vocalist's trigger doubling
+
+# --- Consulate Turret ---
+:ConsulateTurret :enables :BristlingHydra ,  # Repeatable energy feeds counter/hexproof sink
+                          :ElectrostaticPummeler .  # Energy income fuels power doubling
+
+# --- Contagion Clasp ---
+:ContagionClasp :amplifies :BrinebornCutthroat ,  # Proliferate grows its +1/+1 counters
+                           :BristlingHydra ,  # Proliferate adds energy and +1/+1 counters
+                           :BrokersAscendancy ,  # Proliferate stacks its counters further
+                           :ChromeHostSeedshark ,  # Proliferate grows incubate counters
+                           :CoalitionRelic ,  # Proliferate stacks charge counters
+                           :CrystallineCrawler ,  # Proliferate refills mana counters
+                           :DarksteelReactor ,  # Repeatable proliferate adds charge counters
+                           :DuchessWaywardTavernkeep ,  # Proliferate grows quest counters for Junk
+                           :SunstarLightsmith ,  # Repeatable proliferate grows Lightsmith's counters
+                           :TitanForge .  # Proliferate adds charge counters toward 9/9 Golem
+
+# --- Conversion Apparatus ---
+:ConversionApparatus :enables :BristlingHydra ,  # Bulk energy feeds counter/hexproof sink
+                              :BrotherhoodScribe ,  # Energy on your turn triggers team pump
+                              :ElectrostaticPummeler .  # Three energy fuels pump activation
+
+# --- Coretapper ---
+:Coretapper :enables :AstralCornucopia ,  # Charge counters grow mana output
+                     :CoalitionRelic ,  # Adds charge counters for burst mana
+                     :DarksteelReactor ,  # Adds charge counters toward 20-counter win
+                     :EmpoweredAutogenerator ,  # Adds charge counters for more mana
+                     :EverflowingChaliceMagicTheGatheringFallout230 ,  # Charge counters grow mana output
+                     :LuxCannon ,  # Two counters per sac speeds destruction
+                     :MagistratesScepter .  # Speeds charge toward extra turns
+
+# --- Coveted Jewel ---
+:CovetedJewel :enables :HeroesPodium .  # Taps for three mana to fuel Podium's X dig
+
+# --- Cult of Skaro ---
+:CultOfSkaro :enables :CybermanPatrol ,  # Dalek artifact tokens gain afflict 3
+                      :TheDalekEmperor .  # Dalek tokens feed affinity and sac engine
+
+# --- Curse of Opulence ---
+:CurseOfOpulence :enables :CyberdriveAwakener ,  # Gold tokens animate into 4/4s
+                          :MarionetteApprentice .  # Gold sacs trigger artifact-death drain
+
+# --- Cutthroat Negotiator ---
+:CutthroatNegotiator :enables :LeelaSevateemWarrior .  # Parley opponent draws give Leela counters
+
+# --- Cyberdrive Awakener ---
+:CyberdriveAwakener :enables :CultivatorsCaravan ,  # Turns uncrewed Caravan into a 4/4 attacker
+                             :Cybermat .  # Animated artifacts swell attacker count
+
+# --- Cyberman Patrol ---
+:CybermanPatrol :amplifies :Cybership .  # Cyberman artifact tokens gain afflict 3
+
+# --- Cybermen Squadron ---
+:CybermenSquadron :amplifies :Cybership .  # Grants myriad to 2/2 Cyberman artifact tokens it steals
+:CybermenSquadron :enables :EraOfInnovationAetherdriftCommander75 ,  # Myriad artifact token ETBs trigger energy
+                           :JamieMcCrimmon .  # MV7 artifact cast gives +7/+7 until end of turn
+
+# --- Cybership ---
+:Cybership :enables :EraOfInnovationAetherdriftCommander75 .  # Cyberman artifact creature tokens trigger energy on ETB
+
+# --- Cyclops Superconductor ---
+:CyclopsSuperconductor :enables :DeadlockTrap ,  # ETB energy pays recurring tap ability
+                                :ElectrostaticPummeler ,  # Energy fuels power-doubling pump
+                                :FabricationModuleKaladesh211 .  # Energy gains trigger +1/+1 counter placement
+
+# --- Dalek Drone ---
+:DalekDrone :enables :TheDalekEmperor .  # Dalek body feeds affinity for Daleks
+
+# --- Dalek Squadron ---
+:DalekSquadron :enables :TheDalekEmperor .  # Daleks reduce affinity cost and get anthem
+
+# --- Darkmoss Bridge ---
+:DarkmossBridge :enables :EmryLurkerOfTheLoch ,  # Indestructible artifact land cuts affinity cost
+                         :MasterOfEtherium ,  # Artifact land grows artifact count for P/T and pump
+                         :ThoughtMonitor .  # Indestructible artifact land cuts affinity cost
+
+# --- Darksteel Citadel ---
+:DarksteelCitadel :enables :EmryLurkerOfTheLoch .  # Indestructible artifact feeds affinity
+
+# --- Dauntless Cathar ---
+:DauntlessCathar :enables :DemonicTaskmaster ,  # Recurring token feeds upkeep sacrifice
+                          :EcstaticAwakener .  # Recurring Spirit token is sacrifice fodder
+
+# --- Dauntless Scrapbot ---
+:DauntlessScrapbot :enables :ElfswornGiant ,  # Lander fetch triggers landfall token
+                            :EvolutionSage .  # Lander fetch triggers landfall proliferate
+
+# --- Davros, Dalek Creator ---
+:DavrosDalekCreatorDoctorWhoCommander1 :enables :EntropicBattlecruiser ,  # Forced discards trigger 3-life loss
+                                                :TheDalekEmperor .  # Dalek tokens feed affinity for Daleks
+
+# --- Dawnstrike Vanguard ---
+:DawnstrikeVanguard :enables :DuskLegionDuelist .  # Mass +1/+1 counters trigger draw
+
+# --- Dazzling Angel ---
+:DazzlingAngel :enables :DinaSoulSteeper ,  # Per-creature lifegain triggers drain
+                        :EpicureOfBlood ,  # Per-creature lifegain triggers drain
+                        :MaraudingBlightPriestZendikarRising112 ,  # Repeat lifegain triggers Priest drain
+                        :SanguineBond ,  # Lifegain triggers targeted life loss
+                        :SphinxOfTheRevelation ,  # Lifegain converts to energy counters
+                        :StarscapeCleric ,  # Creature ETB lifegain fuels drain trigger
+                        :VitoThornOfTheDuskRose ,  # ETB lifegain converts to opponent life loss
+                        :YouthfulValkyrie .  # Angel ETB adds a +1/+1 counter
+
+# --- Decoction Module ---
+:DecoctionModuleAetherdriftCommander128 :enables :SaheeliRadiantCreator .  # Steady {E} income funds her EEE combat copy
+
+# --- Deepglow Skate ---
+:DeepglowSkate :amplifies :ArcboundHybrid ,  # doubles modular counters on target
+                          :ArcboundLancer ,  # doubles modular counters
+                          :ArcboundOverseer ,  # doubles its counter pile
+                          :ArcboundPrototype ,  # doubles modular counters
+                          :ArcboundWandererFifthDawn103 ,  # doubles modular counters
+                          :AstralCornucopia ,  # doubles charge counters
+                          :DarksteelReactor ,  # Doubles charge counters toward win
+                          :EmpoweredAutogenerator ,  # Doubles charge counters for ramp
+                          :EverflowingChaliceMagicTheGatheringFallout230 ,  # Doubles charge counters for mana
+                          :EzuriClawOfProgress ,  # Doubles experience counters on ETB
+                          :GavelOfTheRighteous ,  # Doubles charge counters toward double strike
+                          :HangarbackWalker ,  # Doubles +1/+1 counters for double Thopters
+                          :LunarAvenger ,  # Doubles sunburst +1/+1 counters on Avenger
+                          :LuxCannon ,  # Doubles charge counters for repeat destroys
+                          :MagistratesScepter ,  # Doubles charge counters toward extra turns
+                          :PentadPrism ,  # Doubles charge counters for extra mana
+                          :SawtoothThresher .  # Doubles sunburst counters for pump fuel
+
+# --- Demonic Taskmaster ---
+:DemonicTaskmaster :enables :BloodArtist .  # Forced upkeep sacrifices trigger drain
+
+# --- Depthshaker Titan ---
+:DepthshakerTitan :amplifies :CybermenSquadron ,  # Myriad artifact token copies gain melee and haste
+                             :Cybership .  # Cyberman tokens gain melee, trample, haste
+
+# --- Determined Iteration ---
+:DeterminedIteration :enables :StarfieldVocalistEdgeOfEternities78 .  # Creates extra permanent ETBs, feeding Vocalist's trigger doubling
+
+# --- Displaced Dinosaurs ---
+:DisplacedDinosaurs :amplifies :DauntlessScrapbot .  # Lander artifact token enters as 7/7 Dinosaur
+:DisplacedDinosaurs :enables :SaheelisLattice .  # Makes historic permanents Dinosaurs for craft
+
+# --- Don & Leo, Problem Solvers ---
+:DonLeoProblemSolvers :amplifies :AethertideWhaleAetherdriftCommander69 ,  # end-step blink re-fires 6E ETB
+                                 :CovetedJewel ,  # End-step blink redraws three, resets control
+                                 :CryogenRelic ,  # Blink draws on both leave and enter
+                                 :DalekDrone ,  # End-step blink re-fires ETB removal
+                                 :DauntlessScrapbot ,  # Blink re-fires graveyard exile and Lander ETB
+                                 :DebrisFieldCrusher ,  # Blink re-fires ETB 3-damage artifact trigger
+                                 :DeepglowSkate ,  # Blink re-fires counter-doubling ETB
+                                 :DruidOfPurification ,  # Blink re-fires ETB artifact/enchant removal
+                                 :Duplicant ,  # Blink re-fires imprint exile removal
+                                 :ElderOwynLyons .  # Blink re-fires artifact recursion trigger
+:DonLeoProblemSolvers :enables :TurtlePower .  # Turtle creature type turns on the anthem
+
+# --- Doubling Season ---
+:DoublingSeason :amplifies :AceFearlessRebel ,  # doubles +1/+1 counters from Nitro-9
+                           :AlistairTheBrigadier ,  # doubles Soldier token per historic cast
+                           :AncientImperiosaur ,  # doubles convoke ETB counters
+                           :AngelOfInvention ,  # doubles Servos or counters
+                           :AnimPakalThousandthMoon ,  # doubles counters and Gnome tokens
+                           :ArcboundHybrid ,  # doubles modular entry counters
+                           :ArcboundLancer ,  # doubles modular entry counters
+                           :ArcboundOverseer ,  # doubles modular 6 entry counters
+                           :ArcboundPrototype ,  # doubles modular entry counters
+                           :ArcboundWandererFifthDawn103 ,  # doubles sunburst modular counters
+                           :AshadTheLoneCyberman ,  # doubles sac-trigger counters
+                           :AstralCornucopia ,  # doubles X charge counters on entry
+                           :AtmosphericGreenhouse ,  # doubles team +1/+1 counters
+                           :BarrensteppeSiege ,  # doubles Abzan end-step counters
+                           :Blink ,  # Doubles Clue and Alien Angel tokens from Saga
+                           :BloodPetalCelebrant ,  # Blood token creation doubled
+                           :BloodforgedBattleAxe ,  # Equipment copy tokens doubled
+                           :BloodtitheHarvesterInnistradCrimsonVow232 ,  # Blood token creation doubled
+                           :BoonBringerValkyrie ,  # Backup +1/+1 counter doubled
+                           :BootleggersStash ,  # Treasure tokens per land doubled
+                           :BrokersAscendancy ,  # End-step counters on team doubled
+                           :BrudicladTelchorEngineer ,  # Two Myr per combat; doubled tokens feed mass token-copying
+                           :CAMP ,  # Junk tokens and +1/+1 counters doubled
+                           :CatharsCall ,  # End-step Human token doubled
+                           :CaythFamedMechanist ,  # Fabricate tokens/counters doubled
+                           :ChromeHostSeedshark ,  # Incubate tokens and counters doubled
+                           :CityOfDeath ,  # Treasure and copy chapters doubled
+                           :CrystallineCrawler ,  # Converge counters enter doubled
+                           :CultOfSkaro ,  # Dalek token mode makes two 3/3s
+                           :CurseOfOpulence ,  # Gold tokens per attack doubled
+                           :CutthroatNegotiator ,  # Parley Treasure tokens doubled
+                           :CybermenSquadron ,  # Doubles myriad token copies made by granted myriad
+                           :DalekSquadron ,  # Doubles myriad attack token copies
+                           :DarksteelReactor ,  # Doubles upkeep charge counters toward 20-win
+                           :DavrosDalekCreatorDoctorWhoCommander1 ,  # Doubles end-step Dalek token creation
+                           :DawnstrikeVanguard ,  # Doubles end-step +1/+1 counters on team
+                           :DeterminedIteration ,  # Populate makes two hasty token copies instead of one
+                           :DragonTrainer ,  # ETB 4/4 Dragon token becomes two
+                           :ElfswornGiant ,  # Doubles landfall Elf Warrior tokens
+                           :EsixFractalBloom ,  # Esix's redirected token batch is created twice over
+                           :EtchedOracle ,  # Doubles sunburst counters feeding draw sink
+                           :EverflowingChaliceMagicTheGatheringFallout230 ,  # Doubles multikicker charge counters for mana
+                           :ExtravagantReplication ,  # Two upkeep copies of your best permanent instead of one
+                           :GenesisOfTheDaleks ,  # Doubles lore counters and Dalek token output
+                           :GhiredConclaveExile ,  # Doubles Rhino and populate token output
+                           :HornetQueen ,  # Eight Insect tokens instead of four
+                           :HuntmasterOfTheFells ,  # Wolf token created twice
+                           :InfiniteGuidelineStationEdgeOfEternities219 ,  # Twice the Robot tokens
+                           :MechanizedProductionMurdersAtKarlovManorCommander109 ,  # Doubled upkeep copies race to eight same-name artifacts
+                           :PhyrexianIronworks ,  # Golem token creation doubled
+                           :PiaNalaarChiefMechanic ,  # Two X/X Vehicle tokens per end-step payment
+                           :PiaAndKiranNalaarAetherdriftCommander105 ,  # ETB makes four Thopters instead of two
+                           :PinnacleEmissaryEdgeOfEternities223 ,  # Drone per artifact cast becomes two
+                           :PridefulParent ,  # ETB Cat token doubled
+                           :PriestOfTheBlessedGraf ,  # End-step Spirit tokens doubled
+                           :ProfessionalFaceBreaker ,  # Combat Treasure creation doubled
+                           :RampagingAetherhood ,  # Doubles the +1/+1 counters: exponential upkeep growth
+                           :RashmiAndRagavan ,  # Treasure token creation doubled
+                           :ReefWorm ,  # Each death makes two bigger tokens
+                           :ReplicatingRing ,  # Eight-Ring payoff creates sixteen tokens
+                           :RestlessBloodseeker ,  # Blood token creation doubled
+                           :RetrofitterFoundry ,  # Servo/Thopter/Construct outputs doubled
+                           :SaheeliRadiantCreator ,  # Her combat copy is doubled; one hasty 5/5 copy becomes two
+                           :SaheeliTheSunsBrillianceTheLostCavernsOfIxalan239 ,  # Each activation yields two hasty artifact copies
+                           :SaiMasterThopterist ,  # Thopter per artifact cast doubled
+                           :SarahJaneSmith ,  # Clue token from investigate doubled
+                           :SatyaAetherfluxGenius ,  # Attack copy token doubled
+                           :SchemaThief ,  # Artifact-copy token doubled
+                           :ScurryOfGremlins ,  # Doubles the two Gremlin tokens on ETB
+                           :ShalaiVoiceOfPlenty ,  # Mass +1/+1 counters from activation doubled
+                           :ShardingSphinx ,  # Thopter tokens per combat damage doubled
+                           :ShaunFatherOfSynths ,  # Attacking Synth copy tokens doubled
+                           :ShivanDevastator ,  # Enters with twice X +1/+1 counters
+                           :SiegeVeteran ,  # Doubles both its counters and Soldier tokens
+                           :SkyclaveRelic ,  # Kicked copy tokens doubled to four
+                           :Solarion ,  # Its doubling ability places doubled counters
+                           :StarscapeCleric ,  # Offspring token copy doubled
+                           :StationMonitor ,  # Drone tokens per second spell doubled
+                           :StoneIdolGenerator ,  # 6/12 Construct activation makes two tokens
+                           :TheDalekEmperor ,  # Twice the 3/3 Dalek tokens
+                           :TheFifthDoctor ,  # Doubles his end-step +1/+1 counters
+                           :TheMasterGallifreysEnd ,  # Copy-token punishment doubled
+                           :TheMasterMultiplied ,  # Doubles myriad attack copies
+                           :ThePrydwenSteelFlagship ,  # Twice the 2/2 Knight tokens
+                           :TheSeaDevils ,  # Twice the 2/2 Salamander tokens per chapter
+                           :TheSixthDoctor ,  # Token copies of historic permanents doubled
+                           :TheWarGames ,  # Doubles Warrior tokens and chapter counters
+                           :ThopterAssembly ,  # Ten Thopters instead of five
+                           :ThreefoldThunderhulk ,  # Doubles Gnome tokens and +1/+1 counters
+                           :TirelessProvisioner ,  # Two tokens per land drop
+                           :TirelessTracker ,  # Doubles Clue tokens and +1/+1 counters from sacs
+                           :TitanForge ,  # Doubles charge counters and the Golem token
+                           :TriplicateTitan ,  # Death trigger yields six Golem tokens instead of three
+                           :TrostaniSelesnyasVoice ,  # Populate creates two token copies
+                           :VilespawnSpider ,  # Doubles the Insect token payout
+                           :VrestinMenoptraLeader ,  # Doubles X counters and Insect tokens
+                           :WedgelightRammer ,  # Robot token created twice over
+                           :WeirdingWood ,  # Clue token from investigate is doubled
+                           :WhirlerRogueAetherdriftCommander85 ,  # Doubles Thopter token output
+                           :WhirlerVirtuosoAetherdriftCommander122 ,  # Each paid Thopter comes with a twin
+                           :WildwoodScourge ,  # Doubles X counters and trigger counters
+                           :Zoanthrope .  # X ravenous counters enter doubled
+
+# --- Dr. Madison Li ---
+:DrMadisonLiMagicTheGatheringFallout3 :enables :ElectrostaticPummeler .  # Artifact-cast energy fuels pump
+
+# --- Dragon Trainer ---
+:DragonTrainer :enables :DeterminedIteration ,  # 4/4 Dragon token is prime populate copy
+                        :GrowingRanks ,  # 4/4 Dragon token upgrades upkeep populate
+                        :RomanaII ,  # 4/4 Dragon token is prime token to copy
+                        :SarkhanSoulAflame .  # 4/4 Dragon token entering triggers copy
+
+# --- Dragonwing Glider ---
+:DragonwingGlider :enables :EmpyreanEagle ,  # Rebel token plus flying bearer both get flier anthem
+                           :OdricLunarchMarshal .  # Granted flying and haste are shared team-wide
+
+# --- Duskwatch Recruiter // Krallenhorde Howler ---
+:DuskwatchRecruiter :enables :SilverbackElder .  # Discounts creature spells and digs for more cast triggers
+
+# --- Dynavolt Tower ---
+:DynavoltTower :enables :DeadlockTrap ,  # Spell-cast energy pays tap ability
+                        :ElectrostaticPummeler .  # Spell-cast energy fuels pump
+
+# --- Eccentric Farmer ---
+:EccentricFarmer :enables :ArcadeGannon ,  # ETB mill fills gy for recasting
+                          :FeldonOfTheThirdPath ,  # Mill stocks graveyard creatures for Feldon copies
+                          :GhoultreeInnistradRemastered198 ,  # Mill fills yard with creatures cutting cost
+                          :HearthhullTheWorldseed ,  # Returns sacrificed lands to keep drawing
+                          :SoulcipherBoard ,  # ETB mill drops creature cards to shed omen counters
+                          :TheEighthDoctor .  # Self-mill fills graveyard with historic plays
+
+# --- Echo Storm ---
+:EchoStorm :enables :StarfieldVocalistEdgeOfEternities78 .  # Creates extra permanent ETBs, feeding Vocalist's trigger doubling
+
+# --- Ecstatic Awakener // Awoken Demon ---
+:EcstaticAwakener :enables :BloodArtist ,  # Sac outlet generates death drain triggers
+                           :DockworkerDrone ,  # Sac outlet converts body to counters plus draw
+                           :EdgeRover .  # Sac outlet cashes death-trigger Lander
+
+# --- Edge Rover ---
+:EdgeRover :enables :ElfswornGiant ,  # Lander fetch triggers landfall token
+                    :EvolutionSage .  # Lander fetch triggers landfall proliferate
+
+# --- Elder Gargaroth ---
+:ElderGargaroth :enables :DeterminedIteration ,  # 3/3 Beast tokens give populate a solid target
+                         :EsixFractalBloom ,  # Beast token creation converts to copies of best creature
+                         :StarfieldVocalistEdgeOfEternities78 .  # Creates extra permanent ETBs, feeding Vocalist's trigger doubling
+
+# --- Elementalist Adept ---
+:ElementalistAdept :enables :BrinebornCutthroat .  # Flash cast on opponent's turn adds +1/+1 counter to Cutthroat
+
+# --- Elfsworn Giant ---
+:ElfswornGiant :enables :DemonicTaskmaster ,  # Landfall tokens feed upkeep sacrifice
+                        :EcstaticAwakener ,  # Token stream feeds sac-draw outlet
+                        :EsixFractalBloom .  # Landfall tokens become copies of best creature
+
+# --- Empowered Autogenerator ---
+:EmpoweredAutogenerator :enables :HeroesPodium .  # Adds X mana of one color to fuel Podium's X dig
+
+# --- Empyreal Voyager ---
+:EmpyrealVoyager :enables :DeadlockTrap ,  # Combat energy pays tap-down ability
+                          :ElectrostaticPummeler ,  # Combat energy fuels pump
+                          :FabricationModuleKaladesh211 .  # Combat energy triggers counter placement
+
+# --- Empyrean Eagle ---
+:EmpyreanEagle :amplifies :DauntlessCathar .  # Flying Spirit tokens get +1/+1 anthem
+
+# --- Emry, Lurker of the Loch ---
+:EmryLurkerOfTheLoch :amplifies :BlazingTorch .  # Recasts the sacrificed Torch from graveyard every turn
+:EmryLurkerOfTheLoch :enables :DragonsRageChanneler ,  # Recasting artifacts from graveyard repeats noncreature triggers
+                              :FirebrandArcher ,  # Graveyard artifact recasts repeat the damage trigger
+                              :GolemFoundry ,  # Graveyard recasts add extra charge counters
+                              :JhoiraWeatherlightCaptain ,  # Recasting graveyard artifacts keeps historic draws flowing
+                              :SeedshipBroodtender ,  # Self-mill stocks graveyard for its reanimation
+                              :SimianSimulacrum ,  # Mill puts it in GY for unearth value
+                              :UthrosResearchCraft .  # Recasting graveyard artifacts repeats the draw trigger
+
+# --- Enthusiastic Mechanaut ---
+:EnthusiasticMechanaut :enables :DrMadisonLiMagicTheGatheringFallout3 ,  # Cheaper artifacts mean more cast energy triggers
+                                :UthrosResearchCraft .  # Artifact cost cut means more casts, draws, charge counters
+
+# --- Era of Innovation ---
+:EraOfInnovationAetherdriftCommander75 :enables :DeadlockTrap ,  # Energy income pays tap ability
+                                                :ElectrostaticPummeler .  # Energy income fuels pump
+
+# --- Esix, Fractal Bloom ---
+:EsixFractalBloom :amplifies :DalekSquadron ,  # Turns myriad tokens into copies of best creature
+                             :DeterminedIteration ,  # Populate trigger becomes copies of any creature you choose
+                             :Duplicant .  # Redirected tokens become Duplicants, mass exile removal
+:EsixFractalBloom :enables :RogueRefiner ,  # Turns any token batch into Refiner copies: mass draw + {E}
+                           :StarfieldVocalistEdgeOfEternities78 .  # Creates extra permanent ETBs, feeding Vocalist's trigger doubling
+
+# --- Etherium Sculptor ---
+:EtheriumSculptor :enables :DrMadisonLiMagicTheGatheringFallout3 ,  # Cheaper artifacts mean more cast energy triggers
+                           :EmryLurkerOfTheLoch ,  # Discounts artifacts cast from graveyard
+                           :JhoiraWeatherlightCaptain ,  # Cheaper artifacts mean more historic casts per turn
+                           :MirrodinBesieged ,  # Cheaper artifacts = more Myr triggers
+                           :MoiraAndTeshar ,  # Cheap artifact casts spam historic reanimation
+                           :UthrosResearchCraft .  # Artifact discount raises artifact-cast density for draws
+
+# --- Everflowing Chalice ---
+:EverflowingChaliceMagicTheGatheringFallout230 :enables :DragonsRageChanneler ,  # Free {0} noncreature spell triggers surveil 1
+                                                        :EmryLurkerOfTheLoch ,  # Zero-cost artifact recast from graveyard
+                                                        :FirebrandArcher ,  # {0} noncreature spell converts to free damage
+                                                        :HeartfireImmolator ,  # Free noncreature cast triggers prowess
+                                                        :JhoiraWeatherlightCaptain ,  # {0} artifact cast cantrips off Jhoira
+                                                        :LightshellDuo ,  # Free noncreature cast triggers prowess
+                                                        :SunstarLightsmith .  # {0} spell cheaply reaches second spell each turn
+
+# --- Evolution Sage ---
+:EvolutionSage :amplifies :ArchitectOfTheUntamed ,  # landfall proliferate grows energy
+                          :AstralCornucopia ,  # proliferate adds charge counters
+                          :DarksteelReactor ,  # Landfall proliferate grows charge counters
+                          :EmpoweredAutogenerator ,  # Proliferate grows charge counters
+                          :EtchedOracle ,  # Proliferate refills sunburst counters for draws
+                          :EverflowingChaliceMagicTheGatheringFallout230 ,  # Proliferate grows charge counters
+                          :LunarAvenger ,  # Proliferate refills spent sunburst counters
+                          :MidnightClockAetherdriftCommander79 ,  # Landfall proliferate adds hour counters
+                          :ShalaiVoiceOfPlenty ,  # Proliferate grows counters Shalai spread to whole team
+                          :ShivanDevastator ,  # Landfall proliferate grows its counters
+                          :Solarion ,  # Proliferate adds to its exponential counters
+                          :SteelOverseerMagicTheGatheringFallout241 ,  # Proliferate multiplies its counter spread
+                          :Suncrusher ,  # Proliferate refills sunburst counters
+                          :TitanForge .  # Landfall proliferate grows charge counters faster
+:EvolutionSage :enables :DuskLegionDuelist ,  # Proliferate adds counters triggering draw
+                        :EzuriStalkerOfSpheres ,  # Landfall proliferate triggers Ezuri's draw
+                        :SchemingAspirant ,  # Landfall proliferate triggers drain
+                        :VenserCorpsePuppet ,  # Landfall proliferate fires Venser trigger
+                        :WildwoodScourge .  # Proliferate puts counters on others, triggering it
+
+# --- Exploration Broodship ---
+:ExplorationBroodship :enables :EvolutionSage ,  # Extra land drop gives more landfall proliferate triggers
+                               :FungalColossus ,  # Extra land drops grow differently named land count for discount
+                               :GenemorphImago ,  # Extra land drop gives more landfall pump triggers
+                               :SurveyMechan ,  # Extra land drops cut the {10} activation via land names
+                               :TannukMemorialEnsign ,  # Extra land drop per turn fuels second landfall resolution
+                               :TirelessTracker .  # Extra land drop yields extra investigate Clue
+
+# --- Extravagant Replication ---
+:ExtravagantReplication :amplifies :AethertideWhaleAetherdriftCommander69 ,  # Upkeep copy nets six {E} per turn
+                                   :CombustibleGearhulkAetherdriftCommander102 ,  # Upkeep token copy re-triggers ETB punisher
+                                   :DruidOfPurification ,  # Upkeep copy repeats the removal sweep
+                                   :Duplicant ,  # Upkeep copy exiles a creature each turn
+                                   :ImprisonedInTheMoonInnistradRemastered69 ,  # Aura copy locks a second problem permanent each upkeep
+                                   :SolemnSimulacrumAetherdriftCommander138 .  # Copy fetches land now, draws on death later
+:ExtravagantReplication :enables :GrowingRanks ,  # Its copy tokens are creature tokens for populate
+                                 :RogueRefiner ,  # Upkeep copy retriggers draw + energy ETB
+                                 :StarfieldVocalistEdgeOfEternities78 .  # Creates extra permanent ETBs, feeding Vocalist's trigger doubling
+
+# --- Ezuri, Claw of Progress ---
+:EzuriClawOfProgress :enables :FairgroundsTrumpeter .  # Combat counters satisfy end-step counter check
+
+# --- Fabrication Module ---
+:FabricationModuleKaladesh211 :enables :DuskLegionDuelist ,  # Energy-fed counters trigger draw
+                                       :FairgroundsTrumpeter .  # Counter placement each turn triggers Trumpeter growth
+
+# --- Falkenrath Torturer ---
+:FalkenrathTorturer :enables :GalvanicJuggernaut ,  # Repeated sacrifices untap Juggernaut
+                             :GhoulishProcession ,  # Sac outlet kills nontoken creatures for Zombie tokens
+                             :GleamingBarrier ,  # Sac outlet cashes death-trigger Treasure
+                             :HangarbackWalker ,  # Sac outlet releases Thopter swarm on demand
+                             :SotheraTheSupervoid ,  # Free sac outlet triggers opponent exiles
+                             :SporeCrawler .  # Sac outlet cashes in its death draw
+
+# --- Feldon of the Third Path ---
+:FeldonOfTheThirdPath :amplifies :AethertideWhaleAetherdriftCommander69 ,  # Token copy nets six {E} per activation
+                                 :DruidOfPurification ,  # Rebuys the removal ETB from the graveyard each turn
+                                 :Duplicant ,  # Classic loop: token Duplicant exiles a creature every turn
+                                 :SolemnSimulacrumAetherdriftCommander138 .  # Token copy fetches land, then draws when sacrificed
+:FeldonOfTheThirdPath :enables :AetherworksMarvelAetherdriftCommander123 ,  # End-step token sacrifice feeds Marvel's energy trigger
+                               :GontisAetherHeart ,  # Artifact token copies entering trigger Heart's energy
+                               :RogueRefiner ,  # Recurs Refiner from graveyard as hasty copy for ETB value
+                               :SolemnSimulacrumAetherdriftCommander138 ,  # Graveyard copy: ETB search, then sac gives death draw
+                               :StarfieldVocalistEdgeOfEternities78 ,  # Creates extra permanent ETBs, feeding Vocalist's trigger doubling
+                               :TriplicateTitan .  # Graveyard copy dies at end step, converting into 3 Golems
+
+# --- Fell Gravship ---
+:FellGravship :enables :GhoultreeInnistradRemastered198 .  # Mill fills yard with creatures cutting cost
+
+# --- Filigree Racer ---
+:FiligreeRacer :enables :FabricationModuleKaladesh211 ,  # Four ETB energy triggers counter placement
+                        :GuideOfSouls ,  # ETB energy funds Guide's attack counter payoff
+                        :WhirlerVirtuosoAetherdriftCommander122 .  # Four energy funds Thopter production
+
+# --- Fishing Pole ---
+:FishingPole :enables :EzuriClawOfProgress ,  # 1/1 Fish tokens entering grant experience counters
+                      :GrowingRanks ,  # Fish tokens give populate a target
+                      :GuideOfSouls .  # Fish tokens entering give life and energy
+
+# --- Fleshtaker ---
+:Fleshtaker :enables :AbyssalHarvester ,  # sac fills graveyard this turn for exile-copy
+                     :BeamsawProspector ,  # sac outlet cashes in death trigger
+                     :GleamingBarrier ,  # Sac outlet cashes death-trigger Treasure
+                     :GravpackMonoist ,  # Sac outlet cashes death-trigger Robot token
+                     :Lumberknot ,  # Repeat creature sacrifice feeds Lumberknot counters
+                     :VashtaNerada ,  # Sac outlet ensures a creature dies for morbid
+                     :ZulaportCutthroat .  # Sac outlet forces death drain triggers
+
+# --- Flux Channeler ---
+:FluxChanneler :amplifies :AetherfluxConduit ,  # noncreature casts proliferate energy
+                          :EzuriClawOfProgress ,  # Proliferate adds experience counters, bigger X pump
+                          :GavelOfTheRighteous ,  # Proliferate adds charge counters toward double strike
+                          :GenesisOfTheDaleks ,  # Proliferate adds lore counters for more Daleks
+                          :GolemFoundry ,  # Proliferate accelerates charge to Golems
+                          :HangarbackWalker ,  # Proliferate grows +1/+1 counters for more Thopters
+                          :LuxCannon ,  # Noncreature casts proliferate charge counters
+                          :MindlessAutomaton ,  # Proliferate refills counters for draws
+                          :StormkeldProwler .  # Proliferate grows the +1/+1 counters it accrues
+:FluxChanneler :enables :EzuriStalkerOfSpheres ,  # Each noncreature cast proliferates, drawing a card
+                        :SchemingAspirant .  # Repeated proliferate drains each opponent
+
+# --- Foundry Inspector ---
+:FoundryInspector :enables :EmryLurkerOfTheLoch ,  # Discounts artifact recasts from the graveyard
+                           :GolemFoundry ,  # Cheaper artifact casts mean more charge counters
+                           :UthrosResearchCraft .  # Cheaper artifact spells feed draw-and-charge trigger
+
+# --- Galactic Wayfarer ---
+:GalacticWayfarer :enables :GhirapurAetherGrid ,  # Lander token is an artifact to tap for damage
+                           :GimbalGremlinProdigyMarchOfTheMachineCommander3 ,  # Lander adds a differently named artifact token
+                           :HedronDetonator ,  # Lander token ETB triggers opponent damage
+                           :SpitfireLagac .  # Lander fetch triggers landfall damage
+
+# --- Gavel of the Righteous ---
+:GavelOfTheRighteous :enables :TheDominionBracelet .  # Stacking counters grow power, cheapening the {15} X
+
+# --- Geier Reach Bandit // Vildin-Pack Alpha ---
+:GeierReachBandit :amplifies :DuskwatchRecruiter ,  # Werewolves enter transformed to Howler side
+                             :HuntmasterOfTheFells .  # Werewolves enter transformed to Ravager side
+
+# --- Genesis of the Daleks ---
+:GenesisOfTheDaleks :enables :Fleshtaker ,  # 3/3 Dalek tokens are premium sac fodder
+                             :GrowingRanks .  # Dalek tokens give populate a strong target
+
+# --- Ghirapur Aether Grid ---
+:GhirapurAetherGrid :enables :Cryoshatter .  # 1 damage from the Grid destroys the enchanted creature
+
+# --- Ghired, Conclave Exile ---
+:GhiredConclaveExile :enables :GhaltaPrimalHunger ,  # 4/4 Rhino tokens cut Ghalta's cost by power
+                              :GrowingRanks .  # Rhino token gives populate a 4/4 target
+
+# --- Ghoulish Procession ---
+:GhoulishProcession :enables :AetherwindBasker ,  # Zombie tokens raise creature count
+                             :ArchghoulOfThraben ,  # Zombie tokens dying trigger dig
+                             :BeastKinRanger ,  # Zombie tokens entering pump it
+                             :Fleshtaker .  # Zombie tokens are sac fodder for life+scry
+
+# --- Ghoultree ---
+:GhoultreeInnistradRemastered198 :enables :Necroduality .  # Cheap 10/10 Zombie copied for free
+
+# --- Gilded Goose ---
+:GildedGoose :enables :GhirapurAetherGrid ,  # Food tokens are artifacts to tap for damage
+                      :GimbalGremlinProdigyMarchOfTheMachineCommander3 ,  # Food adds a differently named artifact token
+                      :GoddricCloakedReveler ,  # Food creation helps meet celebration count
+                      :HedronDetonator ,  # Repeatable Food ETBs ping opponents
+                      :NukaColaVendingMachine ,  # Extra Food to sac for Treasures
+                      :SelfcraftMechan .  # Food tokens are cheap artifact sac fodder
+
+# --- Gisa and Geralf ---
+:GisaAndGeralf :enables :FeldonOfTheThirdPath ,  # Mill four stocks creatures for Feldon copies
+                        :GhoultreeInnistradRemastered198 ,  # Mill cuts cost; casts Zombie Ghoultree from yard
+                        :GrimGuardian ,  # Recasts Zombie Guardian from graveyard
+                        :Necroduality ,  # Graveyard Zombie casts add copy triggers
+                        :SoulShackledZombie ,  # Recasts Zombie from yard re-firing drain ETB
+                        :TheEighthDoctor .  # Mill 4 stocks graveyard for historic recursion
+
+# --- Gisa, the Hellraiser ---
+:GisaTheHellraiser :amplifies :GhoulishProcession ,  # Zombie lord buffs decayed Zombie tokens
+                              :SiegeZombie ,  # Lord gives +1/+1 and menace to Zombie
+                              :SoulShackledZombie .  # Lord gives +1/+1 and menace to Zombie
+
+# --- Gluttonous Guest ---
+:GluttonousGuest :enables :GimbalGremlinProdigyMarchOfTheMachineCommander3 ,  # Blood adds a differently named artifact token
+                          :StensiaMasquerade .  # Blood token discard casts it for madness
+
+# --- Goldmire Bridge ---
+:GoldmireBridge :enables :EmryLurkerOfTheLoch ,  # Indestructible artifact land cuts affinity cost
+                         :MasterOfEtherium ,  # Artifact land grows artifact count for P/T and pump
+                         :ThoughtMonitor .  # Indestructible artifact land cuts affinity cost
+
+# --- Goldspan Dragon ---
+:GoldspanDragon :amplifies :BootleggersStash ,  # Stash Treasures each produce two mana
+                           :CutthroatNegotiator ,  # Parley Treasures tap for two mana
+                           :ProfessionalFaceBreaker ,  # His Treasures tap for two mana each
+                           :RashmiAndRagavan .  # Her Treasures tap for two mana each
+:GoldspanDragon :enables :GimbalGremlinProdigyMarchOfTheMachineCommander3 ,  # Treasures add a differently named artifact token
+                         :MagdaTheHoardmaster ,  # Extra Treasures feed 3-Treasure dragon sac
+                         :MechanizedProductionMurdersAtKarlovManorCommander109 ,  # Treasure flow toward same-name win
+                         :OltecMatterweaver ,  # Treasure tokens to copy on creature casts
+                         :OreplatePangolin ,  # Treasure ETBs offer counter payments
+                         :SarkhanSoulAflame .  # Dragon ETB copy target, cost reduced
+
+# --- Gonti's Aether Heart ---
+:GontisAetherHeart :enables :RoilCartographer ,  # Artifact-entry energy funds the 6{E} draw-three sink
+                            :WhirlerVirtuosoAetherdriftCommander122 .  # Thopter entries return energy for more
+
+# --- Grenzo, Havoc Raiser ---
+:GrenzoHavocRaiser :enables :TheRani .  # Goad mode feeds her investigate trigger
+
+# --- Guide of Souls ---
+:GuideOfSouls :enables :AethersquallAncientAetherdriftCommander68 ,  # energy income feeds 8E sink
+                       :DinaSoulSteeper ,  # Creature-ETB lifegain triggers drain
+                       :EpicureOfBlood ,  # Creature-ETB lifegain triggers drain
+                       :FabricationModuleKaladesh211 ,  # Energy on creature ETB triggers counter placement
+                       :MaraudingBlightPriestZendikarRising112 ,  # Per-creature lifegain triggers drain
+                       :MultiformWonder ,  # Energy per creature feeds Wonder's sinks
+                       :OverclockedElectromancer ,  # Creature ETB energy feeds combat pump
+                       :SentryBot ,  # Steady energy income pays combat EEE cost
+                       :SphinxOfTheRevelation ,  # Repeat 1-life triggers convert to energy
+                       :StarscapeCleric ,  # Lifegain triggers its each-opponent drain
+                       :StoneIdolGenerator ,  # Energy income feeds six-E Construct sink
+                       :VitoThornOfTheDuskRose .  # ETB lifegain converts to opponent life loss
+
+# --- Hangarback Walker ---
+:HangarbackWalker :enables :TheMasterGallifreysEnd ,  # Nontoken artifact creature that dies profitably
+                           :WretchedGryff ,  # Emerge sac converts Walker into Thopters
+                           :YunaGrandSummoner .  # Counter-laden death moves counters via Yuna
+
+# --- Herald of Eternal Dawn ---
+:HeraldOfEternalDawn :enables :Leveler .  # Can't-lose clause makes Leveler's total library exile safe
+
+# --- Heroes' Podium ---
+:HeroesPodium :enables :JhoiraWeatherlightCaptain .  # Tutors legendary creatures; casting them triggers historic draw
+
+# --- Hinterland Logger // Timber Shredder ---
+:HinterlandLogger :enables :HungryRidgewolf .  # Another Werewolf turns on +1/+0 trample
+
+# --- Hornet Queen ---
+:HornetQueen :enables :HoneymoonHearse ,  # Five bodies to tap two for the Hearse each combat
+                      :IndulgentAristocrat ,  # Five bodies as sacrifice fodder
+                      :JunkWinder ,  # Tokens cut its cost and fire tap trigger
+                      :VampireGourmand ,  # Four Insect tokens are attack-sac fodder
+                      :VrestinMenoptraLeader .  # Insect tokens gain counters on Insect attacks
+
+# --- Howlpack Resurgence ---
+:HowlpackResurgence :amplifies :HinterlandLogger ,  # Wolf/Werewolf lord gives +1/+1 and trample
+                               :HungryRidgewolf ,  # Wolf gets +1/+1 and trample from lord
+                               :HuntmasterOfTheFells ,  # Buffs Werewolf and its Wolf tokens
+                               :VillageMessenger ,  # Werewolf gets +1/+1 and trample
+                               :YoungWolfInnistradRemastered227 .  # Wolf gets +1/+1 and trample
+
+# --- Hullbreaker Horror ---
+:HullbreakerHorror :enables :BrinebornCutthroat .  # Flash Horror cast on opponent's turn triggers Cutthroat counter
+
+# --- Huntmaster of the Fells // Ravager of the Fells ---
+:HuntmasterOfTheFells :enables :HungryRidgewolf .  # Wolf tokens satisfy Wolf/Werewolf condition
+
+# --- Ian Chesterton ---
+:IanChesterton :amplifies :AnUnearthlyChild ,  # replicate copies the Saga
+                          :Blink ,  # Grants replicate: copies the Saga
+                          :CityOfDeath ,  # Grants replicate: copies the Saga
+                          :GenesisOfTheDaleks ,  # Grants replicate: copies the Saga
+                          :TheWarGames ,  # Grants replicate: copies the Saga
+                          :Vault112SadisticSimulation .  # Grants replicate: copies the Saga
+
+# --- Illvoi Galeblade ---
+:IllvoiGaleblade :enables :KavaronSkywarden .  # Self-sacrifice turns on void counter
+
+# --- Illvoi Light Jammer ---
+:IllvoiLightJammer :enables :EmryLurkerOfTheLoch .  # Flash hexproof saves the recursion engine from removal
+
+# --- Indulgent Aristocrat ---
+:IndulgentAristocrat :enables :BloodArtist ,  # Repeated sacs drain via death triggers
+                              :InfestationSage .  # Sac outlet converts it into Insect token
+
+# --- Inexorable Tide ---
+:InexorableTide :amplifies :AetherfluxConduit ,  # cast-proliferate grows E toward fifty
+                           :AethersquallAncientAetherdriftCommander68 ,  # proliferate speeds 8E bounce
+                           :IngeniousProdigy ,  # Proliferate refills its draw counters
+                           :InsightEngine ,  # Proliferate grows charge-counter draws
+                           :LaeliaTheBladeReforged ,  # Proliferate adds more +1/+1 counters
+                           :LibertyPrimeRecharged ,  # Proliferated energy pays attack tax
+                           :LuxArtillery ,  # Proliferate speeds 30-counter burn threshold
+                           :MagistratesScepter ,  # Spell casts proliferate charge counters
+                           :Mechanozoa ,  # Proliferate re-adds stun counter, extends lock
+                           :MidnightClockAetherdriftCommander79 ,  # Proliferate speeds 12th hour counter
+                           :StormkeldProwler ,  # Proliferate on each cast multiplies Prowler counters
+                           :ZygonInfiltrator .  # Proliferating stun counters extends the copy lock
+:InexorableTide :enables :EzuriStalkerOfSpheres ,  # Every spell proliferates, triggering draw
+                         :SchemingAspirant ,  # Spell-cast proliferate triggers drain
+                         :VenserCorpsePuppet .  # Cast-trigger proliferate fires Venser trigger
+
+# --- Infinite Guideline Station ---
+:InfiniteGuidelineStationEdgeOfEternities219 :enables :JunkWinder .  # Robot tokens: affinity plus tap triggers
+
+# --- Inspired Inventor ---
+:InspiredInventor :enables :IngeniousArtillerist ,  # Servo entering deals damage
+                           :LibertyPrimeRecharged ,  # Energy pays its attack/block upkeep
+                           :LightningRunnerAetherdriftCommander103 .  # Energy toward eight-E extra combat
+
+# --- Inspirit, Flagship Vessel ---
+:InspiritFlagshipVessel :amplifies :InfiniteGuidelineStationEdgeOfEternities219 ,  # Charge counters help station to 12+
+                                   :LarvalScoutlander .  # Charge counters station the Spacecraft
+
+# --- Intangible Virtue ---
+:IntangibleVirtue :amplifies :HornetQueen ,  # Insect tokens get +1/+1 vigilance
+                             :HuntmasterOfTheFells ,  # Wolf tokens buffed
+                             :InfiniteGuidelineStationEdgeOfEternities219 ,  # Robot tokens buffed
+                             :LathrilBladeOfTheElves ,  # Elf Warrior tokens buffed
+                             :LoyalApprenticeAetherdriftCommander104 .  # Thopter tokens buffed
+
+# --- Intrepid Provisioner ---
+:IntrepidProvisioner :enables :DawnhartDisciple .  # Human ETB pumps the Disciple
+
+# --- Izzet Generatorium ---
+:IzzetGeneratorium :amplifies :AetherfluxConduit ,  # +1 {E} per spell-cast energy trigger
+                              :AethersquallAncientAetherdriftCommander68 ,  # Upkeep 3 {E} becomes 4, faster mass bounce
+                              :DecoctionModuleAetherdriftCommander128 ,  # Adds +1 {E} to every Module trigger
+                              :EraOfInnovationAetherdriftCommander75 ,  # +1 {E} on each paid Era trigger
+                              :GontisAetherHeart ,  # Each artifact ETB gives 3 {E} instead of 2
+                              :GuideOfSouls ,  # Each creature ETB gives two energy
+                              :InspiredInventor ,  # Energy mode yields four E instead of three
+                              :LibertyPrimeRecharged ,  # +1 E per gain; spent E fuels its draw
+                              :NissaWorldsoulSpeaker ,  # +1{E} on every landfall trigger accelerates her 8{E} casts
+                              :PiaNalaarChiefMechanic ,  # +1{E} per damage trigger grows the Vehicle payoff
+                              :RampagingAetherhood ,  # +1{E} per upkeep trigger accelerates counter growth
+                              :RoilCartographer ,  # +1{E} per landfall speeds the draw-three activation
+                              :SaheeliRadiantCreator ,  # +1 {E} on each artifact/Artificer cast trigger
+                              :SolarTransformerAetherdriftCommander137 ,  # +1 {E} on its 3-energy ETB trigger
+                              :StoneIdolGenerator ,  # +1 {E} on each attack trigger
+                              :SynthEradicator ,  # Extra energy per gain fuels its 3-damage sink
+                              :T45PowerArmor ,  # Extra energy sustains upkeep keyword counters
+                              :TheMotherlodeExcavator ,  # Extra energy feeds 4-energy attack sink
+                              :UnstableAmulet ,  # Extra energy per gain fuels exile activation
+                              :Vault112SadisticSimulation ,  # Bonus energy deepens chapter III exile dig
+                              :VolatileStormdrake ,  # Extra energy keeps the stolen creature alive
+                              :VoltstormAngel ,  # Bonus energy funds combat pump modes
+                              :WhirlerVirtuosoAetherdriftCommander122 ,  # Energy+1 discounts each Thopter loop
+                              :WoodweaversPuzzleknot .  # +1 {E} on each 3-energy trigger
+
+# --- James, Wandering Dad // Follow Him ---
+:JamesWanderingDad :enables :IngeniousArtillerist ,  # Clue tokens are artifacts entering
+                            :InspiringStatuary ,  # Clues tap for improvise
+                            :JunkWinder ,  # Clues cut its cost and fire tap trigger
+                            :KappaCannoneer .  # Clue ETBs grow it and make it unblockable
+
+# --- Junk Winder ---
+:JunkWinder :enables :Cryoshatter .  # Its tap-down effect triggers Cryoshatter's destroy clause
+
+# --- Kappa Cannoneer ---
+:KappaCannoneer :enables :TurtlePower .  # Turtle body receives the +2/+2 anthem
+
+# --- Kav Landseeker ---
+:KavLandseeker :enables :Hylderblade ,  # Lander sacrifice triggers void re-attach
+                        :IcecaveCrasher ,  # Lander land fetch triggers landfall pump
+                        :InsatiableSkittermaw ,  # Lander leaving battlefield turns on void
+                        :InterceptorMechan ,  # Lander leaving battlefield turns on void
+                        :LarvalScoutlander .  # Lander feeds its sacrifice-for-lands ETB
+
+# --- Kellan Joins Up ---
+:KellanJoinsUp :enables :InspiringPaladin .  # Countered army gains first strike
+
+# --- Kilo, Apogee Mind ---
+:KiloApogeeMind :amplifies :IngeniousProdigy ,  # Proliferate refills draw counters
+                           :InsightEngine ,  # Tap-proliferate grows charge counters
+                           :InspiritFlagshipVessel ,  # Proliferate grows its charge counters
+                           :LaeliaTheBladeReforged .  # Proliferate adds +1/+1 counters
+
+# --- Kolaghan Warmonger ---
+:KolaghanWarmonger :enables :GoldspanDragon ,  # Attack trigger digs Dragons to hand
+                            :HellkiteTyrant .  # Attack trigger digs Dragons to hand
+
+# --- Kykar, Zephyr Awakener ---
+:KykarZephyrAwakener :amplifies :HornetQueen ,  # Blink makes four more Insects
+                                :HuntmasterOfTheFells ,  # Blink re-triggers Wolf token and lifegain
+                                :InterceptorMechan .  # Blink re-triggers graveyard recursion ETB
+:KykarZephyrAwakener :enables :Hylderblade ,  # Exile-blink means a permanent left: void on
+                              :InsatiableSkittermaw .  # Blink exile turns on void counter
+
+# --- Lae'zel, Vlaakith's Champion ---
+:LaezelVlaakithsChampion :amplifies :IndulgentAristocrat ,  # Extra +1/+1 counter on each Vampire
+                                    :IngeniousProdigy ,  # Enters with extra counters for draws
+                                    :InspiredInventor ,  # Energy/counter modes give one extra
+                                    :KellanJoinsUp ,  # Each counter placed becomes two
+                                    :LaeliaTheBladeReforged ,  # Exile triggers give extra counters
+                                    :LagrellaTheMagpie .  # Returned creatures get three counters
+
+# --- Larval Scoutlander ---
+:LarvalScoutlander :enables :EvolutionSage ,  # Two lands enter: proliferate twice
+                            :IcecaveCrasher .  # Two basics enter: double landfall pump
+
+# --- Legion Loyalty ---
+:LegionLoyalty :amplifies :HornetQueen ,  # Myriad copies each ETB four Insects
+                          :HuntmasterOfTheFells .  # Copies entering re-fire Wolf+life ETB
+
+# --- Leveler ---
+:Leveler :enables :LaboratoryManiac .  # Empties library so Lab Man's draw wins the game
+
+# --- Lightning Greaves ---
+:LightningGreavesDoctorWhoCommander243 :enables :EmryLurkerOfTheLoch ,  # Haste lets Emry tap at once; shroud shields her
+                                                :LathrilBladeOfTheElves .  # Hasty protected Lathril attacks for token payoff
+
+# --- Lightning Runner ---
+:LightningRunnerAetherdriftCommander103 :amplifies :CultOfSkaro ,  # Extra combats repeat random modes
+                                                   :InfiniteGuidelineStationEdgeOfEternities219 ,  # Extra combat re-fires attack draw
+                                                   :KolaghanWarmonger ,  # Extra combat doubles Dragon digs
+                                                   :LongRangeSensor .  # Extra combats add charge counters
+:LightningRunnerAetherdriftCommander103 :enables :AetherwindBasker ,  # Extra combat lets Basker attack again for {E} per creature
+                                                 :AuroraShifter ,  # Extra combat gives Shifter another combat-damage {E} trigger
+                                                 :PiaNalaarChiefMechanic ,  # Extra combat = artifact creatures deal damage again, more {E}
+                                                 :StoneIdolGenerator .  # Extra combat phases mean more attack triggers, more {E}
+
+# --- Long-Range Sensor ---
+:LongRangeSensor :enables :LaeliaTheBladeReforged .  # Discover exiles library cards: counters
+
+# --- Loyal Apprentice ---
+:LoyalApprenticeAetherdriftCommander104 :enables :IngeniousArtillerist ,  # Thopter each combat pings opponents
+                                                 :InspiringStatuary ,  # Thopters tap for improvise
+                                                 :JunkWinder ,  # Token stream taps opposing permanents
+                                                 :KappaCannoneer .  # Thopter ETB: counter plus unblockable
+
+# --- Lulu, Stern Guardian ---
+:LuluSternGuardian :amplifies :LuxCannon ,  # Proliferate adds charge counters, faster destroys
+                              :MagistratesScepter ,  # Proliferate adds charge counters toward extra turn
+                              :Mechanozoa .  # Proliferate re-adds stun counters, keeps target locked
+:LuluSternGuardian :enables :EzuriStalkerOfSpheres ,  # Her proliferate triggers Ezuri's card draw
+                            :SchemingAspirant .  # Her proliferate triggers Aspirant's 2-life drain
+
+# --- Lunarch Mantle ---
+:LunarchMantle :enables :MarionetteApprentice ,  # Free sac outlet triggers Apprentice drain
+                        :NickValentinePrivateEye .  # Sac artifact creatures to make Clues
+
+# --- Lunarch Veteran // Luminous Phantom ---
+:LunarchVeteran :enables :EpicureOfBlood ,  # Creature-ETB lifegain triggers drain
+                         :MaraudingBlightPriestZendikarRising112 .  # Each lifegain trigger drains all opponents
+
+# --- Magda, the Hoardmaster ---
+:MagdaTheHoardmaster :enables :MarionetteApprentice ,  # Treasure sacs trigger Apprentice drain
+                              :MechanizedProductionMurdersAtKarlovManorCommander109 .  # Crime Treasures toward 8-Treasure win
+
+# --- March of the Machines ---
+:MarchOfTheMachines :enables :ApocalypseRunner ,  # Animates the Vehicle so it attacks without crewing
+                             :CultivatorsCaravan ,  # Animates the mana rock Vehicle without crewing
+                             :HoneymoonHearse ,  # Becomes a 3/3 attacker without tapping creatures
+                             :NickValentinePrivateEye .  # Clue sac = artifact creature death, new Clue
+
+# --- Master of Etherium ---
+:MasterOfEtherium :enables :TheDominionBracelet .  # Artifact-count power makes mind-control nearly free
+
+# --- Masterful Replication ---
+:MasterfulReplication :enables :StarfieldVocalistEdgeOfEternities78 .  # Creates extra permanent ETBs, feeding Vocalist's trigger doubling
+
+# --- Mechanized Production ---
+:MechanizedProductionMurdersAtKarlovManorCommander109 :amplifies :CultivatorsCaravan ,  # Copies the mana-rock Vehicle every upkeep
+                                                                 :SolarTransformerAetherdriftCommander137 .  # Copy each upkeep re-triggers 3-energy ETB, builds to name-win
+:MechanizedProductionMurdersAtKarlovManorCommander109 :enables :EraOfInnovationAetherdriftCommander75 ,  # Upkeep artifact copy entering triggers Era
+                                                               :GontisAetherHeart ,  # Upkeep artifact copy triggers Heart's energy
+                                                               :SolarTransformerAetherdriftCommander137 ,  # Enchanting Transformer yields a 3{E} ETB copy every upkeep
+                                                               :StarfieldVocalistEdgeOfEternities78 ,  # Creates extra permanent ETBs, feeding Vocalist's trigger doubling
+                                                               :WoodweaversPuzzleknot .  # Enchanted Puzzleknot copies give 3 life + 3{E} each upkeep
+
+# --- Metastatic Evangel ---
+:MetastaticEvangel :amplifies :LuxCannon ,  # Creature ETBs proliferate charge counters
+                              :NissaWorldsoulSpeaker ,  # ETB proliferates grow energy stockpile
+                              :OverseerOfVault76 .  # Proliferate stacks quest counters
+:MetastaticEvangel :enables :EzuriStalkerOfSpheres ,  # Each proliferate draws a card
+                            :SchemingAspirant .  # Each proliferate drains opponents 2
+
+# --- Mirrodin Besieged ---
+:MirrodinBesieged :enables :MentorOfTheMeek ,  # Myr token ETBs trigger pay-1 draws
+                           :NyssaOfTraken ,  # Myr artifact tokens are sac fodder
+                           :OreplatePangolin .  # Myr token ETBs pay into +1/+1 counters
+
+# --- Mischievous Pup ---
+:MischievousPup :amplifies :MistRavenInnistradRemastered76 .  # Bounce and recast to re-fire tempo ETB
+
+# --- Missy ---
+:Missy :enables :TARDIS .  # Time Lord on board turns on TARDIS attack trigger
+
+# --- Moira and Teshar ---
+:MoiraAndTeshar :enables :CelesRuneKnight .  # Graveyard-to-battlefield triggers counters
+
+# --- Moldgraf Millipede ---
+:MoldgrafMillipede :enables :VilespawnSpider .  # ETB mill stocks graveyard for Insect token count
+
+# --- Moxite Refinery ---
+:MoxiteRefinery :enables :LuxCannon ,  # Moves X charge counters onto Cannon
+                         :MagistratesScepter ,  # Loads X charge counters toward extra turn
+                         :TitanForge .  # Loads charge counters for 9/9 Golems
+
+# --- Muldrotha, the Gravetide ---
+:MuldrothaTheGravetide :amplifies :MeldedMoxite ,  # Recast from graveyard for repeat loot+Robot
+                                  :MindStoneDoctorWhoCommander244 ,  # Recast sacrificed Mind Stone each turn
+                                  :NutrientBlock .  # Recast self-sac Food for repeat value
+
+# --- Myr Battlesphere ---
+:MyrBattlesphere :enables :ApocalypseRunner ,  # Four Myr tokens easily pay crew 3
+                          :CrusaderOfOdric ,  # Four Myr tokens boost creature-count P/T
+                          :CultivatorsCaravan ,  # Myr tokens pay crew 3 to turn the rock into a 5/5
+                          :CurieEmergentIntelligence ,  # Big nontoken artifact body to copy
+                          :CybermanPatrol ,  # Myr swarm weaponized with afflict
+                          :Cybermat ,  # Mass artifact attackers pump skulker
+                          :LunarchVeteran ,  # Four Myr ETBs = four lifegain triggers
+                          :MasterOfEtherium ,  # Five artifacts pump Master's power
+                          :MentorOfTheMeek ,  # Four 1/1 Myr = four draw triggers
+                          :NestingDovehawk ,  # Myr tokens to populate and stack counters
+                          :OverseerOfVault76 .  # Four small Myr = four quest counters
+
+# --- Mystic Forge ---
+:MysticForge :enables :DragonsRageChanneler ,  # Casting artifacts off the top adds noncreature casts for surveil
+                      :FirebrandArcher ,  # Artifact casts off the top each ping every opponent
+                      :HeartfireImmolator ,  # Extra artifact casts pump prowess before the sacrifice ability
+                      :JamieMcCrimmon ,  # Casting artifacts from library top adds historic pump triggers
+                      :JhoiraWeatherlightCaptain ,  # Artifact casts off the top chain draws with Jhoira
+                      :LightshellDuo ,  # Artifact casts off the top pump prowess repeatedly
+                      :LuxArtillery ,  # Top-deck artifact creature casts gain sunburst
+                      :MirrodinBesieged ,  # Cast artifacts off library, chain Myr tokens
+                      :MoiraAndTeshar ,  # Top-deck artifact casts chain historic triggers
+                      :SunstarLightsmith ,  # Casts off the top reliably provide the second spell
+                      :UthrosResearchCraft .  # Artifact casts off the top chain draws and charge counters
+
+# --- Nanoform Sentinel ---
+:NanoformSentinel :enables :FishingPole .  # Untaps equipped creature to cash bait counter
+
+# --- Necroduality ---
+:Necroduality :enables :Octomancer .  # Zombie copy tokens are fresh copy targets
+
+# --- Nerd Rage ---
+:NerdRage :enables :TheDominionBracelet .  # +10/+10 power slashes the {15} activation cost
+
+# --- Nick Valentine, Private Eye ---
+:NickValentinePrivateEye :enables :NyssaOfTraken .  # Clue tokens are attack-sac fodder
+
+# --- Nissa, Worldsoul Speaker ---
+:NissaWorldsoulSpeaker :enables :IzzetGeneratorium ,  # Paying 8 {E} for a permanent turns on the draw tap
+                                :MultiformWonder ,  # Landfall energy feeds pump/evasion sinks
+                                :OverclockedElectromancer ,  # Landfall energy pays combat +1/+1 cost
+                                :TriplicateTitan .  # 8{E} instead of {9} cheats the Titan into play early
+
+# --- Nuka-Cola Vending Machine ---
+:NukaColaVendingMachine :enables :IngeniousArtillerist ,  # Food tokens ping each opponent
+                                 :MagdaTheHoardmaster ,  # Treasures feed her 3-Treasure sac
+                                 :MarionetteApprentice ,  # Food/Treasure sacs trigger Apprentice drain
+                                 :VitoFanaticOfAclazotz .  # Food creation and sac chain fires sac triggers
+
+# --- Nutrient Block ---
+:NutrientBlock :enables :NukaColaVendingMachine .  # Food body to sac, triggers Treasure
+
+# --- Nyssa of Traken ---
+:NyssaOfTraken :amplifies :NerdRage .  # Mass draw and no max hand size hit the 10-card gate
+:NyssaOfTraken :enables :MarionetteApprentice ,  # Attack artifact sacs trigger Apprentice drain
+                        :MoiraAndTeshar .  # Sacked artifacts become reanimation targets
+
+# --- Ojer Taq, Deepest Foundation // Temple of Civilization ---
+:OjerTaqDeepestFoundation :amplifies :MirrodinBesieged ,  # Triples Myr tokens per artifact cast
+                                     :MyrBattlesphere ,  # Triples Myr tokens to twelve
+                                     :Necroduality ,  # Zombie copy tokens created in triples
+                                     :NestingDovehawk ,  # Populate creates three copies
+                                     :Octomancer ,  # End-step copy token created in triples
+                                     :OltecMatterweaver .  # Gnome/copy tokens created in triples
+
+# --- Olivia's Dragoon ---
+:OliviasDragoon :enables :BloodmadVampire ,  # Free discard outlet casts it via madness
+                         :StensiaMasquerade .  # Discard outlet turns on madness cost
+
+# --- Oltec Matterweaver ---
+:OltecMatterweaver :enables :MentorOfTheMeek .  # 1/1 Gnome per creature cast triggers draw
+
+# --- Panharmonicon ---
+:PanharmoniconAetherdriftCommander135 :amplifies :AetherChanneler ,  # doubles modal ETB trigger
+                                                 :AetherHerder ,  # doubles ETB energy trigger
+                                                 :AethersphereHarvester ,  # Vehicle artifact ETB doubled
+                                                 :AetherstormRoc ,  # creature-ETB energy trigger doubled
+                                                 :AethertideWhaleAetherdriftCommander69 ,  # Doubles Whale's own ETB: 12{E} on entry
+                                                 :AmpedRaptor ,  # doubles ETB energy/impulse trigger
+                                                 :AngelOfInvention ,  # fabricate ETB doubled
+                                                 :AngelOfTheRuins ,  # doubles ETB artifact/ench exile
+                                                 :ApothecaryGeist ,  # doubles ETB lifegain trigger
+                                                 :ArchiveDragon ,  # doubles ETB scry 2
+                                                 :AssaultronDominator ,  # doubles ETB energy trigger
+                                                 :AtmosphericGreenhouse ,  # artifact ETB counter trigger doubled
+                                                 :AuxiliaryBoosters ,  # Equipment ETB token trigger doubled
+                                                 :BehemothOfVault0 ,  # doubles 4E ETB trigger
+                                                 :BloodtitheHarvesterInnistradCrimsonVow232 ,  # Creature ETB Blood trigger doubled
+                                                 :BoonBringerValkyrie ,  # Backup ETB counter trigger doubled
+                                                 :BristlingHydra ,  # ETB energy trigger fires twice
+                                                 :CampusGuide ,  # Land-tutor ETB fires twice
+                                                 :CelesRuneKnight ,  # Loot ETB trigger fires twice
+                                                 :ChompingKavu ,  # Backup ETB counter doubled
+                                                 :CodecrackerHound ,  # Impulse ETB trigger fires twice
+                                                 :CombustibleGearhulkAetherdriftCommander102 ,  # Doubles Gearhulk's own ETB punisher trigger
+                                                 :CovetedJewel ,  # Artifact ETB draw-three doubled
+                                                 :CryogenRelic ,  # Artifact ETB draw doubled
+                                                 :CyclopsSuperconductor ,  # Doubles ETB energy trigger
+                                                 :DalekDrone ,  # Doubles ETB destroy-and-drain trigger
+                                                 :DauntlessScrapbot ,  # Doubles ETB exile and Lander trigger
+                                                 :DebrisFieldCrusher ,  # Doubles Spacecraft ETB damage trigger
+                                                 :DecoctionModuleAetherdriftCommander128 ,  # Each creature entering triggers Module twice
+                                                 :DeepglowSkate ,  # Creature ETB doubling trigger fires twice
+                                                 :DragonTrainer ,  # Doubles ETB Dragon token trigger
+                                                 :DruidOfPurification ,  # Doubles ETB sweep, two rounds of artifact/enchant removal
+                                                 :DugganPrivateDetective ,  # Doubles ETB investigate trigger
+                                                 :Duplicant ,  # Doubles Imprint trigger to exile two creatures
+                                                 :ElectrostaticPummeler ,  # Doubles ETB energy trigger
+                                                 :EraOfInnovationAetherdriftCommander75 ,  # Artifact/Artificer ETBs trigger Era twice
+                                                 :ExtinguisherBattleship ,  # Doubles artifact-ETB destroy/damage trigger
+                                                 :GontisAetherHeart ,  # Doubles energy trigger, including Heart's own ETB
+                                                 :GuideOfSouls ,  # Creature ETBs trigger Guide twice
+                                                 :HaliyaGuidedByLight ,  # Artifact/creature ETB trigger fires twice
+                                                 :HedronDetonator ,  # Artifact ETB damage trigger fires twice
+                                                 :HelpfulHunter ,  # ETB draw trigger fires twice
+                                                 :HornetQueen ,  # Creature ETB trigger fires twice
+                                                 :HuntmasterOfTheFells ,  # ETB-caused trigger doubles: extra Wolf and life
+                                                 :InfiniteGuidelineStationEdgeOfEternities219 ,  # Its artifact ETB fires twice
+                                                 :InspiredInventor ,  # ETB modal choice made twice
+                                                 :KappaCannoneer ,  # Artifact-ETB counter trigger doubled
+                                                 :KellanJoinsUp ,  # Legend ETB-caused trigger fires twice
+                                                 :MentorOfTheMeek ,  # Doubles creature-ETB draw triggers
+                                                 :MistRavenInnistradRemastered76 ,  # ETB bounce triggers twice
+                                                 :MultiformWonder ,  # ETB energy trigger yields 6 energy
+                                                 :MyrBattlesphere ,  # ETB makes eight Myr tokens
+                                                 :NebulaDragon ,  # ETB bolt deals 6 instead of 3
+                                                 :OverseerOfVault76 ,  # Creature-ETB quest triggers doubled
+                                                 :PatronOfTheValiant ,  # Doubles ETB counter-spread trigger
+                                                 :PeemaAetherSeer ,  # Doubles power-scaled ETB energy burst
+                                                 :PerigeeBeckoner ,  # Doubles ETB pump/death-return grant trigger
+                                                 :PiaAndKiranNalaarAetherdriftCommander105 ,  # Doubles ETB trigger for four Thopters
+                                                 :PyrewoodGearhulk ,  # Doubles team pump ETB trigger (+4/+4)
+                                                 :RecklessFireweaver ,  # Each artifact ETB trigger fires twice for 2 damage
+                                                 :RescueSkiff ,  # Doubles artifact ETB reanimation trigger
+                                                 :ReservoirWalker ,  # Doubles ETB trigger: 6 energy + 6 life per entry
+                                                 :RestorationAngel ,  # Doubles Angel's ETB blink trigger
+                                                 :RiddleGateGargoyle ,  # Doubles ETB energy trigger to 6 energy
+                                                 :RobobrainWarMind ,  # Doubles ETB energy-per-artifact-creature trigger
+                                                 :RogueRefiner ,  # Doubles ETB: 2 cards and 4{E} on entry
+                                                 :SeedshipBroodtender ,  # Creature ETB mill trigger doubled
+                                                 :SelfcraftMechan ,  # Creature ETB sac trigger fires twice
+                                                 :SimianSimulacrum ,  # ETB counter trigger doubled to four counters
+                                                 :SkyclaveApparition ,  # Creature ETB exile trigger doubled
+                                                 :SkyclaveRelic ,  # Artifact ETB kicker trigger fires twice
+                                                 :SolarTransformerAetherdriftCommander137 ,  # Its artifact-ETB gives 6{E} instead of 3
+                                                 :SoulGuideLanternAetherdriftCommander139 ,  # Artifact ETB graveyard exile doubled
+                                                 :SpineOfIshSah ,  # Artifact ETB destroy trigger fires twice
+                                                 :SurgeConductor ,  # Artifact-ETB-caused trigger fires an additional time
+                                                 :SycoraxCommander ,  # Creature-ETB villainous trigger fires again
+                                                 :ThePrydwenSteelFlagship ,  # Artifact-ETB Knight trigger fires twice
+                                                 :ThoughtMonitor ,  # ETB draw-two triggers twice
+                                                 :TowerGeist ,  # Doubles creature ETB dig trigger
+                                                 :TyrantOfKherRidges ,  # Doubles ETB 4-damage trigger
+                                                 :UthrosScanship ,  # Artifact ETB draw-two trigger doubles
+                                                 :VirusBeetle ,  # ETB discard trigger fires twice
+                                                 :VolatileStormdrake ,  # Doubles ETB exchange/energy trigger
+                                                 :VoltstormAngel ,  # ETB energy trigger yields six energy
+                                                 :VrestinMenoptraLeader ,  # ETB token trigger creates 2X Insects
+                                                 :WanderingMind ,  # ETB dig-six trigger fires twice
+                                                 :WarmakerGunship ,  # Artifact ETB damage trigger doubles
+                                                 :WedgelightRammer ,  # ETB Robot token trigger fires twice
+                                                 :WeftbladeEnhancer ,  # ETB counter trigger hits four targets total
+                                                 :WeftstalkerArdent ,  # Its ETB-caused ping trigger fires twice
+                                                 :WhirlerRogueAetherdriftCommander85 ,  # ETB makes four Thopters
+                                                 :WhirlerVirtuosoAetherdriftCommander122 ,  # ETB energy trigger gives six
+                                                 :WoodweaversPuzzleknot ,  # Artifact's own ETB fires twice: 6 life, 6 {E}
+                                                 :WurmwallSweeper ,  # ETB surveil 2 trigger doubles
+                                                 :Zoanthrope .  # Warp Blast ETB damage trigger doubles
+
+# --- Patrolling Peacemaker ---
+:PatrollingPeacemaker :amplifies :PeemaTrailblazer ,  # Proliferate grows energy toward 6-energy exhaust
+                                 :PentadPrism ,  # Proliferate refills charge counters for mana
+                                 :RampagingAetherhood ,  # Proliferate adds energy and +1/+1 counters
+                                 :ReplicatingRing ,  # Proliferate accelerates night counters to eight
+                                 :SawtoothThresher .  # Proliferate refills +1/+1 counters spent on pump
+:PatrollingPeacemaker :enables :SchemingAspirant .  # Each proliferate triggers 2-life drain
+
+# --- Patron of the Valiant ---
+:PatronOfTheValiant :amplifies :PatrollingPeacemaker ,  # Enters with counters, Patron adds more
+                               :QuirionBeastcaller ,  # Adds counter to cast-counter accumulator
+                               :RampagingAetherhood ,  # Adds counter once it has +1/+1 counters
+                               :SawtoothThresher .  # Adds counter to sunburst counter pool
+
+# --- Peema Aether-Seer ---
+:PeemaAetherSeer :enables :PhyrexianIronworks ,  # Power-based energy funds 3-energy Golem tokens
+                          :RexCyberHoundMagicTheGatheringFallout117 ,  # Energy funds graveyard-exile activation
+                          :SalvationColossus .  # Energy burst toward 8-energy unearth
+
+# --- Peema Trailblazer ---
+:PeemaTrailblazer :enables :PrimalPrayers ,  # Combat energy pays creature-spell energy casts
+                           :SalvationColossus .  # Combat energy toward 8-energy unearth
+
+# --- Peri Brown ---
+:PeriBrown :enables :SamiteHerbalist .  # Convoke taps Herbalist triggering lifegain/scry
+
+# --- Perigee Beckoner ---
+:PerigeeBeckoner :enables :FalkenrathTorturer ,  # Sacrifice fodder returns after dying
+                          :RagefireHellkite ,  # Sacrificed creature returns to battlefield
+                          :VampireGourmand .  # Sac-for-draw fodder returns after dying
+
+# --- Phyrexian Ironworks ---
+:PhyrexianIronworks :enables :RecklessFireweaver .  # Golem tokens are artifacts entering, ping trigger
+
+# --- Phyrexian Metamorph ---
+:PhyrexianMetamorph :amplifies :PiaAndKiranNalaarAetherdriftCommander105 ,  # Copy re-fires two-Thopter ETB
+                               :ReservoirWalker ,  # Copy re-fires energy+life ETB
+                               :RogueRefiner .  # Copy re-fires draw+energy ETB
+
+# --- Pia Nalaar, Chief Mechanic ---
+:PiaNalaarChiefMechanic :enables :StarfieldVocalistEdgeOfEternities78 .  # Creates extra permanent ETBs, feeding Vocalist's trigger doubling
+
+# --- Pia and Kiran Nalaar ---
+:PiaAndKiranNalaarAetherdriftCommander105 :enables :NickValentinePrivateEye .  # Thopter deaths via sac make Clues
+
+# --- Pinnacle Emissary ---
+:PinnacleEmissaryEdgeOfEternities223 :enables :PiaNalaarChiefMechanic ,  # Drone artifact creature tokens fuel energy trigger
+                                              :RecklessFireweaver .  # Drone tokens enter as artifacts, ping trigger
+
+# --- Plasma Caster ---
+:PlasmaCaster :enables :PiaNalaarChiefMechanic ,  # Attack energy sizes Vehicle token payoff
+                       :PrimalPrayers ,  # Attack energy pays energy creature casts
+                       :SaheeliRadiantCreator ,  # Artifact cast + attack energy fuel copies
+                       :SalvationColossus .  # Attack energy toward 8-energy unearth
+
+# --- Power Depot ---
+:PowerDepot :enables :EmryLurkerOfTheLoch ,  # Artifact land plus artifact-only mana cut affinity cost
+                     :MasterOfEtherium ,  # Artifact land grows artifact count for P/T and pump
+                     :ThoughtMonitor .  # Artifact land plus artifact-only mana cut affinity cost
+
+# --- Prideful Parent ---
+:PridefulParent :enables :PeriBrown .  # Cat tokens tap to convoke historic spells
+
+# --- Priest of the Blessed Graf ---
+:PriestOfTheBlessedGraf :enables :AetherwindBasker ,  # wide token board grows E per trigger
+                                 :AncientImperiosaur ,  # Spirit tokens convoke it out
+                                 :ApothecaryGeist ,  # Spirits on board enable ETB lifegain
+                                 :BarrensteppeSiege ,  # wide board maximizes Abzan counters
+                                 :PeriBrown ,  # End-step Spirits tap to convoke historic spells
+                                 :PinnacleKillShip ,  # Spirit bodies tap to station the Spacecraft
+                                 :RagefireHellkite .  # Spirit tokens as attack sacrifice fodder
+
+# --- Primal Prayers ---
+:PrimalPrayers :enables :QuirionBeastcaller ,  # Free energy creature casts stack counters
+                        :SilverbackElder .  # Energy-cast flash creatures add extra creature-cast triggers
+
+# --- Professional Face-Breaker ---
+:ProfessionalFaceBreaker :enables :MagdaTheHoardmaster ,  # Combat Treasures feed her 3-Treasure sac
+                                  :PiaAndKiranNalaarAetherdriftCommander105 ,  # Treasures are artifact fodder for damage sac
+                                  :SandsteppeWarRiders .  # Treasure adds differently named artifact token
+
+# --- Ragefire Hellkite ---
+:RagefireHellkite :enables :AbyssalHarvester ,  # attack sac puts fresh creature in gy to copy
+                           :AetherworksMarvelAetherdriftCommander123 ,  # attack sacs feed energy per death
+                           :SarkhanSoulAflame .  # Dragon ETB lets Sarkhan copy it
+
+# --- Rampaging Aetherhood ---
+:RampagingAetherhood :enables :PeemaAetherSeer .  # Self-growing Hydra raises greatest power for Peema's ETB
+
+# --- Razortide Bridge ---
+:RazortideBridgeMagicTheGatheringFallout281 :enables :EmryLurkerOfTheLoch ,  # Indestructible artifact land cuts affinity cost
+                                                     :MasterOfEtherium ,  # Artifact land grows artifact count for P/T and pump
+                                                     :ThoughtMonitor .  # Indestructible artifact land cuts affinity cost
+
+# --- Reckoner Bankbuster ---
+:ReckonerBankbuster :enables :SandsteppeWarRiders .  # Treasure token adds a distinct artifact name
+
+# --- Reef Worm ---
+:ReefWorm :enables :RagefireHellkite ,  # Sac fodder that upgrades into bigger tokens
+                   :RassilonTheWarPresident ,  # Blue token bodies tap for conspire copies
+                   :WretchedGryff .  # Emerge fodder that leaves a 3/3 Fish behind
+
+# --- Renegade Silent ---
+:RenegadeSilent :enables :TheRani .  # End-step goad feeds her investigate trigger
+
+# --- Reservoir Walker ---
+:ReservoirWalker :enables :PeemaTrailblazer ,  # ETB 3 energy feeds 6-energy exhaust
+                          :PhyrexianIronworks ,  # ETB energy funds 3-energy Golem activation
+                          :PiaNalaarChiefMechanic ,  # ETB energy sizes X/X Vehicle token
+                          :PrimalPrayers ,  # ETB energy pays for energy creature casts
+                          :RazorfieldRipper ,  # Energy reserve raises +X/+X attack pump
+                          :RestlessBloodseeker ,  # ETB lifegain turns on Blood token trigger
+                          :RexCyberHoundMagicTheGatheringFallout117 ,  # ETB energy funds brain-counter exiles
+                          :RobobrainWarMind ,  # Artifact creature body plus energy for draws
+                          :SaheeliRadiantCreator ,  # ETB energy pays 3-energy copy activation
+                          :SanguineBond ,  # ETB lifegain triggers 3-life drain
+                          :SatyaAetherfluxGenius .  # ETB energy pays to keep copy tokens
+
+# --- Resourceful Defense ---
+:ResourcefulDefense :amplifies :PatrollingPeacemaker ,  # Moves its +1/+1 counters when it dies
+                               :SawtoothThresher .  # Preserves counters when Thresher leaves play
+
+# --- Restless Bloodseeker // Bloodsoaked Reveler ---
+:RestlessBloodseeker :enables :SandsteppeWarRiders .  # Blood adds differently named artifact token
+
+# --- Restoration Angel ---
+:RestorationAngel :amplifies :AetherChanneler ,  # flash blink re-fires modal ETB
+                             :AethertideWhaleAetherdriftCommander69 ,  # blink re-fires 6E ETB
+                             :CombustibleGearhulkAetherdriftCommander102 ,  # Flicker re-fires punisher ETB
+                             :HelpfulHunter ,  # Flash blink re-fires draw ETB
+                             :MistRavenInnistradRemastered76 ,  # Flash blink re-fires bounce ETB
+                             :PeemaAetherSeer ,  # Blink re-fires power-based energy ETB
+                             :PiaAndKiranNalaarAetherdriftCommander105 ,  # Blink re-fires two-Thopter ETB
+                             :PyrewoodGearhulk ,  # Blink re-fires team pump ETB
+                             :ReservoirWalker ,  # Blink re-fires energy+life ETB
+                             :RogueRefiner ,  # Blink re-fires draw+energy ETB
+                             :SkyclaveApparition ,  # Flash blink re-fires the exile ETB
+                             :SolemnSimulacrumAetherdriftCommander138 .  # Blink re-fires land-fetch ETB
+:RestorationAngel :enables :YouthfulValkyrie .  # Angel ETB adds a +1/+1 counter
+
+# --- Retrofitter Foundry ---
+:RetrofitterFoundry :enables :PiaNalaarChiefMechanic ,  # Servo/Thopter artifact creatures deal damage for energy
+                             :RashmiAndRagavan ,  # Token engine raises artifact count for free casts
+                             :RecklessFireweaver ,  # Repeatable artifact tokens ping each entry
+                             :RobobrainWarMind ,  # Artifact creature tokens raise ETB energy
+                             :SandsteppeWarRiders .  # Three differently named artifact tokens for bolster
+
+# --- Riddle Gate Gargoyle ---
+:RiddleGateGargoyle :enables :PrimalPrayers ,  # ETB 3 energy pays energy creature casts
+                             :RazorfieldRipper .  # ETB energy raises +X/+X attack pump
+
+# --- Roaming Throne ---
+:RoamingThrone :amplifies :AethersquallAncientAetherdriftCommander68 ,  # Naming Leviathan gives 6{E} per upkeep
+                          :AetherwindBasker ,  # Naming Lizard doubles enter/attack {E}-per-creature trigger
+                          :AlistairTheBrigadier ,  # Human-named Throne doubles trigger
+                          :AnimPakalThousandthMoon ,  # Human-named Throne doubles trigger
+                          :ArchghoulOfThraben ,  # Zombie-named Throne doubles trigger
+                          :CombustibleGearhulkAetherdriftCommander102 ,  # Naming Construct doubles Gearhulk's ETB trigger
+                          :DragonsRageChanneler ,  # Throne on Human doubles the cast-trigger surveil
+                          :ElderGargaroth ,  # Naming Beast doubles attack/block modal trigger
+                          :FirebrandArcher ,  # Throne on Human doubles damage per noncreature cast
+                          :HeartfireImmolator ,  # Throne on Human doubles prowess triggers
+                          :JamieMcCrimmon ,  # Throne on Human doubles the historic pump trigger
+                          :JhoiraWeatherlightCaptain ,  # Throne on Human doubles draw per historic cast
+                          :LightningRunnerAetherdriftCommander103 ,  # Naming Human/Warrior doubles attack trigger: 4{E} per attack
+                          :LightshellDuo ,  # Throne on Otter doubles prowess triggers
+                          :NissaWorldsoulSpeaker ,  # Naming Druid/Elf doubles landfall trigger to 4{E} per land
+                          :PatronOfTheValiant ,  # Name Angel: counter-spread ETB fires twice
+                          :PeemaAetherSeer ,  # Naming Druid/Elf doubles her power-scaled ETB energy
+                          :PiaNalaarChiefMechanic ,  # Naming Artificer/Human doubles her damage and end-step triggers
+                          :PiaAndKiranNalaarAetherdriftCommander105 ,  # Name Human: four Thopters on ETB
+                          :QuirionBeastcaller ,  # Name Dryad: cast-counter trigger doubles
+                          :RampagingAetherhood ,  # Naming Hydra doubles the upkeep energy/counter trigger
+                          :RecklessFireweaver ,  # Name Human: artifact-ETB ping doubles
+                          :ReefWorm ,  # Name Worm: death trigger makes two Fish
+                          :SaheeliRadiantCreator ,  # Naming Artificer doubles cast-{E} and combat copy triggers
+                          :SilverbackElder ,  # Throne on Ape doubles the modal creature-cast trigger
+                          :SolemnSimulacrumAetherdriftCommander138 ,  # Choose Golem: doubles both ETB search and death draw
+                          :StormkeldProwler ,  # Throne on Human doubles the two-counter trigger
+                          :SunstarLightsmith ,  # Throne on Human doubles counter-and-draw trigger
+                          :TriplicateTitan .  # Choose Golem: death trigger fires twice for six tokens
+
+# --- Roil Cartographer ---
+:RoilCartographer :enables :RexCyberHoundMagicTheGatheringFallout117 ,  # Landfall energy funds activations
+                           :SalvationColossus .  # Landfall energy toward 8-energy unearth
+
+# --- Romana II ---
+:RomanaII :amplifies :PridefulParent ,  # Copies the ETB Cat token
+                     :PriestOfTheBlessedGraf ,  # Copies a fresh end-step Spirit token
+                     :ReefWorm ,  # Copies Fish/Whale/Kraken token on entry
+                     :SchemaThief .  # Copies the stolen-artifact token
+
+# --- Rustvale Bridge ---
+:RustvaleBridgeMagicTheGatheringFallout285 :enables :EmryLurkerOfTheLoch ,  # Indestructible artifact land cuts affinity cost
+                                                    :MasterOfEtherium ,  # Artifact land grows artifact count for P/T and pump
+                                                    :ThoughtMonitor .  # Indestructible artifact land cuts affinity cost
+
+# --- Saheeli, Radiant Creator ---
+:SaheeliRadiantCreator :amplifies :CombustibleGearhulkAetherdriftCommander102 ,  # Combat copy re-triggers ETB damage/draw punisher
+                                  :DruidOfPurification ,  # Combat copy re-triggers the multi-target removal ETB
+                                  :Duplicant ,  # Copy exiles another creature each combat
+                                  :PiaAndKiranNalaarAetherdriftCommander105 ,  # Hasty copy re-fires Thopter ETB
+                                  :PyrewoodGearhulk .  # Copy re-fires team pump ETB
+:SaheeliRadiantCreator :enables :AethertideWhaleAetherdriftCommander69 ,  # Copying Whale re-fires its 6{E} ETB each combat
+                                :GontisAetherHeart ,  # Artifact casts and artifact copy tokens fuel Heart's 8E turn
+                                :PeemaAetherSeer ,  # Copy token retriggers ETB; 5/5 body raises the power count
+                                :RogueRefiner ,  # Combat copy token retriggers draw + 2{E} ETB
+                                :SolemnSimulacrumAetherdriftCommander138 ,  # Copy gets ETB search; end-step sac triggers death draw
+                                :StarfieldVocalistEdgeOfEternities78 ,  # Creates extra permanent ETBs, feeding Vocalist's trigger doubling
+                                :TriplicateTitan .  # 5/5 copy sacked at end step dies, leaving 3 Golems that stay
+
+# --- Saheeli, the Sun's Brilliance ---
+:SaheeliTheSunsBrillianceTheLostCavernsOfIxalan239 :amplifies :Duplicant .  # Repeatable token copy re-triggers exile removal
+:SaheeliTheSunsBrillianceTheLostCavernsOfIxalan239 :enables :AethertideWhaleAetherdriftCommander69 ,  # Tap to copy Whale: 6{E} per activation
+                                                            :Duplicant ,  # Copying Duplicant is repeatable exile removal each turn
+                                                            :PeemaAetherSeer ,  # Hasty copy each turn re-fires her energy ETB
+                                                            :RogueRefiner ,  # Each activation copies Refiner for a card and 2{E}
+                                                            :SolemnSimulacrumAetherdriftCommander138 ,  # Copy fetches a land; sac at end step even draws a card
+                                                            :StarfieldVocalistEdgeOfEternities78 ,  # Creates extra permanent ETBs, feeding Vocalist's trigger doubling
+                                                            :TriplicateTitan .  # Temp copy dies when sacked, leaving three Golem tokens
+
+# --- Sai, Master Thopterist ---
+:SaiMasterThopterist :enables :BrotherhoodVertibird ,  # Thopter tokens raise artifact count
+                              :CybermanPatrol ,  # Thopter tokens all gain afflict 3
+                              :MasterOfEtherium ,  # Thopter stream grows Master, gets lord buff
+                              :NickValentinePrivateEye ,  # Thopter tokens die into Clue draws
+                              :PiaNalaarChiefMechanic ,  # Thopter artifact creatures trigger energy gain
+                              :RashmiAndRagavan ,  # Thopters raise artifact count for free casts
+                              :RecklessFireweaver ,  # Thopter per artifact cast pings opponents
+                              :RobobrainWarMind ,  # Thopters raise artifact-creature ETB energy
+                              :SentinelSarahLyons ,  # Thopters keep artifacts entering and raise artifact count
+                              :ShardingSphinx ,  # Cheap artifact fliers to connect for more Thopters
+                              :ShimmerDragon ,  # Thopters reach 4 artifacts for hexproof and draw fuel
+                              :SteelOverseerMagicTheGatheringFallout241 .  # Thopter swarm to grow with counters
+
+# --- Samite Herbalist ---
+:SamiteHerbalist :enables :RestlessBloodseeker ,  # Tap lifegain turns on Blood token trigger
+                          :SanguineBond .  # Tap lifegain triggers targeted drain
+
+# --- Sanitarium Skeleton ---
+:SanitariumSkeleton :enables :RagefireHellkite ,  # Recurring sacrifice fodder from graveyard
+                             :VampireGourmand .  # Recurring fodder for attack sac-draw
+
+# --- Sarah Jane Smith ---
+:SarahJaneSmith :enables :FiveHundredYearDiary ,  # Historic-cast Clues grow Diary's mana ability
+                         :RecklessFireweaver ,  # Clue tokens enter as artifacts, ping trigger
+                         :SandsteppeWarRiders .  # Clue adds a differently named artifact token
+
+# --- Satya, Aetherflux Genius ---
+:SatyaAetherfluxGenius :amplifies :PiaAndKiranNalaarAetherdriftCommander105 ,  # Attack copy re-fires Thopter ETB
+                                  :ReservoirWalker .  # Attack copy re-fires energy+life ETB
+
+# --- Scheming Aspirant ---
+:SchemingAspirant :enables :RestlessBloodseeker ,  # Proliferate drain gains life for Blood trigger
+                           :SanguineBond .  # Proliferate lifegain triggers drain
+
+# --- Scurry of Gremlins ---
+:ScurryOfGremlins :enables :BessieTheDoctorsRoadster ,  # Two hasty Gremlin tokens pay crew 2 immediately
+                           :EzuriClawOfProgress ,  # 1/1 Gremlins entering grant experience counters
+                           :FabricationModuleKaladesh211 ,  # Mass energy gain triggers counter placement
+                           :Fleshtaker ,  # Gremlin tokens are sac fodder for life+scry
+                           :GoddricCloakedReveler ,  # Two token ETBs turn on celebration
+                           :GuideOfSouls ,  # Gremlin ETBs give life and energy
+                           :HoneymoonHearse ,  # Two hasty tokens tap immediately to crew the Hearse
+                           :OverclockedElectromancer ,  # Burst energy pays 3-energy counter cost
+                           :SiegeZombie .  # Gremlin tokens pay the tap-three-creatures cost
+
+# --- Seedship Agrarian ---
+:SeedshipAgrarian :enables :SelfcraftMechan ,  # Lander tokens are artifact sacrifice fodder
+                           :SpitfireLagac .  # Lander fetches land, triggering landfall damage
+
+# --- Seedship Broodtender ---
+:SeedshipBroodtender :enables :SoulcipherBoard ,  # ETB mill puts creature cards in GY, removing omen counters
+                              :VilespawnSpider .  # Mill three grows creature count in graveyard
+
+# --- Shalai, Voice of Plenty ---
+:ShalaiVoiceOfPlenty :enables :DuskLegionDuelist ,  # Counter placement triggers its draw
+                              :MeltstriderEulogist .  # Gives all creatures counters so deaths draw cards
+
+# --- Sharding Sphinx ---
+:ShardingSphinx :enables :SentinelSarahLyons .  # Thopter tokens grow battalion artifact-count damage
+
+# --- Shaun, Father of Synths ---
+:ShaunFatherOfSynths :enables :SentinelSarahLyons .  # Synth artifact tokens enter, turning on +2/+2
+
+# --- Shivan Devastator ---
+:ShivanDevastator :enables :SarkhanSoulAflame .  # X-cost Dragon entering triggers copy
+
+# --- Siege Zombie ---
+:SiegeZombie :enables :KiloApogeeMind ,  # Tap cost taps Kilo, triggering proliferate
+                      :SamiteHerbalist .  # Tap cost triggers Herbalist life and scry
+
+# --- Sigiled Sentinel ---
+:SigiledSentinel :enables :DuskLegionDuelist .  # Backup counter on Duelist draws a card
+
+# --- Silverbluff Bridge ---
+:SilverbluffBridgeMagicTheGatheringFallout290 :enables :EmryLurkerOfTheLoch ,  # Indestructible artifact land cuts affinity cost
+                                                       :MasterOfEtherium ,  # Artifact land grows artifact count for P/T and pump
+                                                       :ThoughtMonitor .  # Indestructible artifact land cuts affinity cost
+
+# --- Silverquill Lecturer ---
+:SilverquillLecturer :amplifies :SolemnSimulacrumAetherdriftCommander138 .  # Demonstrate copy re-fires ramp ETB as token
+
+# --- Simian Simulacrum ---
+:SimianSimulacrum :enables :DuskLegionDuelist .  # ETB counters on Duelist trigger its draw
+
+# --- Skyseer's Chariot ---
+:SkyseersChariot :enables :KiloApogeeMind ,  # Crew tap triggers Kilo's proliferate
+                          :SeedshipAgrarian .  # Crewing taps Agrarian for a Lander token
+
+# --- Slagwoods Bridge ---
+:SlagwoodsBridgeAetherdriftCommander171 :enables :EmryLurkerOfTheLoch ,  # Indestructible artifact land cuts affinity cost
+                                                 :MasterOfEtherium ,  # Artifact land grows artifact count for P/T and pump
+                                                 :ThoughtMonitor .  # Indestructible artifact land cuts affinity cost
+
+# --- Sledge-Class Seedship ---
+:SledgeClassSeedship :enables :KiloApogeeMind ,  # Station tap triggers Kilo's proliferate
+                              :SeedshipAgrarian ,  # Station taps Agrarian, triggering Lander creation
+                              :StarfighterPilot .  # Station taps Pilot for surveil trigger
+
+# --- Solar Array ---
+:SolarArray :enables :Solarion ,  # Any-color mana maximizes sunburst counters
+                     :Suncrusher .  # Any-color mana maximizes sunburst counters
+
+# --- Solar Transformer ---
+:SolarTransformerAetherdriftCommander137 :enables :AetherworksMarvelAetherdriftCommander123 ,  # 3 energy on ETB stocks Marvel's 6-energy free-cast activation
+                                                  :PrimalPrayers ,  # 3 energy = up to 3 free creature casts via Prayers
+                                                  :SaheeliRadiantCreator ,  # ETB 3 energy funds Saheeli's {E}{E}{E} combat copy activation
+                                                  :SentryBot .  # Energy income feeds its EEE team-counter sink
+
+# --- Solemn Simulacrum ---
+:SolemnSimulacrumAetherdriftCommander138 :enables :FungalColossus ,  # Fetches land, raising differently named land count for discount
+                                                  :NissaWorldsoulSpeaker ,  # Fetched land enters, triggering her landfall for 2{E}
+                                                  :RoilCartographer ,  # Fetched land triggers its landfall for {E}
+                                                  :SurveyMechan ,  # Fetches land, cutting X activation cost via land names
+                                                  :TannukMemorialEnsign .  # Fetches basic to battlefield, extra landfall trigger
+
+# --- Somberwald Sage ---
+:SomberwaldSage :enables :ShivanDevastator .  # Creature-only mana pumps X for huge hasty flier
+
+# --- Sonic Screwdriver ---
+:SonicScrewdriver :amplifies :SteelOverseerMagicTheGatheringFallout241 .  # Untaps Overseer for second counter activation
+
+# --- Specimen Freighter ---
+:SpecimenFreighter :enables :StarfighterPilot .  # Station taps Pilot, triggering surveil
+
+# --- Spectral Shepherd ---
+:SpectralShepherd :amplifies :DrogskolShieldmate ,  # Bounces Spirit to rebuy flash team-pump ETB
+                             :SkyclaveApparition .  # Bounces the Spirit to replay its exile ETB
+
+# --- Squire's Lightblade ---
+:SquiresLightblade :enables :OdricLunarchMarshal .  # First strike on the bearer is shared team-wide
+
+# --- Starfield Vocalist ---
+:StarfieldVocalistEdgeOfEternities78 :amplifies :AbundantGrowth ,  # doubles Aura ETB draw trigger
+                                                :ArchitectOfTheUntamed ,  # Doubles this card's trigger from permanents entering (Vocalist rule)
+                                                :BanishToAnotherUniverse ,  # doubles ETB exile trigger
+                                                :BanishingLight ,  # doubles ETB exile trigger
+                                                :BloodtitheHarvesterInnistradCrimsonVow232 ,  # ETB trigger fires twice
+                                                :CampusGuide ,  # ETB trigger fires twice
+                                                :CovetedJewel ,  # ETB draw trigger fires twice
+                                                :DalekDrone ,  # Doubles ETB Exterminate trigger
+                                                :DecoctionModuleAetherdriftCommander128 ,  # Doubles this card's trigger from permanents entering (Vocalist rule)
+                                                :EraOfInnovationAetherdriftCommander75 ,  # Doubles this card's trigger from permanents entering (Vocalist rule)
+                                                :GontisAetherHeart ,  # Doubles this card's trigger from permanents entering (Vocalist rule)
+                                                :NissaWorldsoulSpeaker ,  # Doubles this card's trigger from permanents entering (Vocalist rule)
+                                                :RoilCartographer ,  # Doubles this card's trigger from permanents entering (Vocalist rule)
+                                                :ScurryOfGremlins ,  # Enchantment ETB trigger fires an additional time
+                                                :SeamRip ,  # ETB exile trigger fires twice, exiling two permanents
+                                                :SkyclaveApparition ,  # ETB exile trigger fires an additional time
+                                                :TannukMemorialEnsign ,  # Doubles landfall trigger; land entering is a permanent entering
+                                                :ThePrydwenSteelFlagship ,  # Permanent-ETB Knight trigger doubled
+                                                :TowerGeist ,  # Doubles ETB look-at-top-two trigger
+                                                :TyrantOfKherRidges ,  # Doubles ETB burn trigger
+                                                :UthrosScanship ,  # Doubles ETB draw-two-discard-one trigger
+                                                :VirusBeetle ,  # Doubles ETB opponent-discard trigger
+                                                :WedgelightRammer ,  # Doubles ETB Robot token trigger
+                                                :WeirdingWood ,  # Aura ETB investigate trigger doubles
+                                                :WhirlerRogueAetherdriftCommander85 .  # ETB Thopter trigger doubles
+
+# --- Steel Overseer ---
+:SteelOverseerMagicTheGatheringFallout241 :enables :Solarion ,  # Adds counters for Solarion to double
+                                                   :StarportSecurity ,  # Counter on creature discounts its tap ability
+                                                   :Suncrusher .  # Refills counters spent on removal ability
+
+# --- Stensia Masquerade ---
+:StensiaMasquerade :enables :DuskLegionDuelist .  # Vampire combat counter triggers its draw
+
+# --- Stitched Mangler ---
+:StitchedMangler :enables :Necroduality .  # Copy doubles ETB tap-lock effect
+
+# --- Stone Idol Generator ---
+:StoneIdolGenerator :enables :BrudicladTelchorEngineer ,  # 6/12 Construct is prime target to copy across all tokens
+                             :DeterminedIteration ,  # 6/12 Construct token is a premium populate target
+                             :EsixFractalBloom ,  # Token creation converts into copies of best creature via Esix
+                             :StarfieldVocalistEdgeOfEternities78 .  # Creates extra permanent ETBs, feeding Vocalist's trigger doubling
+
+# --- Stridehangar Automaton ---
+:StridehangarAutomaton :amplifies :SeedshipAgrarian ,  # Lander is artifact token; adds bonus Thopter
+                                  :ShardingSphinx ,  # Extra Thopter per batch plus Thopter lord
+                                  :SkyclaveRelic ,  # Artifact token copies come with bonus Thopter
+                                  :StationMonitor ,  # Drone artifact token comes with bonus Thopter
+                                  :StoneIdolGenerator ,  # Construct artifact token gains bonus Thopter
+                                  :ThopterAssembly .  # Thopter lord plus bonus Thopter on creation
+
+# --- Sundial of the Infinite ---
+:SundialOfTheInfinite :amplifies :DeterminedIteration ,  # Ends turn to keep the populated hasty token permanently
+                                 :FeldonOfTheThirdPath ,  # Ends turn to permanently keep Feldon's graveyard copy
+                                 :SaheeliRadiantCreator ,  # End turn with sac trigger on stack: keep 5/5 copy forever
+                                 :SaheeliTheSunsBrillianceTheLostCavernsOfIxalan239 ,  # Ends turn to keep her temporary artifact copy forever
+                                 :StarfieldVocalistEdgeOfEternities78 .  # Ends turn to exile-counter warp trigger; Vocalist stays
+:SundialOfTheInfinite :enables :StarbreachWhale ,  # End turn with warp trigger on stack keeps Whale
+                               :StarfieldShepherd .  # End turn dodges warp end-step exile
+
+# --- Surge Conductor ---
+:SurgeConductor :amplifies :TheFifthDoctor ,  # Proliferate multiplies his end-step +1/+1 counters
+                           :ThrivingIbex .  # Proliferate adds extra energy and +1/+1 counters
+
+# --- Survivor's Med Kit ---
+:SurvivorsMedKit :enables :TheThirdDoctor .  # Food tokens grow his noncreature-token buff
+
+# --- Swiftfoot Boots ---
+:SwiftfootBoots :enables :CurieEmergentIntelligence ,  # Hasty protected Curie attacks to draw immediately
+                         :EmryLurkerOfTheLoch .  # Haste for instant tap ability; hexproof protects her
+
+# --- Synth Eradicator ---
+:SynthEradicator :enables :FabricationModuleKaladesh211 ,  # Attack energy gains trigger +1/+1 counter
+                          :UnstableAmulet .  # Casting exiled cards triggers non-hand cast damage
+
+# --- Synth Infiltrator ---
+:SynthInfiltrator :amplifies :ThoughtMonitor .  # Entering as its copy repeats draw-two ETB
+
+# --- Taii Wakeen, Perfect Shot ---
+:TaiiWakeenPerfectShot :amplifies :ThermoAlchemist .  # Adds X to pings; boosts noncombat damage output
+
+# --- Tanglepool Bridge ---
+:TanglepoolBridgeAetherdriftCommander175 :enables :EmryLurkerOfTheLoch ,  # Indestructible artifact land cuts affinity cost
+                                                  :MasterOfEtherium ,  # Artifact land grows artifact count for P/T and pump
+                                                  :ThoughtMonitor .  # Indestructible artifact land cuts affinity cost
+
+# --- Tekuthal, Inquiry Dominus ---
+:TekuthalInquiryDominus :amplifies :AetherfluxConduit ,  # proliferate twice doubles E growth
+                                   :EvolutionSage ,  # Landfall proliferate resolves twice
+                                   :EzuriStalkerOfSpheres ,  # Doubles each proliferate, doubling draws
+                                   :FluxChanneler ,  # Doubles each cast-triggered proliferate
+                                   :InexorableTide ,  # Doubles each proliferate
+                                   :KiloApogeeMind ,  # Doubles each proliferate
+                                   :MetastaticEvangel ,  # Each proliferate becomes proliferate twice
+                                   :SchemingAspirant ,  # Proliferate twice doubles drain triggers
+                                   :SurgeConductor ,  # Doubles Surge Conductor's per-artifact-ETB proliferate
+                                   :Thrummingbird ,  # Combat-damage proliferate resolves twice
+                                   :TromellSeymoursButler ,  # Each proliferate becomes proliferate twice
+                                   :VenserCorpsePuppet .  # Proliferate twice gives two Venser triggers
+
+# --- Tempered Steel ---
+:TemperedSteel :amplifies :HangarbackWalker ,  # Pumps the Thopter tokens it leaves behind
+                          :TheDalekEmperor ,  # Pumps its 3/3 Dalek artifact creature tokens
+                          :ThopterAssembly ,  # +2/+2 turns five 1/1 Thopters into 3/3 fliers
+                          :ThreefoldThunderhulk .  # Pumps its swarm of Gnome artifact tokens
+
+# --- Tetsuko Umezawa, Fugitive ---
+:TetsukoUmezawaFugitive :enables :AutomatedAssemblyLine ,  # Unblockable artifact 1/1s ensure energy trigger
+                                 :Thrummingbird .  # 1/1 always connects to proliferate
+
+# --- Teysa Karlov ---
+:TeysaKarlov :amplifies :ArchghoulOfThraben ,  # doubles Zombie death trigger
+                        :BeamsawProspector ,  # doubles Lander death trigger
+                        :BehemothOfVault0 ,  # doubles death destroy trigger
+                        :BloodArtist ,  # Death triggers fire an additional time
+                        :BloodPetalCelebrant ,  # Dies trigger makes two Blood tokens
+                        :CyclopsSuperconductor ,  # Death damage trigger fires twice
+                        :DockworkerDrone ,  # Death trigger moves counters twice
+                        :EdgeRover ,  # Death trigger makes Landers twice
+                        :GravpackMonoist ,  # Death trigger fires twice for two Robots
+                        :HangarbackWalker ,  # Death trigger fires twice, twice the Thopters
+                        :InfestationSage ,  # Death trigger fires twice: two Insects
+                        :MarionetteApprentice ,  # Creature-death triggers fire twice
+                        :MeltstriderEulogist ,  # Doubles death-trigger draws
+                        :NickValentinePrivateEye ,  # Artifact creature death triggers doubled
+                        :ReefWorm ,  # Death triggers fire twice, extra tokens
+                        :SiegeVeteran ,  # Soldier death trigger makes two tokens
+                        :SolemnSimulacrumAetherdriftCommander138 ,  # Death draw trigger fires twice
+                        :SotheraTheSupervoid ,  # Death trigger edicts each opponent twice
+                        :SporeCrawler ,  # Dies-draw trigger fires twice
+                        :Thawbringer ,  # Dies-surveil trigger fires twice
+                        :TheMasterGallifreysEnd ,  # Artifact-creature-death trigger fires twice
+                        :TriplicateTitan ,  # Death trigger doubles to six Golem tokens
+                        :VengefulBloodwitch ,  # Death drain trigger fires twice per death
+                        :WaryThespian ,  # Dies-surveil trigger fires twice
+                        :WretchedThrong ,  # Dies-search trigger fires twice
+                        :ZulaportCutthroat .  # Death-caused drain triggers twice
+
+# --- The Caves of Androzani ---
+:TheCavesOfAndrozani :enables :SzarelGenesisShepherd .  # Saga self-sacrifice is a nontoken sac trigger
+
+# --- The Curse of Fenric ---
+:TheCurseOfFenric :enables :SzarelGenesisShepherd .  # Saga self-sacrifice is a nontoken sac trigger
+
+# --- The Cyber-Controller ---
+:TheCyberController :amplifies :TheDalekEmperor ,  # +1/+1 to Dalek artifact creature tokens
+                               :ThopterAssembly ,  # +1/+1 to its artifact creature Thopter tokens
+                               :ThreefoldThunderhulk .  # +1/+1 to Gnome artifact tokens
+
+# --- The Eighth Doctor ---
+:TheEighthDoctor :enables :GallifreyStands ,  # Doctor creature counts toward thirteen-Doctor win
+                          :TheNightOfTheDoctor .  # Self-mill stocks legends for chapter II reanimation
+
+# --- The Eternity Elevator ---
+:TheEternityElevator :enables :HeroesPodium .  # Taps for {C}{C}{C} to fuel Podium's X dig
+
+# --- The Fourth Doctor ---
+:TheFourthDoctorDoctorWhoCommander2 :enables :GallifreyStands .  # Doctor creature counts toward thirteen-Doctor win
+
+# --- The Master, Mesmerist ---
+:TheMasterMesmerist :enables :TheRani .  # Goads creatures that trigger her investigate
+
+# --- The Night of the Doctor ---
+:TheNightOfTheDoctor :enables :AcesBaseballBat ,  # Reanimates a legend that equips the bat for just {1}
+                              :CelesRuneKnight ,  # Mass reanimation triggers team counters
+                              :HerosBlade .  # Reanimated legend triggers the free auto-attach
+
+# --- The Prydwen, Steel Flagship ---
+:ThePrydwenSteelFlagship :enables :DawnhartDisciple .  # Human Knight tokens trigger Human-ETB pump
+
+# --- The Rani ---
+:TheRani :enables :Cryoshatter .  # Goad forces the enchanted creature to attack and tap
+
+# --- The Sea Devils ---
+:TheSeaDevils :enables :SzarelGenesisShepherd .  # Saga self-sacrifice is a nontoken sac trigger
+
+# --- The Seriema ---
+:TheSeriema :enables :AcesBaseballBat ,  # Tutors a legendary creature to wield the bat via {1} equip
+                     :HerosBlade .  # Tutors a legend whose ETB auto-attaches the Blade
+
+# --- The Seventh Doctor ---
+:TheSeventhDoctor :enables :TheThirdDoctor .  # Clue tokens grow his noncreature-token buff
+
+# --- The Sixth Doctor ---
+:TheSixthDoctor :amplifies :ThoughtMonitor .  # Copying the historic spell repeats draw-two ETB
+
+# --- The Sound of Drums ---
+:TheSoundOfDrums :enables :TheRani .  # Goads a creature that triggers her investigate
+
+# --- The Third Doctor ---
+:TheThirdDoctor :enables :GallifreyStands .  # Doctor creature counts toward thirteen-Doctor win
+
+# --- The Valeyard ---
+:TheValeyard :amplifies :DavrosDalekCreatorDoctorWhoCommander1 ,  # Opponents face villainous choice twice
+                        :MidnightCrusaderShuttle ,  # Villainous choice faced an additional time
+                        :Missy ,  # End-step villainous choice faced twice
+                        :SycoraxCommander ,  # Opponent faces ETB villainous choice twice
+                        :TheDalekEmperor ,  # Combat villainous choice faced twice
+                        :TheMasterGallifreysEnd ,  # Villainous choice faced an extra time
+                        :TrialOfATimeLord .  # Extra votes swing the guilty verdict on chapter IV
+
+# --- The War Games ---
+:TheWarGames :enables :SzarelGenesisShepherd .  # Saga self-sacrifice is a nontoken sac trigger
+
+# --- Thopter Assembly ---
+:ThopterAssembly :enables :SynthInfiltrator ,  # Thopter tokens tap for improvise
+                          :ThoughtMonitor ,  # Five artifacts slash affinity cost
+                          :ThreefoldThunderhulk .  # Token fodder for its sac-an-artifact ability
+
+# --- Thopter Spy Network ---
+:ThopterSpyNetworkAetherdriftCommander83 :enables :SentinelSarahLyons ,  # Upkeep Thopter turns on +2/+2 each turn
+                                                  :ShimmerDragon .  # Thopters supply untapped artifacts for draws
+
+# --- Thornglint Bridge ---
+:ThornglintBridge :enables :SurgeConductor ,  # Indestructible artifact land ETB triggers proliferate
+                           :ThePrydwenSteelFlagship ,  # Artifact land ETB makes a Knight token
+                           :ThoughtMonitor .  # Artifact land counts toward affinity
+
+# --- Thrummingbird ---
+:Thrummingbird :amplifies :AetherfluxConduit ,  # combat proliferate grows energy stock
+                          :RampagingAetherhood ,  # Proliferate grows its energy and counters
+                          :ReplicatingRing ,  # Proliferate accelerates night counters
+                          :TheFifthDoctor ,  # Proliferates his accumulating +1/+1 counters
+                          :TheWarGames ,  # Proliferates counters on the Warrior team
+                          :ThrivingIbex .  # Proliferates its energy and +1/+1 counters
+:Thrummingbird :enables :EzuriStalkerOfSpheres ,  # Combat proliferate triggers Ezuri's draw
+                        :SchemingAspirant ,  # Combat proliferate triggers 2-life drain
+                        :VenserCorpsePuppet .  # Combat proliferate fires Venser trigger
+
+# --- Tireless Provisioner ---
+:TirelessProvisioner :enables :AceFearlessRebel ,  # Treasure fodder for Nitro-9 artifact sac
+                              :SelfcraftMechan ,  # Food/Treasure per landfall feeds artifact sacrifice
+                              :ShimmerDragon ,  # Token artifacts to tap for card draw
+                              :TheThirdDoctor ,  # Landfall Food/Treasure grow his buff
+                              :VitoFanaticOfAclazotz .  # Food/Treasure tokens are repeat sac fodder
+
+# --- Tireless Tracker ---
+:TirelessTracker :enables :FiveHundredYearDiary .  # Landfall Clues grow Diary's mana ability
+
+# --- Titan Forge ---
+:TitanForge :enables :TrostaniSelesnyasVoice .  # 9/9 Golem token is a premium populate target
+
+# --- Tractor Beam ---
+:TractorBeam :enables :UmbralCollarZealot .  # Stolen creature becomes sacrifice fodder for surveil
+
+# --- Treasure Vault ---
+:TreasureVaultAetherdriftCommander180 :enables :VedalkenHumiliator ,  # X Treasures fill metalcraft artifact count
+                                               :VoidforgedTitan ,  # Treasure sacs make permanents leave for Void draw
+                                               :WarmakerGunship ,  # Treasure count raises ETB damage to a creature
+                                               :WeftstalkerArdent .  # X Treasure artifacts entering ping opponents
+
+# --- Treetop Snarespinner ---
+:TreetopSnarespinner :enables :MeltstridersResolve ,  # Deathtouch makes the Aura's fight kill anything
+                              :WildwoodScourge .  # Repeatable counter placement triggers Scourge growth
+
+# --- Triplicate Titan ---
+:TriplicateTitan :enables :DeterminedIteration ,  # Golem tokens give populate evasive targets
+                          :EsixFractalBloom ,  # Death-trigger tokens convert to three copies of best creature
+                          :PeemaAetherSeer ,  # 9-power body makes her ETB grant 9{E}
+                          :StarfieldVocalistEdgeOfEternities78 ,  # Creates extra permanent ETBs, feeding Vocalist's trigger doubling
+                          :TheMasterGallifreysEnd .  # Nontoken artifact creature dying fires Master payoff
+
+# --- Tromell, Seymour's Butler ---
+:TromellSeymoursButler :enables :EzuriStalkerOfSpheres ,  # Proliferate X times draws that many cards
+                                :FairgroundsTrumpeter ,  # Extra ETB counters satisfy end-step check
+                                :MeltstriderEulogist ,  # Counters on every creature = draws on deaths
+                                :SchemingAspirant ,  # Each proliferate drains 2 from each opponent
+                                :VenserCorpsePuppet ,  # Repeatable proliferate fires Venser's choice trigger
+                                :WildwoodScourge .  # Extra ETB counters on creatures trigger Scourge
+
+# --- Trostani, Selesnya's Voice ---
+:TrostaniSelesnyasVoice :enables :MaraudingBlightPriestZendikarRising112 ,  # Toughness lifegain triggers Priest drain
+                                 :SanguineBond ,  # Constant ETB lifegain fuels drain trigger
+                                 :SphinxOfTheRevelation ,  # ETB lifegain converts into energy counters
+                                 :VitoThornOfTheDuskRose .  # Toughness lifegain converts to opponent life loss
+
+# --- Twinblade Blessing ---
+:TwinbladeBlessing :amplifies :EmpyrealVoyager ,  # Double strike doubles energy from combat damage
+                              :PeemaTrailblazer ,  # Double strike doubles energy from combat damage
+                              :RexCyberHoundMagicTheGatheringFallout117 ,  # Double strike doubles mill+energy trigger
+                              :Thrummingbird .  # Double strike doubles combat-damage proliferates
+
+# --- Ulrich's Kindred ---
+:UlrichsKindred :enables :HungryRidgewolf .  # Second Wolf turns on +1/+0 trample bonus
+
+# --- Umbral Collar Zealot ---
+:UmbralCollarZealot :enables :VoidforgedTitan .  # Sac outlet makes permanents leave, turning on Void draw
+
+# --- Unstoppable Plan ---
+:UnstoppablePlan :amplifies :BespokeBattlewagonModernHorizons352 ,  # Untap grants extra energy tap activations
+                            :ConversionApparatus ,  # Untap doubles energy/mana tap activations
+                            :FiveHundredYearDiary ,  # Untap allows extra Clue-mana activations
+                            :KiloApogeeMind ,  # Re-tapping after untap yields more proliferates
+                            :TitanForge .  # End-step untap allows extra charge activations
+:UnstoppablePlan :enables :FishingPole .  # End-step mass untap makes a Fish every turn
+
+# --- Vampire Gourmand ---
+:VampireGourmand :enables :VashtaNerada ,  # Sacrifice guarantees morbid counter each turn
+                          :VengefulBloodwitch ,  # Attack sac forces death drain triggers
+                          :ZulaportCutthroat .  # Attack sac forces death drain triggers
+
+# --- Vault 112: Sadistic Simulation ---
+:Vault112SadisticSimulation :enables :UnstableAmulet .  # Playing exiled cards triggers non-hand cast damage
+
+# --- Vault 13: Dweller's Journey ---
+:Vault13DwellersJourney :amplifies :SeamRip .  # Flickers own SeamRip to re-fire its exile ETB
+
+# --- Vengeful Bloodwitch ---
+:VengefulBloodwitch :enables :CliffhavenVampire .  # Lifegain from deaths triggers drain
+
+# --- Vilespawn Spider ---
+:VilespawnSpider :enables :VrestinMenoptraLeader .  # Insect token army feeds attack counter trigger
+
+# --- Village Messenger // Moonrise Intruder ---
+:VillageMessenger :enables :HungryRidgewolf .  # Werewolf on board turns on its buff
+
+# --- Virus Beetle ---
+:VirusBeetle :enables :EntropicBattlecruiser .  # ETB opponent discards trigger 3-life loss
+
+# --- Voltstorm Angel ---
+:VoltstormAngel :enables :YouthfulValkyrie .  # Angel ETB puts a +1/+1 counter on Valkyrie
+
+# --- Vraska Joins Up ---
+:VraskaJoinsUp :enables :AceFearlessRebel .  # Deathtouch counter makes Ace's fight lethal
+
+# --- Vrestin, Menoptra Leader ---
+:VrestinMenoptraLeader :enables :MeltstriderEulogist .  # Counters on Insects set up death-draw trigger
+
+# --- Wayfarer's Bauble ---
+:WayfarersBaubleDoctorWhoCommander256 :enables :DragonsRageChanneler ,  # Cheap noncreature cast triggers surveil, fills graveyard for delirium
+                                               :EvolutionSage ,  # Battlefield land search triggers proliferate
+                                               :FirebrandArcher ,  # Cheap noncreature cast pings each opponent
+                                               :FungalColossus ,  # Fetches land, raising differently named land count for discount
+                                               :SunstarLightsmith ,  # One-mana spell makes hitting second cast trivial
+                                               :SurveyMechan ,  # Fetches land, cutting X activation cost via land names
+                                               :TannukMemorialEnsign ,  # Fetches basic to battlefield, extra landfall trigger
+                                               :TirelessProvisioner ,  # Battlefield land search triggers Food/Treasure
+                                               :TirelessTracker .  # Puts land onto battlefield, triggering landfall investigate
+
+# --- Weeping Angel ---
+:WeepingAngel :enables :BrinebornCutthroat .  # Flash cast on opponent's turn adds +1/+1 counter to Cutthroat
+
+# --- Weftblade Enhancer ---
+:WeftbladeEnhancer :enables :WildwoodScourge .  # Counters on creatures trigger Scourge growth
+
+# --- Whirler Rogue ---
+:WhirlerRogueAetherdriftCommander85 :enables :BurnerRocket ,  # Thopter tokens pay crew 1 while keeping bodies back
+                                             :UmbralCollarZealot ,  # Thopter tokens are free sac fodder for surveil
+                                             :VedalkenHumiliator ,  # Two Thopters plus itself hit metalcraft count
+                                             :WarmakerGunship ,  # Thopters raise artifact count for ETB damage
+                                             :WeftstalkerArdent .  # Thopter entries ping each opponent
+
+# --- Whirler Virtuoso ---
+:WhirlerVirtuosoAetherdriftCommander122 :enables :AetherstormRoc ,  # Thopters entering generate energy
+                                                 :AlibouAncientWitness ,  # Thopter artifact attackers scale X
+                                                 :AncientImperiosaur ,  # tokens convoke and add counters
+                                                 :BeastKinRanger ,  # tokens entering pump it repeatedly
+                                                 :BidentOfThassa ,  # evasive Thopters convert to draws
+                                                 :EzuriClawOfProgress ,  # Thopter tokens (power<=2) grant experience counters
+                                                 :FabricationModuleKaladesh211 ,  # ETB energy triggers counter placement
+                                                 :FalkenrathTorturer ,  # Thopter tokens are repeatable sac fodder
+                                                 :Fleshtaker ,  # Thopter tokens are sac fodder for life+scry
+                                                 :GhirapurAetherGrid ,  # Thopters are artifacts to tap for damage
+                                                 :GrowingRanks ,  # Thopter tokens give populate a target
+                                                 :GuideOfSouls ,  # Each Thopter ETB gives life and energy
+                                                 :MasterOfEtherium ,  # Thopters boost power and get +1/+1
+                                                 :MentorOfTheMeek ,  # Thopter ETBs trigger pay-1 draws
+                                                 :NestingDovehawk ,  # Thopter tokens feed populate and counters
+                                                 :Octomancer ,  # Fresh Thopter tokens to copy each end step
+                                                 :OverseerOfVault76 .  # Small Thopter ETBs add quest counters
+
+# --- Woodweaver's Puzzleknot ---
+:WoodweaversPuzzleknot :enables :AetherworksMarvelAetherdriftCommander123 ,  # Sac feeds Marvel: graveyard trigger {E} plus stored energy
+                                :PrimalPrayers ,  # 3 {E} casts up to three cheap creatures free
+                                :SaheeliRadiantCreator ,  # 3 {E} on ETB exactly funds Saheeli's combat copy
+                                :SphinxOfTheRevelation .  # Lifegain pulses convert into energy
+
+# --- Workshop Elders ---
+:WorkshopElders :enables :WildwoodScourge .  # Four counters on animated artifact trigger Scourge
+
+# --- Wound Reflection ---
+:WoundReflection :amplifies :VengefulBloodwitch ,  # Repeats opponent life loss at end step
+                            :VitoThornOfTheDuskRose ,  # Repeats Vito's life-loss at end step
+                            :ZulaportCutthroat .  # Death drains repeat as end-step life loss
+
+# --- Wretched Throng ---
+:WretchedThrong :enables :VampireGourmand .  # Self-replacing body is recurring sac fodder
+
+# --- Young Wolf ---
+:YoungWolfInnistradRemastered227 :enables :Fleshtaker ,  # Undying gives repeatable sac fodder for value
+                                          :HungryRidgewolf ,  # Wolf on board turns on its buff
+                                          :IndulgentAristocrat ,  # Undying gives recurring sac fodder
+                                          :VampireGourmand .  # Undying body is recurring sacrifice fodder
+
+# --- Yuna, Grand Summoner ---
+:YunaGrandSummoner :enables :WildwoodScourge .  # Bonus cast counters trigger Scourge growth
+
+# --- Zulaport Cutthroat ---
+:ZulaportCutthroat :enables :CliffhavenVampire .  # Death drains trigger extra opponent loss
+
+# --- Mutual synergies (symmetric; asserted once per pair) ---
+:AcademyManufactor :hasSynergyWith :GoldspanDragon .  # attack Treasure becomes three tokens
+:AceFearlessRebel :hasSynergyWith :SpineOfIshSah .  # Sac Spine for counter+fight; Spine returns to hand
+:AdrixAndNevTwincasters :hasSynergyWith :DoublingSeason .  # Two token doublers stack multiplicatively (4x tokens)
+:AetherRefineryModernHorizons3Commander54 :hasSynergyWith :IzzetGeneratorium .  # Energy-gain replacements stack: +1 then doubled on every gain
+:AethericAmplifier :hasSynergyWith :DoublingSeason .  # Season doubles the counters Amplifier adds to a permanent (4x)
+:AetherwindBasker :hasSynergyWith :AuroraShifter .  # Copying Basker keeps damage-energy plus gains per-creature attack energy
+:AetherworksMarvelAetherdriftCommander123 :hasSynergyWith :SaheeliRadiantCreator .  # Her sacrificed token feeds Marvel energy; free artifact casts give energy
+:ArchghoulOfThraben :hasSynergyWith :Necroduality .  # copy tokens add Zombie deaths
+:BloodtitheHarvesterInnistradCrimsonVow232 :hasSynergyWith :GluttonousGuest .  # More Blood tokens grow -X/-X sacrifice
+:BrudicladTelchorEngineer :hasSynergyWith :CityOfDeath .  # Both mass-copy your best token
+:BrudicladTelchorEngineer :hasSynergyWith :DeterminedIteration .  # Populate feeds token pool; Brudiclad hastes and mass-copies best token
+:BrudicladTelchorEngineer :hasSynergyWith :FeldonOfTheThirdPath .  # Mass-copies Feldon's graveyard copy token, dodging its sacrifice
+:BrudicladTelchorEngineer :hasSynergyWith :MechanizedProductionMurdersAtKarlovManorCommander109 .  # Brudiclad turns all tokens into copies of MP's token: 8 same-name win
+:BrudicladTelchorEngineer :hasSynergyWith :SaheeliRadiantCreator .  # Converts all tokens into copies of her 5/5 token; copies dodge the sac
+:BrudicladTelchorEngineer :hasSynergyWith :SaheeliTheSunsBrillianceTheLostCavernsOfIxalan239 .  # Mass-copies her temporary artifact copy token before it's sacrificed
+:CombatCelebrant :hasSynergyWith :LightningRunnerAetherdriftCommander103 .  # Runner's untap re-readies exerted Celebrant; both chain extra combats
+:EnduranceBobblehead :hasSynergyWith :IntelligenceBobblehead .  # Each counts Bobbleheads for scaling X abilities
+:EraOfInnovationAetherdriftCommander75 :hasSynergyWith :SaheeliRadiantCreator .  # Her artifact casts/tokens trigger Era; Era's {E} funds copies
+:GhiredConclaveExile :hasSynergyWith :NestingDovehawk .  # Populated tokens grow Dovehawk; both populate
+:GhiredConclaveExile :hasSynergyWith :TrostaniSelesnyasVoice .  # Rhinos trigger lifegain; both populate engines
+:HowlpackResurgence :hasSynergyWith :UlrichsKindred .  # Wolf gets anthem; both support Wolf attacks
+:PanharmoniconAetherdriftCommander135 :hasSynergyWith :StarfieldVocalistEdgeOfEternities78 .  # Same-template trigger doublers stack multiplicatively
+:PeriBrown :hasSynergyWith :SarahJaneSmith .  # Convoke cheapens historic casts that make Clues
+:PiaAndKiranNalaarAetherdriftCommander105 :hasSynergyWith :RetrofitterFoundry .  # Thopters sac to Foundry; Foundry feeds her sac outlet
+:PrimalPrayers :hasSynergyWith :RogueRefiner .  # Cast for 1{E}; ETB refunds 2{E} plus a card: net-positive engine
+:PrimalPrayers :hasSynergyWith :RoilCartographer .  # 1{E} flash-casts a landfall energy engine that repays it
+:PrimalPrayers :hasSynergyWith :ServantOfTheConduit .  # 1{E} flash cast returns 2{E} on ETB, energy-positive
+:RoamingThrone :hasSynergyWith :StarfieldVocalistEdgeOfEternities78 .  # Same-template trigger doublers stack multiplicatively
+:SelfcraftMechan :hasSynergyWith :SpineOfIshSah .  # Sac Spine to Mechan; Spine returns to hand for replay
+:SusanForeman :hasSynergyWith :TARDIS .  # Time Lord on board turns on TARDIS attack trigger
+:TARDIS :hasSynergyWith :TheFirstDoctor .  # Tutors TARDIS; TARDIS cascade feeds his counter trigger
+:TaiiWakeenPerfectShot :hasSynergyWith :TerritorialAetherkite .  # X sweep = toughness kills draw cards each

@@ -1,0 +1,27 @@
+# Generic mechanic synergy list: every synergy relation involving a card
+# whose rules text matches a caller-supplied regular expression. Use this to
+# query mechanics not covered by the dedicated queries in this folder.
+#
+# PARAMETERS - edit the VALUES line below to retarget:
+#   ?pattern - case-insensitive regex matched against oracle text
+#              (default: "proliferate")
+
+PREFIX mc: <urn:stklug84:MagicCardsOntology:2026-02-27#>
+
+SELECT DISTINCT ?mechanicCard ?relation ?direction ?partner WHERE {
+  VALUES ?pattern { "proliferate" }
+
+  ?c mc:oracleText ?text .
+  FILTER(REGEX(STR(?text), ?pattern, "i"))
+
+  VALUES ?rel { mc:amplifies mc:enables mc:hasSynergyWith
+               mc:isAmplifiedBy mc:isEnabledBy }
+  { ?c ?rel ?p . BIND("outgoing" AS ?direction) }
+  UNION
+  { ?p ?rel ?c . BIND("incoming" AS ?direction) }
+
+  ?c mc:cardName ?mechanicCard .
+  ?p mc:cardName ?partner .
+  BIND(STRAFTER(STR(?rel), "#") AS ?relation)
+}
+ORDER BY ?mechanicCard ?direction ?relation ?partner

@@ -1,0 +1,26 @@
+# Synergy list for the energy ({E} counters) mechanic: every synergy relation involving a
+# card whose rules text uses the mechanic, with relation type and direction.
+# "outgoing" means the mechanic card is the subject of the relation,
+# "incoming" means a partner points at the mechanic card. All five synergy
+# properties are matched so the query also works on graphs where only the
+# legacy inverse assertions (:isEnabledBy) are materialized.
+#
+# PARAMETERS: none (the mechanic pattern is fixed in the FILTER regex)
+
+PREFIX mc: <urn:stklug84:MagicCardsOntology:2026-02-27#>
+
+SELECT DISTINCT ?mechanicCard ?relation ?direction ?partner WHERE {
+  ?c mc:oracleText ?text .
+  FILTER(REGEX(STR(?text), "\\{E\\}", "i"))
+
+  VALUES ?rel { mc:amplifies mc:enables mc:hasSynergyWith
+               mc:isAmplifiedBy mc:isEnabledBy }
+  { ?c ?rel ?p . BIND("outgoing" AS ?direction) }
+  UNION
+  { ?p ?rel ?c . BIND("incoming" AS ?direction) }
+
+  ?c mc:cardName ?mechanicCard .
+  ?p mc:cardName ?partner .
+  BIND(STRAFTER(STR(?rel), "#") AS ?relation)
+}
+ORDER BY ?mechanicCard ?direction ?relation ?partner

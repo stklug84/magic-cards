@@ -1,14 +1,16 @@
-# Counts basic lands in a deck, grouped by basic land subtype
-# (Forest / Island / Mountain / Plains / Swamp).
+# Counts basic lands per deck, grouped by basic land subtype
+# (Forest / Island / Mountain / Plains / Swamp), for all decks in the dataset.
 #
 # PARAMETERS:
-#   ?deck - the deck to query
+#   ?deck - optional deck filter; uncomment the VALUES line below to restrict
+#           to specific deck(s)
 
 PREFIX mc:   <urn:stklug84:MagicCardsOntology:2026-02-27#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
-SELECT ?landLabel (SUM(?q) AS ?count) WHERE {
-  VALUES ?deck { mc:SaheeliRadiantCreatorDeck }
+SELECT ?deckName ?landLabel (SUM(?q) AS ?count) WHERE {
+  # To restrict to specific deck(s), uncomment and edit:
+  # VALUES ?deck { mc:SaheeliRadiantCreatorDeck }
 
   ?deck mc:hasDeckEntry ?e .
   ?e mc:entryCard ?c ;
@@ -17,6 +19,7 @@ SELECT ?landLabel (SUM(?q) AS ?count) WHERE {
      mc:hasCardType  mc:Land ;
      mc:hasSubType   ?land .
   ?land rdfs:label ?landLabel .
+  OPTIONAL { ?deck rdfs:label ?deckName }
 }
-GROUP BY ?landLabel
-ORDER BY ?landLabel
+GROUP BY ?deck ?deckName ?landLabel
+ORDER BY ?deckName ?landLabel

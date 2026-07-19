@@ -1,18 +1,22 @@
-# Card-type breakdown: count of unique cards per primary card type in a deck.
-# Multi-typed cards (e.g. Artifact Creature) are counted once per card type.
+# Card-type breakdown: count of unique cards per primary card type, per deck,
+# for all decks in the dataset. Multi-typed cards (e.g. Artifact Creature)
+# are counted once per card type.
 #
 # PARAMETERS:
-#   ?deck - the deck to query
+#   ?deck - optional deck filter; uncomment the VALUES line below to restrict
+#           to specific deck(s)
 
 PREFIX mc:   <urn:stklug84:MagicCardsOntology:2026-02-27#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
-SELECT ?typeLabel (COUNT(DISTINCT ?c) AS ?cardCount) WHERE {
-  VALUES ?deck { mc:SaheeliRadiantCreatorDeck }
+SELECT ?deckName ?typeLabel (COUNT(DISTINCT ?c) AS ?cardCount) WHERE {
+  # To restrict to specific deck(s), uncomment and edit:
+  # VALUES ?deck { mc:SaheeliRadiantCreatorDeck }
 
   ?deck mc:hasCard ?c .
   ?c mc:hasCardType ?t .
   OPTIONAL { ?t rdfs:label ?typeLabel }
+  OPTIONAL { ?deck rdfs:label ?deckName }
 }
-GROUP BY ?typeLabel
-ORDER BY DESC(?cardCount)
+GROUP BY ?deck ?deckName ?typeLabel
+ORDER BY ?deckName DESC(?cardCount)

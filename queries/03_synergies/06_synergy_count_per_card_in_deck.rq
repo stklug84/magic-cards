@@ -1,15 +1,20 @@
-# For each card in the deck, count the number of distinct other cards in the
-# same deck it has any synergy relation with. Useful for spotting key combo pieces.
+# For each card in each deck across the dataset, count the number of distinct
+# other cards in the same deck it has any synergy relation with. Useful for
+# spotting key combo pieces. Uncomment the VALUES ?deck line to restrict to
+# specific deck(s).
 #
 # PARAMETERS:
-#   ?deck - the deck to query
+#   ?deck - (optional) specific deck(s), via the commented VALUES line
 
-PREFIX mc: <urn:stklug84:MagicCardsOntology:2026-02-27#>
+PREFIX mc:   <urn:stklug84:MagicCardsOntology:2026-02-27#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
-SELECT ?cardName (COUNT(DISTINCT ?other) AS ?synergyCount) WHERE {
-  VALUES ?deck { mc:SaheeliRadiantCreatorDeck }
+SELECT ?deckName ?cardName (COUNT(DISTINCT ?other) AS ?synergyCount) WHERE {
+  # To restrict to specific deck(s), uncomment and edit:
+  # VALUES ?deck { mc:SaheeliRadiantCreatorDeck }
 
   ?deck mc:hasCard ?c , ?other .
+  OPTIONAL { ?deck rdfs:label ?deckName }
   FILTER(?c != ?other)
   ?c mc:cardName ?cardName .
   ?c ( mc:hasSynergyWith
@@ -23,5 +28,5 @@ SELECT ?cardName (COUNT(DISTINCT ?other) AS ?synergyCount) WHERE {
      | mc:isEnabledBy
      | ^mc:isEnabledBy ) ?other .
 }
-GROUP BY ?cardName
-ORDER BY DESC(?synergyCount) ?cardName
+GROUP BY ?deck ?deckName ?cardName
+ORDER BY ?deckName DESC(?synergyCount) ?cardName

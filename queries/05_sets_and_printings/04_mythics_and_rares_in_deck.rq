@@ -1,19 +1,22 @@
-# All Rare and Mythic Rare cards in a deck, with set info.
+# All Rare and Mythic Rare cards across all decks in the dataset, with set
+# info. The commented VALUES line restricts results to specific deck(s).
 #
 # PARAMETERS:
-#   ?deck - the deck to query
+#   ?deck - optional deck filter (uncomment the VALUES line to restrict)
 
 PREFIX mc:   <urn:stklug84:MagicCardsOntology:2026-02-27#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
-SELECT ?cardName ?rarityLabel ?setName WHERE {
-  VALUES ?deck { mc:SaheeliRadiantCreatorDeck }
+SELECT ?deckName ?cardName ?rarityLabel ?setName WHERE {
+  # To restrict to specific deck(s), uncomment and edit:
+  # VALUES ?deck { mc:SaheeliRadiantCreatorDeck }
 
   ?deck mc:hasCard ?c .
+  OPTIONAL { ?deck rdfs:label ?deckName }
   ?c mc:cardName  ?cardName ;
      mc:hasRarity ?r .
   FILTER(?r IN (mc:Rare, mc:MythicRare))
   OPTIONAL { ?r rdfs:label ?rarityLabel }
   OPTIONAL { ?c mc:isInSet ?s . ?s mc:setName ?setName }
 }
-ORDER BY DESC(?rarityLabel) ?cardName
+ORDER BY ?deckName DESC(?rarityLabel) ?cardName

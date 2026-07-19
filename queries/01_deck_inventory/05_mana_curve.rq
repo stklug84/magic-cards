@@ -1,18 +1,23 @@
-# Mana curve: count of non-land cards per mana value in a deck.
+# Mana curve: count of non-land cards per mana value, per deck, for all decks
+# in the dataset.
 #
 # PARAMETERS:
-#   ?deck - the deck to query
+#   ?deck - optional deck filter; uncomment the VALUES line below to restrict
+#           to specific deck(s)
 
-PREFIX mc: <urn:stklug84:MagicCardsOntology:2026-02-27#>
+PREFIX mc:   <urn:stklug84:MagicCardsOntology:2026-02-27#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
-SELECT ?manaValue (SUM(?q) AS ?cardCount) WHERE {
-  VALUES ?deck { mc:SaheeliRadiantCreatorDeck }
+SELECT ?deckName ?manaValue (SUM(?q) AS ?cardCount) WHERE {
+  # To restrict to specific deck(s), uncomment and edit:
+  # VALUES ?deck { mc:SaheeliRadiantCreatorDeck }
 
   ?deck mc:hasDeckEntry ?e .
   ?e mc:entryCard ?c ;
      mc:quantity ?q .
   ?c mc:manaValue ?manaValue .
   FILTER NOT EXISTS { ?c mc:hasCardType mc:Land }
+  OPTIONAL { ?deck rdfs:label ?deckName }
 }
-GROUP BY ?manaValue
-ORDER BY ?manaValue
+GROUP BY ?deck ?deckName ?manaValue
+ORDER BY ?deckName ?manaValue

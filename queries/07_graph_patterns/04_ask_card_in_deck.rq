@@ -1,14 +1,17 @@
-# ASK whether a specific card is in a specific deck. Cheap boolean probe
-# useful for inclusion checks in higher-level tooling.
+# ASK whether a specific card is in ANY deck in the dataset. Cheap boolean
+# probe useful for inclusion checks in higher-level tooling. The commented
+# VALUES line restricts the check to specific deck(s).
 #
 # PARAMETERS:
-#   ?deck - the deck to query
+#   ?deck - optional deck filter; uncomment the VALUES line below to restrict
+#           to specific deck(s)
 #   ?card - the card to look for
 
 PREFIX mc: <urn:stklug84:MagicCardsOntology:2026-02-27#>
 
 ASK {
-  VALUES ?deck { mc:SaheeliRadiantCreatorDeck }
+  # To restrict to specific deck(s), uncomment and edit:
+  # VALUES ?deck { mc:SaheeliRadiantCreatorDeck }
   VALUES ?card { mc:StarfieldVocalistEdgeOfEternities78 }
 
   ?deck mc:hasCard ?card .

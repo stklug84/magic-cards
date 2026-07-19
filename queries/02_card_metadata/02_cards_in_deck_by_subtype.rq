@@ -1,17 +1,22 @@
-# All cards in a deck that have a given subtype (creature type, artifact type, etc.).
+# Cards that have a given subtype (creature type, artifact type, etc.),
+# across all decks in the dataset. Uncomment the VALUES ?deck line to
+# restrict to specific deck(s).
 #
 # PARAMETERS:
-#   ?deck    - the deck to query
+#   ?deck    - (optional) specific deck(s), via the commented VALUES line
 #   ?subtype - the subtype individual (e.g. mc:Artificer, mc:Wizard, mc:Equipment)
 
-PREFIX mc: <urn:stklug84:MagicCardsOntology:2026-02-27#>
+PREFIX mc:   <urn:stklug84:MagicCardsOntology:2026-02-27#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
-SELECT ?cardName WHERE {
-  VALUES ?deck    { mc:SaheeliRadiantCreatorDeck }
+SELECT ?deckName ?cardName WHERE {
+  # To restrict to specific deck(s), uncomment and edit:
+  # VALUES ?deck { mc:SaheeliRadiantCreatorDeck }
   VALUES ?subtype { mc:Artificer }
 
   ?deck mc:hasCard ?c .
+  OPTIONAL { ?deck rdfs:label ?deckName }
   ?c mc:hasSubType ?subtype ;
      mc:cardName   ?cardName .
 }
-ORDER BY ?cardName
+ORDER BY ?deckName ?cardName

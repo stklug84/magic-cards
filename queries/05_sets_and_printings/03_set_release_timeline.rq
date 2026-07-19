@@ -1,17 +1,22 @@
-# Lists all sets that contribute cards to a deck, ordered by release date.
+# Lists all sets that contribute cards to each deck in the dataset, ordered
+# by release date. Covers all decks; the commented VALUES line restricts
+# results to specific deck(s).
 #
 # PARAMETERS:
-#   ?deck - the deck to query
+#   ?deck - optional deck filter (uncomment the VALUES line to restrict)
 
-PREFIX mc: <urn:stklug84:MagicCardsOntology:2026-02-27#>
+PREFIX mc:   <urn:stklug84:MagicCardsOntology:2026-02-27#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
-SELECT DISTINCT ?setCode ?setName ?releaseDate WHERE {
-  VALUES ?deck { mc:SaheeliRadiantCreatorDeck }
+SELECT DISTINCT ?deckName ?setCode ?setName ?releaseDate WHERE {
+  # To restrict to specific deck(s), uncomment and edit:
+  # VALUES ?deck { mc:SaheeliRadiantCreatorDeck }
 
   ?deck mc:hasCard ?c .
+  OPTIONAL { ?deck rdfs:label ?deckName }
   ?c mc:isInSet ?s .
   OPTIONAL { ?s mc:setCode     ?setCode }
   OPTIONAL { ?s mc:setName     ?setName }
   OPTIONAL { ?s mc:releaseDate ?releaseDate }
 }
-ORDER BY ?releaseDate ?setCode
+ORDER BY ?deckName ?releaseDate ?setCode
