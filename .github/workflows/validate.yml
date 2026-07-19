@@ -35,8 +35,10 @@ jobs:
       - name: Install Apache Jena
         env:
           JENA_VERSION: "5.4.0"
+        # Download from Maven Central: unlike dlcdn.apache.org (latest release
+        # only, older versions 404), it hosts version-pinned artifacts permanently.
         run: |
-          curl -fsSL "https://dlcdn.apache.org/jena/binaries/apache-jena-${JENA_VERSION}.tar.gz" -o jena.tar.gz
+          curl -fsSL "https://repo1.maven.org/maven2/org/apache/jena/apache-jena/${JENA_VERSION}/apache-jena-${JENA_VERSION}.tar.gz" -o jena.tar.gz
           tar -xzf jena.tar.gz
           echo "$PWD/apache-jena-${JENA_VERSION}/bin" >> "$GITHUB_PATH"
 
