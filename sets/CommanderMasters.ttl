@@ -96,44 +96,6 @@ If an effect would put one or more counters on a permanent you control, it puts 
         :rulingDate "2024-11-08"^^xsd:date ;
         :rulingText """Planeswalkers will enter with double the normal number of loyalty counters. However, if you activate an ability whose cost has you put loyalty counters on a planeswalker, the number you put on isn't doubled. This is because those counters are put on as a cost, not as an effect."""@en ] .
 
-:HeroicIntervention rdf:type owl:NamedIndividual ,
-                  :Card ;
-    :cardName "Heroic Intervention" ;
-    :manaCost "{1}{G}" ;
-    :manaValue "2"^^xsd:nonNegativeInteger ;
-    :hasCardType :Instant ;
-    :hasRarity :Rare ;
-    :hasColor :Green ;
-    :hasColorIdentity :Green ;
-    :isInSet :CommanderMasters ;
-    :cardNumber "295"^^xsd:integer ;
-    :artist "James Ryman" ;
-    :hasLanguage :English ;
-    :printedText """Permanents you control gain hexproof and indestructible until end of turn."""@en ;
-    :oracleText """Permanents you control gain hexproof and indestructible until end of turn."""@en ;
-    :flavorText """"Wherever the strong would harm the weak, I will be there."
-—Ajani Goldmane"""@en ;
-    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=627759"^^xsd:anyURI ;
-    :scryfallUrl "https://scryfall.com/card/cmm/295/heroic-intervention"^^xsd:anyURI ;
-    :hasLegality
-      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ;
-    :hasRuling
-      [ rdf:type :Ruling ;
-        :rulingDate "2023-07-28"^^xsd:date ;
-        :rulingText """A battle with indestructible still loses defense counters as it's dealt damage. If it's a Siege, it will still be exiled when the last defense counter is removed from it, and its controller may still cast it transformed without paying its mana cost."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2020-06-23"^^xsd:date ;
-        :rulingText """A planeswalker with indestructible still loses loyalty counters as it's dealt damage and will still be put into its owner's graveyard if its loyalty reaches 0."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2020-06-23"^^xsd:date ;
-        :rulingText """The set of permanents affected by Heroic Intervention is determined as the spell resolves. Permanents you begin to control later in the turn won't gain hexproof and indestructible."""@en ] .
-
 :TeysaKarlov rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Teysa Karlov" ;

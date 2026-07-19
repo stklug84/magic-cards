@@ -1,0 +1,19 @@
+# Recorded purchase value of the collection: sum of (price x quantity) over
+# all entries that carry a purchase price, plus coverage statistics showing
+# how many entries have a recorded price.
+#
+# PARAMETERS:
+#   ?collection - the collection to query
+
+PREFIX mc: <urn:stklug84:MagicCardsOntology:2026-02-27#>
+
+SELECT (SUM(COALESCE(?price, 0) * ?qty) AS ?recordedValue)
+       (SUM(IF(BOUND(?price), ?qty, 0)) AS ?pricedCopies)
+       (SUM(?qty)                       AS ?totalCopies)
+WHERE {
+  VALUES ?collection { mc:MagicCardCollection }
+
+  ?collection mc:hasCollectionEntry ?e .
+  ?e mc:quantity ?qty .
+  OPTIONAL { ?e mc:purchasePrice ?price }
+}

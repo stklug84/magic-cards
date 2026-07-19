@@ -921,14 +921,14 @@ IV — You may exile a nontoken creature you control. When you do, exile all War
     :powerValue "1"^^xsd:integer ;
     :toughness "1" ;
     :toughnessValue "1"^^xsd:integer ;
+    # Note: keyword "Ultimate Sacrifice" not defined in MagicCardsOntology
+    # Note: keyword "Doctor's companion" not defined in MagicCardsOntology
     :printedText """{2}{U}, {T}: Copy target activated or triggered ability you control. You may choose new targets for the copy.
 Ultimate Sacrifice — {1}{U}, Sacrifice Adric: Counter target activated or triggered ability.
 Doctor's companion (You can have two commanders if the other is the Doctor.)"""@en ;
     :oracleText """{2}{U}, {T}: Copy target activated or triggered ability you control. You may choose new targets for the copy.
 Ultimate Sacrifice — {1}{U}, Sacrifice Adric: Counter target activated or triggered ability.
 Doctor's companion (You can have two commanders if the other is the Doctor.)"""@en ;
-    # Note: keyword "Ultimate Sacrifice" not defined in MagicCardsOntology
-    # Note: keyword "Doctor's companion" not defined in MagicCardsOntology
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=634728"^^xsd:anyURI ;
     :scryfallUrl "https://scryfall.com/card/who/33/adric-mathematical-genius"^^xsd:anyURI ;
     :hasLegality
@@ -942,55 +942,25 @@ Doctor's companion (You can have two commanders if the other is the Doctor.)"""@
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2023-10-13"^^xsd:date ;
-        :rulingText """Adric, Mathematical Genius's first ability targets an activated or triggered ability that is on the stack and creates another instance of that ability on the stack. It doesn't cause any object to gain an ability."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2023-10-13"^^xsd:date ;
-        :rulingText """The source of the copy from Adric, Mathematical Genius's first ability is the same as the source of the original ability."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2023-10-13"^^xsd:date ;
-        :rulingText """Activated abilities contain a colon. They're generally written "[Cost]: [Effect]." Some keyword abilities (such as equip) are activated abilities and will have a colon in their reminder text."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2023-10-13"^^xsd:date ;
-        :rulingText """Triggered abilities use the word "when," "whenever," or "at." They're often written as "[Trigger condition], [effect]." Some keywords (such as prowess) are triggered abilities and will use "when," "whenever," or "at" in their reminder text."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2023-10-13"^^xsd:date ;
-        :rulingText """If an ability is linked to a second ability, copies of that first ability are also linked to that second ability. If the second ability refers to "the exiled card," it refers to all cards exiled by the first ability and the copy. For example, if Fiend Hunter's enters-the-battlefield ability is copied and two creatures are exiled, they both return when Fiend Hunter leaves the battlefield."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2023-10-13"^^xsd:date ;
-        :rulingText """Adric, Mathematical Genius can copy any activated or triggered ability on the stack, not just one with targets."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2023-10-13"^^xsd:date ;
-        :rulingText """The copy is created on the stack, so it's not "activated." Creating the copy won't cause abilities that trigger when a player activates an ability to trigger. Abilities that say that a triggered ability triggers additional times won't apply to copying a triggered ability."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2023-10-13"^^xsd:date ;
-        :rulingText """The copy will resolve before the original ability does."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2023-10-13"^^xsd:date ;
-        :rulingText """The copy will have the same targets as the ability it's copying unless you choose new ones. You may change any number of the targets, including all of them or none of them. If, for one of the targets, you can't choose a new legal target, then it remains unchanged (even if the current target is illegal)."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2023-10-13"^^xsd:date ;
-        :rulingText """If the ability that's copied is modal (that is, it says "Choose one —" or the like), the copy will have the same mode. A different mode can't be chosen."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2023-10-13"^^xsd:date ;
-        :rulingText """If the ability that's copied has an X whose value was determined as it was activated, the copy will have the same value of X."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2023-10-13"^^xsd:date ;
         :rulingText """If the ability has damage divided as it was put onto the stack, the division can't be changed, although the targets receiving that damage still can. The same is true of abilities that distribute counters."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2023-10-13"^^xsd:date ;
-        :rulingText """You can't choose to pay any activation costs for the copy. However, effects based on those costs that were paid for the original ability are copied as though those same costs were paid for the copy."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2023-10-13"^^xsd:date ;
-        :rulingText """Any choices made when the ability resolves won't have been made yet when it's copied. Any such choices will be made separately when the copy resolves. Most notably, if a triggered ability asks its controller to pay a cost, you pay that cost for the copy if you wish to have it paid."""@en ] ,
+        :rulingText """Adric, Mathematical Genius's first ability targets an activated or triggered ability that is on the stack and creates another instance of that ability on the stack. It doesn't cause any object to gain an ability."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2023-10-13"^^xsd:date ;
         :rulingText """The Doctor's companion ability allows you to have two commanders if one has the ability and the other is a legendary creature that is a Time Lord Doctor and has no other creature types. Creatures with the changeling ability, for example, can't be a second commander this way."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2023-10-13"^^xsd:date ;
-        :rulingText """Although Doctor's companion is a new variant of the partner ability, the rules for partner have not otherwise changed. Notably, Time Lord Doctors and cards with Doctor's companion do not interact with cards which have another partner ability."""@en ] ,
+        :rulingText """If an ability is linked to a second ability, copies of that first ability are also linked to that second ability. If the second ability refers to "the exiled card," it refers to all cards exiled by the first ability and the copy. For example, if Fiend Hunter's enters-the-battlefield ability is copied and two creatures are exiled, they both return when Fiend Hunter leaves the battlefield."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2023-10-13"^^xsd:date ;
-        :rulingText """If your Commander deck has two commanders, you can include only cards whose own color identities are also found in your commanders' combined color identities."""@en ] ,
+        :rulingText """If something refers to your commander while you have two commanders, it refers to one of them of your choice. If you are instructed to perform an action on your commander (e.g. put it from the command zone into your hand due to Command Beacon), you choose one of your commanders at the time the effect happens."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-10-13"^^xsd:date ;
+        :rulingText """An effect that checks whether you control your commander is satisfied if you control one or both of your two commanders."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-10-13"^^xsd:date ;
+        :rulingText """The copy will have the same targets as the ability it's copying unless you choose new ones. You may change any number of the targets, including all of them or none of them. If, for one of the targets, you can't choose a new legal target, then it remains unchanged (even if the current target is illegal)."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2023-10-13"^^xsd:date ;
         :rulingText """Both commanders start in the command zone, and the remaining 98 cards (or 58 cards in a Commander Draft game) of your deck are shuffled to become your library."""@en ] ,
@@ -999,10 +969,40 @@ Doctor's companion (You can have two commanders if the other is the Doctor.)"""@
         :rulingText """Once the game begins, your two commanders are tracked separately. If you cast one, you won't have to pay an additional {2} the first time you cast the other. A player loses the game after having been dealt 21 combat damage from any one of them, not from both of them combined."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2023-10-13"^^xsd:date ;
-        :rulingText """If something refers to your commander while you have two commanders, it refers to one of them of your choice. If you are instructed to perform an action on your commander (e.g. put it from the command zone into your hand due to Command Beacon), you choose one of your commanders at the time the effect happens."""@en ] ,
+        :rulingText """Activated abilities contain a colon. They're generally written "[Cost]: [Effect]." Some keyword abilities (such as equip) are activated abilities and will have a colon in their reminder text."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2023-10-13"^^xsd:date ;
-        :rulingText """An effect that checks whether you control your commander is satisfied if you control one or both of your two commanders."""@en ] .
+        :rulingText """If the ability that's copied has an X whose value was determined as it was activated, the copy will have the same value of X."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-10-13"^^xsd:date ;
+        :rulingText """You can't choose to pay any activation costs for the copy. However, effects based on those costs that were paid for the original ability are copied as though those same costs were paid for the copy."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-10-13"^^xsd:date ;
+        :rulingText """Although Doctor's companion is a new variant of the partner ability, the rules for partner have not otherwise changed. Notably, Time Lord Doctors and cards with Doctor's companion do not interact with cards which have another partner ability."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-10-13"^^xsd:date ;
+        :rulingText """Adric, Mathematical Genius can copy any activated or triggered ability on the stack, not just one with targets."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-10-13"^^xsd:date ;
+        :rulingText """The copy is created on the stack, so it's not "activated." Creating the copy won't cause abilities that trigger when a player activates an ability to trigger. Abilities that say that a triggered ability triggers additional times won't apply to copying a triggered ability."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-10-13"^^xsd:date ;
+        :rulingText """The source of the copy from Adric, Mathematical Genius's first ability is the same as the source of the original ability."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-10-13"^^xsd:date ;
+        :rulingText """Any choices made when the ability resolves won't have been made yet when it's copied. Any such choices will be made separately when the copy resolves. Most notably, if a triggered ability asks its controller to pay a cost, you pay that cost for the copy if you wish to have it paid."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-10-13"^^xsd:date ;
+        :rulingText """Triggered abilities use the word "when," "whenever," or "at." They're often written as "[Trigger condition], [effect]." Some keywords (such as prowess) are triggered abilities and will use "when," "whenever," or "at" in their reminder text."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-10-13"^^xsd:date ;
+        :rulingText """If the ability that's copied is modal (that is, it says "Choose one —" or the like), the copy will have the same mode. A different mode can't be chosen."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-10-13"^^xsd:date ;
+        :rulingText """The copy will resolve before the original ability does."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-10-13"^^xsd:date ;
+        :rulingText """If your Commander deck has two commanders, you can include only cards whose own color identities are also found in your commanders' combined color identities."""@en ] .
 
 :AnUnearthlyChild rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -5448,7 +5448,7 @@ Draw a card."""@en ;
         :rulingDate "2017-03-14"^^xsd:date ;
         :rulingText """The effects of multiple Explores in the same turn are cumulative. They're also cumulative with other effects that let you play additional lands, such as the one from Urban Evolution."""@en ] .
 
-:HeroicInterventionDoctorWhoCommander233 rdf:type owl:NamedIndividual ,
+:HeroicIntervention rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Heroic Intervention" ;
     :manaCost "{1}{G}" ;
@@ -6418,7 +6418,7 @@ Cycling {2} ({2}, Discard this card: Draw a card.)"""@en ;
         :rulingDate "2009-10-01"^^xsd:date ;
         :rulingText """This checks for lands you control with the land type Swamp or Mountain, not for lands named Swamp or Mountain. The lands it checks for don't have to be basic lands. For example, if you control Stomping Ground (a nonbasic land with the land types Mountain and Forest), Dragonskull Summit will enter untapped."""@en ] .
 
-:DreamrootCascadeDoctorWhoCommander273 rdf:type owl:NamedIndividual ,
+:DreamrootCascade rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Dreamroot Cascade" ;
     :manaValue "0"^^xsd:nonNegativeInteger ;

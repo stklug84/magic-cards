@@ -156,7 +156,7 @@ At the beginning of each end step, create a token that's a copy of target creatu
         :rulingDate "2009-02-01"^^xsd:date ;
         :rulingText """If multiple effects modify your hand size, apply them in timestamp order. For example, if you put Null Profusion (an enchantment that says your maximum hand size is two) onto the battlefield and then put Reliquary Tower onto the battlefield, you'll have no maximum hand size. However, if those permanents enter in the opposite order, your maximum hand size would be two."""@en ] .
 
-:CombatCelebrantBloomburrowCommander194 rdf:type owl:NamedIndividual ,
+:CombatCelebrant rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Combat Celebrant" ;
     :manaCost "{2}{R}" ;

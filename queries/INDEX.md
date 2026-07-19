@@ -59,7 +59,7 @@ See [`README.md`](README.md) for prefix conventions, running instructions, and t
 | 2 | [`02_cards_by_rarity_in_deck.rq`](05_sets_and_printings/02_cards_by_rarity_in_deck.rq) | Card distribution by rarity | `?deck` |
 | 3 | [`03_set_release_timeline.rq`](05_sets_and_printings/03_set_release_timeline.rq) | Contributing sets ordered by release date | `?deck` |
 | 4 | [`04_mythics_and_rares_in_deck.rq`](05_sets_and_printings/04_mythics_and_rares_in_deck.rq) | All Rares + Mythics in the deck | `?deck` |
-| 5 | [`05_printings_per_card.rq`](05_sets_and_printings/05_printings_per_card.rq) | Tabular list of every card with all collected printings and their sets | none |
+| 5 | [`05_printings_per_card.rq`](05_sets_and_printings/05_printings_per_card.rq) | Tabular list of every card with all collected printings, sets and physical copy counts | none |
 
 ## 06 — Rulings
 
@@ -99,3 +99,13 @@ See [`README.md`](README.md) for prefix conventions, running instructions, and t
 | 2 | [`02_top_synergy_hubs_per_deck.rq`](09_compound/02_top_synergy_hubs_per_deck.rq) | Top-N cards by synergy-partner count | `?deck` |
 | 3 | [`03_compare_two_decks.rq`](09_compound/03_compare_two_decks.rq) | Set-diff two decks (A-only / B-only / both) | `?deckA`, `?deckB` |
 | 4 | [`04_artifact_creature_synergies.rq`](09_compound/04_artifact_creature_synergies.rq) | Artifact Creatures with in-deck synergy partners | `?deck` |
+
+## 10 — Collection
+
+| # | File | Use Case | Parameters |
+|---|------|----------|------------|
+| 1 | [`01_collection_size.rq`](10_collection/01_collection_size.rq) | Physical card count, distinct printings and distinct card names | `?collection` |
+| 2 | [`02_copies_per_card.rq`](10_collection/02_copies_per_card.rq) | Tabular copies-per-card view with per-printing quantities | `?collection` |
+| 3 | [`03_foil_cards.rq`](10_collection/03_foil_cards.rq) | All foil / etched-foil cards with quantities and sets | `?collection` |
+| 4 | [`04_most_duplicated_cards.rq`](10_collection/04_most_duplicated_cards.rq) | Cards owned in the most physical copies | `?collection`, `?minCopies` |
+| 5 | [`05_collection_value.rq`](10_collection/05_collection_value.rq) | Recorded purchase value and price coverage | `?collection` |

@@ -12,7 +12,7 @@
 PREFIX mc: <urn:stklug84:MagicCardsOntology:2026-02-27#>
 
 SELECT DISTINCT ?neighbor ?neighborName WHERE {
-  VALUES ?seed { mc:StarfieldVocalist }
+  VALUES ?seed { mc:StarfieldVocalistEdgeOfEternities78 }
 
   {
     # 1 hop

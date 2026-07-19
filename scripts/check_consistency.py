@@ -6,8 +6,11 @@ Loads all TTL files into one combined graph and checks:
                        declared in MagicCardsOntology.ttl.
   2. dangling-refs   - every mc: individual used as subject or object of an
                        mc: property is typed (rdf:type) somewhere in the repo.
-  3. deck-entries    - every DeckEntry references an existing card individual
-                       and carries a positive :hasCount.
+  3. card-entries    - every DeckEntry / CollectionEntry references an
+                       existing card individual and carries a positive
+                       :quantity; CollectionEntries carry finish + condition;
+                       each Commander deck's entries total 100 cards; the
+                       collection's entry quantities match collection.csv.
   4. synergy-domain  - synergy properties only connect card individuals.
 
 Exit code 0 on success, 1 on any failure.
@@ -90,10 +93,10 @@ def main() -> int:
                     f"dangling-refs: {role} {node} of {p} has no rdf:type anywhere"
                 )
 
-    # --- 3. deck entries -----------------------------------------------------
-    deck_entry_cls = mc_ref("DeckEntry")
-    has_card = mc_ref("hasCard")
-    has_count = mc_ref("hasCount")
+    # --- 3. card entries (deck + collection) ----------------------------------
+    card_entry_cls = mc_ref("CardEntry")
+    entry_card = mc_ref("entryCard")
+    quantity = mc_ref("quantity")
     card_cls = mc_ref("Card")
 
     card_classes = {card_cls} | {
@@ -103,8 +106,8 @@ def main() -> int:
     def is_card(node: URIRef) -> bool:
         return any(t in card_classes for t in combined.objects(node, RDF.type))
 
-    entry_classes = {deck_entry_cls} | {
-        c for c in combined.transitive_subjects(RDFS.subClassOf, deck_entry_cls)
+    entry_classes = {card_entry_cls} | {
+        c for c in combined.transitive_subjects(RDFS.subClassOf, card_entry_cls)
     }
     entries = {
         e
@@ -112,18 +115,65 @@ def main() -> int:
         for e in combined.subjects(RDF.type, cls)
     }
     for entry in sorted(entries):
-        cards = list(combined.objects(entry, has_card))
-        if not cards:
-            errors.append(f"deck-entries: {entry} has no {has_card}")
+        cards = list(combined.objects(entry, entry_card))
+        if len(cards) != 1:
+            errors.append(f"card-entries: {entry} has {len(cards)} {entry_card} values")
         for card in cards:
             if not is_card(card):
-                errors.append(f"deck-entries: {entry} references non-card {card}")
-        counts = list(combined.objects(entry, has_count))
+                errors.append(f"card-entries: {entry} references non-card {card}")
+        counts = list(combined.objects(entry, quantity))
         if not counts:
-            errors.append(f"deck-entries: {entry} has no {has_count}")
+            errors.append(f"card-entries: {entry} has no {quantity}")
         for count in counts:
             if not isinstance(count, Literal) or int(count) < 1:
-                errors.append(f"deck-entries: {entry} has invalid count {count!r}")
+                errors.append(f"card-entries: {entry} has invalid quantity {count!r}")
+
+    # collection entries carry finish + condition; quantities match the csv
+    coll_entry_cls = mc_ref("CollectionEntry")
+    has_finish = mc_ref("hasFinish")
+    has_condition = mc_ref("hasCondition")
+    coll_entries = set(combined.subjects(RDF.type, coll_entry_cls))
+    coll_total = 0
+    for entry in sorted(coll_entries):
+        for prop in (has_finish, has_condition):
+            if not list(combined.objects(entry, prop)):
+                errors.append(f"card-entries: {entry} has no {prop}")
+        for count in combined.objects(entry, quantity):
+            coll_total += int(count)
+
+    csv_path = ROOT / "collection.csv"
+    if csv_path.exists():
+        import csv as _csv
+
+        csv_rows = list(_csv.DictReader(open(csv_path)))
+        csv_total = sum(int(r["Count"]) for r in csv_rows)
+        if coll_entries and len(coll_entries) != len(csv_rows):
+            errors.append(
+                f"card-entries: {len(coll_entries)} collection entries but "
+                f"{len(csv_rows)} rows in collection.csv"
+            )
+        if coll_entries and coll_total != csv_total:
+            errors.append(
+                f"card-entries: collection quantities sum to {coll_total} but "
+                f"collection.csv counts sum to {csv_total}"
+            )
+
+    # every Commander deck's entries must total exactly 100 cards
+    commander_deck_cls = mc_ref("CommanderDeck")
+    has_deck_entry = mc_ref("hasDeckEntry")
+    for deck in sorted(set(combined.subjects(RDF.type, commander_deck_cls))):
+        deck_entries = list(combined.objects(deck, has_deck_entry))
+        if not deck_entries:
+            continue
+        total = sum(
+            int(count)
+            for e in deck_entries
+            for count in combined.objects(e, quantity)
+        )
+        if total != 100:
+            errors.append(
+                f"card-entries: Commander deck {deck} entries total {total}, expected 100"
+            )
 
     # --- 4. synergy domain/range ---------------------------------------------
     for prop in sorted(SYNERGY_PROPS):
@@ -137,7 +187,8 @@ def main() -> int:
     # --- report ------------------------------------------------------------
     print(
         f"Checked {len(used_props)} properties, {len(used_classes)} classes, "
-        f"{len(entries)} deck entries."
+        f"{len(entries)} card entries ({len(coll_entries)} collection, "
+        f"{len(entries) - len(coll_entries)} deck)."
     )
     if errors:
         unique = sorted(set(errors))

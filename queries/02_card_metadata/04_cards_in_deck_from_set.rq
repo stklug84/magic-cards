@@ -4,7 +4,8 @@
 #   ?deck - the deck to query
 #   ?set  - the set individual (e.g. mc:AetherdriftCommander, mc:Kaladesh)
 
-PREFIX mc: <urn:stklug84:MagicCardsOntology:2026-02-27#>
+PREFIX mc:  <urn:stklug84:MagicCardsOntology:2026-02-27#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 
 SELECT ?cardName ?cardNumber WHERE {
   VALUES ?deck { mc:SaheeliRadiantCreatorDeck }

@@ -1,6 +1,6 @@
 # SPARQL Query Catalog
 
-Reusable SPARQL 1.1 queries for the **Magic Cards Ontology** (`MagicCardsOntology.ttl`) and any instance graph that conforms to it. The reference dataset is the card collection in `sets/*.ttl` (aggregated by `MagicCardIndividuals.ttl`) together with the deck graph `decks/SaheeliRadiantCreator.ttl` and the synergy graph `MagicCardSynergies.ttl`.
+Reusable SPARQL 1.1 queries for the **Magic Cards Ontology** (`MagicCardsOntology.ttl`) and any instance graph that conforms to it. The reference dataset is the card collection in `sets/*.ttl` (aggregated by `MagicCardIndividuals.ttl`) together with the inventory graph `MagicCardCollection.ttl`, the deck graph `decks/SaheeliRadiantCreator.ttl` and the synergy graph `MagicCardSynergies.ttl`.
 
 Every query is a standalone `.rq` file with:
 
@@ -23,7 +23,8 @@ queries/
 ├── 06_rulings/                    official ruling text and dates
 ├── 07_graph_patterns/             CONSTRUCT / DESCRIBE / ASK / property paths
 ├── 08_ontology_introspection/     "what's in the schema" queries (no parameters)
-└── 09_compound/                   multi-criteria queries combining several axes
+├── 09_compound/                   multi-criteria queries combining several axes
+└── 10_collection/                 physical inventory: copies, finishes, value
 ```
 
 ## Conventions
@@ -89,6 +90,7 @@ from rdflib import Graph
 
 g = Graph()
 for ttl in ["MagicCardsOntology.ttl", "MagicCardSynergies.ttl",
+            "MagicCardCollection.ttl",
             *Path("sets").glob("*.ttl"), *Path("decks").glob("*.ttl")]:
     g.parse(ttl, format="turtle")
 
@@ -102,6 +104,7 @@ for row in g.query(query):
 ```bash
 arq --data MagicCardsOntology.ttl \
     --data MagicCardSynergies.ttl \
+    --data MagicCardCollection.ttl \
     $(printf -- '--data %s ' sets/*.ttl decks/*.ttl) \
     --query queries/01_deck_inventory/01_list_all_decks.rq
 ```
@@ -115,17 +118,28 @@ Load all TTL files into a single repository / database, then paste the contents 
 A few patterns recur across queries:
 
 - **Deck membership** is asserted directly: `?deck mc:hasCard ?c` (inverse
-  `mc:isInDeck`). The ontology additionally defines a reified `DeckEntry`
-  pattern for copy counts — `?deck mc:hasDeckEntry ?e . ?e mc:entryCard ?c ;
-  mc:quantity ?n .` — and several queries (`01/02`, `01/03`, `01/05`, `01/08`,
-  `07/06`) are written against it. The current deck data does **not** assert
-  any `DeckEntry` individuals (the Commander deck is singleton apart from
-  basic lands), so those queries return empty results until entries are
-  modelled.
+  `mc:isInDeck`). Copy counts are reified as `DeckEntry` individuals —
+  `?deck mc:hasDeckEntry ?e . ?e mc:entryCard ?c ; mc:quantity ?n .` — and
+  several queries (`01/02`, `01/03`, `01/05`, `01/08`, `07/06`) are written
+  against them. The Saheeli deck asserts one entry per unique card
+  (quantity 1 except the basic lands: 8 Island, 2 Forest, 2 Mountain;
+  total = 100).
+- **Physical inventory** is reified analogously in
+  `MagicCardCollection.ttl`: `mc:MagicCardCollection mc:hasCollectionEntry ?e .
+  ?e mc:entryCard ?c ; mc:quantity ?n ; mc:hasFinish ?f ; mc:hasCondition ?cond .`
+  with optional `mc:purchasePrice`. One `CollectionEntry` corresponds to one
+  acquisition lot from `collection.csv`; a printing collected in several
+  finishes or lots has several entries, so always aggregate with `SUM(?n)`.
+  `DeckEntry` and `CollectionEntry` share the `mc:entryCard` / `mc:quantity`
+  properties via their common superclass `mc:CardEntry` — restrict by class
+  (`?e rdf:type mc:CollectionEntry`) or traverse from the container when the
+  distinction matters. Every card referenced by the Saheeli deck is an
+  inventoried printing from `collection.csv`, so all deck cards are backed by
+  collection entries.
 - **Colors and color identity**: cards assert both `mc:hasColor` and
   `mc:hasColorIdentity`. Colorless cards are recognizable by the absence of
   any `mc:hasColorIdentity` values.
-- **Basic lands** in the Saheeli deck are distinct printing-specific Card individuals named `mc:ForestHOB198`, `mc:IslandHOB195`, `mc:MountainHOB197` (from the `sets/TheHobbit.ttl` set graph, set code `HOB`) — the bare `mc:Forest` / `mc:Island` / `mc:Mountain` IRIs are reserved for the basic-land *subtype* individuals in the main ontology.
+- **Basic lands** in the Saheeli deck are distinct printing-specific Card individuals named `mc:ForestAetherdrift291`, `mc:IslandAetherdrift282`, `mc:MountainAetherdrift288` (from the `sets/Aetherdrift.ttl` set graph, set code `DFT`) — the bare `mc:Forest` / `mc:Island` / `mc:Mountain` IRIs are reserved for the basic-land *subtype* individuals in the main ontology.
 - **Legality** is reified as a `LegalityMapping` per (card, format):
   `?card mc:hasLegality ?lm . ?lm mc:inFormat ?fmt ; mc:hasLegalityStatus ?status .`
 - **Rulings** are reified as `Ruling` individuals with `mc:rulingDate` and `mc:rulingText`.

@@ -1,0 +1,19 @@
+# Total size of the physical collection: number of physical cards (summing
+# entry quantities), distinct collected printings, and distinct card names.
+#
+# PARAMETERS:
+#   ?collection - the collection to query
+
+PREFIX mc: <urn:stklug84:MagicCardsOntology:2026-02-27#>
+
+SELECT (SUM(?qty)                 AS ?physicalCards)
+       (COUNT(DISTINCT ?c)        AS ?distinctPrintings)
+       (COUNT(DISTINCT ?cardName) AS ?distinctCards)
+WHERE {
+  VALUES ?collection { mc:MagicCardCollection }
+
+  ?collection mc:hasCollectionEntry ?e .
+  ?e mc:entryCard ?c ;
+     mc:quantity  ?qty .
+  ?c mc:cardName ?cardName .
+}

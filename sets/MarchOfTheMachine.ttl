@@ -506,7 +506,7 @@ When this land enters, you gain 1 life.
       [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] .
 
-:SwiftwaterCliffsMarchOfTheMachine273 rdf:type owl:NamedIndividual ,
+:SwiftwaterCliffs rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Swiftwater Cliffs" ;
     :manaValue "0"^^xsd:nonNegativeInteger ;

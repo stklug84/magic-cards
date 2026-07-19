@@ -3024,36 +3024,6 @@ Cycling {U} ({U}, Discard this card: Draw a card.)"""@en ;
         :rulingDate "2023-02-04"^^xsd:date ;
         :rulingText """The Mycosynth Gardens copies exactly what was printed on the original artifact and nothing else (unless that permanent is copying something else; see below). It doesn't copy whether that artifact is tapped or untapped, whether it has any counters on it or Auras and Equipment attached to it, and so on."""@en ] .
 
-:MyriadLandscape rdf:type owl:NamedIndividual ,
-                  :Card ;
-    :cardName "Myriad Landscape" ;
-    :manaValue "0"^^xsd:nonNegativeInteger ;
-    :hasCardType :Land ;
-    :hasRarity :Uncommon ;
-    :isInSet :EdgeOfEternitiesCommander ;
-    :cardNumber "169"^^xsd:integer ;
-    :artist "Richard Wright" ;
-    :hasLanguage :English ;
-    :printedText """This land enters tapped.
-{T}: Add {C}.
-{2}, {T}, Sacrifice this land: Search your library for up to two basic land cards that share a land type, put them onto the battlefield tapped, then shuffle."""@en ;
-    :oracleText """This land enters tapped.
-{T}: Add {C}.
-{2}, {T}, Sacrifice this land: Search your library for up to two basic land cards that share a land type, put them onto the battlefield tapped, then shuffle."""@en ;
-    :scryfallUrl "https://scryfall.com/card/eoc/169/myriad-landscape"^^xsd:anyURI ;
-    :hasLegality
-      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :NotLegal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :NotLegal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ;
-    :hasRuling
-      [ rdf:type :Ruling ;
-        :rulingDate "2018-03-16"^^xsd:date ;
-        :rulingText """You can choose to find one basic land card with Myriad Landscape's last ability."""@en ] .
-
 :MysticMonasteryEdgeOfEternitiesCommander170 rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Mystic Monastery" ;

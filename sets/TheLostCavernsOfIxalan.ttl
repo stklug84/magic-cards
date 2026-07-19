@@ -160,7 +160,7 @@ Mastercraft Raptor's power is equal to the total power of the exiled cards used 
         :rulingDate "2023-11-10"^^xsd:date ;
         :rulingText """You may exile tokens you control as part of the materials required. However, because they aren't cards and won't stay in exile, any abilities that refer to what you "used to craft" the back faces won't refer to anything."""@en ] .
 
-:SaheeliTheSunsBrilliance rdf:type owl:NamedIndividual ,
+:SaheeliTheSunsBrillianceTheLostCavernsOfIxalan239 rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Saheeli, the Sun's Brilliance" ;
     :manaCost "{U}{R}" ;
@@ -170,10 +170,10 @@ Mastercraft Raptor's power is equal to the total power of the exiled cards used 
     :hasSubType :Human ;
     :hasSubType :Artificer ;
     :hasRarity :MythicRare ;
-    :hasColor :Red ;
     :hasColor :Blue ;
-    :hasColorIdentity :Red ;
+    :hasColor :Red ;
     :hasColorIdentity :Blue ;
+    :hasColorIdentity :Red ;
     :isInSet :TheLostCavernsOfIxalan ;
     :cardNumber "239"^^xsd:integer ;
     :artist "Cynthia Sheppard" ;
@@ -198,19 +198,19 @@ Mastercraft Raptor's power is equal to the total power of the exiled cards used 
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2023-11-10"^^xsd:date ;
-        :rulingText """The token copies exactly what was printed on the original permanent, with the listed exceptions (unless that permanent is copying something else or is a token; see below). It doesn't copy whether that permanent is tapped or untapped, whether it has any counters on it or any Auras or Equipment attached to it, or any non-copy effects that have changed its types, color, power and toughness, and so on."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2023-11-10"^^xsd:date ;
-        :rulingText """If the copied permanent has {X} in its mana cost, X is 0."""@en ] ,
+        :rulingText """Any enters-the-battlefield abilities of the copied permanent will trigger when the token enters the battlefield. Any "as [this permanent] enters the battlefield" or "[this permanent] enters the battlefield with" abilities of the target permanent will also work."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2023-11-10"^^xsd:date ;
         :rulingText """If the copied permanent is a token, the new token that's created copies the original characteristics of that token as stated by the effect that created the token (with the listed exceptions)."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """If the copied permanent has {X} in its mana cost, X is 0."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
         :rulingText """If the copied permanent is copying something else, then the token enters the battlefield as whatever that permanent copied (with the listed exceptions)."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2023-11-10"^^xsd:date ;
-        :rulingText """Any enters-the-battlefield abilities of the copied permanent will trigger when the token enters the battlefield. Any "as [this permanent] enters the battlefield" or "[this permanent] enters the battlefield with" abilities of the target permanent will also work."""@en ] .
+        :rulingText """The token copies exactly what was printed on the original permanent, with the listed exceptions (unless that permanent is copying something else or is a token; see below). It doesn't copy whether that permanent is tapped or untapped, whether it has any counters on it or any Auras or Equipment attached to it, or any non-copy effects that have changed its types, color, power and toughness, and so on."""@en ] .
 
 :VitoFanaticOfAclazotz rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -274,6 +274,7 @@ Whenever you sacrifice another permanent, you gain 2 life if this is the first t
     :powerValue "4"^^xsd:integer ;
     :toughness "4" ;
     :toughnessValue "4"^^xsd:integer ;
+    :hasKeywordAbility :Ward ;
     :printedText """Ward {2}
 As this creature enters, choose a creature type.
 This creature is the chosen type in addition to its other types.
@@ -282,7 +283,6 @@ If a triggered ability of another creature you control of the chosen type trigge
 As this creature enters, choose a creature type.
 This creature is the chosen type in addition to its other types.
 If a triggered ability of another creature you control of the chosen type triggers, it triggers an additional time."""@en ;
-    :hasKeywordAbility :Ward ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=636980"^^xsd:anyURI ;
     :scryfallUrl "https://scryfall.com/card/lci/258/roaming-throne"^^xsd:anyURI ;
     :hasLegality

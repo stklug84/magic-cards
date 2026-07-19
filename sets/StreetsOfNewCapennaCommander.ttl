@@ -52,7 +52,7 @@ subtype, format and legality definitions."""@en .
 #
 ################################################################################
 
-:DeterminedIterationStreetsOfNewCapennaCommander45 rdf:type owl:NamedIndividual ,
+:DeterminedIteration rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Determined Iteration" ;
     :manaCost "{1}{R}" ;

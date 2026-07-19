@@ -52,7 +52,7 @@ subtype, format and legality definitions."""@en .
 #
 ################################################################################
 
-:MechanizedProduction rdf:type owl:NamedIndividual ,
+:MechanizedProductionMurdersAtKarlovManorCommander109 rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Mechanized Production" ;
     :manaCost "{2}{U}{U}" ;
@@ -66,13 +66,13 @@ subtype, format and legality definitions."""@en .
     :cardNumber "109"^^xsd:integer ;
     :artist "Adam Paquette" ;
     :hasLanguage :English ;
+    :hasKeywordAbility :Enchant ;
     :printedText """Enchant artifact you control
 At the beginning of your upkeep, create a token that's a copy of enchanted artifact. Then if you control eight or more artifacts with the same name as one another, you win the game."""@en ;
     :oracleText """Enchant artifact you control
 At the beginning of your upkeep, create a token that's a copy of enchanted artifact. Then if you control eight or more artifacts with the same name as one another, you win the game."""@en ;
     :flavorText """"Give me eight walkers, I'll give you the city."
 —Dovin Baan"""@en ;
-    :hasKeywordAbility :Enchant ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=650203"^^xsd:anyURI ;
     :scryfallUrl "https://scryfall.com/card/mkc/109/mechanized-production"^^xsd:anyURI ;
     :hasLegality
@@ -86,37 +86,37 @@ At the beginning of your upkeep, create a token that's a copy of enchanted artif
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2017-02-09"^^xsd:date ;
-        :rulingText """Any abilities that trigger on the token being created won't resolve until after Mechanized Production's triggered ability has finished resolving entirely and performed its check for eight artifacts with the same name."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2017-02-09"^^xsd:date ;
-        :rulingText """The eight artifacts with the same name don't have to have the same name as the enchanted artifact. For example, you win the game if you control eight Thopter artifact creature tokens as Mechanized Production's ability resolves, even if Mechanized Production isn't attached to a Thopter."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2017-02-09"^^xsd:date ;
         :rulingText """All eight of the permanents sharing a name must be artifacts. If you control only seven artifacts with the same name and a nonartifact permanent with that same name, you won't win the game."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2017-02-09"^^xsd:date ;
-        :rulingText """If you control eight or more artifacts that share a name while you control Mechanized Production, you won't win the game yet. You'll win the game while resolving its triggered ability during your upkeep."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2017-02-09"^^xsd:date ;
-        :rulingText """The token copies exactly what was printed on the original artifact and nothing else (unless that artifact is copying something else or is a token; see below). It doesn't copy whether that artifact is tapped or untapped, whether it has any counters on it or Auras attached to it, or any non-copy effects that have changed its types, color, or so on."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2017-02-09"^^xsd:date ;
-        :rulingText """If the copied artifact has {X} in its mana cost, X is considered to be zero."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2017-02-09"^^xsd:date ;
-        :rulingText """If the copied artifact is copying something else (for example, if the copied artifact is a Sculpting Steel), then the token enters the battlefield as whatever that artifact copied."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2017-02-09"^^xsd:date ;
         :rulingText """If the copied artifact is a token, the token that's created copies the original characteristics of that token as stated by the effect that created it."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2017-02-09"^^xsd:date ;
+        :rulingText """If the copied artifact is copying something else (for example, if the copied artifact is a Sculpting Steel), then the token enters the battlefield as whatever that artifact copied."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2017-02-09"^^xsd:date ;
+        :rulingText """The eight artifacts with the same name don't have to have the same name as the enchanted artifact. For example, you win the game if you control eight Thopter artifact creature tokens as Mechanized Production's ability resolves, even if Mechanized Production isn't attached to a Thopter."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2017-02-09"^^xsd:date ;
+        :rulingText """If the enchanted artifact leaves the battlefield in response to Mechanized Production's triggered ability but Mechanized Production does not, Mechanized Production is put into its owner's graveyard as a state-based action with no enchanted artifact. The triggered ability creates no token, but you can still win the game if you control enough artifacts with the same name."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2017-02-09"^^xsd:date ;
+        :rulingText """If the copied artifact has {X} in its mana cost, X is considered to be zero."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2017-02-09"^^xsd:date ;
+        :rulingText """If you control eight or more artifacts that share a name while you control Mechanized Production, you won't win the game yet. You'll win the game while resolving its triggered ability during your upkeep."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2017-02-09"^^xsd:date ;
         :rulingText """Any enters-the-battlefield abilities of the copied artifact trigger when the artifact token enters the battlefield. The artifact token also has any "this enters the battlefield with" or "as this enters the battlefield" abilities that the copied artifact has."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2017-02-09"^^xsd:date ;
+        :rulingText """The token copies exactly what was printed on the original artifact and nothing else (unless that artifact is copying something else or is a token; see below). It doesn't copy whether that artifact is tapped or untapped, whether it has any counters on it or Auras attached to it, or any non-copy effects that have changed its types, color, or so on."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2017-02-09"^^xsd:date ;
         :rulingText """If Mechanized Production and the enchanted artifact leave the battlefield simultaneously in response to the triggered ability, then the effect creates a token that's a copy of the artifact as it last existed on the battlefield."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2017-02-09"^^xsd:date ;
-        :rulingText """If the enchanted artifact leaves the battlefield in response to Mechanized Production's triggered ability but Mechanized Production does not, Mechanized Production is put into its owner's graveyard as a state-based action with no enchanted artifact. The triggered ability creates no token, but you can still win the game if you control enough artifacts with the same name."""@en ] .
+        :rulingText """Any abilities that trigger on the token being created won't resolve until after Mechanized Production's triggered ability has finished resolving entirely and performed its check for eight artifacts with the same name."""@en ] .
 
 :AdrixAndNevTwincasters rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -128,10 +128,10 @@ At the beginning of your upkeep, create a token that's a copy of enchanted artif
     :hasSubType :Merfolk ;
     :hasSubType :Wizard ;
     :hasRarity :MythicRare ;
-    :hasColor :Green ;
     :hasColor :Blue ;
-    :hasColorIdentity :Green ;
+    :hasColor :Green ;
     :hasColorIdentity :Blue ;
+    :hasColorIdentity :Green ;
     :isInSet :MurdersAtKarlovManorCommander ;
     :cardNumber "198"^^xsd:integer ;
     :artist "Andrew Mar" ;
@@ -140,11 +140,11 @@ At the beginning of your upkeep, create a token that's a copy of enchanted artif
     :powerValue "2"^^xsd:integer ;
     :toughness "2" ;
     :toughnessValue "2"^^xsd:integer ;
+    :hasKeywordAbility :Ward ;
     :printedText """Ward {2} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {2}.)
 If one or more tokens would be created under your control, twice that many of those tokens are created instead."""@en ;
     :oracleText """Ward {2} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {2}.)
 If one or more tokens would be created under your control, twice that many of those tokens are created instead."""@en ;
-    :hasKeywordAbility :Ward ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=650292"^^xsd:anyURI ;
     :scryfallUrl "https://scryfall.com/card/mkc/198/adrix-and-nev-twincasters"^^xsd:anyURI ;
     :hasLegality
@@ -157,11 +157,11 @@ If one or more tokens would be created under your control, twice that many of th
       [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ;
     :hasRuling
       [ rdf:type :Ruling ;
-        :rulingDate "2021-06-18"^^xsd:date ;
-        :rulingText """Everything that is specified by the effect creating the original token or tokens will also be true about the additional token or tokens created by Adrix and Nev's replacement effect. For example, if an effect tells you to create a token "tapped and attacking" the additional tokens will also be tapped and attacking. Similarly, if an effect creates a token and puts counters on it (such as a Fractal token) the additional token will also get those counters."""@en ] ,
-      [ rdf:type :Ruling ;
         :rulingDate "2021-04-16"^^xsd:date ;
-        :rulingText """If a player casts a spell that targets multiple permanents their opponent controls with ward, each of those ward abilities will trigger. If that player doesn't pay for all of them, the spell will be countered."""@en ] .
+        :rulingText """If a player casts a spell that targets multiple permanents their opponent controls with ward, each of those ward abilities will trigger. If that player doesn't pay for all of them, the spell will be countered."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2021-06-18"^^xsd:date ;
+        :rulingText """Everything that is specified by the effect creating the original token or tokens will also be true about the additional token or tokens created by Adrix and Nev's replacement effect. For example, if an effect tells you to create a token "tapped and attacking" the additional tokens will also be tapped and attacking. Similarly, if an effect creates a token and puts counters on it (such as a Fractal token) the additional token will also get those counters."""@en ] .
 
 :EsixFractalBloom rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -172,10 +172,10 @@ If one or more tokens would be created under your control, twice that many of th
     :hasCardType :Creature ;
     :hasSubType :Fractal ;
     :hasRarity :MythicRare ;
-    :hasColor :Green ;
     :hasColor :Blue ;
-    :hasColorIdentity :Green ;
+    :hasColor :Green ;
     :hasColorIdentity :Blue ;
+    :hasColorIdentity :Green ;
     :isInSet :MurdersAtKarlovManorCommander ;
     :cardNumber "210"^^xsd:integer ;
     :artist "Chase Stone" ;
@@ -184,11 +184,11 @@ If one or more tokens would be created under your control, twice that many of th
     :powerValue "4"^^xsd:integer ;
     :toughness "4" ;
     :toughnessValue "4"^^xsd:integer ;
+    :hasKeywordAbility :Flying ;
     :printedText """Flying
 The first time you would create one or more tokens during each of your turns, you may instead choose a creature other than Esix and create that many tokens that are copies of that creature."""@en ;
     :oracleText """Flying
 The first time you would create one or more tokens during each of your turns, you may instead choose a creature other than Esix and create that many tokens that are copies of that creature."""@en ;
-    :hasKeywordAbility :Flying ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=650304"^^xsd:anyURI ;
     :scryfallUrl "https://scryfall.com/card/mkc/210/esix-fractal-bloom"^^xsd:anyURI ;
     :hasLegality
@@ -205,13 +205,13 @@ The first time you would create one or more tokens during each of your turns, yo
         :rulingText """This effect applies before anything that modifies how those tokens enter the battlefield."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2021-04-16"^^xsd:date ;
-        :rulingText """This effect can apply to any token, not just creature tokens. For example, you could replace creating a Treasure token with creating a copy of the chosen creature."""@en ] ,
+        :rulingText """If you choose not to apply the replacement effect, you will not get the choice to apply it again until your next turn."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2021-04-16"^^xsd:date ;
         :rulingText """If you choose a legendary creature, the copies will also be legendary. If this results in you controlling more than one legendary permanent with the same name, you'll put all but one of them into their owner's graveyard."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2021-04-16"^^xsd:date ;
-        :rulingText """If you choose not to apply the replacement effect, you will not get the choice to apply it again until your next turn."""@en ] ,
+        :rulingText """This effect can apply to any token, not just creature tokens. For example, you could replace creating a Treasure token with creating a copy of the chosen creature."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2021-04-16"^^xsd:date ;
         :rulingText """If you create one or more tokens during your turn, and then Esix comes under your control, the replacement effect won't apply to any tokens you create the rest of the turn. You'll have to wait until your next turn."""@en ] .

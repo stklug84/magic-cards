@@ -9,7 +9,7 @@ PREFIX mc: <urn:stklug84:MagicCardsOntology:2026-02-27#>
 
 ASK {
   VALUES ?deck { mc:SaheeliRadiantCreatorDeck }
-  VALUES ?card { mc:StarfieldVocalist }
+  VALUES ?card { mc:StarfieldVocalistEdgeOfEternities78 }
 
   ?deck mc:hasCard ?card .
 }
