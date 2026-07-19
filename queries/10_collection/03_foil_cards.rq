@@ -1,0 +1,24 @@
+# All foil and etched-foil cards in the collection, with finish, quantity
+# and set information.
+#
+# PARAMETERS:
+#   ?collection - the collection to query
+
+PREFIX mc:   <urn:stklug84:MagicCardsOntology:2026-02-27#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?cardName ?finishLabel ?qty ?setCode ?num WHERE {
+  VALUES ?collection { mc:MagicCardCollection }
+
+  ?collection mc:hasCollectionEntry ?e .
+  ?e mc:entryCard  ?c ;
+     mc:quantity   ?qty ;
+     mc:hasFinish  ?finish .
+  FILTER(?finish != mc:Nonfoil)
+  ?finish rdfs:label ?finishLabel .
+  ?c mc:cardName ?cardName ;
+     mc:isInSet  ?s .
+  ?s mc:setCode ?setCode .
+  OPTIONAL { ?c mc:cardNumber ?num }
+}
+ORDER BY ?cardName ?setCode

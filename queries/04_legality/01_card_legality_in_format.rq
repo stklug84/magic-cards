@@ -9,7 +9,7 @@ PREFIX mc:   <urn:stklug84:MagicCardsOntology:2026-02-27#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
 SELECT ?cardName ?formatLabel ?statusLabel WHERE {
-  VALUES ?card   { mc:StarfieldVocalist }
+  VALUES ?card   { mc:StarfieldVocalistEdgeOfEternities78 }
   VALUES ?format { mc:Commander }
 
   ?card mc:cardName ?cardName ;

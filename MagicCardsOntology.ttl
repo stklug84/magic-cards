@@ -119,6 +119,16 @@ See rules 100.2a and 100.6."""@en .
             """A constructed deck for the Pauper format.
 See rules 100.2a and 100.6."""@en .
 
+# --- Collection Class ---
+
+:Collection rdf:type owl:Class ;
+            rdfs:label "Collection" ;
+            rdfs:comment
+            """A physical collection of Magic cards owned by a collector.
+Relates to its contents through reified collection entries that carry the
+number of copies, finish, condition and purchase price of each collected
+printing."""@en .
+
 # ------------------------------------------------------------------------------
 # Card Classes (including its attribute classes)
 # - Color
@@ -567,6 +577,39 @@ See rules 206.1 and 206.5."""@en .
           rdfs:comment
           """Language of the card print. See rules 201.2 and
 213.1e."""@en .
+
+# --- Finish Attribute Class ---
+:Finish rdf:type owl:Class ;
+        owl:equivalentClass [
+            rdf:type owl:Class ;
+            owl:oneOf (
+                :Nonfoil
+                :Foil
+                :EtchedFoil
+            )
+        ] ;
+        rdfs:label "Finish" ;
+        rdfs:comment
+        """The physical finish of a collected card: regular (non-foil),
+traditional foil, or etched foil. A property of the physical copy, not of
+the abstract card."""@en .
+
+# --- Condition Attribute Class ---
+:Condition rdf:type owl:Class ;
+           owl:equivalentClass [
+               rdf:type owl:Class ;
+               owl:oneOf (
+                   :NearMint
+                   :LightlyPlayed
+                   :ModeratelyPlayed
+                   :HeavilyPlayed
+                   :Damaged
+               )
+           ] ;
+           rdfs:label "Condition" ;
+           rdfs:comment
+           """The physical condition of a collected card, following the
+common TCG grading scale from Near Mint down to Damaged."""@en .
 
 # --- Legality Attribute Classes ---
 :Legality rdf:type owl:Class ;
@@ -1296,14 +1339,31 @@ See rule 100.2."""@en .
                """Identifies the commander(s) of a deck.
 See rules 903.3 and 903.6."""@en .
 
-# --- Deck Entry (Reified Deck-Card Quantity) ---
+# --- Card Entries (Reified Card Quantities) ---
+:CardEntry rdf:type owl:Class ;
+           rdfs:label "Card Entry" ;
+           rdfs:comment
+           """An abstract reified association between a container (such as a
+deck or a collection) and a specific card, carrying the number of copies of
+that card. Used because OWL cannot attach a literal (such as a quantity
+count) directly to an object property edge."""@en .
+
 :DeckEntry rdf:type owl:Class ;
+           rdfs:subClassOf :CardEntry ;
            rdfs:label "Deck Entry" ;
            rdfs:comment
            """A reified association between a deck and a specific card,
-carrying the number of copies of that card in the deck. Used because OWL
-cannot attach a literal (such as a quantity count) directly to an object
-property edge between Deck and Card. See rule 100.2."""@en .
+carrying the number of copies of that card in the deck. See rule 100.2."""@en .
+
+:CollectionEntry rdf:type owl:Class ;
+                 rdfs:subClassOf :CardEntry ;
+                 rdfs:label "Collection Entry" ;
+                 rdfs:comment
+                 """A reified association between a collection and a specific
+card printing, carrying the number of physical copies together with their
+finish, condition and (optionally) purchase price. One entry corresponds to
+one acquisition lot; a printing collected in several finishes or conditions
+has one entry per variant."""@en .
 
 :hasDeckEntry rdf:type owl:ObjectProperty ;
               rdfs:domain :Deck ;
@@ -1314,22 +1374,60 @@ property edge between Deck and Card. See rule 100.2."""@en .
 in turn references a specific card and the number of copies in the deck.
 See rule 100.2."""@en .
 
+:hasCollectionEntry rdf:type owl:ObjectProperty ;
+                    rdfs:domain :Collection ;
+                    rdfs:range :CollectionEntry ;
+                    rdfs:label "Has Collection Entry" ;
+                    rdfs:comment
+                    """Relates a collection to one of its reified collection
+entries, which in turn references a specific card printing and the number of
+physical copies owned."""@en .
+
 :entryCard rdf:type owl:ObjectProperty ,
                     owl:FunctionalProperty ;
-           rdfs:domain :DeckEntry ;
+           rdfs:domain :CardEntry ;
            rdfs:range :Card ;
            rdfs:label "Entry Card" ;
            rdfs:comment
-           """The card referenced by a deck entry. See rule 100.2."""@en .
+           """The card referenced by a deck or collection entry.
+See rule 100.2."""@en .
 
 :quantity rdf:type owl:DatatypeProperty ,
                    owl:FunctionalProperty ;
-          rdfs:domain :DeckEntry ;
+          rdfs:domain :CardEntry ;
           rdfs:range xsd:positiveInteger ;
           rdfs:label "Quantity" ;
           rdfs:comment
-          """The number of copies of the entry's card in the deck.
-Must be a positive integer. See rule 100.2."""@en .
+          """The number of copies of the entry's card in the deck or
+collection. Must be a positive integer. See rule 100.2."""@en .
+
+:hasFinish rdf:type owl:ObjectProperty ,
+                    owl:FunctionalProperty ;
+           rdfs:domain :CollectionEntry ;
+           rdfs:range :Finish ;
+           rdfs:label "Has Finish" ;
+           rdfs:comment
+           """The physical finish (non-foil, foil, etched foil) of the
+copies described by a collection entry."""@en .
+
+:hasCondition rdf:type owl:ObjectProperty ,
+                       owl:FunctionalProperty ;
+              rdfs:domain :CollectionEntry ;
+              rdfs:range :Condition ;
+              rdfs:label "Has Condition" ;
+              rdfs:comment
+              """The physical condition of the copies described by a
+collection entry."""@en .
+
+:purchasePrice rdf:type owl:DatatypeProperty ,
+                        owl:FunctionalProperty ;
+               rdfs:domain :CollectionEntry ;
+               rdfs:range xsd:decimal ;
+               rdfs:label "Purchase Price" ;
+               rdfs:comment
+               """The per-copy purchase price of the copies described by a
+collection entry, in the collector's reference currency. Optional; absent
+when the price was not recorded."""@en .
 
 # --- Card-to-Card Synergy ---
 :hasSynergyWith rdf:type owl:ObjectProperty ,
@@ -8336,6 +8434,51 @@ format."""@en .
             rdfs:comment
             """The card is limited to a single copy per deck in the format
 (primarily Vintage)."""@en .
+
+# --- Finishes ---
+:Nonfoil rdf:type owl:NamedIndividual ,
+                  :Finish ;
+         rdfs:label "Non-foil" ;
+         rdfs:comment "A regular card without any foil treatment."@en .
+:Foil rdf:type owl:NamedIndividual ,
+               :Finish ;
+      rdfs:label "Foil" ;
+      rdfs:comment "A card with traditional foil treatment."@en .
+:EtchedFoil rdf:type owl:NamedIndividual ,
+                     :Finish ;
+            rdfs:label "Etched Foil" ;
+            rdfs:comment "A card with etched foil treatment."@en .
+
+# --- Conditions ---
+:NearMint rdf:type owl:NamedIndividual ,
+                   :Condition ;
+          rdfs:label "Near Mint" ;
+          rdfs:comment
+          """A card in near-perfect condition with at most minimal wear."""@en .
+:LightlyPlayed rdf:type owl:NamedIndividual ,
+                        :Condition ;
+               rdfs:label "Lightly Played" ;
+               rdfs:comment
+               """A card with minor border or surface wear visible on close
+inspection."""@en .
+:ModeratelyPlayed rdf:type owl:NamedIndividual ,
+                           :Condition ;
+                  rdfs:label "Moderately Played" ;
+                  rdfs:comment
+                  """A card with moderate wear such as edge whitening,
+scratches or slight creases."""@en .
+:HeavilyPlayed rdf:type owl:NamedIndividual ,
+                        :Condition ;
+               rdfs:label "Heavily Played" ;
+               rdfs:comment
+               """A card with major wear, still tournament legal in a
+sleeve."""@en .
+:Damaged rdf:type owl:NamedIndividual ,
+                  :Condition ;
+         rdfs:label "Damaged" ;
+         rdfs:comment
+         """A card with damage beyond heavy wear, such as tears, bends or
+water damage."""@en .
 
 # --- Summon Card  (only individual card that is of Summon type) ---
 :OldFogey rdf:type owl:NamedIndividual ,

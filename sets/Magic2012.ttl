@@ -78,16 +78,16 @@ subtype, format and legality definitions."""@en .
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2011-09-22"^^xsd:date ;
+        :rulingText """The earliest that you can activate Sundial of the Infinite's ability is during your upkeep step, after abilities that trigger "at the beginning of your upkeep" have been put onto the stack but before they resolve."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2011-09-22"^^xsd:date ;
         :rulingText """If any triggered abilities do trigger during this process, they're put onto the stack during the cleanup step. If this happens, players will have a chance to cast spells and activate abilities, then there will be another cleanup step before the turn finally ends."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2011-09-22"^^xsd:date ;
         :rulingText """If Sundial of the Infinite's ability is activated before the end step, any "at the beginning of the end step"-triggered abilities won't get the chance to trigger that turn because the end step is skipped. Those abilities will trigger at the beginning of the end step of the next turn. The same is true of abilities that trigger at the beginning of other phases or steps (except upkeep)."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2011-09-22"^^xsd:date ;
-        :rulingText """The earliest that you can activate Sundial of the Infinite's ability is during your upkeep step, after abilities that trigger "at the beginning of your upkeep" have been put onto the stack but before they resolve."""@en ] ,
+        :rulingText """Ending the turn this way means the following things happen in order: 1) All spells and abilities on the stack are exiled. This includes spells and abilities that can't be countered. 2) All attacking and blocking creatures are removed from combat. 3) State-based actions are checked. No player gets priority, and no triggered abilities are put onto the stack. 4) The current phase and/or step ends. The game skips straight to the cleanup step. The cleanup step happens in its entirety."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2011-09-22"^^xsd:date ;
-        :rulingText """Though spells and abilities that are exiled won't get a chance to resolve, they don't count as being "countered.\""""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2011-09-22"^^xsd:date ;
-        :rulingText """Ending the turn this way means the following things happen in order: 1) All spells and abilities on the stack are exiled. This includes spells and abilities that can't be countered. 2) All attacking and blocking creatures are removed from combat. 3) State-based actions are checked. No player gets priority, and no triggered abilities are put onto the stack. 4) The current phase and/or step ends. The game skips straight to the cleanup step. The cleanup step happens in its entirety."""@en ] .
+        :rulingText """Though spells and abilities that are exiled won't get a chance to resolve, they don't count as being "countered.\""""@en ] .

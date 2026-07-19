@@ -1,0 +1,23 @@
+# Cards owned in the highest number of physical copies (across all printings
+# and finishes), above a configurable threshold.
+#
+# PARAMETERS:
+#   ?collection - the collection to query
+#   ?minCopies  - minimum number of physical copies to report
+
+PREFIX mc: <urn:stklug84:MagicCardsOntology:2026-02-27#>
+
+SELECT ?cardName (SUM(?qty) AS ?copies)
+       (COUNT(DISTINCT ?c) AS ?distinctPrintings)
+WHERE {
+  VALUES ?collection { mc:MagicCardCollection }
+  VALUES ?minCopies  { 4 }
+
+  ?collection mc:hasCollectionEntry ?e .
+  ?e mc:entryCard ?c ;
+     mc:quantity  ?qty .
+  ?c mc:cardName ?cardName .
+}
+GROUP BY ?cardName ?minCopies
+HAVING (SUM(?qty) >= ?minCopies)
+ORDER BY DESC(?copies) ?cardName

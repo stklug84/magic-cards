@@ -1082,7 +1082,7 @@ Flying"""@en ;
         :rulingDate "2016-04-08"^^xsd:date ;
         :rulingText """Auras attached to the exiled creature will be put into their owners’ graveyards. Equipment attached to the exiled creature will become unattached and remain on the battlefield. Any counters on the exiled creature will cease to exist."""@en ] .
 
-:ImprisonedInTheMoon rdf:type owl:NamedIndividual ,
+:ImprisonedInTheMoonInnistradRemastered69 rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Imprisoned in the Moon" ;
     :manaCost "{2}{U}" ;
@@ -1096,12 +1096,12 @@ Flying"""@en ;
     :cardNumber "69"^^xsd:integer ;
     :artist "Ryan Alexander Lee" ;
     :hasLanguage :English ;
+    :hasKeywordAbility :Enchant ;
     :printedText """Enchant creature, land, or planeswalker
 Enchanted permanent is a colorless land with "{T}: Add {C}" and loses all other card types and abilities."""@en ;
     :oracleText """Enchant creature, land, or planeswalker
 Enchanted permanent is a colorless land with "{T}: Add {C}" and loses all other card types and abilities."""@en ;
     :flavorText """Only one vault was great enough to hold Emrakul."""@en ;
-    :hasKeywordAbility :Enchant ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=685895"^^xsd:anyURI ;
     :scryfallUrl "https://scryfall.com/card/inr/69/imprisoned-in-the-moon"^^xsd:anyURI ;
     :hasLegality
@@ -1115,19 +1115,19 @@ Enchanted permanent is a colorless land with "{T}: Add {C}" and loses all other 
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2016-07-13"^^xsd:date ;
-        :rulingText """If you remove Imprisoned in the Moon from a planeswalker after tapping it for mana, you can still activate a loyalty ability of that planeswalker even though it's tapped."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2016-07-13"^^xsd:date ;
-        :rulingText """If the enchanted permanent is a land and has land types, it retains those types even though it loses any intrinsic mana abilities associated with them. For example, a Plains enchanted by Imprisoned in the Moon is still a Plains, but it can't tap for {W}, only for {C}."""@en ] ,
+        :rulingText """The permanent will keep any supertypes it previously had. Notably, if Imprisoned in the Moon is enchanting a legendary permanent, that permanent will continue to be legendary."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2016-07-13"^^xsd:date ;
         :rulingText """Becoming a land may cause other Auras to become illegally attached. These are put into their owner's graveyard, and any Equipment attached to the land become unattached and remain on the battlefield. Counters on the land remain on it even if they don't do anything."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2016-07-13"^^xsd:date ;
-        :rulingText """At the time the permanent becomes enchanted, Imprisoned in the Moon causes it to lose all abilities except the noted mana ability. Any abilities the permanent gains after that point will work normally."""@en ] ,
+        :rulingText """If the enchanted permanent is a land and has land types, it retains those types even though it loses any intrinsic mana abilities associated with them. For example, a Plains enchanted by Imprisoned in the Moon is still a Plains, but it can't tap for {W}, only for {C}."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2016-07-13"^^xsd:date ;
-        :rulingText """The permanent will keep any supertypes it previously had. Notably, if Imprisoned in the Moon is enchanting a legendary permanent, that permanent will continue to be legendary."""@en ] .
+        :rulingText """If you remove Imprisoned in the Moon from a planeswalker after tapping it for mana, you can still activate a loyalty ability of that planeswalker even though it's tapped."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2016-07-13"^^xsd:date ;
+        :rulingText """At the time the permanent becomes enchanted, Imprisoned in the Moon causes it to lose all abilities except the noted mana ability. Any abilities the permanent gains after that point will work normally."""@en ] .
 
 :LaboratoryManiac rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -3463,13 +3463,13 @@ Whenever a creature dies, put a +1/+1 counter on this creature."""@en ;
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2012-05-01"^^xsd:date ;
+        :rulingText """Mana produced by Somberwald Sage can't be spent on noncreature spells that would put creature tokens onto the battlefield."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2012-05-01"^^xsd:date ;
         :rulingText """Mana produced by Somberwald Sage can be spent on any part of a creature spell's total cost. This includes additional costs (such as kicker) and alternative costs (such as evoke costs)."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2012-05-01"^^xsd:date ;
-        :rulingText """Mana produced by Somberwald Sage can't be spent on activated abilities, even ones that put a creature card directly onto the battlefield, such as unearth or ninjutsu."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2012-05-01"^^xsd:date ;
-        :rulingText """Mana produced by Somberwald Sage can't be spent on noncreature spells that would put creature tokens onto the battlefield."""@en ] .
+        :rulingText """Mana produced by Somberwald Sage can't be spent on activated abilities, even ones that put a creature card directly onto the battlefield, such as unearth or ninjutsu."""@en ] .
 
 :SporeCrawler rdf:type owl:NamedIndividual ,
                   :Card ;

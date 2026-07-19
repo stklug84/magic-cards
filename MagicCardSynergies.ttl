@@ -65,29 +65,29 @@ relates."""@en .
 ################################################################################
 
 # --- Group A: Vocalist directly amplifies these cards' triggered abilities ---
-:StarfieldVocalist :amplifies :ArchitectOfTheUntamed ,
-                              :DecoctionModule ,
-                              :EraOfInnovation ,
+:StarfieldVocalistEdgeOfEternities78 :amplifies :ArchitectOfTheUntamed ,
+                              :DecoctionModuleAetherdriftCommander128 ,
+                              :EraOfInnovationAetherdriftCommander75 ,
                               :GontisAetherHeart ,
                               :NissaWorldsoulSpeaker ,
                               :RoilCartographer .
 
 # --- Group B: Multiplicative stacking with same-template amplifiers ---
-:StarfieldVocalist :hasSynergyWith :Panharmonicon ,
+:StarfieldVocalistEdgeOfEternities78 :hasSynergyWith :PanharmoniconAetherdriftCommander135 ,
                                    :RoamingThrone .
 
 # --- Group C: Cards that enable Vocalist by creating extra permanent ETBs ---
-:StarfieldVocalist :isEnabledBy :SaheeliRadiantCreator ,
+:StarfieldVocalistEdgeOfEternities78 :isEnabledBy :SaheeliRadiantCreator ,
                                 :AdrixAndNevTwincasters ,
                                 :BrudicladTelchorEngineer ,
-                                :SaheeliTheSunsBrilliance ,
+                                :SaheeliTheSunsBrillianceTheLostCavernsOfIxalan239 ,
                                 :DeterminedIteration ,
                                 :EchoStorm ,
                                 :ExtravagantReplication ,
                                 :MasterfulReplication ,
-                                :MechanizedProduction ,
+                                :MechanizedProductionMurdersAtKarlovManorCommander109 ,
                                 :EsixFractalBloom ,
-                                :AetherRefinery ,
+                                :AetherRefineryModernHorizons3Commander54 ,
                                 :ConjurersCloset ,
                                 :ElderGargaroth ,
                                 :StoneIdolGenerator ,

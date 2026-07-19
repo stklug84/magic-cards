@@ -1064,29 +1064,11 @@ Create a token that's a copy of target artifact."""@en ;
       [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ;
     :hasRuling
       [ rdf:type :Ruling ;
-        :rulingDate "2018-10-05"^^xsd:date ;
-        :rulingText """If you have multiple commanders, you'll copy this spell for each time you've cast either of them. For example, if you've cast one commander once and one twice, you'll copy this spell three times."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2018-07-13"^^xsd:date ;
-        :rulingText """The token copies exactly what was printed on the original artifact and nothing else (unless that artifact is copying something else or is a token; see below). It doesn't copy whether that artifact is tapped or untapped, whether it has any counters on it or Auras attached to it, or any non-copy effects that have changed its types, color, or so on."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2018-07-13"^^xsd:date ;
-        :rulingText """If the copied artifact has {X} in its mana cost, X is considered to be 0."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2018-07-13"^^xsd:date ;
-        :rulingText """If the copied artifact is a token, the token that's created copies the original characteristics of that token as stated by the effect that created the token."""@en ] ,
-      [ rdf:type :Ruling ;
         :rulingDate "2018-07-13"^^xsd:date ;
         :rulingText """If the copied artifact is copying something else (for example, if the copied artifact is a Sculpting Steel), then the token enters the battlefield as whatever that artifact copied."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2018-07-13"^^xsd:date ;
-        :rulingText """Each copy resolves one at a time. Any abilities that trigger on the artifact token entering the battlefield resolve before the next copy resolves. The original spell is the last to resolve."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2018-07-13"^^xsd:date ;
-        :rulingText """Each Storm's triggered ability counts only how many times you've cast your commander from the command zone before that triggered ability resolves. If you cast your commander again later, you won't get another copy."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2018-07-13"^^xsd:date ;
-        :rulingText """If your commander was countered, that time you cast it still counts."""@en ] ,
+        :rulingText """The token copies exactly what was printed on the original artifact and nothing else (unless that artifact is copying something else or is a token; see below). It doesn't copy whether that artifact is tapped or untapped, whether it has any counters on it or Auras attached to it, or any non-copy effects that have changed its types, color, or so on."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2018-07-13"^^xsd:date ;
         :rulingText """Each Storm's triggered ability can copy the Storm spell even if that spell is countered before that ability resolves."""@en ] ,
@@ -1095,7 +1077,25 @@ Create a token that's a copy of target artifact."""@en ;
         :rulingText """The copies are created on the stack, so they're not “cast.” Abilities that trigger when a player casts a spell (such as the Storm's ability itself) won't trigger."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2018-07-13"^^xsd:date ;
-        :rulingText """Any enters-the-battlefield abilities of the copied artifact will trigger when the token enters the battlefield. Any “as [this artifact] enters the battlefield” or “[this artifact] enters the battlefield with” abilities of the chosen artifact will also work."""@en ] .
+        :rulingText """If the copied artifact is a token, the token that's created copies the original characteristics of that token as stated by the effect that created the token."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2018-07-13"^^xsd:date ;
+        :rulingText """Each copy resolves one at a time. Any abilities that trigger on the artifact token entering the battlefield resolve before the next copy resolves. The original spell is the last to resolve."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2018-07-13"^^xsd:date ;
+        :rulingText """If the copied artifact has {X} in its mana cost, X is considered to be 0."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2018-07-13"^^xsd:date ;
+        :rulingText """Each Storm's triggered ability counts only how many times you've cast your commander from the command zone before that triggered ability resolves. If you cast your commander again later, you won't get another copy."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2018-07-13"^^xsd:date ;
+        :rulingText """Any enters-the-battlefield abilities of the copied artifact will trigger when the token enters the battlefield. Any “as [this artifact] enters the battlefield” or “[this artifact] enters the battlefield with” abilities of the chosen artifact will also work."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2018-07-13"^^xsd:date ;
+        :rulingText """If your commander was countered, that time you cast it still counts."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2018-10-05"^^xsd:date ;
+        :rulingText """If you have multiple commanders, you'll copy this spell for each time you've cast either of them. For example, if you've cast one commander once and one twice, you'll copy this spell three times."""@en ] .
 
 :ImprisonedInTheMoonMarchOfTheMachineCommander224 rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -1254,16 +1254,16 @@ Other artifact creatures you control get +1/+1."""@en ;
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2019-07-12"^^xsd:date ;
-        :rulingText """Masterful Replication copies the printed values of the target artifact. It won't copy counters on that artifact or effects that have changed its power, toughness, types, color, or so on. Notably, it won't copy effects that made the target artifact become an artifact creature if it isn't normally an artifact creature."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2019-07-12"^^xsd:date ;
-        :rulingText """An Equipment that becomes a copy of a creature becomes unattached if it was attached to a creature. An Equipment that becomes a copy of another Equipment remains attached if it was attached to a creature."""@en ] ,
+        :rulingText """Becoming a copy won't change whether an artifact is a token."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2019-07-12"^^xsd:date ;
         :rulingText """If the target artifact is copying something else, then your artifacts become copies of whatever the target artifact copied."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2019-07-12"^^xsd:date ;
-        :rulingText """Becoming a copy won't change whether an artifact is a token."""@en ] .
+        :rulingText """An Equipment that becomes a copy of a creature becomes unattached if it was attached to a creature. An Equipment that becomes a copy of another Equipment remains attached if it was attached to a creature."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2019-07-12"^^xsd:date ;
+        :rulingText """Masterful Replication copies the printed values of the target artifact. It won't copy counters on that artifact or effects that have changed its power, toughness, types, color, or so on. Notably, it won't copy effects that made the target artifact become an artifact creature if it isn't normally an artifact creature."""@en ] .
 
 :PerplexingTest rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -2059,19 +2059,19 @@ Whenever this creature mutates, create a red artifact token named Feather with "
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2021-03-19"^^xsd:date ;
+        :rulingText """If Feldon's ability creates multiple tokens due to a replacement effect (such as the one Doubling Season creates), each of those tokens will gain haste and you'll sacrifice each of them."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2021-03-19"^^xsd:date ;
         :rulingText """The token copies exactly what was printed on the original creature card (except that the copy is also an artifact) and nothing else."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2021-03-19"^^xsd:date ;
         :rulingText """If the copied creature card has {X} in its mana cost, X is 0."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2021-03-19"^^xsd:date ;
-        :rulingText """Any enters-the-battlefield abilities of the copied creature card will trigger when the token enters the battlefield. Any "as [this permanent] enters the battlefield" or "[this permanent] enters the battlefield with" abilities of the copied creature card will also work."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2021-03-19"^^xsd:date ;
         :rulingText """If another creature becomes a copy of, or enters the battlefield as a copy of the token, that creature will copy the creature card the token is copying, except it will also be an artifact. This is true even if the creature card that was copied by Feldon of the Third Path is no longer in the graveyard at that time. However, the new copy won't gain haste and you won't sacrifice it at the beginning of the next end step."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2021-03-19"^^xsd:date ;
-        :rulingText """If Feldon's ability creates multiple tokens due to a replacement effect (such as the one Doubling Season creates), each of those tokens will gain haste and you'll sacrifice each of them."""@en ] .
+        :rulingText """Any enters-the-battlefield abilities of the copied creature card will trigger when the token enters the battlefield. Any "as [this permanent] enters the battlefield" or "[this permanent] enters the battlefield with" abilities of the copied creature card will also work."""@en ] .
 
 :FieryConfluence rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -3585,7 +3585,7 @@ Indestructible
         :rulingDate "2023-07-28"^^xsd:date ;
         :rulingText """Your commander's creature types are checked immediately after you cast a creature spell spending mana from Path of Ancestry's last ability. They aren't set before the game begins, and they may not be the same types your commander had when you activated that ability."""@en ] .
 
-:SimicGrowthChamberMarchOfTheMachineCommander424 rdf:type owl:NamedIndividual ,
+:SimicGrowthChamber rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Simic Growth Chamber" ;
     :manaValue "0"^^xsd:nonNegativeInteger ;

@@ -7,7 +7,7 @@
 PREFIX mc: <urn:stklug84:MagicCardsOntology:2026-02-27#>
 
 SELECT DISTINCT ?amplifier ?amplifierName WHERE {
-  VALUES ?card { mc:DecoctionModule }
+  VALUES ?card { mc:DecoctionModuleAetherdriftCommander128 }
 
   { ?amplifier mc:amplifies ?card }
   UNION

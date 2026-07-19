@@ -9,5 +9,5 @@ PREFIX mc: <urn:stklug84:MagicCardsOntology:2026-02-27#>
 
 DESCRIBE ?card
 WHERE {
-  VALUES ?card { mc:StarfieldVocalist }
+  VALUES ?card { mc:StarfieldVocalistEdgeOfEternities78 }
 }

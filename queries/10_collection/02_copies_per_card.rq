@@ -1,0 +1,33 @@
+# Tabular overview of physical copies per card: one row per card name with
+# the total number of physical copies (summed over all collection entries)
+# and a concatenated list of "N x SETCODE #number" per printing.
+#
+# PARAMETERS:
+#   ?collection - the collection to query
+
+PREFIX mc: <urn:stklug84:MagicCardsOntology:2026-02-27#>
+
+SELECT ?cardName (SUM(?qty) AS ?copies)
+       (GROUP_CONCAT(?printing; separator=", ") AS ?printings)
+WHERE {
+  {
+    # aggregate entry quantities per printing first (a printing may have
+    # several entries, e.g. foil and non-foil lots)
+    SELECT ?c (SUM(?q) AS ?qty) WHERE {
+      VALUES ?collection { mc:MagicCardCollection }
+      ?collection mc:hasCollectionEntry ?e .
+      ?e mc:entryCard ?c ;
+         mc:quantity  ?q .
+    }
+    GROUP BY ?c
+  }
+  ?c mc:cardName ?cardName ;
+     mc:isInSet  ?s .
+  ?s mc:setCode ?setCode .
+  OPTIONAL { ?c mc:cardNumber ?num }
+  OPTIONAL { ?c mc:cardNumberString ?numStr }
+  BIND(CONCAT(STR(?qty), " x ", ?setCode, " #",
+              COALESCE(STR(?num), ?numStr, "?")) AS ?printing)
+}
+GROUP BY ?cardName
+ORDER BY DESC(?copies) ?cardName

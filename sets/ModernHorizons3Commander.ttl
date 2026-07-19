@@ -218,83 +218,7 @@ Other nontoken creatures you control have fabricate 1.
         :rulingDate "2024-06-07"^^xsd:date ;
         :rulingText """When you proliferate, you can choose any permanent that has a counter, including ones controlled by opponents. You can choose any player who has a counter, including opponents. You can't choose cards in any zone other than the battlefield, even if they have counters on them."""@en ] .
 
-:AuroraShifter rdf:type owl:NamedIndividual ,
-                  :Card ;
-    :cardName "Aurora Shifter" ;
-    :manaCost "{1}{U}" ;
-    :manaValue "2"^^xsd:nonNegativeInteger ;
-    :hasCardType :Creature ;
-    :hasSubType :Shapeshifter ;
-    :hasRarity :Rare ;
-    :hasColor :Blue ;
-    :hasColorIdentity :Blue ;
-    :isInSet :ModernHorizons3Commander ;
-    :cardNumber "45"^^xsd:integer ;
-    :artist "Justyna Dura" ;
-    :hasLanguage :English ;
-    :power "1" ;
-    :powerValue "1"^^xsd:integer ;
-    :toughness "3" ;
-    :toughnessValue "3"^^xsd:integer ;
-    :printedText """Whenever this creature deals combat damage to a player, you get that many {E}.
-At the beginning of combat on your turn, you may pay {E}{E}. When you do, this creature becomes a copy of another target creature you control, except it has this ability and "Whenever this creature deals combat damage to a player, you get that many {E}.\""""@en ;
-    :oracleText """Whenever this creature deals combat damage to a player, you get that many {E}.
-At the beginning of combat on your turn, you may pay {E}{E}. When you do, this creature becomes a copy of another target creature you control, except it has this ability and "Whenever this creature deals combat damage to a player, you get that many {E}.\""""@en ;
-    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=665055"^^xsd:anyURI ;
-    :scryfallUrl "https://scryfall.com/card/m3c/45/aurora-shifter"^^xsd:anyURI ;
-    :hasLegality
-      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :NotLegal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :NotLegal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ;
-    :hasRuling
-      [ rdf:type :Ruling ;
-        :rulingDate "2024-06-07"^^xsd:date ;
-        :rulingText """You don't choose a target for Aurora Shifter's last ability at the time it triggers. Rather, a second "reflexive" ability triggers when you pay {E}{E} this way. You choose a target for that ability as it goes on the stack. Each player may respond to this triggered ability as normal."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2024-06-07"^^xsd:date ;
-        :rulingText """Aurora Shifter copies exactly what was printed on the original creature and nothing else, with the listed exception (unless that permanent is copying something else; see below). It doesn't copy whether that creature is tapped or untapped, whether it has any counters on it or Auras and Equipment attached to it, and so on."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2024-06-07"^^xsd:date ;
-        :rulingText """If the copied creature has {X} in its mana cost, X is 0."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2024-06-07"^^xsd:date ;
-        :rulingText """If the copied creature is copying something else, then Aurora Shifter becomes a copy of whatever that creature copied (with the listed exception)."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2024-06-07"^^xsd:date ;
-        :rulingText """Because Aurora Shifter isn't entering the battlefield when it becomes a copy of another creature, any "When [this creature] enters the battlefield" or "[This creature] enters the battlefield with" abilities of the copied creature won't apply."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2024-06-07"^^xsd:date ;
-        :rulingText """{E} is the energy symbol. It represents one energy counter."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2024-06-07"^^xsd:date ;
-        :rulingText """Energy counters are a kind of counter that a player may have. They're not associated with any specific permanents."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2024-06-07"^^xsd:date ;
-        :rulingText """Keep track of how many energy counters each player has. Potential ways to track this include writing theme down on paper or using dice, but any method that is clear and mutually agreeable is fine. (At higher levels of tournament play, dice may not be allowed for tracking counters that players have.)"""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2024-06-07"^^xsd:date ;
-        :rulingText """If an effect says you get one or more {E}, you get that many energy counters. To pay one or more {E}, you lose that many energy counters. You can't pay more energy counters than you have. Any effects that interact with counters a player gets, has, or loses can interact with energy counters."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2024-06-07"^^xsd:date ;
-        :rulingText """Energy counters aren't mana. They don't go away as steps, phases, and turns end, and effects that add mana "of any type" can't give you energy counters."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2024-06-07"^^xsd:date ;
-        :rulingText """Some triggered abilities state that you "may pay" a certain amount of {E}. You can't pay that amount multiple times to multiply the effect. You simply choose whether or not to pay that amount of {E} as the ability resolves."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2024-06-07"^^xsd:date ;
-        :rulingText """Some triggered abilities that state that you "may pay" a certain amount of {E} describe an effect that happens "If you do." In that case, no player may take actions to try to stop the ability's effect after you make your choice. If the payment is followed by the phrase "When you do," then you'll choose any targets for that reflexive triggered ability and put it on the stack before players can take actions."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2024-06-07"^^xsd:date ;
-        :rulingText """If a spell or ability with one or more targets states that you "may pay" some amount of {E}, and each permanent that it targets has become an illegal target, the spell or ability won't resolve. You can't pay any {E} even if you want to."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2024-06-07"^^xsd:date ;
-        :rulingText """Some spells and abilities that give you {E} may require targets. If each target chosen is an illegal target as that spell or ability tries to resolve, it won't resolve. You won't get any {E}."""@en ] .
-
-:AetherRefinery rdf:type owl:NamedIndividual ,
+:AetherRefineryModernHorizons3Commander54 rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Aether Refinery" ;
     :manaCost "{4}{R}{R}" ;
@@ -325,28 +249,7 @@ At the beginning of combat on your turn, you may pay {E}{E}. When you do, this c
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2024-06-07"^^xsd:date ;
-        :rulingText """If you control two Aether Refineries, the amount of {E} you get is four times the original number. Three Aether Refineries multiplies the original number by eight, and so on."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2024-06-07"^^xsd:date ;
         :rulingText """If two or more effects attempt to modify how many {E} you get (or how many counters you would get), you choose the order to apply those effects, no matter who controls the sources of those effects."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2024-06-07"^^xsd:date ;
-        :rulingText """{E} is the energy symbol. It represents one energy counter."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2024-06-07"^^xsd:date ;
-        :rulingText """Energy counters are a kind of counter that a player may have. They're not associated with any specific permanents."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2024-06-07"^^xsd:date ;
-        :rulingText """Keep track of how many energy counters each player has. Potential ways to track this include writing theme down on paper or using dice, but any method that is clear and mutually agreeable is fine. (At higher levels of tournament play, dice may not be allowed for tracking counters that players have.)"""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2024-06-07"^^xsd:date ;
-        :rulingText """If an effect says you get one or more {E}, you get that many energy counters. To pay one or more {E}, you lose that many energy counters. You can't pay more energy counters than you have. Any effects that interact with counters a player gets, has, or loses can interact with energy counters."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2024-06-07"^^xsd:date ;
-        :rulingText """Energy counters aren't mana. They don't go away as steps, phases, and turns end, and effects that add mana "of any type" can't give you energy counters."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2024-06-07"^^xsd:date ;
-        :rulingText """Some triggered abilities state that you "may pay" a certain amount of {E}. You can't pay that amount multiple times to multiply the effect. You simply choose whether or not to pay that amount of {E} as the ability resolves."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2024-06-07"^^xsd:date ;
         :rulingText """Some triggered abilities that state that you "may pay" a certain amount of {E} describe an effect that happens "If you do." In that case, no player may take actions to try to stop the ability's effect after you make your choice. If the payment is followed by the phrase "When you do," then you'll choose any targets for that reflexive triggered ability and put it on the stack before players can take actions."""@en ] ,
@@ -355,44 +258,6 @@ At the beginning of combat on your turn, you may pay {E}{E}. When you do, this c
         :rulingText """If a spell or ability with one or more targets states that you "may pay" some amount of {E}, and each permanent that it targets has become an illegal target, the spell or ability won't resolve. You can't pay any {E} even if you want to."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2024-06-07"^^xsd:date ;
-        :rulingText """Some spells and abilities that give you {E} may require targets. If each target chosen is an illegal target as that spell or ability tries to resolve, it won't resolve. You won't get any {E}."""@en ] .
-
-:StoneIdolGenerator rdf:type owl:NamedIndividual ,
-                  :Card ;
-    :cardName "Stone Idol Generator" ;
-    :manaCost "{5}" ;
-    :manaValue "5"^^xsd:nonNegativeInteger ;
-    :hasCardType :Artifact ;
-    :hasRarity :Rare ;
-    :isInSet :ModernHorizons3Commander ;
-    :cardNumber "77"^^xsd:integer ;
-    :artist "Julian Kok Joon Wen" ;
-    :hasLanguage :English ;
-    :printedText """Whenever a creature you control attacks, you get {E} (an energy counter).
-{T}, Pay six {E}: Create a 6/12 colorless Construct artifact creature token with trample. Activate only as a sorcery."""@en ;
-    :oracleText """Whenever a creature you control attacks, you get {E} (an energy counter).
-{T}, Pay six {E}: Create a 6/12 colorless Construct artifact creature token with trample. Activate only as a sorcery."""@en ;
-    :flavorText """"Like my people's ambitions, it is both awe-inspiring and unfinished."
-—Nahiri"""@en ;
-    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=665087"^^xsd:anyURI ;
-    :scryfallUrl "https://scryfall.com/card/m3c/77/stone-idol-generator"^^xsd:anyURI ;
-    :hasLegality
-      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :NotLegal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :NotLegal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ;
-    :hasRuling
-      [ rdf:type :Ruling ;
-        :rulingDate "2024-06-07"^^xsd:date ;
-        :rulingText """Some spells and abilities that give you {E} may require targets. If each target chosen is an illegal target as that spell or ability tries to resolve, it won't resolve. You won't get any {E}."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2024-06-07"^^xsd:date ;
-        :rulingText """{E} is the energy symbol. It represents one energy counter."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2024-06-07"^^xsd:date ;
         :rulingText """Energy counters are a kind of counter that a player may have. They're not associated with any specific permanents."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2024-06-07"^^xsd:date ;
@@ -402,16 +267,19 @@ At the beginning of combat on your turn, you may pay {E}{E}. When you do, this c
         :rulingText """If an effect says you get one or more {E}, you get that many energy counters. To pay one or more {E}, you lose that many energy counters. You can't pay more energy counters than you have. Any effects that interact with counters a player gets, has, or loses can interact with energy counters."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2024-06-07"^^xsd:date ;
+        :rulingText """Some spells and abilities that give you {E} may require targets. If each target chosen is an illegal target as that spell or ability tries to resolve, it won't resolve. You won't get any {E}."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-06-07"^^xsd:date ;
         :rulingText """Energy counters aren't mana. They don't go away as steps, phases, and turns end, and effects that add mana "of any type" can't give you energy counters."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-06-07"^^xsd:date ;
+        :rulingText """If you control two Aether Refineries, the amount of {E} you get is four times the original number. Three Aether Refineries multiplies the original number by eight, and so on."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2024-06-07"^^xsd:date ;
         :rulingText """Some triggered abilities state that you "may pay" a certain amount of {E}. You can't pay that amount multiple times to multiply the effect. You simply choose whether or not to pay that amount of {E} as the ability resolves."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2024-06-07"^^xsd:date ;
-        :rulingText """Some triggered abilities that state that you "may pay" a certain amount of {E} describe an effect that happens "If you do." In that case, no player may take actions to try to stop the ability's effect after you make your choice. If the payment is followed by the phrase "When you do," then you'll choose any targets for that reflexive triggered ability and put it on the stack before players can take actions."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2024-06-07"^^xsd:date ;
-        :rulingText """If a spell or ability with one or more targets states that you "may pay" some amount of {E}, and each permanent that it targets has become an illegal target, the spell or ability won't resolve. You can't pay any {E} even if you want to."""@en ] .
+        :rulingText """{E} is the energy symbol. It represents one energy counter."""@en ] .
 
 :HourglassOfTheLost rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -737,7 +605,7 @@ Unearth—Pay eight {E}. (Pay eight energy counters: Return this card from your 
         :rulingDate "2024-06-07"^^xsd:date ;
         :rulingText """If the spell had an X value chosen for it as it was cast, the copies will have the same value of X."""@en ] .
 
-:AuroraShifterModernHorizons3Commander97 rdf:type owl:NamedIndividual ,
+:AuroraShifter rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Aurora Shifter" ;
     :manaCost "{1}{U}" ;
@@ -1172,7 +1040,7 @@ Whenever you gain life, you get that many {E} (energy counters).
       [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :NotLegal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] .
 
-:StoneIdolGeneratorModernHorizons3Commander129 rdf:type owl:NamedIndividual ,
+:StoneIdolGenerator rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Stone Idol Generator" ;
     :manaCost "{5}" ;
@@ -2385,7 +2253,7 @@ Sacrifice a Treasure: Exile the top card of your library. You may play that card
       [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] .
 
-:BrudicladTelchorEngineerModernHorizons3Commander257 rdf:type owl:NamedIndividual ,
+:BrudicladTelchorEngineer rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Brudiclad, Telchor Engineer" ;
     :manaCost "{4}{U}{R}" ;
@@ -2878,7 +2746,7 @@ Whenever one or more creatures an opponent controls attack you and aren't blocke
         :rulingDate "2024-06-07"^^xsd:date ;
         :rulingText """Some triggered abilities that state that you "may pay" a certain amount of {E} describe an effect that happens "If you do." In that case, no player may take actions to try to stop the ability's effect after you make your choice. If the payment is followed by the phrase "When you do," then you'll choose any targets for that reflexive triggered ability and put it on the stack before players can take actions."""@en ] .
 
-:GontisAetherHeartModernHorizons3Commander294 rdf:type owl:NamedIndividual ,
+:GontisAetherHeart rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Gonti's Aether Heart" ;
     :manaCost "{6}" ;
