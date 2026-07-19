@@ -1,0 +1,12 @@
+# For each property defined in the mc: namespace, count how many triples in
+# the data graph use it. Useful for understanding which parts of the ontology
+# are populated and which are unused.
+
+PREFIX mc: <urn:stklug84:MagicCardsOntology:2026-02-27#>
+
+SELECT ?property (COUNT(*) AS ?uses) WHERE {
+  ?s ?property ?o .
+  FILTER(STRSTARTS(STR(?property), STR(mc:)))
+}
+GROUP BY ?property
+ORDER BY DESC(?uses) ?property

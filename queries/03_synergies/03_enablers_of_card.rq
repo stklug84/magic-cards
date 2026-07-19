@@ -1,0 +1,18 @@
+# Cards that enable a given card (i.e. create the preconditions under which
+# the given card's abilities deliver value).
+#
+# PARAMETERS:
+#   ?card - the card whose preconditions are enabled
+
+PREFIX mc: <urn:stklug84:MagicCardsOntology:2026-02-27#>
+
+SELECT DISTINCT ?enabler ?enablerName WHERE {
+  VALUES ?card { mc:StarfieldVocalist }
+
+  { ?enabler mc:enables ?card }
+  UNION
+  { ?card mc:isEnabledBy ?enabler }
+
+  ?enabler mc:cardName ?enablerName .
+}
+ORDER BY ?enablerName

@@ -1331,6 +1331,63 @@ See rule 100.2."""@en .
           """The number of copies of the entry's card in the deck.
 Must be a positive integer. See rule 100.2."""@en .
 
+# --- Card-to-Card Synergy ---
+:hasSynergyWith rdf:type owl:ObjectProperty ,
+                         owl:SymmetricProperty ;
+                rdfs:domain :Card ;
+                rdfs:range :Card ;
+                rdfs:label "Has Synergy With" ;
+                rdfs:comment
+                """Relates two cards whose abilities, types, or effects
+work together in a way that meaningfully enhances one or both cards'
+contribution to a deck. This is an undirected, symmetric relation. For
+finer-grained directional synergies, use the subproperties :amplifies
+and :enables."""@en .
+
+:amplifies rdf:type owl:ObjectProperty ;
+           rdfs:subPropertyOf :hasSynergyWith ;
+           owl:inverseOf :isAmplifiedBy ;
+           rdfs:domain :Card ;
+           rdfs:range :Card ;
+           rdfs:label "Amplifies" ;
+           rdfs:comment
+           """A directional synergy in which the subject card increases
+the value, frequency, or magnitude of the object card's abilities or
+effects (e.g., a card that causes another card's triggered ability to
+trigger an additional time). Implies :hasSynergyWith."""@en .
+
+:isAmplifiedBy rdf:type owl:ObjectProperty ;
+               rdfs:subPropertyOf :hasSynergyWith ;
+               owl:inverseOf :amplifies ;
+               rdfs:domain :Card ;
+               rdfs:range :Card ;
+               rdfs:label "Is Amplified By" ;
+               rdfs:comment
+               """Inverse of :amplifies. The subject card's abilities or
+effects are enhanced by the object card."""@en .
+
+:enables rdf:type owl:ObjectProperty ;
+         rdfs:subPropertyOf :hasSynergyWith ;
+         owl:inverseOf :isEnabledBy ;
+         rdfs:domain :Card ;
+         rdfs:range :Card ;
+         rdfs:label "Enables" ;
+         rdfs:comment
+         """A directional synergy in which the subject card creates the
+preconditions under which the object card's abilities deliver value
+(e.g., a token producer feeding an ETB-watching amplifier). Implies
+:hasSynergyWith."""@en .
+
+:isEnabledBy rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf :hasSynergyWith ;
+             owl:inverseOf :enables ;
+             rdfs:domain :Card ;
+             rdfs:range :Card ;
+             rdfs:label "Is Enabled By" ;
+             rdfs:comment
+             """Inverse of :enables. The subject card's abilities deliver
+their full value because the object card creates the preconditions."""@en .
+
 :hasKeyword rdf:type owl:ObjectProperty ;
             rdfs:domain :Card ;
             rdfs:range :Keyword ;

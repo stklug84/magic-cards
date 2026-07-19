@@ -1,0 +1,33 @@
+# Compare two decks: report cards in deck A, cards in deck B, and cards in both,
+# tagged by membership. Useful for diffing two builds or finding shared staples.
+#
+# PARAMETERS:
+#   ?deckA - first deck
+#   ?deckB - second deck (defaults to the same deck for safe execution;
+#            change to compare against another)
+
+PREFIX mc: <urn:stklug84:MagicCardsOntology:2026-02-27#>
+
+SELECT ?cardName ?membership WHERE {
+  VALUES ?deckA { mc:SaheeliRadiantCreatorDeck }
+  VALUES ?deckB { mc:SaheeliRadiantCreatorDeck }
+
+  {
+    ?deckA mc:hasCard ?c .
+    ?c mc:cardName ?cardName .
+    OPTIONAL { ?deckB mc:hasCard ?c BIND("BOTH" AS ?bothTag) }
+    FILTER NOT EXISTS { ?deckB mc:hasCard ?c }
+    BIND("A_ONLY" AS ?membership)
+  } UNION {
+    ?deckB mc:hasCard ?c .
+    ?c mc:cardName ?cardName .
+    FILTER NOT EXISTS { ?deckA mc:hasCard ?c }
+    BIND("B_ONLY" AS ?membership)
+  } UNION {
+    ?deckA mc:hasCard ?c .
+    ?deckB mc:hasCard ?c .
+    ?c mc:cardName ?cardName .
+    BIND("BOTH" AS ?membership)
+  }
+}
+ORDER BY ?membership ?cardName

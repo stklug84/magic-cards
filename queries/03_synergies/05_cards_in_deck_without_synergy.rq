@@ -1,0 +1,28 @@
+# Cards in a deck that do NOT participate in any synergy triple
+# (no incoming or outgoing synergy edge).
+#
+# PARAMETERS:
+#   ?deck - the deck to query
+
+PREFIX mc: <urn:stklug84:MagicCardsOntology:2026-02-27#>
+
+SELECT ?cardName WHERE {
+  VALUES ?deck { mc:SaheeliRadiantCreatorDeck }
+
+  ?deck mc:hasCard ?c .
+  ?c mc:cardName ?cardName .
+
+  FILTER NOT EXISTS {
+    ?c ( mc:hasSynergyWith
+       | ^mc:hasSynergyWith
+       | mc:amplifies
+       | ^mc:amplifies
+       | mc:isAmplifiedBy
+       | ^mc:isAmplifiedBy
+       | mc:enables
+       | ^mc:enables
+       | mc:isEnabledBy
+       | ^mc:isEnabledBy ) ?other .
+  }
+}
+ORDER BY ?cardName

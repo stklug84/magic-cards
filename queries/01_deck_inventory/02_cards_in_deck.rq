@@ -1,0 +1,16 @@
+# Lists every card in a deck with its quantity, sorted by quantity descending.
+#
+# PARAMETERS - edit the VALUES line below to retarget:
+#   ?deck - the deck to query (default: Saheeli Commander deck)
+
+PREFIX mc: <urn:stklug84:MagicCardsOntology:2026-02-27#>
+
+SELECT ?cardName ?quantity WHERE {
+  VALUES ?deck { mc:SaheeliRadiantCreatorDeck }
+
+  ?deck mc:hasDeckEntry ?entry .
+  ?entry mc:entryCard ?card ;
+         mc:quantity ?quantity .
+  ?card mc:cardName ?cardName .
+}
+ORDER BY DESC(?quantity) ?cardName

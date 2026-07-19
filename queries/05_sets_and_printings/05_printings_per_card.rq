@@ -1,0 +1,31 @@
+# Tabular overview of every card in the collection with all of its printings:
+# one row per card name, with the number of collected printings and a
+# concatenated list of "SETCODE #number (Set Name)" entries.
+#
+# Cards collected in multiple sets (or multiple times in the same set under
+# different collector numbers) show one entry per printing.
+#
+# PARAMETERS:
+#   none - runs against the whole collection
+
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX mc:  <urn:stklug84:MagicCardsOntology:2026-02-27#>
+
+SELECT ?cardName
+       (COUNT(?c) AS ?printings)
+       (GROUP_CONCAT(?printing; separator=", ") AS ?printedIn)
+WHERE {
+  ?c rdf:type mc:Card ;
+     mc:cardName ?cardName ;
+     mc:isInSet  ?s .
+  OPTIONAL { ?s mc:setCode ?setCode }
+  OPTIONAL { ?s mc:setName ?setName }
+  OPTIONAL { ?c mc:cardNumber ?num }
+  BIND(CONCAT(
+         COALESCE(?setCode, STR(?s)),
+         " #", COALESCE(STR(?num), "?"),
+         COALESCE(CONCAT(" (", ?setName, ")"), "")
+       ) AS ?printing)
+}
+GROUP BY ?cardName
+ORDER BY DESC(?printings) ?cardName

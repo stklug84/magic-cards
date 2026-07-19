@@ -1,0 +1,12 @@
+# Lists every KeywordAbility individual in the ontology with its label and
+# (when present) rules-text comment.
+
+PREFIX mc:   <urn:stklug84:MagicCardsOntology:2026-02-27#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?kw ?label ?comment WHERE {
+  ?kw a mc:KeywordAbility .
+  OPTIONAL { ?kw rdfs:label   ?label }
+  OPTIONAL { ?kw rdfs:comment ?comment }
+}
+ORDER BY ?label

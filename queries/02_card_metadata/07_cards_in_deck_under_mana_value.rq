@@ -1,0 +1,21 @@
+# All non-land cards in a deck with mana value at most a given threshold.
+#
+# PARAMETERS:
+#   ?deck  - the deck to query
+#   ?maxMV - inclusive upper bound on mana value
+
+PREFIX mc:  <urn:stklug84:MagicCardsOntology:2026-02-27#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?cardName ?manaValue ?manaCost WHERE {
+  VALUES ?deck  { mc:SaheeliRadiantCreatorDeck }
+  VALUES ?maxMV { 4 }
+
+  ?deck mc:hasCard ?c .
+  ?c mc:cardName  ?cardName ;
+     mc:manaValue ?manaValue .
+  OPTIONAL { ?c mc:manaCost ?manaCost }
+  FILTER NOT EXISTS { ?c mc:hasCardType mc:Land }
+  FILTER (?manaValue <= ?maxMV)
+}
+ORDER BY ?manaValue ?cardName

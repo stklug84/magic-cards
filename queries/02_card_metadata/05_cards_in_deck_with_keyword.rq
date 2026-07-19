@@ -1,0 +1,17 @@
+# All cards in a deck that have a given keyword ability.
+#
+# PARAMETERS:
+#   ?deck    - the deck to query
+#   ?keyword - the KeywordAbility individual (e.g. mc:Flying, mc:Haste, mc:Trample)
+
+PREFIX mc: <urn:stklug84:MagicCardsOntology:2026-02-27#>
+
+SELECT ?cardName WHERE {
+  VALUES ?deck    { mc:SaheeliRadiantCreatorDeck }
+  VALUES ?keyword { mc:Flying }
+
+  ?deck mc:hasCard ?c .
+  ?c mc:hasKeywordAbility ?keyword ;
+     mc:cardName ?cardName .
+}
+ORDER BY ?cardName

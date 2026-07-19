@@ -1,0 +1,15 @@
+# Lists every deck individual in the dataset, with label and class.
+# No parameters - returns ALL decks regardless of format.
+
+PREFIX mc:   <urn:stklug84:MagicCardsOntology:2026-02-27#>
+PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?deck ?deckLabel ?deckClass WHERE {
+  ?deck rdf:type ?deckClass .
+  ?deckClass rdfs:subClassOf* mc:Deck .
+  FILTER(?deckClass != mc:Deck)
+  OPTIONAL { ?deck rdfs:label ?deckLabel }
+  FILTER(?deck != mc:Deck)
+}
+ORDER BY ?deckLabel

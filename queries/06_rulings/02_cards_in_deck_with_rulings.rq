@@ -1,0 +1,16 @@
+# Cards in a deck that have at least one official ruling, with ruling count.
+#
+# PARAMETERS:
+#   ?deck - the deck to query
+
+PREFIX mc: <urn:stklug84:MagicCardsOntology:2026-02-27#>
+
+SELECT ?cardName (COUNT(DISTINCT ?r) AS ?rulingCount) WHERE {
+  VALUES ?deck { mc:SaheeliRadiantCreatorDeck }
+
+  ?deck mc:hasCard ?c .
+  ?c mc:cardName  ?cardName ;
+     mc:hasRuling ?r .
+}
+GROUP BY ?cardName
+ORDER BY DESC(?rulingCount) ?cardName

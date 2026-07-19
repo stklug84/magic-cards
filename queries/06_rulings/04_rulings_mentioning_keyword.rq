@@ -1,0 +1,18 @@
+# Rulings whose text mentions a given keyword/phrase (case-insensitive).
+# Useful for finding "what does X mean for ability Y?"-style guidance.
+#
+# PARAMETERS:
+#   ?keyword - substring to search for (plain literal)
+
+PREFIX mc: <urn:stklug84:MagicCardsOntology:2026-02-27#>
+
+SELECT ?cardName ?date ?text WHERE {
+  VALUES ?keyword { "trigger" }
+
+  ?c mc:cardName ?cardName ;
+     mc:hasRuling ?r .
+  ?r mc:rulingText ?text .
+  OPTIONAL { ?r mc:rulingDate ?date }
+  FILTER (CONTAINS(LCASE(?text), LCASE(?keyword)))
+}
+ORDER BY ?cardName ?date

@@ -1,0 +1,29 @@
+# Top "synergy hubs" in a deck: cards with the highest number of distinct
+# in-deck synergy partners, ordered DESC. Limit configurable.
+#
+# PARAMETERS:
+#   ?deck    - the deck to query
+#   ?topN    - how many rows to return (LIMIT)
+
+PREFIX mc: <urn:stklug84:MagicCardsOntology:2026-02-27#>
+
+SELECT ?cardName (COUNT(DISTINCT ?other) AS ?partners) WHERE {
+  VALUES ?deck { mc:SaheeliRadiantCreatorDeck }
+
+  ?deck mc:hasCard ?c , ?other .
+  FILTER(?c != ?other)
+  ?c mc:cardName ?cardName .
+  ?c ( mc:hasSynergyWith
+     | ^mc:hasSynergyWith
+     | mc:amplifies
+     | ^mc:amplifies
+     | mc:isAmplifiedBy
+     | ^mc:isAmplifiedBy
+     | mc:enables
+     | ^mc:enables
+     | mc:isEnabledBy
+     | ^mc:isEnabledBy ) ?other .
+}
+GROUP BY ?cardName
+ORDER BY DESC(?partners) ?cardName
+LIMIT 10

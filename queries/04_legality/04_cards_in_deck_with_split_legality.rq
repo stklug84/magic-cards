@@ -1,0 +1,25 @@
+# Cards in a deck that are legal in some formats but not in others
+# (i.e. the card has both at least one :Legal and at least one non-:Legal
+# legality status). Useful for identifying format-restricted cards.
+#
+# PARAMETERS:
+#   ?deck - the deck to query
+
+PREFIX mc: <urn:stklug84:MagicCardsOntology:2026-02-27#>
+
+SELECT DISTINCT ?cardName WHERE {
+  VALUES ?deck { mc:SaheeliRadiantCreatorDeck }
+
+  ?deck mc:hasCard ?c .
+  ?c mc:cardName ?cardName .
+
+  # At least one Legal
+  ?c mc:hasLegality ?lmLegal .
+  ?lmLegal mc:hasLegalityStatus mc:Legal .
+
+  # At least one non-Legal
+  ?c mc:hasLegality ?lmOther .
+  ?lmOther mc:hasLegalityStatus ?otherStatus .
+  FILTER(?otherStatus != mc:Legal)
+}
+ORDER BY ?cardName

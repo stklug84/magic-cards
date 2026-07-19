@@ -1,0 +1,15 @@
+# ASK whether a specific card is in a specific deck. Cheap boolean probe
+# useful for inclusion checks in higher-level tooling.
+#
+# PARAMETERS:
+#   ?deck - the deck to query
+#   ?card - the card to look for
+
+PREFIX mc: <urn:stklug84:MagicCardsOntology:2026-02-27#>
+
+ASK {
+  VALUES ?deck { mc:SaheeliRadiantCreatorDeck }
+  VALUES ?card { mc:StarfieldVocalist }
+
+  ?deck mc:hasCard ?card .
+}

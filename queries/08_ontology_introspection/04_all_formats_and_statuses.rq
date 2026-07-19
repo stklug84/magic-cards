@@ -1,0 +1,17 @@
+# Lists every Format individual and every Legality individual.
+# Useful for discovering valid parameter values for legality queries.
+
+PREFIX mc:   <urn:stklug84:MagicCardsOntology:2026-02-27#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?kind ?indiv ?label WHERE {
+  {
+    ?indiv a mc:Format .
+    BIND("Format" AS ?kind)
+  } UNION {
+    ?indiv a mc:Legality .
+    BIND("Legality" AS ?kind)
+  }
+  OPTIONAL { ?indiv rdfs:label ?label }
+}
+ORDER BY ?kind ?label

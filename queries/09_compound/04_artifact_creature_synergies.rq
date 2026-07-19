@@ -1,0 +1,31 @@
+# Combined query: in a deck, find all Artifact Creatures that also participate
+# in at least one synergy edge with another card in the same deck. Returns the
+# artifact creature plus the count of its in-deck synergy partners.
+#
+# PARAMETERS:
+#   ?deck - the deck to query
+
+PREFIX mc: <urn:stklug84:MagicCardsOntology:2026-02-27#>
+
+SELECT ?cardName (COUNT(DISTINCT ?other) AS ?partners) WHERE {
+  VALUES ?deck { mc:SaheeliRadiantCreatorDeck }
+
+  ?deck mc:hasCard ?c , ?other .
+  FILTER(?c != ?other)
+  ?c mc:hasCardType mc:Artifact ,
+                    mc:Creature ;
+     mc:cardName ?cardName .
+  ?c ( mc:hasSynergyWith
+     | ^mc:hasSynergyWith
+     | mc:amplifies
+     | ^mc:amplifies
+     | mc:isAmplifiedBy
+     | ^mc:isAmplifiedBy
+     | mc:enables
+     | ^mc:enables
+     | mc:isEnabledBy
+     | ^mc:isEnabledBy ) ?other .
+}
+GROUP BY ?cardName
+HAVING (COUNT(DISTINCT ?other) > 0)
+ORDER BY DESC(?partners) ?cardName

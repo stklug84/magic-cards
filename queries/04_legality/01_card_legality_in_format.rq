@@ -1,0 +1,21 @@
+# Reports the legality status of a card in a given format.
+#
+# PARAMETERS:
+#   ?card   - the card to look up
+#   ?format - the format individual (mc:Commander, mc:Standard, mc:Modern,
+#             mc:Legacy, mc:Vintage, mc:Pioneer, mc:Pauper)
+
+PREFIX mc:   <urn:stklug84:MagicCardsOntology:2026-02-27#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?cardName ?formatLabel ?statusLabel WHERE {
+  VALUES ?card   { mc:StarfieldVocalist }
+  VALUES ?format { mc:Commander }
+
+  ?card mc:cardName ?cardName ;
+        mc:hasLegality ?lm .
+  ?lm mc:inFormat ?format ;
+      mc:hasLegalityStatus ?status .
+  OPTIONAL { ?format rdfs:label ?formatLabel }
+  OPTIONAL { ?status rdfs:label ?statusLabel }
+}
