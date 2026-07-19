@@ -1,0 +1,22 @@
+# Counts basic lands in a deck, grouped by basic land subtype
+# (Forest / Island / Mountain / Plains / Swamp).
+#
+# PARAMETERS:
+#   ?deck - the deck to query
+
+PREFIX mc:   <urn:stklug84:MagicCardsOntology:2026-02-27#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?landLabel (SUM(?q) AS ?count) WHERE {
+  VALUES ?deck { mc:SaheeliRadiantCreatorDeck }
+
+  ?deck mc:hasDeckEntry ?e .
+  ?e mc:entryCard ?c ;
+     mc:quantity ?q .
+  ?c mc:hasSuperType mc:Basic ;
+     mc:hasCardType  mc:Land ;
+     mc:hasSubType   ?land .
+  ?land rdfs:label ?landLabel .
+}
+GROUP BY ?landLabel
+ORDER BY ?landLabel

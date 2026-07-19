@@ -1,0 +1,13 @@
+# DESCRIBE returns all triples directly mentioning a card. Engine-specific
+# (different stores choose different concise-bounded-descriptions), but in
+# practice this is the fastest way to inspect everything known about a card.
+#
+# PARAMETERS:
+#   ?card - the card to describe
+
+PREFIX mc: <urn:stklug84:MagicCardsOntology:2026-02-27#>
+
+DESCRIBE ?card
+WHERE {
+  VALUES ?card { mc:StarfieldVocalist }
+}

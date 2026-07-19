@@ -1,0 +1,17 @@
+# All cards in a deck that have a given subtype (creature type, artifact type, etc.).
+#
+# PARAMETERS:
+#   ?deck    - the deck to query
+#   ?subtype - the subtype individual (e.g. mc:Artificer, mc:Wizard, mc:Equipment)
+
+PREFIX mc: <urn:stklug84:MagicCardsOntology:2026-02-27#>
+
+SELECT ?cardName WHERE {
+  VALUES ?deck    { mc:SaheeliRadiantCreatorDeck }
+  VALUES ?subtype { mc:Artificer }
+
+  ?deck mc:hasCard ?c .
+  ?c mc:hasSubType ?subtype ;
+     mc:cardName   ?cardName .
+}
+ORDER BY ?cardName

@@ -1,0 +1,18 @@
+# All cards in a deck that come from a specific printing/set.
+#
+# PARAMETERS:
+#   ?deck - the deck to query
+#   ?set  - the set individual (e.g. mc:AetherdriftCommander, mc:Kaladesh)
+
+PREFIX mc: <urn:stklug84:MagicCardsOntology:2026-02-27#>
+
+SELECT ?cardName ?cardNumber WHERE {
+  VALUES ?deck { mc:SaheeliRadiantCreatorDeck }
+  VALUES ?set  { mc:AetherdriftCommander }
+
+  ?deck mc:hasCard ?c .
+  ?c mc:isInSet  ?set ;
+     mc:cardName ?cardName .
+  OPTIONAL { ?c mc:cardNumber ?cardNumber }
+}
+ORDER BY xsd:integer(?cardNumber) ?cardName

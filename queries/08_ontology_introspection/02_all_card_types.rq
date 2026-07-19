@@ -1,0 +1,10 @@
+# Lists every CardType individual in the ontology with its label.
+
+PREFIX mc:   <urn:stklug84:MagicCardsOntology:2026-02-27#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?type ?label WHERE {
+  ?type a mc:CardType .
+  OPTIONAL { ?type rdfs:label ?label }
+}
+ORDER BY ?label

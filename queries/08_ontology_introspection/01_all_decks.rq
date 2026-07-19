@@ -1,0 +1,17 @@
+# Lists every deck individual present in the dataset, with its label and the
+# most specific Deck subclass it belongs to. No parameters - returns ALL decks.
+
+PREFIX mc:   <urn:stklug84:MagicCardsOntology:2026-02-27#>
+PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl:  <http://www.w3.org/2002/07/owl#>
+
+SELECT ?deck ?deckLabel ?deckClass WHERE {
+  ?deck rdf:type ?deckClass .
+  ?deckClass rdfs:subClassOf* mc:Deck .
+  # exclude class definitions themselves and intermediate owl:Class entries
+  FILTER NOT EXISTS { ?deck a owl:Class }
+  FILTER (?deckClass != mc:Deck)
+  OPTIONAL { ?deck rdfs:label ?deckLabel }
+}
+ORDER BY ?deckLabel

@@ -1,0 +1,32 @@
+# Returns full details for a single named card.
+#
+# PARAMETERS:
+#   ?card - the card to look up
+
+PREFIX mc:   <urn:stklug84:MagicCardsOntology:2026-02-27#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?cardName ?manaCost ?manaValue ?typeLine
+       ?power ?toughness ?rarity ?setName
+       ?cardNumber ?artist ?oracleText
+WHERE {
+  VALUES ?card { mc:StarfieldVocalist }
+
+  ?card mc:cardName ?cardName .
+  OPTIONAL { ?card mc:manaCost   ?manaCost }
+  OPTIONAL { ?card mc:manaValue  ?manaValue }
+  OPTIONAL { ?card mc:power      ?power }
+  OPTIONAL { ?card mc:toughness  ?toughness }
+  OPTIONAL { ?card mc:hasRarity  ?rar . ?rar rdfs:label ?rarity }
+  OPTIONAL { ?card mc:isInSet    ?s   . ?s   mc:setName  ?setName }
+  OPTIONAL { ?card mc:cardNumber ?cardNumber }
+  OPTIONAL { ?card mc:artist     ?artist }
+  OPTIONAL { ?card mc:oracleText ?oracleText }
+  # Type line (concatenate card types)
+  OPTIONAL {
+    SELECT ?card (GROUP_CONCAT(?tLabel; separator=" ") AS ?typeLine) WHERE {
+      ?card mc:hasCardType ?t .
+      ?t rdfs:label ?tLabel .
+    } GROUP BY ?card
+  }
+}

@@ -1,0 +1,13 @@
+# Returns the commander(s) of a deck.
+#
+# PARAMETERS:
+#   ?deck - the deck to query
+
+PREFIX mc: <urn:stklug84:MagicCardsOntology:2026-02-27#>
+
+SELECT ?commander ?commanderName WHERE {
+  VALUES ?deck { mc:SaheeliRadiantCreatorDeck }
+
+  ?commander mc:isCommanderOf ?deck ;
+             mc:cardName ?commanderName .
+}

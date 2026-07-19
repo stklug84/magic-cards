@@ -1,0 +1,18 @@
+# Cards that amplify the triggered abilities of a given card
+# (i.e. those linked to the given card via :amplifies in the appropriate direction).
+#
+# PARAMETERS:
+#   ?card - the card whose abilities are amplified
+
+PREFIX mc: <urn:stklug84:MagicCardsOntology:2026-02-27#>
+
+SELECT DISTINCT ?amplifier ?amplifierName WHERE {
+  VALUES ?card { mc:DecoctionModule }
+
+  { ?amplifier mc:amplifies ?card }
+  UNION
+  { ?card mc:isAmplifiedBy ?amplifier }
+
+  ?amplifier mc:cardName ?amplifierName .
+}
+ORDER BY ?amplifierName

@@ -1,0 +1,25 @@
+# ignore global .gitignore
+!*
+.DS_Store
+
+# ignore merge files
+*.orig
+
+# ignore html files
+*.html
+
+# ignore VSCode files
+.vscode/
+*.code-workspace
+
+# ignore Python bytecode caches
+__pycache__/
+*.pyc
+
+# ignore any structured list files
+*.csv
+*.dsv
+*.tsv
+
+# ignore plain text files
+*.txt

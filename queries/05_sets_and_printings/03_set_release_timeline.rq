@@ -1,0 +1,17 @@
+# Lists all sets that contribute cards to a deck, ordered by release date.
+#
+# PARAMETERS:
+#   ?deck - the deck to query
+
+PREFIX mc: <urn:stklug84:MagicCardsOntology:2026-02-27#>
+
+SELECT DISTINCT ?setCode ?setName ?releaseDate WHERE {
+  VALUES ?deck { mc:SaheeliRadiantCreatorDeck }
+
+  ?deck mc:hasCard ?c .
+  ?c mc:isInSet ?s .
+  OPTIONAL { ?s mc:setCode     ?setCode }
+  OPTIONAL { ?s mc:setName     ?setName }
+  OPTIONAL { ?s mc:releaseDate ?releaseDate }
+}
+ORDER BY ?releaseDate ?setCode

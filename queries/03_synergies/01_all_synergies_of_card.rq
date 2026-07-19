@@ -1,0 +1,25 @@
+# All cards synergistic with a given card, via any synergy property
+# (:amplifies, :isAmplifiedBy, :enables, :isEnabledBy, :hasSynergyWith),
+# in either direction. Uses SPARQL 1.1 property paths; no OWL reasoning required.
+#
+# PARAMETERS:
+#   ?card - the card to query synergies for
+
+PREFIX mc: <urn:stklug84:MagicCardsOntology:2026-02-27#>
+
+SELECT DISTINCT ?other ?otherName WHERE {
+  VALUES ?card { mc:StarfieldVocalist }
+
+  ?card ( mc:hasSynergyWith
+        | ^mc:hasSynergyWith
+        | mc:amplifies
+        | ^mc:amplifies
+        | mc:isAmplifiedBy
+        | ^mc:isAmplifiedBy
+        | mc:enables
+        | ^mc:enables
+        | mc:isEnabledBy
+        | ^mc:isEnabledBy ) ?other .
+  ?other mc:cardName ?otherName .
+}
+ORDER BY ?otherName

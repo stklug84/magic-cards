@@ -1,0 +1,104 @@
+name: Validate knowledge graph
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "**.ttl"
+      - "**.rq"
+      - "scripts/**"
+      - ".github/workflows/validate.yml"
+  pull_request:
+    paths:
+      - "**.ttl"
+      - "**.rq"
+      - "scripts/**"
+      - ".github/workflows/validate.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  ttl-syntax-jena:
+    name: TTL syntax (Apache Jena riot)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - name: Install Apache Jena
+        env:
+          JENA_VERSION: "5.4.0"
+        run: |
+          curl -fsSL "https://dlcdn.apache.org/jena/binaries/apache-jena-${JENA_VERSION}.tar.gz" -o jena.tar.gz
+          tar -xzf jena.tar.gz
+          echo "$PWD/apache-jena-${JENA_VERSION}/bin" >> "$GITHUB_PATH"
+
+      - name: Validate all TTL files with riot
+        run: |
+          set -u
+          status=0
+          while IFS= read -r -d '' file; do
+            if output=$(riot --validate "$file" 2>&1); then
+              echo "OK   $file"
+            else
+              echo "FAIL $file"
+              echo "$output"
+              status=1
+            fi
+          done < <(find . -name '*.ttl' -not -path './.git/*' -print0 | sort -z)
+          exit "$status"
+
+  ttl-lint:
+    name: TTL conventions and imports (rdflib)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install "rdflib>=7,<8"
+
+      - name: Validate TTL files
+        run: python3 scripts/validate_ttl.py
+
+  sparql-lint:
+    name: SPARQL syntax, prefixes, and terms
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install "rdflib>=7,<8"
+
+      - name: Validate SPARQL queries
+        run: python3 scripts/validate_sparql.py
+
+  graph-consistency:
+    name: Cross-file graph consistency
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install "rdflib>=7,<8"
+
+      - name: Run consistency checks
+        run: python3 scripts/check_consistency.py

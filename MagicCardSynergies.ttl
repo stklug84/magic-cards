@@ -1,0 +1,96 @@
+# ==============================================================================
+# DISCLAIMER
+#
+# This file is an independent, fan-made instance graph that captures synergy
+# relations between cards of a personal Magic: The Gathering card collection.
+# It is not produced by, endorsed by, or affiliated with Wizards of the Coast
+# LLC.
+#
+# Magic: The Gathering is a trademark of Wizards of the Coast LLC. All card
+# names, card text, rules text, and game terminology referenced herein are the
+# intellectual property of Wizards of the Coast LLC and/or their respective
+# owners. This work is made available under the Wizards of the Coast Fan
+# Content Policy (https://company.wizards.com/en/legal/fancontentpolicy).
+# ==============================================================================
+
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+
+@prefix :     <urn:stklug84:MagicCardsOntology:2026-02-27#> .
+@base         <urn:stklug84:MagicCardSynergies:2026-07-19#> .
+
+################################################################################
+#
+# Ontology Definition
+#
+################################################################################
+
+<urn:stklug84:MagicCardSynergies:2026-07-19#>
+    rdf:type owl:Ontology ;
+    owl:imports <urn:stklug84:MagicCardsOntology:2026-02-27#> ;
+    owl:imports <urn:stklug84:MagicCardIndividuals:2026-07-19#> ;
+    rdfs:label "Magic Card Synergies"@en ;
+    rdfs:comment """An instance graph capturing directional synergy relations
+(:amplifies, :isEnabledBy) and mutual synergies (:hasSynergyWith) between card
+individuals of the collection. This file imports MagicCardsOntology for the
+property definitions and MagicCardIndividuals for the card individuals it
+relates."""@en .
+
+################################################################################
+#
+# Card Synergies (Starfield Vocalist focus)
+#
+# These triples capture the synergies between Starfield Vocalist and other
+# cards in this Commander deck. Vocalist's relevant ability —
+#   "If a permanent entering the battlefield causes a triggered ability of
+#    a permanent you control to trigger, that ability triggers an additional
+#    time."
+# — means it only doubles triggered abilities that fire on a permanent you
+# ALREADY control, not the self-ETB ("when this enters") of the entering
+# permanent itself.
+#
+# Group A (:amplifies)     - Cards whose ETB-watching triggers Vocalist doubles.
+# Group B (:hasSynergyWith) - Same-template trigger doublers that stack
+#                            multiplicatively with Vocalist (Panharmonicon,
+#                            Roaming Throne).
+# Group C (:isEnabledBy)   - Cards that create extra permanents (tokens, copies,
+#                            flicker recursion), feeding Vocalist's amplification
+#                            of Group A and Group B watchers.
+#
+# Scope: this section is Vocalist-centric. Synergies between other pairs of
+# cards in this deck are intentionally out of scope here.
+#
+################################################################################
+
+# --- Group A: Vocalist directly amplifies these cards' triggered abilities ---
+:StarfieldVocalist :amplifies :ArchitectOfTheUntamed ,
+                              :DecoctionModule ,
+                              :EraOfInnovation ,
+                              :GontisAetherHeart ,
+                              :NissaWorldsoulSpeaker ,
+                              :RoilCartographer .
+
+# --- Group B: Multiplicative stacking with same-template amplifiers ---
+:StarfieldVocalist :hasSynergyWith :Panharmonicon ,
+                                   :RoamingThrone .
+
+# --- Group C: Cards that enable Vocalist by creating extra permanent ETBs ---
+:StarfieldVocalist :isEnabledBy :SaheeliRadiantCreator ,
+                                :AdrixAndNevTwincasters ,
+                                :BrudicladTelchorEngineer ,
+                                :SaheeliTheSunsBrilliance ,
+                                :DeterminedIteration ,
+                                :EchoStorm ,
+                                :ExtravagantReplication ,
+                                :MasterfulReplication ,
+                                :MechanizedProduction ,
+                                :EsixFractalBloom ,
+                                :AetherRefinery ,
+                                :ConjurersCloset ,
+                                :ElderGargaroth ,
+                                :StoneIdolGenerator ,
+                                :TriplicateTitan ,
+                                :PiaNalaarChiefMechanic ,
+                                :FeldonOfTheThirdPath .

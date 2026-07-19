@@ -1,0 +1,18 @@
+# CONSTRUCT a flat "card -> quantity" view by walking through DeckEntry reifications.
+# The reified pattern is :deck :hasDeckEntry :e ; :e :entryCard :c ; :e :quantity n.
+# This CONSTRUCT produces direct triples (:c :quantity n) for export, reusing
+# the ontology's :quantity property as a flattened card-level view.
+#
+# PARAMETERS:
+#   ?deck - the deck to query
+
+PREFIX mc: <urn:stklug84:MagicCardsOntology:2026-02-27#>
+
+CONSTRUCT { ?c mc:quantity ?q }
+WHERE {
+  VALUES ?deck { mc:SaheeliRadiantCreatorDeck }
+
+  ?deck mc:hasDeckEntry ?e .
+  ?e mc:entryCard ?c ;
+     mc:quantity  ?q .
+}

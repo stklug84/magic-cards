@@ -1,0 +1,17 @@
+# Lists cards in a deck illustrated by a given artist.
+#
+# PARAMETERS:
+#   ?deck   - the deck to query
+#   ?artist - the artist name (exact match on :artist literal)
+
+PREFIX mc: <urn:stklug84:MagicCardsOntology:2026-02-27#>
+
+SELECT ?cardName WHERE {
+  VALUES ?deck   { mc:SaheeliRadiantCreatorDeck }
+  VALUES ?artist { "Ernanda Souza" }
+
+  ?deck mc:hasCard ?c .
+  ?c mc:cardName ?cardName ;
+     mc:artist   ?artist .
+}
+ORDER BY ?cardName

@@ -1,0 +1,56 @@
+# All cards reachable from a seed card within one OR two synergy hops,
+# regardless of direction. Useful for building a "combo neighborhood"
+# around a key piece.
+#
+# Note: SPARQL 1.1 property paths do not support bounded-length quantifiers
+# (e.g. {1,2}) - those are a non-standard extension. This query therefore
+# enumerates the 1-hop and 2-hop cases via UNION.
+#
+# PARAMETERS:
+#   ?seed - the starting card
+
+PREFIX mc: <urn:stklug84:MagicCardsOntology:2026-02-27#>
+
+SELECT DISTINCT ?neighbor ?neighborName WHERE {
+  VALUES ?seed { mc:StarfieldVocalist }
+
+  {
+    # 1 hop
+    ?seed ( mc:hasSynergyWith
+          | ^mc:hasSynergyWith
+          | mc:amplifies
+          | ^mc:amplifies
+          | mc:isAmplifiedBy
+          | ^mc:isAmplifiedBy
+          | mc:enables
+          | ^mc:enables
+          | mc:isEnabledBy
+          | ^mc:isEnabledBy ) ?neighbor .
+  } UNION {
+    # 2 hops via an intermediate ?mid
+    ?seed ( mc:hasSynergyWith
+          | ^mc:hasSynergyWith
+          | mc:amplifies
+          | ^mc:amplifies
+          | mc:isAmplifiedBy
+          | ^mc:isAmplifiedBy
+          | mc:enables
+          | ^mc:enables
+          | mc:isEnabledBy
+          | ^mc:isEnabledBy ) ?mid .
+    ?mid  ( mc:hasSynergyWith
+          | ^mc:hasSynergyWith
+          | mc:amplifies
+          | ^mc:amplifies
+          | mc:isAmplifiedBy
+          | ^mc:isAmplifiedBy
+          | mc:enables
+          | ^mc:enables
+          | mc:isEnabledBy
+          | ^mc:isEnabledBy ) ?neighbor .
+  }
+
+  FILTER(?neighbor != ?seed)
+  ?neighbor mc:cardName ?neighborName .
+}
+ORDER BY ?neighborName

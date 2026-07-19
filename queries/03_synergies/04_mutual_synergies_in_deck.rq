@@ -1,0 +1,27 @@
+# All synergy pairs where BOTH cards are present in a given deck.
+# Each pair is reported once (filter A < B on IRI to avoid duplicates).
+#
+# PARAMETERS:
+#   ?deck - the deck to query
+
+PREFIX mc: <urn:stklug84:MagicCardsOntology:2026-02-27#>
+
+SELECT DISTINCT ?aName ?bName WHERE {
+  VALUES ?deck { mc:SaheeliRadiantCreatorDeck }
+
+  ?deck mc:hasCard ?a , ?b .
+  ?a ( mc:hasSynergyWith
+     | ^mc:hasSynergyWith
+     | mc:amplifies
+     | ^mc:amplifies
+     | mc:isAmplifiedBy
+     | ^mc:isAmplifiedBy
+     | mc:enables
+     | ^mc:enables
+     | mc:isEnabledBy
+     | ^mc:isEnabledBy ) ?b .
+  ?a mc:cardName ?aName .
+  ?b mc:cardName ?bName .
+  FILTER(STR(?a) < STR(?b))
+}
+ORDER BY ?aName ?bName

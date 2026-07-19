@@ -1,0 +1,15 @@
+# Total card count of a deck (sum of all entry quantities).
+# For a legal Commander deck this should equal 100.
+#
+# PARAMETERS:
+#   ?deck - the deck to query
+
+PREFIX mc: <urn:stklug84:MagicCardsOntology:2026-02-27#>
+
+SELECT (SUM(?q) AS ?totalCards) (COUNT(DISTINCT ?card) AS ?uniqueCards) WHERE {
+  VALUES ?deck { mc:SaheeliRadiantCreatorDeck }
+
+  ?deck mc:hasDeckEntry ?entry .
+  ?entry mc:entryCard ?card ;
+         mc:quantity ?q .
+}

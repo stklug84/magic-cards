@@ -1,0 +1,18 @@
+# Mana curve: count of non-land cards per mana value in a deck.
+#
+# PARAMETERS:
+#   ?deck - the deck to query
+
+PREFIX mc: <urn:stklug84:MagicCardsOntology:2026-02-27#>
+
+SELECT ?manaValue (SUM(?q) AS ?cardCount) WHERE {
+  VALUES ?deck { mc:SaheeliRadiantCreatorDeck }
+
+  ?deck mc:hasDeckEntry ?e .
+  ?e mc:entryCard ?c ;
+     mc:quantity ?q .
+  ?c mc:manaValue ?manaValue .
+  FILTER NOT EXISTS { ?c mc:hasCardType mc:Land }
+}
+GROUP BY ?manaValue
+ORDER BY ?manaValue

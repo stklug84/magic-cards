@@ -1,0 +1,17 @@
+# All legendary creatures in a deck (e.g. potential commanders or commander-themed cards).
+#
+# PARAMETERS:
+#   ?deck - the deck to query
+
+PREFIX mc: <urn:stklug84:MagicCardsOntology:2026-02-27#>
+
+SELECT ?cardName ?manaCost WHERE {
+  VALUES ?deck { mc:SaheeliRadiantCreatorDeck }
+
+  ?deck mc:hasCard ?c .
+  ?c mc:hasSuperType mc:Legendary ;
+     mc:hasCardType  mc:Creature ;
+     mc:cardName     ?cardName .
+  OPTIONAL { ?c mc:manaCost ?manaCost }
+}
+ORDER BY ?cardName

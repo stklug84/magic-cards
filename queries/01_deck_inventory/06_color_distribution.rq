@@ -1,0 +1,18 @@
+# Color distribution: count of cards per color in a deck.
+# A multi-colored card is counted once per color it contains.
+#
+# PARAMETERS:
+#   ?deck - the deck to query
+
+PREFIX mc:   <urn:stklug84:MagicCardsOntology:2026-02-27#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?colorLabel (COUNT(DISTINCT ?c) AS ?cardCount) WHERE {
+  VALUES ?deck { mc:SaheeliRadiantCreatorDeck }
+
+  ?deck mc:hasCard ?c .
+  ?c mc:hasColor ?color .
+  ?color rdfs:label ?colorLabel .
+}
+GROUP BY ?colorLabel
+ORDER BY DESC(?cardCount)

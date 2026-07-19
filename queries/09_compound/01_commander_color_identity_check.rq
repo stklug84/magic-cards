@@ -1,0 +1,25 @@
+# Sanity check: list every card in a Commander deck whose colors include a
+# color NOT present in any commander of the deck. In a legal Commander deck
+# this result set should be empty.
+#
+# NOTE: This checks card :hasColor only, not full color identity (which would
+# also include colors of mana symbols in oracle text and color indicators).
+# For a strict check, extend the ontology with :hasColorIdentity.
+#
+# PARAMETERS:
+#   ?deck - the deck to validate
+
+PREFIX mc: <urn:stklug84:MagicCardsOntology:2026-02-27#>
+
+SELECT DISTINCT ?cardName ?offendingColor WHERE {
+  VALUES ?deck { mc:SaheeliRadiantCreatorDeck }
+
+  ?commander mc:isCommanderOf ?deck .
+
+  ?deck mc:hasCard ?c .
+  ?c mc:cardName ?cardName ;
+     mc:hasColor ?offendingColor .
+
+  FILTER NOT EXISTS { ?commander mc:hasColor ?offendingColor }
+}
+ORDER BY ?cardName ?offendingColor

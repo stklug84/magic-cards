@@ -1,0 +1,21 @@
+# Cards in a deck whose legality status is :Legal across ALL seven tracked
+# formats (Commander, Standard, Modern, Legacy, Vintage, Pioneer, Pauper).
+#
+# PARAMETERS:
+#   ?deck - the deck to query
+
+PREFIX mc: <urn:stklug84:MagicCardsOntology:2026-02-27#>
+
+SELECT ?cardName WHERE {
+  VALUES ?deck { mc:SaheeliRadiantCreatorDeck }
+
+  ?deck mc:hasCard ?c .
+  ?c mc:cardName ?cardName .
+
+  FILTER NOT EXISTS {
+    ?c mc:hasLegality ?lm .
+    ?lm mc:hasLegalityStatus ?status .
+    FILTER(?status != mc:Legal)
+  }
+}
+ORDER BY ?cardName

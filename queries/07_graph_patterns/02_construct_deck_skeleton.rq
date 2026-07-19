@@ -1,0 +1,23 @@
+# CONSTRUCT a minimal "deck skeleton" graph: for each card in the deck, emit
+# (card :isInDeck deck), (card :cardName name), (card :manaValue mv), and
+# (card :hasCardType type). Useful for exporting a slim view for visualization.
+#
+# PARAMETERS:
+#   ?deck - the deck to query
+
+PREFIX mc: <urn:stklug84:MagicCardsOntology:2026-02-27#>
+
+CONSTRUCT {
+  ?c mc:isInDeck     ?deck ;
+     mc:cardName     ?name ;
+     mc:manaValue    ?mv ;
+     mc:hasCardType  ?t .
+}
+WHERE {
+  VALUES ?deck { mc:SaheeliRadiantCreatorDeck }
+
+  ?deck mc:hasCard ?c .
+  ?c mc:cardName    ?name ;
+     mc:hasCardType ?t .
+  OPTIONAL { ?c mc:manaValue ?mv }
+}

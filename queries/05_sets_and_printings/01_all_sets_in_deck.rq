@@ -1,0 +1,17 @@
+# Distinct sets represented in a deck, with card count per set.
+#
+# PARAMETERS:
+#   ?deck - the deck to query
+
+PREFIX mc: <urn:stklug84:MagicCardsOntology:2026-02-27#>
+
+SELECT ?setCode ?setName (COUNT(DISTINCT ?c) AS ?cards) WHERE {
+  VALUES ?deck { mc:SaheeliRadiantCreatorDeck }
+
+  ?deck mc:hasCard ?c .
+  ?c mc:isInSet ?s .
+  OPTIONAL { ?s mc:setCode ?setCode }
+  OPTIONAL { ?s mc:setName ?setName }
+}
+GROUP BY ?setCode ?setName
+ORDER BY DESC(?cards) ?setName

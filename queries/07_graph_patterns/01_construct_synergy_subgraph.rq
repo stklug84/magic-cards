@@ -1,0 +1,26 @@
+# CONSTRUCT a clean synergy subgraph for a deck: a triple (a :hasSynergyWith b)
+# for every pair of cards in the deck that share any synergy relation.
+# Result can be loaded into Graphviz/Gephi via TriG/N-Triples export.
+#
+# PARAMETERS:
+#   ?deck - the deck to query
+
+PREFIX mc: <urn:stklug84:MagicCardsOntology:2026-02-27#>
+
+CONSTRUCT { ?a mc:hasSynergyWith ?b }
+WHERE {
+  VALUES ?deck { mc:SaheeliRadiantCreatorDeck }
+
+  ?deck mc:hasCard ?a , ?b .
+  FILTER(STR(?a) < STR(?b))
+  ?a ( mc:hasSynergyWith
+     | ^mc:hasSynergyWith
+     | mc:amplifies
+     | ^mc:amplifies
+     | mc:isAmplifiedBy
+     | ^mc:isAmplifiedBy
+     | mc:enables
+     | ^mc:enables
+     | mc:isEnabledBy
+     | ^mc:isEnabledBy ) ?b .
+}

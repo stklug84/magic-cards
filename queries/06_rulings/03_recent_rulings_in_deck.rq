@@ -1,0 +1,22 @@
+# All rulings on cards in a deck issued on or after a cutoff date,
+# ordered by date descending.
+#
+# PARAMETERS:
+#   ?deck   - the deck to query
+#   ?cutoff - inclusive earliest ruling date (xsd:date)
+
+PREFIX mc:  <urn:stklug84:MagicCardsOntology:2026-02-27#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?cardName ?date ?text WHERE {
+  VALUES ?deck   { mc:SaheeliRadiantCreatorDeck }
+  VALUES ?cutoff { "2020-01-01"^^xsd:date }
+
+  ?deck mc:hasCard ?c .
+  ?c mc:cardName  ?cardName ;
+     mc:hasRuling ?r .
+  ?r mc:rulingDate ?date ;
+     mc:rulingText ?text .
+  FILTER (?date >= ?cutoff)
+}
+ORDER BY DESC(?date) ?cardName

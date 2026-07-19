@@ -1,0 +1,15 @@
+# All rulings on a specific card, ordered by date.
+#
+# PARAMETERS:
+#   ?card - the card to look up
+
+PREFIX mc: <urn:stklug84:MagicCardsOntology:2026-02-27#>
+
+SELECT ?date ?text WHERE {
+  VALUES ?card { mc:StarfieldVocalist }
+
+  ?card mc:hasRuling ?r .
+  OPTIONAL { ?r mc:rulingDate ?date }
+  OPTIONAL { ?r mc:rulingText ?text }
+}
+ORDER BY ?date

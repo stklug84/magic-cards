@@ -1,0 +1,17 @@
+# Distribution of unique cards by rarity within a deck.
+#
+# PARAMETERS:
+#   ?deck - the deck to query
+
+PREFIX mc:   <urn:stklug84:MagicCardsOntology:2026-02-27#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?rarityLabel (COUNT(DISTINCT ?c) AS ?cards) WHERE {
+  VALUES ?deck { mc:SaheeliRadiantCreatorDeck }
+
+  ?deck mc:hasCard ?c .
+  ?c mc:hasRarity ?r .
+  OPTIONAL { ?r rdfs:label ?rarityLabel }
+}
+GROUP BY ?rarityLabel
+ORDER BY DESC(?cards)
