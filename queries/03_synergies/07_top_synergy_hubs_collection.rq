@@ -1,0 +1,27 @@
+# Top synergies across the whole collection: ranks every card by the number
+# of distinct synergy partners it has (any synergy property, either
+# direction). The best-connected cards are the collection's synergy hubs —
+# strong build-around candidates. Not deck-scoped; complements
+# 06_synergy_count_per_card_in_deck.rq.
+#
+# PARAMETERS - edit the LIMIT below to retarget:
+#   result size - number of top cards to return (default 25)
+
+PREFIX mc: <urn:stklug84:MagicCardsOntology:2026-02-27#>
+
+SELECT ?cardName (COUNT(DISTINCT ?other) AS ?partners) WHERE {
+  ?c ( mc:hasSynergyWith
+     | ^mc:hasSynergyWith
+     | mc:amplifies
+     | ^mc:amplifies
+     | mc:isAmplifiedBy
+     | ^mc:isAmplifiedBy
+     | mc:enables
+     | ^mc:enables
+     | mc:isEnabledBy
+     | ^mc:isEnabledBy ) ?other .
+  ?c mc:cardName ?cardName .
+}
+GROUP BY ?cardName
+ORDER BY DESC(?partners) ?cardName
+LIMIT 25

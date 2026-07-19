@@ -1,22 +1,26 @@
-# All rulings on cards in a deck issued on or after a cutoff date,
-# ordered by date descending.
+# All rulings on cards across all decks in the dataset issued on or after a
+# cutoff date, ordered by date descending. The commented VALUES line
+# restricts results to specific deck(s).
 #
 # PARAMETERS:
-#   ?deck   - the deck to query
+#   ?deck   - optional deck filter (uncomment the VALUES line to restrict)
 #   ?cutoff - inclusive earliest ruling date (xsd:date)
 
-PREFIX mc:  <urn:stklug84:MagicCardsOntology:2026-02-27#>
-PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX mc:   <urn:stklug84:MagicCardsOntology:2026-02-27#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
 
-SELECT ?cardName ?date ?text WHERE {
-  VALUES ?deck   { mc:SaheeliRadiantCreatorDeck }
+SELECT ?deckName ?cardName ?date ?text WHERE {
+  # To restrict to specific deck(s), uncomment and edit:
+  # VALUES ?deck { mc:SaheeliRadiantCreatorDeck }
   VALUES ?cutoff { "2020-01-01"^^xsd:date }
 
   ?deck mc:hasCard ?c .
+  OPTIONAL { ?deck rdfs:label ?deckName }
   ?c mc:cardName  ?cardName ;
      mc:hasRuling ?r .
   ?r mc:rulingDate ?date ;
      mc:rulingText ?text .
   FILTER (?date >= ?cutoff)
 }
-ORDER BY DESC(?date) ?cardName
+ORDER BY ?deckName DESC(?date) ?cardName

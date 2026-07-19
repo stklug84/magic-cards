@@ -1,21 +1,26 @@
-# All non-land cards in a deck with mana value at most a given threshold.
+# All non-land cards with mana value at most a given threshold, across all
+# decks in the dataset. Uncomment the VALUES ?deck line to restrict to
+# specific deck(s).
 #
 # PARAMETERS:
-#   ?deck  - the deck to query
+#   ?deck  - (optional) specific deck(s), via the commented VALUES line
 #   ?maxMV - inclusive upper bound on mana value
 
-PREFIX mc:  <urn:stklug84:MagicCardsOntology:2026-02-27#>
-PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX mc:   <urn:stklug84:MagicCardsOntology:2026-02-27#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
 
-SELECT ?cardName ?manaValue ?manaCost WHERE {
-  VALUES ?deck  { mc:SaheeliRadiantCreatorDeck }
+SELECT ?deckName ?cardName ?manaValue ?manaCost WHERE {
+  # To restrict to specific deck(s), uncomment and edit:
+  # VALUES ?deck { mc:SaheeliRadiantCreatorDeck }
   VALUES ?maxMV { 4 }
 
   ?deck mc:hasCard ?c .
+  OPTIONAL { ?deck rdfs:label ?deckName }
   ?c mc:cardName  ?cardName ;
      mc:manaValue ?manaValue .
   OPTIONAL { ?c mc:manaCost ?manaCost }
   FILTER NOT EXISTS { ?c mc:hasCardType mc:Land }
   FILTER (?manaValue <= ?maxMV)
 }
-ORDER BY ?manaValue ?cardName
+ORDER BY ?deckName ?manaValue ?cardName

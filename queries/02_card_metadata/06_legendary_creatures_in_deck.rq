@@ -1,17 +1,22 @@
-# All legendary creatures in a deck (e.g. potential commanders or commander-themed cards).
+# All legendary creatures (e.g. potential commanders or commander-themed cards),
+# across all decks in the dataset. Uncomment the VALUES ?deck line to restrict
+# to specific deck(s).
 #
 # PARAMETERS:
-#   ?deck - the deck to query
+#   ?deck - (optional) specific deck(s), via the commented VALUES line
 
-PREFIX mc: <urn:stklug84:MagicCardsOntology:2026-02-27#>
+PREFIX mc:   <urn:stklug84:MagicCardsOntology:2026-02-27#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
-SELECT ?cardName ?manaCost WHERE {
-  VALUES ?deck { mc:SaheeliRadiantCreatorDeck }
+SELECT ?deckName ?cardName ?manaCost WHERE {
+  # To restrict to specific deck(s), uncomment and edit:
+  # VALUES ?deck { mc:SaheeliRadiantCreatorDeck }
 
   ?deck mc:hasCard ?c .
+  OPTIONAL { ?deck rdfs:label ?deckName }
   ?c mc:hasSuperType mc:Legendary ;
      mc:hasCardType  mc:Creature ;
      mc:cardName     ?cardName .
   OPTIONAL { ?c mc:manaCost ?manaCost }
 }
-ORDER BY ?cardName
+ORDER BY ?deckName ?cardName

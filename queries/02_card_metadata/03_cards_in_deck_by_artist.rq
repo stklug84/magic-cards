@@ -1,17 +1,21 @@
-# Lists cards in a deck illustrated by a given artist.
+# Lists cards illustrated by a given artist, across all decks in the dataset.
+# Uncomment the VALUES ?deck line to restrict to specific deck(s).
 #
 # PARAMETERS:
-#   ?deck   - the deck to query
+#   ?deck   - (optional) specific deck(s), via the commented VALUES line
 #   ?artist - the artist name (exact match on :artist literal)
 
-PREFIX mc: <urn:stklug84:MagicCardsOntology:2026-02-27#>
+PREFIX mc:   <urn:stklug84:MagicCardsOntology:2026-02-27#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
-SELECT ?cardName WHERE {
-  VALUES ?deck   { mc:SaheeliRadiantCreatorDeck }
+SELECT ?deckName ?cardName WHERE {
+  # To restrict to specific deck(s), uncomment and edit:
+  # VALUES ?deck { mc:SaheeliRadiantCreatorDeck }
   VALUES ?artist { "Ernanda Souza" }
 
   ?deck mc:hasCard ?c .
+  OPTIONAL { ?deck rdfs:label ?deckName }
   ?c mc:cardName ?cardName ;
      mc:artist   ?artist .
 }
-ORDER BY ?cardName
+ORDER BY ?deckName ?cardName

@@ -1,16 +1,21 @@
-# Cards in a deck that have at least one official ruling, with ruling count.
+# Cards across all decks in the dataset that have at least one official
+# ruling, with ruling count. The commented VALUES line restricts results
+# to specific deck(s).
 #
 # PARAMETERS:
-#   ?deck - the deck to query
+#   ?deck - optional deck filter (uncomment the VALUES line to restrict)
 
-PREFIX mc: <urn:stklug84:MagicCardsOntology:2026-02-27#>
+PREFIX mc:   <urn:stklug84:MagicCardsOntology:2026-02-27#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
-SELECT ?cardName (COUNT(DISTINCT ?r) AS ?rulingCount) WHERE {
-  VALUES ?deck { mc:SaheeliRadiantCreatorDeck }
+SELECT ?deckName ?cardName (COUNT(DISTINCT ?r) AS ?rulingCount) WHERE {
+  # To restrict to specific deck(s), uncomment and edit:
+  # VALUES ?deck { mc:SaheeliRadiantCreatorDeck }
 
   ?deck mc:hasCard ?c .
+  OPTIONAL { ?deck rdfs:label ?deckName }
   ?c mc:cardName  ?cardName ;
      mc:hasRuling ?r .
 }
-GROUP BY ?cardName
-ORDER BY DESC(?rulingCount) ?cardName
+GROUP BY ?deck ?deckName ?cardName
+ORDER BY ?deckName DESC(?rulingCount) ?cardName

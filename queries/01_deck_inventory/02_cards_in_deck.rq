@@ -1,16 +1,21 @@
-# Lists every card in a deck with its quantity, sorted by quantity descending.
+# Lists every card in every deck with its quantity, sorted by deck then
+# quantity descending. Covers all decks in the dataset.
 #
-# PARAMETERS - edit the VALUES line below to retarget:
-#   ?deck - the deck to query (default: Saheeli Commander deck)
+# PARAMETERS:
+#   ?deck - optional deck filter; uncomment the VALUES line below to restrict
+#           to specific deck(s)
 
-PREFIX mc: <urn:stklug84:MagicCardsOntology:2026-02-27#>
+PREFIX mc:   <urn:stklug84:MagicCardsOntology:2026-02-27#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
-SELECT ?cardName ?quantity WHERE {
-  VALUES ?deck { mc:SaheeliRadiantCreatorDeck }
+SELECT ?deckName ?cardName ?quantity WHERE {
+  # To restrict to specific deck(s), uncomment and edit:
+  # VALUES ?deck { mc:SaheeliRadiantCreatorDeck }
 
   ?deck mc:hasDeckEntry ?entry .
   ?entry mc:entryCard ?card ;
          mc:quantity ?quantity .
   ?card mc:cardName ?cardName .
+  OPTIONAL { ?deck rdfs:label ?deckName }
 }
-ORDER BY DESC(?quantity) ?cardName
+ORDER BY ?deckName DESC(?quantity) ?cardName

@@ -1,15 +1,19 @@
-# Cards in a deck that do NOT participate in any synergy triple
-# (no incoming or outgoing synergy edge).
+# Cards that do NOT participate in any synergy triple (no incoming or
+# outgoing synergy edge), across all decks in the dataset. Uncomment the
+# VALUES ?deck line to restrict to specific deck(s).
 #
 # PARAMETERS:
-#   ?deck - the deck to query
+#   ?deck - (optional) specific deck(s), via the commented VALUES line
 
-PREFIX mc: <urn:stklug84:MagicCardsOntology:2026-02-27#>
+PREFIX mc:   <urn:stklug84:MagicCardsOntology:2026-02-27#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
-SELECT ?cardName WHERE {
-  VALUES ?deck { mc:SaheeliRadiantCreatorDeck }
+SELECT ?deckName ?cardName WHERE {
+  # To restrict to specific deck(s), uncomment and edit:
+  # VALUES ?deck { mc:SaheeliRadiantCreatorDeck }
 
   ?deck mc:hasCard ?c .
+  OPTIONAL { ?deck rdfs:label ?deckName }
   ?c mc:cardName ?cardName .
 
   FILTER NOT EXISTS {
@@ -25,4 +29,4 @@ SELECT ?cardName WHERE {
        | ^mc:isEnabledBy ) ?other .
   }
 }
-ORDER BY ?cardName
+ORDER BY ?deckName ?cardName

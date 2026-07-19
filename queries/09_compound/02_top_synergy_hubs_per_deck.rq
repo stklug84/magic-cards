@@ -1,14 +1,19 @@
-# Top "synergy hubs" in a deck: cards with the highest number of distinct
-# in-deck synergy partners, ordered DESC. Limit configurable.
+# Top "synergy hubs" across all decks: cards with the highest number of
+# distinct in-deck synergy partners, ordered DESC. Limit configurable.
 #
 # PARAMETERS:
-#   ?deck    - the deck to query
+#   ?deck    - optional: uncomment the VALUES clause in WHERE to restrict
+#              to specific deck(s); by default all decks are covered
 #   ?topN    - how many rows to return (LIMIT)
 
 PREFIX mc: <urn:stklug84:MagicCardsOntology:2026-02-27#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
-SELECT ?cardName (COUNT(DISTINCT ?other) AS ?partners) WHERE {
-  VALUES ?deck { mc:SaheeliRadiantCreatorDeck }
+SELECT ?deckName ?cardName (COUNT(DISTINCT ?other) AS ?partners) WHERE {
+  # To restrict to specific deck(s), uncomment and edit:
+  # VALUES ?deck { mc:SaheeliRadiantCreatorDeck }
+
+  OPTIONAL { ?deck rdfs:label ?deckName }
 
   ?deck mc:hasCard ?c , ?other .
   FILTER(?c != ?other)
@@ -24,6 +29,6 @@ SELECT ?cardName (COUNT(DISTINCT ?other) AS ?partners) WHERE {
      | mc:isEnabledBy
      | ^mc:isEnabledBy ) ?other .
 }
-GROUP BY ?cardName
-ORDER BY DESC(?partners) ?cardName
+GROUP BY ?deck ?deckName ?cardName
+ORDER BY ?deckName DESC(?partners) ?cardName
 LIMIT 10

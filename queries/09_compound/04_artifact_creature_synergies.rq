@@ -1,14 +1,19 @@
-# Combined query: in a deck, find all Artifact Creatures that also participate
-# in at least one synergy edge with another card in the same deck. Returns the
-# artifact creature plus the count of its in-deck synergy partners.
+# Combined query: across all decks, find all Artifact Creatures that also
+# participate in at least one synergy edge with another card in the same deck.
+# Returns the artifact creature plus the count of its in-deck synergy partners.
 #
 # PARAMETERS:
-#   ?deck - the deck to query
+#   ?deck - optional: uncomment the VALUES clause in WHERE to restrict
+#           to specific deck(s); by default all decks are covered
 
 PREFIX mc: <urn:stklug84:MagicCardsOntology:2026-02-27#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
-SELECT ?cardName (COUNT(DISTINCT ?other) AS ?partners) WHERE {
-  VALUES ?deck { mc:SaheeliRadiantCreatorDeck }
+SELECT ?deckName ?cardName (COUNT(DISTINCT ?other) AS ?partners) WHERE {
+  # To restrict to specific deck(s), uncomment and edit:
+  # VALUES ?deck { mc:SaheeliRadiantCreatorDeck }
+
+  OPTIONAL { ?deck rdfs:label ?deckName }
 
   ?deck mc:hasCard ?c , ?other .
   FILTER(?c != ?other)
@@ -26,6 +31,6 @@ SELECT ?cardName (COUNT(DISTINCT ?other) AS ?partners) WHERE {
      | mc:isEnabledBy
      | ^mc:isEnabledBy ) ?other .
 }
-GROUP BY ?cardName
+GROUP BY ?deck ?deckName ?cardName
 HAVING (COUNT(DISTINCT ?other) > 0)
-ORDER BY DESC(?partners) ?cardName
+ORDER BY ?deckName DESC(?partners) ?cardName

@@ -1,17 +1,21 @@
-# Distribution of unique cards by rarity within a deck.
+# Distribution of unique cards by rarity within each deck in the dataset.
+# Covers all decks; the commented VALUES line restricts results to specific
+# deck(s).
 #
 # PARAMETERS:
-#   ?deck - the deck to query
+#   ?deck - optional deck filter (uncomment the VALUES line to restrict)
 
 PREFIX mc:   <urn:stklug84:MagicCardsOntology:2026-02-27#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
-SELECT ?rarityLabel (COUNT(DISTINCT ?c) AS ?cards) WHERE {
-  VALUES ?deck { mc:SaheeliRadiantCreatorDeck }
+SELECT ?deckName ?rarityLabel (COUNT(DISTINCT ?c) AS ?cards) WHERE {
+  # To restrict to specific deck(s), uncomment and edit:
+  # VALUES ?deck { mc:SaheeliRadiantCreatorDeck }
 
   ?deck mc:hasCard ?c .
+  OPTIONAL { ?deck rdfs:label ?deckName }
   ?c mc:hasRarity ?r .
   OPTIONAL { ?r rdfs:label ?rarityLabel }
 }
-GROUP BY ?rarityLabel
-ORDER BY DESC(?cards)
+GROUP BY ?deck ?deckName ?rarityLabel
+ORDER BY ?deckName DESC(?cards)
