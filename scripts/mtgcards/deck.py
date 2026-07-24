@@ -9,8 +9,8 @@ Supported format (one card per line, // comments, commander marked by a
     1 Some Legendary Creature
 
 If the list has no '// Commander' section, the first card of the list is
-used as the commander (the convention of exported decklists such as
-strategies/ss-test.txt / bb-test.txt). Everything after a '#' character is
+used as the commander (the convention of exported decklists, e.g. from
+Moxfield/Archidekt). Everything after a '#' character is
 stripped (inline annotations, e.g. the knowledge-graph individual), as is a
 trailing '(SET) collector-number [*F*]' printing suffix:
 

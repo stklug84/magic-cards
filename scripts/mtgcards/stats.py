@@ -93,7 +93,7 @@ class Aggregator:
             if seeds == list(range(seeds[0], seeds[0] + len(seeds))) \
             else f"{len(seeds)} seeds ({','.join(map(str, seeds))})"
         lines.append("=" * width)
-        lines.append(f" mtgsim v2 - {n} games, seed {seed_desc}, "
+        lines.append(f" mtgrules - {n} games, seed {seed_desc}, "
                      f"{len(self.names)} players")
         lines.append("=" * width)
         for name in self.names:
@@ -119,13 +119,15 @@ class Aggregator:
             f"{k}={v}" for k, v in sorted(reasons.items(),
                                           key=lambda x: -x[1])))
         lines.append("-" * width)
-        keys = ["life", "mulligans", "tokens_created", "tokens_killed",
-                "treasures_made", "counters_placed", "blowfly_chain_kills",
-                "necroskitter_steals", "grave_robs",
-                "kulrath_locked", "drain", "drained_taken", "combat_damage",
-                "counterspells_used", "protection_saves", "blink_resets",
-                "commander_locks", "removal_used", "wipes_cast",
-                "proliferates", "energy_gained"]
+        keys = ["life", "mulligans", "lands_played", "spells_cast",
+                "cards_drawn", "abilities_activated",
+                "tokens_created", "tokens_killed", "treasures_made",
+                "counters_received", "proliferates",
+                "attacks", "combat_damage",
+                "drain", "drained_taken",
+                "counterspells_used", "spells_countered_against",
+                "removal_used", "wipes_cast",
+                "necroskitter_steals", "grave_robs", "mechanized_wins"]
         seen = [k for k in keys
                 if any(self.stat_avg(nm, k) for nm in self.names)]
         header = " per-game avg          " + "".join(

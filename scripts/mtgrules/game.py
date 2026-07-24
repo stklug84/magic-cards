@@ -53,6 +53,18 @@ class PendingTrigger:
     event: object
 
 
+def _lname(x) -> str:
+    """Loggable name for a Player, GameObject, or stack item."""
+    if isinstance(x, Player):
+        return x.name
+    if isinstance(x, GameObject):
+        return x.base.name or "(unnamed)"
+    if isinstance(x, StackItem):
+        return (x.obj.base.name if x.is_spell
+                else f"ability of {x.source.base.name}")
+    return str(x)
+
+
 class Game:
     def __init__(self, players: list[Player], rng: random.Random,
                  policies: dict, turn_cap: int = 40, log=None):
@@ -210,6 +222,9 @@ class Game:
             obj.zone = "ceased"
             self.bump()
             if from_zone == Zone.BATTLEFIELD and to_zone == Zone.GRAVEYARD:
+                obj.controller.stat("tokens_killed")
+                self.log("dies", who=obj.controller.name, card=_lname(obj),
+                         token=True)
                 self._fire_leave_battlefield(obj, event)
             return None
 
@@ -243,6 +258,8 @@ class Game:
             self._queue_triggers(etb)
         elif from_zone == Zone.BATTLEFIELD:
             self.bump()
+            if to_zone == Zone.GRAVEYARD:
+                self.log("dies", who=obj.controller.name, card=_lname(obj))
             self._fire_leave_battlefield(obj, event)
         else:
             self.bump()
@@ -296,6 +313,11 @@ class Game:
                 controller.battlefield.append(tok)
                 made.append(tok)
                 controller.stat("tokens_created")
+                if spec.predefined in ("treasure", "gold"):
+                    controller.stat("treasures_made")
+                self.log("token", who=controller.name, name=spec.name,
+                         pt=(f"{spec.power}/{spec.toughness}"
+                             if spec.power is not None else None))
                 self.bump()
                 self._queue_triggers(Event(EventType.ENTERS_BATTLEFIELD,
                                            {"obj": tok}))
@@ -314,6 +336,7 @@ class Game:
             card.zone = Zone.HAND
             player.hand.append(card)
             player.stat("cards_drawn")
+            self.log("draw", who=player.name)
         self.bump()
 
     @rule("120.3", "119.3")
@@ -331,6 +354,8 @@ class Game:
         self._queue_triggers(Event(EventType.DAMAGE, {
             "source": source, "target": target, "amount": amount,
             "combat": combat, "resolved": True}))
+        self.log("damage", src=_lname(source), target=_lname(target),
+                 n=amount, combat=combat)
         if isinstance(target, Player):
             # rule 120.3a: damage to a player causes life loss
             self.lose_life(target, amount, damage=True)
@@ -361,6 +386,8 @@ class Game:
         if event is None:
             return
         player.life += event.data["amount"]
+        self.log("life", who=player.name, delta=event.data["amount"],
+                 total=player.life)
         self.bump()
 
     def lose_life(self, player, n, damage=False):
@@ -372,6 +399,8 @@ class Game:
         if event is None:
             return
         player.life -= event.data["amount"]
+        self.log("life", who=player.name, delta=-event.data["amount"],
+                 total=player.life)
         self.bump()
 
     @rule("122.1", "122.6")
@@ -529,6 +558,8 @@ class Game:
     @rule("701.5")
     def counter_spell(self, item: StackItem):
         if item in self.stack:
+            self.log("counter", spell=_lname(item),
+                     who=item.controller.name)
             self.stack.remove(item)
             if item.is_spell and not item.obj.is_token:
                 self.move_zone(item.obj, Zone.GRAVEYARD)
@@ -699,6 +730,15 @@ class Game:
         if card.commander and from_command:
             player.commander_casts += 1
         player.stat("spells_cast")
+        player.cards_cast.append(card.base.name)
+        self.log("cast", who=player.name, card=card.base.name,
+                 x=x or None, commander=from_command or None)
+        ref = card.card_ref
+        if ref is not None:
+            if ref.behavior.get("wipe"):
+                player.stat("wipes_cast")
+            elif ref.behavior.get("removal"):
+                player.stat("removal_used")
         # rule 702.21 ward: cost tax handled as a trigger when targeted
         self._ward_check(item)
         self._queue_triggers(Event(EventType.CAST, {"obj": card,
@@ -790,6 +830,7 @@ class Game:
         if ab.once_per_turn:
             self.activated_this_turn.add((obj.id, id(ab)))
         player.stat("abilities_activated")
+        self.log("activate", who=player.name, source=_lname(obj))
         self.bump()
         return True
 
@@ -832,6 +873,11 @@ class Game:
     @rule("608.2", "608.2b", "608.3", "608.2m")
     def resolve_top(self):
         item = self.stack.pop()
+        if self._resolve_item(item):
+            # logged on completion so observers snapshot the applied state
+            self.log("resolve", what=_lname(item))
+
+    def _resolve_item(self, item) -> bool:
         ctx = Ctx(controller=item.controller, source=item.source,
                   targets=item.targets, x=item.x)
         if isinstance(item.obj, PendingTrigger):
@@ -845,8 +891,8 @@ class Game:
                 # rule 608.2b: all targets illegal -> doesn't resolve
                 if item.is_spell:
                     self.move_zone(item.obj, Zone.GRAVEYARD)
-                self.log("fizzle", what=repr(item))
-                return
+                self.log("fizzle", what=_lname(item))
+                return False
         if item.is_spell:
             card = item.obj
             ch = card.base
@@ -878,10 +924,11 @@ class Game:
             if isinstance(ability, TriggeredAbility) \
                     and ability.intervening_if \
                     and not ability.intervening_if(self, item.source):
-                return                              # rule 603.4 recheck
+                return False                        # rule 603.4 recheck
             if ability is not None and ability.effect is not None:
                 ability.effect.resolve(self, ctx)
         self.bump()
+        return True
 
     # ------------------------------------------------------ state-based
     @rule("704.3", "704.5", "704.5a", "704.5b", "704.5d",
@@ -1056,6 +1103,8 @@ class Game:
         self._queue_triggers(Event(EventType.LAND_PLAYED,
                                    {"obj": card, "player": player}))
         player.stat("lands_played")
+        self.log("land", who=player.name, card=card.base.name,
+                 tapped=tapped or None)
         return True
 
     def add_floating_effect(self, effect: ContinuousEffect):

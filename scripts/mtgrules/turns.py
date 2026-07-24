@@ -21,28 +21,34 @@ class TurnRunner:
         game.turn += 1
         game.log("turn", n=game.turn, who=active.name)
 
-        game.phase = "untap"
+        self._enter("untap")
         self._untap_step()
-        game.phase = "upkeep"
+        self._enter("upkeep")
         self._upkeep_step()
-        game.phase = "draw"
+        self._enter("draw")
         if game.turn > 1 or len(game.players) > 2:
             self._draw_step()      # rule 103.8a: first player skips draw
         else:
             self._draw_step_skip_first()
-        game.phase = "main1"
+        self._enter("main1")
         self._main_phase()
-        game.phase = "combat"
+        self._enter("combat")
         CombatPhase(game).run()
         if game.game_over:
             return
-        game.phase = "main2"
+        self._enter("main2")
         self._main_phase(second=True)
-        game.phase = "end"
+        self._enter("end")
         self._end_step()
-        game.phase = "cleanup"
+        self._enter("cleanup")
         self._cleanup_step()
         self._end_of_phase()
+
+    def _enter(self, phase: str):
+        game = self.game
+        game.phase = phase
+        game.log("phase", phase=phase, turn=game.turn,
+                 who=game.active_player.name)
 
     def _end_of_phase(self):
         # rule 500.4: mana pools empty at end of each step/phase; we empty

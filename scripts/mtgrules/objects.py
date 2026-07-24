@@ -82,7 +82,7 @@ class GameObject:
         self.controller = owner          # rule 109.4
         self.zone = Zone.LIBRARY
         self.is_token = is_token         # rule 111
-        self.card_ref = card_ref         # mtgsim CardData (data provenance)
+        self.card_ref = card_ref         # mtgcards CardData (data provenance)
         self.timestamp = next_timestamp()
         # battlefield status, rule 110.5
         self.tapped = False
@@ -166,6 +166,7 @@ class Player:
         self.attractions = None
         # per-game statistics
         self.stats: dict[str, float] = {}
+        self.cards_cast: list[str] = []       # for per-card win-rate lift
 
     def zone_list(self, zone: str) -> list:
         return {Zone.LIBRARY: self.library, Zone.HAND: self.hand,

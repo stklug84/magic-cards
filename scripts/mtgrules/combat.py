@@ -104,6 +104,9 @@ class CombatPhase:
                 obj.tapped = True
             self.attackers.append(obj)
             active.stat("attacks")
+            game.log("attack", who=active.name, card=obj.base.name,
+                     target=(defender.name if hasattr(defender, "life")
+                             else defender.base.name))
             game._queue_triggers(Event(EventType.ATTACKS,
                                        {"obj": obj, "defender": defender}))
         game.bump()
@@ -137,6 +140,10 @@ class CombatPhase:
             if "menace" in a.chars(game).keywords and len(a.blocked_by) == 1:
                 a.blocked_by[0].blocking.remove(a)
                 a.blocked_by = []
+        for a in self.attackers:
+            for b in a.blocked_by:
+                game.log("block", who=b.controller.name,
+                         blocker=b.base.name, attacker=a.base.name)
         game.bump()
         game.priority_loop()
 

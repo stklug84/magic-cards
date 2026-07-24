@@ -7,11 +7,49 @@ only do what the CR machinery permits (priority windows, timing, costs).
 
 from __future__ import annotations
 
+from dataclasses import dataclass
+
 from .abilities import ActivatedAbility, SpellAbility
 from .cr import rule
 from .effects import CounterSpell
 from .manasys import parse_cost
 from .objects import GameObject, Player, Zone
+
+
+@dataclass
+class PolicyProfile:
+    """Tunable decision knobs for DefaultPolicy (ported from the retired
+    heuristic engine's AIProfile). Presets: default, aggressive, control."""
+    name: str = "default"
+    aggression: float = 1.0        # >1 attacks into worse boards
+    hold_reactive_mana: bool = True
+    wipe_board_deficit: int = 6    # cast wipes when this far behind in power
+    removal_key_threshold: float = 2.0  # min threat worth a removal spell
+    counter_value_threshold: int = 3    # min spell mv worth countering
+    mulligan_min_lands: int = 2
+    mulligan_max_lands: int = 5
+    max_mulligans: int = 3
+    race_life: int = 14            # below this life, chump-block freely
+
+
+PROFILES = {
+    "default": PolicyProfile(),
+    "aggressive": PolicyProfile(name="aggressive", aggression=1.5,
+                                hold_reactive_mana=False,
+                                wipe_board_deficit=9,
+                                counter_value_threshold=4, race_life=10),
+    "control": PolicyProfile(name="control", aggression=0.7,
+                             hold_reactive_mana=True, wipe_board_deficit=4,
+                             removal_key_threshold=1.5,
+                             counter_value_threshold=2),
+}
+
+
+def get_profile(name: str) -> PolicyProfile:
+    if name not in PROFILES:
+        raise SystemExit(f"unknown AI profile {name!r}; "
+                         f"choose from {sorted(PROFILES)}")
+    return PROFILES[name]
 
 
 def _threat(game, obj) -> float:
@@ -24,16 +62,18 @@ def _threat(game, obj) -> float:
 
 
 class DefaultPolicy:
-    def __init__(self, rng):
+    def __init__(self, rng, profile: PolicyProfile | None = None):
         self.rng = rng
+        self.profile = profile or PROFILES["default"]
 
     # ------------------------------------------------------- mulligans
     @rule("103.5")
     def keep_hand(self, game, player, hand, mulls) -> bool:
         lands = sum(1 for c in hand if "Land" in c.base.types)
-        if mulls >= 3:
+        if mulls >= self.profile.max_mulligans:
             return True
-        return 2 <= lands <= 5
+        return (self.profile.mulligan_min_lands <= lands
+                <= self.profile.mulligan_max_lands)
 
     def bottom_cards(self, game, player, hand, n):
         """London mulligan (rule 103.5c): put n cards on the bottom."""
@@ -57,7 +97,8 @@ class DefaultPolicy:
             top = game.stack[-1]
             if top.controller is not player and top.is_spell:
                 counter = self._find_counterspell(game, player)
-                if counter is not None and _spell_value(top) >= 3:
+                if counter is not None and _spell_value(top) \
+                        >= self.profile.counter_value_threshold:
                     return counter
             return None
         if not main:
@@ -75,6 +116,7 @@ class DefaultPolicy:
             if game.can_pay_mana(player, cost):
                 return ("cast", cmd, {"from_command": True})
         # 3. best castable spell (sorcery speed)
+        reserve = self._reaction_reserve(game, player)
         castable = []
         for card in player.hand:
             ch = card.base
@@ -95,6 +137,9 @@ class DefaultPolicy:
                     continue
                 if self._is_counterspell(card):
                     continue                       # hold for responses
+                if reserve and not game.can_pay_mana(
+                        player, cost.with_x(x).with_extra_generic(reserve)):
+                    continue                       # keep reaction mana up
                 castable.append((self._cast_value(game, player, card, x),
                                  card, x))
         if castable:
@@ -107,6 +152,33 @@ class DefaultPolicy:
         if act is not None:
             return act
         return None
+
+    def _reaction_reserve(self, game, player) -> int:
+        """Mana value to keep available for a held counterspell
+        (profile.hold_reactive_mana; the heuristic engine reserved from
+        turn 4 onward)."""
+        if not self.profile.hold_reactive_mana or game.turn < 4:
+            return 0
+        best = 0
+        for card in player.hand:
+            if "Instant" in card.base.types and self._is_counterspell(card):
+                mv = parse_cost(card.base.mana_cost).mv
+                if best == 0 or mv < best:
+                    best = mv
+        return best
+
+    @staticmethod
+    def _board_power(game, player) -> int:
+        return sum(o.chars(game).power or 0 for o in player.battlefield
+                   if "Creature" in o.chars(game).types)
+
+    def _should_wipe(self, game, player) -> bool:
+        """Cast board wipes only when this far behind on board power
+        (profile.wipe_board_deficit)."""
+        deficit = max((self._board_power(game, o)
+                       for o in game.opponents(player)), default=0) \
+            - self._board_power(game, player)
+        return deficit >= self.profile.wipe_board_deficit
 
     def _find_counterspell(self, game, player):
         for card in player.hand:
@@ -144,6 +216,10 @@ class DefaultPolicy:
         v = 1.0 + mv * 0.3
         if ref is not None:
             v += ref.behavior.get("key", 0) * 0.5
+            if ref.behavior.get("wipe"):
+                if not self._should_wipe(game, player):
+                    return -1                      # hold the wipe
+                v += 3.0
         if ch.types & {"Creature", "Planeswalker"}:
             v += 1.5
         # removal/wipes only when there are worthwhile targets
@@ -157,7 +233,7 @@ class DefaultPolicy:
                          and t.controller is not player]
                 if enemy:
                     best = max(best, max(_threat(game, t) for t in enemy))
-            if best < 2:
+            if best < self.profile.removal_key_threshold:
                 return -1
             v += best * 0.4
         return v
@@ -351,8 +427,10 @@ class DefaultPolicy:
                           for b in can_be_blocked), default=0)
             tough = ch.toughness or 0
             evasive = not can_be_blocked
-            profitable = (evasive or danger < tough
-                          or (ch.power or 0) >= 5
+            profitable = (evasive
+                          or danger < tough * self.profile.aggression
+                          or ((ch.power or 0) >= 5
+                              and self.profile.aggression >= 1.0)
                           or attacker.commander)
             if not profitable:
                 continue
@@ -369,7 +447,8 @@ class DefaultPolicy:
         threat_order = sorted(attackers,
                               key=lambda a: -(a.chars(game).power or 0))
         incoming = sum(a.chars(game).power or 0 for a in attackers)
-        must_chump = incoming >= player.life
+        must_chump = (incoming >= player.life
+                      or player.life <= self.profile.race_life)
         for a in threat_order:
             ach = a.chars(game)
             cands = [b for b in free if _could_block(game, b, a)]

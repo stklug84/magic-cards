@@ -114,7 +114,9 @@ class Drain(Effect):
         total = 0
         for p in game.opponents(ctx.controller):
             game.lose_life(p, n)
+            p.stat("drained_taken", n)
             total += n
+        ctx.controller.stat("drain", total)
         game.gain_life(ctx.controller, total)
 
 
@@ -273,6 +275,7 @@ class CounterSpell(Effect):
     def resolve(self, game, ctx):
         t = ctx.target()
         if t is not None and t in game.stack:
+            ctx.controller.stat("counterspells_used")
             game.counter_spell(t)
 
 

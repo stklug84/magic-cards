@@ -1,14 +1,12 @@
 """Match runner: decklists + knowledge graph -> rules-engine games.
 
-Bridges the mtgsim data layer (CardDatabase, deck loading, stats
+Bridges the mtgcards data layer (CardDatabase, deck loading, stats
 conventions) to the mtgrules kernel and reports what the card compiler
 could not model, so nothing is skipped silently.
 """
 
 from __future__ import annotations
 
-import random
-import sys
 from pathlib import Path
 
 from . import compiler, overrides
@@ -31,12 +29,14 @@ def _build_library(deck, db, owner):
 
 
 @rule("903.6", "103.4", "103.5")
-def setup_game(decks, db, rng, turn_cap=40, log=None) -> Game:
+def setup_game(decks, db, rng, turn_cap=40, log=None, profiles=None) -> Game:
     players = []
     for deck in decks:
         p = Player(name=deck.name, deck_name=deck.name)
         players.append(p)
-    policies = {p.name: DefaultPolicy(rng) for p in players}
+    profiles = profiles or [None] * len(players)
+    policies = {p.name: DefaultPolicy(rng, profile)
+                for p, profile in zip(players, profiles)}
     game = Game(players, rng, policies, turn_cap=turn_cap, log=log)
 
     for p, deck in zip(players, decks):
@@ -70,20 +70,39 @@ def setup_game(decks, db, rng, turn_cap=40, log=None) -> Game:
                 break
             mulls += 1
             rng.shuffle(p.library)
+        p.stats["mulligans"] = mulls
     return game
 
 
-def run_game(decks, db, seed, turn_cap=40, verbose=False):
-    rng = random.Random(seed)
+#: raw rules-engine loss reasons (rule citations) -> short report labels
+_REASONS = {"life 0 or less (704.5a)": "life",
+            "drew from empty library (704.5b)": "decked",
+            "21+ commander damage (903.10a)": "commander"}
 
-    events = []
 
-    def log(event, **kw):
-        events.append((event, kw))
-        if verbose:
-            print(f"  [{event}] {kw}")
+def run_game(decks, db, rng, turn_cap=40, log=None, profiles=None,
+             recorder=None):
+    """Play one game. Returns an Aggregator-compatible record:
+    {winner, turns, reason, players: {name: {stats..., life, lost,
+    cards_cast}}}. `log` is an optional (event, **kw) sink; `recorder`
+    an optional mtgviz Recorder (attached after setup, notified of every
+    log event, finished with the outcome)."""
+    last_loss = {"why": None}
+    sinks = []
+    if log is not None:
+        sinks.append(log)
 
-    game = setup_game(decks, db, rng, turn_cap=turn_cap, log=log)
+    def fanout(event, **kw):
+        if event == "player_loses":
+            last_loss["why"] = kw.get("why")
+        for s in sinks:
+            s(event, **kw)
+
+    game = setup_game(decks, db, rng, turn_cap=turn_cap, log=fanout,
+                      profiles=profiles)
+    if recorder is not None:
+        recorder.attach(game)
+        sinks.append(recorder.on_event)
     runner = TurnRunner(game)
     order = list(game.players)
     while not game.game_over and game.turn < turn_cap:
@@ -96,47 +115,42 @@ def run_game(decks, db, seed, turn_cap=40, verbose=False):
             if not order[game.active_idx].lost:
                 break
     winner = game.winner
-    if winner is None:
+    if winner is not None:
+        if winner.stats.get("mechanized_wins"):
+            reason = "alt_win"
+        else:
+            reason = _REASONS.get(last_loss["why"],
+                                  last_loss["why"] or "elimination")
+    else:
         alive = game.alive()
         if len(alive) == 1:
             winner = alive[0]
+            reason = _REASONS.get(last_loss["why"], "elimination")
         elif alive:
             winner = max(alive, key=lambda p: p.life)   # turn-cap tiebreak
-    return {"winner": winner.name if winner else None,
+            reason = "turn_cap"
+        else:
+            reason = "draw"
+    if recorder is not None:
+        recorder.finish(game, winner, reason)
+    return {"winner": winner.name if winner else "draw",
             "turns": game.turn,
+            "reason": reason,
             "players": {p.name: dict(p.stats, life=p.life,
-                                     lost=p.lose_reason)
+                                     lost=p.lose_reason,
+                                     cards_cast=list(p.cards_cast))
                         for p in game.players}}
 
 
 def run_match(deck_files, games=10, seed=42, turn_cap=40, verbose=False):
-    sys.path.insert(0, str(REPO / "scripts"))
-    from mtgsim.database import CardDatabase
-    from mtgsim.deck import load_deck
-
-    db = CardDatabase(REPO)
-    decks = [load_deck(f) for f in deck_files]
-    wins = {d.name: 0 for d in decks}
-    draws = 0
-    turns = []
-    for i in range(games):
-        result = run_game(decks, db, seed=seed + i, turn_cap=turn_cap,
-                          verbose=verbose)
-        turns.append(result["turns"])
-        if result["winner"] is None:
-            draws += 1
-        else:
-            wins[result["winner"]] += 1
-
-    print(f"=== rules engine: {games} games, seed {seed} ===")
-    for name, w in wins.items():
-        print(f"  {name:40s} {w:3d} wins ({100 * w / games:5.1f} %)")
-    if draws:
-        print(f"  {'(no winner at turn cap)':40s} {draws:3d}")
-    print(f"  game length: avg {sum(turns) / len(turns):.1f} turns")
-
-    report_model_coverage(decks, db)
-    return wins
+    """Back-compat wrapper: delegates to the full CLI."""
+    from .cli import main
+    argv = [str(f) for f in deck_files] + [
+        "--games", str(games), "--seed", str(seed),
+        "--turn-cap", str(turn_cap)]
+    if verbose:
+        argv.append("--verbose")
+    main(argv)
 
 
 def report_model_coverage(decks, db):
@@ -163,13 +177,5 @@ def report_model_coverage(decks, db):
 
 
 if __name__ == "__main__":
-    import argparse
-    ap = argparse.ArgumentParser()
-    ap.add_argument("decks", nargs="+")
-    ap.add_argument("--games", type=int, default=10)
-    ap.add_argument("--seed", type=int, default=42)
-    ap.add_argument("--turn-cap", type=int, default=40)
-    ap.add_argument("--verbose", action="store_true")
-    args = ap.parse_args()
-    run_match(args.decks, games=args.games, seed=args.seed,
-              turn_cap=args.turn_cap, verbose=args.verbose)
+    from .cli import main
+    main()

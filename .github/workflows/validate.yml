@@ -104,3 +104,29 @@ jobs:
 
       - name: Run consistency checks
         run: python3 scripts/check_consistency.py
+
+  simulator-tests:
+    name: Rules engine + viz unit tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Rules-engine conformance tests (stdlib only)
+        working-directory: scripts
+        run: python3 -m unittest discover -s mtgrules/tests -t .
+
+      - name: Visualization tests (recorder / replay)
+        working-directory: scripts
+        run: python3 -m unittest discover -s mtgviz/tests -t .
+
+      - name: "Smoke: 3-game matchup with stats report"
+        run: |
+          python3 scripts/simulate_matchup.py \
+            strategies/station-swarm-counter-deck.txt \
+            strategies/blight-curse-deck.txt \
+            --games 3 --seed 7 | tee /tmp/report.txt
+          grep -q "wins" /tmp/report.txt

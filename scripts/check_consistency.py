@@ -14,7 +14,7 @@ Loads all TTL files into one combined graph and checks:
   4. synergy-domain  - synergy properties only connect card individuals.
   5. behavior-hooks  - every :hasBehaviorHook subject is a Card individual,
                        every hook carries exactly one whitelisted
-                       :behaviorKey (scripts/mtgsim/behaviors.BEHAVIOR_KEYS)
+                       :behaviorKey (scripts/mtgcards/behaviors.BEHAVIOR_KEYS)
                        and one JSON-parseable :behaviorValue; :threatWeight
                        is only asserted on Card individuals.
 
@@ -182,7 +182,7 @@ def main() -> int:
 
     # --- 4. behavior hooks ------------------------------------------------
     sys.path.insert(0, str(ROOT / "scripts"))
-    from mtgsim.behaviors import BEHAVIOR_KEYS
+    from mtgcards.behaviors import BEHAVIOR_KEYS
 
     import json as _json
 
