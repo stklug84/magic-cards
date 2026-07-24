@@ -21,5 +21,7 @@ __pycache__/
 *.dsv
 *.tsv
 
-# ignore plain text files
+# ignore plain text files (collection data, MagicCompRules - not
+# distributed), but keep the strategy decklists
 *.txt
+!strategies/*.txt
