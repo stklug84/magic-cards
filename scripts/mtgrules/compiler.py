@@ -17,11 +17,15 @@ from .abilities import (ActivatedAbility, SpellAbility, StaticAbility,
                         TargetSpec, TokenSpec, TriggeredAbility, TriggerSpec,
                         TREASURE)
 from .cr import rule
-from .effects import (AddMana, CounterSpell, CreateTokens, DealDamage,
-                      Destroy, Drain, DrawCards, EnergyGain, ExileObj,
-                      GainLife, LoseLife, Noop, Populate, Proliferate,
-                      ProtectAll, PumpAll, PutCounters, ReturnToHand,
-                      SacrificeSelf, Scry, SearchLands, Sequence, TutorAny)
+from .effects import (AddMana, CopySpell, CounterSpell, CreateTokens,
+                      DealDamage, Destroy, Drain, DrawCards, EnergyGain,
+                      ExileObj, GainLife, LoseLife, LoseLifeTargetMV, Noop,
+                      Populate, Proliferate, ProtectAll, PumpAll,
+                      PutCounters, PutLandFromHand, ReturnToHand,
+                      SacrificeSelf, Scry, SearchLands, Sequence,
+                      TakeDeadCreature, TapTarget,
+                      TargetControllerBasicLand,
+                      TargetControllerGainsPower, TutorAny)
 from .events import EventType
 from .objects import Characteristics
 
@@ -131,10 +135,11 @@ def parse_effect_clause(clause: str, name: str, targets: list):
     if m:
         count, spec = _parse_token_clause(m)
         return CreateTokens(count, spec)
-    m = re.search(r"create (a|one|two|three|x|\d+) (?:tapped )?"
+    m = re.search(r"create (a|one|two|three|x|\d+) (tapped )?"
                   r"treasure tokens?", low)
     if m:
-        return CreateTokens(_num(m.group(1)), TREASURE)
+        return CreateTokens(_num(m.group(1)), TREASURE,
+                            tapped=bool(m.group(2)) or None)
     m = re.search(r"draw (a|one|two|three|four|x|\d+) cards?", low)
     if m:
         who = "each" if "each player" in low else "you"
@@ -179,6 +184,30 @@ def parse_effect_clause(clause: str, name: str, targets: list):
     if re.search(r"counter target .*spell", low):
         targets.append(TargetSpec(what="spell"))
         return CounterSpell()
+    if re.search(r"copy target (?:instant(?: or sorcery)?|sorcery)"
+                 r" spell", low):
+        targets.append(TargetSpec(what="spell"))
+        return CopySpell(index=len(targets) - 1)
+    if re.match(r"tap target creature", low):
+        spec = _target_spec("target creature")
+        targets.append(spec)
+        return TapTarget(index=len(targets) - 1)
+    # removal riders referencing the (already removed) target
+    if re.match(r"its controller may search their library for a basic"
+                r" land card", low):
+        return TargetControllerBasicLand()
+    if re.match(r"its controller gains life equal to its power", low):
+        return TargetControllerGainsPower()
+    if re.match(r"you lose life equal to that permanent's mana value",
+                low):
+        return LoseLifeTargetMV()
+    if re.match(r"you may put a land card from your hand(?: or graveyard)?"
+                r" onto the battlefield tapped", low):
+        # graveyard option simplified to hand-only
+        return PutLandFromHand(tapped=True)
+    if re.match(r"you may put that card onto the battlefield under your"
+                r" control", low):
+        return TakeDeadCreature()
     m = re.search(r"put (a|one|two|three|x|\d+) ([+-]1/[+-]1) counters? on",
                   low)
     if m:
@@ -242,7 +271,8 @@ def parse_effect_clause(clause: str, name: str, targets: list):
 #: e.g. there is no regeneration), so they need no unknown-clause report
 _INERT_RIDERS = re.compile(
     r"^(it can't be regenerated|cycling |evoke |compleated$|"
-    r"as long as you control|shuffle)", re.I)
+    r"as long as you control|shuffle|activate only|"
+    r"you may choose new targets|do this only once each turn)", re.I)
 
 
 def parse_effect_text(text: str, name: str) -> tuple:
@@ -252,6 +282,15 @@ def parse_effect_text(text: str, name: str) -> tuple:
     for sentence in re.split(r"(?<=[.;])\s+", text):
         sentence = sentence.strip()
         if not sentence:
+            continue
+        low = sentence.lower().rstrip(".")
+        # "You gain life equal to the life lost this way." merges the
+        # preceding each-opponent life loss into a Drain (Exsanguinate)
+        if re.match(r"you gain life equal to the (?:life lost|total life"
+                    r" lost)(?: this way)?", low) and parts \
+                and isinstance(parts[-1], LoseLife) \
+                and parts[-1].who == "each_opponent":
+            parts[-1] = Drain(parts[-1].amount)
             continue
         eff = parse_effect_clause(sentence, name, targets)
         if eff is None:
@@ -296,6 +335,23 @@ _TRIGGER_TABLE = [
      lambda: TriggerSpec(EventType.DIES, condition=_dies())),
     (r"^when(?:ever)? a creature an opponent controls dies",
      lambda: TriggerSpec(EventType.DIES, condition=_dies(opponent=True))),
+    (r"^when(?:ever)? a creature an opponent controls with"
+     r" (?:a|one or more) -1/-1 counters? on it dies",
+     lambda: TriggerSpec(EventType.DIES,
+                         condition=_dies_with_counter(opponent=True,
+                                                      kind="-1/-1"))),
+    (r"^when(?:ever)? a creature an opponent controls with"
+     r" (?:a|one or more) counters? on it dies",
+     lambda: TriggerSpec(EventType.DIES,
+                         condition=_dies_with_counter(opponent=True))),
+    (r"^when(?:ever)? a creature you control with (?:a|one or more)"
+     r" counters? on it dies",
+     lambda: TriggerSpec(EventType.DIES,
+                         condition=_dies_with_counter(own=True))),
+    (r"^when(?:ever)? a creature with (?:a|one or more) -1/-1 counters?"
+     r" on it dies",
+     lambda: TriggerSpec(EventType.DIES,
+                         condition=_dies_with_counter(kind="-1/-1"))),
     (r"^landfall - when(?:ever)? a land you control enters|"
      r"^when(?:ever)? a land you control enters",
      lambda: TriggerSpec(EventType.LAND_PLAYED, condition=_own_event())),
@@ -328,6 +384,25 @@ def _dies(own=False, other=False, opponent=False):
     return cond
 
 
+def _dies_with_counter(own=False, opponent=False, kind=""):
+    """Dies-trigger conditioned on the dead creature's last-known counters
+    (rule 603.10a look-back; lki_counters is captured on leaving the
+    battlefield)."""
+    def cond(game, source, event):
+        obj = event.data.get("obj")
+        if obj is None or "Creature" not in obj.base.types:
+            return False
+        if own and obj.controller is not source.controller:
+            return False
+        if opponent and obj.controller is source.controller:
+            return False
+        counters = getattr(obj, "lki_counters", {}) or {}
+        if kind:
+            return counters.get(kind, 0) > 0
+        return any(n > 0 for n in counters.values())
+    return cond
+
+
 def _own_event():
     def cond(game, source, event):
         p = event.data.get("player")
@@ -350,13 +425,16 @@ def parse_trigger_line(line: str, name: str):
     if comma < 0:
         return None
     head, body = low[:comma], line[comma + 2:]
+    once = bool(re.search(r"do this only once each turn\.?\s*$", body,
+                          re.I))
     for pattern, factory in _TRIGGER_TABLE:
         pat = pattern.replace("{name}", re.escape(short))
         if re.match(pat, head):
             effect, targets = parse_effect_text(body, name)
             return TriggeredAbility(
                 trigger=factory(), effect=effect, targets=targets,
-                text=line, optional=body.lower().startswith("you may"))
+                text=line, optional=body.lower().startswith("you may"),
+                once_each_turn=once)
     return None
 
 
@@ -366,6 +444,10 @@ _MINUS = "\u2212"
 
 
 def parse_activated_line(line: str, name: str):
+    m = re.match(r"^cycling ((?:\{[^}]+\})+)\.?$", line, re.I)
+    if m:                                          # rule 702.29a
+        return ActivatedAbility(mana_cost=m.group(1), from_hand=True,
+                                effect=DrawCards(1), text=line)
     m = re.match(r"^([+%s]?\d+|0): (.+)$" % _MINUS, line)
     if m:                                          # loyalty ability
         n = int(m.group(1).replace(_MINUS, "-"))
@@ -416,10 +498,19 @@ def parse_activated_line(line: str, name: str):
 
 def parse_static_line(line: str, name: str):
     low = line.lower()
+    if re.match(r"^spells you control can't be countered\.?$", low):
+        ab = StaticAbility(text=line)
+        ab.uncounterable_spells = True
+        return ab
     m = re.match(r"^(creatures?|creature tokens?|artifact creatures?)"
-                 r" you control get \+(\d+)/\+(\d+)\.?$", low)
+                 r" you control get \+(\d+)/\+(\d+)"
+                 r"(?: and have ([a-z ]+?))?\.?$", low)
     if m:
         boost_p, boost_t = int(m.group(2)), int(m.group(3))
+        granted = {k.strip() for k in (m.group(4) or "").split(" and ")
+                   if k.strip() in _KEYWORD_WORDS}
+        if m.group(4) and not granted:
+            return None                        # unknown keyword grant
         tokens_only = "token" in m.group(1)
         art_only = "artifact" in m.group(1)
         from .layers import ContinuousEffect
@@ -436,11 +527,16 @@ def parse_static_line(line: str, name: str):
                     return False
                 return True
 
-            return [ContinuousEffect(
+            effects = [ContinuousEffect(
                 layer=7, sublayer="c", source=source, applies_to=applies,
                 apply=lambda g, o, ch: (
                     setattr(ch, "power", (ch.power or 0) + boost_p),
                     setattr(ch, "toughness", (ch.toughness or 0) + boost_t)))]
+            if granted:
+                effects.append(ContinuousEffect(
+                    layer=6, source=source, applies_to=applies,
+                    apply=lambda g, o, ch: ch.keywords.update(granted)))
+            return effects
 
         return StaticAbility(continuous=continuous, text=line)
     return None
@@ -460,6 +556,8 @@ def parse_keyword_line(line: str) -> set | None:
             got.add(f"ward:{m.group(1)}")
         elif re.match(r"^ward\b", p):
             got.add("ward:2")
+        elif m := re.match(r"^toxic (\d+)$", p):
+            got.add(f"toxic:{m.group(1)}")
         elif p == "station":
             got.add("station")
         else:
@@ -500,6 +598,19 @@ def compile_card(ref) -> Characteristics:
         # heuristic engine)
         if re.match(r"^this land enters (the battlefield )?tapped",
                     line, re.I):
+            continue
+        m = re.match(r"^this spell costs \{(\d+)\} less to cast for each"
+                     r" creature on the battlefield\.?$", line, re.I)
+        if m:                                      # rule 601.2f
+            ch.cost_less_per_creature = int(m.group(1))
+            continue
+        m = re.match(r"^as an additional cost to cast this spell,"
+                     r" (sacrifice a creature|discard a card)\.?$",
+                     line, re.I)
+        if m:                                      # rule 601.2b
+            ch.additional_cost = ("sacrifice_creature"
+                                  if "sacrifice" in m.group(1)
+                                  else "discard_card")
             continue
         kws = parse_keyword_line(line)
         if kws is not None:

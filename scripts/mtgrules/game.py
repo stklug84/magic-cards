@@ -21,8 +21,6 @@ from .manasys import ManaPool, parse_cost
 from .objects import Characteristics, GameObject, Player, Zone
 from .replacements import ReplacementEngine
 
-unsupported("704.5c", "poison counters: no infect/toxic cards in the pool")
-unsupported("704.5e", "spell copies: no copy spells in the pool")
 unsupported("903.4", "deck color-identity legality is validated by the "
                      "knowledge-graph tooling, not at runtime")
 
@@ -180,6 +178,11 @@ class Game:
             if len(mine) > 1:
                 mine = self.policy(p).order_triggers(self, mine)
             for t in mine:
+                if getattr(t.ability, "once_each_turn", False):
+                    key = ("trig", t.source.id, id(t.ability))
+                    if key in self.activated_this_turn:
+                        continue                   # "only once each turn"
+                    self.activated_this_turn.add(key)
                 if t.ability.optional and not self.policy(p).accept_optional(
                         self, t):
                     continue
@@ -357,8 +360,18 @@ class Game:
         self.log("damage", src=_lname(source), target=_lname(target),
                  n=amount, combat=combat)
         if isinstance(target, Player):
-            # rule 120.3a: damage to a player causes life loss
-            self.lose_life(target, amount, damage=True)
+            if src_ch is not None and "infect" in src_ch.keywords:
+                # rule 702.90b: infect damage to a player is poison
+                # counters instead of life loss
+                self.add_poison(target, amount)
+            else:
+                # rule 120.3a: damage to a player causes life loss
+                self.lose_life(target, amount, damage=True)
+            if combat and src_ch is not None:
+                # rule 702.164a toxic: combat damage also gives poison
+                for kw in src_ch.keywords:
+                    if kw.startswith("toxic:"):
+                        self.add_poison(target, int(kw.split(":")[1]))
             if combat and isinstance(source, GameObject) and source.commander:
                 # rules 903.10a / 704.6c: commander damage
                 dealt = target.commander_damage.get(source.id, 0) + amount
@@ -377,6 +390,16 @@ class Game:
                     if src_ch is not None and "deathtouch" in src_ch.keywords:
                         target.deathtouch_damage = True   # rule 704.5h
             self.bump()
+
+    @rule("122.1", "702.90b")
+    def add_poison(self, player, n):
+        """Give a player poison counters (infect / toxic)."""
+        if n <= 0:
+            return
+        player.poison += n
+        player.stat("poison_received", n)
+        self.log("poison", who=player.name, n=n, total=player.poison)
+        self.bump()
 
     def gain_life(self, player, n):
         if n <= 0:
@@ -558,6 +581,9 @@ class Game:
     @rule("701.5")
     def counter_spell(self, item: StackItem):
         if item in self.stack:
+            if self._uncounterable(item):
+                self.log("uncounterable", spell=_lname(item))
+                return
             self.log("counter", spell=_lname(item),
                      who=item.controller.name)
             self.stack.remove(item)
@@ -565,6 +591,37 @@ class Game:
                 self.move_zone(item.obj, Zone.GRAVEYARD)
             item.controller.stat("spells_countered_against")
             self.bump()
+
+    def _uncounterable(self, item: StackItem) -> bool:
+        """'Spells you control can't be countered' statics (e.g. Chimil)."""
+        for obj in item.controller.battlefield:
+            for ab in obj.chars(self).abilities:
+                if getattr(ab, "uncounterable_spells", False):
+                    return True
+        return False
+
+    @rule("707.10", "707.10a", "704.5e")
+    def copy_spell(self, item: StackItem, controller) -> StackItem | None:
+        """Put a copy of a spell on the stack (rule 707.10). The copy keeps
+        the original's targets and X; it is created as a token object so
+        it ceases to exist in any zone but the stack (704.5e / 707.10a) and
+        resolves to a token if it is a permanent spell."""
+        if item not in self.stack or not item.is_spell:
+            return None
+        copy_obj = GameObject(item.obj.base.copy(), controller,
+                              is_token=True, card_ref=item.obj.card_ref)
+        copy_obj.is_copy = True
+        copy_obj.zone = Zone.STACK
+        copy_obj.controller = controller
+        copy = StackItem(obj=copy_obj, source=copy_obj,
+                         controller=controller, ability=item.ability,
+                         targets=list(item.targets), x=item.x,
+                         is_spell=True)
+        self.stack.append(copy)
+        controller.stat("spells_copied")
+        self.log("copy", spell=_lname(item), who=controller.name)
+        self.bump()
+        return copy
 
     # ------------------------------------------------------------ mana
     @rule("605.1a", "605.3")
@@ -711,6 +768,24 @@ class Game:
         if card.commander:
             # rule 903.8: commander tax
             cost = cost.with_extra_generic(2 * player.commander_casts)
+        # rule 601.2f cost-reduction statics on the spell itself
+        # (e.g. "costs {1} less to cast for each creature")
+        per_creature = getattr(ch, "cost_less_per_creature", 0)
+        if per_creature:
+            n = sum(1 for o in self.battlefield_objects()
+                    if "Creature" in o.chars(self).types)
+            cost = cost.reduced(per_creature * n)
+        # rule 601.2b additional costs: verify they can be paid up front
+        extra = getattr(ch, "additional_cost", "")
+        extra_sac = None
+        if extra == "sacrifice_creature":
+            extra_sac = self.policy(player).choose_sacrifice(
+                self, player, "creature")
+            if extra_sac is None:
+                return False
+        elif extra == "discard_card":
+            if not [c for c in player.hand if c is not card]:
+                return False
         spell_ability = next(
             (a for a in ch.abilities if isinstance(a, SpellAbility)), None)
         targets = None
@@ -724,6 +799,14 @@ class Game:
             item.targets = targets
         if not self.pay_mana(player, cost):
             return False                           # rule 601.2h
+        # rule 601.2h: pay additional costs along with mana
+        if extra_sac is not None:
+            self.sacrifice(player, extra_sac)
+        elif extra == "discard_card":
+            pool = [c for c in player.hand if c is not card]
+            pick = min(pool, key=lambda c: parse_cost(c.base.mana_cost).mv)
+            self.move_zone(pick, Zone.GRAVEYARD)
+            self.log("discard", who=player.name, card=pick.base.name)
         self._remove_from_zone(card, card.zone)
         card.zone = Zone.STACK
         self.stack.append(item)
@@ -768,6 +851,8 @@ class Game:
 
     @rule("602.2", "602.5a", "606.3")
     def activate_ability(self, player, obj, ab: ActivatedAbility, *, x=0):
+        if ab.from_hand:
+            return self._activate_from_hand(player, obj, ab)
         ch = obj.chars(self)
         if ab.loyalty_cost is not None:
             # rule 606.3: one loyalty ability per permanent per turn,
@@ -831,6 +916,22 @@ class Game:
             self.activated_this_turn.add((obj.id, id(ab)))
         player.stat("abilities_activated")
         self.log("activate", who=player.name, source=_lname(obj))
+        self.bump()
+        return True
+
+    @rule("702.29a")
+    def _activate_from_hand(self, player, obj, ab) -> bool:
+        """Cycling-style abilities: activated while the card is in the
+        hand; discarding the card is part of the cost (rule 702.29a)."""
+        if obj not in player.hand:
+            return False
+        if not self.pay_mana(player, ab.cost):
+            return False
+        self.move_zone(obj, Zone.GRAVEYARD)        # discard as a cost
+        self.stack.append(StackItem(obj=ab, source=obj, controller=player,
+                                    ability=ab, targets=[]))
+        player.stat("cards_cycled")
+        self.log("cycle", who=player.name, card=obj.base.name)
         self.bump()
         return True
 
@@ -931,7 +1032,7 @@ class Game:
         return True
 
     # ------------------------------------------------------ state-based
-    @rule("704.3", "704.5", "704.5a", "704.5b", "704.5d",
+    @rule("704.3", "704.5", "704.5a", "704.5b", "704.5c", "704.5d",
           "704.5f", "704.5g", "704.5h", "704.5i", "704.5j",
           "704.5m", "704.5n", "704.5q", "704.6c", "702.12b")
     def check_state_based_actions(self) -> bool:
@@ -943,6 +1044,9 @@ class Game:
                 acted = True
             elif p.drew_from_empty:                # rule 704.5b
                 self._lose(p, "drew from empty library (704.5b)")
+                acted = True
+            elif p.poison >= 10:                   # rule 704.5c
+                self._lose(p, "ten or more poison counters (704.5c)")
                 acted = True
             else:
                 for cid, dmg in p.commander_damage.items():

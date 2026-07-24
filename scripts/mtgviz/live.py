@@ -19,7 +19,7 @@ from .tui import HAVE_RICH, ViewState, format_event, render_frame
 from . import keys
 
 LIVE_HELP = (" p/space:pause-resume  +/-:speed  h:pause-on-highlight "
-             " q:quit ")
+             " c:battlefield  q:quit ")
 
 #: extra dwell time (seconds, at speed 1.0) after notable events
 _DWELL = {"phase": 0.5, "cast": 0.6, "resolve": 0.6, "attack": 0.5,
@@ -121,8 +121,10 @@ def _rich_loop(q, throttle, seed):
     from rich.console import Console
     from rich.live import Live
 
+    from .tui import BF_FILTERS
     view = ViewState(meta={"seed": seed, "game": 1})
     pause_hl = True
+    bf_filter = "all"
     done = False
 
     def status():
@@ -141,10 +143,12 @@ def _rich_loop(q, throttle, seed):
                 tail = view.visible_events(n=1)
                 if tail and tail[-1]["kind"] in HIGHLIGHTS:
                     throttle.gate.clear()
-            live.update(render_frame(view, status()), refresh=True)
+            live.update(render_frame(view, status(), bf_filter=bf_filter),
+                        refresh=True)
             if done and q.empty():
                 live.update(render_frame(
-                    view, " game over - any key to exit "), refresh=True)
+                    view, " game over - any key to exit ",
+                    bf_filter=bf_filter), refresh=True)
                 keys.read_key(None)
                 return
             key = keys.read_key(0.1)
@@ -161,6 +165,9 @@ def _rich_loop(q, throttle, seed):
                 throttle.speed = max(0.25, throttle.speed / 2)
             elif key == "h":
                 pause_hl = not pause_hl
+            elif key == "c":
+                bf_filter = BF_FILTERS[(BF_FILTERS.index(bf_filter) + 1)
+                                       % len(BF_FILTERS)]
 
 
 def _plain_loop(q):

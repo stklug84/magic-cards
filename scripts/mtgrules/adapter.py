@@ -77,6 +77,7 @@ def setup_game(decks, db, rng, turn_cap=40, log=None, profiles=None) -> Game:
 #: raw rules-engine loss reasons (rule citations) -> short report labels
 _REASONS = {"life 0 or less (704.5a)": "life",
             "drew from empty library (704.5b)": "decked",
+            "ten or more poison counters (704.5c)": "poison",
             "21+ commander damage (903.10a)": "commander"}
 
 

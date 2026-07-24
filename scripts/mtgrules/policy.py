@@ -151,6 +151,25 @@ class DefaultPolicy:
         act = self._find_activation(game, player)
         if act is not None:
             return act
+        # 5. cycle dead cards (rule 702.29): excess lands, or anything
+        # when flooded and out of plays
+        return self._find_cycling(game, player)
+
+    def _find_cycling(self, game, player):
+        cyclers = [(c, a) for c in player.hand for a in c.base.abilities
+                   if getattr(a, "from_hand", False)]
+        if not cyclers:
+            return None
+        lands_bf = sum(1 for o in player.battlefield
+                       if "Land" in o.base.types)
+        for card, ab in cyclers:
+            if not game.can_pay_mana(player, ab.cost):
+                continue
+            is_land = "Land" in card.base.types
+            if is_land and lands_bf >= 6 and player.lands_played >= 1:
+                return ("activate", card, ab, {})
+            if not is_land and lands_bf >= 8:
+                return ("activate", card, ab, {})
         return None
 
     def _reaction_reserve(self, game, player) -> int:
@@ -172,12 +191,42 @@ class DefaultPolicy:
         return sum(o.chars(game).power or 0 for o in player.battlefield
                    if "Creature" in o.chars(game).types)
 
+    @staticmethod
+    def _board_threat(game, player) -> float:
+        """Wipe-relevant board value: creature power plus token count and
+        annotated key-permanent weights (politics beyond raw power)."""
+        power = tokens = keys = 0.0
+        for o in player.battlefield:
+            ref = o.card_ref
+            if ref is not None:
+                keys += ref.behavior.get("key", 0)
+            if "Creature" not in o.base.types:
+                continue
+            ch = o.chars(game)
+            power += ch.power or 0
+            if o.is_token:
+                tokens += 1
+        return power + tokens * 0.5 + keys * 1.5
+
+    def player_threat(self, game, opp) -> float:
+        """Archenemy assessment: board value, life lead, and how close
+        the player is to a commander-damage kill."""
+        threat = self._board_threat(game, opp)
+        threat += max(0, opp.life - 30) * 0.15
+        cmd = opp.commander_obj
+        if cmd is not None:
+            best = max((p.commander_damage.get(cmd.id, 0)
+                        for p in game.players if p is not opp), default=0)
+            threat += best * 0.3                   # 21-damage clock
+        return threat
+
     def _should_wipe(self, game, player) -> bool:
-        """Cast board wipes only when this far behind on board power
-        (profile.wipe_board_deficit)."""
-        deficit = max((self._board_power(game, o)
-                       for o in game.opponents(player)), default=0) \
-            - self._board_power(game, player)
+        """Cast board wipes only when this far behind on board value
+        (profile.wipe_board_deficit); token swarms and key permanents
+        count, not just raw power."""
+        deficit = max((self._board_threat(game, o)
+                       for o in game.opponents(player)), default=0.0) \
+            - self._board_threat(game, player)
         return deficit >= self.profile.wipe_board_deficit
 
     def _find_counterspell(self, game, player):
@@ -413,12 +462,69 @@ class DefaultPolicy:
             if target is None:
                 continue
             picks.append((obj, target))
-        return picks
+        return self._lookahead_filter(game, player, picks)
+
+    def _lookahead_filter(self, game, player, picks):
+        """1-ply lookahead: simulate each defender's blocks (using that
+        defender's own policy) and drop attackers whose expected trade is
+        bad for this profile's aggression."""
+        if not picks:
+            return picks
+        by_def = {}
+        for obj, target in picks:
+            dfn = target if isinstance(target, Player) else target.controller
+            by_def.setdefault(dfn, []).append((obj, target))
+        kept = []
+        for dfn, mine in by_def.items():
+            attackers = [a for a, _ in mine]
+            # lethal alpha strike: send everything, no second thoughts
+            incoming = sum(a.chars(game).power or 0 for a in attackers)
+            if incoming >= dfn.life:
+                kept.extend(mine)
+                continue
+            blockers = [o for o in dfn.battlefield
+                        if "Creature" in o.chars(game).types
+                        and not o.tapped]
+            predicted = game.policy(dfn).declare_blockers(
+                game, dfn, attackers, blockers)
+            blocked_by = {}
+            for blocker, attacker in predicted:
+                blocked_by.setdefault(attacker, []).append(blocker)
+            tolerance = (self.profile.aggression - 1.0) * 3.0
+            for obj, target in mine:
+                score = self._attack_ev(game, obj, blocked_by.get(obj, []))
+                if score >= -tolerance:
+                    kept.append((obj, target))
+        return kept
+
+    @staticmethod
+    def _attack_ev(game, attacker, blockers) -> float:
+        """Expected value of one attack against a predicted block."""
+        ach = attacker.chars(game)
+        power, tough = ach.power or 0, ach.toughness or 0
+        if not blockers:
+            return power + (2 if attacker.commander else 0)
+        incoming = sum(b.chars(game).power or 0 for b in blockers)
+        dies = incoming >= tough and "indestructible" not in ach.keywords \
+            or any("deathtouch" in b.chars(game).keywords for b in blockers)
+        kills = 0.0
+        remaining = power
+        for b in sorted(blockers, key=lambda b: b.chars(game).toughness or 0):
+            bch = b.chars(game)
+            btough = bch.toughness or 0
+            if remaining >= btough or "deathtouch" in ach.keywords:
+                kills += _threat(game, b)
+                remaining -= btough
+        overflow = max(0, remaining) if "trample" in ach.keywords else 0
+        return kills + overflow - (_threat(game, attacker) if dies else 0)
 
     def _attack_target(self, game, player, attacker):
         ch = attacker.chars(game)
+        opps = game.opponents(player)
+        threats = {o.name: self.player_threat(game, o) for o in opps}
+        top_threat = max(threats.values(), default=0.0)
         best, best_score = None, None
-        for opp in game.opponents(player):
+        for opp in opps:
             blockers = [o for o in opp.battlefield
                         if "Creature" in o.chars(game).types and not o.tapped]
             can_be_blocked = [b for b in blockers
@@ -427,6 +533,7 @@ class DefaultPolicy:
                           for b in can_be_blocked), default=0)
             tough = ch.toughness or 0
             evasive = not can_be_blocked
+            lethal_range = opp.life <= (ch.power or 0) * 3
             profitable = (evasive
                           or danger < tough * self.profile.aggression
                           or ((ch.power or 0) >= 5
@@ -434,7 +541,16 @@ class DefaultPolicy:
                           or attacker.commander)
             if not profitable:
                 continue
-            score = (100 if evasive else 0) - opp.life \
+            # kingmaker avoidance (pods): don't farm the weakest player
+            # while a real archenemy is developing
+            if len(opps) > 1 and not lethal_range \
+                    and threats[opp.name] < 0.4 * top_threat:
+                continue
+            grudge = player.grudges.get(opp.name, 0)
+            score = (100 if evasive else 0) \
+                + threats[opp.name] * 0.8 \
+                + min(grudge, 10) * 0.5 \
+                - opp.life * 0.2 \
                 - len(can_be_blocked) * 3
             if best_score is None or score > best_score:
                 best, best_score = opp, score

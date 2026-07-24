@@ -104,6 +104,10 @@ class CombatPhase:
                 obj.tapped = True
             self.attackers.append(obj)
             active.stat("attacks")
+            dfn = defender if hasattr(defender, "grudges") \
+                else defender.controller
+            dfn.grudges[active.name] = dfn.grudges.get(active.name, 0) \
+                + (obj.chars(game).power or 0)
             game.log("attack", who=active.name, card=obj.base.name,
                      target=(defender.name if hasattr(defender, "life")
                              else defender.base.name))
