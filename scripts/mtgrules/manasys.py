@@ -37,6 +37,11 @@ class Cost:
                  self.colorless, self.x_count)
         return c
 
+    def reduced(self, n: int) -> "Cost":
+        """Cost reduction (rule 601.2f): only the generic part shrinks."""
+        return Cost(max(0, self.generic - n), dict(self.pips),
+                    list(self.hybrid), self.colorless, self.x_count)
+
     def with_x(self, x: int) -> "Cost":
         """Rule 601.2b/107.3: chosen X becomes generic mana in the total
         cost."""

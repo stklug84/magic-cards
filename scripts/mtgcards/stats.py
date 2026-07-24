@@ -120,13 +120,13 @@ class Aggregator:
                                           key=lambda x: -x[1])))
         lines.append("-" * width)
         keys = ["life", "mulligans", "lands_played", "spells_cast",
-                "cards_drawn", "abilities_activated",
+                "cards_drawn", "cards_cycled", "abilities_activated",
                 "tokens_created", "tokens_killed", "treasures_made",
                 "counters_received", "proliferates",
-                "attacks", "combat_damage",
+                "attacks", "combat_damage", "poison_received",
                 "drain", "drained_taken",
                 "counterspells_used", "spells_countered_against",
-                "removal_used", "wipes_cast",
+                "spells_copied", "removal_used", "wipes_cast",
                 "necroskitter_steals", "grave_robs", "mechanized_wins"]
         seen = [k for k in keys
                 if any(self.stat_avg(nm, k) for nm in self.names)]

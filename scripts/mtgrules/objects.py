@@ -167,6 +167,8 @@ class Player:
         # per-game statistics
         self.stats: dict[str, float] = {}
         self.cards_cast: list[str] = []       # for per-card win-rate lift
+        #: pod politics: attacker name -> cumulative power sent at us
+        self.grudges: dict[str, float] = {}
 
     def zone_list(self, zone: str) -> list:
         return {Zone.LIBRARY: self.library, Zone.HAND: self.hand,

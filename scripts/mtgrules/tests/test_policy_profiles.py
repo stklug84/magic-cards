@@ -56,6 +56,42 @@ class TestProfiles(unittest.TestCase):
         self.assertTrue(results["aggressive"])
         self.assertFalse(results["control"])
 
+    def test_lookahead_stops_commander_suicide(self):
+        """1-ply lookahead: a commander no longer attacks into a wall
+        that trades it away for nothing."""
+        game = make_game()
+        atk, dfn = game.players
+        cmd = creature(game, atk, name="General", power=3, toughness=3)
+        cmd.commander = True
+        picks_open = game.policies[atk.name].declare_attackers(
+            game, atk, [cmd])
+        self.assertEqual(picks_open, [(cmd, dfn)])  # open board: attack
+        creature(game, dfn, name="Wall", power=3, toughness=3)
+        picks_walled = game.policies[atk.name].declare_attackers(
+            game, atk, [cmd])
+        self.assertEqual(picks_walled, [])          # bad trade: hold back
+
+    def test_lookahead_allows_lethal_alpha(self):
+        """Lookahead never talks the AI out of a lethal swing."""
+        game = make_game()
+        atk, dfn = game.players
+        dfn.life = 3
+        cmd = creature(game, atk, name="General", power=3, toughness=3)
+        cmd.commander = True
+        creature(game, dfn, name="Wall", power=3, toughness=3)
+        picks = game.policies[atk.name].declare_attackers(game, atk, [cmd])
+        self.assertEqual(picks, [(cmd, dfn)])
+
+    def test_grudge_influences_target(self):
+        """Pod politics: prefer attacking whoever has been hitting us."""
+        game = make_game(n_players=3)
+        me, a, b = game.players
+        flyer = creature(game, me, name="Hawk", power=2, toughness=2,
+                         keywords={"flying"})
+        me.grudges[b.name] = 8
+        pol = game.policies[me.name]
+        self.assertIs(pol._attack_target(game, me, flyer), b)
+
     def test_race_life_chump_blocks(self):
         """Below race_life, the control profile chump-blocks freely."""
         game = make_game()

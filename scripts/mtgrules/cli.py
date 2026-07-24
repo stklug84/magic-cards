@@ -116,6 +116,11 @@ def main(argv=None):
 
     db = CardDatabase(REPO, args.custom_cards)
     decks = [load_deck(p) for p in deck_paths]
+    seen: dict = {}
+    for d in decks:                        # same list twice -> unique seats
+        seen[d.name] = seen.get(d.name, 0) + 1
+        if seen[d.name] > 1:
+            d.name = f"{d.name}#{seen[d.name]}"
     for d in decks:
         if d.commander is None:
             sys.exit(f"{d.path}: no '// Commander' section found")

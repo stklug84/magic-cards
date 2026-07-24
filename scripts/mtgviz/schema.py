@@ -59,6 +59,9 @@ def snapshot(game, seq: int) -> dict:
     players = []
     for p in game.players:
         cmd = p.commander_obj
+        pool = "".join(sym * n for sym, n in
+                       sorted(getattr(p.mana_pool, "mana", {}).items())
+                       if n > 0)
         players.append({
             "name": p.name,
             "life": p.life,
@@ -68,6 +71,8 @@ def snapshot(game, seq: int) -> dict:
             "graveyard": len(p.graveyard),
             "exile": len(p.exile),
             "energy": p.energy,
+            "poison": p.poison,
+            "mana_pool": pool,
             "commander_in_command": bool(cmd and cmd.zone == "command"),
             "cmd_damage": {cmd_names.get(src, str(src)): n
                            for src, n in p.commander_damage.items() if n},

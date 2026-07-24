@@ -220,13 +220,30 @@ def _perm_line(count, p) -> Text:
     return t
 
 
-def _player_panel(pd, active, width_hint=40):
+#: battlefield display filters, cycled with the 'c' key
+BF_FILTERS = ("all", "creatures", "nonland")
+
+
+def _bf_visible(p, bf_filter):
+    types = p.get("types", [])
+    if bf_filter == "creatures":
+        return "Creature" in types
+    if bf_filter == "nonland":
+        return "Land" not in types
+    return True
+
+
+def _player_panel(pd, active, bf_filter="all", max_rows=None):
     head = Text()
     head.append(f"{pd['life']:>3} ", style=_life_style(pd["life"]))
     head.append(f"H:{pd['hand']} L:{pd['library']} G:{pd['graveyard']}",
                 style="dim")
+    if pd.get("poison"):
+        head.append(f" P:{pd['poison']}", style="bold green4")
     if pd.get("energy"):
         head.append(f" E:{pd['energy']}", style="cyan")
+    if pd.get("mana_pool"):
+        head.append(f" pool:{pd['mana_pool']}", style="bold magenta")
     if pd.get("cmd_damage"):
         dmg = " ".join(f"{k[:14]}:{v}" for k, v in pd["cmd_damage"].items())
         head.append(f"  cmd<{dmg}", style="red")
@@ -235,9 +252,19 @@ def _player_panel(pd, active, width_hint=40):
     lines = [head]
     lands, rest = [], []
     for count, p in _group_battlefield(pd["battlefield"]):
+        if not _bf_visible(p, bf_filter):
+            continue
         (lands if "Land" in p.get("types", []) else rest).append((count, p))
-    for count, p in rest:
-        lines.append(_perm_line(count, p))
+    # busiest boards first when space is tight (4-player pods)
+    if max_rows is not None and len(rest) > max_rows:
+        shown, hidden = rest[:max_rows - 1], rest[max_rows - 1:]
+        for count, p in shown:
+            lines.append(_perm_line(count, p))
+        lines.append(Text(f"... +{sum(c for c, _ in hidden)} more",
+                          style="dim"))
+    else:
+        for count, p in rest:
+            lines.append(_perm_line(count, p))
     if lands:
         summary = Text()
         n = sum(c for c, _ in lands)
@@ -255,7 +282,8 @@ def _player_panel(pd, active, width_hint=40):
                  border_style=border, padding=(0, 1))
 
 
-def render_frame(view: ViewState, status: str, log_filter=None):
+def render_frame(view: ViewState, status: str, log_filter=None,
+                 bf_filter="all"):
     snap = view.snapshot()
     if snap is None:
         return Panel("waiting for first snapshot ...")
@@ -270,15 +298,19 @@ def render_frame(view: ViewState, status: str, log_filter=None):
     if view.result and view.at_end():        # no spoilers mid-replay
         header.append(f"  WINNER: {view.result['winner']}"
                       f" ({view.result['reason']}) ", style="bold green")
-    # player grid
+    if bf_filter != "all":
+        header.append(f" [battlefield: {bf_filter}] ", style="magenta")
+    # player grid (2x2 for pods; compact panels when 3-4 players)
     players = snap["players"]
     grid = Table.grid(expand=True)
     per_row = 2 if len(players) > 1 else 1
+    max_rows = 8 if len(players) > 2 else None
     for _ in range(per_row):
         grid.add_column(ratio=1)
     row = []
     for pd in players:
-        row.append(_player_panel(pd, pd["name"] == snap["active"]))
+        row.append(_player_panel(pd, pd["name"] == snap["active"],
+                                 bf_filter=bf_filter, max_rows=max_rows))
         if len(row) == per_row:
             grid.add_row(*row)
             row = []
@@ -334,7 +366,7 @@ def render_frame(view: ViewState, status: str, log_filter=None):
 # --------------------------------------------------------------- replay app
 REPLAY_HELP = (" space:event  n/N:phase  t/T:turn  arrows:event/turn "
                " g<turn>:jump  a:auto  +/-:speed  h:pause-on-highlight "
-               " f:filter  q:quit ")
+               " f:log-filter  c:battlefield  q:quit ")
 
 
 def run_replay(records, meta, result=None):
@@ -351,6 +383,7 @@ def run_replay(records, meta, result=None):
     speed = 1.0
     pause_hl = True
     log_filter = None
+    bf_filter = "all"
     player_names = [p["name"] for p in (view.snapshot() or {}).get(
         "players", [])]
     goto = None
@@ -365,7 +398,8 @@ def run_replay(records, meta, result=None):
                                    console=console, screen=True,
                                    auto_refresh=False) as live:
         while True:
-            live.update(render_frame(view, status(), log_filter),
+            live.update(render_frame(view, status(), log_filter,
+                                     bf_filter=bf_filter),
                         refresh=True)
             key = keys.read_key(0.35 / speed if autoplay else None)
             if key is None:                       # autoplay tick
@@ -411,6 +445,9 @@ def run_replay(records, meta, result=None):
             elif key == "f":
                 opts = [None] + player_names
                 log_filter = opts[(opts.index(log_filter) + 1) % len(opts)]
+            elif key == "c":
+                bf_filter = BF_FILTERS[(BF_FILTERS.index(bf_filter) + 1)
+                                       % len(BF_FILTERS)]
             elif key == "g":
                 goto = ""
             elif key == "G":

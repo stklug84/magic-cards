@@ -58,10 +58,12 @@ class CreateTokens(Effect):
     count: object
     spec: object                       # abilities.TokenSpec
     controller: str = "you"
+    tapped: bool | None = None         # None: use the spec's default
 
     def resolve(self, game, ctx):
-        game.create_tokens(ctx.controller, self.spec, _n(self.count, game, ctx),
-                           source=ctx.source)
+        game.create_tokens(ctx.controller, self.spec,
+                           _n(self.count, game, ctx),
+                           source=ctx.source, tapped=self.tapped)
 
 
 @rule("121.1")
@@ -247,6 +249,93 @@ class SearchLands(Effect):
         game.search_lands(ctx.controller, _n(self.count, game, ctx),
                           tapped=self.tapped, to_hand=self.to_hand,
                           basic_only=self.basic_only)
+
+
+@rule("701.23")
+@dataclass
+class TargetControllerBasicLand(Effect):
+    """Removal rider (Path to Exile / Assassin's Trophy): the destroyed
+    permanent's controller may search for a basic land onto the
+    battlefield."""
+    index: int = 0
+
+    def resolve(self, game, ctx):
+        t = ctx.target(self.index)
+        if t is None or not hasattr(t, "controller"):
+            return
+        game.search_lands(t.controller, 1, tapped=False, basic_only=True)
+
+
+@dataclass
+class TargetControllerGainsPower(Effect):
+    """Swords to Plowshares rider: target's controller gains life equal
+    to its power (last-known power)."""
+    index: int = 0
+
+    def resolve(self, game, ctx):
+        t = ctx.target(self.index)
+        if t is None or not hasattr(t, "controller"):
+            return
+        game.gain_life(t.controller, t.base.power or 0)
+
+
+@dataclass
+class LoseLifeTargetMV(Effect):
+    """Feed the Swarm rider: you lose life equal to the target's mana
+    value."""
+    index: int = 0
+
+    def resolve(self, game, ctx):
+        from .manasys import parse_cost
+        t = ctx.target(self.index)
+        if t is None or not hasattr(t, "base"):
+            return
+        game.lose_life(ctx.controller, parse_cost(t.base.mana_cost).mv)
+
+
+@rule("707.10")
+@dataclass
+class CopySpell(Effect):
+    """Copy target instant or sorcery spell (targets unchanged)."""
+    index: int = 0
+
+    def resolve(self, game, ctx):
+        t = ctx.target(self.index)
+        if t is not None and t in game.stack:
+            game.copy_spell(t, ctx.controller)
+
+
+@dataclass
+class PutLandFromHand(Effect):
+    """Dread Tiller-style: put a land card from your hand onto the
+    battlefield tapped."""
+    tapped: bool = True
+
+    def resolve(self, game, ctx):
+        from .objects import Zone
+        lands = [c for c in ctx.controller.hand if "Land" in c.base.types]
+        if not lands:
+            return
+        pick = game.policy(ctx.controller)._best_land(
+            game, ctx.controller, lands) if hasattr(
+            game.policy(ctx.controller), "_best_land") else lands[0]
+        game.move_zone(pick, Zone.BATTLEFIELD,
+                       to_battlefield_tapped=self.tapped)
+
+
+@dataclass
+class TakeDeadCreature(Effect):
+    """The Reaper-style: put the creature that just died onto the
+    battlefield under your control (rule 603.10a look-back)."""
+
+    def resolve(self, game, ctx):
+        from .objects import Zone
+        obj = ctx.event_obj
+        if obj is None or obj.is_token or obj.zone != Zone.GRAVEYARD:
+            return
+        obj.controller = ctx.controller
+        game.move_zone(obj, Zone.BATTLEFIELD)
+        ctx.controller.stat("grave_robs")
 
 
 @rule("106.2")

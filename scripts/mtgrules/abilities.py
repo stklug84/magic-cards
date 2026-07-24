@@ -101,6 +101,7 @@ class TriggeredAbility:
     intervening_if: object = None
     text: str = ""
     optional: bool = False              # "you may ..."
+    once_each_turn: bool = False        # "Do this only once each turn."
 
     kind = "triggered"
 
@@ -119,6 +120,9 @@ class ActivatedAbility:
     is_mana_ability: bool = False       # rule 605.1a
     sorcery_only: bool = False          # "Activate only as a sorcery" 602.5d
     once_per_turn: bool = False
+    #: rule 702.29a cycling-style: activated from the hand; the card itself
+    #: is discarded as part of the cost
+    from_hand: bool = False
     text: str = ""
 
     kind = "activated"
