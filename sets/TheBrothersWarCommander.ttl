@@ -65,6 +65,7 @@ subtype, format and legality definitions."""@en .
     :cardNumber "32"^^xsd:integer ;
     :artist "Lucas Staniec" ;
     :hasLanguage :English ;
+    :producesMana :Blue ;
     :printedText """({T}: Add {U}.)"""@en ;
     :oracleText """({T}: Add {U}.)"""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=588634"^^xsd:anyURI ;

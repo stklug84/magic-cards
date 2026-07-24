@@ -97,6 +97,13 @@ subtype, format and legality definitions."""@en .
     :cardNumber "251"^^xsd:integer ;
     :artist "James Paick" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :producesMana :Black ;
+    :producesMana :Red ;
+    :producesMana :Green ;
+    :producesMana :Colorless ;
+    :entersTapped "true"^^xsd:boolean ;
     :hasKeywordAbility :Modular ;
     :printedText """This land enters tapped.
 {T}: Add {C}.
@@ -143,6 +150,9 @@ Modular 1"""@en ;
     :cardNumber "256"^^xsd:integer ;
     :artist "Lucas Graciano" ;
     :hasLanguage :English ;
+    :producesMana :Red ;
+    :producesMana :Green ;
+    :entersTapped "true"^^xsd:boolean ;
     :hasKeywordAbility :Indestructible ;
     :printedText """This land enters tapped.
 Indestructible
@@ -175,6 +185,9 @@ Indestructible
     :cardNumber "257"^^xsd:integer ;
     :artist "Randy Gallegos" ;
     :hasLanguage :English ;
+    :producesMana :Blue ;
+    :producesMana :Green ;
+    :entersTapped "true"^^xsd:boolean ;
     :hasKeywordAbility :Indestructible ;
     :printedText """This land enters tapped.
 Indestructible
@@ -207,6 +220,9 @@ Indestructible
     :cardNumber "258"^^xsd:integer ;
     :artist "Randy Gallegos" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Green ;
+    :entersTapped "true"^^xsd:boolean ;
     :hasKeywordAbility :Indestructible ;
     :printedText """This land enters tapped.
 Indestructible

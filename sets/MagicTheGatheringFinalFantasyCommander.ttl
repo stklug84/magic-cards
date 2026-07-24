@@ -72,6 +72,11 @@ subtype, format and legality definitions."""@en .
     :cardNumber "8"^^xsd:integer ;
     :artist "Kevin Glint" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :producesMana :Black ;
+    :producesMana :Red ;
+    :producesMana :Green ;
     :power "1" ;
     :powerValue "1"^^xsd:integer ;
     :toughness "5" ;
@@ -330,6 +335,7 @@ At the beginning of your upkeep, if you control twenty or more artifacts, you wi
     :cardNumber "368"^^xsd:integer ;
     :artist "Daniel Correia" ;
     :hasLanguage :English ;
+    :producesMana :Colorless ;
     :printedText """You have no maximum hand size.
 {T}: Add {C}."""@en ;
     :oracleText """You have no maximum hand size.
@@ -355,6 +361,7 @@ At the beginning of your upkeep, if you control twenty or more artifacts, you wi
     :cardNumber "408"^^xsd:integer ;
     :artist "Craig Elliott" ;
     :hasLanguage :English ;
+    :producesMana :Colorless ;
     :printedText """{T}: Add {C}.
 {1}, {T}: Move a counter from target permanent you control onto a second target permanent. Activate only as a sorcery."""@en ;
     :oracleText """{T}: Add {C}.
@@ -395,6 +402,9 @@ At the beginning of your upkeep, if you control twenty or more artifacts, you wi
     :cardNumber "440"^^xsd:integer ;
     :artist "Mauricio Calle" ;
     :hasLanguage :English ;
+    :producesMana :Blue ;
+    :producesMana :Green ;
+    :entersTapped "true"^^xsd:boolean ;
     :printedText """As this land enters, you may reveal a Forest or Island card from your hand. If you don't, this land enters tapped.
 {T}: Add {G} or {U}."""@en ;
     :oracleText """As this land enters, you may reveal a Forest or Island card from your hand. If you don't, this land enters tapped.

@@ -12,6 +12,11 @@ Loads all TTL files into one combined graph and checks:
                        each Commander deck's entries total 100 cards; the
                        collection's entry quantities match collection.csv.
   4. synergy-domain  - synergy properties only connect card individuals.
+  5. behavior-hooks  - every :hasBehaviorHook subject is a Card individual,
+                       every hook carries exactly one whitelisted
+                       :behaviorKey (scripts/mtgsim/behaviors.BEHAVIOR_KEYS)
+                       and one JSON-parseable :behaviorValue; :threatWeight
+                       is only asserted on Card individuals.
 
 Exit code 0 on success, 1 on any failure.
 
@@ -175,7 +180,44 @@ def main() -> int:
                 f"card-entries: Commander deck {deck} entries total {total}, expected 100"
             )
 
-    # --- 4. synergy domain/range ---------------------------------------------
+    # --- 4. behavior hooks ------------------------------------------------
+    sys.path.insert(0, str(ROOT / "scripts"))
+    from mtgsim.behaviors import BEHAVIOR_KEYS
+
+    import json as _json
+
+    has_hook = mc_ref("hasBehaviorHook")
+    behavior_key = mc_ref("behaviorKey")
+    behavior_value = mc_ref("behaviorValue")
+    threat_weight = mc_ref("threatWeight")
+    n_hooks = 0
+    for subj, hook in combined.subject_objects(has_hook):
+        n_hooks += 1
+        if not is_card(subj):
+            errors.append(f"behavior-hooks: {subj} has hooks but is not a Card")
+        keys = list(combined.objects(hook, behavior_key))
+        if len(keys) != 1:
+            errors.append(f"behavior-hooks: hook on {subj} has {len(keys)} keys")
+        for key in keys:
+            if str(key) not in BEHAVIOR_KEYS:
+                errors.append(
+                    f"behavior-hooks: {subj} uses unknown key {key!r}")
+        values = list(combined.objects(hook, behavior_value))
+        if len(values) != 1:
+            errors.append(
+                f"behavior-hooks: hook on {subj} has {len(values)} values")
+        for value in values:
+            try:
+                _json.loads(str(value))
+            except ValueError:
+                errors.append(
+                    f"behavior-hooks: {subj} value is not JSON: {value!r}")
+    for subj in combined.subjects(threat_weight, None):
+        if not is_card(subj):
+            errors.append(
+                f"behavior-hooks: :threatWeight on non-card {subj}")
+
+    # --- 5. synergy domain/range ---------------------------------------------
     for prop in sorted(SYNERGY_PROPS):
         for s, o in combined.subject_objects(prop):
             for node, role in ((s, "subject"), (o, "object")):
@@ -188,7 +230,7 @@ def main() -> int:
     print(
         f"Checked {len(used_props)} properties, {len(used_classes)} classes, "
         f"{len(entries)} card entries ({len(coll_entries)} collection, "
-        f"{len(entries) - len(coll_entries)} deck)."
+        f"{len(entries) - len(coll_entries)} deck), {n_hooks} behavior hooks."
     )
     if errors:
         unique = sorted(set(errors))

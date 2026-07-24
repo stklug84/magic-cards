@@ -1184,6 +1184,7 @@ Cycling {2} ({2}, Discard this card: Draw a card.)"""@en ;
     :cardNumber "42"^^xsd:integer ;
     :artist "Kieran Yanner" ;
     :hasLanguage :English ;
+    :producesMana :Blue ;
     :printedText """Five Hundred Year Diary enters tapped.
 {T}: Add {U} for each Clue you control.
 {2}, Sacrifice Five Hundred Year Diary: Draw a card."""@en ;
@@ -2689,6 +2690,7 @@ III — Until end of turn, whenever a Salamander deals combat damage to a player
     :cardNumber "110"^^xsd:integer ;
     :artist "Wangjie Li" ;
     :hasLanguage :English ;
+    :producesMana :Green ;
     :power "1" ;
     :powerValue "1"^^xsd:integer ;
     :toughness "1" ;
@@ -4467,6 +4469,11 @@ Crew 4"""@en ;
     :cardNumber "178"^^xsd:integer ;
     :artist "Hector Ortiz" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :producesMana :Black ;
+    :producesMana :Red ;
+    :producesMana :Green ;
     :hasKeywordAction :Surveil ;
     :hasKeywordAction :Goad ;
     :printedText """{T}: Add one mana of any color.
@@ -4545,6 +4552,11 @@ Crew 2"""@en ;
     :cardNumber "184"^^xsd:integer ;
     :artist "Thanh Tuấn" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :producesMana :Black ;
+    :producesMana :Red ;
+    :producesMana :Green ;
     :hasKeywordAction :Scry ;
     :printedText """{T}: Add one mana of any color.
 {1}, {T}: Untap another target artifact.
@@ -4645,6 +4657,12 @@ Crew 2 (Tap any number of creatures you control with total power 2 or more: This
     :cardNumber "188"^^xsd:integer ;
     :artist "Lixin Yin" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :producesMana :Black ;
+    :producesMana :Red ;
+    :producesMana :Green ;
+    :producesMana :Colorless ;
     :hasKeywordAction :Surveil ;
     :printedText """When Gallifrey Council Chamber enters, surveil 1. (Look at the top card of your library. You may put that card into your graveyard.)
 {T}: Add {C}.
@@ -4673,6 +4691,7 @@ Crew 2 (Tap any number of creatures you control with total power 2 or more: This
     :cardNumber "189"^^xsd:integer ;
     :artist "Anato Finnstark" ;
     :hasLanguage :English ;
+    :producesMana :Colorless ;
     :printedText """{T}: Add {C}.
 {5}, {T}, Exile this land: Target creature's owner shuffles it into their library."""@en ;
     :oracleText """{T}: Add {C}.
@@ -4702,6 +4721,7 @@ Crew 2 (Tap any number of creatures you control with total power 2 or more: This
     :cardNumber "190"^^xsd:integer ;
     :artist "Eliz Roxs" ;
     :hasLanguage :English ;
+    :producesMana :Blue ;
     :printedText """{T}: Add {U}. Put a time counter on Trenzalore Clocktower.
 {1}{U}, {T}, Remove twelve time counters from Trenzalore Clocktower and exile it: Shuffle your graveyard and hand into your library, then draw seven cards. Activate only if you control a Time Lord."""@en ;
     :oracleText """{T}: Add {U}. Put a time counter on Trenzalore Clocktower.
@@ -4842,6 +4862,7 @@ Would You Like A...? — Once each turn, you may play a historic land or cast a 
     :cardNumber "196"^^xsd:integer ;
     :artist "Titus Lunter" ;
     :hasLanguage :English ;
+    :producesMana :White ;
     :printedText """({T}: Add {W}.)"""@en ;
     :oracleText """({T}: Add {W}.)"""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=635466"^^xsd:anyURI ;
@@ -4868,6 +4889,7 @@ Would You Like A...? — Once each turn, you may play a historic land or cast a 
     :cardNumber "197"^^xsd:integer ;
     :artist "Svetlin Velinov" ;
     :hasLanguage :English ;
+    :producesMana :White ;
     :printedText """({T}: Add {W}.)"""@en ;
     :oracleText """({T}: Add {W}.)"""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=635467"^^xsd:anyURI ;
@@ -4894,6 +4916,7 @@ Would You Like A...? — Once each turn, you may play a historic land or cast a 
     :cardNumber "198"^^xsd:integer ;
     :artist "Titus Lunter" ;
     :hasLanguage :English ;
+    :producesMana :Blue ;
     :printedText """({T}: Add {U}.)"""@en ;
     :oracleText """({T}: Add {U}.)"""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=635468"^^xsd:anyURI ;
@@ -4920,6 +4943,7 @@ Would You Like A...? — Once each turn, you may play a historic land or cast a 
     :cardNumber "199"^^xsd:integer ;
     :artist "Svetlin Velinov" ;
     :hasLanguage :English ;
+    :producesMana :Blue ;
     :printedText """({T}: Add {U}.)"""@en ;
     :oracleText """({T}: Add {U}.)"""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=635469"^^xsd:anyURI ;
@@ -4946,6 +4970,7 @@ Would You Like A...? — Once each turn, you may play a historic land or cast a 
     :cardNumber "200"^^xsd:integer ;
     :artist "Titus Lunter" ;
     :hasLanguage :English ;
+    :producesMana :Black ;
     :printedText """({T}: Add {B}.)"""@en ;
     :oracleText """({T}: Add {B}.)"""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=635470"^^xsd:anyURI ;
@@ -4972,6 +4997,7 @@ Would You Like A...? — Once each turn, you may play a historic land or cast a 
     :cardNumber "201"^^xsd:integer ;
     :artist "Svetlin Velinov" ;
     :hasLanguage :English ;
+    :producesMana :Black ;
     :printedText """({T}: Add {B}.)"""@en ;
     :oracleText """({T}: Add {B}.)"""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=635471"^^xsd:anyURI ;
@@ -4998,6 +5024,7 @@ Would You Like A...? — Once each turn, you may play a historic land or cast a 
     :cardNumber "202"^^xsd:integer ;
     :artist "Titus Lunter" ;
     :hasLanguage :English ;
+    :producesMana :Red ;
     :printedText """({T}: Add {R}.)"""@en ;
     :oracleText """({T}: Add {R}.)"""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=635472"^^xsd:anyURI ;
@@ -5024,6 +5051,7 @@ Would You Like A...? — Once each turn, you may play a historic land or cast a 
     :cardNumber "203"^^xsd:integer ;
     :artist "Svetlin Velinov" ;
     :hasLanguage :English ;
+    :producesMana :Red ;
     :printedText """({T}: Add {R}.)"""@en ;
     :oracleText """({T}: Add {R}.)"""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=635473"^^xsd:anyURI ;
@@ -5050,6 +5078,7 @@ Would You Like A...? — Once each turn, you may play a historic land or cast a 
     :cardNumber "204"^^xsd:integer ;
     :artist "Titus Lunter" ;
     :hasLanguage :English ;
+    :producesMana :Green ;
     :printedText """({T}: Add {G}.)"""@en ;
     :oracleText """({T}: Add {G}.)"""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=635474"^^xsd:anyURI ;
@@ -5076,6 +5105,7 @@ Would You Like A...? — Once each turn, you may play a historic land or cast a 
     :cardNumber "205"^^xsd:integer ;
     :artist "Svetlin Velinov" ;
     :hasLanguage :English ;
+    :producesMana :Green ;
     :printedText """({T}: Add {G}.)"""@en ;
     :oracleText """({T}: Add {G}.)"""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=635475"^^xsd:anyURI ;
@@ -5568,6 +5598,11 @@ Draw a card."""@en ;
     :cardNumber "239"^^xsd:integer ;
     :artist "L J Koh" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :producesMana :Black ;
+    :producesMana :Red ;
+    :producesMana :Green ;
     :printedText """{T}: Add one mana of any color in your commander's color identity."""@en ;
     :oracleText """{T}: Add one mana of any color in your commander's color identity."""@en ;
     :flavorText """"Seal of the High Council of Gallifrey. Nicked it off the Master in the Death Zone."
@@ -5604,6 +5639,11 @@ Draw a card."""@en ;
     :cardNumber "240"^^xsd:integer ;
     :artist "Thanh Tuấn" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :producesMana :Black ;
+    :producesMana :Red ;
+    :producesMana :Green ;
     :printedText """{T}: Add one mana of any color in your commander's color identity.
 Sacrifice this artifact: Draw a card."""@en ;
     :oracleText """{T}: Add one mana of any color in your commander's color identity.
@@ -5750,6 +5790,7 @@ Equip {0}"""@en ;
     :cardNumber "244"^^xsd:integer ;
     :artist "L J Koh" ;
     :hasLanguage :English ;
+    :producesMana :Colorless ;
     :printedText """{T}: Add {C}.
 {1}, {T}, Sacrifice this artifact: Draw a card."""@en ;
     :oracleText """{T}: Add {C}.
@@ -5778,6 +5819,7 @@ Equip {0}"""@en ;
     :cardNumber "245"^^xsd:integer ;
     :artist "Kekai Kotaki" ;
     :hasLanguage :English ;
+    :producesMana :Colorless ;
     :printedText """{T}: Add {C}{C}."""@en ;
     :oracleText """{T}: Add {C}{C}."""@en ;
     :flavorText """"The Eye of Harmony. Exploding star in the act of becoming a black hole. Time Lord engineering."
@@ -5838,6 +5880,9 @@ When this creature dies, you may draw a card."""@en ;
     :cardNumber "250"^^xsd:integer ;
     :artist "Miklós Ligeti" ;
     :hasLanguage :English ;
+    :producesMana :Blue ;
+    :producesMana :Black ;
+    :producesMana :Colorless ;
     :printedText """{T}: Add {C}.
 {T}: Add {U} or {B}. This artifact deals 1 damage to you."""@en ;
     :oracleText """{T}: Add {C}.
@@ -5867,6 +5912,9 @@ When this creature dies, you may draw a card."""@en ;
     :cardNumber "252"^^xsd:integer ;
     :artist "Xabi Gaztelua" ;
     :hasLanguage :English ;
+    :producesMana :Black ;
+    :producesMana :Red ;
+    :producesMana :Colorless ;
     :printedText """{T}: Add {C}.
 {T}: Add {B} or {R}. This artifact deals 1 damage to you."""@en ;
     :oracleText """{T}: Add {C}.
@@ -5897,6 +5945,9 @@ When this creature dies, you may draw a card."""@en ;
     :cardNumber "253"^^xsd:integer ;
     :artist "Andrey Kuzinskiy" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :producesMana :Colorless ;
     :printedText """{T}: Add {C}.
 {T}: Add {W} or {U}. This artifact deals 1 damage to you."""@en ;
     :oracleText """{T}: Add {C}.
@@ -5927,6 +5978,9 @@ When this creature dies, you may draw a card."""@en ;
     :cardNumber "254"^^xsd:integer ;
     :artist "John Di Giovanni" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Green ;
+    :producesMana :Colorless ;
     :printedText """{T}: Add {C}.
 {T}: Add {G} or {W}. This artifact deals 1 damage to you."""@en ;
     :oracleText """{T}: Add {C}.
@@ -5954,6 +6008,7 @@ When this creature dies, you may draw a card."""@en ;
     :cardNumber "255"^^xsd:integer ;
     :artist "Anthony Devine" ;
     :hasLanguage :English ;
+    :producesMana :Colorless ;
     :printedText """You have no maximum hand size.
 {T}: Add {C}."""@en ;
     :oracleText """You have no maximum hand size.
@@ -6007,6 +6062,7 @@ When this creature dies, you may draw a card."""@en ;
     :cardNumber "257"^^xsd:integer ;
     :artist "Oliver Wetter" ;
     :hasLanguage :English ;
+    :producesMana :Colorless ;
     # Note: keyword "Landcycling" not defined in MagicCardsOntology
     # Note: keyword "Basic landcycling" not defined in MagicCardsOntology
     # Note: keyword "Typecycling" not defined in MagicCardsOntology
@@ -6042,6 +6098,8 @@ Basic landcycling {1} ({1}, Discard this card: Search your library for a basic l
     :cardNumber "258"^^xsd:integer ;
     :artist "Zhillustrator" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Green ;
     :printedText """({T}: Add {G} or {W}.)
 This land enters tapped unless you control two or more basic lands."""@en ;
     :oracleText """({T}: Add {G} or {W}.)
@@ -6083,6 +6141,9 @@ This land enters tapped unless you control two or more basic lands."""@en ;
     :cardNumber "259"^^xsd:integer ;
     :artist "Logan Feliciano" ;
     :hasLanguage :English ;
+    :producesMana :Black ;
+    :producesMana :Red ;
+    :entersTapped "true"^^xsd:boolean ;
     :hasKeywordAbility :Cycling ;
     :printedText """({T}: Add {B} or {R}.)
 This land enters tapped.
@@ -6115,6 +6176,9 @@ Cycling {2} ({2}, Discard this card: Draw a card.)"""@en ;
     :cardNumber "260"^^xsd:integer ;
     :artist "Nadia Hurianova" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :entersTapped "true"^^xsd:boolean ;
     :printedText """This land enters tapped.
 {T}: Add {W} or {U}.
 {3}{W}{U}: Until end of turn, this land becomes a 4/4 white and blue Elemental creature with flying and vigilance. It's still a land."""@en ;
@@ -6157,6 +6221,9 @@ Cycling {2} ({2}, Discard this card: Draw a card.)"""@en ;
     :cardNumber "261"^^xsd:integer ;
     :artist "Shahab Alizadeh" ;
     :hasLanguage :English ;
+    :producesMana :Blue ;
+    :producesMana :Black ;
+    :entersTapped "true"^^xsd:boolean ;
     :printedText """As this land enters, you may reveal an Island or Swamp card from your hand. If you don't, this land enters tapped.
 {T}: Add {U} or {B}."""@en ;
     :oracleText """As this land enters, you may reveal an Island or Swamp card from your hand. If you don't, this land enters tapped.
@@ -6197,6 +6264,11 @@ Cycling {2} ({2}, Discard this card: Draw a card.)"""@en ;
     :cardNumber "263"^^xsd:integer ;
     :artist "Hector Ortiz" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :producesMana :Black ;
+    :producesMana :Red ;
+    :producesMana :Green ;
     :printedText """{T}: Add one mana of any color in your commander's color identity."""@en ;
     :oracleText """{T}: Add one mana of any color in your commander's color identity."""@en ;
     :flavorText """"A thing that looks like a police box, standing in a junkyard... it can move anywhere in time and space?"
@@ -6232,6 +6304,11 @@ Cycling {2} ({2}, Discard this card: Draw a card.)"""@en ;
     :cardNumber "266"^^xsd:integer ;
     :artist "Henry Peters" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :producesMana :Black ;
+    :producesMana :Red ;
+    :producesMana :Green ;
     :printedText """{T}: Add one mana of any color in your commander's color identity."""@en ;
     :oracleText """{T}: Add one mana of any color in your commander's color identity."""@en ;
     :flavorText """"It's like the Doctor's," said Peri. "But infinitely superior, as I am to that galactic philanthropist," replied the Master."""@en ;
@@ -6268,6 +6345,9 @@ Cycling {2} ({2}, Discard this card: Draw a card.)"""@en ;
     :cardNumber "267"^^xsd:integer ;
     :artist "Nino Is" ;
     :hasLanguage :English ;
+    :producesMana :Blue ;
+    :producesMana :Black ;
+    :entersTapped "true"^^xsd:boolean ;
     :printedText """This land enters tapped.
 {T}: Add {U} or {B}.
 {1}{U}{B}: Until end of turn, this land becomes a 3/2 blue and black Elemental creature. It's still a land. It can't be blocked this turn."""@en ;
@@ -6305,6 +6385,10 @@ Cycling {2} ({2}, Discard this card: Draw a card.)"""@en ;
     :cardNumber "268"^^xsd:integer ;
     :artist "David Álvarez" ;
     :hasLanguage :English ;
+    :producesMana :Blue ;
+    :producesMana :Black ;
+    :producesMana :Red ;
+    :entersTapped "true"^^xsd:boolean ;
     :printedText """This land enters tapped.
 {T}: Add {U}, {B}, or {R}."""@en ;
     :oracleText """This land enters tapped.
@@ -6334,6 +6418,8 @@ Cycling {2} ({2}, Discard this card: Draw a card.)"""@en ;
     :cardNumber "269"^^xsd:integer ;
     :artist "Eddie Schillo" ;
     :hasLanguage :English ;
+    :producesMana :Blue ;
+    :producesMana :Black ;
     :printedText """{1}, {T}: Add {U}{B}."""@en ;
     :oracleText """{1}, {T}: Add {U}{B}."""@en ;
     :flavorText """"They were placed, after death. These are tombs. Water tombs, some sort of fluid, anyway."
@@ -6361,6 +6447,8 @@ Cycling {2} ({2}, Discard this card: Draw a card.)"""@en ;
     :cardNumber "270"^^xsd:integer ;
     :artist "Jonas De Ro" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
     :printedText """This land enters tapped unless you control two or more other lands.
 {T}: Add {W} or {U}."""@en ;
     :oracleText """This land enters tapped unless you control two or more other lands.
@@ -6394,6 +6482,8 @@ Cycling {2} ({2}, Discard this card: Draw a card.)"""@en ;
     :cardNumber "272"^^xsd:integer ;
     :artist "Henry Peters" ;
     :hasLanguage :English ;
+    :producesMana :Black ;
+    :producesMana :Red ;
     :printedText """This land enters tapped unless you control a Swamp or a Mountain.
 {T}: Add {B} or {R}."""@en ;
     :oracleText """This land enters tapped unless you control a Swamp or a Mountain.
@@ -6430,6 +6520,8 @@ Cycling {2} ({2}, Discard this card: Draw a card.)"""@en ;
     :cardNumber "273"^^xsd:integer ;
     :artist "Shahab Alizadeh" ;
     :hasLanguage :English ;
+    :producesMana :Blue ;
+    :producesMana :Green ;
     :printedText """This land enters tapped unless you control two or more other lands.
 {T}: Add {G} or {U}."""@en ;
     :oracleText """This land enters tapped unless you control two or more other lands.
@@ -6459,6 +6551,8 @@ Cycling {2} ({2}, Discard this card: Draw a card.)"""@en ;
     :cardNumber "274"^^xsd:integer ;
     :artist "Victor Harmatiuk" ;
     :hasLanguage :English ;
+    :producesMana :Blue ;
+    :producesMana :Black ;
     :printedText """This land enters tapped unless you control an Island or a Swamp.
 {T}: Add {U} or {B}."""@en ;
     :oracleText """This land enters tapped unless you control an Island or a Swamp.
@@ -6493,6 +6587,11 @@ Cycling {2} ({2}, Discard this card: Draw a card.)"""@en ;
     :cardNumber "276"^^xsd:integer ;
     :artist "Miklós Ligeti" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :producesMana :Black ;
+    :producesMana :Red ;
+    :producesMana :Green ;
     :printedText """{T}: Add one mana of any color that a land an opponent controls could produce."""@en ;
     :oracleText """{T}: Add one mana of any color that a land an opponent controls could produce."""@en ;
     :flavorText """"Architectural Reconfiguration System. It reconstructs particles according to your needs," explained the Doctor. "A machine that makes machines?" Gregor questioned."""@en ;
@@ -6537,6 +6636,9 @@ Cycling {2} ({2}, Discard this card: Draw a card.)"""@en ;
     :cardNumber "277"^^xsd:integer ;
     :artist "Miklós Ligeti" ;
     :hasLanguage :English ;
+    :producesMana :Blue ;
+    :producesMana :Black ;
+    :entersTapped "true"^^xsd:boolean ;
     :hasKeywordAbility :Cycling ;
     :printedText """({T}: Add {U} or {B}.)
 This land enters tapped.
@@ -6569,6 +6671,8 @@ Cycling {2} ({2}, Discard this card: Draw a card.)"""@en ;
     :cardNumber "278"^^xsd:integer ;
     :artist "Pierre Loyvet" ;
     :hasLanguage :English ;
+    :producesMana :Blue ;
+    :producesMana :Red ;
     :printedText """{T}, Pay 1 life: Add {U} or {R}.
 {1}, {T}, Sacrifice this land: Draw a card."""@en ;
     :oracleText """{T}, Pay 1 life: Add {U} or {R}.
@@ -6598,6 +6702,9 @@ Cycling {2} ({2}, Discard this card: Draw a card.)"""@en ;
     :cardNumber "279"^^xsd:integer ;
     :artist "Stephen Stark" ;
     :hasLanguage :English ;
+    :producesMana :Black ;
+    :producesMana :Red ;
+    :entersTapped "true"^^xsd:boolean ;
     :printedText """As this land enters, you may reveal a Swamp or Mountain card from your hand. If you don't, this land enters tapped.
 {T}: Add {B} or {R}."""@en ;
     :oracleText """As this land enters, you may reveal a Swamp or Mountain card from your hand. If you don't, this land enters tapped.
@@ -6640,6 +6747,9 @@ Cycling {2} ({2}, Discard this card: Draw a card.)"""@en ;
     :cardNumber "280"^^xsd:integer ;
     :artist "Nino Is" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Green ;
+    :entersTapped "true"^^xsd:boolean ;
     :printedText """As this land enters, you may reveal a Forest or Plains card from your hand. If you don't, this land enters tapped.
 {T}: Add {G} or {W}."""@en ;
     :oracleText """As this land enters, you may reveal a Forest or Plains card from your hand. If you don't, this land enters tapped.
@@ -6682,6 +6792,9 @@ Cycling {2} ({2}, Discard this card: Draw a card.)"""@en ;
     :cardNumber "282"^^xsd:integer ;
     :artist "Wei Guan" ;
     :hasLanguage :English ;
+    :producesMana :Blue ;
+    :producesMana :Red ;
+    :entersTapped "true"^^xsd:boolean ;
     :printedText """As this land enters, you may reveal an Island or Mountain card from your hand. If you don't, this land enters tapped.
 {T}: Add {U} or {R}."""@en ;
     :oracleText """As this land enters, you may reveal an Island or Mountain card from your hand. If you don't, this land enters tapped.
@@ -6724,6 +6837,8 @@ Cycling {2} ({2}, Discard this card: Draw a card.)"""@en ;
     :cardNumber "285"^^xsd:integer ;
     :artist "Néstor Ossandón Leal" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
     :printedText """This land enters tapped unless you control a Plains or an Island.
 {T}: Add {W} or {U}."""@en ;
     :oracleText """This land enters tapped unless you control a Plains or an Island.
@@ -6760,6 +6875,8 @@ Cycling {2} ({2}, Discard this card: Draw a card.)"""@en ;
     :cardNumber "286"^^xsd:integer ;
     :artist "Victor Harmatiuk" ;
     :hasLanguage :English ;
+    :producesMana :Black ;
+    :producesMana :Red ;
     :printedText """This land enters tapped unless you control two or more other lands.
 {T}: Add {B} or {R}."""@en ;
     :oracleText """This land enters tapped unless you control two or more other lands.
@@ -6793,6 +6910,8 @@ Cycling {2} ({2}, Discard this card: Draw a card.)"""@en ;
     :cardNumber "287"^^xsd:integer ;
     :artist "David Sondered" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Green ;
     :printedText """{T}, Pay 1 life: Add {G} or {W}.
 {1}, {T}, Sacrifice this land: Draw a card."""@en ;
     :oracleText """{T}, Pay 1 life: Add {G} or {W}.
@@ -6824,6 +6943,9 @@ Cycling {2} ({2}, Discard this card: Draw a card.)"""@en ;
     :cardNumber "288"^^xsd:integer ;
     :artist "Pablo Mendoza" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :entersTapped "true"^^xsd:boolean ;
     :hasKeywordAbility :Cycling ;
     :printedText """({T}: Add {W} or {U}.)
 This land enters tapped.
@@ -6856,6 +6978,9 @@ Cycling {2} ({2}, Discard this card: Draw a card.)"""@en ;
     :cardNumber "289"^^xsd:integer ;
     :artist "Jake Murray" ;
     :hasLanguage :English ;
+    :producesMana :Black ;
+    :producesMana :Red ;
+    :entersTapped "true"^^xsd:boolean ;
     :printedText """This land enters tapped.
 {T}: Add {B} or {R}.
 {1}{B}{R}: Until end of turn, this land becomes a 2/2 black and red Elemental creature with "{X}: This creature gets +X/+0 until end of turn." It's still a land."""@en ;
@@ -6892,6 +7017,8 @@ Cycling {2} ({2}, Discard this card: Draw a card.)"""@en ;
     :cardNumber "292"^^xsd:integer ;
     :artist "Álvaro Calvo Escudero" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Green ;
     :printedText """This land enters tapped unless you control two or more other lands.
 {T}: Add {G} or {W}."""@en ;
     :oracleText """This land enters tapped unless you control two or more other lands.
@@ -6923,6 +7050,12 @@ Cycling {2} ({2}, Discard this card: Draw a card.)"""@en ;
     :cardNumber "293"^^xsd:integer ;
     :artist "Fang Xinyu" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :producesMana :Black ;
+    :producesMana :Red ;
+    :producesMana :Green ;
+    :entersTapped "true"^^xsd:boolean ;
     :hasKeywordAction :Scry ;
     :printedText """This land enters tapped.
 {T}: Add one mana of any color in your commander's color identity. When that mana is spent to cast a creature spell that shares a creature type with your commander, scry 1. (Look at the top card of your library. You may put that card on the bottom.)"""@en ;
@@ -6975,6 +7108,9 @@ Cycling {2} ({2}, Discard this card: Draw a card.)"""@en ;
     :cardNumber "294"^^xsd:integer ;
     :artist "Alexander Gering" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :entersTapped "true"^^xsd:boolean ;
     :printedText """As this land enters, you may reveal a Plains or Island card from your hand. If you don't, this land enters tapped.
 {T}: Add {W} or {U}."""@en ;
     :oracleText """As this land enters, you may reveal a Plains or Island card from your hand. If you don't, this land enters tapped.
@@ -7019,6 +7155,8 @@ Cycling {2} ({2}, Discard this card: Draw a card.)"""@en ;
     :cardNumber "295"^^xsd:integer ;
     :artist "JB Casacop" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
     :printedText """({T}: Add {W} or {U}.)
 This land enters tapped unless you control two or more basic lands."""@en ;
     :oracleText """({T}: Add {W} or {U}.)
@@ -7056,6 +7194,7 @@ This land enters tapped unless you control two or more basic lands."""@en ;
     :cardNumber "296"^^xsd:integer ;
     :artist "Lixin Yin" ;
     :hasLanguage :English ;
+    :producesMana :Colorless ;
     :printedText """You have no maximum hand size.
 {T}: Add {C}."""@en ;
     :oracleText """You have no maximum hand size.
@@ -7089,6 +7228,8 @@ This land enters tapped unless you control two or more basic lands."""@en ;
     :cardNumber "297"^^xsd:integer ;
     :artist "Oliver Wetter" ;
     :hasLanguage :English ;
+    :producesMana :Blue ;
+    :producesMana :Black ;
     :printedText """{T}: Add {U}. If you played a land this turn, add {B} instead."""@en ;
     :oracleText """{T}: Add {U}. If you played a land this turn, add {B} instead."""@en ;
     :flavorText """"We will drain the oceans and put the humans in chains."
@@ -7125,6 +7266,9 @@ This land enters tapped unless you control two or more basic lands."""@en ;
     :cardNumber "301"^^xsd:integer ;
     :artist "Piotr Dura" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Green ;
+    :entersTapped "true"^^xsd:boolean ;
     :hasKeywordAbility :Cycling ;
     :printedText """({T}: Add {G} or {W}.)
 This land enters tapped.
@@ -7158,6 +7302,10 @@ Cycling {2} ({2}, Discard this card: Draw a card.)"""@en ;
     :cardNumber "302"^^xsd:integer ;
     :artist "Piotr Dura" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :producesMana :Green ;
+    :entersTapped "true"^^xsd:boolean ;
     :printedText """This land enters tapped.
 {T}: Add {G}, {W}, or {U}."""@en ;
     :oracleText """This land enters tapped.
@@ -7187,6 +7335,8 @@ Cycling {2} ({2}, Discard this card: Draw a card.)"""@en ;
     :cardNumber "303"^^xsd:integer ;
     :artist "Kamila Szutenberg" ;
     :hasLanguage :English ;
+    :producesMana :Black ;
+    :producesMana :Red ;
     :printedText """{1}, {T}: Add {B}{R}."""@en ;
     :oracleText """{1}, {T}: Add {B}{R}."""@en ;
     :flavorText """"Demons run when a good man goes to war. Night will fall and drown the sun, when a good man goes to war."
@@ -7214,6 +7364,8 @@ Cycling {2} ({2}, Discard this card: Draw a card.)"""@en ;
     :cardNumber "305"^^xsd:integer ;
     :artist "Kamila Szutenberg" ;
     :hasLanguage :English ;
+    :producesMana :Blue ;
+    :producesMana :Black ;
     :printedText """This land enters tapped unless you control two or more other lands.
 {T}: Add {U} or {B}."""@en ;
     :oracleText """This land enters tapped unless you control two or more other lands.
@@ -7247,6 +7399,8 @@ Cycling {2} ({2}, Discard this card: Draw a card.)"""@en ;
     :cardNumber "306"^^xsd:integer ;
     :artist "Nino Is" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
     :printedText """{1}, {T}: Add {W}{U}."""@en ;
     :oracleText """{1}, {T}: Add {W}{U}."""@en ;
     :flavorText """"How did we get up so high so quick?" asked Clara, "Clever staircase. It's taller on the inside," replied the Doctor."""@en ;
@@ -7275,6 +7429,8 @@ Cycling {2} ({2}, Discard this card: Draw a card.)"""@en ;
     :cardNumber "307"^^xsd:integer ;
     :artist "Drew Tucker" ;
     :hasLanguage :English ;
+    :producesMana :Black ;
+    :producesMana :Red ;
     :printedText """({T}: Add {B} or {R}.)
 This land enters tapped unless you control two or more basic lands."""@en ;
     :oracleText """({T}: Add {B} or {R}.)
@@ -7314,6 +7470,8 @@ This land enters tapped unless you control two or more basic lands."""@en ;
     :cardNumber "308"^^xsd:integer ;
     :artist "L J Koh" ;
     :hasLanguage :English ;
+    :producesMana :Blue ;
+    :producesMana :Red ;
     :printedText """This land enters tapped unless you control two or more other lands.
 {T}: Add {U} or {R}."""@en ;
     :oracleText """This land enters tapped unless you control two or more other lands.
@@ -7343,6 +7501,8 @@ This land enters tapped unless you control two or more basic lands."""@en ;
     :cardNumber "311"^^xsd:integer ;
     :artist "Nino Is" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Green ;
     :printedText """{1}, {T}: Add {G}{W}."""@en ;
     :oracleText """{1}, {T}: Add {G}{W}."""@en ;
     :flavorText """"So, where is everyone? Don't tell me we've come halfway across the universe and they've all gone out. We should've texted first or something."
@@ -7372,6 +7532,8 @@ This land enters tapped unless you control two or more basic lands."""@en ;
     :cardNumber "312"^^xsd:integer ;
     :artist "Sean Vo" ;
     :hasLanguage :English ;
+    :producesMana :Blue ;
+    :producesMana :Black ;
     :printedText """({T}: Add {U} or {B}.)
 This land enters tapped unless you control two or more basic lands."""@en ;
     :oracleText """({T}: Add {U} or {B}.)
@@ -7411,6 +7573,9 @@ This land enters tapped unless you control two or more basic lands."""@en ;
     :cardNumber "314"^^xsd:integer ;
     :artist "Eliz Roxs" ;
     :hasLanguage :English ;
+    :producesMana :Blue ;
+    :producesMana :Black ;
+    :entersTapped "true"^^xsd:boolean ;
     :hasKeywordAction :Scry ;
     :printedText """This land enters tapped.
 When this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)
@@ -7456,6 +7621,9 @@ When this land enters, scry 1. (Look at the top card of your library. You may pu
     :cardNumber "315"^^xsd:integer ;
     :artist "Anthony Devine" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :entersTapped "true"^^xsd:boolean ;
     :hasKeywordAction :Scry ;
     :printedText """This land enters tapped.
 When this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)
@@ -7499,6 +7667,9 @@ When this land enters, scry 1. (Look at the top card of your library. You may pu
     :cardNumber "316"^^xsd:integer ;
     :artist "Nino Is" ;
     :hasLanguage :English ;
+    :producesMana :Blue ;
+    :producesMana :Red ;
+    :entersTapped "true"^^xsd:boolean ;
     :hasKeywordAction :Scry ;
     :printedText """This land enters tapped.
 When this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)
@@ -7531,6 +7702,9 @@ When this land enters, scry 1. (Look at the top card of your library. You may pu
     :cardNumber "317"^^xsd:integer ;
     :artist "Jokubas Uogintas" ;
     :hasLanguage :English ;
+    :producesMana :Black ;
+    :producesMana :Red ;
+    :entersTapped "true"^^xsd:boolean ;
     :hasKeywordAction :Scry ;
     :printedText """This land enters tapped.
 When this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)
@@ -7575,6 +7749,9 @@ When this land enters, scry 1. (Look at the top card of your library. You may pu
     :cardNumber "318"^^xsd:integer ;
     :artist "Jokubas Uogintas" ;
     :hasLanguage :English ;
+    :producesMana :Blue ;
+    :producesMana :Green ;
+    :entersTapped "true"^^xsd:boolean ;
     :hasKeywordAction :Scry ;
     :printedText """This land enters tapped.
 When this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)
@@ -7618,6 +7795,9 @@ When this land enters, scry 1. (Look at the top card of your library. You may pu
     :cardNumber "319"^^xsd:integer ;
     :artist "David Álvarez" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Green ;
+    :entersTapped "true"^^xsd:boolean ;
     :hasKeywordAction :Scry ;
     :printedText """This land enters tapped.
 When this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)
@@ -7660,6 +7840,7 @@ When this land enters, scry 1. (Look at the top card of your library. You may pu
     :cardNumber "320"^^xsd:integer ;
     :artist "Shahab Alizadeh" ;
     :hasLanguage :English ;
+    :producesMana :Colorless ;
     :printedText """{T}: Add {C}{C}. Activate only if you control five or more lands."""@en ;
     :oracleText """{T}: Add {C}{C}. Activate only if you control five or more lands."""@en ;
     :flavorText """"The Pyramid of the Rings of Akhaten. It's a holy site for the Sun Singers of Akhat."
@@ -7685,6 +7866,7 @@ When this land enters, scry 1. (Look at the top card of your library. You may pu
     :cardNumber "322"^^xsd:integer ;
     :artist "Pavel Kolomeyets" ;
     :hasLanguage :English ;
+    :isFetchLand "true"^^xsd:boolean ;
     :printedText """{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."""@en ;
     :oracleText """{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."""@en ;
     :flavorText """"This lump of rock is suspended in perpetual geostationary orbit around that black hole without falling in. Discuss."
@@ -7711,6 +7893,12 @@ When this land enters, scry 1. (Look at the top card of your library. You may pu
     :cardNumber "325"^^xsd:integer ;
     :artist "Zhillustrator" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :producesMana :Black ;
+    :producesMana :Red ;
+    :producesMana :Green ;
+    :entersTapped "true"^^xsd:boolean ;
     :printedText """This land enters tapped. As it enters, choose a color other than green.
 {T}: Add {G} or one mana of the chosen color."""@en ;
     :oracleText """This land enters tapped. As it enters, choose a color other than green.
@@ -7739,6 +7927,12 @@ When this land enters, scry 1. (Look at the top card of your library. You may pu
     :cardNumber "326"^^xsd:integer ;
     :artist "Sean Vo" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :producesMana :Black ;
+    :producesMana :Red ;
+    :producesMana :Green ;
+    :entersTapped "true"^^xsd:boolean ;
     :printedText """This land enters tapped. As it enters, choose a color other than white.
 {T}: Add {W} or one mana of the chosen color."""@en ;
     :oracleText """This land enters tapped. As it enters, choose a color other than white.
@@ -7767,6 +7961,12 @@ When this land enters, scry 1. (Look at the top card of your library. You may pu
     :cardNumber "327"^^xsd:integer ;
     :artist "Bruce Brenneise" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :producesMana :Black ;
+    :producesMana :Red ;
+    :producesMana :Green ;
+    :entersTapped "true"^^xsd:boolean ;
     :printedText """This land enters tapped. As it enters, choose a color other than blue.
 {T}: Add {U} or one mana of the chosen color."""@en ;
     :oracleText """This land enters tapped. As it enters, choose a color other than blue.
@@ -7795,6 +7995,12 @@ When this land enters, scry 1. (Look at the top card of your library. You may pu
     :cardNumber "328"^^xsd:integer ;
     :artist "Pavel Kolomeyets" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :producesMana :Black ;
+    :producesMana :Red ;
+    :producesMana :Green ;
+    :entersTapped "true"^^xsd:boolean ;
     :printedText """This land enters tapped. As it enters, choose a color other than black.
 {T}: Add {B} or one mana of the chosen color."""@en ;
     :oracleText """This land enters tapped. As it enters, choose a color other than black.
@@ -7824,6 +8030,9 @@ When this land enters, scry 1. (Look at the top card of your library. You may pu
     :cardNumber "329"^^xsd:integer ;
     :artist "Jorge Jacinto" ;
     :hasLanguage :English ;
+    :producesMana :Blue ;
+    :producesMana :Green ;
+    :entersTapped "true"^^xsd:boolean ;
     :printedText """As this land enters, you may reveal a Forest or Island card from your hand. If you don't, this land enters tapped.
 {T}: Add {G} or {U}."""@en ;
     :oracleText """As this land enters, you may reveal a Forest or Island card from your hand. If you don't, this land enters tapped.
@@ -7866,6 +8075,8 @@ When this land enters, scry 1. (Look at the top card of your library. You may pu
     :cardNumber "331"^^xsd:integer ;
     :artist "John Di Giovanni" ;
     :hasLanguage :English ;
+    :producesMana :Blue ;
+    :producesMana :Green ;
     :printedText """{T}, Pay 1 life: Add {G} or {U}.
 {1}, {T}, Sacrifice this land: Draw a card."""@en ;
     :oracleText """{T}, Pay 1 life: Add {G} or {U}.

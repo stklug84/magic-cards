@@ -65,6 +65,7 @@ subtype, format and legality definitions."""@en .
     :cardNumber "43"^^xsd:integer ;
     :artist "Lius Lasahido" ;
     :hasLanguage :English ;
+    :producesMana :White ;
     :printedText """({T}: Add {W}.)"""@en ;
     :oracleText """({T}: Add {W}.)"""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=489627"^^xsd:anyURI ;

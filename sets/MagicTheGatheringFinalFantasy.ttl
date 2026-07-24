@@ -63,6 +63,7 @@ subtype, format and legality definitions."""@en .
     :cardNumber "271"^^xsd:integer ;
     :artist "Allen Morris" ;
     :hasLanguage :English ;
+    :producesMana :Colorless ;
     :printedText """When this land enters, you gain 2 life.
 {T}: Add {C}."""@en ;
     :oracleText """When this land enters, you gain 2 life.

@@ -64,6 +64,7 @@ subtype, format and legality definitions."""@en .
     :cardNumber "245"^^xsd:integer ;
     :artist "Chris Ostrowski" ;
     :hasLanguage :English ;
+    :producesMana :Green ;
     # Note: keyword "Food" not defined in MagicCardsOntology
     :printedText """({T}: Add {G}.)
 This land enters tapped unless you control three or more other Forests.

@@ -488,6 +488,9 @@ This creature can't be blocked by creatures with power 2 or less."""@en ;
     :cardNumber "268"^^xsd:integer ;
     :artist "Robin Olausson" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Green ;
+    :entersTapped "true"^^xsd:boolean ;
     :printedText """This land enters tapped.
 When this land enters, you gain 1 life.
 {T}: Add {G} or {W}."""@en ;
@@ -518,6 +521,9 @@ When this land enters, you gain 1 life.
     :cardNumber "273"^^xsd:integer ;
     :artist "Julian Kok Joon Wen" ;
     :hasLanguage :English ;
+    :producesMana :Blue ;
+    :producesMana :Red ;
+    :entersTapped "true"^^xsd:boolean ;
     :printedText """This land enters tapped.
 When this land enters, you gain 1 life.
 {T}: Add {U} or {R}."""@en ;
@@ -549,6 +555,7 @@ When this land enters, you gain 1 life.
     :cardNumber "278"^^xsd:integer ;
     :artist "Sam Burley" ;
     :hasLanguage :English ;
+    :producesMana :Blue ;
     :printedText """({T}: Add {U}.)"""@en ;
     :oracleText """({T}: Add {U}.)"""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=610462"^^xsd:anyURI ;
@@ -575,6 +582,7 @@ When this land enters, you gain 1 life.
     :cardNumber "280"^^xsd:integer ;
     :artist "Sam Burley" ;
     :hasLanguage :English ;
+    :producesMana :Red ;
     :printedText """({T}: Add {R}.)"""@en ;
     :oracleText """({T}: Add {R}.)"""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=610464"^^xsd:anyURI ;
@@ -601,6 +609,7 @@ When this land enters, you gain 1 life.
     :cardNumber "281"^^xsd:integer ;
     :artist "Sam Burley" ;
     :hasLanguage :English ;
+    :producesMana :Green ;
     :printedText """({T}: Add {G}.)"""@en ;
     :oracleText """({T}: Add {G}.)"""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=610465"^^xsd:anyURI ;

@@ -1407,6 +1407,7 @@ Whenever you cast a spell during an opponent's turn, put a +1/+1 counter on this
     :cardNumber "156"^^xsd:integer ;
     :artist "Ryan Alexander Lee" ;
     :hasLanguage :English ;
+    :producesMana :Colorless ;
     :hasKeywordAbility :Enchant ;
     :printedText """Enchant creature, land, or planeswalker
 Enchanted permanent is a colorless land with "{T}: Add {C}" and loses all other card types and abilities."""@en ;
@@ -2022,6 +2023,11 @@ Burst Lightning deals 2 damage to any target. If this spell was kicked, it deals
     :cardNumber "203"^^xsd:integer ;
     :artist "Milivoj Ćeran" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :producesMana :Black ;
+    :producesMana :Red ;
+    :producesMana :Green ;
     # Note: keyword "Treasure" not defined in MagicCardsOntology
     :printedText """Gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn. Create a Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add one mana of any color.")"""@en ;
     :oracleText """Gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn. Create a Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add one mana of any color.")"""@en ;
@@ -2486,6 +2492,11 @@ Whenever Lathril deals combat damage to a player, create that many 1/1 green Elf
     :cardNumber "252"^^xsd:integer ;
     :artist "Jason Felix" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :producesMana :Black ;
+    :producesMana :Red ;
+    :producesMana :Green ;
     :power "0" ;
     :powerValue "0"^^xsd:integer ;
     :toughness "4" ;
@@ -2521,6 +2532,9 @@ When this creature dies, create a Treasure token. (It's an artifact with "{T}, S
     :cardNumber "259"^^xsd:integer ;
     :artist "Adam Paquette" ;
     :hasLanguage :English ;
+    :producesMana :Black ;
+    :producesMana :Red ;
+    :entersTapped "true"^^xsd:boolean ;
     :printedText """This land enters tapped.
 When this land enters, you gain 1 life.
 {T}: Add {B} or {R}."""@en ;
@@ -2550,6 +2564,9 @@ When this land enters, you gain 1 life.
     :cardNumber "270"^^xsd:integer ;
     :artist "Jonas De Ro" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :entersTapped "true"^^xsd:boolean ;
     :printedText """This land enters tapped.
 When this land enters, you gain 1 life.
 {T}: Add {W} or {U}."""@en ;
@@ -2580,6 +2597,7 @@ When this land enters, you gain 1 life.
     :cardNumber "272"^^xsd:integer ;
     :artist "Rebecca Guay" ;
     :hasLanguage :English ;
+    :producesMana :White ;
     :printedText """({T}: Add {W}.)"""@en ;
     :oracleText """({T}: Add {W}.)"""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=677861"^^xsd:anyURI ;
@@ -2606,6 +2624,7 @@ When this land enters, you gain 1 life.
     :cardNumber "273"^^xsd:integer ;
     :artist "Tingting Yeh" ;
     :hasLanguage :English ;
+    :producesMana :White ;
     :printedText """({T}: Add {W}.)"""@en ;
     :oracleText """({T}: Add {W}.)"""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=677862"^^xsd:anyURI ;
@@ -2632,6 +2651,7 @@ When this land enters, you gain 1 life.
     :cardNumber "277"^^xsd:integer ;
     :artist "Rebecca Guay" ;
     :hasLanguage :English ;
+    :producesMana :Black ;
     :printedText """({T}: Add {B}.)"""@en ;
     :oracleText """({T}: Add {B}.)"""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=677866"^^xsd:anyURI ;
@@ -2658,6 +2678,7 @@ When this land enters, you gain 1 life.
     :cardNumber "287"^^xsd:integer ;
     :artist "Piotr Dura" ;
     :hasLanguage :English ;
+    :producesMana :Black ;
     :printedText """({T}: Add {B}.)"""@en ;
     :oracleText """({T}: Add {B}.)"""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=677806"^^xsd:anyURI ;
@@ -2684,6 +2705,7 @@ When this land enters, you gain 1 life.
     :cardNumber "290"^^xsd:integer ;
     :artist "Sam Burley" ;
     :hasLanguage :English ;
+    :producesMana :Green ;
     :printedText """({T}: Add {G}.)"""@en ;
     :oracleText """({T}: Add {G}.)"""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=677809"^^xsd:anyURI ;

@@ -281,6 +281,9 @@ At the beginning of your end step, exile up to one target artifact you control a
     :cardNumber "183"^^xsd:integer ;
     :artist "Maël Ollivier-Henry" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Red ;
+    :entersTapped "true"^^xsd:boolean ;
     :printedText """This land enters tapped.
 When this land enters, you gain 1 life.
 {T}: Add {R} or {W}."""@en ;
@@ -311,6 +314,9 @@ When this land enters, you gain 1 life.
     :cardNumber "185"^^xsd:integer ;
     :artist "Hokyoung Kim" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Black ;
+    :entersTapped "true"^^xsd:boolean ;
     :printedText """This land enters tapped.
 When this land enters, you gain 1 life.
 {T}: Add {W} or {B}."""@en ;
@@ -341,6 +347,9 @@ When this land enters, you gain 1 life.
     :cardNumber "186"^^xsd:integer ;
     :artist "Miklós Ligeti" ;
     :hasLanguage :English ;
+    :producesMana :Black ;
+    :producesMana :Green ;
+    :entersTapped "true"^^xsd:boolean ;
     :printedText """This land enters tapped.
 When this land enters, you gain 1 life.
 {T}: Add {B} or {G}."""@en ;
@@ -370,6 +379,9 @@ When this land enters, you gain 1 life.
     :cardNumber "187"^^xsd:integer ;
     :artist "Josu Solano" ;
     :hasLanguage :English ;
+    :producesMana :Blue ;
+    :producesMana :Green ;
+    :entersTapped "true"^^xsd:boolean ;
     :printedText """This land enters tapped.
 When this land enters, you gain 1 life.
 {T}: Add {G} or {U}."""@en ;
@@ -400,6 +412,9 @@ When this land enters, you gain 1 life.
     :cardNumber "189"^^xsd:integer ;
     :artist "Aenami" ;
     :hasLanguage :English ;
+    :producesMana :Blue ;
+    :producesMana :Red ;
+    :entersTapped "true"^^xsd:boolean ;
     :printedText """This land enters tapped.
 When this land enters, you gain 1 life.
 {T}: Add {U} or {R}."""@en ;
@@ -427,6 +442,12 @@ When this land enters, you gain 1 life.
     :cardNumber "190"^^xsd:integer ;
     :artist "Marina Ortega Lorente" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :producesMana :Black ;
+    :producesMana :Red ;
+    :producesMana :Green ;
+    :producesMana :Colorless ;
     :printedText """{T}: Add {C}.
 {T}: Add one mana of any color. Spend this mana only to cast a Ninja or Turtle spell.
 {3}, {T}: Target Ninja or Turtle can't be blocked this turn."""@en ;
@@ -461,6 +482,7 @@ When this land enters, you gain 1 life.
     :cardNumber "191"^^xsd:integer ;
     :artist "BEMOCS" ;
     :hasLanguage :English ;
+    :producesMana :White ;
     :printedText """({T}: Add {W}.)"""@en ;
     :oracleText """({T}: Add {W}.)"""@en ;
     :scryfallUrl "https://scryfall.com/card/tmt/191/plains"^^xsd:anyURI ;
@@ -486,6 +508,7 @@ When this land enters, you gain 1 life.
     :cardNumber "192"^^xsd:integer ;
     :artist "BEMOCS" ;
     :hasLanguage :English ;
+    :producesMana :Blue ;
     :printedText """({T}: Add {U}.)"""@en ;
     :oracleText """({T}: Add {U}.)"""@en ;
     :scryfallUrl "https://scryfall.com/card/tmt/192/island"^^xsd:anyURI ;
@@ -511,6 +534,7 @@ When this land enters, you gain 1 life.
     :cardNumber "193"^^xsd:integer ;
     :artist "BEMOCS" ;
     :hasLanguage :English ;
+    :producesMana :Black ;
     :printedText """({T}: Add {B}.)"""@en ;
     :oracleText """({T}: Add {B}.)"""@en ;
     :scryfallUrl "https://scryfall.com/card/tmt/193/swamp"^^xsd:anyURI ;
@@ -536,6 +560,7 @@ When this land enters, you gain 1 life.
     :cardNumber "194"^^xsd:integer ;
     :artist "BEMOCS" ;
     :hasLanguage :English ;
+    :producesMana :Red ;
     :printedText """({T}: Add {R}.)"""@en ;
     :oracleText """({T}: Add {R}.)"""@en ;
     :scryfallUrl "https://scryfall.com/card/tmt/194/mountain"^^xsd:anyURI ;
@@ -561,6 +586,7 @@ When this land enters, you gain 1 life.
     :cardNumber "195"^^xsd:integer ;
     :artist "BEMOCS" ;
     :hasLanguage :English ;
+    :producesMana :Green ;
     :printedText """({T}: Add {G}.)"""@en ;
     :oracleText """({T}: Add {G}.)"""@en ;
     :scryfallUrl "https://scryfall.com/card/tmt/195/forest"^^xsd:anyURI ;
@@ -586,6 +612,7 @@ When this land enters, you gain 1 life.
     :cardNumber "315"^^xsd:integer ;
     :artist "Sylvain Sarrailh" ;
     :hasLanguage :English ;
+    :producesMana :White ;
     :printedText """({T}: Add {W}.)"""@en ;
     :oracleText """({T}: Add {W}.)"""@en ;
     :scryfallUrl "https://scryfall.com/card/tmt/315/plains"^^xsd:anyURI ;
@@ -611,6 +638,7 @@ When this land enters, you gain 1 life.
     :cardNumber "316"^^xsd:integer ;
     :artist "Sylvain Sarrailh" ;
     :hasLanguage :English ;
+    :producesMana :Blue ;
     :printedText """({T}: Add {U}.)"""@en ;
     :oracleText """({T}: Add {U}.)"""@en ;
     :scryfallUrl "https://scryfall.com/card/tmt/316/island"^^xsd:anyURI ;
@@ -636,6 +664,7 @@ When this land enters, you gain 1 life.
     :cardNumber "317"^^xsd:integer ;
     :artist "Sylvain Sarrailh" ;
     :hasLanguage :English ;
+    :producesMana :Black ;
     :printedText """({T}: Add {B}.)"""@en ;
     :oracleText """({T}: Add {B}.)"""@en ;
     :scryfallUrl "https://scryfall.com/card/tmt/317/swamp"^^xsd:anyURI ;
@@ -661,6 +690,7 @@ When this land enters, you gain 1 life.
     :cardNumber "318"^^xsd:integer ;
     :artist "Sylvain Sarrailh" ;
     :hasLanguage :English ;
+    :producesMana :Red ;
     :printedText """({T}: Add {R}.)"""@en ;
     :oracleText """({T}: Add {R}.)"""@en ;
     :scryfallUrl "https://scryfall.com/card/tmt/318/mountain"^^xsd:anyURI ;
@@ -686,6 +716,7 @@ When this land enters, you gain 1 life.
     :cardNumber "319"^^xsd:integer ;
     :artist "Sylvain Sarrailh" ;
     :hasLanguage :English ;
+    :producesMana :Green ;
     :printedText """({T}: Add {G}.)"""@en ;
     :oracleText """({T}: Add {G}.)"""@en ;
     :scryfallUrl "https://scryfall.com/card/tmt/319/forest"^^xsd:anyURI ;

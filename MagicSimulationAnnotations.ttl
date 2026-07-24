@@ -1,0 +1,473 @@
+# ==============================================================================
+# DISCLAIMER
+#
+# This file is an independent, fan-made instance graph carrying simulation
+# annotations for Magic: The Gathering cards: machine-readable behavior hooks
+# and threat weights consumed by the Monte-Carlo matchup simulator
+# (scripts/mtgsim). These annotations are house-authored simulation opinion,
+# not card facts. The file is not produced by, endorsed by, or affiliated
+# with Wizards of the Coast LLC.
+#
+# Magic: The Gathering is a trademark of Wizards of the Coast LLC. All card
+# names referenced herein are the intellectual property of Wizards of the
+# Coast LLC and/or their respective owners. This work is made available under
+# the Wizards of the Coast Fan Content Policy
+# (https://company.wizards.com/en/legal/fancontentpolicy).
+# ==============================================================================
+
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+
+@prefix :     <urn:stklug84:MagicCardsOntology:2026-02-27#> .
+@base         <urn:stklug84:MagicSimulationAnnotations:2026-07-20#> .
+
+################################################################################
+#
+# Ontology Definition
+#
+################################################################################
+
+<urn:stklug84:MagicSimulationAnnotations:2026-07-20#>
+    rdf:type owl:Ontology ;
+    owl:imports <urn:stklug84:MagicCardsOntology:2026-02-27#> ;
+    rdfs:label "Magic Simulation Annotations"@en ;
+    rdfs:comment """An instance graph attaching simulation behavior hooks
+(:hasBehaviorHook, whitelisted keys with JSON literal values) and AI threat
+weights (:threatWeight) to card individuals. Consumed by the Monte-Carlo
+matchup simulator in scripts/mtgsim, which cannot reliably derive these
+semantics from oracle text. Hooks apply to the card by name (any printing);
+by convention they are asserted on the printing referenced by the deck
+graphs. Keys are whitelisted in scripts/mtgsim/behaviors.py
+(BEHAVIOR_KEYS) and validated by scripts/check_consistency.py."""@en .
+
+
+################################################################################
+#
+# Behavior Hooks and Threat Weights
+#
+################################################################################
+
+:AberrantReturn
+    :hasBehaviorHook
+      [ rdf:type :BehaviorHook ; :behaviorKey "recursion" ; :behaviorValue "true" ] .
+
+:AcademyManufactor
+    :threatWeight "4"^^xsd:nonNegativeInteger ;
+    :hasBehaviorHook
+      [ rdf:type :BehaviorHook ; :behaviorKey "manufactor" ; :behaviorValue "true" ] .
+
+:AdrixAndNevTwincasters
+    :threatWeight "8"^^xsd:nonNegativeInteger ;
+    :hasBehaviorHook
+      [ rdf:type :BehaviorHook ; :behaviorKey "doubler" ; :behaviorValue "2" ] .
+
+:AetherHubAetherdriftCommander145
+    :hasBehaviorHook
+      [ rdf:type :BehaviorHook ; :behaviorKey "energy_gain" ; :behaviorValue "1" ] .
+
+:AkromasWill
+    :hasBehaviorHook
+      [ rdf:type :BehaviorHook ; :behaviorKey "protect" ; :behaviorValue "true" ] .
+
+:AnimPakalThousandthMoon
+    :threatWeight "7"^^xsd:nonNegativeInteger ;
+    :hasBehaviorHook
+      [ rdf:type :BehaviorHook ; :behaviorKey "anim" ; :behaviorValue "true" ] .
+
+:AustereCommandWildsOfEldraineCommander62
+    :hasBehaviorHook
+      [ rdf:type :BehaviorHook ; :behaviorKey "wipe" ; :behaviorValue "{\"style\": \"select\"}" ] .
+
+:BanishingLight
+    :hasBehaviorHook
+      [ rdf:type :BehaviorHook ; :behaviorKey "removal" ; :behaviorValue "true" ] ,
+      [ rdf:type :BehaviorHook ; :behaviorKey "removal_exile" ; :behaviorValue "true" ] ,
+      [ rdf:type :BehaviorHook ; :behaviorKey "removal_lock" ; :behaviorValue "true" ] ,
+      [ rdf:type :BehaviorHook ; :behaviorKey "removal_scope" ; :behaviorValue "\"any\"" ] .
+
+:BidentOfThassa
+    :threatWeight "5"^^xsd:nonNegativeInteger ;
+    :hasBehaviorHook
+      [ rdf:type :BehaviorHook ; :behaviorKey "draw_on_attack" ; :behaviorValue "2" ] .
+
+:BlackSunsZenith
+    :hasBehaviorHook
+      [ rdf:type :BehaviorHook ; :behaviorKey "wipe" ; :behaviorValue "{\"style\": \"counters\", \"x\": 3}" ] .
+
+:BlasphemousActAetherdriftCommander101
+    :hasBehaviorHook
+      [ rdf:type :BehaviorHook ; :behaviorKey "wipe" ; :behaviorValue "{\"style\": \"damage\", \"dmg\": 13}" ] .
+
+:BloodArtist
+    :threatWeight "5"^^xsd:nonNegativeInteger ;
+    :hasBehaviorHook
+      [ rdf:type :BehaviorHook ; :behaviorKey "drain_any" ; :behaviorValue "true" ] .
+
+:BlowflyInfestation
+    :threatWeight "9"^^xsd:nonNegativeInteger ;
+    :hasBehaviorHook
+      [ rdf:type :BehaviorHook ; :behaviorKey "chain" ; :behaviorValue "true" ] .
+
+:BootleggersStash
+    :threatWeight "5"^^xsd:nonNegativeInteger ;
+    :hasBehaviorHook
+      [ rdf:type :BehaviorHook ; :behaviorKey "treasures_per_turn" ; :behaviorValue "2" ] .
+
+:BrasssBounty
+    :hasBehaviorHook
+      [ rdf:type :BehaviorHook ; :behaviorKey "burst_treasures" ; :behaviorValue "\"lands\"" ] .
+
+:CarnifexDemon
+    :threatWeight "8"^^xsd:nonNegativeInteger ;
+    :hasBehaviorHook
+      [ rdf:type :BehaviorHook ; :behaviorKey "mass_counters" ; :behaviorValue "1" ] ,
+      [ rdf:type :BehaviorHook ; :behaviorKey "mass_self" ; :behaviorValue "true" ] .
+
+:ChaosWarpAetherdriftCommander48
+    :hasBehaviorHook
+      [ rdf:type :BehaviorHook ; :behaviorKey "removal" ; :behaviorValue "true" ] ,
+      [ rdf:type :BehaviorHook ; :behaviorKey "removal_scope" ; :behaviorValue "\"any\"" ] .
+
+:ConjurersCloset
+    :threatWeight "5"^^xsd:nonNegativeInteger ;
+    :hasBehaviorHook
+      [ rdf:type :BehaviorHook ; :behaviorKey "closet" ; :behaviorValue "true" ] .
+
+:ContagionClasp
+    :threatWeight "4"^^xsd:nonNegativeInteger ;
+    :hasBehaviorHook
+      [ rdf:type :BehaviorHook ; :behaviorKey "proliferate" ; :behaviorValue "1" ] ,
+      [ rdf:type :BehaviorHook ; :behaviorKey "single_counters" ; :behaviorValue "1" ] .
+
+:ContagionEngine
+    :threatWeight "9"^^xsd:nonNegativeInteger ;
+    :hasBehaviorHook
+      [ rdf:type :BehaviorHook ; :behaviorKey "etb_counter_wipe" ; :behaviorValue "1" ] ,
+      [ rdf:type :BehaviorHook ; :behaviorKey "proliferate" ; :behaviorValue "2" ] .
+
+:CrushContraband
+    :hasBehaviorHook
+      [ rdf:type :BehaviorHook ; :behaviorKey "removal" ; :behaviorValue "true" ] ,
+      [ rdf:type :BehaviorHook ; :behaviorKey "removal_exile" ; :behaviorValue "true" ] ,
+      [ rdf:type :BehaviorHook ; :behaviorKey "removal_scope" ; :behaviorValue "\"art_ench\"" ] ,
+      [ rdf:type :BehaviorHook ; :behaviorKey "removal_targets" ; :behaviorValue "2" ] .
+
+:CurseOfOpulence
+    :threatWeight "3"^^xsd:nonNegativeInteger ;
+    :hasBehaviorHook
+      [ rdf:type :BehaviorHook ; :behaviorKey "treasures_per_turn" ; :behaviorValue "1" ] .
+
+:DeterminedIteration
+    :threatWeight "6"^^xsd:nonNegativeInteger ;
+    :hasBehaviorHook
+      [ rdf:type :BehaviorHook ; :behaviorKey "populate_per_turn" ; :behaviorValue "1" ] .
+
+:DiabolicIntent
+    :hasBehaviorHook
+      [ rdf:type :BehaviorHook ; :behaviorKey "tutor" ; :behaviorValue "[\"Necroskitter\", \"Skullclamp\", \"Yawgmoth, Thran Physician\", \"Soul Snuffers\"]" ] .
+
+:DispatchEdgeOfEternitiesCommander64
+    :hasBehaviorHook
+      [ rdf:type :BehaviorHook ; :behaviorKey "removal" ; :behaviorValue "true" ] ,
+      [ rdf:type :BehaviorHook ; :behaviorKey "removal_exile" ; :behaviorValue "true" ] ,
+      [ rdf:type :BehaviorHook ; :behaviorKey "removal_scope" ; :behaviorValue "\"creature\"" ] .
+
+:DoublingSeason
+    :threatWeight "9"^^xsd:nonNegativeInteger ;
+    :hasBehaviorHook
+      [ rdf:type :BehaviorHook ; :behaviorKey "doubler" ; :behaviorValue "2" ] .
+
+:DuskUrchins
+    :hasBehaviorHook
+      [ rdf:type :BehaviorHook ; :behaviorKey "death_tokens" ; :behaviorValue "null" ] .
+
+:EsixFractalBloom
+    :threatWeight "7"^^xsd:nonNegativeInteger ;
+    :hasBehaviorHook
+      [ rdf:type :BehaviorHook ; :behaviorKey "esix" ; :behaviorValue "true" ] .
+
+:EverlastingTorment
+    :threatWeight "5"^^xsd:nonNegativeInteger .
+
+:EvolutionSage
+    :threatWeight "5"^^xsd:nonNegativeInteger ;
+    :hasBehaviorHook
+      [ rdf:type :BehaviorHook ; :behaviorKey "proliferate" ; :behaviorValue "1" ] .
+
+:Exsanguinate
+    :hasBehaviorHook
+      [ rdf:type :BehaviorHook ; :behaviorKey "burst_drain" ; :behaviorValue "true" ] .
+
+:ExtravagantReplication
+    :threatWeight "7"^^xsd:nonNegativeInteger ;
+    :hasBehaviorHook
+      [ rdf:type :BehaviorHook ; :behaviorKey "replicate" ; :behaviorValue "true" ] .
+
+:FarewellDoctorWhoCommander465
+    :hasBehaviorHook
+      [ rdf:type :BehaviorHook ; :behaviorKey "wipe" ; :behaviorValue "{\"style\": \"select\", \"exile\": true}" ] .
+
+:FeedTheSwarm
+    :hasBehaviorHook
+      [ rdf:type :BehaviorHook ; :behaviorKey "removal" ; :behaviorValue "true" ] ,
+      [ rdf:type :BehaviorHook ; :behaviorKey "removal_scope" ; :behaviorValue "\"cre_ench\"" ] .
+
+:FireCovenant
+    :hasBehaviorHook
+      [ rdf:type :BehaviorHook ; :behaviorKey "wipe" ; :behaviorValue "{\"style\": \"damage\", \"dmg\": 5, \"divided\": true}" ] .
+
+:FlourishingDefenses
+    :threatWeight "7"^^xsd:nonNegativeInteger ;
+    :hasBehaviorHook
+      [ rdf:type :BehaviorHook ; :behaviorKey "token_per_counter" ; :behaviorValue "true" ] .
+
+:Fury
+    :hasBehaviorHook
+      [ rdf:type :BehaviorHook ; :behaviorKey "etb_removal" ; :behaviorValue "{\"scope\": \"creature\"}" ] .
+
+:GraveTitan
+    :threatWeight "6"^^xsd:nonNegativeInteger ;
+    :hasBehaviorHook
+      [ rdf:type :BehaviorHook ; :behaviorKey "etb_tokens" ; :behaviorValue "[2, 2, 2, false]" ] .
+
+:GraveVenerations
+    :hasBehaviorHook
+      [ rdf:type :BehaviorHook ; :behaviorKey "recursion" ; :behaviorValue "true" ] .
+
+:GrowingRanks
+    :threatWeight "6"^^xsd:nonNegativeInteger ;
+    :hasBehaviorHook
+      [ rdf:type :BehaviorHook ; :behaviorKey "populate_per_turn" ; :behaviorValue "1" ] .
+
+:HangarbackWalker
+    :hasBehaviorHook
+      [ rdf:type :BehaviorHook ; :behaviorKey "death_tokens" ; :behaviorValue "[2, 1, 1, true]" ] .
+
+:HapatraVizierOfPoisons
+    :threatWeight "8"^^xsd:nonNegativeInteger ;
+    :hasBehaviorHook
+      [ rdf:type :BehaviorHook ; :behaviorKey "token_per_counter" ; :behaviorValue "true" ] .
+
+:HeroicIntervention
+    :hasBehaviorHook
+      [ rdf:type :BehaviorHook ; :behaviorKey "protect" ; :behaviorValue "true" ] .
+
+:HeroicReinforcements
+    :hasBehaviorHook
+      [ rdf:type :BehaviorHook ; :behaviorKey "burst_tokens" ; :behaviorValue "[2, 1, 1, false]" ] .
+
+:ImprisonedInTheMoonInnistradRemastered69
+    :hasBehaviorHook
+      [ rdf:type :BehaviorHook ; :behaviorKey "removal" ; :behaviorValue "true" ] ,
+      [ rdf:type :BehaviorHook ; :behaviorKey "removal_lock" ; :behaviorValue "true" ] ,
+      [ rdf:type :BehaviorHook ; :behaviorKey "removal_scope" ; :behaviorValue "\"any\"" ] .
+
+:InTheTrenches
+    :hasBehaviorHook
+      [ rdf:type :BehaviorHook ; :behaviorKey "anthem" ; :behaviorValue "{\"boost\": 1}" ] .
+
+:InfiniteGuidelineStationEdgeOfEternities219
+    :threatWeight "8"^^xsd:nonNegativeInteger ;
+    :hasBehaviorHook
+      [ rdf:type :BehaviorHook ; :behaviorKey "igs" ; :behaviorValue "true" ] ,
+      [ rdf:type :BehaviorHook ; :behaviorKey "station" ; :behaviorValue "true" ] .
+
+:IntangibleVirtue
+    :hasBehaviorHook
+      [ rdf:type :BehaviorHook ; :behaviorKey "anthem" ; :behaviorValue "{\"boost\": 1, \"tokens_only\": true}" ] .
+
+:KayaGeistHunterInnistradCrimsonVow240
+    :threatWeight "7"^^xsd:nonNegativeInteger ;
+    :hasBehaviorHook
+      [ rdf:type :BehaviorHook ; :behaviorKey "doubler" ; :behaviorValue "2" ] .
+
+:KulrathKnight
+    :threatWeight "7"^^xsd:nonNegativeInteger ;
+    :hasBehaviorHook
+      [ rdf:type :BehaviorHook ; :behaviorKey "kulrath_lock" ; :behaviorValue "true" ] .
+
+:MarionetteApprentice
+    :threatWeight "5"^^xsd:nonNegativeInteger ;
+    :hasBehaviorHook
+      [ rdf:type :BehaviorHook ; :behaviorKey "drain_own" ; :behaviorValue "true" ] .
+
+:MassacreGirlKnownKiller
+    :threatWeight "5"^^xsd:nonNegativeInteger .
+
+:MechanizedProductionMurdersAtKarlovManorCommander109
+    :threatWeight "8"^^xsd:nonNegativeInteger ;
+    :hasBehaviorHook
+      [ rdf:type :BehaviorHook ; :behaviorKey "mechanized_wincon" ; :behaviorValue "true" ] ,
+      [ rdf:type :BehaviorHook ; :behaviorKey "tokens_per_turn" ; :behaviorValue "1" ] .
+
+:MentorOfTheMeek
+    :threatWeight "6"^^xsd:nonNegativeInteger ;
+    :hasBehaviorHook
+      [ rdf:type :BehaviorHook ; :behaviorKey "draw_on_tokens" ; :behaviorValue "1" ] .
+
+:MidnightBanshee
+    :threatWeight "8"^^xsd:nonNegativeInteger ;
+    :hasBehaviorHook
+      [ rdf:type :BehaviorHook ; :behaviorKey "mass_counters" ; :behaviorValue "1" ] ,
+      [ rdf:type :BehaviorHook ; :behaviorKey "mass_self" ; :behaviorValue "true" ] .
+
+:MyrBattlesphere
+    :threatWeight "5"^^xsd:nonNegativeInteger ;
+    :hasBehaviorHook
+      [ rdf:type :BehaviorHook ; :behaviorKey "etb_tokens" ; :behaviorValue "[4, 1, 1, true]" ] .
+
+:Necroskitter
+    :threatWeight "10"^^xsd:nonNegativeInteger ;
+    :hasBehaviorHook
+      [ rdf:type :BehaviorHook ; :behaviorKey "steal" ; :behaviorValue "true" ] .
+
+:NestOfScarabs
+    :threatWeight "7"^^xsd:nonNegativeInteger ;
+    :hasBehaviorHook
+      [ rdf:type :BehaviorHook ; :behaviorKey "token_per_counter" ; :behaviorValue "true" ] .
+
+:ObeliskSpider
+    :threatWeight "5"^^xsd:nonNegativeInteger ;
+    :hasBehaviorHook
+      [ rdf:type :BehaviorHook ; :behaviorKey "drain_on_counters" ; :behaviorValue "true" ] .
+
+:OjerTaqDeepestFoundation
+    :threatWeight "9"^^xsd:nonNegativeInteger ;
+    :hasBehaviorHook
+      [ rdf:type :BehaviorHook ; :behaviorKey "creature_token_mult" ; :behaviorValue "3" ] .
+
+:Persist
+    :hasBehaviorHook
+      [ rdf:type :BehaviorHook ; :behaviorKey "recursion" ; :behaviorValue "true" ] .
+
+:PuppeteerClique
+    :threatWeight "5"^^xsd:nonNegativeInteger ;
+    :hasBehaviorHook
+      [ rdf:type :BehaviorHook ; :behaviorKey "grave_rob" ; :behaviorValue "true" ] .
+
+:RealityShiftMarchOfTheMachineCommander231
+    :hasBehaviorHook
+      [ rdf:type :BehaviorHook ; :behaviorKey "removal" ; :behaviorValue "true" ] ,
+      [ rdf:type :BehaviorHook ; :behaviorKey "removal_exile" ; :behaviorValue "true" ] ,
+      [ rdf:type :BehaviorHook ; :behaviorKey "removal_scope" ; :behaviorValue "\"creature\"" ] .
+
+:ReassemblingSkeleton
+    :hasBehaviorHook
+      [ rdf:type :BehaviorHook ; :behaviorKey "rebuild" ; :behaviorValue "true" ] .
+
+:ReefWorm
+    :hasBehaviorHook
+      [ rdf:type :BehaviorHook ; :behaviorKey "death_tokens" ; :behaviorValue "[1, 3, 3, false]" ] ,
+      [ rdf:type :BehaviorHook ; :behaviorKey "reef" ; :behaviorValue "true" ] .
+
+:RestorationAngel
+    :hasBehaviorHook
+      [ rdf:type :BehaviorHook ; :behaviorKey "blink_on_etb" ; :behaviorValue "true" ] .
+
+:RetrofitterFoundry
+    :threatWeight "5"^^xsd:nonNegativeInteger ;
+    :hasBehaviorHook
+      [ rdf:type :BehaviorHook ; :behaviorKey "tokens_per_turn" ; :behaviorValue "1" ] .
+
+:SaheeliRai
+    :threatWeight "4"^^xsd:nonNegativeInteger ;
+    :hasBehaviorHook
+      [ rdf:type :BehaviorHook ; :behaviorKey "tokens_per_turn" ; :behaviorValue "1" ] .
+
+:SaheeliSublimeArtificerMarchOfTheMachineCommander338
+    :threatWeight "6"^^xsd:nonNegativeInteger ;
+    :hasBehaviorHook
+      [ rdf:type :BehaviorHook ; :behaviorKey "tokens_per_turn" ; :behaviorValue "1" ] .
+
+:SaiMasterThopterist
+    :threatWeight "6"^^xsd:nonNegativeInteger ;
+    :hasBehaviorHook
+      [ rdf:type :BehaviorHook ; :behaviorKey "tokens_per_turn" ; :behaviorValue "1" ] .
+
+:ShalaiVoiceOfPlenty
+    :threatWeight "7"^^xsd:nonNegativeInteger ;
+    :hasBehaviorHook
+      [ rdf:type :BehaviorHook ; :behaviorKey "hexproof_grant" ; :behaviorValue "true" ] .
+
+:Shriekmaw
+    :hasBehaviorHook
+      [ rdf:type :BehaviorHook ; :behaviorKey "etb_removal" ; :behaviorValue "{\"scope\": \"creature\"}" ] .
+
+:Skinrender
+    :threatWeight "5"^^xsd:nonNegativeInteger ;
+    :hasBehaviorHook
+      [ rdf:type :BehaviorHook ; :behaviorKey "etb_target_counters" ; :behaviorValue "3" ] .
+
+:Skullclamp
+    :threatWeight "8"^^xsd:nonNegativeInteger ;
+    :hasBehaviorHook
+      [ rdf:type :BehaviorHook ; :behaviorKey "clamp" ; :behaviorValue "true" ] .
+
+:SkyclaveApparition
+    :hasBehaviorHook
+      [ rdf:type :BehaviorHook ; :behaviorKey "etb_removal" ; :behaviorValue "{\"scope\": \"any\", \"exile\": true}" ] .
+
+:SoulSnuffers
+    :threatWeight "6"^^xsd:nonNegativeInteger ;
+    :hasBehaviorHook
+      [ rdf:type :BehaviorHook ; :behaviorKey "counter_wipe_self" ; :behaviorValue "true" ] ,
+      [ rdf:type :BehaviorHook ; :behaviorKey "etb_counter_wipe" ; :behaviorValue "1" ] .
+
+:SpellSwindle
+    :hasBehaviorHook
+      [ rdf:type :BehaviorHook ; :behaviorKey "burst_treasures" ; :behaviorValue "3" ] ,
+      [ rdf:type :BehaviorHook ; :behaviorKey "counterspell" ; :behaviorValue "true" ] .
+
+:TemperedSteel
+    :threatWeight "6"^^xsd:nonNegativeInteger ;
+    :hasBehaviorHook
+      [ rdf:type :BehaviorHook ; :behaviorKey "anthem" ; :behaviorValue "{\"boost\": 2, \"art_only\": true}" ] .
+
+:TheScorpionGod
+    :threatWeight "6"^^xsd:nonNegativeInteger ;
+    :hasBehaviorHook
+      [ rdf:type :BehaviorHook ; :behaviorKey "draw_per_turn" ; :behaviorValue "1" ] ,
+      [ rdf:type :BehaviorHook ; :behaviorKey "single_counters" ; :behaviorValue "1" ] .
+
+:ThopterSpyNetworkAetherdriftCommander83
+    :threatWeight "7"^^xsd:nonNegativeInteger ;
+    :hasBehaviorHook
+      [ rdf:type :BehaviorHook ; :behaviorKey "draw_on_attack" ; :behaviorValue "1" ] ,
+      [ rdf:type :BehaviorHook ; :behaviorKey "tokens_per_turn" ; :behaviorValue "1" ] .
+
+:TreasureVaultAetherdriftCommander180
+    :threatWeight "3"^^xsd:nonNegativeInteger ;
+    :hasBehaviorHook
+      [ rdf:type :BehaviorHook ; :behaviorKey "treasures_per_turn" ; :behaviorValue "1" ] .
+
+:TriplicateTitan
+    :threatWeight "5"^^xsd:nonNegativeInteger ;
+    :hasBehaviorHook
+      [ rdf:type :BehaviorHook ; :behaviorKey "death_tokens" ; :behaviorValue "[3, 4, 4, true]" ] .
+
+:UnexpectedWindfall
+    :hasBehaviorHook
+      [ rdf:type :BehaviorHook ; :behaviorKey "burst_treasures" ; :behaviorValue "2" ] ,
+      [ rdf:type :BehaviorHook ; :behaviorKey "draw_cards" ; :behaviorValue "2" ] .
+
+:VraskaBetrayalsSting
+    :hasBehaviorHook
+      [ rdf:type :BehaviorHook ; :behaviorKey "removal" ; :behaviorValue "true" ] ,
+      [ rdf:type :BehaviorHook ; :behaviorKey "removal_scope" ; :behaviorValue "\"any\"" ] .
+
+:WhirlerVirtuosoAetherdriftCommander122
+    :hasBehaviorHook
+      [ rdf:type :BehaviorHook ; :behaviorKey "energy_gain" ; :behaviorValue "3" ] ,
+      [ rdf:type :BehaviorHook ; :behaviorKey "energy_thopter" ; :behaviorValue "true" ] .
+
+:YawgmothThranPhysician
+    :threatWeight "9"^^xsd:nonNegativeInteger ;
+    :hasBehaviorHook
+      [ rdf:type :BehaviorHook ; :behaviorKey "yawgmoth" ; :behaviorValue "true" ] .
+
+:ZulaportCutthroat
+    :threatWeight "4"^^xsd:nonNegativeInteger ;
+    :hasBehaviorHook
+      [ rdf:type :BehaviorHook ; :behaviorKey "drain_own" ; :behaviorValue "true" ] .

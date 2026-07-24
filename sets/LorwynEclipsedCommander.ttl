@@ -92,6 +92,11 @@ subtype, format and legality definitions."""@en .
     :cardNumber "97"^^xsd:integer ;
     :artist "Vincent Proce" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :producesMana :Black ;
+    :producesMana :Red ;
+    :producesMana :Green ;
     :hasKeywordAbility :Enchant ;
     :printedText """Enchant land
 When this Aura enters, draw a card.

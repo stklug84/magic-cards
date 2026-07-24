@@ -540,6 +540,7 @@ At the beginning of combat on your turn, bolster X, where X is the number of dif
     :cardNumber "46"^^xsd:integer ;
     :artist "Warren Mahy" ;
     :hasLanguage :English ;
+    :producesMana :Colorless ;
     :printedText """If you would roll one or more planar dice, instead roll that many planar dice plus one and ignore one.
 {T}: Add {C}{C}."""@en ;
     :oracleText """If you would roll one or more planar dice, instead roll that many planar dice plus one and ignore one.
@@ -955,6 +956,11 @@ Whenever chaos ensues, destroy target creature and all other creatures with the 
     :cardNumber "156"^^xsd:integer ;
     :artist "Martina Pilcerova" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :producesMana :Black ;
+    :producesMana :Red ;
+    :producesMana :Green ;
     :printedText """If an effect would create one or more tokens, it creates twice that many of those tokens instead.
 If an effect would put one or more counters on a permanent, it puts twice that many of those counters on that permanent instead.
 Whenever chaos ensues, until end of turn, whenever you tap a land for mana, add one mana of any type that land produced."""@en ;
@@ -1111,6 +1117,7 @@ Create a token that's a copy of target artifact."""@en ;
     :cardNumber "224"^^xsd:integer ;
     :artist "Ryan Alexander Lee" ;
     :hasLanguage :English ;
+    :producesMana :Colorless ;
     :hasKeywordAbility :Enchant ;
     :printedText """Enchant creature, land, or planeswalker
 Enchanted permanent is a colorless land with "{T}: Add {C}" and loses all other card types and abilities."""@en ;
@@ -1616,6 +1623,11 @@ Tap two untapped artifacts you control: Draw a card."""@en ;
     :cardNumber "237"^^xsd:integer ;
     :artist "Victor Adame Minguez" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :producesMana :Black ;
+    :producesMana :Red ;
+    :producesMana :Green ;
     # Note: keyword "Treasure" not defined in MagicCardsOntology
     :printedText """Counter target spell. Create X Treasure tokens, where X is that spell's mana value. (They're artifacts with "{T}, Sacrifice this token: Add one mana of any color.")"""@en ;
     :oracleText """Counter target spell. Create X Treasure tokens, where X is that spell's mana value. (They're artifacts with "{T}, Sacrifice this token: Add one mana of any color.")"""@en ;
@@ -1880,6 +1892,11 @@ At the beginning of combat on your turn, you may have target noncreature artifac
     :cardNumber "272"^^xsd:integer ;
     :artist "Grzegorz Rutkowski" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :producesMana :Black ;
+    :producesMana :Red ;
+    :producesMana :Green ;
     # Note: keyword "Treasure" not defined in MagicCardsOntology
     :printedText """For each land you control, create a Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add one mana of any color.")"""@en ;
     :oracleText """For each land you control, create a Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add one mana of any color.")"""@en ;
@@ -1953,6 +1970,11 @@ At the beginning of combat on your turn, you may have target noncreature artifac
     :cardNumber "274"^^xsd:integer ;
     :artist "Kieran Yanner" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :producesMana :Black ;
+    :producesMana :Red ;
+    :producesMana :Green ;
     :hasKeywordAbility :Enchant ;
     :printedText """Enchant player
 Whenever enchanted player is attacked, create a Gold token. Each opponent attacking that player does the same. (A Gold token is an artifact with "Sacrifice this token: Add one mana of any color.")"""@en ;
@@ -2335,6 +2357,11 @@ Whenever this creature mutates, create a red artifact token named Feather with "
     :cardNumber "294"^^xsd:integer ;
     :artist "Yeong-Hao Han" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :producesMana :Black ;
+    :producesMana :Red ;
+    :producesMana :Green ;
     # Note: keyword "Treasure" not defined in MagicCardsOntology
     :printedText """Destroy target artifact or enchantment. Create a Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add one mana of any color.")"""@en ;
     :oracleText """Destroy target artifact or enchantment. Create a Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add one mana of any color.")"""@en ;
@@ -2364,6 +2391,11 @@ Whenever this creature mutates, create a red artifact token named Feather with "
     :cardNumber "299"^^xsd:integer ;
     :artist "Lindsey Look" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :producesMana :Black ;
+    :producesMana :Red ;
+    :producesMana :Green ;
     :power "0" ;
     :powerValue "0"^^xsd:integer ;
     :toughness "2" ;
@@ -2459,6 +2491,11 @@ Investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this to
     :cardNumber "313"^^xsd:integer ;
     :artist "Josu Hernaiz" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :producesMana :Black ;
+    :producesMana :Red ;
+    :producesMana :Green ;
     :power "3" ;
     :powerValue "3"^^xsd:integer ;
     :toughness "2" ;
@@ -2573,6 +2610,11 @@ Whenever you sacrifice a Clue, put a +1/+1 counter on this creature."""@en ;
     :cardNumber "315"^^xsd:integer ;
     :artist "Jung Park" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :producesMana :Black ;
+    :producesMana :Red ;
+    :producesMana :Green ;
     :hasKeywordAction :Investigate ;
     :hasKeywordAbility :Enchant ;
     :printedText """Enchant land
@@ -2823,6 +2865,11 @@ Each player shuffles their graveyard into their library."""@en ;
     :cardNumber "348"^^xsd:integer ;
     :artist "Dan Murayama Scott" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :producesMana :Black ;
+    :producesMana :Red ;
+    :producesMana :Green ;
     :printedText """{T}: Add one mana of any color in your commander's color identity."""@en ;
     :oracleText """{T}: Add one mana of any color in your commander's color identity."""@en ;
     :flavorText """It started as a mere drop of water. The Magic Mirror crystallized it into much more."""@en ;
@@ -2896,6 +2943,7 @@ Equip {2}"""@en ;
     :cardNumber "357"^^xsd:integer ;
     :artist "Rob Alexander" ;
     :hasLanguage :English ;
+    :producesMana :Colorless ;
     :printedText """{T}: Add {C}.
 {T}: Roll the planar die. Activate only as a sorcery."""@en ;
     :oracleText """{T}: Add {C}.
@@ -2932,6 +2980,8 @@ Equip {2}"""@en ;
     :cardNumber "358"^^xsd:integer ;
     :artist "Efrem Palacios" ;
     :hasLanguage :English ;
+    :producesMana :Red ;
+    :producesMana :Green ;
     :printedText """{1}, {T}: Add {R}{G}."""@en ;
     :oracleText """{1}, {T}: Add {R}{G}."""@en ;
     :flavorText """Gruul territorial markings need not be legible. The blood, snot, and muck used to smear them are unmistakably Gruul."""@en ;
@@ -2991,6 +3041,8 @@ Equip {2}"""@en ;
     :cardNumber "362"^^xsd:integer ;
     :artist "Raoul Vitale" ;
     :hasLanguage :English ;
+    :producesMana :Blue ;
+    :producesMana :Red ;
     :printedText """{1}, {T}: Add {U}{R}."""@en ;
     :oracleText """{1}, {T}: Add {U}{R}."""@en ;
     :flavorText """The Izzet signet is redesigned often, each time becoming closer to a vanity portrait of Niv-Mizzet."""@en ;
@@ -3017,6 +3069,11 @@ Equip {2}"""@en ;
     :cardNumber "372"^^xsd:integer ;
     :artist "Olena Richards" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :producesMana :Black ;
+    :producesMana :Red ;
+    :producesMana :Green ;
     :printedText """{T}: Add one mana of any color.
 At the beginning of your upkeep, put a night counter on this artifact. Then if it has eight or more night counters on it, remove all of them and create eight colorless snow artifact tokens named Replicated Ring with "{T}: Add one mana of any color.\""""@en ;
     :oracleText """{T}: Add one mana of any color.
@@ -3064,6 +3121,8 @@ At the beginning of your upkeep, put a night counter on this artifact. Then if i
     :cardNumber "378"^^xsd:integer ;
     :artist "Mike Sass" ;
     :hasLanguage :English ;
+    :producesMana :Blue ;
+    :producesMana :Green ;
     :printedText """{1}, {T}: Add {G}{U}."""@en ;
     :oracleText """{1}, {T}: Add {G}{U}."""@en ;
     :flavorText """For the Simic Combine, its sigil serves not as an emblem of honor but as a trademark. Its familiar image on any biological commodity attests to superb craftsmanship, ingenious innovation, and higher cost."""@en ;
@@ -3089,6 +3148,11 @@ At the beginning of your upkeep, put a night counter on this artifact. Then if i
     :cardNumber "380"^^xsd:integer ;
     :artist "Daniel Ljunggren" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :producesMana :Black ;
+    :producesMana :Red ;
+    :producesMana :Green ;
     :hasKeywordAbility :Indestructible ;
     :hasKeywordAbility :Kicker ;
     :printedText """Kicker {3}
@@ -3141,6 +3205,7 @@ When this artifact enters, if it was kicked, create two tapped tokens that are c
     :cardNumber "381"^^xsd:integer ;
     :artist "Mike Bierek" ;
     :hasLanguage :English ;
+    :producesMana :Colorless ;
     :printedText """{T}: Add {C}{C}."""@en ;
     :oracleText """{T}: Add {C}{C}."""@en ;
     :flavorText """Lost to time is the artificer's art of trapping light from a distant star in a ring of purest gold."""@en ;
@@ -3236,6 +3301,8 @@ At the beginning of your upkeep, if you control no Thopters other than this crea
     :cardNumber "395"^^xsd:integer ;
     :artist "Adam Paquette" ;
     :hasLanguage :English ;
+    :producesMana :Red ;
+    :producesMana :Green ;
     :printedText """({T}: Add {R} or {G}.)
 This land enters tapped unless you control two or more basic lands."""@en ;
     :oracleText """({T}: Add {R} or {G}.)
@@ -3272,6 +3339,11 @@ This land enters tapped unless you control two or more basic lands."""@en ;
     :cardNumber "396"^^xsd:integer ;
     :artist "Evan Shipard" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :producesMana :Black ;
+    :producesMana :Red ;
+    :producesMana :Green ;
     :printedText """{T}: Add one mana of any color in your commander's color identity."""@en ;
     :oracleText """{T}: Add one mana of any color in your commander's color identity."""@en ;
     :flavorText """"Approach my tower on bended knee or depart from it as ash upon the wind."
@@ -3307,6 +3379,7 @@ This land enters tapped unless you control two or more basic lands."""@en ;
     :cardNumber "397"^^xsd:integer ;
     :artist "Cliff Childs" ;
     :hasLanguage :English ;
+    :isFetchLand "true"^^xsd:boolean ;
     :printedText """{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."""@en ;
     :oracleText """{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."""@en ;
     :flavorText """"Our world is vast, but Thraben is its heart. The cathedral must stand even if the hinterlands are lost."
@@ -3332,6 +3405,11 @@ This land enters tapped unless you control two or more basic lands."""@en ;
     :cardNumber "398"^^xsd:integer ;
     :artist "Steven Belledin" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :producesMana :Black ;
+    :producesMana :Red ;
+    :producesMana :Green ;
     :printedText """{T}: Add one mana of any color that a land an opponent controls could produce."""@en ;
     :oracleText """{T}: Add one mana of any color that a land an opponent controls could produce."""@en ;
     :flavorText """"It was a strange morning. When we awoke, we found our trees transformed. We didn't know whether to water them or polish them."
@@ -3376,6 +3454,10 @@ This land enters tapped unless you control two or more basic lands."""@en ;
     :cardNumber "402"^^xsd:integer ;
     :artist "Titus Lunter" ;
     :hasLanguage :English ;
+    :producesMana :Blue ;
+    :producesMana :Red ;
+    :producesMana :Green ;
+    :entersTapped "true"^^xsd:boolean ;
     :printedText """This land enters tapped.
 {T}: Add {G}, {U}, or {R}."""@en ;
     :oracleText """This land enters tapped.
@@ -3405,6 +3487,9 @@ This land enters tapped unless you control two or more basic lands."""@en ;
     :cardNumber "403"^^xsd:integer ;
     :artist "Sam Burley" ;
     :hasLanguage :English ;
+    :producesMana :Blue ;
+    :producesMana :Red ;
+    :entersTapped "true"^^xsd:boolean ;
     :printedText """As this land enters, you may reveal an Island or Mountain card from your hand. If you don't, this land enters tapped.
 {T}: Add {U} or {R}."""@en ;
     :oracleText """As this land enters, you may reveal an Island or Mountain card from your hand. If you don't, this land enters tapped.
@@ -3446,6 +3531,9 @@ This land enters tapped unless you control two or more basic lands."""@en ;
     :cardNumber "405"^^xsd:integer ;
     :artist "Adam Paquette" ;
     :hasLanguage :English ;
+    :producesMana :Red ;
+    :producesMana :Green ;
+    :entersTapped "true"^^xsd:boolean ;
     :printedText """As this land enters, you may reveal a Mountain or Forest card from your hand. If you don't, this land enters tapped.
 {T}: Add {R} or {G}."""@en ;
     :oracleText """As this land enters, you may reveal a Mountain or Forest card from your hand. If you don't, this land enters tapped.
@@ -3487,6 +3575,9 @@ This land enters tapped unless you control two or more basic lands."""@en ;
     :cardNumber "407"^^xsd:integer ;
     :artist "Aaron Miller" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Black ;
+    :entersTapped "true"^^xsd:boolean ;
     :hasKeywordAbility :Indestructible ;
     :printedText """This land enters tapped.
 Indestructible
@@ -3516,6 +3607,8 @@ Indestructible
     :cardNumber "416"^^xsd:integer ;
     :artist "Jonas De Ro" ;
     :hasLanguage :English ;
+    :producesMana :Colorless ;
+    :entersTapped "true"^^xsd:boolean ;
     :printedText """This land enters tapped.
 {T}: Add {C}.
 {2}, {T}, Sacrifice this land: Search your library for up to two basic land cards that share a land type, put them onto the battlefield tapped, then shuffle."""@en ;
@@ -3547,6 +3640,12 @@ Indestructible
     :cardNumber "418"^^xsd:integer ;
     :artist "Alayna Danner" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :producesMana :Black ;
+    :producesMana :Red ;
+    :producesMana :Green ;
+    :entersTapped "true"^^xsd:boolean ;
     :hasKeywordAction :Scry ;
     :printedText """This land enters tapped.
 {T}: Add one mana of any color in your commander's color identity. When that mana is spent to cast a creature spell that shares a creature type with your commander, scry 1. (Look at the top card of your library. You may put that card on the bottom.)"""@en ;
@@ -3597,6 +3696,9 @@ Indestructible
     :cardNumber "424"^^xsd:integer ;
     :artist "John Avon" ;
     :hasLanguage :English ;
+    :producesMana :Blue ;
+    :producesMana :Green ;
+    :entersTapped "true"^^xsd:boolean ;
     :printedText """This land enters tapped.
 When this land enters, return a land you control to its owner's hand.
 {T}: Add {G}{U}."""@en ;
@@ -3630,6 +3732,9 @@ When this land enters, return a land you control to its owner's hand.
     :cardNumber "430"^^xsd:integer ;
     :artist "Adam Paquette" ;
     :hasLanguage :English ;
+    :producesMana :Red ;
+    :producesMana :Green ;
+    :entersTapped "true"^^xsd:boolean ;
     :hasKeywordAction :Scry ;
     :printedText """This land enters tapped.
 When this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)
@@ -3673,6 +3778,9 @@ When this land enters, scry 1. (Look at the top card of your library. You may pu
     :cardNumber "433"^^xsd:integer ;
     :artist "Adam Paquette" ;
     :hasLanguage :English ;
+    :producesMana :Blue ;
+    :producesMana :Red ;
+    :entersTapped "true"^^xsd:boolean ;
     :hasKeywordAction :Scry ;
     :printedText """This land enters tapped.
 When this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)
@@ -3703,6 +3811,9 @@ When this land enters, scry 1. (Look at the top card of your library. You may pu
     :cardNumber "434"^^xsd:integer ;
     :artist "Piotr Dura" ;
     :hasLanguage :English ;
+    :producesMana :Blue ;
+    :producesMana :Green ;
+    :entersTapped "true"^^xsd:boolean ;
     :hasKeywordAction :Scry ;
     :printedText """This land enters tapped.
 When this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)
@@ -3744,6 +3855,7 @@ When this land enters, scry 1. (Look at the top card of your library. You may pu
     :cardNumber "439"^^xsd:integer ;
     :artist "Dan Murayama Scott" ;
     :hasLanguage :English ;
+    :isFetchLand "true"^^xsd:boolean ;
     :printedText """{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."""@en ;
     :oracleText """{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."""@en ;
     :flavorText """Take two steps north into the unsettled future, south into the unquiet past, east into the present day, or west into the great unknown."""@en ;
@@ -3770,6 +3882,9 @@ When this land enters, scry 1. (Look at the top card of your library. You may pu
     :cardNumber "444"^^xsd:integer ;
     :artist "Sam Burley" ;
     :hasLanguage :English ;
+    :producesMana :Blue ;
+    :producesMana :Green ;
+    :entersTapped "true"^^xsd:boolean ;
     :printedText """As this land enters, you may reveal a Forest or Island card from your hand. If you don't, this land enters tapped.
 {T}: Add {G} or {U}."""@en ;
     :oracleText """As this land enters, you may reveal a Forest or Island card from your hand. If you don't, this land enters tapped.

@@ -1177,6 +1177,12 @@ Pay {E}{E}{E}{E}: Creatures you control get +1/+0 and gain haste until end of tu
     :cardNumber "211"^^xsd:integer ;
     :artist "Mike Bierek" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :producesMana :Black ;
+    :producesMana :Red ;
+    :producesMana :Green ;
+    :producesMana :Colorless ;
     :printedText """This artifact enters tapped.
 When this artifact enters, you get {E}{E}{E} (three energy counters).
 {T}: Add {C}.
@@ -1235,6 +1241,7 @@ When this artifact enters, you get {E}{E}{E} (three energy counters).
     :cardNumber "214"^^xsd:integer ;
     :artist "Yeong-Hao Han" ;
     :hasLanguage :English ;
+    :producesMana :Blue ;
     :printedText """This land enters tapped unless you control an Island.
 {T}: Add {U}.
 {U}, {T}: The next spell you cast this turn has improvise. (Your artifacts can help cast that spell. Each artifact you tap after you're done activating mana abilities pays for {1}.)"""@en ;
@@ -1315,6 +1322,7 @@ When this artifact enters, you get {E}{E}{E} (three energy counters).
     :cardNumber "310"^^xsd:integer ;
     :artist "Volkan Baǵa" ;
     :hasLanguage :English ;
+    :producesMana :White ;
     :printedText """({T}: Add {W}.)"""@en ;
     :oracleText """({T}: Add {W}.)"""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=660965"^^xsd:anyURI ;
@@ -1341,6 +1349,7 @@ When this artifact enters, you get {E}{E}{E} (three energy counters).
     :cardNumber "311"^^xsd:integer ;
     :artist "Lius Lasahido" ;
     :hasLanguage :English ;
+    :producesMana :White ;
     :printedText """({T}: Add {W}.)"""@en ;
     :oracleText """({T}: Add {W}.)"""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=660966"^^xsd:anyURI ;
@@ -1367,6 +1376,7 @@ When this artifact enters, you get {E}{E}{E} (three energy counters).
     :cardNumber "312"^^xsd:integer ;
     :artist "Alayna Danner" ;
     :hasLanguage :English ;
+    :producesMana :Blue ;
     :printedText """({T}: Add {U}.)"""@en ;
     :oracleText """({T}: Add {U}.)"""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=660967"^^xsd:anyURI ;
@@ -1393,6 +1403,7 @@ When this artifact enters, you get {E}{E}{E} (three energy counters).
     :cardNumber "313"^^xsd:integer ;
     :artist "Raph Lomotan" ;
     :hasLanguage :English ;
+    :producesMana :Blue ;
     :printedText """({T}: Add {U}.)"""@en ;
     :oracleText """({T}: Add {U}.)"""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=660968"^^xsd:anyURI ;
@@ -1419,6 +1430,7 @@ When this artifact enters, you get {E}{E}{E} (three energy counters).
     :cardNumber "316"^^xsd:integer ;
     :artist "Carlos Palma Cruchaga" ;
     :hasLanguage :English ;
+    :producesMana :Red ;
     :printedText """({T}: Add {R}.)"""@en ;
     :oracleText """({T}: Add {R}.)"""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=660971"^^xsd:anyURI ;
@@ -1445,6 +1457,7 @@ When this artifact enters, you get {E}{E}{E} (three energy counters).
     :cardNumber "317"^^xsd:integer ;
     :artist "Paolo Parente" ;
     :hasLanguage :English ;
+    :producesMana :Red ;
     :printedText """({T}: Add {R}.)"""@en ;
     :oracleText """({T}: Add {R}.)"""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=660972"^^xsd:anyURI ;
