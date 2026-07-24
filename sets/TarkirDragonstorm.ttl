@@ -103,6 +103,9 @@ subtype, format and legality definitions."""@en .
     :cardNumber "265"^^xsd:integer ;
     :artist "Carlos Palma Cruchaga" ;
     :hasLanguage :English ;
+    :producesMana :Red ;
+    :producesMana :Green ;
+    :entersTapped "true"^^xsd:boolean ;
     :printedText """This land enters tapped.
 When this land enters, you gain 1 life.
 {T}: Add {R} or {G}."""@en ;
@@ -135,6 +138,7 @@ When this land enters, you gain 1 life.
     :cardNumber "277"^^xsd:integer ;
     :artist "John Avon" ;
     :hasLanguage :English ;
+    :producesMana :White ;
     :printedText """({T}: Add {W}.)"""@en ;
     :oracleText """({T}: Add {W}.)"""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=693320"^^xsd:anyURI ;
@@ -161,6 +165,7 @@ When this land enters, you gain 1 life.
     :cardNumber "278"^^xsd:integer ;
     :artist "Valera Lutfullina" ;
     :hasLanguage :English ;
+    :producesMana :White ;
     :printedText """({T}: Add {W}.)"""@en ;
     :oracleText """({T}: Add {W}.)"""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=693321"^^xsd:anyURI ;
@@ -187,6 +192,7 @@ When this land enters, you gain 1 life.
     :cardNumber "281"^^xsd:integer ;
     :artist "Alexander Ostrowski" ;
     :hasLanguage :English ;
+    :producesMana :Black ;
     :printedText """({T}: Add {B}.)"""@en ;
     :oracleText """({T}: Add {B}.)"""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=693324"^^xsd:anyURI ;
@@ -213,6 +219,7 @@ When this land enters, you gain 1 life.
     :cardNumber "282"^^xsd:integer ;
     :artist "Arthur Yuan" ;
     :hasLanguage :English ;
+    :producesMana :Black ;
     :printedText """({T}: Add {B}.)"""@en ;
     :oracleText """({T}: Add {B}.)"""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=693325"^^xsd:anyURI ;
@@ -239,6 +246,7 @@ When this land enters, you gain 1 life.
     :cardNumber "285"^^xsd:integer ;
     :artist "Jesper Ejsing" ;
     :hasLanguage :English ;
+    :producesMana :Green ;
     :printedText """({T}: Add {G}.)"""@en ;
     :oracleText """({T}: Add {G}.)"""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=693328"^^xsd:anyURI ;
@@ -265,6 +273,7 @@ When this land enters, you gain 1 life.
     :cardNumber "286"^^xsd:integer ;
     :artist "Valera Lutfullina" ;
     :hasLanguage :English ;
+    :producesMana :Green ;
     :printedText """({T}: Add {G}.)"""@en ;
     :oracleText """({T}: Add {G}.)"""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=693329"^^xsd:anyURI ;

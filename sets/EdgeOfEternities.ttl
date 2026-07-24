@@ -1533,6 +1533,7 @@ Warp {1}{U} (You may cast this card from your hand for its warp cost. Exile this
     :cardNumber "80"^^xsd:integer ;
     :artist "Cristi Balanescu" ;
     :hasLanguage :English ;
+    :producesMana :Blue ;
     :power "1" ;
     :powerValue "1"^^xsd:integer ;
     :toughness "1" ;
@@ -3141,6 +3142,7 @@ Warp {R} (You may cast this card from your hand for its warp cost. Exile this cr
     :cardNumber "170"^^xsd:integer ;
     :artist "Justyna Dura" ;
     :hasLanguage :English ;
+    :producesMana :Red ;
     :power "1" ;
     :powerValue "1"^^xsd:integer ;
     :toughness "3" ;
@@ -3426,6 +3428,11 @@ When this creature dies, each player creates a Lander token. (It's an artifact w
     :cardNumber "186"^^xsd:integer ;
     :artist "Milivoj Ćeran" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :producesMana :Black ;
+    :producesMana :Red ;
+    :producesMana :Green ;
     :power "1" ;
     :powerValue "1"^^xsd:integer ;
     :toughness "2" ;
@@ -4399,6 +4406,12 @@ Equip {1}"""@en ;
     :cardNumber "241"^^xsd:integer ;
     :artist "Josu Solano" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :producesMana :Black ;
+    :producesMana :Red ;
+    :producesMana :Green ;
+    :producesMana :Colorless ;
     :hasKeywordAbility :Station ;
     :printedText """{T}: Add {C}{C}{C}.
 Station (Tap another creature you control: Put charge counters equal to its power on this Spacecraft. Station only as a sorcery.)
@@ -4616,6 +4629,12 @@ Station (Tap another creature you control: Put charge counters equal to its powe
     :cardNumber "252"^^xsd:integer ;
     :artist "Constantin Marin" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :producesMana :Black ;
+    :producesMana :Red ;
+    :producesMana :Green ;
+    :entersTapped "true"^^xsd:boolean ;
     :printedText """This land enters tapped.
 When this land enters, sacrifice it unless you tap an untapped permanent you control.
 {T}: Add one mana of any color."""@en ;
@@ -4644,6 +4663,8 @@ When this land enters, sacrifice it unless you tap an untapped permanent you con
     :cardNumber "253"^^xsd:integer ;
     :artist "Adam Paquette" ;
     :hasLanguage :English ;
+    :producesMana :Green ;
+    :entersTapped "true"^^xsd:boolean ;
     :hasKeywordAbility :Station ;
     :printedText """This land enters tapped.
 {T}: Add {G}.
@@ -4675,6 +4696,8 @@ Station (Tap another creature you control: Put charge counters equal to its powe
     :cardNumber "255"^^xsd:integer ;
     :artist "Adam Paquette" ;
     :hasLanguage :English ;
+    :producesMana :Red ;
+    :entersTapped "true"^^xsd:boolean ;
     :hasKeywordAbility :Station ;
     :printedText """This land enters tapped.
 {T}: Add {R}.
@@ -4706,6 +4729,8 @@ Station (Tap another creature you control: Put charge counters equal to its powe
     :cardNumber "259"^^xsd:integer ;
     :artist "Adam Paquette" ;
     :hasLanguage :English ;
+    :producesMana :Black ;
+    :entersTapped "true"^^xsd:boolean ;
     :hasKeywordAbility :Station ;
     :printedText """This land enters tapped.
 {T}: Add {B}.
@@ -4738,6 +4763,7 @@ Station (Tap another creature you control: Put charge counters equal to its powe
     :cardNumber "262"^^xsd:integer ;
     :artist "Adam Paquette" ;
     :hasLanguage :English ;
+    :producesMana :White ;
     :printedText """({T}: Add {W}.)"""@en ;
     :oracleText """({T}: Add {W}.)"""@en ;
     :scryfallUrl "https://scryfall.com/card/eoe/262/plains"^^xsd:anyURI ;
@@ -4763,6 +4789,7 @@ Station (Tap another creature you control: Put charge counters equal to its powe
     :cardNumber "263"^^xsd:integer ;
     :artist "Adam Paquette" ;
     :hasLanguage :English ;
+    :producesMana :Blue ;
     :printedText """({T}: Add {U}.)"""@en ;
     :oracleText """({T}: Add {U}.)"""@en ;
     :scryfallUrl "https://scryfall.com/card/eoe/263/island"^^xsd:anyURI ;
@@ -4788,6 +4815,7 @@ Station (Tap another creature you control: Put charge counters equal to its powe
     :cardNumber "264"^^xsd:integer ;
     :artist "Adam Paquette" ;
     :hasLanguage :English ;
+    :producesMana :Black ;
     :printedText """({T}: Add {B}.)"""@en ;
     :oracleText """({T}: Add {B}.)"""@en ;
     :scryfallUrl "https://scryfall.com/card/eoe/264/swamp"^^xsd:anyURI ;
@@ -4813,6 +4841,7 @@ Station (Tap another creature you control: Put charge counters equal to its powe
     :cardNumber "265"^^xsd:integer ;
     :artist "Adam Paquette" ;
     :hasLanguage :English ;
+    :producesMana :Red ;
     :printedText """({T}: Add {R}.)"""@en ;
     :oracleText """({T}: Add {R}.)"""@en ;
     :scryfallUrl "https://scryfall.com/card/eoe/265/mountain"^^xsd:anyURI ;
@@ -4838,6 +4867,7 @@ Station (Tap another creature you control: Put charge counters equal to its powe
     :cardNumber "266"^^xsd:integer ;
     :artist "Adam Paquette" ;
     :hasLanguage :English ;
+    :producesMana :Green ;
     :printedText """({T}: Add {G}.)"""@en ;
     :oracleText """({T}: Add {G}.)"""@en ;
     :scryfallUrl "https://scryfall.com/card/eoe/266/forest"^^xsd:anyURI ;
@@ -4863,6 +4893,7 @@ Station (Tap another creature you control: Put charge counters equal to its powe
     :cardNumber "267"^^xsd:integer ;
     :artist "Alayna Danner" ;
     :hasLanguage :English ;
+    :producesMana :White ;
     :printedText """({T}: Add {W}.)"""@en ;
     :oracleText """({T}: Add {W}.)"""@en ;
     :scryfallUrl "https://scryfall.com/card/eoe/267/plains"^^xsd:anyURI ;
@@ -4888,6 +4919,7 @@ Station (Tap another creature you control: Put charge counters equal to its powe
     :cardNumber "268"^^xsd:integer ;
     :artist "Sergey Glushakov" ;
     :hasLanguage :English ;
+    :producesMana :White ;
     :printedText """({T}: Add {W}.)"""@en ;
     :oracleText """({T}: Add {W}.)"""@en ;
     :scryfallUrl "https://scryfall.com/card/eoe/268/plains"^^xsd:anyURI ;
@@ -4913,6 +4945,7 @@ Station (Tap another creature you control: Put charge counters equal to its powe
     :cardNumber "269"^^xsd:integer ;
     :artist "Sergey Glushakov" ;
     :hasLanguage :English ;
+    :producesMana :Blue ;
     :printedText """({T}: Add {U}.)"""@en ;
     :oracleText """({T}: Add {U}.)"""@en ;
     :scryfallUrl "https://scryfall.com/card/eoe/269/island"^^xsd:anyURI ;
@@ -4938,6 +4971,7 @@ Station (Tap another creature you control: Put charge counters equal to its powe
     :cardNumber "270"^^xsd:integer ;
     :artist "Liiga Smilshkalne" ;
     :hasLanguage :English ;
+    :producesMana :Blue ;
     :printedText """({T}: Add {U}.)"""@en ;
     :oracleText """({T}: Add {U}.)"""@en ;
     :scryfallUrl "https://scryfall.com/card/eoe/270/island"^^xsd:anyURI ;
@@ -4963,6 +4997,7 @@ Station (Tap another creature you control: Put charge counters equal to its powe
     :cardNumber "271"^^xsd:integer ;
     :artist "Sergey Glushakov" ;
     :hasLanguage :English ;
+    :producesMana :Black ;
     :printedText """({T}: Add {B}.)"""@en ;
     :oracleText """({T}: Add {B}.)"""@en ;
     :scryfallUrl "https://scryfall.com/card/eoe/271/swamp"^^xsd:anyURI ;
@@ -4988,6 +5023,7 @@ Station (Tap another creature you control: Put charge counters equal to its powe
     :cardNumber "272"^^xsd:integer ;
     :artist "Liiga Smilshkalne" ;
     :hasLanguage :English ;
+    :producesMana :Black ;
     :printedText """({T}: Add {B}.)"""@en ;
     :oracleText """({T}: Add {B}.)"""@en ;
     :scryfallUrl "https://scryfall.com/card/eoe/272/swamp"^^xsd:anyURI ;
@@ -5013,6 +5049,7 @@ Station (Tap another creature you control: Put charge counters equal to its powe
     :cardNumber "273"^^xsd:integer ;
     :artist "Sergey Glushakov" ;
     :hasLanguage :English ;
+    :producesMana :Red ;
     :printedText """({T}: Add {R}.)"""@en ;
     :oracleText """({T}: Add {R}.)"""@en ;
     :scryfallUrl "https://scryfall.com/card/eoe/273/mountain"^^xsd:anyURI ;
@@ -5038,6 +5075,7 @@ Station (Tap another creature you control: Put charge counters equal to its powe
     :cardNumber "274"^^xsd:integer ;
     :artist "Julian Kok Joon Wen" ;
     :hasLanguage :English ;
+    :producesMana :Red ;
     :printedText """({T}: Add {R}.)"""@en ;
     :oracleText """({T}: Add {R}.)"""@en ;
     :scryfallUrl "https://scryfall.com/card/eoe/274/mountain"^^xsd:anyURI ;
@@ -5063,6 +5101,7 @@ Station (Tap another creature you control: Put charge counters equal to its powe
     :cardNumber "275"^^xsd:integer ;
     :artist "Sergey Glushakov" ;
     :hasLanguage :English ;
+    :producesMana :Green ;
     :printedText """({T}: Add {G}.)"""@en ;
     :oracleText """({T}: Add {G}.)"""@en ;
     :scryfallUrl "https://scryfall.com/card/eoe/275/forest"^^xsd:anyURI ;
@@ -5088,6 +5127,7 @@ Station (Tap another creature you control: Put charge counters equal to its powe
     :cardNumber "276"^^xsd:integer ;
     :artist "Julian Kok Joon Wen" ;
     :hasLanguage :English ;
+    :producesMana :Green ;
     :printedText """({T}: Add {G}.)"""@en ;
     :oracleText """({T}: Add {G}.)"""@en ;
     :scryfallUrl "https://scryfall.com/card/eoe/276/forest"^^xsd:anyURI ;
@@ -5112,6 +5152,8 @@ Station (Tap another creature you control: Put charge counters equal to its powe
     :cardNumber "285"^^xsd:integer ;
     :artist "Piotr Dura" ;
     :hasLanguage :English ;
+    :producesMana :Blue ;
+    :entersTapped "true"^^xsd:boolean ;
     :hasKeywordAbility :Station ;
     :printedText """This land enters tapped.
 {T}: Add {U}.

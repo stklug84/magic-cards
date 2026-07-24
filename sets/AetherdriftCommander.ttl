@@ -541,6 +541,11 @@ Equip {3}"""@en ;
     :cardNumber "18"^^xsd:integer ;
     :artist "Victor Sales" ;
     :hasLanguage :German ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :producesMana :Black ;
+    :producesMana :Red ;
+    :producesMana :Green ;
     :hasKeywordAction :Double ;
     :printedText """{T}: Erzeuge ein Mana einer beliebigen Farbe.
 {4}, {T}: Bestimme eines. Aktiviere diese Fähigkeit wie eine Hexerei.
@@ -806,6 +811,11 @@ If one or more artifact tokens would be created under your control, those tokens
     :cardNumber "52"^^xsd:integer ;
     :artist "Ernanda Souza" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :producesMana :Black ;
+    :producesMana :Red ;
+    :producesMana :Green ;
     :printedText """{T}: Add one mana of any color in your commander's color identity."""@en ;
     :oracleText """{T}: Add one mana of any color in your commander's color identity."""@en ;
     :flavorText """Avishkar's power comes from its joyful innovation, in the marvels that people can build when they work together for the common good."""@en ;
@@ -841,6 +851,11 @@ If one or more artifact tokens would be created under your control, those tokens
     :cardNumber "53"^^xsd:integer ;
     :artist "Julie Dillon" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :producesMana :Black ;
+    :producesMana :Red ;
+    :producesMana :Green ;
     :printedText """Lands you control have "{T}: Add one mana of any color."
 {T}: Add one mana of any color."""@en ;
     :oracleText """Lands you control have "{T}: Add one mana of any color."
@@ -954,6 +969,7 @@ Equip {0}"""@en ;
     :cardNumber "57"^^xsd:integer ;
     :artist "Piotr Dura" ;
     :hasLanguage :English ;
+    :producesMana :Colorless ;
     :printedText """{T}: Add {C}{C}."""@en ;
     :oracleText """{T}: Add {C}{C}."""@en ;
     :flavorText """"Nissa asked if the light of foreign suns could affect the flora of Avishkar through Omenpaths. I built a device to capture such light for further testing."
@@ -981,6 +997,7 @@ Equip {0}"""@en ;
     :cardNumber "58"^^xsd:integer ;
     :artist "Josu Solano" ;
     :hasLanguage :English ;
+    :producesMana :Colorless ;
     :printedText """{T}: Add {C}.
 {1}{U}, {T}: Put target artifact card from your graveyard on top of your library."""@en ;
     :oracleText """{T}: Add {C}.
@@ -1008,6 +1025,11 @@ Equip {0}"""@en ;
     :cardNumber "60"^^xsd:integer ;
     :artist "Alayna Danner" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :producesMana :Black ;
+    :producesMana :Red ;
+    :producesMana :Green ;
     :printedText """{T}: Add one mana of any color in your commander's color identity."""@en ;
     :oracleText """{T}: Add one mana of any color in your commander's color identity."""@en ;
     :flavorText """"You think I sit in this seat because of luck? Because of providence? I hold this seat because I alone am fit to fill it."
@@ -1490,6 +1512,7 @@ Pay six {E}, Sacrifice this enchantment: Draw three cards."""@en ;
     :cardNumber "79"^^xsd:integer ;
     :artist "Alexander Forssberg" ;
     :hasLanguage :English ;
+    :producesMana :Blue ;
     :printedText """{T}: Add {U}.
 {2}{U}: Put an hour counter on this artifact.
 At the beginning of each upkeep, put an hour counter on this artifact.
@@ -2338,6 +2361,11 @@ Pay {E}{E}{E}: Target creature blocks this turn if able."""@en ;
     :cardNumber "114"^^xsd:integer ;
     :artist "Magali Villeneuve" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :producesMana :Black ;
+    :producesMana :Red ;
+    :producesMana :Green ;
     :power "2" ;
     :powerValue "2"^^xsd:integer ;
     :toughness "2" ;
@@ -2653,6 +2681,11 @@ Pay {E}{E}{E}: Create a 1/1 colorless Thopter artifact creature token with flyin
     :cardNumber "125"^^xsd:integer ;
     :artist "Ryan Alexander Lee" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :producesMana :Black ;
+    :producesMana :Red ;
+    :producesMana :Green ;
     :printedText """{T}: Add one mana of any color in your commander's color identity.
 Sacrifice this artifact: Draw a card."""@en ;
     :oracleText """{T}: Add one mana of any color in your commander's color identity.
@@ -2730,6 +2763,11 @@ Sacrifice this artifact: Draw a card."""@en ;
     :cardNumber "127"^^xsd:integer ;
     :artist "Mark Zug" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :producesMana :Black ;
+    :producesMana :Red ;
+    :producesMana :Green ;
     :power "5" ;
     :powerValue "5"^^xsd:integer ;
     :toughness "5" ;
@@ -2858,6 +2896,11 @@ Crew 3 (Tap any number of creatures you control with total power 3 or more: This
     :cardNumber "133"^^xsd:integer ;
     :artist "Raoul Vitale" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :producesMana :Black ;
+    :producesMana :Red ;
+    :producesMana :Green ;
     :power "0" ;
     :powerValue "0"^^xsd:integer ;
     :toughness "2" ;
@@ -2974,6 +3017,12 @@ Crew 3 (Tap any number of creatures you control with total power 3 or more: This
     :cardNumber "137"^^xsd:integer ;
     :artist "Mike Bierek" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :producesMana :Black ;
+    :producesMana :Red ;
+    :producesMana :Green ;
+    :producesMana :Colorless ;
     :printedText """This artifact enters tapped.
 When this artifact enters, you get {E}{E}{E} (three energy counters).
 {T}: Add {C}.
@@ -3094,6 +3143,9 @@ When this creature dies, you may draw a card."""@en ;
     :cardNumber "140"^^xsd:integer ;
     :artist "Lindsey Look" ;
     :hasLanguage :English ;
+    :producesMana :Blue ;
+    :producesMana :Green ;
+    :producesMana :Colorless ;
     :printedText """{T}: Add {C}.
 {T}: Add {G} or {U}. This artifact deals 1 damage to you."""@en ;
     :oracleText """{T}: Add {C}.
@@ -3156,6 +3208,12 @@ When this creature dies, create a 3/3 colorless Golem artifact creature token wi
     :cardNumber "145"^^xsd:integer ;
     :artist "Sam Burley" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :producesMana :Black ;
+    :producesMana :Red ;
+    :producesMana :Green ;
+    :producesMana :Colorless ;
     :printedText """When this land enters, you get {E} (an energy counter).
 {T}: Add {C}.
 {T}, Pay {E}: Add one mana of any color."""@en ;
@@ -3212,6 +3270,7 @@ When this creature dies, create a 3/3 colorless Golem artifact creature token wi
     :cardNumber "154"^^xsd:integer ;
     :artist "Andreas Rocha" ;
     :hasLanguage :English ;
+    :isFetchLand "true"^^xsd:boolean ;
     :printedText """{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."""@en ;
     :oracleText """{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."""@en ;
     :flavorText """The land is ever resilient. Should it die, it will be reborn."""@en ;
@@ -3236,6 +3295,11 @@ When this creature dies, create a 3/3 colorless Golem artifact creature token wi
     :cardNumber "155"^^xsd:integer ;
     :artist "Steven Belledin" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :producesMana :Black ;
+    :producesMana :Red ;
+    :producesMana :Green ;
     :printedText """{T}: Add one mana of any color that a land an opponent controls could produce."""@en ;
     :oracleText """{T}: Add one mana of any color that a land an opponent controls could produce."""@en ;
     :flavorText """"It was a strange morning. When we awoke, we found our trees transformed. We didn't know whether to water them or polish them."
@@ -3280,6 +3344,10 @@ When this creature dies, create a 3/3 colorless Golem artifact creature token wi
     :cardNumber "157"^^xsd:integer ;
     :artist "Titus Lunter" ;
     :hasLanguage :English ;
+    :producesMana :Blue ;
+    :producesMana :Red ;
+    :producesMana :Green ;
+    :entersTapped "true"^^xsd:boolean ;
     :printedText """This land enters tapped.
 {T}: Add {G}, {U}, or {R}."""@en ;
     :oracleText """This land enters tapped.
@@ -3309,6 +3377,9 @@ When this creature dies, create a 3/3 colorless Golem artifact creature token wi
     :cardNumber "158"^^xsd:integer ;
     :artist "Sam Burley" ;
     :hasLanguage :English ;
+    :producesMana :Blue ;
+    :producesMana :Red ;
+    :entersTapped "true"^^xsd:boolean ;
     :printedText """As this land enters, you may reveal an Island or Mountain card from your hand. If you don't, this land enters tapped.
 {T}: Add {U} or {R}."""@en ;
     :oracleText """As this land enters, you may reveal an Island or Mountain card from your hand. If you don't, this land enters tapped.
@@ -3350,6 +3421,8 @@ When this creature dies, create a 3/3 colorless Golem artifact creature token wi
     :cardNumber "160"^^xsd:integer ;
     :artist "Daniel Ljunggren" ;
     :hasLanguage :English ;
+    :producesMana :Blue ;
+    :producesMana :Green ;
     :printedText """This land enters tapped unless you control a Forest or an Island.
 {T}: Add {G} or {U}."""@en ;
     :oracleText """This land enters tapped unless you control a Forest or an Island.
@@ -3379,6 +3452,9 @@ When this creature dies, create a 3/3 colorless Golem artifact creature token wi
     :cardNumber "163"^^xsd:integer ;
     :artist "Sam Burley" ;
     :hasLanguage :English ;
+    :producesMana :Red ;
+    :producesMana :Green ;
+    :producesMana :Colorless ;
     :printedText """{T}: Add {C}.
 {T}: Add {R} or {G}. This land deals 1 damage to you."""@en ;
     :oracleText """{T}: Add {C}.
@@ -3407,6 +3483,8 @@ When this creature dies, create a 3/3 colorless Golem artifact creature token wi
     :cardNumber "165"^^xsd:integer ;
     :artist "Sarah Finnigan" ;
     :hasLanguage :English ;
+    :producesMana :Blue ;
+    :producesMana :Green ;
     :printedText """{1}, {T}: Add {G}{U}."""@en ;
     :oracleText """{1}, {T}: Add {G}{U}."""@en ;
     :flavorText """Still to the ignorant eye, yet bursting with life. A million actions and reactions, unstoppable as the dawn."""@en ;
@@ -3431,6 +3509,12 @@ When this creature dies, create a 3/3 colorless Golem artifact creature token wi
     :cardNumber "166"^^xsd:integer ;
     :artist "Alayna Danner" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :producesMana :Black ;
+    :producesMana :Red ;
+    :producesMana :Green ;
+    :entersTapped "true"^^xsd:boolean ;
     :hasKeywordAction :Scry ;
     :printedText """This land enters tapped.
 {T}: Add one mana of any color in your commander's color identity. When that mana is spent to cast a creature spell that shares a creature type with your commander, scry 1. (Look at the top card of your library. You may put that card on the bottom.)"""@en ;
@@ -3481,6 +3565,8 @@ When this creature dies, create a 3/3 colorless Golem artifact creature token wi
     :cardNumber "168"^^xsd:integer ;
     :artist "Grzegorz Rutkowski" ;
     :hasLanguage :English ;
+    :producesMana :Red ;
+    :producesMana :Green ;
     :printedText """This land enters tapped unless you control a Mountain or a Forest.
 {T}: Add {R} or {G}."""@en ;
     :oracleText """This land enters tapped unless you control a Mountain or a Forest.
@@ -3518,6 +3604,9 @@ When this creature dies, create a 3/3 colorless Golem artifact creature token wi
     :cardNumber "169"^^xsd:integer ;
     :artist "Sung Choi" ;
     :hasLanguage :English ;
+    :producesMana :Red ;
+    :producesMana :Green ;
+    :entersTapped "true"^^xsd:boolean ;
     :hasKeywordAbility :Cycling ;
     :printedText """({T}: Add {R} or {G}.)
 This land enters tapped.
@@ -3548,6 +3637,9 @@ Cycling {2} ({2}, Discard this card: Draw a card.)"""@en ;
     :cardNumber "170"^^xsd:integer ;
     :artist "Andrew Mar" ;
     :hasLanguage :English ;
+    :producesMana :Blue ;
+    :producesMana :Red ;
+    :producesMana :Colorless ;
     :printedText """{T}: Add {C}.
 {T}: Add {U} or {R}. This land deals 1 damage to you."""@en ;
     :oracleText """{T}: Add {C}.
@@ -3584,6 +3676,9 @@ Cycling {2} ({2}, Discard this card: Draw a card.)"""@en ;
     :cardNumber "171"^^xsd:integer ;
     :artist "Lucas Graciano" ;
     :hasLanguage :English ;
+    :producesMana :Red ;
+    :producesMana :Green ;
+    :entersTapped "true"^^xsd:boolean ;
     :hasKeywordAbility :Indestructible ;
     :printedText """This land enters tapped.
 Indestructible
@@ -3613,6 +3708,12 @@ Indestructible
     :cardNumber "172"^^xsd:integer ;
     :artist "John Avon" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :producesMana :Black ;
+    :producesMana :Red ;
+    :producesMana :Green ;
+    :producesMana :Colorless ;
     :printedText """{T}: Add {C}.
 {T}, Pay 1 life: Add one mana of any color. Activate only if you control an artifact."""@en ;
     :oracleText """{T}: Add {C}.
@@ -3641,6 +3742,8 @@ Indestructible
     :cardNumber "173"^^xsd:integer ;
     :artist "Cliff Childs" ;
     :hasLanguage :English ;
+    :producesMana :Blue ;
+    :producesMana :Red ;
     :printedText """This land enters tapped unless you control an Island or a Mountain.
 {T}: Add {U} or {R}."""@en ;
     :oracleText """This land enters tapped unless you control an Island or a Mountain.
@@ -3671,6 +3774,9 @@ Indestructible
     :cardNumber "175"^^xsd:integer ;
     :artist "Randy Gallegos" ;
     :hasLanguage :English ;
+    :producesMana :Blue ;
+    :producesMana :Green ;
+    :entersTapped "true"^^xsd:boolean ;
     :hasKeywordAbility :Indestructible ;
     :printedText """This land enters tapped.
 Indestructible
@@ -3702,6 +3808,9 @@ Indestructible
     :cardNumber "177"^^xsd:integer ;
     :artist "Yeong-Hao Han" ;
     :hasLanguage :English ;
+    :producesMana :Blue ;
+    :producesMana :Red ;
+    :entersTapped "true"^^xsd:boolean ;
     :hasKeywordAction :Scry ;
     :printedText """This land enters tapped.
 When this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)
@@ -3731,6 +3840,7 @@ When this land enters, scry 1. (Look at the top card of your library. You may pu
     :cardNumber "180"^^xsd:integer ;
     :artist "Johannes Voss" ;
     :hasLanguage :English ;
+    :producesMana :Colorless ;
     # Note: keyword "Treasure" not defined in MagicCardsOntology
     :printedText """{T}: Add {C}.
 {X}{X}, {T}, Sacrifice this land: Create X Treasure tokens."""@en ;
@@ -3760,6 +3870,9 @@ When this land enters, scry 1. (Look at the top card of your library. You may pu
     :cardNumber "183"^^xsd:integer ;
     :artist "Sam Burley" ;
     :hasLanguage :English ;
+    :producesMana :Blue ;
+    :producesMana :Green ;
+    :entersTapped "true"^^xsd:boolean ;
     :printedText """As this land enters, you may reveal a Forest or Island card from your hand. If you don't, this land enters tapped.
 {T}: Add {G} or {U}."""@en ;
     :oracleText """As this land enters, you may reveal a Forest or Island card from your hand. If you don't, this land enters tapped.
@@ -3801,6 +3914,9 @@ When this land enters, scry 1. (Look at the top card of your library. You may pu
     :cardNumber "184"^^xsd:integer ;
     :artist "Jesper Ejsing" ;
     :hasLanguage :English ;
+    :producesMana :Blue ;
+    :producesMana :Green ;
+    :producesMana :Colorless ;
     :printedText """{T}: Add {C}.
 {T}: Add {G} or {U}. This land deals 1 damage to you."""@en ;
     :oracleText """{T}: Add {C}.

@@ -68,6 +68,7 @@ subtype, format and legality definitions."""@en .
     :cardNumber "26"^^xsd:integer ;
     :artist "Cristi Balanescu" ;
     :hasLanguage :English ;
+    :producesMana :White ;
     :power "6" ;
     :powerValue "6"^^xsd:integer ;
     :toughness "6" ;

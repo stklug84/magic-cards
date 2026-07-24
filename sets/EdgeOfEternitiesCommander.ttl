@@ -562,6 +562,11 @@ Once during each of your turns, you may cast a permanent spell from your graveya
     :cardNumber "18"^^xsd:integer ;
     :artist "Sergey Glushakov" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :producesMana :Black ;
+    :producesMana :Red ;
+    :producesMana :Green ;
     :printedText """{T}: Add one mana of any color. When you next cast an artifact spell this turn, that spell gains sunburst. (If it's a creature, it enters with a +1/+1 counter on it for each color of mana spent to cast it. Otherwise, it enters with that many charge counters on it.)"""@en ;
     :oracleText """{T}: Add one mana of any color. When you next cast an artifact spell this turn, that spell gains sunburst. (If it's a creature, it enters with a +1/+1 counter on it for each color of mana spent to cast it. Otherwise, it enters with that many charge counters on it.)"""@en ;
     :flavorText """Sothera collapses, but its light is not yet gone."""@en ;
@@ -646,6 +651,9 @@ Once during each of your turns, you may cast a permanent spell from your graveya
     :cardNumber "22"^^xsd:integer ;
     :artist "Cristi Balanescu" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Red ;
+    :entersTapped "true"^^xsd:boolean ;
     :hasKeywordAbility :Cycling ;
     :printedText """({T}: Add {R} or {W}.)
 This land enters tapped.
@@ -678,6 +686,8 @@ Cycling {2} ({2}, Discard this card: Draw a card.)"""@en ;
     :cardNumber "23"^^xsd:integer ;
     :artist "Marco Gorlei" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Red ;
     :printedText """({T}: Add {R} or {W}.)
 This land enters tapped unless you control two or more basic lands."""@en ;
     :oracleText """({T}: Add {R} or {W}.)
@@ -904,6 +914,11 @@ Draw two cards, then proliferate. (Choose any number of permanents and/or player
     :cardNumber "53"^^xsd:integer ;
     :artist "Constantin Marin" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :producesMana :Black ;
+    :producesMana :Red ;
+    :producesMana :Green ;
     :printedText """{T}: Add one mana of any color in your commander's color identity."""@en ;
     :oracleText """{T}: Add one mana of any color in your commander's color identity."""@en ;
     :flavorText """"An ordered Sothera is a peaceful Sothera. Join the Strategic Corps today and proudly turn the gears of progress!"
@@ -1003,6 +1018,11 @@ Equip—Pay {3} or remove a counter from this Equipment."""@en ;
     :cardNumber "56"^^xsd:integer ;
     :artist "Lindsey Look" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :producesMana :Black ;
+    :producesMana :Red ;
+    :producesMana :Green ;
     :hasKeywordAbility :Sunburst ;
     :printedText """Sunburst (This artifact enters with a charge counter on it for each color of mana spent to cast it.)
 Remove a charge counter from this artifact: Add one mana of any color."""@en ;
@@ -1037,6 +1057,7 @@ Remove a charge counter from this artifact: Add one mana of any color."""@en ;
     :cardNumber "57"^^xsd:integer ;
     :artist "Steven Belledin" ;
     :hasLanguage :English ;
+    :producesMana :Colorless ;
     :printedText """{T}: Add {C}{C}."""@en ;
     :oracleText """{T}: Add {C}{C}."""@en ;
     :flavorText """"All creation in a single point, the point of all creation in all."
@@ -1063,6 +1084,9 @@ Remove a charge counter from this artifact: Add one mana of any color."""@en ;
     :cardNumber "58"^^xsd:integer ;
     :artist "Manuel Castañón" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Red ;
+    :producesMana :Colorless ;
     :printedText """{T}: Add {C}.
 {T}: Add {R} or {W}. This land deals 1 damage to you."""@en ;
     :oracleText """{T}: Add {C}.
@@ -1096,6 +1120,11 @@ Remove a charge counter from this artifact: Add one mana of any color."""@en ;
     :cardNumber "59"^^xsd:integer ;
     :artist "Constantin Marin" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :producesMana :Black ;
+    :producesMana :Red ;
+    :producesMana :Green ;
     :printedText """{T}: Add one mana of any color in your commander's color identity."""@en ;
     :oracleText """{T}: Add one mana of any color in your commander's color identity."""@en ;
     :flavorText """"Thus, the shattered half of the planet was named Kavaron That Is, and the capital was moved to Kavaron Before."
@@ -2118,6 +2147,11 @@ Artifact spells you cast cost {1} less to cast."""@en ;
     :cardNumber "131"^^xsd:integer ;
     :artist "Aleksi Briclot" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :producesMana :Black ;
+    :producesMana :Red ;
+    :producesMana :Green ;
     :printedText """This artifact enters with X charge counters on it.
 {T}: Choose a color. Add one mana of that color for each charge counter on this artifact."""@en ;
     :oracleText """This artifact enters with X charge counters on it.
@@ -2184,6 +2218,11 @@ Sacrifice this creature: Put two charge counters on target artifact."""@en ;
     :cardNumber "133"^^xsd:integer ;
     :artist "Jason Felix" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :producesMana :Black ;
+    :producesMana :Red ;
+    :producesMana :Green ;
     :power "1" ;
     :powerValue "1"^^xsd:integer ;
     :toughness "1" ;
@@ -2257,6 +2296,11 @@ When this artifact has twenty or more charge counters on it, you win the game.""
     :cardNumber "135"^^xsd:integer ;
     :artist "Piotr Dura" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :producesMana :Black ;
+    :producesMana :Red ;
+    :producesMana :Green ;
     :printedText """This artifact enters tapped.
 {T}: Put a charge counter on this artifact. Add X mana of any one color, where X is the number of charge counters on this artifact."""@en ;
     :oracleText """This artifact enters tapped.
@@ -2319,6 +2363,7 @@ When this artifact has twenty or more charge counters on it, you win the game.""
     :cardNumber "137"^^xsd:integer ;
     :artist "Steve Argyle" ;
     :hasLanguage :English ;
+    :producesMana :Colorless ;
     # Note: keyword "Multikicker" not defined in MagicCardsOntology
     :printedText """Multikicker {2} (You may pay an additional {2} any number of times as you cast this spell.)
 This artifact enters with a charge counter on it for each time it was kicked.
@@ -2640,6 +2685,9 @@ Whenever this creature enters or attacks, create a number of 1/1 colorless Gnome
     :cardNumber "147"^^xsd:integer ;
     :artist "Piotr Dura" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :producesMana :Colorless ;
     :printedText """{T}: Add {C}.
 {T}: Add {W} or {U}. This land deals 1 damage to you."""@en ;
     :oracleText """{T}: Add {C}.
@@ -2667,6 +2715,7 @@ Whenever this creature enters or attacks, create a number of 1/1 colorless Gnome
     :cardNumber "148"^^xsd:integer ;
     :artist "Rob Alexander" ;
     :hasLanguage :English ;
+    :producesMana :White ;
     :printedText """{T}: Add {W}."""@en ;
     :oracleText """{T}: Add {W}."""@en ;
     :flavorText """Taj-Nar, throne of Raksha Golden Cub, destined leader of the leonin prides."""@en ;
@@ -2690,6 +2739,7 @@ Whenever this creature enters or attacks, create a number of 1/1 colorless Gnome
     :cardNumber "150"^^xsd:integer ;
     :artist "Franz Vohwinkel" ;
     :hasLanguage :English ;
+    :producesMana :Colorless ;
     :printedText """{T}: Add {C}.
 {2}, {T}, Sacrifice this land: Return target artifact card from your graveyard to your hand."""@en ;
     :oracleText """{T}: Add {C}.
@@ -2717,6 +2767,9 @@ Whenever this creature enters or attacks, create a number of 1/1 colorless Gnome
     :cardNumber "153"^^xsd:integer ;
     :artist "Brandon Kitkouski" ;
     :hasLanguage :English ;
+    :producesMana :Blue ;
+    :producesMana :Red ;
+    :producesMana :Colorless ;
     :printedText """{T}: Add {C}.
 {U/R}, {T}: Add {U}{U}, {U}{R}, or {R}{R}."""@en ;
     :oracleText """{T}: Add {C}.
@@ -2744,6 +2797,8 @@ Whenever this creature enters or attacks, create a number of 1/1 colorless Gnome
     :cardNumber "155"^^xsd:integer ;
     :artist "Christine Choi" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Red ;
     :printedText """This land enters tapped unless you control a Mountain or a Plains.
 {T}: Add {R} or {W}."""@en ;
     :oracleText """This land enters tapped unless you control a Mountain or a Plains.
@@ -2769,6 +2824,7 @@ Whenever this creature enters or attacks, create a number of 1/1 colorless Gnome
     :cardNumber "158"^^xsd:integer ;
     :artist "Andreas Rocha" ;
     :hasLanguage :English ;
+    :isFetchLand "true"^^xsd:boolean ;
     :printedText """{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."""@en ;
     :oracleText """{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."""@en ;
     :flavorText """The land is ever resilient. Should it die, it will be reborn."""@en ;
@@ -2792,6 +2848,11 @@ Whenever this creature enters or attacks, create a number of 1/1 colorless Gnome
     :cardNumber "159"^^xsd:integer ;
     :artist "Steven Belledin" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :producesMana :Black ;
+    :producesMana :Red ;
+    :producesMana :Green ;
     :printedText """{T}: Add one mana of any color that a land an opponent controls could produce."""@en ;
     :oracleText """{T}: Add one mana of any color that a land an opponent controls could produce."""@en ;
     :flavorText """"It was a strange morning. When we awoke, we found our trees transformed. We didn't know whether to water them or polish them."
@@ -2834,6 +2895,8 @@ Whenever this creature enters or attacks, create a number of 1/1 colorless Gnome
     :cardNumber "160"^^xsd:integer ;
     :artist "James Paick" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
     :printedText """This land enters tapped unless you control a Plains or an Island.
 {T}: Add {W} or {U}."""@en ;
     :oracleText """This land enters tapped unless you control a Plains or an Island.
@@ -2868,6 +2931,7 @@ Whenever this creature enters or attacks, create a number of 1/1 colorless Gnome
     :cardNumber "161"^^xsd:integer ;
     :artist "Rob Alexander" ;
     :hasLanguage :English ;
+    :producesMana :Red ;
     :printedText """{T}: Add {R}."""@en ;
     :oracleText """{T}: Add {R}."""@en ;
     :flavorText """Kuldotha, wellspring of molten metal, temple of the goblin horde."""@en ;
@@ -2895,6 +2959,9 @@ Whenever this creature enters or attacks, create a number of 1/1 colorless Gnome
     :cardNumber "162"^^xsd:integer ;
     :artist "Jonas De Ro" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :entersTapped "true"^^xsd:boolean ;
     :hasKeywordAbility :Cycling ;
     :printedText """({T}: Add {W} or {U}.)
 This land enters tapped.
@@ -2922,6 +2989,7 @@ Cycling {2} ({2}, Discard this card: Draw a card.)"""@en ;
     :cardNumber "163"^^xsd:integer ;
     :artist "Adam Paquette" ;
     :hasLanguage :English ;
+    :producesMana :Colorless ;
     :hasKeywordAction :Proliferate ;
     :printedText """{T}: Add {C}.
 {4}, {T}: Proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)"""@en ;
@@ -2969,6 +3037,8 @@ Cycling {2} ({2}, Discard this card: Draw a card.)"""@en ;
     :cardNumber "166"^^xsd:integer ;
     :artist "Heather Hudson" ;
     :hasLanguage :English ;
+    :producesMana :Blue ;
+    :entersTapped "true"^^xsd:boolean ;
     :hasKeywordAbility :Cycling ;
     :printedText """This land enters tapped.
 {T}: Add {U}.
@@ -2997,6 +3067,12 @@ Cycling {U} ({U}, Discard this card: Draw a card.)"""@en ;
     :cardNumber "168"^^xsd:integer ;
     :artist "Andrew Mar" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :producesMana :Black ;
+    :producesMana :Red ;
+    :producesMana :Green ;
+    :producesMana :Colorless ;
     :printedText """{T}: Add {C}.
 {1}, {T}: Add one mana of any color.
 {X}, {T}: This land becomes a copy of target nontoken artifact you control with mana value X."""@en ;
@@ -3037,6 +3113,10 @@ Cycling {U} ({U}, Discard this card: Draw a card.)"""@en ;
     :cardNumber "170"^^xsd:integer ;
     :artist "Leon Tukker" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :producesMana :Red ;
+    :entersTapped "true"^^xsd:boolean ;
     :printedText """This land enters tapped.
 {T}: Add {U}, {R}, or {W}."""@en ;
     :oracleText """This land enters tapped.
@@ -3065,6 +3145,9 @@ Cycling {U} ({U}, Discard this card: Draw a card.)"""@en ;
     :cardNumber "171"^^xsd:integer ;
     :artist "Rob Alexander" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :entersTapped "true"^^xsd:boolean ;
     :hasKeywordAbility :Indestructible ;
     :printedText """This land enters tapped.
 Indestructible
@@ -3095,6 +3178,9 @@ Indestructible
     :cardNumber "174"^^xsd:integer ;
     :artist "Fred Fields" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Red ;
+    :producesMana :Colorless ;
     :printedText """{T}: Add {C}.
 {R/W}, {T}: Add {R}{R}, {R}{W}, or {W}{W}."""@en ;
     :oracleText """{T}: Add {C}.
@@ -3123,6 +3209,9 @@ Indestructible
     :cardNumber "175"^^xsd:integer ;
     :artist "Craig J Spearing" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Red ;
+    :entersTapped "true"^^xsd:boolean ;
     :hasKeywordAbility :Indestructible ;
     :printedText """This land enters tapped.
 Indestructible
@@ -3153,6 +3242,7 @@ Indestructible
     :cardNumber "176"^^xsd:integer ;
     :artist "John Avon" ;
     :hasLanguage :English ;
+    :producesMana :Blue ;
     :printedText """{T}: Add {U}."""@en ;
     :oracleText """{T}: Add {U}."""@en ;
     :flavorText """Lumengrid, site of the Knowledge Pool, source of vedalken arcana."""@en ;
@@ -3177,6 +3267,8 @@ Indestructible
     :cardNumber "177"^^xsd:integer ;
     :artist "Heather Hudson" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :entersTapped "true"^^xsd:boolean ;
     :hasKeywordAbility :Cycling ;
     :printedText """This land enters tapped.
 {T}: Add {W}.
@@ -3206,6 +3298,9 @@ Cycling {W} ({W}, Discard this card: Draw a card.)"""@en ;
     :cardNumber "179"^^xsd:integer ;
     :artist "Andrew Mar" ;
     :hasLanguage :English ;
+    :producesMana :Blue ;
+    :producesMana :Red ;
+    :producesMana :Colorless ;
     :printedText """{T}: Add {C}.
 {T}: Add {U} or {R}. This land deals 1 damage to you."""@en ;
     :oracleText """{T}: Add {C}.
@@ -3241,6 +3336,9 @@ Cycling {W} ({W}, Discard this card: Draw a card.)"""@en ;
     :cardNumber "180"^^xsd:integer ;
     :artist "Joseph Meehan" ;
     :hasLanguage :German ;
+    :producesMana :Blue ;
+    :producesMana :Red ;
+    :entersTapped "true"^^xsd:boolean ;
     :hasKeywordAbility :Indestructible ;
     :printedText """This land enters tapped.
 Indestructible
@@ -3271,6 +3369,8 @@ Indestructible
     :cardNumber "181"^^xsd:integer ;
     :artist "Rob Alexander" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
     :printedText """{1}, {T}: Add {W}{U}."""@en ;
     :oracleText """{1}, {T}: Add {W}{U}."""@en ;
     :flavorText """From Otaria, the sun above meets the sea below at a glittering horizon."""@en ;
@@ -3294,6 +3394,12 @@ Indestructible
     :cardNumber "183"^^xsd:integer ;
     :artist "John Avon" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :producesMana :Black ;
+    :producesMana :Red ;
+    :producesMana :Green ;
+    :producesMana :Colorless ;
     :printedText """{T}: Add {C}.
 {T}, Pay 1 life: Add one mana of any color. Activate only if you control an artifact."""@en ;
     :oracleText """{T}: Add {C}.
@@ -3321,6 +3427,8 @@ Indestructible
     :cardNumber "184"^^xsd:integer ;
     :artist "Cliff Childs" ;
     :hasLanguage :English ;
+    :producesMana :Blue ;
+    :producesMana :Red ;
     :printedText """This land enters tapped unless you control an Island or a Mountain.
 {T}: Add {U} or {R}."""@en ;
     :oracleText """This land enters tapped unless you control an Island or a Mountain.
@@ -3349,6 +3457,9 @@ Indestructible
     :cardNumber "186"^^xsd:integer ;
     :artist "Piotr Dura" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :entersTapped "true"^^xsd:boolean ;
     :hasKeywordAction :Scry ;
     :printedText """This land enters tapped.
 When this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)
@@ -3391,6 +3502,9 @@ When this land enters, scry 1. (Look at the top card of your library. You may pu
     :cardNumber "187"^^xsd:integer ;
     :artist "Adam Paquette" ;
     :hasLanguage :English ;
+    :producesMana :Blue ;
+    :producesMana :Red ;
+    :entersTapped "true"^^xsd:boolean ;
     :hasKeywordAction :Scry ;
     :printedText """This land enters tapped.
 When this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)
@@ -3420,6 +3534,9 @@ When this land enters, scry 1. (Look at the top card of your library. You may pu
     :cardNumber "188"^^xsd:integer ;
     :artist "Piotr Dura" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Red ;
+    :entersTapped "true"^^xsd:boolean ;
     :hasKeywordAction :Scry ;
     :printedText """This land enters tapped.
 When this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)

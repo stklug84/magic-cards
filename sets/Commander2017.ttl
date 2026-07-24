@@ -63,6 +63,8 @@ subtype, format and legality definitions."""@en .
     :cardNumber "259"^^xsd:integer ;
     :artist "James Paick" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :entersTapped "true"^^xsd:boolean ;
     :printedText """This land enters tapped.
 When this land enters, you gain 2 life.
 {T}: Add {W}."""@en ;

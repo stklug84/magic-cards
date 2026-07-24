@@ -240,6 +240,38 @@ def parse_type_line(tl, vocab, sub_by_label):
     return supers, types, subs
 
 
+PRODUCED_ORDER = ["W", "U", "B", "R", "G", "C"]
+PRODUCED_IND = {"W": "White", "U": "Blue", "B": "Black", "R": "Red",
+                "G": "Green", "C": "Colorless"}
+_TAPPED_RE = re.compile(r"enters (?:the battlefield )?tapped(?! unless)",
+                        re.I)
+_FETCH_RE = re.compile(r"search your librar(?:y|ies) for [^.]*land", re.I)
+
+
+def mana_fact_lines(card) -> list:
+    """Turtle lines for :producesMana / :entersTapped / :isFetchLand.
+
+    :producesMana comes from Scryfall's structured produced_mana field;
+    :entersTapped is asserted only for unconditional taplands ("... unless"
+    forms are omitted); :isFetchLand for sacrifice-to-search lands that do
+    not produce mana themselves.
+    """
+    lines = []
+    produced = [s for s in card.get("produced_mana") or []
+                if s in PRODUCED_IND]
+    for sym in sorted(produced, key=PRODUCED_ORDER.index):
+        lines.append(f"    :producesMana :{PRODUCED_IND[sym]} ;")
+    faces = card.get("card_faces") or [card]
+    oracle = "\n".join(f.get("oracle_text", "") for f in faces)
+    type_line = card.get("type_line") or faces[0].get("type_line", "")
+    is_land = "Land" in type_line
+    if is_land and _TAPPED_RE.search(oracle):
+        lines.append('    :entersTapped "true"^^xsd:boolean ;')
+    if is_land and not produced and _FETCH_RE.search(oracle):
+        lines.append('    :isFetchLand "true"^^xsd:boolean ;')
+    return lines
+
+
 def card_block(ind, card, info, vocab, sub_by_label, kw_map, rulings, notes):
     L = []
     add = L.append
@@ -292,6 +324,8 @@ def card_block(ind, card, info, vocab, sub_by_label, kw_map, rulings, notes):
     if card.get("artist"):
         add(f'    :artist "{esc_str(card["artist"])}" ;')
     add(f"    :hasLanguage :{LANG[info['language']]} ;")
+    for line in mana_fact_lines(card):
+        add(line)
 
     if front.get("power") is not None:
         add(f'    :power "{esc_str(front["power"])}" ;')
@@ -651,6 +685,83 @@ def cmd_collection():
         print(f"NOT IN sets/*.ttl ({len(missing)}):", missing)
 
 
+# ---------------------------------------------------------------- augment
+
+def cmd_augment_mana():
+    """Backfill :producesMana / :entersTapped / :isFetchLand triples.
+
+    Post-processes the existing sets/*.ttl and MagicExternalCards.ttl card
+    blocks in place (keyed by :scryfallUrl against the Scryfall cache,
+    fetching uncached printings on demand). Idempotent: blocks that already
+    carry mana-fact triples are left untouched. Avoids a full `generate`
+    run, which could rename individuals.
+    """
+    url_re = re.compile(r':scryfallUrl "https://scryfall\.com/card/'
+                        r'([^/"]+)/([^/"]+)/')
+    lang_re = re.compile(r"^    :hasLanguage :\w+ ;$", re.M)
+    files = sorted((ROOT / "sets").glob("*.ttl"))
+    ext = ROOT / "MagicExternalCards.ttl"
+    if ext.exists():
+        files.append(ext)
+
+    cards_file = CACHE / "cards.json"
+    cards = json.loads(cards_file.read_text()) if cards_file.exists() else {}
+    by_key = {k.lower(): v for k, v in cards.items()}
+
+    # collect printings referenced by blocks but missing from the cache
+    todo = []
+    for path in files:
+        for s, n in url_re.findall(path.read_text()):
+            if f"{s}|{n}".lower() not in by_key:
+                todo.append((s, n))
+    for i in range(0, len(todo), 75):
+        batch = todo[i:i + 75]
+        idents = [{"set": s, "collector_number": n} for s, n in batch]
+        resp = http_json(f"{API}/cards/collection", {"identifiers": idents})
+        for c in resp["data"]:
+            key = f"{c['set']}|{c['collector_number']}"
+            cards[key] = c
+            by_key[key.lower()] = c
+        if resp.get("not_found"):
+            print("NOT FOUND:", resp["not_found"])
+        time.sleep(0.15)
+    if todo:
+        cards_file.write_text(json.dumps(cards))
+
+    n_blocks = n_facts = n_skipped = 0
+    for path in files:
+        text = path.read_text()
+        blocks = re.split(r"\n(?=:\w+ rdf:type owl:NamedIndividual)", text)
+        out = []
+        changed = False
+        for block in blocks:
+            m = url_re.search(block)
+            if m and ":cardName" in block:
+                n_blocks += 1
+                if (":producesMana" in block or ":entersTapped" in block
+                        or ":isFetchLand" in block):
+                    n_skipped += 1
+                elif (card := by_key.get(
+                        f"{m.group(1)}|{m.group(2)}".lower())) is not None:
+                    lines = mana_fact_lines(card)
+                    if lines:
+                        lm = lang_re.search(block)
+                        if lm:
+                            block = (block[:lm.end()] + "\n"
+                                     + "\n".join(lines) + block[lm.end():])
+                            n_facts += len(lines)
+                            changed = True
+                else:
+                    print(f"no scryfall data: {path.name} "
+                          f"{m.group(1)}/{m.group(2)}")
+            out.append(block)
+        if changed:
+            path.write_text("\n".join(out))
+    print(f"blocks: {n_blocks}  facts inserted: {n_facts}  "
+          f"already present: {n_skipped}")
+
+
 if __name__ == "__main__":
     {"fetch": cmd_fetch, "generate": cmd_generate,
-     "collection": cmd_collection}[sys.argv[1]]()
+     "collection": cmd_collection,
+     "augment-mana": cmd_augment_mana}[sys.argv[1]]()

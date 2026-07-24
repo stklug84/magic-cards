@@ -246,6 +246,7 @@ Whenever Ghired attacks, populate. The token enters tapped and attacking. (To po
     :cardNumber "292"^^xsd:integer ;
     :artist "Florian de Gesincourt" ;
     :hasLanguage :English ;
+    :producesMana :Blue ;
     :printedText """({T}: Add {U}.)"""@en ;
     :oracleText """({T}: Add {U}.)"""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=470838"^^xsd:anyURI ;

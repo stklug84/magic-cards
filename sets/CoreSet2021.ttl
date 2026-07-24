@@ -114,6 +114,7 @@ subtype, format and legality definitions."""@en .
     :cardNumber "248"^^xsd:integer ;
     :artist "Adam Paquette" ;
     :hasLanguage :English ;
+    :producesMana :Colorless ;
     :printedText """When this land enters, you gain 2 life.
 {T}: Add {C}."""@en ;
     :oracleText """When this land enters, you gain 2 life.
@@ -144,6 +145,7 @@ subtype, format and legality definitions."""@en .
     :cardNumber "260"^^xsd:integer ;
     :artist "John Avon" ;
     :hasLanguage :English ;
+    :producesMana :White ;
     :printedText """({T}: Add {W}.)"""@en ;
     :oracleText """({T}: Add {W}.)"""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=488461"^^xsd:anyURI ;
@@ -170,6 +172,7 @@ subtype, format and legality definitions."""@en .
     :cardNumber "261"^^xsd:integer ;
     :artist "Nils Hamm" ;
     :hasLanguage :English ;
+    :producesMana :White ;
     :printedText """({T}: Add {W}.)"""@en ;
     :oracleText """({T}: Add {W}.)"""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=488462"^^xsd:anyURI ;
@@ -196,6 +199,7 @@ subtype, format and legality definitions."""@en .
     :cardNumber "262"^^xsd:integer ;
     :artist "Andreas Rocha" ;
     :hasLanguage :English ;
+    :producesMana :White ;
     :printedText """({T}: Add {W}.)"""@en ;
     :oracleText """({T}: Add {W}.)"""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=488463"^^xsd:anyURI ;

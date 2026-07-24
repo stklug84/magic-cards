@@ -1096,6 +1096,7 @@ Flying"""@en ;
     :cardNumber "69"^^xsd:integer ;
     :artist "Ryan Alexander Lee" ;
     :hasLanguage :English ;
+    :producesMana :Colorless ;
     :hasKeywordAbility :Enchant ;
     :printedText """Enchant creature, land, or planeswalker
 Enchanted permanent is a colorless land with "{T}: Add {C}" and loses all other card types and abilities."""@en ;
@@ -2452,6 +2453,8 @@ Choose one or both —
     :cardNumber "150"^^xsd:integer ;
     :artist "Raymond Swanland" ;
     :hasLanguage :English ;
+    :producesMana :Red ;
+    :producesMana :Colorless ;
     :power "2" ;
     :powerValue "2"^^xsd:integer ;
     :toughness "3" ;
@@ -3443,6 +3446,11 @@ Whenever a creature dies, put a +1/+1 counter on this creature."""@en ;
     :cardNumber "215"^^xsd:integer ;
     :artist "Steve Argyle" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :producesMana :Black ;
+    :producesMana :Red ;
+    :producesMana :Green ;
     :power "0" ;
     :powerValue "0"^^xsd:integer ;
     :toughness "1" ;
@@ -4137,6 +4145,8 @@ When Helvault is put into a graveyard from the battlefield, return all cards exi
     :cardNumber "276"^^xsd:integer ;
     :artist "Jonas De Ro" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
     :printedText """This land enters tapped unless you control two or more other lands.
 {T}: Add {W} or {U}."""@en ;
     :oracleText """This land enters tapped unless you control two or more other lands.
@@ -4167,6 +4177,7 @@ When Helvault is put into a graveyard from the battlefield, return all cards exi
     :cardNumber "278"^^xsd:integer ;
     :artist "Cliff Childs" ;
     :hasLanguage :English ;
+    :isFetchLand "true"^^xsd:boolean ;
     :printedText """{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."""@en ;
     :oracleText """{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."""@en ;
     :flavorText """"Our world is vast, but Thraben is its heart. The cathedral must stand even if the hinterlands are lost."
@@ -4194,6 +4205,8 @@ When Helvault is put into a graveyard from the battlefield, return all cards exi
     :cardNumber "282"^^xsd:integer ;
     :artist "Muhammad Firdaus" ;
     :hasLanguage :English ;
+    :producesMana :Red ;
+    :producesMana :Green ;
     :printedText """This land enters tapped unless you control two or more other lands.
 {T}: Add {R} or {G}."""@en ;
     :oracleText """This land enters tapped unless you control two or more other lands.
@@ -4227,6 +4240,7 @@ When Helvault is put into a graveyard from the battlefield, return all cards exi
     :cardNumber "289"^^xsd:integer ;
     :artist "Andreas Rocha" ;
     :hasLanguage :English ;
+    :producesMana :White ;
     :printedText """({T}: Add {W}.)"""@en ;
     :oracleText """({T}: Add {W}.)"""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=685605"^^xsd:anyURI ;
@@ -4253,6 +4267,7 @@ When Helvault is put into a graveyard from the battlefield, return all cards exi
     :cardNumber "290"^^xsd:integer ;
     :artist "Jonas De Ro" ;
     :hasLanguage :English ;
+    :producesMana :Blue ;
     :printedText """({T}: Add {U}.)"""@en ;
     :oracleText """({T}: Add {U}.)"""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=685606"^^xsd:anyURI ;
@@ -4279,6 +4294,7 @@ When Helvault is put into a graveyard from the battlefield, return all cards exi
     :cardNumber "291"^^xsd:integer ;
     :artist "Adam Paquette" ;
     :hasLanguage :English ;
+    :producesMana :Blue ;
     :printedText """({T}: Add {U}.)"""@en ;
     :oracleText """({T}: Add {U}.)"""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=685607"^^xsd:anyURI ;
@@ -4305,6 +4321,7 @@ When Helvault is put into a graveyard from the battlefield, return all cards exi
     :cardNumber "292"^^xsd:integer ;
     :artist "Jung Park" ;
     :hasLanguage :English ;
+    :producesMana :Black ;
     :printedText """({T}: Add {B}.)"""@en ;
     :oracleText """({T}: Add {B}.)"""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=685608"^^xsd:anyURI ;
@@ -4331,6 +4348,7 @@ When Helvault is put into a graveyard from the battlefield, return all cards exi
     :cardNumber "295"^^xsd:integer ;
     :artist "Sam White" ;
     :hasLanguage :English ;
+    :producesMana :Red ;
     :printedText """({T}: Add {R}.)"""@en ;
     :oracleText """({T}: Add {R}.)"""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=685611"^^xsd:anyURI ;
@@ -4357,6 +4375,7 @@ When Helvault is put into a graveyard from the battlefield, return all cards exi
     :cardNumber "296"^^xsd:integer ;
     :artist "Jung Park" ;
     :hasLanguage :English ;
+    :producesMana :Green ;
     :printedText """({T}: Add {G}.)"""@en ;
     :oracleText """({T}: Add {G}.)"""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=685612"^^xsd:anyURI ;
@@ -4383,6 +4402,7 @@ When Helvault is put into a graveyard from the battlefield, return all cards exi
     :cardNumber "297"^^xsd:integer ;
     :artist "Eytan Zana" ;
     :hasLanguage :English ;
+    :producesMana :Green ;
     :printedText """({T}: Add {G}.)"""@en ;
     :oracleText """({T}: Add {G}.)"""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=685613"^^xsd:anyURI ;

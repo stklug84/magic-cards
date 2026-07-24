@@ -170,6 +170,9 @@ When this creature enters, create four 1/1 green Insect creature tokens with fly
     :cardNumber "269"^^xsd:integer ;
     :artist "Raoul Vitale" ;
     :hasLanguage :English ;
+    :producesMana :Black ;
+    :producesMana :Green ;
+    :entersTapped "true"^^xsd:boolean ;
     :hasKeywordAbility :Indestructible ;
     :printedText """This land enters tapped.
 Indestructible
@@ -201,6 +204,7 @@ Indestructible
     :cardNumber "319"^^xsd:integer ;
     :artist "John Avon" ;
     :hasLanguage :English ;
+    :producesMana :Green ;
     :printedText """{T}: Add {G}."""@en ;
     :oracleText """{T}: Add {G}."""@en ;
     :flavorText """Tel-Jilad, sanctum of the ancient trolls, keepers of the secret of Mirrodin's origin."""@en ;

@@ -185,6 +185,7 @@ Whenever you expend 4, you may discard your hand. If you do, draw two cards. (Yo
     :cardNumber "375"^^xsd:integer ;
     :artist "Samuele Bandini" ;
     :hasLanguage :English ;
+    :producesMana :Red ;
     :printedText """({T}: Add {R}.)"""@en ;
     :oracleText """({T}: Add {R}.)"""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=668672"^^xsd:anyURI ;
@@ -211,6 +212,7 @@ Whenever you expend 4, you may discard your hand. If you do, draw two cards. (Yo
     :cardNumber "376"^^xsd:integer ;
     :artist "Adam Paquette" ;
     :hasLanguage :English ;
+    :producesMana :Red ;
     :printedText """({T}: Add {R}.)"""@en ;
     :oracleText """({T}: Add {R}.)"""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=668673"^^xsd:anyURI ;

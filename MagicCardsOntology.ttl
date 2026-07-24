@@ -1486,6 +1486,85 @@ preconditions under which the object card's abilities deliver value
              """Inverse of :enables. The subject card's abilities deliver
 their full value because the object card creates the preconditions."""@en .
 
+# --- Mana Production Facts ---
+:producesMana rdf:type owl:ObjectProperty ;
+              rdfs:domain :Card ;
+              rdfs:label "Produces Mana" ;
+              rdfs:comment
+              """Relates a card to a color of mana that one of its mana
+abilities can produce (see rules 106.1 and 605). The object is one of the
+five :Color individuals or :Colorless. Derived from structured Scryfall
+data (produced_mana), not from parsing oracle text."""@en .
+
+:entersTapped rdf:type owl:DatatypeProperty ;
+              rdfs:domain :Card ;
+              rdfs:range xsd:boolean ;
+              rdfs:label "Enters Tapped" ;
+              rdfs:comment
+              """True if the permanent unconditionally enters the battlefield
+tapped (a "tapland"). Conditional forms ("unless you control...", "if you
+have two or more opponents") are not asserted. See rule 614.1c for the
+replacement-effect nature of entering tapped."""@en .
+
+:isFetchLand rdf:type owl:DatatypeProperty ;
+             rdfs:domain :Card ;
+             rdfs:range xsd:boolean ;
+             rdfs:label "Is Fetch Land" ;
+             rdfs:comment
+             """True if the land's primary ability sacrifices it to search
+the library for one or more land cards (e.g. Evolving Wilds, Myriad
+Landscape) rather than producing mana itself."""@en .
+
+# --- Simulation Behavior Annotations ---
+:BehaviorHook rdf:type owl:Class ;
+              rdfs:label "Behavior Hook" ;
+              rdfs:comment
+              """A reified simulation annotation attaching one machine-readable
+behavior key/value pair to a card, consumed by the Monte-Carlo matchup
+simulator (scripts/mtgsim). Behavior hooks encode card semantics that cannot
+be reliably derived from oracle text by pattern matching. They are
+house-authored simulation opinion, not Wizards of the Coast card facts, and
+therefore live in the separate instance graph
+MagicSimulationAnnotations.ttl."""@en .
+
+:hasBehaviorHook rdf:type owl:ObjectProperty ;
+                 rdfs:domain :Card ;
+                 rdfs:range :BehaviorHook ;
+                 rdfs:label "Has Behavior Hook" ;
+                 rdfs:comment
+                 """Attaches a simulation BehaviorHook to a card individual.
+Hooks apply to the card (identified by name), not to a specific printing;
+by convention they are asserted on the printing referenced by the deck
+graphs."""@en .
+
+:behaviorKey rdf:type owl:DatatypeProperty ;
+             rdfs:domain :BehaviorHook ;
+             rdfs:range xsd:string ;
+             rdfs:label "Behavior Key" ;
+             rdfs:comment
+             """The behavior hook's key. Must be one of the whitelisted keys
+in scripts/mtgsim/behaviors.py (BEHAVIOR_KEYS)."""@en .
+
+:behaviorValue rdf:type owl:DatatypeProperty ;
+               rdfs:domain :BehaviorHook ;
+               rdfs:range xsd:string ;
+               rdfs:label "Behavior Value" ;
+               rdfs:comment
+               """The behavior hook's value as a JSON literal (e.g. "true",
+"2", "[4, 1, 1, true]", "{\\"style\\": \\"damage\\", \\"dmg\\": 13}"). JSON is
+used because hook values are heterogeneous (booleans, integers, tuples,
+objects); consumers parse this with a standard JSON parser."""@en .
+
+:threatWeight rdf:type owl:DatatypeProperty ;
+              rdfs:domain :Card ;
+              rdfs:range xsd:nonNegativeInteger ;
+              rdfs:label "Threat Weight" ;
+              rdfs:comment
+              """Simulation annotation: how badly opponents want this
+permanent removed, on a 0-10 scale. Consumed by the simulator's AI threat
+assessment. House-authored opinion, asserted in
+MagicSimulationAnnotations.ttl."""@en .
+
 :hasKeyword rdf:type owl:ObjectProperty ;
             rdfs:domain :Card ;
             rdfs:range :Keyword ;

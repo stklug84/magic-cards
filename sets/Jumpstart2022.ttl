@@ -116,6 +116,7 @@ subtype, format and legality definitions."""@en .
     :cardNumber "104"^^xsd:integer ;
     :artist "Mike Bierek" ;
     :hasLanguage :English ;
+    :producesMana :Black ;
     :printedText """({T}: Add {B}.)"""@en ;
     :oracleText """({T}: Add {B}.)"""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=597751"^^xsd:anyURI ;
@@ -142,6 +143,7 @@ subtype, format and legality definitions."""@en .
     :cardNumber "105"^^xsd:integer ;
     :artist "Jonas De Ro" ;
     :hasLanguage :English ;
+    :producesMana :Black ;
     :printedText """({T}: Add {B}.)"""@en ;
     :oracleText """({T}: Add {B}.)"""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=597752"^^xsd:anyURI ;
@@ -168,6 +170,7 @@ subtype, format and legality definitions."""@en .
     :cardNumber "106"^^xsd:integer ;
     :artist "Alexander Forssberg" ;
     :hasLanguage :English ;
+    :producesMana :Black ;
     :printedText """({T}: Add {B}.)"""@en ;
     :oracleText """({T}: Add {B}.)"""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=597753"^^xsd:anyURI ;
@@ -194,6 +197,7 @@ subtype, format and legality definitions."""@en .
     :cardNumber "107"^^xsd:integer ;
     :artist "Sam Burley" ;
     :hasLanguage :English ;
+    :producesMana :Red ;
     :printedText """({T}: Add {R}.)"""@en ;
     :oracleText """({T}: Add {R}.)"""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=597754"^^xsd:anyURI ;
@@ -220,6 +224,7 @@ subtype, format and legality definitions."""@en .
     :cardNumber "108"^^xsd:integer ;
     :artist "Piotr Dura" ;
     :hasLanguage :English ;
+    :producesMana :Red ;
     :printedText """({T}: Add {R}.)"""@en ;
     :oracleText """({T}: Add {R}.)"""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=597755"^^xsd:anyURI ;
@@ -246,6 +251,7 @@ subtype, format and legality definitions."""@en .
     :cardNumber "109"^^xsd:integer ;
     :artist "Andreas Rocha" ;
     :hasLanguage :English ;
+    :producesMana :Red ;
     :printedText """({T}: Add {R}.)"""@en ;
     :oracleText """({T}: Add {R}.)"""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=597756"^^xsd:anyURI ;

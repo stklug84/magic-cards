@@ -131,6 +131,7 @@ When this creature enters, other creatures you control get +2/+2 and gain vigila
     :cardNumber "282"^^xsd:integer ;
     :artist "Leon Tukker" ;
     :hasLanguage :English ;
+    :producesMana :Blue ;
     :printedText """({T}: Add {U}.)"""@en ;
     :oracleText """({T}: Add {U}.)"""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=689042"^^xsd:anyURI ;
@@ -157,6 +158,7 @@ When this creature enters, other creatures you control get +2/+2 and gain vigila
     :cardNumber "288"^^xsd:integer ;
     :artist "Leon Tukker" ;
     :hasLanguage :English ;
+    :producesMana :Red ;
     :printedText """({T}: Add {R}.)"""@en ;
     :oracleText """({T}: Add {R}.)"""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=689048"^^xsd:anyURI ;
@@ -183,6 +185,7 @@ When this creature enters, other creatures you control get +2/+2 and gain vigila
     :cardNumber "291"^^xsd:integer ;
     :artist "Leon Tukker" ;
     :hasLanguage :English ;
+    :producesMana :Green ;
     :printedText """({T}: Add {G}.)"""@en ;
     :oracleText """({T}: Add {G}.)"""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=689051"^^xsd:anyURI ;
@@ -342,6 +345,11 @@ Crew 3 (Tap any number of creatures you control with total power 3 or more: This
     :cardNumber "391"^^xsd:integer ;
     :artist "Ernanda Souza" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :producesMana :Black ;
+    :producesMana :Red ;
+    :producesMana :Green ;
     :power "2" ;
     :powerValue "2"^^xsd:integer ;
     :toughness "4" ;

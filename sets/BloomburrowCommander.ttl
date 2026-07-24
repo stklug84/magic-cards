@@ -136,6 +136,7 @@ At the beginning of each end step, create a token that's a copy of target creatu
     :cardNumber "132"^^xsd:integer ;
     :artist "Jesper Ejsing" ;
     :hasLanguage :English ;
+    :producesMana :Colorless ;
     :printedText """You have no maximum hand size.
 {T}: Add {C}."""@en ;
     :oracleText """You have no maximum hand size.

@@ -108,6 +108,7 @@ subtype, format and legality definitions."""@en .
     :cardNumber "285"^^xsd:integer ;
     :artist "John Avon" ;
     :hasLanguage :English ;
+    :producesMana :Colorless ;
     :hasKeywordAbility :Indestructible ;
     :printedText """Indestructible
 {T}: Add {C}."""@en ;

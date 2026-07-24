@@ -65,6 +65,7 @@ subtype, format and legality definitions."""@en .
     :cardNumber "84"^^xsd:integer ;
     :artist "Jonas De Ro" ;
     :hasLanguage :English ;
+    :producesMana :Blue ;
     :printedText """({T}: Add {U}.)"""@en ;
     :oracleText """({T}: Add {U}.)"""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=681239"^^xsd:anyURI ;
@@ -91,6 +92,7 @@ subtype, format and legality definitions."""@en .
     :cardNumber "85"^^xsd:integer ;
     :artist "Yeong-Hao Han" ;
     :hasLanguage :English ;
+    :producesMana :Blue ;
     :printedText """({T}: Add {U}.)"""@en ;
     :oracleText """({T}: Add {U}.)"""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=681240"^^xsd:anyURI ;
@@ -117,6 +119,7 @@ subtype, format and legality definitions."""@en .
     :cardNumber "86"^^xsd:integer ;
     :artist "Yeong-Hao Han" ;
     :hasLanguage :English ;
+    :producesMana :Blue ;
     :printedText """({T}: Add {U}.)"""@en ;
     :oracleText """({T}: Add {U}.)"""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=681241"^^xsd:anyURI ;
@@ -143,6 +146,7 @@ subtype, format and legality definitions."""@en .
     :cardNumber "93"^^xsd:integer ;
     :artist "Dimitar Marinski" ;
     :hasLanguage :English ;
+    :producesMana :Green ;
     :printedText """({T}: Add {G}.)"""@en ;
     :oracleText """({T}: Add {G}.)"""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=681248"^^xsd:anyURI ;
@@ -169,6 +173,7 @@ subtype, format and legality definitions."""@en .
     :cardNumber "94"^^xsd:integer ;
     :artist "Adam Paquette" ;
     :hasLanguage :English ;
+    :producesMana :Green ;
     :printedText """({T}: Add {G}.)"""@en ;
     :oracleText """({T}: Add {G}.)"""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=681249"^^xsd:anyURI ;
@@ -195,6 +200,7 @@ subtype, format and legality definitions."""@en .
     :cardNumber "95"^^xsd:integer ;
     :artist "Vincent Proce" ;
     :hasLanguage :English ;
+    :producesMana :Green ;
     :printedText """({T}: Add {G}.)"""@en ;
     :oracleText """({T}: Add {G}.)"""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=681250"^^xsd:anyURI ;

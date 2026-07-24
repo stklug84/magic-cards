@@ -294,6 +294,7 @@ Other nontoken creatures you control have fabricate 1.
     :cardNumber "92"^^xsd:integer ;
     :artist "Lindsey Look" ;
     :hasLanguage :English ;
+    :producesMana :White ;
     :printedText """{T}: Add {W}. Put a time counter on this artifact.
 {T}, Remove X time counters from this artifact and exile it: Return each nonland permanent card with mana value X from your graveyard to the battlefield. Activate only as a sorcery."""@en ;
     :oracleText """{T}: Add {W}. Put a time counter on this artifact.
@@ -1021,6 +1022,12 @@ Whenever you gain life, you get that many {E} (energy counters).
     :cardNumber "128"^^xsd:integer ;
     :artist "Alayna Danner" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :producesMana :Black ;
+    :producesMana :Red ;
+    :producesMana :Green ;
+    :producesMana :Colorless ;
     :printedText """{T}: Add {C}.
 {3}, {T}: You get {E}{E}{E} (three energy counters).
 {T}, Pay {E}{E}{E}: Add three mana in any combination of colors."""@en ;
@@ -1891,6 +1898,7 @@ Pay six {E}, Sacrifice this enchantment: Draw three cards."""@en ;
     :cardNumber "189"^^xsd:integer ;
     :artist "Alexander Forssberg" ;
     :hasLanguage :English ;
+    :producesMana :Blue ;
     :printedText """{T}: Add {U}.
 {2}{U}: Put an hour counter on this artifact.
 At the beginning of each upkeep, put an hour counter on this artifact.
@@ -2046,6 +2054,11 @@ When this creature enters, target opponent may have you draw three cards. If the
     :cardNumber "212"^^xsd:integer ;
     :artist "Andrew Mar" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :producesMana :Black ;
+    :producesMana :Red ;
+    :producesMana :Green ;
     :power "4" ;
     :powerValue "4"^^xsd:integer ;
     :toughness "4" ;
@@ -2560,6 +2573,11 @@ Crew 1 (Tap any number of creatures you control with total power 1 or more: This
     :cardNumber "283"^^xsd:integer ;
     :artist "Dan Murayama Scott" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :producesMana :Black ;
+    :producesMana :Red ;
+    :producesMana :Green ;
     :printedText """{T}: Add one mana of any color in your commander's color identity."""@en ;
     :oracleText """{T}: Add one mana of any color in your commander's color identity."""@en ;
     :flavorText """It started as a mere drop of water. The Magic Mirror crystallized it into much more."""@en ;
@@ -2626,6 +2644,11 @@ Crew 1 (Tap any number of creatures you control with total power 1 or more: This
     :cardNumber "286"^^xsd:integer ;
     :artist "Donato Giancola" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :producesMana :Black ;
+    :producesMana :Red ;
+    :producesMana :Green ;
     :printedText """{T}: Add one mana of any color.
 {T}: Put a charge counter on this artifact.
 At the beginning of your first main phase, remove all charge counters from this artifact. Add one mana of any color for each charge counter removed this way."""@en ;
@@ -2661,6 +2684,11 @@ At the beginning of your first main phase, remove all charge counters from this 
     :cardNumber "287"^^xsd:integer ;
     :artist "Jason A. Engle" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :producesMana :Black ;
+    :producesMana :Red ;
+    :producesMana :Green ;
     :printedText """When this artifact enters, draw three cards.
 {T}: Add three mana of any one color.
 Whenever one or more creatures an opponent controls attack you and aren't blocked, that player draws three cards and gains control of this artifact. Untap it."""@en ;
@@ -2856,6 +2884,7 @@ Whenever this creature attacks, you may tap X untapped Myr you control. If you d
     :cardNumber "305"^^xsd:integer ;
     :artist "Mike Bierek" ;
     :hasLanguage :English ;
+    :producesMana :Colorless ;
     :printedText """{T}: Add {C}{C}."""@en ;
     :oracleText """{T}: Add {C}{C}."""@en ;
     :flavorText """Lost to time is the artificer's art of trapping light from a distant star in a ring of purest gold."""@en ;
@@ -2915,6 +2944,9 @@ When this creature dies, you may draw a card."""@en ;
     :cardNumber "307"^^xsd:integer ;
     :artist "Lindsey Look" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Red ;
+    :producesMana :Colorless ;
     :printedText """{T}: Add {C}.
 {T}: Add {R} or {W}. This artifact deals 1 damage to you."""@en ;
     :oracleText """{T}: Add {C}.
@@ -2945,6 +2977,9 @@ When this creature dies, you may draw a card."""@en ;
     :cardNumber "308"^^xsd:integer ;
     :artist "Lindsey Look" ;
     :hasLanguage :English ;
+    :producesMana :Blue ;
+    :producesMana :Red ;
+    :producesMana :Colorless ;
     :printedText """{T}: Add {C}.
 {T}: Add {U} or {R}. This artifact deals 1 damage to you."""@en ;
     :oracleText """{T}: Add {C}.
@@ -2975,6 +3010,9 @@ When this creature dies, you may draw a card."""@en ;
     :cardNumber "313"^^xsd:integer ;
     :artist "Mike Dringenberg" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :producesMana :Colorless ;
     :printedText """{T}: Add {C}.
 {T}: Add {W} or {U}. This artifact deals 1 damage to you."""@en ;
     :oracleText """{T}: Add {C}.
@@ -3027,6 +3065,9 @@ When this creature dies, you may draw a card."""@en ;
     :cardNumber "316"^^xsd:integer ;
     :artist "Piotr Dura" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :producesMana :Colorless ;
     :printedText """{T}: Add {C}.
 {T}: Add {W} or {U}. This land deals 1 damage to you."""@en ;
     :oracleText """{T}: Add {C}.
@@ -3053,6 +3094,12 @@ When this creature dies, you may draw a card."""@en ;
     :cardNumber "317"^^xsd:integer ;
     :artist "Sam Burley" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :producesMana :Black ;
+    :producesMana :Red ;
+    :producesMana :Green ;
+    :producesMana :Colorless ;
     :printedText """When this land enters, you get {E} (an energy counter).
 {T}: Add {C}.
 {T}, Pay {E}: Add one mana of any color."""@en ;
@@ -3111,6 +3158,9 @@ When this creature dies, you may draw a card."""@en ;
     :cardNumber "319"^^xsd:integer ;
     :artist "John Avon" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :entersTapped "true"^^xsd:boolean ;
     :printedText """This land enters tapped.
 When this land enters, return a land you control to its owner's hand.
 {T}: Add {W}{U}."""@en ;
@@ -3144,6 +3194,9 @@ When this land enters, return a land you control to its owner's hand.
     :cardNumber "321"^^xsd:integer ;
     :artist "Thomas Stoop" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Red ;
+    :producesMana :Colorless ;
     :printedText """{T}: Add {C}.
 {T}: Add {R} or {W}. This land deals 1 damage to you."""@en ;
     :oracleText """{T}: Add {C}.
@@ -3179,6 +3232,7 @@ When this land enters, return a land you control to its owner's hand.
     :cardNumber "327"^^xsd:integer ;
     :artist "John Avon" ;
     :hasLanguage :English ;
+    :producesMana :Blue ;
     :hasKeywordAction :Scry ;
     :printedText """This land enters tapped unless you control an Island.
 {T}: Add {U}.
@@ -3215,6 +3269,11 @@ When this land enters, return a land you control to its owner's hand.
     :cardNumber "331"^^xsd:integer ;
     :artist "Ryan Yee" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :producesMana :Black ;
+    :producesMana :Red ;
+    :producesMana :Green ;
     :printedText """{T}: Add one mana of any color in your commander's color identity."""@en ;
     :oracleText """{T}: Add one mana of any color in your commander's color identity."""@en ;
     :flavorText """When defeat is near and guidance is scarce, all eyes look in one direction."""@en ;
@@ -3249,6 +3308,7 @@ When this land enters, return a land you control to its owner's hand.
     :cardNumber "335"^^xsd:integer ;
     :artist "Kamila Szutenberg" ;
     :hasLanguage :English ;
+    :producesMana :Colorless ;
     :printedText """{T}: Add {C}.
 {2}, {T}, Sacrifice this land: Destroy target nonbasic land an opponent controls. That land's controller may search their library for a basic land card, put it onto the battlefield, then shuffle. You may search your library for a basic land card, put it onto the battlefield, then shuffle."""@en ;
     :oracleText """{T}: Add {C}.
@@ -3283,6 +3343,9 @@ When this land enters, return a land you control to its owner's hand.
     :cardNumber "344"^^xsd:integer ;
     :artist "Sam Burley" ;
     :hasLanguage :English ;
+    :producesMana :Blue ;
+    :producesMana :Red ;
+    :entersTapped "true"^^xsd:boolean ;
     :printedText """As this land enters, you may reveal an Island or Mountain card from your hand. If you don't, this land enters tapped.
 {T}: Add {U} or {R}."""@en ;
     :oracleText """As this land enters, you may reveal an Island or Mountain card from your hand. If you don't, this land enters tapped.
@@ -3324,6 +3387,9 @@ When this land enters, return a land you control to its owner's hand.
     :cardNumber "345"^^xsd:integer ;
     :artist "Sam Burley" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Red ;
+    :entersTapped "true"^^xsd:boolean ;
     :printedText """As this land enters, you may reveal a Mountain or Plains card from your hand. If you don't, this land enters tapped.
 {T}: Add {R} or {W}."""@en ;
     :oracleText """As this land enters, you may reveal a Mountain or Plains card from your hand. If you don't, this land enters tapped.
@@ -3365,6 +3431,9 @@ When this land enters, return a land you control to its owner's hand.
     :cardNumber "350"^^xsd:integer ;
     :artist "John Avon" ;
     :hasLanguage :English ;
+    :producesMana :Blue ;
+    :producesMana :Red ;
+    :entersTapped "true"^^xsd:boolean ;
     :printedText """This land enters tapped.
 When this land enters, return a land you control to its owner's hand.
 {T}: Add {U}{R}."""@en ;
@@ -3398,6 +3467,9 @@ When this land enters, return a land you control to its owner's hand.
     :cardNumber "359"^^xsd:integer ;
     :artist "Fred Fields" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :producesMana :Colorless ;
     :printedText """{T}: Add {C}.
 {W/U}, {T}: Add {W}{W}, {W}{U}, or {U}{U}."""@en ;
     :oracleText """{T}: Add {C}.
@@ -3427,6 +3499,10 @@ When this land enters, return a land you control to its owner's hand.
     :cardNumber "360"^^xsd:integer ;
     :artist "Florian de Gesincourt" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :producesMana :Red ;
+    :entersTapped "true"^^xsd:boolean ;
     :printedText """This land enters tapped.
 {T}: Add {U}, {R}, or {W}."""@en ;
     :oracleText """This land enters tapped.
@@ -3455,6 +3531,9 @@ When this land enters, return a land you control to its owner's hand.
     :cardNumber "364"^^xsd:integer ;
     :artist "Kamila Szutenberg" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :entersTapped "true"^^xsd:boolean ;
     :printedText """As this land enters, you may reveal a Plains or Island card from your hand. If you don't, this land enters tapped.
 {T}: Add {W} or {U}."""@en ;
     :oracleText """As this land enters, you may reveal a Plains or Island card from your hand. If you don't, this land enters tapped.
@@ -3498,6 +3577,8 @@ When this land enters, return a land you control to its owner's hand.
     :cardNumber "365"^^xsd:integer ;
     :artist "Adam Paquette" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
     :printedText """({T}: Add {W} or {U}.)
 This land enters tapped unless you control two or more basic lands."""@en ;
     :oracleText """({T}: Add {W} or {U}.)
@@ -3536,6 +3617,9 @@ This land enters tapped unless you control two or more basic lands."""@en ;
     :cardNumber "375"^^xsd:integer ;
     :artist "Andrew Mar" ;
     :hasLanguage :English ;
+    :producesMana :Blue ;
+    :producesMana :Red ;
+    :producesMana :Colorless ;
     :printedText """{T}: Add {C}.
 {T}: Add {U} or {R}. This land deals 1 damage to you."""@en ;
     :oracleText """{T}: Add {C}.
@@ -3569,6 +3653,7 @@ This land enters tapped unless you control two or more basic lands."""@en ;
     :cardNumber "380"^^xsd:integer ;
     :artist "Jason Felix" ;
     :hasLanguage :English ;
+    :producesMana :Colorless ;
     :printedText """{T}: Add {C}.
 {6}, {T}, Sacrifice this land: Create three 1/1 colorless Eldrazi Scion creature tokens. They have "Sacrifice this token: Add {C}.\""""@en ;
     :oracleText """{T}: Add {C}.
@@ -3610,6 +3695,9 @@ This land enters tapped unless you control two or more basic lands."""@en ;
     :cardNumber "386"^^xsd:integer ;
     :artist "Svetlin Velinov" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Blue ;
+    :entersTapped "true"^^xsd:boolean ;
     :hasKeywordAction :Scry ;
     :printedText """This land enters tapped.
 When this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)
@@ -3653,6 +3741,9 @@ When this land enters, scry 1. (Look at the top card of your library. You may pu
     :cardNumber "387"^^xsd:integer ;
     :artist "Adam Paquette" ;
     :hasLanguage :English ;
+    :producesMana :Blue ;
+    :producesMana :Red ;
+    :entersTapped "true"^^xsd:boolean ;
     :hasKeywordAction :Scry ;
     :printedText """This land enters tapped.
 When this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)
@@ -3683,6 +3774,9 @@ When this land enters, scry 1. (Look at the top card of your library. You may pu
     :cardNumber "392"^^xsd:integer ;
     :artist "Piotr Dura" ;
     :hasLanguage :English ;
+    :producesMana :White ;
+    :producesMana :Red ;
+    :entersTapped "true"^^xsd:boolean ;
     :hasKeywordAction :Scry ;
     :printedText """This land enters tapped.
 When this land enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)
