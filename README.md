@@ -11,6 +11,22 @@ or affiliated with Wizards of the Coast LLC. Card data is sourced from
 distribution policies, and made available under the
 [Wizards of the Coast Fan Content Policy](https://company.wizards.com/en/legal/fancontentpolicy).
 
+## Dependencies
+
+The repository is deliberately light on dependencies; what you need depends
+on which part you use:
+
+| Component | Requirement | Needed for |
+|-----------|-------------|------------|
+| Matchup simulator (`scripts/simulate_matchup.py`, `mtgcards/`, `mtgrules/`) | Python 3.10+ — **stdlib only** | Running matches, statistics, unit tests |
+| Simulator TUI (`mtgviz/`, `--watch` / `--replay`) | [`rich`](https://pypi.org/project/rich/) (`pip install rich`) — *optional* | Live/replay game visualization; both modes fall back to a plain-text viewer without it |
+| Graph tooling (`generate_individuals.py`, `validate_ttl.py`, `validate_sparql.py`, `check_consistency.py`) | Python 3.12+ and `pip install "rdflib>=7,<8"` | Regenerating `sets/` from Scryfall, TTL/SPARQL/consistency validation |
+| SPARQL queries (`queries/`) | [Apache Jena](https://jena.apache.org/) (`arq`, `riot`; Java 21+) | Running the query catalog, TTL syntax validation as done in CI |
+| Rules-engine CR traceability | `MagicCompRules-YYYYMMDD.txt` in the repo root (download from Wizards of the Coast; not distributed here) | The simulator validates its `@rule` annotations against the official Comprehensive Rules text at import |
+
+No `pyproject.toml`/lockfile is required: install the two optional pip
+packages ad hoc as listed above.
+
 ## Repository layout
 
 | Path | Description |
@@ -25,7 +41,7 @@ distribution policies, and made available under the
 | [`queries/`](./queries/) | Catalog of 71 reusable SPARQL 1.1 queries. See [`queries/README.md`](./queries/README.md) and [`queries/INDEX.md`](./queries/INDEX.md). |
 | [`strategies/`](./strategies/) | Commander decklists built from the collection plus a Monte-Carlo matchup simulator. See [`strategies/README.md`](./strategies/README.md). |
 | [`MagicSimulationAnnotations.ttl`](./MagicSimulationAnnotations.ttl) | Simulation annotations: behavior hooks (`:hasBehaviorHook`) and AI threat weights (`:threatWeight`) consumed by the simulator — house-authored opinion kept separate from generated card facts. |
-| [`scripts/`](./scripts/) | Generator and validation tooling, the heuristic deck matchup simulator (`mtgsim/`), and a CR-grounded rules engine (`mtgrules/`, built against `MagicCompRules-20260227.txt`; run with `--engine rules`). |
+| [`scripts/`](./scripts/) | Generator and validation tooling, the shared card data layer (`mtgcards/`), the CR-grounded rules-engine matchup simulator (`mtgrules/`, built against `MagicCompRules-20260227.txt`), and the game visualization / TUI package (`mtgviz/`). |
 | [`collection.csv`](./collection.csv) | Source inventory of the physical collection; input to the generator. |
 | `MagicCompRules-*.txt` | Magic: The Gathering Comprehensive Rules text referenced by ontology comments. |
 
@@ -109,23 +125,30 @@ inventoried printing, so all deck cards are backed by collection entries.
 
 ## Deck matchup simulation
 
-[`scripts/simulate_matchup.py`](./scripts/simulate_matchup.py) runs
-Monte-Carlo Commander games between 2–4 arbitrary decklists (stdlib only, no
-dependencies). Card characteristics are driven by the TTL knowledge graph in
-[`sets/`](./sets/) and [`MagicExternalCards.ttl`](./MagicExternalCards.ttl),
-with opt-in custom-card overrides (`--custom-cards`). The
-engine lives in the modular [`scripts/mtgsim/`](./scripts/mtgsim/) package
-(color-aware mana, multi-block combat, reaction windows, London mulligan,
-tunable AI profiles, Wilson CIs, multi-seed statistics, JSONL logs):
+[`scripts/simulate_matchup.py`](./scripts/simulate_matchup.py) runs Commander
+games between 2–4 arbitrary decklists on a CR-grounded rules engine (stdlib
+only; the optional TUI needs `pip install rich`). Card characteristics are
+driven by the TTL knowledge graph in [`sets/`](./sets/) and
+[`MagicExternalCards.ttl`](./MagicExternalCards.ttl), with opt-in custom-card
+overrides (`--custom-cards`). The engine lives in
+[`scripts/mtgrules/`](./scripts/mtgrules/) (real stack and priority,
+state-based actions, the layer system, replacement effects, Commander rules,
+tunable AI policy profiles) on top of the
+[`scripts/mtgcards/`](./scripts/mtgcards/) data layer (Wilson CIs, per-card
+win-rate lift, multi-seed statistics, JSONL logs):
 
 ```sh
 python3 scripts/simulate_matchup.py DECK1.txt DECK2.txt             # heads-up
 python3 scripts/simulate_matchup.py a.txt b.txt c.txt --seeds 5     # pod,
                                                         # pooled over 5 seeds
+python3 scripts/simulate_matchup.py DECK1.txt DECK2.txt --watch     # live TUI
+python3 scripts/simulate_matchup.py DECK1.txt DECK2.txt \
+    --games 3 --viz-file games.jsonl                    # record for replay
+python3 scripts/simulate_matchup.py --replay games.jsonl --game 2   # replay
 ```
 
 See [`strategies/README.md`](./strategies/README.md) for the decklist format,
-architecture, statistics guide, and model assumptions.
+architecture, statistics guide, TUI keys, and model assumptions.
 
 ## Validation
 

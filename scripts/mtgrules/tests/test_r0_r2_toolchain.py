@@ -104,11 +104,12 @@ class TestCompiler(unittest.TestCase):
 
     def test_full_pool_compiles(self):
         sys.path.insert(0, str(REPO / "scripts"))
-        from mtgsim.database import CardDatabase
-        from mtgsim.deck import load_deck
+        from mtgcards.database import CardDatabase
+        from mtgcards.deck import load_deck
         db = CardDatabase(REPO)
         names = set()
-        for f in ("strategies/ss-test.txt", "strategies/bb-test.txt"):
+        for f in ("strategies/station-swarm-counter-deck.txt",
+                  "strategies/blight-curse-deck.txt"):
             d = load_deck(REPO / f)
             names.update(d.cards)
             names.add(d.commander)

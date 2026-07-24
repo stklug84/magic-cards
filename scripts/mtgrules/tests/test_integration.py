@@ -14,11 +14,12 @@ from ..turns import TurnRunner                      # noqa: E402
 
 
 def _decks_db():
-    from mtgsim.database import CardDatabase
-    from mtgsim.deck import load_deck
+    from mtgcards.database import CardDatabase
+    from mtgcards.deck import load_deck
     db = CardDatabase(REPO)
-    decks = [load_deck(REPO / "strategies" / "ss-test.txt"),
-             load_deck(REPO / "strategies" / "bb-test.txt")]
+    decks = [load_deck(REPO / "strategies"
+                       / "station-swarm-counter-deck.txt"),
+             load_deck(REPO / "strategies" / "blight-curse-deck.txt")]
     return decks, db
 
 
@@ -29,13 +30,25 @@ class TestIntegration(unittest.TestCase):
 
     def test_games_complete(self):
         for seed in (1, 2, 3):
-            result = run_game(self.decks, self.db, seed=seed, turn_cap=40)
+            result = run_game(self.decks, self.db, random.Random(seed),
+                              turn_cap=40)
             self.assertLessEqual(result["turns"], 40)
 
     def test_determinism(self):
-        a = run_game(self.decks, self.db, seed=11)
-        b = run_game(self.decks, self.db, seed=11)
+        a = run_game(self.decks, self.db, random.Random(11))
+        b = run_game(self.decks, self.db, random.Random(11))
         self.assertEqual(a, b)
+
+    def test_record_shape(self):
+        """The record must satisfy the mtgcards.stats.Aggregator contract."""
+        rec = run_game(self.decks, self.db, random.Random(3), turn_cap=40)
+        self.assertIn("winner", rec)
+        self.assertIn("turns", rec)
+        self.assertIn("reason", rec)
+        for name, pdata in rec["players"].items():
+            self.assertIn("life", pdata)
+            self.assertIn("mulligans", pdata)
+            self.assertIsInstance(pdata["cards_cast"], list)
 
     def test_card_conservation(self):
         """Rule 400: every nontoken card stays in exactly one zone; each
