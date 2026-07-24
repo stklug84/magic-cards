@@ -1,0 +1,429 @@
+"""Default decision policy.
+
+The rules engine enumerates *legal* options; the policy chooses among
+them. This replaces the heuristic engine's scripted plays: here the AI can
+only do what the CR machinery permits (priority windows, timing, costs).
+"""
+
+from __future__ import annotations
+
+from .abilities import ActivatedAbility, SpellAbility
+from .cr import rule
+from .effects import CounterSpell
+from .manasys import parse_cost
+from .objects import GameObject, Player, Zone
+
+
+def _threat(game, obj) -> float:
+    """Threat assessment: graph :threatWeight hook + board impact."""
+    ch = obj.chars(game)
+    ref = obj.card_ref
+    key = (ref.behavior.get("key", 0) if ref is not None else 0)
+    pt = (ch.power or 0) + (ch.toughness or 0)
+    return key * 2 + pt * 0.3 + (3 if obj.commander else 0)
+
+
+class DefaultPolicy:
+    def __init__(self, rng):
+        self.rng = rng
+
+    # ------------------------------------------------------- mulligans
+    @rule("103.5")
+    def keep_hand(self, game, player, hand, mulls) -> bool:
+        lands = sum(1 for c in hand if "Land" in c.base.types)
+        if mulls >= 3:
+            return True
+        return 2 <= lands <= 5
+
+    def bottom_cards(self, game, player, hand, n):
+        """London mulligan (rule 103.5c): put n cards on the bottom."""
+        ranked = sorted(hand, key=lambda c: self._keep_rank(c))
+        return ranked[:n]
+
+    def _keep_rank(self, card):
+        mv = parse_cost(card.base.mana_cost).mv
+        if "Land" in card.base.types:
+            return 10
+        return -abs(mv - 3)
+
+    # ------------------------------------------------------- priority
+    def choose_action(self, game, player):
+        """Return ('cast', card, kwargs) | ('activate', obj, ab, kwargs) |
+        ('land', card) | None (pass)."""
+        main = (player is game.active_player and not game.stack
+                and game.phase in ("main1", "main2"))
+        # respond to opposing spells with counterspells
+        if game.stack:
+            top = game.stack[-1]
+            if top.controller is not player and top.is_spell:
+                counter = self._find_counterspell(game, player)
+                if counter is not None and _spell_value(top) >= 3:
+                    return counter
+            return None
+        if not main:
+            return None
+        # 1. land drop
+        if player.lands_played < 1:
+            lands = [c for c in player.hand if "Land" in c.base.types]
+            if lands:
+                return ("land", self._best_land(game, player, lands))
+        # 2. commander
+        cmd = player.commander_obj
+        if cmd is not None and cmd.zone == Zone.COMMAND:
+            cost = parse_cost(cmd.base.mana_cost).with_extra_generic(
+                2 * player.commander_casts)
+            if game.can_pay_mana(player, cost):
+                return ("cast", cmd, {"from_command": True})
+        # 3. best castable spell (sorcery speed)
+        castable = []
+        for card in player.hand:
+            ch = card.base
+            if "Land" in ch.types:
+                continue
+            cost = parse_cost(ch.mana_cost)
+            x = 0
+            if cost.x_count:
+                x = self._max_x(game, player, cost)
+                if x < 2:
+                    continue
+            if game.can_pay_mana(player, cost.with_x(x)):
+                sa = next((a for a in ch.abilities
+                           if isinstance(a, SpellAbility)), None)
+                if sa is not None and sa.targets and not any(
+                        game.legal_targets(s, _ctx(player, card))
+                        for s in sa.targets):
+                    continue
+                if self._is_counterspell(card):
+                    continue                       # hold for responses
+                castable.append((self._cast_value(game, player, card, x),
+                                 card, x))
+        if castable:
+            castable.sort(key=lambda t: -t[0])
+            value, card, x = castable[0]
+            if value > 0:
+                return ("cast", card, {"x": x})
+        # 4. useful activated ability
+        act = self._find_activation(game, player)
+        if act is not None:
+            return act
+        return None
+
+    def _find_counterspell(self, game, player):
+        for card in player.hand:
+            ch = card.base
+            if "Instant" not in ch.types:
+                continue
+            sa = next((a for a in ch.abilities
+                       if isinstance(a, SpellAbility)), None)
+            if sa is None or not self._is_counterspell(card):
+                continue
+            if game.can_pay_mana(player, parse_cost(ch.mana_cost)):
+                return ("cast", card, {})
+        return None
+
+    @staticmethod
+    def _is_counterspell(card):
+        sa = next((a for a in card.base.abilities
+                   if isinstance(a, SpellAbility)), None)
+        if sa is None:
+            return False
+        eff = sa.effect
+        parts = getattr(eff, "parts", [eff])
+        return any(isinstance(p, CounterSpell) for p in parts)
+
+    def _max_x(self, game, player, cost):
+        for x in range(12, 0, -1):
+            if game.can_pay_mana(player, cost.with_x(x)):
+                return x
+        return 0
+
+    def _cast_value(self, game, player, card, x=0):
+        ch = card.base
+        ref = card.card_ref
+        mv = parse_cost(ch.mana_cost).mv + x
+        v = 1.0 + mv * 0.3
+        if ref is not None:
+            v += ref.behavior.get("key", 0) * 0.5
+        if ch.types & {"Creature", "Planeswalker"}:
+            v += 1.5
+        # removal/wipes only when there are worthwhile targets
+        sa = next((a for a in ch.abilities if isinstance(a, SpellAbility)),
+                  None)
+        if sa is not None and sa.targets:
+            best = 0.0
+            for spec in sa.targets:
+                legal = game.legal_targets(spec, _ctx(player, card))
+                enemy = [t for t in legal if isinstance(t, GameObject)
+                         and t.controller is not player]
+                if enemy:
+                    best = max(best, max(_threat(game, t) for t in enemy))
+            if best < 2:
+                return -1
+            v += best * 0.4
+        return v
+
+    def _best_land(self, game, player, lands):
+        # prefer untapped lands producing colors we need
+        def score(card):
+            b = (card.card_ref.behavior if card.card_ref else {})
+            colors = b.get("land_colors") or set()
+            tapped = bool(b.get("enters_tapped"))
+            return (0 if tapped else 2) + len(colors)
+        return max(lands, key=score)
+
+    def _find_activation(self, game, player):
+        for obj in player.battlefield:
+            ch = obj.chars(game)
+            for ab in ch.abilities:
+                if not isinstance(ab, ActivatedAbility) \
+                        or ab.is_mana_ability or ab.effect is None:
+                    continue
+                if ab.loyalty_cost is not None:
+                    if ("loyalty", obj.id) in game.activated_this_turn:
+                        continue
+                    if ab.loyalty_cost < 0 and obj.counters.get(
+                            "loyalty", 0) <= -ab.loyalty_cost:
+                        continue                    # don't suicide walkers
+                    return ("activate", obj, ab, {})
+                if ab.once_per_turn and (obj.id, id(ab)) \
+                        in game.activated_this_turn:
+                    continue
+                if ab.tap_cost and obj.tapped:
+                    continue
+                if ab.sac_cost:
+                    continue                        # engine sacs need intent
+                if ab.cost.mv and not game.can_pay_mana(player, ab.cost):
+                    continue
+                if ab.cost.mv or ab.tap_cost:
+                    if ab.targets and not any(
+                            game.legal_targets(s, _ctx(player, obj))
+                            for s in ab.targets):
+                        continue
+                    if game.phase == "main2" or not ab.cost.mv:
+                        return ("activate", obj, ab, {})
+        return None
+
+    # ------------------------------------------------------- choices
+    def choose_target(self, game, spec, legal, ctx, ability):
+        me = ctx.controller
+        harmful = spec.what not in ("player",) and not _is_beneficial(ability)
+        if spec.what in ("player", "opponent"):
+            opps = [p for p in legal if p is not me]
+            return min(opps, key=lambda p: p.life) if opps else (
+                None if spec.optional else legal[0])
+        if spec.what == "spell":
+            return legal[-1] if legal else None
+        enemy = [t for t in legal if isinstance(t, GameObject)
+                 and t.controller is not me]
+        own = [t for t in legal if isinstance(t, GameObject)
+               and t.controller is me]
+        if harmful:
+            pool = enemy or ([] if spec.optional else legal)
+            return max(pool, key=lambda t: _threat(game, t)) if pool else None
+        pool = own or ([] if spec.optional else legal)
+        return max(pool, key=lambda t: _threat(game, t)) if pool else None
+
+    def order_triggers(self, game, triggers):
+        return triggers
+
+    def accept_optional(self, game, trigger):
+        return True
+
+    def choose_replacement(self, game, event, candidates):
+        return candidates[0]
+
+    def choose_mana_color(self, game, ctx, allowed):
+        return allowed[0] if allowed else "C"
+
+    def choose_discard(self, game, player):
+        return max(player.hand,
+                   key=lambda c: parse_cost(c.base.mana_cost).mv)
+
+    def choose_sacrifice(self, game, player, selector, exclude=None):
+        pool = []
+        for o in player.battlefield:
+            if o is exclude:
+                continue
+            ch = o.chars(game)
+            if "creature" in selector and "Creature" not in ch.types:
+                continue
+            if "artifact" in selector and "Artifact" not in ch.types:
+                continue
+            pool.append(o)
+        if not pool:
+            return None
+        return min(pool, key=lambda o: _threat(game, o))
+
+    def choose_legend(self, game, objs):
+        return max(objs, key=lambda o: sum(o.counters.values()))
+
+    def commander_to_command_zone(self, game, obj, to_zone):
+        return True                                # rule 903.9
+
+    def pay_ward(self, game, item, n):
+        return True
+
+    def choose_bounce_land(self, game, lands):
+        if not lands:
+            return None
+        return min(lands, key=lambda o: len(
+            (o.card_ref.behavior.get("land_colors") or set())
+            if o.card_ref else set()))
+
+    def divide_damage(self, game, ctx, total):
+        enemies = sorted(
+            (o for o in game.battlefield_objects()
+             if o.controller is not ctx.controller
+             and "Creature" in o.chars(game).types),
+            key=lambda o: -_threat(game, o))
+        out = []
+        for o in enemies:
+            if total <= 0:
+                break
+            need = max(1, (o.chars(game).toughness or 1) - o.damage)
+            deal = min(total, need)
+            out.append((o, deal))
+            total -= deal
+        return out
+
+    def choose_proliferate(self, game, player):
+        picks = []
+        for o in game.battlefield_objects():
+            if not o.counters:
+                continue
+            good = o.counters.get("+1/+1", 0) + o.counters.get("loyalty", 0) \
+                + o.counters.get("charge", 0)
+            bad = o.counters.get("-1/-1", 0)
+            if o.controller is player and good > bad:
+                picks.append(o)
+            elif o.controller is not player and bad > good:
+                picks.append(o)
+        return picks
+
+    def choose_populate(self, game, tokens):
+        return max(tokens, key=lambda o: (o.base.power or 0)) \
+            if tokens else None
+
+    def scry(self, game, player, top):
+        lands_bf = sum(1 for o in player.battlefield
+                       if "Land" in o.base.types)
+        keep, bottom = [], []
+        for card in top:
+            is_land = "Land" in card.base.types
+            if is_land and lands_bf >= 6:
+                bottom.append(card)
+            elif not is_land and lands_bf < 3:
+                bottom.append(card)
+            else:
+                keep.append(card)
+        return keep, bottom
+
+    def choose_tutor_card(self, game, player):
+        if not player.library:
+            return None
+        return max(player.library, key=lambda c: (
+            c.card_ref.behavior.get("key", 0) if c.card_ref else 0))
+
+    # ------------------------------------------------------- combat
+    @rule("508.1")
+    def declare_attackers(self, game, player, candidates):
+        picks = []
+        for obj in candidates:
+            ch = obj.chars(game)
+            power = ch.power or 0
+            if power <= 0:
+                continue
+            target = self._attack_target(game, player, obj)
+            if target is None:
+                continue
+            picks.append((obj, target))
+        return picks
+
+    def _attack_target(self, game, player, attacker):
+        ch = attacker.chars(game)
+        best, best_score = None, None
+        for opp in game.opponents(player):
+            blockers = [o for o in opp.battlefield
+                        if "Creature" in o.chars(game).types and not o.tapped]
+            can_be_blocked = [b for b in blockers
+                              if _could_block(game, b, attacker)]
+            danger = max((b.chars(game).power or 0
+                          for b in can_be_blocked), default=0)
+            tough = ch.toughness or 0
+            evasive = not can_be_blocked
+            profitable = (evasive or danger < tough
+                          or (ch.power or 0) >= 5
+                          or attacker.commander)
+            if not profitable:
+                continue
+            score = (100 if evasive else 0) - opp.life \
+                - len(can_be_blocked) * 3
+            if best_score is None or score > best_score:
+                best, best_score = opp, score
+        return best
+
+    @rule("509.1")
+    def declare_blockers(self, game, player, attackers, blockers):
+        assignment = []
+        free = list(blockers)
+        threat_order = sorted(attackers,
+                              key=lambda a: -(a.chars(game).power or 0))
+        incoming = sum(a.chars(game).power or 0 for a in attackers)
+        must_chump = incoming >= player.life
+        for a in threat_order:
+            ach = a.chars(game)
+            cands = [b for b in free if _could_block(game, b, a)]
+            if "menace" in ach.keywords and len(cands) < 2:
+                continue
+            pick = None
+            for b in sorted(cands, key=lambda b: -(b.chars(game).power or 0)):
+                bch = b.chars(game)
+                kills = ((bch.power or 0) >= (ach.toughness or 0)
+                         or "deathtouch" in bch.keywords)
+                survives = ((ach.power or 0) < (bch.toughness or 0)
+                            and "deathtouch" not in ach.keywords)
+                if kills or survives or must_chump:
+                    pick = b
+                    break
+            if pick is not None:
+                if "menace" in ach.keywords:
+                    others = [b for b in cands if b is not pick]
+                    if not others:
+                        continue
+                    assignment.append((pick, a))
+                    assignment.append((others[0], a))
+                    free.remove(pick)
+                    free.remove(others[0])
+                else:
+                    assignment.append((pick, a))
+                    free.remove(pick)
+        return assignment
+
+
+def _could_block(game, blocker, attacker):
+    from .combat import can_block
+    return can_block(game, blocker, attacker)
+
+
+def _ctx(player, source):
+    from .effects import Ctx
+    return Ctx(controller=player, source=source)
+
+
+def _is_beneficial(ability):
+    """Does this targeted effect help the target (pump/blink) rather than
+    harm it?"""
+    from .effects import Blink, PutCounters
+    eff = getattr(ability, "effect", None)
+    parts = getattr(eff, "parts", [eff]) if eff is not None else []
+    for p in parts:
+        if isinstance(p, Blink):
+            return True
+        if isinstance(p, PutCounters) and p.kind == "+1/+1":
+            return True
+    return False
+
+
+def _spell_value(item):
+    ch = item.obj.base
+    return parse_cost(ch.mana_cost).mv + item.x
