@@ -1,6 +1,6 @@
 """mtgrules - a CR-grounded Magic: The Gathering rules engine.
 
-Built against MagicCompRules-20260227.txt (parsed and indexed by cr.py;
+Built against MagicCompRules-20260619.txt (parsed and indexed by cr.py;
 every engine function is annotated with the rules it implements via
 @rule). Card semantics come from the knowledge graph's oracle text
 through compiler.py, with hand-written implementations in overrides.py

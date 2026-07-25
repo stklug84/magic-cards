@@ -133,7 +133,7 @@ jobs:
       # release from Wizards of the Coast.
       - name: Download Comprehensive Rules (gitignored, not distributed)
         env:
-          CR_DATE: "20260227"
+          CR_DATE: "20260619"
         run: |
           set -euo pipefail
           curl -fsSL -o "MagicCompRules-${CR_DATE}.txt" \
