@@ -278,7 +278,7 @@ graphs. Keys are whitelisted in scripts/mtgsim/behaviors.py
     :hasBehaviorHook
       [ rdf:type :BehaviorHook ; :behaviorKey "anthem" ; :behaviorValue "{\"boost\": 1, \"tokens_only\": true}" ] .
 
-:KayaGeistHunterInnistradCrimsonVow240
+:KayaGeistHunterInnistradCrimsonVow280
     :threatWeight "7"^^xsd:nonNegativeInteger ;
     :hasBehaviorHook
       [ rdf:type :BehaviorHook ; :behaviorKey "doubler" ; :behaviorValue "2" ] .

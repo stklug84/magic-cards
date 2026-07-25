@@ -555,7 +555,6 @@ only battle type is Siege. See rules 310.3 and 205.3q."""@en .
 
 # --- Set Attribute Class ---
 :Set rdf:type owl:Class ;
-     owl:hasKey ( :setName ) ;
      owl:hasKey ( :setCode ) ;
      rdfs:label "Set" ;
      rdfs:comment
@@ -8126,7 +8125,7 @@ Coalition"""@en ;
              :releaseDate "2007-02-02"^^xsd:date .
 :TimeSpiralTimeshifted rdf:type owl:NamedIndividual ,
                                 :Set ;
-                       :setName "Time Spiral"@en ;
+                       :setName "Time Spiral Timeshifted"@en ;
                        :setCode "TSB" ;
                        :cardCount 122 ;
                        :releaseDate "2006-10-06"^^xsd:date .

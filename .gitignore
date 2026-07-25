@@ -18,8 +18,10 @@ __pycache__/
 .mypy_cache/
 .ruff_cache/
 
-# ignore any structured list files
+# ignore any structured list files, but keep the collection inventory —
+# it is the generator input for the Regenerate knowledge graph workflow
 *.csv
+!collection.csv
 *.dsv
 *.tsv
 

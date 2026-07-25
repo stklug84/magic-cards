@@ -113,15 +113,24 @@ Card individuals under `sets/` and the inventory graph
 `MagicCardCollection.ttl` are generated from `collection.csv`:
 
 ```sh
+python3 scripts/build_vocab.py                      # extract vocabulary + master card list from the ontology
 python3 scripts/generate_individuals.py fetch       # resolve printings via the Scryfall API (cached)
-python3 scripts/generate_individuals.py generate    # emit sets/*.ttl and the owl:imports block
+python3 scripts/generate_individuals.py generate    # emit sets/*.ttl and /tmp/imports.json
 python3 scripts/generate_individuals.py collection  # emit MagicCardCollection.ttl (needs no network)
+python3 scripts/update_imports.py                   # rewrite the owl:imports block of MagicCardIndividuals.ttl
 ```
 
 The `collection` step resolves card individuals from the existing `sets/*.ttl`
 files, so it can run standalone after any inventory change in
 `collection.csv`. Every printing referenced by the deck graphs is an
 inventoried printing, so all deck cards are backed by collection entries.
+
+The same pipeline runs in CI
+([`.github/workflows/generate.yml`](./.github/workflows/generate.yml)) via the
+reusable `stklug84/github-workflows` rdf-generate workflow: every push that
+changes `collection.csv` on `main` (and every manual dispatch) regenerates the
+graph and opens a pull request with the changed files, gated by the validation
+workflow.
 
 ## Deck matchup simulation
 

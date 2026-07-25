@@ -157,6 +157,53 @@ At the beginning of each end step, create a token that's a copy of target creatu
         :rulingDate "2009-02-01"^^xsd:date ;
         :rulingText """If multiple effects modify your hand size, apply them in timestamp order. For example, if you put Null Profusion (an enchantment that says your maximum hand size is two) onto the battlefield and then put Reliquary Tower onto the battlefield, you'll have no maximum hand size. However, if those permanents enter in the opposite order, your maximum hand size would be two."""@en ] .
 
+:RestorationAngel rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Restoration Angel" ;
+    :manaCost "{3}{W}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Angel ;
+    :hasRarity :Rare ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :BloomburrowCommander ;
+    :cardNumber "150"^^xsd:integer ;
+    :artist "Jake Murray" ;
+    :hasLanguage :English ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "4" ;
+    :toughnessValue "4"^^xsd:integer ;
+    :hasKeywordAbility :Flying ;
+    :hasKeywordAbility :Flash ;
+    :printedText """Flash
+Flying
+When this creature enters, you may exile target non-Angel creature you control, then return that card to the battlefield under your control."""@en ;
+    :oracleText """Flash
+Flying
+When this creature enters, you may exile target non-Angel creature you control, then return that card to the battlefield under your control."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=671508"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/blc/150/restoration-angel"^^xsd:anyURI ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2021-03-19"^^xsd:date ;
+        :rulingText """If a token is exiled this way, it will cease to exist and won't return to the battlefield."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2021-03-19"^^xsd:date ;
+        :rulingText """Once the exiled creature returns, it's considered a new object with no relation to the object that it was. Auras attached to the exiled creature will be put into their owners' graveyards. Equipment attached to the exiled creature will become unattached and remain on the battlefield. Any counters on the exiled creature will cease to exist."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2021-03-19"^^xsd:date ;
+        :rulingText """When an effect returns the exiled card "under your control," you control it indefinitely after that. If you had temporarily gained control of a creature, it won't return to its previous controller. In a multiplayer game, if a player leaves the game, all cards that player owns leave as well. If you leave the game, a creature you took with Restoration Angel's effect is exiled."""@en ] .
+
 :CombatCelebrant rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Combat Celebrant" ;

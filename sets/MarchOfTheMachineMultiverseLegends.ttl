@@ -90,3 +90,71 @@ subtype, format and legality definitions."""@en .
       [ rdf:type :Ruling ;
         :rulingDate "2018-04-27"^^xsd:date ;
         :rulingText """Once a creature you control has been blocked, changing its power to 1 or less won't cause it to become unblocked. Changing its toughness to 1 won't cause it to become unblocked, and changing its toughness to less than 1 will cause it to die."""@en ] .
+
+:AtraxaPraetorsVoice rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Atraxa, Praetors' Voice" ;
+    :manaCost "{G}{W}{U}{B}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasSuperType :Legendary ;
+    :hasCardType :Creature ;
+    :hasSubType :Phyrexian ;
+    :hasSubType :Angel ;
+    :hasSubType :Horror ;
+    :hasRarity :MythicRare ;
+    :hasColor :White ;
+    :hasColor :Blue ;
+    :hasColor :Black ;
+    :hasColor :Green ;
+    :hasColorIdentity :White ;
+    :hasColorIdentity :Blue ;
+    :hasColorIdentity :Black ;
+    :hasColorIdentity :Green ;
+    :isInSet :MarchOfTheMachineMultiverseLegends ;
+    :cardNumber "33"^^xsd:integer ;
+    :artist "Justin Hernandez & Alexis Hernandez" ;
+    :hasLanguage :English ;
+    :power "4" ;
+    :powerValue "4"^^xsd:integer ;
+    :toughness "4" ;
+    :toughnessValue "4"^^xsd:integer ;
+    :hasKeywordAbility :Deathtouch ;
+    :hasKeywordAbility :Flying ;
+    :hasKeywordAbility :Lifelink ;
+    :hasKeywordAbility :Vigilance ;
+    :hasKeywordAction :Proliferate ;
+    :printedText """Flying, vigilance, deathtouch, lifelink
+At the beginning of your end step, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)"""@en ;
+    :oracleText """Flying, vigilance, deathtouch, lifelink
+At the beginning of your end step, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)"""@en ;
+    :flavorText """"Teach these people the price of their insolence."
+—Elesh Norn"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=611338"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mul/33/atraxa-praetors-voice"^^xsd:anyURI ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """Players can respond to a spell or ability whose effect includes proliferating. Once that spell or ability starts to resolve, however, and its controller chooses which permanents and players will get new counters, it's too late for anyone to respond."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """If a permanent ever has both +1/+1 counters and -1/-1 counters on it at the same time, they're removed in pairs as a state-based action so that the permanent has only one of those kinds of counters on it."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """If a player or permanent has more than one kind of counter on it, and you choose for it to get additional counters, it must get one of each kind of counter it already has. You can't have it get just one kind of counter it already has and not the others."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """You don't have to choose every permanent or player that has a counter, only the ones you want to add another counter to. Since "any number" includes zero, you don't have to choose any permanents at all, and you don't have to choose any players at all."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """An ability that triggers "Whenever you proliferate" triggers even if you chose no permanents or players while doing so."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """To proliferate, you can choose any permanent that has a counter, including ones controlled by opponents. You can choose any player who has a counter, including opponents. You can't choose cards in any zone other than the battlefield, even if they have counters on them."""@en ] .
