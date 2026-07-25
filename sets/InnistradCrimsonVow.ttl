@@ -100,7 +100,7 @@ subtype, format and legality definitions."""@en .
         :rulingDate "2025-01-24"^^xsd:date ;
         :rulingText """If an effect refers to a Blood token, it means any artifact token with the subtype Blood, even if it has gained other subtypes."""@en ] .
 
-:KayaGeistHunterInnistradCrimsonVow240 rdf:type owl:NamedIndividual ,
+:KayaGeistHunterInnistradCrimsonVow280 rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Kaya, Geist Hunter" ;
     :manaCost "{1}{W}{B}" ;
@@ -114,8 +114,8 @@ subtype, format and legality definitions."""@en .
     :hasColorIdentity :White ;
     :hasColorIdentity :Black ;
     :isInSet :InnistradCrimsonVow ;
-    :cardNumber "240"^^xsd:integer ;
-    :artist "Ryan Pancoast" ;
+    :cardNumber "280"^^xsd:integer ;
+    :artist "Raymond Swanland" ;
     :hasLanguage :English ;
     :loyalty "3"^^xsd:integer ;
     :printedText """+1: Creatures you control gain deathtouch until end of turn. Put a +1/+1 counter on up to one target creature token you control.
@@ -124,8 +124,8 @@ subtype, format and legality definitions."""@en .
     :oracleText """+1: Creatures you control gain deathtouch until end of turn. Put a +1/+1 counter on up to one target creature token you control.
 −2: Until end of turn, if one or more tokens would be created under your control, twice that many of those tokens are created instead.
 −6: Exile all cards from all graveyards, then create a 1/1 white Spirit creature token with flying for each card exiled this way."""@en ;
-    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=541114"^^xsd:anyURI ;
-    :scryfallUrl "https://scryfall.com/card/vow/240/kaya-geist-hunter"^^xsd:anyURI ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=544416"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/vow/280/kaya-geist-hunter"^^xsd:anyURI ;
     :hasLegality
       [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,

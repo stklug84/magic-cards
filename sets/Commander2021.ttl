@@ -52,6 +52,46 @@ subtype, format and legality definitions."""@en .
 #
 ################################################################################
 
+:OsgirTheReconstructor rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Osgir, the Reconstructor" ;
+    :manaCost "{2}{R}{W}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasSuperType :Legendary ;
+    :hasCardType :Creature ;
+    :hasSubType :Giant ;
+    :hasSubType :Artificer ;
+    :hasRarity :MythicRare ;
+    :hasColor :White ;
+    :hasColor :Red ;
+    :hasColorIdentity :White ;
+    :hasColorIdentity :Red ;
+    :isInSet :Commander2021 ;
+    :cardNumber "8"^^xsd:integer ;
+    :artist "Victor Adame Minguez" ;
+    :hasLanguage :English ;
+    :power "4" ;
+    :powerValue "4"^^xsd:integer ;
+    :toughness "4" ;
+    :toughnessValue "4"^^xsd:integer ;
+    :hasKeywordAbility :Vigilance ;
+    :printedText """Vigilance
+{1}, Sacrifice an artifact: Target creature you control gets +2/+0 until end of turn.
+{X}, {T}, Exile an artifact card with mana value X from your graveyard: Create two tokens that are copies of the exiled card. Activate only as a sorcery."""@en ;
+    :oracleText """Vigilance
+{1}, Sacrifice an artifact: Target creature you control gets +2/+0 until end of turn.
+{X}, {T}, Exile an artifact card with mana value X from your graveyard: Create two tokens that are copies of the exiled card. Activate only as a sorcery."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=518314"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/c21/8/osgir-the-reconstructor"^^xsd:anyURI ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] .
+
 :EpicureOfBlood rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Epicure of Blood" ;

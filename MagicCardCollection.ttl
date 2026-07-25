@@ -64,8 +64,8 @@ lot of a specific printing."""@en ;
   :AceFearlessRebelEntry1 ,
   :AcesBaseballBatEntry1 ,
   :AdaptiveOmnitoolEntry1 ,
-  :AdarkarWastesModernHorizons3Commander316Entry1 ,
   :AdarkarWastesEdgeOfEternitiesCommander147Entry1 ,
+  :AdarkarWastesModernHorizons3Commander316Entry1 ,
   :AdricMathematicalGeniusEntry1 ,
   :AdricMathematicalGeniusEntry2 ,
   :AdrixAndNevTwincastersEntry1 ,
@@ -118,19 +118,19 @@ lot of a specific printing."""@en ;
   :ArcadeGannonEntry2 ,
   :ArcaneAdaptationEntry1 ,
   :ArcaneDenialEntry1 ,
-  :ArcaneSignetDoctorWhoCommander239Entry1 ,
-  :ArcaneSignetMarchOfTheMachineCommander348Entry1 ,
-  :ArcaneSignetDoctorWhoCommander239Entry2 ,
-  :ArcaneSignetModernHorizons3Commander283Entry1 ,
-  :ArcaneSignetAetherdriftCommander52Entry1 ,
-  :ArcaneSignetEdgeOfEternitiesCommander53Entry1 ,
   :ArcaneSignetMagicTheGatheringFallout224Entry1 ,
+  :ArcaneSignetModernHorizons3Commander283Entry1 ,
+  :ArcaneSignetDoctorWhoCommander239Entry1 ,
+  :ArcaneSignetDoctorWhoCommander239Entry2 ,
+  :ArcaneSignetEdgeOfEternitiesCommander53Entry1 ,
+  :ArcaneSignetAetherdriftCommander52Entry1 ,
+  :ArcaneSignetMarchOfTheMachineCommander348Entry1 ,
   :ArcboundHybridEntry1 ,
   :ArcboundLancerEntry1 ,
   :ArcboundOverseerEntry1 ,
   :ArcboundPrototypeEntry1 ,
-  :ArcboundWandererFifthDawn103Entry1 ,
   :ArcboundWandererModernMasters200Entry1 ,
+  :ArcboundWandererFifthDawn103Entry1 ,
   :ArchghoulOfThrabenEntry1 ,
   :ArchitectOfTheUntamedEntry1 ,
   :ArchiveDragonEntry1 ,
@@ -141,17 +141,18 @@ lot of a specific printing."""@en ;
   :AssaultronDominatorEntry1 ,
   :AstralCornucopiaEntry1 ,
   :AtmosphericGreenhouseEntry1 ,
+  :AtraxaPraetorsVoiceEntry1 ,
   :AttuneWithAetherEntry1 ,
   :AuroraShifterEntry1 ,
   :AuroraShifterEntry2 ,
-  :AustereCommandModernHorizons3Commander167Entry1 ,
-  :AustereCommandMagicTheGatheringFallout156Entry1 ,
   :AustereCommandWildsOfEldraineCommander62Entry1 ,
+  :AustereCommandMagicTheGatheringFallout156Entry1 ,
+  :AustereCommandModernHorizons3Commander167Entry1 ,
   :AutomatedAssemblyLineEntry1 ,
   :AutonSoldierEntry1 ,
   :AuxiliaryBoostersEntry1 ,
-  :AvacynianPriestInnistradRemastered334Entry1 ,
   :AvacynianPriestInnistradRemastered12Entry1 ,
+  :AvacynianPriestInnistradRemastered334Entry1 ,
   :AxgardCavalryEntry1 ,
   :AzoriusChanceryEntry1 ,
   :BanishToAnotherUniverseEntry1 ,
@@ -165,8 +166,8 @@ lot of a specific printing."""@en ;
   :BeamsawProspectorEntry1 ,
   :BeastKinRangerEntry1 ,
   :BehemothOfVault0Entry1 ,
-  :BespokeBattlewagonModernHorizons352Entry1 ,
   :BespokeBattlewagonAetherdriftCommander71Entry1 ,
+  :BespokeBattlewagonModernHorizons352Entry1 ,
   :BessieTheDoctorsRoadsterEntry1 ,
   :BidentOfThassaEntry1 ,
   :BiteDownEntry1 ,
@@ -200,8 +201,8 @@ lot of a specific printing."""@en ;
   :BrotherhoodVertibirdEntry1 ,
   :BrudicladTelchorEngineerEntry1 ,
   :BrudicladTelchorEngineerEntry2 ,
-  :BuriedRuinEdgeOfEternitiesCommander150Entry1 ,
   :BuriedRuinMagicTheGatheringFallout254Entry1 ,
+  :BuriedRuinEdgeOfEternitiesCommander150Entry1 ,
   :BurnerRocketEntry1 ,
   :BurnishedHartEntry1 ,
   :BurstLightningEntry1 ,
@@ -229,8 +230,8 @@ lot of a specific printing."""@en ;
   :ChainReactionEdgeOfEternitiesCommander87Entry1 ,
   :ChainReactionAetherdriftCommander47Entry1 ,
   :ChaosWarpEdgeOfEternitiesCommander49Entry1 ,
-  :ChaosWarpMarchOfTheMachineCommander273Entry1 ,
   :ChaosWarpAetherdriftCommander48Entry1 ,
+  :ChaosWarpMarchOfTheMachineCommander273Entry1 ,
   :ChokedEstuaryEntry1 ,
   :ChompingKavuEntry1 ,
   :ChromaticLanternMagicTheGatheringTeenageMutantNinjaTurtlesCommander58Entry1 ,
@@ -242,8 +243,8 @@ lot of a specific printing."""@en ;
   :CityOfTheDaleksEntry1 ,
   :ClearShotEntry1 ,
   :CliffhavenVampireEntry1 ,
-  :ClifftopRetreatEdgeOfEternitiesCommander155Entry1 ,
   :ClifftopRetreatMagicTheGatheringFallout258Entry1 ,
+  :ClifftopRetreatEdgeOfEternitiesCommander155Entry1 ,
   :ClockworkDroidEntry1 ,
   :CloudKeyEntry1 ,
   :CloudsculptTechnicianEntry1 ,
@@ -255,25 +256,26 @@ lot of a specific printing."""@en ;
   :ColonelAutumnEntry1 ,
   :CombatCelebrantEntry1 ,
   :CombineChrysalisEntry1 ,
-  :CombustibleGearhulkAetherdriftCommander102Entry1 ,
   :CombustibleGearhulkModernHorizons3Commander210Entry1 ,
+  :CombustibleGearhulkAetherdriftCommander102Entry1 ,
   :CometCrawlerEntry1 ,
   :CometCrawlerEntry2 ,
   :CommandBridgeEntry1 ,
-  :CommandTowerMarchOfTheMachineCommander396Entry1 ,
-  :CommandTowerAetherdriftCommander60Entry1 ,
   :CommandTowerModernHorizons3Commander331Entry1 ,
-  :CommandTowerMagicTheGatheringFallout259Entry1 ,
+  :CommandTowerAetherdriftCommander60Entry1 ,
   :CommandTowerDoctorWhoCommander266Entry1 ,
-  :CommandTowerDoctorWhoCommander263Entry1 ,
   :CommandTowerEdgeOfEternitiesCommander59Entry1 ,
-  :CommandersSphereAetherdriftCommander125Entry1 ,
+  :CommandTowerDoctorWhoCommander263Entry1 ,
+  :CommandTowerMagicTheGatheringFallout259Entry1 ,
+  :CommandTowerMarchOfTheMachineCommander396Entry1 ,
   :CommandersSphereDoctorWhoCommander240Entry1 ,
+  :CommandersSphereAetherdriftCommander125Entry1 ,
   :ConduitOfStormsEntry1 ,
   :ConfiscationCoupModernHorizons3Commander178Entry1 ,
   :ConfiscationCoupAetherdriftCommander73Entry1 ,
   :ConjurersClosetEntry1 ,
   :ConjurersClosetEntry2 ,
+  :ConsulateSurveillanceEntry1 ,
   :ConsulateTurretEntry1 ,
   :ContagionClaspEntry1 ,
   :ConversionApparatusEntry1 ,
@@ -347,8 +349,8 @@ lot of a specific printing."""@en ;
   :DinaSoulSteeperEntry1 ,
   :DiplomaticRelationsEntry1 ,
   :DisallowEntry1 ,
-  :DispatchEdgeOfEternitiesCommander64Entry1 ,
   :DispatchMagicTheGatheringFallout159Entry1 ,
+  :DispatchEdgeOfEternitiesCommander64Entry1 ,
   :DisplacedDinosaursEntry1 ,
   :DockworkerDroneEntry1 ,
   :DonLeoProblemSolversEntry1 ,
@@ -414,22 +416,22 @@ lot of a specific printing."""@en ;
   :EtchedOracleEntry2 ,
   :EtheriumSculptorEntry1 ,
   :EvendoWakingHavenEntry1 ,
-  :EverflowingChaliceMagicTheGatheringFallout230Entry1 ,
   :EverflowingChaliceEdgeOfEternitiesCommander137Entry1 ,
+  :EverflowingChaliceMagicTheGatheringFallout230Entry1 ,
   :EverquillPhoenixEntry1 ,
   :EvolutionSageEntry1 ,
-  :EvolvingWildsInnistradRemastered278Entry1 ,
-  :EvolvingWildsMarchOfTheMachineCommander397Entry1 ,
   :EvolvingWildsAetherdriftCommander154Entry1 ,
   :EvolvingWildsMagicTheGatheringFallout263Entry1 ,
+  :EvolvingWildsInnistradRemastered278Entry1 ,
   :EvolvingWildsEdgeOfEternitiesCommander158Entry1 ,
-  :ExoticOrchardMarchOfTheMachineCommander398Entry1 ,
+  :EvolvingWildsMarchOfTheMachineCommander397Entry1 ,
   :ExoticOrchardDoctorWhoCommander276Entry1 ,
-  :ExoticOrchardEdgeOfEternitiesCommander159Entry1 ,
+  :ExoticOrchardDoctorWhoCommander276Entry2 ,
   :ExoticOrchardMagicTheGatheringFallout264Entry1 ,
   :ExoticOrchardMagicTheGatheringFallout495Entry1 ,
-  :ExoticOrchardDoctorWhoCommander276Entry2 ,
+  :ExoticOrchardEdgeOfEternitiesCommander159Entry1 ,
   :ExoticOrchardAetherdriftCommander155Entry1 ,
+  :ExoticOrchardMarchOfTheMachineCommander398Entry1 ,
   :ExperimentalAuguryEntry1 ,
   :ExpertLevelSafeEntry1 ,
   :ExplorationBroodshipEntry1 ,
@@ -448,8 +450,8 @@ lot of a specific printing."""@en ;
   :FalkenrathTorturerEntry1 ,
   :FallersFaithfulEntry1 ,
   :FanaticalFirebrandEntry1 ,
-  :FarewellDoctorWhoCommander465Entry1 ,
   :FarewellModernHorizons3Commander170Entry1 ,
+  :FarewellDoctorWhoCommander465Entry1 ,
   :FeedTheSwarmEntry1 ,
   :FeldonOfTheThirdPathEntry1 ,
   :FellGravshipEntry1 ,
@@ -472,45 +474,45 @@ lot of a specific printing."""@en ;
   :FootHeadquartersEntry3 ,
   :ForbiddenAlchemyEntry1 ,
   :ForebodingRuinsEntry1 ,
-  :ForestJumpstart202593Entry1 ,
-  :ForestJumpstart202594Entry1 ,
-  :ForestJumpstart202595Entry1 ,
-  :ForestMagicTheGatheringTeenageMutantNinjaTurtles195Entry1 ,
-  :ForestMagicTheGatheringFoundations290Entry1 ,
-  :ForestMagicTheGatheringTeenageMutantNinjaTurtles319Entry1 ,
-  :ForestDoctorWhoCommander205Entry1 ,
-  :ForestSecretsOfStrixhaven280Entry1 ,
+  :ForestEdgeOfEternities276Entry1 ,
   :ForestDoctorWhoCommander204Entry1 ,
+  :ForestEdgeOfEternities275Entry1 ,
+  :ForestEdgeOfEternities266Entry1 ,
   :ForestWildsOfEldraine276Entry1 ,
   :ForestWildsOfEldraine275Entry1 ,
-  :ForestMarchOfTheMachine281Entry1 ,
-  :ForestSecretsOfStrixhaven281Entry1 ,
-  :ForestInnistradRemastered297Entry1 ,
+  :ForestEdgeOfEternities266Entry2 ,
+  :ForestEdgeOfEternities275Entry2 ,
+  :ForestEdgeOfEternities276Entry2 ,
+  :ForestMagicTheGatheringTeenageMutantNinjaTurtles195Entry1 ,
   :ForestInnistradRemastered296Entry1 ,
-  :ForestTarkirDragonstorm286Entry1 ,
-  :ForestMagicTheGatheringTeenageMutantNinjaTurtles195Entry2 ,
+  :ForestMagicTheGatheringTeenageMutantNinjaTurtles319Entry1 ,
+  :ForestInnistradRemastered297Entry1 ,
+  :ForestAetherdrift291Entry1 ,
   :ForestSecretsOfStrixhaven271Entry1 ,
-  :ForestSecretsOfStrixhaven280Entry2 ,
+  :ForestSecretsOfStrixhaven281Entry1 ,
   :ForestTarkirDragonstorm285Entry1 ,
-  :ForestMagicTheGatheringTeenageMutantNinjaTurtles319Entry2 ,
+  :ForestSecretsOfStrixhaven280Entry1 ,
+  :ForestSecretsOfStrixhaven280Entry2 ,
   :ForestSecretsOfStrixhaven281Entry2 ,
   :ForestSecretsOfStrixhaven271Entry2 ,
-  :ForestAetherdrift291Entry1 ,
-  :ForestEdgeOfEternities275Entry1 ,
-  :ForestEdgeOfEternities276Entry1 ,
-  :ForestEdgeOfEternities266Entry1 ,
-  :ForestEdgeOfEternities266Entry2 ,
-  :ForestEdgeOfEternities276Entry2 ,
-  :ForestEdgeOfEternities275Entry2 ,
+  :ForestTarkirDragonstorm286Entry1 ,
+  :ForestMagicTheGatheringTeenageMutantNinjaTurtles319Entry2 ,
+  :ForestMagicTheGatheringTeenageMutantNinjaTurtles195Entry2 ,
+  :ForestMagicTheGatheringFoundations290Entry1 ,
+  :ForestJumpstart202595Entry1 ,
+  :ForestJumpstart202594Entry1 ,
+  :ForestMarchOfTheMachine281Entry1 ,
+  :ForestJumpstart202593Entry1 ,
+  :ForestDoctorWhoCommander205Entry1 ,
   :FortifiedVillageEntry1 ,
   :FoundryInspectorEntry1 ,
   :FracturedPowerstoneEntry1 ,
   :FrontierBivouacAetherdriftCommander157Entry1 ,
   :FrontierBivouacMarchOfTheMachineCommander402Entry1 ,
   :FrontlineWarRagerEntry1 ,
-  :FrostboilSnarlMarchOfTheMachineCommander403Entry1 ,
   :FrostboilSnarlModernHorizons3Commander344Entry1 ,
   :FrostboilSnarlDoctorWhoCommander282Entry1 ,
+  :FrostboilSnarlMarchOfTheMachineCommander403Entry1 ,
   :FrostboilSnarlAetherdriftCommander158Entry1 ,
   :FumigateEntry1 ,
   :FungalColossusEntry1 ,
@@ -539,20 +541,21 @@ lot of a specific printing."""@en ;
   :GiantGrowthMagicTheGatheringFoundations223Entry1 ,
   :GiantGrowthTheBrothersWar183Entry1 ,
   :GildedGooseEntry1 ,
-  :GimbalGremlinProdigyMarchOfTheMachineCommander136Entry1 ,
   :GimbalGremlinProdigyMarchOfTheMachineCommander3Entry1 ,
+  :GimbalGremlinProdigyMarchOfTheMachineCommander136Entry1 ,
   :GingerbreadCabinEntry1 ,
   :GisaAndGeralfEntry1 ,
   :GisaTheHellraiserEntry1 ,
   :GisasBiddingEntry1 ,
-  :GlacialFortressDoctorWhoCommander285Entry1 ,
   :GlacialFortressEdgeOfEternitiesCommander160Entry1 ,
+  :GlacialFortressDoctorWhoCommander285Entry1 ,
   :GlacialFortressMagicTheGatheringFallout266Entry1 ,
+  :GlassblowersPuzzleknotEntry1 ,
   :GleamingBarrierEntry1 ,
   :GleamingBarrierEntry2 ,
+  :GlimmerOfGeniusMagicTheGatheringFallout176Entry1 ,
   :GlimmerOfGeniusModernHorizons3Commander187Entry1 ,
   :GlimmerOfGeniusAetherdriftCommander78Entry1 ,
-  :GlimmerOfGeniusMagicTheGatheringFallout176Entry1 ,
   :GlimmervoidBasinEntry1 ,
   :GlitteringMassifEntry1 ,
   :GluttonousGuestEntry1 ,
@@ -627,8 +630,8 @@ lot of a specific printing."""@en ;
   :InexorableTideEntry1 ,
   :InfernalGraspEntry1 ,
   :InfestationSageEntry1 ,
-  :InfiniteGuidelineStationEdgeOfEternities219Entry1 ,
   :InfiniteGuidelineStationEdgeOfEternities348Entry1 ,
+  :InfiniteGuidelineStationEdgeOfEternities219Entry1 ,
   :IngeniousArtilleristEntry1 ,
   :IngeniousProdigyEntry1 ,
   :InsatiableSkittermawEntry1 ,
@@ -649,43 +652,43 @@ lot of a specific printing."""@en ;
   :IrrigatedFarmlandEdgeOfEternitiesCommander162Entry1 ,
   :IrrigatedFarmlandDoctorWhoCommander288Entry1 ,
   :IrrigatedFarmlandMagicTheGatheringFallout268Entry1 ,
-  :IslandDoctorWhoCommander199Entry1 ,
-  :IslandModernHorizons3312Entry1 ,
+  :IslandEdgeOfEternities263Entry1 ,
+  :IslandInnistradRemastered290Entry1 ,
   :IslandMagicTheGatheringTeenageMutantNinjaTurtles192Entry1 ,
-  :IslandMagicTheGatheringFallout319Entry1 ,
-  :IslandMagicTheGatheringFallout320Entry1 ,
-  :IslandMagicTheGatheringTeenageMutantNinjaTurtles316Entry1 ,
-  :IslandSecretsOfStrixhaven268Entry1 ,
+  :IslandEdgeOfEternities269Entry1 ,
+  :IslandEdgeOfEternities269Entry2 ,
   :IslandWildsOfEldraine269Entry1 ,
   :IslandWildsOfEldraine270Entry1 ,
+  :IslandAetherdrift282Entry1 ,
+  :IslandInnistradRemastered291Entry1 ,
+  :IslandMagicTheGatheringTeenageMutantNinjaTurtles316Entry1 ,
+  :IslandDoctorWhoCommander198Entry1 ,
+  :IslandEdgeOfEternities270Entry1 ,
+  :IslandEdgeOfEternities270Entry2 ,
+  :IslandSecretsOfStrixhaven268Entry1 ,
+  :IslandEdgeOfEternities263Entry2 ,
+  :IslandDoctorWhoCommander198Entry2 ,
+  :IslandEdgeOfEternities270Entry3 ,
   :IslandSecretsOfStrixhaven274Entry1 ,
   :IslandSecretsOfStrixhaven275Entry1 ,
-  :IslandDoctorWhoCommander199Entry2 ,
-  :IslandInnistradRemastered290Entry1 ,
-  :IslandInnistradRemastered291Entry1 ,
+  :IslandCommander2019292Entry1 ,
+  :IslandEdgeOfEternities269Entry3 ,
+  :IslandMagicTheGatheringFallout320Entry1 ,
+  :IslandMagicTheGatheringFallout319Entry1 ,
+  :IslandModernHorizons3312Entry1 ,
+  :IslandModernHorizons3313Entry1 ,
+  :IslandMagicTheGatheringTeenageMutantNinjaTurtles192Entry2 ,
+  :IslandSecretsOfStrixhaven275Entry2 ,
+  :IslandSecretsOfStrixhaven274Entry2 ,
+  :IslandMagicTheGatheringTeenageMutantNinjaTurtles316Entry2 ,
+  :IslandSecretsOfStrixhaven268Entry2 ,
+  :IslandMarchOfTheMachine278Entry1 ,
+  :IslandTheBrothersWarCommander32Entry1 ,
   :IslandJumpstart202586Entry1 ,
   :IslandJumpstart202585Entry1 ,
   :IslandJumpstart202584Entry1 ,
-  :IslandDoctorWhoCommander198Entry1 ,
-  :IslandModernHorizons3313Entry1 ,
-  :IslandSecretsOfStrixhaven275Entry2 ,
-  :IslandSecretsOfStrixhaven274Entry2 ,
-  :IslandSecretsOfStrixhaven268Entry2 ,
-  :IslandMagicTheGatheringTeenageMutantNinjaTurtles316Entry2 ,
-  :IslandMagicTheGatheringTeenageMutantNinjaTurtles192Entry2 ,
-  :IslandMarchOfTheMachine278Entry1 ,
-  :IslandDoctorWhoCommander198Entry2 ,
-  :IslandTheBrothersWarCommander32Entry1 ,
-  :IslandEdgeOfEternities270Entry1 ,
-  :IslandEdgeOfEternities263Entry1 ,
-  :IslandEdgeOfEternities270Entry2 ,
-  :IslandEdgeOfEternities263Entry2 ,
-  :IslandCommander2019292Entry1 ,
-  :IslandEdgeOfEternities269Entry1 ,
-  :IslandEdgeOfEternities269Entry2 ,
-  :IslandAetherdrift282Entry1 ,
-  :IslandEdgeOfEternities270Entry3 ,
-  :IslandEdgeOfEternities269Entry3 ,
+  :IslandDoctorWhoCommander199Entry1 ,
+  :IslandDoctorWhoCommander199Entry2 ,
   :IsleOfVesuvaEntry1 ,
   :IzzetBoilerworksEntry1 ,
   :IzzetGeneratoriumEntry1 ,
@@ -710,7 +713,7 @@ lot of a specific printing."""@en ;
   :KavaronMemorialWorldEntry1 ,
   :KayaTheInexorableEntry1 ,
   :KayaBaneOfTheDeadEntry1 ,
-  :KayaGeistHunterInnistradCrimsonVow240Entry1 ,
+  :KayaGeistHunterInnistradCrimsonVow280Entry1 ,
   :KayaGeistHunterTarkirDragonstormCommander294Entry1 ,
   :KayaIntangibleSlayerEntry1 ,
   :KayaOrzhovUsurperEntry1 ,
@@ -748,8 +751,8 @@ lot of a specific printing."""@en ;
   :LongRangeSensorEntry1 ,
   :LootThePathfinderEntry1 ,
   :LostInSpaceEntry1 ,
-  :LoyalApprenticeAetherdriftCommander104Entry1 ,
   :LoyalApprenticeMagicTheGatheringFallout190Entry1 ,
+  :LoyalApprenticeAetherdriftCommander104Entry1 ,
   :LuluSternGuardianEntry1 ,
   :LuluSternGuardianEntry2 ,
   :LumberknotEntry1 ,
@@ -777,9 +780,10 @@ lot of a specific printing."""@en ;
   :MasterfulReplicationEntry1 ,
   :MechanNavigatorEntry1 ,
   :MechanShieldmateEntry1 ,
-  :MechanizedProductionMurdersAtKarlovManorCommander109Entry1 ,
   :MechanizedProductionMagicTheGatheringFallout178Entry1 ,
+  :MechanizedProductionMurdersAtKarlovManorCommander109Entry1 ,
   :MechanozoaEntry1 ,
+  :MedomaiTheAgelessEntry1 ,
   :MeldedMoxiteEntry1 ,
   :MeldedMoxiteEntry2 ,
   :MeltstriderEulogistEntry1 ,
@@ -792,8 +796,8 @@ lot of a specific printing."""@en ;
   :MidnightClockModernHorizons3Commander189Entry1 ,
   :MidnightClockAetherdriftCommander79Entry1 ,
   :MidnightCrusaderShuttleEntry1 ,
-  :MindStoneDoctorWhoCommander244Entry1 ,
   :MindStoneMagicTheGatheringFallout235Entry1 ,
+  :MindStoneDoctorWhoCommander244Entry1 ,
   :MindStoneDoctorWhoCommander244Entry2 ,
   :MindlessAutomatonEntry1 ,
   :MirrodinBesiegedEntry1 ,
@@ -809,40 +813,40 @@ lot of a specific printing."""@en ;
   :MondassianColonyShipEntry1 ,
   :MonoistCircuitFeederEntry1 ,
   :MonoistSentryEntry1 ,
+  :MountainMagicTheGatheringFallout323Entry1 ,
+  :MountainSecretsOfStrixhaven270Entry1 ,
+  :MountainMagicTheGatheringFallout324Entry1 ,
+  :MountainSecretsOfStrixhaven278Entry1 ,
+  :MountainSecretsOfStrixhaven279Entry1 ,
+  :MountainModernHorizons3317Entry1 ,
+  :MountainSecretsOfStrixhaven279Entry2 ,
+  :MountainModernHorizons3316Entry1 ,
+  :MountainAetherdrift288Entry1 ,
+  :MountainSecretsOfStrixhaven278Entry2 ,
+  :MountainInnistradRemastered295Entry1 ,
+  :MountainSecretsOfStrixhaven270Entry2 ,
+  :MountainEdgeOfEternities273Entry1 ,
+  :MountainEdgeOfEternities274Entry1 ,
+  :MountainEdgeOfEternities265Entry1 ,
+  :MountainMagicTheGatheringTeenageMutantNinjaTurtles318Entry1 ,
+  :MountainMagicTheGatheringTeenageMutantNinjaTurtles318Entry2 ,
+  :MountainDoctorWhoCommander202Entry1 ,
+  :MountainMagicTheGatheringTeenageMutantNinjaTurtles194Entry1 ,
+  :MountainEdgeOfEternities274Entry2 ,
+  :MountainMagicTheGatheringTeenageMutantNinjaTurtles194Entry2 ,
+  :MountainEdgeOfEternities274Entry3 ,
+  :MountainEdgeOfEternities265Entry2 ,
+  :MountainWildsOfEldraine274Entry1 ,
+  :MountainWildsOfEldraine273Entry1 ,
+  :MountainEdgeOfEternities273Entry2 ,
+  :MountainEdgeOfEternities273Entry3 ,
   :MountainJumpstart2022107Entry1 ,
   :MountainJumpstart2022108Entry1 ,
   :MountainJumpstart2022109Entry1 ,
-  :MountainMagicTheGatheringTeenageMutantNinjaTurtles194Entry1 ,
-  :MountainMagicTheGatheringTeenageMutantNinjaTurtles318Entry1 ,
-  :MountainSecretsOfStrixhaven270Entry1 ,
   :MountainMarchOfTheMachine280Entry1 ,
-  :MountainSecretsOfStrixhaven278Entry1 ,
-  :MountainSecretsOfStrixhaven279Entry1 ,
-  :MountainWildsOfEldraine273Entry1 ,
-  :MountainSecretsOfStrixhaven278Entry2 ,
-  :MountainBloomburrow376Entry1 ,
-  :MountainDoctorWhoCommander202Entry1 ,
   :MountainBloomburrow375Entry1 ,
-  :MountainSecretsOfStrixhaven270Entry2 ,
-  :MountainMagicTheGatheringFallout323Entry1 ,
-  :MountainMagicTheGatheringFallout324Entry1 ,
-  :MountainWildsOfEldraine274Entry1 ,
-  :MountainSecretsOfStrixhaven279Entry2 ,
-  :MountainMagicTheGatheringTeenageMutantNinjaTurtles318Entry2 ,
-  :MountainModernHorizons3317Entry1 ,
-  :MountainModernHorizons3316Entry1 ,
-  :MountainMagicTheGatheringTeenageMutantNinjaTurtles194Entry2 ,
+  :MountainBloomburrow376Entry1 ,
   :MountainDoctorWhoCommander203Entry1 ,
-  :MountainInnistradRemastered295Entry1 ,
-  :MountainEdgeOfEternities274Entry1 ,
-  :MountainEdgeOfEternities265Entry1 ,
-  :MountainEdgeOfEternities274Entry2 ,
-  :MountainEdgeOfEternities273Entry1 ,
-  :MountainEdgeOfEternities265Entry2 ,
-  :MountainEdgeOfEternities273Entry2 ,
-  :MountainEdgeOfEternities274Entry3 ,
-  :MountainEdgeOfEternities273Entry3 ,
-  :MountainAetherdrift288Entry1 ,
   :MouthOfTheStormEntry1 ,
   :MoxiteRefineryEntry1 ,
   :MuldrothaTheGravetideEntry1 ,
@@ -855,8 +859,8 @@ lot of a specific printing."""@en ;
   :MyriadLandscapeMarchOfTheMachineCommander416Entry1 ,
   :MysticForgeEntry1 ,
   :MysticGateEntry1 ,
-  :MysticMonasteryModernHorizons3Commander360Entry1 ,
   :MysticMonasteryMagicTheGatheringFallout275Entry1 ,
+  :MysticMonasteryModernHorizons3Commander360Entry1 ,
   :MysticMonasteryEdgeOfEternitiesCommander170Entry1 ,
   :NanoformSentinelEntry1 ,
   :NebulaDragonEntry1 ,
@@ -865,6 +869,7 @@ lot of a specific printing."""@en ;
   :NestingDovehawkEntry1 ,
   :NestingGroundsEntry1 ,
   :NewArgiveEntry1 ,
+  :NeyaliSunsVanguardEntry1 ,
   :NickValentinePrivateEyeEntry1 ,
   :NissaWorldsoulSpeakerEntry1 ,
   :NukaColaVendingMachineEntry1 ,
@@ -882,6 +887,7 @@ lot of a specific printing."""@en ;
   :OreplatePangolinEntry1 ,
   :OrganicExtinctionEntry1 ,
   :OrnithopterOfParadiseEntry1 ,
+  :OsgirTheReconstructorEntry1 ,
   :OverclockedElectromancerEntry1 ,
   :OverencumberedEntry1 ,
   :OverflowingBasinEntry1 ,
@@ -893,11 +899,11 @@ lot of a specific printing."""@en ;
   :PanharmoniconMagicTheGatheringFallout237Entry1 ,
   :PanharmoniconAetherdriftCommander135Entry1 ,
   :PartyDudeEntry1 ,
-  :PathOfAncestryMagicTheGatheringFallout279Entry1 ,
   :PathOfAncestryDoctorWhoCommander293Entry1 ,
   :PathOfAncestryDoctorWhoCommander293Entry2 ,
-  :PathOfAncestryMarchOfTheMachineCommander418Entry1 ,
+  :PathOfAncestryMagicTheGatheringFallout279Entry1 ,
   :PathOfAncestryAetherdriftCommander166Entry1 ,
+  :PathOfAncestryMarchOfTheMachineCommander418Entry1 ,
   :PathOfTheAnimistEntry1 ,
   :PathToExileEntry1 ,
   :PatrollingPeacemakerEntry1 ,
@@ -920,50 +926,51 @@ lot of a specific printing."""@en ;
   :PinnacleEmissaryEdgeOfEternities223Entry1 ,
   :PinnacleKillShipEntry1 ,
   :PinnacleKillShipEntry2 ,
-  :PlainsSecretsOfStrixhaven267Entry1 ,
-  :PlainsSecretsOfStrixhaven272Entry1 ,
-  :PlainsMagicTheGatheringTeenageMutantNinjaTurtles315Entry1 ,
-  :PlainsSecretsOfStrixhaven273Entry1 ,
-  :PlainsJumpstart43Entry1 ,
-  :PlainsMagicTheGatheringTeenageMutantNinjaTurtles191Entry1 ,
-  :PlainsInnistradRemastered289Entry1 ,
-  :PlainsMagicTheGatheringTeenageMutantNinjaTurtles191Entry2 ,
-  :PlainsDoctorWhoCommander197Entry1 ,
-  :PlainsMagicTheGatheringTeenageMutantNinjaTurtles315Entry2 ,
-  :PlainsSecretsOfStrixhaven267Entry2 ,
-  :PlainsSecretsOfStrixhaven272Entry2 ,
-  :PlainsSecretsOfStrixhaven273Entry2 ,
-  :PlainsTarkirDragonstorm278Entry1 ,
-  :PlainsTarkirDragonstorm277Entry1 ,
-  :PlainsMagicTheGatheringFoundations272Entry1 ,
-  :PlainsMagicTheGatheringFoundations273Entry1 ,
-  :PlainsModernHorizons3311Entry1 ,
-  :PlainsModernHorizons3310Entry1 ,
-  :PlainsDoctorWhoCommander196Entry1 ,
+  :PlainsCoreSet2021260Entry1 ,
+  :PlainsCoreSet2021262Entry1 ,
+  :PlainsCoreSet2021261Entry1 ,
+  :PlainsEdgeOfEternities262Entry1 ,
+  :PlainsEdgeOfEternities267Entry1 ,
+  :PlainsEdgeOfEternities267Entry2 ,
   :PlainsWildsOfEldraine267Entry1 ,
   :PlainsWildsOfEldraine268Entry1 ,
+  :PlainsJumpstart43Entry1 ,
+  :PlainsMagicTheGatheringTeenageMutantNinjaTurtles191Entry1 ,
+  :PlainsEdgeOfEternities268Entry1 ,
+  :PlainsDoctorWhoCommander196Entry1 ,
+  :PlainsEdgeOfEternities268Entry2 ,
+  :PlainsEdgeOfEternities262Entry2 ,
+  :PlainsMagicTheGatheringTeenageMutantNinjaTurtles315Entry1 ,
+  :PlainsInnistradRemastered289Entry1 ,
+  :PlainsSecretsOfStrixhaven273Entry1 ,
   :PlainsMagicTheGatheringFallout318Entry1 ,
   :PlainsMagicTheGatheringFallout317Entry1 ,
-  :PlainsEdgeOfEternities268Entry1 ,
-  :PlainsEdgeOfEternities262Entry1 ,
-  :PlainsCoreSet2021262Entry1 ,
-  :PlainsEdgeOfEternities268Entry2 ,
-  :PlainsCoreSet2021260Entry1 ,
-  :PlainsEdgeOfEternities267Entry1 ,
-  :PlainsEdgeOfEternities268Entry3 ,
-  :PlainsCoreSet2021261Entry1 ,
-  :PlainsEdgeOfEternities262Entry2 ,
-  :PlainsEdgeOfEternities267Entry2 ,
+  :PlainsSecretsOfStrixhaven267Entry1 ,
+  :PlainsSecretsOfStrixhaven272Entry1 ,
+  :PlainsModernHorizons3310Entry1 ,
+  :PlainsModernHorizons3311Entry1 ,
+  :PlainsSecretsOfStrixhaven273Entry2 ,
+  :PlainsSecretsOfStrixhaven272Entry2 ,
+  :PlainsTarkirDragonstorm277Entry1 ,
+  :PlainsTarkirDragonstorm278Entry1 ,
+  :PlainsSecretsOfStrixhaven267Entry2 ,
   :PlainsEdgeOfEternities267Entry3 ,
+  :PlainsMagicTheGatheringTeenageMutantNinjaTurtles315Entry2 ,
+  :PlainsEdgeOfEternities268Entry3 ,
+  :PlainsMagicTheGatheringTeenageMutantNinjaTurtles191Entry2 ,
+  :PlainsMagicTheGatheringFoundations273Entry1 ,
+  :PlainsDoctorWhoCommander197Entry1 ,
+  :PlainsMagicTheGatheringFoundations272Entry1 ,
   :PlanewideDisasterEntry1 ,
   :PlasmaBoltEntry1 ,
   :PlasmaCasterEntry1 ,
-  :PortTownModernHorizons3Commander364Entry1 ,
+  :PlasmaCasterEntry2 ,
   :PortTownDoctorWhoCommander294Entry1 ,
+  :PortTownModernHorizons3Commander364Entry1 ,
   :PowerDepotEntry1 ,
   :PrairieStreamModernHorizons3Commander365Entry1 ,
-  :PrairieStreamDoctorWhoCommander295Entry1 ,
   :PrairieStreamMagicTheGatheringFallout280Entry1 ,
+  :PrairieStreamDoctorWhoCommander295Entry1 ,
   :PridefulParentEntry1 ,
   :PriestOfTheBlessedGrafEntry1 ,
   :PrimalPrayersEntry1 ,
@@ -981,8 +988,8 @@ lot of a specific printing."""@en ;
   :RashmiAndRagavanEntry1 ,
   :RassilonTheWarPresidentEntry1 ,
   :RazorfieldRipperEntry1 ,
-  :RazortideBridgeMagicTheGatheringFallout281Entry1 ,
   :RazortideBridgeEdgeOfEternitiesCommander171Entry1 ,
+  :RazortideBridgeMagicTheGatheringFallout281Entry1 ,
   :RazortideBridgeEdgeOfEternitiesCommander171Entry2 ,
   :RealityShiftAetherdriftCommander39Entry1 ,
   :RealityShiftMarchOfTheMachineCommander231Entry1 ,
@@ -1030,8 +1037,8 @@ lot of a specific printing."""@en ;
   :RuggedHighlandsEntry1 ,
   :RuggedPrairieEntry1 ,
   :RunAwayTogetherEntry1 ,
-  :RustvaleBridgeMagicTheGatheringFallout285Entry1 ,
   :RustvaleBridgeEdgeOfEternitiesCommander175Entry1 ,
+  :RustvaleBridgeMagicTheGatheringFallout285Entry1 ,
   :RustvaleBridgeEdgeOfEternitiesCommander175Entry2 ,
   :SaheeliRaiEntry1 ,
   :SaheeliFiligreeMasterEntry1 ,
@@ -1093,9 +1100,9 @@ lot of a specific printing."""@en ;
   :SigardaHostOfHeronsEntry1 ,
   :SigiledSentinelEntry1 ,
   :SilverbackElderEntry1 ,
-  :SilverbluffBridgeMagicTheGatheringFallout290Entry1 ,
   :SilverbluffBridgeEdgeOfEternitiesCommander180Entry1 ,
   :SilverbluffBridgeEdgeOfEternitiesCommander180Entry2 ,
+  :SilverbluffBridgeMagicTheGatheringFallout290Entry1 ,
   :SilverbluffBridgeEdgeOfEternitiesCommander180Entry3 ,
   :SilverquillLecturerEntry1 ,
   :SimianSimulacrumEntry1 ,
@@ -1104,9 +1111,9 @@ lot of a specific printing."""@en ;
   :SingularityRuptureEntry1 ,
   :SkyclaveApparitionEntry1 ,
   :SkyclaveRelicEntry1 ,
-  :SkycloudExpanseMagicTheGatheringFallout291Entry1 ,
-  :SkycloudExpanseEdgeOfEternitiesCommander181Entry1 ,
   :SkycloudExpanseDoctorWhoCommander306Entry1 ,
+  :SkycloudExpanseEdgeOfEternitiesCommander181Entry1 ,
+  :SkycloudExpanseMagicTheGatheringFallout291Entry1 ,
   :SkyseersChariotEntry1 ,
   :SkystingerEntry1 ,
   :SlagwoodsBridgeAetherdriftCommander171Entry1 ,
@@ -1115,21 +1122,21 @@ lot of a specific printing."""@en ;
   :SmolderingMarshEntry1 ,
   :SnakeskinVeilEntry1 ,
   :SnuffOutEntry1 ,
-  :SolRingModernHorizons3Commander305Entry1 ,
-  :SolRingAetherdriftCommander57Entry1 ,
-  :SolRingDoctorWhoCommander245Entry1 ,
-  :SolRingDoctorWhoCommander245Entry2 ,
-  :SolRingMagicTheGatheringFallout239Entry1 ,
   :SolRingEdgeOfEternitiesCommander57Entry1 ,
+  :SolRingMagicTheGatheringFallout239Entry1 ,
+  :SolRingAetherdriftCommander57Entry1 ,
+  :SolRingModernHorizons3Commander305Entry1 ,
+  :SolRingDoctorWhoCommander245Entry1 ,
   :SolRingMarchOfTheMachineCommander381Entry1 ,
+  :SolRingDoctorWhoCommander245Entry2 ,
   :SolarArrayEntry1 ,
   :SolarArrayEntry2 ,
   :SolarTransformerModernHorizons3211Entry1 ,
   :SolarTransformerAetherdriftCommander137Entry1 ,
   :SolarionEntry1 ,
-  :SolemnSimulacrumModernHorizons3Commander306Entry1 ,
   :SolemnSimulacrumDoctorWhoCommander246Entry1 ,
   :SolemnSimulacrumMagicTheGatheringFallout240Entry1 ,
+  :SolemnSimulacrumModernHorizons3Commander306Entry1 ,
   :SolemnSimulacrumAetherdriftCommander138Entry1 ,
   :SomberwaldSageEntry1 ,
   :SonicScrewdriverEntry1 ,
@@ -1149,8 +1156,8 @@ lot of a specific printing."""@en ;
   :SpellSwindleEntry1 ,
   :SphinxOfTheRevelationEntry1 ,
   :SpineOfIshSahEntry1 ,
-  :SpireOfIndustryEdgeOfEternitiesCommander183Entry1 ,
   :SpireOfIndustryMagicTheGatheringFallout293Entry1 ,
+  :SpireOfIndustryEdgeOfEternitiesCommander183Entry1 ,
   :SpireOfIndustryAetherdriftCommander172Entry1 ,
   :SpitfireLagacEntry1 ,
   :SporeCrawlerEntry1 ,
@@ -1158,15 +1165,15 @@ lot of a specific printing."""@en ;
   :StabEntry1 ,
   :StarbreachWhaleEntry1 ,
   :StarfieldShepherdEntry1 ,
-  :StarfieldVocalistEdgeOfEternities78Entry1 ,
   :StarfieldVocalistEdgeOfEternities328Entry1 ,
+  :StarfieldVocalistEdgeOfEternities78Entry1 ,
   :StarfighterPilotEntry1 ,
   :StarportSecurityEntry1 ,
   :StarscapeClericEntry1 ,
   :StasisFieldEntry1 ,
   :StationMonitorEntry1 ,
-  :SteelOverseerEdgeOfEternitiesCommander144Entry1 ,
   :SteelOverseerMagicTheGatheringFallout241Entry1 ,
+  :SteelOverseerEdgeOfEternitiesCommander144Entry1 ,
   :SteelswarmOperatorEntry1 ,
   :StensiaMasqueradeEntry1 ,
   :StitchedManglerEntry1 ,
@@ -1180,8 +1187,8 @@ lot of a specific printing."""@en ;
   :StrokeOfGeniusEntry1 ,
   :StrongholdFurnaceEntry1 ,
   :StruggleEntry1 ,
-  :SulfurFallsEdgeOfEternitiesCommander184Entry1 ,
   :SulfurFallsMagicTheGatheringFallout294Entry1 ,
+  :SulfurFallsEdgeOfEternitiesCommander184Entry1 ,
   :SulfurFallsAetherdriftCommander173Entry1 ,
   :SuncrusherEntry1 ,
   :SundialOfTheInfiniteEntry1 ,
@@ -1195,39 +1202,39 @@ lot of a specific printing."""@en ;
   :SusanForemanEntry1 ,
   :SusurSecundiVoidAltarEntry1 ,
   :SusurianDirgecraftEntry1 ,
-  :SwampMagicTheGatheringFoundations277Entry1 ,
-  :SwampSecretsOfStrixhaven277Entry1 ,
   :SwampSecretsOfStrixhaven276Entry1 ,
-  :SwampSecretsOfStrixhaven276Entry2 ,
-  :SwampInnistradRemastered292Entry1 ,
-  :SwampSecretsOfStrixhaven269Entry1 ,
-  :SwampMagicTheGatheringFoundations287Entry1 ,
-  :SwampDoctorWhoCommander200Entry1 ,
-  :SwampSecretsOfStrixhaven277Entry2 ,
+  :SwampSecretsOfStrixhaven277Entry1 ,
   :SwampMagicTheGatheringTeenageMutantNinjaTurtles317Entry1 ,
-  :SwampJumpstart2022106Entry1 ,
+  :SwampSecretsOfStrixhaven277Entry2 ,
   :SwampMagicTheGatheringTeenageMutantNinjaTurtles193Entry1 ,
-  :SwampJumpstart2022104Entry1 ,
-  :SwampJumpstart2022105Entry1 ,
-  :SwampSecretsOfStrixhaven269Entry2 ,
-  :SwampTarkirDragonstorm282Entry1 ,
-  :SwampMagicTheGatheringTeenageMutantNinjaTurtles317Entry2 ,
+  :SwampInnistradRemastered292Entry1 ,
   :SwampTarkirDragonstorm281Entry1 ,
-  :SwampMagicTheGatheringTeenageMutantNinjaTurtles193Entry2 ,
-  :SwampDoctorWhoCommander201Entry1 ,
   :SwampEdgeOfEternities264Entry1 ,
+  :SwampSecretsOfStrixhaven276Entry2 ,
+  :SwampEdgeOfEternities264Entry2 ,
+  :SwampDoctorWhoCommander200Entry1 ,
+  :SwampMagicTheGatheringTeenageMutantNinjaTurtles317Entry2 ,
+  :SwampTarkirDragonstorm282Entry1 ,
   :SwampEdgeOfEternities272Entry1 ,
   :SwampEdgeOfEternities271Entry1 ,
+  :SwampMagicTheGatheringTeenageMutantNinjaTurtles193Entry2 ,
   :SwampEdgeOfEternities272Entry2 ,
-  :SwampEdgeOfEternities264Entry2 ,
+  :SwampSecretsOfStrixhaven269Entry1 ,
+  :SwampSecretsOfStrixhaven269Entry2 ,
   :SwampEdgeOfEternities271Entry2 ,
+  :SwampJumpstart2022105Entry1 ,
+  :SwampMagicTheGatheringFoundations277Entry1 ,
+  :SwampJumpstart2022104Entry1 ,
+  :SwampJumpstart2022106Entry1 ,
+  :SwampDoctorWhoCommander201Entry1 ,
+  :SwampMagicTheGatheringFoundations287Entry1 ,
   :SwanSongEntry1 ,
   :SwiftfootBootsEntry1 ,
   :SwiftwaterCliffsEntry1 ,
   :SwordsToPlowsharesModernHorizons3Commander173Entry1 ,
+  :SwordsToPlowsharesEdgeOfEternitiesCommander45Entry1 ,
   :SwordsToPlowsharesMagicTheGatheringFallout173Entry1 ,
   :SwordsToPlowsharesDoctorWhoCommander212Entry1 ,
-  :SwordsToPlowsharesEdgeOfEternitiesCommander45Entry1 ,
   :SycoraxCommanderEntry1 ,
   :SyncopateEntry1 ,
   :SynthEradicatorEntry1 ,
@@ -1239,16 +1246,16 @@ lot of a specific printing."""@en ;
   :T45PowerArmorEntry1 ,
   :T45PowerArmorEntry2 ,
   :TaiiWakeenPerfectShotEntry1 ,
-  :TalismanOfConvictionModernHorizons3Commander307Entry1 ,
   :TalismanOfConvictionMagicTheGatheringFallout243Entry1 ,
+  :TalismanOfConvictionModernHorizons3Commander307Entry1 ,
   :TalismanOfCreativityModernHorizons3Commander308Entry1 ,
   :TalismanOfCreativityMagicTheGatheringFallout244Entry1 ,
   :TalismanOfCuriosityEntry1 ,
   :TalismanOfDominanceEntry1 ,
   :TalismanOfIndulgenceEntry1 ,
+  :TalismanOfProgressMagicTheGatheringFallout249Entry1 ,
   :TalismanOfProgressModernHorizons3Commander313Entry1 ,
   :TalismanOfProgressDoctorWhoCommander253Entry1 ,
-  :TalismanOfProgressMagicTheGatheringFallout249Entry1 ,
   :TalismanOfUnityEntry1 ,
   :TanglepoolBridgeAetherdriftCommander175Entry1 ,
   :TanglepoolBridgeModernHorizons2257Entry1 ,
@@ -1262,33 +1269,33 @@ lot of a specific printing."""@en ;
   :TemperedSteelEntry1 ,
   :TempleOfAbandonEntry1 ,
   :TempleOfDeceitEntry1 ,
-  :TempleOfEnlightenmentMagicTheGatheringFallout304Entry1 ,
   :TempleOfEnlightenmentDoctorWhoCommander315Entry1 ,
-  :TempleOfEnlightenmentEdgeOfEternitiesCommander186Entry1 ,
+  :TempleOfEnlightenmentMagicTheGatheringFallout304Entry1 ,
   :TempleOfEnlightenmentModernHorizons3Commander386Entry1 ,
-  :TempleOfEpiphanyMarchOfTheMachineCommander433Entry1 ,
-  :TempleOfEpiphanyEdgeOfEternitiesCommander187Entry1 ,
-  :TempleOfEpiphanyMagicTheGatheringFallout305Entry1 ,
+  :TempleOfEnlightenmentEdgeOfEternitiesCommander186Entry1 ,
   :TempleOfEpiphanyDoctorWhoCommander316Entry1 ,
   :TempleOfEpiphanyModernHorizons3Commander387Entry1 ,
+  :TempleOfEpiphanyEdgeOfEternitiesCommander187Entry1 ,
+  :TempleOfEpiphanyMagicTheGatheringFallout305Entry1 ,
+  :TempleOfEpiphanyMarchOfTheMachineCommander433Entry1 ,
   :TempleOfEpiphanyAetherdriftCommander177Entry1 ,
   :TempleOfMaliceEntry1 ,
-  :TempleOfMysteryMarchOfTheMachineCommander434Entry1 ,
   :TempleOfMysteryDoctorWhoCommander318Entry1 ,
+  :TempleOfMysteryMarchOfTheMachineCommander434Entry1 ,
   :TempleOfPlentyEntry1 ,
   :TempleOfTheFalseGodEntry1 ,
   :TempleOfTriumphEdgeOfEternitiesCommander188Entry1 ,
   :TempleOfTriumphModernHorizons3Commander392Entry1 ,
   :TenWizardsMountainEntry1 ,
-  :TerramorphicExpanseMarchOfTheMachineCommander439Entry1 ,
   :TerramorphicExpanseDoctorWhoCommander322Entry1 ,
   :TerramorphicExpanseSecretsOfStrixhaven265Entry1 ,
   :TerramorphicExpanseMagicTheGatheringFallout313Entry1 ,
+  :TerramorphicExpanseMarchOfTheMachineCommander439Entry1 ,
   :TerritorialAetherkiteEntry1 ,
   :TetsukoUmezawaFugitiveEntry1 ,
   :TeysaKarlovEntry1 ,
-  :TezzeretsGambitModernHorizons3Commander194Entry1 ,
   :TezzeretsGambitEdgeOfEternitiesCommander47Entry1 ,
+  :TezzeretsGambitModernHorizons3Commander194Entry1 ,
   :ThawbringerEntry1 ,
   :TheBeastDeathlessPrinceEntry1 ,
   :TheCaveOfSkullsEntry1 ,
@@ -1305,8 +1312,8 @@ lot of a specific printing."""@en ;
   :TheFirstDoctorEntry1 ,
   :TheFiveDoctorsEntry1 ,
   :TheFloodOfMarsEntry1 ,
-  :TheFourthDoctorDoctorWhoCommander2Entry1 ,
   :TheFourthDoctorDoctorWhoCommander193Entry1 ,
+  :TheFourthDoctorDoctorWhoCommander2Entry1 ,
   :TheMasterFormedAnewEntry1 ,
   :TheMasterGallifreysEndEntry1 ,
   :TheMasterMesmeristEntry1 ,
@@ -1333,16 +1340,16 @@ lot of a specific printing."""@en ;
   :TheWesternCloudEntry1 ,
   :TheWildsEntry1 ,
   :ThermoAlchemistEntry1 ,
-  :ThirstForKnowledgeEdgeOfEternitiesCommander48Entry1 ,
   :ThirstForKnowledgeMagicTheGatheringFallout180Entry1 ,
+  :ThirstForKnowledgeEdgeOfEternitiesCommander48Entry1 ,
   :ThisIsHowItEndsEntry1 ,
   :ThopterAssemblyEntry1 ,
   :ThopterSpyNetworkMarchOfTheMachineCommander241Entry1 ,
   :ThopterSpyNetworkAetherdriftCommander83Entry1 ,
   :ThornglintBridgeEntry1 ,
   :ThoughtMonitorEntry1 ,
-  :ThoughtVesselMagicTheGatheringFallout251Entry1 ,
   :ThoughtVesselMagicTheGatheringFinalFantasyCommander368Entry1 ,
+  :ThoughtVesselMagicTheGatheringFallout251Entry1 ,
   :ThoughtVesselDoctorWhoCommander255Entry1 ,
   :ThoughtVesselDoctorWhoCommander255Entry2 ,
   :ThoughtcastEntry1 ,
@@ -1411,9 +1418,9 @@ lot of a specific printing."""@en ;
   :VilespawnSpiderEntry1 ,
   :VillageMessengerEntry1 ,
   :VillageRitesEntry1 ,
+  :VineglimmerSnarlMagicTheGatheringFinalFantasyCommander440Entry1 ,
   :VineglimmerSnarlDoctorWhoCommander329Entry1 ,
   :VineglimmerSnarlMarchOfTheMachineCommander444Entry1 ,
-  :VineglimmerSnarlMagicTheGatheringFinalFantasyCommander440Entry1 ,
   :VineglimmerSnarlAetherdriftCommander183Entry1 ,
   :VirusBeetleEntry1 ,
   :VislorTurloughEntry1 ,
@@ -1425,8 +1432,8 @@ lot of a specific printing."""@en ;
   :VoltstormAngelEntry2 ,
   :VraskaJoinsUpEntry1 ,
   :VrestinMenoptraLeaderEntry1 ,
-  :WakeThePastEdgeOfEternitiesCommander128Entry1 ,
   :WakeThePastMagicTheGatheringFallout221Entry1 ,
+  :WakeThePastEdgeOfEternitiesCommander128Entry1 ,
   :WakeThePastEdgeOfEternitiesCommander128Entry2 ,
   :WanderingMindEntry1 ,
   :WarmakerGunshipEntry1 ,
@@ -1441,9 +1448,9 @@ lot of a specific printing."""@en ;
   :WeftstalkerArdentEntry1 ,
   :WeirdingWoodEntry1 ,
   :WheelOfPotentialEntry1 ,
+  :WhirlerRogueMagicTheGatheringFallout181Entry1 ,
   :WhirlerRogueAetherdriftCommander85Entry1 ,
   :WhirlerRogueMarchOfTheMachineCommander244Entry1 ,
-  :WhirlerRogueMagicTheGatheringFallout181Entry1 ,
   :WhirlerVirtuosoModernHorizons3Commander278Entry1 ,
   :WhirlerVirtuosoAetherdriftCommander122Entry1 ,
   :WildwoodScourgeEntry1 ,
@@ -1594,7 +1601,7 @@ lot of a specific printing."""@en ;
 :AethericAmplifierEntry1 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :AethericAmplifier ;
-    :quantity "2"^^xsd:positiveInteger ;
+    :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
@@ -1608,7 +1615,7 @@ lot of a specific printing."""@en ;
 :AethericAmplifierEntry3 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :AethericAmplifier ;
-    :quantity "1"^^xsd:positiveInteger ;
+    :quantity "2"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
@@ -1776,14 +1783,14 @@ lot of a specific printing."""@en ;
 :DruidOfPurificationEntry1 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :DruidOfPurification ;
-    :quantity "2"^^xsd:positiveInteger ;
+    :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
 :DruidOfPurificationEntry2 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :DruidOfPurification ;
-    :quantity "1"^^xsd:positiveInteger ;
+    :quantity "2"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
@@ -2203,17 +2210,17 @@ lot of a specific printing."""@en ;
     :hasCondition :NearMint ;
     :purchasePrice "0.19"^^xsd:decimal .
 
-:MountainBloomburrow376Entry1 rdf:type owl:NamedIndividual ,
-                  :CollectionEntry ;
-    :entryCard :MountainBloomburrow376 ;
-    :quantity "4"^^xsd:positiveInteger ;
-    :hasFinish :Nonfoil ;
-    :hasCondition :NearMint .
-
 :MountainBloomburrow375Entry1 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :MountainBloomburrow375 ;
     :quantity "8"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:MountainBloomburrow376Entry1 rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :MountainBloomburrow376 ;
+    :quantity "4"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
@@ -2247,6 +2254,14 @@ lot of a specific printing."""@en ;
     :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
+
+:RestorationAngelEntry1 rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :RestorationAngel ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint ;
+    :purchasePrice "0.44"^^xsd:decimal .
 
 # --- sets/Commander2017.ttl ---
 
@@ -2301,6 +2316,13 @@ lot of a specific printing."""@en ;
     :entryCard :EpicureOfBlood ;
     :quantity "2"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:OsgirTheReconstructorEntry1 rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :OsgirTheReconstructor ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Foil ;
     :hasCondition :NearMint .
 
 # --- sets/CommanderLegends.ttl ---
@@ -2374,16 +2396,16 @@ lot of a specific printing."""@en ;
 
 # --- sets/CoreSet2021.ttl ---
 
-:PlainsCoreSet2021262Entry1 rdf:type owl:NamedIndividual ,
+:PlainsCoreSet2021260Entry1 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
-    :entryCard :PlainsCoreSet2021262 ;
+    :entryCard :PlainsCoreSet2021260 ;
     :quantity "4"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
-:PlainsCoreSet2021260Entry1 rdf:type owl:NamedIndividual ,
+:PlainsCoreSet2021262Entry1 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
-    :entryCard :PlainsCoreSet2021260 ;
+    :entryCard :PlainsCoreSet2021262 ;
     :quantity "4"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
@@ -2451,15 +2473,14 @@ lot of a specific printing."""@en ;
 :AdricMathematicalGeniusEntry1 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :AdricMathematicalGenius ;
-    :quantity "2"^^xsd:positiveInteger ;
+    :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
-    :hasCondition :NearMint ;
-    :purchasePrice "0.28"^^xsd:decimal .
+    :hasCondition :NearMint .
 
 :AdricMathematicalGeniusEntry2 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :AdricMathematicalGenius ;
-    :quantity "1"^^xsd:positiveInteger ;
+    :quantity "2"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
@@ -2918,17 +2939,17 @@ lot of a specific printing."""@en ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
-:ForestDoctorWhoCommander205Entry1 rdf:type owl:NamedIndividual ,
-                  :CollectionEntry ;
-    :entryCard :ForestDoctorWhoCommander205 ;
-    :quantity "1"^^xsd:positiveInteger ;
-    :hasFinish :Nonfoil ;
-    :hasCondition :NearMint .
-
 :ForestDoctorWhoCommander204Entry1 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :ForestDoctorWhoCommander204 ;
     :quantity "2"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:ForestDoctorWhoCommander205Entry1 rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :ForestDoctorWhoCommander205 ;
+    :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
@@ -3058,20 +3079,6 @@ lot of a specific printing."""@en ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
-:IslandDoctorWhoCommander199Entry1 rdf:type owl:NamedIndividual ,
-                  :CollectionEntry ;
-    :entryCard :IslandDoctorWhoCommander199 ;
-    :quantity "1"^^xsd:positiveInteger ;
-    :hasFinish :Nonfoil ;
-    :hasCondition :NearMint .
-
-:IslandDoctorWhoCommander199Entry2 rdf:type owl:NamedIndividual ,
-                  :CollectionEntry ;
-    :entryCard :IslandDoctorWhoCommander199 ;
-    :quantity "2"^^xsd:positiveInteger ;
-    :hasFinish :Nonfoil ;
-    :hasCondition :NearMint .
-
 :IslandDoctorWhoCommander198Entry1 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :IslandDoctorWhoCommander198 ;
@@ -3082,6 +3089,20 @@ lot of a specific printing."""@en ;
 :IslandDoctorWhoCommander198Entry2 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :IslandDoctorWhoCommander198 ;
+    :quantity "2"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:IslandDoctorWhoCommander199Entry1 rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :IslandDoctorWhoCommander199 ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:IslandDoctorWhoCommander199Entry2 rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :IslandDoctorWhoCommander199 ;
     :quantity "2"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
@@ -3145,14 +3166,14 @@ lot of a specific printing."""@en ;
 :MindStoneDoctorWhoCommander244Entry1 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :MindStoneDoctorWhoCommander244 ;
-    :quantity "2"^^xsd:positiveInteger ;
+    :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
 :MindStoneDoctorWhoCommander244Entry2 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :MindStoneDoctorWhoCommander244 ;
-    :quantity "1"^^xsd:positiveInteger ;
+    :quantity "2"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
@@ -3208,14 +3229,14 @@ lot of a specific printing."""@en ;
 :PathOfAncestryDoctorWhoCommander293Entry1 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :PathOfAncestryDoctorWhoCommander293 ;
-    :quantity "2"^^xsd:positiveInteger ;
+    :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
 :PathOfAncestryDoctorWhoCommander293Entry2 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :PathOfAncestryDoctorWhoCommander293 ;
-    :quantity "1"^^xsd:positiveInteger ;
+    :quantity "2"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
@@ -3233,16 +3254,16 @@ lot of a specific printing."""@en ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
-:PlainsDoctorWhoCommander197Entry1 rdf:type owl:NamedIndividual ,
+:PlainsDoctorWhoCommander196Entry1 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
-    :entryCard :PlainsDoctorWhoCommander197 ;
+    :entryCard :PlainsDoctorWhoCommander196 ;
     :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
-:PlainsDoctorWhoCommander196Entry1 rdf:type owl:NamedIndividual ,
+:PlainsDoctorWhoCommander197Entry1 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
-    :entryCard :PlainsDoctorWhoCommander196 ;
+    :entryCard :PlainsDoctorWhoCommander197 ;
     :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
@@ -3674,18 +3695,18 @@ lot of a specific printing."""@en ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
-:TheFourthDoctorDoctorWhoCommander2Entry1 rdf:type owl:NamedIndividual ,
-                  :CollectionEntry ;
-    :entryCard :TheFourthDoctorDoctorWhoCommander2 ;
-    :quantity "1"^^xsd:positiveInteger ;
-    :hasFinish :Foil ;
-    :hasCondition :NearMint .
-
 :TheFourthDoctorDoctorWhoCommander193Entry1 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :TheFourthDoctorDoctorWhoCommander193 ;
     :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :EtchedFoil ;
+    :hasCondition :NearMint .
+
+:TheFourthDoctorDoctorWhoCommander2Entry1 rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :TheFourthDoctorDoctorWhoCommander2 ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Foil ;
     :hasCondition :NearMint .
 
 :TheMasterFormedAnewEntry1 rdf:type owl:NamedIndividual ,
@@ -3824,14 +3845,14 @@ lot of a specific printing."""@en ;
 :ThoughtVesselDoctorWhoCommander255Entry1 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :ThoughtVesselDoctorWhoCommander255 ;
-    :quantity "1"^^xsd:positiveInteger ;
+    :quantity "2"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
 :ThoughtVesselDoctorWhoCommander255Entry2 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :ThoughtVesselDoctorWhoCommander255 ;
-    :quantity "2"^^xsd:positiveInteger ;
+    :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
@@ -4222,17 +4243,17 @@ lot of a specific printing."""@en ;
                   :CollectionEntry ;
     :entryCard :CometCrawler ;
     :quantity "1"^^xsd:positiveInteger ;
-    :hasFinish :Foil ;
+    :hasFinish :Nonfoil ;
     :hasCondition :NearMint ;
-    :purchasePrice "0.09"^^xsd:decimal .
+    :purchasePrice "0.06"^^xsd:decimal .
 
 :CometCrawlerEntry2 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :CometCrawler ;
     :quantity "1"^^xsd:positiveInteger ;
-    :hasFinish :Nonfoil ;
+    :hasFinish :Foil ;
     :hasCondition :NearMint ;
-    :purchasePrice "0.06"^^xsd:decimal .
+    :purchasePrice "0.09"^^xsd:decimal .
 
 :CommandBridgeEntry1 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
@@ -4424,16 +4445,16 @@ lot of a specific printing."""@en ;
     :hasCondition :NearMint ;
     :purchasePrice "0.08"^^xsd:decimal .
 
-:ForestEdgeOfEternities275Entry1 rdf:type owl:NamedIndividual ,
+:ForestEdgeOfEternities276Entry1 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
-    :entryCard :ForestEdgeOfEternities275 ;
+    :entryCard :ForestEdgeOfEternities276 ;
     :quantity "2"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
-:ForestEdgeOfEternities276Entry1 rdf:type owl:NamedIndividual ,
+:ForestEdgeOfEternities275Entry1 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
-    :entryCard :ForestEdgeOfEternities276 ;
+    :entryCard :ForestEdgeOfEternities275 ;
     :quantity "2"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
@@ -4442,19 +4463,12 @@ lot of a specific printing."""@en ;
                   :CollectionEntry ;
     :entryCard :ForestEdgeOfEternities266 ;
     :quantity "1"^^xsd:positiveInteger ;
-    :hasFinish :Foil ;
+    :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
 :ForestEdgeOfEternities266Entry2 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :ForestEdgeOfEternities266 ;
-    :quantity "1"^^xsd:positiveInteger ;
-    :hasFinish :Nonfoil ;
-    :hasCondition :NearMint .
-
-:ForestEdgeOfEternities276Entry2 rdf:type owl:NamedIndividual ,
-                  :CollectionEntry ;
-    :entryCard :ForestEdgeOfEternities276 ;
     :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Foil ;
     :hasCondition :NearMint .
@@ -4462,6 +4476,13 @@ lot of a specific printing."""@en ;
 :ForestEdgeOfEternities275Entry2 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :ForestEdgeOfEternities275 ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Foil ;
+    :hasCondition :NearMint .
+
+:ForestEdgeOfEternities276Entry2 rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :ForestEdgeOfEternities276 ;
     :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Foil ;
     :hasCondition :NearMint .
@@ -4586,16 +4607,16 @@ lot of a specific printing."""@en ;
     :hasCondition :NearMint ;
     :purchasePrice "0.11"^^xsd:decimal .
 
-:InfiniteGuidelineStationEdgeOfEternities219Entry1 rdf:type owl:NamedIndividual ,
+:InfiniteGuidelineStationEdgeOfEternities348Entry1 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
-    :entryCard :InfiniteGuidelineStationEdgeOfEternities219 ;
+    :entryCard :InfiniteGuidelineStationEdgeOfEternities348 ;
     :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
-:InfiniteGuidelineStationEdgeOfEternities348Entry1 rdf:type owl:NamedIndividual ,
+:InfiniteGuidelineStationEdgeOfEternities219Entry1 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
-    :entryCard :InfiniteGuidelineStationEdgeOfEternities348 ;
+    :entryCard :InfiniteGuidelineStationEdgeOfEternities219 ;
     :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
@@ -4612,17 +4633,17 @@ lot of a specific printing."""@en ;
                   :CollectionEntry ;
     :entryCard :InterceptorMechan ;
     :quantity "1"^^xsd:positiveInteger ;
-    :hasFinish :Foil ;
+    :hasFinish :Nonfoil ;
     :hasCondition :NearMint ;
-    :purchasePrice "0.18"^^xsd:decimal .
+    :purchasePrice "0.19"^^xsd:decimal .
 
 :InterceptorMechanEntry2 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :InterceptorMechan ;
     :quantity "1"^^xsd:positiveInteger ;
-    :hasFinish :Nonfoil ;
+    :hasFinish :Foil ;
     :hasCondition :NearMint ;
-    :purchasePrice "0.19"^^xsd:decimal .
+    :purchasePrice "0.18"^^xsd:decimal .
 
 :IntrepidTenderfootEntry1 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
@@ -4632,18 +4653,32 @@ lot of a specific printing."""@en ;
     :hasCondition :NearMint ;
     :purchasePrice "0.03"^^xsd:decimal .
 
-:IslandEdgeOfEternities270Entry1 rdf:type owl:NamedIndividual ,
-                  :CollectionEntry ;
-    :entryCard :IslandEdgeOfEternities270 ;
-    :quantity "1"^^xsd:positiveInteger ;
-    :hasFinish :Nonfoil ;
-    :hasCondition :NearMint .
-
 :IslandEdgeOfEternities263Entry1 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :IslandEdgeOfEternities263 ;
     :quantity "2"^^xsd:positiveInteger ;
     :hasFinish :Foil ;
+    :hasCondition :NearMint .
+
+:IslandEdgeOfEternities269Entry1 rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :IslandEdgeOfEternities269 ;
+    :quantity "2"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:IslandEdgeOfEternities269Entry2 rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :IslandEdgeOfEternities269 ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:IslandEdgeOfEternities270Entry1 rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :IslandEdgeOfEternities270 ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
 :IslandEdgeOfEternities270Entry2 rdf:type owl:NamedIndividual ,
@@ -4657,20 +4692,6 @@ lot of a specific printing."""@en ;
                   :CollectionEntry ;
     :entryCard :IslandEdgeOfEternities263 ;
     :quantity "1"^^xsd:positiveInteger ;
-    :hasFinish :Nonfoil ;
-    :hasCondition :NearMint .
-
-:IslandEdgeOfEternities269Entry1 rdf:type owl:NamedIndividual ,
-                  :CollectionEntry ;
-    :entryCard :IslandEdgeOfEternities269 ;
-    :quantity "1"^^xsd:positiveInteger ;
-    :hasFinish :Nonfoil ;
-    :hasCondition :NearMint .
-
-:IslandEdgeOfEternities269Entry2 rdf:type owl:NamedIndividual ,
-                  :CollectionEntry ;
-    :entryCard :IslandEdgeOfEternities269 ;
-    :quantity "2"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
@@ -4846,11 +4867,18 @@ lot of a specific printing."""@en ;
     :hasCondition :NearMint ;
     :purchasePrice "0.14"^^xsd:decimal .
 
+:MountainEdgeOfEternities273Entry1 rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :MountainEdgeOfEternities273 ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Foil ;
+    :hasCondition :NearMint .
+
 :MountainEdgeOfEternities274Entry1 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :MountainEdgeOfEternities274 ;
     :quantity "1"^^xsd:positiveInteger ;
-    :hasFinish :Nonfoil ;
+    :hasFinish :Foil ;
     :hasCondition :NearMint .
 
 :MountainEdgeOfEternities265Entry1 rdf:type owl:NamedIndividual ,
@@ -4867,10 +4895,10 @@ lot of a specific printing."""@en ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
-:MountainEdgeOfEternities273Entry1 rdf:type owl:NamedIndividual ,
+:MountainEdgeOfEternities274Entry3 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
-    :entryCard :MountainEdgeOfEternities273 ;
-    :quantity "2"^^xsd:positiveInteger ;
+    :entryCard :MountainEdgeOfEternities274 ;
+    :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
@@ -4884,15 +4912,8 @@ lot of a specific printing."""@en ;
 :MountainEdgeOfEternities273Entry2 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :MountainEdgeOfEternities273 ;
-    :quantity "1"^^xsd:positiveInteger ;
-    :hasFinish :Foil ;
-    :hasCondition :NearMint .
-
-:MountainEdgeOfEternities274Entry3 rdf:type owl:NamedIndividual ,
-                  :CollectionEntry ;
-    :entryCard :MountainEdgeOfEternities274 ;
-    :quantity "1"^^xsd:positiveInteger ;
-    :hasFinish :Foil ;
+    :quantity "2"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
 :MountainEdgeOfEternities273Entry3 rdf:type owl:NamedIndividual ,
@@ -4969,29 +4990,44 @@ lot of a specific printing."""@en ;
                   :CollectionEntry ;
     :entryCard :PinnacleKillShip ;
     :quantity "1"^^xsd:positiveInteger ;
-    :hasFinish :Nonfoil ;
+    :hasFinish :Foil ;
     :hasCondition :NearMint ;
-    :purchasePrice "0.12"^^xsd:decimal .
+    :purchasePrice "0.14"^^xsd:decimal .
 
 :PinnacleKillShipEntry2 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :PinnacleKillShip ;
     :quantity "1"^^xsd:positiveInteger ;
-    :hasFinish :Foil ;
+    :hasFinish :Nonfoil ;
     :hasCondition :NearMint ;
-    :purchasePrice "0.14"^^xsd:decimal .
+    :purchasePrice "0.12"^^xsd:decimal .
+
+:PlainsEdgeOfEternities262Entry1 rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :PlainsEdgeOfEternities262 ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Foil ;
+    :hasCondition :NearMint .
+
+:PlainsEdgeOfEternities267Entry1 rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :PlainsEdgeOfEternities267 ;
+    :quantity "2"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:PlainsEdgeOfEternities267Entry2 rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :PlainsEdgeOfEternities267 ;
+    :quantity "2"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint ;
+    :purchasePrice "0.10"^^xsd:decimal .
 
 :PlainsEdgeOfEternities268Entry1 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :PlainsEdgeOfEternities268 ;
     :quantity "1"^^xsd:positiveInteger ;
-    :hasFinish :Nonfoil ;
-    :hasCondition :NearMint .
-
-:PlainsEdgeOfEternities262Entry1 rdf:type owl:NamedIndividual ,
-                  :CollectionEntry ;
-    :entryCard :PlainsEdgeOfEternities262 ;
-    :quantity "2"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
@@ -5003,7 +5039,14 @@ lot of a specific printing."""@en ;
     :hasCondition :NearMint ;
     :purchasePrice "0.16"^^xsd:decimal .
 
-:PlainsEdgeOfEternities267Entry1 rdf:type owl:NamedIndividual ,
+:PlainsEdgeOfEternities262Entry2 rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :PlainsEdgeOfEternities262 ;
+    :quantity "2"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:PlainsEdgeOfEternities267Entry3 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :PlainsEdgeOfEternities267 ;
     :quantity "1"^^xsd:positiveInteger ;
@@ -5016,28 +5059,6 @@ lot of a specific printing."""@en ;
     :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Foil ;
     :hasCondition :NearMint .
-
-:PlainsEdgeOfEternities262Entry2 rdf:type owl:NamedIndividual ,
-                  :CollectionEntry ;
-    :entryCard :PlainsEdgeOfEternities262 ;
-    :quantity "1"^^xsd:positiveInteger ;
-    :hasFinish :Foil ;
-    :hasCondition :NearMint .
-
-:PlainsEdgeOfEternities267Entry2 rdf:type owl:NamedIndividual ,
-                  :CollectionEntry ;
-    :entryCard :PlainsEdgeOfEternities267 ;
-    :quantity "2"^^xsd:positiveInteger ;
-    :hasFinish :Nonfoil ;
-    :hasCondition :NearMint .
-
-:PlainsEdgeOfEternities267Entry3 rdf:type owl:NamedIndividual ,
-                  :CollectionEntry ;
-    :entryCard :PlainsEdgeOfEternities267 ;
-    :quantity "2"^^xsd:positiveInteger ;
-    :hasFinish :Nonfoil ;
-    :hasCondition :NearMint ;
-    :purchasePrice "0.10"^^xsd:decimal .
 
 :PlasmaBoltEntry1 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
@@ -5112,18 +5133,18 @@ lot of a specific printing."""@en ;
 :SelfcraftMechanEntry1 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :SelfcraftMechan ;
-    :quantity "1"^^xsd:positiveInteger ;
-    :hasFinish :Foil ;
-    :hasCondition :NearMint ;
-    :purchasePrice "0.06"^^xsd:decimal .
-
-:SelfcraftMechanEntry2 rdf:type owl:NamedIndividual ,
-                  :CollectionEntry ;
-    :entryCard :SelfcraftMechan ;
     :quantity "2"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint ;
     :purchasePrice "0.07"^^xsd:decimal .
+
+:SelfcraftMechanEntry2 rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :SelfcraftMechan ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Foil ;
+    :hasCondition :NearMint ;
+    :purchasePrice "0.06"^^xsd:decimal .
 
 :ShatteredWingsEntry1 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
@@ -5201,17 +5222,17 @@ lot of a specific printing."""@en ;
     :hasCondition :NearMint ;
     :purchasePrice "0.28"^^xsd:decimal .
 
-:StarfieldVocalistEdgeOfEternities78Entry1 rdf:type owl:NamedIndividual ,
-                  :CollectionEntry ;
-    :entryCard :StarfieldVocalistEdgeOfEternities78 ;
-    :quantity "1"^^xsd:positiveInteger ;
-    :hasFinish :Nonfoil ;
-    :hasCondition :NearMint .
-
 :StarfieldVocalistEdgeOfEternities328Entry1 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :StarfieldVocalistEdgeOfEternities328 ;
     :quantity "3"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:StarfieldVocalistEdgeOfEternities78Entry1 rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :StarfieldVocalistEdgeOfEternities78 ;
+    :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
@@ -5282,27 +5303,6 @@ lot of a specific printing."""@en ;
     :hasFinish :Foil ;
     :hasCondition :NearMint .
 
-:SwampEdgeOfEternities272Entry1 rdf:type owl:NamedIndividual ,
-                  :CollectionEntry ;
-    :entryCard :SwampEdgeOfEternities272 ;
-    :quantity "1"^^xsd:positiveInteger ;
-    :hasFinish :Foil ;
-    :hasCondition :NearMint .
-
-:SwampEdgeOfEternities271Entry1 rdf:type owl:NamedIndividual ,
-                  :CollectionEntry ;
-    :entryCard :SwampEdgeOfEternities271 ;
-    :quantity "1"^^xsd:positiveInteger ;
-    :hasFinish :Nonfoil ;
-    :hasCondition :NearMint .
-
-:SwampEdgeOfEternities272Entry2 rdf:type owl:NamedIndividual ,
-                  :CollectionEntry ;
-    :entryCard :SwampEdgeOfEternities272 ;
-    :quantity "2"^^xsd:positiveInteger ;
-    :hasFinish :Nonfoil ;
-    :hasCondition :NearMint .
-
 :SwampEdgeOfEternities264Entry2 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :SwampEdgeOfEternities264 ;
@@ -5310,11 +5310,32 @@ lot of a specific printing."""@en ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
-:SwampEdgeOfEternities271Entry2 rdf:type owl:NamedIndividual ,
+:SwampEdgeOfEternities272Entry1 rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :SwampEdgeOfEternities272 ;
+    :quantity "2"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:SwampEdgeOfEternities271Entry1 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :SwampEdgeOfEternities271 ;
     :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Foil ;
+    :hasCondition :NearMint .
+
+:SwampEdgeOfEternities272Entry2 rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :SwampEdgeOfEternities272 ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Foil ;
+    :hasCondition :NearMint .
+
+:SwampEdgeOfEternities271Entry2 rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :SwampEdgeOfEternities271 ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
 :SynthesizerLabshipEntry1 rdf:type owl:NamedIndividual ,
@@ -5771,15 +5792,15 @@ lot of a specific printing."""@en ;
     :entryCard :GolemFoundry ;
     :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
-    :hasCondition :NearMint ;
-    :purchasePrice "0.24"^^xsd:decimal .
+    :hasCondition :NearMint .
 
 :GolemFoundryEntry2 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :GolemFoundry ;
     :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
-    :hasCondition :NearMint .
+    :hasCondition :NearMint ;
+    :purchasePrice "0.24"^^xsd:decimal .
 
 :GreatFurnaceEntry1 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
@@ -6248,15 +6269,15 @@ lot of a specific printing."""@en ;
     :entryCard :ThreefoldThunderhulk ;
     :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
-    :hasCondition :NearMint .
+    :hasCondition :NearMint ;
+    :purchasePrice "0.29"^^xsd:decimal .
 
 :ThreefoldThunderhulkEntry2 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :ThreefoldThunderhulk ;
     :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
-    :hasCondition :NearMint ;
-    :purchasePrice "0.29"^^xsd:decimal .
+    :hasCondition :NearMint .
 
 :ThrummingbirdEntry1 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
@@ -6353,9 +6374,9 @@ lot of a specific printing."""@en ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
-:KayaGeistHunterInnistradCrimsonVow240Entry1 rdf:type owl:NamedIndividual ,
+:KayaGeistHunterInnistradCrimsonVow280Entry1 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
-    :entryCard :KayaGeistHunterInnistradCrimsonVow240 ;
+    :entryCard :KayaGeistHunterInnistradCrimsonVow280 ;
     :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
@@ -6436,14 +6457,6 @@ lot of a specific printing."""@en ;
     :hasCondition :NearMint ;
     :purchasePrice "0.17"^^xsd:decimal .
 
-:AvacynianPriestInnistradRemastered334Entry1 rdf:type owl:NamedIndividual ,
-                  :CollectionEntry ;
-    :entryCard :AvacynianPriestInnistradRemastered334 ;
-    :quantity "1"^^xsd:positiveInteger ;
-    :hasFinish :Nonfoil ;
-    :hasCondition :NearMint ;
-    :purchasePrice "0.06"^^xsd:decimal .
-
 :AvacynianPriestInnistradRemastered12Entry1 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :AvacynianPriestInnistradRemastered12 ;
@@ -6451,6 +6464,14 @@ lot of a specific printing."""@en ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint ;
     :purchasePrice "0.10"^^xsd:decimal .
+
+:AvacynianPriestInnistradRemastered334Entry1 rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :AvacynianPriestInnistradRemastered334 ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint ;
+    :purchasePrice "0.06"^^xsd:decimal .
 
 :BattlegroundGeistEntry1 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
@@ -6732,18 +6753,18 @@ lot of a specific printing."""@en ;
     :hasCondition :NearMint ;
     :purchasePrice "0.13"^^xsd:decimal .
 
-:ForestInnistradRemastered297Entry1 rdf:type owl:NamedIndividual ,
-                  :CollectionEntry ;
-    :entryCard :ForestInnistradRemastered297 ;
-    :quantity "1"^^xsd:positiveInteger ;
-    :hasFinish :Foil ;
-    :hasCondition :NearMint .
-
 :ForestInnistradRemastered296Entry1 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :ForestInnistradRemastered296 ;
     :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:ForestInnistradRemastered297Entry1 rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :ForestInnistradRemastered297 ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Foil ;
     :hasCondition :NearMint .
 
 :GalvanicJuggernautEntry1 rdf:type owl:NamedIndividual ,
@@ -7103,14 +7124,6 @@ lot of a specific printing."""@en ;
     :hasCondition :NearMint ;
     :purchasePrice "0.18"^^xsd:decimal .
 
-:RestorationAngelEntry1 rdf:type owl:NamedIndividual ,
-                  :CollectionEntry ;
-    :entryCard :RestorationAngel ;
-    :quantity "1"^^xsd:positiveInteger ;
-    :hasFinish :Nonfoil ;
-    :hasCondition :NearMint ;
-    :purchasePrice "0.44"^^xsd:decimal .
-
 :RockfallValeEntry1 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :RockfallVale ;
@@ -7382,10 +7395,10 @@ lot of a specific printing."""@en ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
-:SwampJumpstart2022106Entry1 rdf:type owl:NamedIndividual ,
+:SwampJumpstart2022105Entry1 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
-    :entryCard :SwampJumpstart2022106 ;
-    :quantity "6"^^xsd:positiveInteger ;
+    :entryCard :SwampJumpstart2022105 ;
+    :quantity "7"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
@@ -7396,19 +7409,19 @@ lot of a specific printing."""@en ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
-:SwampJumpstart2022105Entry1 rdf:type owl:NamedIndividual ,
+:SwampJumpstart2022106Entry1 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
-    :entryCard :SwampJumpstart2022105 ;
-    :quantity "7"^^xsd:positiveInteger ;
+    :entryCard :SwampJumpstart2022106 ;
+    :quantity "6"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
 # --- sets/Jumpstart2025.ttl ---
 
-:ForestJumpstart202593Entry1 rdf:type owl:NamedIndividual ,
+:ForestJumpstart202595Entry1 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
-    :entryCard :ForestJumpstart202593 ;
-    :quantity "4"^^xsd:positiveInteger ;
+    :entryCard :ForestJumpstart202595 ;
+    :quantity "3"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
@@ -7419,10 +7432,10 @@ lot of a specific printing."""@en ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
-:ForestJumpstart202595Entry1 rdf:type owl:NamedIndividual ,
+:ForestJumpstart202593Entry1 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
-    :entryCard :ForestJumpstart202595 ;
-    :quantity "3"^^xsd:positiveInteger ;
+    :entryCard :ForestJumpstart202593 ;
+    :quantity "4"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
@@ -7457,6 +7470,13 @@ lot of a specific printing."""@en ;
     :hasCondition :NearMint ;
     :purchasePrice "0.19"^^xsd:decimal .
 
+:ConsulateSurveillanceEntry1 rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :ConsulateSurveillance ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
 :DeadlockTrapEntry1 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :DeadlockTrap ;
@@ -7490,6 +7510,13 @@ lot of a specific printing."""@en ;
 :FabricationModuleKaladesh211Entry1 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :FabricationModuleKaladesh211 ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:GlassblowersPuzzleknotEntry1 rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :GlassblowersPuzzleknot ;
     :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
@@ -7865,17 +7892,17 @@ lot of a specific printing."""@en ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
-:IslandMagicTheGatheringFallout319Entry1 rdf:type owl:NamedIndividual ,
-                  :CollectionEntry ;
-    :entryCard :IslandMagicTheGatheringFallout319 ;
-    :quantity "3"^^xsd:positiveInteger ;
-    :hasFinish :Nonfoil ;
-    :hasCondition :NearMint .
-
 :IslandMagicTheGatheringFallout320Entry1 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :IslandMagicTheGatheringFallout320 ;
     :quantity "2"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:IslandMagicTheGatheringFallout319Entry1 rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :IslandMagicTheGatheringFallout319 ;
+    :quantity "3"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
@@ -8048,6 +8075,13 @@ lot of a specific printing."""@en ;
     :hasCondition :NearMint .
 
 :PlasmaCasterEntry1 rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :PlasmaCaster ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:PlasmaCasterEntry2 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :PlasmaCaster ;
     :quantity "1"^^xsd:positiveInteger ;
@@ -8817,17 +8851,17 @@ lot of a specific printing."""@en ;
                   :CollectionEntry ;
     :entryCard :MaraudingBlightPriestMagicTheGatheringFoundations178 ;
     :quantity "1"^^xsd:positiveInteger ;
-    :hasFinish :Foil ;
+    :hasFinish :Nonfoil ;
     :hasCondition :NearMint ;
-    :purchasePrice "0.67"^^xsd:decimal .
+    :purchasePrice "0.25"^^xsd:decimal .
 
 :MaraudingBlightPriestMagicTheGatheringFoundations178Entry2 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :MaraudingBlightPriestMagicTheGatheringFoundations178 ;
     :quantity "1"^^xsd:positiveInteger ;
-    :hasFinish :Nonfoil ;
+    :hasFinish :Foil ;
     :hasCondition :NearMint ;
-    :purchasePrice "0.25"^^xsd:decimal .
+    :purchasePrice "0.67"^^xsd:decimal .
 
 :MischievousPupEntry1 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
@@ -8861,17 +8895,17 @@ lot of a specific printing."""@en ;
     :hasCondition :NearMint ;
     :purchasePrice "0.08"^^xsd:decimal .
 
-:PlainsMagicTheGatheringFoundations272Entry1 rdf:type owl:NamedIndividual ,
-                  :CollectionEntry ;
-    :entryCard :PlainsMagicTheGatheringFoundations272 ;
-    :quantity "4"^^xsd:positiveInteger ;
-    :hasFinish :Nonfoil ;
-    :hasCondition :NearMint .
-
 :PlainsMagicTheGatheringFoundations273Entry1 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :PlainsMagicTheGatheringFoundations273 ;
     :quantity "6"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:PlainsMagicTheGatheringFoundations272Entry1 rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :PlainsMagicTheGatheringFoundations272 ;
+    :quantity "4"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
@@ -9067,7 +9101,7 @@ lot of a specific printing."""@en ;
                   :CollectionEntry ;
     :entryCard :FootHeadquarters ;
     :quantity "1"^^xsd:positiveInteger ;
-    :hasFinish :Nonfoil ;
+    :hasFinish :Foil ;
     :hasCondition :NearMint .
 
 :FootHeadquartersEntry2 rdf:type owl:NamedIndividual ,
@@ -9081,7 +9115,7 @@ lot of a specific printing."""@en ;
                   :CollectionEntry ;
     :entryCard :FootHeadquarters ;
     :quantity "1"^^xsd:positiveInteger ;
-    :hasFinish :Foil ;
+    :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
 :ForestMagicTheGatheringTeenageMutantNinjaTurtles195Entry1 rdf:type owl:NamedIndividual ,
@@ -9098,13 +9132,6 @@ lot of a specific printing."""@en ;
     :hasFinish :Foil ;
     :hasCondition :NearMint .
 
-:ForestMagicTheGatheringTeenageMutantNinjaTurtles195Entry2 rdf:type owl:NamedIndividual ,
-                  :CollectionEntry ;
-    :entryCard :ForestMagicTheGatheringTeenageMutantNinjaTurtles195 ;
-    :quantity "1"^^xsd:positiveInteger ;
-    :hasFinish :Foil ;
-    :hasCondition :NearMint .
-
 :ForestMagicTheGatheringTeenageMutantNinjaTurtles319Entry2 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :ForestMagicTheGatheringTeenageMutantNinjaTurtles319 ;
@@ -9112,17 +9139,24 @@ lot of a specific printing."""@en ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
+:ForestMagicTheGatheringTeenageMutantNinjaTurtles195Entry2 rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :ForestMagicTheGatheringTeenageMutantNinjaTurtles195 ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Foil ;
+    :hasCondition :NearMint .
+
 :IllegitimateBusinessEntry1 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :IllegitimateBusiness ;
-    :quantity "2"^^xsd:positiveInteger ;
+    :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
 :IllegitimateBusinessEntry2 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :IllegitimateBusiness ;
-    :quantity "1"^^xsd:positiveInteger ;
+    :quantity "2"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
@@ -9130,17 +9164,10 @@ lot of a specific printing."""@en ;
                   :CollectionEntry ;
     :entryCard :IslandMagicTheGatheringTeenageMutantNinjaTurtles192 ;
     :quantity "1"^^xsd:positiveInteger ;
-    :hasFinish :Nonfoil ;
+    :hasFinish :Foil ;
     :hasCondition :NearMint .
 
 :IslandMagicTheGatheringTeenageMutantNinjaTurtles316Entry1 rdf:type owl:NamedIndividual ,
-                  :CollectionEntry ;
-    :entryCard :IslandMagicTheGatheringTeenageMutantNinjaTurtles316 ;
-    :quantity "1"^^xsd:positiveInteger ;
-    :hasFinish :Nonfoil ;
-    :hasCondition :NearMint .
-
-:IslandMagicTheGatheringTeenageMutantNinjaTurtles316Entry2 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :IslandMagicTheGatheringTeenageMutantNinjaTurtles316 ;
     :quantity "2"^^xsd:positiveInteger ;
@@ -9151,14 +9178,14 @@ lot of a specific printing."""@en ;
                   :CollectionEntry ;
     :entryCard :IslandMagicTheGatheringTeenageMutantNinjaTurtles192 ;
     :quantity "1"^^xsd:positiveInteger ;
-    :hasFinish :Foil ;
+    :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
-:MountainMagicTheGatheringTeenageMutantNinjaTurtles194Entry1 rdf:type owl:NamedIndividual ,
+:IslandMagicTheGatheringTeenageMutantNinjaTurtles316Entry2 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
-    :entryCard :MountainMagicTheGatheringTeenageMutantNinjaTurtles194 ;
+    :entryCard :IslandMagicTheGatheringTeenageMutantNinjaTurtles316 ;
     :quantity "1"^^xsd:positiveInteger ;
-    :hasFinish :Foil ;
+    :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
 :MountainMagicTheGatheringTeenageMutantNinjaTurtles318Entry1 rdf:type owl:NamedIndividual ,
@@ -9175,37 +9202,37 @@ lot of a specific printing."""@en ;
     :hasFinish :Foil ;
     :hasCondition :NearMint .
 
-:MountainMagicTheGatheringTeenageMutantNinjaTurtles194Entry2 rdf:type owl:NamedIndividual ,
+:MountainMagicTheGatheringTeenageMutantNinjaTurtles194Entry1 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :MountainMagicTheGatheringTeenageMutantNinjaTurtles194 ;
     :quantity "2"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
+:MountainMagicTheGatheringTeenageMutantNinjaTurtles194Entry2 rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :MountainMagicTheGatheringTeenageMutantNinjaTurtles194 ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Foil ;
+    :hasCondition :NearMint .
+
 :MutantTownEntry1 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :MutantTown ;
-    :quantity "2"^^xsd:positiveInteger ;
+    :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
 :MutantTownEntry2 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :MutantTown ;
-    :quantity "1"^^xsd:positiveInteger ;
+    :quantity "2"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
 :PartyDudeEntry1 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :PartyDude ;
-    :quantity "1"^^xsd:positiveInteger ;
-    :hasFinish :Nonfoil ;
-    :hasCondition :NearMint .
-
-:PlainsMagicTheGatheringTeenageMutantNinjaTurtles315Entry1 rdf:type owl:NamedIndividual ,
-                  :CollectionEntry ;
-    :entryCard :PlainsMagicTheGatheringTeenageMutantNinjaTurtles315 ;
     :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
@@ -9217,18 +9244,25 @@ lot of a specific printing."""@en ;
     :hasFinish :Foil ;
     :hasCondition :NearMint .
 
-:PlainsMagicTheGatheringTeenageMutantNinjaTurtles191Entry2 rdf:type owl:NamedIndividual ,
+:PlainsMagicTheGatheringTeenageMutantNinjaTurtles315Entry1 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
-    :entryCard :PlainsMagicTheGatheringTeenageMutantNinjaTurtles191 ;
+    :entryCard :PlainsMagicTheGatheringTeenageMutantNinjaTurtles315 ;
     :quantity "2"^^xsd:positiveInteger ;
-    :hasFinish :Nonfoil ;
+    :hasFinish :Foil ;
     :hasCondition :NearMint .
 
 :PlainsMagicTheGatheringTeenageMutantNinjaTurtles315Entry2 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :PlainsMagicTheGatheringTeenageMutantNinjaTurtles315 ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:PlainsMagicTheGatheringTeenageMutantNinjaTurtles191Entry2 rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :PlainsMagicTheGatheringTeenageMutantNinjaTurtles191 ;
     :quantity "2"^^xsd:positiveInteger ;
-    :hasFinish :Foil ;
+    :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
 :RetroMutationEntry1 rdf:type owl:NamedIndividual ,
@@ -9291,14 +9325,14 @@ lot of a specific printing."""@en ;
                   :CollectionEntry ;
     :entryCard :UneasyAlliance ;
     :quantity "1"^^xsd:positiveInteger ;
-    :hasFinish :Nonfoil ;
+    :hasFinish :Foil ;
     :hasCondition :NearMint .
 
 :UneasyAllianceEntry2 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :UneasyAlliance ;
     :quantity "1"^^xsd:positiveInteger ;
-    :hasFinish :Foil ;
+    :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
 # --- sets/MagicTheGatheringTeenageMutantNinjaTurtlesCommander.ttl ---
@@ -9608,18 +9642,18 @@ lot of a specific printing."""@en ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
-:GimbalGremlinProdigyMarchOfTheMachineCommander136Entry1 rdf:type owl:NamedIndividual ,
-                  :CollectionEntry ;
-    :entryCard :GimbalGremlinProdigyMarchOfTheMachineCommander136 ;
-    :quantity "1"^^xsd:positiveInteger ;
-    :hasFinish :EtchedFoil ;
-    :hasCondition :NearMint .
-
 :GimbalGremlinProdigyMarchOfTheMachineCommander3Entry1 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :GimbalGremlinProdigyMarchOfTheMachineCommander3 ;
     :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Foil ;
+    :hasCondition :NearMint .
+
+:GimbalGremlinProdigyMarchOfTheMachineCommander136Entry1 rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :GimbalGremlinProdigyMarchOfTheMachineCommander136 ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :EtchedFoil ;
     :hasCondition :NearMint .
 
 :GlimmervoidBasinEntry1 rdf:type owl:NamedIndividual ,
@@ -10066,6 +10100,13 @@ lot of a specific printing."""@en ;
 
 # --- sets/MarchOfTheMachineMultiverseLegends.ttl ---
 
+:AtraxaPraetorsVoiceEntry1 rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :AtraxaPraetorsVoice ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
 :TetsukoUmezawaFugitiveEntry1 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :TetsukoUmezawaFugitive ;
@@ -10231,15 +10272,15 @@ lot of a specific printing."""@en ;
     :entryCard :IzzetGeneratorium ;
     :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
-    :hasCondition :NearMint ;
-    :purchasePrice "0.25"^^xsd:decimal .
+    :hasCondition :NearMint .
 
 :IzzetGeneratoriumEntry2 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :IzzetGeneratorium ;
     :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
-    :hasCondition :NearMint .
+    :hasCondition :NearMint ;
+    :purchasePrice "0.25"^^xsd:decimal .
 
 :JoltedAwakeEntry1 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
@@ -10290,16 +10331,16 @@ lot of a specific printing."""@en ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
-:PlainsModernHorizons3311Entry1 rdf:type owl:NamedIndividual ,
+:PlainsModernHorizons3310Entry1 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
-    :entryCard :PlainsModernHorizons3311 ;
+    :entryCard :PlainsModernHorizons3310 ;
     :quantity "5"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
-:PlainsModernHorizons3310Entry1 rdf:type owl:NamedIndividual ,
+:PlainsModernHorizons3311Entry1 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
-    :entryCard :PlainsModernHorizons3310 ;
+    :entryCard :PlainsModernHorizons3311 ;
     :quantity "5"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
@@ -10359,15 +10400,15 @@ lot of a specific printing."""@en ;
     :entryCard :UnstableAmulet ;
     :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
-    :hasCondition :NearMint ;
-    :purchasePrice "0.20"^^xsd:decimal .
+    :hasCondition :NearMint .
 
 :UnstableAmuletEntry2 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :UnstableAmulet ;
     :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
-    :hasCondition :NearMint .
+    :hasCondition :NearMint ;
+    :purchasePrice "0.20"^^xsd:decimal .
 
 :VolatileStormdrakeEntry1 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
@@ -10380,14 +10421,14 @@ lot of a specific printing."""@en ;
                   :CollectionEntry ;
     :entryCard :VoltstormAngel ;
     :quantity "1"^^xsd:positiveInteger ;
-    :hasFinish :Nonfoil ;
+    :hasFinish :Foil ;
     :hasCondition :NearMint .
 
 :VoltstormAngelEntry2 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :VoltstormAngel ;
     :quantity "1"^^xsd:positiveInteger ;
-    :hasFinish :Foil ;
+    :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
 :WheelOfPotentialEntry1 rdf:type owl:NamedIndividual ,
@@ -11119,6 +11160,15 @@ lot of a specific printing."""@en ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
+# --- sets/PhyrexiaAllWillBeOneCommander.ttl ---
+
+:NeyaliSunsVanguardEntry1 rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :NeyaliSunsVanguard ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
 # --- sets/RavnicaAllegiance.ttl ---
 
 :KayasWrathEntry1 rdf:type owl:NamedIndividual ,
@@ -11146,11 +11196,11 @@ lot of a specific printing."""@en ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
-:ForestSecretsOfStrixhaven280Entry1 rdf:type owl:NamedIndividual ,
+:ForestSecretsOfStrixhaven271Entry1 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
-    :entryCard :ForestSecretsOfStrixhaven280 ;
-    :quantity "2"^^xsd:positiveInteger ;
-    :hasFinish :Foil ;
+    :entryCard :ForestSecretsOfStrixhaven271 ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
 :ForestSecretsOfStrixhaven281Entry1 rdf:type owl:NamedIndividual ,
@@ -11160,11 +11210,11 @@ lot of a specific printing."""@en ;
     :hasFinish :Foil ;
     :hasCondition :NearMint .
 
-:ForestSecretsOfStrixhaven271Entry1 rdf:type owl:NamedIndividual ,
+:ForestSecretsOfStrixhaven280Entry1 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
-    :entryCard :ForestSecretsOfStrixhaven271 ;
-    :quantity "1"^^xsd:positiveInteger ;
-    :hasFinish :Nonfoil ;
+    :entryCard :ForestSecretsOfStrixhaven280 ;
+    :quantity "2"^^xsd:positiveInteger ;
+    :hasFinish :Foil ;
     :hasCondition :NearMint .
 
 :ForestSecretsOfStrixhaven280Entry2 rdf:type owl:NamedIndividual ,
@@ -11192,42 +11242,42 @@ lot of a specific printing."""@en ;
                   :CollectionEntry ;
     :entryCard :IslandSecretsOfStrixhaven268 ;
     :quantity "1"^^xsd:positiveInteger ;
-    :hasFinish :Nonfoil ;
+    :hasFinish :Foil ;
     :hasCondition :NearMint .
 
 :IslandSecretsOfStrixhaven274Entry1 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :IslandSecretsOfStrixhaven274 ;
     :quantity "1"^^xsd:positiveInteger ;
-    :hasFinish :Foil ;
+    :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
 :IslandSecretsOfStrixhaven275Entry1 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :IslandSecretsOfStrixhaven275 ;
     :quantity "1"^^xsd:positiveInteger ;
-    :hasFinish :Nonfoil ;
+    :hasFinish :Foil ;
     :hasCondition :NearMint .
 
 :IslandSecretsOfStrixhaven275Entry2 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :IslandSecretsOfStrixhaven275 ;
     :quantity "1"^^xsd:positiveInteger ;
-    :hasFinish :Foil ;
+    :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
 :IslandSecretsOfStrixhaven274Entry2 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :IslandSecretsOfStrixhaven274 ;
     :quantity "1"^^xsd:positiveInteger ;
-    :hasFinish :Nonfoil ;
+    :hasFinish :Foil ;
     :hasCondition :NearMint .
 
 :IslandSecretsOfStrixhaven268Entry2 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :IslandSecretsOfStrixhaven268 ;
     :quantity "1"^^xsd:positiveInteger ;
-    :hasFinish :Foil ;
+    :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
 :MountainSecretsOfStrixhaven270Entry1 rdf:type owl:NamedIndividual ,
@@ -11248,6 +11298,13 @@ lot of a specific printing."""@en ;
                   :CollectionEntry ;
     :entryCard :MountainSecretsOfStrixhaven279 ;
     :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:MountainSecretsOfStrixhaven279Entry2 rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :MountainSecretsOfStrixhaven279 ;
+    :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Foil ;
     :hasCondition :NearMint .
 
@@ -11265,9 +11322,9 @@ lot of a specific printing."""@en ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
-:MountainSecretsOfStrixhaven279Entry2 rdf:type owl:NamedIndividual ,
+:PlainsSecretsOfStrixhaven273Entry1 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
-    :entryCard :MountainSecretsOfStrixhaven279 ;
+    :entryCard :PlainsSecretsOfStrixhaven273 ;
     :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
@@ -11276,31 +11333,10 @@ lot of a specific printing."""@en ;
                   :CollectionEntry ;
     :entryCard :PlainsSecretsOfStrixhaven267 ;
     :quantity "1"^^xsd:positiveInteger ;
-    :hasFinish :Nonfoil ;
-    :hasCondition :NearMint .
-
-:PlainsSecretsOfStrixhaven272Entry1 rdf:type owl:NamedIndividual ,
-                  :CollectionEntry ;
-    :entryCard :PlainsSecretsOfStrixhaven272 ;
-    :quantity "1"^^xsd:positiveInteger ;
-    :hasFinish :Nonfoil ;
-    :hasCondition :NearMint .
-
-:PlainsSecretsOfStrixhaven273Entry1 rdf:type owl:NamedIndividual ,
-                  :CollectionEntry ;
-    :entryCard :PlainsSecretsOfStrixhaven273 ;
-    :quantity "1"^^xsd:positiveInteger ;
-    :hasFinish :Nonfoil ;
-    :hasCondition :NearMint .
-
-:PlainsSecretsOfStrixhaven267Entry2 rdf:type owl:NamedIndividual ,
-                  :CollectionEntry ;
-    :entryCard :PlainsSecretsOfStrixhaven267 ;
-    :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Foil ;
     :hasCondition :NearMint .
 
-:PlainsSecretsOfStrixhaven272Entry2 rdf:type owl:NamedIndividual ,
+:PlainsSecretsOfStrixhaven272Entry1 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :PlainsSecretsOfStrixhaven272 ;
     :quantity "1"^^xsd:positiveInteger ;
@@ -11314,9 +11350,16 @@ lot of a specific printing."""@en ;
     :hasFinish :Foil ;
     :hasCondition :NearMint .
 
-:SwampSecretsOfStrixhaven277Entry1 rdf:type owl:NamedIndividual ,
+:PlainsSecretsOfStrixhaven272Entry2 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
-    :entryCard :SwampSecretsOfStrixhaven277 ;
+    :entryCard :PlainsSecretsOfStrixhaven272 ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:PlainsSecretsOfStrixhaven267Entry2 rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :PlainsSecretsOfStrixhaven267 ;
     :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
@@ -11324,20 +11367,13 @@ lot of a specific printing."""@en ;
 :SwampSecretsOfStrixhaven276Entry1 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :SwampSecretsOfStrixhaven276 ;
-    :quantity "2"^^xsd:positiveInteger ;
-    :hasFinish :Nonfoil ;
-    :hasCondition :NearMint .
-
-:SwampSecretsOfStrixhaven276Entry2 rdf:type owl:NamedIndividual ,
-                  :CollectionEntry ;
-    :entryCard :SwampSecretsOfStrixhaven276 ;
     :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Foil ;
     :hasCondition :NearMint .
 
-:SwampSecretsOfStrixhaven269Entry1 rdf:type owl:NamedIndividual ,
+:SwampSecretsOfStrixhaven277Entry1 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
-    :entryCard :SwampSecretsOfStrixhaven269 ;
+    :entryCard :SwampSecretsOfStrixhaven277 ;
     :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
@@ -11347,6 +11383,20 @@ lot of a specific printing."""@en ;
     :entryCard :SwampSecretsOfStrixhaven277 ;
     :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Foil ;
+    :hasCondition :NearMint .
+
+:SwampSecretsOfStrixhaven276Entry2 rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :SwampSecretsOfStrixhaven276 ;
+    :quantity "2"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:SwampSecretsOfStrixhaven269Entry1 rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :SwampSecretsOfStrixhaven269 ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
 :SwampSecretsOfStrixhaven269Entry2 rdf:type owl:NamedIndividual ,
@@ -11430,13 +11480,6 @@ lot of a specific printing."""@en ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
-:ForestTarkirDragonstorm286Entry1 rdf:type owl:NamedIndividual ,
-                  :CollectionEntry ;
-    :entryCard :ForestTarkirDragonstorm286 ;
-    :quantity "5"^^xsd:positiveInteger ;
-    :hasFinish :Nonfoil ;
-    :hasCondition :NearMint .
-
 :ForestTarkirDragonstorm285Entry1 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :ForestTarkirDragonstorm285 ;
@@ -11444,10 +11487,10 @@ lot of a specific printing."""@en ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
-:PlainsTarkirDragonstorm278Entry1 rdf:type owl:NamedIndividual ,
+:ForestTarkirDragonstorm286Entry1 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
-    :entryCard :PlainsTarkirDragonstorm278 ;
-    :quantity "1"^^xsd:positiveInteger ;
+    :entryCard :ForestTarkirDragonstorm286 ;
+    :quantity "5"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
@@ -11458,6 +11501,13 @@ lot of a specific printing."""@en ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
+:PlainsTarkirDragonstorm278Entry1 rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :PlainsTarkirDragonstorm278 ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
 :RuggedHighlandsEntry1 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :RuggedHighlands ;
@@ -11465,16 +11515,16 @@ lot of a specific printing."""@en ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
-:SwampTarkirDragonstorm282Entry1 rdf:type owl:NamedIndividual ,
+:SwampTarkirDragonstorm281Entry1 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
-    :entryCard :SwampTarkirDragonstorm282 ;
+    :entryCard :SwampTarkirDragonstorm281 ;
     :quantity "5"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
-:SwampTarkirDragonstorm281Entry1 rdf:type owl:NamedIndividual ,
+:SwampTarkirDragonstorm282Entry1 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
-    :entryCard :SwampTarkirDragonstorm281 ;
+    :entryCard :SwampTarkirDragonstorm282 ;
     :quantity "5"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
@@ -11647,6 +11697,15 @@ lot of a specific printing."""@en ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
+# --- sets/Theros.ttl ---
+
+:MedomaiTheAgelessEntry1 rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :MedomaiTheAgeless ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
 # --- sets/ThroneOfEldraine.ttl ---
 
 :GingerbreadCabinEntry1 rdf:type owl:NamedIndividual ,
@@ -11733,17 +11792,17 @@ lot of a specific printing."""@en ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
-:MountainWildsOfEldraine273Entry1 rdf:type owl:NamedIndividual ,
-                  :CollectionEntry ;
-    :entryCard :MountainWildsOfEldraine273 ;
-    :quantity "4"^^xsd:positiveInteger ;
-    :hasFinish :Nonfoil ;
-    :hasCondition :NearMint .
-
 :MountainWildsOfEldraine274Entry1 rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :MountainWildsOfEldraine274 ;
     :quantity "5"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:MountainWildsOfEldraine273Entry1 rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :MountainWildsOfEldraine273 ;
+    :quantity "4"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 

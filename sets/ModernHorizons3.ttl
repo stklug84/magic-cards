@@ -649,6 +649,52 @@ When this creature enters, exchange control of this creature and target creature
         :rulingDate "2024-06-07"^^xsd:date ;
         :rulingText """Some triggered abilities state that you "may pay" a certain amount of {E}. You can't pay that amount multiple times to multiply the effect. You simply choose whether or not to pay that amount of {E} as the ability resolves."""@en ] .
 
+:MarionetteApprentice rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Marionette Apprentice" ;
+    :manaCost "{1}{B}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Human ;
+    :hasSubType :Artificer ;
+    :hasRarity :Uncommon ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :ModernHorizons3 ;
+    :cardNumber "100"^^xsd:integer ;
+    :artist "Steve Ellis" ;
+    :hasLanguage :English ;
+    :power "1" ;
+    :powerValue "1"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    :hasKeywordAbility :Fabricate ;
+    :printedText """Fabricate 1 (When this creature enters, put a +1/+1 counter on it or create a 1/1 colorless Servo artifact creature token.)
+Whenever another creature or artifact you control is put into a graveyard from the battlefield, each opponent loses 1 life."""@en ;
+    :oracleText """Fabricate 1 (When this creature enters, put a +1/+1 counter on it or create a 1/1 colorless Servo artifact creature token.)
+Whenever another creature or artifact you control is put into a graveyard from the battlefield, each opponent loses 1 life."""@en ;
+    :flavorText """"Ah! Yes! I got its leg to twitch!\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=662252"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mh3/100/marionette-apprentice"^^xsd:anyURI ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-06-07"^^xsd:date ;
+        :rulingText """If you can't put a +1/+1 counter on the creature for any reason as fabricate resolves (for instance, if it's no longer on the battlefield), you just create a Servo token."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-06-07"^^xsd:date ;
+        :rulingText """You choose whether to put a +1/+1 counter on the creature or create a Servo token as the fabricate ability is resolving. No player may take actions between the time you choose and the time that a counter is added or a token is created."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-06-07"^^xsd:date ;
+        :rulingText """Fabricate doesn't cause the creature with the ability to enter the battlefield with +1/+1 counters already on it. For example, Marionette Apprentice will enter the battlefield as a 1/2 creature, then its fabricate ability goes on the stack. Players may take actions (such as casting instants) while the ability is waiting to resolve."""@en ] .
+
 :AetherRevolt rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Aether Revolt" ;
@@ -1592,48 +1638,3 @@ Whenever one or more cards are put into exile from your library and/or your grav
       [ rdf:type :Ruling ;
         :rulingDate "2024-06-07"^^xsd:date ;
         :rulingText """The last ability triggers only once for each time cards are put into exile from your library and/or graveyard, no matter how many cards were exiled at the same time."""@en ] .
-
-:MarionetteApprentice rdf:type owl:NamedIndividual ,
-                  :Card ;
-    :cardName "Marionette Apprentice" ;
-    :manaCost "{1}{B}" ;
-    :manaValue "2"^^xsd:nonNegativeInteger ;
-    :hasCardType :Creature ;
-    :hasSubType :Human ;
-    :hasSubType :Artificer ;
-    :hasRarity :Uncommon ;
-    :hasColor :Black ;
-    :hasColorIdentity :Black ;
-    :isInSet :ModernHorizons3 ;
-    :cardNumber "410"^^xsd:integer ;
-    :artist "Steve Ellis" ;
-    :hasLanguage :English ;
-    :power "1" ;
-    :powerValue "1"^^xsd:integer ;
-    :toughness "2" ;
-    :toughnessValue "2"^^xsd:integer ;
-    :hasKeywordAbility :Fabricate ;
-    :printedText """Fabricate 1 (When this creature enters, put a +1/+1 counter on it or create a 1/1 colorless Servo artifact creature token.)
-Whenever another creature or artifact you control is put into a graveyard from the battlefield, each opponent loses 1 life."""@en ;
-    :oracleText """Fabricate 1 (When this creature enters, put a +1/+1 counter on it or create a 1/1 colorless Servo artifact creature token.)
-Whenever another creature or artifact you control is put into a graveyard from the battlefield, each opponent loses 1 life."""@en ;
-    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=664403"^^xsd:anyURI ;
-    :scryfallUrl "https://scryfall.com/card/mh3/410/marionette-apprentice"^^xsd:anyURI ;
-    :hasLegality
-      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :NotLegal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ;
-    :hasRuling
-      [ rdf:type :Ruling ;
-        :rulingDate "2024-06-07"^^xsd:date ;
-        :rulingText """If you can't put a +1/+1 counter on the creature for any reason as fabricate resolves (for instance, if it's no longer on the battlefield), you just create a Servo token."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2024-06-07"^^xsd:date ;
-        :rulingText """You choose whether to put a +1/+1 counter on the creature or create a Servo token as the fabricate ability is resolving. No player may take actions between the time you choose and the time that a counter is added or a token is created."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2024-06-07"^^xsd:date ;
-        :rulingText """Fabricate doesn't cause the creature with the ability to enter the battlefield with +1/+1 counters already on it. For example, Marionette Apprentice will enter the battlefield as a 1/2 creature, then its fabricate ability goes on the stack. Players may take actions (such as casting instants) while the ability is waiting to resolve."""@en ] .
