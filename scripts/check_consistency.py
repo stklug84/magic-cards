@@ -28,16 +28,26 @@ from __future__ import annotations
 
 import sys
 from pathlib import Path
+from typing import TYPE_CHECKING
 
-from rdflib import Graph, RDF, RDFS, URIRef, Literal
+from rdflib import RDF, RDFS, Graph, Literal, URIRef
 from rdflib.namespace import OWL
+
+if TYPE_CHECKING:
+    from rdflib.term import Node
 
 ROOT = Path(__file__).resolve().parent.parent
 MC = "urn:stklug84:MagicCardsOntology:2026-02-27#"
 
 SYNERGY_PROPS = {
     URIRef(MC + name)
-    for name in ("hasSynergyWith", "amplifies", "isAmplifiedBy", "enables", "isEnabledBy")
+    for name in (
+        "hasSynergyWith",
+        "amplifies",
+        "isAmplifiedBy",
+        "enables",
+        "isEnabledBy",
+    )
 }
 
 
@@ -60,7 +70,9 @@ def load() -> tuple[Graph, Graph]:
 def main() -> int:
     errors: list[str] = []
     ontology, combined = load()
-    print(f"Ontology: {len(ontology)} triples; combined graph: {len(combined)} triples.")
+    print(
+        f"Ontology: {len(ontology)} triples; combined graph: {len(combined)} triples.",
+    )
 
     declared_props = set(ontology.subjects(RDF.type, OWL.ObjectProperty))
     declared_props |= set(ontology.subjects(RDF.type, OWL.DatatypeProperty))
@@ -70,15 +82,16 @@ def main() -> int:
 
     # --- 1. undefined terms ------------------------------------------------
     used_props = {p for p in combined.predicates(None, None) if str(p).startswith(MC)}
-    for prop in sorted(used_props):
+    for prop in sorted(used_props, key=str):
         if prop not in declared_props:
             errors.append(f"undefined-terms: property used but not declared: {prop}")
 
     used_classes = {
-        c for c in combined.objects(None, RDF.type)
+        c
+        for c in combined.objects(None, RDF.type)
         if isinstance(c, URIRef) and str(c).startswith(MC)
     }
-    for cls in sorted(used_classes):
+    for cls in sorted(used_classes, key=str):
         if cls not in declared_classes:
             errors.append(f"undefined-terms: class used but not declared: {cls}")
 
@@ -95,7 +108,7 @@ def main() -> int:
                 and node not in declared_classes
             ):
                 errors.append(
-                    f"dangling-refs: {role} {node} of {p} has no rdf:type anywhere"
+                    f"dangling-refs: {role} {node} of {p} has no rdf:type anywhere",
                 )
 
     # --- 3. card entries (deck + collection) ----------------------------------
@@ -104,22 +117,18 @@ def main() -> int:
     quantity = mc_ref("quantity")
     card_cls = mc_ref("Card")
 
-    card_classes = {card_cls} | {
-        c for c in combined.transitive_subjects(RDFS.subClassOf, card_cls)
-    }
+    card_classes = {card_cls} | set(
+        combined.transitive_subjects(RDFS.subClassOf, card_cls)
+    )
 
-    def is_card(node: URIRef) -> bool:
+    def is_card(node: Node) -> bool:
         return any(t in card_classes for t in combined.objects(node, RDF.type))
 
-    entry_classes = {card_entry_cls} | {
-        c for c in combined.transitive_subjects(RDFS.subClassOf, card_entry_cls)
-    }
-    entries = {
-        e
-        for cls in entry_classes
-        for e in combined.subjects(RDF.type, cls)
-    }
-    for entry in sorted(entries):
+    entry_classes = {card_entry_cls} | set(
+        combined.transitive_subjects(RDFS.subClassOf, card_entry_cls)
+    )
+    entries = {e for cls in entry_classes for e in combined.subjects(RDF.type, cls)}
+    for entry in sorted(entries, key=str):
         cards = list(combined.objects(entry, entry_card))
         if len(cards) != 1:
             errors.append(f"card-entries: {entry} has {len(cards)} {entry_card} values")
@@ -139,12 +148,12 @@ def main() -> int:
     has_condition = mc_ref("hasCondition")
     coll_entries = set(combined.subjects(RDF.type, coll_entry_cls))
     coll_total = 0
-    for entry in sorted(coll_entries):
+    for entry in sorted(coll_entries, key=str):
         for prop in (has_finish, has_condition):
             if not list(combined.objects(entry, prop)):
                 errors.append(f"card-entries: {entry} has no {prop}")
         for count in combined.objects(entry, quantity):
-            coll_total += int(count)
+            coll_total += int(str(count))
 
     csv_path = ROOT / "collection.csv"
     if csv_path.exists():
@@ -155,36 +164,36 @@ def main() -> int:
         if coll_entries and len(coll_entries) != len(csv_rows):
             errors.append(
                 f"card-entries: {len(coll_entries)} collection entries but "
-                f"{len(csv_rows)} rows in collection.csv"
+                f"{len(csv_rows)} rows in collection.csv",
             )
         if coll_entries and coll_total != csv_total:
             errors.append(
                 f"card-entries: collection quantities sum to {coll_total} but "
-                f"collection.csv counts sum to {csv_total}"
+                f"collection.csv counts sum to {csv_total}",
             )
 
     # every Commander deck's entries must total exactly 100 cards
     commander_deck_cls = mc_ref("CommanderDeck")
     has_deck_entry = mc_ref("hasDeckEntry")
-    for deck in sorted(set(combined.subjects(RDF.type, commander_deck_cls))):
+    for deck in sorted(set(combined.subjects(RDF.type, commander_deck_cls)), key=str):
         deck_entries = list(combined.objects(deck, has_deck_entry))
         if not deck_entries:
             continue
         total = sum(
-            int(count)
+            int(str(count))
             for e in deck_entries
             for count in combined.objects(e, quantity)
         )
         if total != 100:
             errors.append(
-                f"card-entries: Commander deck {deck} entries total {total}, expected 100"
+                f"card-entries: Commander deck {deck} totals {total}, expected 100",
             )
 
     # --- 4. behavior hooks ------------------------------------------------
     sys.path.insert(0, str(ROOT / "scripts"))
-    from mtgcards.behaviors import BEHAVIOR_KEYS
-
     import json as _json
+
+    from mtgcards.behaviors import BEHAVIOR_KEYS
 
     has_hook = mc_ref("hasBehaviorHook")
     behavior_key = mc_ref("behaviorKey")
@@ -200,22 +209,18 @@ def main() -> int:
             errors.append(f"behavior-hooks: hook on {subj} has {len(keys)} keys")
         for key in keys:
             if str(key) not in BEHAVIOR_KEYS:
-                errors.append(
-                    f"behavior-hooks: {subj} uses unknown key {key!r}")
+                errors.append(f"behavior-hooks: {subj} uses unknown key {key!r}")
         values = list(combined.objects(hook, behavior_value))
         if len(values) != 1:
-            errors.append(
-                f"behavior-hooks: hook on {subj} has {len(values)} values")
+            errors.append(f"behavior-hooks: hook on {subj} has {len(values)} values")
         for value in values:
             try:
                 _json.loads(str(value))
             except ValueError:
-                errors.append(
-                    f"behavior-hooks: {subj} value is not JSON: {value!r}")
+                errors.append(f"behavior-hooks: {subj} value is not JSON: {value!r}")
     for subj in combined.subjects(threat_weight, None):
         if not is_card(subj):
-            errors.append(
-                f"behavior-hooks: :threatWeight on non-card {subj}")
+            errors.append(f"behavior-hooks: :threatWeight on non-card {subj}")
 
     # --- 5. synergy domain/range ---------------------------------------------
     for prop in sorted(SYNERGY_PROPS):
@@ -223,14 +228,14 @@ def main() -> int:
             for node, role in ((s, "subject"), (o, "object")):
                 if isinstance(node, URIRef) and not is_card(node):
                     errors.append(
-                        f"synergy-domain: {role} {node} of {prop} is not a Card individual"
+                        f"synergy-domain: {role} {node} of {prop} is not a Card",
                     )
 
     # --- report ------------------------------------------------------------
     print(
         f"Checked {len(used_props)} properties, {len(used_classes)} classes, "
         f"{len(entries)} card entries ({len(coll_entries)} collection, "
-        f"{len(entries) - len(coll_entries)} deck), {n_hooks} behavior hooks."
+        f"{len(entries) - len(coll_entries)} deck), {n_hooks} behavior hooks.",
     )
     if errors:
         unique = sorted(set(errors))

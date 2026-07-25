@@ -35,11 +35,13 @@ def setup_game(decks, db, rng, turn_cap=40, log=None, profiles=None) -> Game:
         p = Player(name=deck.name, deck_name=deck.name)
         players.append(p)
     profiles = profiles or [None] * len(players)
-    policies = {p.name: DefaultPolicy(rng, profile)
-                for p, profile in zip(players, profiles)}
+    policies = {
+        p.name: DefaultPolicy(rng, profile)
+        for p, profile in zip(players, profiles, strict=False)
+    }
     game = Game(players, rng, policies, turn_cap=turn_cap, log=log)
 
-    for p, deck in zip(players, decks):
+    for p, deck in zip(players, decks, strict=False):
         p.library = _build_library(deck, db, p)
         rng.shuffle(p.library)
         if deck.commander:
@@ -75,19 +77,21 @@ def setup_game(decks, db, rng, turn_cap=40, log=None, profiles=None) -> Game:
 
 
 #: raw rules-engine loss reasons (rule citations) -> short report labels
-_REASONS = {"life 0 or less (704.5a)": "life",
-            "drew from empty library (704.5b)": "decked",
-            "ten or more poison counters (704.5c)": "poison",
-            "21+ commander damage (903.10a)": "commander"}
+_REASONS = {
+    "life 0 or less (704.5a)": "life",
+    "drew from empty library (704.5b)": "decked",
+    "ten or more poison counters (704.5c)": "poison",
+    "21+ commander damage (903.10a)": "commander",
+}
 
 
-def run_game(decks, db, rng, turn_cap=40, log=None, profiles=None,
-             recorder=None):
+def run_game(decks, db, rng, turn_cap=40, log=None, profiles=None, recorder=None):
     """Play one game. Returns an Aggregator-compatible record:
     {winner, turns, reason, players: {name: {stats..., life, lost,
     cards_cast}}}. `log` is an optional (event, **kw) sink; `recorder`
     an optional mtgviz Recorder (attached after setup, notified of every
-    log event, finished with the outcome)."""
+    log event, finished with the outcome).
+    """
     last_loss = {"why": None}
     sinks = []
     if log is not None:
@@ -99,8 +103,7 @@ def run_game(decks, db, rng, turn_cap=40, log=None, profiles=None,
         for s in sinks:
             s(event, **kw)
 
-    game = setup_game(decks, db, rng, turn_cap=turn_cap, log=fanout,
-                      profiles=profiles)
+    game = setup_game(decks, db, rng, turn_cap=turn_cap, log=fanout, profiles=profiles)
     if recorder is not None:
         recorder.attach(game)
         sinks.append(recorder.on_event)
@@ -120,35 +123,47 @@ def run_game(decks, db, rng, turn_cap=40, log=None, profiles=None,
         if winner.stats.get("mechanized_wins"):
             reason = "alt_win"
         else:
-            reason = _REASONS.get(last_loss["why"],
-                                  last_loss["why"] or "elimination")
+            reason = _REASONS.get(last_loss["why"], last_loss["why"] or "elimination")
     else:
         alive = game.alive()
         if len(alive) == 1:
             winner = alive[0]
             reason = _REASONS.get(last_loss["why"], "elimination")
         elif alive:
-            winner = max(alive, key=lambda p: p.life)   # turn-cap tiebreak
+            winner = max(alive, key=lambda p: p.life)  # turn-cap tiebreak
             reason = "turn_cap"
         else:
             reason = "draw"
     if recorder is not None:
         recorder.finish(game, winner, reason)
-    return {"winner": winner.name if winner else "draw",
-            "turns": game.turn,
-            "reason": reason,
-            "players": {p.name: dict(p.stats, life=p.life,
-                                     lost=p.lose_reason,
-                                     cards_cast=list(p.cards_cast))
-                        for p in game.players}}
+    return {
+        "winner": winner.name if winner else "draw",
+        "turns": game.turn,
+        "reason": reason,
+        "players": {
+            p.name: dict(
+                p.stats,
+                life=p.life,
+                lost=p.lose_reason,
+                cards_cast=list(p.cards_cast),
+            )
+            for p in game.players
+        },
+    }
 
 
 def run_match(deck_files, games=10, seed=42, turn_cap=40, verbose=False):
     """Back-compat wrapper: delegates to the full CLI."""
     from .cli import main
+
     argv = [str(f) for f in deck_files] + [
-        "--games", str(games), "--seed", str(seed),
-        "--turn-cap", str(turn_cap)]
+        "--games",
+        str(games),
+        "--seed",
+        str(seed),
+        "--turn-cap",
+        str(turn_cap),
+    ]
     if verbose:
         argv.append("--verbose")
     main(argv)
@@ -161,17 +176,24 @@ def report_model_coverage(decks, db):
         pool.update(d.cards)
         if d.commander:
             pool.add(d.commander)
-    unknown = {name: clauses
-               for name, clauses in sorted(compiler.UNKNOWN_CLAUSES.items())
-               if name in pool or name.split(" // ")[0] in pool}
-    notes = {n: t for n, t in sorted(overrides.NOTES.items())
-             if n in pool or n.split(" // ")[0] in pool}
+    unknown = {
+        name: clauses
+        for name, clauses in sorted(compiler.UNKNOWN_CLAUSES.items())
+        if name in pool or name.split(" // ")[0] in pool
+    }
+    notes = {
+        n: t
+        for n, t in sorted(overrides.NOTES.items())
+        if n in pool or n.split(" // ")[0] in pool
+    }
     if notes:
         print(f"  simplified implementations: {len(notes)}")
     if unknown:
         n_clauses = sum(len(c) for c in unknown.values())
-        print(f"  unmodeled oracle clauses: {n_clauses} "
-              f"on {len(unknown)} cards (inert, not silently wrong):")
+        print(
+            f"  unmodeled oracle clauses: {n_clauses} "
+            f"on {len(unknown)} cards (inert, not silently wrong):",
+        )
         for name, clauses in unknown.items():
             for c in sorted(clauses):
                 print(f"    - {name}: {c[:90]}")
@@ -179,4 +201,5 @@ def report_model_coverage(decks, db):
 
 if __name__ == "__main__":
     from .cli import main
+
     main()

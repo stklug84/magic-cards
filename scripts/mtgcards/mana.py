@@ -17,7 +17,7 @@ COLORS = "WUBRG"
 @dataclass
 class Cost:
     generic: int = 0
-    pips: dict = field(default_factory=dict)   # color -> count
+    pips: dict = field(default_factory=dict)  # color -> count
     hybrid: list = field(default_factory=list)  # list of frozenset(colors)
     has_x: bool = False
 
@@ -49,7 +49,7 @@ def parse_cost(cost_str: str) -> Cost:
 class Source:
     """One mana source on the battlefield."""
 
-    __slots__ = ("colors", "tapped", "name")
+    __slots__ = ("colors", "name", "tapped")
 
     def __init__(self, colors, name=""):
         self.colors = frozenset(colors) if colors else frozenset({"C"})
@@ -75,11 +75,10 @@ def pay(cost: Cost, sources, treasures: int, x_value: int = 0):
         need.extend([frozenset({color})] * k)
     need.extend(cost.hybrid)
     # most constrained pip first
-    need.sort(key=lambda opts: len(opts))
+    need.sort(key=len)
     treasure_budget = treasures
     for opts in need:
-        cands = [s for s in avail
-                 if (s.colors & opts) or "ANY" in s.colors]
+        cands = [s for s in avail if (s.colors & opts) or "ANY" in s.colors]
         if cands:
             cands.sort(key=lambda s: len(s.colors))
             src = cands[0]
@@ -110,7 +109,7 @@ def can_pay(cost: Cost, sources, treasures: int, x_value: int = 0) -> bool:
     for color, k in cost.pips.items():
         need.extend([frozenset({color})] * k)
     need.extend(cost.hybrid)
-    need.sort(key=lambda opts: len(opts))
+    need.sort(key=len)
     treasure_budget = treasures
     pool = list(avail)
     for opts in need:

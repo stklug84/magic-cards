@@ -16,16 +16,33 @@ def make_game(n_players=2, seed=7):
     return Game(players, rng, policies)
 
 
-def creature(game, player, name="Bear", power=2, toughness=2, *,
-             keywords=(), abilities=(), supertypes=(), subtypes=(),
-             colors=(), types=("Creature",), tapped=False,
-             entered_this_turn=False):
-    base = Characteristics(name=name, types=set(types),
-                           supertypes=set(supertypes),
-                           subtypes=set(subtypes), colors=set(colors),
-                           power=power, toughness=toughness,
-                           keywords=set(keywords),
-                           abilities=list(abilities))
+def creature(
+    game,
+    player,
+    name="Bear",
+    power=2,
+    toughness=2,
+    *,
+    keywords=(),
+    abilities=(),
+    supertypes=(),
+    subtypes=(),
+    colors=(),
+    types=("Creature",),
+    tapped=False,
+    entered_this_turn=False,
+):
+    base = Characteristics(
+        name=name,
+        types=set(types),
+        supertypes=set(supertypes),
+        subtypes=set(subtypes),
+        colors=set(colors),
+        power=power,
+        toughness=toughness,
+        keywords=set(keywords),
+        abilities=list(abilities),
+    )
     obj = GameObject(base, player)
     obj.zone = Zone.BATTLEFIELD
     obj.controller = player
@@ -36,13 +53,26 @@ def creature(game, player, name="Bear", power=2, toughness=2, *,
     return obj
 
 
-def card_in_hand(game, player, name="Spell", mana_cost="{1}",
-                 types=("Sorcery",), abilities=(), power=None,
-                 toughness=None, subtypes=()):
-    base = Characteristics(name=name, mana_cost=mana_cost,
-                           types=set(types), subtypes=set(subtypes),
-                           power=power, toughness=toughness,
-                           abilities=list(abilities))
+def card_in_hand(
+    game,
+    player,
+    name="Spell",
+    mana_cost="{1}",
+    types=("Sorcery",),
+    abilities=(),
+    power=None,
+    toughness=None,
+    subtypes=(),
+):
+    base = Characteristics(
+        name=name,
+        mana_cost=mana_cost,
+        types=set(types),
+        subtypes=set(subtypes),
+        power=power,
+        toughness=toughness,
+        abilities=list(abilities),
+    )
     obj = GameObject(base, player)
     obj.zone = Zone.HAND
     player.hand.append(obj)
@@ -59,7 +89,9 @@ def settle(game):
     guard = 0
     while True:
         guard += 1
-        assert guard < 200, "settle() did not converge"
+        if guard >= 200:
+            msg = "settle() did not converge"
+            raise AssertionError(msg)
         acted = game.check_state_based_actions()
         placed = game.put_triggers_on_stack()
         if game.stack:

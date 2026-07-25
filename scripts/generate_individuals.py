@@ -33,29 +33,63 @@ ROOT = Path(__file__).resolve().parent.parent
 CACHE = Path("/tmp/scryfall_cache")
 CACHE.mkdir(exist_ok=True)
 API = "https://api.scryfall.com"
-UA = {"User-Agent": "stklug84-inventory-ttl-generator/1.0", "Accept": "application/json"}
+UA = {
+    "User-Agent": "stklug84-inventory-ttl-generator/1.0",
+    "Accept": "application/json",
+}
 TODAY = "2026-07-19"
 NS_DATE = "2026-07-19"
 
-BASICS = {"Plains", "Island", "Swamp", "Mountain", "Forest", "Wastes",
-          "Snow-Covered Plains", "Snow-Covered Island", "Snow-Covered Swamp",
-          "Snow-Covered Mountain", "Snow-Covered Forest", "Snow-Covered Wastes"}
+BASICS = {
+    "Plains",
+    "Island",
+    "Swamp",
+    "Mountain",
+    "Forest",
+    "Wastes",
+    "Snow-Covered Plains",
+    "Snow-Covered Island",
+    "Snow-Covered Swamp",
+    "Snow-Covered Mountain",
+    "Snow-Covered Forest",
+    "Snow-Covered Wastes",
+}
 
 COLOR = {"W": "White", "U": "Blue", "B": "Black", "R": "Red", "G": "Green"}
-RARITY = {"common": "Common", "uncommon": "Uncommon", "rare": "Rare",
-          "mythic": "MythicRare", "special": "Special", "bonus": "Bonus"}
-LEGALITY = {"legal": "Legal", "not_legal": "NotLegal", "banned": "Banned",
-            "restricted": "Restricted"}
-FORMATS = [("commander", "Commander"), ("standard", "Standard"), ("modern", "Modern"),
-           ("legacy", "Legacy"), ("vintage", "Vintage"), ("pioneer", "Pioneer"),
-           ("pauper", "Pauper")]
+RARITY = {
+    "common": "Common",
+    "uncommon": "Uncommon",
+    "rare": "Rare",
+    "mythic": "MythicRare",
+    "special": "Special",
+    "bonus": "Bonus",
+}
+LEGALITY = {
+    "legal": "Legal",
+    "not_legal": "NotLegal",
+    "banned": "Banned",
+    "restricted": "Restricted",
+}
+FORMATS = [
+    ("commander", "Commander"),
+    ("standard", "Standard"),
+    ("modern", "Modern"),
+    ("legacy", "Legacy"),
+    ("vintage", "Vintage"),
+    ("pioneer", "Pioneer"),
+    ("pauper", "Pauper"),
+]
 LANG = {"English": "English", "German": "German"}
 
 # ---------------------------------------------------------------- helpers
 
+
 def http_json(url, data=None):
-    req = urllib.request.Request(url, headers=UA,
-                                 data=json.dumps(data).encode() if data else None)
+    req = urllib.request.Request(
+        url,
+        headers=UA,
+        data=json.dumps(data).encode() if data else None,
+    )
     if data:
         req.add_header("Content-Type", "application/json")
     with urllib.request.urlopen(req, timeout=60) as r:
@@ -84,14 +118,20 @@ def esc_long(s: str) -> str:
 
 # ---------------------------------------------------------------- fetch
 
+
 def load_rows():
     rows = list(csv.DictReader(open(ROOT / "collection.csv")))
     printings = {}  # (set, num) -> row info
     for r in rows:
         key = (r["Edition"].lower(), r["Collector Number"])
         if key not in printings:
-            printings[key] = {"name": r["Name"], "set": key[0], "num": key[1],
-                              "language": r["Language"], "count": 0}
+            printings[key] = {
+                "name": r["Name"],
+                "set": key[0],
+                "num": key[1],
+                "language": r["Language"],
+                "count": 0,
+            }
         printings[key]["count"] += int(r["Count"])
         if r["Language"] != "English":
             printings[key]["language"] = r["Language"]
@@ -108,15 +148,16 @@ def cmd_fetch():
     todo = [k for k in keys if f"{k[0]}|{k[1]}" not in cards]
     not_found = []
     for i in range(0, len(todo), 75):
-        batch = todo[i:i + 75]
+        batch = todo[i : i + 75]
         idents = [{"set": s, "collector_number": n} for s, n in batch]
         resp = http_json(f"{API}/cards/collection", {"identifiers": idents})
-        for nf in resp.get("not_found", []):
-            not_found.append(nf)
+        not_found.extend(resp.get("not_found", []))
         for c in resp["data"]:
             cards[f"{c['set']}|{c['collector_number']}"] = c
-        print(f"  batch {i // 75 + 1}: {len(resp['data'])} found, "
-              f"{len(resp.get('not_found', []))} missing")
+        print(
+            f"  batch {i // 75 + 1}: {len(resp['data'])} found, "
+            f"{len(resp.get('not_found', []))} missing",
+        )
         cards_file.write_text(json.dumps(cards))
         time.sleep(0.15)
     if not_found:
@@ -154,7 +195,9 @@ def cmd_fetch():
     if not rulings_file.exists():
         oracle_ids = set()
         for c in cards.values():
-            oid = c.get("oracle_id") or (c.get("card_faces") or [{}])[0].get("oracle_id")
+            oid = c.get("oracle_id") or (c.get("card_faces") or [{}])[0].get(
+                "oracle_id",
+            )
             if oid:
                 oracle_ids.add(oid)
         bulk = http_json(f"{API}/bulk-data")
@@ -167,13 +210,15 @@ def cmd_fetch():
         for ru in allr:
             if ru["oracle_id"] in oracle_ids and ru["source"] == "wotc":
                 mine[ru["oracle_id"]].append(
-                    {"date": ru["published_at"], "text": ru["comment"]})
+                    {"date": ru["published_at"], "text": ru["comment"]},
+                )
         rulings_file.write_text(json.dumps(mine))
         print(f"kept rulings for {len(mine)} cards")
     print("fetch complete")
 
 
 # ---------------------------------------------------------------- generate
+
 
 def norm_label(s: str) -> str:
     return s.replace("\u2019", "'").lower()
@@ -187,9 +232,11 @@ def load_vocab():
         sub_by_label[norm_label(labels.get(ind, ind))] = ind
         sub_by_label[norm_label(ind)] = ind
     kw = {}
-    for cls, prop in (("KeywordAbility", "hasKeywordAbility"),
-                      ("KeywordAction", "hasKeywordAction"),
-                      ("Keyword", "hasKeyword")):
+    for cls, prop in (
+        ("KeywordAbility", "hasKeywordAbility"),
+        ("KeywordAction", "hasKeywordAction"),
+        ("Keyword", "hasKeyword"),
+    ):
         for ind in v[cls]:
             key = labels.get(ind, ind)
             kw.setdefault(key, (prop, ind))
@@ -197,11 +244,19 @@ def load_vocab():
     return v, sub_by_label, kw
 
 
-TYPE_CLASS = {"Creature": "CreatureTypes", "Artifact": "ArtifactTypes",
-              "Enchantment": "EnchantmentTypes", "Planeswalker": "PlaneswalkerTypes",
-              "Instant": "SpellTypes", "Sorcery": "SpellTypes", "Land": "LandTypes",
-              "Plane": "PlanarTypes", "Battle": "BattleType", "Dungeon": "DungeonType",
-              "Kindred": "CreatureTypes"}
+TYPE_CLASS = {
+    "Creature": "CreatureTypes",
+    "Artifact": "ArtifactTypes",
+    "Enchantment": "EnchantmentTypes",
+    "Planeswalker": "PlaneswalkerTypes",
+    "Instant": "SpellTypes",
+    "Sorcery": "SpellTypes",
+    "Land": "LandTypes",
+    "Plane": "PlanarTypes",
+    "Battle": "BattleType",
+    "Dungeon": "DungeonType",
+    "Kindred": "CreatureTypes",
+}
 
 
 def tokenize_subtypes(right, types, sub_by_label):
@@ -215,7 +270,7 @@ def tokenize_subtypes(right, types, sub_by_label):
     subs, i = [], 0
     while i < len(words):
         for n in range(min(4, len(words) - i), 0, -1):
-            cand = " ".join(words[i:i + n])
+            cand = " ".join(words[i : i + n])
             if norm_label(cand) in sub_by_label or n == 1:
                 subs.append(cand)
                 i += n
@@ -241,11 +296,16 @@ def parse_type_line(tl, vocab, sub_by_label):
 
 
 PRODUCED_ORDER = ["W", "U", "B", "R", "G", "C"]
-PRODUCED_IND = {"W": "White", "U": "Blue", "B": "Black", "R": "Red",
-                "G": "Green", "C": "Colorless"}
-_TAPPED_RE = re.compile(r"enters (?:the battlefield )?tapped(?! unless)",
-                        re.I)
-_FETCH_RE = re.compile(r"search your librar(?:y|ies) for [^.]*land", re.I)
+PRODUCED_IND = {
+    "W": "White",
+    "U": "Blue",
+    "B": "Black",
+    "R": "Red",
+    "G": "Green",
+    "C": "Colorless",
+}
+_TAPPED_RE = re.compile(r"enters (?:the battlefield )?tapped(?! unless)", re.IGNORECASE)
+_FETCH_RE = re.compile(r"search your librar(?:y|ies) for [^.]*land", re.IGNORECASE)
 
 
 def mana_fact_lines(card) -> list:
@@ -257,8 +317,7 @@ def mana_fact_lines(card) -> list:
     not produce mana themselves.
     """
     lines = []
-    produced = [s for s in card.get("produced_mana") or []
-                if s in PRODUCED_IND]
+    produced = [s for s in card.get("produced_mana") or [] if s in PRODUCED_IND]
     for sym in sorted(produced, key=PRODUCED_ORDER.index):
         lines.append(f"    :producesMana :{PRODUCED_IND[sym]} ;")
     faces = card.get("card_faces") or [card]
@@ -273,8 +332,8 @@ def mana_fact_lines(card) -> list:
 
 
 def card_block(ind, card, info, vocab, sub_by_label, kw_map, rulings, notes):
-    L = []
-    add = L.append
+    out = []
+    add = out.append
     faces = card.get("card_faces") or [card]
     front = faces[0]
 
@@ -287,16 +346,19 @@ def card_block(ind, card, info, vocab, sub_by_label, kw_map, rulings, notes):
     cmc = card.get("cmc", front.get("cmc", 0)) or 0
     add(f'    :manaValue "{int(cmc)}"^^xsd:nonNegativeInteger ;')
 
-    supers, types, subs = parse_type_line(card.get("type_line")
-                                          or front.get("type_line", ""),
-                                          vocab, sub_by_label)
+    supers, types, subs = parse_type_line(
+        card.get("type_line") or front.get("type_line", ""),
+        vocab,
+        sub_by_label,
+    )
     for s in supers:
         add(f"    :hasSuperType :{s} ;")
     for t in types:
         add(f"    :hasCardType :{t} ;")
     for sub in subs:
-        target = (sub_by_label.get(norm_label(sub))
-                  or sub_by_label.get(norm_label(sub.replace("-", ""))))
+        target = sub_by_label.get(norm_label(sub)) or sub_by_label.get(
+            norm_label(sub.replace("-", "")),
+        )
         if target is None:
             target = pascal(sub)
             cls = TYPE_CLASS.get(types[0] if types else "Creature", "CreatureTypes")
@@ -351,44 +413,53 @@ def card_block(ind, card, info, vocab, sub_by_label, kw_map, rulings, notes):
     loc = info.get("localized")
     lfaces = (loc.get("card_faces") or [loc]) if loc else faces
     printed = "\n//\n".join(
-        f.get("printed_text") or f.get("oracle_text", "") for f in lfaces)
+        f.get("printed_text") or f.get("oracle_text", "") for f in lfaces
+    )
     oracle = "\n//\n".join(f.get("oracle_text", "") for f in faces)
     if printed:
-        add(f'    :printedText """{esc_long(printed)}"""@{ "de" if loc else "en" } ;')
+        add(f'    :printedText """{esc_long(printed)}"""@{"de" if loc else "en"} ;')
     if oracle:
         add(f'    :oracleText """{esc_long(oracle)}"""@en ;')
     flavor_src = lfaces if loc else faces
     flavor = "\n//\n".join(f["flavor_text"] for f in flavor_src if f.get("flavor_text"))
     if flavor:
-        add(f'    :flavorText """{esc_long(flavor)}"""@{ "de" if loc else "en" } ;')
+        add(f'    :flavorText """{esc_long(flavor)}"""@{"de" if loc else "en"} ;')
 
     mvids = card.get("multiverse_ids") or []
     if mvids:
-        add(f'    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx'
-            f'?multiverseid={mvids[0]}"^^xsd:anyURI ;')
+        add(
+            f'    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx'
+            f'?multiverseid={mvids[0]}"^^xsd:anyURI ;',
+        )
     surl = card["scryfall_uri"].split("?")[0]
     add(f'    :scryfallUrl "{surl}"^^xsd:anyURI ;')
 
     leg = card["legalities"]
-    leg_lines = [f"      [ rdf:type :LegalityMapping ; :inFormat :{f_ind} ; "
-                 f":hasLegalityStatus :{LEGALITY[leg[f_key]]} ]"
-                 for f_key, f_ind in FORMATS]
-    rus = rulings.get(card.get("oracle_id")
-                      or (card.get("card_faces") or [{}])[0].get("oracle_id"), [])
+    leg_lines = [
+        f"      [ rdf:type :LegalityMapping ; :inFormat :{f_ind} ; "
+        f":hasLegalityStatus :{LEGALITY[leg[f_key]]} ]"
+        for f_key, f_ind in FORMATS
+    ]
+    rus = rulings.get(
+        card.get("oracle_id") or (card.get("card_faces") or [{}])[0].get("oracle_id"),
+        [],
+    )
     if rus:
         add("    :hasLegality")
         add(" ,\n".join(leg_lines) + " ;")
         add("    :hasRuling")
         ru_lines = []
         for ru in rus:
-            ru_lines.append("      [ rdf:type :Ruling ;\n"
-                            f'        :rulingDate "{ru["date"]}"^^xsd:date ;\n'
-                            f'        :rulingText """{esc_long(ru["text"])}"""@en ]')
+            ru_lines.append(
+                "      [ rdf:type :Ruling ;\n"
+                f'        :rulingDate "{ru["date"]}"^^xsd:date ;\n'
+                f'        :rulingText """{esc_long(ru["text"])}"""@en ]',
+            )
         add(" ,\n".join(ru_lines) + " .")
     else:
         add("    :hasLegality")
         add(" ,\n".join(leg_lines) + " .")
-    return "\n".join(L)
+    return "\n".join(out)
 
 
 HEADER = """\
@@ -454,8 +525,9 @@ def cmd_generate():
 
     # skip-list: (name, setcode, number) of individuals already in the master file
     inv_sets = {ind: code for code, ind in setcodes.items()}
-    existing_keys = {(e["name"], (inv_sets.get(e["set"]) or "").lower(), e["num"])
-                     for e in existing}
+    existing_keys = {
+        (e["name"], (inv_sets.get(e["set"]) or "").lower(), e["num"]) for e in existing
+    }
     existing_names = {e["ind"] for e in existing}
 
     # set individual names, creating entries for sets missing from the ontology
@@ -478,9 +550,14 @@ def cmd_generate():
     used, blocks_by_set = {}, defaultdict(list)
     notes = {"subtypes": {}, "keywords": set(), "skipped": [], "missing": []}
 
-    for key in sorted(printings, key=lambda k: (set_ind[k[0]],
-                                                (0, int(k[1])) if k[1].isdigit()
-                                                else (1, 0), k[1])):
+    for key in sorted(
+        printings,
+        key=lambda k: (
+            set_ind[k[0]],
+            (0, int(k[1])) if k[1].isdigit() else (1, 0),
+            k[1],
+        ),
+    ):
         p = printings[key]
         card = cards.get(f"{key[0]}|{key[1]}")
         if card is None:
@@ -496,13 +573,17 @@ def cmd_generate():
         else:
             ind = base
         if ind in used:
-            raise SystemExit(f"individual name collision: {ind} "
-                             f"({used[ind]} vs {key})")
+            msg = f"individual name collision: {ind} ({used[ind]} vs {key})"
+            raise SystemExit(msg)
         used[ind] = key
-        info = {"set_ind": set_ind[key[0]], "language": p["language"],
-                "localized": localized.get(f"{key[0]}|{key[1]}")}
+        info = {
+            "set_ind": set_ind[key[0]],
+            "language": p["language"],
+            "localized": localized.get(f"{key[0]}|{key[1]}"),
+        }
         blocks_by_set[key[0]].append(
-            card_block(ind, card, info, vocab, sub_by_label, kw_map, rulings, notes))
+            card_block(ind, card, info, vocab, sub_by_label, kw_map, rulings, notes),
+        )
 
     # write per-set files
     (ROOT / "sets").mkdir(exist_ok=True)
@@ -513,14 +594,16 @@ def cmd_generate():
         parts = [HEADER.format(set_name=sname, set_code=code.upper(), urn=urn)]
         if code in new_sets:
             sm = sets_meta[code]
-            parts.append("#" * 80 + "\n#\n# Set Individual (not defined in "
-                         "MagicCardsOntology)\n#\n" + "#" * 80 + "\n\n"
-                         f":{new_sets[code]} rdf:type owl:NamedIndividual ,\n"
-                         "                  :Set ;\n"
-                         f'    :setName "{esc_str(sm["name"])}" ;\n'
-                         f'    :setCode "{code.upper()}" ;\n'
-                         f'    :cardCount "{sm["card_count"]}"^^xsd:integer ;\n'
-                         f'    :releaseDate "{sm["released_at"]}"^^xsd:date .\n')
+            parts.append(
+                "#" * 80 + "\n#\n# Set Individual (not defined in "
+                "MagicCardsOntology)\n#\n" + "#" * 80 + "\n\n"
+                f":{new_sets[code]} rdf:type owl:NamedIndividual ,\n"
+                "                  :Set ;\n"
+                f'    :setName "{esc_str(sm["name"])}" ;\n'
+                f'    :setCode "{code.upper()}" ;\n'
+                f'    :cardCount "{sm["card_count"]}"^^xsd:integer ;\n'
+                f'    :releaseDate "{sm["released_at"]}"^^xsd:date .\n',
+            )
         # missing subtypes used by cards of this set
         parts.append("#" * 80 + "\n#\n# Card Individuals\n#\n" + "#" * 80 + "\n")
         parts.append("\n\n".join(blocks_by_set[code]))
@@ -531,15 +614,23 @@ def cmd_generate():
     # supplemental subtype individuals file
     if notes["subtypes"]:
         urn = f"urn:stklug84:MagicCardIndividuals:SubTypeSupplement:{NS_DATE}#"
-        lines = [HEADER.format(set_name="SubType Supplement",
-                               set_code="SUPPLEMENT", urn=urn)]
-        lines.append("#" * 80 + "\n#\n# SubType individuals referenced by the "
-                     "collection but not defined in\n# MagicCardsOntology\n#\n"
-                     + "#" * 80 + "\n")
+        lines = [
+            HEADER.format(
+                set_name="SubType Supplement", set_code="SUPPLEMENT", urn=urn
+            ),
+        ]
+        lines.append(
+            "#" * 80 + "\n#\n# SubType individuals referenced by the "
+            "collection but not defined in\n# MagicCardsOntology\n#\n"
+            + "#" * 80
+            + "\n",
+        )
         for ind, (label, cls) in sorted(notes["subtypes"].items()):
-            lines.append(f":{ind} rdf:type owl:NamedIndividual ,\n"
-                         f"                  :{cls} ;\n"
-                         f'    rdfs:label "{esc_str(label)}" .\n')
+            lines.append(
+                f":{ind} rdf:type owl:NamedIndividual ,\n"
+                f"                  :{cls} ;\n"
+                f'    rdfs:label "{esc_str(label)}" .\n',
+            )
         out = ROOT / "sets" / "SubTypeSupplement.ttl"
         out.write_text("\n".join(lines))
         imports.insert(0, (urn, out.name, len(notes["subtypes"])))
@@ -552,16 +643,23 @@ def cmd_generate():
         print("new subtypes:", sorted(notes["subtypes"]))
     if notes["keywords"]:
         print("unknown keywords (comment notes):", sorted(notes["keywords"]))
-    json.dump([{"urn": u, "file": f, "cards": n} for u, f, n in imports],
-              open("/tmp/imports.json", "w"), indent=2)
+    json.dump(
+        [{"urn": u, "file": f, "cards": n} for u, f, n in imports],
+        open("/tmp/imports.json", "w"),
+        indent=2,
+    )
 
 
 # ---------------------------------------------------------------- collection
 
 FINISH = {"": "Nonfoil", "foil": "Foil", "etched": "EtchedFoil"}
-CONDITION = {"Near Mint": "NearMint", "Lightly Played": "LightlyPlayed",
-             "Moderately Played": "ModeratelyPlayed",
-             "Heavily Played": "HeavilyPlayed", "Damaged": "Damaged"}
+CONDITION = {
+    "Near Mint": "NearMint",
+    "Lightly Played": "LightlyPlayed",
+    "Moderately Played": "ModeratelyPlayed",
+    "Heavily Played": "HeavilyPlayed",
+    "Damaged": "Damaged",
+}
 
 COLLECTION_HEADER = """\
 # ==============================================================================
@@ -615,19 +713,26 @@ def load_card_map():
     card_map = {}
     for path in sorted((ROOT / "sets").glob("*.ttl")):
         text = path.read_text()
-        code = re.search(r"@base\s+<urn:stklug84:MagicCardIndividuals:"
-                         r"([^:>]+):[^>]*>", text).group(1)
+        code = re.search(
+            r"@base\s+<urn:stklug84:MagicCardIndividuals:"
+            r"([^:>]+):[^>]*>",
+            text,
+        ).group(1)
         blocks = re.split(r"\n(?=:\w+ rdf:type owl:NamedIndividual)", text)
         for b in blocks[1:]:
             ind = re.match(r":(\w+)", b).group(1)
-            m = (re.search(r':cardNumber "([^"]+)"', b)
-                 or re.search(r':cardNumberString "([^"]+)"', b))
+            m = re.search(r':cardNumber "([^"]+)"', b) or re.search(
+                r':cardNumberString "([^"]+)"',
+                b,
+            )
             if m is None:
                 continue  # not a card individual (e.g. Set / SubType)
             key = (code.upper(), m.group(1))
             if key in card_map:
-                raise SystemExit(f"duplicate printing {key}: "
-                                 f"{card_map[key][0]} vs {ind}")
+                msg = f"duplicate printing {key}: {card_map[key][0]} vs {ind}"
+                raise SystemExit(
+                    msg,
+                )
             card_map[key] = (ind, path.name)
     return card_map
 
@@ -636,7 +741,7 @@ def cmd_collection():
     rows = list(csv.DictReader(open(ROOT / "collection.csv")))
     card_map = load_card_map()
 
-    entries, refs, missing = [], [], []
+    _entries, refs, missing = [], [], []
     seq = defaultdict(int)
     total = 0
     by_file = defaultdict(list)
@@ -650,12 +755,14 @@ def cmd_collection():
         entry = f"{ind}Entry{seq[ind]}"
         count = int(r["Count"])
         total += count
-        lines = [f":{entry} rdf:type owl:NamedIndividual ,",
-                 "                  :CollectionEntry ;",
-                 f"    :entryCard :{ind} ;",
-                 f'    :quantity "{count}"^^xsd:positiveInteger ;',
-                 f"    :hasFinish :{FINISH[r['Foil'].strip()]} ;",
-                 f"    :hasCondition :{CONDITION[r['Condition'].strip()]} ;"]
+        lines = [
+            f":{entry} rdf:type owl:NamedIndividual ,",
+            "                  :CollectionEntry ;",
+            f"    :entryCard :{ind} ;",
+            f'    :quantity "{count}"^^xsd:positiveInteger ;',
+            f"    :hasFinish :{FINISH[r['Foil'].strip()]} ;",
+            f"    :hasCondition :{CONDITION[r['Condition'].strip()]} ;",
+        ]
         price = r["Purchase Price"].strip()
         if price:
             lines.append(f'    :purchasePrice "{price}"^^xsd:decimal ;')
@@ -665,16 +772,21 @@ def cmd_collection():
 
     parts = [COLLECTION_HEADER.format(ns_date=NS_DATE)]
     parts.append("#" * 80 + "\n#\n# Collection Individual\n#\n" + "#" * 80 + "\n")
-    parts.append(":MagicCardCollection rdf:type owl:NamedIndividual ,\n"
-                 "                  :Collection ;\n"
-                 '    rdfs:label "Magic Card Collection"@en ;\n'
-                 "    rdfs:comment \"\"\"The physical card collection inventoried\n"
-                 "in collection.csv. Each collection entry describes one acquisition\n"
-                 "lot of a specific printing.\"\"\"@en ;\n"
-                 "    :hasCollectionEntry\n  "
-                 + " ,\n  ".join(f":{e}" for e in refs) + " .\n")
-    parts.append("#" * 80 + "\n#\n# Collection Entries (grouped by set file)\n#\n"
-                 + "#" * 80 + "\n")
+    parts.append(
+        ":MagicCardCollection rdf:type owl:NamedIndividual ,\n"
+        "                  :Collection ;\n"
+        '    rdfs:label "Magic Card Collection"@en ;\n'
+        '    rdfs:comment """The physical card collection inventoried\n'
+        "in collection.csv. Each collection entry describes one acquisition\n"
+        'lot of a specific printing."""@en ;\n'
+        "    :hasCollectionEntry\n  " + " ,\n  ".join(f":{e}" for e in refs) + " .\n",
+    )
+    parts.append(
+        "#" * 80
+        + "\n#\n# Collection Entries (grouped by set file)\n#\n"
+        + "#" * 80
+        + "\n",
+    )
     for fname in sorted(by_file):
         parts.append(f"# --- sets/{fname} ---\n")
         parts.append("\n\n".join(by_file[fname]) + "\n")
@@ -687,6 +799,7 @@ def cmd_collection():
 
 # ---------------------------------------------------------------- augment
 
+
 def cmd_augment_mana():
     """Backfill :producesMana / :entersTapped / :isFetchLand triples.
 
@@ -696,9 +809,11 @@ def cmd_augment_mana():
     carry mana-fact triples are left untouched. Avoids a full `generate`
     run, which could rename individuals.
     """
-    url_re = re.compile(r':scryfallUrl "https://scryfall\.com/card/'
-                        r'([^/"]+)/([^/"]+)/')
-    lang_re = re.compile(r"^    :hasLanguage :\w+ ;$", re.M)
+    url_re = re.compile(
+        r':scryfallUrl "https://scryfall\.com/card/'
+        r'([^/"]+)/([^/"]+)/',
+    )
+    lang_re = re.compile(r"^    :hasLanguage :\w+ ;$", re.MULTILINE)
     files = sorted((ROOT / "sets").glob("*.ttl"))
     ext = ROOT / "MagicExternalCards.ttl"
     if ext.exists():
@@ -715,7 +830,7 @@ def cmd_augment_mana():
             if f"{s}|{n}".lower() not in by_key:
                 todo.append((s, n))
     for i in range(0, len(todo), 75):
-        batch = todo[i:i + 75]
+        batch = todo[i : i + 75]
         idents = [{"set": s, "collector_number": n} for s, n in batch]
         resp = http_json(f"{API}/cards/collection", {"identifiers": idents})
         for c in resp["data"]:
@@ -738,30 +853,41 @@ def cmd_augment_mana():
             m = url_re.search(block)
             if m and ":cardName" in block:
                 n_blocks += 1
-                if (":producesMana" in block or ":entersTapped" in block
-                        or ":isFetchLand" in block):
+                if (
+                    ":producesMana" in block
+                    or ":entersTapped" in block
+                    or ":isFetchLand" in block
+                ):
                     n_skipped += 1
-                elif (card := by_key.get(
-                        f"{m.group(1)}|{m.group(2)}".lower())) is not None:
+                elif (
+                    card := by_key.get(f"{m.group(1)}|{m.group(2)}".lower())
+                ) is not None:
                     lines = mana_fact_lines(card)
                     if lines:
                         lm = lang_re.search(block)
                         if lm:
-                            block = (block[:lm.end()] + "\n"
-                                     + "\n".join(lines) + block[lm.end():])
+                            block = (
+                                block[: lm.end()]
+                                + "\n"
+                                + "\n".join(lines)
+                                + block[lm.end() :]
+                            )
                             n_facts += len(lines)
                             changed = True
                 else:
-                    print(f"no scryfall data: {path.name} "
-                          f"{m.group(1)}/{m.group(2)}")
+                    print(f"no scryfall data: {path.name} {m.group(1)}/{m.group(2)}")
             out.append(block)
         if changed:
             path.write_text("\n".join(out))
-    print(f"blocks: {n_blocks}  facts inserted: {n_facts}  "
-          f"already present: {n_skipped}")
+    print(
+        f"blocks: {n_blocks}  facts inserted: {n_facts}  already present: {n_skipped}",
+    )
 
 
 if __name__ == "__main__":
-    {"fetch": cmd_fetch, "generate": cmd_generate,
-     "collection": cmd_collection,
-     "augment-mana": cmd_augment_mana}[sys.argv[1]]()
+    {
+        "fetch": cmd_fetch,
+        "generate": cmd_generate,
+        "collection": cmd_collection,
+        "augment-mana": cmd_augment_mana,
+    }[sys.argv[1]]()

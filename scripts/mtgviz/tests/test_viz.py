@@ -1,5 +1,6 @@
 """Recorder / replay conformance: a seeded game's viz stream is complete,
-JSON-serializable, navigable, and its final snapshot matches the engine."""
+JSON-serializable, navigable, and its final snapshot matches the engine.
+"""
 
 import json
 import random
@@ -10,27 +11,37 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parent.parent.parent.parent
 sys.path.insert(0, str(REPO / "scripts"))
 
-from mtgviz.recorder import Recorder                 # noqa: E402
-from mtgviz.tui import ViewState, format_event       # noqa: E402
+from mtgviz.recorder import Recorder
+from mtgviz.tui import ViewState, format_event
 
 
 def _run_recorded(seed=11, turn_cap=12):
     from mtgcards.database import CardDatabase
     from mtgcards.deck import load_deck
     from mtgrules.adapter import run_game
+
     db = CardDatabase(REPO)
-    decks = [load_deck(REPO / "strategies"
-                       / "station-swarm-counter-deck.txt"),
-             load_deck(REPO / "strategies" / "blight-curse-deck.txt")]
+    decks = [
+        load_deck(REPO / "strategies" / "station-swarm-counter-deck.txt"),
+        load_deck(REPO / "strategies" / "blight-curse-deck.txt"),
+    ]
     sink_records = []
-    rec = run_game(decks, db, random.Random(seed), turn_cap=turn_cap,
-                   recorder=Recorder(sink_records.append))
+    rec = run_game(
+        decks,
+        db,
+        random.Random(seed),
+        turn_cap=turn_cap,
+        recorder=Recorder(sink_records.append),
+    )
     return rec, sink_records
 
 
 class TestViz(unittest.TestCase):
+    rec: dict
+    records: list
+
     @classmethod
-    def setUpClass(cls):
+    def setUpClass(cls) -> None:
         cls.rec, cls.records = _run_recorded()
 
     def test_stream_shape(self):
@@ -51,8 +62,7 @@ class TestViz(unittest.TestCase):
         """Golden invariant: last snapshot's life totals == game record."""
         last_snap = [r for r in self.records if r["t"] == "s"][-1]
         for pd in last_snap["players"]:
-            self.assertEqual(pd["life"],
-                             self.rec["players"][pd["name"]]["life"])
+            self.assertEqual(pd["life"], self.rec["players"][pd["name"]]["life"])
         end = self.records[-1]
         self.assertEqual(end["winner"], self.rec["winner"])
         self.assertEqual(end["reason"], self.rec["reason"])

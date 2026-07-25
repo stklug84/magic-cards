@@ -1,17 +1,23 @@
 # SPARQL Query Catalog
 
-Reusable SPARQL 1.1 queries for the **Magic Cards Ontology** (`MagicCardsOntology.ttl`) and any instance graph that conforms to it. The reference dataset is the card collection in `sets/*.ttl` (aggregated by `MagicCardIndividuals.ttl`) together with the inventory graph `MagicCardCollection.ttl`, the deck graph `decks/SaheeliRadiantCreator.ttl` and the synergy graph `MagicCardSynergies.ttl`.
+Reusable SPARQL 1.1 queries for the **Magic Cards Ontology** (`MagicCardsOntology.ttl`) and any instance graph
+that conforms to it. The reference dataset is the card collection in `sets/*.ttl` (aggregated by
+`MagicCardIndividuals.ttl`) together with the inventory graph `MagicCardCollection.ttl`, the deck graph
+`decks/SaheeliRadiantCreator.ttl` and the synergy graph `MagicCardSynergies.ttl`.
 
 Every query is a standalone `.rq` file with:
 
 - a header comment describing **what it does**, plus
-- a `# PARAMETERS:` section identifying every parameter you can edit to retarget the query. Deck-scoped queries cover **all decks** by default and carry an optional, commented-out `VALUES ?deck { … }` filter you can uncomment to restrict them; other parameters (card, keyword, format, …) remain `VALUES`-based, so every query runs as-is.
+- a `# PARAMETERS:` section identifying every parameter you can edit to retarget the query. Deck-scoped
+  queries cover **all decks** by default and carry an optional, commented-out `VALUES ?deck { … }` filter you
+  can uncomment to restrict them; other parameters (card, keyword, format, …) remain `VALUES`-based, so every
+  query runs as-is.
 
 See [`INDEX.md`](INDEX.md) for the full catalog.
 
 ## Directory layout
 
-```
+```text
 queries/
 ├── README.md                      this file
 ├── INDEX.md                       catalog of all queries with use cases & parameters
@@ -30,7 +36,8 @@ queries/
 
 ## Conventions
 
-Every query starts with the same prefix. Deck-scoped queries cover all decks by default, project the deck's label first, and carry a commented-out `VALUES ?deck` filter:
+Every query starts with the same prefix. Deck-scoped queries cover all decks by default, project the deck's
+label first, and carry a commented-out `VALUES ?deck` filter:
 
 ```sparql
 PREFIX mc: <urn:stklug84:MagicCardsOntology:2026-02-27#>
@@ -62,7 +69,8 @@ VALUES ?deck { mc:DeckA mc:DeckB mc:DeckC }
 
 Other parameters (card, keyword, format, …) remain active `VALUES` clauses that you edit in place.
 
-The single `mc:` prefix covers everything; no `deck:` or default prefix is needed because deck individuals live in the ontology namespace by import.
+The single `mc:` prefix covers everything; no `deck:` or default prefix is needed because deck individuals
+live in the ontology namespace by import.
 
 ## Synergy traversal
 
@@ -81,13 +89,18 @@ Synergy queries (sections 03, 07 and 09) walk the directional synergy edges usin
       | ^mc:isEnabledBy ) ?other .
 ```
 
-This pattern means "any synergy edge in either direction." It does **not** require OWL reasoning, so it works directly against an unmaterialized graph in any SPARQL 1.1 engine (rdflib, Apache Jena, GraphDB, Stardog, Blazegraph, Virtuoso).
+This pattern means "any synergy edge in either direction." It does **not** require OWL reasoning, so it works
+directly against an unmaterialized graph in any SPARQL 1.1 engine (rdflib, Apache Jena, GraphDB, Stardog,
+Blazegraph, Virtuoso).
 
-If you have OWL-RL closure available, the explicit `:isAmplifiedBy` / `:isEnabledBy` and reverse `:hasSynergyWith` triples are already materialized as inverses, so a simpler `?card mc:hasSynergyWith ?other` pattern is sufficient.
+If you have OWL-RL closure available, the explicit `:isAmplifiedBy` / `:isEnabledBy` and reverse
+`:hasSynergyWith` triples are already materialized as inverses, so a simpler `?card mc:hasSynergyWith ?other`
+pattern is sufficient.
 
 ## Running the queries
 
-Most SPARQL engines do **not** follow `owl:imports` automatically, so load the ontology, the per-set instance files, the deck graph and the synergy graph explicitly.
+Most SPARQL engines do **not** follow `owl:imports` automatically, so load the ontology, the per-set instance
+files, the deck graph and the synergy graph explicitly.
 
 ### rdflib (Python)
 
@@ -118,7 +131,8 @@ arq --data MagicCardsOntology.ttl \
 
 ### GraphDB / Stardog / Blazegraph
 
-Load all TTL files into a single repository / database, then paste the contents of any `.rq` file into the Workbench SPARQL editor.
+Load all TTL files into a single repository / database, then paste the contents of any `.rq` file into the
+Workbench SPARQL editor.
 
 ## Notes on the data model
 
@@ -146,7 +160,10 @@ A few patterns recur across queries:
 - **Colors and color identity**: cards assert both `mc:hasColor` and
   `mc:hasColorIdentity`. Colorless cards are recognizable by the absence of
   any `mc:hasColorIdentity` values.
-- **Basic lands** in the Saheeli deck are distinct printing-specific Card individuals named `mc:ForestAetherdrift291`, `mc:IslandAetherdrift282`, `mc:MountainAetherdrift288` (from the `sets/Aetherdrift.ttl` set graph, set code `DFT`) — the bare `mc:Forest` / `mc:Island` / `mc:Mountain` IRIs are reserved for the basic-land *subtype* individuals in the main ontology.
+- **Basic lands** in the Saheeli deck are distinct printing-specific Card individuals named
+  `mc:ForestAetherdrift291`, `mc:IslandAetherdrift282`, `mc:MountainAetherdrift288` (from the
+  `sets/Aetherdrift.ttl` set graph, set code `DFT`) — the bare `mc:Forest` / `mc:Island` / `mc:Mountain`
+  IRIs are reserved for the basic-land *subtype* individuals in the main ontology.
 - **Legality** is reified as a `LegalityMapping` per (card, format):
   `?card mc:hasLegality ?lm . ?lm mc:inFormat ?fmt ; mc:hasLegalityStatus ?status .`
 - **Rulings** are reified as `Ruling` individuals with `mc:rulingDate` and `mc:rulingText`.

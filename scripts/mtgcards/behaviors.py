@@ -36,21 +36,70 @@ import re
 from pathlib import Path
 
 BEHAVIOR_KEYS = {
-    "rock_mana", "rock_colors", "ramp_lands", "fetch_land", "enters_tapped",
-    "land_colors", "treasures_per_turn", "burst_treasures", "draw_cards",
-    "draw_per_turn", "draw_on_attack", "draw_on_tokens", "removal",
-    "removal_scope",     "removal_exile", "removal_lock", "removal_targets", "mass_self",
-    "counter_wipe_self", "igs",
-    "counterspell", "protect", "wipe", "tokens_per_turn", "etb_tokens",
-    "death_tokens", "burst_tokens", "populate_per_turn", "replicate",
-    "doubler", "creature_token_mult", "esix", "anim", "reef",
-    "mechanized_wincon", "mass_counters", "single_counters",
-    "etb_counter_wipe", "etb_target_counters", "proliferate",
-    "token_per_counter", "drain_on_counters", "chain", "kulrath_lock",
-    "steal", "grave_rob", "yawgmoth", "clamp", "drain_own", "drain_any",
-    "burst_drain", "hexproof_grant", "etb_removal", "blink_on_etb", "closet",
-    "station", "rebuild", "tutor", "recursion", "energy_gain",
-    "energy_thopter", "manufactor", "key", "anthem",
+    "rock_mana",
+    "rock_colors",
+    "ramp_lands",
+    "fetch_land",
+    "enters_tapped",
+    "land_colors",
+    "treasures_per_turn",
+    "burst_treasures",
+    "draw_cards",
+    "draw_per_turn",
+    "draw_on_attack",
+    "draw_on_tokens",
+    "removal",
+    "removal_scope",
+    "removal_exile",
+    "removal_lock",
+    "removal_targets",
+    "mass_self",
+    "counter_wipe_self",
+    "igs",
+    "counterspell",
+    "protect",
+    "wipe",
+    "tokens_per_turn",
+    "etb_tokens",
+    "death_tokens",
+    "burst_tokens",
+    "populate_per_turn",
+    "replicate",
+    "doubler",
+    "creature_token_mult",
+    "esix",
+    "anim",
+    "reef",
+    "mechanized_wincon",
+    "mass_counters",
+    "single_counters",
+    "etb_counter_wipe",
+    "etb_target_counters",
+    "proliferate",
+    "token_per_counter",
+    "drain_on_counters",
+    "chain",
+    "kulrath_lock",
+    "steal",
+    "grave_rob",
+    "yawgmoth",
+    "clamp",
+    "drain_own",
+    "drain_any",
+    "burst_drain",
+    "hexproof_grant",
+    "etb_removal",
+    "blink_on_etb",
+    "closet",
+    "station",
+    "rebuild",
+    "tutor",
+    "recursion",
+    "energy_gain",
+    "energy_thopter",
+    "manufactor",
+    "key",
+    "anthem",
 }
 
 # hook values that the engine indexes positionally
@@ -58,10 +107,9 @@ _TUPLE_KEYS = {"etb_tokens", "death_tokens", "burst_tokens"}
 
 ANNOTATIONS_FILE = "MagicSimulationAnnotations.ttl"
 
-_SUBJECT_RE = re.compile(r"^:(\w+)\s*$|^:(\w+)\s", re.M)
+_SUBJECT_RE = re.compile(r"^:(\w+)\s*$|^:(\w+)\s", re.MULTILINE)
 _THREAT_RE = re.compile(r':threatWeight "(\d+)"')
-_HOOK_RE = re.compile(
-    r':behaviorKey "([^"]+)" ; :behaviorValue "((?:[^"\\]|\\.)*)"')
+_HOOK_RE = re.compile(r':behaviorKey "([^"]+)" ; :behaviorValue "((?:[^"\\]|\\.)*)"')
 
 
 def _decode(key: str, raw: str):
@@ -94,18 +142,26 @@ def load_annotations(repo_root: Path, ind2name: dict[str, str]) -> dict:
         ind = m.group(1)
         name = ind2name.get(ind)
         if name is None:
-            raise ValueError(
+            msg = (
                 f"{ANNOTATIONS_FILE}: subject :{ind} is not a card "
-                f"individual known to the card graphs")
+                f"individual known to the card graphs"
+            )
+            raise ValueError(
+                msg,
+            )
         hooks = hooks_by_name.setdefault(name, {})
         tw = _THREAT_RE.search(block)
         if tw:
             hooks["key"] = int(tw.group(1))
         for key, raw in _HOOK_RE.findall(block):
             if key not in BEHAVIOR_KEYS:
-                raise ValueError(
+                msg = (
                     f"{ANNOTATIONS_FILE}: :{ind} uses unknown behavior "
-                    f"key {key!r} (see BEHAVIOR_KEYS)")
+                    f"key {key!r} (see BEHAVIOR_KEYS)"
+                )
+                raise ValueError(
+                    msg,
+                )
             hooks[key] = _decode(key, raw)
     return hooks_by_name
 

@@ -10,7 +10,8 @@ from .tui import HAVE_RICH, ViewState, format_event, print_plain_frame
 
 def load_games(path):
     """Split a --viz-file JSONL into per-game streams.
-    Returns {game_no: {"meta": {...}, "records": [...], "result": {...}}}."""
+    Returns {game_no: {"meta": {...}, "records": [...], "result": {...}}}.
+    """
     games = {}
     current = None
     try:
@@ -39,25 +40,31 @@ def load_games(path):
 def replay_file(path, game=1):
     games = load_games(path)
     if not games:
-        sys.exit(f"{path}: no recorded games found (record with "
-                 f"--viz-file)")
+        sys.exit(f"{path}: no recorded games found (record with --viz-file)")
     if game not in games:
-        sys.exit(f"{path}: no game {game}; available: "
-                 f"{', '.join(map(str, sorted(games)))}")
+        sys.exit(
+            f"{path}: no game {game}; available: {', '.join(map(str, sorted(games)))}",
+        )
     g = games[game]
     if not HAVE_RICH:
-        print("note: 'rich' not installed (pip install rich); "
-              "using the plain step viewer", file=sys.stderr)
+        print(
+            "note: 'rich' not installed (pip install rich); "
+            "using the plain step viewer",
+            file=sys.stderr,
+        )
     from .tui import run_replay
+
     run_replay(g["records"], g["meta"], g["result"])
 
 
 def plain_replay(records, meta, result=None):
     """Fallback viewer: prints one phase per <Enter>, 'q' to quit."""
     view = ViewState(records, meta)
-    print(f"replaying game {meta.get('game', 1)} (seed "
-          f"{meta.get('seed')}), {len(records)} records; <Enter> for next "
-          f"phase, 'a<Enter>' for all, 'q<Enter>' to quit")
+    print(
+        f"replaying game {meta.get('game', 1)} (seed "
+        f"{meta.get('seed')}), {len(records)} records; <Enter> for next "
+        f"phase, 'a<Enter>' for all, 'q<Enter>' to quit",
+    )
     auto = False
     while not view.at_end():
         start = view.cursor
@@ -78,5 +85,7 @@ def plain_replay(records, meta, result=None):
         if ans == "a":
             auto = True
     if result:
-        print(f"=== winner: {result['winner']} ({result['reason']}) "
-              f"after {result['turns']} turns ===")
+        print(
+            f"=== winner: {result['winner']} ({result['reason']}) "
+            f"after {result['turns']} turns ===",
+        )

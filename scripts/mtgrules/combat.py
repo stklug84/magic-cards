@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import Any
+
 from .cr import rule
 from .events import Event, EventType
 from .objects import GameObject, Player, Zone
@@ -13,12 +15,11 @@ def can_attack(game, obj) -> bool:
     if "Creature" not in ch.types or obj.tapped:
         return False
     if obj.entered_this_turn and "haste" not in ch.keywords:
-        return False                               # rule 302.6
-    if "defender" in ch.keywords:                  # rule 702.3
+        return False  # rule 302.6
+    if "defender" in ch.keywords:  # rule 702.3
         return False
-    if "shackled" in ch.keywords:                  # Kulrath-style locks
-        return False
-    return True
+    # Kulrath-style locks
+    return "shackled" not in ch.keywords
 
 
 @rule("509.1b", "702.9", "702.111")
@@ -30,10 +31,11 @@ def can_block(game, blocker, attacker) -> bool:
     if "shackled" in ch_b.keywords:
         return False
     if "flying" in ch_a.keywords and not (
-            ch_b.keywords & {"flying", "reach"}):  # rules 702.9c / 702.17
+        ch_b.keywords & {"flying", "reach"}
+    ):  # rules 702.9c / 702.17
         return False
     if "menace" in ch_a.keywords:
-        return True   # menace is a *count* restriction, checked separately
+        return True  # menace is a *count* restriction, checked separately
     return True
 
 
@@ -47,9 +49,9 @@ class CombatPhase:
         game = self.game
         active = game.active_player
         # 507: beginning of combat
-        game._queue_triggers(Event(EventType.BEGIN_STEP,
-                                   {"step": "combat_begin",
-                                    "player": active}))
+        game._queue_triggers(
+            Event(EventType.BEGIN_STEP, {"step": "combat_begin", "player": active}),
+        )
         game.priority_loop()
         if game.game_over:
             return
@@ -64,9 +66,11 @@ class CombatPhase:
                 return
             # 510: combat damage; rule 510.5 - an additional first-strike
             # combat damage step if any first/double strike creature
-            fs = [a for a in self._combatants()
-                  if a.chars(game).keywords & {"first strike",
-                                               "double strike"}]
+            fs = [
+                a
+                for a in self._combatants()
+                if a.chars(game).keywords & {"first strike", "double strike"}
+            ]
             if fs:
                 self._damage_step(first_strike=True)
                 game.priority_loop()
@@ -77,8 +81,9 @@ class CombatPhase:
             if game.game_over:
                 return
         # 511: end of combat
-        game._queue_triggers(Event(EventType.END_STEP_EVT,
-                                   {"step": "combat_end", "player": active}))
+        game._queue_triggers(
+            Event(EventType.END_STEP_EVT, {"step": "combat_end", "player": active}),
+        )
         game.priority_loop()
         for obj in list(game.battlefield_objects()):
             obj.attacking = None
@@ -96,44 +101,59 @@ class CombatPhase:
         game = self.game
         active = game.active_player
         candidates = [o for o in active.battlefield if can_attack(game, o)]
-        picks = game.policy(active).declare_attackers(game, active,
-                                                      candidates)
+        picks = game.policy(active).declare_attackers(game, active, candidates)
         for obj, defender in picks:
             obj.attacking = defender
             if "vigilance" not in obj.chars(game).keywords:  # rule 702.20
                 obj.tapped = True
             self.attackers.append(obj)
             active.stat("attacks")
-            dfn = defender if hasattr(defender, "grudges") \
-                else defender.controller
-            dfn.grudges[active.name] = dfn.grudges.get(active.name, 0) \
-                + (obj.chars(game).power or 0)
-            game.log("attack", who=active.name, card=obj.base.name,
-                     target=(defender.name if hasattr(defender, "life")
-                             else defender.base.name))
-            game._queue_triggers(Event(EventType.ATTACKS,
-                                       {"obj": obj, "defender": defender}))
+            dfn = defender if hasattr(defender, "grudges") else defender.controller
+            dfn.grudges[active.name] = dfn.grudges.get(active.name, 0) + (
+                obj.chars(game).power or 0
+            )
+            game.log(
+                "attack",
+                who=active.name,
+                card=obj.base.name,
+                target=(
+                    defender.name if hasattr(defender, "life") else defender.base.name
+                ),
+            )
+            game._queue_triggers(
+                Event(EventType.ATTACKS, {"obj": obj, "defender": defender}),
+            )
         game.bump()
         if self.attackers:
             game.priority_loop()
-        self.attackers = [a for a in self.attackers
-                          if a.zone == Zone.BATTLEFIELD]
+        self.attackers = [a for a in self.attackers if a.zone == Zone.BATTLEFIELD]
 
     @rule("509.1", "509.1a")
     def _declare_blockers(self):
         game = self.game
         for defender in game.players_apnap()[1:]:
-            mine = [a for a in self.attackers
-                    if a.attacking is defender
-                    or (isinstance(a.attacking, GameObject)
-                        and a.attacking.controller is defender)]
+            mine = [
+                a
+                for a in self.attackers
+                if a.attacking is defender
+                or (
+                    isinstance(a.attacking, GameObject)
+                    and a.attacking.controller is defender
+                )
+            ]
             if not mine:
                 continue
-            blockers = [o for o in defender.battlefield
-                        if "Creature" in o.chars(game).types
-                        and not o.tapped]
+            blockers = [
+                o
+                for o in defender.battlefield
+                if "Creature" in o.chars(game).types and not o.tapped
+            ]
             assignment = game.policy(defender).declare_blockers(
-                game, defender, mine, blockers)
+                game,
+                defender,
+                mine,
+                blockers,
+            )
             for blocker, attacker in assignment:
                 if not can_block(game, blocker, attacker):
                     continue
@@ -146,8 +166,12 @@ class CombatPhase:
                 a.blocked_by = []
         for a in self.attackers:
             for b in a.blocked_by:
-                game.log("block", who=b.controller.name,
-                         blocker=b.base.name, attacker=a.base.name)
+                game.log(
+                    "block",
+                    who=b.controller.name,
+                    blocker=b.base.name,
+                    attacker=a.base.name,
+                )
         game.bump()
         game.priority_loop()
 
@@ -155,7 +179,7 @@ class CombatPhase:
     def _damage_step(self, first_strike: bool):
         """Assign then deal all combat damage simultaneously (510.2)."""
         game = self.game
-        assignments = []                            # (source, target, amount)
+        assignments: list[tuple[Any, Any, int]] = []  # (source, target, amount)
 
         def strikes(obj):
             kw = obj.chars(game).keywords
@@ -170,10 +194,9 @@ class CombatPhase:
             power = max(0, ch.power or 0)
             if not power:
                 continue
-            blockers = [b for b in a.blocked_by
-                        if b.zone == Zone.BATTLEFIELD]
+            blockers = [b for b in a.blocked_by if b.zone == Zone.BATTLEFIELD]
             if not blockers:
-                if not a.blocked_by:                # unblocked, rule 510.1c
+                if not a.blocked_by:  # unblocked, rule 510.1c
                     assignments.append((a, a.attacking, power))
                 continue
             # rule 510.1a damage assignment order = policy order;
@@ -203,6 +226,5 @@ class CombatPhase:
             if isinstance(target, Player):
                 game.deal_damage(source, target, amount, combat=True)
                 source.controller.stat("combat_damage", amount)
-            elif isinstance(target, GameObject) \
-                    and target.zone == Zone.BATTLEFIELD:
+            elif isinstance(target, GameObject) and target.zone == Zone.BATTLEFIELD:
                 game.deal_damage(source, target, amount, combat=True)

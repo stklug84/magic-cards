@@ -12,27 +12,28 @@ from dataclasses import dataclass, field
 
 
 class EventType:
-    ZONE_CHANGE = "zone_change"          # obj, from_zone, to_zone
-    ENTERS_BATTLEFIELD = "etb"           # obj  (rule 603.6a)
-    DIES = "dies"                        # obj  (rule 700.4)
-    CREATE_TOKEN = "create_token"        # spec, count, controller (r111.2)
-    PUT_COUNTERS = "put_counters"        # obj, kind, count  (rule 122)
-    DRAW = "draw"                        # player, count     (rule 121)
-    DAMAGE = "damage"                    # source, target, amount (rule 120)
-    GAIN_LIFE = "gain_life"              # player, amount    (rule 119.3)
-    LOSE_LIFE = "lose_life"              # player, amount
-    CAST = "cast"                        # obj (spell)       (rule 601.2i)
-    ATTACKS = "attacks"                  # obj, defender     (rule 508.1)
-    TAP = "tap"                          # obj
-    UNTAP = "untap"                      # obj
-    SACRIFICE = "sacrifice"              # obj               (rule 701.22)
-    DESTROY = "destroy"                  # obj               (rule 701.7)
-    EXILE_OBJ = "exile_obj"              # obj               (rule 701.9)
-    BEGIN_STEP = "begin_step"            # step, player
-    END_STEP_EVT = "end_step"            # step, player
-    PROLIFERATE = "proliferate"          # player            (rule 702.87)
-    SHUFFLE = "shuffle"                  # player            (rule 701.24)
-    LAND_PLAYED = "land_played"          # obj, player       (rule 305)
+    ZONE_CHANGE = "zone_change"  # obj, from_zone, to_zone
+    ENTERS_BATTLEFIELD = "etb"  # obj  (rule 603.6a)
+    DIES = "dies"  # obj  (rule 700.4)
+    # spec, count, controller (r111.2); event name, not a credential
+    CREATE_TOKEN = "create_token"  # noqa: S105  # nosec B105
+    PUT_COUNTERS = "put_counters"  # obj, kind, count  (rule 122)
+    DRAW = "draw"  # player, count     (rule 121)
+    DAMAGE = "damage"  # source, target, amount (rule 120)
+    GAIN_LIFE = "gain_life"  # player, amount    (rule 119.3)
+    LOSE_LIFE = "lose_life"  # player, amount
+    CAST = "cast"  # obj (spell)       (rule 601.2i)
+    ATTACKS = "attacks"  # obj, defender     (rule 508.1)
+    TAP = "tap"  # obj
+    UNTAP = "untap"  # obj
+    SACRIFICE = "sacrifice"  # obj               (rule 701.22)
+    DESTROY = "destroy"  # obj               (rule 701.7)
+    EXILE_OBJ = "exile_obj"  # obj               (rule 701.9)
+    BEGIN_STEP = "begin_step"  # step, player
+    END_STEP_EVT = "end_step"  # step, player
+    PROLIFERATE = "proliferate"  # player            (rule 702.87)
+    SHUFFLE = "shuffle"  # player            (rule 701.24)
+    LAND_PLAYED = "land_played"  # obj, player       (rule 305)
 
 
 @dataclass

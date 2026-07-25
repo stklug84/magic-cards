@@ -1,0 +1,8 @@
+# @author:
+#	Steffen Klug <45033201+stklug84@users.noreply.github.com>
+# @description:
+#	Default code owners for this repository. Owners are requested for
+#	review on every pull request touching matching paths.
+
+# Default owner for everything in the repository
+*	@stklug84

@@ -174,3 +174,12 @@ python3 scripts/validate_ttl.py
 python3 scripts/validate_sparql.py
 python3 scripts/check_consistency.py
 ```
+
+## Development
+
+Linting, testing, CI structure, and the contribution workflow are
+documented in [`CONTRIBUTING.md`](./CONTRIBUTING.md). The Python tooling
+under [`scripts/`](./scripts/) is linted with ruff/mypy/bandit
+(configuration in [`pyproject.toml`](./pyproject.toml)); the remaining
+strictness work is tracked in
+[`docs/python-strictness-roadmap.md`](./docs/python-strictness-roadmap.md).

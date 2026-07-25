@@ -23,8 +23,8 @@ import re
 from dataclasses import dataclass, field
 from pathlib import Path
 
-# trailing printing suffix of exported lists: '(EOE) 219', '(PLST) SOM-144',
-# '(LCI) 26 *F*', ...
+# Trailing printing suffix of exported lists, for example "(EOE) 219",
+# "(PLST) SOM-144" or "(LCI) 26 *F*".
 _PRINTING_RE = re.compile(r"\s+\([A-Z0-9]{2,6}\)\s+[A-Za-z0-9-]+\S*(\s+\*\w+\*)?$")
 
 
@@ -32,7 +32,7 @@ _PRINTING_RE = re.compile(r"\s+\([A-Z0-9]{2,6}\)\s+[A-Za-z0-9-]+\S*(\s+\*\w+\*)?
 class Deck:
     name: str
     path: str
-    cards: list = field(default_factory=list)   # card names, expanded
+    cards: list = field(default_factory=list)  # card names, expanded
     commander: str | None = None
 
     @property

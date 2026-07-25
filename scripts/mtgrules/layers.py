@@ -24,7 +24,7 @@ effects (rule 613.6).
 from __future__ import annotations
 
 import itertools
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 
 from .cr import rule
 from .objects import Characteristics, next_timestamp
@@ -32,8 +32,18 @@ from .objects import Characteristics, next_timestamp
 _eff_ids = itertools.count(1)
 
 #: layer order including layer-7 sublayers
-LAYER_ORDER = [(1, ""), (2, ""), (3, ""), (4, ""), (5, ""), (6, ""),
-               (7, "a"), (7, "b"), (7, "c"), (7, "d")]
+LAYER_ORDER = [
+    (1, ""),
+    (2, ""),
+    (3, ""),
+    (4, ""),
+    (5, ""),
+    (6, ""),
+    (7, "a"),
+    (7, "b"),
+    (7, "c"),
+    (7, "d"),
+]
 
 
 @rule("611.1", "613.1")
@@ -49,7 +59,7 @@ class ContinuousEffect:
     #: None = while the source's static ability is active (rule 611.3);
     #: "end_of_turn" = until cleanup (rules 611.2a-b, 514.2)
     duration: str | None = "static"
-    is_cda: bool = False               # rules 604.3 / 613.2
+    is_cda: bool = False  # rules 604.3 / 613.2
     timestamp: int = 0
     id: int = 0
 
@@ -58,9 +68,11 @@ class ContinuousEffect:
         if not self.timestamp:
             # rule 613.7b: an effect from a static ability shares its
             # object's timestamp; floating effects get their own
-            self.timestamp = (self.source.timestamp if self.source is not None
-                              and self.duration == "static"
-                              else next_timestamp())
+            self.timestamp = (
+                self.source.timestamp
+                if self.source is not None and self.duration == "static"
+                else next_timestamp()
+            )
 
 
 class LayerSystem:
@@ -90,8 +102,7 @@ class LayerSystem:
     @rule("514.2")
     def end_of_turn_cleanup(self):
         """'Until end of turn' effects end during cleanup (rule 514.2)."""
-        self.floating = [e for e in self.floating
-                         if e.duration != "end_of_turn"]
+        self.floating = [e for e in self.floating if e.duration != "end_of_turn"]
         self.game.bump()
 
     # -- collection ------------------------------------------------------
@@ -101,17 +112,16 @@ class LayerSystem:
 
         *use_chars* selects which ability set to read: None -> base
         abilities; otherwise the partially-computed characteristics (used
-        for the post-layer-6 re-collection pass, rule 613.6)."""
+        for the post-layer-6 re-collection pass, rule 613.6).
+        """
         out = []
         for obj in self.game.battlefield_objects():
-            abilities = (use_chars[obj.id].abilities if use_chars else
-                         obj.base.abilities)
+            abilities = use_chars[obj.id].abilities if use_chars else obj.base.abilities
             for ab in abilities:
                 if getattr(ab, "kind", "") == "static" and ab.continuous:
                     key = (obj.id, id(ab))
                     if key not in self._static_cache:
-                        self._static_cache[key] = ab.continuous(
-                            self.game, obj)
+                        self._static_cache[key] = ab.continuous(self.game, obj)
                     out.extend(self._static_cache[key])
         return out
 
@@ -132,8 +142,9 @@ class LayerSystem:
                 for e in self._collect_static(chars):
                     if e.id not in seen:
                         effects.append(e)
-            group = [e for e in effects
-                     if e.layer == layer and (e.sublayer or "") == sub]
+            group = [
+                e for e in effects if e.layer == layer and (e.sublayer or "") == sub
+            ]
             self._apply_group(group, objs, chars)
             if (layer, sub) == (7, "c"):
                 self._apply_pt_counters(objs, chars)
@@ -143,13 +154,17 @@ class LayerSystem:
     @rule("613.7", "613.8")
     def _apply_group(self, group, objs, chars):
         """Apply one layer's effects: timestamp order with dependency
-        handling (rules 613.7-613.8)."""
+        handling (rules 613.7-613.8).
+        """
         remaining = sorted(group, key=lambda e: (e.timestamp, e.id))
         while remaining:
             pick = None
             for cand in remaining:
-                if not any(self._depends(cand, other, objs, chars)
-                           for other in remaining if other is not cand):
+                if not any(
+                    self._depends(cand, other, objs, chars)
+                    for other in remaining
+                    if other is not cand
+                ):
                     pick = cand
                     break
             if pick is None:
@@ -162,7 +177,7 @@ class LayerSystem:
 
     @rule("613.8a")
     def _depends(self, a, b, objs, chars) -> bool:
-        """Would applying *b* first change what *a* applies to or does?"""
+        """Return whether applying *b* first changes what *a* does."""
         game = self.game
 
         def snapshot():
@@ -185,8 +200,7 @@ class LayerSystem:
             o = next(o for o in objs if o.id == oid)
             a.apply(game, o, probe1)
             a.apply(game, o, probe2)
-            if (self._delta(base[oid], probe1)
-                    != self._delta(after_b[oid], probe2)):
+            if self._delta(base[oid], probe1) != self._delta(after_b[oid], probe2):
                 return True
         return False
 
@@ -208,7 +222,8 @@ class LayerSystem:
     @rule("613.4", "122.1a")
     def _apply_pt_counters(self, objs, chars):
         """+1/+1 and -1/-1 counters apply in layer 7c (rule 613.4c order
-        does not matter: all are additive)."""
+        does not matter: all are additive).
+        """
         for o in objs:
             ch = chars[o.id]
             if ch.power is None and ch.toughness is None:

@@ -46,15 +46,13 @@ class TestSBA(unittest.TestCase):
 
     def test_704_5h_deathtouch_any_damage_destroys(self):
         c = creature(self.game, self.p0, toughness=9)
-        src = creature(self.game, self.p1, power=1,
-                       keywords={"deathtouch"})
+        src = creature(self.game, self.p1, power=1, keywords={"deathtouch"})
         self.game.deal_damage(src, c, 1)
         settle(self.game)
         self.assertEqual(c.zone, Zone.GRAVEYARD)
 
     def test_702_12_indestructible_survives_lethal(self):
-        c = creature(self.game, self.p0, toughness=1,
-                     keywords={"indestructible"})
+        c = creature(self.game, self.p0, toughness=1, keywords={"indestructible"})
         src = creature(self.game, self.p1, power=5)
         self.game.deal_damage(src, c, 5)
         settle(self.game)
@@ -69,27 +67,27 @@ class TestSBA(unittest.TestCase):
         self.assertEqual(c.counters.get("-1/-1", 0), 0)
 
     def test_704_5j_legend_rule(self):
-        a = creature(self.game, self.p0, name="Legend",
-                     supertypes={"Legendary"})
-        b = creature(self.game, self.p0, name="Legend",
-                     supertypes={"Legendary"})
+        a = creature(self.game, self.p0, name="Legend", supertypes={"Legendary"})
+        b = creature(self.game, self.p0, name="Legend", supertypes={"Legendary"})
         settle(self.game)
         on_bf = [o for o in (a, b) if o.zone == Zone.BATTLEFIELD]
         self.assertEqual(len(on_bf), 1)
 
     def test_704_5j_different_controllers_keep_both(self):
-        a = creature(self.game, self.p0, name="Legend",
-                     supertypes={"Legendary"})
-        b = creature(self.game, self.p1, name="Legend",
-                     supertypes={"Legendary"})
+        a = creature(self.game, self.p0, name="Legend", supertypes={"Legendary"})
+        b = creature(self.game, self.p1, name="Legend", supertypes={"Legendary"})
         settle(self.game)
         self.assertEqual(a.zone, Zone.BATTLEFIELD)
         self.assertEqual(b.zone, Zone.BATTLEFIELD)
 
     def test_704_5d_token_ceases_outside_battlefield(self):
         from ..abilities import TokenSpec
+
         toks = self.game.create_tokens(
-            self.p0, TokenSpec(name="Soldier", power=1, toughness=1), 1)
+            self.p0,
+            TokenSpec(name="Soldier", power=1, toughness=1),
+            1,
+        )
         self.game.destroy(toks[0])
         settle(self.game)
         self.assertEqual(toks[0].zone, "ceased")

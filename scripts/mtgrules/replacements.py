@@ -48,7 +48,8 @@ class ReplacementEngine:
     @rule("614.7a", "616.1")
     def _active(self):
         """All currently active replacement effects, from static abilities
-        of battlefield permanents plus floating ones."""
+        of battlefield permanents plus floating ones.
+        """
         out = list(self.floating)
         for obj in self.game.battlefield_objects():
             for ab in obj.chars(self.game).abilities:
@@ -64,10 +65,12 @@ class ReplacementEngine:
         """Run *event* through the replacement machinery.
 
         Returns the (possibly modified) event, or None if a prevention
-        effect removed it entirely."""
+        effect removed it entirely.
+        """
         while True:
             candidates = [
-                r for r in self._active()
+                r
+                for r in self._active()
                 if r.event_type == event.type
                 and r.id not in event.applied
                 and (r.matches is None or r.matches(self.game, event))
@@ -82,8 +85,7 @@ class ReplacementEngine:
             pool = selfs or candidates
             chooser = self._affected_player(event)
             if chooser is not None and len(pool) > 1:
-                r = self.game.policy(chooser).choose_replacement(
-                    self.game, event, pool)
+                r = self.game.policy(chooser).choose_replacement(self.game, event, pool)
             else:
                 r = pool[0]
             event.applied.add(r.id)
@@ -93,10 +95,15 @@ class ReplacementEngine:
 
     def _affected_player(self, event):
         from .objects import Player
-        who = (event.data.get("controller") or event.data.get("player")
-               or event.data.get("target"))
+
+        who = (
+            event.data.get("controller")
+            or event.data.get("player")
+            or event.data.get("target")
+        )
         if isinstance(who, Player):
             return who
         obj = event.data.get("obj") or event.data.get("target")
-        return obj.controller if obj is not None and hasattr(
-            obj, "controller") else None
+        return (
+            obj.controller if obj is not None and hasattr(obj, "controller") else None
+        )

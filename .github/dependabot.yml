@@ -1,0 +1,35 @@
+---
+# title: Dependabot version updates configuration
+# authors:
+#   - Steffen Klug <45033201+stklug84@users.noreply.github.com>
+# date: 2026-07-25
+# keywords: [infrastructure, dependencies]
+# comment: |
+#   Weekly version updates. For the github-actions ecosystem "/" covers
+#   workflows in .github/workflows, including the version-pinned
+#   stklug84/github-workflows reusable workflows; all action bumps are
+#   grouped into a single pull request.
+#
+#   RDF note: Dependabot has no ecosystem for Turtle ontologies or
+#   SPARQL queries, so the knowledge-graph content itself cannot be
+#   tracked. The pip ecosystem below covers only the dev/CI tooling
+#   declared in pyproject.toml (rdflib for the validators); the rules
+#   engine and visualization packages are stdlib-only by design.
+#   Documentation:
+#   https://docs.github.com/code-security/dependabot/dependabot-version-updates
+# ---
+version: 2
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"  # Workflows in .github/workflows
+    schedule:
+      interval: "weekly"
+    groups:
+      github-actions:
+        patterns:
+          - "*"  # Bundle all action bumps into a single PR
+
+  - package-ecosystem: "pip"
+    directory: "/"  # pyproject.toml — dev/CI tooling dependencies only
+    schedule:
+      interval: "weekly"

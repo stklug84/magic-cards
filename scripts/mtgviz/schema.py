@@ -21,9 +21,11 @@ HIGHLIGHTS = {"counter", "player_loses", "eliminated"}
 
 def _perm(game, obj) -> dict:
     ch = obj.chars(game)
-    d = {"name": ch.name or "(unnamed)",
-         "types": sorted(ch.types),
-         "tapped": bool(obj.tapped)}
+    d = {
+        "name": ch.name or "(unnamed)",
+        "types": sorted(ch.types),
+        "tapped": bool(obj.tapped),
+    }
     if obj.is_token:
         d["token"] = True
     if obj.commander:
@@ -59,31 +61,49 @@ def snapshot(game, seq: int) -> dict:
     players = []
     for p in game.players:
         cmd = p.commander_obj
-        pool = "".join(sym * n for sym, n in
-                       sorted(getattr(p.mana_pool, "mana", {}).items())
-                       if n > 0)
-        players.append({
-            "name": p.name,
-            "life": p.life,
-            "lost": p.lose_reason,
-            "hand": len(p.hand),
-            "library": len(p.library),
-            "graveyard": len(p.graveyard),
-            "exile": len(p.exile),
-            "energy": p.energy,
-            "poison": p.poison,
-            "mana_pool": pool,
-            "commander_in_command": bool(cmd and cmd.zone == "command"),
-            "cmd_damage": {cmd_names.get(src, str(src)): n
-                           for src, n in p.commander_damage.items() if n},
-            "battlefield": [_perm(game, o) for o in p.battlefield],
-        })
-    return {"t": "s", "seq": seq, "turn": game.turn, "phase": game.phase,
-            "active": game.active_player.name,
-            "stack": [_stack_entry(i) for i in game.stack],
-            "players": players}
+        pool = "".join(
+            sym * n
+            for sym, n in sorted(getattr(p.mana_pool, "mana", {}).items())
+            if n > 0
+        )
+        players.append(
+            {
+                "name": p.name,
+                "life": p.life,
+                "lost": p.lose_reason,
+                "hand": len(p.hand),
+                "library": len(p.library),
+                "graveyard": len(p.graveyard),
+                "exile": len(p.exile),
+                "energy": p.energy,
+                "poison": p.poison,
+                "mana_pool": pool,
+                "commander_in_command": bool(cmd and cmd.zone == "command"),
+                "cmd_damage": {
+                    cmd_names.get(src, str(src)): n
+                    for src, n in p.commander_damage.items()
+                    if n
+                },
+                "battlefield": [_perm(game, o) for o in p.battlefield],
+            },
+        )
+    return {
+        "t": "s",
+        "seq": seq,
+        "turn": game.turn,
+        "phase": game.phase,
+        "active": game.active_player.name,
+        "stack": [_stack_entry(i) for i in game.stack],
+        "players": players,
+    }
 
 
 def event(game, seq: int, kind: str, data: dict) -> dict:
-    return {"t": "e", "seq": seq, "turn": game.turn, "phase": game.phase,
-            "kind": kind, "data": data}
+    return {
+        "t": "e",
+        "seq": seq,
+        "turn": game.turn,
+        "phase": game.phase,
+        "kind": kind,
+        "data": data,
+    }

@@ -15,13 +15,18 @@ class TestStack(unittest.TestCase):
 
     def _sorcery(self, player, effect, targets=(), cost="{1}"):
         return card_in_hand(
-            self.game, player, name="TestSpell", mana_cost=cost,
-            abilities=[SpellAbility(effect=effect, targets=list(targets))])
+            self.game,
+            player,
+            name="TestSpell",
+            mana_cost=cost,
+            abilities=[SpellAbility(effect=effect, targets=list(targets))],
+        )
 
     def test_601_2_cast_and_resolve(self):
         spell = self._sorcery(self.p0, DrawCards(2))
-        self.p0.library = [card_in_hand(self.game, self.p0, name=f"c{i}")
-                           for i in range(3)]
+        self.p0.library = [
+            card_in_hand(self.game, self.p0, name=f"c{i}") for i in range(3)
+        ]
         for c in self.p0.library:
             self.p0.hand.remove(c)
             c.zone = Zone.LIBRARY
@@ -30,7 +35,7 @@ class TestStack(unittest.TestCase):
         self.assertEqual(len(self.game.stack), 1)
         self.game.resolve_top()
         self.assertEqual(len(self.p0.hand), 2)
-        self.assertEqual(spell.zone, Zone.GRAVEYARD)   # rule 608.2m
+        self.assertEqual(spell.zone, Zone.GRAVEYARD)  # rule 608.2m
 
     def test_601_2h_cannot_cast_without_mana(self):
         spell = self._sorcery(self.p0, DrawCards(1), cost="{4}")
@@ -38,9 +43,15 @@ class TestStack(unittest.TestCase):
         self.assertEqual(spell.zone, Zone.HAND)
 
     def test_608_3_permanent_resolves_to_battlefield(self):
-        c = card_in_hand(self.game, self.p0, name="Bear",
-                         mana_cost="{1}", types=("Creature",),
-                         power=2, toughness=2)
+        c = card_in_hand(
+            self.game,
+            self.p0,
+            name="Bear",
+            mana_cost="{1}",
+            types=("Creature",),
+            power=2,
+            toughness=2,
+        )
         give_mana(self.p0, C=1)
         self.assertTrue(self.game.cast_spell(self.p0, c))
         self.game.resolve_top()
@@ -51,21 +62,25 @@ class TestStack(unittest.TestCase):
         give_mana(self.p0, C=1)
         self.game.cast_spell(self.p0, victim)
         counter = card_in_hand(
-            self.game, self.p1, name="Cancel", mana_cost="{1}",
+            self.game,
+            self.p1,
+            name="Cancel",
+            mana_cost="{1}",
             types=("Instant",),
-            abilities=[SpellAbility(effect=CounterSpell(),
-                                    targets=[TargetSpec(what="spell")])])
+            abilities=[
+                SpellAbility(effect=CounterSpell(), targets=[TargetSpec(what="spell")]),
+            ],
+        )
         give_mana(self.p1, C=1)
         self.assertTrue(self.game.cast_spell(self.p1, counter))
-        self.game.resolve_top()                    # counter resolves first
+        self.game.resolve_top()  # counter resolves first
         self.assertEqual(len(self.game.stack), 0)  # victim countered
         self.assertEqual(victim.zone, Zone.GRAVEYARD)
-        self.assertEqual(len(self.p0.hand), 0)     # never resolved
+        self.assertEqual(len(self.p0.hand), 0)  # never resolved
 
     def test_608_2b_fizzle_on_illegal_target(self):
         bear = creature(self.game, self.p1, name="Bear")
-        spell = self._sorcery(self.p0, Destroy(),
-                              targets=[TargetSpec(what="creature")])
+        spell = self._sorcery(self.p0, Destroy(), targets=[TargetSpec(what="creature")])
         give_mana(self.p0, C=1)
         self.assertTrue(self.game.cast_spell(self.p0, spell))
         # target dies in response
@@ -74,29 +89,26 @@ class TestStack(unittest.TestCase):
         self.assertEqual(spell.zone, Zone.GRAVEYARD)
 
     def test_115_4_cannot_target_hexproof(self):
-        creature(self.game, self.p1, name="Sneaky",
-                 keywords={"hexproof"})
-        spell = self._sorcery(self.p0, Destroy(),
-                              targets=[TargetSpec(what="creature")])
+        creature(self.game, self.p1, name="Sneaky", keywords={"hexproof"})
+        spell = self._sorcery(self.p0, Destroy(), targets=[TargetSpec(what="creature")])
         give_mana(self.p0, C=1)
         # only potential target is hexproof -> cast fails for want of
         # a legal target (rule 601.2c)
         self.assertFalse(self.game.cast_spell(self.p0, spell))
 
     def test_115_4_own_hexproof_targetable(self):
-        mine = creature(self.game, self.p0, name="Mine",
-                        keywords={"hexproof"})
-        spell = self._sorcery(self.p0, Destroy(),
-                              targets=[TargetSpec(what="creature")])
+        creature(self.game, self.p0, name="Mine", keywords={"hexproof"})
+        spell = self._sorcery(self.p0, Destroy(), targets=[TargetSpec(what="creature")])
         give_mana(self.p0, C=1)
         self.assertTrue(self.game.cast_spell(self.p0, spell))
 
     def test_603_3b_apnap_trigger_order(self):
         """Both players' triggers: active player's go on the stack first,
-        so the nonactive player's resolve first (LIFO)."""
+        so the nonactive player's resolve first (LIFO).
+        """
         from ..abilities import TriggeredAbility, TriggerSpec
-        from ..events import Event, EventType
         from ..effects import GainLife
+        from ..events import Event, EventType
 
         order = []
 
@@ -110,34 +122,41 @@ class TestStack(unittest.TestCase):
 
         for player, tag in ((self.p0, "active"), (self.p1, "nonactive")):
             c = creature(self.game, player, name=f"w_{tag}")
-            c.base.abilities.append(TriggeredAbility(
-                trigger=TriggerSpec(
-                    EventType.BEGIN_STEP,
-                    condition=lambda g, s, e: e.data.get("step") == "test"),
-                effect=Probe(tag)))
+            c.base.abilities.append(
+                TriggeredAbility(
+                    trigger=TriggerSpec(
+                        EventType.BEGIN_STEP,
+                        condition=lambda g, s, e: e.data.get("step") == "test",
+                    ),
+                    effect=Probe(tag),
+                ),
+            )
         self.game.bump()
-        self.game._queue_triggers(Event(EventType.BEGIN_STEP,
-                                        {"step": "test"}))
+        self.game._queue_triggers(Event(EventType.BEGIN_STEP, {"step": "test"}))
         settle(self.game)
         self.assertEqual(order, ["nonactive", "active"])
 
     def test_903_8_commander_tax(self):
-        from ..manasys import parse_cost
-        cmd = card_in_hand(self.game, self.p0, name="General",
-                           mana_cost="{2}", types=("Creature",),
-                           power=2, toughness=2)
+
+        cmd = card_in_hand(
+            self.game,
+            self.p0,
+            name="General",
+            mana_cost="{2}",
+            types=("Creature",),
+            power=2,
+            toughness=2,
+        )
         cmd.commander = True
         self.p0.hand.remove(cmd)
         cmd.zone = Zone.COMMAND
         self.p0.command.append(cmd)
         self.p0.commander_obj = cmd
-        self.p0.commander_casts = 1                # one previous cast
+        self.p0.commander_casts = 1  # one previous cast
         give_mana(self.p0, C=2)
-        self.assertFalse(self.game.cast_spell(self.p0, cmd,
-                                              from_command=True))
-        give_mana(self.p0, C=2)                    # now 4 total
-        self.assertTrue(self.game.cast_spell(self.p0, cmd,
-                                             from_command=True))
+        self.assertFalse(self.game.cast_spell(self.p0, cmd, from_command=True))
+        give_mana(self.p0, C=2)  # now 4 total
+        self.assertTrue(self.game.cast_spell(self.p0, cmd, from_command=True))
         self.assertEqual(self.p0.commander_casts, 2)
 
     def test_903_9_commander_to_command_zone(self):

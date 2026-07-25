@@ -28,18 +28,12 @@ ROOT = Path(__file__).resolve().parent.parent
 
 MC_NS = "urn:stklug84:MagicCardsOntology:2026-02-27#"
 
-PREFIX_RE = re.compile(
-    r"^\s*PREFIX\s+(\w*):\s*<([^>]*)>", re.IGNORECASE | re.MULTILINE
-)
+PREFIX_RE = re.compile(r"^\s*PREFIX\s+(\w*):\s*<([^>]*)>", re.IGNORECASE | re.MULTILINE)
 MC_TERM_RE = re.compile(r"\bmc:([A-Za-z_][\w-]*)")
 
 
 def rq_files() -> list[Path]:
-    files = sorted(
-        p
-        for p in ROOT.rglob("*.rq")
-        if ".git" not in p.parts
-    )
+    files = sorted(p for p in ROOT.rglob("*.rq") if ".git" not in p.parts)
     if not files:
         print("ERROR: no .rq files found", file=sys.stderr)
         sys.exit(1)
@@ -58,7 +52,7 @@ def load_known_terms() -> set[str]:
         for node in triple:
             text = str(node)
             if text.startswith(MC_NS):
-                terms.add(text[len(MC_NS):])
+                terms.add(text[len(MC_NS) :])
     return terms
 
 
@@ -85,13 +79,11 @@ def main() -> int:
         if uses_mc and prefixes.get("mc") != MC_NS:
             errors.append(
                 f"{rel}: uses mc: terms but PREFIX mc: is "
-                f"{prefixes.get('mc')!r}, expected {MC_NS!r}"
+                f"{prefixes.get('mc')!r}, expected {MC_NS!r}",
             )
 
         # --- 3. terms exist ------------------------------------------------
-        unknown = sorted(
-            {t for t in MC_TERM_RE.findall(text) if t not in known_terms}
-        )
+        unknown = sorted({t for t in MC_TERM_RE.findall(text) if t not in known_terms})
         if unknown:
             errors.append(f"{rel}: unknown mc: term(s): {', '.join(unknown)}")
 

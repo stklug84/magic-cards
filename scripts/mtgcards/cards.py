@@ -12,19 +12,46 @@ from __future__ import annotations
 
 import re
 from dataclasses import dataclass, field
+from typing import Any
 
 COLORS = "WUBRG"
 
 KEYWORDS = (
-    "flying", "trample", "deathtouch", "lifelink", "vigilance", "haste",
-    "menace", "reach", "defender", "first strike", "double strike",
-    "hexproof", "indestructible", "wither", "infect", "myriad", "populate",
-    "proliferate", "flash",
+    "flying",
+    "trample",
+    "deathtouch",
+    "lifelink",
+    "vigilance",
+    "haste",
+    "menace",
+    "reach",
+    "defender",
+    "first strike",
+    "double strike",
+    "hexproof",
+    "indestructible",
+    "wither",
+    "infect",
+    "myriad",
+    "populate",
+    "proliferate",
+    "flash",
 )
 
 NUM_WORDS = {
-    "a": 1, "an": 1, "one": 1, "two": 2, "three": 3, "four": 4, "five": 5,
-    "six": 6, "seven": 7, "eight": 8, "nine": 9, "ten": 10, "x": 2,
+    "a": 1,
+    "an": 1,
+    "one": 1,
+    "two": 2,
+    "three": 3,
+    "four": 4,
+    "five": 5,
+    "six": 6,
+    "seven": 7,
+    "eight": 8,
+    "nine": 9,
+    "ten": 10,
+    "x": 2,
 }
 
 
@@ -33,7 +60,7 @@ class CardData:
     name: str
     mana_cost: str = ""
     mv: int = 0
-    types: set = field(default_factory=set)       # card types
+    types: set = field(default_factory=set)  # card types
     supertypes: set = field(default_factory=set)
     subtypes: set = field(default_factory=set)
     loyalty: int | None = None
@@ -43,7 +70,7 @@ class CardData:
     oracle: str = ""
     keywords: set = field(default_factory=set)
     behavior: dict = field(default_factory=dict)  # merged effect hooks
-    source: str = "unknown"                       # graph|custom|stub
+    source: str = "unknown"  # graph|custom|stub
 
     # ---- convenience -------------------------------------------------
     @property
@@ -74,7 +101,10 @@ def _num(word):
 
 
 BASIC_LAND_COLORS = {
-    "Plains": "W", "Island": "U", "Swamp": "B", "Mountain": "R",
+    "Plains": "W",
+    "Island": "U",
+    "Swamp": "B",
+    "Mountain": "R",
     "Forest": "G",
 }
 
@@ -87,7 +117,7 @@ def derive_from_oracle(card: CardData) -> None:
     """
     text = card.oracle or ""
     low = text.lower()
-    b = {}
+    b: dict[str, Any] = {}
 
     # ---- keywords (line-leading or comma-listed) ---------------------
     for kw in KEYWORDS:
@@ -106,14 +136,18 @@ def derive_from_oracle(card: CardData) -> None:
             b["land_colors"] = set(COLORS)
         else:
             # note: `low` is lowercased, so the symbol classes must be too
-            colors = {c.upper() for c in
-                      re.findall(r"add [^.\n]*?\{([wubrg])\}", low)}
-            colors |= {m.upper() for pair in re.findall(
-                r"\{([wubrg])\} or \{([wubrg])\}", low) for m in pair}
+            colors = {c.upper() for c in re.findall(r"add [^.\n]*?\{([wubrg])\}", low)}
+            colors |= {
+                m.upper()
+                for pair in re.findall(r"\{([wubrg])\} or \{([wubrg])\}", low)
+                for m in pair
+            }
             if colors:
                 b.setdefault("land_colors", set()).update(colors)
-        if "search your library for a basic land" in low \
-                or "search your library for a plains" in low:
+        if (
+            "search your library for a basic land" in low
+            or "search your library for a plains" in low
+        ):
             b["fetch_land"] = True
         if not b.get("land_colors") and not b.get("fetch_land"):
             b["land_colors"] = {"C"}
@@ -124,15 +158,19 @@ def derive_from_oracle(card: CardData) -> None:
         syms = re.findall(r"\{([cwubrg])\}", m.group(1))
         b["rock_mana"] = len(syms)
         b["rock_colors"] = {s.upper() for s in syms if s != "c"} or {"C"}
-    if not card.is_land and ("add one mana of any color" in low
-                             or "mana of any color" in low):
+    if not card.is_land and (
+        "add one mana of any color" in low or "mana of any color" in low
+    ):
         b.setdefault("rock_mana", 1)
         b["rock_colors"] = set(COLORS)
 
     # ---- ramp spells ----------------------------------------------------
-    if ("Sorcery" in card.types or "Instant" in card.types):
-        m = re.search(r"search your librar(?:y|ies) for (?:up to )?"
-                      r"(a|an|one|two|three)[^.]*land", low)
+    if "Sorcery" in card.types or "Instant" in card.types:
+        m = re.search(
+            r"search your librar(?:y|ies) for (?:up to )?"
+            r"(a|an|one|two|three)[^.]*land",
+            low,
+        )
         if m:
             b["ramp_lands"] = _num(m.group(1))
 
@@ -146,17 +184,25 @@ def derive_from_oracle(card: CardData) -> None:
         b["counterspell"] = True
 
     # ---- removal --------------------------------------------------------
-    if "Instant" in card.types or "Sorcery" in card.types \
-            or "Enchantment" in card.types:
-        m = re.search(r"(destroy|exile) target (creature|permanent|artifact"
-                      r"|enchantment|nonland permanent)", low)
+    if (
+        "Instant" in card.types
+        or "Sorcery" in card.types
+        or "Enchantment" in card.types
+    ):
+        m = re.search(
+            r"(destroy|exile) target (creature|permanent|artifact"
+            r"|enchantment|nonland permanent)",
+            low,
+        )
         if m and "all" not in low.split(m.group(0))[0][-20:]:
             b["removal"] = True
             b["removal_exile"] = m.group(1) == "exile"
             scope = m.group(2)
             b["removal_scope"] = {
-                "creature": "creature", "artifact": "art_ench",
-                "enchantment": "art_ench", "permanent": "any",
+                "creature": "creature",
+                "artifact": "art_ench",
+                "enchantment": "art_ench",
+                "permanent": "any",
                 "nonland permanent": "any",
             }.get(scope, "any")
 
@@ -169,12 +215,14 @@ def derive_from_oracle(card: CardData) -> None:
 
     # ---- token creation ----------------------------------------------------
     for m in re.finditer(
-            r"create (a|an|one|two|three|four|five|x|\d+)"
-            r"(?: tapped)?[^.]*?(\d+)/(\d+)[^.]*?"
-            r"((?:artifact )?)creature tokens?", low):
+        r"create (a|an|one|two|three|four|five|x|\d+)"
+        r"(?: tapped)?[^.]*?(\d+)/(\d+)[^.]*?"
+        r"((?:artifact )?)creature tokens?",
+        low,
+    ):
         n, p, t = _num(m.group(1)), int(m.group(2)), int(m.group(3))
         art = "artifact" in (m.group(4) or "") or "thopter" in m.group(0)
-        trig = text[:m.start()].lower()
+        trig = text[: m.start()].lower()
         entry = (n, p, t, art)
         if "when" in trig[-120:] and "enters" in trig[-120:]:
             b.setdefault("etb_tokens", entry)
@@ -191,17 +239,21 @@ def derive_from_oracle(card: CardData) -> None:
             b.setdefault("treasures_per_turn", 1)
 
     # ---- anthems ---------------------------------------------------------
-    m = re.search(r"(creatures?|creature tokens?) you control get "
-                  r"\+(\d+)/\+(\d+)", low)
+    m = re.search(
+        r"(creatures?|creature tokens?) you control get "
+        r"\+(\d+)/\+(\d+)",
+        low,
+    )
     if m and "Enchantment" in card.types:
-        b["anthem"] = {"boost": int(m.group(3)),
-                       "tokens_only": "token" in m.group(1),
-                       "art_only": "artifact creature" in low}
+        b["anthem"] = {
+            "boost": int(m.group(3)),
+            "tokens_only": "token" in m.group(1),
+            "art_only": "artifact creature" in low,
+        }
 
     # ---- counter sub-systems ----------------------------------------------
     if "proliferate" in low:
-        b["proliferate"] = low.count("proliferate twice") + 1 \
-            if "twice" in low else 1
+        b["proliferate"] = low.count("proliferate twice") + 1 if "twice" in low else 1
     if "populate" in low and "Creature" not in card.types:
         b.setdefault("populate_per_turn", 1)
     if "{e}" in low:
