@@ -41,7 +41,7 @@ packages ad hoc as listed above.
 | [`queries/`](./queries/) | Catalog of 71 reusable SPARQL 1.1 queries. See [`queries/README.md`](./queries/README.md) and [`queries/INDEX.md`](./queries/INDEX.md). |
 | [`strategies/`](./strategies/) | Commander decklists built from the collection plus a Monte-Carlo matchup simulator. See [`strategies/README.md`](./strategies/README.md). |
 | [`MagicSimulationAnnotations.ttl`](./MagicSimulationAnnotations.ttl) | Simulation annotations: behavior hooks (`:hasBehaviorHook`) and AI threat weights (`:threatWeight`) consumed by the simulator — house-authored opinion kept separate from generated card facts. |
-| [`scripts/`](./scripts/) | Generator and validation tooling, the shared card data layer (`mtgcards/`), the CR-grounded rules-engine matchup simulator (`mtgrules/`, built against `MagicCompRules-20260227.txt`), and the game visualization / TUI package (`mtgviz/`). |
+| [`scripts/`](./scripts/) | Generator and validation tooling, the shared card data layer (`mtgcards/`), the CR-grounded rules-engine matchup simulator (`mtgrules/`, built against `MagicCompRules-20260619.txt`), and the game visualization / TUI package (`mtgviz/`). |
 | [`collection.csv`](./collection.csv) | Source inventory of the physical collection; input to the generator. |
 | `MagicCompRules-*.txt` | Magic: The Gathering Comprehensive Rules text referenced by ontology comments. |
 
