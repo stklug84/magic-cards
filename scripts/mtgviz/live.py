@@ -13,18 +13,29 @@ import sys
 import threading
 import time
 
+from . import keys
 from .recorder import Recorder, VizWriter
 from .schema import HIGHLIGHTS
 from .tui import HAVE_RICH, ViewState, format_event, render_frame
-from . import keys
 
-LIVE_HELP = (" p/space:pause-resume  +/-:speed  h:pause-on-highlight "
-             " c:battlefield  q:quit ")
+LIVE_HELP = (
+    " p/space:pause-resume  +/-:speed  h:pause-on-highlight  c:battlefield  q:quit "
+)
 
 #: extra dwell time (seconds, at speed 1.0) after notable events
-_DWELL = {"phase": 0.5, "cast": 0.6, "resolve": 0.6, "attack": 0.5,
-          "block": 0.5, "counter": 1.0, "player_loses": 1.5, "dies": 0.4,
-          "damage": 0.3, "life": 0.2, "token": 0.2}
+_DWELL = {
+    "phase": 0.5,
+    "cast": 0.6,
+    "resolve": 0.6,
+    "attack": 0.5,
+    "block": 0.5,
+    "counter": 1.0,
+    "player_loses": 1.5,
+    "dies": 0.4,
+    "damage": 0.3,
+    "life": 0.2,
+    "token": 0.2,
+}
 
 
 class Throttle:
@@ -39,11 +50,11 @@ class Throttle:
     def wait(self, kind):
         self.gate.wait()
         if self.aborted:
-            raise _Abort()
+            raise _AbortError
         time.sleep(_DWELL.get(kind, 0.08) / self.speed)
 
 
-class _Abort(Exception):
+class _AbortError(Exception):
     pass
 
 
@@ -67,13 +78,19 @@ def watch_game(decks, db, seed, turn_cap=40, profiles=None, viz_path=None):
 
     def engine():
         try:
-            rec = run_game(decks, db, random.Random(seed),
-                           turn_cap=turn_cap, profiles=profiles,
-                           recorder=recorder)
+            rec = run_game(
+                decks,
+                db,
+                random.Random(seed),
+                turn_cap=turn_cap,
+                profiles=profiles,
+                recorder=recorder,
+            )
             outcome.update(rec)
-        except _Abort:
+        except _AbortError:
             pass
-        except Exception as exc:                     # pragma: no cover
+        # Deliberate catch-all: engine errors must reach the UI thread.
+        except Exception as exc:  # noqa: BLE001  # pragma: no cover
             outcome["error"] = repr(exc)
         finally:
             q.put({"t": "eof"})
@@ -84,9 +101,11 @@ def watch_game(decks, db, seed, turn_cap=40, profiles=None, viz_path=None):
         if HAVE_RICH and sys.stdin.isatty():
             _rich_loop(q, throttle, seed)
         else:
-            print("note: plain event stream ('rich' missing or not a "
-                  "TTY)", file=sys.stderr)
-            throttle.speed = 1000.0        # no pacing without a UI
+            print(
+                "note: plain event stream ('rich' missing or not a TTY)",
+                file=sys.stderr,
+            )
+            throttle.speed = 1000.0  # no pacing without a UI
             _plain_loop(q)
     finally:
         throttle.aborted = True
@@ -98,9 +117,11 @@ def watch_game(decks, db, seed, turn_cap=40, profiles=None, viz_path=None):
         if outcome.get("error"):
             sys.exit(f"engine error: {outcome['error']}")
         if outcome:
-            print(f"winner: {outcome.get('winner')} "
-                  f"({outcome.get('reason')}) after "
-                  f"{outcome.get('turns')} turns")
+            print(
+                f"winner: {outcome.get('winner')} "
+                f"({outcome.get('reason')}) after "
+                f"{outcome.get('turns')} turns",
+            )
 
 
 def _drain(q, view):
@@ -122,20 +143,26 @@ def _rich_loop(q, throttle, seed):
     from rich.live import Live
 
     from .tui import BF_FILTERS
+
     view = ViewState(meta={"seed": seed, "game": 1})
     pause_hl = True
     bf_filter = "all"
     done = False
 
     def status():
-        mode = f"live x{throttle.speed:g}" if throttle.gate.is_set() \
-            else "PAUSED"
+        mode = f"live x{throttle.speed:g}" if throttle.gate.is_set() else "PAUSED"
         return f" {mode} |{LIVE_HELP}"
 
     console = Console()
-    with keys.raw_terminal(), Live(render_frame(view, status()),
-                                   console=console, screen=True,
-                                   auto_refresh=False) as live:
+    with (
+        keys.raw_terminal(),
+        Live(
+            render_frame(view, status()),
+            console=console,
+            screen=True,
+            auto_refresh=False,
+        ) as live,
+    ):
         while True:
             done = _drain(q, view) or done
             view.cursor = len(view.records) - 1
@@ -143,12 +170,16 @@ def _rich_loop(q, throttle, seed):
                 tail = view.visible_events(n=1)
                 if tail and tail[-1]["kind"] in HIGHLIGHTS:
                     throttle.gate.clear()
-            live.update(render_frame(view, status(), bf_filter=bf_filter),
-                        refresh=True)
+            live.update(render_frame(view, status(), bf_filter=bf_filter), refresh=True)
             if done and q.empty():
-                live.update(render_frame(
-                    view, " game over - any key to exit ",
-                    bf_filter=bf_filter), refresh=True)
+                live.update(
+                    render_frame(
+                        view,
+                        " game over - any key to exit ",
+                        bf_filter=bf_filter,
+                    ),
+                    refresh=True,
+                )
                 keys.read_key(None)
                 return
             key = keys.read_key(0.1)
@@ -166,8 +197,9 @@ def _rich_loop(q, throttle, seed):
             elif key == "h":
                 pause_hl = not pause_hl
             elif key == "c":
-                bf_filter = BF_FILTERS[(BF_FILTERS.index(bf_filter) + 1)
-                                       % len(BF_FILTERS)]
+                bf_filter = BF_FILTERS[
+                    (BF_FILTERS.index(bf_filter) + 1) % len(BF_FILTERS)
+                ]
 
 
 def _plain_loop(q):

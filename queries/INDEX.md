@@ -1,6 +1,8 @@
 # Query Index
 
-Catalog of all SPARQL queries in this directory. Deck-scoped queries cover all decks in the dataset by default and carry a commented-out `VALUES ?deck` line to optionally restrict to specific deck(s); other parameters use editable `VALUES` clauses, so each query runs as-is.
+Catalog of all SPARQL queries in this directory. Deck-scoped queries cover all decks in the dataset by default
+and carry a commented-out `VALUES ?deck` line to optionally restrict to specific deck(s); other parameters use
+editable `VALUES` clauses, so each query runs as-is.
 
 See [`README.md`](README.md) for prefix conventions, running instructions, and the synergy-traversal pattern.
 

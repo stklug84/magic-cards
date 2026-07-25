@@ -16,9 +16,21 @@ import json
 from . import schema
 
 #: events after which the board snapshot is refreshed
-SNAPSHOT_AFTER = {"phase", "resolve", "land", "attack", "block", "dies",
-                  "token", "counter", "life", "player_loses", "fizzle",
-                  "cast", "activate"}
+SNAPSHOT_AFTER = {
+    "phase",
+    "resolve",
+    "land",
+    "attack",
+    "block",
+    "dies",
+    "token",
+    "counter",
+    "life",
+    "player_loses",
+    "fizzle",
+    "cast",
+    "activate",
+}
 
 
 class Recorder:
@@ -30,7 +42,7 @@ class Recorder:
     def attach(self, game):
         self.game = game
         self.seq += 1
-        self.sink(schema.snapshot(game, self.seq))     # opening hands
+        self.sink(schema.snapshot(game, self.seq))  # opening hands
 
     def on_event(self, kind, **kw):
         if self.game is None:
@@ -44,9 +56,14 @@ class Recorder:
     def finish(self, game, winner, reason):
         self.seq += 1
         self.sink(schema.snapshot(game, self.seq))
-        self.sink({"t": "end",
-                   "winner": winner.name if winner else "draw",
-                   "reason": reason, "turns": game.turn})
+        self.sink(
+            {
+                "t": "end",
+                "winner": winner.name if winner else "draw",
+                "reason": reason,
+                "turns": game.turn,
+            },
+        )
 
 
 class VizWriter:
@@ -56,11 +73,11 @@ class VizWriter:
         self.fh = open(path, "w", encoding="utf-8")
 
     def game_sink(self, game_no: int, seed: int):
-        self.fh.write(json.dumps({"t": "game", "game": game_no,
-                                  "seed": seed}) + "\n")
+        self.fh.write(json.dumps({"t": "game", "game": game_no, "seed": seed}) + "\n")
 
         def sink(rec):
             self.fh.write(json.dumps(rec, default=str) + "\n")
+
         return sink
 
     def close(self):

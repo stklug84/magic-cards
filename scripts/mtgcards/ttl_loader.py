@@ -29,16 +29,26 @@ _CI_RE = re.compile(r":hasColorIdentity :(\w+)")
 _PRODUCES_RE = re.compile(r":producesMana :(\w+)")
 _TAPPED_RE = re.compile(r':entersTapped "true"')
 _FETCHLAND_RE = re.compile(r':isFetchLand "true"')
-_ORACLE_RE = re.compile(
-    r':oracleText\s+(?:"""(.*?)"""|"([^"]*)")', re.S)
+_ORACLE_RE = re.compile(r':oracleText\s+(?:"""(.*?)"""|"([^"]*)")', re.DOTALL)
 
-COLOR_NAME = {"White": "W", "Blue": "U", "Black": "B", "Red": "R",
-              "Green": "G"}
+COLOR_NAME = {"White": "W", "Blue": "U", "Black": "B", "Red": "R", "Green": "G"}
 
 # CamelCase subtype individuals -> display words (only ones we act on)
-_SUBTYPE_WORDS = {"Plains", "Island", "Swamp", "Mountain", "Forest",
-                  "Spacecraft", "Saga", "Equipment", "Vehicle", "Gate",
-                  "Treasure", "Food", "Clue"}
+_SUBTYPE_WORDS = {
+    "Plains",
+    "Island",
+    "Swamp",
+    "Mountain",
+    "Forest",
+    "Spacecraft",
+    "Saga",
+    "Equipment",
+    "Vehicle",
+    "Gate",
+    "Treasure",
+    "Food",
+    "Clue",
+}
 
 
 def _blocks(text):
@@ -48,8 +58,11 @@ def _blocks(text):
             yield block
 
 
-def load_graph_cards(sets_dir: Path, extra_files: tuple = (),
-                     ind2name: dict | None = None) -> dict:
+def load_graph_cards(
+    sets_dir: Path,
+    extra_files: tuple = (),
+    ind2name: dict | None = None,
+) -> dict:
     """Return {card name: CardData} for every card in the graph.
 
     Reads every TTL file in *sets_dir* plus any *extra_files* (e.g. the
@@ -93,9 +106,9 @@ def load_graph_cards(sets_dir: Path, extra_files: tuple = (),
                 for word in _SUBTYPE_WORDS:
                     if s != word and s.startswith(word):
                         card.subtypes.add(word)
-            card.color_identity = {COLOR_NAME[c]
-                                   for c in _CI_RE.findall(block)
-                                   if c in COLOR_NAME}
+            card.color_identity = {
+                COLOR_NAME[c] for c in _CI_RE.findall(block) if c in COLOR_NAME
+            }
             om = _ORACLE_RE.search(block)
             if om:
                 card.oracle = om.group(1) or om.group(2) or ""
@@ -106,7 +119,8 @@ def load_graph_cards(sets_dir: Path, extra_files: tuple = (),
                 produced = _PRODUCES_RE.findall(block)
                 if produced:
                     card.behavior["land_colors"] = {
-                        COLOR_NAME.get(c, "C") for c in produced}
+                        COLOR_NAME.get(c, "C") for c in produced
+                    }
                 if _TAPPED_RE.search(block):
                     card.behavior["enters_tapped"] = True
                 if _FETCHLAND_RE.search(block):

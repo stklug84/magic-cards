@@ -19,7 +19,7 @@ from __future__ import annotations
 import sys
 from pathlib import Path
 
-from rdflib import Graph, RDF, URIRef
+from rdflib import RDF, Graph, URIRef
 from rdflib.namespace import OWL
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -33,11 +33,7 @@ REQUIRED_PREFIXES = {
 
 
 def ttl_files() -> list[Path]:
-    files = sorted(
-        p
-        for p in ROOT.rglob("*.ttl")
-        if ".git" not in p.parts
-    )
+    files = sorted(p for p in ROOT.rglob("*.ttl") if ".git" not in p.parts)
     if not files:
         print("ERROR: no .ttl files found", file=sys.stderr)
         sys.exit(1)
@@ -71,13 +67,13 @@ def main() -> int:
             actual = prefixes.get(prefix)
             if actual != expected_ns:
                 errors.append(
-                    f"{rel}: prefix '{prefix}:' is {actual!r}, expected {expected_ns!r}"
+                    f"{rel}: prefix '{prefix}:' is {actual!r}, want {expected_ns!r}",
                 )
 
         ontologies = list(graph.subjects(RDF.type, OWL.Ontology))
         if len(ontologies) != 1:
             errors.append(
-                f"{rel}: expected exactly 1 owl:Ontology declaration, found {len(ontologies)}"
+                f"{rel}: expected 1 owl:Ontology declaration, found {len(ontologies)}",
             )
         declared_ontologies.update(o for o in ontologies if isinstance(o, URIRef))
 

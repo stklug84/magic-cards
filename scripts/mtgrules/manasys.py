@@ -13,40 +13,57 @@ from dataclasses import dataclass, field
 from .cr import rule
 
 COLORS = "WUBRG"
-MANA_TYPES = "WUBRGC"     # rule 106.1b: five colors + colorless
+MANA_TYPES = "WUBRGC"  # rule 106.1b: five colors + colorless
 
 
 @rule("202.1", "107.4")
 @dataclass
 class Cost:
     """A parsed mana cost: generic, colored pips, hybrid options, X."""
+
     generic: int = 0
-    pips: dict = field(default_factory=dict)     # color -> count
-    hybrid: list = field(default_factory=list)   # list of frozenset(colors)
-    colorless: int = 0                           # {C} pips, rule 107.4c
-    x_count: int = 0                             # rule 107.3
+    pips: dict = field(default_factory=dict)  # color -> count
+    hybrid: list = field(default_factory=list)  # list of frozenset(colors)
+    colorless: int = 0  # {C} pips, rule 107.4c
+    x_count: int = 0  # rule 107.3
 
     @property
     def mv(self) -> int:
         """Rule 202.3: mana value (X counts as 0 elsewhere than the stack)."""
-        return (self.generic + sum(self.pips.values()) + len(self.hybrid)
-                + self.colorless)
+        return (
+            self.generic + sum(self.pips.values()) + len(self.hybrid) + self.colorless
+        )
 
-    def with_extra_generic(self, n: int) -> "Cost":
-        c = Cost(self.generic + n, dict(self.pips), list(self.hybrid),
-                 self.colorless, self.x_count)
-        return c
+    def with_extra_generic(self, n: int) -> Cost:
+        return Cost(
+            self.generic + n,
+            dict(self.pips),
+            list(self.hybrid),
+            self.colorless,
+            self.x_count,
+        )
 
-    def reduced(self, n: int) -> "Cost":
+    def reduced(self, n: int) -> Cost:
         """Cost reduction (rule 601.2f): only the generic part shrinks."""
-        return Cost(max(0, self.generic - n), dict(self.pips),
-                    list(self.hybrid), self.colorless, self.x_count)
+        return Cost(
+            max(0, self.generic - n),
+            dict(self.pips),
+            list(self.hybrid),
+            self.colorless,
+            self.x_count,
+        )
 
-    def with_x(self, x: int) -> "Cost":
+    def with_x(self, x: int) -> Cost:
         """Rule 601.2b/107.3: chosen X becomes generic mana in the total
-        cost."""
-        return Cost(self.generic + x * self.x_count, dict(self.pips),
-                    list(self.hybrid), self.colorless, 0)
+        cost.
+        """
+        return Cost(
+            self.generic + x * self.x_count,
+            dict(self.pips),
+            list(self.hybrid),
+            self.colorless,
+            0,
+        )
 
 
 @rule("202.1")
@@ -59,13 +76,13 @@ def parse_cost(cost_str: str) -> Cost:
             c.x_count += 1
         elif sym == "C":
             c.colorless += 1
-        elif sym == "S":                      # snow, rule 107.4g: any mana
+        elif sym == "S":  # snow, rule 107.4g: any mana
             c.generic += 1
         elif "/" in sym:
             opts = frozenset(s for s in sym.split("/") if s in COLORS)
             if opts:
                 c.hybrid.append(opts)
-            else:                             # {2/W} style, pay generic side
+            else:  # {2/W} style, pay generic side
                 c.generic += 1
         elif sym in COLORS:
             c.pips[sym] = c.pips.get(sym, 0) + 1
@@ -77,7 +94,7 @@ class ManaPool:
     """A player's mana pool: counts per mana type."""
 
     def __init__(self):
-        self.mana: dict[str, int] = {t: 0 for t in MANA_TYPES}
+        self.mana: dict[str, int] = dict.fromkeys(MANA_TYPES, 0)
 
     def add(self, mana_type: str, n: int = 1):
         self.mana[mana_type] = self.mana.get(mana_type, 0) + n
@@ -99,7 +116,8 @@ class ManaPool:
 
     def _solve(self, cost: Cost, commit: bool) -> bool:
         """Exact payment: colored pips first, then hybrid (scarcity-first),
-        then {C}, then generic from the most plentiful types."""
+        then {C}, then generic from the most plentiful types.
+        """
         pool = dict(self.mana)
         for color, n in cost.pips.items():
             if pool.get(color, 0) < n:

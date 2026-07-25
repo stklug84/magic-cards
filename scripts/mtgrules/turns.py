@@ -27,7 +27,7 @@ class TurnRunner:
         self._upkeep_step()
         self._enter("draw")
         if game.turn > 1 or len(game.players) > 2:
-            self._draw_step()      # rule 103.8a: first player skips draw
+            self._draw_step()  # rule 103.8a: first player skips draw
         else:
             self._draw_step_skip_first()
         self._enter("main1")
@@ -47,8 +47,7 @@ class TurnRunner:
     def _enter(self, phase: str):
         game = self.game
         game.phase = phase
-        game.log("phase", phase=phase, turn=game.turn,
-                 who=game.active_player.name)
+        game.log("phase", phase=phase, turn=game.turn, who=game.active_player.name)
 
     def _end_of_phase(self):
         # rule 500.4: mana pools empty at end of each step/phase; we empty
@@ -70,9 +69,12 @@ class TurnRunner:
     @rule("503.1")
     def _upkeep_step(self):
         game = self.game
-        game._queue_triggers(Event(EventType.BEGIN_STEP,
-                                   {"step": "upkeep",
-                                    "player": game.active_player}))
+        game._queue_triggers(
+            Event(
+                EventType.BEGIN_STEP,
+                {"step": "upkeep", "player": game.active_player},
+            ),
+        )
         game.priority_loop()
         self._pools()
 
@@ -97,9 +99,9 @@ class TurnRunner:
     @rule("513.1")
     def _end_step(self):
         game = self.game
-        game._queue_triggers(Event(EventType.BEGIN_STEP,
-                                   {"step": "end",
-                                    "player": game.active_player}))
+        game._queue_triggers(
+            Event(EventType.BEGIN_STEP, {"step": "end", "player": game.active_player}),
+        )
         game.priority_loop()
         self._pools()
 

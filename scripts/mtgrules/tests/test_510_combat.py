@@ -15,11 +15,12 @@ class TestCombat(unittest.TestCase):
 
     def _fight(self):
         phase = CombatPhase(self.game)
-        phase.attackers = [o for o in self.p0.battlefield
-                           if o.attacking is not None]
-        fs = [a for a in phase._combatants()
-              if a.chars(self.game).keywords & {"first strike",
-                                                "double strike"}]
+        phase.attackers = [o for o in self.p0.battlefield if o.attacking is not None]
+        fs = [
+            a
+            for a in phase._combatants()
+            if a.chars(self.game).keywords & {"first strike", "double strike"}
+        ]
         if fs:
             phase._damage_step(first_strike=True)
             settle(self.game)
@@ -41,33 +42,42 @@ class TestCombat(unittest.TestCase):
         self._fight()
         self.assertEqual(a.zone, Zone.GRAVEYARD)
         self.assertEqual(b.zone, Zone.GRAVEYARD)
-        self.assertEqual(self.p1.life, 40)         # no damage through
+        self.assertEqual(self.p1.life, 40)  # no damage through
 
     def test_702_19_trample_excess_to_player(self):
-        a = creature(self.game, self.p0, power=6, toughness=6,
-                     keywords={"trample"})
+        a = creature(self.game, self.p0, power=6, toughness=6, keywords={"trample"})
         b = creature(self.game, self.p1, power=1, toughness=2)
         a.attacking = self.p1
         a.blocked_by = [b]
         b.blocking = [a]
         self._fight()
         self.assertEqual(b.zone, Zone.GRAVEYARD)
-        self.assertEqual(self.p1.life, 36)         # 6 - 2 lethal = 4 through
+        self.assertEqual(self.p1.life, 36)  # 6 - 2 lethal = 4 through
 
     def test_702_2b_deathtouch_trample_assigns_one(self):
-        a = creature(self.game, self.p0, power=6, toughness=6,
-                     keywords={"trample", "deathtouch"})
+        a = creature(
+            self.game,
+            self.p0,
+            power=6,
+            toughness=6,
+            keywords={"trample", "deathtouch"},
+        )
         b = creature(self.game, self.p1, power=1, toughness=4)
         a.attacking = self.p1
         a.blocked_by = [b]
         b.blocking = [a]
         self._fight()
-        self.assertEqual(b.zone, Zone.GRAVEYARD)   # 1 deathtouch = lethal
-        self.assertEqual(self.p1.life, 35)         # 5 tramples through
+        self.assertEqual(b.zone, Zone.GRAVEYARD)  # 1 deathtouch = lethal
+        self.assertEqual(self.p1.life, 35)  # 5 tramples through
 
     def test_510_5_first_strike_kills_before_normal_damage(self):
-        a = creature(self.game, self.p0, power=2, toughness=1,
-                     keywords={"first strike"})
+        a = creature(
+            self.game,
+            self.p0,
+            power=2,
+            toughness=1,
+            keywords={"first strike"},
+        )
         b = creature(self.game, self.p1, power=5, toughness=2)
         a.attacking = self.p1
         a.blocked_by = [b]
@@ -77,8 +87,7 @@ class TestCombat(unittest.TestCase):
         self.assertEqual(a.zone, Zone.BATTLEFIELD)  # never took damage
 
     def test_702_4_double_strike_hits_twice(self):
-        a = creature(self.game, self.p0, power=3,
-                     keywords={"double strike"})
+        a = creature(self.game, self.p0, power=3, keywords={"double strike"})
         a.attacking = self.p1
         self._fight()
         self.assertEqual(self.p1.life, 34)
@@ -95,13 +104,11 @@ class TestCombat(unittest.TestCase):
     def test_302_6_summoning_sickness(self):
         a = creature(self.game, self.p0, entered_this_turn=True)
         self.assertFalse(can_attack(self.game, a))
-        h = creature(self.game, self.p0, entered_this_turn=True,
-                     keywords={"haste"})
+        h = creature(self.game, self.p0, entered_this_turn=True, keywords={"haste"})
         self.assertTrue(can_attack(self.game, h))
 
     def test_702_80_wither_damage_as_counters(self):
-        a = creature(self.game, self.p0, power=2, toughness=2,
-                     keywords={"wither"})
+        a = creature(self.game, self.p0, power=2, toughness=2, keywords={"wither"})
         b = creature(self.game, self.p1, power=1, toughness=4)
         a.attacking = self.p1
         a.blocked_by = [b]

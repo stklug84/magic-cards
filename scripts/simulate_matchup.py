@@ -33,7 +33,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from mtgrules.cli import main  # noqa: E402
+from mtgrules.cli import main
 
 if __name__ == "__main__":
     main()

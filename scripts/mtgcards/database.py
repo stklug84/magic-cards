@@ -17,6 +17,7 @@ from .behaviors import BEHAVIOR_KEYS, apply_behaviors, load_annotations
 from .cards import CardData, derive_from_oracle
 from .ttl_loader import load_graph_cards
 
+
 def _card_from_json(name, entry, source):
     card = CardData(name=name, source=source)
     card.mana_cost = entry.get("mana_cost", "")
@@ -27,14 +28,23 @@ def _card_from_json(name, entry, source):
     card.oracle = entry.get("oracle", "")
     card.color_identity = set(entry.get("color_identity", []))
     from .mana import parse_cost
+
     card.mv = parse_cost(card.mana_cost).mv
     for k, v in entry.get("behavior", {}).items():
         if k not in BEHAVIOR_KEYS:
-            raise ValueError(
+            msg = (
                 f"custom card {name!r}: unknown behavior key {k!r} "
-                f"(see behaviors.BEHAVIOR_KEYS)")
-        card.behavior[k] = tuple(v) if isinstance(v, list) and k in (
-            "etb_tokens", "death_tokens", "burst_tokens") else v
+                f"(see behaviors.BEHAVIOR_KEYS)"
+            )
+            raise ValueError(
+                msg,
+            )
+        card.behavior[k] = (
+            tuple(v)
+            if isinstance(v, list)
+            and k in ("etb_tokens", "death_tokens", "burst_tokens")
+            else v
+        )
     return card
 
 
@@ -47,8 +57,7 @@ class CardDatabase:
         if sets_dir.is_dir():
             # out-of-collection cards referenced by deck graphs
             external = Path(repo_root) / "MagicExternalCards.ttl"
-            self.index.update(
-                load_graph_cards(sets_dir, (external,), ind2name))
+            self.index.update(load_graph_cards(sets_dir, (external,), ind2name))
             # simulation annotations (behavior hooks, threat weights)
             hooks_by_name = load_annotations(Path(repo_root), ind2name)
         # custom layer (opt-in, overrides the graph)
@@ -71,11 +80,16 @@ class CardDatabase:
     def get(self, name: str) -> CardData:
         card = self.index.get(name)
         if card is None and " // " in name:
-            card = self.index.get(name.split(" // ")[0])
+            card = self.index.get(name.split(" // ", maxsplit=1)[0])
         if card is None:
             # unknown card: inert stub so arbitrary decks never crash
-            card = CardData(name=name, mana_cost="{3}", mv=3,
-                            types={"Sorcery"}, source="stub")
+            card = CardData(
+                name=name,
+                mana_cost="{3}",
+                mv=3,
+                types={"Sorcery"},
+                source="stub",
+            )
             self.index[name] = card
             self.stubbed.append(name)
         return card

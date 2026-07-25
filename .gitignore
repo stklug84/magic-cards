@@ -12,9 +12,11 @@
 .vscode/
 *.code-workspace
 
-# ignore Python bytecode caches
+# ignore Python bytecode and tool caches
 __pycache__/
 *.pyc
+.mypy_cache/
+.ruff_cache/
 
 # ignore any structured list files
 *.csv
