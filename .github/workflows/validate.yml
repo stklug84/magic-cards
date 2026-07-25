@@ -44,7 +44,7 @@ jobs:
   # *.ttl in the repo (root ontologies, decks/, sets/) and every query
   # under queries/. See the header comment for why owl-files is empty.
   rdf:
-    uses: stklug84/github-workflows/.github/workflows/rdf-validate.yml@v1.18.0
+    uses: stklug84/github-workflows/.github/workflows/rdf-validate.yml@v1.20.0
     with:
       turtle-glob: "**/*.ttl"
       sparql-glob: "queries/**/*.rq"

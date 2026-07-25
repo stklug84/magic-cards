@@ -83,7 +83,7 @@ jobs:
   # strictness is governed there (mypy-strict 'false'), so the job stays
   # green while the strictness roadmap is worked through.
   python:
-    uses: stklug84/github-workflows/.github/workflows/python-validate.yml@v1.18.0
+    uses: stklug84/github-workflows/.github/workflows/python-validate.yml@v1.20.0
     with:
       paths: "scripts"
       config: "pyproject.toml"
