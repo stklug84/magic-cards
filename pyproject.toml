@@ -79,6 +79,14 @@ warn_redundant_casts = true
 warn_unused_ignores = true
 warn_unreachable = false
 
+# rich is an OPTIONAL dependency of mtgviz/tui.py (guarded by
+# try/except ImportError with a HAVE_RICH fallback). GitHub runners
+# happen to preinstall it; this override keeps mypy deterministic on
+# machines without it.
+[[tool.mypy.overrides]]
+module = "rich.*"
+ignore_missing_imports = true
+
 [tool.bandit]
 # B311: the random module drives game simulation and deck shuffling, not
 # cryptography. Mirrors the permanent ruff S311 ignore.

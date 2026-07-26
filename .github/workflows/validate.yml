@@ -7,7 +7,8 @@
 # comment: |
 #   Validates the MTG knowledge graph on pull requests against main:
 #     - rdf               : Turtle syntax (Jena riot) + SPARQL syntax
-#                           (rdflib) via the reusable stklug84/
+#                           (rdflib) + OWL consistency/coherence (ROBOT
+#                           reason, HermiT) via the reusable stklug84/
 #                           github-workflows rdf-validate workflow
 #     - ttl-lint          : repo conventions and imports (validate_ttl.py)
 #     - sparql-lint       : prefixes and term usage (validate_sparql.py)
@@ -15,17 +16,18 @@
 #     - simulator-tests   : rules engine + viz unit tests and a 3-game
 #                           smoke matchup
 #
-#   OWL reasoning (the rdf workflow's `owl` job) is disabled: `owl-files`
-#   is empty, so the job auto-skips. Local ROBOT 1.9.8 / HermiT results
-#   (2026-07-25):
-#     - MagicCardsOntology.ttl: logically INCONSISTENT — tracked in
-#       docs/python-strictness-roadmap.md (follow-up section), not fixed
-#       here.
-#     - All other root TTLs (MagicCardCollection, MagicCardSynergies,
-#       MagicCardIndividuals, MagicExternalCards,
-#       MagicSimulationAnnotations): owl:imports the ontology by a urn:
-#       IRI that ROBOT cannot resolve without a catalog — reasoning them
-#       standalone fails at load time.
+#   OWL reasoning (the rdf workflow's `owl` job) reasons two roots, each
+#   over its full owl:imports closure resolved through catalog-v001.xml
+#   (the graph imports by urn: IRIs, which ROBOT cannot dereference):
+#     - MagicCardsOntology.ttl      : TBox + set/keyword/subtype
+#                                     individuals (~2 min with HermiT)
+#     - MagicCardIndividuals.ttl    : + all per-set instance graphs under
+#                                     sets/ (~8 min with HermiT)
+#   `robot reason` certifies logical consistency and coherence (no
+#   unsatisfiable classes). Note: `robot explain` cannot be used on this
+#   graph as-is — xsd:date is outside the OWL 2 datatype map and HermiT's
+#   explanation code path rejects it (reasoning itself is unaffected);
+#   strip date literals first when debugging a future inconsistency.
 # ---
 name: Validate knowledge graph
 
@@ -42,12 +44,15 @@ permissions:
 jobs:
   # Turtle syntax (riot --validate) + SPARQL grammar (rdflib) for every
   # *.ttl in the repo (root ontologies, decks/, sets/) and every query
-  # under queries/. See the header comment for why owl-files is empty.
+  # under queries/, plus OWL reasoning over the ontology and the full
+  # per-set instance-graph closure (see the header comment).
   rdf:
-    uses: stklug84/github-workflows/.github/workflows/rdf-validate.yml@v1.20.0
+    uses: stklug84/github-workflows/.github/workflows/rdf-validate.yml@v1.21.0
     with:
       turtle-glob: "**/*.ttl"
       sparql-glob: "queries/**/*.rq"
+      owl-files: "MagicCardsOntology.ttl MagicCardIndividuals.ttl"
+      owl-catalog: "catalog-v001.xml"
 
   ttl-lint:
     name: TTL conventions and imports (rdflib)

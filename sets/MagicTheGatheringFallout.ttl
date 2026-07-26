@@ -650,7 +650,6 @@ III — Return two cards exiled with this Saga to the battlefield under their ow
     :manaValue "3"^^xsd:nonNegativeInteger ;
     :hasSuperType :Legendary ;
     :hasCardType :Creature ;
-    :hasCardType :Instant ;
     :hasSubType :Human ;
     :hasSubType :Scientist ;
     :hasSubType :Adventure ;

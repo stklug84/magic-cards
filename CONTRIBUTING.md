@@ -65,6 +65,33 @@ python3 scripts/validate_sparql.py
 python3 scripts/check_consistency.py
 ```
 
+OWL reasoning (CI runs this via the `rdf / owl (robot reason)` check;
+HermiT needs ~2 min for the ontology and ~8 min for the full per-set
+closure):
+
+```sh
+curl -fsSL -o /tmp/robot.jar \
+  https://github.com/ontodev/robot/releases/download/v1.9.8/robot.jar
+java -jar /tmp/robot.jar reason --reasoner hermit \
+  --catalog catalog-v001.xml --input MagicCardsOntology.ttl --output /tmp/r.owl
+java -jar /tmp/robot.jar reason --reasoner hermit \
+  --catalog catalog-v001.xml --input MagicCardIndividuals.ttl --output /tmp/r.owl
+```
+
+`catalog-v001.xml` maps the graph's `urn:` ontology IRIs to local files
+(ROBOT cannot dereference them). Regenerate it after adding, removing,
+or renaming any ontology file — the `owl` CI job fails on unresolvable
+imports when the catalog is stale:
+
+```sh
+python3 scripts/generate_catalog.py
+```
+
+Note for debugging a future inconsistency: `robot explain` rejects this
+graph because `xsd:date` is outside the OWL 2 datatype map (plain
+`reason` is unaffected). Strip `^^xsd:date` literals into strings on a
+scratch copy first, then explain that copy.
+
 Simulator tests and smoke matchup (must stay green after every change to
 `scripts/`):
 
@@ -151,6 +178,7 @@ this repo cannot use) with this repo's required status checks:
           { "context": "python / bandit (security)" },
           { "context": "rdf / turtle (riot --validate)" },
           { "context": "rdf / sparql (rdflib parse)" },
+          { "context": "rdf / owl (robot reason)" },
           { "context": "TTL conventions and imports (rdflib)" },
           { "context": "SPARQL syntax, prefixes, and terms" },
           { "context": "Cross-file graph consistency" },
@@ -162,10 +190,6 @@ this repo cannot use) with this repo's required status checks:
   "bypass_actors": []
 }
 ```
-
-The `rdf / owl (robot reason)` check is not required while `owl-files`
-is empty (see the `validate.yml` header comment and the roadmap); add it
-once `MagicCardsOntology.ttl` reasons cleanly.
 
 Apply with:
 
