@@ -34,6 +34,12 @@ from __future__ import annotations
 import json
 import re
 from pathlib import Path
+from typing import TYPE_CHECKING, Any
+
+if TYPE_CHECKING:
+    from collections.abc import Mapping
+
+    from mtgcards.cards import CardData
 
 BEHAVIOR_KEYS = {
     "rock_mana",
@@ -112,14 +118,18 @@ _THREAT_RE = re.compile(r':threatWeight "(\d+)"')
 _HOOK_RE = re.compile(r':behaviorKey "([^"]+)" ; :behaviorValue "((?:[^"\\]|\\.)*)"')
 
 
-def _decode(key: str, raw: str):
+def _decode(key: str, raw: str) -> object:
+    """Decode one :behaviorValue JSON literal (tuple keys become tuples)."""
     value = json.loads(raw.replace('\\"', '"').replace("\\\\", "\\"))
     if key in _TUPLE_KEYS and isinstance(value, list):
         return tuple(value)
     return value
 
 
-def load_annotations(repo_root: Path, ind2name: dict[str, str]) -> dict:
+def load_annotations(
+    repo_root: str | Path,
+    ind2name: Mapping[str, str],
+) -> dict[str, dict[str, Any]]:
     """Parse MagicSimulationAnnotations.ttl -> {card name: behavior dict}.
 
     *ind2name* maps card individual local names (as produced by
@@ -128,12 +138,12 @@ def load_annotations(repo_root: Path, ind2name: dict[str, str]) -> dict:
     graph and the card graphs consistent.
     """
     path = Path(repo_root) / ANNOTATIONS_FILE
-    hooks_by_name: dict[str, dict] = {}
+    hooks_by_name: dict[str, dict[str, Any]] = {}
     if not path.exists():
         return hooks_by_name
     text = path.read_text(encoding="utf-8")
-    for block in re.split(r"\n\s*\n", text):
-        block = block.strip()
+    for raw_block in re.split(r"\n\s*\n", text):
+        block = raw_block.strip()
         if not block.startswith(":") or "owl:Ontology" in block:
             continue
         m = re.match(r":(\w+)", block)
@@ -166,7 +176,10 @@ def load_annotations(repo_root: Path, ind2name: dict[str, str]) -> dict:
     return hooks_by_name
 
 
-def apply_behaviors(card, hooks_by_name: dict) -> None:
+def apply_behaviors(
+    card: CardData,
+    hooks_by_name: Mapping[str, dict[str, Any]],
+) -> None:
     """Merge graph-authored hooks over parser-derived behavior."""
     hooks = hooks_by_name.get(card.name)
     if not hooks and " // " in card.name:

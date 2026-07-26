@@ -25,46 +25,8 @@ ignore = [
     "S311",  # PERMANENT: random module drives game simulation, not cryptography
     "PT009", # PERMANENT: test suites deliberately use stdlib unittest, not pytest
     "PT027", # PERMANENT: unittest assertRaises is the house test idiom
-    # --- TEMPORARY ignores: every entry is tracked in
-    # --- docs/python-strictness-roadmap.md and must be removed there. ------
-    "ANN001", # TEMPORARY (roadmap #1): annotate function arguments
-    "ANN003", # TEMPORARY (roadmap #1): annotate **kwargs
-    "ANN201", # TEMPORARY (roadmap #1): annotate public return types
-    "ANN202", # TEMPORARY (roadmap #1): annotate private return types
-    "ANN204", # TEMPORARY (roadmap #1): annotate special-method return types
-    "ANN205", # TEMPORARY (roadmap #1): annotate staticmethod return types
-    "D101",   # TEMPORARY (roadmap #2): document public classes
-    "D102",   # TEMPORARY (roadmap #2): document public methods
-    "D103",   # TEMPORARY (roadmap #2): document public functions
-    "D105",   # TEMPORARY (roadmap #2): document magic methods
-    "D107",   # TEMPORARY (roadmap #2): document __init__ methods
-    "D205",   # TEMPORARY (roadmap #2): blank line after docstring summary
-    "ARG001", # TEMPORARY (roadmap #3): unused function arguments (callback protocols)
-    "ARG002", # TEMPORARY (roadmap #3): unused method arguments (callback protocols)
-    "ARG005", # TEMPORARY (roadmap #3): unused lambda arguments (callback protocols)
-    "TID252", # TEMPORARY (roadmap #4): replace relative imports with absolute ones
-    "PLC0415", # TEMPORARY (roadmap #4): move imports to module top level
-    "E402",   # TEMPORARY (roadmap #4): imports after sys.path manipulation in entry scripts
-    "T201",   # TEMPORARY (roadmap #5): replace print with logging/CLI output layer
-    "CPY001", # TEMPORARY (roadmap #6): add copyright notices
-    "C901",   # TEMPORARY (roadmap #7): reduce function complexity
-    "PLR0911", # TEMPORARY (roadmap #7): too many return statements
-    "PLR0912", # TEMPORARY (roadmap #7): too many branches
-    "PLR0913", # TEMPORARY (roadmap #7): too many arguments
-    "PLR0915", # TEMPORARY (roadmap #7): too many statements
-    "PLR0917", # TEMPORARY (roadmap #7): too many positional arguments
-    "PLR2004", # TEMPORARY (roadmap #8): name magic values as constants
-    "SLF001", # TEMPORARY (roadmap #9): remove private-member access across modules
-    "PERF401", # TEMPORARY (roadmap #10): rewrite loops as comprehensions where clearer
-    "FBT001", # TEMPORARY (roadmap #11): boolean positional arguments
-    "FBT002", # TEMPORARY (roadmap #11): boolean default positional arguments
-    "PTH123", # TEMPORARY (roadmap #12): migrate open() to pathlib
-    "SIM115", # TEMPORARY (roadmap #12): use context managers for file handles
-    "PLW2901", # TEMPORARY (roadmap #13): stop overwriting loop variables
-    "S108",   # TEMPORARY (roadmap #14): parameterize hardcoded /tmp paths
-    "S310",   # TEMPORARY (roadmap #14): validate URL schemes in generator scripts
-    "PERF203", # TEMPORARY (roadmap #15): move try/except out of loop in check_consistency
-    "PLW0603", # TEMPORARY (roadmap #15): replace global singleton in mtgrules.cr
+    # --- PERMANENT: house style has no per-file copyright notices ---------
+    "CPY001", # PERMANENT: single-author personal repo; provenance is git history
 ]
 
 [tool.ruff.format]
@@ -73,10 +35,7 @@ quote-style = "double"
 [tool.mypy]
 python_version = "3.12"
 files = ["scripts"]
-# Non-strict for now — the strict migration is tracked in
-# docs/python-strictness-roadmap.md. Everything below already passes.
-warn_redundant_casts = true
-warn_unused_ignores = true
+strict = true
 warn_unreachable = false
 
 # rich is an OPTIONAL dependency of mtgviz/tui.py (guarded by
@@ -90,11 +49,5 @@ ignore_missing_imports = true
 [tool.bandit]
 # B311: the random module drives game simulation and deck shuffling, not
 # cryptography. Mirrors the permanent ruff S311 ignore.
-# B108: generate_individuals.py keeps its Scryfall response cache under a
-# fixed /tmp path; the script is a manually-run, single-user generator.
-# Mirrors the TEMPORARY ruff S108 ignore (roadmap #14).
-# B310: urllib.request.urlopen is only called with hardcoded https://
-# Scryfall API URLs in generate_individuals.py. Mirrors the TEMPORARY
-# ruff S310 ignore (roadmap #14).
-skips = ["B311", "B108", "B310"]
+skips = ["B311"]
 

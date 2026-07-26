@@ -19,19 +19,31 @@ Usage:
   python3 scripts/generate_individuals.py collection
 """
 
+from __future__ import annotations
+
 import csv
 import json
 import re
 import sys
+import tempfile
 import time
 import unicodedata
 import urllib.request
 from collections import defaultdict
+from dataclasses import dataclass, field
 from pathlib import Path
+from typing import Any, TypedDict
 
 ROOT = Path(__file__).resolve().parent.parent
-CACHE = Path("/tmp/scryfall_cache")
+# Interchange contract: build_vocab.py writes onto_vocab.json /
+# existing_cards.json and update_imports.py reads imports.json from the
+# platform temp dir (/tmp on the Linux CI runners, where TMPDIR is unset).
+TMP = Path(tempfile.gettempdir())
+CACHE = TMP / "scryfall_cache"
 CACHE.mkdir(exist_ok=True)
+VOCAB_JSON = TMP / "onto_vocab.json"
+EXISTING_JSON = TMP / "existing_cards.json"
+IMPORTS_JSON = TMP / "imports.json"
 API = "https://api.scryfall.com"
 UA = {
     "User-Agent": "stklug84-inventory-ttl-generator/1.0",
@@ -39,6 +51,12 @@ UA = {
 }
 TODAY = "2026-07-19"
 NS_DATE = "2026-07-19"
+
+#: A Scryfall card (or set / bulk-data) JSON object: heterogeneous,
+#: API-defined, consumed via .get() narrowing at each use site.
+ScryCard = dict[str, Any]
+#: (lowercase set code, collector number) identifying one printing.
+PrintKey = tuple[str, str]
 
 BASICS = {
     "Plains",
@@ -55,6 +73,7 @@ BASICS = {
     "Snow-Covered Wastes",
 }
 
+WUBRG = ("W", "U", "B", "R", "G")
 COLOR = {"W": "White", "U": "Blue", "B": "Black", "R": "Red", "G": "Green"}
 RARITY = {
     "common": "Common",
@@ -81,19 +100,82 @@ FORMATS = [
 ]
 LANG = {"English": "English", "German": "German"}
 
+
+class Printing(TypedDict):
+    """One unique printing aggregated over its collection.csv rows."""
+
+    name: str
+    set: str
+    num: str
+    language: str
+    count: int
+
+
+class RulingEntry(TypedDict):
+    """One WotC ruling as cached by the fetch step."""
+
+    date: str
+    text: str
+
+
+@dataclass
+class Notes:
+    """Anomalies collected while generating, reported at the end."""
+
+    #: new individual -> (source label, vocabulary class) for subtypes
+    #: missing from the ontology
+    subtypes: dict[str, tuple[str, str]] = field(default_factory=dict)
+    #: keywords without an ontology individual (emitted as TTL comments)
+    keywords: set[str] = field(default_factory=set)
+    #: printings skipped because the master file already models them
+    skipped: list[tuple[str, PrintKey]] = field(default_factory=list)
+    #: printings the Scryfall cache has no data for
+    missing: list[PrintKey] = field(default_factory=list)
+
+
+@dataclass
+class PrintingInfo:
+    """Per-printing context for one card block."""
+
+    set_ind: str
+    language: str
+    localized: ScryCard | None
+
+
+@dataclass
+class GenContext:
+    """Ontology vocabulary and shared lookup tables for block generation."""
+
+    vocab: dict[str, Any]
+    sub_by_label: dict[str, str]
+    kw_map: dict[str, tuple[str, str]]
+    rulings: dict[str, list[RulingEntry]]
+    notes: Notes
+
+
 # ---------------------------------------------------------------- helpers
 
 
-def http_json(url, data=None):
-    req = urllib.request.Request(
+def _https_request(url: str, data: bytes | None = None) -> urllib.request.Request:
+    """Build a Request for the URL, refusing any scheme other than https."""
+    if not url.startswith("https://"):
+        msg = f"refusing to fetch non-https URL: {url}"
+        raise ValueError(msg)
+    return urllib.request.Request(  # noqa: S310 - https enforced above  # nosec B310
         url,
         headers=UA,
-        data=json.dumps(data).encode() if data else None,
+        data=data,
     )
+
+
+def http_json(url: str, data: dict[str, Any] | None = None) -> dict[str, Any]:
+    """GET (or POST, when data is given) an https URL and decode the JSON."""
+    req = _https_request(url, json.dumps(data).encode() if data else None)
     if data:
         req.add_header("Content-Type", "application/json")
-    with urllib.request.urlopen(req, timeout=60) as r:
-        return json.loads(r.read().decode())
+    with urllib.request.urlopen(req, timeout=60) as r:  # noqa: S310 - https enforced by _https_request  # nosec B310
+        payload: dict[str, Any] = json.loads(r.read().decode())
+    return payload
 
 
 def pascal(name: str) -> str:
@@ -106,10 +188,12 @@ def pascal(name: str) -> str:
 
 
 def esc_str(s: str) -> str:
+    """Escape a value for a single-quoted Turtle string literal."""
     return s.replace("\\", "\\\\").replace('"', '\\"').replace("\n", "\\n")
 
 
 def esc_long(s: str) -> str:
+    """Escape a value for a triple-quoted Turtle string literal."""
     s = s.replace("\\", "\\\\").replace('"""', '\\"\\"\\"')
     if s.endswith('"'):
         s = s[:-1] + '\\"'
@@ -119,9 +203,11 @@ def esc_long(s: str) -> str:
 # ---------------------------------------------------------------- fetch
 
 
-def load_rows():
-    rows = list(csv.DictReader(open(ROOT / "collection.csv")))
-    printings = {}  # (set, num) -> row info
+def load_rows() -> dict[PrintKey, Printing]:
+    """Aggregate collection.csv rows into unique printings with counts."""
+    with (ROOT / "collection.csv").open(encoding="utf-8", newline="") as handle:
+        rows = list(csv.DictReader(handle))
+    printings: dict[PrintKey, Printing] = {}
     for r in rows:
         key = (r["Edition"].lower(), r["Collector Number"])
         if key not in printings:
@@ -138,15 +224,14 @@ def load_rows():
     return printings
 
 
-def cmd_fetch():
-    printings = load_rows()
-    keys = sorted(printings)
-    print(f"{len(printings)} unique printings")
-
+def _fetch_cards(keys: list[PrintKey]) -> dict[str, ScryCard]:
+    """Resolve every uncached printing via the batch collection endpoint."""
     cards_file = CACHE / "cards.json"
-    cards = json.loads(cards_file.read_text()) if cards_file.exists() else {}
+    cards: dict[str, ScryCard] = (
+        json.loads(cards_file.read_text()) if cards_file.exists() else {}
+    )
     todo = [k for k in keys if f"{k[0]}|{k[1]}" not in cards]
-    not_found = []
+    not_found: list[Any] = []
     for i in range(0, len(todo), 75):
         batch = todo[i : i + 75]
         idents = [{"set": s, "collector_number": n} for s, n in batch]
@@ -154,19 +239,24 @@ def cmd_fetch():
         not_found.extend(resp.get("not_found", []))
         for c in resp["data"]:
             cards[f"{c['set']}|{c['collector_number']}"] = c
-        print(
+        print(  # noqa: T201 - generator progress output
             f"  batch {i // 75 + 1}: {len(resp['data'])} found, "
             f"{len(resp.get('not_found', []))} missing",
         )
         cards_file.write_text(json.dumps(cards))
         time.sleep(0.15)
     if not_found:
-        print("NOT FOUND:", json.dumps(not_found, indent=2))
+        print("NOT FOUND:", json.dumps(not_found, indent=2))  # noqa: T201 - generator report output
+    return cards
 
-    # localized printings (non-English rows)
+
+def _fetch_localized(printings: dict[PrintKey, Printing]) -> None:
+    """Fetch the localized printing for every non-English collection row."""
     loc_file = CACHE / "localized.json"
-    localized = json.loads(loc_file.read_text()) if loc_file.exists() else {}
-    for k in keys:
+    localized: dict[str, ScryCard] = (
+        json.loads(loc_file.read_text()) if loc_file.exists() else {}
+    )
+    for k in sorted(printings):
         p = printings[k]
         if p["language"] == "English":
             continue
@@ -177,61 +267,85 @@ def cmd_fetch():
         try:
             localized[lid] = http_json(f"{API}/cards/{k[0]}/{k[1]}/{code}")
         except Exception as e:  # noqa: BLE001
-            print(f"  localized fetch failed for {lid}: {e}")
+            print(f"  localized fetch failed for {lid}: {e}")  # noqa: T201 - generator progress output
         time.sleep(0.15)
     loc_file.write_text(json.dumps(localized))
 
-    # set metadata
+
+def _fetch_sets(keys: list[PrintKey]) -> None:
+    """Fetch the set metadata for every collected set code."""
     sets_file = CACHE / "sets.json"
-    sets_meta = json.loads(sets_file.read_text()) if sets_file.exists() else {}
+    sets_meta: dict[str, ScryCard] = (
+        json.loads(sets_file.read_text()) if sets_file.exists() else {}
+    )
     for code in sorted({k[0] for k in keys}):
         if code not in sets_meta:
             sets_meta[code] = http_json(f"{API}/sets/{code}")
             time.sleep(0.1)
     sets_file.write_text(json.dumps(sets_meta))
 
-    # rulings: bulk file filtered to our oracle ids
+
+def _fetch_rulings(cards: dict[str, ScryCard]) -> None:
+    """Filter the Scryfall bulk rulings file down to our oracle ids (WotC only)."""
     rulings_file = CACHE / "rulings.json"
-    if not rulings_file.exists():
-        oracle_ids = set()
-        for c in cards.values():
-            oid = c.get("oracle_id") or (c.get("card_faces") or [{}])[0].get(
-                "oracle_id",
+    if rulings_file.exists():
+        return
+    oracle_ids = set()
+    for c in cards.values():
+        oid = c.get("oracle_id") or (c.get("card_faces") or [{}])[0].get(
+            "oracle_id",
+        )
+        if oid:
+            oracle_ids.add(oid)
+    bulk = http_json(f"{API}/bulk-data")
+    uri = next(b["download_uri"] for b in bulk["data"] if b["type"] == "rulings")
+    print("downloading bulk rulings ...")  # noqa: T201 - generator progress output
+    req = _https_request(uri)
+    with urllib.request.urlopen(req, timeout=300) as r:  # noqa: S310 - https enforced by _https_request  # nosec B310
+        allr = json.loads(r.read().decode())
+    mine = defaultdict(list)
+    for ru in allr:
+        if ru["oracle_id"] in oracle_ids and ru["source"] == "wotc":
+            mine[ru["oracle_id"]].append(
+                {"date": ru["published_at"], "text": ru["comment"]},
             )
-            if oid:
-                oracle_ids.add(oid)
-        bulk = http_json(f"{API}/bulk-data")
-        uri = next(b["download_uri"] for b in bulk["data"] if b["type"] == "rulings")
-        print("downloading bulk rulings ...")
-        req = urllib.request.Request(uri, headers=UA)
-        with urllib.request.urlopen(req, timeout=300) as r:
-            allr = json.loads(r.read().decode())
-        mine = defaultdict(list)
-        for ru in allr:
-            if ru["oracle_id"] in oracle_ids and ru["source"] == "wotc":
-                mine[ru["oracle_id"]].append(
-                    {"date": ru["published_at"], "text": ru["comment"]},
-                )
-        rulings_file.write_text(json.dumps(mine))
-        print(f"kept rulings for {len(mine)} cards")
-    print("fetch complete")
+    rulings_file.write_text(json.dumps(mine))
+    print(f"kept rulings for {len(mine)} cards")  # noqa: T201 - generator report output
+
+
+def cmd_fetch() -> None:
+    """Resolve every collection.csv printing via Scryfall into the cache."""
+    printings = load_rows()
+    keys = sorted(printings)
+    print(f"{len(printings)} unique printings")  # noqa: T201 - generator progress output
+    cards = _fetch_cards(keys)
+    _fetch_localized(printings)
+    _fetch_sets(keys)
+    _fetch_rulings(cards)
+    print("fetch complete")  # noqa: T201 - generator report output
 
 
 # ---------------------------------------------------------------- generate
 
 
 def norm_label(s: str) -> str:
+    """Normalize a label for lookups (straight apostrophe, lowercase)."""
     return s.replace("\u2019", "'").lower()
 
 
-def load_vocab():
-    v = json.load(open("/tmp/onto_vocab.json"))
+def load_vocab() -> tuple[dict[str, Any], dict[str, str], dict[str, tuple[str, str]]]:
+    """Load the build_vocab.py extract and derive the lookup tables.
+
+    Returns the raw vocabulary, the normalized-label -> SubType-individual
+    map and the keyword -> (property, individual) map.
+    """
+    v: dict[str, Any] = json.loads(VOCAB_JSON.read_text())
     labels = v["_labels"]
-    sub_by_label = {}
+    sub_by_label: dict[str, str] = {}
     for ind in v["SubType"]:
         sub_by_label[norm_label(labels.get(ind, ind))] = ind
         sub_by_label[norm_label(ind)] = ind
-    kw = {}
+    kw: dict[str, tuple[str, str]] = {}
     for cls, prop in (
         ("KeywordAbility", "hasKeywordAbility"),
         ("KeywordAction", "hasKeywordAction"),
@@ -259,7 +373,11 @@ TYPE_CLASS = {
 }
 
 
-def tokenize_subtypes(right, types, sub_by_label):
+def tokenize_subtypes(
+    right: str,
+    types: list[str],
+    sub_by_label: dict[str, str],
+) -> list[str]:
     """Greedy longest-match against known (multi-word) subtype labels."""
     right = right.strip()
     if not right:
@@ -267,7 +385,8 @@ def tokenize_subtypes(right, types, sub_by_label):
     if "Plane" in types:  # a plane's whole subtype line is one plane name
         return [right]
     words = right.split()
-    subs, i = [], 0
+    subs: list[str] = []
+    i = 0
     while i < len(words):
         for n in range(min(4, len(words) - i), 0, -1):
             cand = " ".join(words[i : i + n])
@@ -278,7 +397,12 @@ def tokenize_subtypes(right, types, sub_by_label):
     return subs
 
 
-def parse_type_line(tl, vocab, sub_by_label, layout=""):
+def parse_type_line(
+    tl: str,
+    vocab: dict[str, Any],
+    sub_by_label: dict[str, str],
+    layout: str = "",
+) -> tuple[list[str], list[str], list[str]]:
     """Parse a Scryfall type_line into (supertypes, card types, subtypes).
 
     Multi-face type lines ("A // B") are unioned, EXCEPT for the
@@ -291,18 +415,19 @@ def parse_type_line(tl, vocab, sub_by_label, layout=""):
     OWL-inconsistent: SpellCardConstraint forbids creature subtypes on
     instants/sorceries (CreatureTypes and SpellTypes are disjoint).
     """
-    supers, types, subs = [], [], []
+    supers: list[str] = []
+    types: list[str] = []
+    subs: list[str] = []
     for idx, part in enumerate(tl.split(" // ")):
         left, _, right = part.partition("\u2014")
         secondary_adventure_face = layout == "adventure" and idx > 0
         if not secondary_adventure_face:
-            words = left.split()
-            for w in words:
-                w = "Kindred" if w == "Tribal" else w
-                if w in vocab["SuperType"] and w not in supers:
-                    supers.append(w)
-                elif w in vocab["CardType"] and w not in types:
-                    types.append(w)
+            for w in left.split():
+                word = "Kindred" if w == "Tribal" else w
+                if word in vocab["SuperType"] and word not in supers:
+                    supers.append(word)
+                elif word in vocab["CardType"] and word not in types:
+                    types.append(word)
         for sub in tokenize_subtypes(right, types, sub_by_label):
             if sub not in subs:
                 subs.append(sub)
@@ -322,7 +447,7 @@ _TAPPED_RE = re.compile(r"enters (?:the battlefield )?tapped(?! unless)", re.IGN
 _FETCH_RE = re.compile(r"search your librar(?:y|ies) for [^.]*land", re.IGNORECASE)
 
 
-def mana_fact_lines(card) -> list:
+def mana_fact_lines(card: ScryCard) -> list[str]:
     """Turtle lines for :producesMana / :entersTapped / :isFetchLand.
 
     :producesMana comes from Scryfall's structured produced_mana field;
@@ -330,10 +455,11 @@ def mana_fact_lines(card) -> list:
     forms are omitted); :isFetchLand for sacrifice-to-search lands that do
     not produce mana themselves.
     """
-    lines = []
     produced = [s for s in card.get("produced_mana") or [] if s in PRODUCED_IND]
-    for sym in sorted(produced, key=PRODUCED_ORDER.index):
-        lines.append(f"    :producesMana :{PRODUCED_IND[sym]} ;")
+    lines = [
+        f"    :producesMana :{PRODUCED_IND[sym]} ;"
+        for sym in sorted(produced, key=PRODUCED_ORDER.index)
+    ]
     faces = card.get("card_faces") or [card]
     oracle = "\n".join(f.get("oracle_text", "") for f in faces)
     type_line = card.get("type_line") or faces[0].get("type_line", "")
@@ -345,135 +471,182 @@ def mana_fact_lines(card) -> list:
     return lines
 
 
-def card_block(ind, card, info, vocab, sub_by_label, kw_map, rulings, notes):
-    out = []
-    add = out.append
-    faces = card.get("card_faces") or [card]
-    front = faces[0]
-
-    add(f":{ind} rdf:type owl:NamedIndividual ,")
-    add("                  :Card ;")
-    add(f'    :cardName "{esc_str(card["name"])}" ;')
+def _identity_lines(ind: str, card: ScryCard, front: ScryCard) -> list[str]:
+    """Block opener: individual declaration, name, mana cost and value."""
+    out = [
+        f":{ind} rdf:type owl:NamedIndividual ,",
+        "                  :Card ;",
+        f'    :cardName "{esc_str(card["name"])}" ;',
+    ]
     mc = front.get("mana_cost") or card.get("mana_cost") or ""
     if mc:
-        add(f'    :manaCost "{esc_str(mc)}" ;')
+        out.append(f'    :manaCost "{esc_str(mc)}" ;')
     cmc = card.get("cmc", front.get("cmc", 0)) or 0
-    add(f'    :manaValue "{int(cmc)}"^^xsd:nonNegativeInteger ;')
+    out.append(f'    :manaValue "{int(cmc)}"^^xsd:nonNegativeInteger ;')
+    return out
 
+
+def _type_lines(card: ScryCard, front: ScryCard, ctx: GenContext) -> list[str]:
+    """Super/card/subtype triples; notes subtypes missing from the ontology."""
     supers, types, subs = parse_type_line(
         card.get("type_line") or front.get("type_line", ""),
-        vocab,
-        sub_by_label,
+        ctx.vocab,
+        ctx.sub_by_label,
         layout=card.get("layout", ""),
     )
-    for s in supers:
-        add(f"    :hasSuperType :{s} ;")
-    for t in types:
-        add(f"    :hasCardType :{t} ;")
+    out = [f"    :hasSuperType :{s} ;" for s in supers]
+    out.extend(f"    :hasCardType :{t} ;" for t in types)
     for sub in subs:
-        target = sub_by_label.get(norm_label(sub)) or sub_by_label.get(
+        target = ctx.sub_by_label.get(norm_label(sub)) or ctx.sub_by_label.get(
             norm_label(sub.replace("-", "")),
         )
         if target is None:
             target = pascal(sub)
             cls = TYPE_CLASS.get(types[0] if types else "Creature", "CreatureTypes")
-            notes["subtypes"].setdefault(target, (sub, cls))
-        add(f"    :hasSubType :{target} ;")
+            ctx.notes.subtypes.setdefault(target, (sub, cls))
+        out.append(f"    :hasSubType :{target} ;")
+    return out
 
-    add(f"    :hasRarity :{RARITY[card['rarity']]} ;")
 
+def _color_lines(card: ScryCard, faces: list[ScryCard]) -> list[str]:
+    """Rarity, color and color-identity triples (WUBRG order)."""
+    out = [f"    :hasRarity :{RARITY[card['rarity']]} ;"]
     colors = card.get("colors")
     if colors is None:
         colors = sorted({c for f in faces for c in f.get("colors", [])})
-    for c in ["W", "U", "B", "R", "G"]:
-        if c in colors:
-            add(f"    :hasColor :{COLOR[c]} ;")
-    for c in ["W", "U", "B", "R", "G"]:
-        if c in card.get("color_identity", []):
-            add(f"    :hasColorIdentity :{COLOR[c]} ;")
+    out.extend(f"    :hasColor :{COLOR[c]} ;" for c in WUBRG if c in colors)
+    out.extend(
+        f"    :hasColorIdentity :{COLOR[c]} ;"
+        for c in WUBRG
+        if c in card.get("color_identity", [])
+    )
+    return out
 
-    add(f"    :isInSet :{info['set_ind']} ;")
+
+def _printing_lines(card: ScryCard, info: PrintingInfo) -> list[str]:
+    """Set membership, collector number, artist, language and mana facts."""
+    out = [f"    :isInSet :{info.set_ind} ;"]
     num = card["collector_number"]
     if num.isdigit():
-        add(f'    :cardNumber "{num}"^^xsd:integer ;')
+        out.append(f'    :cardNumber "{num}"^^xsd:integer ;')
     else:
-        add(f'    :cardNumberString "{esc_str(num)}" ;')
+        out.append(f'    :cardNumberString "{esc_str(num)}" ;')
     if card.get("artist"):
-        add(f'    :artist "{esc_str(card["artist"])}" ;')
-    add(f"    :hasLanguage :{LANG[info['language']]} ;")
-    for line in mana_fact_lines(card):
-        add(line)
+        out.append(f'    :artist "{esc_str(card["artist"])}" ;')
+    out.append(f"    :hasLanguage :{LANG[info.language]} ;")
+    out.extend(mana_fact_lines(card))
+    return out
 
+
+def _stat_lines(front: ScryCard) -> list[str]:
+    """Power / toughness / loyalty / defense triples of the front face."""
+    out = []
     if front.get("power") is not None:
-        add(f'    :power "{esc_str(front["power"])}" ;')
+        out.append(f'    :power "{esc_str(front["power"])}" ;')
         if re.fullmatch(r"-?\d+", front["power"]):
-            add(f'    :powerValue "{front["power"]}"^^xsd:integer ;')
+            out.append(f'    :powerValue "{front["power"]}"^^xsd:integer ;')
     if front.get("toughness") is not None:
-        add(f'    :toughness "{esc_str(front["toughness"])}" ;')
+        out.append(f'    :toughness "{esc_str(front["toughness"])}" ;')
         if re.fullmatch(r"-?\d+", front["toughness"]):
-            add(f'    :toughnessValue "{front["toughness"]}"^^xsd:integer ;')
+            out.append(f'    :toughnessValue "{front["toughness"]}"^^xsd:integer ;')
     if front.get("loyalty") and re.fullmatch(r"\d+", front["loyalty"]):
-        add(f'    :loyalty "{front["loyalty"]}"^^xsd:integer ;')
+        out.append(f'    :loyalty "{front["loyalty"]}"^^xsd:integer ;')
     if front.get("defense") and re.fullmatch(r"\d+", front["defense"]):
-        add(f'    :defenseValue "{front["defense"]}"^^xsd:nonNegativeInteger ;')
+        out.append(f'    :defenseValue "{front["defense"]}"^^xsd:nonNegativeInteger ;')
+    return out
 
+
+def _keyword_lines(card: ScryCard, ctx: GenContext) -> list[str]:
+    """Keyword triples; unknown keywords become comments and a note."""
+    out = []
     for kw in card.get("keywords", []):
-        hit = kw_map.get(kw) or kw_map.get(pascal(kw))
+        hit = ctx.kw_map.get(kw) or ctx.kw_map.get(pascal(kw))
         if hit:
-            add(f"    :{hit[0]} :{hit[1]} ;")
+            out.append(f"    :{hit[0]} :{hit[1]} ;")
         else:
-            add(f'    # Note: keyword "{kw}" not defined in MagicCardsOntology')
-            notes["keywords"].add(kw)
+            out.append(f'    # Note: keyword "{kw}" not defined in MagicCardsOntology')
+            ctx.notes.keywords.add(kw)
+    return out
 
-    loc = info.get("localized")
+
+def _text_lines(faces: list[ScryCard], info: PrintingInfo) -> list[str]:
+    """Emit the printed / oracle / flavor text triples (localized if known)."""
+    out = []
+    loc = info.localized
+    lang = "de" if loc else "en"
     lfaces = (loc.get("card_faces") or [loc]) if loc else faces
     printed = "\n//\n".join(
         f.get("printed_text") or f.get("oracle_text", "") for f in lfaces
     )
     oracle = "\n//\n".join(f.get("oracle_text", "") for f in faces)
     if printed:
-        add(f'    :printedText """{esc_long(printed)}"""@{"de" if loc else "en"} ;')
+        out.append(f'    :printedText """{esc_long(printed)}"""@{lang} ;')
     if oracle:
-        add(f'    :oracleText """{esc_long(oracle)}"""@en ;')
+        out.append(f'    :oracleText """{esc_long(oracle)}"""@en ;')
     flavor_src = lfaces if loc else faces
     flavor = "\n//\n".join(f["flavor_text"] for f in flavor_src if f.get("flavor_text"))
     if flavor:
-        add(f'    :flavorText """{esc_long(flavor)}"""@{"de" if loc else "en"} ;')
+        out.append(f'    :flavorText """{esc_long(flavor)}"""@{lang} ;')
+    return out
 
+
+def _url_lines(card: ScryCard) -> list[str]:
+    """Gatherer (when a multiverse id exists) and Scryfall URL triples."""
+    out = []
     mvids = card.get("multiverse_ids") or []
     if mvids:
-        add(
+        out.append(
             f'    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx'
             f'?multiverseid={mvids[0]}"^^xsd:anyURI ;',
         )
     surl = card["scryfall_uri"].split("?")[0]
-    add(f'    :scryfallUrl "{surl}"^^xsd:anyURI ;')
+    out.append(f'    :scryfallUrl "{surl}"^^xsd:anyURI ;')
+    return out
 
+
+def _legality_lines(card: ScryCard, ctx: GenContext) -> list[str]:
+    """Legality mappings and rulings; terminates the block with '.'."""
+    out = []
     leg = card["legalities"]
     leg_lines = [
         f"      [ rdf:type :LegalityMapping ; :inFormat :{f_ind} ; "
         f":hasLegalityStatus :{LEGALITY[leg[f_key]]} ]"
         for f_key, f_ind in FORMATS
     ]
-    rus = rulings.get(
+    rus = ctx.rulings.get(
         card.get("oracle_id") or (card.get("card_faces") or [{}])[0].get("oracle_id"),
         [],
     )
     if rus:
-        add("    :hasLegality")
-        add(" ,\n".join(leg_lines) + " ;")
-        add("    :hasRuling")
-        ru_lines = []
-        for ru in rus:
-            ru_lines.append(
-                "      [ rdf:type :Ruling ;\n"
-                f'        :rulingDate "{ru["date"]}"^^xsd:date ;\n'
-                f'        :rulingText """{esc_long(ru["text"])}"""@en ]',
-            )
-        add(" ,\n".join(ru_lines) + " .")
+        out.append("    :hasLegality")
+        out.append(" ,\n".join(leg_lines) + " ;")
+        out.append("    :hasRuling")
+        ru_lines = [
+            "      [ rdf:type :Ruling ;\n"
+            f'        :rulingDate "{ru["date"]}"^^xsd:date ;\n'
+            f'        :rulingText """{esc_long(ru["text"])}"""@en ]'
+            for ru in rus
+        ]
+        out.append(" ,\n".join(ru_lines) + " .")
     else:
-        add("    :hasLegality")
-        add(" ,\n".join(leg_lines) + " .")
+        out.append("    :hasLegality")
+        out.append(" ,\n".join(leg_lines) + " .")
+    return out
+
+
+def card_block(ind: str, card: ScryCard, info: PrintingInfo, ctx: GenContext) -> str:
+    """Render one card individual as a Turtle block (one section per helper)."""
+    faces: list[ScryCard] = card.get("card_faces") or [card]
+    front = faces[0]
+    out = _identity_lines(ind, card, front)
+    out.extend(_type_lines(card, front, ctx))
+    out.extend(_color_lines(card, faces))
+    out.extend(_printing_lines(card, info))
+    out.extend(_stat_lines(front))
+    out.extend(_keyword_lines(card, ctx))
+    out.extend(_text_lines(faces, info))
+    out.extend(_url_lines(card))
+    out.extend(_legality_lines(card, ctx))
     return "\n".join(out)
 
 
@@ -528,26 +701,28 @@ subtype, format and legality definitions.\"\"\"@en .
 """
 
 
-def cmd_generate():
-    vocab, sub_by_label, kw_map = load_vocab()
-    setcodes = vocab["_setcodes"]  # CODE -> individual
-    printings = load_rows()
-    cards = json.loads((CACHE / "cards.json").read_text())
-    localized = json.loads((CACHE / "localized.json").read_text())
-    sets_meta = json.loads((CACHE / "sets.json").read_text())
-    rulings = json.loads((CACHE / "rulings.json").read_text())
-    existing = json.load(open("/tmp/existing_cards.json"))
+@dataclass
+class GenerateInputs:
+    """The cached fetch results and derived name tables for one generate run."""
 
-    # skip-list: (name, setcode, number) of individuals already in the master file
-    inv_sets = {ind: code for code, ind in setcodes.items()}
-    existing_keys = {
-        (e["name"], (inv_sets.get(e["set"]) or "").lower(), e["num"]) for e in existing
-    }
-    existing_names = {e["ind"] for e in existing}
+    printings: dict[PrintKey, Printing]
+    cards: dict[str, ScryCard]
+    localized: dict[str, ScryCard]
+    sets_meta: dict[str, ScryCard]
+    set_ind: dict[str, str]
+    new_sets: dict[str, str]
+    existing_keys: set[tuple[str, str, str]]
+    existing_names: set[str]
 
-    # set individual names, creating entries for sets missing from the ontology
-    new_sets = {}
-    set_ind = {}
+
+def _resolve_set_individuals(
+    printings: dict[PrintKey, Printing],
+    setcodes: dict[str, str],
+    sets_meta: dict[str, ScryCard],
+) -> tuple[dict[str, str], dict[str, str]]:
+    """Map set codes to Set individuals, minting names for unknown sets."""
+    new_sets: dict[str, str] = {}
+    set_ind: dict[str, str] = {}
     for code in sorted({k[0] for k in printings}):
         up = code.upper()
         if up in setcodes:
@@ -556,63 +731,86 @@ def cmd_generate():
             ind = pascal(sets_meta[code]["name"])
             set_ind[code] = ind
             new_sets[code] = ind
+    return set_ind, new_sets
 
-    # printings-per-name to decide suffixing
-    per_name = defaultdict(list)
-    for k, p in printings.items():
+
+def _individual_name(
+    p: Printing,
+    key: PrintKey,
+    per_name: dict[str, list[PrintKey]],
+    inputs: GenerateInputs,
+) -> str:
+    """Choose the individual name; suffix set+number to avoid collisions."""
+    base = pascal(p["name"].split(" // ")[0])
+    multi = len(per_name[p["name"]]) > 1
+    if p["name"] in BASICS or multi or base in inputs.existing_names:
+        return f"{base}{inputs.set_ind[key[0]]}{re.sub(r'[^A-Za-z0-9]', '', key[1])}"
+    return base
+
+
+def _generate_blocks(
+    inputs: GenerateInputs,
+    ctx: GenContext,
+) -> tuple[dict[str, list[str]], dict[str, PrintKey]]:
+    """Render every new printing into per-set Turtle blocks.
+
+    Skips printings already modelled in the master file and aborts on
+    individual-name collisions. Returns the blocks grouped by set code
+    and the name -> printing map of emitted individuals.
+    """
+    per_name: dict[str, list[PrintKey]] = defaultdict(list)
+    for k, p in inputs.printings.items():
         per_name[p["name"]].append(k)
 
-    used, blocks_by_set = {}, defaultdict(list)
-    notes = {"subtypes": {}, "keywords": set(), "skipped": [], "missing": []}
-
+    used: dict[str, PrintKey] = {}
+    blocks_by_set: dict[str, list[str]] = defaultdict(list)
     for key in sorted(
-        printings,
+        inputs.printings,
         key=lambda k: (
-            set_ind[k[0]],
+            inputs.set_ind[k[0]],
             (0, int(k[1])) if k[1].isdigit() else (1, 0),
             k[1],
         ),
     ):
-        p = printings[key]
-        card = cards.get(f"{key[0]}|{key[1]}")
+        p = inputs.printings[key]
+        card = inputs.cards.get(f"{key[0]}|{key[1]}")
         if card is None:
-            notes["missing"].append(key)
+            ctx.notes.missing.append(key)
             continue
-        if (p["name"], key[0], key[1]) in existing_keys:
-            notes["skipped"].append((p["name"], key))
+        if (p["name"], key[0], key[1]) in inputs.existing_keys:
+            ctx.notes.skipped.append((p["name"], key))
             continue
-        base = pascal(p["name"].split(" // ")[0])
-        multi = len(per_name[p["name"]]) > 1
-        if p["name"] in BASICS or multi or base in existing_names:
-            ind = f"{base}{set_ind[key[0]]}{re.sub(r'[^A-Za-z0-9]', '', key[1])}"
-        else:
-            ind = base
+        ind = _individual_name(p, key, per_name, inputs)
         if ind in used:
             msg = f"individual name collision: {ind} ({used[ind]} vs {key})"
             raise SystemExit(msg)
         used[ind] = key
-        info = {
-            "set_ind": set_ind[key[0]],
-            "language": p["language"],
-            "localized": localized.get(f"{key[0]}|{key[1]}"),
-        }
-        blocks_by_set[key[0]].append(
-            card_block(ind, card, info, vocab, sub_by_label, kw_map, rulings, notes),
+        info = PrintingInfo(
+            set_ind=inputs.set_ind[key[0]],
+            language=p["language"],
+            localized=inputs.localized.get(f"{key[0]}|{key[1]}"),
         )
+        blocks_by_set[key[0]].append(card_block(ind, card, info, ctx))
+    return blocks_by_set, used
 
-    # write per-set files
+
+def _write_set_files(
+    blocks_by_set: dict[str, list[str]],
+    inputs: GenerateInputs,
+) -> list[tuple[str, str, int]]:
+    """Write one sets/<SetIndividual>.ttl per set; return the import entries."""
     (ROOT / "sets").mkdir(exist_ok=True)
-    imports = []
-    for code in sorted(blocks_by_set, key=lambda c: set_ind[c]):
-        sname = sets_meta[code]["name"]
+    imports: list[tuple[str, str, int]] = []
+    for code in sorted(blocks_by_set, key=lambda c: inputs.set_ind[c]):
+        sname = inputs.sets_meta[code]["name"]
         urn = f"urn:stklug84:MagicCardIndividuals:{code.upper()}:{NS_DATE}#"
         parts = [HEADER.format(set_name=sname, set_code=code.upper(), urn=urn)]
-        if code in new_sets:
-            sm = sets_meta[code]
+        if code in inputs.new_sets:
+            sm = inputs.sets_meta[code]
             parts.append(
                 "#" * 80 + "\n#\n# Set Individual (not defined in "
                 "MagicCardsOntology)\n#\n" + "#" * 80 + "\n\n"
-                f":{new_sets[code]} rdf:type owl:NamedIndividual ,\n"
+                f":{inputs.new_sets[code]} rdf:type owl:NamedIndividual ,\n"
                 "                  :Set ;\n"
                 f'    :setName "{esc_str(sm["name"])}" ;\n'
                 f'    :setCode "{code.upper()}" ;\n'
@@ -622,47 +820,105 @@ def cmd_generate():
         # missing subtypes used by cards of this set
         parts.append("#" * 80 + "\n#\n# Card Individuals\n#\n" + "#" * 80 + "\n")
         parts.append("\n\n".join(blocks_by_set[code]))
-        out = ROOT / "sets" / f"{set_ind[code]}.ttl"
+        out = ROOT / "sets" / f"{inputs.set_ind[code]}.ttl"
         out.write_text("\n".join(parts) + "\n")
         imports.append((urn, out.name, len(blocks_by_set[code])))
+    return imports
 
-    # supplemental subtype individuals file
-    if notes["subtypes"]:
-        urn = f"urn:stklug84:MagicCardIndividuals:SubTypeSupplement:{NS_DATE}#"
-        lines = [
-            HEADER.format(
-                set_name="SubType Supplement", set_code="SUPPLEMENT", urn=urn
-            ),
-        ]
-        lines.append(
-            "#" * 80 + "\n#\n# SubType individuals referenced by the "
-            "collection but not defined in\n# MagicCardsOntology\n#\n"
-            + "#" * 80
-            + "\n",
-        )
-        for ind, (label, cls) in sorted(notes["subtypes"].items()):
-            lines.append(
-                f":{ind} rdf:type owl:NamedIndividual ,\n"
-                f"                  :{cls} ;\n"
-                f'    rdfs:label "{esc_str(label)}" .\n',
-            )
-        out = ROOT / "sets" / "SubTypeSupplement.ttl"
-        out.write_text("\n".join(lines))
-        imports.insert(0, (urn, out.name, len(notes["subtypes"])))
 
-    print(f"cards written: {len(used)}  files: {len(blocks_by_set)}")
-    print(f"skipped (already in master): {len(notes['skipped'])}")
-    if notes["missing"]:
-        print("MISSING from scryfall:", notes["missing"])
-    if notes["subtypes"]:
-        print("new subtypes:", sorted(notes["subtypes"]))
-    if notes["keywords"]:
-        print("unknown keywords (comment notes):", sorted(notes["keywords"]))
-    json.dump(
-        [{"urn": u, "file": f, "cards": n} for u, f, n in imports],
-        open("/tmp/imports.json", "w"),
-        indent=2,
+def _write_subtype_supplement(
+    notes: Notes,
+    imports: list[tuple[str, str, int]],
+) -> None:
+    """Write sets/SubTypeSupplement.ttl for subtypes the ontology lacks."""
+    if not notes.subtypes:
+        return
+    urn = f"urn:stklug84:MagicCardIndividuals:SubTypeSupplement:{NS_DATE}#"
+    lines = [
+        HEADER.format(set_name="SubType Supplement", set_code="SUPPLEMENT", urn=urn),
+    ]
+    lines.append(
+        "#" * 80 + "\n#\n# SubType individuals referenced by the "
+        "collection but not defined in\n# MagicCardsOntology\n#\n" + "#" * 80 + "\n",
     )
+    lines.extend(
+        f":{ind} rdf:type owl:NamedIndividual ,\n"
+        f"                  :{cls} ;\n"
+        f'    rdfs:label "{esc_str(label)}" .\n'
+        for ind, (label, cls) in sorted(notes.subtypes.items())
+    )
+    out = ROOT / "sets" / "SubTypeSupplement.ttl"
+    out.write_text("\n".join(lines))
+    imports.insert(0, (urn, out.name, len(notes.subtypes)))
+
+
+def _report_generate(
+    used: dict[str, PrintKey],
+    blocks_by_set: dict[str, list[str]],
+    notes: Notes,
+    imports: list[tuple[str, str, int]],
+) -> None:
+    """Print the generate summary and write the update_imports.py input."""
+    # T201+RUF100 (below): this generator's program output, consumed by
+    print(f"cards written: {len(used)}  files: {len(blocks_by_set)}")  # noqa: T201
+    print(f"skipped (already in master): {len(notes.skipped)}")  # noqa: T201
+    if notes.missing:
+        print("MISSING from scryfall:", notes.missing)  # noqa: T201
+    if notes.subtypes:
+        print("new subtypes:", sorted(notes.subtypes))  # noqa: T201
+    if notes.keywords:
+        print("unknown keywords (comment notes):", sorted(notes.keywords))  # noqa: T201
+    IMPORTS_JSON.write_text(
+        json.dumps(
+            [{"urn": u, "file": f, "cards": n} for u, f, n in imports],
+            indent=2,
+        ),
+    )
+
+
+def cmd_generate() -> None:
+    """Emit the per-set TTL files from the cached fetch results."""
+    vocab, sub_by_label, kw_map = load_vocab()
+    setcodes: dict[str, str] = vocab["_setcodes"]  # CODE -> individual
+    printings = load_rows()
+    cards: dict[str, ScryCard] = json.loads((CACHE / "cards.json").read_text())
+    localized: dict[str, ScryCard] = json.loads((CACHE / "localized.json").read_text())
+    sets_meta: dict[str, ScryCard] = json.loads((CACHE / "sets.json").read_text())
+    rulings: dict[str, list[RulingEntry]] = json.loads(
+        (CACHE / "rulings.json").read_text(),
+    )
+    existing: list[dict[str, str]] = json.loads(EXISTING_JSON.read_text())
+
+    # skip-list: (name, setcode, number) of individuals already in the master file
+    inv_sets = {ind: code for code, ind in setcodes.items()}
+    existing_keys = {
+        (e["name"], (inv_sets.get(e["set"]) or "").lower(), e["num"]) for e in existing
+    }
+    existing_names = {e["ind"] for e in existing}
+
+    set_ind, new_sets = _resolve_set_individuals(printings, setcodes, sets_meta)
+    inputs = GenerateInputs(
+        printings=printings,
+        cards=cards,
+        localized=localized,
+        sets_meta=sets_meta,
+        set_ind=set_ind,
+        new_sets=new_sets,
+        existing_keys=existing_keys,
+        existing_names=existing_names,
+    )
+    notes = Notes()
+    ctx = GenContext(
+        vocab=vocab,
+        sub_by_label=sub_by_label,
+        kw_map=kw_map,
+        rulings=rulings,
+        notes=notes,
+    )
+    blocks_by_set, used = _generate_blocks(inputs, ctx)
+    imports = _write_set_files(blocks_by_set, inputs)
+    _write_subtype_supplement(notes, imports)
+    _report_generate(used, blocks_by_set, notes, imports)
 
 
 # ---------------------------------------------------------------- collection
@@ -723,19 +979,27 @@ MagicCardIndividuals.\"\"\"@en .
 """
 
 
-def load_card_map():
+def load_card_map() -> dict[tuple[str, str], tuple[str, str]]:
     """Scan sets/*.ttl -> {(SETCODE, collector_number): (individual, file)}."""
-    card_map = {}
+    card_map: dict[tuple[str, str], tuple[str, str]] = {}
     for path in sorted((ROOT / "sets").glob("*.ttl")):
         text = path.read_text()
-        code = re.search(
+        code_match = re.search(
             r"@base\s+<urn:stklug84:MagicCardIndividuals:"
             r"([^:>]+):[^>]*>",
             text,
-        ).group(1)
+        )
+        if code_match is None:
+            msg = f"{path.name}: no MagicCardIndividuals @base declaration"
+            raise SystemExit(msg)
+        code = code_match.group(1)
         blocks = re.split(r"\n(?=:\w+ rdf:type owl:NamedIndividual)", text)
         for b in blocks[1:]:
-            ind = re.match(r":(\w+)", b).group(1)
+            ind_match = re.match(r":(\w+)", b)
+            if ind_match is None:  # unreachable: the split anchors on ':\w+'
+                msg = f"{path.name}: malformed individual block"
+                raise SystemExit(msg)
+            ind = ind_match.group(1)
             m = re.search(r':cardNumber "([^"]+)"', b) or re.search(
                 r':cardNumberString "([^"]+)"',
                 b,
@@ -752,14 +1016,17 @@ def load_card_map():
     return card_map
 
 
-def cmd_collection():
-    rows = list(csv.DictReader(open(ROOT / "collection.csv")))
+def cmd_collection() -> None:
+    """Emit MagicCardCollection.ttl with one entry per collection.csv row."""
+    with (ROOT / "collection.csv").open(encoding="utf-8", newline="") as handle:
+        rows = list(csv.DictReader(handle))
     card_map = load_card_map()
 
-    _entries, refs, missing = [], [], []
-    seq = defaultdict(int)
+    refs: list[str] = []
+    missing: list[tuple[str, str]] = []
+    seq: dict[str, int] = defaultdict(int)
     total = 0
-    by_file = defaultdict(list)
+    by_file: dict[str, list[str]] = defaultdict(list)
     for r in rows:
         key = (r["Edition"].upper(), r["Collector Number"])
         if key not in card_map:
@@ -807,43 +1074,57 @@ def cmd_collection():
         parts.append("\n\n".join(by_file[fname]) + "\n")
     (ROOT / "MagicCardCollection.ttl").write_text("\n".join(parts))
 
-    print(f"entries written: {len(refs)}  physical cards: {total}")
+    print(f"entries written: {len(refs)}  physical cards: {total}")  # noqa: T201 - generator report output
     if missing:
-        print(f"NOT IN sets/*.ttl ({len(missing)}):", missing)
+        print(f"NOT IN sets/*.ttl ({len(missing)}):", missing)  # noqa: T201 - generator report output
 
 
 # ---------------------------------------------------------------- augment
 
+_AUG_URL_RE = re.compile(
+    r':scryfallUrl "https://scryfall\.com/card/'
+    r'([^/"]+)/([^/"]+)/',
+)
+_AUG_LANG_RE = re.compile(r"^    :hasLanguage :\w+ ;$", re.MULTILINE)
 
-def cmd_augment_mana():
-    """Backfill :producesMana / :entersTapped / :isFetchLand triples.
 
-    Post-processes the existing sets/*.ttl and MagicExternalCards.ttl card
-    blocks in place (keyed by :scryfallUrl against the Scryfall cache,
-    fetching uncached printings on demand). Idempotent: blocks that already
-    carry mana-fact triples are left untouched. Avoids a full `generate`
-    run, which could rename individuals.
-    """
-    url_re = re.compile(
-        r':scryfallUrl "https://scryfall\.com/card/'
-        r'([^/"]+)/([^/"]+)/',
-    )
-    lang_re = re.compile(r"^    :hasLanguage :\w+ ;$", re.MULTILINE)
+@dataclass
+class AugmentStats:
+    """Counters for the augment-mana summary line."""
+
+    blocks: int = 0
+    facts: int = 0
+    skipped: int = 0
+
+
+def _augment_files() -> list[Path]:
+    """Return the TTL files whose card blocks augment-mana post-processes."""
     files = sorted((ROOT / "sets").glob("*.ttl"))
     ext = ROOT / "MagicExternalCards.ttl"
     if ext.exists():
         files.append(ext)
+    return files
 
+
+def _augment_cache(files: list[Path]) -> dict[str, ScryCard]:
+    """Load the Scryfall cache, fetching printings the files need on demand.
+
+    Returns the cache keyed by lowercase 'set|number'.
+    """
     cards_file = CACHE / "cards.json"
-    cards = json.loads(cards_file.read_text()) if cards_file.exists() else {}
+    cards: dict[str, ScryCard] = (
+        json.loads(cards_file.read_text()) if cards_file.exists() else {}
+    )
     by_key = {k.lower(): v for k, v in cards.items()}
 
     # collect printings referenced by blocks but missing from the cache
-    todo = []
+    todo: list[tuple[str, str]] = []
     for path in files:
-        for s, n in url_re.findall(path.read_text()):
-            if f"{s}|{n}".lower() not in by_key:
-                todo.append((s, n))
+        todo.extend(
+            (s, n)
+            for s, n in _AUG_URL_RE.findall(path.read_text())
+            if f"{s}|{n}".lower() not in by_key
+        )
     for i in range(0, len(todo), 75):
         batch = todo[i : i + 75]
         idents = [{"set": s, "collector_number": n} for s, n in batch]
@@ -853,49 +1134,63 @@ def cmd_augment_mana():
             cards[key] = c
             by_key[key.lower()] = c
         if resp.get("not_found"):
-            print("NOT FOUND:", resp["not_found"])
+            print("NOT FOUND:", resp["not_found"])  # noqa: T201 - generator report output
         time.sleep(0.15)
     if todo:
         cards_file.write_text(json.dumps(cards))
+    return by_key
 
-    n_blocks = n_facts = n_skipped = 0
+
+def _augment_block(
+    block: str,
+    fname: str,
+    by_key: dict[str, ScryCard],
+    stats: AugmentStats,
+) -> str:
+    """Insert missing mana-fact triples into one card block (idempotent)."""
+    m = _AUG_URL_RE.search(block)
+    if not (m and ":cardName" in block):
+        return block
+    stats.blocks += 1
+    if ":producesMana" in block or ":entersTapped" in block or ":isFetchLand" in block:
+        stats.skipped += 1
+        return block
+    card = by_key.get(f"{m.group(1)}|{m.group(2)}".lower())
+    if card is None:
+        print(f"no scryfall data: {fname} {m.group(1)}/{m.group(2)}")  # noqa: T201 - generator progress output
+        return block
+    lines = mana_fact_lines(card)
+    if not lines:
+        return block
+    lm = _AUG_LANG_RE.search(block)
+    if lm is None:
+        return block
+    stats.facts += len(lines)
+    return block[: lm.end()] + "\n" + "\n".join(lines) + block[lm.end() :]
+
+
+def cmd_augment_mana() -> None:
+    """Backfill :producesMana / :entersTapped / :isFetchLand triples.
+
+    Post-processes the existing sets/*.ttl and MagicExternalCards.ttl card
+    blocks in place (keyed by :scryfallUrl against the Scryfall cache,
+    fetching uncached printings on demand). Idempotent: blocks that already
+    carry mana-fact triples are left untouched. Avoids a full `generate`
+    run, which could rename individuals.
+    """
+    files = _augment_files()
+    by_key = _augment_cache(files)
+
+    stats = AugmentStats()
     for path in files:
         text = path.read_text()
         blocks = re.split(r"\n(?=:\w+ rdf:type owl:NamedIndividual)", text)
-        out = []
-        changed = False
-        for block in blocks:
-            m = url_re.search(block)
-            if m and ":cardName" in block:
-                n_blocks += 1
-                if (
-                    ":producesMana" in block
-                    or ":entersTapped" in block
-                    or ":isFetchLand" in block
-                ):
-                    n_skipped += 1
-                elif (
-                    card := by_key.get(f"{m.group(1)}|{m.group(2)}".lower())
-                ) is not None:
-                    lines = mana_fact_lines(card)
-                    if lines:
-                        lm = lang_re.search(block)
-                        if lm:
-                            block = (
-                                block[: lm.end()]
-                                + "\n"
-                                + "\n".join(lines)
-                                + block[lm.end() :]
-                            )
-                            n_facts += len(lines)
-                            changed = True
-                else:
-                    print(f"no scryfall data: {path.name} {m.group(1)}/{m.group(2)}")
-            out.append(block)
-        if changed:
+        out = [_augment_block(block, path.name, by_key, stats) for block in blocks]
+        if out != blocks:
             path.write_text("\n".join(out))
-    print(
-        f"blocks: {n_blocks}  facts inserted: {n_facts}  already present: {n_skipped}",
+    print(  # noqa: T201 - generator report output
+        f"blocks: {stats.blocks}  facts inserted: {stats.facts}  "
+        f"already present: {stats.skipped}",
     )
 
 

@@ -12,12 +12,17 @@ import select
 import sys
 import termios
 import tty
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from collections.abc import Iterator
 
 _ESC_MAP = {"[A": "up", "[B": "down", "[C": "right", "[D": "left"}
 
 
 @contextlib.contextmanager
-def raw_terminal():
+def raw_terminal() -> Iterator[None]:
+    """Put stdin into cbreak mode for the duration of the block."""
     fd = sys.stdin.fileno()
     old = termios.tcgetattr(fd)
     try:

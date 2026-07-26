@@ -33,20 +33,22 @@ REQUIRED_PREFIXES = {
 
 
 def ttl_files() -> list[Path]:
+    """Return every tracked .ttl file; exit 1 if the repo has none."""
     files = sorted(p for p in ROOT.rglob("*.ttl") if ".git" not in p.parts)
     if not files:
-        print("ERROR: no .ttl files found", file=sys.stderr)
+        print("ERROR: no .ttl files found", file=sys.stderr)  # noqa: T201 - validator FAIL output on stderr
         sys.exit(1)
     return files
 
 
-def main() -> int:
+def check_syntax(files: list[Path]) -> tuple[dict[Path, Graph], list[str]]:
+    """Check 1 (syntax): every .ttl file must parse as valid Turtle.
+
+    Returns the successfully parsed graphs plus one error per file that
+    rdflib rejects; prints one OK line per parsed file.
+    """
     errors: list[str] = []
     graphs: dict[Path, Graph] = {}
-
-    files = ttl_files()
-
-    # --- 1. syntax ------------------------------------------------------
     for path in files:
         rel = path.relative_to(ROOT)
         graph = Graph()
@@ -56,9 +58,18 @@ def main() -> int:
             errors.append(f"{rel}: syntax error: {exc}")
             continue
         graphs[path] = graph
-        print(f"OK   syntax      {rel} ({len(graph)} triples)")
+        print(f"OK   syntax      {rel} ({len(graph)} triples)")  # noqa: T201 - validator OK line, grepped by CI
+    return graphs, errors
 
-    # --- 2. conventions ---------------------------------------------------
+
+def check_conventions(graphs: dict[Path, Graph]) -> tuple[set[URIRef], list[str]]:
+    """Check 2 (conventions): standard prefixes and one owl:Ontology header.
+
+    Every file must declare the REQUIRED_PREFIXES bindings verbatim and
+    exactly one owl:Ontology. Returns the declared ontology IRIs (input
+    to the imports check) and the convention violations.
+    """
+    errors: list[str] = []
     declared_ontologies: set[URIRef] = set()
     for path, graph in graphs.items():
         rel = path.relative_to(ROOT)
@@ -76,24 +87,44 @@ def main() -> int:
                 f"{rel}: expected 1 owl:Ontology declaration, found {len(ontologies)}",
             )
         declared_ontologies.update(o for o in ontologies if isinstance(o, URIRef))
+    return declared_ontologies, errors
 
-    # --- 3. imports resolve ----------------------------------------------
-    for path, graph in graphs.items():
-        rel = path.relative_to(ROOT)
-        for target in graph.objects(None, OWL.imports):
-            if target not in declared_ontologies:
-                errors.append(f"{rel}: owl:imports target not found in repo: {target}")
 
-    # --- report ------------------------------------------------------------
-    print()
-    print(f"Checked {len(files)} TTL files.")
+def check_imports(
+    graphs: dict[Path, Graph],
+    declared_ontologies: set[URIRef],
+) -> list[str]:
+    """Check 3 (imports): every owl:imports target must be declared in-repo."""
+    return [
+        f"{path.relative_to(ROOT)}: owl:imports target not found in repo: {target}"
+        for path, graph in graphs.items()
+        for target in graph.objects(None, OWL.imports)
+        if target not in declared_ontologies
+    ]
+
+
+def report(n_files: int, errors: list[str]) -> int:
+    """Print the summary and FAIL lines; return the process exit code."""
+    # T201+RUF100 (below): this validator's program output, consumed by
+    print()  # noqa: T201
+    print(f"Checked {n_files} TTL files.")  # noqa: T201
     if errors:
-        print(f"\n{len(errors)} error(s):", file=sys.stderr)
+        print(f"\n{len(errors)} error(s):", file=sys.stderr)  # noqa: T201
         for err in errors:
-            print(f"FAIL {err}", file=sys.stderr)
+            print(f"FAIL {err}", file=sys.stderr)  # noqa: T201
         return 1
-    print("All TTL checks passed.")
+    print("All TTL checks passed.")  # noqa: T201
     return 0
+
+
+def main() -> int:
+    """Run the three TTL checks over the repository and report."""
+    files = ttl_files()
+    graphs, errors = check_syntax(files)
+    declared_ontologies, convention_errors = check_conventions(graphs)
+    errors.extend(convention_errors)
+    errors.extend(check_imports(graphs, declared_ontologies))
+    return report(len(files), errors)
 
 
 if __name__ == "__main__":

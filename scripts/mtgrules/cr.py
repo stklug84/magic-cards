@@ -21,27 +21,37 @@ traceability, tests, and error messages.
 
 from __future__ import annotations
 
+import functools
 import re
 from dataclasses import dataclass, field
 from pathlib import Path
+from typing import TYPE_CHECKING, Any, TypeVar, cast
+
+if TYPE_CHECKING:
+    from collections.abc import Callable
 
 _REPO = Path(__file__).resolve().parent.parent.parent
 
 _RULE_RE = re.compile(r"^(\d{3}(?:\.\d+[a-z]?)?)\.?\s+(.*)$")
 _SECTION_RE = re.compile(r"^(\d)\. (.+)$")
 
+_T = TypeVar("_T")
+
 
 @dataclass
 class Rule:
+    """One numbered CR rule with its attached worked examples."""
+
     number: str  # "704.5g" (no trailing dot)
     text: str
-    examples: list = field(default_factory=list)
+    examples: list[str] = field(default_factory=list)
 
 
 class ComprehensiveRules:
     """Index over one CR text file."""
 
-    def __init__(self, path: Path | str | None = None):
+    def __init__(self, path: Path | str | None = None) -> None:
+        """Parse *path* (default: the newest CR file in the repo root)."""
         if path is None:
             candidates = sorted(_REPO.glob("MagicCompRules-*.txt"))
             if not candidates:
@@ -54,16 +64,20 @@ class ComprehensiveRules:
         self._parse()
 
     def _parse(self) -> None:
+        """Split the file into rules body and glossary and parse both."""
         lines = self.path.read_text(encoding="utf-8").splitlines()
         # the rules body runs from "1. Game Concepts" up to the second
         # "Glossary" line (the first is the table of contents entry)
         glossary_hits = [i for i, ln in enumerate(lines) if ln.strip() == "Glossary"]
         body_end = glossary_hits[1] if len(glossary_hits) > 1 else len(lines)
+        self._parse_rules(lines[:body_end])
+        self._parse_glossary(lines[body_end + 1 :])
 
+    def _parse_rules(self, lines: list[str]) -> None:
+        """Index the numbered rules and attach their examples."""
         current: Rule | None = None
-        seen_toc: set[str] = set()
-        for line in lines[:body_end]:
-            line = line.strip()
+        for raw in lines:
+            line = raw.strip()
             if not line:
                 continue
             if line.startswith("Example: "):
@@ -71,26 +85,26 @@ class ComprehensiveRules:
                     current.examples.append(line[len("Example: ") :])
                 continue
             m = _RULE_RE.match(line)
-            if m:
-                number, text = m.group(1), m.group(2)
-                if number in self.rules and not text:
-                    continue
-                if number not in self.rules or len(text) > len(self.rules[number].text):
-                    # table-of-contents lines ("704. State-Based Actions")
-                    # precede the body; the longer body text wins
-                    if number in self.rules:
-                        seen_toc.add(number)
-                    rule = Rule(number, text)
-                    if number in self.rules:
-                        rule.examples = self.rules[number].examples
-                    self.rules[number] = rule
-                current = self.rules[number]
+            if not m:
+                continue
+            number, text = m.group(1), m.group(2)
+            if number in self.rules and not text:
+                continue
+            if number not in self.rules or len(text) > len(self.rules[number].text):
+                # table-of-contents lines ("704. State-Based Actions")
+                # precede the body; the longer body text wins
+                parsed = Rule(number, text)
+                if number in self.rules:
+                    parsed.examples = self.rules[number].examples
+                self.rules[number] = parsed
+            current = self.rules[number]
 
-        # glossary: term line followed by definition lines
-        term = None
+    def _parse_glossary(self, lines: list[str]) -> None:
+        """Index the glossary: a term line followed by definition lines."""
+        term: str | None = None
         buf: list[str] = []
-        for line in lines[body_end + 1 :]:
-            line = line.strip()
+        for raw in lines:
+            line = raw.strip()
             if line == "Credits":
                 break
             if not line:
@@ -107,12 +121,15 @@ class ComprehensiveRules:
 
     # -- lookups ---------------------------------------------------------
     def __getitem__(self, number: str) -> Rule:
+        """Look up a rule by number ("704.5g", with or without a dot)."""
         return self.rules[number.rstrip(".")]
 
-    def __contains__(self, number: str) -> bool:
-        return number.rstrip(".") in self.rules
+    def __contains__(self, number: object) -> bool:
+        """Whether the CR defines the given rule number."""
+        return isinstance(number, str) and number.rstrip(".") in self.rules
 
     def text(self, number: str) -> str:
+        """Return the normative text of the given rule."""
         return self[number].text
 
     def examples_under(self, prefix: str) -> list[tuple[str, str]]:
@@ -136,17 +153,14 @@ RULE_IMPLEMENTATIONS: dict[str, list[str]] = {}
 #: rules explicitly declared out of scope, with a reason
 UNSUPPORTED: dict[str, str] = {}
 
-_cr_singleton: ComprehensiveRules | None = None
 
-
+@functools.cache
 def get_cr() -> ComprehensiveRules:
-    global _cr_singleton
-    if _cr_singleton is None:
-        _cr_singleton = ComprehensiveRules()
-    return _cr_singleton
+    """Return the process-wide CR index (parsed once, cached)."""
+    return ComprehensiveRules()
 
 
-def rule(*numbers: str):
+def rule(*numbers: str) -> Callable[[_T], _T]:
     """Annotate a function/class with the CR rules it implements.
 
     Numbers are validated against the parsed CR at import time, so a typo
@@ -158,12 +172,15 @@ def rule(*numbers: str):
             msg = f"@rule: unknown CR rule {n!r}"
             raise ValueError(msg)
 
-    def deco(obj):
-        qname = f"{obj.__module__}.{getattr(obj, '__qualname__', obj.__name__)}"
+    def deco(obj: _T) -> _T:
+        # the decorator serves both classes and functions; the registry
+        # bookkeeping below is uniform attribute plumbing over either
+        target = cast("Any", obj)
+        qname = f"{target.__module__}.{getattr(target, '__qualname__', '?')}"
         for n in numbers:
             RULE_IMPLEMENTATIONS.setdefault(n.rstrip("."), []).append(qname)
-        existing = getattr(obj, "__cr_rules__", ())
-        obj.__cr_rules__ = tuple(existing) + tuple(n.rstrip(".") for n in numbers)
+        existing = getattr(target, "__cr_rules__", ())
+        target.__cr_rules__ = tuple(existing) + tuple(n.rstrip(".") for n in numbers)
         return obj
 
     return deco
@@ -208,12 +225,11 @@ def coverage_report(prefixes: tuple[str, ...] = ()) -> str:
             f"[{len(impl)} implemented / {len(unsup)} unsupported / "
             f"{len(rest)} unclaimed of {len(nums)}]",
         )
-        for n in impl:
-            lines.append(f"  OK   {n}  <- {', '.join(RULE_IMPLEMENTATIONS[n])}")
-        for n in unsup:
-            lines.append(f"  SKIP {n}  ({UNSUPPORTED[n]})")
-        for n in rest:
-            lines.append(f"  ..   {n}")
+        lines.extend(
+            f"  OK   {n}  <- {', '.join(RULE_IMPLEMENTATIONS[n])}" for n in impl
+        )
+        lines.extend(f"  SKIP {n}  ({UNSUPPORTED[n]})" for n in unsup)
+        lines.extend(f"  ..   {n}" for n in rest)
         lines.append("")
     return "\n".join(lines)
 
@@ -258,7 +274,7 @@ if __name__ == "__main__":
 
     cr = get_cr()
     n_examples = sum(len(r.examples) for r in cr.rules.values())
-    print(
+    print(  # noqa: T201 - CLI diagnostic output of `-m mtgrules.cr`
         f"{cr.path.name}: {len(cr.rules)} rules, {n_examples} examples, "
         f"{len(cr.glossary)} glossary terms",
     )
@@ -296,7 +312,7 @@ if __name__ == "__main__":
             "116",
             "122",
         )
-        print(_pkg_cr.coverage_report(families))
+        print(_pkg_cr.coverage_report(families))  # noqa: T201 - CLI output
     else:
         for probe in ("100.1", "117.1", "601.2", "613.1", "704.5g", "903.10a"):
-            print(f"  {probe}: {cr.text(probe)[:90]}...")
+            print(f"  {probe}: {cr.text(probe)[:90]}...")  # noqa: T201

@@ -1,19 +1,23 @@
-"""rich-based TUI: renders recorder streams (replay and live).
+"""rich-based TUI rendering: view state, event formatting, board frames.
 
 The board is always the latest snapshot at or before the cursor; events
-form a scrolling, color-coded log. Requires the optional 'rich' package.
+form a scrolling, color-coded log. Requires the optional 'rich' package;
+the replay/live apps (replay.py, live.py) fall back to print_plain_frame
+without it.
 """
 
 from __future__ import annotations
 
 from collections import Counter
+from typing import TYPE_CHECKING, Any
 
-from . import keys
-from .schema import HIGHLIGHTS
+if TYPE_CHECKING:
+    from collections.abc import Callable, Iterable
+
+    from mtgviz.schema import Record
 
 try:
-    from rich.console import Console, Group
-    from rich.live import Live
+    from rich.console import Group
     from rich.panel import Panel
     from rich.table import Table
     from rich.text import Text
@@ -27,26 +31,34 @@ except ImportError:  # pragma: no cover
 class ViewState:
     """Cursor over a list of schema records (events + snapshots)."""
 
-    def __init__(self, records=None, meta=None):
+    def __init__(
+        self,
+        records: list[Record] | None = None,
+        meta: dict[str, Any] | None = None,
+    ) -> None:
+        """Wrap *records* (shared, appendable) and the game-header *meta*."""
         self.records = records if records is not None else []
         self.meta = meta or {}
         self.cursor = -1  # index of last visible record
-        self.result = None  # {"t": "end", ...} once known
+        self.result: Record | None = None  # {"t": "end", ...} once known
 
-    def append(self, rec):
+    def append(self, rec: Record) -> None:
+        """Add a live record; the end record is kept aside as the result."""
         if rec.get("t") == "end":
             self.result = rec
         else:
             self.records.append(rec)
 
     # ---- queries ---------------------------------------------------------
-    def snapshot(self):
+    def snapshot(self) -> Record | None:
+        """Latest snapshot at or before the cursor."""
         for i in range(min(self.cursor, len(self.records) - 1), -1, -1):
             if self.records[i]["t"] == "s":
                 return self.records[i]
         return None
 
-    def visible_events(self, n=14, player=None):
+    def visible_events(self, n: int = 14, player: str | None = None) -> list[Record]:
+        """Collect the last *n* events up to the cursor (per player, opt.)."""
         out = []
         for i in range(min(self.cursor, len(self.records) - 1), -1, -1):
             rec = self.records[i]
@@ -59,11 +71,12 @@ class ViewState:
                 break
         return list(reversed(out))
 
-    def at_end(self):
+    def at_end(self) -> bool:
+        """Whether the cursor is at (or past) the last record."""
         return self.cursor >= len(self.records) - 1
 
     # ---- navigation ------------------------------------------------------
-    def step(self, direction=1):
+    def step(self, direction: int = 1) -> bool:
         """Move to the next/previous *event* record."""
         i = self.cursor + direction
         while 0 <= i < len(self.records):
@@ -76,7 +89,11 @@ class ViewState:
         self.cursor = max(-1, min(self.cursor + direction, len(self.records) - 1))
         return False
 
-    def seek_event(self, direction=1, match=None):
+    def seek_event(
+        self,
+        direction: int = 1,
+        match: Callable[[Record], bool] | None = None,
+    ) -> bool:
         """Advance until an event satisfying match(rec) (e.g. next phase)."""
         i = self.cursor + direction
         while 0 <= i < len(self.records):
@@ -88,10 +105,12 @@ class ViewState:
         self.cursor = len(self.records) - 1 if direction > 0 else -1
         return False
 
-    def next_phase(self, direction=1):
+    def next_phase(self, direction: int = 1) -> bool:
+        """Seek to the next/previous phase boundary."""
         return self.seek_event(direction, lambda r: r["kind"] == "phase")
 
-    def next_turn(self, direction=1):
+    def next_turn(self, direction: int = 1) -> bool:
+        """Seek to the untap step of the next/previous turn."""
         here = self._turn_at(self.cursor)
         return self.seek_event(
             direction,
@@ -102,17 +121,18 @@ class ViewState:
             ),
         )
 
-    def jump_turn(self, turn):
+    def jump_turn(self, turn: int) -> None:
+        """Jump to the first phase event of *turn* (from the start)."""
         self.cursor = -1
         self.seek_event(1, lambda r: r["kind"] == "phase" and r["turn"] >= turn)
 
-    def _turn_at(self, i):
+    def _turn_at(self, i: int) -> int:
         if 0 <= i < len(self.records):
-            return self.records[i].get("turn", 0)
+            return int(self.records[i].get("turn", 0))
         return 0
 
 
-def _event_players(rec):
+def _event_players(rec: Record) -> set[str]:
     d = rec["data"]
     return {
         v
@@ -143,62 +163,82 @@ _EVENT_STYLE = {
 }
 
 
-def format_event(rec) -> str:
-    k, d = rec["kind"], rec["data"]
-    if k == "phase":
-        return f"-- T{rec['turn']} {d.get('phase')} ({d.get('who')}) --"
-    if k == "turn":
-        return f"== Turn {d.get('n')}: {d.get('who')} =="
-    if k == "cast":
-        extra = f" (X={d['x']})" if d.get("x") else ""
-        cmd = " [commander]" if d.get("commander") else ""
-        return f"{d.get('who')} casts {d.get('card')}{extra}{cmd}"
-    if k == "resolve":
-        return f"resolves: {d.get('what')}"
-    if k == "trigger":
-        return f"trigger: {d.get('what')} ({d.get('who')})"
-    if k == "activate":
-        return f"{d.get('who')} activates {d.get('source')}"
-    if k == "land":
-        t = " (tapped)" if d.get("tapped") else ""
-        return f"{d.get('who')} plays {d.get('card')}{t}"
-    if k == "token":
-        pt = f" {d['pt']}" if d.get("pt") else ""
-        return f"{d.get('who')} creates {d.get('name')}{pt} token"
-    if k == "attack":
-        return f"{d.get('card')} attacks {d.get('target')}"
-    if k == "block":
-        return f"{d.get('blocker')} blocks {d.get('attacker')}"
-    if k == "damage":
-        c = " (combat)" if d.get("combat") else ""
-        return f"{d.get('src')} deals {d.get('n')} to {d.get('target')}{c}"
-    if k == "life":
-        return f"{d.get('who')} {d.get('delta'):+d} life -> {d.get('total')}"
-    if k == "dies":
-        t = " token" if d.get("token") else ""
-        return f"{d.get('card')}{t} dies ({d.get('who')})"
-    if k == "counter":
-        return f"{d.get('spell')} ({d.get('who')}) is countered"
-    if k == "fizzle":
-        return f"fizzles: {d.get('what')}"
-    if k == "draw":
-        return f"{d.get('who')} draws"
-    if k == "player_loses":
-        return f"{d.get('who')} LOSES: {d.get('why')}"
-    return f"{k} {d}"
+def _fmt_cast(_rec: Record, d: dict[str, Any]) -> str:
+    extra = f" (X={d['x']})" if d.get("x") else ""
+    cmd = " [commander]" if d.get("commander") else ""
+    return f"{d.get('who')} casts {d.get('card')}{extra}{cmd}"
 
 
-def _life_style(life):
-    if life > 30:
+def _fmt_land(_rec: Record, d: dict[str, Any]) -> str:
+    t = " (tapped)" if d.get("tapped") else ""
+    return f"{d.get('who')} plays {d.get('card')}{t}"
+
+
+def _fmt_token(_rec: Record, d: dict[str, Any]) -> str:
+    pt = f" {d['pt']}" if d.get("pt") else ""
+    return f"{d.get('who')} creates {d.get('name')}{pt} token"
+
+
+def _fmt_damage(_rec: Record, d: dict[str, Any]) -> str:
+    c = " (combat)" if d.get("combat") else ""
+    return f"{d.get('src')} deals {d.get('n')} to {d.get('target')}{c}"
+
+
+def _fmt_life(_rec: Record, d: dict[str, Any]) -> str:
+    return f"{d.get('who')} {d.get('delta'):+d} life -> {d.get('total')}"
+
+
+def _fmt_dies(_rec: Record, d: dict[str, Any]) -> str:
+    t = " token" if d.get("token") else ""
+    return f"{d.get('card')}{t} dies ({d.get('who')})"
+
+
+#: event kind -> log-line renderer (unknown kinds fall back to "kind data")
+_FORMATTERS: dict[str, Callable[[Record, dict[str, Any]], str]] = {
+    "phase": lambda r, d: f"-- T{r['turn']} {d.get('phase')} ({d.get('who')}) --",
+    "turn": lambda _r, d: f"== Turn {d.get('n')}: {d.get('who')} ==",
+    "cast": _fmt_cast,
+    "resolve": lambda _r, d: f"resolves: {d.get('what')}",
+    "trigger": lambda _r, d: f"trigger: {d.get('what')} ({d.get('who')})",
+    "activate": lambda _r, d: f"{d.get('who')} activates {d.get('source')}",
+    "land": _fmt_land,
+    "token": _fmt_token,
+    "attack": lambda _r, d: f"{d.get('card')} attacks {d.get('target')}",
+    "block": lambda _r, d: f"{d.get('blocker')} blocks {d.get('attacker')}",
+    "damage": _fmt_damage,
+    "life": _fmt_life,
+    "dies": _fmt_dies,
+    "counter": lambda _r, d: f"{d.get('spell')} ({d.get('who')}) is countered",
+    "fizzle": lambda _r, d: f"fizzles: {d.get('what')}",
+    "draw": lambda _r, d: f"{d.get('who')} draws",
+    "player_loses": lambda _r, d: f"{d.get('who')} LOSES: {d.get('why')}",
+}
+
+
+def format_event(rec: Record) -> str:
+    """Render one engine event record as a log line."""
+    fmt = _FORMATTERS.get(rec["kind"])
+    if fmt is None:
+        return f"{rec['kind']} {rec['data']}"
+    return fmt(rec, rec["data"])
+
+
+#: life-total display thresholds against the 40-life start (CR 903.7)
+_LIFE_COMFORTABLE = 30
+_LIFE_DANGER = 10
+
+
+def _life_style(life: int) -> str:
+    if life > _LIFE_COMFORTABLE:
         return "bold green"
-    if life > 10:
+    if life > _LIFE_DANGER:
         return "bold yellow"
     return "bold red"
 
 
-def _group_battlefield(perms):
+def _group_battlefield(perms: Iterable[Record]) -> list[tuple[int, Record]]:
     """Group identical battlefield entries: '3x Insect 1/1'."""
-    groups = Counter()
+    groups: Counter[tuple[object, ...]] = Counter()
     order = []
     for p in perms:
         key = (
@@ -218,7 +258,7 @@ def _group_battlefield(perms):
     return [(groups[key], p) for key, p in order]
 
 
-def _perm_line(count, p) -> Text:
+def _perm_line(count: int, p: Record) -> Text:
     t = Text()
     if count > 1:
         t.append(f"{count}x ", style="bold")
@@ -244,7 +284,7 @@ def _perm_line(count, p) -> Text:
 BF_FILTERS = ("all", "creatures", "nonland")
 
 
-def _bf_visible(p, bf_filter):
+def _bf_visible(p: Record, bf_filter: str) -> bool:
     types = p.get("types", [])
     if bf_filter == "creatures":
         return "Creature" in types
@@ -253,7 +293,8 @@ def _bf_visible(p, bf_filter):
     return True
 
 
-def _player_panel(pd, active, bf_filter="all", max_rows=None):
+def _panel_header(pd: Record) -> Text:
+    """Life / zone counts / pools / commander-damage line of a panel."""
     head = Text()
     head.append(f"{pd['life']:>3} ", style=_life_style(pd["life"]))
     head.append(f"H:{pd['hand']} L:{pd['library']} G:{pd['graveyard']}", style="dim")
@@ -268,8 +309,18 @@ def _player_panel(pd, active, bf_filter="all", max_rows=None):
         head.append(f"  cmd<{dmg}", style="red")
     if pd.get("commander_in_command"):
         head.append("  [cmd zone]", style="gold3")
-    lines = [head]
-    lands, rest = [], []
+    return head
+
+
+def _battlefield_lines(
+    pd: Record,
+    bf_filter: str,
+    max_rows: int | None,
+) -> list[Text]:
+    """Build grouped battlefield rows plus a one-line land summary."""
+    lines = []
+    lands: list[tuple[int, Record]] = []
+    rest: list[tuple[int, Record]] = []
     for count, p in _group_battlefield(pd["battlefield"]):
         if not _bf_visible(p, bf_filter):
             continue
@@ -289,6 +340,17 @@ def _player_panel(pd, active, bf_filter="all", max_rows=None):
         tapped = sum(c for c, p in lands if p["tapped"])
         summary.append(f"{n} lands ({n - tapped} untapped)", style="dim")
         lines.append(summary)
+    return lines
+
+
+def _player_panel(
+    pd: Record,
+    *,
+    active: bool,
+    bf_filter: str = "all",
+    max_rows: int | None = None,
+) -> Panel:
+    lines = [_panel_header(pd), *_battlefield_lines(pd, bf_filter, max_rows)]
     title = Text(pd["name"][:28])
     if pd.get("lost"):
         title.stylize("strike red")
@@ -307,11 +369,14 @@ def _player_panel(pd, active, bf_filter="all", max_rows=None):
     )
 
 
-def render_frame(view: ViewState, status: str, log_filter=None, bf_filter="all"):
-    snap = view.snapshot()
-    if snap is None:
-        return Panel("waiting for first snapshot ...")
-    # header
+#: player panels per grid row (2x2 layout for pods)
+_GRID_COLS = 2
+#: battlefield rows per panel before truncation in 3-4 player pods
+_PANEL_MAX_ROWS = 8
+
+
+def _frame_header(view: ViewState, snap: Record, bf_filter: str) -> Text:
+    """Turn/phase/active header, incl. seed and (at the end) the winner."""
     header = Text()
     header.append(f" Turn {snap['turn']} ", style="bold white on grey23")
     header.append(f" {snap['phase']} ", style="bold cyan")
@@ -328,11 +393,15 @@ def render_frame(view: ViewState, status: str, log_filter=None, bf_filter="all")
         )
     if bf_filter != "all":
         header.append(f" [battlefield: {bf_filter}] ", style="magenta")
-    # player grid (2x2 for pods; compact panels when 3-4 players)
+    return header
+
+
+def _players_grid(snap: Record, bf_filter: str) -> Table:
+    """Player grid (2x2 for pods; compact panels when 3-4 players)."""
     players = snap["players"]
     grid = Table.grid(expand=True)
-    per_row = 2 if len(players) > 1 else 1
-    max_rows = 8 if len(players) > 2 else None
+    per_row = _GRID_COLS if len(players) > 1 else 1
+    max_rows = _PANEL_MAX_ROWS if len(players) > _GRID_COLS else None
     for _ in range(per_row):
         grid.add_column(ratio=1)
     row = []
@@ -340,7 +409,7 @@ def render_frame(view: ViewState, status: str, log_filter=None, bf_filter="all")
         row.append(
             _player_panel(
                 pd,
-                pd["name"] == snap["active"],
+                active=pd["name"] == snap["active"],
                 bf_filter=bf_filter,
                 max_rows=max_rows,
             ),
@@ -350,7 +419,35 @@ def render_frame(view: ViewState, status: str, log_filter=None, bf_filter="all")
             row = []
     if row:
         grid.add_row(*row, *[Text("")] * (per_row - len(row)))
-    # stack + combat
+    return grid
+
+
+def _combat_lines(players: list[Record]) -> list[Text]:
+    """Attack arrows with blocker annotations for the COMBAT panel."""
+    lines = []
+    for pd in players:
+        for count, p in _group_battlefield(pd["battlefield"]):
+            if not p.get("attacking"):
+                continue
+            n = f"{count}x " if count > 1 else ""
+            blocked = []
+            for qd in players:
+                for _c2, q in _group_battlefield(qd["battlefield"]):
+                    if p["name"] in (q.get("blocking") or []):
+                        blocked.append(q["name"])
+            arrow = f"{n}{p['name']} {p.get('pt', '')} -> {p['attacking']}"
+            if blocked:
+                arrow += f"  blocked by {', '.join(blocked)}"
+                style = "gold3"
+            else:
+                arrow += "  unblocked"
+                style = "yellow"
+            lines.append(Text(arrow, style=style))
+    return lines
+
+
+def _stack_combat_row(snap: Record) -> Table:
+    """STACK and COMBAT panels side by side."""
     mid = Table.grid(expand=True)
     mid.add_column(ratio=1)
     mid.add_column(ratio=1)
@@ -358,25 +455,7 @@ def render_frame(view: ViewState, status: str, log_filter=None, bf_filter="all")
         Text(f"{len(snap['stack']) - i}. {s}", style="bold blue" if i == 0 else "blue")
         for i, s in enumerate(reversed(snap["stack"]))
     ] or [Text("(empty)", style="dim")]
-    combat_lines = []
-    for pd in players:
-        for count, p in _group_battlefield(pd["battlefield"]):
-            if p.get("attacking"):
-                n = f"{count}x " if count > 1 else ""
-                blocked = []
-                for qd in players:
-                    for _c2, q in _group_battlefield(qd["battlefield"]):
-                        if p["name"] in (q.get("blocking") or []):
-                            blocked.append(q["name"])
-                arrow = f"{n}{p['name']} {p.get('pt', '')} -> {p['attacking']}"
-                if blocked:
-                    arrow += f"  blocked by {', '.join(blocked)}"
-                    style = "gold3"
-                else:
-                    arrow += "  unblocked"
-                    style = "yellow"
-                combat_lines.append(Text(arrow, style=style))
-    combat_lines = combat_lines or [Text("(no combat)", style="dim")]
+    combat_lines = _combat_lines(snap["players"]) or [Text("(no combat)", style="dim")]
     mid.add_row(
         Panel(
             Group(*stack_lines),
@@ -391,7 +470,11 @@ def render_frame(view: ViewState, status: str, log_filter=None, bf_filter="all")
             padding=(0, 1),
         ),
     )
-    # event log
+    return mid
+
+
+def _log_panel(view: ViewState, log_filter: str | None) -> Panel:
+    """Scrolling, color-coded event log."""
     log_lines = []
     for rec in view.visible_events(n=12, player=log_filter):
         style = _EVENT_STYLE.get(rec["kind"], "")
@@ -400,118 +483,37 @@ def render_frame(view: ViewState, status: str, log_filter=None, bf_filter="all")
         line.append(format_event(rec), style=style)
         log_lines.append(line)
     ftitle = "LOG" + (f" [{log_filter}]" if log_filter else "")
-    log_panel = Panel(
+    return Panel(
         Group(*(log_lines or [Text("...")])),
         title=ftitle,
         border_style="grey42",
         padding=(0, 1),
     )
-    footer = Text(status, style="black on grey66")
-    return Group(header, grid, mid, log_panel, footer)
 
 
-# --------------------------------------------------------------- replay app
-REPLAY_HELP = (
-    " space:event  n/N:phase  t/T:turn  arrows:event/turn "
-    " g<turn>:jump  a:auto  +/-:speed  h:pause-on-highlight "
-    " f:log-filter  c:battlefield  q:quit "
-)
+def render_frame(
+    view: ViewState,
+    status: str,
+    log_filter: str | None = None,
+    bf_filter: str = "all",
+) -> Group | Panel:
+    """Render one full TUI frame: header, boards, stack/combat, log."""
+    snap = view.snapshot()
+    if snap is None:
+        return Panel("waiting for first snapshot ...")
+    return Group(
+        _frame_header(view, snap, bf_filter),
+        _players_grid(snap, bf_filter),
+        _stack_combat_row(snap),
+        _log_panel(view, log_filter),
+        Text(status, style="black on grey66"),
+    )
 
 
-def run_replay(records, meta, result=None):
-    import sys
-
-    if not HAVE_RICH or not sys.stdin.isatty():
-        from .replay import plain_replay
-
-        plain_replay(records, meta, result)
-        return
-    view = ViewState(records, meta)
-    view.result = result
-    view.step(1)
-    console = Console()
-    autoplay = False
-    speed = 1.0
-    pause_hl = True
-    log_filter = None
-    bf_filter = "all"
-    player_names = [p["name"] for p in (view.snapshot() or {}).get("players", [])]
-    goto = None
-
-    def status():
-        mode = f"auto x{speed:g}" if autoplay else "paused"
-        pos = f"{max(view.cursor, 0)}/{len(view.records)}"
-        g = f"  goto: {goto}_" if goto is not None else ""
-        return f" {mode}  {pos}{g} |{REPLAY_HELP}"
-
-    with (
-        keys.raw_terminal(),
-        Live(
-            render_frame(view, status()),
-            console=console,
-            screen=True,
-            auto_refresh=False,
-        ) as live,
-    ):
-        while True:
-            live.update(
-                render_frame(view, status(), log_filter, bf_filter=bf_filter),
-                refresh=True,
-            )
-            key = keys.read_key(0.35 / speed if autoplay else None)
-            if key is None:  # autoplay tick
-                moved = view.step(1)
-                if (not moved and view.at_end()) or (
-                    pause_hl
-                    and view.records[view.cursor]["t"] == "e"
-                    and view.records[view.cursor]["kind"] in HIGHLIGHTS
-                ):
-                    autoplay = False
-                continue
-            if goto is not None:
-                if key.isdigit():
-                    goto += key
-                    continue
-                if key in ("\r", "\n") and goto:
-                    view.jump_turn(int(goto))
-                goto = None
-                continue
-            if key in ("q", "\x03"):
-                return
-            if key in {" ", "right"}:
-                view.step(1)
-            elif key in ("left", "b"):
-                view.step(-1)
-            elif key == "n":
-                view.next_phase(1)
-            elif key == "N":
-                view.next_phase(-1)
-            elif key in ("t", "down"):
-                view.next_turn(1)
-            elif key in ("T", "up"):
-                view.next_turn(-1)
-            elif key == "a":
-                autoplay = not autoplay
-            elif key == "+":
-                speed = min(8.0, speed * 2)
-            elif key == "-":
-                speed = max(0.25, speed / 2)
-            elif key == "h":
-                pause_hl = not pause_hl
-            elif key == "f":
-                opts = [None, *player_names]
-                log_filter = opts[(opts.index(log_filter) + 1) % len(opts)]
-            elif key == "c":
-                bf_filter = BF_FILTERS[
-                    (BF_FILTERS.index(bf_filter) + 1) % len(BF_FILTERS)
-                ]
-            elif key == "g":
-                goto = ""
-            elif key == "G":
-                view.cursor = len(view.records) - 1
-
-
-def print_plain_frame(view, console_print=print):
+def print_plain_frame(
+    view: ViewState,
+    console_print: Callable[[str], None] = print,
+) -> None:
     """One-frame text dump (fallback when rich is unavailable)."""
     snap = view.snapshot()
     if snap is None:

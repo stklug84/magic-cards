@@ -9,10 +9,10 @@
 #     - actionlint   : .github/workflows/* (incl. shellcheck on run: steps)
 #     - yamllint     : all YAML files (.yamllint.yml)
 #     - markdownlint : all Markdown files (.markdownlint.yml)
-#     - python       : ruff + mypy + bandit on scripts/ via the reusable
-#                      stklug84/github-workflows python-validate workflow
-#                      (tool config in pyproject.toml; mypy runs non-strict
-#                      until docs/python-strictness-roadmap.md is done)
+#     - python       : ruff (select = ALL) + mypy --strict + bandit on
+#                      scripts/ via the reusable stklug84/github-workflows
+#                      python-validate workflow (tool config in
+#                      pyproject.toml)
 # ---
 name: Lint
 
@@ -78,14 +78,14 @@ jobs:
           config: .markdownlint.yml
           globs: '**/*.md'
 
-  # Ruff (lint + format check), mypy and Bandit on the Python tooling.
-  # All three tools read their configuration from pyproject.toml; mypy
-  # strictness is governed there (mypy-strict 'false'), so the job stays
-  # green while the strictness roadmap is worked through.
+  # Ruff (lint + format check), mypy --strict and Bandit on the Python
+  # tooling. All three tools read their configuration from
+  # pyproject.toml (ruff select = ALL with permanent, individually
+  # justified ignores only; [tool.mypy] strict = true).
   python:
     uses: stklug84/github-workflows/.github/workflows/python-validate.yml@v1.20.0
     with:
       paths: "scripts"
       config: "pyproject.toml"
-      mypy-strict: "false"
+      mypy-strict: "true"
       mypy-extra-deps: "rdflib>=7,<8"

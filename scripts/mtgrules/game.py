@@ -9,19 +9,35 @@ stack with priority passing (rules 117, 405, 601-608), state-based actions
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from typing import TYPE_CHECKING, Any
+from typing import TYPE_CHECKING, Any, TypedDict, cast
 
-from .abilities import ActivatedAbility, SpellAbility, TokenSpec, TriggeredAbility
-from .cr import rule, unsupported
-from .effects import Ctx
-from .events import Event, EventType
-from .layers import ContinuousEffect, LayerSystem
-from .manasys import ManaPool, parse_cost
-from .objects import Characteristics, GameObject, Player, Zone
-from .replacements import ReplacementEngine
+from mtgrules.abilities import (
+    ActivatedAbility,
+    SpellAbility,
+    StaticAbility,
+    TargetSpec,
+    TokenSpec,
+    TriggeredAbility,
+)
+from mtgrules.cr import rule, unsupported
+from mtgrules.effects import AddMana, Ctx
+from mtgrules.events import Event, EventType
+from mtgrules.layers import LayerSystem
+from mtgrules.manasys import ManaPool, parse_cost
+from mtgrules.objects import Characteristics, GameObject, Player, Zone
+from mtgrules.replacements import ReplacementEngine
+from mtgrules.stack import PendingTrigger, StackItem
 
 if TYPE_CHECKING:
     import random
+    from collections.abc import Callable, Iterator
+    from typing import Literal
+
+    from mtgrules.layers import ContinuousEffect
+    from mtgrules.manasys import Cost
+    from mtgrules.policy import DefaultPolicy
+    from mtgrules.protocols import LogFn
+    from mtgrules.stack import Target
 
 unsupported(
     "903.4",
@@ -29,57 +45,155 @@ unsupported(
     "knowledge-graph tooling, not at runtime",
 )
 
+#: rule 704.5c: a player with ten or more poison counters loses
+POISON_LOSS_THRESHOLD = 10
+#: rules 903.10a / 704.6c: 21+ combat damage from one commander loses
+COMMANDER_DAMAGE_LOSS = 21
 
-@rule("405.1", "405.2")
-@dataclass
-class StackItem:
-    """A spell or ability on the stack (rules 405.1-405.2)."""
-
-    obj: Any  # GameObject (spell) or PendingTrigger (ability)
-    source: Any  # for abilities: their source object
-    controller: Any  # Player
-    ability: Any = None  # SpellAbility/Activated/Triggered
-    targets: list = field(default_factory=list)
-    x: int = 0
-    is_spell: bool = False
-
-    def __repr__(self):
-        name = (
-            self.obj.base.name
-            if self.is_spell
-            else f"ability of {self.source.base.name}"
-        )
-        return f"<Stack:{name}>"
+_ADD_ANY_MANA = AddMana(any_color=True)
 
 
-@dataclass
-class PendingTrigger:
-    ability: Any
-    source: Any
-    controller: Any  # Player
-    event: Any  # events.Event
+class CastOptions(TypedDict, total=False):
+    """Keyword options of a ('cast', card, options) player action."""
+
+    x: int
+    from_command: bool
 
 
-def _lname(x) -> str:
+class ActivateOptions(TypedDict, total=False):
+    """Keyword options of an ('activate', obj, ability, options) action."""
+
+    x: int
+
+
+#: the three legal player actions a policy can choose during priority
+type CastAction = tuple[Literal["cast"], GameObject, CastOptions]
+type ActivateAction = tuple[
+    Literal["activate"],
+    GameObject,
+    ActivatedAbility,
+    ActivateOptions,
+]
+type LandAction = tuple[Literal["land"], GameObject]
+type Action = CastAction | ActivateAction | LandAction
+
+#: an ability that can sit on the stack and resolve
+type ResolvableAbility = SpellAbility | ActivatedAbility | TriggeredAbility
+
+
+def _lname(x: object) -> str:
     """Loggable name for a Player, GameObject, or stack item."""
     if isinstance(x, Player):
         return x.name
     if isinstance(x, GameObject):
         return x.base.name or "(unnamed)"
     if isinstance(x, StackItem):
-        return x.obj.base.name if x.is_spell else f"ability of {x.source.base.name}"
+        if x.is_spell:
+            return cast("GameObject", x.obj).base.name
+        return f"ability of {x.source.base.name}"
     return str(x)
 
 
+@dataclass
+class _ManaPlan:
+    """Working state of one greedy mana-payment search (rule 601.2g)."""
+
+    pool: dict[str, int]
+    #: untapped sources: (permanent, mana ability, producible colors, amount)
+    avail: list[tuple[GameObject, ActivatedAbility, frozenset[str], int]]
+    #: sources committed so far, with the mana type each will produce
+    used: list[tuple[GameObject, ActivatedAbility, str]] = field(default_factory=list)
+
+    def take(
+        self,
+        pred: Callable[[frozenset[str]], object],
+    ) -> tuple[GameObject, ActivatedAbility, frozenset[str], int] | None:
+        """Pop the matching source with the fewest producible colors."""
+        best = None
+        for i, (_obj, _ab, colors, _amount) in enumerate(self.avail):
+            if pred(colors) and (
+                best is None or len(colors) < len(self.avail[best][2])
+            ):
+                best = i
+        if best is None:
+            return None
+        return self.avail.pop(best)
+
+    def cover_pips(self, cost: Cost) -> bool:
+        """Cover the colored and {C} pips of *cost* (rule 601.2g)."""
+        need_pips: list[str] = []
+        for color, n in cost.pips.items():
+            need_pips += [color] * n
+        need_pips += ["C"] * cost.colorless
+        for color in need_pips:
+            if self.pool.get(color, 0) > 0:
+                self.pool[color] -= 1
+                continue
+
+            def has_color(cs: frozenset[str], c: str = color) -> bool:
+                return c in cs
+
+            got = self.take(has_color)
+            if got is None:
+                return False
+            self.used.append((got[0], got[1], color))
+            if len(got[2]) == 1 and got[3] > 1:
+                # single-type multi-mana source (Sol Ring): surplus floats
+                self.pool[color] = self.pool.get(color, 0) + got[3] - 1
+        return True
+
+    def cover_hybrid(self, cost: Cost) -> bool:
+        """Cover the hybrid pips of *cost*, scarcest option first."""
+        for opts in sorted(cost.hybrid, key=len):
+            hit = False
+            for c in opts:
+                if self.pool.get(c, 0) > 0:
+                    self.pool[c] -= 1
+                    hit = True
+                    break
+            if hit:
+                continue
+
+            def overlaps(
+                cs: frozenset[str],
+                wanted: frozenset[str] = opts,
+            ) -> frozenset[str]:
+                return cs & wanted
+
+            got = self.take(overlaps)
+            if got is None:
+                return False
+            color = next(iter(got[2] & opts))
+            self.used.append((got[0], got[1], color))
+        return True
+
+    def cover_generic(self, cost: Cost) -> bool:
+        """Cover the generic part from floating mana, then sources."""
+        need = cost.generic
+        for t in sorted(self.pool, key=lambda t: (t != "C", -self.pool[t])):
+            take_n = min(need, self.pool[t])
+            self.pool[t] -= take_n
+            need -= take_n
+        self.avail.sort(key=lambda e: (-e[3], len(e[2])))
+        while need > 0 and self.avail:
+            obj, ab, colors, amount = self.avail.pop(0)
+            self.used.append((obj, ab, "C" if "C" in colors else next(iter(colors))))
+            need -= amount
+        return need <= 0
+
+
 class Game:
+    """One game: players, zones, the stack, and the CR machinery."""
+
     def __init__(
         self,
         players: list[Player],
         rng: random.Random,
-        policies: dict,
+        policies: dict[str, DefaultPolicy],
         turn_cap: int = 40,
-        log=None,
-    ):
+        log: LogFn | None = None,
+    ) -> None:
+        """Wire up the layer/replacement engines and fresh mana pools."""
         self.players = players
         self.rng = rng
         self.policies = policies
@@ -89,32 +203,38 @@ class Game:
         self.phase = "main1"
         #: (obj id, ability index) activated this turn (once-per-turn and
         #: loyalty tracking, rule 606.3)
-        self.activated_this_turn: set = set()
+        self.activated_this_turn: set[tuple[object, ...]] = set()
         self.stack: list[StackItem] = []
         self.pending_triggers: list[PendingTrigger] = []
         self.tick = 0
         self.layers = LayerSystem(self)
         self.replacements = ReplacementEngine(self)
-        self.log = log or (lambda *a, **k: None)
+        self.log: LogFn = log or (lambda *_args, **_kw: None)
         self.game_over = False
         self.winner: Player | None = None
-        self.unknown_clauses: dict[str, set] = {}
+        self.unknown_clauses: dict[str, set[str]] = {}
+        #: scratch state owned by hand-written card implementations
+        self.custom: dict[str, Any] = {}
         for p in players:
             p.mana_pool = ManaPool()
 
     # ------------------------------------------------------------ helpers
-    def bump(self):
+    def bump(self) -> None:
+        """Invalidate the layer-system cache (state changed)."""
         self.tick += 1
 
     @property
     def active_player(self) -> Player:
+        """The player whose turn it is (rule 102.1)."""
         return self.players[self.active_idx]
 
     @rule("102.2", "102.3")
-    def opponents(self, player) -> list[Player]:
+    def opponents(self, player: Player) -> list[Player]:
+        """Return the surviving opponents of *player* (rule 102.2)."""
         return [p for p in self.players if p is not player and not p.lost]
 
     def alive(self) -> list[Player]:
+        """All players still in the game."""
         return [p for p in self.players if not p.lost]
 
     @rule("101.4")
@@ -124,53 +244,41 @@ class Game:
         order = [self.players[(self.active_idx + i) % n] for i in range(n)]
         return [p for p in order if not p.lost]
 
-    def policy(self, player):
+    def policy(self, player: Player) -> DefaultPolicy:
+        """Return the decision policy that plays for *player*."""
         return self.policies[player.name]
 
-    def battlefield_objects(self):
+    def battlefield_objects(self) -> Iterator[GameObject]:
+        """Every permanent on any player's battlefield."""
         for p in self.players:
             yield from p.battlefield
 
-    def commander_identity(self, player) -> set:
+    def commander_identity(self, player: Player) -> set[str]:
+        """Return the commander's color identity (rule 903.4)."""
         obj = player.commander_obj
         if obj is None or obj.card_ref is None:
             return set("WUBRG")
         return set(obj.card_ref.color_identity)
 
     @rule("702.11")
-    def cant_be_targeted(self, obj, ctx) -> bool:
+    def cant_be_targeted(self, obj: GameObject, ctx: Ctx) -> bool:
         """Hexproof (rule 702.11): can't be targeted by opponents."""
         ch = obj.chars(self)
         return "hexproof" in ch.keywords and ctx.controller is not obj.controller
 
     # ------------------------------------------------------------ events
-    def emit(self, event: Event):
-        """Route an event through replacement effects (rule 614), then
-        return the final event, or None if it was prevented.
+    def emit(self, event: Event) -> Event | None:
+        """Route an event through replacement effects (rule 614).
+
+        Returns the final event, or None if it was prevented.
         """
         return self.replacements.process(event)
 
     @rule("603.2", "603.3")
-    def _queue_triggers(self, event: Event):
+    def queue_triggers(self, event: Event) -> None:
         """Collect triggered abilities that trigger off *event*."""
-        watchers = []
-        for obj in self.battlefield_objects():
-            for ab in obj.chars(self).abilities:
-                if isinstance(ab, TriggeredAbility):
-                    watchers.append((obj, ab))
-        # rule 603.6b-d: leave-the-battlefield / dies triggers of the
-        # departing object itself look back in time
-        obj = event.data.get("obj")
-        if (
-            obj is not None
-            and isinstance(obj, GameObject)
-            and obj.zone != Zone.BATTLEFIELD
-        ):
-            for ab in obj.base.abilities:
-                if isinstance(ab, TriggeredAbility):
-                    watchers.append((obj, ab))
-        seen = set()
-        for source, ab in watchers:
+        seen: set[tuple[int, int]] = set()
+        for source, ab in self._trigger_watchers(event):
             key = (source.id, id(ab))
             if key in seen:
                 continue
@@ -182,12 +290,35 @@ class Game:
                     PendingTrigger(ab, source, source.controller, event),
                 )
 
+    @rule("603.6b")
+    def _trigger_watchers(
+        self,
+        event: Event,
+    ) -> list[tuple[GameObject, TriggeredAbility]]:
+        """All (source, ability) pairs that watch for *event*."""
+        watchers = [
+            (obj, ab)
+            for obj in self.battlefield_objects()
+            for ab in obj.chars(self).abilities
+            if isinstance(ab, TriggeredAbility)
+        ]
+        # rule 603.6b-d: leave-the-battlefield / dies triggers of the
+        # departing object itself look back in time
+        obj = event.data.get("obj")
+        if isinstance(obj, GameObject) and obj.zone != Zone.BATTLEFIELD:
+            watchers.extend(
+                (obj, ab)
+                for ab in obj.base.abilities
+                if isinstance(ab, TriggeredAbility)
+            )
+        return watchers
+
     @rule("603.3b")
-    def put_triggers_on_stack(self):
+    def put_triggers_on_stack(self) -> bool:
         """APNAP order; each player orders their own triggers."""
         if not self.pending_triggers:
             return False
-        by_player = {}
+        by_player: dict[Player, list[PendingTrigger]] = {}
         for t in self.pending_triggers:
             by_player.setdefault(t.controller, []).append(t)
         self.pending_triggers = []
@@ -196,7 +327,7 @@ class Game:
             if len(mine) > 1:
                 mine = self.policy(p).order_triggers(self, mine)
             for t in mine:
-                if getattr(t.ability, "once_each_turn", False):
+                if t.ability.once_each_turn:
                     key = ("trig", t.source.id, id(t.ability))
                     if key in self.activated_this_turn:
                         continue  # "only once each turn"
@@ -225,10 +356,15 @@ class Game:
         obj: GameObject,
         to_zone: str,
         *,
-        to_battlefield_tapped=False,
-        counters=None,
+        to_battlefield_tapped: bool = False,
+        counters: dict[str, int] | None = None,
         pos: str = "top",
-    ):
+    ) -> GameObject | None:
+        """Move *obj* between zones through the replacement machinery.
+
+        Returns the object, or None when the move was prevented or the
+        object ceased to exist (tokens, rule 704.5d).
+        """
         from_zone = obj.zone
         event = self.emit(
             Event(
@@ -245,38 +381,16 @@ class Game:
         )
         if event is None:
             return None
-        to_zone = event.data["to"]
-
-        # rule 903.9a-b: a commander's owner may move it to the command
-        # zone instead of graveyard/exile/hand/library
-        if (
-            obj.commander
-            and to_zone in (Zone.GRAVEYARD, Zone.EXILE, Zone.HAND, Zone.LIBRARY)
-            and self.policy(obj.owner).commander_to_command_zone(self, obj, to_zone)
-        ):
-            to_zone = Zone.COMMAND
-
+        to_zone = self._commander_redirect(obj, event.data["to"])
         self._remove_from_zone(obj, from_zone)
 
         # rule 704.5d: a token anywhere but the battlefield ceases to exist
         if obj.is_token and to_zone != Zone.BATTLEFIELD:
-            obj.zone = "ceased"
-            self.bump()
-            if from_zone == Zone.BATTLEFIELD and to_zone == Zone.GRAVEYARD:
-                obj.controller.stat("tokens_killed")
-                self.log("dies", who=obj.controller.name, card=_lname(obj), token=True)
-                self._fire_leave_battlefield(obj, event)
+            self._token_ceases(obj, from_zone, to_zone, event)
             return None
 
         obj.zone = to_zone
-        holder = obj.controller if to_zone == Zone.BATTLEFIELD else obj.owner
-        if to_zone == Zone.LIBRARY:
-            if pos == "bottom":
-                holder.library.append(obj)
-            else:
-                holder.library.insert(0, obj)
-        else:
-            holder.zone_list(to_zone).append(obj)
+        self._place_in_zone(obj, to_zone, pos)
 
         if Zone.BATTLEFIELD in (from_zone, to_zone):
             # last-known-information for leave-the-battlefield triggers
@@ -294,7 +408,7 @@ class Game:
                 obj.counters[kind] = obj.counters.get(kind, 0) + n
             self.bump()
             etb = Event(EventType.ENTERS_BATTLEFIELD, {"obj": obj})
-            self._queue_triggers(etb)
+            self.queue_triggers(etb)
         elif from_zone == Zone.BATTLEFIELD:
             self.bump()
             if to_zone == Zone.GRAVEYARD:
@@ -304,11 +418,51 @@ class Game:
             self.bump()
         return obj
 
-    def _fire_leave_battlefield(self, obj, zone_event):
-        if zone_event.data["to"] == Zone.GRAVEYARD:
-            self._queue_triggers(Event(EventType.DIES, {"obj": obj}))
+    @rule("903.9a")
+    def _commander_redirect(self, obj: GameObject, to_zone: str) -> str:
+        """Rule 903.9a-b: the owner may send a commander to the command zone."""
+        if (
+            obj.commander
+            and to_zone in (Zone.GRAVEYARD, Zone.EXILE, Zone.HAND, Zone.LIBRARY)
+            and self.policy(obj.owner).commander_to_command_zone(self, obj, to_zone)
+        ):
+            return Zone.COMMAND
+        return to_zone
 
-    def _remove_from_zone(self, obj, zone):
+    @rule("704.5d")
+    def _token_ceases(
+        self,
+        obj: GameObject,
+        from_zone: str,
+        to_zone: str,
+        event: Event,
+    ) -> None:
+        """Cease a token that left the battlefield (rule 704.5d)."""
+        obj.zone = "ceased"
+        self.bump()
+        if from_zone == Zone.BATTLEFIELD and to_zone == Zone.GRAVEYARD:
+            obj.controller.stat("tokens_killed")
+            self.log("dies", who=obj.controller.name, card=_lname(obj), token=True)
+            self._fire_leave_battlefield(obj, event)
+
+    def _place_in_zone(self, obj: GameObject, to_zone: str, pos: str) -> None:
+        """Append *obj* to the destination zone's list."""
+        holder = obj.controller if to_zone == Zone.BATTLEFIELD else obj.owner
+        if to_zone == Zone.LIBRARY:
+            if pos == "bottom":
+                holder.library.append(obj)
+            else:
+                holder.library.insert(0, obj)
+        else:
+            holder.zone_list(to_zone).append(obj)
+
+    def _fire_leave_battlefield(self, obj: GameObject, zone_event: Event) -> None:
+        """Queue dies triggers when the destination was a graveyard."""
+        if zone_event.data["to"] == Zone.GRAVEYARD:
+            self.queue_triggers(Event(EventType.DIES, {"obj": obj}))
+
+    def _remove_from_zone(self, obj: GameObject, zone: str) -> None:
+        """Remove *obj* from whichever player's list holds it."""
         if zone == "ceased":
             return
         for p in self.players:
@@ -321,13 +475,14 @@ class Game:
     @rule("111.2", "111.3")
     def create_tokens(
         self,
-        controller,
+        controller: Player,
         spec: TokenSpec,
         count: int,
         *,
-        source=None,
-        tapped=None,
-    ):
+        source: GameObject | None = None,
+        tapped: bool | None = None,
+    ) -> list[GameObject]:
+        """Create *count* tokens from *spec* (rule 111.2)."""
         event = self.emit(
             Event(
                 EventType.CREATE_TOKEN,
@@ -341,59 +496,75 @@ class Game:
         )
         if event is None or event.data["count"] <= 0:
             return []
-        made = []
-        specs = [(event.data["spec"], event.data["count"])]
-        for extra in event.data.get("extra_specs", []):
-            specs.append((extra, event.data["count"]))
-        for tok_spec, tok_count in specs:
-            for _ in range(tok_count):
-                base = Characteristics(
-                    name=tok_spec.name,
-                    colors=set(tok_spec.colors),
-                    types=set(tok_spec.types),
-                    subtypes=set(tok_spec.subtypes),
-                    power=tok_spec.power,
-                    toughness=tok_spec.toughness,
-                    keywords=set(tok_spec.keywords),
-                )
-                if tok_spec.predefined in ("treasure", "gold"):
-                    base.abilities.append(
-                        ActivatedAbility(
-                            tap_cost=True,
-                            sac_cost="self",
-                            is_mana_ability=True,
-                            effect=_ADD_ANY_MANA,
-                            text="{T}, Sacrifice: Add one mana of any color.",
-                        ),
-                    )
-                for factory in getattr(tok_spec, "abilities", ()) or ():
-                    base.abilities.append(factory())
-                tok = GameObject(base, controller, is_token=True)
-                tok.zone = Zone.BATTLEFIELD
-                tok.controller = controller
-                tok.tapped = tok_spec.tapped if tapped is None else tapped
-                tok.entered_this_turn = True
-                controller.battlefield.append(tok)
-                made.append(tok)
-                controller.stat("tokens_created")
-                if tok_spec.predefined in ("treasure", "gold"):
-                    controller.stat("treasures_made")
-                self.log(
-                    "token",
-                    who=controller.name,
-                    name=tok_spec.name,
-                    pt=(
-                        f"{tok_spec.power}/{tok_spec.toughness}"
-                        if tok_spec.power is not None
-                        else None
-                    ),
-                )
-                self.bump()
-                self._queue_triggers(Event(EventType.ENTERS_BATTLEFIELD, {"obj": tok}))
+        made: list[GameObject] = []
+        specs: list[tuple[TokenSpec, int]] = [
+            (event.data["spec"], event.data["count"]),
+        ]
+        specs.extend(
+            (extra, event.data["count"]) for extra in event.data.get("extra_specs", [])
+        )
+        made.extend(
+            self._make_token(controller, tok_spec, tapped=tapped)
+            for tok_spec, tok_count in specs
+            for _ in range(tok_count)
+        )
         return made
 
+    def _make_token(
+        self,
+        controller: Player,
+        tok_spec: TokenSpec,
+        *,
+        tapped: bool | None,
+    ) -> GameObject:
+        """Build one token object and put it onto the battlefield."""
+        base = Characteristics(
+            name=tok_spec.name,
+            colors=set(tok_spec.colors),
+            types=set(tok_spec.types),
+            subtypes=set(tok_spec.subtypes),
+            power=tok_spec.power,
+            toughness=tok_spec.toughness,
+            keywords=set(tok_spec.keywords),
+        )
+        if tok_spec.predefined in ("treasure", "gold"):
+            base.abilities.append(
+                ActivatedAbility(
+                    tap_cost=True,
+                    sac_cost="self",
+                    is_mana_ability=True,
+                    effect=_ADD_ANY_MANA,
+                    text="{T}, Sacrifice: Add one mana of any color.",
+                ),
+            )
+        for factory in tok_spec.abilities:
+            base.abilities.append(factory())
+        tok = GameObject(base, controller, is_token=True)
+        tok.zone = Zone.BATTLEFIELD
+        tok.controller = controller
+        tok.tapped = tok_spec.tapped if tapped is None else tapped
+        tok.entered_this_turn = True
+        controller.battlefield.append(tok)
+        controller.stat("tokens_created")
+        if tok_spec.predefined in ("treasure", "gold"):
+            controller.stat("treasures_made")
+        self.log(
+            "token",
+            who=controller.name,
+            name=tok_spec.name,
+            pt=(
+                f"{tok_spec.power}/{tok_spec.toughness}"
+                if tok_spec.power is not None
+                else None
+            ),
+        )
+        self.bump()
+        self.queue_triggers(Event(EventType.ENTERS_BATTLEFIELD, {"obj": tok}))
+        return tok
+
     @rule("121.1", "121.4")
-    def draw(self, player, n=1):
+    def draw(self, player: Player, n: int = 1) -> None:
+        """Draw *n* cards, one draw event at a time (rule 121.2)."""
         for _ in range(n):
             event = self.emit(Event(EventType.DRAW, {"player": player}))
             if event is None:
@@ -409,7 +580,15 @@ class Game:
         self.bump()
 
     @rule("120.3", "119.3")
-    def deal_damage(self, source, target, amount, *, combat=False):
+    def deal_damage(
+        self,
+        source: GameObject | Player | None,
+        target: GameObject | Player,
+        amount: int,
+        *,
+        combat: bool = False,
+    ) -> None:
+        """Deal damage from *source* to a player or permanent (rule 120)."""
         if amount <= 0:
             return
         event = self.emit(
@@ -428,7 +607,7 @@ class Game:
         amount = event.data["amount"]
         src_ch = source.chars(self) if isinstance(source, GameObject) else None
         # damage triggers (e.g. "deals combat damage to a player")
-        self._queue_triggers(
+        self.queue_triggers(
             Event(
                 EventType.DAMAGE,
                 {
@@ -448,38 +627,61 @@ class Game:
             combat=combat,
         )
         if isinstance(target, Player):
-            if src_ch is not None and "infect" in src_ch.keywords:
-                # rule 702.90b: infect damage to a player is poison
-                # counters instead of life loss
-                self.add_poison(target, amount)
-            else:
-                # rule 120.3a: damage to a player causes life loss
-                self.lose_life(target, amount, damage=True)
-            if combat and src_ch is not None:
-                # rule 702.164a toxic: combat damage also gives poison
-                for kw in src_ch.keywords:
-                    if kw.startswith("toxic:"):
-                        self.add_poison(target, int(kw.split(":")[1]))
-            if combat and isinstance(source, GameObject) and source.commander:
-                # rules 903.10a / 704.6c: commander damage
-                dealt = target.commander_damage.get(source.id, 0) + amount
-                target.commander_damage[source.id] = dealt
+            self._damage_player(source, src_ch, target, amount, combat=combat)
         else:
-            ch = target.chars(self)
-            if "Planeswalker" in ch.types:
-                # rule 120.3c: damage removes that many loyalty counters
-                self.remove_counters(target, "loyalty", amount)
-            elif src_ch is not None and "wither" in src_ch.keywords:
-                # rule 702.80: wither deals damage as -1/-1 counters
-                self.put_counters(target, "-1/-1", amount)
-            else:
-                target.damage += amount
-                if src_ch is not None and "deathtouch" in src_ch.keywords:
-                    target.deathtouch_damage = True  # rule 704.5h
-            self.bump()
+            self._damage_permanent(src_ch, target, amount)
+
+    @rule("120.3a", "702.90b", "702.164a", "903.10a")
+    def _damage_player(
+        self,
+        source: GameObject | Player | None,
+        src_ch: Characteristics | None,
+        target: Player,
+        amount: int,
+        *,
+        combat: bool,
+    ) -> None:
+        """Damage to a player: life loss, poison, commander damage."""
+        if src_ch is not None and "infect" in src_ch.keywords:
+            # rule 702.90b: infect damage to a player is poison
+            # counters instead of life loss
+            self.add_poison(target, amount)
+        else:
+            # rule 120.3a: damage to a player causes life loss
+            self.lose_life(target, amount, damage=True)
+        if combat and src_ch is not None:
+            # rule 702.164a toxic: combat damage also gives poison
+            for kw in src_ch.keywords:
+                if kw.startswith("toxic:"):
+                    self.add_poison(target, int(kw.split(":")[1]))
+        if combat and isinstance(source, GameObject) and source.commander:
+            # rules 903.10a / 704.6c: commander damage
+            dealt = target.commander_damage.get(source.id, 0) + amount
+            target.commander_damage[source.id] = dealt
+
+    @rule("120.3c", "702.80")
+    def _damage_permanent(
+        self,
+        src_ch: Characteristics | None,
+        target: GameObject,
+        amount: int,
+    ) -> None:
+        """Damage to a permanent: loyalty, wither, or marked damage."""
+        ch = target.chars(self)
+        if "Planeswalker" in ch.types:
+            # rule 120.3c: damage removes that many loyalty counters
+            self.remove_counters(target, "loyalty", amount)
+        elif src_ch is not None and "wither" in src_ch.keywords:
+            # rule 702.80: wither deals damage as -1/-1 counters
+            self.put_counters(target, "-1/-1", amount)
+        else:
+            target.damage += amount
+            if src_ch is not None and "deathtouch" in src_ch.keywords:
+                target.deathtouch_damage = True  # rule 704.5h
+        self.bump()
 
     @rule("122.1", "702.90b")
-    def add_poison(self, player, n):
+    def add_poison(self, player: Player, n: int) -> None:
         """Give a player poison counters (infect / toxic)."""
         if n <= 0:
             return
@@ -488,7 +690,8 @@ class Game:
         self.log("poison", who=player.name, n=n, total=player.poison)
         self.bump()
 
-    def gain_life(self, player, n):
+    def gain_life(self, player: Player, n: int) -> None:
+        """Give the player *n* life (rule 119.3), replaceable."""
         if n <= 0:
             return
         event = self.emit(Event(EventType.GAIN_LIFE, {"player": player, "amount": n}))
@@ -498,7 +701,8 @@ class Game:
         self.log("life", who=player.name, delta=event.data["amount"], total=player.life)
         self.bump()
 
-    def lose_life(self, player, n, damage=False):
+    def lose_life(self, player: Player, n: int, *, damage: bool = False) -> None:
+        """Take *n* life from the player (rule 119.3), replaceable."""
         if n <= 0:
             return
         event = self.emit(
@@ -519,7 +723,8 @@ class Game:
         self.bump()
 
     @rule("122.1", "122.6")
-    def put_counters(self, obj, kind, n):
+    def put_counters(self, obj: GameObject, kind: str, n: int) -> None:
+        """Put *n* counters of *kind* on a battlefield object."""
         if n <= 0 or obj.zone != Zone.BATTLEFIELD:
             return
         event = self.emit(
@@ -534,14 +739,15 @@ class Game:
         obj.counters[kind] = obj.counters.get(kind, 0) + n
         obj.controller.stat("counters_received", n)
         self.bump()
-        self._queue_triggers(
+        self.queue_triggers(
             Event(
                 EventType.PUT_COUNTERS,
                 {"obj": obj, "kind": kind, "count": n, "resolved": True},
             ),
         )
 
-    def remove_counters(self, obj, kind, n):
+    def remove_counters(self, obj: GameObject, kind: str, n: int) -> None:
+        """Remove up to *n* counters of *kind* from the object."""
         have = obj.counters.get(kind, 0)
         take = min(have, n)
         if take:
@@ -551,9 +757,11 @@ class Game:
             self.bump()
 
     @rule("702.87")
-    def proliferate(self, player):
-        """Choose any number of permanents/players with counters; give each
-        one more counter of each kind already there (rule 702.87a).
+    def proliferate(self, player: Player) -> None:
+        """Proliferate for *player* (rule 702.87a).
+
+        Choose any number of permanents/players with counters; give each
+        one more counter of each kind already there.
         """
         picks = self.policy(player).choose_proliferate(self, player)
         for obj in picks:
@@ -562,7 +770,8 @@ class Game:
         player.stat("proliferates")
 
     @rule("701.34")
-    def populate(self, player):
+    def populate(self, player: Player) -> None:
+        """Populate: copy one of the player's creature tokens (701.34)."""
         tokens = [
             o
             for o in player.battlefield
@@ -586,7 +795,8 @@ class Game:
         self.create_tokens(player, spec, 1)
 
     @rule("701.7", "701.7b")
-    def destroy(self, obj):
+    def destroy(self, obj: GameObject) -> None:
+        """Destroy the permanent (rule 701.7); indestructible ignores it."""
         if obj.zone != Zone.BATTLEFIELD:
             return
         if "indestructible" in obj.chars(self).keywords:  # rule 702.12
@@ -597,7 +807,8 @@ class Game:
         self.move_zone(obj, Zone.GRAVEYARD)
 
     @rule("701.9")
-    def exile(self, obj):
+    def exile(self, obj: GameObject) -> None:
+        """Exile the permanent (rule 701.9)."""
         if obj.zone != Zone.BATTLEFIELD:
             return
         event = self.emit(Event(EventType.EXILE_OBJ, {"obj": obj}))
@@ -606,29 +817,41 @@ class Game:
         self.move_zone(obj, Zone.EXILE)
 
     @rule("701.22")
-    def sacrifice(self, player, obj):
-        """Sacrifice can't be replaced and ignores indestructible
-        (rules 701.22a-b).
+    def sacrifice(self, player: Player, obj: GameObject) -> None:
+        """Sacrifice the permanent (rules 701.22a-b).
+
+        Sacrifice can't be replaced and ignores indestructible.
         """
         if obj.zone != Zone.BATTLEFIELD or obj.controller is not player:
             return
         self.emit(Event(EventType.SACRIFICE, {"obj": obj}))
         self.move_zone(obj, Zone.GRAVEYARD)
 
-    def tap(self, obj):
+    def tap(self, obj: GameObject) -> None:
+        """Tap the permanent, firing tap triggers."""
         if not obj.tapped:
             obj.tapped = True
             self.bump()
-            self._queue_triggers(Event(EventType.TAP, {"obj": obj}))
+            self.queue_triggers(Event(EventType.TAP, {"obj": obj}))
 
-    def untap(self, obj):
+    def untap(self, obj: GameObject) -> None:
+        """Untap the permanent, firing untap triggers."""
         if obj.tapped:
             obj.tapped = False
             self.bump()
-            self._queue_triggers(Event(EventType.UNTAP, {"obj": obj}))
+            self.queue_triggers(Event(EventType.UNTAP, {"obj": obj}))
 
     @rule("701.23")
-    def search_lands(self, player, n, *, tapped=True, to_hand=False, basic_only=True):
+    def search_lands(
+        self,
+        player: Player,
+        n: int,
+        *,
+        tapped: bool = True,
+        to_hand: bool = False,
+        basic_only: bool = True,
+    ) -> None:
+        """Search the library for up to *n* lands, then shuffle (701.23)."""
         found = 0
         for card in list(player.library):
             if found >= n:
@@ -649,23 +872,26 @@ class Game:
                 card.reset_battlefield_state()
                 card.entered_this_turn = True
                 card.tapped = tapped
-                self._queue_triggers(Event(EventType.ENTERS_BATTLEFIELD, {"obj": card}))
+                self.queue_triggers(Event(EventType.ENTERS_BATTLEFIELD, {"obj": card}))
             found += 1
         self.shuffle(player)
 
     @rule("701.24")
-    def shuffle(self, player):
+    def shuffle(self, player: Player) -> None:
+        """Shuffle the player's library (rule 701.24)."""
         self.rng.shuffle(player.library)
         self.emit(Event(EventType.SHUFFLE, {"player": player}))
         self.bump()
 
     @rule("701.26")
-    def scry(self, player, n):
+    def scry(self, player: Player, n: int) -> None:
+        """Scry *n* via the player's policy (rule 701.26)."""
         top = player.library[:n]
         keep, bottom = self.policy(player).scry(self, player, top)
         player.library = keep + player.library[n:] + bottom
 
-    def tutor(self, player):
+    def tutor(self, player: Player) -> None:
+        """Search the library for any card to hand, then shuffle."""
         pick = self.policy(player).choose_tutor_card(self, player)
         if pick is not None and pick in player.library:
             player.library.remove(pick)
@@ -673,7 +899,8 @@ class Game:
             player.hand.append(pick)
         self.shuffle(player)
 
-    def blink(self, obj):
+    def blink(self, obj: GameObject) -> None:
+        """Exile the permanent and return it to the battlefield."""
         owner_ctl = obj.controller
         if obj.is_token:
             self.move_zone(obj, Zone.EXILE)  # token ceases (704.5d)
@@ -684,14 +911,19 @@ class Game:
             self.move_zone(moved, Zone.BATTLEFIELD)
 
     @rule("701.5")
-    def counter_spell(self, item: StackItem):
+    def counter_spell(self, item: StackItem) -> None:
+        """Counter the spell on the stack (rule 701.5)."""
         if item in self.stack:
             if self._uncounterable(item):
                 self.log("uncounterable", spell=_lname(item))
                 return
             self.log("counter", spell=_lname(item), who=item.controller.name)
             self.stack.remove(item)
-            if item.is_spell and not item.obj.is_token:
+            if (
+                item.is_spell
+                and isinstance(item.obj, GameObject)
+                and not item.obj.is_token
+            ):
                 self.move_zone(item.obj, Zone.GRAVEYARD)
             item.controller.stat("spells_countered_against")
             self.bump()
@@ -700,18 +932,24 @@ class Game:
         """'Spells you control can't be countered' statics (e.g. Chimil)."""
         for obj in item.controller.battlefield:
             for ab in obj.chars(self).abilities:
-                if getattr(ab, "uncounterable_spells", False):
+                if isinstance(ab, StaticAbility) and ab.uncounterable_spells:
                     return True
         return False
 
     @rule("707.10", "707.10a", "704.5e")
-    def copy_spell(self, item: StackItem, controller) -> StackItem | None:
-        """Put a copy of a spell on the stack (rule 707.10). The copy keeps
-        the original's targets and X; it is created as a token object so
-        it ceases to exist in any zone but the stack (704.5e / 707.10a) and
-        resolves to a token if it is a permanent spell.
+    def copy_spell(self, item: StackItem, controller: Player) -> StackItem | None:
+        """Put a copy of a spell on the stack (rule 707.10).
+
+        The copy keeps the original's targets and X; it is created as a
+        token object so it ceases to exist in any zone but the stack
+        (704.5e / 707.10a) and resolves to a token if it is a permanent
+        spell.
         """
-        if item not in self.stack or not item.is_spell:
+        if (
+            item not in self.stack
+            or not item.is_spell
+            or not isinstance(item.obj, GameObject)
+        ):
             return None
         copy_obj = GameObject(
             item.obj.base.copy(),
@@ -739,9 +977,9 @@ class Game:
 
     # ------------------------------------------------------------ mana
     @rule("605.1a", "605.3")
-    def mana_sources(self, player):
+    def mana_sources(self, player: Player) -> list[tuple[GameObject, ActivatedAbility]]:
         """Untapped permanents with activatable mana abilities."""
-        out = []
+        out: list[tuple[GameObject, ActivatedAbility]] = []
         for obj in player.battlefield:
             if obj.tapped:
                 continue
@@ -759,16 +997,15 @@ class Game:
                     break
         return out
 
-    def mana_colors_of(self, obj, ab) -> frozenset:
+    def mana_colors_of(self, obj: GameObject, ab: ActivatedAbility) -> frozenset[str]:
+        """Return the mana types this source's ability can produce."""
         eff = ab.effect
-        from .effects import AddMana
-
         adds = (
             [eff]
             if isinstance(eff, AddMana)
             else [e for e in getattr(eff, "parts", []) if isinstance(e, AddMana)]
         )
-        colors = set()
+        colors: set[str] = set()
         for a in adds:
             if a.any_color:
                 colors |= set("WUBRG")
@@ -778,84 +1015,39 @@ class Game:
         return frozenset(colors - {"ANY"} or {"C"})
 
     @rule("601.2g", "601.2h")
-    def can_pay_mana(self, player, cost) -> bool:
+    def can_pay_mana(self, player: Player, cost: Cost) -> bool:
+        """Whether pool plus untapped sources can cover *cost*."""
         return self._solve_mana(player, cost, commit=False)
 
-    def pay_mana(self, player, cost) -> bool:
+    def pay_mana(self, player: Player, cost: Cost) -> bool:
+        """Pay *cost*, activating mana abilities as needed (rule 601.2h)."""
         return self._solve_mana(player, cost, commit=True)
 
-    def _solve_mana(self, player, cost, commit) -> bool:
-        """Greedy scarcity-first assignment of mana sources to pips, on top
-        of whatever is already in the pool.
+    def _solve_mana(self, player: Player, cost: Cost, *, commit: bool) -> bool:
+        """Greedy scarcity-first assignment of mana sources to pips.
+
+        Runs on top of whatever is already floating in the pool.
         """
-        pool = dict(player.mana_pool.mana)
-        avail = []
-        for obj, ab in self.mana_sources(player):
-            colors = self.mana_colors_of(obj, ab)
-            amount = self._mana_amount(ab)
-            avail.append((obj, ab, colors, amount))
-        used = []
-
-        def take(pred):
-            best = None
-            for i, (_obj, _ab, colors, _amount) in enumerate(avail):
-                if pred(colors) and (best is None or len(colors) < len(avail[best][2])):
-                    best = i
-            if best is None:
-                return None
-            return avail.pop(best)
-
-        need_pips = []
-        for color, n in cost.pips.items():
-            need_pips += [color] * n
-        need_pips += ["C"] * cost.colorless
-        for color in need_pips:
-            if pool.get(color, 0) > 0:
-                pool[color] -= 1
-                continue
-            got = take(lambda cs, c=color: c in cs)
-            if got is None:
-                return False
-            used.append((got[0], got[1], color))
-            if len(got[2]) == 1 and got[3] > 1:
-                # single-type multi-mana source (Sol Ring): surplus floats
-                pool[color] = pool.get(color, 0) + got[3] - 1
-        for opts in sorted(cost.hybrid, key=len):
-            hit = None
-            for c in opts:
-                if pool.get(c, 0) > 0:
-                    pool[c] -= 1
-                    hit = True
-                    break
-            if hit:
-                continue
-            got = take(lambda cs, opts=opts: cs & opts)
-            if got is None:
-                return False
-            color = next(iter(got[2] & opts))
-            used.append((got[0], got[1], color))
-        need = cost.generic
-        for t in sorted(pool, key=lambda t: (t != "C", -pool[t])):
-            take_n = min(need, pool[t])
-            pool[t] -= take_n
-            need -= take_n
-        avail.sort(key=lambda e: (-e[3], len(e[2])))
-        while need > 0 and avail:
-            obj, ab, colors, amount = avail.pop(0)
-            used.append((obj, ab, "C" if "C" in colors else next(iter(colors))))
-            need -= amount
-        if need > 0:
+        avail = [
+            (obj, ab, self.mana_colors_of(obj, ab), self._mana_amount(ab))
+            for obj, ab in self.mana_sources(player)
+        ]
+        plan = _ManaPlan(pool=dict(player.mana_pool.mana), avail=avail)
+        if not (
+            plan.cover_pips(cost)
+            and plan.cover_hybrid(cost)
+            and plan.cover_generic(cost)
+        ):
             return False
         if commit:
-            for obj, ab, color in used:
+            for obj, ab, color in plan.used:
                 self._activate_mana_ability(obj, ab, color)
             player.mana_pool.pay(cost)
         return True
 
     @staticmethod
-    def _mana_amount(ab) -> int:
-        from .effects import AddMana
-
+    def _mana_amount(ab: ActivatedAbility) -> int:
+        """How much mana one activation of the ability produces."""
         eff = ab.effect
         if isinstance(eff, AddMana):
             return (
@@ -866,15 +1058,18 @@ class Game:
         return 1
 
     @rule("605.3b")
-    def _activate_mana_ability(self, obj, ab, color):
+    def _activate_mana_ability(
+        self,
+        obj: GameObject,
+        ab: ActivatedAbility,
+        color: str,
+    ) -> None:
         """Mana abilities resolve immediately, no stack (rule 605.3b)."""
         player = obj.controller
         if ab.tap_cost:
             self.tap(obj)
         if ab.sac_cost == "self":
             self.sacrifice(player, obj)
-        from .effects import AddMana
-
         eff = ab.effect
         if (
             isinstance(eff, AddMana)
@@ -889,38 +1084,30 @@ class Game:
 
     # ------------------------------------------------------------ casting
     @rule("601.2", "601.2a", "601.2b", "601.2c", "601.2f", "601.2h", "601.2i", "903.8")
-    def cast_spell(self, player, card: GameObject, *, x=0, from_command=False):
+    def cast_spell(
+        self,
+        player: Player,
+        card: GameObject,
+        *,
+        x: int = 0,
+        from_command: bool = False,
+    ) -> bool:
+        """Cast a spell through the rule 601.2 process; False if illegal."""
         ch = card.base
-        cost = parse_cost(ch.mana_cost).with_x(x)
-        if card.commander:
-            # rule 903.8: commander tax
-            cost = cost.with_extra_generic(2 * player.commander_casts)
-        # rule 601.2f cost-reduction statics on the spell itself
-        # (e.g. "costs {1} less to cast for each creature")
-        per_creature = getattr(ch, "cost_less_per_creature", 0)
-        if per_creature:
-            n = sum(
-                1
-                for o in self.battlefield_objects()
-                if "Creature" in o.chars(self).types
-            )
-            cost = cost.reduced(per_creature * n)
+        cost = self._spell_cost(player, card, x)
         # rule 601.2b additional costs: verify they can be paid up front
-        extra = getattr(ch, "additional_cost", "")
+        extra = ch.additional_cost
         extra_sac = None
         if extra == "sacrifice_creature":
             extra_sac = self.policy(player).choose_sacrifice(self, player, "creature")
             if extra_sac is None:
                 return False
-        elif extra == "discard_card":
-            if not [c for c in player.hand if c is not card]:
-                return False
+        elif extra == "discard_card" and not [c for c in player.hand if c is not card]:
+            return False
         spell_ability = next(
             (a for a in ch.abilities if isinstance(a, SpellAbility)),
             None,
         )
-        targets = None
-        t_specs = spell_ability.targets if spell_ability else []
         item = StackItem(
             obj=card,
             source=card,
@@ -929,14 +1116,52 @@ class Game:
             x=x,
             is_spell=True,
         )
-        if t_specs:
+        if spell_ability is not None and spell_ability.targets:
             targets = self._choose_targets(player, spell_ability, card, x=x)
             if targets is None:
                 return False  # rule 601.2c: no targets
             item.targets = targets
         if not self.pay_mana(player, cost):
             return False  # rule 601.2h
-        # rule 601.2h: pay additional costs along with mana
+        self._pay_additional_cost(player, card, extra, extra_sac)
+        self._remove_from_zone(card, card.zone)
+        card.zone = Zone.STACK
+        self.stack.append(item)
+        self._record_cast(player, card, x=x, from_command=from_command)
+        # rule 702.21 ward: cost tax handled as a trigger when targeted
+        self._ward_check(item)
+        self.queue_triggers(Event(EventType.CAST, {"obj": card, "player": player}))
+        self.bump()
+        return True
+
+    @rule("601.2f", "903.8")
+    def _spell_cost(self, player: Player, card: GameObject, x: int) -> Cost:
+        """Total mana cost: X, commander tax, and cost-reduction statics."""
+        ch = card.base
+        cost = parse_cost(ch.mana_cost).with_x(x)
+        if card.commander:
+            # rule 903.8: commander tax
+            cost = cost.with_extra_generic(2 * player.commander_casts)
+        # rule 601.2f cost-reduction statics on the spell itself
+        # (e.g. "costs {1} less to cast for each creature")
+        if ch.cost_less_per_creature:
+            n = sum(
+                1
+                for o in self.battlefield_objects()
+                if "Creature" in o.chars(self).types
+            )
+            cost = cost.reduced(ch.cost_less_per_creature * n)
+        return cost
+
+    @rule("601.2b", "601.2h")
+    def _pay_additional_cost(
+        self,
+        player: Player,
+        card: GameObject,
+        extra: str,
+        extra_sac: GameObject | None,
+    ) -> None:
+        """Rule 601.2h: pay additional costs along with the mana."""
         if extra_sac is not None:
             self.sacrifice(player, extra_sac)
         elif extra == "discard_card":
@@ -944,9 +1169,16 @@ class Game:
             pick = min(pool, key=lambda c: parse_cost(c.base.mana_cost).mv)
             self.move_zone(pick, Zone.GRAVEYARD)
             self.log("discard", who=player.name, card=pick.base.name)
-        self._remove_from_zone(card, card.zone)
-        card.zone = Zone.STACK
-        self.stack.append(item)
+
+    def _record_cast(
+        self,
+        player: Player,
+        card: GameObject,
+        *,
+        x: int,
+        from_command: bool,
+    ) -> None:
+        """Casting bookkeeping: tax counter, stats, and the log line."""
         if card.commander and from_command:
             player.commander_casts += 1
         player.stat("spells_cast")
@@ -964,16 +1196,12 @@ class Game:
                 player.stat("wipes_cast")
             elif ref.behavior.get("removal"):
                 player.stat("removal_used")
-        # rule 702.21 ward: cost tax handled as a trigger when targeted
-        self._ward_check(item)
-        self._queue_triggers(Event(EventType.CAST, {"obj": card, "player": player}))
-        self.bump()
-        return True
 
     @rule("702.21")
-    def _ward_check(self, item: StackItem):
-        """Ward N: counter the targeting spell unless its controller pays
-        (policy decides; paying requires available mana).
+    def _ward_check(self, item: StackItem) -> None:
+        """Ward N: counter the targeting spell unless its controller pays.
+
+        The policy decides; paying requires available mana.
         """
         for t in item.targets or []:
             if (
@@ -998,26 +1226,78 @@ class Game:
                     return
 
     @rule("602.2", "602.5a", "606.3")
-    def activate_ability(self, player, obj, ab: ActivatedAbility, *, x=0):
+    def activate_ability(
+        self,
+        player: Player,
+        obj: GameObject,
+        ab: ActivatedAbility,
+        *,
+        x: int = 0,
+    ) -> bool:
+        """Activate an ability (rule 602.2); False when illegal/unpaid."""
         if ab.from_hand:
             return self._activate_from_hand(player, obj, ab)
+        if not self._activation_legal(player, obj, ab):
+            return False
+        cost = ab.cost.with_x(x)
+        sac_pick = None
+        if ab.sac_cost and ab.sac_cost != "self":
+            sac_pick = self.policy(player).choose_sacrifice(
+                self,
+                player,
+                ab.sac_cost,
+                exclude=obj,
+            )
+            if sac_pick is None:
+                return False
+        # rule 601.2c (via 602.2b): choose targets before determining and
+        # paying costs
+        targets = self._choose_targets(player, ab, obj, x=x)
+        if targets is None and ab.targets:
+            return False
+        # rules 601.2f-h: determine and pay costs
+        if not self.pay_mana(player, cost):
+            return False
+        self._pay_activation_costs(player, obj, ab, sac_pick)
+        self.stack.append(
+            StackItem(
+                obj=ab,
+                source=obj,
+                controller=player,
+                ability=ab,
+                targets=targets or [],
+                x=x,
+            ),
+        )
+        self._record_activation(player, obj, ab)
+        return True
+
+    @rule("602.5a", "602.5d", "606.3", "302.6")
+    def _activation_legal(
+        self,
+        player: Player,
+        obj: GameObject,
+        ab: ActivatedAbility,
+    ) -> bool:
+        """Check timing, once-per-turn, tap, loyalty, and life legality."""
         ch = obj.chars(self)
-        if ab.loyalty_cost is not None:
+        sorcery_window = (
+            player is self.active_player
+            and not self.stack
+            and self.phase in ("main1", "main2")
+        )
+        if ab.loyalty_cost is not None and (
             # rule 606.3: one loyalty ability per permanent per turn,
             # only during a main phase with an empty stack
-            if ("loyalty", obj.id) in self.activated_this_turn:
-                return False
-            if (
-                player is not self.active_player
-                or self.stack
-                or self.phase not in ("main1", "main2")
-            ):
-                return False
-        if ab.sorcery_only and (
-            player is not self.active_player
-            or self.stack
-            or self.phase not in ("main1", "main2")
+            ("loyalty", obj.id) in self.activated_this_turn
+            or not sorcery_window
+            or (
+                ab.loyalty_cost < 0
+                and obj.counters.get("loyalty", 0) < -ab.loyalty_cost
+            )
         ):
+            return False
+        if ab.sorcery_only and not sorcery_window:
             return False  # rule 602.5d
         if ab.once_per_turn and (obj.id, id(ab)) in self.activated_this_turn:
             return False
@@ -1030,33 +1310,17 @@ class Game:
                 and "haste" not in ch.keywords
             ):
                 return False  # rule 302.6
-        cost = ab.cost.with_x(x)
-        # rule 601.2c (via 602.2b): choose targets before determining and
-        # paying costs
-        if (
-            ab.loyalty_cost is not None
-            and ab.loyalty_cost < 0
-            and obj.counters.get("loyalty", 0) < -ab.loyalty_cost
-        ):
-            return False
-        if ab.life_cost and player.life <= ab.life_cost:
-            return False
-        sac_pick = None
-        if ab.sac_cost and ab.sac_cost != "self":
-            sac_pick = self.policy(player).choose_sacrifice(
-                self,
-                player,
-                ab.sac_cost,
-                exclude=obj,
-            )
-            if sac_pick is None:
-                return False
-        targets = self._choose_targets(player, ab, obj, x=x)
-        if targets is None and ab.targets:
-            return False
-        # rules 601.2f-h: determine and pay costs
-        if not self.pay_mana(player, cost):
-            return False
+        return not (ab.life_cost and player.life <= ab.life_cost)
+
+    @rule("601.2h", "606.3")
+    def _pay_activation_costs(
+        self,
+        player: Player,
+        obj: GameObject,
+        ab: ActivatedAbility,
+        sac_pick: GameObject | None,
+    ) -> None:
+        """Pay the non-mana activation costs (tap, life, sac, loyalty)."""
         if ab.tap_cost:
             self.tap(obj)
         if ab.life_cost:
@@ -1070,16 +1334,14 @@ class Game:
                 self.put_counters(obj, "loyalty", ab.loyalty_cost)
             else:
                 self.remove_counters(obj, "loyalty", -ab.loyalty_cost)
-        self.stack.append(
-            StackItem(
-                obj=ab,
-                source=obj,
-                controller=player,
-                ability=ab,
-                targets=targets or [],
-                x=x,
-            ),
-        )
+
+    def _record_activation(
+        self,
+        player: Player,
+        obj: GameObject,
+        ab: ActivatedAbility,
+    ) -> None:
+        """Once-per-turn bookkeeping, stats, and the log line."""
         if ab.loyalty_cost is not None:
             self.activated_this_turn.add(("loyalty", obj.id))
         if ab.once_per_turn:
@@ -1087,12 +1349,18 @@ class Game:
         player.stat("abilities_activated")
         self.log("activate", who=player.name, source=_lname(obj))
         self.bump()
-        return True
 
     @rule("702.29a")
-    def _activate_from_hand(self, player, obj, ab) -> bool:
-        """Cycling-style abilities: activated while the card is in the
-        hand; discarding the card is part of the cost (rule 702.29a).
+    def _activate_from_hand(
+        self,
+        player: Player,
+        obj: GameObject,
+        ab: ActivatedAbility,
+    ) -> bool:
+        """Cycling-style abilities (rule 702.29a).
+
+        Activated while the card is in the hand; discarding the card is
+        part of the cost.
         """
         if obj not in player.hand:
             return False
@@ -1108,8 +1376,15 @@ class Game:
         return True
 
     @rule("115.3", "601.2c")
-    def _choose_targets(self, player, ability, source, x=0):
-        targets = []
+    def _choose_targets(
+        self,
+        player: Player,
+        ability: ResolvableAbility,
+        source: GameObject,
+        x: int = 0,
+    ) -> list[Target] | None:
+        """Choose all targets of the ability, or None when impossible."""
+        targets: list[Target] = []
         ctx = Ctx(controller=player, source=source, x=x)
         for spec in ability.targets:
             legal = self.legal_targets(spec, ctx)
@@ -1125,17 +1400,15 @@ class Game:
             targets.append(pick)
         return targets
 
-    def legal_targets(self, spec, ctx):
-        out = []
+    def legal_targets(self, spec: TargetSpec, ctx: Ctx) -> list[Target]:
+        """All currently legal targets for one TargetSpec (rule 115.4)."""
         if spec.what in ("player", "opponent"):
-            out = [p for p in self.alive() if spec.legal(self, ctx, p)]
-        elif spec.what == "spell":
-            out = [i for i in self.stack if i.is_spell]
-        else:
-            out = [o for o in self.battlefield_objects() if spec.legal(self, ctx, o)]
-        return out
+            return [p for p in self.alive() if spec.legal(self, ctx, p)]
+        if spec.what == "spell":
+            return [i for i in self.stack if i.is_spell]
+        return [o for o in self.battlefield_objects() if spec.legal(self, ctx, o)]
 
-    def still_legal_target(self, target, ctx, index) -> bool:
+    def still_legal_target(self, target: Target, _ctx: Ctx, _index: int) -> bool:
         """Rule 608.2b: re-check target legality on resolution."""
         return (
             True
@@ -1145,13 +1418,15 @@ class Game:
 
     # ------------------------------------------------------------ stack
     @rule("608.2", "608.2b", "608.3", "608.2m")
-    def resolve_top(self):
+    def resolve_top(self) -> None:
+        """Resolve the top object of the stack (rule 608.1)."""
         item = self.stack.pop()
         if self._resolve_item(item):
             # logged on completion so observers snapshot the applied state
             self.log("resolve", what=_lname(item))
 
-    def _resolve_item(self, item) -> bool:
+    def _resolve_item(self, item: StackItem) -> bool:
+        """Resolve one stack item; False when it fizzles (rule 608.2b)."""
         ctx = Ctx(
             controller=item.controller,
             source=item.source,
@@ -1168,33 +1443,12 @@ class Game:
             ]
             if not legal and not any(isinstance(t, Player) for t in item.targets):
                 # rule 608.2b: all targets illegal -> doesn't resolve
-                if item.is_spell:
+                if item.is_spell and isinstance(item.obj, GameObject):
                     self.move_zone(item.obj, Zone.GRAVEYARD)
                 self.log("fizzle", what=_lname(item))
                 return False
         if item.is_spell:
-            card = item.obj
-            ch = card.base
-            if ch.types & {"Instant", "Sorcery"}:
-                if item.ability is not None:
-                    item.ability.effect.resolve(self, ctx)
-                self.move_zone(card, Zone.GRAVEYARD)  # rule 608.2m
-            else:
-                # rule 608.3: permanent spell resolves to the battlefield
-                counters = {}
-                if "Planeswalker" in ch.types and ch.loyalty:
-                    counters["loyalty"] = ch.loyalty  # rule 306.5b
-                kind = getattr(ch, "etb_x_counters", None)
-                if kind and item.x:
-                    counters[kind] = item.x
-                moved = self.move_zone(card, Zone.BATTLEFIELD, counters=counters)
-                # rule 303.4: an Aura enters attached to its target
-                if moved is not None and "Aura" in ch.subtypes and item.targets:
-                    t = item.targets[0]
-                    if isinstance(t, GameObject) and t.zone == Zone.BATTLEFIELD:
-                        self.attach(moved, t)
-                    else:
-                        self.move_zone(moved, Zone.GRAVEYARD)
+            self._resolve_spell(item, ctx)
         else:
             ability = item.ability
             if (
@@ -1208,27 +1462,43 @@ class Game:
         self.bump()
         return True
 
+    @rule("608.2m", "608.3", "303.4", "306.5b")
+    def _resolve_spell(self, item: StackItem, ctx: Ctx) -> None:
+        """Resolve a spell: run instructions or enter the battlefield."""
+        card = cast("GameObject", item.obj)
+        ch = card.base
+        if ch.types & {"Instant", "Sorcery"}:
+            if item.ability is not None and item.ability.effect is not None:
+                item.ability.effect.resolve(self, ctx)
+            self.move_zone(card, Zone.GRAVEYARD)  # rule 608.2m
+            return
+        # rule 608.3: permanent spell resolves to the battlefield
+        counters: dict[str, int] = {}
+        if "Planeswalker" in ch.types and ch.loyalty:
+            counters["loyalty"] = ch.loyalty  # rule 306.5b
+        if ch.etb_x_counters and item.x:
+            counters[ch.etb_x_counters] = item.x
+        moved = self.move_zone(card, Zone.BATTLEFIELD, counters=counters)
+        # rule 303.4: an Aura enters attached to its target
+        if moved is not None and "Aura" in ch.subtypes and item.targets:
+            t = item.targets[0]
+            if isinstance(t, GameObject) and t.zone == Zone.BATTLEFIELD:
+                self.attach(moved, t)
+            else:
+                self.move_zone(moved, Zone.GRAVEYARD)
+
     # ------------------------------------------------------ state-based
-    @rule(
-        "704.3",
-        "704.5",
-        "704.5a",
-        "704.5b",
-        "704.5c",
-        "704.5d",
-        "704.5f",
-        "704.5g",
-        "704.5h",
-        "704.5i",
-        "704.5j",
-        "704.5m",
-        "704.5n",
-        "704.5q",
-        "704.6c",
-        "702.12b",
-    )
+    @rule("704.3", "704.5")
     def check_state_based_actions(self) -> bool:
         """Perform all applicable SBAs; return True if any happened."""
+        acted = self._sba_players()
+        acted = self._sba_permanents() or acted
+        acted = self._sba_attachments() or acted
+        return self._sba_legend_rule() or acted
+
+    @rule("704.5a", "704.5b", "704.5c", "704.6c")
+    def _sba_players(self) -> bool:
+        """Player-loss SBAs: life, empty draw, poison, commander damage."""
         acted = False
         for p in self.alive():
             if p.life <= 0:  # rule 704.5a
@@ -1237,16 +1507,21 @@ class Game:
             elif p.drew_from_empty:  # rule 704.5b
                 self._lose(p, "drew from empty library (704.5b)")
                 acted = True
-            elif p.poison >= 10:  # rule 704.5c
+            elif p.poison >= POISON_LOSS_THRESHOLD:  # rule 704.5c
                 self._lose(p, "ten or more poison counters (704.5c)")
                 acted = True
             else:
                 for dmg in p.commander_damage.values():
-                    if dmg >= 21:  # rules 903.10a / 704.6c
+                    if dmg >= COMMANDER_DAMAGE_LOSS:  # rules 903.10a / 704.6c
                         self._lose(p, "21+ commander damage (903.10a)")
                         acted = True
                         break
+        return acted
 
+    @rule("704.5f", "704.5g", "704.5h", "704.5i", "704.5q", "702.12b")
+    def _sba_permanents(self) -> bool:
+        """Creature/planeswalker death and counter-annihilation SBAs."""
+        acted = False
         for obj in list(self.battlefield_objects()):
             ch = obj.chars(self)
             if "Creature" in ch.types:
@@ -1281,8 +1556,12 @@ class Game:
                 self.remove_counters(obj, "+1/+1", n)
                 self.remove_counters(obj, "-1/-1", n)
                 acted = True
+        return acted
 
-        # rules 704.5m / 704.5n: auras and equipment attachment checks
+    @rule("704.5m", "704.5n")
+    def _sba_attachments(self) -> bool:
+        """Aura and Equipment attachment SBAs (rules 704.5m/n)."""
+        acted = False
         for obj in list(self.battlefield_objects()):
             ch = obj.chars(self)
             if "Aura" in ch.subtypes and (
@@ -1297,10 +1576,14 @@ class Game:
             ):
                 obj.attached_to = None  # rule 704.5n
                 acted = True
+        return acted
 
-        # rule 704.5j: legend rule
+    @rule("704.5j")
+    def _sba_legend_rule(self) -> bool:
+        """Apply the legend rule (rule 704.5j)."""
+        acted = False
         for p in self.alive():
-            named: dict[str, list] = {}
+            named: dict[str, list[GameObject]] = {}
             for obj in p.battlefield:
                 ch = obj.chars(self)
                 if "Legendary" in ch.supertypes and ch.name:
@@ -1314,7 +1597,8 @@ class Game:
                     acted = True
         return acted
 
-    def _lose(self, player, reason):
+    def _lose(self, player: Player, reason: str) -> None:
+        """Eliminate the player; end the game on a sole survivor."""
         if player.lost:
             return
         player.lost = True
@@ -1329,45 +1613,30 @@ class Game:
             self.game_over = True
 
     # ------------------------------------------------------------ priority
+    @rule("704.3")
+    def _sba_trigger_cycle(self) -> None:
+        """Rule 704.3: repeat SBAs plus trigger placement until quiescent."""
+        while True:
+            acted = self.check_state_based_actions()
+            placed = self.put_triggers_on_stack()
+            if self.game_over or (not acted and not placed):
+                return
+
     @rule("117.3", "117.4", "117.5", "405.5", "704.3")
-    def priority_loop(self):
-        """Give priority around the table until all players pass in
-        succession; resolve the stack as needed (rules 117.4, 405.5).
+    def priority_loop(self) -> None:
+        """Give priority around the table until all players pass.
+
+        Resolve the stack as needed (rules 117.4, 405.5); the loop ends
+        when the stack is empty and everyone passed in succession.
         """
         while True:
             # rule 704.3: SBAs + triggers before a player gets priority
-            while True:
-                acted = self.check_state_based_actions()
-                placed = self.put_triggers_on_stack()
-                if self.game_over:
-                    return
-                if not acted and not placed:
-                    break
-            passes = 0
-            order = self.players_apnap()
-            i = 0
-            while passes < len(order):
-                player = order[i % len(order)]
-                i += 1
-                if player.lost:
-                    passes += 1
-                    continue
-                action = self.policy(player).choose_action(self, player)
-                if action is None:
-                    passes += 1
-                    continue
-                if self._perform(player, action):
-                    passes = 0
-                    # re-run SBAs/triggers between actions
-                    while True:
-                        acted = self.check_state_based_actions()
-                        placed = self.put_triggers_on_stack()
-                        if self.game_over:
-                            return
-                        if not acted and not placed:
-                            break
-                else:
-                    passes += 1
+            self._sba_trigger_cycle()
+            if self.game_over:
+                return
+            self._priority_round()
+            if self.game_over:
+                return
             if self.stack:
                 self.resolve_top()  # rule 117.4
                 if self.game_over:
@@ -1375,21 +1644,45 @@ class Game:
                 continue
             return  # step/phase ends
 
-    def _perform(self, player, action) -> bool:
-        kind = action[0]
-        if kind == "cast":
-            _, card, kwargs = action
-            return self.cast_spell(player, card, **kwargs)
-        if kind == "activate":
-            _, obj, ab, kwargs = action
-            return self.activate_ability(player, obj, ab, **kwargs)
-        if kind == "land":
-            return self.play_land(player, action[1])
-        return False
+    @rule("117.3", "117.4")
+    def _priority_round(self) -> None:
+        """One round of priority: actions until all players pass."""
+        passes = 0
+        order = self.players_apnap()
+        i = 0
+        while passes < len(order):
+            player = order[i % len(order)]
+            i += 1
+            if player.lost:
+                passes += 1
+                continue
+            action = self.policy(player).choose_action(self, player)
+            if action is None:
+                passes += 1
+                continue
+            if self._perform(player, action):
+                passes = 0
+                # re-run SBAs/triggers between actions
+                self._sba_trigger_cycle()
+                if self.game_over:
+                    return
+            else:
+                passes += 1
+
+    def _perform(self, player: Player, action: Action) -> bool:
+        """Perform one policy-chosen action; False when it was illegal."""
+        if action[0] == "cast":
+            _, card, cast_opts = action
+            return self.cast_spell(player, card, **cast_opts)
+        if action[0] == "activate":
+            _, obj, ab, act_opts = action
+            return self.activate_ability(player, obj, ab, **act_opts)
+        _, card = action
+        return self.play_land(player, card)
 
     # ------------------------------------------------------------ lands
     @rule("116.2a", "305.1")
-    def play_land(self, player, card) -> bool:
+    def play_land(self, player: Player, card: GameObject) -> bool:
         """Playing a land is a special action, no stack (rule 116.2a)."""
         if player.lands_played >= 1:  # rule 305.2
             return False
@@ -1398,27 +1691,27 @@ class Game:
         if card not in player.hand:
             return False
         player.lands_played += 1
-        tapped = any(getattr(ab, "enters_tapped", False) for ab in card.base.abilities)
+        tapped = any(
+            isinstance(ab, StaticAbility) and ab.enters_tapped
+            for ab in card.base.abilities
+        )
         self.move_zone(card, Zone.BATTLEFIELD, to_battlefield_tapped=tapped)
-        self._queue_triggers(
+        self.queue_triggers(
             Event(EventType.LAND_PLAYED, {"obj": card, "player": player}),
         )
         player.stat("lands_played")
         self.log("land", who=player.name, card=card.base.name, tapped=tapped or None)
         return True
 
-    def add_floating_effect(self, effect: ContinuousEffect):
+    def add_floating_effect(self, effect: ContinuousEffect) -> None:
+        """Register a floating continuous effect (rule 611.2)."""
         self.layers.add_floating(effect)
 
     @rule("303.4", "301.5")
-    def attach(self, obj, target):
+    def attach(self, obj: GameObject, target: GameObject) -> None:
+        """Attach an Aura/Equipment to its new target."""
         if obj.attached_to is not None and obj in obj.attached_to.attachments:
             obj.attached_to.attachments.remove(obj)
         obj.attached_to = target
         target.attachments.append(obj)
         self.bump()
-
-
-from .effects import AddMana
-
-_ADD_ANY_MANA = AddMana(any_color=True)

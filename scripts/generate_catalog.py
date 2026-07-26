@@ -59,10 +59,13 @@ def main() -> int:
     root = Path()
     entries = ontology_iris(root)
     if not entries:
-        print("error: no owl:Ontology declarations found", file=sys.stderr)
+        print(  # noqa: T201 - CLI error output on stderr
+            "error: no owl:Ontology declarations found",
+            file=sys.stderr,
+        )
         return 1
     CATALOG.write_text(render(entries), encoding="utf-8")
-    print(f"{CATALOG}: {len(entries)} ontology IRIs mapped")
+    print(f"{CATALOG}: {len(entries)} ontology IRIs mapped")  # noqa: T201 - CLI report output
     return 0
 
 

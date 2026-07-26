@@ -19,6 +19,9 @@ With one deck file, a mirror match is played (the second seat gets a
 '#2'-suffixed copy).
 """
 
+# I001+RUF100 (on the block below): mtgcards and mtgrules are both
+# first-party under [tool.ruff] src=["scripts"]; the isolated future-state
+# lint cannot know that and wants the two packages in separate sections.
 from __future__ import annotations
 
 import argparse
@@ -26,19 +29,17 @@ import dataclasses
 import itertools
 import random
 import sys
-from pathlib import Path
-
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from dataclasses import dataclass
+from typing import TYPE_CHECKING
 
 from mtgcards.database import CardDatabase
-from mtgcards.deck import (
-    Deck,
-    load_deck,
-)
+from mtgcards.deck import Deck, load_deck
 from mtgcards.stats import wilson_ci
+from mtgrules.adapter import REPO, MatchOptions, run_game
+from mtgrules.policy import PROFILES, PolicyProfile, get_profile
 
-from .adapter import REPO, run_game
-from .policy import PROFILES, PolicyProfile, get_profile
+if TYPE_CHECKING:
+    from collections.abc import Sequence
 
 _INT_KNOBS = {
     "wipe_board_deficit",
@@ -50,8 +51,21 @@ _INT_KNOBS = {
 }
 _BOOL_KNOBS = {"hold_reactive_mana"}
 
+#: a mirror match needs exactly two seats
+_PAIR = 2
+
+
+@dataclass(frozen=True)
+class SelfplaySettings:
+    """How much self-play to run per pairing."""
+
+    games: int
+    seeds: list[int]
+    turn_cap: int = 40
+
 
 def _clone_deck(deck: Deck, suffix: str) -> Deck:
+    """Clone *deck* under a distinct seat name."""
     return Deck(
         name=deck.name + suffix,
         path=deck.path,
@@ -60,37 +74,53 @@ def _clone_deck(deck: Deck, suffix: str) -> Deck:
     )
 
 
-def _pair_winrate(decks, db, prof_a, prof_b, games, seeds, turn_cap=40):
-    """Win rate of prof_a over `games` per seed, both seatings."""
+def _pair_winrate(
+    decks: Sequence[Deck],
+    db: CardDatabase,
+    prof_a: PolicyProfile,
+    prof_b: PolicyProfile,
+    settings: SelfplaySettings,
+) -> tuple[int, int]:
+    """Win rate of prof_a over settings.games per seed, both seatings."""
     wins = total = 0
-    for seed in seeds:
+    for seed in settings.seeds:
         for seating in (0, 1):
             rng = random.Random(seed * 2 + seating)
             profiles = [prof_a, prof_b] if seating == 0 else [prof_b, prof_a]
             a_name = decks[seating].name
-            for _ in range(games):
-                rec = run_game(decks, db, rng, profiles=profiles, turn_cap=turn_cap)
+            for _ in range(settings.games):
+                rec = run_game(
+                    decks,
+                    db,
+                    rng,
+                    MatchOptions(turn_cap=settings.turn_cap, profiles=profiles),
+                )
                 total += 1
                 if rec["winner"] == a_name:
                     wins += 1
     return wins, total
 
 
-def _variant(base: PolicyProfile, assignment: dict) -> PolicyProfile:
+def _variant(base: PolicyProfile, assignment: dict[str, object]) -> PolicyProfile:
+    """One tuning candidate: *base* with the assignment's knobs applied."""
     label = ",".join(f"{k}={v}" for k, v in assignment.items())
-    return dataclasses.replace(base, name=f"{base.name}[{label}]", **assignment)
+    return dataclasses.replace(
+        base,
+        name=f"{base.name}[{label}]",
+        **assignment,  # type: ignore[arg-type]  # knob values are validated by parse_tune against PolicyProfile's fields
+    )
 
 
-def parse_tune(specs):
+def parse_tune(specs: list[str]) -> list[dict[str, object]]:
     """--tune KNOB=v1,v2 ... -> list of {knob: value} assignments."""
-    axes = []
+    axes: list[list[tuple[str, object]]] = []
     for spec in specs:
         knob, _, values = spec.partition("=")
         if not values or not hasattr(PolicyProfile, knob):
             sys.exit(
                 f"--tune expects KNOB=v1,v2 with a PolicyProfile field, got {spec!r}",
             )
-        parsed = []
+        parsed: list[object] = []
         for v in values.split(","):
             if knob in _BOOL_KNOBS:
                 parsed.append(v.lower() in ("1", "true", "yes"))
@@ -102,14 +132,20 @@ def parse_tune(specs):
     return [dict(combo) for combo in itertools.product(*axes)]
 
 
-def round_robin(decks, db, games, seeds, turn_cap=40):
+def round_robin(
+    decks: Sequence[Deck],
+    db: CardDatabase,
+    settings: SelfplaySettings,
+) -> None:
+    """Play every preset against every other and print the win matrix."""
     names = sorted(PROFILES)
-    print(
+    # #5 completes; the prints ARE this tool's report output.
+    print(  # noqa: T201
         f"=== preset round-robin: {decks[0].name} vs {decks[1].name}, "
-        f"{games} games x {len(seeds)} seed(s) x 2 seatings ===",
+        f"{settings.games} games x {len(settings.seeds)} seed(s) x 2 seatings ===",
     )
     header = f"{'row wins vs':<14}" + "".join(f"{n:>14}" for n in names)
-    print(header)
+    print(header)  # noqa: T201
     for a in names:
         row = f"{a:<14}"
         for b in names:
@@ -121,39 +157,46 @@ def round_robin(decks, db, games, seeds, turn_cap=40):
                 db,
                 PROFILES[a],
                 PROFILES[b],
-                games,
-                seeds,
-                turn_cap,
+                settings,
             )
             row += f"{100 * wins / total:>13.1f}%"
-        print(row)
+        print(row)  # noqa: T201
 
 
-def grid_tune(decks, db, games, seeds, base_name, tune_specs, turn_cap=40):
+def grid_tune(
+    decks: Sequence[Deck],
+    db: CardDatabase,
+    settings: SelfplaySettings,
+    base_name: str,
+    tune_specs: list[str],
+) -> None:
+    """Rank --tune candidates against the base profile by win rate."""
     base = get_profile(base_name)
     assignments = parse_tune(tune_specs)
-    print(
+    # #5 completes; the prints ARE this tool's report output.
+    print(  # noqa: T201
         f"=== grid tuning vs '{base_name}': {len(assignments)} "
-        f"candidates, {games} games x {len(seeds)} seed(s) x 2 "
+        f"candidates, {settings.games} games x {len(settings.seeds)} seed(s) x 2 "
         f"seatings each ===",
     )
     results = []
     for assignment in assignments:
         cand = _variant(base, assignment)
-        wins, total = _pair_winrate(decks, db, cand, base, games, seeds, turn_cap)
+        wins, total = _pair_winrate(decks, db, cand, base, settings)
         results.append((wins / total, wins, total, cand.name))
     results.sort(reverse=True)
     for rate, wins, total, name in results:
         lo, hi = wilson_ci(wins, total)
-        print(
+        print(  # noqa: T201
             f"  {100 * rate:5.1f} % ({wins:3d}/{total}) "
             f"CI {100 * lo:.0f}-{100 * hi:.0f} %  {name}",
         )
     best = results[0]
-    print(f"best: {best[3]} at {100 * best[0]:.1f} %")
+    print(f"best: {best[3]} at {100 * best[0]:.1f} %")  # noqa: T201
 
 
-def main(argv=None):
+def main(argv: list[str] | None = None) -> None:
+    """Entry point of the self-play tuner."""
     ap = argparse.ArgumentParser(
         prog="mtgrules.selfplay",
         description="Self-play round-robin / grid tuning of AI profiles.",
@@ -190,25 +233,22 @@ def main(argv=None):
     if len(args.decks) == 1:
         d = load_deck(args.decks[0])
         decks = [_clone_deck(d, "#1"), _clone_deck(d, "#2")]
-    elif len(args.decks) == 2:
+    elif len(args.decks) == _PAIR:
         decks = [load_deck(f) for f in args.decks]
     else:
         sys.exit("pass 1 (mirror) or 2 decklist files")
     db = CardDatabase(REPO)
     seeds = [args.seed + i for i in range(args.seeds)]
+    settings = SelfplaySettings(
+        games=args.games,
+        seeds=seeds,
+        turn_cap=args.turn_cap,
+    )
 
     if args.tune:
-        grid_tune(
-            decks,
-            db,
-            args.games,
-            seeds,
-            args.base,
-            args.tune,
-            turn_cap=args.turn_cap,
-        )
+        grid_tune(decks, db, settings, args.base, args.tune)
     else:
-        round_robin(decks, db, args.games, seeds, turn_cap=args.turn_cap)
+        round_robin(decks, db, settings)
 
 
 if __name__ == "__main__":

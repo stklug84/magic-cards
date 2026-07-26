@@ -27,6 +27,7 @@ from __future__ import annotations
 
 import json
 import sys
+import tempfile
 from collections import defaultdict
 from pathlib import Path
 
@@ -45,8 +46,10 @@ VOCAB_CLASSES = (
 )
 EXISTING_SOURCES = ("MagicCardsOntology.ttl", "MagicExternalCards.ttl")
 
-VOCAB_OUT = Path("/tmp/onto_vocab.json")
-EXISTING_OUT = Path("/tmp/existing_cards.json")
+# Interchange contract with scripts/generate_individuals.py: both sides
+# resolve the platform temp dir (/tmp on the Linux CI runners).
+VOCAB_OUT = Path(tempfile.gettempdir()) / "onto_vocab.json"
+EXISTING_OUT = Path(tempfile.gettempdir()) / "existing_cards.json"
 
 
 def local(term: object) -> str | None:
@@ -83,9 +86,11 @@ def individuals_of(graph: Graph, class_name: str) -> list[str]:
     return sorted(inds)
 
 
-def build_vocab(graph: Graph) -> dict:
+def build_vocab(graph: Graph) -> dict[str, list[str] | dict[str, str]]:
     """Assemble the vocabulary extract for /tmp/onto_vocab.json."""
-    vocab: dict = {cls: individuals_of(graph, cls) for cls in VOCAB_CLASSES}
+    vocab: dict[str, list[str] | dict[str, str]] = {
+        cls: individuals_of(graph, cls) for cls in VOCAB_CLASSES
+    }
 
     labels: dict[str, str] = {}
     for subj, label in graph.subject_objects(RDFS.label):
@@ -154,18 +159,18 @@ def main() -> int:
     vocab = build_vocab(graph)
     VOCAB_OUT.write_text(json.dumps(vocab))
     counts = ", ".join(f"{cls}: {len(vocab[cls])}" for cls in VOCAB_CLASSES)
-    print(f"{VOCAB_OUT}: {counts}")
-    print(
+    print(f"{VOCAB_OUT}: {counts}")  # noqa: T201 - pipeline progress/error output
+    print(  # noqa: T201 - pipeline progress/error output
         f"{VOCAB_OUT}: _labels: {len(vocab['_labels'])}, "
         f"_setcodes: {len(vocab['_setcodes'])}",
     )
 
     existing = build_existing()
     EXISTING_OUT.write_text(json.dumps(existing))
-    print(f"{EXISTING_OUT}: {len(existing)} card individuals")
+    print(f"{EXISTING_OUT}: {len(existing)} card individuals")  # noqa: T201 - pipeline progress/error output
 
     if not vocab["_setcodes"] or not vocab["SubType"]:
-        print("ERROR: vocabulary extract is empty", file=sys.stderr)
+        print("ERROR: vocabulary extract is empty", file=sys.stderr)  # noqa: T201 - pipeline progress/error output
         return 1
     return 0
 

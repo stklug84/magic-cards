@@ -30,21 +30,25 @@ _PRINTING_RE = re.compile(r"\s+\([A-Z0-9]{2,6}\)\s+[A-Za-z0-9-]+\S*(\s+\*\w+\*)?
 
 @dataclass
 class Deck:
+    """A parsed decklist: expanded card names plus the commander."""
+
     name: str
     path: str
-    cards: list = field(default_factory=list)  # card names, expanded
+    cards: list[str] = field(default_factory=list)  # card names, expanded
     commander: str | None = None
 
     @property
-    def size(self):
+    def size(self) -> int:
+        """Total card count including the commander."""
         return len(self.cards) + (1 if self.commander else 0)
 
 
-def load_deck(path) -> Deck:
-    path = Path(path)
-    deck = Deck(name=path.stem, path=str(path))
+def load_deck(path: str | Path) -> Deck:
+    """Parse the decklist file at *path* into a Deck."""
+    deck_path = Path(path)
+    deck = Deck(name=deck_path.stem, path=str(deck_path))
     in_commander = False
-    for raw in path.read_text(encoding="utf-8").splitlines():
+    for raw in deck_path.read_text(encoding="utf-8").splitlines():
         line = raw.split("#", 1)[0].strip()
         if not line:
             continue
@@ -54,10 +58,10 @@ def load_deck(path) -> Deck:
             header = line.lstrip("/ ").strip().lower()
             in_commander = header in ("commander", "commanders")
             continue
-        parts = line.split(" ", 1)
-        if not parts[0].isdigit() or len(parts) < 2:
+        count_str, _, rest = line.partition(" ")
+        if not count_str.isdigit() or not rest.strip():
             continue
-        count, name = int(parts[0]), _PRINTING_RE.sub("", parts[1].strip())
+        count, name = int(count_str), _PRINTING_RE.sub("", rest.strip())
         # exported lists write double-faced cards as 'Front / Back'; the
         # card database uses the canonical 'Front // Back' form
         name = name.replace(" / ", " // ")

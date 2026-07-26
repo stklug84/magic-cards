@@ -7,13 +7,20 @@ dominant templates of the deck pool; complex cards get hand-written
 implementations in overrides.py. Clauses neither compiled nor overridden
 are recorded as unknown (Noop) and reported by the adapter - nothing is
 skipped silently.
+
+Effect clauses are parsed by a table of per-pattern handlers
+(_CLAUSE_PARSERS): each handler owns one oracle template and either
+returns its Effect node or None to let the next handler try.
 """
 
 from __future__ import annotations
 
 import re
+from dataclasses import dataclass, field
+from typing import TYPE_CHECKING
 
-from .abilities import (
+from mtgrules import overrides
+from mtgrules.abilities import (
     TREASURE,
     ActivatedAbility,
     SpellAbility,
@@ -23,16 +30,19 @@ from .abilities import (
     TriggeredAbility,
     TriggerSpec,
 )
-from .cr import rule
-from .effects import (
+from mtgrules.cr import rule
+from mtgrules.effects import (
     AddMana,
     CopySpell,
     CounterSpell,
     CreateTokens,
+    Ctx,
+    Custom,
     DealDamage,
     Destroy,
     Drain,
     DrawCards,
+    Effect,
     EnergyGain,
     ExileObj,
     GainLife,
@@ -56,11 +66,20 @@ from .effects import (
     TargetControllerGainsPower,
     TutorAny,
 )
-from .events import EventType
-from .objects import Characteristics
+from mtgrules.events import EventType
+from mtgrules.layers import ContinuousEffect
+from mtgrules.objects import Characteristics, Zone
+
+if TYPE_CHECKING:
+    from collections.abc import Callable
+
+    from mtgrules.events import Event
+    from mtgrules.game import Game
+    from mtgrules.objects import GameObject
+    from mtgrules.protocols import CardRef, TriggerCondition
 
 #: filled by compile_card: card name -> set of uncompiled clauses
-UNKNOWN_CLAUSES: dict[str, set] = {}
+UNKNOWN_CLAUSES: dict[str, set[str]] = {}
 
 _KEYWORD_WORDS = {
     "flying",
@@ -86,7 +105,7 @@ _KEYWORD_WORDS = {
     "exalted",
 }
 
-_NUM = {
+_NUM: dict[str, int | str] = {
     "a": 1,
     "an": 1,
     "one": 1,
@@ -103,14 +122,16 @@ _NUM = {
 }
 
 
-def _num(word):
+def _num(word: str) -> int | str:
+    """Parse a count word: an int, or the literal 'x'."""
     w = word.lower()
     if w in _NUM:
         return _NUM[w]
     return int(w) if w.isdigit() else 1
 
 
-def _note(name, clause):
+def _note(name: str, clause: str) -> None:
+    """Record an uncompiled clause for the coverage report."""
     UNKNOWN_CLAUSES.setdefault(name, set()).add(clause)
 
 
@@ -127,7 +148,8 @@ _TOKEN_RE = re.compile(
 _COLOR_WORDS = {"white": "W", "blue": "U", "black": "B", "red": "R", "green": "G"}
 
 
-def _parse_token_clause(m) -> tuple:
+def _parse_token_clause(m: re.Match[str]) -> tuple[int | str, TokenSpec]:
+    """Extract (count, TokenSpec) from a _TOKEN_RE match."""
     count = _num(m.group(1))
     colors = frozenset(
         c for w, c in _COLOR_WORDS.items() if w in (m.group("colors") or "")
@@ -154,7 +176,8 @@ def _parse_token_clause(m) -> tuple:
 
 
 @rule("601.2c")
-def _target_spec(text) -> TargetSpec | None:
+def _target_spec(text: str) -> TargetSpec | None:
+    """Parse one 'target <what>' phrase into a TargetSpec."""
     m = re.search(
         r"(?:up to (?P<upto>one|two|three) )?target (?P<what>[a-z' ]+?)"
         r"(?: an opponent controls| you control| you don't control)?"
@@ -194,181 +217,381 @@ def _target_spec(text) -> TargetSpec | None:
     what = next((v for k, v in mapping if k in what_raw), None)
     if what is None:
         return None
+    count = _num(m.group("upto") or "one")
     return TargetSpec(
         what=what,
         controller=controller,
         other=other,
         optional=bool(m.group("upto")),
-        count=_num(m.group("upto") or "one"),
+        count=count if isinstance(count, int) else 1,
     )
 
 
-def parse_effect_clause(clause: str, name: str, targets: list):
-    """One sentence -> Effect node (or None if unrecognized)."""
-    c = clause.strip().rstrip(".")
-    low = c.lower()
-    if not low:
+@dataclass
+class _Clause:
+    """One effect sentence handed to the clause-parser table."""
+
+    clause: str  # stripped, trailing dot removed, original case
+    low: str  # lowercased form of `clause`
+    name: str  # the card name (self-reference detection)
+    #: growing target list of the whole effect text; handlers append their
+    #: TargetSpec and index into it
+    targets: list[TargetSpec] = field(default_factory=list)
+
+    def short_name(self) -> str:
+        """Return the card's short (pre-comma) name, lowercased."""
+        return self.name.split(",", maxsplit=1)[0].lower()
+
+
+#: one entry of the clause-parser table
+type ClauseParser = Callable[[_Clause], Effect | None]
+
+
+def _p_create_creature_tokens(c: _Clause) -> Effect | None:
+    """'Create N P/T ... creature tokens ...'."""
+    m = _TOKEN_RE.search(c.clause)
+    if not m:
         return None
+    count, spec = _parse_token_clause(m)
+    return CreateTokens(count, spec)
 
-    m = _TOKEN_RE.search(c)
-    if m:
-        count, spec = _parse_token_clause(m)
-        return CreateTokens(count, spec)
-    m = re.search(
-        r"create (a|one|two|three|x|\d+) (tapped )?"
-        r"treasure tokens?",
-        low,
-    )
-    if m:
-        return CreateTokens(_num(m.group(1)), TREASURE, tapped=bool(m.group(2)) or None)
-    m = re.search(r"draw (a|one|two|three|four|x|\d+) cards?", low)
-    if m:
-        who = "each" if "each player" in low else "you"
-        return DrawCards(_num(m.group(1)), who)
-    m = re.search(r"each opponent loses (a|one|two|three|x|\d+) life", low)
-    if m:
-        n = _num(m.group(1))
-        if "you gain" in low and ("that much" in low or "equal" in low):
-            return Drain(n)
-        return LoseLife(n, "each_opponent")
-    m = re.search(r"you gain (\d+|x) life", low)
-    if m:
-        return GainLife(_num(m.group(1)))
-    m = re.search(r"you lose (\d+) life", low)
-    if m:
-        return LoseLife(int(m.group(1)), "you")
-    if re.search(r"destroy all creatures", low):
+
+def _p_create_treasures(c: _Clause) -> Effect | None:
+    """'Create N (tapped) Treasure tokens.'."""
+    m = re.search(r"create (a|one|two|three|x|\d+) (tapped )?treasure tokens?", c.low)
+    if not m:
+        return None
+    return CreateTokens(_num(m.group(1)), TREASURE, tapped=bool(m.group(2)) or None)
+
+
+def _p_draw(c: _Clause) -> Effect | None:
+    """'(Each player) draw(s) N cards.'."""
+    m = re.search(r"draw (a|one|two|three|four|x|\d+) cards?", c.low)
+    if not m:
+        return None
+    who = "each" if "each player" in c.low else "you"
+    return DrawCards(_num(m.group(1)), who)
+
+
+def _p_each_opponent_loses(c: _Clause) -> Effect | None:
+    """'Each opponent loses N life (you gain that much).'."""
+    m = re.search(r"each opponent loses (a|one|two|three|x|\d+) life", c.low)
+    if not m:
+        return None
+    n = _num(m.group(1))
+    if "you gain" in c.low and ("that much" in c.low or "equal" in c.low):
+        return Drain(n)
+    return LoseLife(n, "each_opponent")
+
+
+def _p_gain_life(c: _Clause) -> Effect | None:
+    """'You gain N life.'."""
+    m = re.search(r"you gain (\d+|x) life", c.low)
+    return GainLife(_num(m.group(1))) if m else None
+
+
+def _p_lose_life(c: _Clause) -> Effect | None:
+    """'You lose N life.'."""
+    m = re.search(r"you lose (\d+) life", c.low)
+    return LoseLife(int(m.group(1)), "you") if m else None
+
+
+def _p_destroy_all_creatures(c: _Clause) -> Effect | None:
+    """'Destroy all creatures.'."""
+    if re.search(r"destroy all creatures", c.low):
         return Destroy(all_of="creatures")
-    m = re.search(r"deals? (\d+|x) damage to each creature", low)
-    if m:
-        return DealDamage(_num(m.group(1)), "each_creature")
-    m = re.search(r"deals? (\d+|x) damage(?:,| to)", low)
-    if m:
-        spec = _target_spec(c)
-        if spec:
-            targets.append(spec)
-            return DealDamage(_num(m.group(1)), "target")
-        if "divided" in low:
-            return DealDamage(_num(m.group(1)), "divided")
-        if "each opponent" in low:
-            return LoseLife(_num(m.group(1)), "each_opponent")
-    if low.startswith("destroy target") or " destroy target" in low:
-        spec = _target_spec(c)
-        if spec:
-            targets.append(spec)
-            return Destroy(index=len(targets) - 1)
-    if low.startswith("exile target") or " exile target" in low:
-        spec = _target_spec(c)
-        if spec:
-            targets.append(spec)
-            return ExileObj(index=len(targets) - 1)
-    if re.search(r"counter target .*spell", low):
-        targets.append(TargetSpec(what="spell"))
+    return None
+
+
+def _p_damage_each_creature(c: _Clause) -> Effect | None:
+    """'... deals N damage to each creature.'."""
+    m = re.search(r"deals? (\d+|x) damage to each creature", c.low)
+    return DealDamage(_num(m.group(1)), "each_creature") if m else None
+
+
+def _p_damage(c: _Clause) -> Effect | None:
+    """'... deals N damage to <target|divided|each opponent>'."""
+    m = re.search(r"deals? (\d+|x) damage(?:,| to)", c.low)
+    if not m:
+        return None
+    spec = _target_spec(c.clause)
+    if spec:
+        c.targets.append(spec)
+        return DealDamage(_num(m.group(1)), "target")
+    if "divided" in c.low:
+        return DealDamage(_num(m.group(1)), "divided")
+    if "each opponent" in c.low:
+        return LoseLife(_num(m.group(1)), "each_opponent")
+    return None
+
+
+def _p_destroy_target(c: _Clause) -> Effect | None:
+    """'Destroy target <what>.'."""
+    if not (c.low.startswith("destroy target") or " destroy target" in c.low):
+        return None
+    spec = _target_spec(c.clause)
+    if spec:
+        c.targets.append(spec)
+        return Destroy(index=len(c.targets) - 1)
+    return None
+
+
+def _p_exile_target(c: _Clause) -> Effect | None:
+    """'Exile target <what>.'."""
+    if not (c.low.startswith("exile target") or " exile target" in c.low):
+        return None
+    spec = _target_spec(c.clause)
+    if spec:
+        c.targets.append(spec)
+        return ExileObj(index=len(c.targets) - 1)
+    return None
+
+
+def _p_counter_spell(c: _Clause) -> Effect | None:
+    """'Counter target ... spell.'."""
+    if re.search(r"counter target .*spell", c.low):
+        c.targets.append(TargetSpec(what="spell"))
         return CounterSpell()
-    if re.search(
-        r"copy target (?:instant(?: or sorcery)?|sorcery)"
-        r" spell",
-        low,
-    ):
-        targets.append(TargetSpec(what="spell"))
-        return CopySpell(index=len(targets) - 1)
-    if re.match(r"tap target creature", low):
-        spec = _target_spec("target creature")
-        targets.append(spec)
-        return TapTarget(index=len(targets) - 1)
-    # removal riders referencing the (already removed) target
+    return None
+
+
+def _p_copy_spell(c: _Clause) -> Effect | None:
+    """'Copy target instant or sorcery spell.'."""
+    if re.search(r"copy target (?:instant(?: or sorcery)?|sorcery) spell", c.low):
+        c.targets.append(TargetSpec(what="spell"))
+        return CopySpell(index=len(c.targets) - 1)
+    return None
+
+
+def _p_tap_target(c: _Clause) -> Effect | None:
+    """'Tap target creature.'."""
+    if not re.match(r"tap target creature", c.low):
+        return None
+    spec = _target_spec("target creature")
+    if spec is None:  # pragma: no cover - the fixed phrase always parses
+        return None
+    c.targets.append(spec)
+    return TapTarget(index=len(c.targets) - 1)
+
+
+def _p_rider_basic_land(c: _Clause) -> Effect | None:
+    """Parse the its-controller-may-fetch-a-basic-land rider."""
     if re.match(
-        r"its controller may search their library for a basic"
-        r" land card",
-        low,
+        r"its controller may search their library for a basic land card",
+        c.low,
     ):
         return TargetControllerBasicLand()
-    if re.match(r"its controller gains life equal to its power", low):
+    return None
+
+
+def _p_rider_gain_power(c: _Clause) -> Effect | None:
+    """Parse the its-controller-gains-life-equal-to-power rider."""
+    if re.match(r"its controller gains life equal to its power", c.low):
         return TargetControllerGainsPower()
-    if re.match(r"you lose life equal to that permanent's mana value", low):
+    return None
+
+
+def _p_rider_lose_mv(c: _Clause) -> Effect | None:
+    """Parse the you-lose-life-equal-to-its-mana-value rider."""
+    if re.match(r"you lose life equal to that permanent's mana value", c.low):
         return LoseLifeTargetMV()
+    return None
+
+
+def _p_put_land_from_hand(c: _Clause) -> Effect | None:
+    """'You may put a land card from your hand onto the battlefield.'."""
     if re.match(
         r"you may put a land card from your hand(?: or graveyard)?"
         r" onto the battlefield tapped",
-        low,
+        c.low,
     ):
         # graveyard option simplified to hand-only
         return PutLandFromHand(tapped=True)
+    return None
+
+
+def _p_take_dead_creature(c: _Clause) -> Effect | None:
+    """'You may put that card onto the battlefield under your control.'."""
     if re.match(
-        r"you may put that card onto the battlefield under your"
-        r" control",
-        low,
+        r"you may put that card onto the battlefield under your control",
+        c.low,
     ):
         return TakeDeadCreature()
-    m = re.search(r"put (a|one|two|three|x|\d+) ([+-]1/[+-]1) counters? on", low)
-    if m:
-        n, kind = _num(m.group(1)), m.group(2)
-        if (
-            "each creature you don't control" in low
-            or "each creature your opponents control" in low
-        ):
-            return PutCounters(kind, n, "each_opponent_creature")
-        if "each creature" in low or "each other creature" in low:
-            return PutCounters(kind, n, "each_creature")
-        if "on it" in low or f"on {name.split(',', maxsplit=1)[0].lower()}" in low:
-            return PutCounters(kind, n, "self")
-        spec = _target_spec(c)
-        if spec:
-            targets.append(spec)
-            return PutCounters(kind, n, "target")
+    return None
+
+
+def _p_put_counters(c: _Clause) -> Effect | None:
+    """'Put N +1/+1 (or -1/-1) counters on <self|target|each ...>'."""
+    m = re.search(r"put (a|one|two|three|x|\d+) ([+-]1/[+-]1) counters? on", c.low)
+    if not m:
+        return None
+    n, kind = _num(m.group(1)), m.group(2)
+    if (
+        "each creature you don't control" in c.low
+        or "each creature your opponents control" in c.low
+    ):
+        return PutCounters(kind, n, "each_opponent_creature")
+    if "each creature" in c.low or "each other creature" in c.low:
+        return PutCounters(kind, n, "each_creature")
+    if "on it" in c.low or f"on {c.short_name()}" in c.low:
         return PutCounters(kind, n, "self")
-    if "proliferate" in low:
-        times = 2 if "proliferate twice" in low else 1
+    spec = _target_spec(c.clause)
+    if spec:
+        c.targets.append(spec)
+        return PutCounters(kind, n, "target")
+    return PutCounters(kind, n, "self")
+
+
+def _p_proliferate(c: _Clause) -> Effect | None:
+    """'Proliferate (twice).'."""
+    if "proliferate" in c.low:
+        times = 2 if "proliferate twice" in c.low else 1
         return Proliferate(times)
-    if re.match(r"populate", low):
-        return Populate()
+    return None
+
+
+def _p_populate(c: _Clause) -> Effect | None:
+    """'Populate.'."""
+    return Populate() if re.match(r"populate", c.low) else None
+
+
+def _p_search_lands(c: _Clause) -> Effect | None:
+    """'Search your library for (up to) N ... land(s) ...'."""
     m = re.search(
         r"search your library for (?:up to )?(a|an|one|two|three|x)"
         r"[^.]*?(land|plains|island|swamp|mountain|forest)",
-        low,
+        c.low,
     )
-    if m:
-        tapped = "tapped" in low
-        to_hand = "hand" in low and "battlefield" not in low
-        basic = "basic" in low or m.group(2) != "land"
-        return SearchLands(
-            _num(m.group(1)),
-            tapped=tapped,
-            to_hand=to_hand,
-            basic_only=basic,
-        )
-    if re.match(r"return a land you control to (?:its|their) owner", low):
+    if not m:
+        return None
+    tapped = "tapped" in c.low
+    to_hand = "hand" in c.low and "battlefield" not in c.low
+    basic = "basic" in c.low or m.group(2) != "land"
+    return SearchLands(
+        _num(m.group(1)),
+        tapped=tapped,
+        to_hand=to_hand,
+        basic_only=basic,
+    )
+
+
+def _p_return_own_land(c: _Clause) -> Effect | None:
+    """Bounce lands: 'return a land you control to its owner's hand'."""
+    if re.match(r"return a land you control to (?:its|their) owner", c.low):
         return ReturnToHand(self_land=True)
-    m = re.search(r"scry (\d+)", low)
-    if m:
-        return Scry(int(m.group(1)))
-    if re.search(r"search your library for a card.*hand", low):
+    return None
+
+
+def _p_scry(c: _Clause) -> Effect | None:
+    """'Scry N.'."""
+    m = re.search(r"scry (\d+)", c.low)
+    return Scry(int(m.group(1))) if m else None
+
+
+def _p_tutor(c: _Clause) -> Effect | None:
+    """'Search your library for a card ... hand.'."""
+    if re.search(r"search your library for a card.*hand", c.low):
         return TutorAny()
-    if re.search(
-        r"return target .* to (?:its owner's|their owners?')"
-        r" hands?",
-        low,
+    return None
+
+
+def _p_return_target_to_hand(c: _Clause) -> Effect | None:
+    """'Return target ... to its owner's hand.'."""
+    if not re.search(
+        r"return target .* to (?:its owner's|their owners?') hands?",
+        c.low,
     ):
-        spec = _target_spec(c)
-        if spec:
-            targets.append(spec)
-            return ReturnToHand(index=len(targets) - 1)
-    m = re.search(r"you get (\{e\})+", low)
-    if m:
-        return EnergyGain(low.count("{e}"))
+        return None
+    spec = _target_spec(c.clause)
+    if spec:
+        c.targets.append(spec)
+        return ReturnToHand(index=len(c.targets) - 1)
+    return None
+
+
+def _p_energy(c: _Clause) -> Effect | None:
+    """'You get {E}{E}...'."""
+    if re.search(r"you get (\{e\})+", c.low):
+        return EnergyGain(c.low.count("{e}"))
+    return None
+
+
+def _p_pump_all(c: _Clause) -> Effect | None:
+    """'Creatures you control get +N/+N until end of turn.'."""
     m = re.search(
-        r"creatures you control get \+(\d+)/\+(\d+)"
-        r" until end of turn",
-        low,
+        r"creatures you control get \+(\d+)/\+(\d+) until end of turn",
+        c.low,
     )
-    if m:
-        return PumpAll(int(m.group(1)), int(m.group(2)))
-    if "gain hexproof and indestructible" in low or (
-        "permanents you control gain" in low and "protection" in low
+    return PumpAll(int(m.group(1)), int(m.group(2))) if m else None
+
+
+def _p_protect_all(c: _Clause) -> Effect | None:
+    """Akroma's-Will-style team protection clauses."""
+    if "gain hexproof and indestructible" in c.low or (
+        "permanents you control gain" in c.low and "protection" in c.low
     ):
         return ProtectAll()
-    if low.startswith("sacrifice ") and name.split(",", maxsplit=1)[0].lower() in low:
+    return None
+
+
+def _p_sacrifice_self(c: _Clause) -> Effect | None:
+    """'Sacrifice <this card>.'."""
+    if c.low.startswith("sacrifice ") and c.short_name() in c.low:
         return SacrificeSelf()
+    return None
+
+
+#: ordered clause-parser table: first handler to return an Effect wins
+_CLAUSE_PARSERS: tuple[ClauseParser, ...] = (
+    _p_create_creature_tokens,
+    _p_create_treasures,
+    _p_draw,
+    _p_each_opponent_loses,
+    _p_gain_life,
+    _p_lose_life,
+    _p_destroy_all_creatures,
+    _p_damage_each_creature,
+    _p_damage,
+    _p_destroy_target,
+    _p_exile_target,
+    _p_counter_spell,
+    _p_copy_spell,
+    _p_tap_target,
+    _p_rider_basic_land,
+    _p_rider_gain_power,
+    _p_rider_lose_mv,
+    _p_put_land_from_hand,
+    _p_take_dead_creature,
+    _p_put_counters,
+    _p_proliferate,
+    _p_populate,
+    _p_search_lands,
+    _p_return_own_land,
+    _p_scry,
+    _p_tutor,
+    _p_return_target_to_hand,
+    _p_energy,
+    _p_pump_all,
+    _p_protect_all,
+    _p_sacrifice_self,
+)
+
+
+def parse_effect_clause(
+    clause: str,
+    name: str,
+    targets: list[TargetSpec],
+) -> Effect | None:
+    """One sentence -> Effect node (or None if unrecognized)."""
+    stripped = clause.strip().rstrip(".")
+    low = stripped.lower()
+    if not low:
+        return None
+    c = _Clause(clause=stripped, low=low, name=name, targets=targets)
+    for parser in _CLAUSE_PARSERS:
+        eff = parser(c)
+        if eff is not None:
+            return eff
     return None
 
 
@@ -382,28 +605,28 @@ _INERT_RIDERS = re.compile(
 )
 
 
-def parse_effect_text(text: str, name: str) -> tuple:
+def parse_effect_text(text: str, name: str) -> tuple[Effect, list[TargetSpec]]:
     """Full effect text -> (Effect, [TargetSpec, ...])."""
-    targets: list = []
-    parts: list = []
-    for sentence in re.split(r"(?<=[.;])\s+", text):
-        sentence = sentence.strip()
+    targets: list[TargetSpec] = []
+    parts: list[Effect] = []
+    for raw_sentence in re.split(r"(?<=[.;])\s+", text):
+        sentence = raw_sentence.strip()
         if not sentence:
             continue
         low = sentence.lower().rstrip(".")
         # "You gain life equal to the life lost this way." merges the
         # preceding each-opponent life loss into a Drain (Exsanguinate)
+        last = parts[-1] if parts else None
         if (
             re.match(
                 r"you gain life equal to the (?:life lost|total life"
                 r" lost)(?: this way)?",
                 low,
             )
-            and parts
-            and isinstance(parts[-1], LoseLife)
-            and parts[-1].who == "each_opponent"
+            and isinstance(last, LoseLife)
+            and last.who == "each_opponent"
         ):
-            parts[-1] = Drain(parts[-1].amount)
+            parts[-1] = Drain(last.amount)
             continue
         eff = parse_effect_clause(sentence, name, targets)
         if eff is None:
@@ -418,7 +641,7 @@ def parse_effect_text(text: str, name: str) -> tuple:
 
 # ---------------------------------------------------------------- triggers
 
-_TRIGGER_TABLE = [
+_TRIGGER_TABLE: list[tuple[str, Callable[[], TriggerSpec]]] = [
     (
         (
             r"^when(?:ever)? (?:this creature|this permanent|this artifact"
@@ -521,8 +744,10 @@ _TRIGGER_TABLE = [
 ]
 
 
-def _step(step, mine=False):
-    def cond(game, source, event):
+def _step(step: str, *, mine: bool = False) -> TriggerCondition:
+    """Condition: a BEGIN_STEP event for *step* (optionally our own)."""
+
+    def cond(_game: Game, source: GameObject, event: Event) -> bool:
         if event.data.get("step") != step:
             return False
         return not mine or event.data.get("player") is source.controller
@@ -530,8 +755,15 @@ def _step(step, mine=False):
     return cond
 
 
-def _dies(own=False, other=False, opponent=False):
-    def cond(game, source, event):
+def _dies(
+    *,
+    own: bool = False,
+    other: bool = False,
+    opponent: bool = False,
+) -> TriggerCondition:
+    """Condition: a creature died (optionally ours/another's/theirs)."""
+
+    def cond(_game: Game, source: GameObject, event: Event) -> bool:
         obj = event.data.get("obj")
         if obj is None or "Creature" not in obj.base.types:
             return False
@@ -544,13 +776,19 @@ def _dies(own=False, other=False, opponent=False):
     return cond
 
 
-def _dies_with_counter(own=False, opponent=False, kind=""):
-    """Dies-trigger conditioned on the dead creature's last-known counters
-    (rule 603.10a look-back; lki_counters is captured on leaving the
-    battlefield).
+def _dies_with_counter(
+    *,
+    own: bool = False,
+    opponent: bool = False,
+    kind: str = "",
+) -> TriggerCondition:
+    """Condition: a countered creature died (rule 603.10a look-back).
+
+    Checks the dead creature's last-known counters; lki_counters is
+    captured on leaving the battlefield.
     """
 
-    def cond(game, source, event):
+    def cond(_game: Game, source: GameObject, event: Event) -> bool:
         obj = event.data.get("obj")
         if obj is None or "Creature" not in obj.base.types:
             return False
@@ -560,29 +798,34 @@ def _dies_with_counter(own=False, opponent=False, kind=""):
             return False
         counters = getattr(obj, "lki_counters", {}) or {}
         if kind:
-            return counters.get(kind, 0) > 0
+            return bool(counters.get(kind, 0) > 0)
         return any(n > 0 for n in counters.values())
 
     return cond
 
 
-def _own_event():
-    def cond(game, source, event):
+def _own_event() -> TriggerCondition:
+    """Condition: the event's player is the ability's controller."""
+
+    def cond(_game: Game, source: GameObject, event: Event) -> bool:
         p = event.data.get("player")
         return p is source.controller
 
     return cond
 
 
-def _token_etb():
-    def cond(game, source, event):
+def _token_etb() -> TriggerCondition:
+    """Condition: one of the controller's tokens entered."""
+
+    def cond(_game: Game, source: GameObject, event: Event) -> bool:
         obj = event.data.get("obj")
         return obj is not None and obj.is_token and obj.controller is source.controller
 
     return cond
 
 
-def parse_trigger_line(line: str, name: str):
+def parse_trigger_line(line: str, name: str) -> TriggeredAbility | None:
+    """Parse one 'When/Whenever/At ..., <effect>' oracle line."""
     low = line.lower()
     short = name.split(",", maxsplit=1)[0].lower()
     comma = low.find(", ")
@@ -610,7 +853,8 @@ def parse_trigger_line(line: str, name: str):
 _MINUS = "\u2212"
 
 
-def parse_activated_line(line: str, name: str):
+def parse_activated_line(line: str, name: str) -> ActivatedAbility | None:
+    """Parse one '[Cost]: [Effect]' oracle line (rule 602.1)."""
     m = re.match(r"^cycling ((?:\{[^}]+\})+)\.?$", line, re.IGNORECASE)
     if m:  # rule 702.29a
         return ActivatedAbility(
@@ -685,72 +929,90 @@ def parse_activated_line(line: str, name: str):
 # ---------------------------------------------------------------- statics
 
 
-def parse_static_line(line: str, name: str):
+def parse_static_line(line: str, _name: str) -> StaticAbility | None:
+    """Parse one static-ability oracle line into a StaticAbility."""
     low = line.lower()
     if re.match(r"^spells you control can't be countered\.?$", low):
-        ab = StaticAbility(text=line)
-        ab.uncounterable_spells = True
-        return ab
+        return StaticAbility(text=line, uncounterable_spells=True)
     m = re.match(
         r"^(creatures?|creature tokens?|artifact creatures?)"
         r" you control get \+(\d+)/\+(\d+)"
         r"(?: and have ([a-z ]+?))?\.?$",
         low,
     )
-    if m:
-        boost_p, boost_t = int(m.group(2)), int(m.group(3))
-        granted = {
-            k.strip()
-            for k in (m.group(4) or "").split(" and ")
-            if k.strip() in _KEYWORD_WORDS
-        }
-        if m.group(4) and not granted:
-            return None  # unknown keyword grant
-        tokens_only = "token" in m.group(1)
-        art_only = "artifact" in m.group(1)
-        from .layers import ContinuousEffect
+    if not m:
+        return None
+    granted = {
+        k.strip()
+        for k in (m.group(4) or "").split(" and ")
+        if k.strip() in _KEYWORD_WORDS
+    }
+    if m.group(4) and not granted:
+        return None  # unknown keyword grant
+    return _anthem_static(
+        line,
+        boost=(int(m.group(2)), int(m.group(3))),
+        granted=granted,
+        tokens_only="token" in m.group(1),
+        art_only="artifact" in m.group(1),
+    )
 
-        def continuous(game, source):
-            me = source.controller
 
-            def applies(g, obj, ch):
-                if obj.controller is not me or "Creature" not in ch.types:
-                    return False
-                if tokens_only and not obj.is_token:
-                    return False
-                return not (art_only and "Artifact" not in ch.types)
+def _anthem_static(
+    line: str,
+    *,
+    boost: tuple[int, int],
+    granted: set[str],
+    tokens_only: bool,
+    art_only: bool,
+) -> StaticAbility:
+    """Build the anthem StaticAbility for parse_static_line."""
+    boost_p, boost_t = boost
 
-            effects = [
+    def continuous(_game: Game, source: GameObject) -> list[ContinuousEffect]:
+        me = source.controller
+
+        def applies(_g: Game, obj: GameObject, ch: Characteristics) -> bool:
+            if obj.controller is not me or "Creature" not in ch.types:
+                return False
+            if tokens_only and not obj.is_token:
+                return False
+            return not (art_only and "Artifact" not in ch.types)
+
+        def boost(_g: Game, _o: GameObject, ch: Characteristics) -> None:
+            ch.power = (ch.power or 0) + boost_p
+            ch.toughness = (ch.toughness or 0) + boost_t
+
+        def grant(_g: Game, _o: GameObject, ch: Characteristics) -> None:
+            ch.keywords.update(granted)
+
+        effects = [
+            ContinuousEffect(
+                layer=7,
+                sublayer="c",
+                source=source,
+                applies_to=applies,
+                apply=boost,
+            ),
+        ]
+        if granted:
+            effects.append(
                 ContinuousEffect(
-                    layer=7,
-                    sublayer="c",
+                    layer=6,
                     source=source,
                     applies_to=applies,
-                    apply=lambda g, o, ch: (
-                        setattr(ch, "power", (ch.power or 0) + boost_p),
-                        setattr(ch, "toughness", (ch.toughness or 0) + boost_t),
-                    ),
+                    apply=grant,
                 ),
-            ]
-            if granted:
-                effects.append(
-                    ContinuousEffect(
-                        layer=6,
-                        source=source,
-                        applies_to=applies,
-                        apply=lambda g, o, ch: ch.keywords.update(granted),
-                    ),
-                )
-            return effects
+            )
+        return effects
 
-        return StaticAbility(continuous=continuous, text=line)
-    return None
+    return StaticAbility(continuous=continuous, text=line)
 
 
 # ---------------------------------------------------------------- keywords
 
 
-def parse_keyword_line(line: str) -> set | None:
+def parse_keyword_line(line: str) -> set[str] | None:
     """Parse a keywords-only line into a set of keyword strings."""
     got = set()
     for part in re.split(r"[,;] ", line.rstrip(".")):
@@ -775,30 +1037,47 @@ def parse_keyword_line(line: str) -> set | None:
 
 
 @rule("113.2")
-def compile_card(ref) -> Characteristics:
-    """CardData (from the knowledge graph) -> base Characteristics with
-    compiled abilities. Overrides in overrides.py win per card.
-    """
-    from . import overrides
+def compile_card(ref: CardRef) -> Characteristics:
+    """CardData (from the knowledge graph) -> compiled Characteristics.
 
+    Overrides in overrides.py win per card.
+    """
     ch = Characteristics(
         name=ref.name,
         mana_cost=ref.mana_cost,
-        supertypes=set(getattr(ref, "supertypes", ()) or ()),
+        supertypes=set(ref.supertypes or ()),
         types=set(ref.types),
         subtypes=set(ref.subtypes),
         power=ref.power if isinstance(ref.power, int) else None,
         toughness=ref.toughness if isinstance(ref.toughness, int) else None,
-        loyalty=getattr(ref, "loyalty", None),
+        loyalty=ref.loyalty,
     )
     ch.colors = set(ref.color_identity) & set("WUBRG") if ref.mana_cost else set()
 
     if overrides.apply_override(ch, ref):
         return ch
 
-    name = ref.name
     is_spell = bool(ch.types & {"Instant", "Sorcery"})
-    spell_clauses = []
+    spell_clauses = _compile_oracle_lines(ch, ref, is_spell=is_spell)
+    if is_spell:
+        text = " ".join(spell_clauses)
+        effect, targets = parse_effect_text(text, ref.name)
+        ch.abilities.append(SpellAbility(effect=effect, targets=targets, text=text))
+
+    _apply_land_behavior(ch, ref)
+    _add_keyword_abilities(ch)
+    return ch
+
+
+def _compile_oracle_lines(
+    ch: Characteristics,
+    ref: CardRef,
+    *,
+    is_spell: bool,
+) -> list[str]:
+    """Compile each oracle line onto *ch*; return leftover spell clauses."""
+    name = ref.name
+    spell_clauses: list[str] = []
     for raw_line in (ref.oracle or "").split("\n"):
         line = re.sub(r"\s*\([^)]*\)", "", raw_line).strip()
         if not line:
@@ -807,28 +1086,12 @@ def compile_card(ref) -> Characteristics:
         # (conditional forms conservatively enter tapped, like the
         # heuristic engine)
         if re.match(
-            r"^this land enters (the battlefield )?tapped", line, re.IGNORECASE
+            r"^this land enters (the battlefield )?tapped",
+            line,
+            re.IGNORECASE,
         ):
             continue
-        m = re.match(
-            r"^this spell costs \{(\d+)\} less to cast for each"
-            r" creature on the battlefield\.?$",
-            line,
-            re.IGNORECASE,
-        )
-        if m:  # rule 601.2f
-            ch.cost_less_per_creature = int(m.group(1))
-            continue
-        m = re.match(
-            r"^as an additional cost to cast this spell,"
-            r" (sacrifice a creature|discard a card)\.?$",
-            line,
-            re.IGNORECASE,
-        )
-        if m:  # rule 601.2b
-            ch.additional_cost = (
-                "sacrifice_creature" if "sacrifice" in m.group(1) else "discard_card"
-            )
+        if _parse_cost_modifier_line(ch, line):
             continue
         kws = parse_keyword_line(line)
         if kws is not None:
@@ -850,18 +1113,46 @@ def compile_card(ref) -> Characteristics:
             spell_clauses.append(line)
             continue
         _note(name, line)
+    return spell_clauses
 
-    if is_spell:
-        text = " ".join(spell_clauses)
-        effect, targets = parse_effect_text(text, name)
-        ch.abilities.append(SpellAbility(effect=effect, targets=targets, text=text))
 
-    # graph mana facts -> land mana abilities
-    if "Land" in ch.types and ref.behavior.get("land_colors"):
+@rule("601.2b", "601.2f")
+def _parse_cost_modifier_line(ch: Characteristics, line: str) -> bool:
+    """Cost-modifier lines: rule 601.2f reductions, 601.2b extra costs."""
+    m = re.match(
+        r"^this spell costs \{(\d+)\} less to cast for each"
+        r" creature on the battlefield\.?$",
+        line,
+        re.IGNORECASE,
+    )
+    if m:  # rule 601.2f
+        ch.cost_less_per_creature = int(m.group(1))
+        return True
+    m = re.match(
+        r"^as an additional cost to cast this spell,"
+        r" (sacrifice a creature|discard a card)\.?$",
+        line,
+        re.IGNORECASE,
+    )
+    if m:  # rule 601.2b
+        ch.additional_cost = (
+            "sacrifice_creature" if "sacrifice" in m.group(1) else "discard_card"
+        )
+        return True
+    return False
+
+
+def _apply_land_behavior(ch: Characteristics, ref: CardRef) -> None:
+    """Graph land facts -> mana abilities, tapped markers, fetches."""
+    if "Land" not in ch.types:
+        return
+    if ref.behavior.get("land_colors"):
         colors = set(ref.behavior["land_colors"])
         any_c = colors >= set("WUBRG")
         types = tuple(c for c in colors if c in "WUBRGC") if not any_c else ()
-        if not any(getattr(a, "is_mana_ability", False) for a in ch.abilities):
+        if not any(
+            isinstance(a, ActivatedAbility) and a.is_mana_ability for a in ch.abilities
+        ):
             ch.abilities.append(
                 ActivatedAbility(
                     tap_cost=True,
@@ -870,9 +1161,11 @@ def compile_card(ref) -> Characteristics:
                     text="{T}: Add mana.",
                 ),
             )
-    if "Land" in ch.types and ref.behavior.get("enters_tapped"):
-        ch.abilities.append(_EntersTappedMarker())
-    if "Land" in ch.types and ref.behavior.get("fetch_land"):
+    if ref.behavior.get("enters_tapped"):
+        ch.abilities.append(
+            StaticAbility(enters_tapped=True, text="enters the battlefield tapped"),
+        )
+    if ref.behavior.get("fetch_land"):
         ch.abilities.append(
             ActivatedAbility(
                 tap_cost=True,
@@ -881,21 +1174,18 @@ def compile_card(ref) -> Characteristics:
                 text="{T}, Sacrifice: fetch a basic land.",
             ),
         )
-    _add_keyword_abilities(ch)
-    return ch
 
 
 @rule("702.79")
-def _add_keyword_abilities(ch):
+def _add_keyword_abilities(ch: Characteristics) -> None:
     """Keywords that carry rules baggage beyond combat checks."""
     if "persist" in ch.keywords:
-        from .objects import Zone
-        from .overrides import Custom
 
-        def persist_return(game, ctx):
+        def persist_return(game: Game, ctx: Ctx) -> None:
             src = ctx.source
             if (
-                src.zone == Zone.GRAVEYARD
+                src is not None
+                and src.zone == Zone.GRAVEYARD
                 and not src.is_token
                 and src.lki_counters.get("-1/-1", 0) == 0
             ):
@@ -909,13 +1199,3 @@ def _add_keyword_abilities(ch):
                 text="Persist (rule 702.79): return with a -1/-1 counter",
             ),
         )
-
-
-class _EntersTappedMarker:
-    """Marker consumed by Game.play_land / ETB replacement."""
-
-    kind = "static"
-    continuous = None
-    replacement = None
-    enters_tapped = True
-    text = "enters the battlefield tapped"

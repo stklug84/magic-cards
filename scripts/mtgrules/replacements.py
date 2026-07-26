@@ -12,8 +12,17 @@ from __future__ import annotations
 
 import itertools
 from dataclasses import dataclass
+from typing import TYPE_CHECKING
 
-from .cr import rule
+from mtgrules.abilities import StaticAbility
+from mtgrules.cr import rule
+from mtgrules.objects import Player
+
+if TYPE_CHECKING:
+    from mtgrules.events import Event
+    from mtgrules.game import Game
+    from mtgrules.objects import GameObject
+    from mtgrules.protocols import EventMatcher, EventReplacer
 
 _rep_ids = itertools.count(1)
 
@@ -21,39 +30,54 @@ _rep_ids = itertools.count(1)
 @rule("614.1")
 @dataclass
 class Replacement:
+    """One replacement/prevention effect (rule 614.1)."""
+
     event_type: str
-    #: matches(game, event) -> bool
-    matches: object = None
     #: replace(game, event) -> event | None (None = event prevented, 615)
-    replace: object = None
-    source: object = None
+    replace: EventReplacer
+    #: matches(game, event) -> bool; None matches every event of the type
+    matches: EventMatcher | None = None
+    source: GameObject | None = None
     #: rule 614.16a: self-replacement effects apply before others
     self_replacement: bool = False
     #: "static" (while source on battlefield) or "floating"
     duration: str = "static"
     id: int = 0
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
+        """Assign the rule 616.2 bookkeeping id."""
         self.id = next(_rep_ids)
 
 
 class ReplacementEngine:
-    def __init__(self, game):
+    """Per-game replacement-effect machinery (rules 614-616)."""
+
+    def __init__(self, game: Game) -> None:
+        """Bind the game with no active floating replacements."""
         self.game = game
         self.floating: list[Replacement] = []
         #: stable Replacement instances per (source id, ability id) so that
         #: rule 616.2 "applies only once per event" bookkeeping works
-        self._cache: dict = {}
+        self._cache: dict[tuple[int, int], list[Replacement]] = {}
+
+    def clear_cache(self) -> None:
+        """Drop cached per-ability Replacement instances.
+
+        Test fixtures use this after grafting abilities onto an object
+        that is already on the battlefield.
+        """
+        self._cache.clear()
 
     @rule("614.7a", "616.1")
-    def _active(self):
-        """All currently active replacement effects, from static abilities
-        of battlefield permanents plus floating ones.
+    def _active(self) -> list[Replacement]:
+        """All currently active replacement effects.
+
+        From static abilities of battlefield permanents plus floating ones.
         """
         out = list(self.floating)
         for obj in self.game.battlefield_objects():
             for ab in obj.chars(self.game).abilities:
-                if getattr(ab, "kind", "") == "static" and ab.replacement:
+                if isinstance(ab, StaticAbility) and ab.replacement:
                     key = (obj.id, id(ab))
                     if key not in self._cache:
                         self._cache[key] = ab.replacement(self.game, obj)
@@ -61,7 +85,7 @@ class ReplacementEngine:
         return out
 
     @rule("614.5", "616.1", "616.2")
-    def process(self, event):
+    def process(self, event: Event) -> Event | None:
         """Run *event* through the replacement machinery.
 
         Returns the (possibly modified) event, or None if a prevention
@@ -89,13 +113,13 @@ class ReplacementEngine:
             else:
                 r = pool[0]
             event.applied.add(r.id)
-            event = r.replace(self.game, event)
-            if event is None or event.prevented:
+            replaced = r.replace(self.game, event)
+            if replaced is None or replaced.prevented:
                 return None
+            event = replaced
 
-    def _affected_player(self, event):
-        from .objects import Player
-
+    def _affected_player(self, event: Event) -> Player | None:
+        """Return the player who orders replacements (rule 616.1)."""
         who = (
             event.data.get("controller")
             or event.data.get("player")
@@ -104,6 +128,5 @@ class ReplacementEngine:
         if isinstance(who, Player):
             return who
         obj = event.data.get("obj") or event.data.get("target")
-        return (
-            obj.controller if obj is not None and hasattr(obj, "controller") else None
-        )
+        controller = getattr(obj, "controller", None)
+        return controller if isinstance(controller, Player) else None

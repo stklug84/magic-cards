@@ -30,7 +30,6 @@ to be reusable — contributions to either are welcome.
 | `scripts/*.py` | Entry points: validators, consistency check, generators, matchup simulator |
 | `decks/`, `sets/` | Per-deck and per-set TTL slices |
 | `strategies/` | Deck lists and strategy notes for the simulator |
-| `docs/python-strictness-roadmap.md` | Task list for removing the temporary lint baseline |
 
 The reusable workflows (`rdf-validate.yml`, `python-validate.yml`) live in
 the central
@@ -105,11 +104,12 @@ python3 scripts/simulate_matchup.py \
   strategies/blight-curse-deck.txt --games 3 --seed 7
 ```
 
-Python strictness note: `pyproject.toml` carries a **temporary** ruff
-ignore baseline. Every temporary entry references
-[`docs/python-strictness-roadmap.md`](docs/python-strictness-roadmap.md);
-do not add new code that depends on those ignores, and remove entries as
-the roadmap progresses.
+Python strictness: ruff runs with `select = ["ALL"]` and only permanent,
+individually justified ignores (see `[tool.ruff.lint]` in
+`pyproject.toml`); mypy runs `--strict` over all of `scripts/`. There is
+no ignore baseline and no per-file-ignore section — new suppressions are
+allowed only per line (`# noqa: <RULE>` / `# nosec <ID>`) with a
+justification comment.
 
 ## Working on the CI infrastructure
 

@@ -1,5 +1,7 @@
-"""Result aggregation: Wilson confidence intervals, per-card win-rate lift,
-mulligan/curve reports, JSONL export.
+"""Result aggregation and reporting.
+
+Wilson confidence intervals, per-card win-rate lift, per-seed win-rate
+spread, per-game stat averages, and JSONL export of the raw records.
 """
 
 from __future__ import annotations
@@ -8,9 +10,11 @@ import json
 import math
 import statistics
 from collections import defaultdict
+from pathlib import Path
+from typing import Any
 
 
-def wilson_ci(wins, n, z=1.96):
+def wilson_ci(wins: int, n: int, z: float = 1.96) -> tuple[float, float]:
     """95% Wilson score interval for a binomial proportion."""
     if n == 0:
         return (0.0, 0.0)
@@ -22,33 +26,44 @@ def wilson_ci(wins, n, z=1.96):
 
 
 class Aggregator:
-    def __init__(self, player_names):
-        self.names = player_names
-        self.records = []
+    """Collects per-game records and renders the matchup report."""
 
-    def add(self, record):
+    def __init__(self, player_names: list[str]) -> None:
+        """Remember the seat order used by every report column."""
+        self.names = player_names
+        self.records: list[dict[str, Any]] = []
+
+    def add(self, record: dict[str, Any]) -> None:
+        """Append one game record (mtgrules.adapter.run_game output)."""
         self.records.append(record)
 
     # ---- basic -----------------------------------------------------------
-    def wins(self, name, seed=None):
+    def wins(self, name: str, seed: int | None = None) -> int:
+        """Count wins of *name*, optionally restricted to one seed."""
         return sum(
             1
             for r in self.records
             if r["winner"] == name and (seed is None or r.get("seed") == seed)
         )
 
-    def stat_avg(self, name, key):
+    def stat_avg(self, name: str, key: str) -> float:
+        """Per-game average of one player statistic."""
         vals = [r["players"][name].get(key, 0) for r in self.records]
-        return statistics.mean(vals) if vals else 0.0
+        return float(statistics.mean(vals)) if vals else 0.0
 
     # ---- per-card win correlation -----------------------------------------
-    def card_lift(self, name, min_games=8):
-        """For each card: win rate in games where it was cast vs the deck's
-        overall win rate. Returns [(card, cast_games, winrate, lift)].
+    def card_lift(
+        self,
+        name: str,
+        min_games: int = 8,
+    ) -> list[tuple[str, int, float, float]]:
+        """Win rate in games where a card was cast vs the deck's overall.
+
+        Returns [(card, cast_games, winrate, lift)].
         """
         overall = self.wins(name) / max(1, len(self.records))
-        cast_games = defaultdict(int)
-        cast_wins = defaultdict(int)
+        cast_games: defaultdict[str, int] = defaultdict(int)
+        cast_wins: defaultdict[str, int] = defaultdict(int)
         for r in self.records:
             won = r["winner"] == name
             for card in r["players"][name].get("cards_cast", []):
@@ -65,12 +80,17 @@ class Aggregator:
         return rows
 
     # ---- per-seed summary ---------------------------------------------------
-    def seed_lines(self, seeds, games_per_seed, width):
+    def seed_lines(
+        self,
+        seeds: list[int],
+        games_per_seed: int,
+        width: int,
+    ) -> list[str]:
         """Per-seed win rates + between-seed spread for each player."""
         lines = ["-" * width, f" per-seed win rates ({games_per_seed} games each)"]
         header = f"   {'seed':<8s}" + "".join(f"{nm[:16]:>18s}" for nm in self.names)
         lines.append(header)
-        rates = {nm: [] for nm in self.names}
+        rates: dict[str, list[float]] = {nm: [] for nm in self.names}
         for seed in seeds:
             row = f"   {seed:<8d}"
             for nm in self.names:
@@ -87,7 +107,8 @@ class Aggregator:
         return lines
 
     # ---- report ------------------------------------------------------------
-    def report(self, seeds, games_per_seed):
+    def report(self, seeds: list[int], games_per_seed: int) -> str:
+        """Render the full matchup report as one printable string."""
         n = len(self.records)
         lines = []
         width = 72
@@ -122,7 +143,7 @@ class Aggregator:
             f" game length: avg {statistics.mean(turns):.1f} "
             f"turns, median {statistics.median(turns):.0f}",
         )
-        reasons = defaultdict(int)
+        reasons: defaultdict[str, int] = defaultdict(int)
         for r in self.records:
             reasons[r["reason"]] += 1
         lines.append(
@@ -184,6 +205,7 @@ class Aggregator:
         lines.append("=" * width)
         return "\n".join(lines)
 
-    def write_jsonl(self, path):
-        with open(path, "w", encoding="utf-8") as fh:
+    def write_jsonl(self, path: str | Path) -> None:
+        """Write every raw game record to *path*, one JSON object per line."""
+        with Path(path).open("w", encoding="utf-8") as fh:
             fh.writelines(json.dumps(r, default=str) + "\n" for r in self.records)
