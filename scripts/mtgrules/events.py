@@ -9,9 +9,12 @@ notifies trigger watchers.
 from __future__ import annotations
 
 from dataclasses import dataclass, field
+from typing import Any
 
 
 class EventType:
+    """Event-type name constants (the values of Event.type)."""
+
     ZONE_CHANGE = "zone_change"  # obj, from_zone, to_zone
     ENTERS_BATTLEFIELD = "etb"  # obj  (rule 603.6a)
     DIES = "dies"  # obj  (rule 700.4)
@@ -38,19 +41,27 @@ class EventType:
 
 @dataclass
 class Event:
+    """One game event: a type tag plus its payload (rules 603.2/614.1)."""
+
     type: str
-    data: dict = field(default_factory=dict)
+    #: heterogeneous payload (objects, players, counts, specs) keyed by
+    #: role name; see the per-event comments on EventType
+    data: dict[str, Any] = field(default_factory=dict)
     #: replacement effects that already applied to this event (rule 616.2:
     #: each replacement effect applies to a given event only once)
-    applied: set = field(default_factory=set)
+    applied: set[int] = field(default_factory=set)
     #: set by a replacement/prevention effect that removes the event
     prevented: bool = False
 
-    def __getattr__(self, key):
+    # The payload is heterogeneous by design, so attribute passthrough is
+    # necessarily Any-typed; typed access goes through Event.data.
+    def __getattr__(self, key: str) -> Any:  # noqa: ANN401
+        """Expose payload entries as attributes (event.obj, event.player)."""
         try:
             return self.data[key]
         except KeyError:
             raise AttributeError(key) from None
 
-    def __repr__(self):
+    def __repr__(self) -> str:
+        """Show the event type and its payload."""
         return f"<Event {self.type} {self.data}>"

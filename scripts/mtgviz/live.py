@@ -12,11 +12,27 @@ import random
 import sys
 import threading
 import time
+from dataclasses import dataclass
+from typing import TYPE_CHECKING, Any
 
-from . import keys
-from .recorder import Recorder, VizWriter
-from .schema import HIGHLIGHTS
-from .tui import HAVE_RICH, ViewState, format_event, render_frame
+from mtgviz import keys
+from mtgviz.recorder import Recorder, VizWriter
+from mtgviz.schema import HIGHLIGHTS
+from mtgviz.tui import BF_FILTERS, HAVE_RICH, ViewState, format_event, render_frame
+
+if TYPE_CHECKING:
+    from collections.abc import Sequence
+    from pathlib import Path
+
+    from mtgcards.database import CardDatabase
+    from mtgcards.deck import Deck
+    from mtgrules.policy import PolicyProfile
+
+try:
+    from rich.console import Console
+    from rich.live import Live
+except ImportError:  # pragma: no cover - all uses are HAVE_RICH-guarded
+    pass
 
 LIVE_HELP = (
     " p/space:pause-resume  +/-:speed  h:pause-on-highlight  c:battlefield  q:quit "
@@ -37,17 +53,24 @@ _DWELL = {
     "token": 0.2,
 }
 
+_MAX_SPEED = 8.0
+_MIN_SPEED = 0.25
+#: effectively no pacing (used when there is no interactive UI)
+_UNPACED_SPEED = 1000.0
+
 
 class Throttle:
     """Paces the engine thread; the TUI adjusts speed / pauses it."""
 
-    def __init__(self):
+    def __init__(self) -> None:
+        """Start unpaused at speed 1.0."""
         self.gate = threading.Event()
         self.gate.set()
         self.speed = 1.0
         self.aborted = False
 
-    def wait(self, kind):
+    def wait(self, kind: str) -> None:
+        """Block while paused, then dwell according to the event kind."""
         self.gate.wait()
         if self.aborted:
             raise _AbortError
@@ -55,35 +78,53 @@ class Throttle:
 
 
 class _AbortError(Exception):
-    pass
+    """Raised inside the engine thread when the UI quits early."""
 
 
-def watch_game(decks, db, seed, turn_cap=40, profiles=None, viz_path=None):
-    from mtgrules.adapter import run_game
+@dataclass(frozen=True)
+class WatchOptions:
+    """Optional watch_game settings, bundled to keep its signature small."""
 
-    q: queue.Queue = queue.Queue()
+    turn_cap: int = 40
+    profiles: Sequence[PolicyProfile | None] | None = None
+    viz_path: str | Path | None = None
+
+
+def watch_game(
+    decks: Sequence[Deck],
+    db: CardDatabase,
+    seed: int,
+    options: WatchOptions | None = None,
+) -> None:
+    """Run one seeded game on a worker thread and render it live."""
+    opts = options or WatchOptions()
+    q: queue.Queue[dict[str, Any]] = queue.Queue()
     throttle = Throttle()
-    writer = VizWriter(viz_path) if viz_path else None
+    writer = VizWriter(opts.viz_path) if opts.viz_path else None
     file_sink = writer.game_sink(1, seed) if writer else None
 
-    def sink(rec):
+    def sink(rec: dict[str, Any]) -> None:
         if file_sink is not None:
             file_sink(rec)
         q.put(rec)
         if rec.get("t") == "e":
-            throttle.wait(rec.get("kind"))
+            throttle.wait(rec.get("kind", ""))
 
     recorder = Recorder(sink)
-    outcome = {}
+    outcome: dict[str, Any] = {}
 
-    def engine():
+    # Deferred: only --watch pulls in the rules engine, and a module-level
+    # sibling-package import would couple mtgviz's import graph to the
+    # engine. RUF100 is listed because PLC0415 is still globally ignored
+    from mtgrules.adapter import MatchOptions, run_game  # noqa: PLC0415
+
+    def engine() -> None:
         try:
-            rec = run_game(
+            rec: dict[str, Any] = run_game(
                 decks,
                 db,
                 random.Random(seed),
-                turn_cap=turn_cap,
-                profiles=profiles,
+                MatchOptions(turn_cap=opts.turn_cap, profiles=opts.profiles),
                 recorder=recorder,
             )
             outcome.update(rec)
@@ -98,33 +139,52 @@ def watch_game(decks, db, seed, turn_cap=40, profiles=None, viz_path=None):
     worker = threading.Thread(target=engine, daemon=True)
     worker.start()
     try:
-        if HAVE_RICH and sys.stdin.isatty():
-            _rich_loop(q, throttle, seed)
-        else:
-            print(
-                "note: plain event stream ('rich' missing or not a TTY)",
-                file=sys.stderr,
-            )
-            throttle.speed = 1000.0  # no pacing without a UI
-            _plain_loop(q)
+        _render_loop(q, throttle, seed)
     finally:
         throttle.aborted = True
         throttle.gate.set()
         worker.join(timeout=2)
-        if writer:
-            writer.close()
-            print(f"viz recording written to {viz_path}")
-        if outcome.get("error"):
-            sys.exit(f"engine error: {outcome['error']}")
-        if outcome:
-            print(
-                f"winner: {outcome.get('winner')} "
-                f"({outcome.get('reason')}) after "
-                f"{outcome.get('turns')} turns",
-            )
+        _finish_report(outcome, writer, opts.viz_path)
 
 
-def _drain(q, view):
+def _render_loop(
+    q: queue.Queue[dict[str, Any]],
+    throttle: Throttle,
+    seed: int,
+) -> None:
+    """Dispatch to the rich TUI or the unpaced plain event stream."""
+    if HAVE_RICH and sys.stdin.isatty():
+        _rich_loop(q, throttle, seed)
+    else:
+        print(  # noqa: T201 - user-facing CLI notice on stderr
+            "note: plain event stream ('rich' missing or not a TTY)",
+            file=sys.stderr,
+        )
+        throttle.speed = _UNPACED_SPEED  # no pacing without a UI
+        _plain_loop(q)
+
+
+def _finish_report(
+    outcome: dict[str, Any],
+    writer: VizWriter | None,
+    viz_path: str | Path | None,
+) -> None:
+    """CLI epilogue: close the recording, report errors and the winner."""
+    if writer:
+        writer.close()
+        print(f"viz recording written to {viz_path}")  # noqa: T201
+    if outcome.get("error"):
+        sys.exit(f"engine error: {outcome['error']}")
+    if outcome:
+        print(  # noqa: T201 - CLI output
+            f"winner: {outcome.get('winner')} "
+            f"({outcome.get('reason')}) after "
+            f"{outcome.get('turns')} turns",
+        )
+
+
+def _drain(q: queue.Queue[dict[str, Any]], view: ViewState) -> bool:
+    """Move queued records into the view; True once the engine is done."""
     done = False
     try:
         while True:
@@ -138,18 +198,57 @@ def _drain(q, view):
     return done
 
 
-def _rich_loop(q, throttle, seed):
-    from rich.console import Console
-    from rich.live import Live
+@dataclass
+class _LiveSettings:
+    """Mutable live-view mode switches, adjusted by keypresses."""
 
-    from .tui import BF_FILTERS
+    pause_hl: bool = True
+    bf_filter: str = "all"
 
+
+def _maybe_pause_on_highlight(
+    view: ViewState,
+    throttle: Throttle,
+    st: _LiveSettings,
+) -> None:
+    """Auto-pause the engine when the newest event is a highlight."""
+    if not (st.pause_hl and throttle.gate.is_set()):
+        return
+    tail = view.visible_events(n=1)
+    if tail and tail[-1]["kind"] in HIGHLIGHTS:
+        throttle.gate.clear()
+
+
+def _live_key(key: str, throttle: Throttle, st: _LiveSettings) -> None:
+    """Mode toggles: pause/resume, speed, highlight pause, filter."""
+    if key in ("p", " "):
+        if throttle.gate.is_set():
+            throttle.gate.clear()
+        else:
+            throttle.gate.set()
+    elif key == "+":
+        throttle.speed = min(_MAX_SPEED, throttle.speed * 2)
+    elif key == "-":
+        throttle.speed = max(_MIN_SPEED, throttle.speed / 2)
+    elif key == "h":
+        st.pause_hl = not st.pause_hl
+    elif key == "c":
+        st.bf_filter = BF_FILTERS[
+            (BF_FILTERS.index(st.bf_filter) + 1) % len(BF_FILTERS)
+        ]
+
+
+def _rich_loop(
+    q: queue.Queue[dict[str, Any]],
+    throttle: Throttle,
+    seed: int,
+) -> None:
+    """Main-thread render/key loop of the rich live view."""
     view = ViewState(meta={"seed": seed, "game": 1})
-    pause_hl = True
-    bf_filter = "all"
+    st = _LiveSettings()
     done = False
 
-    def status():
+    def status() -> str:
         mode = f"live x{throttle.speed:g}" if throttle.gate.is_set() else "PAUSED"
         return f" {mode} |{LIVE_HELP}"
 
@@ -166,17 +265,17 @@ def _rich_loop(q, throttle, seed):
         while True:
             done = _drain(q, view) or done
             view.cursor = len(view.records) - 1
-            if pause_hl and throttle.gate.is_set():
-                tail = view.visible_events(n=1)
-                if tail and tail[-1]["kind"] in HIGHLIGHTS:
-                    throttle.gate.clear()
-            live.update(render_frame(view, status(), bf_filter=bf_filter), refresh=True)
+            _maybe_pause_on_highlight(view, throttle, st)
+            live.update(
+                render_frame(view, status(), bf_filter=st.bf_filter),
+                refresh=True,
+            )
             if done and q.empty():
                 live.update(
                     render_frame(
                         view,
                         " game over - any key to exit ",
-                        bf_filter=bf_filter,
+                        bf_filter=st.bf_filter,
                     ),
                     refresh=True,
                 )
@@ -185,27 +284,17 @@ def _rich_loop(q, throttle, seed):
             key = keys.read_key(0.1)
             if key in ("q", "\x03"):
                 return
-            if key in ("p", " "):
-                if throttle.gate.is_set():
-                    throttle.gate.clear()
-                else:
-                    throttle.gate.set()
-            elif key == "+":
-                throttle.speed = min(8.0, throttle.speed * 2)
-            elif key == "-":
-                throttle.speed = max(0.25, throttle.speed / 2)
-            elif key == "h":
-                pause_hl = not pause_hl
-            elif key == "c":
-                bf_filter = BF_FILTERS[
-                    (BF_FILTERS.index(bf_filter) + 1) % len(BF_FILTERS)
-                ]
+            if key is not None:
+                _live_key(key, throttle, st)
 
 
-def _plain_loop(q):
+def _plain_loop(q: queue.Queue[dict[str, Any]]) -> None:
+    """Print every engine event as it arrives (no TTY / no rich)."""
     while True:
         rec = q.get()
         if rec.get("t") == "eof":
             return
         if rec.get("t") == "e":
-            print(f"T{rec['turn']:>2} [{rec['kind']}] {format_event(rec)}")
+            print(  # noqa: T201 - this viewer's UI
+                f"T{rec['turn']:>2} [{rec['kind']}] {format_event(rec)}",
+            )

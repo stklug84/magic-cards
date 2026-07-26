@@ -12,13 +12,16 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+from typing import Any
 
-from .behaviors import BEHAVIOR_KEYS, apply_behaviors, load_annotations
-from .cards import CardData, derive_from_oracle
-from .ttl_loader import load_graph_cards
+from mtgcards.behaviors import BEHAVIOR_KEYS, apply_behaviors, load_annotations
+from mtgcards.cards import CardData, derive_from_oracle
+from mtgcards.mana import parse_cost
+from mtgcards.ttl_loader import load_graph_cards
 
 
-def _card_from_json(name, entry, source):
+def _card_from_json(name: str, entry: dict[str, Any], source: str) -> CardData:
+    """Build a CardData from one --custom-cards JSON entry."""
     card = CardData(name=name, source=source)
     card.mana_cost = entry.get("mana_cost", "")
     card.types = set(entry.get("types", []))
@@ -27,8 +30,6 @@ def _card_from_json(name, entry, source):
     card.toughness = entry.get("toughness")
     card.oracle = entry.get("oracle", "")
     card.color_identity = set(entry.get("color_identity", []))
-    from .mana import parse_cost
-
     card.mv = parse_cost(card.mana_cost).mv
     for k, v in entry.get("behavior", {}).items():
         if k not in BEHAVIOR_KEYS:
@@ -49,10 +50,17 @@ def _card_from_json(name, entry, source):
 
 
 class CardDatabase:
-    def __init__(self, repo_root: Path, custom_cards_path: Path | None = None):
+    """Name-indexed card data, layered from graph, custom JSON, and hooks."""
+
+    def __init__(
+        self,
+        repo_root: str | Path,
+        custom_cards_path: str | Path | None = None,
+    ) -> None:
+        """Load every layer and derive behavior for each unique card."""
         self.index: dict[str, CardData] = {}
         ind2name: dict[str, str] = {}
-        hooks_by_name: dict[str, dict] = {}
+        hooks_by_name: dict[str, dict[str, Any]] = {}
         sets_dir = Path(repo_root) / "sets"
         if sets_dir.is_dir():
             # out-of-collection cards referenced by deck graphs
@@ -68,7 +76,7 @@ class CardDatabase:
                     continue
                 self.index[name] = _card_from_json(name, entry, "custom")
         # derivation + hooks (dedupe DFC aliases by id)
-        seen = set()
+        seen: set[int] = set()
         for card in self.index.values():
             if id(card) in seen:
                 continue
@@ -78,6 +86,7 @@ class CardDatabase:
         self.stubbed: list[str] = []
 
     def get(self, name: str) -> CardData:
+        """Look up a card by (front-face) name, stubbing unknown cards."""
         card = self.index.get(name)
         if card is None and " // " in name:
             card = self.index.get(name.split(" // ", maxsplit=1)[0])

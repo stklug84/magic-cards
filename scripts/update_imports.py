@@ -24,11 +24,14 @@ from __future__ import annotations
 import json
 import re
 import sys
+import tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 MASTER = ROOT / "MagicCardIndividuals.ttl"
-IMPORTS_JSON = Path("/tmp/imports.json")
+# Interchange contract with scripts/generate_individuals.py: both sides
+# resolve the platform temp dir (/tmp on the Linux CI runners).
+IMPORTS_JSON = Path(tempfile.gettempdir()) / "imports.json"
 
 IMPORT_LINE_RE = re.compile(
     r"^    owl:imports <[^>]+> ;  # sets/\S+\.ttl \(\d+ individuals\)$",
@@ -37,7 +40,7 @@ ONTOLOGY_IMPORT = "    owl:imports <urn:stklug84:MagicCardsOntology:2026-02-27#>
 SUPPLEMENT = "SubTypeSupplement.ttl"
 
 
-def import_lines(entries: list[dict]) -> list[str]:
+def import_lines(entries: list[dict[str, str | int]]) -> list[str]:
     """Render one aggregator import line per generated set file."""
     supplement = [e for e in entries if e["file"] == SUPPLEMENT]
     sets = sorted(
@@ -53,7 +56,7 @@ def import_lines(entries: list[dict]) -> list[str]:
 def main() -> int:
     """Rewrite the import block; return a process exit code."""
     if not IMPORTS_JSON.exists():
-        print(
+        print(  # noqa: T201 - pipeline progress/error output
             f"ERROR: {IMPORTS_JSON} not found - run "
             "'generate_individuals.py generate' first",
             file=sys.stderr,
@@ -76,7 +79,7 @@ def main() -> int:
         try:
             anchor = kept.index(ONTOLOGY_IMPORT)
         except ValueError:
-            print(
+            print(  # noqa: T201 - pipeline progress/error output
                 f"ERROR: no import block found in {MASTER.name}",
                 file=sys.stderr,
             )
@@ -84,7 +87,7 @@ def main() -> int:
         kept[anchor + 1 : anchor + 1] = import_lines(entries)
 
     MASTER.write_text("\n".join(kept) + "\n")
-    print(f"{MASTER.name}: {len(entries)} imports written")
+    print(f"{MASTER.name}: {len(entries)} imports written")  # noqa: T201 - pipeline progress/error output
     return 0
 
 

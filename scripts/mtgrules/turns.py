@@ -2,18 +2,31 @@
 
 from __future__ import annotations
 
-from .combat import CombatPhase
-from .cr import rule
-from .events import Event, EventType
-from .objects import Zone
+from typing import TYPE_CHECKING
+
+from mtgrules.combat import CombatPhase
+from mtgrules.cr import rule
+from mtgrules.events import Event, EventType
+from mtgrules.objects import Zone
+
+if TYPE_CHECKING:
+    from mtgrules.game import Game
+
+#: rule 103.8a: only in a two-player game does the starting player skip
+#: their first draw step
+_TWO_PLAYER_GAME = 2
 
 
 @rule("500.1", "500.4")
 class TurnRunner:
-    def __init__(self, game):
+    """Runs one turn: all phases and steps in order (rule 500.1)."""
+
+    def __init__(self, game: Game) -> None:
+        """Bind the game."""
         self.game = game
 
-    def take_turn(self):
+    def take_turn(self) -> None:
+        """Run one full turn for the current active player."""
         game = self.game
         active = game.active_player
         active.lands_played = 0
@@ -26,7 +39,7 @@ class TurnRunner:
         self._enter("upkeep")
         self._upkeep_step()
         self._enter("draw")
-        if game.turn > 1 or len(game.players) > 2:
+        if game.turn > 1 or len(game.players) > _TWO_PLAYER_GAME:
             self._draw_step()  # rule 103.8a: first player skips draw
         else:
             self._draw_step_skip_first()
@@ -37,26 +50,28 @@ class TurnRunner:
         if game.game_over:
             return
         self._enter("main2")
-        self._main_phase(second=True)
+        self._main_phase()
         self._enter("end")
         self._end_step()
         self._enter("cleanup")
         self._cleanup_step()
         self._end_of_phase()
 
-    def _enter(self, phase: str):
+    def _enter(self, phase: str) -> None:
+        """Advance to *phase* and log the transition."""
         game = self.game
         game.phase = phase
         game.log("phase", phase=phase, turn=game.turn, who=game.active_player.name)
 
-    def _end_of_phase(self):
+    def _end_of_phase(self) -> None:
+        """Empty all mana pools (rule 500.4, coarse boundary)."""
         # rule 500.4: mana pools empty at end of each step/phase; we empty
         # at the coarse boundaries the engine exposes
         for p in self.game.players:
             p.mana_pool.empty()
 
     @rule("502.1", "502.4")
-    def _untap_step(self):
+    def _untap_step(self) -> None:
         """No player receives priority during the untap step (502.4)."""
         game = self.game
         active = game.active_player
@@ -67,9 +82,10 @@ class TurnRunner:
         game.bump()
 
     @rule("503.1")
-    def _upkeep_step(self):
+    def _upkeep_step(self) -> None:
+        """Rule 503.1: upkeep triggers, then priority."""
         game = self.game
-        game._queue_triggers(
+        game.queue_triggers(
             Event(
                 EventType.BEGIN_STEP,
                 {"step": "upkeep", "player": game.active_player},
@@ -79,34 +95,39 @@ class TurnRunner:
         self._pools()
 
     @rule("504.1")
-    def _draw_step(self):
+    def _draw_step(self) -> None:
+        """Rule 504.1: the active player draws, then priority."""
         game = self.game
         game.draw(game.active_player, 1)
         game.priority_loop()
         self._pools()
 
     @rule("103.8a")
-    def _draw_step_skip_first(self):
+    def _draw_step_skip_first(self) -> None:
+        """Run the starting player's skipped first draw (rule 103.8a)."""
         self.game.priority_loop()
         self._pools()
 
     @rule("505.1", "505.6")
-    def _main_phase(self, second=False):
+    def _main_phase(self) -> None:
+        """Run a main phase (sorcery-speed window for the active player)."""
         game = self.game
         game.priority_loop()
         self._pools()
 
     @rule("513.1")
-    def _end_step(self):
+    def _end_step(self) -> None:
+        """Rule 513.1: end-step triggers, then priority."""
         game = self.game
-        game._queue_triggers(
+        game.queue_triggers(
             Event(EventType.BEGIN_STEP, {"step": "end", "player": game.active_player}),
         )
         game.priority_loop()
         self._pools()
 
     @rule("514.1", "514.2", "514.3")
-    def _cleanup_step(self):
+    def _cleanup_step(self) -> None:
+        """Rule 514: discard to hand size, remove damage, end 'until EOT'."""
         game = self.game
         active = game.active_player
         # rule 514.1: discard to maximum hand size
@@ -126,6 +147,7 @@ class TurnRunner:
             game.priority_loop()
         self._pools()
 
-    def _pools(self):
+    def _pools(self) -> None:
+        """Empty every mana pool (rule 500.4)."""
         for p in self.game.players:
             p.mana_pool.empty()

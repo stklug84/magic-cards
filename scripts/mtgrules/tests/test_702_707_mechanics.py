@@ -1,18 +1,22 @@
-"""Poison/infect/toxic (702.90/702.164/704.5c), spell copies (707),
+"""Newer-mechanic conformance tests (CR 601/702/707).
+
+Poison/infect/toxic (702.90/702.164/704.5c), spell copies (707),
 cycling (702.29), additional costs / cost reduction (601.2b/f), and the
-new compiler templates behind them.
+compiler templates behind them.
 """
+
+from __future__ import annotations
 
 import unittest
 
-from ..abilities import (
+from mtgrules.abilities import (
     ActivatedAbility,
     SpellAbility,
     StaticAbility,
     TriggeredAbility,
 )
-from ..compiler import compile_card
-from ..effects import (
+from mtgrules.compiler import compile_card
+from mtgrules.effects import (
     CopySpell,
     Drain,
     GainLife,
@@ -20,40 +24,45 @@ from ..effects import (
     TargetControllerBasicLand,
     TargetControllerGainsPower,
 )
-from ..objects import Zone
-from .helpers import card_in_hand, creature, give_mana, make_game, settle
+from mtgrules.objects import GameObject, Zone
+from mtgrules.tests.helpers import card_in_hand, creature, give_mana, make_game, settle
 
 
 class _Ref:
+    """Minimal CardData stand-in."""
+
     def __init__(
         self,
-        name,
-        oracle,
-        types=("Creature",),
-        mana_cost="{1}",
-        power=1,
-        toughness=1,
-    ):
+        name: str,
+        oracle: str,
+        types: tuple[str, ...] = ("Creature",),
+        mana_cost: str = "{1}",
+    ) -> None:
+        """Fill the CardRef fields the compiler reads."""
         self.name = name
         self.oracle = oracle
         self.types = set(types)
-        self.subtypes = set()
-        self.supertypes = set()
+        self.subtypes: set[str] = set()
+        self.supertypes: set[str] = set()
         self.mana_cost = mana_cost
-        self.power = power
-        self.toughness = toughness
-        self.loyalty = None
-        self.color_identity = set()
-        self.behavior = {}
-        self.keywords = set()
+        self.power: int | None = 1
+        self.toughness: int | None = 1
+        self.loyalty: int | None = None
+        self.color_identity: set[str] = set()
+        self.behavior: dict[str, object] = {}
+        self.keywords: set[str] = set()
 
 
 class TestPoison(unittest.TestCase):
-    def setUp(self):
+    """Infect, toxic, and the poison SBA."""
+
+    def setUp(self) -> None:
+        """Set up a fresh two-player game."""
         self.game = make_game()
         self.p0, self.p1 = self.game.players
 
-    def test_702_90b_infect_damage_is_poison(self):
+    def test_702_90b_infect_damage_is_poison(self) -> None:
+        """Infect damage to a player becomes poison counters."""
         atk = creature(
             self.game,
             self.p0,
@@ -65,13 +74,15 @@ class TestPoison(unittest.TestCase):
         self.assertEqual(self.p1.poison, 3)
         self.assertEqual(self.p1.life, 40)  # no life loss
 
-    def test_702_164_toxic_adds_poison(self):
+    def test_702_164_toxic_adds_poison(self) -> None:
+        """Toxic N adds poison on top of normal combat damage."""
         atk = creature(self.game, self.p0, name="Rat", power=1, keywords={"toxic:2"})
         self.game.deal_damage(atk, self.p1, 1, combat=True)
         self.assertEqual(self.p1.life, 39)  # normal damage too
         self.assertEqual(self.p1.poison, 2)
 
-    def test_704_5c_ten_poison_loses(self):
+    def test_704_5c_ten_poison_loses(self) -> None:
+        """Ten poison counters lose the game (rule 704.5c)."""
         self.p1.poison = 10
         self.game.check_state_based_actions()
         self.assertTrue(self.p1.lost)
@@ -79,11 +90,15 @@ class TestPoison(unittest.TestCase):
 
 
 class TestCopies(unittest.TestCase):
-    def setUp(self):
+    """Spell copies (rule 707.10) and their compiler template."""
+
+    def setUp(self) -> None:
+        """Set up a fresh two-player game."""
         self.game = make_game()
         self.p0, self.p1 = self.game.players
 
-    def test_707_10_copy_resolves_and_ceases(self):
+    def test_707_10_copy_resolves_and_ceases(self) -> None:
+        """A spell copy resolves and then ceases to exist."""
         spell = card_in_hand(
             self.game,
             self.p0,
@@ -95,6 +110,9 @@ class TestCopies(unittest.TestCase):
         self.assertTrue(self.game.cast_spell(self.p0, spell))
         item = self.game.stack[-1]
         copy = self.game.copy_spell(item, self.p1)
+        if copy is None:
+            msg = "copy_spell returned None"
+            raise AssertionError(msg)
         self.assertEqual(len(self.game.stack), 2)
         self.game.resolve_top()  # copy (p1) resolves
         self.game.resolve_top()  # original resolves
@@ -105,7 +123,8 @@ class TestCopies(unittest.TestCase):
         self.assertNotIn(copy.obj, self.p0.graveyard)
         self.assertEqual(spell.zone, Zone.GRAVEYARD)
 
-    def test_compiler_copy_template(self):
+    def test_compiler_copy_template(self) -> None:
+        """'Copy target instant or sorcery spell' compiles to CopySpell."""
         ch = compile_card(
             _Ref(
                 "Fork2",
@@ -119,7 +138,8 @@ class TestCopies(unittest.TestCase):
         self.assertTrue(any(isinstance(p, CopySpell) for p in parts))
         self.assertEqual(sa.targets[0].what, "spell")
 
-    def test_uncounterable_static(self):
+    def test_uncounterable_static(self) -> None:
+        """'Spells you control can't be countered' blanks counters."""
         ch = compile_card(
             _Ref(
                 "Chimil2",
@@ -130,8 +150,6 @@ class TestCopies(unittest.TestCase):
         st = next(a for a in ch.abilities if isinstance(a, StaticAbility))
         self.assertTrue(st.uncounterable_spells)
         # runtime: counter_spell is a no-op
-        from ..objects import GameObject
-
         shield = GameObject(ch, self.p0)
         shield.zone = Zone.BATTLEFIELD
         shield.controller = self.p0
@@ -150,15 +168,16 @@ class TestCopies(unittest.TestCase):
 
 
 class TestCycling(unittest.TestCase):
-    def test_702_29a_cycle_from_hand(self):
+    """Cycling from the hand (rule 702.29a)."""
+
+    def test_702_29a_cycle_from_hand(self) -> None:
+        """Cycling discards the card as a cost and draws a card."""
         game = make_game()
         p0 = game.players[0]
         ch = compile_card(_Ref("Slough2", "Cycling {2}", types=("Land",), mana_cost=""))
         ab = next(
             a for a in ch.abilities if isinstance(a, ActivatedAbility) and a.from_hand
         )
-        from ..objects import GameObject
-
         card = GameObject(ch, p0)
         card.zone = Zone.HAND
         p0.hand.append(card)
@@ -174,11 +193,15 @@ class TestCycling(unittest.TestCase):
 
 
 class TestCastModifiers(unittest.TestCase):
-    def setUp(self):
+    """Cost reduction (601.2f) and additional costs (601.2b)."""
+
+    def setUp(self) -> None:
+        """Set up a fresh two-player game."""
         self.game = make_game()
         self.p0, self.p1 = self.game.players
 
-    def test_601_2f_cost_reduction_per_creature(self):
+    def test_601_2f_cost_reduction_per_creature(self) -> None:
+        """Per-creature cost reduction shrinks the generic cost."""
         ch = compile_card(
             _Ref(
                 "Blasphemy2",
@@ -189,8 +212,6 @@ class TestCastModifiers(unittest.TestCase):
             ),
         )
         self.assertEqual(ch.cost_less_per_creature, 1)
-        from ..objects import GameObject
-
         for i in range(8):
             creature(self.game, self.p1, name=f"c{i}")
         spell = GameObject(ch, self.p0)
@@ -199,7 +220,8 @@ class TestCastModifiers(unittest.TestCase):
         give_mana(self.p0, R=1)  # {8} reduced to {0}
         self.assertTrue(self.game.cast_spell(self.p0, spell))
 
-    def test_601_2b_additional_cost_sacrifice(self):
+    def test_601_2b_additional_cost_sacrifice(self) -> None:
+        """An additional sacrifice cost gates casting and is paid."""
         ch = compile_card(
             _Ref(
                 "Intent2",
@@ -211,8 +233,6 @@ class TestCastModifiers(unittest.TestCase):
             ),
         )
         self.assertEqual(ch.additional_cost, "sacrifice_creature")
-        from ..objects import GameObject
-
         spell = GameObject(ch, self.p0)
         spell.zone = Zone.HAND
         self.p0.hand.append(spell)
@@ -225,7 +245,10 @@ class TestCastModifiers(unittest.TestCase):
 
 
 class TestRiderTemplates(unittest.TestCase):
-    def test_swords_rider(self):
+    """Removal riders that reference the removed target."""
+
+    def test_swords_rider(self) -> None:
+        """Swords-style rider grants life equal to the target's power."""
         ch = compile_card(
             _Ref(
                 "StP2",
@@ -240,8 +263,6 @@ class TestRiderTemplates(unittest.TestCase):
         game = make_game()
         p0, p1 = game.players
         bear = creature(game, p1, name="Bear", power=4, toughness=4)
-        from ..objects import GameObject
-
         spell = GameObject(ch, p0)
         spell.zone = Zone.HAND
         p0.hand.append(spell)
@@ -251,7 +272,8 @@ class TestRiderTemplates(unittest.TestCase):
         self.assertEqual(bear.zone, Zone.EXILE)
         self.assertEqual(p1.life, 44)
 
-    def test_trophy_and_feed_riders_compile(self):
+    def test_trophy_and_feed_riders_compile(self) -> None:
+        """Trophy and Feed the Swarm riders compile to their nodes."""
         ch = compile_card(
             _Ref(
                 "Trophy2",
@@ -277,7 +299,8 @@ class TestRiderTemplates(unittest.TestCase):
         parts = getattr(sa.effect, "parts", [sa.effect])
         self.assertTrue(any(isinstance(p, LoseLifeTargetMV) for p in parts))
 
-    def test_exsanguinate_merges_to_drain(self):
+    def test_exsanguinate_merges_to_drain(self) -> None:
+        """The Exsanguinate life-gain rider merges into a Drain node."""
         ch = compile_card(
             _Ref(
                 "Exsang2",
@@ -294,7 +317,10 @@ class TestRiderTemplates(unittest.TestCase):
 
 
 class TestDiesWithCounterTriggers(unittest.TestCase):
-    def test_village_pillagers_style(self):
+    """Dies-with-a-counter triggers (rule 603.10a look-back)."""
+
+    def test_village_pillagers_style(self) -> None:
+        """A countered opposing creature's death mints a Treasure."""
         ch = compile_card(
             _Ref(
                 "Pillager2",
@@ -305,8 +331,6 @@ class TestDiesWithCounterTriggers(unittest.TestCase):
         next(a for a in ch.abilities if isinstance(a, TriggeredAbility))
         game = make_game()
         p0, p1 = game.players
-        from ..objects import GameObject
-
         src = GameObject(ch, p0)
         src.zone = Zone.BATTLEFIELD
         src.controller = p0
@@ -319,7 +343,8 @@ class TestDiesWithCounterTriggers(unittest.TestCase):
         self.assertEqual(len(treasures), 1)
         self.assertTrue(treasures[0].tapped)
 
-    def test_once_each_turn_gate(self):
+    def test_once_each_turn_gate(self) -> None:
+        """'Do this only once each turn' fires a trigger only once."""
         ch = compile_card(
             _Ref(
                 "Reaper2",
@@ -333,8 +358,6 @@ class TestDiesWithCounterTriggers(unittest.TestCase):
         self.assertTrue(trig.once_each_turn)
         game = make_game()
         p0, p1 = game.players
-        from ..objects import GameObject
-
         src = GameObject(ch, p0)
         src.zone = Zone.BATTLEFIELD
         src.controller = p0

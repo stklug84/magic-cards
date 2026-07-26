@@ -1,14 +1,15 @@
-"""Hand-written card implementations for cards whose oracle text exceeds
-the compiler grammar (the rules-engine equivalent of per-card scripts in
-mature engines). Each entry builds real abilities from the card's actual
-text; simplifications are marked SIMPLIFIED and reported via NOTES.
+"""Hand-written card implementations beyond the compiler grammar.
+
+The rules-engine equivalent of per-card scripts in mature engines: each
+entry builds real abilities from the card's actual oracle text.
+Simplifications are marked SIMPLIFIED and reported via NOTES.
 """
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from typing import TYPE_CHECKING
 
-from .abilities import (
+from mtgrules.abilities import (
     CLUE,
     FOOD,
     TREASURE,
@@ -20,11 +21,13 @@ from .abilities import (
     TriggeredAbility,
     TriggerSpec,
 )
-from .effects import (
+from mtgrules.effects import (
     AddMana,
     Blink,
     CounterSpell,
     CreateTokens,
+    Ctx,
+    Custom,
     DealDamage,
     Drain,
     DrawCards,
@@ -41,30 +44,45 @@ from .effects import (
     SearchLands,
     Sequence,
 )
-from .events import EventType
-from .layers import ContinuousEffect
-from .objects import GameObject, Player, Zone
-from .replacements import Replacement
+from mtgrules.events import Event, EventType
+from mtgrules.layers import ContinuousEffect
+from mtgrules.objects import Characteristics, GameObject, Player, Zone
+from mtgrules.replacements import Replacement
+
+if TYPE_CHECKING:
+    from collections.abc import Callable, Iterable
+
+    from mtgrules.abilities import Ability
+    from mtgrules.game import Game
+    from mtgrules.protocols import CardRef, TriggerCondition
 
 #: card name -> note about any simplification made
 NOTES: dict[str, str] = {}
+
+#: one hand-written card implementation: mutates the compiled base
+type OverrideFn = Callable[[Characteristics, CardRef], None]
+
+#: Austere Command mode: destroy creatures with power 3 or greater
+_AUSTERE_POWER_MIN = 3
+#: Mechanized Production wins at eight same-name artifacts
+_MECHANIZED_WIN_COPIES = 8
+#: permanents with two or more colors count as multicolored (CR 105.4)
+_MULTICOLORED_MIN = 2
+#: Infinite Guideline Station animates at twelve charge counters
+_STATION_FLIGHT_CHARGES = 12
+#: Esix only swaps in a copy at least twice the token's P+T
+_ESIX_UPGRADE_FACTOR = 2
+#: Mentor of the Meek triggers for creatures with power 2 or less
+_MEEK_MAX_POWER = 2
 
 
 # ---------------------------------------------------------------- helpers
 
 
-def _dies_cond(pred):
-    def cond(game, source, event):
-        obj = event.data.get("obj")
-        return obj is not None and pred(game, source, obj)
-
-    return cond
-
-
-def _counters_put_cond(kind, own_only=None):
+def _counters_put_cond(kind: str, *, own_only: bool | None = None) -> TriggerCondition:
     """Trigger on resolved PUT_COUNTERS events of a counter kind."""
 
-    def cond(game, source, event):
+    def cond(_game: Game, source: GameObject, event: Event) -> bool:
         if not event.data.get("resolved"):
             return False
         if event.data.get("kind") != kind:
@@ -77,26 +95,19 @@ def _counters_put_cond(kind, own_only=None):
     return cond
 
 
-@dataclass
-class Custom(Effect):
-    fn: object
-    note: str = ""
-
-    def resolve(self, game, ctx):
-        self.fn(game, ctx)
-
-
-def _token(
-    name,
-    p,
-    t,
-    colors="",
-    types=("Creature",),
-    subs=(),
-    kws=(),
-    tapped=False,
-    abilities=(),
-):
+def _token(  # noqa: PLR0913, PLR0917 - thin TokenSpec builder: one keyword per token characteristic
+    name: str,
+    p: int,
+    t: int,
+    colors: str = "",
+    types: Iterable[str] = ("Creature",),
+    subs: Iterable[str] = (),
+    kws: Iterable[str] = (),
+    *,
+    tapped: bool = False,
+    abilities: Iterable[Callable[[], Ability]] = (),
+) -> TokenSpec:
+    """Shorthand TokenSpec builder for the predefined tokens below."""
     return TokenSpec(
         name=name,
         power=p,
@@ -146,31 +157,42 @@ GOLEM = _token(
     kws=("flying",),
 )
 
+#: (name, power, toughness, deeper chain) of one Reef Worm stage
+type ReefChain = tuple[str, int, int, "ReefChain"] | None
 
-def _reef_spec(name, p, t, next_factory):
-    ab = ()
+
+def _reef_spec(
+    name: str,
+    p: int,
+    t: int,
+    next_factory: Callable[[], Ability] | None,
+) -> TokenSpec:
+    """One Reef Worm chain token, optionally carrying the next stage."""
+    ab: tuple[Callable[[], Ability], ...] = ()
     if next_factory is not None:
         ab = (next_factory,)
     return _token(name, p, t, "U", subs=(name,), abilities=ab)
 
 
-def _reef_chain(name, p, t, deeper):
+def _reef_chain(
+    name: str,
+    _p: int,
+    _t: int,
+    deeper: ReefChain,
+) -> Callable[[], Ability]:
     """Fish -> Whale -> Kraken death chain (Reef Worm)."""
 
-    def factory():
+    def factory() -> Ability:
         spec = None
         if deeper:
             nname, np, nt, ndeeper = deeper
             spec = _reef_spec(nname, np, nt, _reef_chain(nname, np, nt, ndeeper))
 
-        def build_trigger():
-            return TriggeredAbility(
-                trigger=TriggerSpec(EventType.DIES),
-                effect=CreateTokens(1, spec) if spec else Noop(),
-                text=f"When this {name} dies ...",
-            )
-
-        return build_trigger()
+        return TriggeredAbility(
+            trigger=TriggerSpec(EventType.DIES),
+            effect=CreateTokens(1, spec) if spec else Noop(),
+            text=f"When this {name} dies ...",
+        )
 
     return factory
 
@@ -179,12 +201,14 @@ def _reef_chain(name, p, t, deeper):
 
 
 class Reanimate(Effect):
-    """Return the dying creature to the battlefield under your control
-    (Necroskitter).
+    """Return the dying creature to the battlefield under your control.
+
+    Used by Necroskitter.
     """
 
-    def resolve(self, game, ctx):
-        obj = getattr(ctx, "event_obj", None)
+    def resolve(self, game: Game, ctx: Ctx) -> None:
+        """Steal the dead creature (rule 603.10a look-back)."""
+        obj = ctx.event_obj
         if obj is not None and obj.zone == Zone.GRAVEYARD and not obj.is_token:
             obj.controller = ctx.controller
             game.move_zone(obj, Zone.BATTLEFIELD)
@@ -194,9 +218,16 @@ class Reanimate(Effect):
 # ---------------------------------------------------------------- statics
 
 
-def _grant_all_creatures(kw, controller_only=None, others=False):
-    def continuous(game, source):
-        def applies(g, obj, ch):
+def _grant_all_creatures(
+    kw: str,
+    *,
+    controller_only: bool | None = None,
+    others: bool = False,
+) -> StaticAbility:
+    """Build a static ability granting *kw* to (all) creatures."""
+
+    def continuous(_game: Game, source: GameObject) -> list[ContinuousEffect]:
+        def applies(_g: Game, obj: GameObject, ch: Characteristics) -> bool:
             if "Creature" not in ch.types:
                 return False
             if controller_only is True and obj.controller is not source.controller:
@@ -208,23 +239,23 @@ def _grant_all_creatures(kw, controller_only=None, others=False):
                 layer=6,
                 source=source,
                 applies_to=applies,
-                apply=lambda g, o, ch: ch.keywords.add(kw),
+                apply=lambda _g, _o, ch: ch.keywords.add(kw),
             ),
         ]
 
     return StaticAbility(continuous=continuous, text=f"grant {kw}")
 
 
-def _token_doubler(source_pred=None, creature_only=False, factor=2):
+def _token_doubler(*, creature_only: bool = False, factor: int = 2) -> StaticAbility:
     """'If one or more tokens would be created ... instead' (rule 614.1c)."""
 
-    def replacement(game, source):
-        def matches(g, event):
+    def replacement(_game: Game, source: GameObject) -> list[Replacement]:
+        def matches(_g: Game, event: Event) -> bool:
             if event.data.get("controller") is not source.controller:
                 return False
             return not (creature_only and "Creature" not in event.data["spec"].types)
 
-        def replace(g, event):
+        def replace(_g: Game, event: Event) -> Event:
             event.data["count"] *= factor
             return event
 
@@ -240,15 +271,17 @@ def _token_doubler(source_pred=None, creature_only=False, factor=2):
     return StaticAbility(replacement=replacement, text="token doubler")
 
 
-def _counter_doubler():
-    def replacement(game, source):
-        def matches(g, event):
+def _counter_doubler() -> StaticAbility:
+    """'If one or more counters would be put ... twice that many instead'."""
+
+    def replacement(_game: Game, source: GameObject) -> list[Replacement]:
+        def matches(_g: Game, event: Event) -> bool:
             if event.data.get("resolved"):
                 return False
             obj = event.data.get("obj")
             return obj is not None and obj.controller is source.controller
 
-        def replace(g, event):
+        def replace(_g: Game, event: Event) -> Event:
             event.data["count"] *= 2
             return event
 
@@ -267,12 +300,12 @@ def _counter_doubler():
 # ---------------------------------------------------------------- registry
 
 
-def _auntie_ool(ch, ref):
+def _auntie_ool(ch: Characteristics, _ref: CardRef) -> None:
     """Ward-Blight 2 (SIMPLIFIED to Ward {2}); draw / drain on -1/-1."""
     NOTES[ch.name] = "Ward-Blight 2 simplified to Ward {2}"
     ch.keywords |= {"ward:2"}
 
-    def effect(game, ctx):
+    def effect(game: Game, ctx: Ctx) -> None:
         obj = ctx.event_obj
         if obj is None:
             return
@@ -293,10 +326,11 @@ def _auntie_ool(ch, ref):
     )
 
 
-def _blowfly(ch, ref):
+def _blowfly(ch: Characteristics, _ref: CardRef) -> None:
+    """Blowfly Infestation: countered creature dies -> spread a counter."""
     spec = TargetSpec(what="creature")
 
-    def cond(game, source, event):
+    def cond(_game: Game, _source: GameObject, event: Event) -> bool:
         obj = event.data.get("obj")
         return (
             obj is not None
@@ -315,8 +349,10 @@ def _blowfly(ch, ref):
     )
 
 
-def _necroskitter(ch, ref):
-    def cond(game, source, event):
+def _necroskitter(ch: Characteristics, _ref: CardRef) -> None:
+    """Necroskitter: steal opposing creatures that die with -1/-1."""
+
+    def cond(_game: Game, source: GameObject, event: Event) -> bool:
         obj = event.data.get("obj")
         return (
             obj is not None
@@ -337,13 +373,15 @@ def _necroskitter(ch, ref):
     )
 
 
-def _hapatra(ch, ref):
-    def dmg_cond(game, source, event):
-        return (
+def _hapatra(ch: Characteristics, _ref: CardRef) -> None:
+    """Hapatra: combat damage -> counter; counter placed -> Snake."""
+
+    def dmg_cond(_game: Game, source: GameObject, event: Event) -> bool:
+        return bool(
             event.data.get("resolved")
             and event.data.get("combat")
             and event.data.get("source") is source
-            and isinstance(event.data.get("target"), Player)
+            and isinstance(event.data.get("target"), Player),
         )
 
     ch.abilities.append(
@@ -367,25 +405,28 @@ def _hapatra(ch, ref):
     )
 
 
-def _nest_of_scarabs(ch, ref):
-    def cond(game, source, event):
-        return (
+def _nest_of_scarabs(ch: Characteristics, _ref: CardRef) -> None:
+    """Nest of Scarabs: -1/-1 counters placed -> Insects."""
+
+    def cond(_game: Game, _source: GameObject, event: Event) -> bool:
+        return bool(
             event.data.get("resolved")
             and event.data.get("kind") == "-1/-1"
-            and event.data.get("obj") is not None
+            and event.data.get("obj") is not None,
         )
 
     ch.abilities.append(
         TriggeredAbility(
             trigger=TriggerSpec(EventType.PUT_COUNTERS, condition=cond),
-            effect=CreateTokens(lambda g, c: 1, INSECT),
+            effect=CreateTokens(lambda _g, _c: 1, INSECT),
             text="-1/-1 placed -> insect",
         ),
     )
     NOTES[ch.name] = "one Insect per counter event (not per counter)"
 
 
-def _flourishing_defenses(ch, ref):
+def _flourishing_defenses(ch: Characteristics, _ref: CardRef) -> None:
+    """Flourishing Defenses: -1/-1 counter placed -> Elf."""
     ch.abilities.append(
         TriggeredAbility(
             trigger=TriggerSpec(
@@ -398,7 +439,8 @@ def _flourishing_defenses(ch, ref):
     )
 
 
-def _obelisk_spider(ch, ref):
+def _obelisk_spider(ch: Characteristics, _ref: CardRef) -> None:
+    """Obelisk Spider: reach; -1/-1 placed -> drain 1."""
     ch.keywords.add("reach")
     ch.abilities.append(
         TriggeredAbility(
@@ -413,10 +455,11 @@ def _obelisk_spider(ch, ref):
     NOTES[ch.name] = "drain simplified to any -1/-1 event"
 
 
-def _midnight_banshee(ch, ref):
+def _midnight_banshee(ch: Characteristics, _ref: CardRef) -> None:
+    """Midnight Banshee: wither; upkeep -1/-1 on nonblack creatures."""
     ch.keywords |= {"wither"}
 
-    def effect(game, ctx):
+    def effect(game: Game, ctx: Ctx) -> None:
         for obj in list(game.battlefield_objects()):
             c = obj.chars(game)
             if "Creature" in c.types and "B" not in c.colors and obj is not ctx.source:
@@ -426,7 +469,7 @@ def _midnight_banshee(ch, ref):
         TriggeredAbility(
             trigger=TriggerSpec(
                 EventType.BEGIN_STEP,
-                condition=lambda g, s, e: e.data.get("step") == "upkeep",
+                condition=lambda _g, _s, e: e.data.get("step") == "upkeep",
             ),
             effect=Custom(effect),
             text="each upkeep: -1/-1 on each nonblack creature",
@@ -434,7 +477,8 @@ def _midnight_banshee(ch, ref):
     )
 
 
-def _carnifex_demon(ch, ref):
+def _carnifex_demon(ch: Characteristics, _ref: CardRef) -> None:
+    """Carnifex Demon: enters with counters; spread them for {B}."""
     ch.keywords.add("flying")
     ch.abilities.append(
         TriggeredAbility(
@@ -444,9 +488,9 @@ def _carnifex_demon(ch, ref):
         ),
     )
 
-    def effect(game, ctx):
+    def effect(game: Game, ctx: Ctx) -> None:
         src = ctx.source
-        if src.counters.get("-1/-1", 0) < 1:
+        if src is None or src.counters.get("-1/-1", 0) < 1:
             return
         game.remove_counters(src, "-1/-1", 1)
         for obj in list(game.battlefield_objects()):
@@ -464,10 +508,11 @@ def _carnifex_demon(ch, ref):
     )
 
 
-def _soul_snuffers(ch, ref):
+def _soul_snuffers(ch: Characteristics, _ref: CardRef) -> None:
+    """Soul Snuffers: wither; ETB -1/-1 on every creature."""
     ch.keywords.add("wither")
 
-    def effect(game, ctx):
+    def effect(game: Game, _ctx: Ctx) -> None:
         for obj in list(game.battlefield_objects()):
             if "Creature" in obj.chars(game).types:
                 game.put_counters(obj, "-1/-1", 1)
@@ -481,8 +526,10 @@ def _soul_snuffers(ch, ref):
     )
 
 
-def _contagion_engine(ch, ref):
-    def effect(game, ctx):
+def _contagion_engine(ch: Characteristics, _ref: CardRef) -> None:
+    """Contagion Engine: ETB player wipe; proliferate twice."""
+
+    def effect(game: Game, ctx: Ctx) -> None:
         t = ctx.target()
         if isinstance(t, Player):
             for obj in list(t.battlefield):
@@ -507,7 +554,8 @@ def _contagion_engine(ch, ref):
     )
 
 
-def _contagion_clasp(ch, ref):
+def _contagion_clasp(ch: Characteristics, _ref: CardRef) -> None:
+    """Contagion Clasp: ETB -1/-1; tap to proliferate."""
     ch.abilities.append(
         TriggeredAbility(
             trigger=TriggerSpec(EventType.ENTERS_BATTLEFIELD),
@@ -526,7 +574,8 @@ def _contagion_clasp(ch, ref):
     )
 
 
-def _skinrender(ch, ref):
+def _skinrender(ch: Characteristics, _ref: CardRef) -> None:
+    """Skinrender: ETB three -1/-1 counters."""
     ch.abilities.append(
         TriggeredAbility(
             trigger=TriggerSpec(EventType.ENTERS_BATTLEFIELD),
@@ -537,7 +586,8 @@ def _skinrender(ch, ref):
     )
 
 
-def _yawgmoth(ch, ref):
+def _yawgmoth(ch: Characteristics, _ref: CardRef) -> None:
+    """Yawgmoth: pay life + sac for counters and cards."""
     ch.keywords.add("hexproof")  # SIMPLIFIED: protection from Humans
 
     ch.abilities.append(
@@ -554,10 +604,16 @@ def _yawgmoth(ch, ref):
     )
 
 
-def _skullclamp(ch, ref):
-    def continuous(game, source):
-        def applies(g, obj, c):
+def _skullclamp(ch: Characteristics, _ref: CardRef) -> None:
+    """Skullclamp: +1/-1 equipment that draws when the bearer dies."""
+
+    def continuous(_game: Game, source: GameObject) -> list[ContinuousEffect]:
+        def applies(_g: Game, obj: GameObject, _c: Characteristics) -> bool:
             return obj is source.attached_to
+
+        def clamp(_g: Game, _o: GameObject, c: Characteristics) -> None:
+            c.power = (c.power or 0) + 1
+            c.toughness = (c.toughness or 0) - 1
 
         return [
             ContinuousEffect(
@@ -565,10 +621,7 @@ def _skullclamp(ch, ref):
                 sublayer="c",
                 source=source,
                 applies_to=applies,
-                apply=lambda g, o, c: (
-                    setattr(c, "power", (c.power or 0) + 1),
-                    setattr(c, "toughness", (c.toughness or 0) - 1),
-                ),
+                apply=clamp,
             ),
         ]
 
@@ -576,30 +629,26 @@ def _skullclamp(ch, ref):
         StaticAbility(continuous=continuous, text="equipped gets +1/-1"),
     )
 
-    def died_cond(game, source, event):
-        return (
-            event.data.get("obj") is source.attached_to
-            and source.attached_to is not None
-        )
-
-    # note: attachment is cleared on zone change, so capture via lki:
-    def died_cond2(game, source, event):
+    # note: attachment is cleared on zone change, so capture via the
+    # object's override scratch state:
+    def died_cond(_game: Game, source: GameObject, event: Event) -> bool:
         obj = event.data.get("obj")
-        return obj is not None and getattr(obj, "_clamped_by", None) is source
+        return obj is not None and obj.custom.get("clamped_by") is source
 
     ch.abilities.append(
         TriggeredAbility(
-            trigger=TriggerSpec(EventType.DIES, condition=died_cond2),
+            trigger=TriggerSpec(EventType.DIES, condition=died_cond),
             effect=DrawCards(2),
             text="equipped dies: draw 2",
         ),
     )
 
-    def equip(game, ctx):
+    def equip(game: Game, ctx: Ctx) -> None:
         t = ctx.target()
-        if t is not None and t.zone == Zone.BATTLEFIELD:
-            game.attach(ctx.source, t)
-            t._clamped_by = ctx.source
+        if isinstance(t, GameObject) and t.zone == Zone.BATTLEFIELD:
+            if ctx.source is not None:
+                game.attach(ctx.source, t)
+            t.custom["clamped_by"] = ctx.source
 
     ch.abilities.append(
         ActivatedAbility(
@@ -612,8 +661,10 @@ def _skullclamp(ch, ref):
     )
 
 
-def _scorpion_god(ch, ref):
-    def cond(game, source, event):
+def _scorpion_god(ch: Characteristics, _ref: CardRef) -> None:
+    """Implement The Scorpion God: countered deaths draw cards."""
+
+    def cond(_game: Game, _source: GameObject, event: Event) -> bool:
         obj = event.data.get("obj")
         return (
             obj is not None
@@ -639,7 +690,8 @@ def _scorpion_god(ch, ref):
     NOTES[ch.name] = "return-to-hand-from-graveyard upkeep trigger omitted"
 
 
-def _dusk_urchins(ch, ref):
+def _dusk_urchins(ch: Characteristics, _ref: CardRef) -> None:
+    """Dusk Urchins: shrink on attack, draw per counter on death."""
     ch.abilities.append(
         TriggeredAbility(
             trigger=TriggerSpec(EventType.ATTACKS),
@@ -648,8 +700,9 @@ def _dusk_urchins(ch, ref):
         ),
     )
 
-    def effect(game, ctx):
-        game.draw(ctx.controller, ctx.source.lki_counters.get("-1/-1", 0))
+    def effect(game: Game, ctx: Ctx) -> None:
+        if ctx.source is not None:
+            game.draw(ctx.controller, ctx.source.lki_counters.get("-1/-1", 0))
 
     ch.abilities.append(
         TriggeredAbility(
@@ -661,7 +714,8 @@ def _dusk_urchins(ch, ref):
     NOTES[ch.name] = "blocks trigger folded into attacks only"
 
 
-def _grave_titan(ch, ref):
+def _grave_titan(ch: Characteristics, _ref: CardRef) -> None:
+    """Grave Titan: deathtouch; Zombies on entry and attack."""
     ch.keywords.add("deathtouch")
     two_zombies = CreateTokens(2, ZOMBIE)
     ch.abilities.append(
@@ -680,10 +734,11 @@ def _grave_titan(ch, ref):
     )
 
 
-def _puppeteer_clique(ch, ref):
+def _puppeteer_clique(ch: Characteristics, _ref: CardRef) -> None:
+    """Puppeteer Clique: ETB raid the best opposing graveyard creature."""
     ch.keywords |= {"flying", "persist"}
 
-    def effect(game, ctx):
+    def effect(game: Game, ctx: Ctx) -> None:
         best, bp = None, -1
         for opp in game.opponents(ctx.controller):
             for card in opp.graveyard:
@@ -704,24 +759,29 @@ def _puppeteer_clique(ch, ref):
     NOTES[ch.name] = "stolen creature stays (haste/exile-at-end omitted)"
 
 
-def _reassembling_skeleton(ch, ref):
-    def effect(game, ctx):
+def _reassembling_skeleton(ch: Characteristics, _ref: CardRef) -> None:
+    """Reassembling Skeleton: return itself from the graveyard."""
+
+    def effect(game: Game, ctx: Ctx) -> None:
         src = ctx.source
-        if src.zone == Zone.GRAVEYARD:
+        if src is not None and src.zone == Zone.GRAVEYARD:
             src.controller = ctx.controller
             game.move_zone(src, Zone.BATTLEFIELD, to_battlefield_tapped=True)
 
-    ab = ActivatedAbility(
-        mana_cost="{1}{B}",
-        effect=Custom(effect),
-        text="{1}{B}: return from graveyard tapped",
+    ch.abilities.append(
+        ActivatedAbility(
+            mana_cost="{1}{B}",
+            effect=Custom(effect),
+            from_graveyard=True,
+            text="{1}{B}: return from graveyard tapped",
+        ),
     )
-    ab.from_graveyard = True
-    ch.abilities.append(ab)
 
 
-def _quillspike(ch, ref):
-    def effect(game, ctx):
+def _quillspike(ch: Characteristics, _ref: CardRef) -> None:
+    """Quillspike: eat a -1/-1 counter for +3/+3."""
+
+    def effect(game: Game, ctx: Ctx) -> None:
         for obj in list(ctx.controller.battlefield):
             if obj.counters.get("-1/-1", 0):
                 game.remove_counters(obj, "-1/-1", 1)
@@ -730,16 +790,18 @@ def _quillspike(ch, ref):
             return
         PumpAll(0, 0)  # no-op placeholder
         src = ctx.source
+
+        def pump(_g: Game, _o: GameObject, c: Characteristics) -> None:
+            c.power = (c.power or 0) + 3
+            c.toughness = (c.toughness or 0) + 3
+
         game.add_floating_effect(
             ContinuousEffect(
                 layer=7,
                 sublayer="c",
                 source=src,
-                applies_to=lambda g, o, c: o is src,
-                apply=lambda g, o, c: (
-                    setattr(c, "power", (c.power or 0) + 3),
-                    setattr(c, "toughness", (c.toughness or 0) + 3),
-                ),
+                applies_to=lambda _g, o, _c: o is src,
+                apply=pump,
                 duration="end_of_turn",
             ),
         )
@@ -754,12 +816,14 @@ def _quillspike(ch, ref):
     NOTES[ch.name] = "{B/G} simplified to {B}; counter removed from any own creature"
 
 
-def _everlasting_torment(ch, ref):
-    def replacement(game, source):
-        def matches(g, event):
+def _everlasting_torment(ch: Characteristics, _ref: CardRef) -> None:
+    """Everlasting Torment: no life gain; everything has wither."""
+
+    def replacement(_game: Game, source: GameObject) -> list[Replacement]:
+        def matches(_g: Game, _event: Event) -> bool:
             return True
 
-        def replace(g, event):
+        def replace(_g: Game, _event: Event) -> Event | None:
             return None  # no life gain (615)
 
         return [
@@ -778,11 +842,12 @@ def _everlasting_torment(ch, ref):
     NOTES[ch.name] = "'damage can't be prevented' omitted"
 
 
-def _kulrath_knight(ch, ref):
+def _kulrath_knight(ch: Characteristics, _ref: CardRef) -> None:
+    """Kulrath Knight: countered enemy creatures can't attack/block."""
     ch.keywords |= {"flying", "wither"}
 
-    def continuous(game, source):
-        def applies(g, obj, c):
+    def continuous(_game: Game, source: GameObject) -> list[ContinuousEffect]:
+        def applies(_g: Game, obj: GameObject, c: Characteristics) -> bool:
             return (
                 obj.controller is not source.controller
                 and "Creature" in c.types
@@ -794,7 +859,7 @@ def _kulrath_knight(ch, ref):
                 layer=6,
                 source=source,
                 applies_to=applies,
-                apply=lambda g, o, c: c.keywords.add("shackled"),
+                apply=lambda _g, _o, c: c.keywords.add("shackled"),
             ),
         ]
 
@@ -806,21 +871,23 @@ def _kulrath_knight(ch, ref):
     )
 
 
-def _massacre_girl(ch, ref):
+def _massacre_girl(ch: Characteristics, _ref: CardRef) -> None:
+    """Massacre Girl: menace; your creatures have wither."""
     ch.keywords.add("menace")
     ch.abilities.append(_grant_all_creatures("wither", controller_only=True))
     NOTES[ch.name] = "card-draw clause omitted"
 
 
-def _glissa(ch, ref):
+def _glissa(ch: Characteristics, _ref: CardRef) -> None:
+    """Glissa Sunslayer: first strike + deathtouch; hits draw."""
     ch.keywords |= {"first strike", "deathtouch"}
 
-    def cond(game, source, event):
-        return (
+    def cond(_game: Game, source: GameObject, event: Event) -> bool:
+        return bool(
             event.data.get("resolved")
             and event.data.get("combat")
             and event.data.get("source") is source
-            and isinstance(event.data.get("target"), Player)
+            and isinstance(event.data.get("target"), Player),
         )
 
     ch.abilities.append(
@@ -833,7 +900,8 @@ def _glissa(ch, ref):
     NOTES[ch.name] = "modal (counters/stun) simplified to draw"
 
 
-def _fire_covenant(ch, ref):
+def _fire_covenant(ch: Characteristics, _ref: CardRef) -> None:
+    """Fire Covenant: pay life, divide damage."""
     ch.abilities.append(
         SpellAbility(
             effect=Sequence([LoseLife(2, "you"), DealDamage(4, "divided")]),
@@ -843,7 +911,8 @@ def _fire_covenant(ch, ref):
     NOTES[ch.name] = "X life / X damage fixed at 2 life for 4 damage"
 
 
-def _black_suns_zenith(ch, ref):
+def _black_suns_zenith(ch: Characteristics, _ref: CardRef) -> None:
+    """Black Sun's Zenith: X -1/-1 counters on each creature."""
     ch.abilities.append(
         SpellAbility(
             effect=PutCounters("-1/-1", "x", "each_creature"),
@@ -853,8 +922,10 @@ def _black_suns_zenith(ch, ref):
     NOTES[ch.name] = "shuffle-back clause omitted"
 
 
-def _chaos_warp(ch, ref):
-    def effect(game, ctx):
+def _chaos_warp(ch: Characteristics, _ref: CardRef) -> None:
+    """Chaos Warp: shuffle target permanent into its owner's library."""
+
+    def effect(game: Game, ctx: Ctx) -> None:
         t = ctx.target()
         if isinstance(t, GameObject) and t.zone == Zone.BATTLEFIELD:
             owner = t.owner
@@ -871,7 +942,8 @@ def _chaos_warp(ch, ref):
     NOTES[ch.name] = "reveal/may-cast rider omitted"
 
 
-def _cultivate(ch, ref):
+def _cultivate(ch: Characteristics, _ref: CardRef) -> None:
+    """Cultivate: one basic tapped, one to hand."""
     ch.abilities.append(
         SpellAbility(
             effect=Sequence(
@@ -882,8 +954,10 @@ def _cultivate(ch, ref):
     )
 
 
-def _farewell(ch, ref):
-    def effect(game, ctx):
+def _farewell(ch: Characteristics, _ref: CardRef) -> None:
+    """Farewell: exile all creatures and artifacts."""
+
+    def effect(game: Game, _ctx: Ctx) -> None:
         for obj in list(game.battlefield_objects()):
             c = obj.chars(game)
             if c.types & {"Creature", "Artifact"}:
@@ -895,11 +969,13 @@ def _farewell(ch, ref):
     NOTES[ch.name] = "modes fixed: creatures + artifacts, exiled"
 
 
-def _austere_command(ch, ref):
-    def effect(game, ctx):
+def _austere_command(ch: Characteristics, _ref: CardRef) -> None:
+    """Austere Command: destroy big creatures + opposing artifacts."""
+
+    def effect(game: Game, ctx: Ctx) -> None:
         for obj in list(game.battlefield_objects()):
             c = obj.chars(game)
-            if ("Creature" in c.types and (c.power or 0) >= 3) or (
+            if ("Creature" in c.types and (c.power or 0) >= _AUSTERE_POWER_MIN) or (
                 "Artifact" in c.types and obj.controller is not ctx.controller
             ):
                 game.destroy(obj)
@@ -913,7 +989,8 @@ def _austere_command(ch, ref):
     NOTES[ch.name] = "modes fixed"
 
 
-def _akromas_will(ch, ref):
+def _akromas_will(ch: Characteristics, _ref: CardRef) -> None:
+    """Akroma's Will: team protection plus a small pump."""
     ch.abilities.append(
         SpellAbility(
             effect=Sequence([ProtectAll(), PumpAll(1, 1)]),
@@ -923,7 +1000,8 @@ def _akromas_will(ch, ref):
     NOTES[ch.name] = "both modes approximated"
 
 
-def _spell_swindle(ch, ref):
+def _spell_swindle(ch: Characteristics, _ref: CardRef) -> None:
+    """Spell Swindle: counter a spell, mint Treasures."""
     ch.abilities.append(
         SpellAbility(
             effect=Sequence([CounterSpell(), CreateTokens(3, TREASURE)]),
@@ -934,8 +1012,10 @@ def _spell_swindle(ch, ref):
     NOTES[ch.name] = "treasures fixed at 3 (mana value of countered spell)"
 
 
-def _brasss_bounty(ch, ref):
-    def count(game, ctx):
+def _brasss_bounty(ch: Characteristics, _ref: CardRef) -> None:
+    """Brass's Bounty: a Treasure per land."""
+
+    def count(game: Game, ctx: Ctx) -> int:
         return sum(
             1 for o in ctx.controller.battlefield if "Land" in o.chars(game).types
         )
@@ -945,15 +1025,17 @@ def _brasss_bounty(ch, ref):
     )
 
 
-def _curse_of_opulence(ch, ref):
-    def effect(game, ctx):
+def _curse_of_opulence(ch: Characteristics, _ref: CardRef) -> None:
+    """Curse of Opulence: gold each upkeep (SIMPLIFIED)."""
+
+    def effect(game: Game, ctx: Ctx) -> None:
         game.create_tokens(ctx.controller, TREASURE, 1)
 
     ch.abilities.append(
         TriggeredAbility(
             trigger=TriggerSpec(
                 EventType.BEGIN_STEP,
-                condition=lambda g, s, e: (
+                condition=lambda _g, s, e: (
                     e.data.get("step") == "upkeep"
                     and e.data.get("player") is s.controller
                 ),
@@ -967,7 +1049,8 @@ def _curse_of_opulence(ch, ref):
     )
 
 
-def _bootleggers_stash(ch, ref):
+def _bootleggers_stash(ch: Characteristics, _ref: CardRef) -> None:
+    """Bootleggers' Stash: tap for a Treasure."""
     ch.abilities.append(
         ActivatedAbility(
             tap_cost=True,
@@ -978,7 +1061,8 @@ def _bootleggers_stash(ch, ref):
     NOTES[ch.name] = "grants-lands-the-ability simplified to itself"
 
 
-def _treasure_vault(ch, ref):
+def _treasure_vault(ch: Characteristics, _ref: CardRef) -> None:
+    """Treasure Vault: colorless mana; burst into Treasures."""
     ch.abilities.append(
         ActivatedAbility(
             tap_cost=True,
@@ -999,7 +1083,8 @@ def _treasure_vault(ch, ref):
     NOTES[ch.name] = "X fixed at 4"
 
 
-def _retrofitter_foundry(ch, ref):
+def _retrofitter_foundry(ch: Characteristics, _ref: CardRef) -> None:
+    """Retrofitter Foundry: pay and tap for a Thopter."""
     ch.abilities.append(
         ActivatedAbility(
             mana_cost="{2}",
@@ -1011,14 +1096,16 @@ def _retrofitter_foundry(ch, ref):
     NOTES[ch.name] = "untap/upgrade chain simplified"
 
 
-def _academy_manufactor(ch, ref):
-    def replacement(game, source):
-        def matches(g, event):
+def _academy_manufactor(ch: Characteristics, _ref: CardRef) -> None:
+    """Academy Manufactor: clue/food/treasure -> all three."""
+
+    def replacement(_game: Game, source: GameObject) -> list[Replacement]:
+        def matches(_g: Game, event: Event) -> bool:
             if event.data.get("controller") is not source.controller:
                 return False
             return event.data["spec"].predefined in ("treasure", "clue", "food")
 
-        def replace(g, event):
+        def replace(_g: Game, event: Event) -> Event:
             kinds = {"treasure": TREASURE, "clue": CLUE, "food": FOOD}
             have = event.data["spec"].predefined
             event.data["extra_specs"] = [v for k, v in kinds.items() if k != have]
@@ -1038,10 +1125,12 @@ def _academy_manufactor(ch, ref):
     )
 
 
-def _mechanized_production(ch, ref):
-    def effect(game, ctx):
+def _mechanized_production(ch: Characteristics, _ref: CardRef) -> None:
+    """Mechanized Production: copy the artifact; win at eight."""
+
+    def effect(game: Game, ctx: Ctx) -> None:
         src = ctx.source
-        target = src.attached_to
+        target = src.attached_to if src is not None else None
         if target is None or target.zone != Zone.BATTLEFIELD:
             return
         tch = target.chars(game)
@@ -1055,17 +1144,17 @@ def _mechanized_production(ch, ref):
             predefined="treasure" if "Treasure" in tch.subtypes else "",
         )
         game.create_tokens(ctx.controller, spec, 1)
-        names = {}
+        names: dict[str, int] = {}
         for o in ctx.controller.battlefield:
             c = o.chars(game)
             if "Artifact" in c.types and c.name:
                 names[c.name] = names.get(c.name, 0) + 1
-        if names and max(names.values()) >= 8:
+        if names and max(names.values()) >= _MECHANIZED_WIN_COPIES:
             game.winner = ctx.controller
             game.game_over = True  # alternate win condition
             ctx.controller.stat("mechanized_wins")
 
-    def cond(game, source, event):
+    def cond(_game: Game, source: GameObject, event: Event) -> bool:
         return (
             event.data.get("step") == "upkeep"
             and event.data.get("player") is source.controller
@@ -1087,85 +1176,99 @@ def _mechanized_production(ch, ref):
     )
 
 
-def _infinite_guideline_station(ch, ref):
-    def count_multicolored(game, ctx):
-        n = 0
-        for o in ctx.controller.battlefield:
-            if len(o.chars(game).colors) >= 2:
-                n += 1
-        return n
+def _igs_count_multicolored(game: Game, ctx: Ctx) -> int:
+    """Count the controller's multicolored permanents."""
+    n = 0
+    for o in ctx.controller.battlefield:
+        if len(o.chars(game).colors) >= _MULTICOLORED_MIN:
+            n += 1
+    return n
 
+
+def _igs_station(game: Game, ctx: Ctx) -> None:
+    """Station (rule 702.184): tap the best creature to charge up."""
+    src = ctx.source
+    if src is None:
+        return
+    best = None
+    for o in ctx.controller.battlefield:
+        c = o.chars(game)
+        if (
+            "Creature" in c.types
+            and not o.tapped
+            and o is not src
+            and not (o.entered_this_turn and "haste" not in c.keywords)
+            and (best is None or (c.power or 0) > (best.chars(game).power or 0))
+        ):
+            best = o
+    if best is not None:
+        game.tap(best)
+        game.put_counters(src, "charge", max(0, best.chars(game).power or 0))
+
+
+def _igs_continuous(_game: Game, source: GameObject) -> list[ContinuousEffect]:
+    """At twelve charge counters: an artifact creature with flying."""
+
+    def applies(_g: Game, obj: GameObject, _c: Characteristics) -> bool:
+        return obj is source and obj.counters.get("charge", 0) >= (
+            _STATION_FLIGHT_CHARGES
+        )
+
+    def add_type(_g: Game, _o: GameObject, c: Characteristics) -> None:
+        c.types.add("Creature")
+
+    def add_kw(_g: Game, _o: GameObject, c: Characteristics) -> None:
+        c.keywords.add("flying")
+
+    return [
+        ContinuousEffect(
+            layer=4,
+            source=source,
+            applies_to=applies,
+            apply=add_type,
+        ),
+        ContinuousEffect(layer=6, source=source, applies_to=applies, apply=add_kw),
+    ]
+
+
+def _infinite_guideline_station(ch: Characteristics, _ref: CardRef) -> None:
+    """Infinite Guideline Station: Robots, draws, and station charges."""
     ch.abilities.append(
         TriggeredAbility(
             trigger=TriggerSpec(EventType.ENTERS_BATTLEFIELD),
-            effect=CreateTokens(count_multicolored, ROBOT),
+            effect=CreateTokens(_igs_count_multicolored, ROBOT),
             text="ETB: a Robot per multicolored permanent",
         ),
     )
     ch.abilities.append(
         TriggeredAbility(
             trigger=TriggerSpec(EventType.ATTACKS),
-            effect=DrawCards(count_multicolored),
+            effect=DrawCards(_igs_count_multicolored),
             text="attacks: draw per multicolored permanent",
         ),
     )
-
-    def station(game, ctx):
-        src = ctx.source
-        best = None
-        for o in ctx.controller.battlefield:
-            c = o.chars(game)
-            if (
-                "Creature" in c.types
-                and not o.tapped
-                and o is not src
-                and not (o.entered_this_turn and "haste" not in c.keywords)
-                and (best is None or (c.power or 0) > (best.chars(game).power or 0))
-            ):
-                best = o
-        if best is not None:
-            game.tap(best)
-            game.put_counters(src, "charge", max(0, best.chars(game).power or 0))
-
     ch.abilities.append(
         ActivatedAbility(
             sorcery_only=True,
-            effect=Custom(station),
+            effect=Custom(_igs_station),
             text="Station (rule 702.184)",
         ),
     )
-
-    def continuous(game, source):
-        def applies(g, obj, c):
-            return obj is source and obj.counters.get("charge", 0) >= 12
-
-        def add_type(g, o, c):
-            c.types.add("Creature")
-
-        def add_kw(g, o, c):
-            c.keywords.add("flying")
-
-        return [
-            ContinuousEffect(
-                layer=4,
-                source=source,
-                applies_to=applies,
-                apply=add_type,
-            ),
-            ContinuousEffect(layer=6, source=source, applies_to=applies, apply=add_kw),
-        ]
-
     ch.abilities.append(
         StaticAbility(
-            continuous=continuous,
+            continuous=_igs_continuous,
             text="12+ charge: artifact creature with flying",
         ),
     )
 
 
-def _anim_pakal(ch, ref):
-    def effect(game, ctx):
+def _anim_pakal(ch: Characteristics, _ref: CardRef) -> None:
+    """Anim Pakal: grow on attack, then Gnomes per counter."""
+
+    def effect(game: Game, ctx: Ctx) -> None:
         src = ctx.source
+        if src is None:
+            return
         game.put_counters(src, "+1/+1", 1)
         n = src.counters.get("+1/+1", 0)
         game.create_tokens(ctx.controller, GNOME, n)
@@ -1180,19 +1283,20 @@ def _anim_pakal(ch, ref):
     NOTES[ch.name] = "Gnomes enter untapped, not attacking"
 
 
-def _esix(ch, ref):
+def _esix(ch: Characteristics, _ref: CardRef) -> None:
+    """Esix, Fractal Bloom: first tokens each turn may copy a creature."""
     ch.keywords.add("ward:2")
 
-    def replacement(game, source):
-        def matches(g, event):
+    def replacement(_game: Game, source: GameObject) -> list[Replacement]:
+        def matches(g: Game, event: Event) -> bool:
             if event.data.get("controller") is not source.controller:
                 return False
-            if getattr(source, "_esix_turn", -1) == g.turn:
+            if source.custom.get("esix_turn", -1) == g.turn:
                 return False
             return "Creature" in event.data["spec"].types
 
-        def replace(g, event):
-            source._esix_turn = g.turn
+        def replace(g: Game, event: Event) -> Event:
+            source.custom["esix_turn"] = g.turn
             me = source.controller
             best, bv = None, 0
             for o in me.battlefield:
@@ -1201,7 +1305,7 @@ def _esix(ch, ref):
                     v = (c.power or 0) + (c.toughness or 0)
                     if v > bv:
                         best, bv = o, v
-            if best is not None and bv > 2 * (
+            if best is not None and bv > _ESIX_UPGRADE_FACTOR * (
                 (event.data["spec"].power or 1) + (event.data["spec"].toughness or 1)
             ):
                 c = best.chars(g)
@@ -1233,64 +1337,70 @@ def _esix(ch, ref):
     )
 
 
-def _adrix_and_nev(ch, ref):
+def _adrix_and_nev(ch: Characteristics, _ref: CardRef) -> None:
+    """Adrix and Nev: ward and a token doubler."""
     ch.keywords.add("ward:2")
     ch.abilities.append(_token_doubler())
 
 
-def _doubling_season(ch, ref):
+def _doubling_season(ch: Characteristics, _ref: CardRef) -> None:
+    """Doubling Season: token and counter doubling."""
     ch.abilities.append(_token_doubler())
     ch.abilities.append(_counter_doubler())
 
 
-def _ojer_taq(ch, ref):
+def _ojer_taq(ch: Characteristics, _ref: CardRef) -> None:
+    """Ojer Taq: triple creature tokens."""
     ch.abilities.append(_token_doubler(creature_only=True, factor=3))
     NOTES[ch.name] = "back face (Temple of Civilization) not modeled"
 
 
-def _kaya_geist_hunter(ch, ref):
+def _kaya_geist_hunter(ch: Characteristics, _ref: CardRef) -> None:
+    """Kaya, Geist Hunter: team deathtouch; token doubling burst."""
+
+    def plus1(game: Game, ctx: Ctx) -> None:
+        me = ctx.controller
+        game.add_floating_effect(
+            ContinuousEffect(
+                layer=6,
+                source=ctx.source,
+                applies_to=lambda _g, o, c: (
+                    o.controller is me and "Creature" in c.types
+                ),
+                apply=lambda _g, _o, c: c.keywords.add("deathtouch"),
+                duration="end_of_turn",
+            ),
+        )
+
     ch.abilities.append(
         ActivatedAbility(
             loyalty_cost=1,
-            effect=Custom(
-                lambda game, ctx: game.add_floating_effect(
-                    ContinuousEffect(
-                        layer=6,
-                        source=ctx.source,
-                        applies_to=lambda g, o, c: (
-                            o.controller is ctx.controller and "Creature" in c.types
-                        ),
-                        apply=lambda g, o, c: c.keywords.add("deathtouch"),
-                        duration="end_of_turn",
-                    ),
-                ),
-            ),
+            effect=Custom(plus1),
             text="+1: your creatures gain deathtouch",
         ),
     )
 
-    def minus2(game, ctx):
+    def minus2(game: Game, ctx: Ctx) -> None:
         src = ctx.source
         me = ctx.controller
         game.add_floating_effect(
             ContinuousEffect(
                 layer=6,
                 source=src,
-                applies_to=lambda g, o, c: False,
-                apply=lambda g, o, c: None,
+                applies_to=lambda _g, _o, _c: False,
+                apply=lambda _g, _o, _c: None,
                 duration="end_of_turn",
             ),
         )
         rep = Replacement(
             EventType.CREATE_TOKEN,
-            matches=lambda g, e: e.data.get("controller") is me,
+            matches=lambda _g, e: e.data.get("controller") is me,
             replace=_double_count,
             source=src,
             duration="floating",
         )
         game.replacements.floating.append(rep)
-        game._kaya_reps = getattr(game, "_kaya_reps", [])
-        game._kaya_reps.append(rep)
+        game.custom.setdefault("kaya_reps", []).append(rep)
 
     ch.abilities.append(
         ActivatedAbility(
@@ -1305,34 +1415,33 @@ def _kaya_geist_hunter(ch, ref):
     )
 
 
-def _double_count(g, event):
+def _double_count(_game: Game, event: Event) -> Event:
+    """Double the created-token count (Kaya's -2)."""
     event.data["count"] *= 2
     return event
 
 
-def _saheeli_rai(ch, ref):
+def _saheeli_rai(ch: Characteristics, _ref: CardRef) -> None:
+    """Saheeli Rai: +1 scry and ping each opponent."""
+
+    def ping(game: Game, ctx: Ctx) -> None:
+        for p in game.opponents(ctx.controller):
+            game.deal_damage(ctx.source, p, 1)
+
     ch.abilities.append(
         ActivatedAbility(
             loyalty_cost=1,
-            effect=Sequence(
-                [
-                    Scry(1),
-                    Custom(
-                        lambda game, ctx: [
-                            game.deal_damage(ctx.source, p, 1)
-                            for p in game.opponents(ctx.controller)
-                        ],
-                    ),
-                ],
-            ),
+            effect=Sequence([Scry(1), Custom(ping)]),
             text="+1: scry 1, 1 damage to each opponent",
         ),
     )
     NOTES[ch.name] = "-2 copy-artifact and -7 omitted"
 
 
-def _saheeli_sublime(ch, ref):
-    def cond(game, source, event):
+def _saheeli_sublime(ch: Characteristics, _ref: CardRef) -> None:
+    """Saheeli, Sublime Artificer: noncreature casts make Servos."""
+
+    def cond(_game: Game, source: GameObject, event: Event) -> bool:
         obj = event.data.get("obj")
         return (
             event.data.get("player") is source.controller
@@ -1349,8 +1458,10 @@ def _saheeli_sublime(ch, ref):
     )
 
 
-def _sai(ch, ref):
-    def cond(game, source, event):
+def _sai(ch: Characteristics, _ref: CardRef) -> None:
+    """Sai, Master Thopterist: artifact casts make Thopters."""
+
+    def cond(_game: Game, source: GameObject, event: Event) -> bool:
         obj = event.data.get("obj")
         return (
             event.data.get("player") is source.controller
@@ -1368,8 +1479,10 @@ def _sai(ch, ref):
     NOTES[ch.name] = "sacrifice-to-draw ability omitted"
 
 
-def _thopter_spy_network(ch, ref):
-    def cond(game, source, event):
+def _thopter_spy_network(ch: Characteristics, _ref: CardRef) -> None:
+    """Thopter Spy Network: upkeep Thopters; artifact hits draw."""
+
+    def cond(game: Game, source: GameObject, event: Event) -> bool:
         if (
             event.data.get("step") != "upkeep"
             or event.data.get("player") is not source.controller
@@ -1387,15 +1500,15 @@ def _thopter_spy_network(ch, ref):
         ),
     )
 
-    def dmg_cond(game, source, event):
+    def dmg_cond(game: Game, source: GameObject, event: Event) -> bool:
         src = event.data.get("source")
-        return (
+        return bool(
             event.data.get("resolved")
             and event.data.get("combat")
             and isinstance(event.data.get("target"), Player)
             and isinstance(src, GameObject)
             and src.controller is source.controller
-            and "Artifact" in src.chars(game).types
+            and "Artifact" in src.chars(game).types,
         )
 
     ch.abilities.append(
@@ -1407,16 +1520,18 @@ def _thopter_spy_network(ch, ref):
     )
 
 
-def _bident(ch, ref):
-    def dmg_cond(game, source, event):
+def _bident(ch: Characteristics, _ref: CardRef) -> None:
+    """Bident of Thassa: creature hits draw cards."""
+
+    def dmg_cond(game: Game, source: GameObject, event: Event) -> bool:
         src = event.data.get("source")
-        return (
+        return bool(
             event.data.get("resolved")
             and event.data.get("combat")
             and isinstance(event.data.get("target"), Player)
             and isinstance(src, GameObject)
             and src.controller is source.controller
-            and "Creature" in src.chars(game).types
+            and "Creature" in src.chars(game).types,
         )
 
     ch.abilities.append(
@@ -1429,15 +1544,17 @@ def _bident(ch, ref):
     NOTES[ch.name] = "activated force-attack mode omitted"
 
 
-def _mentor_of_the_meek(ch, ref):
-    def cond(game, source, event):
+def _mentor_of_the_meek(ch: Characteristics, _ref: CardRef) -> None:
+    """Mentor of the Meek: small creatures draw cards."""
+
+    def cond(_game: Game, source: GameObject, event: Event) -> bool:
         obj = event.data.get("obj")
         return (
             obj is not None
             and obj is not source
             and obj.controller is source.controller
             and "Creature" in obj.base.types
-            and (obj.base.power or 0) <= 2
+            and (obj.base.power or 0) <= _MEEK_MAX_POWER
         )
 
     ch.abilities.append(
@@ -1450,8 +1567,10 @@ def _mentor_of_the_meek(ch, ref):
     NOTES[ch.name] = "the {1} payment is waived (SIMPLIFIED)"
 
 
-def _blood_artist(ch, ref):
-    def cond(game, source, event):
+def _blood_artist(ch: Characteristics, _ref: CardRef) -> None:
+    """Blood Artist: any creature death drains 1."""
+
+    def cond(_game: Game, _source: GameObject, event: Event) -> bool:
         obj = event.data.get("obj")
         return obj is not None and "Creature" in obj.base.types
 
@@ -1465,8 +1584,10 @@ def _blood_artist(ch, ref):
     NOTES[ch.name] = "drains each opponent instead of target player"
 
 
-def _zulaport(ch, ref):
-    def cond(game, source, event):
+def _zulaport(ch: Characteristics, _ref: CardRef) -> None:
+    """Zulaport Cutthroat: own creature death drains 1."""
+
+    def cond(_game: Game, source: GameObject, event: Event) -> bool:
         obj = event.data.get("obj")
         return (
             obj is not None
@@ -1483,8 +1604,10 @@ def _zulaport(ch, ref):
     )
 
 
-def _marionette_apprentice(ch, ref):
-    def cond(game, source, event):
+def _marionette_apprentice(ch: Characteristics, _ref: CardRef) -> None:
+    """Marionette Apprentice: own artifact/token death drains 1."""
+
+    def cond(_game: Game, source: GameObject, event: Event) -> bool:
         obj = event.data.get("obj")
         return (
             obj is not None
@@ -1501,11 +1624,12 @@ def _marionette_apprentice(ch, ref):
     )
 
 
-def _shalai(ch, ref):
+def _shalai(ch: Characteristics, _ref: CardRef) -> None:
+    """Shalai: your other permanents have hexproof."""
     ch.keywords.add("flying")
 
-    def continuous(game, source):
-        def applies(g, obj, c):
+    def continuous(_game: Game, source: GameObject) -> list[ContinuousEffect]:
+        def applies(_g: Game, obj: GameObject, _c: Characteristics) -> bool:
             return obj.controller is source.controller and obj is not source
 
         return [
@@ -1513,7 +1637,7 @@ def _shalai(ch, ref):
                 layer=6,
                 source=source,
                 applies_to=applies,
-                apply=lambda g, o, c: c.keywords.add("hexproof"),
+                apply=lambda _g, _o, c: c.keywords.add("hexproof"),
             ),
         ]
 
@@ -1523,10 +1647,12 @@ def _shalai(ch, ref):
     NOTES[ch.name] = "player hexproof + {4}{G}{G} pump omitted"
 
 
-def _skyclave(ch, ref):
-    def effect(game, ctx):
+def _skyclave(ch: Characteristics, _ref: CardRef) -> None:
+    """Skyclave Apparition: ETB exile a small nonland permanent."""
+
+    def effect(game: Game, ctx: Ctx) -> None:
         t = ctx.target()
-        if t is not None and t.zone == Zone.BATTLEFIELD:
+        if isinstance(t, GameObject) and t.zone == Zone.BATTLEFIELD:
             game.exile(t)
 
     ch.abilities.append(
@@ -1540,7 +1666,8 @@ def _skyclave(ch, ref):
     NOTES[ch.name] = "mv<=4 restriction and Illusion give-back omitted"
 
 
-def _restoration_angel(ch, ref):
+def _restoration_angel(ch: Characteristics, _ref: CardRef) -> None:
+    """Restoration Angel: flash flyer; ETB blink."""
     ch.keywords |= {"flash", "flying"}
     ch.abilities.append(
         TriggeredAbility(
@@ -1549,7 +1676,10 @@ def _restoration_angel(ch, ref):
             optional=True,
             targets=[
                 TargetSpec(
-                    what="creature", controller="you", other=True, optional=True
+                    what="creature",
+                    controller="you",
+                    other=True,
+                    optional=True,
                 ),
             ],
             text="ETB: you may blink another creature you control",
@@ -1557,8 +1687,10 @@ def _restoration_angel(ch, ref):
     )
 
 
-def _conjurers_closet(ch, ref):
-    def cond(game, source, event):
+def _conjurers_closet(ch: Characteristics, _ref: CardRef) -> None:
+    """Conjurer's Closet: end-step blink."""
+
+    def cond(_game: Game, source: GameObject, event: Event) -> bool:
         return (
             event.data.get("step") == "end"
             and event.data.get("player") is source.controller
@@ -1575,7 +1707,8 @@ def _conjurers_closet(ch, ref):
     )
 
 
-def _reef_worm(ch, ref):
+def _reef_worm(ch: Characteristics, _ref: CardRef) -> None:
+    """Reef Worm: dies into Fish -> Whale -> Kraken."""
     fish = _reef_spec(
         "Fish",
         3,
@@ -1591,10 +1724,13 @@ def _reef_worm(ch, ref):
     )
 
 
-def _hangarback(ch, ref):
+def _hangarback(ch: Characteristics, _ref: CardRef) -> None:
+    """Hangarback Walker: X counters in; Thopters out."""
     ch.etb_x_counters = "+1/+1"
 
-    def effect(game, ctx):
+    def effect(game: Game, ctx: Ctx) -> None:
+        if ctx.source is None:
+            return
         n = ctx.source.lki_counters.get("+1/+1", 0)
         game.create_tokens(ctx.controller, THOPTER, n)
 
@@ -1607,7 +1743,8 @@ def _hangarback(ch, ref):
     )
 
 
-def _triplicate_titan(ch, ref):
+def _triplicate_titan(ch: Characteristics, _ref: CardRef) -> None:
+    """Triplicate Titan: dies into three Golems."""
     ch.keywords |= {"flying", "vigilance", "trample"}
     ch.abilities.append(
         TriggeredAbility(
@@ -1619,7 +1756,8 @@ def _triplicate_titan(ch, ref):
     NOTES[ch.name] = "Golem keyword split simplified to flying on all"
 
 
-def _myr_battlesphere(ch, ref):
+def _myr_battlesphere(ch: Characteristics, _ref: CardRef) -> None:
+    """Myr Battlesphere: ETB four Myr."""
     ch.abilities.append(
         TriggeredAbility(
             trigger=TriggerSpec(EventType.ENTERS_BATTLEFIELD),
@@ -1630,8 +1768,10 @@ def _myr_battlesphere(ch, ref):
     NOTES[ch.name] = "attack pump/damage trigger omitted"
 
 
-def _determined_iteration(ch, ref):
-    def cond(game, source, event):
+def _determined_iteration(ch: Characteristics, _ref: CardRef) -> None:
+    """Implement Determined Iteration: populate at combat start."""
+
+    def cond(_game: Game, source: GameObject, event: Event) -> bool:
         return (
             event.data.get("step") == "combat_begin"
             and event.data.get("player") is source.controller
@@ -1647,8 +1787,10 @@ def _determined_iteration(ch, ref):
     NOTES[ch.name] = "haste grant omitted"
 
 
-def _growing_ranks(ch, ref):
-    def cond(game, source, event):
+def _growing_ranks(ch: Characteristics, _ref: CardRef) -> None:
+    """Growing Ranks: populate each upkeep."""
+
+    def cond(_game: Game, source: GameObject, event: Event) -> bool:
         return (
             event.data.get("step") == "upkeep"
             and event.data.get("player") is source.controller
@@ -1663,8 +1805,10 @@ def _growing_ranks(ch, ref):
     )
 
 
-def _extravagant_replication(ch, ref):
-    def effect(game, ctx):
+def _extravagant_replication(ch: Characteristics, _ref: CardRef) -> None:
+    """Extravagant Replication: upkeep copy of your best creature."""
+
+    def effect(game: Game, ctx: Ctx) -> None:
         me = ctx.controller
         best, bv = None, 0
         for o in me.battlefield:
@@ -1686,7 +1830,7 @@ def _extravagant_replication(ch, ref):
             )
             game.create_tokens(me, spec, 1)
 
-    def cond(game, source, event):
+    def cond(_game: Game, source: GameObject, event: Event) -> bool:
         return (
             event.data.get("step") == "upkeep"
             and event.data.get("player") is source.controller
@@ -1701,17 +1845,19 @@ def _extravagant_replication(ch, ref):
     )
 
 
-def _imprisoned_in_the_moon(ch, ref):
-    def continuous(game, source):
-        def applies(g, obj, c):
+def _imprisoned_in_the_moon(ch: Characteristics, _ref: CardRef) -> None:
+    """Imprisoned in the Moon: enchanted permanent is a colorless land."""
+
+    def continuous(_game: Game, source: GameObject) -> list[ContinuousEffect]:
+        def applies(_g: Game, obj: GameObject, _c: Characteristics) -> bool:
             return obj is source.attached_to
 
-        def to_land(g, o, c):
+        def to_land(_g: Game, _o: GameObject, c: Characteristics) -> None:
             c.types = {"Land"}
             c.subtypes = set()
             c.supertypes -= {"Legendary"}
 
-        def strip_abilities(g, o, c):
+        def strip_abilities(_g: Game, _o: GameObject, c: Characteristics) -> None:
             c.abilities = [
                 ActivatedAbility(
                     tap_cost=True,
@@ -1722,7 +1868,7 @@ def _imprisoned_in_the_moon(ch, ref):
             ]
             c.keywords = set()
 
-        def zero_pt(g, o, c):
+        def zero_pt(_g: Game, _o: GameObject, c: Characteristics) -> None:
             c.power = c.toughness = None
 
         return [
@@ -1757,14 +1903,16 @@ def _imprisoned_in_the_moon(ch, ref):
     )
 
 
-def _banishing_light(ch, ref):
-    def effect(game, ctx):
+def _banishing_light(ch: Characteristics, _ref: CardRef) -> None:
+    """Banishing Light: exile until it leaves the battlefield."""
+
+    def effect(game: Game, ctx: Ctx) -> None:
         t = ctx.target()
-        if t is None or t.zone != Zone.BATTLEFIELD:
+        if not isinstance(t, GameObject) or t.zone != Zone.BATTLEFIELD:
             return
         game.exile(t)
-        if t.zone == Zone.EXILE:
-            ctx.source._imprisoned = t
+        if t.zone == Zone.EXILE and ctx.source is not None:
+            ctx.source.custom["imprisoned"] = t
 
     ch.abilities.append(
         TriggeredAbility(
@@ -1775,12 +1923,12 @@ def _banishing_light(ch, ref):
         ),
     )
 
-    def release_cond(game, source, event):
+    def release_cond(_game: Game, source: GameObject, event: Event) -> bool:
         return event.data.get("obj") is source
 
-    def release(game, ctx):
-        held = getattr(ctx.source, "_imprisoned", None)
-        if held is not None and held.zone == Zone.EXILE:
+    def release(game: Game, ctx: Ctx) -> None:
+        held = ctx.source.custom.get("imprisoned") if ctx.source is not None else None
+        if isinstance(held, GameObject) and held.zone == Zone.EXILE:
             held.controller = held.owner
             game.move_zone(held, Zone.BATTLEFIELD)
 
@@ -1793,7 +1941,8 @@ def _banishing_light(ch, ref):
     )
 
 
-def _chromatic_lantern(ch, ref):
+def _chromatic_lantern(ch: Characteristics, _ref: CardRef) -> None:
+    """Chromatic Lantern: tap for any color."""
     ch.abilities.append(
         ActivatedAbility(
             tap_cost=True,
@@ -1805,7 +1954,8 @@ def _chromatic_lantern(ch, ref):
     NOTES[ch.name] = "lands-have-any-color static omitted"
 
 
-def _coalition_relic(ch, ref):
+def _coalition_relic(ch: Characteristics, _ref: CardRef) -> None:
+    """Coalition Relic: tap for any color."""
     ch.abilities.append(
         ActivatedAbility(
             tap_cost=True,
@@ -1817,7 +1967,8 @@ def _coalition_relic(ch, ref):
     NOTES[ch.name] = "charge counter mode omitted"
 
 
-def _channeler_initiate(ch, ref):
+def _channeler_initiate(ch: Characteristics, _ref: CardRef) -> None:
+    """Channeler Initiate: counters in, any color out."""
     ch.abilities.append(
         TriggeredAbility(
             trigger=TriggerSpec(EventType.ENTERS_BATTLEFIELD),
@@ -1837,7 +1988,8 @@ def _channeler_initiate(ch, ref):
     NOTES[ch.name] = "mana ability does not remove the -1/-1 counter"
 
 
-def _devoted_druid(ch, ref):
+def _devoted_druid(ch: Characteristics, _ref: CardRef) -> None:
+    """Devoted Druid: tap for green."""
     ch.abilities.append(
         ActivatedAbility(
             tap_cost=True,
@@ -1849,12 +2001,13 @@ def _devoted_druid(ch, ref):
     NOTES[ch.name] = "untap-with--1/-1 mode omitted"
 
 
-def _evolution_sage(ch, ref):
+def _evolution_sage(ch: Characteristics, _ref: CardRef) -> None:
+    """Evolution Sage: landfall proliferate."""
     ch.abilities.append(
         TriggeredAbility(
             trigger=TriggerSpec(
                 EventType.LAND_PLAYED,
-                condition=lambda g, s, e: e.data.get("player") is s.controller,
+                condition=lambda _g, s, e: e.data.get("player") is s.controller,
             ),
             effect=Proliferate(),
             text="landfall: proliferate",
@@ -1862,7 +2015,8 @@ def _evolution_sage(ch, ref):
     )
 
 
-def _heroic_reinforcements(ch, ref):
+def _heroic_reinforcements(ch: Characteristics, _ref: CardRef) -> None:
+    """Heroic Reinforcements: two hasty Soldiers."""
     ch.abilities.append(
         SpellAbility(
             effect=CreateTokens(
@@ -1875,10 +2029,12 @@ def _heroic_reinforcements(ch, ref):
     NOTES[ch.name] = "+1/+1 until end of turn pump omitted"
 
 
-def _swan_song(ch, ref):
-    def effect(game, ctx):
+def _swan_song(ch: Characteristics, _ref: CardRef) -> None:
+    """Swan Song: counter; its controller gets a Bird."""
+
+    def effect(game: Game, ctx: Ctx) -> None:
         t = ctx.target()
-        if t is not None:
+        if t is not None and not isinstance(t, GameObject | Player):
             game.counter_spell(t)
             if t.controller is not ctx.controller:
                 game.create_tokens(
@@ -1896,10 +2052,12 @@ def _swan_song(ch, ref):
     )
 
 
-def _arcane_denial(ch, ref):
-    def effect(game, ctx):
+def _arcane_denial(ch: Characteristics, _ref: CardRef) -> None:
+    """Arcane Denial: counter; they draw 2, you draw 1."""
+
+    def effect(game: Game, ctx: Ctx) -> None:
         t = ctx.target()
-        if t is not None:
+        if t is not None and not isinstance(t, GameObject | Player):
             other = t.controller
             game.counter_spell(t)
             game.draw(other, 2)
@@ -1914,7 +2072,8 @@ def _arcane_denial(ch, ref):
     )
 
 
-def _wayfarers_bauble(ch, ref):
+def _wayfarers_bauble(ch: Characteristics, _ref: CardRef) -> None:
+    """Wayfarer's Bauble: sac to fetch a basic tapped."""
     ch.abilities.append(
         ActivatedAbility(
             mana_cost="{2}",
@@ -1926,7 +2085,8 @@ def _wayfarers_bauble(ch, ref):
     )
 
 
-def _myriad_landscape(ch, ref):
+def _myriad_landscape(ch: Characteristics, _ref: CardRef) -> None:
+    """Myriad Landscape: sac to fetch two basics tapped."""
     ch.abilities.append(
         ActivatedAbility(
             mana_cost="{2}",
@@ -1939,8 +2099,10 @@ def _myriad_landscape(ch, ref):
     NOTES[ch.name] = "'share a land type' restriction omitted"
 
 
-def _persist_sorcery(ch, ref):
-    def effect(game, ctx):
+def _persist_sorcery(ch: Characteristics, _ref: CardRef) -> None:
+    """Persist (the sorcery): return your best dead creature."""
+
+    def effect(game: Game, ctx: Ctx) -> None:
         me = ctx.controller
         best, bv = None, 0
         for card in me.graveyard:
@@ -1962,16 +2124,18 @@ def _persist_sorcery(ch, ref):
     NOTES[ch.name] = "returns your best creature; legendary clause omitted"
 
 
-def _aberrant_return(ch, ref):
+def _aberrant_return(ch: Characteristics, ref: CardRef) -> None:
+    """Aberrant Return: as Persist."""
     _persist_sorcery(ch, ref)
 
 
-def _grave_venerations(ch, ref):
+def _grave_venerations(ch: Characteristics, ref: CardRef) -> None:
+    """Grave Venerations: approximated as graveyard recursion."""
     _persist_sorcery(ch, ref)
     NOTES[ch.name] = "approximated as graveyard recursion"
 
 
-OVERRIDES = {
+OVERRIDES: dict[str, OverrideFn] = {
     "Auntie Ool, Cursewretch": _auntie_ool,
     "Blowfly Infestation": _blowfly,
     "Necroskitter": _necroskitter,
@@ -2057,7 +2221,8 @@ OVERRIDES = {
 }
 
 
-def apply_override(ch, ref) -> bool:
+def apply_override(ch: Characteristics, ref: CardRef) -> bool:
+    """Apply the hand-written implementation for *ref*, if one exists."""
     fn = OVERRIDES.get(ref.name)
     if fn is None and " // " in ref.name:
         fn = OVERRIDES.get(ref.name.split(" // ")[0])
@@ -2068,7 +2233,9 @@ def apply_override(ch, ref) -> bool:
     if (
         "Land" in ch.types
         and ref.behavior.get("land_colors")
-        and not any(getattr(a, "is_mana_ability", False) for a in ch.abilities)
+        and not any(
+            isinstance(a, ActivatedAbility) and a.is_mana_ability for a in ch.abilities
+        )
     ):
         colors = set(ref.behavior["land_colors"])
         any_c = colors >= set("WUBRG")

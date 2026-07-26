@@ -25,9 +25,16 @@ from __future__ import annotations
 
 import itertools
 from dataclasses import dataclass
+from typing import TYPE_CHECKING
 
-from .cr import rule
-from .objects import Characteristics, next_timestamp
+from mtgrules.abilities import StaticAbility
+from mtgrules.cr import rule
+from mtgrules.objects import Characteristics, next_timestamp
+
+if TYPE_CHECKING:
+    from mtgrules.game import Game
+    from mtgrules.objects import GameObject
+    from mtgrules.protocols import CharMutator, CharPredicate
 
 _eff_ids = itertools.count(1)
 
@@ -49,13 +56,15 @@ LAYER_ORDER = [
 @rule("611.1", "613.1")
 @dataclass
 class ContinuousEffect:
+    """One continuous effect: a layer slot, a predicate, and a mutator."""
+
     layer: int
-    sublayer: str = ""
-    source: object = None
     #: applies_to(game, obj, chars) -> bool
-    applies_to: object = None
+    applies_to: CharPredicate
     #: apply(game, obj, chars) mutates the working Characteristics
-    apply: object = None
+    apply: CharMutator
+    sublayer: str = ""
+    source: GameObject | None = None
     #: None = while the source's static ability is active (rule 611.3);
     #: "end_of_turn" = until cleanup (rules 611.2a-b, 514.2)
     duration: str | None = "static"
@@ -63,7 +72,8 @@ class ContinuousEffect:
     timestamp: int = 0
     id: int = 0
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
+        """Assign the effect id and its rule 613.7 timestamp."""
         self.id = next(_eff_ids)
         if not self.timestamp:
             # rule 613.7b: an effect from a static ability shares its
@@ -76,16 +86,20 @@ class ContinuousEffect:
 
 
 class LayerSystem:
-    def __init__(self, game):
+    """Per-game evaluator of continuous effects (rule 613)."""
+
+    def __init__(self, game: Game) -> None:
+        """Bind the game; caches are invalidated via the game tick."""
         self.game = game
         self.floating: list[ContinuousEffect] = []
         self._cache: dict[int, Characteristics] = {}
         self._tick = -1
         #: stable ContinuousEffect instances per (source id, ability id)
-        self._static_cache: dict = {}
+        self._static_cache: dict[tuple[int, int], list[ContinuousEffect]] = {}
 
     # -- public API ------------------------------------------------------
-    def characteristics(self, obj) -> Characteristics:
+    def characteristics(self, obj: GameObject) -> Characteristics:
+        """Return the object's current characteristics (rule 613.1)."""
         if obj.zone != "battlefield":
             # objects elsewhere have their base characteristics
             # (copy effects on the stack are out of scope for the pool)
@@ -95,30 +109,34 @@ class LayerSystem:
             self._tick = self.game.tick
         return self._cache.get(obj.id, obj.base)
 
-    def add_floating(self, effect: ContinuousEffect):
+    def add_floating(self, effect: ContinuousEffect) -> None:
+        """Register a floating (non-static) continuous effect."""
         self.floating.append(effect)
         self.game.bump()
 
     @rule("514.2")
-    def end_of_turn_cleanup(self):
+    def end_of_turn_cleanup(self) -> None:
         """'Until end of turn' effects end during cleanup (rule 514.2)."""
         self.floating = [e for e in self.floating if e.duration != "end_of_turn"]
         self.game.bump()
 
     # -- collection ------------------------------------------------------
     @rule("611.3", "604.2")
-    def _collect_static(self, use_chars: dict | None):
+    def _collect_static(
+        self,
+        use_chars: dict[int, Characteristics] | None,
+    ) -> list[ContinuousEffect]:
         """Continuous effects from static abilities of permanents.
 
         *use_chars* selects which ability set to read: None -> base
         abilities; otherwise the partially-computed characteristics (used
         for the post-layer-6 re-collection pass, rule 613.6).
         """
-        out = []
+        out: list[ContinuousEffect] = []
         for obj in self.game.battlefield_objects():
             abilities = use_chars[obj.id].abilities if use_chars else obj.base.abilities
             for ab in abilities:
-                if getattr(ab, "kind", "") == "static" and ab.continuous:
+                if isinstance(ab, StaticAbility) and ab.continuous:
                     key = (obj.id, id(ab))
                     if key not in self._static_cache:
                         self._static_cache[key] = ab.continuous(self.game, obj)
@@ -127,7 +145,8 @@ class LayerSystem:
 
     # -- computation -----------------------------------------------------
     @rule("613.1", "613.5")
-    def _recompute(self):
+    def _recompute(self) -> None:
+        """Recompute all battlefield characteristics in layer order."""
         game = self.game
         objs = list(game.battlefield_objects())
         chars = {o.id: o.base.copy() for o in objs}
@@ -139,9 +158,9 @@ class LayerSystem:
                 # rule 613.6: abilities added in layer 6 generate effects
                 # in later layers; re-collect statics from computed chars
                 seen = {e.id for e in effects}
-                for e in self._collect_static(chars):
-                    if e.id not in seen:
-                        effects.append(e)
+                effects.extend(
+                    e for e in self._collect_static(chars) if e.id not in seen
+                )
             group = [
                 e for e in effects if e.layer == layer and (e.sublayer or "") == sub
             ]
@@ -152,9 +171,16 @@ class LayerSystem:
         self._cache = chars
 
     @rule("613.7", "613.8")
-    def _apply_group(self, group, objs, chars):
-        """Apply one layer's effects: timestamp order with dependency
-        handling (rules 613.7-613.8).
+    def _apply_group(
+        self,
+        group: list[ContinuousEffect],
+        objs: list[GameObject],
+        chars: dict[int, Characteristics],
+    ) -> None:
+        """Apply one layer's effects (rules 613.7-613.8).
+
+        Timestamp order, with dependency handling: a dependent effect
+        waits for the effect it depends on.
         """
         remaining = sorted(group, key=lambda e: (e.timestamp, e.id))
         while remaining:
@@ -176,11 +202,17 @@ class LayerSystem:
                     pick.apply(self.game, o, chars[o.id])
 
     @rule("613.8a")
-    def _depends(self, a, b, objs, chars) -> bool:
+    def _depends(
+        self,
+        a: ContinuousEffect,
+        b: ContinuousEffect,
+        objs: list[GameObject],
+        chars: dict[int, Characteristics],
+    ) -> bool:
         """Return whether applying *b* first changes what *a* does."""
         game = self.game
 
-        def snapshot():
+        def snapshot() -> dict[int, Characteristics]:
             return {o.id: chars[o.id].copy() for o in objs}
 
         base = snapshot()
@@ -205,7 +237,8 @@ class LayerSystem:
         return False
 
     @staticmethod
-    def _delta(before: Characteristics, after: Characteristics) -> tuple:
+    def _delta(before: Characteristics, after: Characteristics) -> tuple[object, ...]:
+        """Fingerprint what one application changed, comparably."""
         return (
             after.name != before.name and after.name,
             tuple(sorted(after.colors - before.colors)),
@@ -220,9 +253,14 @@ class LayerSystem:
         )
 
     @rule("613.4", "122.1a")
-    def _apply_pt_counters(self, objs, chars):
-        """+1/+1 and -1/-1 counters apply in layer 7c (rule 613.4c order
-        does not matter: all are additive).
+    def _apply_pt_counters(
+        self,
+        objs: list[GameObject],
+        chars: dict[int, Characteristics],
+    ) -> None:
+        """Apply +1/+1 and -1/-1 counters in layer 7c.
+
+        Rule 613.4c order does not matter: all are additive.
         """
         for o in objs:
             ch = chars[o.id]

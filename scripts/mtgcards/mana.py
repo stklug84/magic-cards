@@ -10,23 +10,31 @@ from __future__ import annotations
 
 import re
 from dataclasses import dataclass, field
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from collections.abc import Iterable
 
 COLORS = "WUBRG"
 
 
 @dataclass
 class Cost:
+    """A parsed mana cost: generic part, colored pips, hybrid pips, X."""
+
     generic: int = 0
-    pips: dict = field(default_factory=dict)  # color -> count
-    hybrid: list = field(default_factory=list)  # list of frozenset(colors)
+    pips: dict[str, int] = field(default_factory=dict)  # color -> count
+    hybrid: list[frozenset[str]] = field(default_factory=list)
     has_x: bool = False
 
     @property
-    def mv(self):
+    def mv(self) -> int:
+        """Mana value of the cost (X counts as zero)."""
         return self.generic + sum(self.pips.values()) + len(self.hybrid)
 
 
 def parse_cost(cost_str: str) -> Cost:
+    """Parse a mana cost string like ``{2}{G}{G}`` into a Cost."""
     c = Cost()
     for sym in re.findall(r"\{([^}]+)\}", cost_str or ""):
         if sym.isdigit():
@@ -51,26 +59,32 @@ class Source:
 
     __slots__ = ("colors", "name", "tapped")
 
-    def __init__(self, colors, name=""):
+    def __init__(self, colors: Iterable[str] | None, name: str = "") -> None:
+        """Create a source producing *colors* (colorless when empty)."""
         self.colors = frozenset(colors) if colors else frozenset({"C"})
         self.tapped = False
         self.name = name
 
-    def can(self, color):
+    def can(self, color: str) -> bool:
+        """Whether this source can produce *color*."""
         return color in self.colors or "ANY" in self.colors
 
 
-def pay(cost: Cost, sources, treasures: int, x_value: int = 0):
+def pay(
+    cost: Cost,
+    sources: Iterable[Source],
+    treasures: int,
+    x_value: int = 0,
+) -> tuple[list[Source], int] | None:
     """Try to pay `cost` (+x generic) from untapped sources and treasures.
 
-    Returns list of sources tapped (treasure count consumed encoded as
-    ('treasures', n)) or None if unpayable. Greedy: colored pips are paid
-    from the most restricted matching source first; treasures are wildcards
-    spent last.
+    Returns (sources tapped, treasure count consumed) or None if
+    unpayable. Greedy: colored pips are paid from the most restricted
+    matching source first; treasures are wildcards spent last.
     """
     avail = [s for s in sources if not s.tapped]
-    used = []
-    need = []
+    used: list[Source] = []
+    need: list[frozenset[str]] = []
     for color, k in cost.pips.items():
         need.extend([frozenset({color})] * k)
     need.extend(cost.hybrid)
@@ -102,10 +116,15 @@ def pay(cost: Cost, sources, treasures: int, x_value: int = 0):
     return used, treasure_spent
 
 
-def can_pay(cost: Cost, sources, treasures: int, x_value: int = 0) -> bool:
+def can_pay(
+    cost: Cost,
+    sources: Iterable[Source],
+    treasures: int,
+    x_value: int = 0,
+) -> bool:
     """Non-destructive payment check."""
     avail = [s for s in sources if not s.tapped]
-    need = []
+    need: list[frozenset[str]] = []
     for color, k in cost.pips.items():
         need.extend([frozenset({color})] * k)
     need.extend(cost.hybrid)
@@ -124,5 +143,6 @@ def can_pay(cost: Cost, sources, treasures: int, x_value: int = 0) -> bool:
     return len(pool) + treasure_budget >= cost.generic + x_value
 
 
-def potential(sources, treasures):
+def potential(sources: Iterable[Source], treasures: int) -> int:
+    """Upper bound on payable mana: untapped sources plus treasures."""
     return sum(1 for s in sources if not s.tapped) + treasures

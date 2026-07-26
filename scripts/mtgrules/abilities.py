@@ -10,11 +10,24 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import TYPE_CHECKING
 
-from .cr import rule
-from .manasys import parse_cost
+from mtgrules.cr import rule
+from mtgrules.manasys import parse_cost
+from mtgrules.objects import GameObject, Player
+from mtgrules.stack import StackItem
 
 if TYPE_CHECKING:
     from collections.abc import Callable
+
+    from mtgrules.effects import Ctx, Effect
+    from mtgrules.events import Event
+    from mtgrules.game import Game
+    from mtgrules.protocols import (
+        ContinuousFactory,
+        InterveningIf,
+        ReplacementFactory,
+        TriggerCondition,
+    )
+    from mtgrules.stack import Target
 
 # ---------------------------------------------------------------- targets
 
@@ -33,18 +46,24 @@ class TargetSpec:
     other: bool = False  # "another target ..."
 
     @rule("115.4")
-    def legal(self, game, ctx, target) -> bool:
+    def legal(self, game: Game, ctx: Ctx, target: Target) -> bool:
         """Return whether *target* is a legal target right now (rule 115.4)."""
-        from .objects import GameObject, Player
-
         if self.what in ("player", "opponent"):
             if not isinstance(target, Player) or target.lost:
                 return False
             return not (self.what == "opponent" and target is ctx.controller)
         if self.what == "spell":
-            return target in game.stack and target.is_spell
+            return (
+                isinstance(target, StackItem)
+                and target in game.stack
+                and target.is_spell
+            )
         if not isinstance(target, GameObject):
             return False
+        return self._legal_object(game, ctx, target)
+
+    def _legal_object(self, game: Game, ctx: Ctx, target: GameObject) -> bool:
+        """Rule 115.4 legality of a battlefield-object target."""
         if target.zone != "battlefield":
             return False
         if self.other and target is ctx.source:
@@ -57,7 +76,7 @@ class TargetSpec:
             return False
         if self.controller == "you" and target.controller is not ctx.controller:
             return False
-        need = {
+        need: Callable[[], object] = {
             "creature": lambda: "Creature" in ch.types,
             "permanent": lambda: True,
             "nonland": lambda: "Land" not in ch.types,
@@ -81,11 +100,12 @@ class TriggerSpec:
 
     event: str  # EventType value
     #: predicate(game, source_obj, event) -> bool; None = self only default
-    condition: Callable[..., object] | None = None
+    condition: TriggerCondition | None = None
     #: "you" | "any" - whose step for BEGIN_STEP triggers
     step: str = ""  # upkeep|end|combat_begin|...
 
-    def matches(self, game, source, event) -> bool:
+    def matches(self, game: Game, source: GameObject, event: Event) -> bool:
+        """Whether *event* makes an ability with this spec trigger."""
         if event.type != self.event:
             return False
         if self.condition is not None:
@@ -97,12 +117,14 @@ class TriggerSpec:
 @rule("113.3c", "603.1")
 @dataclass
 class TriggeredAbility:
+    """[Trigger condition], [effect] (rule 603.1)."""
+
     trigger: TriggerSpec
-    effect: object  # effects.Effect
-    targets: list = field(default_factory=list)
+    effect: Effect
+    targets: list[TargetSpec] = field(default_factory=list)
     #: rule 603.4 intervening "if" clause: pred(game, source) checked both
     #: at trigger time and on resolution
-    intervening_if: Callable[..., object] | None = None
+    intervening_if: InterveningIf | None = None
     text: str = ""
     optional: bool = False  # "you may ..."
     once_each_turn: bool = False  # "Do this only once each turn."
@@ -120,19 +142,22 @@ class ActivatedAbility:
     sac_cost: str = ""  # "a creature", "another artifact", ~
     life_cost: int = 0
     loyalty_cost: int | None = None  # rule 606; planeswalkers
-    effect: object = None
-    targets: list = field(default_factory=list)
+    effect: Effect | None = None
+    targets: list[TargetSpec] = field(default_factory=list)
     is_mana_ability: bool = False  # rule 605.1a
     sorcery_only: bool = False  # "Activate only as a sorcery" 602.5d
     once_per_turn: bool = False
     #: rule 702.29a cycling-style: activated from the hand; the card itself
     #: is discarded as part of the cost
     from_hand: bool = False
+    #: activated while the card is in the graveyard (Reassembling Skeleton)
+    from_graveyard: bool = False
     text: str = ""
 
     kind = "activated"
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
+        """Parse the printed mana cost once (rule 202.1)."""
         self.cost = parse_cost(self.mana_cost)
 
 
@@ -141,8 +166,8 @@ class ActivatedAbility:
 class SpellAbility:
     """The instructions of an instant/sorcery spell (rule 113.3a)."""
 
-    effect: object
-    targets: list = field(default_factory=list)
+    effect: Effect
+    targets: list[TargetSpec] = field(default_factory=list)
     text: str = ""
 
     kind = "spell"
@@ -151,19 +176,27 @@ class SpellAbility:
 @rule("113.3d", "604.1")
 @dataclass
 class StaticAbility:
-    """A static ability: generates continuous and/or replacement effects
-    while its source is on the battlefield (rules 604.1-604.2).
+    """A static ability (rules 604.1-604.2).
+
+    Generates continuous and/or replacement effects while its source is
+    on the battlefield.
     """
 
     #: factory(game, source) -> list of layers.ContinuousEffect
-    continuous: object = None
+    continuous: ContinuousFactory | None = None
     #: factory(game, source) -> list of replacements.Replacement
-    replacement: object = None
+    replacement: ReplacementFactory | None = None
     text: str = ""
-    #: "spells you control can't be countered" (read via getattr default False)
+    #: "spells you control can't be countered" (Chimil style)
     uncounterable_spells: bool = False
+    #: marker consumed by Game.play_land: the land enters tapped
+    enters_tapped: bool = False
 
     kind = "static"
+
+
+#: any of the four ability kinds carried by Characteristics.abilities
+type Ability = ActivatedAbility | SpellAbility | StaticAbility | TriggeredAbility
 
 
 # ---------------------------------------------------------------- tokens
@@ -172,18 +205,20 @@ class StaticAbility:
 @rule("111.1", "111.4")
 @dataclass
 class TokenSpec:
+    """The characteristics a token is created with (rule 111.4)."""
+
     name: str = ""
     power: int | None = None
     toughness: int | None = None
-    colors: frozenset = frozenset()
-    types: frozenset = frozenset({"Creature"})
-    subtypes: frozenset = frozenset()
-    keywords: frozenset = frozenset()
+    colors: frozenset[str] = frozenset()
+    types: frozenset[str] = frozenset({"Creature"})
+    subtypes: frozenset[str] = frozenset()
+    keywords: frozenset[str] = frozenset()
     tapped: bool = False
     #: predefined token abilities, e.g. Treasure's sacrifice mana ability
     predefined: str = ""  # treasure|clue|food|blood|map
     #: extra ability factories () -> Ability attached to created tokens
-    abilities: tuple = ()
+    abilities: tuple[Callable[[], Ability], ...] = ()
 
 
 TREASURE = TokenSpec(

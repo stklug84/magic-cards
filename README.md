@@ -188,7 +188,6 @@ python3 scripts/check_consistency.py
 
 Linting, testing, CI structure, and the contribution workflow are
 documented in [`CONTRIBUTING.md`](./CONTRIBUTING.md). The Python tooling
-under [`scripts/`](./scripts/) is linted with ruff/mypy/bandit
-(configuration in [`pyproject.toml`](./pyproject.toml)); the remaining
-strictness work is tracked in
-[`docs/python-strictness-roadmap.md`](./docs/python-strictness-roadmap.md).
+under [`scripts/`](./scripts/) is linted with ruff (`select = ALL`),
+`mypy --strict`, and bandit (configuration in
+[`pyproject.toml`](./pyproject.toml)).

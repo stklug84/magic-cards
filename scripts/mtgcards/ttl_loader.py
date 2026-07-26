@@ -1,18 +1,22 @@
-"""Load card characteristics from the TTL knowledge graph (sets/*.ttl and
-MagicExternalCards.ttl).
+"""Card characteristics from the TTL knowledge graph.
 
-Regex-based extraction (no rdflib dependency) of the fields the simulator
-needs: name, mana cost, mana value, types, subtypes, color identity,
-power/toughness and oracle text. Results are indexed by full card name and,
-for double-faced cards, by the front-face name as well.
+Reads sets/*.ttl and MagicExternalCards.ttl with regex-based extraction
+(no rdflib dependency) of the fields the simulator needs: name, mana cost,
+mana value, types, subtypes, color identity, power/toughness and oracle
+text. Results are indexed by full card name and, for double-faced cards,
+by the front-face name as well.
 """
 
 from __future__ import annotations
 
 import re
 from pathlib import Path
+from typing import TYPE_CHECKING
 
-from .cards import CardData
+from mtgcards.cards import CardData
+
+if TYPE_CHECKING:
+    from collections.abc import Iterable, Iterator
 
 _FIELD_RE = {
     "name": re.compile(r':cardName "([^"]+)"'),
@@ -51,18 +55,67 @@ _SUBTYPE_WORDS = {
 }
 
 
-def _blocks(text):
+def _blocks(text: str) -> Iterator[str]:
     """Yield per-individual blocks (terminated by ' .')."""
     for block in re.split(r"\n\s*\n", text):
         if ":cardName" in block:
             yield block
 
 
+def _parse_card(name: str, block: str) -> CardData:
+    """Extract one card's printed characteristics from its TTL block."""
+    card = CardData(name=name, source="graph")
+    mc = _FIELD_RE["cost"].search(block)
+    card.mana_cost = mc.group(1) if mc else ""
+    mv = _FIELD_RE["mv"].search(block)
+    card.mv = int(mv.group(1)) if mv else 0
+    p = _FIELD_RE["power"].search(block)
+    t = _FIELD_RE["tough"].search(block)
+    card.power = int(p.group(1)) if p else None
+    card.toughness = int(t.group(1)) if t else None
+    card.types = set(_TYPE_RE.findall(block))
+    card.supertypes = set(_SUPER_RE.findall(block))
+    lm = _LOYALTY_RE.search(block)
+    card.loyalty = int(lm.group(1)) if lm else None
+    card.subtypes = set(_SUB_RE.findall(block))
+    # normalize concatenated subtype individuals (:SpacecraftPlanar)
+    for s in list(card.subtypes):
+        for word in _SUBTYPE_WORDS:
+            if s != word and s.startswith(word):
+                card.subtypes.add(word)
+    card.color_identity = {
+        COLOR_NAME[c] for c in _CI_RE.findall(block) if c in COLOR_NAME
+    }
+    om = _ORACLE_RE.search(block)
+    if om:
+        card.oracle = om.group(1) or om.group(2) or ""
+    _apply_land_facts(card, block)
+    return card
+
+
+def _apply_land_facts(card: CardData, block: str) -> None:
+    """Apply graph-authored land facts to *card*.
+
+    The mana facts (:producesMana / :entersTapped / :isFetchLand) are
+    authoritative for lands; the oracle-text regexes in
+    cards.derive_from_oracle remain as fallback only.
+    """
+    if "Land" not in card.types:
+        return
+    produced = _PRODUCES_RE.findall(block)
+    if produced:
+        card.behavior["land_colors"] = {COLOR_NAME.get(c, "C") for c in produced}
+    if _TAPPED_RE.search(block):
+        card.behavior["enters_tapped"] = True
+    if _FETCHLAND_RE.search(block):
+        card.behavior["fetch_land"] = True
+
+
 def load_graph_cards(
-    sets_dir: Path,
-    extra_files: tuple = (),
-    ind2name: dict | None = None,
-) -> dict:
+    sets_dir: str | Path,
+    extra_files: Iterable[str | Path] = (),
+    ind2name: dict[str, str] | None = None,
+) -> dict[str, CardData]:
     """Return {card name: CardData} for every card in the graph.
 
     Reads every TTL file in *sets_dir* plus any *extra_files* (e.g. the
@@ -71,7 +124,7 @@ def load_graph_cards(
     *ind2name* is given, it is filled with {individual local name: card
     name} for every card individual encountered (all printings).
     """
-    index = {}
+    index: dict[str, CardData] = {}
     files = sorted(Path(sets_dir).glob("*.ttl"))
     files += [Path(f) for f in extra_files if Path(f).exists()]
     for f in files:
@@ -87,47 +140,9 @@ def load_graph_cards(
                     ind2name[im.group(1)] = name
             if name in index:
                 continue
-            card = CardData(name=name, source="graph")
-            mc = _FIELD_RE["cost"].search(block)
-            card.mana_cost = mc.group(1) if mc else ""
-            mv = _FIELD_RE["mv"].search(block)
-            card.mv = int(mv.group(1)) if mv else 0
-            p = _FIELD_RE["power"].search(block)
-            t = _FIELD_RE["tough"].search(block)
-            card.power = int(p.group(1)) if p else None
-            card.toughness = int(t.group(1)) if t else None
-            card.types = set(_TYPE_RE.findall(block))
-            card.supertypes = set(_SUPER_RE.findall(block))
-            lm = _LOYALTY_RE.search(block)
-            card.loyalty = int(lm.group(1)) if lm else None
-            card.subtypes = set(_SUB_RE.findall(block))
-            # normalize concatenated subtype individuals (:SpacecraftPlanar)
-            for s in list(card.subtypes):
-                for word in _SUBTYPE_WORDS:
-                    if s != word and s.startswith(word):
-                        card.subtypes.add(word)
-            card.color_identity = {
-                COLOR_NAME[c] for c in _CI_RE.findall(block) if c in COLOR_NAME
-            }
-            om = _ORACLE_RE.search(block)
-            if om:
-                card.oracle = om.group(1) or om.group(2) or ""
-            # mana facts (:producesMana / :entersTapped / :isFetchLand)
-            # are authoritative for lands; the oracle-text regexes in
-            # cards.derive_from_oracle remain as fallback only
-            if "Land" in card.types:
-                produced = _PRODUCES_RE.findall(block)
-                if produced:
-                    card.behavior["land_colors"] = {
-                        COLOR_NAME.get(c, "C") for c in produced
-                    }
-                if _TAPPED_RE.search(block):
-                    card.behavior["enters_tapped"] = True
-                if _FETCHLAND_RE.search(block):
-                    card.behavior["fetch_land"] = True
-            index[name] = card
+            index[name] = _parse_card(name, block)
             # front face of double-faced cards
             if " // " in name:
                 front = name.split(" // ")[0]
-                index.setdefault(front, card)
+                index.setdefault(front, index[name])
     return index

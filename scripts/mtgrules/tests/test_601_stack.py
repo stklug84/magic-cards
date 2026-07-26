@@ -1,19 +1,45 @@
 """Casting, the stack, priority, and resolution (CR 117, 405, 601-608)."""
 
-import unittest
+from __future__ import annotations
 
-from ..abilities import SpellAbility, TargetSpec
-from ..effects import CounterSpell, Destroy, DrawCards
-from ..objects import Zone
-from .helpers import card_in_hand, creature, give_mana, make_game, settle
+import unittest
+from typing import TYPE_CHECKING
+
+from mtgrules.abilities import (
+    SpellAbility,
+    TargetSpec,
+    TriggeredAbility,
+    TriggerSpec,
+)
+from mtgrules.effects import CounterSpell, Destroy, DrawCards, GainLife
+from mtgrules.events import Event, EventType
+from mtgrules.objects import Zone
+from mtgrules.tests.helpers import card_in_hand, creature, give_mana, make_game, settle
+
+if TYPE_CHECKING:
+    from collections.abc import Iterable
+
+    from mtgrules.effects import Ctx, Effect
+    from mtgrules.game import Game
+    from mtgrules.objects import GameObject, Player
 
 
 class TestStack(unittest.TestCase):
-    def setUp(self):
+    """Casting, countering, targeting, and trigger ordering."""
+
+    def setUp(self) -> None:
+        """Set up a fresh two-player game."""
         self.game = make_game()
         self.p0, self.p1 = self.game.players
 
-    def _sorcery(self, player, effect, targets=(), cost="{1}"):
+    def _sorcery(
+        self,
+        player: Player,
+        effect: Effect,
+        targets: Iterable[TargetSpec] = (),
+        cost: str = "{1}",
+    ) -> GameObject:
+        """Put a synthetic sorcery with the given effect in hand."""
         return card_in_hand(
             self.game,
             player,
@@ -22,7 +48,8 @@ class TestStack(unittest.TestCase):
             abilities=[SpellAbility(effect=effect, targets=list(targets))],
         )
 
-    def test_601_2_cast_and_resolve(self):
+    def test_601_2_cast_and_resolve(self) -> None:
+        """A cast spell resolves off the stack and hits the graveyard."""
         spell = self._sorcery(self.p0, DrawCards(2))
         self.p0.library = [
             card_in_hand(self.game, self.p0, name=f"c{i}") for i in range(3)
@@ -37,12 +64,14 @@ class TestStack(unittest.TestCase):
         self.assertEqual(len(self.p0.hand), 2)
         self.assertEqual(spell.zone, Zone.GRAVEYARD)  # rule 608.2m
 
-    def test_601_2h_cannot_cast_without_mana(self):
+    def test_601_2h_cannot_cast_without_mana(self) -> None:
+        """Casting fails (and the card stays) when mana can't be paid."""
         spell = self._sorcery(self.p0, DrawCards(1), cost="{4}")
         self.assertFalse(self.game.cast_spell(self.p0, spell))
         self.assertEqual(spell.zone, Zone.HAND)
 
-    def test_608_3_permanent_resolves_to_battlefield(self):
+    def test_608_3_permanent_resolves_to_battlefield(self) -> None:
+        """A permanent spell resolves onto the battlefield."""
         c = card_in_hand(
             self.game,
             self.p0,
@@ -57,7 +86,8 @@ class TestStack(unittest.TestCase):
         self.game.resolve_top()
         self.assertEqual(c.zone, Zone.BATTLEFIELD)
 
-    def test_701_5_counterspell(self):
+    def test_701_5_counterspell(self) -> None:
+        """A counterspell removes the spell before it resolves."""
         victim = self._sorcery(self.p0, DrawCards(1))
         give_mana(self.p0, C=1)
         self.game.cast_spell(self.p0, victim)
@@ -78,7 +108,8 @@ class TestStack(unittest.TestCase):
         self.assertEqual(victim.zone, Zone.GRAVEYARD)
         self.assertEqual(len(self.p0.hand), 0)  # never resolved
 
-    def test_608_2b_fizzle_on_illegal_target(self):
+    def test_608_2b_fizzle_on_illegal_target(self) -> None:
+        """A spell whose only target left fizzles to the graveyard."""
         bear = creature(self.game, self.p1, name="Bear")
         spell = self._sorcery(self.p0, Destroy(), targets=[TargetSpec(what="creature")])
         give_mana(self.p0, C=1)
@@ -88,7 +119,8 @@ class TestStack(unittest.TestCase):
         self.game.resolve_top()
         self.assertEqual(spell.zone, Zone.GRAVEYARD)
 
-    def test_115_4_cannot_target_hexproof(self):
+    def test_115_4_cannot_target_hexproof(self) -> None:
+        """Hexproof blanks opposing targeting (rule 702.11)."""
         creature(self.game, self.p1, name="Sneaky", keywords={"hexproof"})
         spell = self._sorcery(self.p0, Destroy(), targets=[TargetSpec(what="creature")])
         give_mana(self.p0, C=1)
@@ -96,28 +128,32 @@ class TestStack(unittest.TestCase):
         # a legal target (rule 601.2c)
         self.assertFalse(self.game.cast_spell(self.p0, spell))
 
-    def test_115_4_own_hexproof_targetable(self):
+    def test_115_4_own_hexproof_targetable(self) -> None:
+        """A player may target their own hexproof creature."""
         creature(self.game, self.p0, name="Mine", keywords={"hexproof"})
         spell = self._sorcery(self.p0, Destroy(), targets=[TargetSpec(what="creature")])
         give_mana(self.p0, C=1)
         self.assertTrue(self.game.cast_spell(self.p0, spell))
 
-    def test_603_3b_apnap_trigger_order(self):
-        """Both players' triggers: active player's go on the stack first,
-        so the nonactive player's resolve first (LIFO).
-        """
-        from ..abilities import TriggeredAbility, TriggerSpec
-        from ..effects import GainLife
-        from ..events import Event, EventType
+    def test_603_3b_apnap_trigger_order(self) -> None:
+        """APNAP: active player's triggers go on the stack first.
 
-        order = []
+        Both players' triggers: the active player's go on the stack
+        first, so the nonactive player's resolve first (LIFO).
+        """
+        order: list[str] = []
 
         class Probe(GainLife):
-            def __init__(self, tag):
+            """A life-gain effect that records its resolution order."""
+
+            def __init__(self, tag: str) -> None:
+                """Tag the probe."""
                 super().__init__(amount=0)
                 self.tag = tag
 
-            def resolve(self, game, ctx):
+            def resolve(self, game: Game, ctx: Ctx) -> None:
+                """Record the tag instead of gaining life."""
+                del game, ctx
                 order.append(self.tag)
 
         for player, tag in ((self.p0, "active"), (self.p1, "nonactive")):
@@ -126,18 +162,18 @@ class TestStack(unittest.TestCase):
                 TriggeredAbility(
                     trigger=TriggerSpec(
                         EventType.BEGIN_STEP,
-                        condition=lambda g, s, e: e.data.get("step") == "test",
+                        condition=lambda _g, _s, e: e.data.get("step") == "test",
                     ),
                     effect=Probe(tag),
                 ),
             )
         self.game.bump()
-        self.game._queue_triggers(Event(EventType.BEGIN_STEP, {"step": "test"}))
+        self.game.queue_triggers(Event(EventType.BEGIN_STEP, {"step": "test"}))
         settle(self.game)
         self.assertEqual(order, ["nonactive", "active"])
 
-    def test_903_8_commander_tax(self):
-
+    def test_903_8_commander_tax(self) -> None:
+        """Each prior commander cast taxes the next by {2} (rule 903.8)."""
         cmd = card_in_hand(
             self.game,
             self.p0,
@@ -159,7 +195,8 @@ class TestStack(unittest.TestCase):
         self.assertTrue(self.game.cast_spell(self.p0, cmd, from_command=True))
         self.assertEqual(self.p0.commander_casts, 2)
 
-    def test_903_9_commander_to_command_zone(self):
+    def test_903_9_commander_to_command_zone(self) -> None:
+        """A dying commander returns to the command zone (rule 903.9)."""
         cmd = creature(self.game, self.p0, name="General")
         cmd.commander = True
         self.p0.commander_obj = cmd

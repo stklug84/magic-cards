@@ -8,18 +8,55 @@ only do what the CR machinery permits (priority windows, timing, costs).
 from __future__ import annotations
 
 from dataclasses import dataclass
+from typing import TYPE_CHECKING
 
-from .abilities import ActivatedAbility, SpellAbility
-from .cr import rule
-from .effects import CounterSpell
-from .manasys import parse_cost
-from .objects import GameObject, Player, Zone
+from mtgrules.abilities import ActivatedAbility, SpellAbility
+from mtgrules.combat import can_block
+from mtgrules.cr import rule
+from mtgrules.effects import Blink, CounterSpell, Ctx, PutCounters
+from mtgrules.manasys import parse_cost
+from mtgrules.objects import GameObject, Player, Zone
+
+if TYPE_CHECKING:
+    import random
+
+    from mtgrules.abilities import TargetSpec
+    from mtgrules.events import Event
+    from mtgrules.game import (
+        Action,
+        ActivateAction,
+        CastAction,
+        Game,
+        LandAction,
+        ResolvableAbility,
+    )
+    from mtgrules.manasys import Cost
+    from mtgrules.replacements import Replacement
+    from mtgrules.stack import PendingTrigger, StackItem, Target
+
+#: X spells are held until X is at least this large
+_MIN_WORTHWHILE_X = 2
+#: land count where excess lands become cycling fodder
+_FLOODED_LANDS = 6
+#: land count where anything spare becomes cycling fodder
+_VERY_FLOODED_LANDS = 8
+#: hold reactive counterspell mana from this turn on
+_HOLD_REACTIVE_FROM_TURN = 4
+#: creatures at least this big attack regardless of blockers
+_BIG_ATTACKER_POWER = 5
+#: rule 702.111b menace: can't be blocked by exactly one creature
+_MENACE_MIN_BLOCKERS = 2
+#: scry: battlefield land counts steering land keeps/bottoms
+_SCRY_ENOUGH_LANDS = 6
+_SCRY_NEED_LANDS = 3
 
 
 @dataclass
 class PolicyProfile:
-    """Tunable decision knobs for DefaultPolicy (ported from the retired
-    heuristic engine's AIProfile). Presets: default, aggressive, control.
+    """Tunable decision knobs for DefaultPolicy.
+
+    Ported from the retired heuristic engine's AIProfile. Presets:
+    default, aggressive, control.
     """
 
     name: str = "default"
@@ -56,13 +93,14 @@ PROFILES = {
 
 
 def get_profile(name: str) -> PolicyProfile:
+    """Look up a preset profile; exit with a message when unknown."""
     if name not in PROFILES:
         msg = f"unknown AI profile {name!r}; choose from {sorted(PROFILES)}"
         raise SystemExit(msg)
     return PROFILES[name]
 
 
-def _threat(game, obj) -> float:
+def _threat(game: Game, obj: GameObject) -> float:
     """Threat assessment: graph :threatWeight hook + board impact."""
     ch = obj.chars(game)
     ref = obj.card_ref
@@ -72,13 +110,27 @@ def _threat(game, obj) -> float:
 
 
 class DefaultPolicy:
-    def __init__(self, rng, profile: PolicyProfile | None = None):
+    """The built-in decision policy over engine-legal actions."""
+
+    def __init__(
+        self,
+        rng: random.Random,
+        profile: PolicyProfile | None = None,
+    ) -> None:
+        """Bind the RNG and the (default) knob profile."""
         self.rng = rng
         self.profile = profile or PROFILES["default"]
 
     # ------------------------------------------------------- mulligans
     @rule("103.5")
-    def keep_hand(self, game, player, hand, mulls) -> bool:
+    def keep_hand(
+        self,
+        _game: Game,
+        _player: Player,
+        hand: list[GameObject],
+        mulls: int,
+    ) -> bool:
+        """Keep hands whose land count is inside the profile's window."""
         lands = sum(1 for c in hand if "Land" in c.base.types)
         if mulls >= self.profile.max_mulligans:
             return True
@@ -86,20 +138,29 @@ class DefaultPolicy:
             self.profile.mulligan_min_lands <= lands <= self.profile.mulligan_max_lands
         )
 
-    def bottom_cards(self, game, player, hand, n):
+    def bottom_cards(
+        self,
+        _game: Game,
+        _player: Player,
+        hand: list[GameObject],
+        n: int,
+    ) -> list[GameObject]:
         """London mulligan (rule 103.5c): put n cards on the bottom."""
         ranked = sorted(hand, key=self._keep_rank)
         return ranked[:n]
 
-    def _keep_rank(self, card):
+    def _keep_rank(self, card: GameObject) -> float:
+        """Keep priority of one card during mulligan bottoming."""
         mv = parse_cost(card.base.mana_cost).mv
         if "Land" in card.base.types:
             return 10
         return -abs(mv - 3)
 
     # ------------------------------------------------------- priority
-    def choose_action(self, game, player):
-        """Return ('cast', card, kwargs) | ('activate', obj, ab, kwargs) |
+    def choose_action(self, game: Game, player: Player) -> Action | None:
+        """Choose one legal action, or None to pass priority.
+
+        Returns ('cast', card, kwargs) | ('activate', obj, ab, kwargs) |
         ('land', card) | None (pass).
         """
         main = (
@@ -109,22 +170,15 @@ class DefaultPolicy:
         )
         # respond to opposing spells with counterspells
         if game.stack:
-            top = game.stack[-1]
-            if top.controller is not player and top.is_spell:
-                counter = self._find_counterspell(game, player)
-                if (
-                    counter is not None
-                    and _spell_value(top) >= self.profile.counter_value_threshold
-                ):
-                    return counter
-            return None
+            return self._respond_to_stack(game, player)
         if not main:
             return None
         # 1. land drop
         if player.lands_played < 1:
             lands = [c for c in player.hand if "Land" in c.base.types]
             if lands:
-                return ("land", self._best_land(game, player, lands))
+                land_act: LandAction = ("land", self.best_land(game, player, lands))
+                return land_act
         # 2. commander
         cmd = player.commander_obj
         if cmd is not None and cmd.zone == Zone.COMMAND:
@@ -132,10 +186,44 @@ class DefaultPolicy:
                 2 * player.commander_casts,
             )
             if game.can_pay_mana(player, cost):
-                return ("cast", cmd, {"from_command": True})
+                cmd_act: CastAction = ("cast", cmd, {"from_command": True})
+                return cmd_act
         # 3. best castable spell (sorcery speed)
+        castable = self._castable_spells(game, player)
+        if castable:
+            castable.sort(key=lambda t: -t[0])
+            value, card, x = castable[0]
+            if value > 0:
+                cast_act: CastAction = ("cast", card, {"x": x})
+                return cast_act
+        # 4. useful activated ability; else 5. cycle dead cards
+        # (rule 702.29): excess lands, or anything when flooded and out
+        # of plays
+        return self._find_activation(game, player) or self._find_cycling(
+            game,
+            player,
+        )
+
+    def _respond_to_stack(self, game: Game, player: Player) -> Action | None:
+        """Instant-speed response: counter a worthwhile opposing spell."""
+        top = game.stack[-1]
+        if top.controller is not player and top.is_spell:
+            counter = self._find_counterspell(game, player)
+            if (
+                counter is not None
+                and _spell_value(top) >= self.profile.counter_value_threshold
+            ):
+                return counter
+        return None
+
+    def _castable_spells(
+        self,
+        game: Game,
+        player: Player,
+    ) -> list[tuple[float, GameObject, int]]:
+        """All castable hand spells as (value, card, x) candidates."""
         reserve = self._reaction_reserve(game, player)
-        castable = []
+        castable: list[tuple[float, GameObject, int]] = []
         for card in player.hand:
             ch = card.base
             if "Land" in ch.types:
@@ -144,48 +232,39 @@ class DefaultPolicy:
             x = 0
             if cost.x_count:
                 x = self._max_x(game, player, cost)
-                if x < 2:
+                if x < _MIN_WORTHWHILE_X:
                     continue
-            if game.can_pay_mana(player, cost.with_x(x)):
-                sa = next(
-                    (a for a in ch.abilities if isinstance(a, SpellAbility)),
-                    None,
+            if not game.can_pay_mana(player, cost.with_x(x)):
+                continue
+            sa = next(
+                (a for a in ch.abilities if isinstance(a, SpellAbility)),
+                None,
+            )
+            if (
+                sa is not None
+                and sa.targets
+                and not any(
+                    game.legal_targets(s, _ctx(player, card)) for s in sa.targets
                 )
-                if (
-                    sa is not None
-                    and sa.targets
-                    and not any(
-                        game.legal_targets(s, _ctx(player, card)) for s in sa.targets
-                    )
-                ):
-                    continue
-                if self._is_counterspell(card):
-                    continue  # hold for responses
-                if reserve and not game.can_pay_mana(
-                    player,
-                    cost.with_x(x).with_extra_generic(reserve),
-                ):
-                    continue  # keep reaction mana up
-                castable.append((self._cast_value(game, player, card, x), card, x))
-        if castable:
-            castable.sort(key=lambda t: -t[0])
-            value, card, x = castable[0]
-            if value > 0:
-                return ("cast", card, {"x": x})
-        # 4. useful activated ability
-        act = self._find_activation(game, player)
-        if act is not None:
-            return act
-        # 5. cycle dead cards (rule 702.29): excess lands, or anything
-        # when flooded and out of plays
-        return self._find_cycling(game, player)
+            ):
+                continue
+            if self._is_counterspell(card):
+                continue  # hold for responses
+            if reserve and not game.can_pay_mana(
+                player,
+                cost.with_x(x).with_extra_generic(reserve),
+            ):
+                continue  # keep reaction mana up
+            castable.append((self._cast_value(game, player, card, x), card, x))
+        return castable
 
-    def _find_cycling(self, game, player):
+    def _find_cycling(self, game: Game, player: Player) -> Action | None:
+        """Cycle a dead card when flooded (rule 702.29)."""
         cyclers = [
             (c, a)
             for c in player.hand
             for a in c.base.abilities
-            if getattr(a, "from_hand", False)
+            if isinstance(a, ActivatedAbility) and a.from_hand
         ]
         if not cyclers:
             return None
@@ -194,18 +273,20 @@ class DefaultPolicy:
             if not game.can_pay_mana(player, ab.cost):
                 continue
             is_land = "Land" in card.base.types
-            if is_land and lands_bf >= 6 and player.lands_played >= 1:
-                return ("activate", card, ab, {})
-            if not is_land and lands_bf >= 8:
-                return ("activate", card, ab, {})
+            cycle_act: ActivateAction = ("activate", card, ab, {})
+            if is_land and lands_bf >= _FLOODED_LANDS and player.lands_played >= 1:
+                return cycle_act
+            if not is_land and lands_bf >= _VERY_FLOODED_LANDS:
+                return cycle_act
         return None
 
-    def _reaction_reserve(self, game, player) -> int:
-        """Mana value to keep available for a held counterspell
-        (profile.hold_reactive_mana; the heuristic engine reserved from
-        turn 4 onward).
+    def _reaction_reserve(self, game: Game, player: Player) -> int:
+        """Mana value to keep available for a held counterspell.
+
+        Controlled by profile.hold_reactive_mana; the heuristic engine
+        reserved from turn 4 onward.
         """
-        if not self.profile.hold_reactive_mana or game.turn < 4:
+        if not self.profile.hold_reactive_mana or game.turn < _HOLD_REACTIVE_FROM_TURN:
             return 0
         best = 0
         for card in player.hand:
@@ -216,7 +297,8 @@ class DefaultPolicy:
         return best
 
     @staticmethod
-    def _board_power(game, player) -> int:
+    def _board_power(game: Game, player: Player) -> int:
+        """Total creature power on the player's battlefield."""
         return sum(
             o.chars(game).power or 0
             for o in player.battlefield
@@ -224,9 +306,11 @@ class DefaultPolicy:
         )
 
     @staticmethod
-    def _board_threat(game, player) -> float:
-        """Wipe-relevant board value: creature power plus token count and
-        annotated key-permanent weights (politics beyond raw power).
+    def _board_threat(game: Game, player: Player) -> float:
+        """Wipe-relevant board value.
+
+        Creature power plus token count and annotated key-permanent
+        weights (politics beyond raw power).
         """
         power = tokens = keys = 0.0
         for o in player.battlefield:
@@ -241,9 +325,11 @@ class DefaultPolicy:
                 tokens += 1
         return power + tokens * 0.5 + keys * 1.5
 
-    def player_threat(self, game, opp) -> float:
-        """Archenemy assessment: board value, life lead, and how close
-        the player is to a commander-damage kill.
+    def player_threat(self, game: Game, opp: Player) -> float:
+        """Archenemy assessment of one opponent.
+
+        Board value, life lead, and how close the player is to a
+        commander-damage kill.
         """
         threat = self._board_threat(game, opp)
         threat += max(0, opp.life - 30) * 0.15
@@ -260,8 +346,10 @@ class DefaultPolicy:
             threat += best * 0.3  # 21-damage clock
         return threat
 
-    def _should_wipe(self, game, player) -> bool:
-        """Cast board wipes only when this far behind on board value
+    def _should_wipe(self, game: Game, player: Player) -> bool:
+        """Whether a board wipe is worth casting now.
+
+        Cast board wipes only when this far behind on board value
         (profile.wipe_board_deficit); token swarms and key permanents
         count, not just raw power.
         """
@@ -271,7 +359,8 @@ class DefaultPolicy:
         ) - self._board_threat(game, player)
         return deficit >= self.profile.wipe_board_deficit
 
-    def _find_counterspell(self, game, player):
+    def _find_counterspell(self, game: Game, player: Player) -> Action | None:
+        """Find a castable counterspell in hand, as a cast action."""
         for card in player.hand:
             ch = card.base
             if "Instant" not in ch.types:
@@ -280,11 +369,13 @@ class DefaultPolicy:
             if sa is None or not self._is_counterspell(card):
                 continue
             if game.can_pay_mana(player, parse_cost(ch.mana_cost)):
-                return ("cast", card, {})
+                counter_act: CastAction = ("cast", card, {})
+                return counter_act
         return None
 
     @staticmethod
-    def _is_counterspell(card):
+    def _is_counterspell(card: GameObject) -> bool:
+        """Whether the card's spell ability counters a spell."""
         sa = next((a for a in card.base.abilities if isinstance(a, SpellAbility)), None)
         if sa is None:
             return False
@@ -292,13 +383,21 @@ class DefaultPolicy:
         parts = getattr(eff, "parts", [eff])
         return any(isinstance(p, CounterSpell) for p in parts)
 
-    def _max_x(self, game, player, cost):
+    def _max_x(self, game: Game, player: Player, cost: Cost) -> int:
+        """Return the largest payable X (searched from 12 down)."""
         for x in range(12, 0, -1):
             if game.can_pay_mana(player, cost.with_x(x)):
                 return x
         return 0
 
-    def _cast_value(self, game, player, card, x=0):
+    def _cast_value(
+        self,
+        game: Game,
+        player: Player,
+        card: GameObject,
+        x: int = 0,
+    ) -> float:
+        """Heuristic value of casting *card* now; negative = hold it."""
         ch = card.base
         ref = card.card_ref
         mv = parse_cost(ch.mana_cost).mv + x
@@ -329,9 +428,16 @@ class DefaultPolicy:
             v += best * 0.4
         return v
 
-    def _best_land(self, game, player, lands):
+    def best_land(
+        self,
+        _game: Game,
+        _player: Player,
+        lands: list[GameObject],
+    ) -> GameObject:
+        """Pick the best land drop: untapped and color-rich first."""
+
         # prefer untapped lands producing colors we need
-        def score(card):
+        def score(card: GameObject) -> int:
             b = card.card_ref.behavior if card.card_ref else {}
             colors = b.get("land_colors") or set()
             tapped = bool(b.get("enters_tapped"))
@@ -339,7 +445,8 @@ class DefaultPolicy:
 
         return max(lands, key=score)
 
-    def _find_activation(self, game, player):
+    def _find_activation(self, game: Game, player: Player) -> Action | None:
+        """Find a useful non-mana activated ability to activate."""
         for obj in player.battlefield:
             ch = obj.chars(game)
             for ab in ch.abilities:
@@ -349,38 +456,68 @@ class DefaultPolicy:
                     or ab.effect is None
                 ):
                     continue
-                if ab.loyalty_cost is not None:
-                    if ("loyalty", obj.id) in game.activated_this_turn:
-                        continue
-                    if (
-                        ab.loyalty_cost < 0
-                        and obj.counters.get("loyalty", 0) <= -ab.loyalty_cost
-                    ):
-                        continue  # don't suicide walkers
-                    return ("activate", obj, ab, {})
-                if ab.once_per_turn and (obj.id, id(ab)) in game.activated_this_turn:
-                    continue
-                if ab.tap_cost and obj.tapped:
-                    continue
-                if ab.sac_cost:
-                    continue  # engine sacs need intent
-                if ab.cost.mv and not game.can_pay_mana(player, ab.cost):
-                    continue
-                if ab.cost.mv or ab.tap_cost:
-                    if ab.targets and not any(
-                        game.legal_targets(s, _ctx(player, obj)) for s in ab.targets
-                    ):
-                        continue
-                    if game.phase == "main2" or not ab.cost.mv:
-                        return ("activate", obj, ab, {})
+                action = self._activation_action(game, player, obj, ab)
+                if action is not None:
+                    return action
+        return None
+
+    @staticmethod
+    def _loyalty_activation(
+        game: Game,
+        obj: GameObject,
+        ab: ActivatedAbility,
+    ) -> Action | None:
+        """Whether a loyalty ability is worth activating now."""
+        if ("loyalty", obj.id) in game.activated_this_turn:
+            return None
+        if ab.loyalty_cost is not None and (
+            ab.loyalty_cost < 0 and obj.counters.get("loyalty", 0) <= -ab.loyalty_cost
+        ):
+            return None  # don't suicide walkers
+        loyalty_act: ActivateAction = ("activate", obj, ab, {})
+        return loyalty_act
+
+    def _activation_action(
+        self,
+        game: Game,
+        player: Player,
+        obj: GameObject,
+        ab: ActivatedAbility,
+    ) -> Action | None:
+        """Whether one ability is worth (and legal) activating now."""
+        if ab.loyalty_cost is not None:
+            return self._loyalty_activation(game, obj, ab)
+        if (
+            (ab.once_per_turn and (obj.id, id(ab)) in game.activated_this_turn)
+            or (ab.tap_cost and obj.tapped)
+            or bool(ab.sac_cost)  # engine sacs need intent
+            or (ab.cost.mv and not game.can_pay_mana(player, ab.cost))
+        ):
+            return None
+        if ab.cost.mv or ab.tap_cost:
+            if ab.targets and not any(
+                game.legal_targets(s, _ctx(player, obj)) for s in ab.targets
+            ):
+                return None
+            if game.phase == "main2" or not ab.cost.mv:
+                utility_act: ActivateAction = ("activate", obj, ab, {})
+                return utility_act
         return None
 
     # ------------------------------------------------------- choices
-    def choose_target(self, game, spec, legal, ctx, ability):
+    def choose_target(
+        self,
+        game: Game,
+        spec: TargetSpec,
+        legal: list[Target],
+        ctx: Ctx,
+        ability: ResolvableAbility,
+    ) -> Target | None:
+        """Pick one target: harm the enemy's best, help our own best."""
         me = ctx.controller
         harmful = spec.what != "player" and not _is_beneficial(ability)
         if spec.what in ("player", "opponent"):
-            opps = [p for p in legal if p is not me]
+            opps = [p for p in legal if isinstance(p, Player) and p is not me]
             return (
                 min(opps, key=lambda p: p.life)
                 if opps
@@ -394,26 +531,47 @@ class DefaultPolicy:
         own = [t for t in legal if isinstance(t, GameObject) and t.controller is me]
         if harmful:
             pool = enemy or ([] if spec.optional else legal)
-            return max(pool, key=lambda t: _threat(game, t)) if pool else None
+            return max(pool, key=lambda t: _obj_threat(game, t)) if pool else None
         pool = own or ([] if spec.optional else legal)
-        return max(pool, key=lambda t: _threat(game, t)) if pool else None
+        return max(pool, key=lambda t: _obj_threat(game, t)) if pool else None
 
-    def order_triggers(self, game, triggers):
+    def order_triggers(
+        self,
+        _game: Game,
+        triggers: list[PendingTrigger],
+    ) -> list[PendingTrigger]:
+        """Order the player's own simultaneous triggers (rule 603.3b)."""
         return triggers
 
-    def accept_optional(self, game, trigger):
+    def accept_optional(self, _game: Game, _trigger: PendingTrigger) -> bool:
+        """Whether to take a 'you may' trigger (always yes)."""
         return True
 
-    def choose_replacement(self, game, event, candidates):
+    def choose_replacement(
+        self,
+        _game: Game,
+        _event: Event,
+        candidates: list[Replacement],
+    ) -> Replacement:
+        """Order applicable replacement effects (rule 616.1)."""
         return candidates[0]
 
-    def choose_mana_color(self, game, ctx, allowed):
+    def choose_mana_color(self, _game: Game, _ctx: Ctx, allowed: str) -> str:
+        """Pick the color an any-color source produces."""
         return allowed[0] if allowed else "C"
 
-    def choose_discard(self, game, player):
+    def choose_discard(self, _game: Game, player: Player) -> GameObject:
+        """Pick the cleanup-step discard (highest mana value)."""
         return max(player.hand, key=lambda c: parse_cost(c.base.mana_cost).mv)
 
-    def choose_sacrifice(self, game, player, selector, exclude=None):
+    def choose_sacrifice(
+        self,
+        game: Game,
+        player: Player,
+        selector: str,
+        exclude: GameObject | None = None,
+    ) -> GameObject | None:
+        """Pick the cheapest permanent matching a sacrifice selector."""
         pool = []
         for o in player.battlefield:
             if o is exclude:
@@ -428,16 +586,29 @@ class DefaultPolicy:
             return None
         return min(pool, key=lambda o: _threat(game, o))
 
-    def choose_legend(self, game, objs):
+    def choose_legend(self, _game: Game, objs: list[GameObject]) -> GameObject:
+        """Legend rule keep choice: most counters survive (rule 704.5j)."""
         return max(objs, key=lambda o: sum(o.counters.values()))
 
-    def commander_to_command_zone(self, game, obj, to_zone):
-        return True  # rule 903.9
-
-    def pay_ward(self, game, item, n):
+    def commander_to_command_zone(
+        self,
+        _game: Game,
+        _obj: GameObject,
+        _to_zone: str,
+    ) -> bool:
+        """Send a dying commander to the command zone (rule 903.9)."""
         return True
 
-    def choose_bounce_land(self, game, lands):
+    def pay_ward(self, _game: Game, _item: StackItem, _n: int) -> bool:
+        """Pay ward taxes whenever the mana is available (702.21)."""
+        return True
+
+    def choose_bounce_land(
+        self,
+        _game: Game,
+        lands: list[GameObject],
+    ) -> GameObject | None:
+        """Pick the least color-rich land to return to hand."""
         if not lands:
             return None
         return min(
@@ -449,7 +620,13 @@ class DefaultPolicy:
             ),
         )
 
-    def divide_damage(self, game, ctx, total):
+    def divide_damage(
+        self,
+        game: Game,
+        ctx: Ctx,
+        total: int,
+    ) -> list[tuple[GameObject, int]]:
+        """Divide damage lethally across the scariest enemy creatures."""
         enemies = sorted(
             (
                 o
@@ -469,7 +646,8 @@ class DefaultPolicy:
             total -= deal
         return out
 
-    def choose_proliferate(self, game, player):
+    def choose_proliferate(self, game: Game, player: Player) -> list[GameObject]:
+        """Pick proliferate recipients that help us / hurt opponents."""
         picks = []
         for o in game.battlefield_objects():
             if not o.counters:
@@ -486,21 +664,35 @@ class DefaultPolicy:
                 picks.append(o)
         return picks
 
-    def choose_populate(self, game, tokens):
+    def choose_populate(
+        self,
+        _game: Game,
+        tokens: list[GameObject],
+    ) -> GameObject | None:
+        """Pick the biggest creature token to copy (rule 701.34)."""
         return max(tokens, key=lambda o: o.base.power or 0) if tokens else None
 
-    def scry(self, game, player, top):
+    def scry(
+        self,
+        _game: Game,
+        player: Player,
+        top: list[GameObject],
+    ) -> tuple[list[GameObject], list[GameObject]]:
+        """Scry choice: (keep on top, bottom) based on land needs."""
         lands_bf = sum(1 for o in player.battlefield if "Land" in o.base.types)
         keep, bottom = [], []
         for card in top:
             is_land = "Land" in card.base.types
-            if (is_land and lands_bf >= 6) or (not is_land and lands_bf < 3):
+            if (is_land and lands_bf >= _SCRY_ENOUGH_LANDS) or (
+                not is_land and lands_bf < _SCRY_NEED_LANDS
+            ):
                 bottom.append(card)
             else:
                 keep.append(card)
         return keep, bottom
 
-    def choose_tutor_card(self, game, player):
+    def choose_tutor_card(self, _game: Game, player: Player) -> GameObject | None:
+        """Tutor pick: the highest key-weight card in the library."""
         if not player.library:
             return None
         return max(
@@ -510,27 +702,40 @@ class DefaultPolicy:
 
     # ------------------------------------------------------- combat
     @rule("508.1")
-    def declare_attackers(self, game, player, candidates):
-        picks = []
+    def declare_attackers(
+        self,
+        game: Game,
+        player: Player,
+        candidates: list[GameObject],
+    ) -> list[tuple[GameObject, Player | GameObject]]:
+        """Choose the attack: per-creature targets plus a lookahead."""
+        picks: list[tuple[GameObject, Player | GameObject]] = []
         for obj in candidates:
             ch = obj.chars(game)
             power = ch.power or 0
             if power <= 0:
                 continue
-            target = self._attack_target(game, player, obj)
+            target = self.attack_target(game, player, obj)
             if target is None:
                 continue
             picks.append((obj, target))
         return self._lookahead_filter(game, player, picks)
 
-    def _lookahead_filter(self, game, player, picks):
-        """1-ply lookahead: simulate each defender's blocks (using that
-        defender's own policy) and drop attackers whose expected trade is
-        bad for this profile's aggression.
+    def _lookahead_filter(
+        self,
+        game: Game,
+        _player: Player,
+        picks: list[tuple[GameObject, Player | GameObject]],
+    ) -> list[tuple[GameObject, Player | GameObject]]:
+        """1-ply lookahead over the declared attack.
+
+        Simulate each defender's blocks (using that defender's own
+        policy) and drop attackers whose expected trade is bad for this
+        profile's aggression.
         """
         if not picks:
             return picks
-        by_def = {}
+        by_def: dict[Player, list[tuple[GameObject, Player | GameObject]]] = {}
         for obj, target in picks:
             dfn = target if isinstance(target, Player) else target.controller
             by_def.setdefault(dfn, []).append((obj, target))
@@ -553,7 +758,7 @@ class DefaultPolicy:
                 attackers,
                 blockers,
             )
-            blocked_by = {}
+            blocked_by: dict[GameObject, list[GameObject]] = {}
             for blocker, attacker in predicted:
                 blocked_by.setdefault(attacker, []).append(blocker)
             tolerance = (self.profile.aggression - 1.0) * 3.0
@@ -564,7 +769,11 @@ class DefaultPolicy:
         return kept
 
     @staticmethod
-    def _attack_ev(game, attacker, blockers) -> float:
+    def _attack_ev(
+        game: Game,
+        attacker: GameObject,
+        blockers: list[GameObject],
+    ) -> float:
         """Estimate the expected value of one attack against a predicted block."""
         ach = attacker.chars(game)
         power, tough = ach.power or 0, ach.toughness or 0
@@ -585,7 +794,13 @@ class DefaultPolicy:
         overflow = max(0, remaining) if "trample" in ach.keywords else 0
         return kills + overflow - (_threat(game, attacker) if dies else 0)
 
-    def _attack_target(self, game, player, attacker):
+    def attack_target(
+        self,
+        game: Game,
+        player: Player,
+        attacker: GameObject,
+    ) -> Player | None:
+        """Pick which opponent this creature attacks, or None to hold."""
         ch = attacker.chars(game)
         opps = game.opponents(player)
         threats = {o.name: self.player_threat(game, o) for o in opps}
@@ -597,7 +812,7 @@ class DefaultPolicy:
                 for o in opp.battlefield
                 if "Creature" in o.chars(game).types and not o.tapped
             ]
-            can_be_blocked = [b for b in blockers if _could_block(game, b, attacker)]
+            can_be_blocked = [b for b in blockers if can_block(game, b, attacker)]
             danger = max((b.chars(game).power or 0 for b in can_be_blocked), default=0)
             tough = ch.toughness or 0
             evasive = not can_be_blocked
@@ -605,7 +820,10 @@ class DefaultPolicy:
             profitable = (
                 evasive
                 or danger < tough * self.profile.aggression
-                or ((ch.power or 0) >= 5 and self.profile.aggression >= 1.0)
+                or (
+                    (ch.power or 0) >= _BIG_ATTACKER_POWER
+                    and self.profile.aggression >= 1.0
+                )
                 or attacker.commander
             )
             if not profitable:
@@ -631,16 +849,23 @@ class DefaultPolicy:
         return best
 
     @rule("509.1")
-    def declare_blockers(self, game, player, attackers, blockers):
-        assignment = []
+    def declare_blockers(
+        self,
+        game: Game,
+        player: Player,
+        attackers: list[GameObject],
+        blockers: list[GameObject],
+    ) -> list[tuple[GameObject, GameObject]]:
+        """Choose blocks: trades, safe blocks, and racing chumps."""
+        assignment: list[tuple[GameObject, GameObject]] = []
         free = list(blockers)
         threat_order = sorted(attackers, key=lambda a: -(a.chars(game).power or 0))
         incoming = sum(a.chars(game).power or 0 for a in attackers)
         must_chump = incoming >= player.life or player.life <= self.profile.race_life
         for a in threat_order:
             ach = a.chars(game)
-            cands = [b for b in free if _could_block(game, b, a)]
-            if "menace" in ach.keywords and len(cands) < 2:
+            cands = [b for b in free if can_block(game, b, a)]
+            if "menace" in ach.keywords and len(cands) < _MENACE_MIN_BLOCKERS:
                 continue
             pick = None
             for b in sorted(cands, key=lambda b: -(b.chars(game).power or 0)):
@@ -669,27 +894,25 @@ class DefaultPolicy:
         return assignment
 
 
-def _could_block(game, blocker, attacker):
-    from .combat import can_block
+def _obj_threat(game: Game, target: Target) -> float:
+    """Threat of a target for max() keys (players/spells rank zero)."""
+    if isinstance(target, GameObject):
+        return _threat(game, target)
+    return 0.0
 
-    return can_block(game, blocker, attacker)
 
-
-def _ctx(player, source):
-    from .effects import Ctx
-
+def _ctx(player: Player, source: GameObject) -> Ctx:
+    """Build a minimal resolution context for legality probing."""
     return Ctx(controller=player, source=source)
 
 
-def _is_beneficial(ability):
+def _is_beneficial(ability: ResolvableAbility) -> bool:
     """Return whether a targeted effect helps its target.
 
     Beneficial effects (pump/blink) point at our own permanents; harmful
     ones at the opponent's.
     """
-    from .effects import Blink, PutCounters
-
-    eff = getattr(ability, "effect", None)
+    eff = ability.effect
     parts = getattr(eff, "parts", [eff]) if eff is not None else []
     for p in parts:
         if isinstance(p, Blink):
@@ -699,6 +922,8 @@ def _is_beneficial(ability):
     return False
 
 
-def _spell_value(item):
-    ch = item.obj.base
-    return parse_cost(ch.mana_cost).mv + item.x
+def _spell_value(item: StackItem) -> int:
+    """Rate a stack spell by mana value including X."""
+    if isinstance(item.obj, GameObject):
+        return parse_cost(item.obj.base.mana_cost).mv + item.x
+    return item.x

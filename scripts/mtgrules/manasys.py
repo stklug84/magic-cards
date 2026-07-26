@@ -10,7 +10,7 @@ from __future__ import annotations
 import re
 from dataclasses import dataclass, field
 
-from .cr import rule
+from mtgrules.cr import rule
 
 COLORS = "WUBRG"
 MANA_TYPES = "WUBRGC"  # rule 106.1b: five colors + colorless
@@ -22,8 +22,8 @@ class Cost:
     """A parsed mana cost: generic, colored pips, hybrid options, X."""
 
     generic: int = 0
-    pips: dict = field(default_factory=dict)  # color -> count
-    hybrid: list = field(default_factory=list)  # list of frozenset(colors)
+    pips: dict[str, int] = field(default_factory=dict)  # color -> count
+    hybrid: list[frozenset[str]] = field(default_factory=list)
     colorless: int = 0  # {C} pips, rule 107.4c
     x_count: int = 0  # rule 107.3
 
@@ -35,6 +35,7 @@ class Cost:
         )
 
     def with_extra_generic(self, n: int) -> Cost:
+        """Return this cost plus *n* extra generic mana (commander tax)."""
         return Cost(
             self.generic + n,
             dict(self.pips),
@@ -54,8 +55,9 @@ class Cost:
         )
 
     def with_x(self, x: int) -> Cost:
-        """Rule 601.2b/107.3: chosen X becomes generic mana in the total
-        cost.
+        """Rule 601.2b/107.3: the chosen X becomes generic mana.
+
+        The result carries no X of its own; it is the total cost.
         """
         return Cost(
             self.generic + x * self.x_count,
@@ -68,6 +70,7 @@ class Cost:
 
 @rule("202.1")
 def parse_cost(cost_str: str) -> Cost:
+    """Parse a "{2}{G}{G}" style mana-cost string (rule 202.1)."""
     c = Cost()
     for sym in re.findall(r"\{([^}]+)\}", cost_str or ""):
         if sym.isdigit():
@@ -93,30 +96,37 @@ def parse_cost(cost_str: str) -> Cost:
 class ManaPool:
     """A player's mana pool: counts per mana type."""
 
-    def __init__(self):
+    def __init__(self) -> None:
+        """Start empty (rule 106.4)."""
         self.mana: dict[str, int] = dict.fromkeys(MANA_TYPES, 0)
 
-    def add(self, mana_type: str, n: int = 1):
+    def add(self, mana_type: str, n: int = 1) -> None:
+        """Add *n* mana of the given type to the pool."""
         self.mana[mana_type] = self.mana.get(mana_type, 0) + n
 
     def total(self) -> int:
+        """Total floating mana across all types."""
         return sum(self.mana.values())
 
-    def empty(self):
+    def empty(self) -> None:
         """Rule 500.4: pools empty at the end of each step and phase."""
         for t in self.mana:
             self.mana[t] = 0
 
     @rule("601.2g", "601.2h")
     def can_pay(self, cost: Cost) -> bool:
+        """Whether the floating mana alone covers *cost*."""
         return self._solve(cost, commit=False)
 
     def pay(self, cost: Cost) -> bool:
+        """Pay *cost* from the pool; return whether payment succeeded."""
         return self._solve(cost, commit=True)
 
-    def _solve(self, cost: Cost, commit: bool) -> bool:
-        """Exact payment: colored pips first, then hybrid (scarcity-first),
-        then {C}, then generic from the most plentiful types.
+    def _solve(self, cost: Cost, *, commit: bool) -> bool:
+        """Find an exact payment for *cost* from the pool.
+
+        Colored pips first, then hybrid (scarcity-first), then {C}, then
+        generic from the most plentiful types.
         """
         pool = dict(self.mana)
         for color, n in cost.pips.items():
