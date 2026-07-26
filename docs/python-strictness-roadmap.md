@@ -180,14 +180,12 @@ input), and flip `mypy-strict: "true"` in `.github/workflows/lint.yml`.
 
 ## Knowledge-graph follow-up (from the CI restructuring)
 
-- **`MagicCardsOntology.ttl` is logically inconsistent** under
-  ROBOT 1.9.8 / HermiT (`robot reason --reasoner hermit`). Diagnose with
-  `robot explain`, fix the ontology, then set the `owl-files` input of
-  the `rdf` job in `.github/workflows/validate.yml` to
-  `"MagicCardsOntology.ttl"`.
-- The other root TTLs import the ontology via a `urn:` IRI that ROBOT
-  cannot resolve standalone; once the ontology reasons cleanly, evaluate
-  a catalog (or merged-graph reasoning) to include them too.
+Done (2026-07-25): the `owl:hasKey (:setName)` axiom and the flat
+adventure-card modeling of `generate_individuals.py` made the graph
+HermiT-inconsistent; both are fixed, `catalog-v001.xml` (regenerable via
+`scripts/generate_catalog.py`) resolves the `urn:` imports, and the
+`rdf / owl (robot reason)` job now reasons `MagicCardsOntology.ttl` and
+the full `MagicCardIndividuals.ttl` closure in CI.
 
 ## Final tasks
 

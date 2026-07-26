@@ -278,17 +278,31 @@ def tokenize_subtypes(right, types, sub_by_label):
     return subs
 
 
-def parse_type_line(tl, vocab, sub_by_label):
+def parse_type_line(tl, vocab, sub_by_label, layout=""):
+    """Parse a Scryfall type_line into (supertypes, card types, subtypes).
+
+    Multi-face type lines ("A // B") are unioned, EXCEPT for the
+    adventure layout: per CR 715.2 an adventurer card has only its
+    primary (left) face's characteristics anywhere except on the stack
+    as an Adventure, so the right face contributes its subtypes (the
+    Adventure spell type) but neither its card types nor supertypes.
+    Unioning them (e.g. Creature + Instant for "Legendary Creature -
+    Human Scientist // Instant - Adventure") makes the knowledge graph
+    OWL-inconsistent: SpellCardConstraint forbids creature subtypes on
+    instants/sorceries (CreatureTypes and SpellTypes are disjoint).
+    """
     supers, types, subs = [], [], []
-    for part in tl.split(" // "):
+    for idx, part in enumerate(tl.split(" // ")):
         left, _, right = part.partition("\u2014")
-        words = left.split()
-        for w in words:
-            w = "Kindred" if w == "Tribal" else w
-            if w in vocab["SuperType"] and w not in supers:
-                supers.append(w)
-            elif w in vocab["CardType"] and w not in types:
-                types.append(w)
+        secondary_adventure_face = layout == "adventure" and idx > 0
+        if not secondary_adventure_face:
+            words = left.split()
+            for w in words:
+                w = "Kindred" if w == "Tribal" else w
+                if w in vocab["SuperType"] and w not in supers:
+                    supers.append(w)
+                elif w in vocab["CardType"] and w not in types:
+                    types.append(w)
         for sub in tokenize_subtypes(right, types, sub_by_label):
             if sub not in subs:
                 subs.append(sub)
@@ -350,6 +364,7 @@ def card_block(ind, card, info, vocab, sub_by_label, kw_map, rulings, notes):
         card.get("type_line") or front.get("type_line", ""),
         vocab,
         sub_by_label,
+        layout=card.get("layout", ""),
     )
     for s in supers:
         add(f"    :hasSuperType :{s} ;")
