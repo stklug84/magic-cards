@@ -83,7 +83,7 @@ jobs:
   # pyproject.toml (ruff select = ALL with permanent, individually
   # justified ignores only; [tool.mypy] strict = true).
   python:
-    uses: stklug84/github-workflows/.github/workflows/python-validate.yml@v1.20.0
+    uses: stklug84/github-workflows/.github/workflows/python-validate.yml@v1.21.0
     with:
       paths: "scripts"
       config: "pyproject.toml"

@@ -44,7 +44,7 @@ concurrency:
 
 jobs:
   generate:
-    uses: stklug84/github-workflows/.github/workflows/rdf-generate.yml@v1.20.0
+    uses: stklug84/github-workflows/.github/workflows/rdf-generate.yml@v1.21.0
     permissions:
       contents: write
       pull-requests: write
