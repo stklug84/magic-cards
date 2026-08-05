@@ -5,6 +5,8 @@ Resolution order (later layers override earlier ones):
      source of card characteristics
   2. custom cards JSON (opt-in via --custom-cards) - unreleased/unverified
      cards only; no default file is loaded
+  3. Scryfall API (resolve_scryfall) - cards of txt decklists, fetched by
+     name with a local cache; failures fall back to the layers above
 Then oracle-text derivation and behavior hooks are applied.
 """
 
@@ -12,12 +14,16 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 from mtgcards.behaviors import BEHAVIOR_KEYS, apply_behaviors, load_annotations
 from mtgcards.cards import CardData, derive_from_oracle
 from mtgcards.mana import parse_cost
+from mtgcards.scryfall import ScryfallClient, card_from_scryfall
 from mtgcards.ttl_loader import load_graph_cards
+
+if TYPE_CHECKING:
+    from collections.abc import Iterable
 
 
 def _card_from_json(name: str, entry: dict[str, Any], source: str) -> CardData:
@@ -59,7 +65,10 @@ class CardDatabase:
     ) -> None:
         """Load every layer and derive behavior for each unique card."""
         self.index: dict[str, CardData] = {}
-        ind2name: dict[str, str] = {}
+        #: {individual local name: card name} for every card individual in
+        #: the graph; deck instance graphs (.ttl decks) resolve through it
+        self.ind2name: dict[str, str] = {}
+        ind2name = self.ind2name
         hooks_by_name: dict[str, dict[str, Any]] = {}
         sets_dir = Path(repo_root) / "sets"
         if sets_dir.is_dir():
@@ -83,7 +92,38 @@ class CardDatabase:
             seen.add(id(card))
             derive_from_oracle(card)
             apply_behaviors(card, hooks_by_name)
+        self._hooks_by_name = hooks_by_name
         self.stubbed: list[str] = []
+
+    def resolve_scryfall(
+        self,
+        names: Iterable[str],
+        client: ScryfallClient | None = None,
+    ) -> list[str]:
+        """Fetch *names* from Scryfall, overriding the graph entries.
+
+        Fetched cards go through the same oracle derivation + behavior
+        hook pipeline as graph cards. Returns the names that could not be
+        fetched (offline / unknown name); lookups for those fall back to
+        the knowledge graph entry or, failing that, the inert stub.
+        """
+        client = client if client is not None else ScryfallClient()
+        failed: list[str] = []
+        for name in names:
+            data = client.fetch(name)
+            if data is None:
+                failed.append(name)
+                continue
+            card = card_from_scryfall(data)
+            derive_from_oracle(card)
+            apply_behaviors(card, self._hooks_by_name)
+            self.index[card.name] = card
+            # front face of double-faced cards, plus the queried alias
+            if " // " in card.name:
+                self.index[card.name.split(" // ")[0]] = card
+            self.index[name] = card
+        client.save()
+        return failed
 
     def get(self, name: str) -> CardData:
         """Look up a card by (front-face) name, stubbing unknown cards."""
