@@ -12,7 +12,7 @@ PREFIX mc: <urn:stklug84:MagicCardsOntology:2026-02-27#>
 ASK {
   # To restrict to specific deck(s), uncomment and edit:
   # VALUES ?deck { mc:SaheeliRadiantCreatorDeck }
-  VALUES ?card { mc:StarfieldVocalistEdgeOfEternities78 }
+  VALUES ?card { mc:StarfieldVocalist }
 
   ?deck mc:hasCard ?card .
 }

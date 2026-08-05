@@ -1428,7 +1428,7 @@ When Elder Owyn Lyons enters or dies, return target artifact card from your grav
         :rulingDate "2024-03-08"^^xsd:date ;
         :rulingText """Attacking with a goaded creature doesn’t cause it to stop being goaded. If there is an additional combat phase that turn, or if another player gains control of it before it stops being goaded, it must attack again if able."""@en ] .
 
-:RexCyberHoundMagicTheGatheringFallout117 rdf:type owl:NamedIndividual ,
+:RexCyberHound rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Rex, Cyber-Hound" ;
     :manaCost "{1}{W}{U}" ;
@@ -4166,54 +4166,6 @@ When this land enters, scry 1. (Look at the top card of your library. You may pu
       [ rdf:type :Ruling ;
         :rulingDate "2024-03-08"^^xsd:date ;
         :rulingText """Some spells and abilities that create Junk tokens may require targets. If each target chosen is illegal as that spell or ability tries to resolve, it won't resolve and none of its effects happen. You won't create any Junk tokens."""@en ] .
-
-:RexCyberHoundMagicTheGatheringFallout427 rdf:type owl:NamedIndividual ,
-                  :Card ;
-    :cardName "Rex, Cyber-Hound" ;
-    :manaCost "{1}{W}{U}" ;
-    :manaValue "3"^^xsd:nonNegativeInteger ;
-    :hasSuperType :Legendary ;
-    :hasCardType :Artifact ;
-    :hasCardType :Creature ;
-    :hasSubType :Robot ;
-    :hasSubType :Dog ;
-    :hasRarity :Rare ;
-    :hasColor :White ;
-    :hasColor :Blue ;
-    :hasColorIdentity :White ;
-    :hasColorIdentity :Blue ;
-    :isInSet :MagicTheGatheringFallout ;
-    :cardNumber "427"^^xsd:integer ;
-    :artist "Jeremy Paillotin" ;
-    :hasLanguage :English ;
-    :power "2" ;
-    :powerValue "2"^^xsd:integer ;
-    :toughness "2" ;
-    :toughnessValue "2"^^xsd:integer ;
-    :hasKeywordAction :Mill ;
-    :printedText """Whenever Rex deals combat damage to a player, they mill two cards and you get {E}{E} (two energy counters).
-Pay {E}{E}: Choose target creature card in a graveyard. Exile it with a brain counter on it. Activate only as a sorcery.
-Rex has all activated abilities of all cards in exile with brain counters on them."""@en ;
-    :oracleText """Whenever Rex deals combat damage to a player, they mill two cards and you get {E}{E} (two energy counters).
-Pay {E}{E}: Choose target creature card in a graveyard. Exile it with a brain counter on it. Activate only as a sorcery.
-Rex has all activated abilities of all cards in exile with brain counters on them."""@en ;
-    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=654472"^^xsd:anyURI ;
-    :scryfallUrl "https://scryfall.com/card/pip/427/rex-cyber-hound"^^xsd:anyURI ;
-    :hasLegality
-      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :NotLegal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :NotLegal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ;
-    :hasRuling
-      [ rdf:type :Ruling ;
-        :rulingDate "2024-03-08"^^xsd:date ;
-        :rulingText """If an activated ability of a card in exile with a brain counter on it references the card it's printed on by name, treat Rex's version of that ability as though it referenced Rex, Cyber-Hound instead. For example, say Arcade Gannon (which has the ability "{T}: Draw a card, then discard a card. Put a quest counter on Arcade Gannon.") is in exile with a brain counter on it. You would treat Rex's version of the ability as though it said "{T}: Draw a card, then discard a card. Put a quest counter on Rex, Cyber-Hound.\""""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2024-03-08"^^xsd:date ;
-        :rulingText """Rex gains only activated abilities. It doesn't gain triggered abilities or static abilities. Activated abilities contain a colon. They're generally written "[Cost]: [Effect]." Some keywords are activated abilities and may have colons in their reminder text."""@en ] .
 
 :ExoticOrchardMagicTheGatheringFallout495 rdf:type owl:NamedIndividual ,
                   :Card ;

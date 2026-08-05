@@ -97,6 +97,33 @@ subtype, format and legality definitions."""@en .
         :rulingDate "2006-09-25"^^xsd:date ;
         :rulingText """If this creature gets enough -1/-1 counters put on it to cause its toughness to be 0 or less (or the damage marked on it to be lethal), modular will put a number of +1/+1 counters on the target artifact creature equal to the number of +1/+1 counters on this creature before it left the battlefield."""@en ] .
 
+:ClearwaterGoblet rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Clearwater Goblet" ;
+    :manaCost "{5}" ;
+    :manaValue "5"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ;
+    :hasRarity :Rare ;
+    :isInSet :FifthDawn ;
+    :cardNumber "109"^^xsd:integer ;
+    :artist "Dany Orizio" ;
+    :hasLanguage :English ;
+    :hasKeywordAbility :Sunburst ;
+    :printedText """Sunburst (This artifact enters with a charge counter on it for each color of mana spent to cast it.)
+At the beginning of your upkeep, you may gain life equal to the number of charge counters on this artifact."""@en ;
+    :oracleText """Sunburst (This artifact enters with a charge counter on it for each color of mana spent to cast it.)
+At the beginning of your upkeep, you may gain life equal to the number of charge counters on this artifact."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=50198"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/5dn/109/clearwater-goblet"^^xsd:anyURI ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] .
+
 :LunarAvenger rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Lunar Avenger" ;

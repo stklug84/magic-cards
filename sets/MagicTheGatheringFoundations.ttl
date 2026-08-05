@@ -1190,6 +1190,42 @@ Equip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)
         :rulingDate "2024-11-08"^^xsd:date ;
         :rulingText """The ability granted by Fishing Pole's first ability refers only to the Fishing Pole granting that ability, not any other permanent on the battlefield named Fishing Pole."""@en ] .
 
+:CatharCommandoMagicTheGatheringFoundations139 rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Cathar Commando" ;
+    :manaCost "{1}{W}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Human ;
+    :hasSubType :Soldier ;
+    :hasRarity :Common ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :MagicTheGatheringFoundations ;
+    :cardNumber "139"^^xsd:integer ;
+    :artist "Evyn Fong" ;
+    :hasLanguage :English ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "1" ;
+    :toughnessValue "1"^^xsd:integer ;
+    :hasKeywordAbility :Flash ;
+    :printedText """Flash
+{1}, Sacrifice this creature: Destroy target artifact or enchantment."""@en ;
+    :oracleText """Flash
+{1}, Sacrifice this creature: Destroy target artifact or enchantment."""@en ;
+    :flavorText """"Honorable tactics are for honorable foes. These werewolves are preying on innocent travelers. I'll stab them in the back while they sleep if I have to.\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=679881"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/fdn/139/cathar-commando"^^xsd:anyURI ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] .
+
 :MischievousPup rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Mischievous Pup" ;
@@ -1672,6 +1708,36 @@ Ward {2} (Whenever this creature becomes the target of a spell or ability an opp
       [ rdf:type :Ruling ;
         :rulingDate "2024-11-08"^^xsd:date ;
         :rulingText """To determine the total cost of a spell, start with the mana cost or alternative cost you're paying, add any cost increases, then apply any cost reductions (such as that of Tolarian Terror). The mana value of the spell is determined by only its mana cost, no matter what the total cost to cast that spell was."""@en ] .
+
+:EatenAlive rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Eaten Alive" ;
+    :manaCost "{B}" ;
+    :manaValue "1"^^xsd:nonNegativeInteger ;
+    :hasCardType :Sorcery ;
+    :hasRarity :Common ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :MagicTheGatheringFoundations ;
+    :cardNumber "172"^^xsd:integer ;
+    :artist "Nicholas Gregory" ;
+    :hasLanguage :English ;
+    :printedText """As an additional cost to cast this spell, sacrifice a creature or pay {3}{B}.
+Exile target creature or planeswalker."""@en ;
+    :oracleText """As an additional cost to cast this spell, sacrifice a creature or pay {3}{B}.
+Exile target creature or planeswalker."""@en ;
+    :flavorText """"If you hear a groaning noise in the cellar, don't investigate. Don't split up. Just lock the door and barricade it."
+—Emili, guard captain"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=679914"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/fdn/172/eaten-alive"^^xsd:anyURI ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] .
 
 :HerosDownfall rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -2519,6 +2585,38 @@ When this creature dies, create a Treasure token. (It's an artifact with "{T}, S
       [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] .
+
+:SwiftfootBoots rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Swiftfoot Boots" ;
+    :manaCost "{2}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ;
+    :hasSubType :Equipment ;
+    :hasRarity :Uncommon ;
+    :isInSet :MagicTheGatheringFoundations ;
+    :cardNumber "258"^^xsd:integer ;
+    :artist "Svetlin Velinov" ;
+    :hasLanguage :English ;
+    :hasKeywordAbility :Equip ;
+    :printedText """Equipped creature has hexproof and haste. (It can't be the target of spells or abilities your opponents control. It can attack and {T} no matter when it came under your control.)
+Equip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)"""@en ;
+    :oracleText """Equipped creature has hexproof and haste. (It can't be the target of spells or abilities your opponents control. It can attack and {T} no matter when it came under your control.)
+Equip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=680000"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/fdn/258/swiftfoot-boots"^^xsd:anyURI ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2018-03-16"^^xsd:date ;
+        :rulingText """If a creature enters the battlefield under your control and gains haste, but then loses it before attacking, it won't be able to attack that turn. This means that you can't use one Swiftfoot Boots to allow two new creatures to attack in the same turn."""@en ] .
 
 :BloodfellCaves rdf:type owl:NamedIndividual ,
                   :Card ;

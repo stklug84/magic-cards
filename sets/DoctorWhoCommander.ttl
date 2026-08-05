@@ -1828,7 +1828,7 @@ III — Put all creature cards exiled with this enchantment onto the battlefield
         :rulingDate "2023-10-13"^^xsd:date ;
         :rulingText """If, for any reason, the face-down creature is turned face up, the effect making it a Cyberman ends. It will be whatever is printed on the card."""@en ] .
 
-:DoomsdayConfluence rdf:type owl:NamedIndividual ,
+:DoomsdayConfluenceDoctorWhoCommander67 rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Doomsday Confluence" ;
     :manaCost "{X}{X}{B}" ;
@@ -2787,7 +2787,7 @@ Whenever Alistair attacks, you may pay {8}. If you do, creatures you control get
         :rulingDate "2023-10-13"^^xsd:date ;
         :rulingText """You choose whether to pay {8} as Alistair's second ability resolves. Notably, once it begins to resolve, none of your opponents may take actions that might change the result before it happens, such as casting a spell that destroys one of your historic permanents."""@en ] .
 
-:AshadTheLoneCyberman rdf:type owl:NamedIndividual ,
+:AshadTheLoneCybermanDoctorWhoCommander113 rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Ashad, the Lone Cyberman" ;
     :manaCost "{1}{U}{B}{R}" ;
@@ -3202,6 +3202,48 @@ Once during each of your turns, you may play a historic land or cast a historic 
       [ rdf:type :Ruling ;
         :rulingDate "2023-10-13"^^xsd:date ;
         :rulingText """Unlike other creature types in Magic that are each only one word, the two words "Time Lord" represent a single creature subtype. Time Lord is the only two-word creature type."""@en ] .
+
+:TheFaceOfBoe rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "The Face of Boe" ;
+    :manaCost "{1}{U}{R}{W}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasSuperType :Legendary ;
+    :hasCardType :Creature ;
+    :hasSubType :Alien ;
+    :hasSubType :Advisor ;
+    :hasRarity :Rare ;
+    :hasColor :White ;
+    :hasColor :Blue ;
+    :hasColor :Red ;
+    :hasColorIdentity :White ;
+    :hasColorIdentity :Blue ;
+    :hasColorIdentity :Red ;
+    :isInSet :DoctorWhoCommander ;
+    :cardNumber "126"^^xsd:integer ;
+    :artist "Greg Staples" ;
+    :hasLanguage :English ;
+    :power "0" ;
+    :powerValue "0"^^xsd:integer ;
+    :toughness "4" ;
+    :toughnessValue "4"^^xsd:integer ;
+    :printedText """{T}: You may cast a spell with suspend from your hand. If you do, pay its suspend cost rather than its mana cost. Activate only as a sorcery."""@en ;
+    :oracleText """{T}: You may cast a spell with suspend from your hand. If you do, pay its suspend cost rather than its mana cost. Activate only as a sorcery."""@en ;
+    :flavorText """"You are not alone.\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=634821"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/who/126/the-face-of-boe"^^xsd:anyURI ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-10-13"^^xsd:date ;
+        :rulingText """You cast the spell immediately as The Face of Boe's ability resolves."""@en ] .
 
 :TheFifthDoctor rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -3847,7 +3889,7 @@ Share Intelligence — Whenever Sergeant John Benton deals combat damage to a pl
         :rulingDate "2023-10-13"^^xsd:date ;
         :rulingText """If the card you chose has an {X} in its mana cost, the value of X is 0."""@en ] .
 
-:TheSixthDoctor rdf:type owl:NamedIndividual ,
+:TheSixthDoctorDoctorWhoCommander159 rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "The Sixth Doctor" ;
     :manaCost "{4}{G}{U}" ;
@@ -8093,6 +8135,272 @@ When this land enters, scry 1. (Look at the top card of your library. You may pu
       [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :NotLegal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] .
+
+:RoseTyler rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Rose Tyler" ;
+    :manaCost "{1}{W}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasSuperType :Legendary ;
+    :hasCardType :Creature ;
+    :hasSubType :Human ;
+    :hasRarity :Rare ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :DoctorWhoCommander ;
+    :cardNumber "346"^^xsd:integer ;
+    :artist "Luisa J. Preissler" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    # Note: keyword "Bad Wolf" not defined in MagicCardsOntology
+    # Note: keyword "Doctor's companion" not defined in MagicCardsOntology
+    :printedText """Rose Tyler gets +1/+1 for each time counter on it.
+Bad Wolf — Whenever Rose Tyler attacks, put a time counter on it for each suspended card you own and each other permanent you control with a time counter on it.
+Doctor's companion (You can have two commanders if the other is the Doctor.)"""@en ;
+    :oracleText """Rose Tyler gets +1/+1 for each time counter on it.
+Bad Wolf — Whenever Rose Tyler attacks, put a time counter on it for each suspended card you own and each other permanent you control with a time counter on it.
+Doctor's companion (You can have two commanders if the other is the Doctor.)"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=634454"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/who/346/rose-tyler"^^xsd:anyURI ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-10-13"^^xsd:date ;
+        :rulingText """Both commanders start in the command zone, and the remaining 98 cards (or 58 cards in a Commander Draft game) of your deck are shuffled to become your library."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-10-13"^^xsd:date ;
+        :rulingText """Once the game begins, your two commanders are tracked separately. If you cast one, you won't have to pay an additional {2} the first time you cast the other. A player loses the game after having been dealt 21 combat damage from any one of them, not from both of them combined."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-10-13"^^xsd:date ;
+        :rulingText """A suspended card is a card in exile with suspend that has at least one time counter on it. That includes any cards which were put there by an effect that says they "gain suspend" or similar."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-10-13"^^xsd:date ;
+        :rulingText """If something refers to your commander while you have two commanders, it refers to one of them of your choice. If you are instructed to perform an action on your commander (e.g. put it from the command zone into your hand due to Command Beacon), you choose one of your commanders at the time the effect happens."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-10-13"^^xsd:date ;
+        :rulingText """The Doctor's companion ability allows you to have two commanders if one has the ability and the other is a legendary creature that is a Time Lord Doctor and has no other creature types. Creatures with the changeling ability, for example, can't be a second commander this way."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-10-13"^^xsd:date ;
+        :rulingText """Although Doctor's companion is a new variant of the partner ability, the rules for partner have not otherwise changed. Notably, Time Lord Doctors and cards with Doctor's companion do not interact with cards which have another partner ability."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-10-13"^^xsd:date ;
+        :rulingText """An effect that checks whether you control your commander is satisfied if you control one or both of your two commanders."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-10-13"^^xsd:date ;
+        :rulingText """If your Commander deck has two commanders, you can include only cards whose own color identities are also found in your commanders' combined color identities."""@en ] .
+
+:DoomsdayConfluenceDoctorWhoCommander372 rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Doomsday Confluence" ;
+    :manaCost "{X}{X}{B}" ;
+    :manaValue "1"^^xsd:nonNegativeInteger ;
+    :hasCardType :Sorcery ;
+    :hasRarity :Rare ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :DoctorWhoCommander ;
+    :cardNumber "372"^^xsd:integer ;
+    :artist "Dominik Mayer" ;
+    :hasLanguage :English ;
+    :printedText """Choose X. You may choose the same mode more than once.
+• Each player sacrifices a nonartifact creature of their choice.
+• Create a 3/3 black Dalek artifact creature token with menace.
+• Each opponent discards a card."""@en ;
+    :oracleText """Choose X. You may choose the same mode more than once.
+• Each player sacrifices a nonartifact creature of their choice.
+• Create a 3/3 black Dalek artifact creature token with menace.
+• Each opponent discards a card."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=634480"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/who/372/doomsday-confluence"^^xsd:anyURI ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-10-13"^^xsd:date ;
+        :rulingText """You choose the modes as you cast the spell. Once modes are chosen, they can't be changed."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-10-13"^^xsd:date ;
+        :rulingText """No matter which combination of modes you choose, you always follow the instructions in the order they are written."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-10-13"^^xsd:date ;
+        :rulingText """No player can cast spells or activate abilities in between the modes of a resolving spell."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-10-13"^^xsd:date ;
+        :rulingText """If an effect copies Doomsday Confluence, the copy will have the same modes chosen the same number of times."""@en ] .
+
+:AshadTheLoneCybermanDoctorWhoCommander402 rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Ashad, the Lone Cyberman" ;
+    :manaCost "{1}{U}{B}{R}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasSuperType :Legendary ;
+    :hasCardType :Artifact ;
+    :hasCardType :Creature ;
+    :hasSubType :Cyberman ;
+    :hasRarity :Rare ;
+    :hasColor :Blue ;
+    :hasColor :Black ;
+    :hasColor :Red ;
+    :hasColorIdentity :Blue ;
+    :hasColorIdentity :Black ;
+    :hasColorIdentity :Red ;
+    :isInSet :DoctorWhoCommander ;
+    :cardNumber "402"^^xsd:integer ;
+    :artist "Eric Wilkerson" ;
+    :hasLanguage :English ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "3" ;
+    :toughnessValue "3"^^xsd:integer ;
+    :printedText """The first nonlegendary artifact spell you cast each turn has casualty 2. (As you cast it, you may sacrifice a creature with power 2 or greater. When you do, copy it. A copy of an artifact spell becomes a token.)
+Whenever you sacrifice another creature, put a +1/+1 counter on Ashad."""@en ;
+    :oracleText """The first nonlegendary artifact spell you cast each turn has casualty 2. (As you cast it, you may sacrifice a creature with power 2 or greater. When you do, copy it. A copy of an artifact spell becomes a token.)
+Whenever you sacrifice another creature, put a +1/+1 counter on Ashad."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=634510"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/who/402/ashad-the-lone-cyberman"^^xsd:anyURI ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-10-13"^^xsd:date ;
+        :rulingText """You may sacrifice only one creature to pay a spell's casualty cost, and you copy the spell only once."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-10-13"^^xsd:date ;
+        :rulingText """The copy of the spell is created on the stack, so it's not "cast." Abilities that trigger when a player casts a spell won't trigger."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-10-13"^^xsd:date ;
+        :rulingText """Casualty 2 means "As an additional cost to cast this spell, you may sacrifice a creature with power 2 or greater." and "When you cast this spell, if a casualty cost was paid for it, copy it. If the spell has any targets, you may choose new targets for the copy.\""""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-10-13"^^xsd:date ;
+        :rulingText """If you pay the casualty cost of a spell, the copy will resolve before the original spell."""@en ] .
+
+:RiverSong rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "River Song" ;
+    :manaCost "{1}{U}{R}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasSuperType :Legendary ;
+    :hasCardType :Creature ;
+    :hasSubType :Human ;
+    :hasSubType :TimeLord ;
+    :hasSubType :Rogue ;
+    :hasRarity :Rare ;
+    :hasColor :Blue ;
+    :hasColor :Red ;
+    :hasColorIdentity :Blue ;
+    :hasColorIdentity :Red ;
+    :isInSet :DoctorWhoCommander ;
+    :cardNumber "436"^^xsd:integer ;
+    :artist "John Di Giovanni" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    # Note: keyword "Meet in Reverse" not defined in MagicCardsOntology
+    # Note: keyword "Spoilers" not defined in MagicCardsOntology
+    :printedText """Meet in Reverse — You draw cards from the bottom of your library rather than the top.
+Spoilers — Whenever an opponent scries, surveils, or searches their library, put a +1/+1 counter on River Song. Then River Song deals damage to that player equal to its power."""@en ;
+    :oracleText """Meet in Reverse — You draw cards from the bottom of your library rather than the top.
+Spoilers — Whenever an opponent scries, surveils, or searches their library, put a +1/+1 counter on River Song. Then River Song deals damage to that player equal to its power."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=634544"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/who/436/river-song"^^xsd:anyURI ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-10-13"^^xsd:date ;
+        :rulingText """Unlike other creature types in Magic that are each only one word, the two words "Time Lord" represent a single creature subtype. Time Lord is the only two-word creature type."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-10-13"^^xsd:date ;
+        :rulingText """If an effect instructs you to choose a creature type, you may choose Time Lord."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-10-13"^^xsd:date ;
+        :rulingText """Drawing cards from the bottom of your library is exactly the same as drawing from the top, except that you take the bottom card of your library and put it into your hand."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-10-13"^^xsd:date ;
+        :rulingText """Neither "Time" nor "Lord" are creature types. Some older cards were printed with the subtype "Lord," but all of those cards have updated Oracle card text that removed that type."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-10-13"^^xsd:date ;
+        :rulingText """River Song's first ability applies to all cards you draw while it is on the battlefield, not just the card you draw for your turn."""@en ] .
+
+:TheSixthDoctorDoctorWhoCommander443 rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "The Sixth Doctor" ;
+    :manaCost "{4}{G}{U}" ;
+    :manaValue "6"^^xsd:nonNegativeInteger ;
+    :hasSuperType :Legendary ;
+    :hasCardType :Creature ;
+    :hasSubType :TimeLord ;
+    :hasSubType :Doctor ;
+    :hasRarity :Rare ;
+    :hasColor :Blue ;
+    :hasColor :Green ;
+    :hasColorIdentity :Blue ;
+    :hasColorIdentity :Green ;
+    :isInSet :DoctorWhoCommander ;
+    :cardNumber "443"^^xsd:integer ;
+    :artist "Matt Stewart" ;
+    :hasLanguage :English ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "3" ;
+    :toughnessValue "3"^^xsd:integer ;
+    # Note: keyword "Time Lord's Prerogative" not defined in MagicCardsOntology
+    :printedText """Time Lord's Prerogative — Whenever you cast a historic spell, copy it, except the copy isn't legendary. This ability triggers only once each turn. (Artifacts, legendaries, and Sagas are historic. A copy of a permanent spell becomes a token.)"""@en ;
+    :oracleText """Time Lord's Prerogative — Whenever you cast a historic spell, copy it, except the copy isn't legendary. This ability triggers only once each turn. (Artifacts, legendaries, and Sagas are historic. A copy of a permanent spell becomes a token.)"""@en ;
+    :flavorText """"This is a situation that requires tact and finesse. Fortunately, I am blessed with both!\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=634551"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/who/443/the-sixth-doctor"^^xsd:anyURI ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-10-13"^^xsd:date ;
+        :rulingText """Unlike other creature types in Magic that are each only one word, the two words "Time Lord" represent a single creature subtype. Time Lord is the only two-word creature type."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-10-13"^^xsd:date ;
+        :rulingText """Usually, a historic spell won't have any targets. However, if it does have one or more targets, those targets will remain the same for the copy. You won't get to choose new targets."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-10-13"^^xsd:date ;
+        :rulingText """Neither "Time" nor "Lord" are creature types. Some older cards were printed with the subtype "Lord," but all of those cards have updated Oracle card text that removed that type."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-10-13"^^xsd:date ;
+        :rulingText """If an effect instructs you to choose a creature type, you may choose Time Lord."""@en ] .
 
 :FarewellDoctorWhoCommander465 rdf:type owl:NamedIndividual ,
                   :Card ;

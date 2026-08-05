@@ -68,7 +68,7 @@ subtype, format and legality definitions."""@en .
     :hasColorIdentity :Blue ;
     :hasColorIdentity :Green ;
     :isInSet :DoubleMasters2022 ;
-    :cardNumber "211"^^xsd:integer ;
+    :cardNumber "494"^^xsd:integer ;
     :artist "James Ryman" ;
     :hasLanguage :English ;
     :power "3" ;
@@ -79,8 +79,8 @@ subtype, format and legality definitions."""@en .
 At the beginning of combat on your turn, put X +1/+1 counters on another target creature you control, where X is the number of experience counters you have."""@en ;
     :oracleText """Whenever a creature you control with power 2 or less enters, you get an experience counter.
 At the beginning of combat on your turn, put X +1/+1 counters on another target creature you control, where X is the number of experience counters you have."""@en ;
-    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=571544"^^xsd:anyURI ;
-    :scryfallUrl "https://scryfall.com/card/2x2/211/ezuri-claw-of-progress"^^xsd:anyURI ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=573462"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/2x2/494/ezuri-claw-of-progress"^^xsd:anyURI ;
     :hasLegality
       [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,

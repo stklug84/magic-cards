@@ -939,6 +939,66 @@ Whenever this creature deals combat damage to a creature, if that creature was d
         :rulingDate "2024-06-07"^^xsd:date ;
         :rulingText """If a spell or ability with one or more targets states that you "may pay" some amount of {E}, and each permanent that it targets has become an illegal target, the spell or ability won't resolve. You can't pay any {E} even if you want to."""@en ] .
 
+:ExterminatorMagmarch rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Exterminator Magmarch" ;
+    :manaCost "{2}{B}{R}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ;
+    :hasCardType :Creature ;
+    :hasSubType :Phyrexian ;
+    :hasSubType :Construct ;
+    :hasRarity :Rare ;
+    :hasColor :Black ;
+    :hasColor :Red ;
+    :hasColorIdentity :Black ;
+    :hasColorIdentity :Red ;
+    :isInSet :ModernHorizons3Commander ;
+    :cardNumber "124"^^xsd:integer ;
+    :artist "Monztre" ;
+    :hasLanguage :English ;
+    :power "5" ;
+    :powerValue "5"^^xsd:integer ;
+    :toughness "3" ;
+    :toughnessValue "3"^^xsd:integer ;
+    :hasKeywordAction :Regenerate ;
+    :printedText """Whenever you cast an instant or sorcery spell that targets only a single nonland permanent an opponent controls, if another opponent controls one or more nonland permanents that spell could target, choose one of those permanents. Copy that spell. The copy targets the chosen permanent.
+{1}{B}: Regenerate this creature."""@en ;
+    :oracleText """Whenever you cast an instant or sorcery spell that targets only a single nonland permanent an opponent controls, if another opponent controls one or more nonland permanents that spell could target, choose one of those permanents. Copy that spell. The copy targets the chosen permanent.
+{1}{B}: Regenerate this creature."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=665398"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/m3c/124/exterminator-magmarch"^^xsd:anyURI ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-06-07"^^xsd:date ;
+        :rulingText """The controller of a copy can't choose to pay any additional costs for the copy. However, effects based on any additional costs that were paid for the original spell are copied as though those same costs were paid for the copy too. For example, if the spell you copy was kicked, the copies will also be kicked."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-06-07"^^xsd:date ;
+        :rulingText """If a spell has multiple targets but all of them are the same nonland permanent an opponent controls, Exterminator Magmarch's ability will trigger as long as another opponent controls one or more nonland permanents that spell could target. The copy will target only the chosen permanent and no other permanents."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-06-07"^^xsd:date ;
+        :rulingText """Exterminator Magmarch's first ability won't trigger if no other opponent controls any nonland permanents that spell could target. If the ability does trigger but no other opponent controls any nonland permanents the spell could target by the time the ability resolves, the ability won't do anything."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-06-07"^^xsd:date ;
+        :rulingText """The copy that Exterminator Magmarch's ability creates is created on the stack, so it's not "cast." Other abilities that trigger when a player casts a spell won't trigger."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-06-07"^^xsd:date ;
+        :rulingText """If the spell that's copied has an X whose value was determined as it was cast, the copy has the same value of X."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-06-07"^^xsd:date ;
+        :rulingText """If the spell that's copied is modal (that is, it says "Choose one —" or the like), the copy will have the same modes. You can't choose different ones."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-06-07"^^xsd:date ;
+        :rulingText """The copy is created even if the spell that caused the ability to trigger has been countered by the time the ability resolves. The copy resolves before the original spell."""@en ] .
+
 :SphinxOfTheRevelation rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Sphinx of the Revelation" ;

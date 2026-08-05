@@ -22,6 +22,7 @@ Usage:
 from __future__ import annotations
 
 import csv
+import gzip
 import json
 import re
 import sys
@@ -298,11 +299,14 @@ def _fetch_rulings(cards: dict[str, ScryCard]) -> None:
         if oid:
             oracle_ids.add(oid)
     bulk = http_json(f"{API}/bulk-data")
-    uri = next(b["download_uri"] for b in bulk["data"] if b["type"] == "rulings")
+    uri = next(b["jsonl_download_uri"] for b in bulk["data"] if b["type"] == "rulings")
     print("downloading bulk rulings ...")  # noqa: T201 - generator progress output
     req = _https_request(uri)
     with urllib.request.urlopen(req, timeout=300) as r:  # noqa: S310 - https enforced by _https_request  # nosec B310
-        allr = json.loads(r.read().decode())
+        raw = r.read()
+    if uri.endswith(".gz"):
+        raw = gzip.decompress(raw)
+    allr = [json.loads(line) for line in raw.decode().splitlines() if line.strip()]
     mine = defaultdict(list)
     for ru in allr:
         if ru["oracle_id"] in oracle_ids and ru["source"] == "wotc":

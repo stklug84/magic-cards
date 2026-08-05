@@ -570,7 +570,7 @@ Pay {E}{E}{E}: This creature gets +X/+X until end of turn, where X is its power.
         :rulingDate "2024-06-07"^^xsd:date ;
         :rulingText """{E} is the energy symbol. It represents one energy counter."""@en ] .
 
-:FabricationModuleKaladesh211 rdf:type owl:NamedIndividual ,
+:FabricationModule rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Fabrication Module" ;
     :manaCost "{3}" ;

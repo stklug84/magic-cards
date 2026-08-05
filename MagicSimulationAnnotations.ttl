@@ -268,7 +268,7 @@ graphs. Keys are whitelisted in scripts/mtgsim/behaviors.py
     :hasBehaviorHook
       [ rdf:type :BehaviorHook ; :behaviorKey "anthem" ; :behaviorValue "{\"boost\": 1}" ] .
 
-:InfiniteGuidelineStationEdgeOfEternities219
+:InfiniteGuidelineStation
     :threatWeight "8"^^xsd:nonNegativeInteger ;
     :hasBehaviorHook
       [ rdf:type :BehaviorHook ; :behaviorKey "igs" ; :behaviorValue "true" ] ,
