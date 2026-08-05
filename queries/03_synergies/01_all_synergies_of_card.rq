@@ -8,7 +8,7 @@
 PREFIX mc: <urn:stklug84:MagicCardsOntology:2026-02-27#>
 
 SELECT DISTINCT ?other ?otherName WHERE {
-  VALUES ?card { mc:StarfieldVocalistEdgeOfEternities78 }
+  VALUES ?card { mc:StarfieldVocalist }
 
   ?card ( mc:hasSynergyWith
         | ^mc:hasSynergyWith

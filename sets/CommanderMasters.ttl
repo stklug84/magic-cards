@@ -96,6 +96,60 @@ If an effect would put one or more counters on a permanent you control, it puts 
         :rulingDate "2024-11-08"^^xsd:date ;
         :rulingText """Planeswalkers will enter with double the normal number of loyalty counters. However, if you activate an ability whose cost has you put loyalty counters on a planeswalker, the number you put on isn't doubled. This is because those counters are put on as a cost, not as an effect."""@en ] .
 
+:VerdantConfluence rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Verdant Confluence" ;
+    :manaCost "{4}{G}{G}" ;
+    :manaValue "6"^^xsd:nonNegativeInteger ;
+    :hasCardType :Sorcery ;
+    :hasRarity :Rare ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :CommanderMasters ;
+    :cardNumber "329"^^xsd:integer ;
+    :artist "Kieran Yanner" ;
+    :hasLanguage :English ;
+    :printedText """Choose three. You may choose the same mode more than once.
+• Put two +1/+1 counters on target creature.
+• Return target permanent card from your graveyard to your hand.
+• Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."""@en ;
+    :oracleText """Choose three. You may choose the same mode more than once.
+• Put two +1/+1 counters on target creature.
+• Return target permanent card from your graveyard to your hand.
+• Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=627793"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/cmm/329/verdant-confluence"^^xsd:anyURI ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2015-11-04"^^xsd:date ;
+        :rulingText """If a Confluence is copied, the effect that creates the copy will usually allow you to choose new targets, but you can't choose new modes."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2015-11-04"^^xsd:date ;
+        :rulingText """No player can cast spells or activate abilities in between the modes of a resolving spell."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2015-11-04"^^xsd:date ;
+        :rulingText """No matter which combination of modes you choose, you always follow the instructions of a Confluence in the order they are written. If the same mode is chosen more than once, you choose their relative order as you cast the spell."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2015-11-04"^^xsd:date ;
+        :rulingText """If a mode requires a target, you can select that mode only if there's a legal target available. Ignore the targeting requirements for modes you don't choose. Each time you select that mode, you can choose a different target, or you can choose the same target."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2015-11-04"^^xsd:date ;
+        :rulingText """If all targets for the chosen modes become illegal before the Confluence resolves, the spell won't resolve and none of its effects will happen. If at least one target is still legal, the spell will resolve but will have no effect on any illegal targets."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2015-11-04"^^xsd:date ;
+        :rulingText """You choose the modes as you cast the spell. Once modes are chosen, they can't be changed."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-07-28"^^xsd:date ;
+        :rulingText """A permanent card is an artifact, battle, creature, enchantment, land, or planeswalker card."""@en ] .
+
 :TeysaKarlov rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Teysa Karlov" ;
@@ -111,7 +165,7 @@ If an effect would put one or more counters on a permanent you control, it puts 
     :hasColorIdentity :White ;
     :hasColorIdentity :Black ;
     :isInSet :CommanderMasters ;
-    :cardNumber "593"^^xsd:integer ;
+    :cardNumber "359"^^xsd:integer ;
     :artist "Magali Villeneuve" ;
     :hasLanguage :English ;
     :power "2" ;
@@ -123,8 +177,8 @@ Creature tokens you control have vigilance and lifelink."""@en ;
     :oracleText """If a creature dying causes a triggered ability of a permanent you control to trigger, that ability triggers an additional time.
 Creature tokens you control have vigilance and lifelink."""@en ;
     :flavorText """While Kaya is guildmaster, Teysa waits patiently at the center of the Orzhov web of power."""@en ;
-    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=626448"^^xsd:anyURI ;
-    :scryfallUrl "https://scryfall.com/card/cmm/593/teysa-karlov"^^xsd:anyURI ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=627823"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/cmm/359/teysa-karlov"^^xsd:anyURI ;
     :hasLegality
       [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
@@ -161,59 +215,3 @@ Creature tokens you control have vigilance and lifelink."""@en ;
       [ rdf:type :Ruling ;
         :rulingDate "2019-01-25"^^xsd:date ;
         :rulingText """The trigger event doesn't have to specifically refer to “creatures.” In these cases, the trigger event may also refer to something being “put into a graveyard from the battlefield.” For example, an ability that triggers “whenever an artifact is put into a graveyard from the battlefield” would trigger twice if an artifact creature dies while Teysa Karlov is on the battlefield."""@en ] .
-
-:FluxChanneler rdf:type owl:NamedIndividual ,
-                  :Card ;
-    :cardName "Flux Channeler" ;
-    :manaCost "{2}{U}" ;
-    :manaValue "3"^^xsd:nonNegativeInteger ;
-    :hasCardType :Creature ;
-    :hasSubType :Human ;
-    :hasSubType :Wizard ;
-    :hasRarity :Uncommon ;
-    :hasColor :Blue ;
-    :hasColorIdentity :Blue ;
-    :isInSet :CommanderMasters ;
-    :cardNumber "847"^^xsd:integer ;
-    :artist "Heonhwa" ;
-    :hasLanguage :English ;
-    :power "2" ;
-    :powerValue "2"^^xsd:integer ;
-    :toughness "2" ;
-    :toughnessValue "2"^^xsd:integer ;
-    :hasKeywordAction :Proliferate ;
-    :printedText """Whenever you cast a noncreature spell, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)"""@en ;
-    :oracleText """Whenever you cast a noncreature spell, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)"""@en ;
-    :flavorText """"Inform our allies in the Tenth and throw the circuit. It's about to get weird.\""""@en ;
-    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=625252"^^xsd:anyURI ;
-    :scryfallUrl "https://scryfall.com/card/cmm/847/flux-channeler"^^xsd:anyURI ;
-    :hasLegality
-      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ;
-    :hasRuling
-      [ rdf:type :Ruling ;
-        :rulingDate "2019-05-03"^^xsd:date ;
-        :rulingText """Flux Channeler's ability resolves before the spell that caused it to trigger. It resolves even if that spell is countered."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2023-02-04"^^xsd:date ;
-        :rulingText """If a player or permanent has more than one kind of counter on it, and you choose for it to get additional counters, it must get one of each kind of counter it already has. You can't have it get just one kind of counter it already has and not the others."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2023-02-04"^^xsd:date ;
-        :rulingText """You don't have to choose every permanent or player that has a counter, only the ones you want to add another counter to. Since "any number" includes zero, you don't have to choose any permanents at all, and you don't have to choose any players at all."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2023-02-04"^^xsd:date ;
-        :rulingText """To proliferate, you can choose any permanent that has a counter, including ones controlled by opponents. You can choose any player who has a counter, including opponents. You can't choose cards in any zone other than the battlefield, even if they have counters on them."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2023-02-04"^^xsd:date ;
-        :rulingText """An ability that triggers "Whenever you proliferate" triggers even if you chose no permanents or players while doing so."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2023-02-04"^^xsd:date ;
-        :rulingText """If a permanent ever has both +1/+1 counters and -1/-1 counters on it at the same time, they're removed in pairs as a state-based action so that the permanent has only one of those kinds of counters on it."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2023-02-04"^^xsd:date ;
-        :rulingText """Players can respond to a spell or ability whose effect includes proliferating. Once that spell or ability starts to resolve, however, and its controller chooses which permanents and players will get new counters, it's too late for anyone to respond."""@en ] .

@@ -161,6 +161,55 @@ Mastercraft Raptor's power is equal to the total power of the exiled cards used 
         :rulingDate "2023-11-10"^^xsd:date ;
         :rulingText """You may exile tokens you control as part of the materials required. However, because they aren't cards and won't stay in exile, any abilities that refer to what you "used to craft" the back faces won't refer to anything."""@en ] .
 
+:AnimPakalThousandthMoon rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Anim Pakal, Thousandth Moon" ;
+    :manaCost "{1}{R}{W}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasSuperType :Legendary ;
+    :hasCardType :Creature ;
+    :hasSubType :Human ;
+    :hasSubType :Soldier ;
+    :hasRarity :Rare ;
+    :hasColor :White ;
+    :hasColor :Red ;
+    :hasColorIdentity :White ;
+    :hasColorIdentity :Red ;
+    :isInSet :TheLostCavernsOfIxalan ;
+    :cardNumber "223"^^xsd:integer ;
+    :artist "Chris Rahn" ;
+    :hasLanguage :English ;
+    :power "1" ;
+    :powerValue "1"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    :printedText """Whenever you attack with one or more non-Gnome creatures, put a +1/+1 counter on Anim Pakal, then create X 1/1 colorless Gnome artifact creature tokens that are tapped and attacking, where X is the number of +1/+1 counters on Anim Pakal."""@en ;
+    :oracleText """Whenever you attack with one or more non-Gnome creatures, put a +1/+1 counter on Anim Pakal, then create X 1/1 colorless Gnome artifact creature tokens that are tapped and attacking, where X is the number of +1/+1 counters on Anim Pakal."""@en ;
+    :flavorText """"If we are to protect this world, we can no longer hide within it!\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=636943"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/lci/223/anim-pakal-thousandth-moon"^^xsd:anyURI ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """If Anim Pakal is no longer on the battlefield when the triggered ability resolves, you'll still create Gnomes. Use the number of +1/+1 counters that were on it when it was last on the battlefield."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """You choose which player, planeswalker, or battle the Gnome tokens are attacking. Each Gnome token can enter attacking a different player, planeswalker, or battle, and they don't need to be the same ones that the non-Gnome creatures are attacking."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """Although the Gnome tokens enter the battlefield as attacking creatures, they were never declared as attacking creatures. Abilities that trigger whenever a creature attacks won't trigger when they enter the battlefield attacking."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """Anim Pakal, Thousandth Moon doesn't have to be one of the non-Gnome creatures you attack with in order for its ability to trigger, but it can be."""@en ] .
+
 :SaheeliTheSunsBrillianceTheLostCavernsOfIxalan239 rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Saheeli, the Sun's Brilliance" ;
@@ -301,54 +350,6 @@ If a triggered ability of another creature you control of the chosen type trigge
       [ rdf:type :Ruling ;
         :rulingDate "2023-11-10"^^xsd:date ;
         :rulingText """If you control two Roaming Thrones with the same chosen creature type, triggered abilities of other creatures you control of the chosen type trigger three times. Three such Roaming Thrones result in four triggered abilities, and so on."""@en ] .
-
-:AnimPakalThousandthMoon rdf:type owl:NamedIndividual ,
-                  :Card ;
-    :cardName "Anim Pakal, Thousandth Moon" ;
-    :manaCost "{1}{R}{W}" ;
-    :manaValue "3"^^xsd:nonNegativeInteger ;
-    :hasSuperType :Legendary ;
-    :hasCardType :Creature ;
-    :hasSubType :Human ;
-    :hasSubType :Soldier ;
-    :hasRarity :Rare ;
-    :hasColor :White ;
-    :hasColor :Red ;
-    :hasColorIdentity :White ;
-    :hasColorIdentity :Red ;
-    :isInSet :TheLostCavernsOfIxalan ;
-    :cardNumber "300"^^xsd:integer ;
-    :artist "Anditya Dita" ;
-    :hasLanguage :English ;
-    :power "1" ;
-    :powerValue "1"^^xsd:integer ;
-    :toughness "2" ;
-    :toughnessValue "2"^^xsd:integer ;
-    :printedText """Whenever you attack with one or more non-Gnome creatures, put a +1/+1 counter on Anim Pakal, then create X 1/1 colorless Gnome artifact creature tokens that are tapped and attacking, where X is the number of +1/+1 counters on Anim Pakal."""@en ;
-    :oracleText """Whenever you attack with one or more non-Gnome creatures, put a +1/+1 counter on Anim Pakal, then create X 1/1 colorless Gnome artifact creature tokens that are tapped and attacking, where X is the number of +1/+1 counters on Anim Pakal."""@en ;
-    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=636508"^^xsd:anyURI ;
-    :scryfallUrl "https://scryfall.com/card/lci/300/anim-pakal-thousandth-moon"^^xsd:anyURI ;
-    :hasLegality
-      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ;
-    :hasRuling
-      [ rdf:type :Ruling ;
-        :rulingDate "2023-11-10"^^xsd:date ;
-        :rulingText """If Anim Pakal is no longer on the battlefield when the triggered ability resolves, you'll still create Gnomes. Use the number of +1/+1 counters that were on it when it was last on the battlefield."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2023-11-10"^^xsd:date ;
-        :rulingText """You choose which player, planeswalker, or battle the Gnome tokens are attacking. Each Gnome token can enter attacking a different player, planeswalker, or battle, and they don't need to be the same ones that the non-Gnome creatures are attacking."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2023-11-10"^^xsd:date ;
-        :rulingText """Although the Gnome tokens enter the battlefield as attacking creatures, they were never declared as attacking creatures. Abilities that trigger whenever a creature attacks won't trigger when they enter the battlefield attacking."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2023-11-10"^^xsd:date ;
-        :rulingText """Anim Pakal, Thousandth Moon doesn't have to be one of the non-Gnome creatures you attack with in order for its ability to trigger, but it can be."""@en ] .
 
 :SaheeliTheSunsBrillianceTheLostCavernsOfIxalan308 rdf:type owl:NamedIndividual ,
                   :Card ;

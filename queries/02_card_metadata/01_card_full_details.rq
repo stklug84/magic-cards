@@ -10,7 +10,7 @@ SELECT ?cardName ?manaCost ?manaValue ?typeLine
        ?power ?toughness ?rarity ?setName
        ?cardNumber ?artist ?oracleText
 WHERE {
-  VALUES ?card { mc:StarfieldVocalistEdgeOfEternities78 }
+  VALUES ?card { mc:StarfieldVocalist }
 
   ?card mc:cardName ?cardName .
   OPTIONAL { ?card mc:manaCost   ?manaCost }

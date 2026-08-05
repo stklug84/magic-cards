@@ -93,3 +93,38 @@ subtype, format and legality definitions."""@en .
       [ rdf:type :Ruling ;
         :rulingDate "2009-10-01"^^xsd:date ;
         :rulingText """A noncreature permanent that turns into a creature is subject to the "summoning sickness" rule: It can only attack, and its {T} abilities can only be activated, if its controller has continuously controlled that permanent since the beginning of their most recent turn."""@en ] .
+
+:Leveler rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Leveler" ;
+    :manaCost "{5}" ;
+    :manaValue "5"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ;
+    :hasCardType :Creature ;
+    :hasSubType :Juggernaut ;
+    :hasRarity :Rare ;
+    :isInSet :Mirrodin ;
+    :cardNumber "195"^^xsd:integer ;
+    :artist "Carl Critchlow" ;
+    :hasLanguage :English ;
+    :power "10" ;
+    :powerValue "10"^^xsd:integer ;
+    :toughness "10" ;
+    :toughnessValue "10"^^xsd:integer ;
+    :printedText """When this creature enters, exile all cards from your library."""@en ;
+    :oracleText """When this creature enters, exile all cards from your library."""@en ;
+    :flavorText """Once a century, the levelers rip through every corner of Mirrodin, obeying the commands of an unseen master."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=46708"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mrd/195/leveler"^^xsd:anyURI ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2021-03-19"^^xsd:date ;
+        :rulingText """You won't lose the game until you try to draw from the empty library."""@en ] .

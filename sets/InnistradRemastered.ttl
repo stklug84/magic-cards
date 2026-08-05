@@ -316,7 +316,7 @@ When this creature enters, if you control another Spirit, you gain 3 life."""@en
       [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :NotLegal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] .
 
-:CatharCommando rdf:type owl:NamedIndividual ,
+:CatharCommandoInnistradRemastered15 rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Cathar Commando" ;
     :manaCost "{1}{W}" ;
@@ -914,42 +914,6 @@ Other Spirit creatures you control get +1/+0."""@en ;
       [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :NotLegal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] .
 
-:CobbledLancer rdf:type owl:NamedIndividual ,
-                  :Card ;
-    :cardName "Cobbled Lancer" ;
-    :manaCost "{U}" ;
-    :manaValue "1"^^xsd:nonNegativeInteger ;
-    :hasCardType :Creature ;
-    :hasSubType :Zombie ;
-    :hasSubType :Horse ;
-    :hasRarity :Uncommon ;
-    :hasColor :Blue ;
-    :hasColorIdentity :Blue ;
-    :isInSet :InnistradRemastered ;
-    :cardNumber "56"^^xsd:integer ;
-    :artist "Igor Kieryluk" ;
-    :hasLanguage :English ;
-    :power "3" ;
-    :powerValue "3"^^xsd:integer ;
-    :toughness "3" ;
-    :toughnessValue "3"^^xsd:integer ;
-    :printedText """As an additional cost to cast this spell, exile a creature card from your graveyard.
-{3}{U}, Exile this card from your graveyard: Draw a card."""@en ;
-    :oracleText """As an additional cost to cast this spell, exile a creature card from your graveyard.
-{3}{U}, Exile this card from your graveyard: Draw a card."""@en ;
-    :flavorText """"Don't worry everyone—I hear hoofbeats! The Gavony Riders are coming to save us!"
-—Adin, Moorland villager"""@en ;
-    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=685878"^^xsd:anyURI ;
-    :scryfallUrl "https://scryfall.com/card/inr/56/cobbled-lancer"^^xsd:anyURI ;
-    :hasLegality
-      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] .
-
 :DelverOfSecrets rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Delver of Secrets // Insectile Aberration" ;
@@ -1034,6 +998,58 @@ Flying"""@en ;
       [ rdf:type :Ruling ;
         :rulingDate "2016-04-08"^^xsd:date ;
         :rulingText """Auras attached to the exiled creature will be put into their owners’ graveyards. Equipment attached to the exiled creature will become unattached and remain on the battlefield. Any counters on the exiled creature will cease to exist."""@en ] .
+
+:ForbiddenAlchemy rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Forbidden Alchemy" ;
+    :manaCost "{2}{U}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Instant ;
+    :hasRarity :Uncommon ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :hasColorIdentity :Black ;
+    :isInSet :InnistradRemastered ;
+    :cardNumber "65"^^xsd:integer ;
+    :artist "David Rapoza" ;
+    :hasLanguage :English ;
+    :hasKeywordAbility :Flashback ;
+    :printedText """Look at the top four cards of your library. Put one of them into your hand and the rest into your graveyard.
+Flashback {6}{B} (You may cast this card from your graveyard for its flashback cost. Then exile it.)"""@en ;
+    :oracleText """Look at the top four cards of your library. Put one of them into your hand and the rest into your graveyard.
+Flashback {6}{B} (You may cast this card from your graveyard for its flashback cost. Then exile it.)"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=685890"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/inr/65/forbidden-alchemy"^^xsd:anyURI ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2011-09-22"^^xsd:date ;
+        :rulingText """If you have fewer than four cards in your library, you'll look at all the cards there and put one into your hand and the rest into your graveyard."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2021-03-19"^^xsd:date ;
+        :rulingText """You can cast a spell using flashback even if it was somehow put into your graveyard without having been cast."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2021-03-19"^^xsd:date ;
+        :rulingText """"Flashback [cost]" means "You may cast this card from your graveyard by paying [cost] rather than paying its mana cost" and "If the flashback cost was paid, exile this card instead of putting it anywhere else any time it would leave the stack.\""""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2021-03-19"^^xsd:date ;
+        :rulingText """You must still follow any timing restrictions and permissions, including those based on the card's type. For instance, you can cast a sorcery using flashback only when you could normally cast a sorcery."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2021-03-19"^^xsd:date ;
+        :rulingText """To determine the total cost of a spell, start with the mana cost or alternative cost (such as a flashback cost) you're paying, add any cost increases, then apply any cost reductions. The mana value of the spell is determined only by its mana cost, no matter what the total cost to cast the spell was."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2021-03-19"^^xsd:date ;
+        :rulingText """A spell cast using flashback will always be exiled afterward, whether it resolves, is countered, or leaves the stack in some other way."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2021-03-19"^^xsd:date ;
+        :rulingText """If a card with flashback is put into your graveyard during your turn, you can cast it if it's legal to do so before any other player can take any actions."""@en ] .
 
 :ImprisonedInTheMoonInnistradRemastered69 rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -1528,36 +1544,6 @@ At the beginning of your upkeep, sacrifice a creature other than this creature."
       [ rdf:type :Ruling ;
         :rulingDate "2012-05-01"^^xsd:date ;
         :rulingText """If Demonic Taskmaster leaves the battlefield after its ability triggers but before it resolves, you’ll still have to sacrifice a creature. Notably, if you control two Demonic Taskmasters and no other creatures, each one will force you to sacrifice the other."""@en ] .
-
-:EatenAlive rdf:type owl:NamedIndividual ,
-                  :Card ;
-    :cardName "Eaten Alive" ;
-    :manaCost "{B}" ;
-    :manaValue "1"^^xsd:nonNegativeInteger ;
-    :hasCardType :Sorcery ;
-    :hasRarity :Common ;
-    :hasColor :Black ;
-    :hasColorIdentity :Black ;
-    :isInSet :InnistradRemastered ;
-    :cardNumber "106"^^xsd:integer ;
-    :artist "Nicholas Gregory" ;
-    :hasLanguage :English ;
-    :printedText """As an additional cost to cast this spell, sacrifice a creature or pay {3}{B}.
-Exile target creature or planeswalker."""@en ;
-    :oracleText """As an additional cost to cast this spell, sacrifice a creature or pay {3}{B}.
-Exile target creature or planeswalker."""@en ;
-    :flavorText """"If you hear a groaning noise in the cellar, don't investigate. Don't split up. Just lock the door and barricade it."
-—Emili, guard captain"""@en ;
-    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=685937"^^xsd:anyURI ;
-    :scryfallUrl "https://scryfall.com/card/inr/106/eaten-alive"^^xsd:anyURI ;
-    :hasLegality
-      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] .
 
 :EcstaticAwakener rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -2442,6 +2428,58 @@ As without, so within."""@en ;
         :rulingDate "2025-01-24"^^xsd:date ;
         :rulingText """If Conduit of Storms attacks and you transform it into Conduit of Emrakul in response, you’ll add {R}, not {C}{C} and not {C}{C}{R}."""@en ] .
 
+:FaithlessLooting rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Faithless Looting" ;
+    :manaCost "{R}" ;
+    :manaValue "1"^^xsd:nonNegativeInteger ;
+    :hasCardType :Sorcery ;
+    :hasRarity :Common ;
+    :hasColor :Red ;
+    :hasColorIdentity :Red ;
+    :isInSet :InnistradRemastered ;
+    :cardNumber "151"^^xsd:integer ;
+    :artist "Gabor Szikszai" ;
+    :hasLanguage :English ;
+    :hasKeywordAbility :Flashback ;
+    :printedText """Draw two cards, then discard two cards.
+Flashback {2}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)"""@en ;
+    :oracleText """Draw two cards, then discard two cards.
+Flashback {2}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)"""@en ;
+    :flavorText """"Avacyn has abandoned us! We have nothing left except what we can take!\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=685987"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/inr/151/faithless-looting"^^xsd:anyURI ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2016-06-08"^^xsd:date ;
+        :rulingText """You draw two cards and discard two cards all while Faithless Looting is resolving. Nothing can happen between the two, and no player may choose to take actions."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-06-06"^^xsd:date ;
+        :rulingText """"Flashback [cost]" means "You may cast this card from your graveyard if the resulting spell is an instant or sorcery spell by paying [cost] rather than paying its mana cost" and "If the flashback cost was paid, exile this card instead of putting it anywhere else any time it would leave the stack.\""""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-06-06"^^xsd:date ;
+        :rulingText """You can cast a spell using flashback even if it was somehow put into your graveyard without having been cast."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-06-06"^^xsd:date ;
+        :rulingText """You must still follow any timing restrictions and permissions, including those based on the card's type. For instance, you can cast a sorcery using flashback only when you could normally cast a sorcery."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-06-06"^^xsd:date ;
+        :rulingText """If a card with flashback is put into your graveyard during your turn, you can cast it if it's legal to do so before any other player can take any actions."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-06-06"^^xsd:date ;
+        :rulingText """To determine the total cost of a spell, start with the mana cost or alternative cost (such as a flashback cost) you're paying, add any cost increases, then apply any cost reductions. The mana value of the spell is determined only by its mana cost, no matter what the total cost to cast the spell was."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-06-06"^^xsd:date ;
+        :rulingText """A spell cast using flashback will always be exiled afterward, whether it resolves, is countered, or leaves the stack in some other way."""@en ] .
+
 :FestivalCrasher rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Festival Crasher" ;
@@ -3116,7 +3154,7 @@ At the beginning of each upkeep, if a player cast two or more spells last turn, 
         :rulingDate "2025-01-24"^^xsd:date ;
         :rulingText """The land card you return to your hand can be one you just milled or it can be one that was already in your graveyard."""@en ] .
 
-:GhoultreeInnistradRemastered198 rdf:type owl:NamedIndividual ,
+:Ghoultree rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Ghoultree" ;
     :manaCost "{7}{G}" ;
@@ -4627,6 +4665,33 @@ When this creature enters, return target creature to its owner's hand."""@en ;
         :rulingDate "2021-09-24"^^xsd:date ;
         :rulingText """ Once a creature with decayed attacks, it will be sacrificed at end of combat, even if it no longer has decayed at that time."""@en ] .
 
+:InfernalGrasp rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Infernal Grasp" ;
+    :manaCost "{1}{B}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Instant ;
+    :hasRarity :Uncommon ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :InnistradRemastered ;
+    :cardNumber "385"^^xsd:integer ;
+    :artist "Naomi Baker" ;
+    :hasLanguage :English ;
+    :printedText """Destroy target creature. You lose 2 life."""@en ;
+    :oracleText """Destroy target creature. You lose 2 life."""@en ;
+    :flavorText """Ancient evils dwell within the burning chasm called the Ashmouth, ever ready to devour those foolish enough to travel alone."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=688219"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/inr/385/infernal-grasp"^^xsd:anyURI ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] .
+
 :ThermoAlchemist rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Thermo-Alchemist" ;
@@ -4671,46 +4736,6 @@ Whenever you cast an instant or sorcery spell, untap this creature."""@en ;
       [ rdf:type :Ruling ;
         :rulingDate "2025-01-24"^^xsd:date ;
         :rulingText """In a Two-Headed Giant game, Thermo-Alchemist’s activated ability deals 1 damage to each of your opponents, resulting in the opposing team losing 2 life."""@en ] .
-
-:GhoultreeInnistradRemastered411 rdf:type owl:NamedIndividual ,
-                  :Card ;
-    :cardName "Ghoultree" ;
-    :manaCost "{7}{G}" ;
-    :manaValue "8"^^xsd:nonNegativeInteger ;
-    :hasCardType :Creature ;
-    :hasSubType :Zombie ;
-    :hasSubType :Treefolk ;
-    :hasRarity :Uncommon ;
-    :hasColor :Green ;
-    :hasColorIdentity :Green ;
-    :isInSet :InnistradRemastered ;
-    :cardNumber "411"^^xsd:integer ;
-    :artist "Volkan Baǵa" ;
-    :hasLanguage :English ;
-    :power "10" ;
-    :powerValue "10"^^xsd:integer ;
-    :toughness "10" ;
-    :toughnessValue "10"^^xsd:integer ;
-    :printedText """This spell costs {1} less to cast for each creature card in your graveyard."""@en ;
-    :oracleText """This spell costs {1} less to cast for each creature card in your graveyard."""@en ;
-    :flavorText """It uproots entire fengrafs to add to its twisted frame."""@en ;
-    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=688245"^^xsd:anyURI ;
-    :scryfallUrl "https://scryfall.com/card/inr/411/ghoultree"^^xsd:anyURI ;
-    :hasLegality
-      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :NotLegal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ;
-    :hasRuling
-      [ rdf:type :Ruling ;
-        :rulingDate "2025-01-24"^^xsd:date ;
-        :rulingText """Ghoultree’s ability can’t reduce the total cost to cast the spell below {G}."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2025-01-24"^^xsd:date ;
-        :rulingText """Once you begin to cast Ghoultree, no player may take actions until you’re done. Notably, opponents can’t try to remove creature cards from your graveyard to change Ghoultree’s cost."""@en ] .
 
 :GrappleWithThePast rdf:type owl:NamedIndividual ,
                   :Card ;

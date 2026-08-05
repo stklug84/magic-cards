@@ -3,7 +3,7 @@
 #
 # This file is an independent, fan-made instance graph that lists the card
 # individuals of a personal Magic: The Gathering card collection printed in
-# the set "Tarkir: Dragonstorm Commander". It is not produced by, endorsed by, or affiliated
+# the set "Gatecrash". It is not produced by, endorsed by, or affiliated
 # with Wizards of the Coast LLC.
 #
 # Magic: The Gathering is a trademark of Wizards of the Coast LLC. All card
@@ -25,7 +25,7 @@
 @prefix owl:  <http://www.w3.org/2002/07/owl#> .
 
 @prefix :     <urn:stklug84:MagicCardsOntology:2026-02-27#> .
-@base         <urn:stklug84:MagicCardIndividuals:TDC:2026-07-19#> .
+@base         <urn:stklug84:MagicCardIndividuals:GTC:2026-07-19#> .
 
 ################################################################################
 #
@@ -33,13 +33,13 @@
 #
 ################################################################################
 
-<urn:stklug84:MagicCardIndividuals:TDC:2026-07-19#>
+<urn:stklug84:MagicCardIndividuals:GTC:2026-07-19#>
     rdf:type owl:Ontology ;
     owl:imports <urn:stklug84:MagicCardsOntology:2026-02-27#> ;
-    rdfs:label "Magic Card Collection Individuals – Tarkir: Dragonstorm Commander"@en ;
+    rdfs:label "Magic Card Collection Individuals – Gatecrash"@en ;
     rdfs:comment """An instance graph describing the card individuals of a
 personal Magic: The Gathering card collection that were printed in the set
-Tarkir: Dragonstorm Commander (TDC). One Card individual is defined per collected
+Gatecrash (GTC). One Card individual is defined per collected
 printing, carrying its characteristics, format legalities and official
 rulings. Card data was sourced from Gatherer and Scryfall. This file imports
 MagicCardsOntology to reuse all existing class, property, set, keyword,
@@ -52,32 +52,34 @@ subtype, format and legality definitions."""@en .
 #
 ################################################################################
 
-:KayaGeistHunterTarkirDragonstormCommander294 rdf:type owl:NamedIndividual ,
+:HellkiteTyrant rdf:type owl:NamedIndividual ,
                   :Card ;
-    :cardName "Kaya, Geist Hunter" ;
-    :manaCost "{1}{W}{B}" ;
-    :manaValue "3"^^xsd:nonNegativeInteger ;
-    :hasSuperType :Legendary ;
-    :hasCardType :Planeswalker ;
-    :hasSubType :Kaya ;
+    :cardName "Hellkite Tyrant" ;
+    :manaCost "{4}{R}{R}" ;
+    :manaValue "6"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Dragon ;
     :hasRarity :MythicRare ;
-    :hasColor :White ;
-    :hasColor :Black ;
-    :hasColorIdentity :White ;
-    :hasColorIdentity :Black ;
-    :isInSet :TarkirDragonstormCommander ;
-    :cardNumber "294"^^xsd:integer ;
-    :artist "Ryan Pancoast" ;
+    :hasColor :Red ;
+    :hasColorIdentity :Red ;
+    :isInSet :Gatecrash ;
+    :cardNumber "94"^^xsd:integer ;
+    :artist "Aleksi Briclot" ;
     :hasLanguage :English ;
-    :loyalty "3"^^xsd:integer ;
-    :printedText """+1: Creatures you control gain deathtouch until end of turn. Put a +1/+1 counter on up to one target creature token you control.
-−2: Until end of turn, if one or more tokens would be created under your control, twice that many of those tokens are created instead.
-−6: Exile all cards from all graveyards, then create a 1/1 white Spirit creature token with flying for each card exiled this way."""@en ;
-    :oracleText """+1: Creatures you control gain deathtouch until end of turn. Put a +1/+1 counter on up to one target creature token you control.
-−2: Until end of turn, if one or more tokens would be created under your control, twice that many of those tokens are created instead.
-−6: Exile all cards from all graveyards, then create a 1/1 white Spirit creature token with flying for each card exiled this way."""@en ;
-    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=696450"^^xsd:anyURI ;
-    :scryfallUrl "https://scryfall.com/card/tdc/294/kaya-geist-hunter"^^xsd:anyURI ;
+    :power "6" ;
+    :powerValue "6"^^xsd:integer ;
+    :toughness "5" ;
+    :toughnessValue "5"^^xsd:integer ;
+    :hasKeywordAbility :Flying ;
+    :hasKeywordAbility :Trample ;
+    :printedText """Flying, trample
+Whenever this creature deals combat damage to a player, gain control of all artifacts that player controls.
+At the beginning of your upkeep, if you control twenty or more artifacts, you win the game."""@en ;
+    :oracleText """Flying, trample
+Whenever this creature deals combat damage to a player, gain control of all artifacts that player controls.
+At the beginning of your upkeep, if you control twenty or more artifacts, you win the game."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=366244"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/gtc/94/hellkite-tyrant"^^xsd:anyURI ;
     :hasLegality
       [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
@@ -88,5 +90,5 @@ subtype, format and legality definitions."""@en .
       [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ;
     :hasRuling
       [ rdf:type :Ruling ;
-        :rulingDate "2021-11-19"^^xsd:date ;
-        :rulingText """The tokens that Kaya's second ability creates are exact copies of the tokens that were being created in the first place."""@en ] .
+        :rulingDate "2013-01-24"^^xsd:date ;
+        :rulingText """If you don't control twenty or more artifacts at the beginning of your upkeep, Hellkite Tyrant's last ability won't trigger. If it does trigger, it will check again when it tries to resolve. If you don't control twenty or more artifacts at that time, the ability will do nothing."""@en ] .

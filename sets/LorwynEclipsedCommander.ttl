@@ -52,32 +52,6 @@ subtype, format and legality definitions."""@en .
 #
 ################################################################################
 
-:InfernalGrasp rdf:type owl:NamedIndividual ,
-                  :Card ;
-    :cardName "Infernal Grasp" ;
-    :manaCost "{1}{B}" ;
-    :manaValue "2"^^xsd:nonNegativeInteger ;
-    :hasCardType :Instant ;
-    :hasRarity :Uncommon ;
-    :hasColor :Black ;
-    :hasColorIdentity :Black ;
-    :isInSet :LorwynEclipsedCommander ;
-    :cardNumber "77"^^xsd:integer ;
-    :artist "Naomi Baker" ;
-    :hasLanguage :English ;
-    :printedText """Destroy target creature. You lose 2 life."""@en ;
-    :oracleText """Destroy target creature. You lose 2 life."""@en ;
-    :flavorText """Ancient evils dwell within the burning chasm called the Ashmouth, ever ready to devour those foolish enough to travel alone."""@en ;
-    :scryfallUrl "https://scryfall.com/card/ecc/77/infernal-grasp"^^xsd:anyURI ;
-    :hasLegality
-      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] .
-
 :AbundantGrowth rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Abundant Growth" ;

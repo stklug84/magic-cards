@@ -52,6 +52,62 @@ subtype, format and legality definitions."""@en .
 #
 ################################################################################
 
+:FluxChanneler rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Flux Channeler" ;
+    :manaCost "{2}{U}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Human ;
+    :hasSubType :Wizard ;
+    :hasRarity :Uncommon ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :WarOfTheSpark ;
+    :cardNumber "52"^^xsd:integer ;
+    :artist "Heonhwa" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    :hasKeywordAction :Proliferate ;
+    :printedText """Whenever you cast a noncreature spell, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)"""@en ;
+    :oracleText """Whenever you cast a noncreature spell, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)"""@en ;
+    :flavorText """"Inform our allies in the Tenth and throw the circuit. It's about to get weird.\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=460979"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/war/52/flux-channeler"^^xsd:anyURI ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2019-05-03"^^xsd:date ;
+        :rulingText """Flux Channeler's ability resolves before the spell that caused it to trigger. It resolves even if that spell is countered."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """If a player or permanent has more than one kind of counter on it, and you choose for it to get additional counters, it must get one of each kind of counter it already has. You can't have it get just one kind of counter it already has and not the others."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """You don't have to choose every permanent or player that has a counter, only the ones you want to add another counter to. Since "any number" includes zero, you don't have to choose any permanents at all, and you don't have to choose any players at all."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """To proliferate, you can choose any permanent that has a counter, including ones controlled by opponents. You can choose any player who has a counter, including opponents. You can't choose cards in any zone other than the battlefield, even if they have counters on them."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """An ability that triggers "Whenever you proliferate" triggers even if you chose no permanents or players while doing so."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """If a permanent ever has both +1/+1 counters and -1/-1 counters on it at the same time, they're removed in pairs as a state-based action so that the permanent has only one of those kinds of counters on it."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """Players can respond to a spell or ability whose effect includes proliferating. Once that spell or ability starts to resolve, however, and its controller chooses which permanents and players will get new counters, it's too late for anyone to respond."""@en ] .
+
 :KayaBaneOfTheDead rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Kaya, Bane of the Dead" ;
