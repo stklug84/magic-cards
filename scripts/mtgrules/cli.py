@@ -2,7 +2,11 @@
 
     python3 scripts/simulate_matchup.py DECK1 DECK2 [DECK3 DECK4] [options]
 
-2-4 decklist files are required. Statistics can be pooled over multiple RNG
+2-4 deck files are required: txt decklists (card data fetched from the
+Scryfall API, falling back to the knowledge graph offline; --offline
+skips the lookups entirely) or .ttl deck instance graphs
+(knowledge-graph content only, no network access).
+Statistics can be pooled over multiple RNG
 seeds (--seeds) to separate matchup signal from seed variance. A single
 game can be watched live in a TUI (--watch) or recorded (--viz-file) and
 replayed later (--replay).
@@ -61,9 +65,11 @@ def build_parser() -> argparse.ArgumentParser:
     ap.add_argument(
         "decks",
         nargs="*",
-        help="2-4 decklist files (format: 'N Card Name' lines, "
-        "// comments, commander under a '// Commander' "
-        "section header)",
+        help="2-4 deck files: txt decklists ('N Card Name' lines, "
+        "// comments, commander under a '// Commander' section "
+        "header; card data fetched from the Scryfall API) or .ttl "
+        "deck instance graphs (card data from the knowledge graph "
+        "only)",
     )
     ap.add_argument("--games", type=int, default=20, help="games per seed (default 20)")
     ap.add_argument("--seed", type=int, default=42, help="base RNG seed (default 42)")
@@ -85,6 +91,12 @@ def build_parser() -> argparse.ArgumentParser:
         help="JSON file overriding card definitions for "
         "unreleased/unverified cards (opt-in; by default "
         "all card data comes from the knowledge graph)",
+    )
+    ap.add_argument(
+        "--offline",
+        action="store_true",
+        help="skip the Scryfall lookups for txt decklists and resolve "
+        "all cards from the knowledge graph (hermetic runs, e.g. CI)",
     )
     ap.add_argument(
         "--profile",
@@ -134,15 +146,23 @@ def _parse_profiles(specs: list[str], n_decks: int) -> list[PolicyProfile | None
     return profiles
 
 
-def _load_decks(args: argparse.Namespace) -> list[Deck]:
-    """Load and validate the decklists named on the command line."""
+def _deck_paths(args: argparse.Namespace) -> list[Path]:
+    """Validate the deck file arguments before any expensive loading."""
     deck_paths = [Path(d) for d in args.decks]
     if not _MIN_DECKS <= len(deck_paths) <= _MAX_DECKS:
-        sys.exit("pass 2-4 decklist files")
+        sys.exit("pass 2-4 deck files (txt decklists or .ttl deck graphs)")
     for p in deck_paths:
         if not p.exists():
             sys.exit(f"deck file not found: {p}")
-    decks = [load_deck(p) for p in deck_paths]
+    return deck_paths
+
+
+def _load_decks(deck_paths: Sequence[Path], db: CardDatabase) -> list[Deck]:
+    """Load and validate the deck files named on the command line."""
+    try:
+        decks = [load_deck(p, db.ind2name) for p in deck_paths]
+    except ValueError as err:
+        sys.exit(str(err))
     seen: dict[str, int] = {}
     for d in decks:  # same list twice -> unique seats
         seen[d.name] = seen.get(d.name, 0) + 1
@@ -150,8 +170,50 @@ def _load_decks(args: argparse.Namespace) -> list[Deck]:
             d.name = f"{d.name}#{seen[d.name]}"
     for d in decks:
         if d.commander is None:
-            sys.exit(f"{d.path}: no '// Commander' section found")
+            hint = (
+                "no ':isCommanderOf' assertion found"
+                if d.fmt == "ttl"
+                else "no '// Commander' section found"
+            )
+            sys.exit(f"{d.path}: {hint}")
     return decks
+
+
+def _resolve_txt_decks(
+    decks: Sequence[Deck],
+    db: CardDatabase,
+    *,
+    offline: bool = False,
+) -> None:
+    """Fetch Scryfall card data for every card of the txt decklists.
+
+    .ttl decks stay on the knowledge graph; failed fetches (offline,
+    unknown names) fall back to the graph entry or the inert stub, with
+    a warning on stderr. With *offline* (--offline) the lookups are
+    skipped entirely and everything resolves from the knowledge graph.
+    """
+    if offline:
+        return
+    names = sorted(
+        {
+            c
+            for d in decks
+            if d.fmt == "txt"
+            for c in (*d.cards, d.commander)
+            if c is not None
+        },
+    )
+    if not names:
+        return
+    failed = db.resolve_scryfall(names)
+    if failed:
+        print(  # noqa: T201 - user-facing warning on stderr
+            f"warning: Scryfall lookup failed for {len(failed)} card(s); "
+            f"falling back to the knowledge graph: "
+            f"{', '.join(failed[:_STUB_PREVIEW])}"
+            f"{' ...' if len(failed) > _STUB_PREVIEW else ''}",
+            file=sys.stderr,
+        )
 
 
 def _audit_unknown_cards(decks: Sequence[Deck], db: CardDatabase) -> None:
@@ -297,8 +359,10 @@ def main(argv: list[str] | None = None) -> None:
     except ValueError:
         sys.exit(f"invalid --seeds value: {args.seeds!r}")
 
-    decks = _load_decks(args)
+    deck_paths = _deck_paths(args)
     db = CardDatabase(REPO, args.custom_cards)
+    decks = _load_decks(deck_paths, db)
+    _resolve_txt_decks(decks, db, offline=args.offline)
     profiles = _parse_profiles(args.profile, len(decks))
     _audit_unknown_cards(decks, db)
 

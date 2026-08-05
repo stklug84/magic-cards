@@ -1,6 +1,9 @@
-"""Decklist parsing.
+"""Deck file parsing (txt decklists and .ttl deck instance graphs).
 
-Supported format (one card per line, // comments, commander marked by a
+Files with a '.ttl' suffix are parsed as deck instance graphs (see
+deck_ttl.load_deck_ttl); everything else is parsed as a plain decklist.
+
+Decklist format (one card per line, // comments, commander marked by a
 '// Commander' section header before its line):
 
     1 Sol Ring
@@ -22,6 +25,10 @@ from __future__ import annotations
 import re
 from dataclasses import dataclass, field
 from pathlib import Path
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from collections.abc import Mapping
 
 # Trailing printing suffix of exported lists, for example "(EOE) 219",
 # "(PLST) SOM-144" or "(LCI) 26 *F*".
@@ -36,6 +43,7 @@ class Deck:
     path: str
     cards: list[str] = field(default_factory=list)  # card names, expanded
     commander: str | None = None
+    fmt: str = "txt"  # source file format: txt|ttl
 
     @property
     def size(self) -> int:
@@ -43,9 +51,26 @@ class Deck:
         return len(self.cards) + (1 if self.commander else 0)
 
 
-def load_deck(path: str | Path) -> Deck:
-    """Parse the decklist file at *path* into a Deck."""
+def load_deck(
+    path: str | Path,
+    ind2name: Mapping[str, str] | None = None,
+) -> Deck:
+    """Parse the deck file at *path* into a Deck.
+
+    '.ttl' files are deck instance graphs and require *ind2name*, the
+    {individual local name: card name} map from the knowledge graph
+    (CardDatabase.ind2name); everything else is a txt decklist.
+    """
     deck_path = Path(path)
+    if deck_path.suffix.lower() == ".ttl":
+        # Deferred: deck_ttl imports Deck from this module, so a
+        # top-level import here would be a real package cycle.
+        from mtgcards.deck_ttl import load_deck_ttl  # noqa: PLC0415
+
+        if ind2name is None:
+            msg = f"{deck_path}: .ttl decks require the knowledge graph"
+            raise ValueError(msg)
+        return load_deck_ttl(deck_path, ind2name)
     deck = Deck(name=deck_path.stem, path=str(deck_path))
     in_commander = False
     for raw in deck_path.read_text(encoding="utf-8").splitlines():

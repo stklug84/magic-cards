@@ -144,6 +144,12 @@ jobs:
           curl -fsSL -o "MagicCompRules-${CR_DATE}.txt" \
             "https://media.wizards.com/2026/downloads/MagicCompRules%20${CR_DATE}.txt"
 
+      - name: Card data-layer tests (deck formats / Scryfall mapping)
+        working-directory: scripts
+        run: |
+          set -euo pipefail
+          python3 -m unittest discover -s mtgcards/tests -t .
+
       - name: Rules-engine conformance tests (stdlib only)
         working-directory: scripts
         run: |
@@ -159,8 +165,10 @@ jobs:
       - name: "Smoke: 3-game matchup with stats report"
         run: |
           set -euo pipefail
+          # --offline: hermetic CI - no live Scryfall lookups (rate limits
+          # would make this flaky); card data comes from the knowledge graph
           python3 scripts/simulate_matchup.py \
             strategies/station-swarm-counter-deck.txt \
             strategies/blight-curse-deck.txt \
-            --games 3 --seed 7 | tee /tmp/report.txt
+            --games 3 --seed 7 --offline | tee /tmp/report.txt
           grep -q "wins" /tmp/report.txt

@@ -96,6 +96,7 @@ Simulator tests and smoke matchup (must stay green after every change to
 
 ```sh
 cd scripts
+python3 -m unittest discover -s mtgcards/tests -t .
 python3 -m unittest discover -s mtgrules/tests -t .
 python3 -m unittest discover -s mtgviz/tests -t .
 cd ..

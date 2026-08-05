@@ -135,11 +135,17 @@ workflow.
 ## Deck matchup simulation
 
 [`scripts/simulate_matchup.py`](./scripts/simulate_matchup.py) runs Commander
-games between 2–4 arbitrary decklists on a CR-grounded rules engine (stdlib
-only; the optional TUI needs `pip install rich`). Card characteristics are
-driven by the TTL knowledge graph in [`sets/`](./sets/) and
-[`MagicExternalCards.ttl`](./MagicExternalCards.ttl), with opt-in custom-card
-overrides (`--custom-cards`). The engine lives in
+games between 2–4 arbitrary deck files on a CR-grounded rules engine (stdlib
+only; the optional TUI needs `pip install rich`). Two deck formats are
+accepted: txt decklists (`N Card Name` lines), whose card characteristics are
+fetched by name from the [Scryfall API](https://scryfall.com/docs/api) with a
+local cache (falling back to the knowledge graph offline; `--offline` skips
+the lookups entirely), and `.ttl` deck
+instance graphs like [`decks/`](./decks/), whose card characteristics come
+solely from the TTL knowledge graph in [`sets/`](./sets/) and
+[`MagicExternalCards.ttl`](./MagicExternalCards.ttl) — no network access.
+Opt-in custom-card overrides remain available (`--custom-cards`). The engine
+lives in
 [`scripts/mtgrules/`](./scripts/mtgrules/) (real stack and priority,
 state-based actions, the layer system, replacement effects, Commander rules,
 tunable AI policy profiles) on top of the
@@ -148,6 +154,8 @@ win-rate lift, multi-seed statistics, JSONL logs):
 
 ```sh
 python3 scripts/simulate_matchup.py DECK1.txt DECK2.txt             # heads-up
+python3 scripts/simulate_matchup.py decks/BlightCurseTest.ttl \
+    decks/StationSwarmTest.ttl                          # deck graphs, offline
 python3 scripts/simulate_matchup.py a.txt b.txt c.txt --seeds 5     # pod,
                                                         # pooled over 5 seeds
 python3 scripts/simulate_matchup.py DECK1.txt DECK2.txt --watch     # live TUI
