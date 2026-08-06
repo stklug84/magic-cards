@@ -18,14 +18,16 @@ __pycache__/
 .mypy_cache/
 .ruff_cache/
 
-# ignore any structured list files, but keep the collection inventory —
-# it is the generator input for the Regenerate knowledge graph workflow
+# ignore any structured list files — the collection inventory
+# (collection.csv) is a local, untracked generator input and is
+# deliberately not distributed
 *.csv
-!collection.csv
 *.dsv
 *.tsv
 
-# ignore plain text files (collection data, MagicCompRules - not
-# distributed), but keep the strategy decklists
+# ignore plain text files
 *.txt
-!strategies/*.txt
+
+# ignore the generated OASIS XML catalog — regenerate on demand with
+# scripts/generate_catalog.py
+catalog-v001.xml

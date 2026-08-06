@@ -217,7 +217,9 @@ def check_collection_entries(idx: GraphIndex) -> tuple[list[str], int]:
 
     Every CollectionEntry must carry :hasFinish and :hasCondition, and
     the entry count and summed quantities must match the rows of
-    collection.csv. Returns the errors plus the collection entry count.
+    collection.csv. The CSV is a local, untracked input; when it is
+    absent (e.g. in CI checkouts) the mirror check is skipped with a
+    notice. Returns the errors plus the collection entry count.
     """
     errors: list[str] = []
     quantity = mc_ref("quantity")
@@ -235,7 +237,14 @@ def check_collection_entries(idx: GraphIndex) -> tuple[list[str], int]:
             coll_total += int(str(count))
 
     csv_path = ROOT / "collection.csv"
-    if csv_path.exists():
+    if not csv_path.exists():
+        # collection.csv is a local, untracked input (not distributed);
+        # the CSV mirror check only runs where the inventory is present.
+        print(  # noqa: T201 - validator progress line
+            "collection.csv not found - skipping the CSV mirror check "
+            "(entry shape checks still ran).",
+        )
+    else:
         with csv_path.open(encoding="utf-8", newline="") as handle:
             csv_rows = list(csv.DictReader(handle))
         csv_total = sum(int(r["Count"]) for r in csv_rows)
