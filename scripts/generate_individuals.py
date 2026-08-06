@@ -204,9 +204,27 @@ def esc_long(s: str) -> str:
 # ---------------------------------------------------------------- fetch
 
 
+def collection_csv_path() -> Path:
+    """Return the inventory CSV path, or exit with guidance when absent.
+
+    collection.csv is a local, untracked input (it is deliberately not
+    distributed with the repository); regeneration only works where the
+    inventory is present.
+    """
+    path = ROOT / "collection.csv"
+    if not path.exists():
+        msg = (
+            "collection.csv not found - it is a local, untracked input "
+            "(not distributed with the repository); restore your "
+            "inventory export to the repo root before regenerating."
+        )
+        raise SystemExit(msg)
+    return path
+
+
 def load_rows() -> dict[PrintKey, Printing]:
     """Aggregate collection.csv rows into unique printings with counts."""
-    with (ROOT / "collection.csv").open(encoding="utf-8", newline="") as handle:
+    with collection_csv_path().open(encoding="utf-8", newline="") as handle:
         rows = list(csv.DictReader(handle))
     printings: dict[PrintKey, Printing] = {}
     for r in rows:
@@ -1022,7 +1040,7 @@ def load_card_map() -> dict[tuple[str, str], tuple[str, str]]:
 
 def cmd_collection() -> None:
     """Emit MagicCardCollection.ttl with one entry per collection.csv row."""
-    with (ROOT / "collection.csv").open(encoding="utf-8", newline="") as handle:
+    with collection_csv_path().open(encoding="utf-8", newline="") as handle:
         rows = list(csv.DictReader(handle))
     card_map = load_card_map()
 

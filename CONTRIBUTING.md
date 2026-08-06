@@ -15,8 +15,9 @@ to be reusable — contributions to either are welcome.
 - Do not commit build byproducts (`__pycache__/`, `.mypy_cache/`,
   `.ruff_cache/`, generated reports). They are gitignored; keep it that
   way.
-- Keep gitignored data files out of PRs; the committed TTL files and
-  `collection.csv` are the source of truth.
+- Keep gitignored data files out of PRs; the committed TTL files are the
+  source of truth. The inventory (`collection.csv`) is a local, untracked
+  generator input containing private data — never commit it.
 
 ## Repository layout
 
@@ -69,6 +70,7 @@ HermiT needs ~2 min for the ontology and ~8 min for the full per-set
 closure):
 
 ```sh
+python3 scripts/generate_catalog.py
 curl -fsSL -o /tmp/robot.jar \
   https://github.com/ontodev/robot/releases/download/v1.9.8/robot.jar
 java -jar /tmp/robot.jar reason --reasoner hermit \
@@ -78,13 +80,11 @@ java -jar /tmp/robot.jar reason --reasoner hermit \
 ```
 
 `catalog-v001.xml` maps the graph's `urn:` ontology IRIs to local files
-(ROBOT cannot dereference them). Regenerate it after adding, removing,
-or renaming any ontology file — the `owl` CI job fails on unresolvable
-imports when the catalog is stale:
-
-```sh
-python3 scripts/generate_catalog.py
-```
+(ROBOT cannot dereference them). The catalog is untracked and generated
+on demand: the `owl` CI job regenerates it before reasoning
+(`owl-prepare-command`), and locally you rerun
+`scripts/generate_catalog.py` after adding, removing, or renaming any
+ontology file.
 
 Note for debugging a future inconsistency: `robot explain` rejects this
 graph because `xsd:date` is outside the OWL 2 datatype map (plain

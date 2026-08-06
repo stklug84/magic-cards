@@ -42,7 +42,8 @@ packages ad hoc as listed above.
 | [`strategies/`](./strategies/) | Commander decklists built from the collection plus a Monte-Carlo matchup simulator. See [`strategies/README.md`](./strategies/README.md). |
 | [`MagicSimulationAnnotations.ttl`](./MagicSimulationAnnotations.ttl) | Simulation annotations: behavior hooks (`:hasBehaviorHook`) and AI threat weights (`:threatWeight`) consumed by the simulator — house-authored opinion kept separate from generated card facts. |
 | [`scripts/`](./scripts/) | Generator and validation tooling, the shared card data layer (`mtgcards/`), the CR-grounded rules-engine matchup simulator (`mtgrules/`, built against `MagicCompRules-20260619.txt`), and the game visualization / TUI package (`mtgviz/`). |
-| [`collection.csv`](./collection.csv) | Source inventory of the physical collection; input to the generator. |
+| `collection.csv` | Source inventory of the physical collection; input to the generator. Local and untracked (contains private data such as purchase prices) — not distributed with the repository. |
+| `catalog-v001.xml` | Generated OASIS XML catalog mapping the graph's `urn:` ontology IRIs to local files for ROBOT/Protégé. Untracked — regenerate with `python3 scripts/generate_catalog.py`. |
 | `MagicCompRules-*.txt` | Magic: The Gathering Comprehensive Rules text referenced by ontology comments. |
 
 ## Running queries with Apache Jena `arq`
@@ -110,7 +111,10 @@ engines: rdflib, GraphDB, Stardog, Blazegraph).
 ## Regenerating set and collection files
 
 Card individuals under `sets/` and the inventory graph
-`MagicCardCollection.ttl` are generated from `collection.csv`:
+`MagicCardCollection.ttl` are generated from `collection.csv`. The CSV is a
+local, untracked input (it contains private data and is not distributed with
+the repository), so regeneration is a local workflow — restore your inventory
+export to the repo root, then run:
 
 ```sh
 python3 scripts/build_vocab.py                      # extract vocabulary + master card list from the ontology
@@ -125,12 +129,10 @@ files, so it can run standalone after any inventory change in
 `collection.csv`. Every printing referenced by the deck graphs is an
 inventoried printing, so all deck cards are backed by collection entries.
 
-The same pipeline runs in CI
-([`.github/workflows/generate.yml`](./.github/workflows/generate.yml)) via the
-reusable `stklug84/github-workflows` rdf-generate workflow: every push that
-changes `collection.csv` on `main` (and every manual dispatch) regenerates the
-graph and opens a pull request with the changed files, gated by the validation
-workflow.
+Commit the regenerated files (`sets/`, `MagicCardCollection.ttl`,
+`MagicCardIndividuals.ttl`) through a pull request; the validation workflow
+gates the result. There is no CI regeneration — the inventory CSV never
+leaves your machine.
 
 ## Deck matchup simulation
 

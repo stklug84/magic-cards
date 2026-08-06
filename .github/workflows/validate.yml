@@ -18,7 +18,9 @@
 #
 #   OWL reasoning (the rdf workflow's `owl` job) reasons two roots, each
 #   over its full owl:imports closure resolved through catalog-v001.xml
-#   (the graph imports by urn: IRIs, which ROBOT cannot dereference):
+#   (the graph imports by urn: IRIs, which ROBOT cannot dereference).
+#   The catalog is untracked and regenerated in-job from the checked-out
+#   ontologies via owl-prepare-command (scripts/generate_catalog.py):
 #     - MagicCardsOntology.ttl      : TBox + set/keyword/subtype
 #                                     individuals (~2 min with HermiT)
 #     - MagicCardIndividuals.ttl    : + all per-set instance graphs under
@@ -47,12 +49,13 @@ jobs:
   # under queries/, plus OWL reasoning over the ontology and the full
   # per-set instance-graph closure (see the header comment).
   rdf:
-    uses: stklug84/github-workflows/.github/workflows/rdf-validate.yml@v1.21.0
+    uses: stklug84/github-workflows/.github/workflows/rdf-validate.yml@v1.22.0
     with:
       turtle-glob: "**/*.ttl"
       sparql-glob: "queries/**/*.rq"
       owl-files: "MagicCardsOntology.ttl MagicCardIndividuals.ttl"
       owl-catalog: "catalog-v001.xml"
+      owl-prepare-command: "python3 scripts/generate_catalog.py"
 
   ttl-lint:
     name: TTL conventions and imports (rdflib)
