@@ -12,10 +12,11 @@ generate:
                                 individual (_labels) and the setCode ->
                                 Set-individual map (_setcodes).
   2. /tmp/existing_cards.json - card individuals defined outside sets/*.ttl
-                                (MagicCardsOntology.ttl and
-                                MagicExternalCards.ttl), so the generator can
-                                skip printings already modelled in the master
-                                files and suffix colliding individual names.
+                                (MagicCardsOntology.ttl plus, when present,
+                                an out-of-collection MagicExternalCards.ttl),
+                                so the generator can skip printings already
+                                modelled in the master files and suffix
+                                colliding individual names.
 
 Exit code 0 on success, 1 on any failure.
 
@@ -128,6 +129,10 @@ def build_existing() -> list[dict[str, str]]:
     """Collect card individuals defined outside sets/*.ttl."""
     existing: list[dict[str, str]] = []
     for filename in EXISTING_SOURCES:
+        # MagicExternalCards.ttl lives in a separate private repository
+        # and is only honored when a copy is present locally
+        if not (ROOT / filename).exists():
+            continue
         graph = Graph()
         graph.parse(ROOT / filename, format="turtle")
         for card in sorted(

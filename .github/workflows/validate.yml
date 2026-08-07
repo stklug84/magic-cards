@@ -13,8 +13,9 @@
 #     - ttl-lint          : repo conventions and imports (validate_ttl.py)
 #     - sparql-lint       : prefixes and term usage (validate_sparql.py)
 #     - graph-consistency : cross-file graph checks (check_consistency.py)
-#     - simulator-tests   : rules engine + viz unit tests and a 3-game
-#                           smoke matchup
+#     - simulator-tests   : rules engine + viz unit tests (deck-data
+#                           integration tests live in the private
+#                           magic-decks repository)
 #
 #   OWL reasoning (the rdf workflow's `owl` job) reasons two roots, each
 #   over its full owl:imports closure resolved through catalog-v001.xml
@@ -45,7 +46,7 @@ permissions:
 
 jobs:
   # Turtle syntax (riot --validate) + SPARQL grammar (rdflib) for every
-  # *.ttl in the repo (root ontologies, decks/, sets/) and every query
+  # *.ttl in the repo (root ontologies, sets/) and every query
   # under queries/, plus OWL reasoning over the ontology and the full
   # per-set instance-graph closure (see the header comment).
   rdf:
@@ -164,14 +165,3 @@ jobs:
         run: |
           set -euo pipefail
           python3 -m unittest discover -s mtgviz/tests -t .
-
-      - name: "Smoke: 3-game matchup with stats report"
-        run: |
-          set -euo pipefail
-          # --offline: hermetic CI - no live Scryfall lookups (rate limits
-          # would make this flaky); card data comes from the knowledge graph
-          python3 scripts/simulate_matchup.py \
-            strategies/station-swarm-counter-deck.txt \
-            strategies/blight-curse-deck.txt \
-            --games 3 --seed 7 --offline | tee /tmp/report.txt
-          grep -q "wins" /tmp/report.txt

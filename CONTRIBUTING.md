@@ -23,14 +23,13 @@ to be reusable — contributions to either are welcome.
 
 | Path | Purpose |
 | --- | --- |
-| `MagicCards*.ttl`, `MagicExternalCards.ttl`, `MagicSimulationAnnotations.ttl` | Root ontologies and individuals (the knowledge graph) |
+| `MagicCards*.ttl`, `MagicSimulationAnnotations.ttl` | Root ontologies and individuals (the knowledge graph) |
 | `queries/` | SPARQL query library, one numbered topic directory per area (see `queries/INDEX.md`) |
 | `scripts/mtgcards/` | Card data model, deck loading, TTL-backed card database |
 | `scripts/mtgrules/` | Comprehensive-Rules engine (stdlib only) + conformance tests |
 | `scripts/mtgviz/` | Game visualization: recorder, replay, live TUI + tests |
 | `scripts/*.py` | Entry points: validators, consistency check, generators, matchup simulator |
-| `decks/`, `sets/` | Per-deck and per-set TTL slices |
-| `strategies/` | Deck lists and strategy notes for the simulator |
+| `sets/` | Per-set TTL slices (generated card individuals) |
 
 The reusable workflows (`rdf-validate.yml`, `python-validate.yml`) live in
 the central
@@ -101,8 +100,7 @@ python3 -m unittest discover -s mtgrules/tests -t .
 python3 -m unittest discover -s mtgviz/tests -t .
 cd ..
 python3 scripts/simulate_matchup.py \
-  strategies/station-swarm-counter-deck.txt \
-  strategies/blight-curse-deck.txt --games 3 --seed 7
+  YOUR_DECK1.txt YOUR_DECK2.txt --games 3 --seed 7
 ```
 
 Python strictness: ruff runs with `select = ["ALL"]` and only permanent,

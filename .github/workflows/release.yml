@@ -1,0 +1,82 @@
+---
+# title: Release workflow
+# authors:
+#   - Steffen Klug <45033201+stklug84@users.noreply.github.com>
+# date: 2026-08-06
+# keywords: [infrastructure, packaging, release]
+# comment: |
+#   Builds the magic-cards-tools Python artifact (wheel + sdist) on
+#   version tags (v*) and publishes it as a GitHub Release. The tag must
+#   match the version in pyproject.toml (vX.Y.Z <-> X.Y.Z); the built
+#   wheel is smoke-tested (install + CLI --help against the checked-out
+#   knowledge graph) before the release is created.
+# ---
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-release:
+    name: Build wheel + sdist and publish release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Check tag matches pyproject version
+        run: |
+          set -euo pipefail
+          script='import tomllib; print(tomllib.load(open("pyproject.toml", "rb"))["project"]["version"])'
+          pyver="$(python3 -c "$script")"
+          tag="${GITHUB_REF_NAME#v}"
+          if [ "$pyver" != "$tag" ]; then
+            echo "::error::tag v${tag} does not match pyproject version ${pyver}"
+            exit 1
+          fi
+
+      - name: Build wheel and sdist
+        run: |
+          set -euo pipefail
+          pip install build
+          python3 -m build
+
+      # The rules engine validates its @rule annotations against the CR
+      # text at import time; the text is not distributed (see README).
+      - name: Download Comprehensive Rules (smoke test input)
+        env:
+          CR_DATE: "20260619"
+        run: |
+          set -euo pipefail
+          curl -fsSL -o "MagicCompRules-${CR_DATE}.txt" \
+            "https://media.wizards.com/2026/downloads/MagicCompRules%20${CR_DATE}.txt"
+
+      - name: Smoke-test the wheel
+        env:
+          MTG_GRAPH_ROOT: ${{ github.workspace }}
+        run: |
+          set -euo pipefail
+          python3 -m venv /tmp/smoke
+          /tmp/smoke/bin/pip install dist/*.whl
+          /tmp/smoke/bin/python -c "import mtgcards, mtgviz"
+          /tmp/smoke/bin/mtg-simulate --help > /dev/null
+          /tmp/smoke/bin/mtg-selfplay --help > /dev/null
+
+      - name: Create GitHub Release with artifacts
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          gh release create "$GITHUB_REF_NAME" dist/* \
+            --title "magic-cards-tools $GITHUB_REF_NAME" \
+            --generate-notes

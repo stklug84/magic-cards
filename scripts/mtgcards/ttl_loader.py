@@ -1,6 +1,6 @@
 """Card characteristics from the TTL knowledge graph.
 
-Reads sets/*.ttl and MagicExternalCards.ttl with regex-based extraction
+Reads sets/*.ttl plus optional extra card graphs with regex-based extraction
 (no rdflib dependency) of the fields the simulator needs: name, mana cost,
 mana value, types, subtypes, color identity, power/toughness and oracle
 text. Results are indexed by full card name and, for double-faced cards,

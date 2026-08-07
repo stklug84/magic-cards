@@ -3,6 +3,10 @@
 A seeded game's viz stream must be complete, JSON-serializable,
 navigable, and its final snapshot must match the engine record.
 Run from the scripts/ directory (mtgcards/mtgrules/mtgviz importable).
+
+The fixture decks are synthetic lists of cards from the public
+knowledge graph (sets/*.ttl); the real deck pool lives in the private
+magic-decks repository together with its own integration tests.
 """
 
 import json
@@ -16,6 +20,11 @@ from mtgviz.tui import ViewState, format_event
 
 REPO = Path(__file__).resolve().parent.parent.parent.parent
 
+#: synthetic fixture pool: cards guaranteed by the public sets/*.ttl graphs
+_COMMANDER = "Pia Nalaar, Chief Mechanic"
+_SPELLS = ["Sol Ring", "Arcane Signet"]
+_LANDS = ["Swamp"] * 38
+
 
 def _run_recorded(
     seed: int = 11,
@@ -25,13 +34,18 @@ def _run_recorded(
     # Deferred: pulls in the rules engine and the card graph, which the
     # pure-navigation tests below do not need at import time. RUF100 is
     from mtgcards.database import CardDatabase  # noqa: PLC0415
-    from mtgcards.deck import load_deck  # noqa: PLC0415
+    from mtgcards.deck import Deck  # noqa: PLC0415
     from mtgrules.adapter import MatchOptions, run_game  # noqa: PLC0415
 
     db = CardDatabase(REPO)
     decks = [
-        load_deck(REPO / "strategies" / "station-swarm-counter-deck.txt"),
-        load_deck(REPO / "strategies" / "blight-curse-deck.txt"),
+        Deck(
+            name=f"Fixture #{i}",
+            path=f"fixture-{i}.txt",
+            cards=[*_SPELLS, *_LANDS],
+            commander=_COMMANDER,
+        )
+        for i in (1, 2)
     ]
     sink_records: list[dict[str, Any]] = []
     rec: dict[str, Any] = run_game(

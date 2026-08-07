@@ -99,6 +99,15 @@ def build_parser() -> argparse.ArgumentParser:
         "all cards from the knowledge graph (hermetic runs, e.g. CI)",
     )
     ap.add_argument(
+        "--extra-cards",
+        action="append",
+        default=[],
+        metavar="FILE.ttl",
+        help="additional card TTL graph merged on top of sets/*.ttl "
+        "(repeatable), e.g. an out-of-collection "
+        "MagicExternalCards.ttl kept next to private deck graphs",
+    )
+    ap.add_argument(
         "--profile",
         action="append",
         default=[],
@@ -360,7 +369,7 @@ def main(argv: list[str] | None = None) -> None:
         sys.exit(f"invalid --seeds value: {args.seeds!r}")
 
     deck_paths = _deck_paths(args)
-    db = CardDatabase(REPO, args.custom_cards)
+    db = CardDatabase(REPO, args.custom_cards, extra_graphs=args.extra_cards)
     decks = _load_decks(deck_paths, db)
     _resolve_txt_decks(decks, db, offline=args.offline)
     profiles = _parse_profiles(args.profile, len(decks))

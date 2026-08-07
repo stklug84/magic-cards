@@ -143,27 +143,17 @@ class TestCompiler(unittest.TestCase):
         compile_card(_Ref("Weirdo", "Whenever you flip a coin, untangle all webs."))
         self.assertIn("Weirdo", UNKNOWN_CLAUSES)
 
-    def test_full_pool_compiles(self) -> None:
-        """Every card of the repo deck pool compiles."""
+    def test_graph_cards_compile(self) -> None:
+        """Every inventoried card of the knowledge graph compiles."""
         # Deferred: loading the knowledge graph is expensive and only
         # this test needs it. RUF100: PLC0415 is still globally ignored.
         from mtgcards.database import CardDatabase  # noqa: PLC0415
-        from mtgcards.deck import load_deck  # noqa: PLC0415
 
         db = CardDatabase(REPO)
-        names: set[str | None] = set()
-        for f in (
-            "strategies/station-swarm-counter-deck.txt",
-            "strategies/blight-curse-deck.txt",
-        ):
-            d = load_deck(REPO / f)
-            names.update(d.cards)
-            names.add(d.commander)
-        for n in names:
-            if n is None:
-                continue
-            ch = compile_card(db.get(n))
-            self.assertEqual(ch.name, db.get(n).name)
+        self.assertGreater(len(db.index), 0)
+        for name, card in db.index.items():
+            ch = compile_card(card)
+            self.assertEqual(ch.name, card.name, name)
 
 
 if __name__ == "__main__":

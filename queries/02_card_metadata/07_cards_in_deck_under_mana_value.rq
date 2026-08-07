@@ -12,7 +12,7 @@ PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
 
 SELECT ?deckName ?cardName ?manaValue ?manaCost WHERE {
   # To restrict to specific deck(s), uncomment and edit:
-  # VALUES ?deck { mc:SaheeliRadiantCreatorDeck }
+  # VALUES ?deck { mc:SomeDeck }
   VALUES ?maxMV { 4 }
 
   ?deck mc:hasCard ?c .

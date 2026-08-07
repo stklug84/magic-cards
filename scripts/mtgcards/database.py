@@ -1,8 +1,9 @@
 """Card database assembly from the TTL knowledge graph.
 
 Resolution order (later layers override earlier ones):
-  1. TTL knowledge graph (sets/*.ttl + MagicExternalCards.ttl) - the single
-     source of card characteristics
+  1. TTL knowledge graph (sets/*.ttl plus any extra card graphs, e.g. an
+     out-of-collection MagicExternalCards.ttl) - the single source of
+     card characteristics
   2. custom cards JSON (opt-in via --custom-cards) - unreleased/unverified
      cards only; no default file is loaded
   3. Scryfall API (resolve_scryfall) - cards of txt decklists, fetched by
@@ -62,8 +63,16 @@ class CardDatabase:
         self,
         repo_root: str | Path,
         custom_cards_path: str | Path | None = None,
+        extra_graphs: Iterable[str | Path] = (),
     ) -> None:
-        """Load every layer and derive behavior for each unique card."""
+        """Load every layer and derive behavior for each unique card.
+
+        *extra_graphs* are additional card TTL graphs merged on top of
+        sets/*.ttl - e.g. an out-of-collection MagicExternalCards.ttl
+        kept in a separate repository (missing files are skipped). A
+        MagicSimulationAnnotations.ttl sitting next to an extra graph is
+        loaded on top of the repo-root annotations.
+        """
         self.index: dict[str, CardData] = {}
         #: {individual local name: card name} for every card individual in
         #: the graph; deck instance graphs (.ttl decks) resolve through it
@@ -72,11 +81,21 @@ class CardDatabase:
         hooks_by_name: dict[str, dict[str, Any]] = {}
         sets_dir = Path(repo_root) / "sets"
         if sets_dir.is_dir():
-            # out-of-collection cards referenced by deck graphs
-            external = Path(repo_root) / "MagicExternalCards.ttl"
-            self.index.update(load_graph_cards(sets_dir, (external,), ind2name))
-            # simulation annotations (behavior hooks, threat weights)
+            # out-of-collection cards referenced by deck graphs (a local
+            # MagicExternalCards.ttl is honored when present)
+            extras = (Path(repo_root) / "MagicExternalCards.ttl", *extra_graphs)
+            self.index.update(load_graph_cards(sets_dir, extras, ind2name))
+            # simulation annotations (behavior hooks, threat weights),
+            # merged with any annotation file next to an extra card graph
             hooks_by_name = load_annotations(Path(repo_root), ind2name)
+            seen_dirs = {Path(repo_root).resolve()}
+            for extra in extras:
+                extra_dir = Path(extra).resolve().parent
+                if extra_dir in seen_dirs or not Path(extra).exists():
+                    continue
+                seen_dirs.add(extra_dir)
+                for name, hooks in load_annotations(extra_dir, ind2name).items():
+                    hooks_by_name.setdefault(name, {}).update(hooks)
         # custom layer (opt-in, overrides the graph)
         if custom_cards_path:
             custom = Path(custom_cards_path)

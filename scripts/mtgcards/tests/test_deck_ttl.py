@@ -9,8 +9,6 @@ from pathlib import Path
 from mtgcards.deck import load_deck
 from mtgcards.deck_ttl import load_deck_ttl
 
-REPO = Path(__file__).resolve().parent.parent.parent.parent
-
 _IND2NAME = {
     "AuntieOolCursewretch": "Auntie Ool, Cursewretch",
     "SolRingAetherdriftCommander57": "Sol Ring",
@@ -120,27 +118,20 @@ class TestLoadDeckDispatch(unittest.TestCase):
 
     def test_txt_unaffected(self) -> None:
         """Plain txt decklists keep the existing parser and fmt tag."""
-        deck = load_deck(REPO / "strategies" / "blight-curse-deck.txt")
+        text = "// Commander\n1 Pia Nalaar, Chief Mechanic\n// Main\n3 Swamp\n"
+        with tempfile.NamedTemporaryFile(
+            "w",
+            suffix=".txt",
+            delete=False,
+            encoding="utf-8",
+        ) as f:
+            f.write(text)
+            path = Path(f.name)
+        self.addCleanup(path.unlink)
+        deck = load_deck(path)
         self.assertEqual(deck.fmt, "txt")
-        self.assertIsNotNone(deck.commander)
-        self.assertGreater(deck.size, 0)
-
-
-class TestRepoDeckGraphs(unittest.TestCase):
-    """The checked-in decks/*.ttl graphs parse against the real graph."""
-
-    def test_blight_curse_deck(self) -> None:
-        """decks/BlightCurseTest.ttl resolves fully to a 100-card deck."""
-        # Deferred: keep the expensive graph load out of module import.
-        from mtgcards.database import CardDatabase  # noqa: PLC0415
-
-        db = CardDatabase(REPO)
-        deck = load_deck(REPO / "decks" / "BlightCurseTest.ttl", db.ind2name)
-        self.assertEqual(deck.commander, "Auntie Ool, Cursewretch")
-        self.assertEqual(deck.size, 100)
-        # every resolved name is a graph card, not a stub
-        for name in deck.cards:
-            self.assertEqual(db.get(name).source, "graph", name)
+        self.assertEqual(deck.commander, "Pia Nalaar, Chief Mechanic")
+        self.assertEqual(deck.size, 4)
 
 
 if __name__ == "__main__":

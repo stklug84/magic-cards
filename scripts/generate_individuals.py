@@ -1194,7 +1194,8 @@ def _augment_block(
 def cmd_augment_mana() -> None:
     """Backfill :producesMana / :entersTapped / :isFetchLand triples.
 
-    Post-processes the existing sets/*.ttl and MagicExternalCards.ttl card
+    Post-processes the existing sets/*.ttl (and, when a local copy is
+    present, MagicExternalCards.ttl) card
     blocks in place (keyed by :scryfallUrl against the Scryfall cache,
     fetching uncached printings on demand). Idempotent: blocks that already
     carry mana-fact triples are left untouched. Avoids a full `generate`

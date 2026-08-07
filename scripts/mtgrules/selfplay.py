@@ -228,6 +228,13 @@ def main(argv: list[str] | None = None) -> None:
         metavar="KNOB=v1,v2",
         help="grid axis, repeatable (e.g. aggression=0.7,1.5)",
     )
+    ap.add_argument(
+        "--extra-cards",
+        action="append",
+        default=[],
+        metavar="FILE.ttl",
+        help="additional card TTL graph merged on top of sets/*.ttl (repeatable)",
+    )
     args = ap.parse_args(argv)
 
     if len(args.decks) == 1:
@@ -237,7 +244,7 @@ def main(argv: list[str] | None = None) -> None:
         decks = [load_deck(f) for f in args.decks]
     else:
         sys.exit("pass 1 (mirror) or 2 decklist files")
-    db = CardDatabase(REPO)
+    db = CardDatabase(REPO, extra_graphs=args.extra_cards)
     seeds = [args.seed + i for i in range(args.seeds)]
     settings = SelfplaySettings(
         games=args.games,

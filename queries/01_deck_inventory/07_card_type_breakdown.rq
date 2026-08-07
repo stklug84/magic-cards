@@ -11,7 +11,7 @@ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
 SELECT ?deckName ?typeLabel (COUNT(DISTINCT ?c) AS ?cardCount) WHERE {
   # To restrict to specific deck(s), uncomment and edit:
-  # VALUES ?deck { mc:SaheeliRadiantCreatorDeck }
+  # VALUES ?deck { mc:SomeDeck }
 
   ?deck mc:hasCard ?c .
   ?c mc:hasCardType ?t .
