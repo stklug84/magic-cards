@@ -44,7 +44,7 @@ the CI pins):
 ```sh
 ruff check scripts/
 ruff format --check scripts/
-mypy                              # reads [tool.mypy]; non-strict for now
+mypy                              # reads [tool.mypy]; strict = true
 bandit -c pyproject.toml -r scripts
 ```
 
@@ -126,13 +126,13 @@ justification comment.
   hand-bump pinned versions in a feature PR; let Dependabot do it, or
   open a dedicated PR.
 
-## Branch protection (pending)
+## Branch protection
 
-This repository is currently **private on a free plan**, so repository
-rulesets and CodeQL/GHAS are unavailable. Once the repo is public (or on
-a Pro/Team plan), apply the ruleset below — it mirrors the
-`curriculum-vitae` "Update main" ruleset (minus the CodeQL rules, which
-this repo cannot use) with this repo's required status checks:
+This repository is **public**, which enables repository rulesets and
+CodeQL code scanning on the free plan. The `main` branch is governed by
+the "Update main" ruleset below — it mirrors the `curriculum-vitae` and
+`actions` rulesets with this repo's required status checks (including
+the two CodeQL analyze jobs from `.github/workflows/codeql.yml`):
 
 ```json
 {
@@ -157,7 +157,7 @@ this repo cannot use) with this repo's required status checks:
         "required_approving_review_count": 0,
         "dismiss_stale_reviews_on_push": true,
         "required_reviewers": [],
-        "require_code_owner_review": false,
+        "require_code_owner_review": true,
         "require_last_push_approval": false,
         "required_review_thread_resolution": false,
         "allowed_merge_methods": ["merge", "squash", "rebase"]
@@ -181,7 +181,9 @@ this repo cannot use) with this repo's required status checks:
           { "context": "TTL conventions and imports (rdflib)" },
           { "context": "SPARQL syntax, prefixes, and terms" },
           { "context": "Cross-file graph consistency" },
-          { "context": "Rules engine + viz unit tests" }
+          { "context": "Rules engine + viz unit tests" },
+          { "context": "Analyze (actions)" },
+          { "context": "Analyze (python)" }
         ]
       }
     }
@@ -194,6 +196,27 @@ Apply with:
 
 ```sh
 gh api -X POST repos/stklug84/magic-cards/rulesets --input ruleset.json
+```
+
+Once the first CodeQL runs on `main` are clean, additionally add the
+`code_scanning` rule (mirroring `stklug84/actions`) so scanning results
+gate merges — the `security-extended` suite includes the unpinned-tag
+query, which flags floating first-party tags (`actions/checkout@v7`) as
+warnings, so verify the alert set first:
+
+```json
+{
+  "type": "code_scanning",
+  "parameters": {
+    "code_scanning_tools": [
+      {
+        "tool": "CodeQL",
+        "security_alerts_threshold": "high_or_higher",
+        "alerts_threshold": "errors"
+      }
+    ]
+  }
+}
 ```
 
 ## Checklist before opening a PR

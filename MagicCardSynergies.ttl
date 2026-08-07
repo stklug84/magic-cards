@@ -11,6 +11,10 @@
 # intellectual property of Wizards of the Coast LLC and/or their respective
 # owners. This work is made available under the Wizards of the Coast Fan
 # Content Policy (https://company.wizards.com/en/legal/fancontentpolicy).
+#
+# SPDX-License-Identifier: CC-BY-SA-4.0
+# The CC BY-SA 4.0 licence applies to the modelling only; see
+# LICENSE-DATA.md for the Wizards of the Coast carve-out.
 # ==============================================================================
 
 @prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -29,6 +33,7 @@
 
 <urn:stklug84:MagicCardSynergies:2026-07-19#>
     rdf:type owl:Ontology ;
+    <http://purl.org/dc/terms/license> <https://creativecommons.org/licenses/by-sa/4.0/> ;
     owl:imports <urn:stklug84:MagicCardsOntology:2026-02-27#> ;
     owl:imports <urn:stklug84:MagicCardIndividuals:2026-07-19#> ;
     rdfs:label "Magic Card Synergies"@en ;
