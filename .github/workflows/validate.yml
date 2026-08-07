@@ -44,6 +44,13 @@ on:
 permissions:
   contents: read
 
+# One run per ref: a new push supersedes the in-flight validation of the
+# same branch (the OWL reasoning job alone takes ~8 minutes). Runs on
+# main are never cancelled mid-flight.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+
 jobs:
   # Turtle syntax (riot --validate) + SPARQL grammar (rdflib) for every
   # *.ttl in the repo (root ontologies, sets/) and every query

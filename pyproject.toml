@@ -8,9 +8,21 @@ version = "0.1.0"
 description = "Simulation tooling for the MTG knowledge graph: CR-grounded Commander matchup simulator, card data layer, and game visualization."
 readme = "README.md"
 requires-python = ">=3.12"
+license = "MIT"
+license-files = ["LICENSE"]
 # the packaged simulator is stdlib-only; the knowledge graph itself is
 # not bundled - point MTG_GRAPH_ROOT at a magic-cards checkout
 dependencies = []
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Games/Entertainment :: Board Games",
+    # distributed via GitHub Releases only; rejected by PyPI on purpose
+    "Private :: Do Not Upload",
+]
 
 [project.optional-dependencies]
 tui = ["rich"]
@@ -19,6 +31,9 @@ dev = ["rdflib>=7,<8"]
 
 [project.urls]
 Homepage = "https://github.com/stklug84/magic-cards"
+Source = "https://github.com/stklug84/magic-cards"
+Issues = "https://github.com/stklug84/magic-cards/issues"
+Releases = "https://github.com/stklug84/magic-cards/releases"
 
 [project.scripts]
 mtg-simulate = "mtgrules.cli:main"
@@ -38,6 +53,7 @@ only-include = [
     "scripts/mtgviz",
     "pyproject.toml",
     "README.md",
+    "LICENSE",
 ]
 
 [tool.ruff]

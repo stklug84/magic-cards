@@ -1,0 +1,65 @@
+---
+# title: CodeQL code scanning workflow
+# authors:
+#   - Steffen Klug <45033201+stklug84@users.noreply.github.com>
+# date: 2026-08-07
+# keywords: [infrastructure, security]
+# comment: |
+#   CodeQL code scanning over a language matrix:
+#     - actions : .github/workflows/* (expression injection, excessive
+#                 permissions, untrusted checkout, artifact/cache
+#                 poisoning, ...).
+#     - python  : the mtgcards/mtgrules/mtgviz packages and the graph
+#                 tooling under scripts/ — taint, unsafe
+#                 deserialization, path traversal, command/template
+#                 injection, ...
+#   Both use build-mode `none` (no compilation needed) and the
+#   security-extended suite, which adds the unpinned-tag query for
+#   actions. Mirrors the codeql.yml in stklug84/actions and
+#   stklug84/github-workflows.
+# ---
+name: CodeQL
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+  schedule:
+    # Weekly run to pick up newly released queries.
+    - cron: '30 5 * * 1'
+
+permissions:
+  contents: read
+
+jobs:
+  analyze:
+    name: Analyze (${{ matrix.language }})
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+      contents: read
+      actions: read
+    strategy:
+      fail-fast: false
+      matrix:
+        language:
+          - actions
+          - python
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v4
+        with:
+          languages: ${{ matrix.language }}
+          build-mode: none
+          queries: security-extended
+
+      - name: Perform CodeQL analysis
+        uses: github/codeql-action/analyze@v4
+        with:
+          category: /language:${{ matrix.language }}

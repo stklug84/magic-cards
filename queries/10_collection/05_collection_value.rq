@@ -2,6 +2,12 @@
 # all entries that carry a purchase price, plus coverage statistics showing
 # how many entries have a recorded price.
 #
+# NOTE: the published MagicCardCollection.ttl carries no mc:purchasePrice
+# triples — prices stay in the local, untracked collection.csv. Against
+# the shipped graph this query therefore reports recordedValue = 0 and
+# pricedCopies = 0; it becomes meaningful against a locally regenerated
+# collection graph that includes prices.
+#
 # PARAMETERS:
 #   ?collection - the collection to query
 

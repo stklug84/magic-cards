@@ -1,0 +1,13 @@
+# ---
+# title: Shellcheck configuration file
+# authors:
+#   - Steffen Klug <45033201+stklug84@users.noreply.github.com>
+# date: 2026-08-07
+# keywords: [infrastructure, linting]
+# comment: |
+#   Disable/Enable shellcheck checks
+# ---
+
+# Disable SC2155 (warning):
+#         Declare and assign separately to avoid masking return values.
+disable=SC2155
