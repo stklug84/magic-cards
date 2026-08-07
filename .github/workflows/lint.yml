@@ -27,6 +27,12 @@ on:
 permissions:
   contents: read
 
+# One run per ref: a new push supersedes the in-flight lint of the same
+# pull request.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   actionlint:
     name: actionlint (workflows)
