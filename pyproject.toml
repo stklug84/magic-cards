@@ -1,10 +1,43 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
 [project]
 name = "magic-cards-tools"
-version = "0.0.0"
-description = "Validation and simulation tooling for the MTG knowledge graph (dev/CI only)."
+version = "0.1.0"
+description = "Simulation tooling for the MTG knowledge graph: CR-grounded Commander matchup simulator, card data layer, and game visualization."
+readme = "README.md"
 requires-python = ">=3.12"
-dependencies = [
-    "rdflib>=7,<8",
+# the packaged simulator is stdlib-only; the knowledge graph itself is
+# not bundled - point MTG_GRAPH_ROOT at a magic-cards checkout
+dependencies = []
+
+[project.optional-dependencies]
+tui = ["rich"]
+# rdflib powers the repo-only validation/generator scripts (not packaged)
+dev = ["rdflib>=7,<8"]
+
+[project.urls]
+Homepage = "https://github.com/stklug84/magic-cards"
+
+[project.scripts]
+mtg-simulate = "mtgrules.cli:main"
+mtg-selfplay = "mtgrules.selfplay:main"
+
+[tool.hatch.build.targets.wheel]
+packages = [
+    "scripts/mtgcards",
+    "scripts/mtgrules",
+    "scripts/mtgviz",
+]
+
+[tool.hatch.build.targets.sdist]
+only-include = [
+    "scripts/mtgcards",
+    "scripts/mtgrules",
+    "scripts/mtgviz",
+    "pyproject.toml",
+    "README.md",
 ]
 
 [tool.ruff]

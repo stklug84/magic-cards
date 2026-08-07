@@ -22,6 +22,7 @@ traceability, tests, and error messages.
 from __future__ import annotations
 
 import functools
+import os
 import re
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -30,7 +31,11 @@ from typing import TYPE_CHECKING, Any, TypeVar, cast
 if TYPE_CHECKING:
     from collections.abc import Callable
 
-_REPO = Path(__file__).resolve().parent.parent.parent
+#: where MagicCompRules-*.txt is searched: a magic-cards checkout.
+#: Installed packages point MTG_GRAPH_ROOT at one.
+_REPO = Path(
+    os.environ.get("MTG_GRAPH_ROOT") or Path(__file__).resolve().parent.parent.parent,
+)
 
 _RULE_RE = re.compile(r"^(\d{3}(?:\.\d+[a-z]?)?)\.?\s+(.*)$")
 _SECTION_RE = re.compile(r"^(\d)\. (.+)$")

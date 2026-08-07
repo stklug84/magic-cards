@@ -13,7 +13,7 @@ PREFIX mc: <urn:stklug84:MagicCardsOntology:2026-02-27#>
 CONSTRUCT { ?c mc:quantity ?q }
 WHERE {
   # To restrict to specific deck(s), uncomment and edit:
-  # VALUES ?deck { mc:SaheeliRadiantCreatorDeck }
+  # VALUES ?deck { mc:SomeDeck }
 
   ?deck mc:hasDeckEntry ?e .
   ?e mc:entryCard ?c ;

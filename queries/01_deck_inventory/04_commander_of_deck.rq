@@ -9,7 +9,7 @@ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
 SELECT ?deckName ?commander ?commanderName WHERE {
   # To restrict to specific deck(s), uncomment and edit:
-  # VALUES ?deck { mc:SaheeliRadiantCreatorDeck }
+  # VALUES ?deck { mc:SomeDeck }
 
   ?commander mc:isCommanderOf ?deck ;
              mc:cardName ?commanderName .

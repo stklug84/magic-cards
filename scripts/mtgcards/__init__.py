@@ -1,7 +1,7 @@
 """mtgcards - shared card data layer for the rules engine.
 
-Card characteristics come from the TTL knowledge graph (sets/*.ttl +
-MagicExternalCards.ttl), enriched by oracle-text derivation and
+Card characteristics come from the TTL knowledge graph (sets/*.ttl plus
+optional extra card graphs), enriched by oracle-text derivation and
 hand-authored behavior hooks (MagicSimulationAnnotations.ttl).
 
   cards.py       card model + oracle-text derivation

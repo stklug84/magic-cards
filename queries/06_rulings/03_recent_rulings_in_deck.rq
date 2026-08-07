@@ -12,7 +12,7 @@ PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
 
 SELECT ?deckName ?cardName ?date ?text WHERE {
   # To restrict to specific deck(s), uncomment and edit:
-  # VALUES ?deck { mc:SaheeliRadiantCreatorDeck }
+  # VALUES ?deck { mc:SomeDeck }
   VALUES ?cutoff { "2020-01-01"^^xsd:date }
 
   ?deck mc:hasCard ?c .

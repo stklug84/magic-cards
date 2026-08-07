@@ -2,8 +2,9 @@
 
 Reusable SPARQL 1.1 queries for the **Magic Cards Ontology** (`MagicCardsOntology.ttl`) and any instance graph
 that conforms to it. The reference dataset is the card collection in `sets/*.ttl` (aggregated by
-`MagicCardIndividuals.ttl`) together with the inventory graph `MagicCardCollection.ttl`, the deck graph
-`decks/SaheeliRadiantCreator.ttl` and the synergy graph `MagicCardSynergies.ttl`.
+`MagicCardIndividuals.ttl`) together with the inventory graph `MagicCardCollection.ttl` and the synergy graph
+`MagicCardSynergies.ttl`. Deck-scoped queries operate on deck instance graphs, which are not part of this
+repository — load your own alongside the dataset.
 
 Every query is a standalone `.rq` file with:
 
@@ -45,7 +46,7 @@ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
 SELECT ?deckName ?cardName WHERE {
   # To restrict to specific deck(s), uncomment and edit:
-  # VALUES ?deck { mc:SaheeliRadiantCreatorDeck }
+  # VALUES ?deck { mc:SomeDeck }
 
   OPTIONAL { ?deck rdfs:label ?deckName }
 
@@ -100,7 +101,7 @@ pattern is sufficient.
 ## Running the queries
 
 Most SPARQL engines do **not** follow `owl:imports` automatically, so load the ontology, the per-set instance
-files, the deck graph and the synergy graph explicitly.
+files, the synergy graph, and any deck instance graphs of your own explicitly.
 
 ### rdflib (Python)
 
@@ -111,7 +112,7 @@ from rdflib import Graph
 g = Graph()
 for ttl in ["MagicCardsOntology.ttl", "MagicCardSynergies.ttl",
             "MagicCardCollection.ttl",
-            *Path("sets").glob("*.ttl"), *Path("decks").glob("*.ttl")]:
+            *Path("sets").glob("*.ttl")]:
     g.parse(ttl, format="turtle")
 
 query = Path("queries/01_deck_inventory/01_list_all_decks.rq").read_text()
@@ -125,7 +126,7 @@ for row in g.query(query):
 arq --data MagicCardsOntology.ttl \
     --data MagicCardSynergies.ttl \
     --data MagicCardCollection.ttl \
-    $(printf -- '--data %s ' sets/*.ttl decks/*.ttl) \
+    $(printf -- '--data %s ' sets/*.ttl) \
     --query queries/01_deck_inventory/01_list_all_decks.rq
 ```
 
@@ -142,9 +143,8 @@ A few patterns recur across queries:
   `mc:isInDeck`). Copy counts are reified as `DeckEntry` individuals —
   `?deck mc:hasDeckEntry ?e . ?e mc:entryCard ?c ; mc:quantity ?n .` — and
   several queries (`01/02`, `01/03`, `01/05`, `01/08`, `07/06`) are written
-  against them. The Saheeli deck asserts one entry per unique card
-  (quantity 1 except the basic lands: 8 Island, 2 Forest, 2 Mountain;
-  total = 100).
+  against them. Commander deck graphs typically assert one entry per unique
+  card (quantity 1 except basic lands; total = 100).
 - **Physical inventory** is reified analogously in
   `MagicCardCollection.ttl`: `mc:MagicCardCollection mc:hasCollectionEntry ?e .
   ?e mc:entryCard ?c ; mc:quantity ?n ; mc:hasFinish ?f ; mc:hasCondition ?cond .`
@@ -154,13 +154,11 @@ A few patterns recur across queries:
   `DeckEntry` and `CollectionEntry` share the `mc:entryCard` / `mc:quantity`
   properties via their common superclass `mc:CardEntry` — restrict by class
   (`?e rdf:type mc:CollectionEntry`) or traverse from the container when the
-  distinction matters. Every card referenced by the Saheeli deck is an
-  inventoried printing from `collection.csv`, so all deck cards are backed by
-  collection entries.
+  distinction matters.
 - **Colors and color identity**: cards assert both `mc:hasColor` and
   `mc:hasColorIdentity`. Colorless cards are recognizable by the absence of
   any `mc:hasColorIdentity` values.
-- **Basic lands** in the Saheeli deck are distinct printing-specific Card individuals named
+- **Basic lands** in deck graphs are distinct printing-specific Card individuals named
   `mc:ForestAetherdrift291`, `mc:IslandAetherdrift282`, `mc:MountainAetherdrift288` (from the
   `sets/Aetherdrift.ttl` set graph, set code `DFT`) — the bare `mc:Forest` / `mc:Island` / `mc:Mountain`
   IRIs are reserved for the basic-land *subtype* individuals in the main ontology.

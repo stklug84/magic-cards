@@ -8,6 +8,7 @@ could not model, so nothing is skipped silently.
 from __future__ import annotations
 
 import dataclasses
+import os
 from dataclasses import dataclass
 from pathlib import Path
 from typing import TYPE_CHECKING, Any
@@ -30,7 +31,11 @@ if TYPE_CHECKING:
     from mtgrules.policy import PolicyProfile
     from mtgrules.protocols import LogFn, RecorderLike
 
-REPO = Path(__file__).resolve().parent.parent.parent
+#: knowledge-graph root: a magic-cards checkout. Defaults to the checkout
+#: this file lives in; installed packages set MTG_GRAPH_ROOT instead.
+REPO = Path(
+    os.environ.get("MTG_GRAPH_ROOT") or Path(__file__).resolve().parent.parent.parent,
+)
 
 #: rule 103.5: a London mulligan can go down to a zero-card keep at most
 #: six times from a seven-card hand

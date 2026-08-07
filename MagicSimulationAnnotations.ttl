@@ -42,16 +42,11 @@ by convention they are asserted on the printing referenced by the deck
 graphs. Keys are whitelisted in scripts/mtgsim/behaviors.py
 (BEHAVIOR_KEYS) and validated by scripts/check_consistency.py."""@en .
 
-
 ################################################################################
 #
 # Behavior Hooks and Threat Weights
 #
 ################################################################################
-
-:AberrantReturn
-    :hasBehaviorHook
-      [ rdf:type :BehaviorHook ; :behaviorKey "recursion" ; :behaviorValue "true" ] .
 
 :AcademyManufactor
     :threatWeight "4"^^xsd:nonNegativeInteger ;
@@ -92,10 +87,6 @@ graphs. Keys are whitelisted in scripts/mtgsim/behaviors.py
     :hasBehaviorHook
       [ rdf:type :BehaviorHook ; :behaviorKey "draw_on_attack" ; :behaviorValue "2" ] .
 
-:BlackSunsZenith
-    :hasBehaviorHook
-      [ rdf:type :BehaviorHook ; :behaviorKey "wipe" ; :behaviorValue "{\"style\": \"counters\", \"x\": 3}" ] .
-
 :BlasphemousActAetherdriftCommander101
     :hasBehaviorHook
       [ rdf:type :BehaviorHook ; :behaviorKey "wipe" ; :behaviorValue "{\"style\": \"damage\", \"dmg\": 13}" ] .
@@ -105,11 +96,6 @@ graphs. Keys are whitelisted in scripts/mtgsim/behaviors.py
     :hasBehaviorHook
       [ rdf:type :BehaviorHook ; :behaviorKey "drain_any" ; :behaviorValue "true" ] .
 
-:BlowflyInfestation
-    :threatWeight "9"^^xsd:nonNegativeInteger ;
-    :hasBehaviorHook
-      [ rdf:type :BehaviorHook ; :behaviorKey "chain" ; :behaviorValue "true" ] .
-
 :BootleggersStash
     :threatWeight "5"^^xsd:nonNegativeInteger ;
     :hasBehaviorHook
@@ -118,12 +104,6 @@ graphs. Keys are whitelisted in scripts/mtgsim/behaviors.py
 :BrasssBounty
     :hasBehaviorHook
       [ rdf:type :BehaviorHook ; :behaviorKey "burst_treasures" ; :behaviorValue "\"lands\"" ] .
-
-:CarnifexDemon
-    :threatWeight "8"^^xsd:nonNegativeInteger ;
-    :hasBehaviorHook
-      [ rdf:type :BehaviorHook ; :behaviorKey "mass_counters" ; :behaviorValue "1" ] ,
-      [ rdf:type :BehaviorHook ; :behaviorKey "mass_self" ; :behaviorValue "true" ] .
 
 :ChaosWarpAetherdriftCommander48
     :hasBehaviorHook
@@ -140,12 +120,6 @@ graphs. Keys are whitelisted in scripts/mtgsim/behaviors.py
     :hasBehaviorHook
       [ rdf:type :BehaviorHook ; :behaviorKey "proliferate" ; :behaviorValue "1" ] ,
       [ rdf:type :BehaviorHook ; :behaviorKey "single_counters" ; :behaviorValue "1" ] .
-
-:ContagionEngine
-    :threatWeight "9"^^xsd:nonNegativeInteger ;
-    :hasBehaviorHook
-      [ rdf:type :BehaviorHook ; :behaviorKey "etb_counter_wipe" ; :behaviorValue "1" ] ,
-      [ rdf:type :BehaviorHook ; :behaviorKey "proliferate" ; :behaviorValue "2" ] .
 
 :CrushContraband
     :hasBehaviorHook
@@ -164,10 +138,6 @@ graphs. Keys are whitelisted in scripts/mtgsim/behaviors.py
     :hasBehaviorHook
       [ rdf:type :BehaviorHook ; :behaviorKey "populate_per_turn" ; :behaviorValue "1" ] .
 
-:DiabolicIntent
-    :hasBehaviorHook
-      [ rdf:type :BehaviorHook ; :behaviorKey "tutor" ; :behaviorValue "[\"Necroskitter\", \"Skullclamp\", \"Yawgmoth, Thran Physician\", \"Soul Snuffers\"]" ] .
-
 :DispatchEdgeOfEternitiesCommander64
     :hasBehaviorHook
       [ rdf:type :BehaviorHook ; :behaviorKey "removal" ; :behaviorValue "true" ] ,
@@ -179,26 +149,15 @@ graphs. Keys are whitelisted in scripts/mtgsim/behaviors.py
     :hasBehaviorHook
       [ rdf:type :BehaviorHook ; :behaviorKey "doubler" ; :behaviorValue "2" ] .
 
-:DuskUrchins
-    :hasBehaviorHook
-      [ rdf:type :BehaviorHook ; :behaviorKey "death_tokens" ; :behaviorValue "null" ] .
-
 :EsixFractalBloom
     :threatWeight "7"^^xsd:nonNegativeInteger ;
     :hasBehaviorHook
       [ rdf:type :BehaviorHook ; :behaviorKey "esix" ; :behaviorValue "true" ] .
 
-:EverlastingTorment
-    :threatWeight "5"^^xsd:nonNegativeInteger .
-
 :EvolutionSage
     :threatWeight "5"^^xsd:nonNegativeInteger ;
     :hasBehaviorHook
       [ rdf:type :BehaviorHook ; :behaviorKey "proliferate" ; :behaviorValue "1" ] .
-
-:Exsanguinate
-    :hasBehaviorHook
-      [ rdf:type :BehaviorHook ; :behaviorKey "burst_drain" ; :behaviorValue "true" ] .
 
 :ExtravagantReplication
     :threatWeight "7"^^xsd:nonNegativeInteger ;
@@ -214,28 +173,6 @@ graphs. Keys are whitelisted in scripts/mtgsim/behaviors.py
       [ rdf:type :BehaviorHook ; :behaviorKey "removal" ; :behaviorValue "true" ] ,
       [ rdf:type :BehaviorHook ; :behaviorKey "removal_scope" ; :behaviorValue "\"cre_ench\"" ] .
 
-:FireCovenant
-    :hasBehaviorHook
-      [ rdf:type :BehaviorHook ; :behaviorKey "wipe" ; :behaviorValue "{\"style\": \"damage\", \"dmg\": 5, \"divided\": true}" ] .
-
-:FlourishingDefenses
-    :threatWeight "7"^^xsd:nonNegativeInteger ;
-    :hasBehaviorHook
-      [ rdf:type :BehaviorHook ; :behaviorKey "token_per_counter" ; :behaviorValue "true" ] .
-
-:Fury
-    :hasBehaviorHook
-      [ rdf:type :BehaviorHook ; :behaviorKey "etb_removal" ; :behaviorValue "{\"scope\": \"creature\"}" ] .
-
-:GraveTitan
-    :threatWeight "6"^^xsd:nonNegativeInteger ;
-    :hasBehaviorHook
-      [ rdf:type :BehaviorHook ; :behaviorKey "etb_tokens" ; :behaviorValue "[2, 2, 2, false]" ] .
-
-:GraveVenerations
-    :hasBehaviorHook
-      [ rdf:type :BehaviorHook ; :behaviorKey "recursion" ; :behaviorValue "true" ] .
-
 :GrowingRanks
     :threatWeight "6"^^xsd:nonNegativeInteger ;
     :hasBehaviorHook
@@ -244,11 +181,6 @@ graphs. Keys are whitelisted in scripts/mtgsim/behaviors.py
 :HangarbackWalker
     :hasBehaviorHook
       [ rdf:type :BehaviorHook ; :behaviorKey "death_tokens" ; :behaviorValue "[2, 1, 1, true]" ] .
-
-:HapatraVizierOfPoisons
-    :threatWeight "8"^^xsd:nonNegativeInteger ;
-    :hasBehaviorHook
-      [ rdf:type :BehaviorHook ; :behaviorKey "token_per_counter" ; :behaviorValue "true" ] .
 
 :HeroicIntervention
     :hasBehaviorHook
@@ -283,18 +215,10 @@ graphs. Keys are whitelisted in scripts/mtgsim/behaviors.py
     :hasBehaviorHook
       [ rdf:type :BehaviorHook ; :behaviorKey "doubler" ; :behaviorValue "2" ] .
 
-:KulrathKnight
-    :threatWeight "7"^^xsd:nonNegativeInteger ;
-    :hasBehaviorHook
-      [ rdf:type :BehaviorHook ; :behaviorKey "kulrath_lock" ; :behaviorValue "true" ] .
-
 :MarionetteApprentice
     :threatWeight "5"^^xsd:nonNegativeInteger ;
     :hasBehaviorHook
       [ rdf:type :BehaviorHook ; :behaviorKey "drain_own" ; :behaviorValue "true" ] .
-
-:MassacreGirlKnownKiller
-    :threatWeight "5"^^xsd:nonNegativeInteger .
 
 :MechanizedProductionMurdersAtKarlovManorCommander109
     :threatWeight "8"^^xsd:nonNegativeInteger ;
@@ -307,55 +231,21 @@ graphs. Keys are whitelisted in scripts/mtgsim/behaviors.py
     :hasBehaviorHook
       [ rdf:type :BehaviorHook ; :behaviorKey "draw_on_tokens" ; :behaviorValue "1" ] .
 
-:MidnightBanshee
-    :threatWeight "8"^^xsd:nonNegativeInteger ;
-    :hasBehaviorHook
-      [ rdf:type :BehaviorHook ; :behaviorKey "mass_counters" ; :behaviorValue "1" ] ,
-      [ rdf:type :BehaviorHook ; :behaviorKey "mass_self" ; :behaviorValue "true" ] .
-
 :MyrBattlesphere
     :threatWeight "5"^^xsd:nonNegativeInteger ;
     :hasBehaviorHook
       [ rdf:type :BehaviorHook ; :behaviorKey "etb_tokens" ; :behaviorValue "[4, 1, 1, true]" ] .
-
-:Necroskitter
-    :threatWeight "10"^^xsd:nonNegativeInteger ;
-    :hasBehaviorHook
-      [ rdf:type :BehaviorHook ; :behaviorKey "steal" ; :behaviorValue "true" ] .
-
-:NestOfScarabs
-    :threatWeight "7"^^xsd:nonNegativeInteger ;
-    :hasBehaviorHook
-      [ rdf:type :BehaviorHook ; :behaviorKey "token_per_counter" ; :behaviorValue "true" ] .
-
-:ObeliskSpider
-    :threatWeight "5"^^xsd:nonNegativeInteger ;
-    :hasBehaviorHook
-      [ rdf:type :BehaviorHook ; :behaviorKey "drain_on_counters" ; :behaviorValue "true" ] .
 
 :OjerTaqDeepestFoundation
     :threatWeight "9"^^xsd:nonNegativeInteger ;
     :hasBehaviorHook
       [ rdf:type :BehaviorHook ; :behaviorKey "creature_token_mult" ; :behaviorValue "3" ] .
 
-:Persist
-    :hasBehaviorHook
-      [ rdf:type :BehaviorHook ; :behaviorKey "recursion" ; :behaviorValue "true" ] .
-
-:PuppeteerClique
-    :threatWeight "5"^^xsd:nonNegativeInteger ;
-    :hasBehaviorHook
-      [ rdf:type :BehaviorHook ; :behaviorKey "grave_rob" ; :behaviorValue "true" ] .
-
 :RealityShiftMarchOfTheMachineCommander231
     :hasBehaviorHook
       [ rdf:type :BehaviorHook ; :behaviorKey "removal" ; :behaviorValue "true" ] ,
       [ rdf:type :BehaviorHook ; :behaviorKey "removal_exile" ; :behaviorValue "true" ] ,
       [ rdf:type :BehaviorHook ; :behaviorKey "removal_scope" ; :behaviorValue "\"creature\"" ] .
-
-:ReassemblingSkeleton
-    :hasBehaviorHook
-      [ rdf:type :BehaviorHook ; :behaviorKey "rebuild" ; :behaviorValue "true" ] .
 
 :ReefWorm
     :hasBehaviorHook
@@ -391,29 +281,9 @@ graphs. Keys are whitelisted in scripts/mtgsim/behaviors.py
     :hasBehaviorHook
       [ rdf:type :BehaviorHook ; :behaviorKey "hexproof_grant" ; :behaviorValue "true" ] .
 
-:Shriekmaw
-    :hasBehaviorHook
-      [ rdf:type :BehaviorHook ; :behaviorKey "etb_removal" ; :behaviorValue "{\"scope\": \"creature\"}" ] .
-
-:Skinrender
-    :threatWeight "5"^^xsd:nonNegativeInteger ;
-    :hasBehaviorHook
-      [ rdf:type :BehaviorHook ; :behaviorKey "etb_target_counters" ; :behaviorValue "3" ] .
-
-:Skullclamp
-    :threatWeight "8"^^xsd:nonNegativeInteger ;
-    :hasBehaviorHook
-      [ rdf:type :BehaviorHook ; :behaviorKey "clamp" ; :behaviorValue "true" ] .
-
 :SkyclaveApparition
     :hasBehaviorHook
       [ rdf:type :BehaviorHook ; :behaviorKey "etb_removal" ; :behaviorValue "{\"scope\": \"any\", \"exile\": true}" ] .
-
-:SoulSnuffers
-    :threatWeight "6"^^xsd:nonNegativeInteger ;
-    :hasBehaviorHook
-      [ rdf:type :BehaviorHook ; :behaviorKey "counter_wipe_self" ; :behaviorValue "true" ] ,
-      [ rdf:type :BehaviorHook ; :behaviorKey "etb_counter_wipe" ; :behaviorValue "1" ] .
 
 :SpellSwindle
     :hasBehaviorHook
@@ -424,12 +294,6 @@ graphs. Keys are whitelisted in scripts/mtgsim/behaviors.py
     :threatWeight "6"^^xsd:nonNegativeInteger ;
     :hasBehaviorHook
       [ rdf:type :BehaviorHook ; :behaviorKey "anthem" ; :behaviorValue "{\"boost\": 2, \"art_only\": true}" ] .
-
-:TheScorpionGod
-    :threatWeight "6"^^xsd:nonNegativeInteger ;
-    :hasBehaviorHook
-      [ rdf:type :BehaviorHook ; :behaviorKey "draw_per_turn" ; :behaviorValue "1" ] ,
-      [ rdf:type :BehaviorHook ; :behaviorKey "single_counters" ; :behaviorValue "1" ] .
 
 :ThopterSpyNetworkAetherdriftCommander83
     :threatWeight "7"^^xsd:nonNegativeInteger ;
@@ -452,20 +316,10 @@ graphs. Keys are whitelisted in scripts/mtgsim/behaviors.py
       [ rdf:type :BehaviorHook ; :behaviorKey "burst_treasures" ; :behaviorValue "2" ] ,
       [ rdf:type :BehaviorHook ; :behaviorKey "draw_cards" ; :behaviorValue "2" ] .
 
-:VraskaBetrayalsSting
-    :hasBehaviorHook
-      [ rdf:type :BehaviorHook ; :behaviorKey "removal" ; :behaviorValue "true" ] ,
-      [ rdf:type :BehaviorHook ; :behaviorKey "removal_scope" ; :behaviorValue "\"any\"" ] .
-
 :WhirlerVirtuosoAetherdriftCommander122
     :hasBehaviorHook
       [ rdf:type :BehaviorHook ; :behaviorKey "energy_gain" ; :behaviorValue "3" ] ,
       [ rdf:type :BehaviorHook ; :behaviorKey "energy_thopter" ; :behaviorValue "true" ] .
-
-:YawgmothThranPhysician
-    :threatWeight "9"^^xsd:nonNegativeInteger ;
-    :hasBehaviorHook
-      [ rdf:type :BehaviorHook ; :behaviorKey "yawgmoth" ; :behaviorValue "true" ] .
 
 :ZulaportCutthroat
     :threatWeight "4"^^xsd:nonNegativeInteger ;

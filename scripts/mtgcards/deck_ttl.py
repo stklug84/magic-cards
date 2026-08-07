@@ -1,6 +1,6 @@
 """Deck instance-graph (.ttl) parsing.
 
-Deck graphs (decks/*.ttl) reference card individuals; they do not embed
+Deck instance graphs (.ttl) reference card individuals; they do not embed
 card characteristics. Contents are read from the reified deck entries
 (:hasDeckEntry -> :entryCard + :quantity) with the plain :hasCard list as
 fallback (one copy each), and the commander from the :isCommanderOf

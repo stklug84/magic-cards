@@ -10,8 +10,8 @@
 PREFIX mc: <urn:stklug84:MagicCardsOntology:2026-02-27#>
 
 SELECT ?cardName ?membership WHERE {
-  VALUES ?deckA { mc:SaheeliRadiantCreatorDeck }
-  VALUES ?deckB { mc:SaheeliRadiantCreatorDeck }
+  VALUES ?deckA { mc:SomeDeck }
+  VALUES ?deckB { mc:SomeDeck }
 
   {
     ?deckA mc:hasCard ?c .

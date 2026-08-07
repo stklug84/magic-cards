@@ -17,7 +17,7 @@ CONSTRUCT {
 }
 WHERE {
   # To restrict to specific deck(s), uncomment and edit:
-  # VALUES ?deck { mc:SaheeliRadiantCreatorDeck }
+  # VALUES ?deck { mc:SomeDeck }
 
   ?deck mc:hasCard ?c .
   ?c mc:cardName    ?name ;

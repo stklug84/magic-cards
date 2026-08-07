@@ -11,7 +11,7 @@ PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
 
 SELECT ?deckName ?cardName ?cardNumber WHERE {
   # To restrict to specific deck(s), uncomment and edit:
-  # VALUES ?deck { mc:SaheeliRadiantCreatorDeck }
+  # VALUES ?deck { mc:SomeDeck }
   VALUES ?set  { mc:AetherdriftCommander }
 
   ?deck mc:hasCard ?c .
