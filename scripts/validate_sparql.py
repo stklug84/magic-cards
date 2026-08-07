@@ -66,6 +66,13 @@ def check_query(path: Path, known_terms: set[str]) -> list[str]:
     """
     rel = path.relative_to(ROOT)
     text = path.read_text(encoding="utf-8")
+    # comment lines document retargeting examples (e.g. a commented-out
+    # 'VALUES ?deck { mc:SomeDeck }' placeholder for deck graphs that
+    # live outside this repository) - exclude them from the prefix and
+    # term checks, but keep them for the syntax parse
+    code = "\n".join(
+        line for line in text.splitlines() if not line.lstrip().startswith("#")
+    )
     errors: list[str] = []
 
     # --- 1. syntax ----------------------------------------------------
@@ -75,8 +82,8 @@ def check_query(path: Path, known_terms: set[str]) -> list[str]:
         return [f"{rel}: syntax error: {exc}"]
 
     # --- 2. prefixes -------------------------------------------------
-    prefixes = {m.group(1): m.group(2) for m in PREFIX_RE.finditer(text)}
-    uses_mc = bool(MC_TERM_RE.search(text))
+    prefixes = {m.group(1): m.group(2) for m in PREFIX_RE.finditer(code)}
+    uses_mc = bool(MC_TERM_RE.search(code))
     if uses_mc and prefixes.get("mc") != MC_NS:
         errors.append(
             f"{rel}: uses mc: terms but PREFIX mc: is "
@@ -84,7 +91,7 @@ def check_query(path: Path, known_terms: set[str]) -> list[str]:
         )
 
     # --- 3. terms exist ------------------------------------------------
-    unknown = sorted({t for t in MC_TERM_RE.findall(text) if t not in known_terms})
+    unknown = sorted({t for t in MC_TERM_RE.findall(code) if t not in known_terms})
     if unknown:
         errors.append(f"{rel}: unknown mc: term(s): {', '.join(unknown)}")
     return errors
