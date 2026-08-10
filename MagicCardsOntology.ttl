@@ -132,8 +132,7 @@ See rules 100.2a and 100.6."""@en .
             rdfs:comment
             """A physical collection of Magic cards owned by a collector.
 Relates to its contents through reified collection entries that carry the
-number of copies, finish, condition and purchase price of each collected
-printing."""@en .
+number of copies, finish and condition of each collected printing."""@en .
 
 # ------------------------------------------------------------------------------
 # Card Classes (including its attribute classes)
@@ -573,15 +572,24 @@ See rules 206.1 and 206.5."""@en .
               rdf:type owl:Class ;
               owl:oneOf (
                   :English
+                  :ChineseSimplified
+                  :ChineseTraditional
+                  :French
                   :German
+                  :Italian
                   :Japanese
+                  :Korean
+                  :Portuguese
+                  :Russian
                   :Spanish
               )
           ] ;
           rdfs:label "Language" ;
           rdfs:comment
-          """Language of the card print. See rules 201.2 and
-213.1e."""@en .
+          """Language of the card print. Enumerates the eleven languages
+Magic is currently printed in; see rules 201.2 and 213.1e. Only the
+languages actually present in the collection are asserted on card
+individuals."""@en .
 
 # --- Finish Attribute Class ---
 :Finish rdf:type owl:Class ;
@@ -990,213 +998,64 @@ in Magic. See rules 205.3a and 205.3b."""@en .
 defined rules meaning in Magic. See rules 205.3c and 205.3d."""@en .
 
 
+# --- Card Entry Classes ---
+
+:CardEntry rdf:type owl:Class ;
+           rdfs:label "Card Entry" ;
+           rdfs:comment
+           """An abstract reified association between a container (such as a
+deck or a collection) and a specific card, carrying the number of copies of
+that card. Used because OWL cannot attach a literal (such as a quantity
+count) directly to an object property edge."""@en .
+
+:DeckEntry rdf:type owl:Class ;
+           rdfs:subClassOf :CardEntry ;
+           rdfs:label "Deck Entry" ;
+           rdfs:comment
+           """A reified association between a deck and a specific card,
+carrying the number of copies of that card in the deck. See rule 100.2."""@en .
+
+:CollectionEntry rdf:type owl:Class ;
+                 rdfs:subClassOf :CardEntry ;
+                 rdfs:label "Collection Entry" ;
+                 rdfs:comment
+                  """A reified association between a collection and a specific
+card printing, carrying the number of physical copies together with their
+finish and condition. Entries are grouped by variant, not by acquisition:
+one entry per distinct combination of printing, finish and condition, whose
+quantity is the total number of copies held in that variant. A printing
+collected in several finishes or conditions therefore has one entry per
+variant, and never two entries with identical attributes."""@en .
+
+# --- Simulation Annotation Classes ---
+
+:BehaviorHook rdf:type owl:Class ;
+              rdfs:label "Behavior Hook" ;
+              rdfs:comment
+              """A reified simulation annotation attaching one machine-readable
+behavior key/value pair to a card, consumed by the Monte-Carlo matchup
+simulator (scripts/mtgrules). Behavior hooks encode card semantics that cannot
+be reliably derived from oracle text by pattern matching. They are
+house-authored simulation opinion, not Wizards of the Coast card facts, and
+therefore live in the separate instance graph
+MagicSimulationAnnotations.ttl."""@en .
+
+
 ################################################################################
 #
 #  Property Definitions
 #
 ################################################################################
 
-# --- Card-related Data Properties ---
+# Object properties first, then datatype properties; each half is
+# grouped by topic. Classes belong in Class Definitions, constraint
+# classes in Constraints.
 
-:cardName rdf:type owl:DatatypeProperty ;
-      	  rdfs:domain :Card ;
-          rdfs:range xsd:string ;
-          rdfs:label "Card Name" ;
-          rdfs:comment
-           """The name of the card. See rules 201.1 and 201.2."""@en .
+############################################################
+#  Object Properties
+############################################################
 
-:manaCost rdf:type owl:DatatypeProperty ;
-          rdfs:domain :Card ;
-          rdfs:range xsd:string ;
-          rdfs:label "Mana Cost" ;
-          rdfs:comment
-          """The mana symbols required to cast the card, with
-values represented using standard Magic mana notation enclosed in braces,
-such as W, U, B, R, G, C, X, or 0. See rule 202.1."""@en .
-
-:manaValue rdf:type owl:DatatypeProperty ;
-           rdfs:domain :Card ;
-           rdfs:range xsd:nonNegativeInteger ;
-           rdfs:label "Mana Value" ;
-           rdfs:comment
-           """Total amount of mana required to cast the spell.
-Formerly known as converted mana cost (CMC). See rule 202.3."""@en .
-
-:printedText rdf:type owl:DatatypeProperty ;
-             rdfs:domain :Card ;
-             rdfs:range rdf:langString ;
-             rdfs:label "Printed Text" ;
-             rdfs:comment
-             """The text printed on the card, including the card
-name, mana cost, oracle text, flavor text, and card text.
-See rule 207.1."""@en .
-
-:oracleText rdf:type owl:DatatypeProperty ;
-            rdfs:domain :Card ;
-            rdfs:range rdf:langString ;
-            rdfs:label "Oracle Text" ;
-            rdfs:comment
-            """The official rules text of the card. See rule 108.1."""@en .
-
-:flavorText rdf:type owl:DatatypeProperty ;
-            rdfs:domain :Card ;
-            rdfs:range rdf:langString ;
-            rdfs:label "Flavor Text" ;
-            rdfs:comment
-             """The flavor text of the card. See rule 207.2b."""@en .
-
-:artist rdf:type owl:DatatypeProperty ;
-        rdfs:domain :Card ;
-        rdfs:range xsd:string ;
-        rdfs:label "Artist" ;
-        rdfs:comment
-        """The artist who illustrated the card. See rule 213.1f."""@en .
-
-:power rdf:type owl:DatatypeProperty ;
-       rdfs:domain :Card ;
-       rdfs:range xsd:string ;
-       rdfs:label "Power" ;
-       rdfs:comment
-       """The printed power of a creature card, including
-non-numeric expressions such as "*", "1+*", or "7-*".
-See rules 208.1 and 208.2."""@en .
-
-:toughness rdf:type owl:DatatypeProperty ;
-           rdfs:domain :Card ;
-           rdfs:range xsd:string ;
-           rdfs:label "Toughness" ;
-           rdfs:comment
-           """The printed toughness of a creature card, including
-non-numeric expressions such as "*", "1+*", or "7-*".
-See rules 208.1 and 208.2."""@en .
-
-:powerValue rdf:type owl:DatatypeProperty ;
-            rdfs:domain :Card ;
-            rdfs:range xsd:integer ;
-            rdfs:label "Power Value" ;
-            rdfs:comment
-            """The numeric power of a creature card when its
-printed power is a plain integer. See rule 208.1."""@en .
-
-:toughnessValue rdf:type owl:DatatypeProperty ;
-                rdfs:domain :Card ;
-                rdfs:range xsd:integer ;
-                rdfs:label "Toughness Value" ;
-                rdfs:comment
-                """The numeric toughness of a creature card when
-its printed toughness is a plain integer. See rule 208.1."""@en .
-
-:loyalty rdf:type owl:DatatypeProperty ;
-         rdfs:domain :Card ;
-         rdfs:range xsd:integer ;
-         rdfs:label "Loyalty" ;
-         rdfs:comment
-         """Starting loyalty of a Planeswalker.
-See rules 209.1 and 306.5."""@en .
-
-:defenseValue rdf:type owl:DatatypeProperty ;
-              rdfs:domain :Card ;
-              rdfs:range xsd:nonNegativeInteger ;
-              rdfs:label "Defense" ;
-              rdfs:comment
-              """The defense of a Battle card. A battle can be attacked
-and its defense reduced; when it reaches 0, it is defeated.
-See rules 210.1 and 310.4."""@en .
-
-:setName rdf:type owl:DatatypeProperty ,
-                  owl:FunctionalProperty ;
-         rdfs:domain :Set ;
-         rdfs:range rdf:langString ;
-         rdfs:label "Set Name" ;
-         rdfs:comment
-         """The full name of the Magic set. See rule 206.1."""@en .
-
-:setCode rdf:type owl:DatatypeProperty ,
-                  owl:FunctionalProperty ;
-         rdfs:domain :Set ;
-         rdfs:range xsd:string ;
-         rdfs:label "Set Code" ;
-         rdfs:comment
-         """The 3-letter code of the Magic set. See rule 206.1."""@en .
-
-:cardNumber rdf:type owl:DatatypeProperty ;
-            rdfs:domain :Card ;
-            rdfs:range xsd:integer ;
-            rdfs:label "Card Number" ;
-            rdfs:comment
-            """The collector number of the card in a set when
-totals are not provided. See rule 213.1a."""@en .
-
-:cardNumberString rdf:type owl:DatatypeProperty ;
-                  rdfs:domain :Card ;
-                  rdfs:range xsd:string ;
-                  rdfs:label "Card Number String" ;
-                  rdfs:comment
-                  """The collector number of the card in a set as a
-string (e.g., '123a'). See rule 213.1a."""@en .
-
-:cardCount rdf:type owl:DatatypeProperty ;
-           rdfs:domain [
-               rdf:type owl:Class ;
-               owl:unionOf (
-                   :Card
-                   :Set
-               )
-           ] ;
-           rdfs:range xsd:integer ;
-           rdfs:label "Card Count" ;
-           rdfs:comment
-           """The total number of cards in the set. See rule 213.1a."""@en .
-
-:rulingText rdf:type owl:DatatypeProperty ;
-            rdfs:domain :Ruling ;
-            rdfs:range rdf:langString ;
-            rdfs:label "Ruling Text" ;
-            rdfs:comment
-            """The ruling text of the card, published alongside
-Oracle text. See rule 108.1."""@en .
-
-:rulingDate rdf:type owl:DatatypeProperty ;
-            rdfs:domain :Ruling ;
-            rdfs:range xsd:date ;
-            rdfs:label "Ruling Date" ;
-            rdfs:comment
-            """The date of the ruling, published alongside
-Oracle text. See rule 108.1."""@en .
-
-:gathererUrl rdf:type owl:DatatypeProperty ,
-                      owl:FunctionalProperty ;
-             rdfs:domain :Card ;
-             rdfs:range xsd:anyURI ;
-             rdfs:label "Gatherer URL" ;
-             rdfs:comment
-             """The URL to the card's entry on
-gatherer.wizards.com. See rule 108.1."""@en .
-
-:scryfallUrl rdf:type owl:DatatypeProperty ,
-                      owl:FunctionalProperty ;
-             rdfs:domain :Card ;
-             rdfs:range xsd:anyURI ;
-             rdfs:label "Scryfall URL" ;
-             rdfs:comment
-             """The URL to the card's entry on scryfall.com."""@en .
-
-:releaseDate rdf:type owl:DatatypeProperty ;
-             rdfs:domain :Set ;
-             rdfs:range xsd:date ;
-             rdfs:label "Release Date" ;
-             rdfs:comment
-             """The release date of the set. See rule 206.1."""@en .
-
-:isPermanent rdf:type owl:DatatypeProperty ;
-             rdfs:domain :CardType ;
-             rdfs:range xsd:boolean ;
-             rdfs:label "Is Permanent" ;
-             rdfs:comment
-             """Indicates whether the card type is a permanent
-(true) or non-permanent (false). See rule 110.4."""@en .
-
-# --- Object Properties ---
+# --- Card Characteristics ---
 
 :hasColor rdf:type owl:ObjectProperty ;
           rdfs:domain :Card ;
@@ -1246,20 +1105,6 @@ by the absence of any :hasColorIdentity values. See rules 903.4 and
            rdfs:comment
            """The rarity of the card. See rule 206.2."""@en .
 
-:containsCard rdf:type owl:ObjectProperty ;
-              rdfs:domain [
-                  rdf:type owl:Class ;
-                  owl:unionOf (
-                      :Deck
-                      :Set
-                  )
-              ] ;
-              rdfs:range :Card ;
-              rdfs:label "Contains Card" ;
-              rdfs:comment
-              """Relates a deck or set to a card it contains.
-See rules 100.2 and 206.1."""@en .
-
 :isInSet rdf:type owl:ObjectProperty ;
          owl:inverseOf :hasSetCard ;
          rdfs:domain :Card ;
@@ -1274,6 +1119,36 @@ See rules 100.2 and 206.1."""@en .
              rdfs:label "Language" ;
              rdfs:comment
              """The language of the card print. See rule 213.1e."""@en .
+
+# --- Keyword Properties ---
+
+:hasKeyword rdf:type owl:ObjectProperty ;
+            rdfs:domain :Card ;
+            rdfs:range :Keyword ;
+            rdfs:label "Has Keyword" ;
+            rdfs:comment
+            """Relates a card to any keyword (ability or action) it has.
+See rules 701.1 and 702.1."""@en .
+
+:hasKeywordAbility rdf:type owl:ObjectProperty ;
+                   rdfs:subPropertyOf :hasKeyword ;
+                   rdfs:domain :Card ;
+                   rdfs:range :KeywordAbility ;
+                   rdfs:label "Has Keyword Ability" ;
+                   rdfs:comment
+                   """Relates a card to a keyword ability printed on it.
+See rule 702.1."""@en .
+
+:hasKeywordAction rdf:type owl:ObjectProperty ;
+                  rdfs:subPropertyOf :hasKeyword ;
+                  rdfs:domain :Card ;
+                  rdfs:range :KeywordAction ;
+                  rdfs:label "Has Keyword Action" ;
+                  rdfs:comment
+                  """Relates a card to a keyword action it references.
+See rule 701.1."""@en .
+
+# --- Legality and Rulings ---
 
 :hasLegality rdf:type owl:ObjectProperty ;
              rdfs:domain :Card ;
@@ -1306,6 +1181,22 @@ See rules 100.6 and 206.4."""@en .
            rdfs:comment
            """The ruling for the card, published alongside
 Oracle text. See rule 108.1."""@en .
+
+# --- Deck, Set and Collection Membership ---
+
+:containsCard rdf:type owl:ObjectProperty ;
+              rdfs:domain [
+                  rdf:type owl:Class ;
+                  owl:unionOf (
+                      :Deck
+                      :Set
+                  )
+              ] ;
+              rdfs:range :Card ;
+              rdfs:label "Contains Card" ;
+              rdfs:comment
+              """Relates a deck or set to a card it contains.
+See rules 100.2 and 206.1."""@en .
 
 :isInDeck rdf:type owl:ObjectProperty ;
           owl:inverseOf :hasCard ;
@@ -1345,30 +1236,6 @@ See rule 100.2."""@en .
 See rules 903.3 and 903.6."""@en .
 
 # --- Card Entries (Reified Card Quantities) ---
-:CardEntry rdf:type owl:Class ;
-           rdfs:label "Card Entry" ;
-           rdfs:comment
-           """An abstract reified association between a container (such as a
-deck or a collection) and a specific card, carrying the number of copies of
-that card. Used because OWL cannot attach a literal (such as a quantity
-count) directly to an object property edge."""@en .
-
-:DeckEntry rdf:type owl:Class ;
-           rdfs:subClassOf :CardEntry ;
-           rdfs:label "Deck Entry" ;
-           rdfs:comment
-           """A reified association between a deck and a specific card,
-carrying the number of copies of that card in the deck. See rule 100.2."""@en .
-
-:CollectionEntry rdf:type owl:Class ;
-                 rdfs:subClassOf :CardEntry ;
-                 rdfs:label "Collection Entry" ;
-                 rdfs:comment
-                 """A reified association between a collection and a specific
-card printing, carrying the number of physical copies together with their
-finish, condition and (optionally) purchase price. One entry corresponds to
-one acquisition lot; a printing collected in several finishes or conditions
-has one entry per variant."""@en .
 
 :hasDeckEntry rdf:type owl:ObjectProperty ;
               rdfs:domain :Deck ;
@@ -1397,15 +1264,6 @@ physical copies owned."""@en .
            """The card referenced by a deck or collection entry.
 See rule 100.2."""@en .
 
-:quantity rdf:type owl:DatatypeProperty ,
-                   owl:FunctionalProperty ;
-          rdfs:domain :CardEntry ;
-          rdfs:range xsd:positiveInteger ;
-          rdfs:label "Quantity" ;
-          rdfs:comment
-          """The number of copies of the entry's card in the deck or
-collection. Must be a positive integer. See rule 100.2."""@en .
-
 :hasFinish rdf:type owl:ObjectProperty ,
                     owl:FunctionalProperty ;
            rdfs:domain :CollectionEntry ;
@@ -1424,17 +1282,8 @@ copies described by a collection entry."""@en .
               """The physical condition of the copies described by a
 collection entry."""@en .
 
-:purchasePrice rdf:type owl:DatatypeProperty ,
-                        owl:FunctionalProperty ;
-               rdfs:domain :CollectionEntry ;
-               rdfs:range xsd:decimal ;
-               rdfs:label "Purchase Price" ;
-               rdfs:comment
-               """The per-copy purchase price of the copies described by a
-collection entry, in the collector's reference currency. Optional; absent
-when the price was not recorded."""@en .
-
 # --- Card-to-Card Synergy ---
+
 :hasSynergyWith rdf:type owl:ObjectProperty ,
                          owl:SymmetricProperty ;
                 rdfs:domain :Card ;
@@ -1492,6 +1341,7 @@ preconditions under which the object card's abilities deliver value
 their full value because the object card creates the preconditions."""@en .
 
 # --- Mana Production Facts ---
+
 :producesMana rdf:type owl:ObjectProperty ;
               rdfs:domain :Card ;
               rdfs:label "Produces Mana" ;
@@ -1500,6 +1350,245 @@ their full value because the object card creates the preconditions."""@en .
 abilities can produce (see rules 106.1 and 605). The object is one of the
 five :Color individuals or :Colorless. Derived from structured Scryfall
 data (produced_mana), not from parsing oracle text."""@en .
+
+# --- Simulation Behavior Annotations ---
+
+:hasBehaviorHook rdf:type owl:ObjectProperty ;
+                 rdfs:domain :Card ;
+                 rdfs:range :BehaviorHook ;
+                 rdfs:label "Has Behavior Hook" ;
+                 rdfs:comment
+                 """Attaches a simulation BehaviorHook to a card individual.
+Hooks apply to the card (identified by name), not to a specific printing;
+by convention they are asserted on the printing referenced by the deck
+graphs."""@en .
+
+############################################################
+#  Datatype Properties
+############################################################
+
+# --- Card Identity and Text ---
+
+:cardName rdf:type owl:DatatypeProperty ;
+      	  rdfs:domain :Card ;
+          rdfs:range xsd:string ;
+          rdfs:label "Card Name" ;
+          rdfs:comment
+           """The name of the card. See rules 201.1 and 201.2."""@en .
+
+:manaCost rdf:type owl:DatatypeProperty ;
+          rdfs:domain :Card ;
+          rdfs:range xsd:string ;
+          rdfs:label "Mana Cost" ;
+          rdfs:comment
+          """The mana symbols required to cast the card, with
+values represented using standard Magic mana notation enclosed in braces,
+such as W, U, B, R, G, C, X, or 0. See rule 202.1."""@en .
+
+:manaValue rdf:type owl:DatatypeProperty ;
+           rdfs:domain :Card ;
+           rdfs:range xsd:nonNegativeInteger ;
+           rdfs:label "Mana Value" ;
+           rdfs:comment
+           """Total amount of mana required to cast the spell.
+Formerly known as converted mana cost (CMC). See rule 202.3."""@en .
+
+:printedText rdf:type owl:DatatypeProperty ;
+             rdfs:domain :Card ;
+             rdfs:range rdf:langString ;
+             rdfs:label "Printed Text" ;
+             rdfs:comment
+             """The text printed on the card, including the card
+name, mana cost, oracle text, flavor text, and card text.
+See rule 207.1."""@en .
+
+:oracleText rdf:type owl:DatatypeProperty ;
+            rdfs:domain :Card ;
+            rdfs:range rdf:langString ;
+            rdfs:label "Oracle Text" ;
+            rdfs:comment
+            """The official rules text of the card. See rule 108.1."""@en .
+
+:flavorText rdf:type owl:DatatypeProperty ;
+            rdfs:domain :Card ;
+            rdfs:range rdf:langString ;
+            rdfs:label "Flavor Text" ;
+            rdfs:comment
+             """The flavor text of the card. See rule 207.2b."""@en .
+
+:artist rdf:type owl:DatatypeProperty ;
+        rdfs:domain :Card ;
+        rdfs:range xsd:string ;
+        rdfs:label "Artist" ;
+        rdfs:comment
+        """The artist who illustrated the card. See rule 213.1f."""@en .
+
+# --- Creature and Planeswalker Statistics ---
+
+:power rdf:type owl:DatatypeProperty ;
+       rdfs:domain :Card ;
+       rdfs:range xsd:string ;
+       rdfs:label "Power" ;
+       rdfs:comment
+       """The printed power of a creature card, including
+non-numeric expressions such as "*", "1+*", or "7-*".
+See rules 208.1 and 208.2."""@en .
+
+:toughness rdf:type owl:DatatypeProperty ;
+           rdfs:domain :Card ;
+           rdfs:range xsd:string ;
+           rdfs:label "Toughness" ;
+           rdfs:comment
+           """The printed toughness of a creature card, including
+non-numeric expressions such as "*", "1+*", or "7-*".
+See rules 208.1 and 208.2."""@en .
+
+:powerValue rdf:type owl:DatatypeProperty ;
+            rdfs:domain :Card ;
+            rdfs:range xsd:integer ;
+            rdfs:label "Power Value" ;
+            rdfs:comment
+            """The numeric power of a creature card when its
+printed power is a plain integer. See rule 208.1."""@en .
+
+:toughnessValue rdf:type owl:DatatypeProperty ;
+                rdfs:domain :Card ;
+                rdfs:range xsd:integer ;
+                rdfs:label "Toughness Value" ;
+                rdfs:comment
+                """The numeric toughness of a creature card when
+its printed toughness is a plain integer. See rule 208.1."""@en .
+
+:loyalty rdf:type owl:DatatypeProperty ;
+         rdfs:domain :Card ;
+         rdfs:range xsd:integer ;
+         rdfs:label "Loyalty" ;
+         rdfs:comment
+         """Starting loyalty of a Planeswalker.
+See rules 209.1 and 306.5."""@en .
+
+:defenseValue rdf:type owl:DatatypeProperty ;
+              rdfs:domain :Card ;
+              rdfs:range xsd:nonNegativeInteger ;
+              rdfs:label "Defense" ;
+              rdfs:comment
+              """The defense of a Battle card. A battle can be attacked
+and its defense reduced; when it reaches 0, it is defeated.
+See rules 210.1 and 310.4."""@en .
+
+# --- Set and Printing ---
+
+:setName rdf:type owl:DatatypeProperty ,
+                  owl:FunctionalProperty ;
+         rdfs:domain :Set ;
+         rdfs:range rdf:langString ;
+         rdfs:label "Set Name" ;
+         rdfs:comment
+         """The full name of the Magic set. See rule 206.1."""@en .
+
+:setCode rdf:type owl:DatatypeProperty ,
+                  owl:FunctionalProperty ;
+         rdfs:domain :Set ;
+         rdfs:range xsd:string ;
+         rdfs:label "Set Code" ;
+         rdfs:comment
+         """The 3-letter code of the Magic set. See rule 206.1."""@en .
+
+:cardNumber rdf:type owl:DatatypeProperty ;
+            rdfs:domain :Card ;
+            rdfs:range xsd:integer ;
+            rdfs:label "Card Number" ;
+            rdfs:comment
+            """The collector number of the card in a set when
+totals are not provided. See rule 213.1a."""@en .
+
+:cardNumberString rdf:type owl:DatatypeProperty ;
+                  rdfs:domain :Card ;
+                  rdfs:range xsd:string ;
+                  rdfs:label "Card Number String" ;
+                  rdfs:comment
+                  """The collector number of the card in a set as a
+string (e.g., '123a'). See rule 213.1a."""@en .
+
+:cardCount rdf:type owl:DatatypeProperty ;
+           rdfs:domain [
+               rdf:type owl:Class ;
+               owl:unionOf (
+                   :Card
+                   :Set
+               )
+           ] ;
+           rdfs:range xsd:integer ;
+           rdfs:label "Card Count" ;
+           rdfs:comment
+           """The total number of cards in the set. See rule 213.1a."""@en .
+
+:releaseDate rdf:type owl:DatatypeProperty ;
+             rdfs:domain :Set ;
+             rdfs:range xsd:date ;
+             rdfs:label "Release Date" ;
+             rdfs:comment
+             """The release date of the set. See rule 206.1."""@en .
+
+# --- Rulings ---
+
+:rulingText rdf:type owl:DatatypeProperty ;
+            rdfs:domain :Ruling ;
+            rdfs:range rdf:langString ;
+            rdfs:label "Ruling Text" ;
+            rdfs:comment
+            """The ruling text of the card, published alongside
+Oracle text. See rule 108.1."""@en .
+
+:rulingDate rdf:type owl:DatatypeProperty ;
+            rdfs:domain :Ruling ;
+            rdfs:range xsd:date ;
+            rdfs:label "Ruling Date" ;
+            rdfs:comment
+            """The date of the ruling, published alongside
+Oracle text. See rule 108.1."""@en .
+
+# --- External References ---
+
+:gathererUrl rdf:type owl:DatatypeProperty ,
+                      owl:FunctionalProperty ;
+             rdfs:domain :Card ;
+             rdfs:range xsd:anyURI ;
+             rdfs:label "Gatherer URL" ;
+             rdfs:comment
+             """The URL to the card's entry on
+gatherer.wizards.com. See rule 108.1."""@en .
+
+:scryfallUrl rdf:type owl:DatatypeProperty ,
+                      owl:FunctionalProperty ;
+             rdfs:domain :Card ;
+             rdfs:range xsd:anyURI ;
+             rdfs:label "Scryfall URL" ;
+             rdfs:comment
+             """The URL to the card's entry on scryfall.com."""@en .
+
+# --- Derived Card Facts ---
+
+:isPermanent rdf:type owl:DatatypeProperty ;
+             rdfs:domain :CardType ;
+             rdfs:range xsd:boolean ;
+             rdfs:label "Is Permanent" ;
+             rdfs:comment
+             """Indicates whether the card type is a permanent
+(true) or non-permanent (false). See rule 110.4."""@en .
+
+# --- Card Entries (Reified Card Quantities) ---
+
+:quantity rdf:type owl:DatatypeProperty ,
+                   owl:FunctionalProperty ;
+          rdfs:domain :CardEntry ;
+          rdfs:range xsd:positiveInteger ;
+          rdfs:label "Quantity" ;
+          rdfs:comment
+          """The number of copies of the entry's card in the deck or
+collection. Must be a positive integer. See rule 100.2."""@en .
+
+# --- Mana Production Facts ---
 
 :entersTapped rdf:type owl:DatatypeProperty ;
               rdfs:domain :Card ;
@@ -1521,26 +1610,6 @@ the library for one or more land cards (e.g. Evolving Wilds, Myriad
 Landscape) rather than producing mana itself."""@en .
 
 # --- Simulation Behavior Annotations ---
-:BehaviorHook rdf:type owl:Class ;
-              rdfs:label "Behavior Hook" ;
-              rdfs:comment
-              """A reified simulation annotation attaching one machine-readable
-behavior key/value pair to a card, consumed by the Monte-Carlo matchup
-simulator (scripts/mtgsim). Behavior hooks encode card semantics that cannot
-be reliably derived from oracle text by pattern matching. They are
-house-authored simulation opinion, not Wizards of the Coast card facts, and
-therefore live in the separate instance graph
-MagicSimulationAnnotations.ttl."""@en .
-
-:hasBehaviorHook rdf:type owl:ObjectProperty ;
-                 rdfs:domain :Card ;
-                 rdfs:range :BehaviorHook ;
-                 rdfs:label "Has Behavior Hook" ;
-                 rdfs:comment
-                 """Attaches a simulation BehaviorHook to a card individual.
-Hooks apply to the card (identified by name), not to a specific printing;
-by convention they are asserted on the printing referenced by the deck
-graphs."""@en .
 
 :behaviorKey rdf:type owl:DatatypeProperty ;
              rdfs:domain :BehaviorHook ;
@@ -1548,7 +1617,7 @@ graphs."""@en .
              rdfs:label "Behavior Key" ;
              rdfs:comment
              """The behavior hook's key. Must be one of the whitelisted keys
-in scripts/mtgsim/behaviors.py (BEHAVIOR_KEYS)."""@en .
+in scripts/mtgcards/behaviors.py (BEHAVIOR_KEYS)."""@en .
 
 :behaviorValue rdf:type owl:DatatypeProperty ;
                rdfs:domain :BehaviorHook ;
@@ -1570,146 +1639,116 @@ permanent removed, on a 0-10 scale. Consumed by the simulator's AI threat
 assessment. House-authored opinion, asserted in
 MagicSimulationAnnotations.ttl."""@en .
 
-:hasKeyword rdf:type owl:ObjectProperty ;
-            rdfs:domain :Card ;
-            rdfs:range :Keyword ;
-            rdfs:label "Has Keyword" ;
-            rdfs:comment
-            """Relates a card to any keyword (ability or action) it has.
-See rules 701.1 and 702.1."""@en .
 
-:hasKeywordAbility rdf:type owl:ObjectProperty ;
-                   rdfs:subPropertyOf :hasKeyword ;
-                   rdfs:domain :Card ;
-                   rdfs:range :KeywordAbility ;
-                   rdfs:label "Has Keyword Ability" ;
-                   rdfs:comment
-                   """Relates a card to a keyword ability printed on it.
-See rule 702.1."""@en .
-
-:hasKeywordAction rdf:type owl:ObjectProperty ;
-                  rdfs:subPropertyOf :hasKeyword ;
-                  rdfs:domain :Card ;
-                  rdfs:range :KeywordAction ;
-                  rdfs:label "Has Keyword Action" ;
-                  rdfs:comment
-                  """Relates a card to a keyword action it references.
-See rule 701.1."""@en .
-
-
-#################################################
+################################################################################
 #
 #  Constraints
 #
-#################################################
+################################################################################
 
 # --- Land Constraints ---
 :LandCard rdf:type owl:Class ;
-    rdfs:subClassOf :Card ;
-    owl:equivalentClass [
-        rdf:type owl:Restriction ;
-        owl:onProperty :hasCardType ;
-        owl:hasValue :Land
-    ] ;
-    rdfs:subClassOf [
+    rdfs:subClassOf :Card ,
+    [
         rdf:type owl:Restriction ;
         owl:onProperty :hasSuperType ;
         owl:allValuesFrom [
             rdf:type owl:Class ;
             owl:oneOf ( :Basic :Snow :Legendary )
         ]
-    ] ;
-    rdfs:subClassOf [
+    ] ,
+    [
         rdf:type owl:Restriction ;
         owl:onProperty :hasSuperType ;
         owl:maxCardinality "3"^^xsd:nonNegativeInteger
     ] ;
+    owl:equivalentClass [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasCardType ;
+        owl:hasValue :Land
+    ] ;
     rdfs:label "Land Card" ;
-    rdfs:comment
-    """A class representing any card with the Land card type to enforce
+    rdfs:comment """A class representing any card with the Land card type to enforce
 constraints. See rule 305."""@en .
 
 # --- Artifact Constraints ---
 :ArtifactCard rdf:type owl:Class ;
-    rdfs:subClassOf :Card ;
+    rdfs:subClassOf :Card ,
+    [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSuperType ;
+        owl:allValuesFrom [
+            rdf:type owl:Class ;
+            owl:oneOf ( :Legendary :Host :Snow )
+        ]
+    ] ,
+    [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSuperType ;
+        owl:maxCardinality "3"^^xsd:nonNegativeInteger
+    ] ;
     owl:equivalentClass [
         rdf:type owl:Restriction ;
         owl:onProperty :hasCardType ;
         owl:hasValue :Artifact
     ] ;
-    rdfs:subClassOf [
-        rdf:type owl:Restriction ;
-        owl:onProperty :hasSuperType ;
-        owl:allValuesFrom [
-            rdf:type owl:Class ;
-            owl:oneOf ( :Legendary :Host :Snow )
-        ]
-    ] ;
-    rdfs:subClassOf [
-        rdf:type owl:Restriction ;
-        owl:onProperty :hasSuperType ;
-        owl:maxCardinality "3"^^xsd:nonNegativeInteger
-    ] ;
     rdfs:label "Artifact Card" ;
-    rdfs:comment
-    """A class representing any card with the Artifact card type to enforce
+    rdfs:comment """A class representing any card with the Artifact card type to enforce
 constraints. Artifact cards may be multi-typed (e.g. Artifact Creature) and
 carry subtypes from other categories. See rule 301."""@en .
 
 # --- Creature Constraints ---
 :CreatureCard rdf:type owl:Class ;
-    rdfs:subClassOf :Card ;
-    owl:equivalentClass [
-        rdf:type owl:Restriction ;
-        owl:onProperty :hasCardType ;
-        owl:hasValue :Creature
-    ] ;
-    rdfs:subClassOf [
+    rdfs:subClassOf :Card ,
+    [
         rdf:type owl:Restriction ;
         owl:onProperty :hasSuperType ;
         owl:allValuesFrom [
             rdf:type owl:Class ;
             owl:oneOf ( :Legendary :Host :Snow )
         ]
-    ] ;
-    rdfs:subClassOf [
+    ] ,
+    [
         rdf:type owl:Restriction ;
         owl:onProperty :hasSuperType ;
         owl:maxCardinality "3"^^xsd:nonNegativeInteger
-    ] ;
-    rdfs:subClassOf [
+    ] ,
+    [
         rdf:type owl:Restriction ;
         owl:onProperty :hasSubType ;
         owl:someValuesFrom :CreatureTypes
     ] ;
+    owl:equivalentClass [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasCardType ;
+        owl:hasValue :Creature
+    ] ;
     rdfs:label "Creature Card" ;
-    rdfs:comment
-    """A class representing any card with the Creature card type to enforce
+    rdfs:comment """A class representing any card with the Creature card type to enforce
 constraints. Every creature has at least one creature subtype, but multi-typed
 cards (e.g. Artifact Creature) may also carry subtypes from other categories.
 See rule 302."""@en .
 
 # --- Kindred Constraints ---
 :KindredCard rdf:type owl:Class ;
-    rdfs:subClassOf :Card ;
+    rdfs:subClassOf :Card ,
+    [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSuperType ;
+        owl:maxCardinality "0"^^xsd:nonNegativeInteger
+    ] ,
+    [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSubType ;
+        owl:someValuesFrom :CreatureTypes
+    ] ;
     owl:equivalentClass [
         rdf:type owl:Restriction ;
         owl:onProperty :hasCardType ;
         owl:hasValue :Kindred
     ] ;
-    rdfs:subClassOf [
-        rdf:type owl:Restriction ;
-        owl:onProperty :hasSuperType ;
-        owl:maxCardinality "0"^^xsd:nonNegativeInteger
-    ] ;
-    rdfs:subClassOf [
-        rdf:type owl:Restriction ;
-        owl:onProperty :hasSubType ;
-        owl:someValuesFrom :CreatureTypes
-    ] ;
     rdfs:label "Kindred Card" ;
-    rdfs:comment
-    """A class representing any card with the Kindred card type to enforce
+    rdfs:comment """A class representing any card with the Kindred card type to enforce
 constraints. Kindred cards always have at least one creature subtype, but since
 Kindred always co-occurs with another card type, the card may also carry
 subtypes from other categories. See rule 308."""@en .
@@ -1717,104 +1756,105 @@ subtypes from other categories. See rule 308."""@en .
 
 # --- Plane Constraints ---
 :PlaneCard rdf:type owl:Class ;
-    rdfs:subClassOf :Card ;
+    rdfs:subClassOf :Card ,
+    [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSuperType ;
+        owl:maxCardinality "0"^^xsd:nonNegativeInteger
+    ] ,
+    [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSubType ;
+        owl:allValuesFrom :PlanarType
+    ] ;
     owl:equivalentClass [
         rdf:type owl:Restriction ;
         owl:onProperty :hasCardType ;
         owl:hasValue :Plane
     ] ;
-    rdfs:subClassOf [
-        rdf:type owl:Restriction ;
-        owl:onProperty :hasSuperType ;
-        owl:maxCardinality "0"^^xsd:nonNegativeInteger
-    ] ;
-    rdfs:subClassOf [
-        rdf:type owl:Restriction ;
-        owl:onProperty :hasSubType ;
-        owl:allValuesFrom :PlanarType
-    ] ;
     rdfs:label "Plane Card" ;
-    rdfs:comment
-    """A class representing any card with the Plane card type to enforce
+    rdfs:comment """A class representing any card with the Plane card type to enforce
 restrictions. See rule 311."""@en .
 
 
 # --- Dungeon Constraints ---
 :DungeonCard rdf:type owl:Class ;
-    rdfs:subClassOf :Card ;
+    rdfs:subClassOf :Card ,
+    [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSuperType ;
+        owl:maxCardinality "0"^^xsd:nonNegativeInteger
+    ] ,
+    [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSubType ;
+        owl:allValuesFrom :DungeonType
+    ] ;
     owl:equivalentClass [
         rdf:type owl:Restriction ;
         owl:onProperty :hasCardType ;
         owl:hasValue :Dungeon
     ] ;
-    rdfs:subClassOf [
-        rdf:type owl:Restriction ;
-        owl:onProperty :hasSuperType ;
-        owl:maxCardinality "0"^^xsd:nonNegativeInteger
-    ] ;
-    rdfs:subClassOf [
-        rdf:type owl:Restriction ;
-        owl:onProperty :hasSubType ;
-        owl:allValuesFrom :DungeonType
-    ] ;
     rdfs:label "Dungeon Card" ;
-    rdfs:comment
-    """A class representing any card with the Dungeon card type to enforce
+    rdfs:comment """A class representing any card with the Dungeon card type to enforce
 restrictions. See rule 309."""@en .
 
 # --- Battle Constraints ---
 :BattleCard rdf:type owl:Class ;
-    rdfs:subClassOf :Card ;
+    rdfs:subClassOf :Card ,
+    [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSuperType ;
+        owl:maxCardinality "0"^^xsd:nonNegativeInteger
+    ] ,
+    [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSubType ;
+        owl:allValuesFrom :BattleType
+    ] ;
     owl:equivalentClass [
         rdf:type owl:Restriction ;
         owl:onProperty :hasCardType ;
         owl:hasValue :Battle
     ] ;
-    rdfs:subClassOf [
-        rdf:type owl:Restriction ;
-        owl:onProperty :hasSuperType ;
-        owl:maxCardinality "0"^^xsd:nonNegativeInteger
-    ] ;
-    rdfs:subClassOf [
-        rdf:type owl:Restriction ;
-        owl:onProperty :hasSubType ;
-        owl:allValuesFrom :BattleType
-    ] ;
     rdfs:label "Battle Card" ;
-    rdfs:comment
-    """A class representing any card with the Battle card type to enforce
+    rdfs:comment """A class representing any card with the Battle card type to enforce
 restrictions. See rule 310."""@en .
 
 # --- Enchantment Constraints ---
 :EnchantmentCard rdf:type owl:Class ;
-    rdfs:subClassOf :Card ;
-    owl:equivalentClass [
-        rdf:type owl:Restriction ;
-        owl:onProperty :hasCardType ;
-        owl:hasValue :Enchantment
-    ] ;
-    rdfs:subClassOf [
+    rdfs:subClassOf :Card ,
+    [
         rdf:type owl:Restriction ;
         owl:onProperty :hasSuperType ;
         owl:allValuesFrom [
             rdf:type owl:Class ;
             owl:oneOf ( :Legendary :Snow :World )
         ]
-    ] ;
-    rdfs:subClassOf [
+    ] ,
+    [
         rdf:type owl:Restriction ;
         owl:onProperty :hasSuperType ;
         owl:maxCardinality "3"^^xsd:nonNegativeInteger
     ] ;
+    owl:equivalentClass [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasCardType ;
+        owl:hasValue :Enchantment
+    ] ;
     rdfs:label "Enchantment Card" ;
-    rdfs:comment
-    """A class representing any card with the Enchantment card type to enforce
+    rdfs:comment """A class representing any card with the Enchantment card type to enforce
 constraints. Enchantment cards may be multi-typed (e.g. Enchantment Creature)
 and carry subtypes from other categories. See rule 303."""@en .
 
 # --- Planeswalker Constraints ---
 :PlaneswalkerCard rdf:type owl:Class ;
-    rdfs:subClassOf :Card ;
+    rdfs:subClassOf :Card ,
+    [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSubType ;
+        owl:allValuesFrom :PlaneswalkerTypes
+    ] ;
     owl:equivalentClass [
         rdf:type owl:Class ;
         owl:intersectionOf (
@@ -1830,19 +1870,31 @@ and carry subtypes from other categories. See rule 303."""@en .
             ]
         )
     ] ;
-    rdfs:subClassOf [
-        rdf:type owl:Restriction ;
-        owl:onProperty :hasSubType ;
-        owl:allValuesFrom :PlaneswalkerTypes
-    ] ;
     rdfs:label "Planeswalker Card" ;
-    rdfs:comment
-    """A class representing planeswalker cards, which must have the Legendary
+    rdfs:comment """A class representing planeswalker cards, which must have the Legendary
 supertype. See rules 306 and 205.4d."""@en .
 
 # --- Spell Constraints ---
 :SpellCardConstraint rdf:type owl:Class ;
-    rdfs:subClassOf :Card ;
+    rdfs:subClassOf :Card ,
+    [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSuperType ;
+        owl:allValuesFrom [
+            rdf:type owl:Class ;
+            owl:oneOf ( :Legendary :Snow )
+        ]
+    ] ,
+    [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSuperType ;
+        owl:maxCardinality "2"^^xsd:nonNegativeInteger
+    ] ,
+    [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSubType ;
+        owl:allValuesFrom :SpellTypes
+    ] ;
     owl:equivalentClass [
         rdf:type owl:Restriction ;
         owl:onProperty :hasCardType ;
@@ -1851,32 +1903,18 @@ supertype. See rules 306 and 205.4d."""@en .
             owl:oneOf ( :Instant :Sorcery )
         ]
     ] ;
-    rdfs:subClassOf [
-        rdf:type owl:Restriction ;
-        owl:onProperty :hasSuperType ;
-        owl:allValuesFrom [
-            rdf:type owl:Class ;
-            owl:oneOf ( :Legendary :Snow )
-        ]
-    ] ;
-    rdfs:subClassOf [
-        rdf:type owl:Restriction ;
-        owl:onProperty :hasSuperType ;
-        owl:maxCardinality "2"^^xsd:nonNegativeInteger
-    ] ;
-    rdfs:subClassOf [
-        rdf:type owl:Restriction ;
-        owl:onProperty :hasSubType ;
-        owl:allValuesFrom :SpellTypes
-    ] ;
     rdfs:label "Spell Card Constraint" ;
-    rdfs:comment
-    """A class representing any card with the Instant or Sorcery card type to
+    rdfs:comment """A class representing any card with the Instant or Sorcery card type to
 enforce constraints. See rules 304 and 307."""@en .
 
 # --- Basic Land Constraints ---
 :BasicLandCard rdf:type owl:Class ;
-    rdfs:subClassOf :Card ;
+    rdfs:subClassOf :Card ,
+    [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSubType ;
+        owl:allValuesFrom :BasicLandTypes
+    ] ;
     owl:equivalentClass [
         rdf:type owl:Class ;
         owl:intersectionOf (
@@ -1888,114 +1926,104 @@ enforce constraints. See rules 304 and 307."""@en .
             ]
         )
     ] ;
-    rdfs:subClassOf [
-        rdf:type owl:Restriction ;
-        owl:onProperty :hasSubType ;
-        owl:allValuesFrom :BasicLandTypes
-    ] ;
     rdfs:label "Basic Land Card" ;
-    rdfs:comment
-    """A class representing land cards with the Basic supertype.
+    rdfs:comment """A class representing land cards with the Basic supertype.
 See rules 305.6 and 305.8."""@en .
 
 # --- Phenomenon Constraints ---
 :PhenomenonCard rdf:type owl:Class ;
-    rdfs:subClassOf :Card ;
+    rdfs:subClassOf :Card ,
+    [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSuperType ;
+        owl:maxCardinality "0"^^xsd:nonNegativeInteger
+    ] ,
+    [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSubType ;
+        owl:maxCardinality "0"^^xsd:nonNegativeInteger
+    ] ;
     owl:equivalentClass [
         rdf:type owl:Restriction ;
         owl:onProperty :hasCardType ;
         owl:hasValue :Phenomenon
     ] ;
-    rdfs:subClassOf [
-        rdf:type owl:Restriction ;
-        owl:onProperty :hasSuperType ;
-        owl:maxCardinality "0"^^xsd:nonNegativeInteger
-    ] ;
-    rdfs:subClassOf [
-        rdf:type owl:Restriction ;
-        owl:onProperty :hasSubType ;
-        owl:maxCardinality "0"^^xsd:nonNegativeInteger
-    ] ;
     rdfs:label "Phenomenon Card" ;
-    rdfs:comment
-    """A class representing any card with the Phenomenon card type to enforce
+    rdfs:comment """A class representing any card with the Phenomenon card type to enforce
 restrictions. See rule 312."""@en .
 
 # --- Scheme Constraints ---
 :SchemeCard rdf:type owl:Class ;
-    rdfs:subClassOf :Card ;
-    owl:equivalentClass [
-        rdf:type owl:Restriction ;
-        owl:onProperty :hasCardType ;
-        owl:hasValue :Scheme
-    ] ;
-    rdfs:subClassOf [
+    rdfs:subClassOf :Card ,
+    [
         rdf:type owl:Restriction ;
         owl:onProperty :hasSuperType ;
         owl:allValuesFrom [
             rdf:type owl:Class ;
             owl:oneOf ( :Ongoing )
         ]
-    ] ;
-    rdfs:subClassOf [
+    ] ,
+    [
         rdf:type owl:Restriction ;
         owl:onProperty :hasSuperType ;
         owl:maxCardinality "1"^^xsd:nonNegativeInteger
-    ] ;
-    rdfs:subClassOf [
+    ] ,
+    [
         rdf:type owl:Restriction ;
         owl:onProperty :hasSubType ;
         owl:maxCardinality "0"^^xsd:nonNegativeInteger
     ] ;
+    owl:equivalentClass [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasCardType ;
+        owl:hasValue :Scheme
+    ] ;
     rdfs:label "Scheme Card" ;
-    rdfs:comment
-    """A class representing any card with the Scheme card type to enforce
+    rdfs:comment """A class representing any card with the Scheme card type to enforce
 restrictions. See rule 314."""@en .
 
 # --- Vanguard Constraints ---
 :VanguardCard rdf:type owl:Class ;
-    rdfs:subClassOf :Card ;
+    rdfs:subClassOf :Card ,
+    [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSuperType ;
+        owl:maxCardinality "0"^^xsd:nonNegativeInteger
+    ] ,
+    [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSubType ;
+        owl:maxCardinality "0"^^xsd:nonNegativeInteger
+    ] ;
     owl:equivalentClass [
         rdf:type owl:Restriction ;
         owl:onProperty :hasCardType ;
         owl:hasValue :Vanguard
     ] ;
-    rdfs:subClassOf [
-        rdf:type owl:Restriction ;
-        owl:onProperty :hasSuperType ;
-        owl:maxCardinality "0"^^xsd:nonNegativeInteger
-    ] ;
-    rdfs:subClassOf [
-        rdf:type owl:Restriction ;
-        owl:onProperty :hasSubType ;
-        owl:maxCardinality "0"^^xsd:nonNegativeInteger
-    ] ;
     rdfs:label "Vanguard Card" ;
-    rdfs:comment
-    """A class representing any card with the Vanguard card type to enforce
+    rdfs:comment """A class representing any card with the Vanguard card type to enforce
 restrictions. See rule 313."""@en .
 
 # --- Conspiracy Constraints ---
 :ConspiracyCard rdf:type owl:Class ;
-    rdfs:subClassOf :Card ;
+    rdfs:subClassOf :Card ,
+    [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSuperType ;
+        owl:maxCardinality "0"^^xsd:nonNegativeInteger
+    ] ,
+    [
+        rdf:type owl:Restriction ;
+        owl:onProperty :hasSubType ;
+        owl:maxCardinality "0"^^xsd:nonNegativeInteger
+    ] ;
     owl:equivalentClass [
         rdf:type owl:Restriction ;
         owl:onProperty :hasCardType ;
         owl:hasValue :Conspiracy
     ] ;
-    rdfs:subClassOf [
-        rdf:type owl:Restriction ;
-        owl:onProperty :hasSuperType ;
-        owl:maxCardinality "0"^^xsd:nonNegativeInteger
-    ] ;
-    rdfs:subClassOf [
-        rdf:type owl:Restriction ;
-        owl:onProperty :hasSubType ;
-        owl:maxCardinality "0"^^xsd:nonNegativeInteger
-    ] ;
     rdfs:label "Conspiracy Card" ;
-    rdfs:comment
-    """A class representing any card with the Conspiracy card type to enforce
+    rdfs:comment """A class representing any card with the Conspiracy card type to enforce
 restrictions. See rule 315."""@en .
 
 # --- Summon Constraints ---
@@ -2005,14 +2033,13 @@ restrictions. See rule 315."""@en .
         rdf:type owl:Restriction ;
         owl:onProperty :hasCardType ;
         owl:hasValue :Summon
-    ] ;
-    owl:equivalentClass [
+    ] ,
+    [
         rdf:type owl:Class ;
         owl:oneOf ( :OldFogey )
     ] ;
     rdfs:label "Summon Card" ;
-    rdfs:comment
-    """A class representing the Summon card type, which only applies to the card
+    rdfs:comment """A class representing the Summon card type, which only applies to the card
 Old Fogey."""@en .
 
 
@@ -2160,7 +2187,7 @@ rather than cast from cards."""@en .
        """An obsolete supertype representing global enchantments where only one
 can exist on the battlefield at a time."""@en .
 
-# --- Card Types  ---
+# --- Card Types ---
 :Artifact rdf:type owl:NamedIndividual ,
                    :CardType ;
           :isPermanent true ;
@@ -5035,14 +5062,45 @@ four copies of any card""" .
                   :Language ;
          rdfs:label "English" ;
          rdfs:comment "The English language print of the card."@en .
+:ChineseSimplified rdf:type owl:NamedIndividual ,
+                            :Language ;
+                   rdfs:label "Chinese Simplified" ;
+                   rdfs:comment
+                   "The Simplified Chinese language print of the card."@en .
+:ChineseTraditional rdf:type owl:NamedIndividual ,
+                             :Language ;
+                    rdfs:label "Chinese Traditional" ;
+                    rdfs:comment
+                    "The Traditional Chinese language print of the card."@en .
+:French rdf:type owl:NamedIndividual ,
+                 :Language ;
+        rdfs:label "French" ;
+        rdfs:comment "The French language print of the card."@en .
 :German rdf:type owl:NamedIndividual ,
                  :Language ;
         rdfs:label "German" ;
         rdfs:comment "The German language print of the card."@en .
+:Italian rdf:type owl:NamedIndividual ,
+                  :Language ;
+         rdfs:label "Italian" ;
+         rdfs:comment "The Italian language print of the card."@en .
 :Japanese rdf:type owl:NamedIndividual ,
                    :Language ;
           rdfs:label "Japanese" ;
           rdfs:comment "The Japanese language print of the card."@en .
+:Korean rdf:type owl:NamedIndividual ,
+                 :Language ;
+        rdfs:label "Korean" ;
+        rdfs:comment "The Korean language print of the card."@en .
+:Portuguese rdf:type owl:NamedIndividual ,
+                     :Language ;
+            rdfs:label "Portuguese" ;
+            rdfs:comment
+            "The Brazilian Portuguese language print of the card."@en .
+:Russian rdf:type owl:NamedIndividual ,
+                  :Language ;
+         rdfs:label "Russian" ;
+         rdfs:comment "The Russian language print of the card."@en .
 :Spanish rdf:type owl:NamedIndividual ,
                   :Language ;
          rdfs:label "Spanish" ;

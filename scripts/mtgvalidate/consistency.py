@@ -219,20 +219,28 @@ def check_entry_shape(idx: GraphIndex) -> tuple[list[str], int]:
 
 
 def check_collection_entries(idx: GraphIndex) -> tuple[list[str], int]:
-    """Check 3b (card-entries): collection entries mirror collection.csv.
+    """Check 3b (card-entries): collection entries are well-formed variants.
 
-    Every CollectionEntry must carry :hasFinish and :hasCondition, and
-    the entry count and summed quantities must match the rows of
-    collection.csv. The CSV is a local, untracked input; when it is
-    absent (CI checkouts, and any downstream consumer) the mirror check
-    is skipped with a notice. Returns the errors plus the entry count.
+    Every CollectionEntry must carry :hasFinish and :hasCondition, and no
+    two entries may describe the same (card, finish, condition) variant -
+    such a pair is a split stack that belongs in one entry with the
+    summed quantity. Both hold for any graph root, so they also run
+    downstream against a published bundle.
+
+    Where collection.csv is present the entries are additionally mirrored
+    against it: one entry per distinct variant, and quantities summing to
+    the CSV counts. The CSV is a local, untracked input; when it is absent
+    (CI checkouts, and any downstream consumer) that half is skipped with
+    a notice. Returns the errors plus the entry count.
     """
     errors: list[str] = []
     quantity = idx.ref("quantity")
     has_finish = idx.ref("hasFinish")
     has_condition = idx.ref("hasCondition")
+    entry_card = idx.ref("entryCard")
     coll_entries = set(idx.combined.subjects(RDF.type, idx.ref("CollectionEntry")))
     coll_total = 0
+    seen: dict[tuple[str, str, str], str] = {}
     for entry in sorted(coll_entries, key=str):
         errors.extend(
             f"card-entries: {entry} has no {prop}"
@@ -241,6 +249,19 @@ def check_collection_entries(idx: GraphIndex) -> tuple[list[str], int]:
         )
         for count in idx.combined.objects(entry, quantity):
             coll_total += int(str(count))
+        variant = (
+            str(next(iter(idx.combined.objects(entry, entry_card)), "")),
+            str(next(iter(idx.combined.objects(entry, has_finish)), "")),
+            str(next(iter(idx.combined.objects(entry, has_condition)), "")),
+        )
+        if all(variant) and variant in seen:
+            errors.append(
+                f"card-entries: {entry} duplicates the variant of "
+                f"{seen[variant]} (same card, finish and condition) - merge "
+                f"them into one entry with the summed quantity",
+            )
+        elif all(variant):
+            seen[variant] = str(entry)
 
     csv_path = idx.ctx.find("collection.csv")
     if csv_path is None:
@@ -254,10 +275,22 @@ def check_collection_entries(idx: GraphIndex) -> tuple[list[str], int]:
         with csv_path.open(encoding="utf-8", newline="") as handle:
             csv_rows = list(csv.DictReader(handle))
         csv_total = sum(int(r["Count"]) for r in csv_rows)
-        if coll_entries and len(coll_entries) != len(csv_rows):
+        # entries are grouped per variant, so several acquisition rows of
+        # the same printing/finish/condition collapse into a single entry
+        csv_variants = {
+            (
+                r["Edition"].upper(),
+                r["Collector Number"],
+                r["Foil"].strip(),
+                r["Condition"].strip(),
+            )
+            for r in csv_rows
+        }
+        if coll_entries and len(coll_entries) != len(csv_variants):
             errors.append(
                 f"card-entries: {len(coll_entries)} collection entries but "
-                f"{len(csv_rows)} rows in collection.csv",
+                f"{len(csv_variants)} distinct printing/finish/condition "
+                f"variants in collection.csv",
             )
         if coll_entries and coll_total != csv_total:
             errors.append(

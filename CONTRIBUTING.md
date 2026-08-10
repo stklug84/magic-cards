@@ -54,7 +54,7 @@ Repository and workflow linting:
 ```sh
 yamllint --strict .
 actionlint
-npx --yes markdownlint-cli2 "**/*.md"
+npx --yes markdownlint-cli2 "**/*.md" "!.venv" "!venv" "!node_modules" "!dist" "!.opencode"
 ```
 
 Knowledge-graph validation (the three entry points are thin wrappers over
@@ -121,6 +121,55 @@ individually justified ignores (see `[tool.ruff.lint]` in
 no ignore baseline and no per-file-ignore section — new suppressions are
 allowed only per line (`# noqa: <RULE>` / `# nosec <ID>`) with a
 justification comment.
+
+## Turtle house style
+
+The validators enforce syntax, prefixes and imports; these conventions are
+the part a reviewer checks by eye.
+
+- **Never hand-edit a generated file.** `sets/*.ttl`,
+  `MagicCardCollection.ttl` and the import block of
+  `MagicCardIndividuals.ttl` come from `scripts/generate_individuals.py`
+  and `scripts/update_imports.py`. Change the generator and regenerate;
+  an edit made by hand is silently reverted by the next run. The
+  hand-authored files are `MagicCardsOntology.ttl`,
+  `MagicCardSynergies.ttl` and `MagicSimulationAnnotations.ttl`.
+- **One predicate, one object list.** Assert a multi-valued predicate once
+  and separate its objects with `,`; never repeat the predicate. Objects
+  align under the first one:
+
+  ```turtle
+  :hasSubType :Human ,
+              :Artificer ;
+  ```
+
+  Repeating `:hasSubType` on two lines is the same RDF, but it is not the
+  house style and it breaks the assumption the text-based readers make.
+- **Layout of `MagicCardsOntology.ttl`**: `Ontology Definition` →
+  `Class Definitions` → `Property Definitions` (object properties first,
+  then datatype properties, each grouped by topic) → `Constraints` →
+  `Individuals`, separated by 80-column `#` banners with `# --- Topic ---`
+  sub-headers. Put a declaration in the section matching its kind: classes
+  never live among the properties, and card-fact properties never live
+  under `Simulation Behavior Annotations`.
+- **Reformatting must be provably semantics-preserving.** A layout change
+  has to leave the triple set untouched; check it with rdflib rather than
+  by reading the diff:
+
+  ```python
+  from rdflib import Graph
+  from rdflib.compare import graph_diff, to_isomorphic
+  before, after = Graph().parse("old.ttl"), Graph().parse("new.ttl")
+  _, only_old, only_new = graph_diff(to_isomorphic(before), to_isomorphic(after))
+  assert not only_old and not only_new
+  ```
+
+- **Text-based readers are coupled to the layout.**
+  `scripts/mtgcards/ttl_loader.py` and `scripts/mtgcards/deck_ttl.py`
+  parse the generated files with regexes instead of rdflib, so the
+  simulator stays stdlib-only. Any change to how the generator lays out a
+  predicate must be mirrored there and covered by a test — otherwise cards
+  silently lose facts while every validator still passes.
 
 ## Working on the CI infrastructure
 
