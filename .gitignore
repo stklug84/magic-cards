@@ -18,6 +18,12 @@ __pycache__/
 .mypy_cache/
 .ruff_cache/
 
+# ignore local virtualenvs — CONTRIBUTING.md asks contributors to install
+# rdflib to run the validators; `uv venv` self-ignores, `python -m venv`
+# does not
+.venv/
+venv/
+
 # ignore Python build artifacts (released via release.yml)
 dist/
 *.egg-info/

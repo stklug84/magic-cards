@@ -80,11 +80,23 @@ jobs:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7
 
+      # markdownlint-cli2 has no ignore file - exclusions have to be
+      # negation globs. .venv/node_modules/dist are inert on a clean
+      # checkout but keep this identical to the command CONTRIBUTING.md
+      # documents. .opencode holds agent and slash-command prompts, whose
+      # format is YAML frontmatter followed by instruction prose - they are
+      # not documents and do not carry a top-level heading (MD041).
       - name: Run markdownlint
         uses: DavidAnson/markdownlint-cli2-action@21c1be1b93ad9ed58fa840aacc3f279cde2a72ff  # v24.2.0
         with:
           config: .markdownlint.yml
-          globs: '**/*.md'
+          globs: |
+            **/*.md
+            !.venv
+            !venv
+            !node_modules
+            !dist
+            !.opencode
 
   # Ruff (lint + format check), mypy --strict and Bandit on the Python
   # tooling. All three tools read their configuration from
