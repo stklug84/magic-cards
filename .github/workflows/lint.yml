@@ -39,7 +39,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7
 
       - name: Download actionlint
         id: get-actionlint
@@ -61,7 +61,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7
 
       - name: Install yamllint
         run: |
@@ -78,7 +78,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7
 
       - name: Run markdownlint
         uses: DavidAnson/markdownlint-cli2-action@21c1be1b93ad9ed58fa840aacc3f279cde2a72ff  # v24.2.0
@@ -91,7 +91,11 @@ jobs:
   # pyproject.toml (ruff select = ALL with permanent, individually
   # justified ignores only; [tool.mypy] strict = true).
   python:
-    uses: stklug84/github-workflows/.github/workflows/python-validate.yml@v1.21.0
+    # A reusable-workflow path plus a 40-character SHA cannot fit in 120
+    # columns; the trailing version comment stays because that is the form
+    # Dependabot reads and rewrites.
+    # yamllint disable-line rule:line-length
+    uses: stklug84/github-workflows/.github/workflows/python-validate.yml@176a7a46472032661cab6f62994177d107265cce  # v1.21.0
     with:
       paths: "scripts"
       config: "pyproject.toml"
@@ -105,10 +109,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7
 
       - name: Set up Python
-        uses: actions/setup-python@v7
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97  # v7
         with:
           python-version: "3.12"
 
