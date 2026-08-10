@@ -122,9 +122,30 @@ jobs:
           pip install build
           python3 -m build
 
+      # The default install must stay stdlib-only: mtgcards/mtgrules/
+      # mtgviz import without rdflib, and mtgvalidate (which needs it)
+      # must be absent until the validate extra is requested.
       - name: Import smoke test
         run: |
           set -euo pipefail
           python3 -m venv /tmp/smoke
           /tmp/smoke/bin/pip install dist/*.whl
           /tmp/smoke/bin/python -c "import mtgcards, mtgviz"
+          /tmp/smoke/bin/python - <<'PY'
+          try:
+              import rdflib
+          except ImportError:
+              pass
+          else:
+              raise SystemExit("rdflib must not be a default dependency")
+          PY
+
+      # mtgvalidate ships in the same wheel but is only importable with
+      # the extra; this catches it being dropped from the hatch packages.
+      - name: Validate-extra smoke test
+        run: |
+          set -euo pipefail
+          python3 -m venv /tmp/smoke-validate
+          /tmp/smoke-validate/bin/pip install "$(echo dist/*.whl)[validate]"
+          /tmp/smoke-validate/bin/python -c "import mtgvalidate"
+          /tmp/smoke-validate/bin/mtg-validate --help > /dev/null

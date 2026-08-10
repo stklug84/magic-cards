@@ -72,6 +72,15 @@ jobs:
           /tmp/smoke/bin/mtg-simulate --help > /dev/null
           /tmp/smoke/bin/mtg-selfplay --help > /dev/null
 
+      # mtgvalidate ships in the same wheel but needs rdflib, so it is
+      # only importable once the validate extra is requested.
+      - name: Smoke-test the validate extra
+        run: |
+          set -euo pipefail
+          python3 -m venv /tmp/smoke-validate
+          /tmp/smoke-validate/bin/pip install "$(echo dist/*.whl)[validate]"
+          /tmp/smoke-validate/bin/mtg-validate --help > /dev/null
+
       - name: Create GitHub Release with artifacts
         env:
           GH_TOKEN: ${{ github.token }}

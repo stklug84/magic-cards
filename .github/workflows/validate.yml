@@ -13,9 +13,9 @@
 #     - ttl-lint          : repo conventions and imports (validate_ttl.py)
 #     - sparql-lint       : prefixes and term usage (validate_sparql.py)
 #     - graph-consistency : cross-file graph checks (check_consistency.py)
-#     - simulator-tests   : rules engine + viz unit tests (deck-data
-#                           integration tests live in the private
-#                           magic-decks repository)
+#     - simulator-tests   : rules engine + viz unit tests, run against
+#                           synthetic fixtures from this repository's own
+#                           knowledge graph
 #
 #   OWL reasoning (the rdf workflow's `owl` job) reasons two roots, each
 #   over its full owl:imports closure resolved through catalog-v001.xml

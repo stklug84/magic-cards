@@ -31,10 +31,9 @@ dist/
 
 # ignore plain text files — this rule is load-bearing: it is what keeps
 # the WotC Comprehensive Rules text (MagicCompRules-*.txt, downloaded
-# from Wizards, never redistributed) and personal notes (todo.txt) out
-# of the public repository. Do not narrow it without replacing those
-# guards. It is also why the licence file is the extensionless LICENSE,
-# never LICENSE.txt.
+# from Wizards, never redistributed) of the public repository.
+# Do not narrow it without replacing those guards. It is also why the
+# licence file is the extensionless LICENSE, never LICENSE.txt.
 *.txt
 
 # ignore the generated OASIS XML catalog — regenerate on demand with

@@ -28,7 +28,8 @@ to be reusable — contributions to either are welcome.
 | `scripts/mtgcards/` | Card data model, deck loading, TTL-backed card database |
 | `scripts/mtgrules/` | Comprehensive-Rules engine (stdlib only) + conformance tests |
 | `scripts/mtgviz/` | Game visualization: recorder, replay, live TUI + tests |
-| `scripts/*.py` | Entry points: validators, consistency check, generators, matchup simulator |
+| `scripts/mtgvalidate/` | Graph/query validators, root-parameterized (needs rdflib; the `validate` extra) |
+| `scripts/*.py` | Entry points: validator wrappers, generators, graph-bundle builder, matchup simulator |
 | `sets/` | Per-set TTL slices (generated card individuals) |
 
 The reusable workflows (`rdf-validate.yml`, `python-validate.yml`) live in
@@ -56,12 +57,23 @@ actionlint
 npx --yes markdownlint-cli2 "**/*.md"
 ```
 
-Knowledge-graph validation:
+Knowledge-graph validation (the three entry points are thin wrappers over
+`scripts/mtgvalidate/`, which the `validate` extra also exposes as the
+single `mtg-validate` command):
 
 ```sh
 python3 scripts/validate_ttl.py
 python3 scripts/validate_sparql.py
 python3 scripts/check_consistency.py
+```
+
+Graph-bundle build — the data artifact downstream repositories pin (see
+the README section on consuming the graph). `release-graph.yml` runs this
+on `graph-*` tags, unpacks the result and validates it standalone before
+publishing:
+
+```sh
+python3 scripts/build_graph_bundle.py --graph-version "$(date -u +%F)"
 ```
 
 OWL reasoning (CI runs this via the `rdf / owl (robot reason)` check;
