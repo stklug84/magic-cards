@@ -111,7 +111,6 @@ See [`README.md`](README.md) for prefix conventions, running instructions, and t
 | 2 | [`02_copies_per_card.rq`](10_collection/02_copies_per_card.rq) | Tabular copies-per-card view with per-printing quantities | `?collection` |
 | 3 | [`03_foil_cards.rq`](10_collection/03_foil_cards.rq) | All foil / etched-foil cards with quantities and sets | `?collection` |
 | 4 | [`04_most_duplicated_cards.rq`](10_collection/04_most_duplicated_cards.rq) | Cards owned in the most physical copies | `?collection`, `?minCopies` |
-| 5 | [`05_collection_value.rq`](10_collection/05_collection_value.rq) | Recorded purchase value and price coverage | `?collection` |
 
 ## 11 — Mechanic Synergies
 

@@ -27,4 +27,10 @@ Modules:
   adapter       decklist match runner + model-coverage report
 """
 
-__version__ = "0.1"
+from mtgcards.version import tools_version
+
+#: version of the magic-cards-tools distribution these packages ship in
+#: (resolved from installed metadata; "0+source" in an uninstalled tree)
+__version__ = tools_version()
+
+__all__ = ["__version__"]
