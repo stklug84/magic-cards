@@ -4,7 +4,7 @@
 # This file is an independent, fan-made instance graph carrying simulation
 # annotations for Magic: The Gathering cards: machine-readable behavior hooks
 # and threat weights consumed by the Monte-Carlo matchup simulator
-# (scripts/mtgsim). These annotations are house-authored simulation opinion,
+# (scripts/mtgrules). These annotations are house-authored simulation opinion,
 # not card facts. The file is not produced by, endorsed by, or affiliated
 # with Wizards of the Coast LLC.
 #
@@ -41,10 +41,10 @@
     rdfs:comment """An instance graph attaching simulation behavior hooks
 (:hasBehaviorHook, whitelisted keys with JSON literal values) and AI threat
 weights (:threatWeight) to card individuals. Consumed by the Monte-Carlo
-matchup simulator in scripts/mtgsim, which cannot reliably derive these
+matchup simulator in scripts/mtgrules, which cannot reliably derive these
 semantics from oracle text. Hooks apply to the card by name (any printing);
 by convention they are asserted on the printing referenced by the deck
-graphs. Keys are whitelisted in scripts/mtgsim/behaviors.py
+graphs. Keys are whitelisted in scripts/mtgcards/behaviors.py
 (BEHAVIOR_KEYS) and validated by scripts/check_consistency.py."""@en .
 
 ################################################################################

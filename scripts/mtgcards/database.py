@@ -19,6 +19,7 @@ from typing import TYPE_CHECKING, Any
 
 from mtgcards.behaviors import BEHAVIOR_KEYS, apply_behaviors, load_annotations
 from mtgcards.cards import CardData, derive_from_oracle
+from mtgcards.graph import check_compatible, load_manifest
 from mtgcards.mana import parse_cost
 from mtgcards.scryfall import ScryfallClient, card_from_scryfall
 from mtgcards.ttl_loader import load_graph_cards
@@ -67,12 +68,25 @@ class CardDatabase:
     ) -> None:
         """Load every layer and derive behavior for each unique card.
 
+        *repo_root* is a graph root: a magic-cards checkout or an
+        unpacked graph bundle. A bundle's GRAPH-MANIFEST.json is checked
+        for compatibility first (see mtgcards.graph); a checkout carries
+        no manifest and is always accepted.
+
         *extra_graphs* are additional card TTL graphs merged on top of
         sets/*.ttl - e.g. an out-of-collection MagicExternalCards.ttl
         kept in a separate repository (missing files are skipped). A
         MagicSimulationAnnotations.ttl sitting next to an extra graph is
         loaded on top of the repo-root annotations.
+
+        Raises:
+            GraphSchemaError: the graph root declares a graph_schema this
+                release of the tooling cannot read.
+
         """
+        #: declared contract of the graph root (None for a plain checkout)
+        self.manifest = load_manifest(repo_root)
+        check_compatible(self.manifest, repo_root)
         self.index: dict[str, CardData] = {}
         #: {individual local name: card name} for every card individual in
         #: the graph; deck instance graphs (.ttl decks) resolve through it

@@ -1,0 +1,124 @@
+---
+# title: Graph bundle release workflow
+# authors:
+#   - Steffen Klug <45033201+stklug84@users.noreply.github.com>
+# date: 2026-08-09
+# keywords: [infrastructure, packaging, release, rdf]
+# comment: |
+#   Publishes the knowledge graph as a versioned data artifact on
+#   graph-* tags, so an external consumer can pin a graph version
+#   instead of checking this repository out. The bundle and the
+#   magic-cards-tools wheel are
+#   released on separate tag namespaces (graph-* vs v*) because the data
+#   and the code move at different rates: an inventory update must not
+#   force a code version bump.
+#
+#   The tag carries the content version: graph-YYYY-MM-DD. The bundle's
+#   GRAPH-MANIFEST.json is the consumer contract - it declares the
+#   graph_schema (the predicate vocabulary the simulator extracts, the
+#   only enforced compatibility key), the ontology IRI, the CR edition
+#   the simulation annotations were authored against, and the minimum
+#   tools version. See scripts/build_graph_bundle.py and mtgcards.graph.
+#
+#   The artifact is validated before it is published: the bundle is
+#   unpacked and must both load through CardDatabase and pass the full
+#   TTL + consistency check suite standalone.
+# ---
+name: Release graph bundle
+
+on:
+  push:
+    tags:
+      - "graph-*"
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-release:
+    name: Build, validate, and publish the graph bundle
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7
+
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97  # v7
+        with:
+          python-version: "3.12"
+
+      - name: Check tag format
+        run: |
+          set -euo pipefail
+          version="${GITHUB_REF_NAME#graph-}"
+          if ! printf '%s' "$version" | grep -Eq '^[0-9]{4}-[0-9]{2}-[0-9]{2}$'; then
+            echo "::error::tag ${GITHUB_REF_NAME} must be graph-YYYY-MM-DD"
+            exit 1
+          fi
+          echo "GRAPH_VERSION=${version}" >> "$GITHUB_ENV"
+
+      # The CR text is gitignored and never redistributed. It is fetched
+      # here only so the manifest can record which edition the simulation
+      # annotations were authored against (consumers fetch it themselves
+      # using that value), and so the load smoke test can import the
+      # rules engine.
+      - name: Download Comprehensive Rules (not distributed)
+        env:
+          CR_DATE: "20260619"
+        run: |
+          set -euo pipefail
+          curl -fsSL -o "MagicCompRules-${CR_DATE}.txt" \
+            "https://media.wizards.com/2026/downloads/MagicCompRules%20${CR_DATE}.txt"
+
+      - name: Install tooling with the validate extra
+        run: |
+          set -euo pipefail
+          pip install ".[validate]"
+
+      - name: Build the graph bundle
+        run: |
+          set -euo pipefail
+          python3 scripts/build_graph_bundle.py --graph-version "$GRAPH_VERSION"
+
+      - name: Unpack the bundle
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/bundle
+          tar xzf "dist/magic-cards-graph-${GRAPH_VERSION}.tar.gz" \
+            -C /tmp/bundle --strip-components=1
+          cp MagicCompRules-*.txt /tmp/bundle/
+          cat /tmp/bundle/GRAPH-MANIFEST.json
+
+      # The bundle must be usable as a graph root on its own: this is
+      # exactly what a consumer does after unpacking it.
+      - name: "Smoke: load the bundle through CardDatabase"
+        env:
+          MTG_GRAPH_ROOT: /tmp/bundle
+        run: |
+          set -euo pipefail
+          python3 -c "
+          from mtgcards.database import CardDatabase
+          db = CardDatabase('/tmp/bundle')
+          assert db.manifest is not None, 'bundle carries no manifest'
+          assert db.index, 'bundle produced an empty card index'
+          print(f'{len(db.index)} cards, {len(db.ind2name)} individuals, '
+                f'graph {db.manifest.graph_version}')
+          "
+
+      # owl:imports resolution is the check that would catch a bundle
+      # missing a graph its own files import.
+      - name: Validate the bundle standalone
+        run: |
+          set -euo pipefail
+          mtg-validate --check ttl --check consistency /tmp/bundle
+
+      - name: Create GitHub Release with the bundle
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          gh release create "$GITHUB_REF_NAME" \
+            "dist/magic-cards-graph-${GRAPH_VERSION}.tar.gz" \
+            dist/GRAPH-MANIFEST.json \
+            --title "Knowledge graph ${GRAPH_VERSION}" \
+            --generate-notes

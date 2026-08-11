@@ -4,14 +4,15 @@ build-backend = "hatchling.build"
 
 [project]
 name = "magic-cards-tools"
-version = "0.1.0"
-description = "Simulation tooling for the MTG knowledge graph: CR-grounded Commander matchup simulator, card data layer, and game visualization."
+version = "0.2.0"
+description = "Simulation tooling for the MTG knowledge graph: CR-grounded Commander matchup simulator, card data layer, game visualization, and graph validators."
 readme = "README.md"
 requires-python = ">=3.12"
 license = "MIT"
 license-files = ["LICENSE"]
 # the packaged simulator is stdlib-only; the knowledge graph itself is
-# not bundled - point MTG_GRAPH_ROOT at a magic-cards checkout
+# not bundled - point MTG_GRAPH_ROOT at a magic-cards checkout or at an
+# unpacked graph bundle (see scripts/build_graph_bundle.py)
 dependencies = []
 classifiers = [
     "Development Status :: 4 - Beta",
@@ -26,7 +27,11 @@ classifiers = [
 
 [project.optional-dependencies]
 tui = ["rich"]
-# rdflib powers the repo-only validation/generator scripts (not packaged)
+# the mtgvalidate package: graph/query validators for downstream repos
+# that check their own TTL files against a published graph bundle. Kept
+# out of the default install so mtgcards/mtgrules/mtgviz stay stdlib-only.
+validate = ["rdflib>=7,<8"]
+# rdflib also powers the repo-only generator scripts (not packaged)
 dev = ["rdflib>=7,<8"]
 
 [project.urls]
@@ -38,11 +43,14 @@ Releases = "https://github.com/stklug84/magic-cards/releases"
 [project.scripts]
 mtg-simulate = "mtgrules.cli:main"
 mtg-selfplay = "mtgrules.selfplay:main"
+# requires the [validate] extra (rdflib)
+mtg-validate = "mtgvalidate.cli:main"
 
 [tool.hatch.build.targets.wheel]
 packages = [
     "scripts/mtgcards",
     "scripts/mtgrules",
+    "scripts/mtgvalidate",
     "scripts/mtgviz",
 ]
 
@@ -50,6 +58,7 @@ packages = [
 only-include = [
     "scripts/mtgcards",
     "scripts/mtgrules",
+    "scripts/mtgvalidate",
     "scripts/mtgviz",
     "pyproject.toml",
     "README.md",

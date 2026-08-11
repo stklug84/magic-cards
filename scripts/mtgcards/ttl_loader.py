@@ -5,6 +5,10 @@ Reads sets/*.ttl plus optional extra card graphs with regex-based extraction
 mana value, types, subtypes, color identity, power/toughness and oracle
 text. Results are indexed by full card name and, for double-faced cards,
 by the front-face name as well.
+
+Multi-valued predicates are read as Turtle object lists (see _objects).
+Anything that changes how the generator lays out those predicates has to
+be mirrored here, because this module parses text rather than RDF.
 """
 
 from __future__ import annotations
@@ -25,15 +29,37 @@ _FIELD_RE = {
     "power": re.compile(r':powerValue "(-?\d+)"'),
     "tough": re.compile(r':toughnessValue "(-?\d+)"'),
 }
-_TYPE_RE = re.compile(r":hasCardType :(\w+)")
-_SUPER_RE = re.compile(r":hasSuperType :(\w+)")
 _LOYALTY_RE = re.compile(r':loyalty "(\d+)"')
-_SUB_RE = re.compile(r":hasSubType :(\w+)")
-_CI_RE = re.compile(r":hasColorIdentity :(\w+)")
-_PRODUCES_RE = re.compile(r":producesMana :(\w+)")
 _TAPPED_RE = re.compile(r':entersTapped "true"')
 _FETCHLAND_RE = re.compile(r':isFetchLand "true"')
 _ORACLE_RE = re.compile(r':oracleText\s+(?:"""(.*?)"""|"([^"]*)")', re.DOTALL)
+
+#: The generator emits multi-valued predicates as Turtle object lists
+#: (":hasSubType :Human ,\n    :Artificer ;"), so a per-predicate regex that
+#: captures a single object would silently drop every object but the first.
+#: _objects captures the whole object run up to the ';' or '.' that ends the
+#: predicate, then splits it.
+_OBJECT_RUN = r"\s+((?::\w+\s*,\s*)*:\w+)\s*[;.]"
+_LIST_RE = {
+    "type": re.compile(r":hasCardType" + _OBJECT_RUN),
+    "super": re.compile(r":hasSuperType" + _OBJECT_RUN),
+    "sub": re.compile(r":hasSubType" + _OBJECT_RUN),
+    "ci": re.compile(r":hasColorIdentity" + _OBJECT_RUN),
+    "produces": re.compile(r":producesMana" + _OBJECT_RUN),
+}
+
+
+def _objects(kind: str, block: str) -> list[str]:
+    """Return every object local name asserted for *kind* in *block*.
+
+    Handles both the object-list form and a predicate repeated across
+    several lines, so older graph bundles keep loading.
+    """
+    names: list[str] = []
+    for run in _LIST_RE[kind].findall(block):
+        names.extend(part.strip().lstrip(":") for part in run.split(","))
+    return [n for n in names if n]
+
 
 COLOR_NAME = {"White": "W", "Blue": "U", "Black": "B", "Red": "R", "Green": "G"}
 
@@ -73,18 +99,18 @@ def _parse_card(name: str, block: str) -> CardData:
     t = _FIELD_RE["tough"].search(block)
     card.power = int(p.group(1)) if p else None
     card.toughness = int(t.group(1)) if t else None
-    card.types = set(_TYPE_RE.findall(block))
-    card.supertypes = set(_SUPER_RE.findall(block))
+    card.types = set(_objects("type", block))
+    card.supertypes = set(_objects("super", block))
     lm = _LOYALTY_RE.search(block)
     card.loyalty = int(lm.group(1)) if lm else None
-    card.subtypes = set(_SUB_RE.findall(block))
+    card.subtypes = set(_objects("sub", block))
     # normalize concatenated subtype individuals (:SpacecraftPlanar)
     for s in list(card.subtypes):
         for word in _SUBTYPE_WORDS:
             if s != word and s.startswith(word):
                 card.subtypes.add(word)
     card.color_identity = {
-        COLOR_NAME[c] for c in _CI_RE.findall(block) if c in COLOR_NAME
+        COLOR_NAME[c] for c in _objects("ci", block) if c in COLOR_NAME
     }
     om = _ORACLE_RE.search(block)
     if om:
@@ -102,7 +128,7 @@ def _apply_land_facts(card: CardData, block: str) -> None:
     """
     if "Land" not in card.types:
         return
-    produced = _PRODUCES_RE.findall(block)
+    produced = _objects("produces", block)
     if produced:
         card.behavior["land_colors"] = {COLOR_NAME.get(c, "C") for c in produced}
     if _TAPPED_RE.search(block):

@@ -4,9 +4,8 @@ A seeded game's viz stream must be complete, JSON-serializable,
 navigable, and its final snapshot must match the engine record.
 Run from the scripts/ directory (mtgcards/mtgrules/mtgviz importable).
 
-The fixture decks are synthetic lists of cards from the public
-knowledge graph (sets/*.ttl); the real deck pool lives in the private
-magic-decks repository together with its own integration tests.
+The fixture decks are synthetic lists of cards from the knowledge graph
+(sets/*.ttl), so these tests need no data beyond this repository.
 """
 
 import json

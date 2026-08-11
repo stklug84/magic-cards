@@ -9,9 +9,10 @@ Pipeline:
                 conventions of MagicCardIndividuals.ttl / MagicCardsOntology.ttl,
                 and print the owl:imports block for the master file.
   3. collection - emit MagicCardCollection.ttl with one reified CollectionEntry
-                per collection.csv row (quantity, finish, condition, purchase
-                price), resolving card individuals from the existing sets/*.ttl
-                files.
+                per collected variant, i.e. per (printing, finish, condition)
+                combination, carrying the total quantity held in that variant.
+                Card individuals are resolved from the existing sets/*.ttl
+                files, so this step needs no network access.
 
 Usage:
   python3 scripts/generate_individuals.py fetch
@@ -33,7 +34,10 @@ import urllib.request
 from collections import defaultdict
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Any, TypedDict
+from typing import TYPE_CHECKING, Any, TypedDict
+
+if TYPE_CHECKING:
+    from collections.abc import Sequence
 
 ROOT = Path(__file__).resolve().parent.parent
 # Interchange contract: build_vocab.py writes onto_vocab.json /
@@ -456,6 +460,30 @@ def parse_type_line(
     return supers, types, subs
 
 
+def object_list(prop: str, objects: Sequence[str], indent: str = "    ") -> list[str]:
+    """Render one predicate with a comma-separated Turtle object list.
+
+    Turtle's ',' groups several objects under a single predicate. Repeating
+    the predicate line per object is equivalent RDF but redundant, so the
+    house style is the object list; continuation lines align under the
+    first object. Returns [] when there is nothing to assert.
+
+    Consumers that read the generated files with regexes (notably
+    mtgcards.ttl_loader) must parse these lists rather than a single
+    object per predicate.
+    """
+    if not objects:
+        return []
+    head = f"{indent}{prop} "
+    if len(objects) == 1:
+        return [f"{head}{objects[0]} ;"]
+    pad = " " * len(head)
+    lines = [f"{head}{objects[0]} ,"]
+    lines.extend(f"{pad}{obj} ," for obj in objects[1:-1])
+    lines.append(f"{pad}{objects[-1]} ;")
+    return lines
+
+
 PRODUCED_ORDER = ["W", "U", "B", "R", "G", "C"]
 PRODUCED_IND = {
     "W": "White",
@@ -478,10 +506,10 @@ def mana_fact_lines(card: ScryCard) -> list[str]:
     not produce mana themselves.
     """
     produced = [s for s in card.get("produced_mana") or [] if s in PRODUCED_IND]
-    lines = [
-        f"    :producesMana :{PRODUCED_IND[sym]} ;"
-        for sym in sorted(produced, key=PRODUCED_ORDER.index)
-    ]
+    lines = object_list(
+        ":producesMana",
+        [f":{PRODUCED_IND[sym]}" for sym in sorted(produced, key=PRODUCED_ORDER.index)],
+    )
     faces = card.get("card_faces") or [card]
     oracle = "\n".join(f.get("oracle_text", "") for f in faces)
     type_line = card.get("type_line") or faces[0].get("type_line", "")
@@ -516,8 +544,9 @@ def _type_lines(card: ScryCard, front: ScryCard, ctx: GenContext) -> list[str]:
         ctx.sub_by_label,
         layout=card.get("layout", ""),
     )
-    out = [f"    :hasSuperType :{s} ;" for s in supers]
-    out.extend(f"    :hasCardType :{t} ;" for t in types)
+    out = object_list(":hasSuperType", [f":{s}" for s in supers])
+    out.extend(object_list(":hasCardType", [f":{t}" for t in types]))
+    targets: list[str] = []
     for sub in subs:
         target = ctx.sub_by_label.get(norm_label(sub)) or ctx.sub_by_label.get(
             norm_label(sub.replace("-", "")),
@@ -526,7 +555,8 @@ def _type_lines(card: ScryCard, front: ScryCard, ctx: GenContext) -> list[str]:
             target = pascal(sub)
             cls = TYPE_CLASS.get(types[0] if types else "Creature", "CreatureTypes")
             ctx.notes.subtypes.setdefault(target, (sub, cls))
-        out.append(f"    :hasSubType :{target} ;")
+        targets.append(f":{target}")
+    out.extend(object_list(":hasSubType", targets))
     return out
 
 
@@ -536,11 +566,15 @@ def _color_lines(card: ScryCard, faces: list[ScryCard]) -> list[str]:
     colors = card.get("colors")
     if colors is None:
         colors = sorted({c for f in faces for c in f.get("colors", [])})
-    out.extend(f"    :hasColor :{COLOR[c]} ;" for c in WUBRG if c in colors)
     out.extend(
-        f"    :hasColorIdentity :{COLOR[c]} ;"
-        for c in WUBRG
-        if c in card.get("color_identity", [])
+        object_list(":hasColor", [f":{COLOR[c]}" for c in WUBRG if c in colors]),
+    )
+    identity = card.get("color_identity", [])
+    out.extend(
+        object_list(
+            ":hasColorIdentity",
+            [f":{COLOR[c]}" for c in WUBRG if c in identity],
+        ),
     )
     return out
 
@@ -579,15 +613,28 @@ def _stat_lines(front: ScryCard) -> list[str]:
 
 
 def _keyword_lines(card: ScryCard, ctx: GenContext) -> list[str]:
-    """Keyword triples; unknown keywords become comments and a note."""
-    out = []
+    """Keyword triples; unknown keywords become comments and a note.
+
+    Keywords are bucketed per property (:hasKeywordAbility /
+    :hasKeywordAction) so each is emitted once with an object list;
+    buckets keep first-appearance order. Notes for keywords the ontology
+    does not define follow the triples.
+    """
+    buckets: dict[str, list[str]] = defaultdict(list)
+    notes: list[str] = []
     for kw in card.get("keywords", []):
         hit = ctx.kw_map.get(kw) or ctx.kw_map.get(pascal(kw))
         if hit:
-            out.append(f"    :{hit[0]} :{hit[1]} ;")
+            buckets[hit[0]].append(f":{hit[1]}")
         else:
-            out.append(f'    # Note: keyword "{kw}" not defined in MagicCardsOntology')
+            notes.append(
+                f'    # Note: keyword "{kw}" not defined in MagicCardsOntology',
+            )
             ctx.notes.keywords.add(kw)
+    out: list[str] = []
+    for prop, objects in buckets.items():
+        out.extend(object_list(f":{prop}", objects))
+    out.extend(notes)
     return out
 
 
@@ -690,8 +737,8 @@ HEADER = """\
 # Card data sourced from Gatherer (https://gatherer.wizards.com) and Scryfall
 # (https://scryfall.com) under their respective data distribution policies.
 #
-# This file is generated by scripts/generate_individuals.py from
-# collection.csv. Do not edit manually.
+# This file is generated by scripts/generate_individuals.py.
+# Do not edit manually.
 # ==============================================================================
 
 @prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -953,6 +1000,18 @@ CONDITION = {
     "Heavily Played": "HeavilyPlayed",
     "Damaged": "Damaged",
 }
+#: emission order of the entries of one printing (best finish/condition first)
+FINISH_ORDER = ["Nonfoil", "Foil", "EtchedFoil"]
+CONDITION_ORDER = [
+    "NearMint",
+    "LightlyPlayed",
+    "ModeratelyPlayed",
+    "HeavilyPlayed",
+    "Damaged",
+]
+
+#: one collected variant: (card individual, set file, finish, condition)
+VariantKey = tuple[str, str, str, str]
 
 COLLECTION_HEADER = """\
 # ==============================================================================
@@ -968,8 +1027,8 @@ COLLECTION_HEADER = """\
 # owners. This work is made available under the Wizards of the Coast Fan
 # Content Policy (https://company.wizards.com/en/legal/fancontentpolicy).
 #
-# This file is generated by scripts/generate_individuals.py from
-# collection.csv. Do not edit manually.
+# This file is generated by scripts/generate_individuals.py.
+# Do not edit manually.
 # ==============================================================================
 
 @prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -988,16 +1047,15 @@ COLLECTION_HEADER = """\
 
 <urn:stklug84:MagicCardCollection:{ns_date}#>
     rdf:type owl:Ontology ;
-    owl:imports <urn:stklug84:MagicCardsOntology:2026-02-27#> ;
-    owl:imports <urn:stklug84:MagicCardIndividuals:{ns_date}#> ;
+    owl:imports <urn:stklug84:MagicCardsOntology:2026-02-27#> ,
+                <urn:stklug84:MagicCardIndividuals:{ns_date}#> ;
     rdfs:label "Magic Card Collection Inventory"@en ;
     rdfs:comment \"\"\"An instance graph describing the physical inventory of a
 personal Magic: The Gathering card collection. Defines the Collection
-individual and one reified CollectionEntry per acquisition lot from
-collection.csv, carrying the number of copies, finish, condition and
-(where recorded) purchase price of a collected printing. Card individuals
-are defined in the per-set instance graphs aggregated by
-MagicCardIndividuals.\"\"\"@en .
+individual and one reified CollectionEntry per distinct combination of
+printing, finish and condition, carrying the total number of copies held
+in that variant. Card individuals are defined in the per-set instance
+graphs aggregated by MagicCardIndividuals.\"\"\"@en .
 """
 
 
@@ -1038,39 +1096,68 @@ def load_card_map() -> dict[tuple[str, str], tuple[str, str]]:
     return card_map
 
 
-def cmd_collection() -> None:
-    """Emit MagicCardCollection.ttl with one entry per collection.csv row."""
-    with collection_csv_path().open(encoding="utf-8", newline="") as handle:
-        rows = list(csv.DictReader(handle))
-    card_map = load_card_map()
+def collection_variants(
+    rows: list[dict[str, str]],
+    card_map: dict[tuple[str, str], tuple[str, str]],
+) -> tuple[dict[VariantKey, int], list[tuple[str, str]]]:
+    """Group inventory rows into variants, summing their copy counts.
 
-    refs: list[str] = []
+    A variant is one (card individual, finish, condition) combination: two
+    rows describing the same printing in the same finish and condition are
+    the same physical stack split across acquisitions, so they become a
+    single entry whose quantity is their total. Rows whose printing has no
+    individual under sets/ are reported as missing instead.
+    """
+    variants: dict[VariantKey, int] = {}
     missing: list[tuple[str, str]] = []
-    seq: dict[str, int] = defaultdict(int)
-    total = 0
-    by_file: dict[str, list[str]] = defaultdict(list)
     for r in rows:
         key = (r["Edition"].upper(), r["Collector Number"])
         if key not in card_map:
             missing.append(key)
             continue
         ind, fname = card_map[key]
-        seq[ind] += 1
-        entry = f"{ind}Entry{seq[ind]}"
-        count = int(r["Count"])
+        variant = (
+            ind,
+            fname,
+            FINISH[r["Foil"].strip()],
+            CONDITION[r["Condition"].strip()],
+        )
+        variants[variant] = variants.get(variant, 0) + int(r["Count"])
+    return variants, missing
+
+
+def cmd_collection() -> None:
+    """Emit MagicCardCollection.ttl with one entry per collected variant."""
+    with collection_csv_path().open(encoding="utf-8", newline="") as handle:
+        rows = list(csv.DictReader(handle))
+    card_map = load_card_map()
+    variants, missing = collection_variants(rows, card_map)
+
+    refs: list[str] = []
+    total = 0
+    by_file: dict[str, list[str]] = defaultdict(list)
+    for (ind, fname, finish, condition), count in sorted(
+        variants.items(),
+        key=lambda item: (
+            item[0][1],
+            item[0][0],
+            FINISH_ORDER.index(item[0][2]),
+            CONDITION_ORDER.index(item[0][3]),
+        ),
+    ):
+        # attribute-based IRI: derived only from the variant's own
+        # attributes, so adding a lot in a new finish or condition never
+        # renames an existing entry
+        entry = f"{ind}Entry{finish}{condition}"
         total += count
         lines = [
             f":{entry} rdf:type owl:NamedIndividual ,",
             "                  :CollectionEntry ;",
             f"    :entryCard :{ind} ;",
             f'    :quantity "{count}"^^xsd:positiveInteger ;',
-            f"    :hasFinish :{FINISH[r['Foil'].strip()]} ;",
-            f"    :hasCondition :{CONDITION[r['Condition'].strip()]} ;",
+            f"    :hasFinish :{finish} ;",
+            f"    :hasCondition :{condition} .",
         ]
-        price = r["Purchase Price"].strip()
-        if price:
-            lines.append(f'    :purchasePrice "{price}"^^xsd:decimal ;')
-        lines[-1] = lines[-1][:-1].rstrip() + " ."
         by_file[fname].append("\n".join(lines))
         refs.append(entry)
 
@@ -1080,9 +1167,9 @@ def cmd_collection() -> None:
         ":MagicCardCollection rdf:type owl:NamedIndividual ,\n"
         "                  :Collection ;\n"
         '    rdfs:label "Magic Card Collection"@en ;\n'
-        '    rdfs:comment """The physical card collection inventoried\n'
-        "in collection.csv. Each collection entry describes one acquisition\n"
-        'lot of a specific printing."""@en ;\n'
+        '    rdfs:comment """The physical card collection. Each collection\n'
+        "entry describes the copies of one printing held in one finish and\n"
+        'condition."""@en ;\n'
         "    :hasCollectionEntry\n  " + " ,\n  ".join(f":{e}" for e in refs) + " .\n",
     )
     parts.append(

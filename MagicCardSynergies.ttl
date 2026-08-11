@@ -34,8 +34,8 @@
 <urn:stklug84:MagicCardSynergies:2026-07-19#>
     rdf:type owl:Ontology ;
     <http://purl.org/dc/terms/license> <https://creativecommons.org/licenses/by-sa/4.0/> ;
-    owl:imports <urn:stklug84:MagicCardsOntology:2026-02-27#> ;
-    owl:imports <urn:stklug84:MagicCardIndividuals:2026-07-19#> ;
+    owl:imports <urn:stklug84:MagicCardsOntology:2026-02-27#> ,
+                <urn:stklug84:MagicCardIndividuals:2026-07-19#> ;
     rdfs:label "Magic Card Synergies"@en ;
     rdfs:comment """An instance graph capturing directional synergy relations
 (:amplifies, :enables and their OWL inverses) and mutual synergies
