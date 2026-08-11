@@ -33,23 +33,37 @@ MASTER = ROOT / "MagicCardIndividuals.ttl"
 # resolve the platform temp dir (/tmp on the Linux CI runners).
 IMPORTS_JSON = Path(tempfile.gettempdir()) / "imports.json"
 
+# The whole import block is one object list under a single owl:imports
+# predicate: the ontology first, then one object per generated set file,
+# each carrying a trailing comment naming its file. Every line but the last
+# ends in ','. The block is rewritten wholesale, so this regex has to match
+# the ontology line too.
+ONTOLOGY_IRI = "urn:stklug84:MagicCardsOntology:2026-02-27#"
+#: continuation indent aligning objects under the first one
+IMPORT_PAD = " " * len("    owl:imports ")
 IMPORT_LINE_RE = re.compile(
-    r"^    owl:imports <[^>]+> ;  # sets/\S+\.ttl \(\d+ individuals\)$",
+    rf"^(?:    owl:imports |{IMPORT_PAD})<[^>]+> [,;]"
+    r"(?:  # sets/\S+\.ttl \(\d+ individuals\))?$",
 )
-ONTOLOGY_IMPORT = "    owl:imports <urn:stklug84:MagicCardsOntology:2026-02-27#> ;"
 SUPPLEMENT = "SubTypeSupplement.ttl"
 
 
 def import_lines(entries: list[dict[str, str | int]]) -> list[str]:
-    """Render one aggregator import line per generated set file."""
+    """Render the aggregator's imports as one Turtle object list."""
     supplement = [e for e in entries if e["file"] == SUPPLEMENT]
     sets = sorted(
         (e for e in entries if e["file"] != SUPPLEMENT),
         key=lambda e: e["file"],
     )
-    return [
-        f"    owl:imports <{e['urn']}> ;  # sets/{e['file']} ({e['cards']} individuals)"
+    objects = [(ONTOLOGY_IRI, "")]
+    objects += [
+        (str(e["urn"]), f"  # sets/{e['file']} ({e['cards']} individuals)")
         for e in supplement + sets
+    ]
+    return [
+        f"{'    owl:imports ' if i == 0 else IMPORT_PAD}<{urn}> "
+        f"{';' if i == len(objects) - 1 else ','}{comment}"
+        for i, (urn, comment) in enumerate(objects)
     ]
 
 
@@ -76,8 +90,9 @@ def main() -> int:
         kept.append(line)
 
     if not inserted:
+        # no import block yet: hang a fresh one off the ontology header
         try:
-            anchor = kept.index(ONTOLOGY_IMPORT)
+            anchor = kept.index("    rdf:type owl:Ontology ;")
         except ValueError:
             print(  # noqa: T201 - pipeline progress/error output
                 f"ERROR: no import block found in {MASTER.name}",

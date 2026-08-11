@@ -148,9 +148,11 @@ A few patterns recur across queries:
 - **Physical inventory** is reified analogously in
   `MagicCardCollection.ttl`: `mc:MagicCardCollection mc:hasCollectionEntry ?e .
   ?e mc:entryCard ?c ; mc:quantity ?n ; mc:hasFinish ?f ; mc:hasCondition ?cond .`
-  with optional `mc:purchasePrice`. One `CollectionEntry` corresponds to one
-  acquisition lot from `collection.csv`; a printing collected in several
-  finishes or lots has several entries, so always aggregate with `SUM(?n)`.
+  One `CollectionEntry` is one collected *variant* — a distinct combination
+  of printing, finish and condition — and its quantity is the total number of
+  copies held in that variant. No two entries share a variant, but a printing
+  owned in several finishes or conditions still has several entries, so
+  aggregate per card with `SUM(?n)`. The graph models no valuation data.
   `DeckEntry` and `CollectionEntry` share the `mc:entryCard` / `mc:quantity`
   properties via their common superclass `mc:CardEntry` — restrict by class
   (`?e rdf:type mc:CollectionEntry`) or traverse from the container when the

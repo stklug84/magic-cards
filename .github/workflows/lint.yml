@@ -80,11 +80,23 @@ jobs:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7
 
+      # markdownlint-cli2 has no ignore file - exclusions have to be
+      # negation globs. .venv/node_modules/dist are inert on a clean
+      # checkout but keep this identical to the command CONTRIBUTING.md
+      # documents. .opencode holds agent and slash-command prompts, whose
+      # format is YAML frontmatter followed by instruction prose - they are
+      # not documents and do not carry a top-level heading (MD041).
       - name: Run markdownlint
         uses: DavidAnson/markdownlint-cli2-action@21c1be1b93ad9ed58fa840aacc3f279cde2a72ff  # v24.2.0
         with:
           config: .markdownlint.yml
-          globs: '**/*.md'
+          globs: |
+            **/*.md
+            !.venv
+            !venv
+            !node_modules
+            !dist
+            !.opencode
 
   # Ruff (lint + format check), mypy --strict and Bandit on the Python
   # tooling. All three tools read their configuration from
@@ -122,9 +134,30 @@ jobs:
           pip install build
           python3 -m build
 
+      # The default install must stay stdlib-only: mtgcards/mtgrules/
+      # mtgviz import without rdflib, and mtgvalidate (which needs it)
+      # must be absent until the validate extra is requested.
       - name: Import smoke test
         run: |
           set -euo pipefail
           python3 -m venv /tmp/smoke
           /tmp/smoke/bin/pip install dist/*.whl
           /tmp/smoke/bin/python -c "import mtgcards, mtgviz"
+          /tmp/smoke/bin/python - <<'PY'
+          try:
+              import rdflib
+          except ImportError:
+              pass
+          else:
+              raise SystemExit("rdflib must not be a default dependency")
+          PY
+
+      # mtgvalidate ships in the same wheel but is only importable with
+      # the extra; this catches it being dropped from the hatch packages.
+      - name: Validate-extra smoke test
+        run: |
+          set -euo pipefail
+          python3 -m venv /tmp/smoke-validate
+          /tmp/smoke-validate/bin/pip install "$(echo dist/*.whl)[validate]"
+          /tmp/smoke-validate/bin/python -c "import mtgvalidate"
+          /tmp/smoke-validate/bin/mtg-validate --help > /dev/null
