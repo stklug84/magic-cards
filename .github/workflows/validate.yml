@@ -61,7 +61,7 @@ jobs:
     # columns; the trailing version comment stays because that is the form
     # Dependabot reads and rewrites.
     # yamllint disable-line rule:line-length
-    uses: stklug84/github-workflows/.github/workflows/rdf-validate.yml@5da324adc08b183d479b0d1f3aff60b05524b602  # v1.22.0
+    uses: stklug84/github-workflows/.github/workflows/rdf-validate.yml@ef0b2e5ae729ef22d91331095281856a97b4dbd5  # v2.0.0
     with:
       turtle-glob: "**/*.ttl"
       sparql-glob: "queries/**/*.rq"
