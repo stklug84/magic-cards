@@ -2,10 +2,11 @@
 # title: CodeQL code scanning workflow
 # authors:
 #   - Steffen Klug <45033201+stklug84@users.noreply.github.com>
-# date: 2026-08-07
+# date: 2026-08-11
 # keywords: [infrastructure, security]
 # comment: |
-#   CodeQL code scanning over a language matrix:
+#   CodeQL code scanning over a language matrix, via the reusable
+#   stklug84/github-workflows repo-codeql workflow:
 #     - actions : .github/workflows/* (expression injection, excessive
 #                 permissions, untrusted checkout, artifact/cache
 #                 poisoning, ...).
@@ -15,8 +16,7 @@
 #                 injection, ...
 #   Both use build-mode `none` (no compilation needed) and the
 #   security-extended suite, which adds the unpinned-tag query for
-#   actions. Mirrors the codeql.yml in stklug84/actions and
-#   stklug84/github-workflows.
+#   actions.
 # ---
 name: CodeQL
 
@@ -35,31 +35,15 @@ permissions:
   contents: read
 
 jobs:
-  analyze:
-    name: Analyze (${{ matrix.language }})
-    runs-on: ubuntu-latest
+  # A reusable-workflow path plus a 40-character SHA cannot fit in 120
+  # columns; the trailing version comment stays because that is the form
+  # Dependabot reads and rewrites.
+  # yamllint disable-line rule:line-length
+  codeql:
+    uses: stklug84/github-workflows/.github/workflows/repo-codeql.yml@e8b7009127c21bd66249ad5df0a0112c1d4f6553  # v4.0.0
     permissions:
       security-events: write
       contents: read
       actions: read
-    strategy:
-      fail-fast: false
-      matrix:
-        language:
-          - actions
-          - python
-    steps:
-      - name: Checkout
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7
-
-      - name: Initialize CodeQL
-        uses: github/codeql-action/init@5595ccaf912efad79be6eef63a5619ff05969be3  # v4
-        with:
-          languages: ${{ matrix.language }}
-          build-mode: none
-          queries: security-extended
-
-      - name: Perform CodeQL analysis
-        uses: github/codeql-action/analyze@5595ccaf912efad79be6eef63a5619ff05969be3  # v4
-        with:
-          category: /language:${{ matrix.language }}
+    with:
+      languages: '["actions", "python"]'

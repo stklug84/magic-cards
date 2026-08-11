@@ -2,7 +2,7 @@
 # title: Release workflow
 # authors:
 #   - Steffen Klug <45033201+stklug84@users.noreply.github.com>
-# date: 2026-08-06
+# date: 2026-08-11
 # keywords: [infrastructure, packaging, release]
 # comment: |
 #   Builds the magic-cards-tools Python artifact (wheel + sdist) on
@@ -10,6 +10,16 @@
 #   match the version in pyproject.toml (vX.Y.Z <-> X.Y.Z); the built
 #   wheel is smoke-tested (install + CLI --help against the checked-out
 #   knowledge graph) before the release is created.
+#
+#   The build -> verify -> publish sequence is the reusable stklug84/
+#   github-workflows release-artifact workflow, the same one release-
+#   graph.yml uses for the knowledge graph bundle. Only the commands
+#   below are repository-specific; each runs with RELEASE_TAG and
+#   RELEASE_VERSION exported.
+#
+#   tag-prefix is deliberately empty so RELEASE_VERSION is the full tag
+#   (v0.1.0, not 0.1.0): it is what the release title carries, and the
+#   pyproject comparison strips the leading v itself.
 # ---
 name: Release
 
@@ -22,70 +32,53 @@ permissions:
   contents: write
 
 jobs:
-  build-and-release:
-    name: Build wheel + sdist and publish release
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7
+  release:
+    # A reusable-workflow path plus a 40-character SHA cannot fit in 120
+    # columns; the trailing version comment stays because that is the form
+    # Dependabot reads and rewrites.
+    # yamllint disable-line rule:line-length
+    uses: stklug84/github-workflows/.github/workflows/release-artifact.yml@e8b7009127c21bd66249ad5df0a0112c1d4f6553  # v4.0.0
+    permissions:
+      contents: write
+    with:
+      tag-prefix: ""
+      version-pattern: '^v[0-9]+\.[0-9]+\.[0-9]+$'
 
-      - name: Set up Python
-        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97  # v7
-        with:
-          python-version: "3.12"
+      install-command: "pip install build"
 
-      - name: Check tag matches pyproject version
-        run: |
-          set -euo pipefail
-          script='import tomllib; print(tomllib.load(open("pyproject.toml", "rb"))["project"]["version"])'
-          pyver="$(python3 -c "$script")"
-          tag="${GITHUB_REF_NAME#v}"
-          if [ "$pyver" != "$tag" ]; then
-            echo "::error::tag v${tag} does not match pyproject version ${pyver}"
-            exit 1
-          fi
+      # The tag must agree with the packaged version, and the rules
+      # engine validates its @rule annotations against the CR text at
+      # import time -- the text is not distributed (see README), so the
+      # smoke test has to fetch it.
+      prepare-command: |
+        script='import tomllib; print(tomllib.load(open("pyproject.toml", "rb"))["project"]["version"])'
+        pyver="$(python3 -c "$script")"
+        if [ "$pyver" != "${RELEASE_VERSION#v}" ]; then
+          echo "::error::tag ${RELEASE_TAG} does not match pyproject version ${pyver}"
+          exit 1
+        fi
+        CR_DATE=20260619
+        curl -fsSL -o "MagicCompRules-${CR_DATE}.txt" \
+          "https://media.wizards.com/2026/downloads/MagicCompRules%20${CR_DATE}.txt"
 
-      - name: Build wheel and sdist
-        run: |
-          set -euo pipefail
-          pip install build
-          python3 -m build
+      build-command: "python3 -m build"
 
-      # The rules engine validates its @rule annotations against the CR
-      # text at import time; the text is not distributed (see README).
-      - name: Download Comprehensive Rules (smoke test input)
-        env:
-          CR_DATE: "20260619"
-        run: |
-          set -euo pipefail
-          curl -fsSL -o "MagicCompRules-${CR_DATE}.txt" \
-            "https://media.wizards.com/2026/downloads/MagicCompRules%20${CR_DATE}.txt"
-
-      - name: Smoke-test the wheel
-        env:
-          MTG_GRAPH_ROOT: ${{ github.workspace }}
-        run: |
-          set -euo pipefail
-          python3 -m venv /tmp/smoke
-          /tmp/smoke/bin/pip install dist/*.whl
-          /tmp/smoke/bin/python -c "import mtgcards, mtgviz"
-          /tmp/smoke/bin/mtg-simulate --help > /dev/null
-          /tmp/smoke/bin/mtg-selfplay --help > /dev/null
+      # A wheel is not an archive the workflow should unpack; the smoke
+      # tests install it into throwaway virtualenvs instead.
+      smoke-command: |
+        export MTG_GRAPH_ROOT="$GITHUB_WORKSPACE"
+        python3 -m venv /tmp/smoke
+        /tmp/smoke/bin/pip install dist/*.whl
+        /tmp/smoke/bin/python -c "import mtgcards, mtgviz"
+        /tmp/smoke/bin/mtg-simulate --help > /dev/null
+        /tmp/smoke/bin/mtg-selfplay --help > /dev/null
 
       # mtgvalidate ships in the same wheel but needs rdflib, so it is
       # only importable once the validate extra is requested.
-      - name: Smoke-test the validate extra
-        run: |
-          set -euo pipefail
-          python3 -m venv /tmp/smoke-validate
-          /tmp/smoke-validate/bin/pip install "$(echo dist/*.whl)[validate]"
-          /tmp/smoke-validate/bin/mtg-validate --help > /dev/null
+      validate-command: |
+        python3 -m venv /tmp/smoke-validate
+        /tmp/smoke-validate/bin/pip install "$(echo dist/*.whl)[validate]"
+        /tmp/smoke-validate/bin/mtg-validate --help > /dev/null
 
-      - name: Create GitHub Release with artifacts
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          set -euo pipefail
-          gh release create "$GITHUB_REF_NAME" dist/* \
-            --title "magic-cards-tools $GITHUB_REF_NAME" \
-            --generate-notes
+      release-assets: "dist/*"
+      release-name: "magic-cards-tools"

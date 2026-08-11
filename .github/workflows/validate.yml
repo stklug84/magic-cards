@@ -61,7 +61,7 @@ jobs:
     # columns; the trailing version comment stays because that is the form
     # Dependabot reads and rewrites.
     # yamllint disable-line rule:line-length
-    uses: stklug84/github-workflows/.github/workflows/rdf-validate.yml@ef0b2e5ae729ef22d91331095281856a97b4dbd5  # v2.0.0
+    uses: stklug84/github-workflows/.github/workflows/rdf-validate.yml@e8b7009127c21bd66249ad5df0a0112c1d4f6553  # v4.0.0
     with:
       turtle-glob: "**/*.ttl"
       sparql-glob: "queries/**/*.rq"
@@ -151,13 +151,12 @@ jobs:
       # the repo, see README); the rules engine validates its @rule
       # annotations against it at import time, so CI fetches the pinned
       # release from Wizards of the Coast.
-      - name: Download Comprehensive Rules (gitignored, not distributed)
-        env:
-          CR_DATE: "20260619"
-        run: |
-          set -euo pipefail
-          curl -fsSL -o "MagicCompRules-${CR_DATE}.txt" \
-            "https://media.wizards.com/2026/downloads/MagicCompRules%20${CR_DATE}.txt"
+      # Gitignored and never distributed: fetched at run time, cached by
+      # edition (an edition is immutable, so a cache hit is always valid).
+      - name: Download Comprehensive Rules
+        uses: stklug84/actions/mtg/fetch-comprehensive-rules@3edfff92a595c0e2365459f70bfe02b97311f0d7  # v2.18.0
+        with:
+          cr-date: "20260619"
 
       - name: Card data-layer tests (deck formats / Scryfall mapping)
         working-directory: scripts

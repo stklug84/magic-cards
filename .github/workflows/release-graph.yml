@@ -45,7 +45,7 @@ jobs:
     # columns; the trailing version comment stays because that is the form
     # Dependabot reads and rewrites.
     # yamllint disable-line rule:line-length
-    uses: stklug84/github-workflows/.github/workflows/rdf-release-bundle.yml@ef0b2e5ae729ef22d91331095281856a97b4dbd5  # v2.0.0
+    uses: stklug84/github-workflows/.github/workflows/release-artifact.yml@e8b7009127c21bd66249ad5df0a0112c1d4f6553  # v4.0.0
     permissions:
       contents: write
     with:
