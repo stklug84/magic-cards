@@ -3413,6 +3413,67 @@ At the beginning of your upkeep, you may put a Doctor creature card from your ha
         :rulingDate "2023-10-13"^^xsd:date ;
         :rulingText """A player facing a villainous choice can always choose either option, even if one or both of the options are impossible. For example, if one of the options is to sacrifice a creature, a player who controls no creatures can still choose that option."""@en ] .
 
+:JennyFlint rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Jenny Flint" ;
+    :manaCost "{1}{U}{R}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasSuperType :Legendary ;
+    :hasCardType :Creature ;
+    :hasSubType :Human ,
+                :Detective ;
+    :hasRarity :Rare ;
+    :hasColor :Blue ,
+              :Red ;
+    :hasColorIdentity :Blue ,
+                      :Red ;
+    :isInSet :DoctorWhoCommander ;
+    :cardNumber "136"^^xsd:integer ;
+    :artist "Syd Mills" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    :hasKeywordAbility :Training ,
+                       :FirstStrike ,
+                       :Partner ;
+    # Note: keyword "Partner with" not defined in MagicCardsOntology
+    :printedText """Partner with Madame Vastra
+First strike
+Training (Whenever this creature attacks with another creature with greater power, put a +1/+1 counter on this creature.)
+Whenever you sacrifice a Clue or Food, put a +1/+1 counter on another target creature you control."""@en ;
+    :oracleText """Partner with Madame Vastra
+First strike
+Training (Whenever this creature attacks with another creature with greater power, put a +1/+1 counter on this creature.)
+Whenever you sacrifice a Clue or Food, put a +1/+1 counter on another target creature you control."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=634831"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/who/136/jenny-flint"^^xsd:anyURI ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-10-13"^^xsd:date ;
+        :rulingText """The second ability represented by the "partner with [name]" keyword modifies the rules for deck construction in the Commander variant and has no function outside of that variant. If a legendary creature card with "partner with [name]" is designated as your commander, the named legendary creature card can also be designated as your commander."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-10-13"^^xsd:date ;
+        :rulingText """Once a creature's training ability has triggered, destroying the other attacking creature or reducing its power won't stop the creature with training from getting a +1/+1 counter."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-10-13"^^xsd:date ;
+        :rulingText """"Partner with [name]" represents two abilities. The first is a triggered ability: "When this permanent enters the battlefield, target player may search their library for a card named [name], reveal it, put it into their hand, then shuffle.\""""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-10-13"^^xsd:date ;
+        :rulingText """A creature's training ability triggers only when both that creature and a creature with greater power are declared as attackers. Increasing a creature's power after attackers are declared won't cause a training ability to trigger."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-10-13"^^xsd:date ;
+        :rulingText """Note that the target player searches their library (which may be affected by effects such as that of Stranglehold) and that the card they find is revealed, even though these words aren't included in the ability's reminder text."""@en ] .
+
 :TheMasterFormedAnew rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "The Master, Formed Anew" ;
@@ -5249,7 +5310,7 @@ Would You Like A...? — Once each turn, you may play a historic land or cast a 
       [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :NotLegal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ;
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ;
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2021-03-19"^^xsd:date ;
@@ -5320,18 +5381,24 @@ Would You Like A...? — Once each turn, you may play a historic land or cast a 
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2004-10-04"^^xsd:date ;
-        :rulingText """If there is more than one Propaganda on the battlefield, the cost is cumulative."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2004-10-04"^^xsd:date ;
-        :rulingText """If there are multiple attacks in a turn, then you have to pay for each attack."""@en ] ,
+        :rulingText """Paying this cost is not an instant or any other kind of ability, it is an additional cost on the declaration of the attacker."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2004-10-04"^^xsd:date ;
         :rulingText """The payment is made during the declare attackers step at the same time you are declaring the attacker."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2004-10-04"^^xsd:date ;
-        :rulingText """Paying this cost is not an instant or any other kind of ability, it is an additional cost on the declaration of the attacker."""@en ] .
+        :rulingText """If there are multiple attacks in a turn, then you have to pay for each attack."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2004-10-04"^^xsd:date ;
+        :rulingText """If there is more than one Propaganda on the battlefield, the cost is cumulative."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2007-02-01"^^xsd:date ;
+        :rulingText """In the Two-Headed Giant format, you still only have to pay once per creature."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2014-02-01"^^xsd:date ;
+        :rulingText """Unless some effect explicitly says otherwise, a creature that can't attack you can still attack a planeswalker you control."""@en ] .
 
-:FeedTheSwarm rdf:type owl:NamedIndividual ,
+:FeedTheSwarmDoctorWhoCommander221 rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Feed the Swarm" ;
     :manaCost "{1}{B}" ;
@@ -5472,13 +5539,13 @@ Blasphemous Act deals 13 damage to each creature."""@en ;
         :rulingText """The total cost to cast Blasphemous Act is locked in before you pay that cost. For example, if there are three creatures on the battlefield, including one you can sacrifice to add {C}, the total cost of Blasphemous Act is {5}{R}. Then you can sacrifice the creature when you activate mana abilities just before paying the cost."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2020-11-10"^^xsd:date ;
-        :rulingText """Blasphemous Act's ability can't reduce the total cost to cast the spell below {R}."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2020-11-10"^^xsd:date ;
         :rulingText """To determine the total cost of a spell, start with the mana cost or alternative cost you're paying, add any cost increases, then apply any cost reductions (such as that of Blasphemous Act). The mana value of the spell is determined only by its mana cost, no matter what the total cost to cast the spell was."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2020-11-10"^^xsd:date ;
-        :rulingText """Although players may respond to Blasphemous Act once it's been cast, once it's announced, they can't respond before the cost is calculated and paid."""@en ] .
+        :rulingText """Although players may respond to Blasphemous Act once it's been cast, once it's announced, they can't respond before the cost is calculated and paid."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2020-11-10"^^xsd:date ;
+        :rulingText """Blasphemous Act's ability can't reduce the total cost to cast the spell below {R}."""@en ] .
 
 :Explore rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -5512,13 +5579,13 @@ Draw a card."""@en ;
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2017-03-14"^^xsd:date ;
-        :rulingText """Explore's effect allows you to play an additional land during your main phase. Doing so follows the normal timing rules for playing lands. In particular, you don't get to play a land as Explore resolves; Explore fully resolves first and you draw a card, perhaps a land you'll play later."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2017-03-14"^^xsd:date ;
         :rulingText """If you somehow manage to cast Explore when it's not your turn, you'll draw a card when it resolves, but you won't be able to play a land that turn."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2017-03-14"^^xsd:date ;
-        :rulingText """The effects of multiple Explores in the same turn are cumulative. They're also cumulative with other effects that let you play additional lands, such as the one from Urban Evolution."""@en ] .
+        :rulingText """The effects of multiple Explores in the same turn are cumulative. They're also cumulative with other effects that let you play additional lands, such as the one from Urban Evolution."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2017-03-14"^^xsd:date ;
+        :rulingText """Explore's effect allows you to play an additional land during your main phase. Doing so follows the normal timing rules for playing lands. In particular, you don't get to play a land as Explore resolves; Explore fully resolves first and you draw a card, perhaps a land you'll play later."""@en ] .
 
 :HeroicIntervention rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -5662,13 +5729,13 @@ Draw a card."""@en ;
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2020-11-10"^^xsd:date ;
+        :rulingText """If you don't have a commander, Arcane Signet's ability produces no mana."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2020-11-10"^^xsd:date ;
         :rulingText """If you have two commanders, the ability adds one mana of any color in their combined color identities."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2020-11-10"^^xsd:date ;
-        :rulingText """If your commander is a card that has no colors in its color identity, Arcane Signet's ability produces no mana. It doesn't produce {C}."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2020-11-10"^^xsd:date ;
-        :rulingText """If you don't have a commander, Arcane Signet's ability produces no mana."""@en ] .
+        :rulingText """If your commander is a card that has no colors in its color identity, Arcane Signet's ability produces no mana. It doesn't produce {C}."""@en ] .
 
 :CommandersSphereDoctorWhoCommander240 rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -5705,13 +5772,13 @@ Sacrifice this artifact: Draw a card."""@en ;
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2020-11-10"^^xsd:date ;
-        :rulingText """If you don't have a commander, Commander's Sphere's first ability produces no mana."""@en ] ,
+        :rulingText """If your commander is a card that has no colors in its color identity, Commander's Sphere's first ability produces no mana. It doesn't produce {C}."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2020-11-10"^^xsd:date ;
         :rulingText """If you have two commanders, the ability adds one mana of any color in their combined color identities."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2020-11-10"^^xsd:date ;
-        :rulingText """If your commander is a card that has no colors in its color identity, Commander's Sphere's first ability produces no mana. It doesn't produce {C}."""@en ] .
+        :rulingText """If you don't have a commander, Commander's Sphere's first ability produces no mana."""@en ] .
 
 :HerosBlade rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -6161,13 +6228,13 @@ This land enters tapped unless you control two or more basic lands."""@en ;
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2015-08-25"^^xsd:date ;
-        :rulingText """However, because these cards have basic land types, effects that specify a basic land type without also specifying that the land be basic can affect them. For example, a spell or ability that reads "Destroy target Forest" can target Canopy Vista, while one that reads "Destroy target basic Forest" cannot."""@en ] ,
+        :rulingText """If one of these lands enters the battlefield at the same time as any number of basic lands, those other lands are not counted when determining if this land enters the battlefield tapped or untapped."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2015-08-25"^^xsd:date ;
         :rulingText """Even though these lands have basic land types, they are not basic lands because "basic" doesn't appear on their type line. Notably, controlling two or more of them won't allow others to enter the battlefield untapped."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2015-08-25"^^xsd:date ;
-        :rulingText """If one of these lands enters the battlefield at the same time as any number of basic lands, those other lands are not counted when determining if this land enters the battlefield tapped or untapped."""@en ] .
+        :rulingText """However, because these cards have basic land types, effects that specify a basic land type without also specifying that the land be basic can affect them. For example, a spell or ability that reads "Destroy target Forest" can target Canopy Vista, while one that reads "Destroy target basic Forest" cannot."""@en ] .
 
 :CanyonSlough rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -6285,16 +6352,16 @@ Cycling {2} ({2}, Discard this card: Draw a card.)"""@en ;
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2016-04-08"^^xsd:date ;
-        :rulingText """You may reveal any land card with either or both of the appropriate subtypes. It doesn't have to be a basic land. For example, you could reveal Prairie Stream from the Battle for Zendikar set to satisfy the ability of Choked Estuary."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2016-04-08"^^xsd:date ;
-        :rulingText """Lands don't have a subtype just because they can produce mana of the corresponding color. Choked Estuary itself is neither an Island nor a Swamp, even though it produces blue and black mana, so you can't reveal one to satisfy the ability of another."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2016-04-08"^^xsd:date ;
         :rulingText """If an effect instructs you to put Choked Estuary onto the battlefield tapped, it will still enter the battlefield tapped even if you reveal a land card from your hand."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2016-04-08"^^xsd:date ;
-        :rulingText """If an Island or Swamp is entering the battlefield from your hand at the same time as Choked Estuary, you may reveal the other land to have Choked Estuary enter untapped."""@en ] .
+        :rulingText """You may reveal any land card with either or both of the appropriate subtypes. It doesn't have to be a basic land. For example, you could reveal Prairie Stream from the Battle for Zendikar set to satisfy the ability of Choked Estuary."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2016-04-08"^^xsd:date ;
+        :rulingText """If an Island or Swamp is entering the battlefield from your hand at the same time as Choked Estuary, you may reveal the other land to have Choked Estuary enter untapped."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2016-04-08"^^xsd:date ;
+        :rulingText """Lands don't have a subtype just because they can produce mana of the corresponding color. Choked Estuary itself is neither an Island nor a Swamp, even though it produces blue and black mana, so you can't reveal one to satisfy the ability of another."""@en ] .
 
 :CommandTowerDoctorWhoCommander263 rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -6331,10 +6398,10 @@ Cycling {2} ({2}, Discard this card: Draw a card.)"""@en ;
         :rulingText """If you don't have a commander, Command Tower's ability produces no mana."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2020-11-10"^^xsd:date ;
-        :rulingText """If you have two commanders, the ability adds one mana of any color in their combined color identities."""@en ] ,
+        :rulingText """If your commander is a card that has no colors in its color identity, Command Tower's ability produces no mana. It doesn't produce {C}."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2020-11-10"^^xsd:date ;
-        :rulingText """If your commander is a card that has no colors in its color identity, Command Tower's ability produces no mana. It doesn't produce {C}."""@en ] .
+        :rulingText """If you have two commanders, the ability adds one mana of any color in their combined color identities."""@en ] .
 
 :CommandTowerDoctorWhoCommander266 rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -6370,10 +6437,10 @@ Cycling {2} ({2}, Discard this card: Draw a card.)"""@en ;
         :rulingText """If you don't have a commander, Command Tower's ability produces no mana."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2020-11-10"^^xsd:date ;
-        :rulingText """If you have two commanders, the ability adds one mana of any color in their combined color identities."""@en ] ,
+        :rulingText """If your commander is a card that has no colors in its color identity, Command Tower's ability produces no mana. It doesn't produce {C}."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2020-11-10"^^xsd:date ;
-        :rulingText """If your commander is a card that has no colors in its color identity, Command Tower's ability produces no mana. It doesn't produce {C}."""@en ] .
+        :rulingText """If you have two commanders, the ability adds one mana of any color in their combined color identities."""@en ] .
 
 :CreepingTarPit rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -6650,16 +6717,16 @@ Cycling {2} ({2}, Discard this card: Draw a card.)"""@en ;
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2009-02-01"^^xsd:date ;
-        :rulingText """Exotic Orchard checks the effects of all mana-producing abilities of lands your opponents control, but it doesn't check their costs. For example, Vivid Crag has the ability "{T}, Remove a charge counter from Vivid Crag: Add one mana of any color." If an opponent controls Vivid Crag and you control Exotic Orchard, you can tap Exotic Orchard for any color of mana. It doesn't matter whether Vivid Crag has a charge counter on it, and it doesn't matter whether it's untapped."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2009-02-01"^^xsd:date ;
-        :rulingText """Exotic Orchard doesn't care about any restrictions or riders your opponents' lands (such as Ancient Ziggurat or Hall of the Bandit Lord) put on the mana they produce. It just cares about colors of mana."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2009-02-01"^^xsd:date ;
         :rulingText """When determining what colors of mana your opponents' lands could produce, Exotic Orchard takes into account any applicable replacement effects that would apply to those lands' mana abilities (such as Contamination's effect, for example). If there are more than one, consider them in any possible order."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2009-02-01"^^xsd:date ;
         :rulingText """The colors of mana are white, blue, black, red, and green. Exotic Orchard can't be tapped for colorless mana, even if a land an opponent controls could produce colorless mana."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2009-02-01"^^xsd:date ;
+        :rulingText """Exotic Orchard checks the effects of all mana-producing abilities of lands your opponents control, but it doesn't check their costs. For example, Vivid Crag has the ability "{T}, Remove a charge counter from Vivid Crag: Add one mana of any color." If an opponent controls Vivid Crag and you control Exotic Orchard, you can tap Exotic Orchard for any color of mana. It doesn't matter whether Vivid Crag has a charge counter on it, and it doesn't matter whether it's untapped."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2009-02-01"^^xsd:date ;
+        :rulingText """Exotic Orchard doesn't care about any restrictions or riders your opponents' lands (such as Ancient Ziggurat or Hall of the Bandit Lord) put on the mana they produce. It just cares about colors of mana."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2009-02-01"^^xsd:date ;
         :rulingText """Lands that produce mana based only on what other lands "could produce" won't help each other unless some other land allows one of them to actually produce some type of mana. For example, if you control an Exotic Orchard and your opponent controls an Exotic Orchard and a Reflecting Pool, none of those lands would produce mana if their mana abilities were activated. On the other hand, if you control a Forest and an Exotic Orchard, and your opponent controls an Exotic Orchard and a Reflecting Pool, then each of those lands can be tapped to produce {G}. Your opponent's Exotic Orchard can produce {G} because you control a Forest. Your Exotic Orchard and your opponent's Reflecting Pool can each produce {G} because your opponent's Exotic Orchard can produce {G}."""@en ] .
@@ -6766,16 +6833,16 @@ Cycling {2} ({2}, Discard this card: Draw a card.)"""@en ;
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2016-04-08"^^xsd:date ;
-        :rulingText """You may reveal any land card with either or both of the appropriate subtypes. It doesn't have to be a basic land. For example, you could reveal Sunken Hollow from the Battle for Zendikar set to satisfy the ability of Foreboding Ruins."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2016-04-08"^^xsd:date ;
-        :rulingText """If an effect instructs you to put Foreboding Ruins onto the battlefield tapped, it will still enter the battlefield tapped even if you reveal a land card from your hand."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2016-04-08"^^xsd:date ;
         :rulingText """If a Swamp or Mountain is entering the battlefield from your hand at the same time as Foreboding Ruins, you may reveal the other land to have Foreboding Ruins enter untapped."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2016-04-08"^^xsd:date ;
-        :rulingText """Lands don't have a subtype just because they can produce mana of the corresponding color. Foreboding Ruins itself is neither a Swamp nor a Mountain, even though it produces black and red mana, so you can't reveal one to satisfy the ability of another."""@en ] .
+        :rulingText """You may reveal any land card with either or both of the appropriate subtypes. It doesn't have to be a basic land. For example, you could reveal Sunken Hollow from the Battle for Zendikar set to satisfy the ability of Foreboding Ruins."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2016-04-08"^^xsd:date ;
+        :rulingText """Lands don't have a subtype just because they can produce mana of the corresponding color. Foreboding Ruins itself is neither a Swamp nor a Mountain, even though it produces black and red mana, so you can't reveal one to satisfy the ability of another."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2016-04-08"^^xsd:date ;
+        :rulingText """If an effect instructs you to put Foreboding Ruins onto the battlefield tapped, it will still enter the battlefield tapped even if you reveal a land card from your hand."""@en ] .
 
 :FortifiedVillage rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -6811,13 +6878,13 @@ Cycling {2} ({2}, Discard this card: Draw a card.)"""@en ;
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2016-04-08"^^xsd:date ;
-        :rulingText """You may reveal any land card with either or both of the appropriate subtypes. It doesn't have to be a basic land. For example, you could reveal Prairie Stream from the Battle for Zendikar set to satisfy the ability of Fortified Village."""@en ] ,
+        :rulingText """If a Forest or Plains is entering the battlefield from your hand at the same time as Fortified Village, you may reveal the other land to have Fortified Village enter untapped."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2016-04-08"^^xsd:date ;
         :rulingText """Lands don't have a subtype just because they can produce mana of the corresponding color. Fortified Village itself is neither a Forest nor a Plains, even though it produces green and white mana, so you can't reveal one to satisfy the ability of another."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2016-04-08"^^xsd:date ;
-        :rulingText """If a Forest or Plains is entering the battlefield from your hand at the same time as Fortified Village, you may reveal the other land to have Fortified Village enter untapped."""@en ] ,
+        :rulingText """You may reveal any land card with either or both of the appropriate subtypes. It doesn't have to be a basic land. For example, you could reveal Prairie Stream from the Battle for Zendikar set to satisfy the ability of Fortified Village."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2016-04-08"^^xsd:date ;
         :rulingText """If an effect instructs you to put Fortified Village onto the battlefield tapped, it will still enter the battlefield tapped even if you reveal a land card from your hand."""@en ] .
@@ -6900,10 +6967,10 @@ Cycling {2} ({2}, Discard this card: Draw a card.)"""@en ;
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2009-10-01"^^xsd:date ;
-        :rulingText """This checks for lands you control with the land type Plains or Island, not for lands named Plains or Island. The lands it checks for don't have to be basic lands. For example, if you control Watery Grave (a nonbasic land with the land types Island and Swamp), Glacial Fortress will enter untapped."""@en ] ,
+        :rulingText """As this is entering, it checks for lands that are already on the battlefield. It won't see lands that are entering at the same time (due to Warp World, for example)."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2009-10-01"^^xsd:date ;
-        :rulingText """As this is entering, it checks for lands that are already on the battlefield. It won't see lands that are entering at the same time (due to Warp World, for example)."""@en ] .
+        :rulingText """This checks for lands you control with the land type Plains or Island, not for lands named Plains or Island. The lands it checks for don't have to be basic lands. For example, if you control Watery Grave (a nonbasic land with the land types Island and Swamp), Glacial Fortress will enter untapped."""@en ] .
 
 :HauntedRidge rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -7133,10 +7200,10 @@ Cycling {2} ({2}, Discard this card: Draw a card.)"""@en ;
         :rulingText """If your commander is a card that has no colors in its color identity, Path of Ancestry's ability produces no mana. It doesn't produce {C}."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2023-07-28"^^xsd:date ;
-        :rulingText """If you have two commanders, the last ability adds one mana of any color in their combined color identities. When you spend that mana on a creature spell that shares a creature type with either of your commanders, you'll scry 1."""@en ] ,
+        :rulingText """Your commander's creature types are checked immediately after you cast a creature spell spending mana from Path of Ancestry's last ability. They aren't set before the game begins, and they may not be the same types your commander had when you activated that ability."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2023-07-28"^^xsd:date ;
-        :rulingText """Your commander's creature types are checked immediately after you cast a creature spell spending mana from Path of Ancestry's last ability. They aren't set before the game begins, and they may not be the same types your commander had when you activated that ability."""@en ] .
+        :rulingText """If you have two commanders, the last ability adds one mana of any color in their combined color identities. When you spend that mana on a creature spell that shares a creature type with either of your commanders, you'll scry 1."""@en ] .
 
 :PortTownDoctorWhoCommander294 rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -7172,16 +7239,16 @@ Cycling {2} ({2}, Discard this card: Draw a card.)"""@en ;
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2016-04-08"^^xsd:date ;
-        :rulingText """If an effect instructs you to put Port Town onto the battlefield tapped, it will still enter the battlefield tapped even if you reveal a land card from your hand."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2016-04-08"^^xsd:date ;
         :rulingText """You may reveal any land card with either or both of the appropriate subtypes. It doesn't have to be a basic land. For example, you could reveal Canopy Vista from the Battle for Zendikar set to satisfy the ability of Port Town."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2016-04-08"^^xsd:date ;
-        :rulingText """If a Plains or Island is entering the battlefield from your hand at the same time as Port Town, you may reveal the other land to have Port Town enter untapped."""@en ] ,
+        :rulingText """If an effect instructs you to put Port Town onto the battlefield tapped, it will still enter the battlefield tapped even if you reveal a land card from your hand."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2016-04-08"^^xsd:date ;
-        :rulingText """Lands don't have a subtype just because they can produce mana of the corresponding color. Port Town itself is neither a Plains nor an Island, even though it produces white and blue mana, so you can't reveal one to satisfy the ability of another."""@en ] .
+        :rulingText """Lands don't have a subtype just because they can produce mana of the corresponding color. Port Town itself is neither a Plains nor an Island, even though it produces white and blue mana, so you can't reveal one to satisfy the ability of another."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2016-04-08"^^xsd:date ;
+        :rulingText """If a Plains or Island is entering the battlefield from your hand at the same time as Port Town, you may reveal the other land to have Port Town enter untapped."""@en ] .
 
 :PrairieStreamDoctorWhoCommander295 rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -7218,13 +7285,13 @@ This land enters tapped unless you control two or more basic lands."""@en ;
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2015-08-25"^^xsd:date ;
-        :rulingText """Even though these lands have basic land types, they are not basic lands because "basic" doesn't appear on their type line. Notably, controlling two or more of them won't allow others to enter the battlefield untapped."""@en ] ,
+        :rulingText """However, because these cards have basic land types, effects that specify a basic land type without also specifying that the land be basic can affect them. For example, a spell or ability that reads "Destroy target Forest" can target Canopy Vista, while one that reads "Destroy target basic Forest" cannot."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2015-08-25"^^xsd:date ;
         :rulingText """If one of these lands enters the battlefield at the same time as any number of basic lands, those other lands are not counted when determining if this land enters the battlefield tapped or untapped."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2015-08-25"^^xsd:date ;
-        :rulingText """However, because these cards have basic land types, effects that specify a basic land type without also specifying that the land be basic can affect them. For example, a spell or ability that reads "Destroy target Forest" can target Canopy Vista, while one that reads "Destroy target basic Forest" cannot."""@en ] .
+        :rulingText """Even though these lands have basic land types, they are not basic lands because "basic" doesn't appear on their type line. Notably, controlling two or more of them won't allow others to enter the battlefield untapped."""@en ] .
 
 :ReliquaryTowerDoctorWhoCommander296 rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -7492,13 +7559,13 @@ This land enters tapped unless you control two or more basic lands."""@en ;
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2015-08-25"^^xsd:date ;
+        :rulingText """However, because these cards have basic land types, effects that specify a basic land type without also specifying that the land be basic can affect them. For example, a spell or ability that reads "Destroy target Forest" can target Canopy Vista, while one that reads "Destroy target basic Forest" cannot."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2015-08-25"^^xsd:date ;
         :rulingText """Even though these lands have basic land types, they are not basic lands because "basic" doesn't appear on their type line. Notably, controlling two or more of them won't allow others to enter the battlefield untapped."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2015-08-25"^^xsd:date ;
-        :rulingText """If one of these lands enters the battlefield at the same time as any number of basic lands, those other lands are not counted when determining if this land enters the battlefield tapped or untapped."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2015-08-25"^^xsd:date ;
-        :rulingText """However, because these cards have basic land types, effects that specify a basic land type without also specifying that the land be basic can affect them. For example, a spell or ability that reads "Destroy target Forest" can target Canopy Vista, while one that reads "Destroy target basic Forest" cannot."""@en ] .
+        :rulingText """If one of these lands enters the battlefield at the same time as any number of basic lands, those other lands are not counted when determining if this land enters the battlefield tapped or untapped."""@en ] .
 
 :StormcarvedCoast rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -7595,15 +7662,15 @@ This land enters tapped unless you control two or more basic lands."""@en ;
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2015-08-25"^^xsd:date ;
-        :rulingText """Even though these lands have basic land types, they are not basic lands because "basic" doesn't appear on their type line. Notably, controlling two or more of them won't allow others to enter the battlefield untapped."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2015-08-25"^^xsd:date ;
         :rulingText """If one of these lands enters the battlefield at the same time as any number of basic lands, those other lands are not counted when determining if this land enters the battlefield tapped or untapped."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2015-08-25"^^xsd:date ;
-        :rulingText """However, because these cards have basic land types, effects that specify a basic land type without also specifying that the land be basic can affect them. For example, a spell or ability that reads "Destroy target Forest" can target Canopy Vista, while one that reads "Destroy target basic Forest" cannot."""@en ] .
+        :rulingText """However, because these cards have basic land types, effects that specify a basic land type without also specifying that the land be basic can affect them. For example, a spell or ability that reads "Destroy target Forest" can target Canopy Vista, while one that reads "Destroy target basic Forest" cannot."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2015-08-25"^^xsd:date ;
+        :rulingText """Even though these lands have basic land types, they are not basic lands because "basic" doesn't appear on their type line. Notably, controlling two or more of them won't allow others to enter the battlefield untapped."""@en ] .
 
-:TempleOfDeceit rdf:type owl:NamedIndividual ,
+:TempleOfDeceitDoctorWhoCommander314 rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Temple of Deceit" ;
     :manaValue "0"^^xsd:nonNegativeInteger ;
@@ -7732,7 +7799,7 @@ When this land enters, scry 1. (Look at the top card of your library. You may pu
       [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] .
 
-:TempleOfMalice rdf:type owl:NamedIndividual ,
+:TempleOfMaliceDoctorWhoCommander317 rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Temple of Malice" ;
     :manaValue "0"^^xsd:nonNegativeInteger ;
@@ -7825,7 +7892,7 @@ When this land enters, scry 1. (Look at the top card of your library. You may pu
         :rulingDate "2013-09-15"^^xsd:date ;
         :rulingText """You perform the actions stated on a card in sequence. For some spells and abilities, that means you'll scry last. For others, that means you'll scry and then perform other actions."""@en ] .
 
-:TempleOfPlenty rdf:type owl:NamedIndividual ,
+:TempleOfPlentyDoctorWhoCommander319 rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Temple of Plenty" ;
     :manaValue "0"^^xsd:nonNegativeInteger ;
@@ -8094,16 +8161,16 @@ When this land enters, scry 1. (Look at the top card of your library. You may pu
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2021-04-16"^^xsd:date ;
-        :rulingText """You may reveal any land card with either or both of the appropriate subtypes. It doesn't have to be a basic land card."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2021-04-16"^^xsd:date ;
         :rulingText """If a land card with an appropriate subtype is entering the battlefield from your hand at the same time as one of these lands, you may reveal the other land to have the "Snarl" enter untapped."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2021-04-16"^^xsd:date ;
-        :rulingText """The "Snarl" itself doesn't have any land subtypes. You can't reveal one to satisfy the ability of another."""@en ] ,
+        :rulingText """You may reveal any land card with either or both of the appropriate subtypes. It doesn't have to be a basic land card."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2021-04-16"^^xsd:date ;
-        :rulingText """If an effect instructs you to put one of these lands onto the battlefield tapped, it will still enter the battlefield tapped even if you reveal a land card from your hand."""@en ] .
+        :rulingText """If an effect instructs you to put one of these lands onto the battlefield tapped, it will still enter the battlefield tapped even if you reveal a land card from your hand."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2021-04-16"^^xsd:date ;
+        :rulingText """The "Snarl" itself doesn't have any land subtypes. You can't reveal one to satisfy the ability of another."""@en ] .
 
 :WaterloggedGrove rdf:type owl:NamedIndividual ,
                   :Card ;

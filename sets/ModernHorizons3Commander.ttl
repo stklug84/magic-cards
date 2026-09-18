@@ -1436,13 +1436,13 @@ Other creatures you control get +1/+1."""@en ;
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2020-11-10"^^xsd:date ;
-        :rulingText """If a card is exiled "until" another permanent leaves the battlefield, the exiled card returns to the battlefield immediately after that permanent leaves the battlefield during Austere Command's resolution, and it may be destroyed by a later mode."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2020-11-10"^^xsd:date ;
         :rulingText """Each of the chosen modes happens sequentially. If a permanent has an ability that triggers whenever it or another permanent is destroyed, it will see permanents destroyed at the same time as it or before it, but not permanents destroyed by later modes."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2020-11-10"^^xsd:date ;
-        :rulingText """If the first and last modes are chosen, an artifact creature with mana value 4 or greater will have to be regenerated twice to survive. This is because the modes happen sequentially, and the regeneration "shield" is used up by the first one. The same is true with any other combination of modes that covers one permanent twice."""@en ] .
+        :rulingText """If the first and last modes are chosen, an artifact creature with mana value 4 or greater will have to be regenerated twice to survive. This is because the modes happen sequentially, and the regeneration "shield" is used up by the first one. The same is true with any other combination of modes that covers one permanent twice."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2020-11-10"^^xsd:date ;
+        :rulingText """If a card is exiled "until" another permanent leaves the battlefield, the exiled card returns to the battlefield immediately after that permanent leaves the battlefield during Austere Command's resolution, and it may be destroyed by a later mode."""@en ] .
 
 :FarewellModernHorizons3Commander170 rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -2092,13 +2092,13 @@ When this creature enters, target opponent may have you draw three cards. If the
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2016-09-20"^^xsd:date ;
-        :rulingText """If you have fewer than three cards in your library, the opponent may choose to have you draw three cards. If so, you'll lose the game as state-based actions are performed."""@en ] ,
+        :rulingText """If any of the cards put into your graveyard have {X} in their mana cost, X is considered to be 0."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2016-09-20"^^xsd:date ;
         :rulingText """While Combustible Gearhulk's triggered ability is resolving, no player may take any actions other than those specified by the Gearhulk. Once the opponent makes a choice, players can't cast spells or activate abilities until after the cards are drawn or put into the graveyard and damage has been dealt (if applicable)."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2016-09-20"^^xsd:date ;
-        :rulingText """If any of the cards put into your graveyard have {X} in their mana cost, X is considered to be 0."""@en ] .
+        :rulingText """If you have fewer than three cards in your library, the opponent may choose to have you draw three cards. If so, you'll lose the game as state-based actions are performed."""@en ] .
 
 :GoldspanDragon rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -2654,15 +2654,15 @@ Crew 1 (Tap any number of creatures you control with total power 1 or more: This
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2020-11-10"^^xsd:date ;
+        :rulingText """If you don't have a commander, Arcane Signet's ability produces no mana."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2020-11-10"^^xsd:date ;
         :rulingText """If you have two commanders, the ability adds one mana of any color in their combined color identities."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2020-11-10"^^xsd:date ;
-        :rulingText """If your commander is a card that has no colors in its color identity, Arcane Signet's ability produces no mana. It doesn't produce {C}."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2020-11-10"^^xsd:date ;
-        :rulingText """If you don't have a commander, Arcane Signet's ability produces no mana."""@en ] .
+        :rulingText """If your commander is a card that has no colors in its color identity, Arcane Signet's ability produces no mana. It doesn't produce {C}."""@en ] .
 
-:BurnishedHart rdf:type owl:NamedIndividual ,
+:BurnishedHartModernHorizons3Commander284 rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Burnished Hart" ;
     :manaCost "{3}" ;
@@ -2768,16 +2768,16 @@ Whenever one or more creatures an opponent controls attack you and aren't blocke
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2018-07-13"^^xsd:date ;
-        :rulingText """If more than one opponent attacks you at the same time, Coveted Jewel's last ability triggers for each of them. You choose which player ends up with Coveted Jewel, but each of them draws three cards and has a chance to activate its mana ability."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2018-07-13"^^xsd:date ;
-        :rulingText """Coveted Jewel's last ability resolves after blockers are chosen but before combat damage is dealt."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2018-07-13"^^xsd:date ;
         :rulingText """A creature attacking a planeswalker you control won't cause Coveted Jewel's last ability to trigger."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2018-07-13"^^xsd:date ;
-        :rulingText """Coveted Jewel's last ability triggers after you declare blockers (or declare no blockers at all) if any attacking creatures are unblocked. It doesn't matter if some attacking creatures were blocked."""@en ] .
+        :rulingText """Coveted Jewel's last ability triggers after you declare blockers (or declare no blockers at all) if any attacking creatures are unblocked. It doesn't matter if some attacking creatures were blocked."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2018-07-13"^^xsd:date ;
+        :rulingText """If more than one opponent attacks you at the same time, Coveted Jewel's last ability triggers for each of them. You choose which player ends up with Coveted Jewel, but each of them draws three cards and has a chance to activate its mana ability."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2018-07-13"^^xsd:date ;
+        :rulingText """Coveted Jewel's last ability resolves after blockers are chosen but before combat damage is dealt."""@en ] .
 
 :DecoctionModuleModernHorizons3Commander288 rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -3276,10 +3276,10 @@ When this land enters, return a land you control to its owner's hand.
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2015-06-22"^^xsd:date ;
-        :rulingText """Like most lands, each land in this cycle is colorless. The damage dealt to you is dealt by a colorless source."""@en ] ,
+        :rulingText """The damage dealt to you is part of the second mana ability. It doesn't use the stack and can't be responded to."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2015-06-22"^^xsd:date ;
-        :rulingText """The damage dealt to you is part of the second mana ability. It doesn't use the stack and can't be responded to."""@en ] .
+        :rulingText """Like most lands, each land in this cycle is colorless. The damage dealt to you is dealt by a colorless source."""@en ] .
 
 :CastleVantress rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -3353,12 +3353,12 @@ When this land enters, return a land you control to its owner's hand.
         :rulingText """If you don't have a commander, Command Tower's ability produces no mana."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2020-11-10"^^xsd:date ;
-        :rulingText """If you have two commanders, the ability adds one mana of any color in their combined color identities."""@en ] ,
+        :rulingText """If your commander is a card that has no colors in its color identity, Command Tower's ability produces no mana. It doesn't produce {C}."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2020-11-10"^^xsd:date ;
-        :rulingText """If your commander is a card that has no colors in its color identity, Command Tower's ability produces no mana. It doesn't produce {C}."""@en ] .
+        :rulingText """If you have two commanders, the ability adds one mana of any color in their combined color identities."""@en ] .
 
-:DemolitionField rdf:type owl:NamedIndividual ,
+:DemolitionFieldModernHorizons3Commander335 rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Demolition Field" ;
     :manaValue "0"^^xsd:nonNegativeInteger ;
@@ -3612,16 +3612,16 @@ When this land enters, return a land you control to its owner's hand.
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2016-04-08"^^xsd:date ;
-        :rulingText """If an effect instructs you to put Port Town onto the battlefield tapped, it will still enter the battlefield tapped even if you reveal a land card from your hand."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2016-04-08"^^xsd:date ;
         :rulingText """You may reveal any land card with either or both of the appropriate subtypes. It doesn't have to be a basic land. For example, you could reveal Canopy Vista from the Battle for Zendikar set to satisfy the ability of Port Town."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2016-04-08"^^xsd:date ;
-        :rulingText """If a Plains or Island is entering the battlefield from your hand at the same time as Port Town, you may reveal the other land to have Port Town enter untapped."""@en ] ,
+        :rulingText """If an effect instructs you to put Port Town onto the battlefield tapped, it will still enter the battlefield tapped even if you reveal a land card from your hand."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2016-04-08"^^xsd:date ;
-        :rulingText """Lands don't have a subtype just because they can produce mana of the corresponding color. Port Town itself is neither a Plains nor an Island, even though it produces white and blue mana, so you can't reveal one to satisfy the ability of another."""@en ] .
+        :rulingText """Lands don't have a subtype just because they can produce mana of the corresponding color. Port Town itself is neither a Plains nor an Island, even though it produces white and blue mana, so you can't reveal one to satisfy the ability of another."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2016-04-08"^^xsd:date ;
+        :rulingText """If a Plains or Island is entering the battlefield from your hand at the same time as Port Town, you may reveal the other land to have Port Town enter untapped."""@en ] .
 
 :PrairieStreamModernHorizons3Commander365 rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -3657,13 +3657,13 @@ This land enters tapped unless you control two or more basic lands."""@en ;
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2015-08-25"^^xsd:date ;
-        :rulingText """Even though these lands have basic land types, they are not basic lands because "basic" doesn't appear on their type line. Notably, controlling two or more of them won't allow others to enter the battlefield untapped."""@en ] ,
+        :rulingText """However, because these cards have basic land types, effects that specify a basic land type without also specifying that the land be basic can affect them. For example, a spell or ability that reads "Destroy target Forest" can target Canopy Vista, while one that reads "Destroy target basic Forest" cannot."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2015-08-25"^^xsd:date ;
         :rulingText """If one of these lands enters the battlefield at the same time as any number of basic lands, those other lands are not counted when determining if this land enters the battlefield tapped or untapped."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2015-08-25"^^xsd:date ;
-        :rulingText """However, because these cards have basic land types, effects that specify a basic land type without also specifying that the land be basic can affect them. For example, a spell or ability that reads "Destroy target Forest" can target Canopy Vista, while one that reads "Destroy target basic Forest" cannot."""@en ] .
+        :rulingText """Even though these lands have basic land types, they are not basic lands because "basic" doesn't appear on their type line. Notably, controlling two or more of them won't allow others to enter the battlefield untapped."""@en ] .
 
 :ShivanReefModernHorizons3Commander375 rdf:type owl:NamedIndividual ,
                   :Card ;

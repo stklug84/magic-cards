@@ -387,7 +387,7 @@ Enchanted creature has vigilance and "At the beginning of your end step, create 
         :rulingDate "2021-09-24"^^xsd:date ;
         :rulingText """The controller of the enchanted creature creates the Human token, even if they aren't the controller of Cathar's Call."""@en ] .
 
-:CrusaderOfOdric rdf:type owl:NamedIndividual ,
+:CrusaderOfOdricInnistradRemastered18 rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Crusader of Odric" ;
     :manaCost "{2}{W}" ;
@@ -645,16 +645,13 @@ If Luminous Phantom would be put into a graveyard from anywhere, exile it instea
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2021-09-24"^^xsd:date ;
-        :rulingText """When you cast a spell using a card's disturb ability, the card is put onto the stack with its back face up. The resulting spell has all the characteristics of that face."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2021-09-24"^^xsd:date ;
-        :rulingText """If you copy a permanent spell cast this way (perhaps with a card like Double Major), the copy becomes a token that's a copy of the card's back face, even though it isn't itself a double-faced card."""@en ] ,
+        :rulingText """To determine the total cost of a spell, start with the mana cost or alternative cost (such as a disturb cost) you're paying, add any cost increases, then apply any cost reductions. The mana value of a spell cast using disturb is determined by the mana cost on the front face of the card, no matter what the total cost to cast the spell was. (This is a special rule that applies only to nonmodal double faced-cards, including ones with disturb.)"""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2021-09-24"^^xsd:date ;
         :rulingText """A spell cast this way enters the battlefield with its back face up."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2021-09-24"^^xsd:date ;
-        :rulingText """To determine the total cost of a spell, start with the mana cost or alternative cost (such as a disturb cost) you're paying, add any cost increases, then apply any cost reductions. The mana value of a spell cast using disturb is determined by the mana cost on the front face of the card, no matter what the total cost to cast the spell was. (This is a special rule that applies only to transforming double faced-cards, including ones with disturb.)"""@en ] ,
+        :rulingText """If you copy a permanent spell cast this way (perhaps with a card like Double Major), the copy becomes a token that's a copy of the card's back face, even though it isn't itself a double-faced card."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2021-09-24"^^xsd:date ;
         :rulingText """Disturb is found only on the front faces of some double-faced cards."""@en ] ,
@@ -663,9 +660,12 @@ If Luminous Phantom would be put into a graveyard from anywhere, exile it instea
         :rulingText """"Disturb [cost]" means "You may cast this card transformed from your graveyard by paying [cost] rather than its mana cost.\""""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2021-09-24"^^xsd:date ;
+        :rulingText """When you cast a spell using a card's disturb ability, the card is put onto the stack with its back face up. The resulting spell has all the characteristics of that face."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2021-09-24"^^xsd:date ;
         :rulingText """The back face of each card with disturb has an ability that instructs its controller to exile if it would be put into a graveyard from anywhere. This includes going to the graveyard from the stack, so if the spell is countered after you cast it using the disturb ability, it will be put into exile."""@en ] .
 
-:MentorOfTheMeek rdf:type owl:NamedIndividual ,
+:MentorOfTheMeekInnistradRemastered34 rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Mentor of the Meek" ;
     :manaCost "{2}{W}" ;
@@ -700,13 +700,13 @@ If Luminous Phantom would be put into a graveyard from anywhere, exile it instea
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2025-01-24"^^xsd:date ;
-        :rulingText """Mentor of the Meek’s ability checks the power of the other creature only as it enters. If that creature’s power is 2 or less, the ability will trigger. Once the ability triggers, raising that creature’s power above 2 won’t affect that ability. Similarly, reducing the creature’s power to 2 or less after it enters won’t cause the ability to trigger."""@en ] ,
+        :rulingText """Mentor of the Meek's ability checks the power of the other creature only as it enters. If that creature's power is 2 or less, the ability will trigger. Once the ability triggers, raising that creature's power above 2 won't affect that ability. Similarly, reducing the creature's power to 2 or less after it enters won't cause the ability to trigger."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2025-01-24"^^xsd:date ;
-        :rulingText """While resolving the triggered ability of Mentor of the Meek, you can’t pay {1} multiple times to draw more than one card."""@en ] ,
+        :rulingText """If a creature enters with +1/+1 counters or a continuous effect such as that of Wedding Festivity will apply to the creature on the battlefield, those effects apply when checking to see if Mentor of the Meek's ability will trigger."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2025-01-24"^^xsd:date ;
-        :rulingText """If a creature enters with +1/+1 counters or a continuous effect such as that of Wedding Festivity will apply to the creature on the battlefield, those effects apply when checking to see if Mentor of the Meek’s ability will trigger."""@en ] .
+        :rulingText """While resolving the triggered ability of Mentor of the Meek, you can't pay {1} multiple times to draw more than one card."""@en ] .
 
 :OdricLunarchMarshal rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -1085,7 +1085,7 @@ Enchanted permanent is a colorless land with "{T}: Add {C}" and loses all other 
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2016-07-13"^^xsd:date ;
-        :rulingText """The permanent will keep any supertypes it previously had. Notably, if Imprisoned in the Moon is enchanting a legendary permanent, that permanent will continue to be legendary."""@en ] ,
+        :rulingText """At the time the permanent becomes enchanted, Imprisoned in the Moon causes it to lose all abilities except the noted mana ability. Any abilities the permanent gains after that point will work normally."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2016-07-13"^^xsd:date ;
         :rulingText """Becoming a land may cause other Auras to become illegally attached. These are put into their owner's graveyard, and any Equipment attached to the land become unattached and remain on the battlefield. Counters on the land remain on it even if they don't do anything."""@en ] ,
@@ -1097,7 +1097,7 @@ Enchanted permanent is a colorless land with "{T}: Add {C}" and loses all other 
         :rulingText """If you remove Imprisoned in the Moon from a planeswalker after tapping it for mana, you can still activate a loyalty ability of that planeswalker even though it's tapped."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2016-07-13"^^xsd:date ;
-        :rulingText """At the time the permanent becomes enchanted, Imprisoned in the Moon causes it to lose all abilities except the noted mana ability. Any abilities the permanent gains after that point will work normally."""@en ] .
+        :rulingText """The permanent will keep any supertypes it previously had. Notably, if Imprisoned in the Moon is enchanting a legendary permanent, that permanent will continue to be legendary."""@en ] .
 
 :LaboratoryManiac rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -2743,7 +2743,7 @@ Flashback {6}{R} (You may cast this card from your graveyard for its flashback c
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2021-09-24"^^xsd:date ;
-        :rulingText """You must still follow any timing restrictions and permissions, including those based on the card's type. For instance, you can cast a sorcery using flashback only when you could normally cast a sorcery."""@en ] ,
+        :rulingText """If you cast Seize the Storm with no instant or sorcery cards in your graveyard and no cards with flashback in exile, the Elemental will start as a 0/0 creature. However, state-based actions won't be checked until after Seize the Storm has finished resolving. The Elemental will then be a 1/1 creature and survive because Seize the Storm will either be in your graveyard or in exile."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2021-09-24"^^xsd:date ;
         :rulingText """While a spell is on the stack, it is neither in your graveyard nor in exile, so it won't contribute to the Elemental's power and toughness. For example, with Seize the Storm in your graveyard and no cards in exile, the 1/1 Elemental in the above scenario will become 0/0 and die if you cast Seize the Storm from your graveyard using flashback."""@en ] ,
@@ -2751,23 +2751,23 @@ Flashback {6}{R} (You may cast this card from your graveyard for its flashback c
         :rulingDate "2021-09-24"^^xsd:date ;
         :rulingText """The power and toughness of the Elemental token will change as the number of instant and sorcery cards in your graveyard and the number of cards with flashback you own in exile change."""@en ] ,
       [ rdf:type :Ruling ;
-        :rulingDate "2021-09-24"^^xsd:date ;
+        :rulingDate "2025-06-06"^^xsd:date ;
+        :rulingText """"Flashback [cost]" means "You may cast this card from your graveyard if the resulting spell is an instant or sorcery spell by paying [cost] rather than paying its mana cost" and "If the flashback cost was paid, exile this card instead of putting it anywhere else any time it would leave the stack.\""""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-06-06"^^xsd:date ;
         :rulingText """To determine the total cost of a spell, start with the mana cost or alternative cost (such as a flashback cost) you're paying, add any cost increases, then apply any cost reductions. The mana value of the spell is determined only by its mana cost, no matter what the total cost to cast the spell was."""@en ] ,
       [ rdf:type :Ruling ;
-        :rulingDate "2021-09-24"^^xsd:date ;
+        :rulingDate "2025-06-06"^^xsd:date ;
         :rulingText """You can cast a spell using flashback even if it was somehow put into your graveyard without having been cast."""@en ] ,
       [ rdf:type :Ruling ;
-        :rulingDate "2021-09-24"^^xsd:date ;
-        :rulingText """If a card with flashback is put into your graveyard during your turn, you can cast it if it's legal to do so before any other player can take any actions."""@en ] ,
+        :rulingDate "2025-06-06"^^xsd:date ;
+        :rulingText """You must still follow any timing restrictions and permissions, including those based on the card's type. For instance, you can cast a sorcery using flashback only when you could normally cast a sorcery."""@en ] ,
       [ rdf:type :Ruling ;
-        :rulingDate "2021-09-24"^^xsd:date ;
+        :rulingDate "2025-06-06"^^xsd:date ;
         :rulingText """A spell cast using flashback will always be exiled afterward, whether it resolves, is countered, or leaves the stack in some other way."""@en ] ,
       [ rdf:type :Ruling ;
-        :rulingDate "2021-09-24"^^xsd:date ;
-        :rulingText """"Flashback [cost]" means "You may cast this card from your graveyard by paying [cost] rather than paying its mana cost" and "If the flashback cost was paid, exile this card instead of putting it anywhere else any time it would leave the stack.\""""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2021-09-24"^^xsd:date ;
-        :rulingText """If you cast Seize the Storm with no instant or sorcery cards in your graveyard and no cards with flashback in exile, the Elemental will start as a 0/0 creature. However, state-based actions won't be checked until after Seize the Storm has finished resolving. The Elemental will then be a 1/1 creature and survive because Seize the Storm will either be in your graveyard or in exile."""@en ] .
+        :rulingDate "2025-06-06"^^xsd:date ;
+        :rulingText """If a card with flashback is put into your graveyard during your turn, you can cast it if it's legal to do so before any other player can take any actions."""@en ] .
 
 :StensiaMasquerade rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -2985,10 +2985,10 @@ Deathtouch"""@en ;
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2020-08-07"^^xsd:date ;
-        :rulingText """As Clear Shot tries to resolve, if either creature is an illegal target, the creature you control won't deal damage. If the creature you control is a legal target but the other creature isn't, your creature will still get +1/+1."""@en ] ,
+        :rulingText """You can't cast Clear Shot unless you choose a creature you control and a creature you don't control as targets."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2020-08-07"^^xsd:date ;
-        :rulingText """You can't cast Clear Shot unless you choose a creature you control and a creature you don't control as targets."""@en ] .
+        :rulingText """As Clear Shot tries to resolve, if either creature is an illegal target, the creature you control won't deal damage. If the creature you control is a legal target but the other creature isn't, your creature will still get +1/+1."""@en ] .
 
 :DawnhartDisciple rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -3053,10 +3053,10 @@ Deathtouch"""@en ;
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2021-09-24"^^xsd:date ;
-        :rulingText """If you control three or more creatures with different powers and the target creature you control is still a legal target as Duel for Dominance resolves but the target creature you don't control isn't, you will still put a +1/+1 counter on the creature you control. It isn't much of a duel, but your creature is still dominant."""@en ] ,
+        :rulingText """Only the +1/+1 counter is contingent on having three or more creatures with different powers. The target creatures will still fight even if you don't have three or more creatures with different powers when Duel for Dominance resolves."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2021-09-24"^^xsd:date ;
-        :rulingText """Only the +1/+1 counter is contingent on having three or more creatures with different powers. The target creatures will still fight even if you don't have three or more creatures with different powers when Duel for Dominance resolves."""@en ] .
+        :rulingText """If you control three or more creatures with different powers and the target creature you control is still a legal target as Duel for Dominance resolves but the target creature you don't control isn't, you will still put a +1/+1 counter on the creature you control. It isn't much of a duel, but your creature is still dominant."""@en ] .
 
 :DuskwatchRecruiter rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -3812,25 +3812,25 @@ Flashback {3}{G}{W} (You may cast this card from your graveyard for its flashbac
       [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ;
     :hasRuling
       [ rdf:type :Ruling ;
-        :rulingDate "2021-09-24"^^xsd:date ;
-        :rulingText """You must still follow any timing restrictions and permissions, including those based on the card's type. For instance, you can cast a sorcery using flashback only when you could normally cast a sorcery."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2021-09-24"^^xsd:date ;
-        :rulingText """"Flashback [cost]" means "You may cast this card from your graveyard by paying [cost] rather than paying its mana cost" and "If the flashback cost was paid, exile this card instead of putting it anywhere else any time it would leave the stack.\""""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2021-09-24"^^xsd:date ;
-        :rulingText """A spell cast using flashback will always be exiled afterward, whether it resolves, is countered, or leaves the stack in some other way."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2021-09-24"^^xsd:date ;
+        :rulingDate "2025-06-06"^^xsd:date ;
         :rulingText """You can cast a spell using flashback even if it was somehow put into your graveyard without having been cast."""@en ] ,
       [ rdf:type :Ruling ;
-        :rulingDate "2021-09-24"^^xsd:date ;
+        :rulingDate "2025-06-06"^^xsd:date ;
+        :rulingText """You must still follow any timing restrictions and permissions, including those based on the card's type. For instance, you can cast a sorcery using flashback only when you could normally cast a sorcery."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-06-06"^^xsd:date ;
+        :rulingText """A spell cast using flashback will always be exiled afterward, whether it resolves, is countered, or leaves the stack in some other way."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-06-06"^^xsd:date ;
+        :rulingText """"Flashback [cost]" means "You may cast this card from your graveyard if the resulting spell is an instant or sorcery spell by paying [cost] rather than paying its mana cost" and "If the flashback cost was paid, exile this card instead of putting it anywhere else any time it would leave the stack.\""""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-06-06"^^xsd:date ;
         :rulingText """If a card with flashback is put into your graveyard during your turn, you can cast it if it's legal to do so before any other player can take any actions."""@en ] ,
       [ rdf:type :Ruling ;
-        :rulingDate "2021-09-24"^^xsd:date ;
+        :rulingDate "2025-06-06"^^xsd:date ;
         :rulingText """To determine the total cost of a spell, start with the mana cost or alternative cost (such as a flashback cost) you're paying, add any cost increases, then apply any cost reductions. The mana value of the spell is determined only by its mana cost, no matter what the total cost to cast the spell was."""@en ] .
 
-:MaelstromPulse rdf:type owl:NamedIndividual ,
+:MaelstromPulseInnistradRemastered244 rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Maelstrom Pulse" ;
     :manaCost "{1}{B}{G}" ;
@@ -4654,16 +4654,16 @@ When this creature enters, return target creature to its owner's hand."""@en ;
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2021-09-24"^^xsd:date ;
-        :rulingText """ Decayed represents a static ability and a triggered ability. "Decayed" means "This creature can't block" and "When this creature attacks, sacrifice it at end of combat.\""""@en ] ,
+        :rulingText """Decayed represents a static ability and a triggered ability. "Decayed" means "This creature can't block" and "When this creature attacks, sacrifice it at end of combat.\""""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2021-09-24"^^xsd:date ;
-        :rulingText """ Decayed does not grant haste. Creatures with decayed that enter the battlefield during your turn may not attack until your next turn."""@en ] ,
+        :rulingText """Decayed does not grant haste. Creatures with decayed that enter the battlefield during your turn may not attack until your next turn."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2021-09-24"^^xsd:date ;
-        :rulingText """ Decayed does not create any attacking requirements. You may choose not to attack with a creature that has decayed."""@en ] ,
+        :rulingText """Once a creature with decayed attacks, it will be sacrificed at end of combat, even if it no longer has decayed at that time."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2021-09-24"^^xsd:date ;
-        :rulingText """ Once a creature with decayed attacks, it will be sacrificed at end of combat, even if it no longer has decayed at that time."""@en ] .
+        :rulingText """Decayed does not create any attacking requirements. You may choose not to attack with a creature that has decayed."""@en ] .
 
 :InfernalGrasp rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -4732,10 +4732,10 @@ Whenever you cast an instant or sorcery spell, untap this creature."""@en ;
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2025-01-24"^^xsd:date ;
-        :rulingText """Thermo-Alchemist’s triggered ability resolves before the spell that caused it to trigger. It resolves even if that spell is countered. Players can cast spells and activate abilities (such as Thermo-Alchemist’s own activated ability) after the triggered ability resolves but before the spell that caused it to trigger does."""@en ] ,
+        :rulingText """In a Two-Headed Giant game, Thermo-Alchemist's activated ability deals 1 damage to each of your opponents, resulting in the opposing team losing 2 life."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2025-01-24"^^xsd:date ;
-        :rulingText """In a Two-Headed Giant game, Thermo-Alchemist’s activated ability deals 1 damage to each of your opponents, resulting in the opposing team losing 2 life."""@en ] .
+        :rulingText """Thermo-Alchemist's triggered ability resolves before the spell that caused it to trigger. It resolves even if that spell is countered. Players can cast spells and activate abilities (such as Thermo-Alchemist's own activated ability) after the triggered ability resolves but before the spell that caused it to trigger does."""@en ] .
 
 :GrappleWithThePast rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -4802,22 +4802,22 @@ Flashback {3}{G}{W} (You may cast this card from your graveyard for its flashbac
       [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ;
     :hasRuling
       [ rdf:type :Ruling ;
-        :rulingDate "2021-09-24"^^xsd:date ;
-        :rulingText """You must still follow any timing restrictions and permissions, including those based on the card's type. For instance, you can cast a sorcery using flashback only when you could normally cast a sorcery."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2021-09-24"^^xsd:date ;
-        :rulingText """"Flashback [cost]" means "You may cast this card from your graveyard by paying [cost] rather than paying its mana cost" and "If the flashback cost was paid, exile this card instead of putting it anywhere else any time it would leave the stack.\""""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2021-09-24"^^xsd:date ;
-        :rulingText """A spell cast using flashback will always be exiled afterward, whether it resolves, is countered, or leaves the stack in some other way."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2021-09-24"^^xsd:date ;
+        :rulingDate "2025-06-06"^^xsd:date ;
         :rulingText """You can cast a spell using flashback even if it was somehow put into your graveyard without having been cast."""@en ] ,
       [ rdf:type :Ruling ;
-        :rulingDate "2021-09-24"^^xsd:date ;
+        :rulingDate "2025-06-06"^^xsd:date ;
+        :rulingText """You must still follow any timing restrictions and permissions, including those based on the card's type. For instance, you can cast a sorcery using flashback only when you could normally cast a sorcery."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-06-06"^^xsd:date ;
+        :rulingText """A spell cast using flashback will always be exiled afterward, whether it resolves, is countered, or leaves the stack in some other way."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-06-06"^^xsd:date ;
+        :rulingText """"Flashback [cost]" means "You may cast this card from your graveyard if the resulting spell is an instant or sorcery spell by paying [cost] rather than paying its mana cost" and "If the flashback cost was paid, exile this card instead of putting it anywhere else any time it would leave the stack.\""""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-06-06"^^xsd:date ;
         :rulingText """If a card with flashback is put into your graveyard during your turn, you can cast it if it's legal to do so before any other player can take any actions."""@en ] ,
       [ rdf:type :Ruling ;
-        :rulingDate "2021-09-24"^^xsd:date ;
+        :rulingDate "2025-06-06"^^xsd:date ;
         :rulingText """To determine the total cost of a spell, start with the mana cost or alternative cost (such as a flashback cost) you're paying, add any cost increases, then apply any cost reductions. The mana value of the spell is determined only by its mana cost, no matter what the total cost to cast the spell was."""@en ] .
 
 :GalvanicJuggernaut rdf:type owl:NamedIndividual ,

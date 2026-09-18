@@ -52,6 +52,43 @@ subtype, format and legality definitions."""@en .
 #
 ################################################################################
 
+:HinterlandSanctifierJumpstart20255 rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Hinterland Sanctifier" ;
+    :manaCost "{W}" ;
+    :manaValue "1"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Rabbit ,
+                :Cleric ;
+    :hasRarity :Common ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :Jumpstart2025 ;
+    :cardNumber "5"^^xsd:integer ;
+    :artist "Justine Cruz" ;
+    :hasLanguage :English ;
+    :power "1" ;
+    :powerValue "1"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    :printedText """Whenever another creature you control enters, you gain 1 life."""@en ;
+    :oracleText """Whenever another creature you control enters, you gain 1 life."""@en ;
+    :flavorText """"You can learn a lot about a place just by asking the land how it's doing.\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=681330"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/j25/5/hinterland-sanctifier"^^xsd:anyURI ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-11-08"^^xsd:date ;
+        :rulingText """If Hinterland Sanctifier enters at the same time as one or more other creatures you control, its ability will trigger for each of those other creatures."""@en ] .
+
 :IslandJumpstart202584 rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Island" ;

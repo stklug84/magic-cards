@@ -91,7 +91,7 @@ subtype, format and legality definitions."""@en .
         :rulingDate "2025-04-04"^^xsd:date ;
         :rulingText """Barrensteppe Siege’s Mardu ability will check as the end step starts to see if a creature died under your control this turn. If none did, the ability won’t trigger at all."""@en ] .
 
-:RuggedHighlands rdf:type owl:NamedIndividual ,
+:RuggedHighlandsTarkirDragonstorm265 rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Rugged Highlands" ;
     :manaValue "0"^^xsd:nonNegativeInteger ;

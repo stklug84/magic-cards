@@ -1137,7 +1137,7 @@ Enchanted permanent is a colorless land with "{T}: Add {C}" and loses all other 
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2016-07-13"^^xsd:date ;
-        :rulingText """The permanent will keep any supertypes it previously had. Notably, if Imprisoned in the Moon is enchanting a legendary permanent, that permanent will continue to be legendary."""@en ] ,
+        :rulingText """At the time the permanent becomes enchanted, Imprisoned in the Moon causes it to lose all abilities except the noted mana ability. Any abilities the permanent gains after that point will work normally."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2016-07-13"^^xsd:date ;
         :rulingText """Becoming a land may cause other Auras to become illegally attached. These are put into their owner's graveyard, and any Equipment attached to the land become unattached and remain on the battlefield. Counters on the land remain on it even if they don't do anything."""@en ] ,
@@ -1149,7 +1149,7 @@ Enchanted permanent is a colorless land with "{T}: Add {C}" and loses all other 
         :rulingText """If you remove Imprisoned in the Moon from a planeswalker after tapping it for mana, you can still activate a loyalty ability of that planeswalker even though it's tapped."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2016-07-13"^^xsd:date ;
-        :rulingText """At the time the permanent becomes enchanted, Imprisoned in the Moon causes it to lose all abilities except the noted mana ability. Any abilities the permanent gains after that point will work normally."""@en ] .
+        :rulingText """The permanent will keep any supertypes it previously had. Notably, if Imprisoned in the Moon is enchanting a legendary permanent, that permanent will continue to be legendary."""@en ] .
 
 :JunkWinder rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -1941,19 +1941,19 @@ At the beginning of combat on your turn, you may have target noncreature artifac
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2011-09-22"^^xsd:date ;
-        :rulingText """The owner of a token is the player under whose control the token was put onto the battlefield. If a token is shuffled into a player's library this way, that player shuffles before revealing the top card of that library."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2011-09-22"^^xsd:date ;
-        :rulingText """A permanent card is a card with one or more of the following card types: artifact, creature, enchantment, land, or planeswalker."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2011-09-22"^^xsd:date ;
         :rulingText """If the revealed card is not a permanent card, it remains on top of that library."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2011-09-22"^^xsd:date ;
+        :rulingText """The owner of a token is the player under whose control the token was put onto the battlefield. If a token is shuffled into a player's library this way, that player shuffles before revealing the top card of that library."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2011-09-22"^^xsd:date ;
         :rulingText """If the revealed card is a permanent card but can't enter (perhaps because it's an Aura with nothing to enchant), it remains on top of that library."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2011-09-22"^^xsd:date ;
-        :rulingText """If the permanent is an illegal target by the time Chaos Warp tries to resolve, it won't resolve and none of its effects will occur. No library will be shuffled and no card will be revealed."""@en ] .
+        :rulingText """If the permanent is an illegal target by the time Chaos Warp tries to resolve, it won't resolve and none of its effects will occur. No library will be shuffled and no card will be revealed."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2011-09-22"^^xsd:date ;
+        :rulingText """A permanent card is a card with one or more of the following card types: artifact, creature, enchantment, land, or planeswalker."""@en ] .
 
 :CurseOfOpulence rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -2129,25 +2129,25 @@ Whenever this creature mutates, create a red artifact token named Feather with "
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2015-11-04"^^xsd:date ;
-        :rulingText """If a Confluence is copied, the effect that creates the copy will usually allow you to choose new targets, but you can't choose new modes."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2015-11-04"^^xsd:date ;
-        :rulingText """If the first or second modes are chosen multiple times, each of those modes represents a separate damage-dealing event. For example, if your opponent casts Fiery Confluence choosing the second mode three times, and you control Guardian Seraph (a creature with the ability "If a source an opponent controls would deal damage to you, prevent 1 of that damage"), you'll be dealt a total of 3 damage."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2015-11-04"^^xsd:date ;
-        :rulingText """If a mode requires a target, you can select that mode only if there's a legal target available. Ignore the targeting requirements for modes you don't choose. Each time you select that mode, you can choose a different target, or you can choose the same target."""@en ] ,
+        :rulingText """No player can cast spells or activate abilities in between the modes of a resolving spell."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2015-11-04"^^xsd:date ;
         :rulingText """You choose the modes as you cast the spell. Once modes are chosen, they can't be changed."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2015-11-04"^^xsd:date ;
+        :rulingText """If a mode requires a target, you can select that mode only if there's a legal target available. Ignore the targeting requirements for modes you don't choose. Each time you select that mode, you can choose a different target, or you can choose the same target."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2015-11-04"^^xsd:date ;
+        :rulingText """If a Confluence is copied, the effect that creates the copy will usually allow you to choose new targets, but you can't choose new modes."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2015-11-04"^^xsd:date ;
+        :rulingText """No matter which combination of modes you choose, you always follow the instructions of a Confluence in the order they are written. If the same mode is chosen more than once, you choose their relative order as you cast the spell."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2015-11-04"^^xsd:date ;
         :rulingText """If all targets for the chosen modes become illegal before the Confluence resolves, the spell won't resolve and none of its effects will happen. If at least one target is still legal, the spell will resolve but will have no effect on any illegal targets."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2015-11-04"^^xsd:date ;
-        :rulingText """No player can cast spells or activate abilities in between the modes of a resolving spell."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2015-11-04"^^xsd:date ;
-        :rulingText """No matter which combination of modes you choose, you always follow the instructions of a Confluence in the order they are written. If the same mode is chosen more than once, you choose their relative order as you cast the spell."""@en ] .
+        :rulingText """If the first or second modes are chosen multiple times, each of those modes represents a separate damage-dealing event. For example, if your opponent casts Fiery Confluence choosing the second mode three times, and you control Guardian Seraph (a creature with the ability "If a source an opponent controls would deal damage to you, prevent 1 of that damage"), you'll be dealt a total of 3 damage."""@en ] .
 
 :GhirapurAetherGrid rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -2563,38 +2563,29 @@ Whenever you sacrifice a Clue, put a +1/+1 counter on this creature."""@en ;
       [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ;
     :hasRuling
       [ rdf:type :Ruling ;
-        :rulingDate "2016-04-08"^^xsd:date ;
-        :rulingText """Clue is an artifact type. Even though it appears on some cards with other permanent types, it's never a creature type, a land type, or anything but an artifact type."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2016-04-08"^^xsd:date ;
-        :rulingText """You can't sacrifice a Clue to pay multiple costs. For example, you can't sacrifice a Clue token to activate its own ability and also to activate Alquist Proft, Master Sleuth's ability."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2016-04-08"^^xsd:date ;
-        :rulingText """If an effect refers to a Clue, it means any Clue artifact, not just a Clue artifact token. For example, you can sacrifice Wrench to pay for Alquist Proft, Master Sleuth's activated ability."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2024-02-02"^^xsd:date ;
-        :rulingText """Clue is an artifact type. Even though it appears on some cards with other permanent types, it's never a creature type, a land type, or anything but an artifact type."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2024-02-02"^^xsd:date ;
-        :rulingText """You can't sacrifice a Clue to pay multiple costs. For example, you can't sacrifice a Clue token to activate its own ability and also to activate Alquist Proft, Master Sleuth's ability."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2024-02-02"^^xsd:date ;
-        :rulingText """If an effect refers to a Clue, it means any Clue artifact, not just a Clue artifact token. For example, you can sacrifice Wrench to pay for Alquist Proft, Master Sleuth's activated ability."""@en ] ,
-      [ rdf:type :Ruling ;
         :rulingDate "2024-02-02"^^xsd:date ;
         :rulingText """Some abilities trigger "whenever you sacrifice a Clue". Those abilities trigger whenever you sacrifice a Clue for any reason, not just to activate a Clue's activated ability."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """You can't sacrifice a Clue to pay multiple costs. For example, you can't sacrifice a Clue token to activate its own ability and also to activate Alquist Proft, Master Sleuth's ability."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """Clue is an artifact type. Even though it appears on some cards with other permanent types, it's never a creature type, a land type, or anything but an artifact type."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
         :rulingText """Some spells and abilities that investigate may require targets. If each target chosen is an illegal target as that spell or ability tries to resolve, it won't resolve. You won't create any Clue tokens."""@en ] ,
       [ rdf:type :Ruling ;
-        :rulingDate "2024-11-08"^^xsd:date ;
-        :rulingText """A landfall ability triggers whenever a land you control enters for any reason. It triggers whenever you play a land, as well as whenever a spell or ability puts a land onto the battlefield under your control."""@en ] ,
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """If an effect refers to a Clue, it means any Clue artifact, not just a Clue artifact token. For example, you can sacrifice Wrench to pay for Alquist Proft, Master Sleuth's activated ability."""@en ] ,
       [ rdf:type :Ruling ;
-        :rulingDate "2024-11-08"^^xsd:date ;
+        :rulingDate "2025-07-25"^^xsd:date ;
         :rulingText """A landfall ability doesn't trigger if a permanent already on the battlefield becomes a land."""@en ] ,
       [ rdf:type :Ruling ;
-        :rulingDate "2024-11-08"^^xsd:date ;
-        :rulingText """Whenever a land you control enters, each landfall ability of the permanents you control will trigger. You can put them   on the stack in any order. The last ability you put on the stack will be the first one to resolve (As a result, you can have those abilities resolve in the order of your choosing.)."""@en ] .
+        :rulingDate "2025-07-25"^^xsd:date ;
+        :rulingText """A landfall ability triggers whenever a land you control enters for any reason. It triggers whenever you play a land, as well as whenever a spell or ability puts a land onto the battlefield under your control."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-07-25"^^xsd:date ;
+        :rulingText """Whenever a land you control enters, each landfall ability of permanents you control will trigger. You can put them on the stack in any order. The last ability you put on the stack will be the first one to resolve. As a result, you can have those abilities resolve in the order of your choosing."""@en ] .
 
 :WeirdingWood rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -2886,13 +2877,13 @@ Each player shuffles their graveyard into their library."""@en ;
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2020-11-10"^^xsd:date ;
+        :rulingText """If you don't have a commander, Arcane Signet's ability produces no mana."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2020-11-10"^^xsd:date ;
         :rulingText """If you have two commanders, the ability adds one mana of any color in their combined color identities."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2020-11-10"^^xsd:date ;
-        :rulingText """If your commander is a card that has no colors in its color identity, Arcane Signet's ability produces no mana. It doesn't produce {C}."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2020-11-10"^^xsd:date ;
-        :rulingText """If you don't have a commander, Arcane Signet's ability produces no mana."""@en ] .
+        :rulingText """If your commander is a card that has no colors in its color identity, Arcane Signet's ability produces no mana. It doesn't produce {C}."""@en ] .
 
 :BloodforgedBattleAxe rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -3023,10 +3014,37 @@ Equip {2}"""@en ;
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2017-02-09"^^xsd:date ;
+        :rulingText """When using improvise to cast a spell with {X} in its mana cost, first choose the value for X. That choice, plus any cost increases or decreases, will determine the spell's total cost. Then you can tap artifacts you control to help pay that cost. For example, if you cast Whir of Invention (a spell with improvise and mana cost {X}{U}{U}{U}) and choose X to be 3, the total cost is {3}{U}{U}{U}. If you tap two artifacts, you'll have to pay {1}{U}{U}{U}."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2017-02-09"^^xsd:date ;
+        :rulingText """Because improvise isn't an alternative cost, it can be used in conjunction with alternative costs."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2017-02-09"^^xsd:date ;
         :rulingText """If you cast a nonartifact spell that requires you to sacrifice a permanent as an additional cost, you may tap that permanent (if it's an artifact) for the spell's improvise ability before you sacrifice it to pay that cost."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2017-02-09"^^xsd:date ;
-        :rulingText """Multiple instances of improvise are redundant."""@en ] .
+        :rulingText """Improvise can't pay for {W}, {U}, {B}, {R}, {G}, or {C} mana symbols in a spell's total cost."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2017-02-09"^^xsd:date ;
+        :rulingText """Equipment attached to a creature doesn't become tapped when that creature becomes tapped, and tapping that Equipment doesn't cause the creature to become tapped."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2017-02-09"^^xsd:date ;
+        :rulingText """Improvise doesn't change a spell's mana cost or mana value."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2017-02-09"^^xsd:date ;
+        :rulingText """Improvise can't be used to pay for anything other than the cost of casting the spell. For example, it can't be used during the resolution of an ability that says "Counter target spell unless its controller pays {3}.\""""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2017-02-09"^^xsd:date ;
+        :rulingText """If an artifact you control has a mana ability with {T} in the cost, activating that ability while casting a spell with improvise will result in the artifact being tapped when you pay the spell's costs. You won't be able to tap it again for improvise. Similarly, if you sacrifice an artifact to activate a mana ability while casting a spell with improvise, that artifact won't be on the battlefield when you pay the spell's costs, so you won't be able to tap it for improvise."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2017-02-09"^^xsd:date ;
+        :rulingText """Multiple instances of improvise are redundant."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2017-02-09"^^xsd:date ;
+        :rulingText """When calculating a spell's total cost, include any alternative costs, additional costs, or anything else that increases or reduces the cost to cast the spell. Improvise applies after the total cost is calculated."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2017-02-09"^^xsd:date ;
+        :rulingText """Tapping an artifact won't cause its abilities to stop applying unless those abilities say so."""@en ] .
 
 :IzzetSignet rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -3321,13 +3339,13 @@ This land enters tapped unless you control two or more basic lands."""@en ;
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2015-08-25"^^xsd:date ;
-        :rulingText """However, because these cards have basic land types, effects that specify a basic land type without also specifying that the land be basic can affect them. For example, a spell or ability that reads "Destroy target Forest" can target Canopy Vista, while one that reads "Destroy target basic Forest" cannot."""@en ] ,
+        :rulingText """If one of these lands enters the battlefield at the same time as any number of basic lands, those other lands are not counted when determining if this land enters the battlefield tapped or untapped."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2015-08-25"^^xsd:date ;
         :rulingText """Even though these lands have basic land types, they are not basic lands because "basic" doesn't appear on their type line. Notably, controlling two or more of them won't allow others to enter the battlefield untapped."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2015-08-25"^^xsd:date ;
-        :rulingText """If one of these lands enters the battlefield at the same time as any number of basic lands, those other lands are not counted when determining if this land enters the battlefield tapped or untapped."""@en ] .
+        :rulingText """However, because these cards have basic land types, effects that specify a basic land type without also specifying that the land be basic can affect them. For example, a spell or ability that reads "Destroy target Forest" can target Canopy Vista, while one that reads "Destroy target basic Forest" cannot."""@en ] .
 
 :CommandTowerMarchOfTheMachineCommander396 rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -3364,10 +3382,10 @@ This land enters tapped unless you control two or more basic lands."""@en ;
         :rulingText """If you don't have a commander, Command Tower's ability produces no mana."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2020-11-10"^^xsd:date ;
-        :rulingText """If you have two commanders, the ability adds one mana of any color in their combined color identities."""@en ] ,
+        :rulingText """If your commander is a card that has no colors in its color identity, Command Tower's ability produces no mana. It doesn't produce {C}."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2020-11-10"^^xsd:date ;
-        :rulingText """If your commander is a card that has no colors in its color identity, Command Tower's ability produces no mana. It doesn't produce {C}."""@en ] .
+        :rulingText """If you have two commanders, the ability adds one mana of any color in their combined color identities."""@en ] .
 
 :EvolvingWildsMarchOfTheMachineCommander397 rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -3427,16 +3445,16 @@ This land enters tapped unless you control two or more basic lands."""@en ;
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2009-02-01"^^xsd:date ;
-        :rulingText """Exotic Orchard checks the effects of all mana-producing abilities of lands your opponents control, but it doesn't check their costs. For example, Vivid Crag has the ability "{T}, Remove a charge counter from Vivid Crag: Add one mana of any color." If an opponent controls Vivid Crag and you control Exotic Orchard, you can tap Exotic Orchard for any color of mana. It doesn't matter whether Vivid Crag has a charge counter on it, and it doesn't matter whether it's untapped."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2009-02-01"^^xsd:date ;
-        :rulingText """Exotic Orchard doesn't care about any restrictions or riders your opponents' lands (such as Ancient Ziggurat or Hall of the Bandit Lord) put on the mana they produce. It just cares about colors of mana."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2009-02-01"^^xsd:date ;
         :rulingText """When determining what colors of mana your opponents' lands could produce, Exotic Orchard takes into account any applicable replacement effects that would apply to those lands' mana abilities (such as Contamination's effect, for example). If there are more than one, consider them in any possible order."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2009-02-01"^^xsd:date ;
         :rulingText """The colors of mana are white, blue, black, red, and green. Exotic Orchard can't be tapped for colorless mana, even if a land an opponent controls could produce colorless mana."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2009-02-01"^^xsd:date ;
+        :rulingText """Exotic Orchard checks the effects of all mana-producing abilities of lands your opponents control, but it doesn't check their costs. For example, Vivid Crag has the ability "{T}, Remove a charge counter from Vivid Crag: Add one mana of any color." If an opponent controls Vivid Crag and you control Exotic Orchard, you can tap Exotic Orchard for any color of mana. It doesn't matter whether Vivid Crag has a charge counter on it, and it doesn't matter whether it's untapped."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2009-02-01"^^xsd:date ;
+        :rulingText """Exotic Orchard doesn't care about any restrictions or riders your opponents' lands (such as Ancient Ziggurat or Hall of the Bandit Lord) put on the mana they produce. It just cares about colors of mana."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2009-02-01"^^xsd:date ;
         :rulingText """Lands that produce mana based only on what other lands "could produce" won't help each other unless some other land allows one of them to actually produce some type of mana. For example, if you control an Exotic Orchard and your opponent controls an Exotic Orchard and a Reflecting Pool, none of those lands would produce mana if their mana abilities were activated. On the other hand, if you control a Forest and an Exotic Orchard, and your opponent controls an Exotic Orchard and a Reflecting Pool, then each of those lands can be tapped to produce {G}. Your opponent's Exotic Orchard can produce {G} because you control a Forest. Your Exotic Orchard and your opponent's Reflecting Pool can each produce {G} because your opponent's Exotic Orchard can produce {G}."""@en ] .
@@ -3551,16 +3569,16 @@ This land enters tapped unless you control two or more basic lands."""@en ;
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2016-04-08"^^xsd:date ;
-        :rulingText """If an effect instructs you to put Game Trail onto the battlefield tapped, it will still enter the battlefield tapped even if you reveal a land card from your hand."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2016-04-08"^^xsd:date ;
-        :rulingText """You may reveal any land card with either or both of the appropriate subtypes. It doesn't have to be a basic land. For example, you could reveal Canopy Vista from the Battle for Zendikar set to satisfy the ability of Game Trail."""@en ] ,
+        :rulingText """Lands don't have a subtype just because they can produce mana of the corresponding color. Game Trail itself is neither a Mountain nor a Forest, even though it produces red and green mana, so you can't reveal one to satisfy the ability of another."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2016-04-08"^^xsd:date ;
         :rulingText """If a Mountain or Forest is entering the battlefield from your hand at the same time as Game Trail, you may reveal the other land to have Game Trail enter untapped."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2016-04-08"^^xsd:date ;
-        :rulingText """Lands don't have a subtype just because they can produce mana of the corresponding color. Game Trail itself is neither a Mountain nor a Forest, even though it produces red and green mana, so you can't reveal one to satisfy the ability of another."""@en ] .
+        :rulingText """If an effect instructs you to put Game Trail onto the battlefield tapped, it will still enter the battlefield tapped even if you reveal a land card from your hand."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2016-04-08"^^xsd:date ;
+        :rulingText """You may reveal any land card with either or both of the appropriate subtypes. It doesn't have to be a basic land. For example, you could reveal Canopy Vista from the Battle for Zendikar set to satisfy the ability of Game Trail."""@en ] .
 
 :GoldmireBridge rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -3679,10 +3697,10 @@ Indestructible
         :rulingText """If your commander is a card that has no colors in its color identity, Path of Ancestry's ability produces no mana. It doesn't produce {C}."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2023-07-28"^^xsd:date ;
-        :rulingText """If you have two commanders, the last ability adds one mana of any color in their combined color identities. When you spend that mana on a creature spell that shares a creature type with either of your commanders, you'll scry 1."""@en ] ,
+        :rulingText """Your commander's creature types are checked immediately after you cast a creature spell spending mana from Path of Ancestry's last ability. They aren't set before the game begins, and they may not be the same types your commander had when you activated that ability."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2023-07-28"^^xsd:date ;
-        :rulingText """Your commander's creature types are checked immediately after you cast a creature spell spending mana from Path of Ancestry's last ability. They aren't set before the game begins, and they may not be the same types your commander had when you activated that ability."""@en ] .
+        :rulingText """If you have two commanders, the last ability adds one mana of any color in their combined color identities. When you spend that mana on a creature spell that shares a creature type with either of your commanders, you'll scry 1."""@en ] .
 
 :SimicGrowthChamber rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -3720,7 +3738,7 @@ When this land enters, return a land you control to its owner's hand.
         :rulingDate "2013-04-15"^^xsd:date ;
         :rulingText """If this land enters the battlefield and you control no other lands, its ability will force you to return it to your hand."""@en ] .
 
-:TempleOfAbandon rdf:type owl:NamedIndividual ,
+:TempleOfAbandonMarchOfTheMachineCommander430 rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Temple of Abandon" ;
     :manaValue "0"^^xsd:nonNegativeInteger ;
@@ -3903,13 +3921,13 @@ When this land enters, scry 1. (Look at the top card of your library. You may pu
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2021-04-16"^^xsd:date ;
-        :rulingText """You may reveal any land card with either or both of the appropriate subtypes. It doesn't have to be a basic land card."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2021-04-16"^^xsd:date ;
         :rulingText """If a land card with an appropriate subtype is entering the battlefield from your hand at the same time as one of these lands, you may reveal the other land to have the "Snarl" enter untapped."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2021-04-16"^^xsd:date ;
-        :rulingText """The "Snarl" itself doesn't have any land subtypes. You can't reveal one to satisfy the ability of another."""@en ] ,
+        :rulingText """You may reveal any land card with either or both of the appropriate subtypes. It doesn't have to be a basic land card."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2021-04-16"^^xsd:date ;
-        :rulingText """If an effect instructs you to put one of these lands onto the battlefield tapped, it will still enter the battlefield tapped even if you reveal a land card from your hand."""@en ] .
+        :rulingText """If an effect instructs you to put one of these lands onto the battlefield tapped, it will still enter the battlefield tapped even if you reveal a land card from your hand."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2021-04-16"^^xsd:date ;
+        :rulingText """The "Snarl" itself doesn't have any land subtypes. You can't reveal one to satisfy the ability of another."""@en ] .

@@ -80,7 +80,7 @@ graphs. Keys are whitelisted in scripts/mtgcards/behaviors.py
     :hasBehaviorHook
       [ rdf:type :BehaviorHook ; :behaviorKey "wipe" ; :behaviorValue "{\"style\": \"select\"}" ] .
 
-:BanishingLight
+:BanishingLightEdgeOfEternities6
     :hasBehaviorHook
       [ rdf:type :BehaviorHook ; :behaviorKey "removal" ; :behaviorValue "true" ] ,
       [ rdf:type :BehaviorHook ; :behaviorKey "removal_exile" ; :behaviorValue "true" ] ,
@@ -173,7 +173,7 @@ graphs. Keys are whitelisted in scripts/mtgcards/behaviors.py
     :hasBehaviorHook
       [ rdf:type :BehaviorHook ; :behaviorKey "wipe" ; :behaviorValue "{\"style\": \"select\", \"exile\": true}" ] .
 
-:FeedTheSwarm
+:FeedTheSwarmDoctorWhoCommander221
     :hasBehaviorHook
       [ rdf:type :BehaviorHook ; :behaviorKey "removal" ; :behaviorValue "true" ] ,
       [ rdf:type :BehaviorHook ; :behaviorKey "removal_scope" ; :behaviorValue "\"cre_ench\"" ] .
@@ -231,7 +231,7 @@ graphs. Keys are whitelisted in scripts/mtgcards/behaviors.py
       [ rdf:type :BehaviorHook ; :behaviorKey "mechanized_wincon" ; :behaviorValue "true" ] ,
       [ rdf:type :BehaviorHook ; :behaviorKey "tokens_per_turn" ; :behaviorValue "1" ] .
 
-:MentorOfTheMeek
+:MentorOfTheMeekInnistradRemastered34
     :threatWeight "6"^^xsd:nonNegativeInteger ;
     :hasBehaviorHook
       [ rdf:type :BehaviorHook ; :behaviorKey "draw_on_tokens" ; :behaviorValue "1" ] .
