@@ -156,7 +156,7 @@ jobs:
       - name: Download Comprehensive Rules
         uses: stklug84/actions/mtg/fetch-comprehensive-rules@c6c3adbc4140cbf096c0c61c30b4fa96ff82b8dd  # v2.19.0
         with:
-          cr-date: "20260619"
+          cr-date: "20260819"
 
       - name: Card data-layer tests (deck formats / Scryfall mapping)
         working-directory: scripts
