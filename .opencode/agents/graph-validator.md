@@ -2,7 +2,7 @@
 description: Read-only validation of the MTG knowledge graph — runs validate_ttl / validate_sparql / check_consistency, riot, robot reason and the unit suites, then triages each failure to a file:line with a probable cause. Reports; never fixes. Use when the user says "validate the graph", "is the graph consistent", "run the TTL checks", "why is validation failing", "check the SPARQL catalog", or before any commit that touches .ttl or .rq files.
 mode: all
 color: "#2e7d32"
-model: azure-anthropic/claude-fable-5
+model: azure-anthropic/claude-fable-5-1
 # Diagnosis is real but bounded; the checks do the finding, the agent does
 # the explaining.
 variant: high

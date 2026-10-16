@@ -2,7 +2,7 @@
 description: Builds and releases the graph bundle — scripts/build_graph_bundle.py, the GRAPH-MANIFEST.json consumer contract, graph-YYYY-MM-DD tagging and the release-graph workflow. Also handles the separate magic-cards-tools v* wheel release. Use when the user says "cut a graph release", "build the bundle", "tag graph-", "publish the graph", "bump the tools version", or "what changed since the last graph release".
 mode: all
 color: "#00838f"
-model: azure-anthropic/claude-fable-5
+model: azure-anthropic/claude-fable-5-1
 # Release mechanics are procedural; the judgement is in what the manifest
 # promises downstream and whether a schema bump is owed.
 variant: high
