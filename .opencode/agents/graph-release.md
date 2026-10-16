@@ -107,8 +107,10 @@ every consumer to update for nothing.
 
 - Tags are created only when the user asks. Never push a tag or create a
   release on your own initiative — both permissions are gated to `ask`.
-- The tarball is normalized (uid/gid 0, fixed mtime) so it is byte-stable.
-  If two builds of the same tree differ, that is a bug worth reporting, not
-  something to paper over.
+- The tarball is normalized (uid/gid 0, mode 0644, every member and the
+  gzip header stamped with the graph-version date) so it is byte-stable
+  for a given tree and version; `test_build_graph_bundle.py` pins this. If
+  two builds of the same tree still differ, that is a bug worth reporting,
+  not something to paper over.
 - Report the version, the manifest contents, the counts and the standalone
   validation result. Do not paste the bundle listing.
