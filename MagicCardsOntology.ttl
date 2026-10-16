@@ -5291,6 +5291,10 @@ a player’s next turn."""@en .
          rdfs:label "Harness" ;
          rdfs:comment """A keyword action that grants a permanent the harnessed
 designation."""@en .
+:Heal rdf:type owl:NamedIndividual ,
+               :KeywordAction ;
+      rdfs:label "Heal" ;
+      rdfs:comment "To remove marked damage already dealt to a permanent."@en .
 :Incubate rdf:type owl:NamedIndividual ,
                    :KeywordAction ;
           rdfs:label "Incubate" ;
@@ -5358,6 +5362,12 @@ token you control."""@en .
              rdfs:label "Proliferate" ;
              rdfs:comment """To give an additional counter to any number of
 players and/or permanents of each kind they already have."""@en .
+:Recruit rdf:type owl:NamedIndividual ,
+                  :KeywordAction ;
+         rdfs:label "Recruit" ;
+         rdfs:comment """To draw a card, then discard a card; if a
+nonland card was discarded this way, create a 1/1 white Human Soldier
+creature token."""@en .
 :Regenerate rdf:type owl:NamedIndividual ,
                      :KeywordAction ;
             rdfs:label "Regenerate" ;
@@ -5964,6 +5974,12 @@ creature for some period of time."""@en .
            rdfs:label "Improvise" ;
            rdfs:comment """A keyword ability that lets you tap artifacts rather
 than pay mana to cast a spell."""@en .
+:Increment rdf:type owl:NamedIndividual ,
+                    :KeywordAbility ;
+           rdfs:label "Increment" ;
+           rdfs:comment """A triggered ability that puts a +1/+1 counter on
+the creature whenever its controller casts a spell for more mana than the
+creature’s power or toughness."""@en .
 :Indestructible rdf:type owl:NamedIndividual ,
                          :KeywordAbility ;
                 rdfs:label "Indestructible" ;
@@ -6130,6 +6146,12 @@ over time."""@en .
           rdfs:label "Overload" ;
           rdfs:comment """A keyword ability that allows a spell to affect either
 a single target or many objects."""@en .
+:Paradigm rdf:type owl:NamedIndividual ,
+                   :KeywordAbility ;
+          rdfs:label "Paradigm" ;
+          rdfs:comment """A spell ability that, the first time a spell with
+this name resolves in a game, creates a castable copy of the spell in exile
+at the beginning of each of its controller’s precombat main phases."""@en .
 :Partner rdf:type owl:NamedIndividual ,
                   :KeywordAbility ;
          rdfs:label "Partner" ;
@@ -6161,6 +6183,12 @@ their hand and cast them without paying their mana cost on future turns."""@en .
            rdfs:label "Poisonous" ;
            rdfs:comment """A keyword ability that causes a player to get poison
 counters."""@en .
+:PowerUp rdf:type owl:NamedIndividual ,
+                  :KeywordAbility ;
+         rdfs:label "Power-up" ;
+         rdfs:comment """A keyword that reduces the cost of the activated
+ability that follows it by the permanent’s mana cost if the permanent entered
+this turn, and limits that ability to one activation."""@en .
 :Protection rdf:type owl:NamedIndividual ,
                      :KeywordAbility ;
             rdfs:label "Protection" ;
@@ -6341,6 +6369,12 @@ on each of their turns when an opponent loses life."""@en .
          rdfs:label "Station" ;
          rdfs:comment """A keyword ability that lets you tap creatures to add
 charge counters to station cards."""@en .
+:Storied rdf:type owl:NamedIndividual ,
+                  :KeywordAbility ;
+         rdfs:label "Storied" ;
+         rdfs:comment """A static ability that gives its controller an
+enduring story for the rest of the game once they control three or more
+permanents that are artifacts, Sagas, and/or legendary."""@en .
 :Storm rdf:type owl:NamedIndividual ,
                 :KeywordAbility ;
        rdfs:label "Storm" ;
@@ -6361,6 +6395,12 @@ turn."""@en .
          rdfs:label "Suspend" ;
          rdfs:comment """A keyword ability that provides an alternative way to
 play a card."""@en .
+:Teamwork rdf:type owl:NamedIndividual ,
+                   :KeywordAbility ;
+          rdfs:label "Teamwork" ;
+          rdfs:comment """A static ability that functions while the spell is
+on the stack: as an additional cost, its caster may tap any number of
+creatures they control with total power N or more."""@en .
 :Tiered rdf:type owl:NamedIndividual ,
                  :KeywordAbility ;
         rdfs:label "Tiered" ;
@@ -6481,6 +6521,13 @@ damage to a creature."""@en .
                      :setCode "SOS" ;
                      :cardCount 368 ;
                      :releaseDate "2026-04-24"^^xsd:date .
+:SecretsOfStrixhavenMysticalArchive rdf:type owl:NamedIndividual ,
+                                             :Set ;
+                                    :setName """Secrets of Strixhaven
+Mystical Archive"""@en ;
+                                    :setCode "SOA" ;
+                                    :cardCount 195 ;
+                                    :releaseDate "2026-04-24"^^xsd:date .
 :MagicTheGatheringTeenageMutantNinjaTurtlesCommander rdf:type owl:NamedIndividual ,
                                                               :Set ;
                                                      :setName """Magic: The

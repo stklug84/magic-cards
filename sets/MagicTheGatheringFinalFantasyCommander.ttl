@@ -181,7 +181,7 @@ Whenever another permanent you control is put into a graveyard from the battlefi
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2025-06-06"^^xsd:date ;
-        :rulingText """When you proliferate, you can choose any permanent that has a counter, including ones controlled by opponents. You can choose any player who has a counter, including opponents. You can't choose cards in any zone other than the battlefield, even if they have counters on them."""@en ] ,
+        :rulingText """If a player or permanent has more than one kind of counter on it, and you choose for it to get additional counters, it must get one of each kind of counter it already has. You can't have it get just one kind of counter it already has and not the others."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2025-06-06"^^xsd:date ;
         :rulingText """Players can respond to a spell or ability whose effect includes proliferating. Once that spell or ability starts to resolve, however, and its controller chooses which permanents and players will get new counters, it's too late for anyone to respond."""@en ] ,
@@ -190,7 +190,7 @@ Whenever another permanent you control is put into a graveyard from the battlefi
         :rulingText """Lulu's first ability only cares about creatures attacking you, not planeswalkers you control or battles you protect."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2025-06-06"^^xsd:date ;
-        :rulingText """If a player or permanent has more than one kind of counter on it, and you choose for it to get additional counters, it must get one of each kind of counter it already has. You can't have it get just one kind of counter it already has and not the others."""@en ] ,
+        :rulingText """When you proliferate, you can choose any permanent that has a counter, including ones controlled by opponents. You can choose any player who has a counter, including opponents. You can't choose cards in any zone other than the battlefield, even if they have counters on them."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2025-06-06"^^xsd:date ;
         :rulingText """You don't have to choose every permanent or player that has a counter—only the ones you want to add counters to. Since "any number" includes zero, you don't have to choose any permanents at all, and you don't have to choose any players at all."""@en ] .
@@ -232,25 +232,25 @@ Whenever another permanent you control is put into a graveyard from the battlefi
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2025-06-06"^^xsd:date ;
-        :rulingText """If you proliferate multiple times, you don't have to choose the same set of players and/or permanents to get additional counters each time."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2025-06-06"^^xsd:date ;
-        :rulingText """The value of X is determined only once, as Tromell's last ability resolves. To determine that value, look at the nontoken creatures you control and count each one that entered this turn. It doesn't matter if they were creatures when they entered or who controlled them when they entered."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2025-06-06"^^xsd:date ;
-        :rulingText """When you proliferate, you can choose any permanent that has a counter, including ones controlled by opponents. You can choose any player who has a counter, including opponents. You can't choose cards in any zone other than the battlefield, even if they have counters on them."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2025-06-06"^^xsd:date ;
         :rulingText """If a player or permanent has more than one kind of counter on it, and you choose for it to get additional counters, it must get one of each kind of counter it already has. You can't have it get just one kind of counter it already has and not the others."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2025-06-06"^^xsd:date ;
-        :rulingText """Players can respond to a spell or ability whose effect includes proliferating. Once that spell or ability starts to resolve, however, and its controller chooses which permanents and players will get new counters, it's too late for anyone to respond."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2025-06-06"^^xsd:date ;
         :rulingText """You don't have to choose every permanent or player that has a counter—only the ones you want to add counters to. Since "any number" includes zero, you don't have to choose any permanents at all, and you don't have to choose any players at all."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2025-06-06"^^xsd:date ;
-        :rulingText """While proliferating multiple times, players can't respond between proliferating the first time and proliferating the second time, and so on."""@en ] .
+        :rulingText """When you proliferate, you can choose any permanent that has a counter, including ones controlled by opponents. You can choose any player who has a counter, including opponents. You can't choose cards in any zone other than the battlefield, even if they have counters on them."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-06-06"^^xsd:date ;
+        :rulingText """If you proliferate multiple times, you don't have to choose the same set of players and/or permanents to get additional counters each time."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-06-06"^^xsd:date ;
+        :rulingText """Players can respond to a spell or ability whose effect includes proliferating. Once that spell or ability starts to resolve, however, and its controller chooses which permanents and players will get new counters, it's too late for anyone to respond."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-06-06"^^xsd:date ;
+        :rulingText """While proliferating multiple times, players can't respond between proliferating the first time and proliferating the second time, and so on."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-06-06"^^xsd:date ;
+        :rulingText """The value of X is determined only once, as Tromell's last ability resolves. To determine that value, look at the nontoken creatures you control and count each one that entered this turn. It doesn't matter if they were creatures when they entered or who controlled them when they entered."""@en ] .
 
 :InexorableTide rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -282,7 +282,25 @@ Whenever another permanent you control is put into a graveyard from the battlefi
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2011-01-01"^^xsd:date ;
-        :rulingText """Whenever you cast a spell, Inexorable Tide's ability triggers and goes on the stack on top of it. It will resolve (and you'll proliferate) before the spell resolves."""@en ] .
+        :rulingText """Whenever you cast a spell, Inexorable Tide's ability triggers and goes on the stack on top of it. It will resolve (and you'll proliferate) before the spell resolves."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """If a player or permanent has more than one kind of counter on it, and you choose for it to get additional counters, it must get one of each kind of counter it already has. You can't have it get just one kind of counter it already has and not the others."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """If a permanent ever has both +1/+1 counters and -1/-1 counters on it at the same time, they're removed in pairs as a state-based action so that the permanent has only one of those kinds of counters on it."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """An ability that triggers "Whenever you proliferate" triggers even if you chose no permanents or players while doing so."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """You don't have to choose every permanent or player that has a counter, only the ones you want to add another counter to. Since "any number" includes zero, you don't have to choose any permanents at all, and you don't have to choose any players at all."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """Players can respond to a spell or ability whose effect includes proliferating. Once that spell or ability starts to resolve, however, and its controller chooses which permanents and players will get new counters, it's too late for anyone to respond."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """To proliferate, you can choose any permanent that has a counter, including ones controlled by opponents. You can choose any player who has a counter, including opponents. You can't choose cards in any zone other than the battlefield, even if they have counters on them."""@en ] .
 
 :ThoughtVesselMagicTheGatheringFinalFantasyCommander368 rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -339,16 +357,16 @@ Whenever another permanent you control is put into a graveyard from the battlefi
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2020-04-17"^^xsd:date ;
+        :rulingText """To move a counter from one creature to another, the counter is removed from the first permanent and put on the second. Any abilities that care about a counter being removed from or put onto a permanent will apply."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2020-04-17"^^xsd:date ;
         :rulingText """You choose the two target permanents as Nesting Grounds's second ability is put onto the stack. You choose which kind of counter to move as that ability resolves."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2020-04-17"^^xsd:date ;
         :rulingText """If either permanent becomes an illegal target, no counter is removed or put."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2020-04-17"^^xsd:date ;
-        :rulingText """The two target permanents don't have to share a type, which can result in some counters on permanents that would not occur normally, such as loyalty counters on creatures or +1/+1 counters on lands. Keyword counters will grant the permanent that keyword even if it's meaningless (such as trample on an enchantment); +1/+1 counters won't affect the permanent unless it's a creature; and many named counters (such as soul counters) won't have an effect unless the recipient permanent refers to them in some way."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2020-04-17"^^xsd:date ;
-        :rulingText """To move a counter from one creature to another, the counter is removed from the first permanent and put on the second. Any abilities that care about a counter being removed from or put onto a permanent will apply."""@en ] .
+        :rulingText """The two target permanents don't have to share a type, which can result in some counters on permanents that would not occur normally, such as loyalty counters on creatures or +1/+1 counters on lands. Keyword counters will grant the permanent that keyword even if it's meaningless (such as trample on an enchantment); +1/+1 counters won't affect the permanent unless it's a creature; and many named counters (such as soul counters) won't have an effect unless the recipient permanent refers to them in some way."""@en ] .
 
 :VineglimmerSnarlMagicTheGatheringFinalFantasyCommander440 rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -383,13 +401,13 @@ Whenever another permanent you control is put into a graveyard from the battlefi
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2021-04-16"^^xsd:date ;
-        :rulingText """You may reveal any land card with either or both of the appropriate subtypes. It doesn't have to be a basic land card."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2021-04-16"^^xsd:date ;
         :rulingText """If a land card with an appropriate subtype is entering the battlefield from your hand at the same time as one of these lands, you may reveal the other land to have the "Snarl" enter untapped."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2021-04-16"^^xsd:date ;
-        :rulingText """The "Snarl" itself doesn't have any land subtypes. You can't reveal one to satisfy the ability of another."""@en ] ,
+        :rulingText """You may reveal any land card with either or both of the appropriate subtypes. It doesn't have to be a basic land card."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2021-04-16"^^xsd:date ;
-        :rulingText """If an effect instructs you to put one of these lands onto the battlefield tapped, it will still enter the battlefield tapped even if you reveal a land card from your hand."""@en ] .
+        :rulingText """If an effect instructs you to put one of these lands onto the battlefield tapped, it will still enter the battlefield tapped even if you reveal a land card from your hand."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2021-04-16"^^xsd:date ;
+        :rulingText """The "Snarl" itself doesn't have any land subtypes. You can't reveal one to satisfy the ability of another."""@en ] .

@@ -762,7 +762,7 @@ Draw a card."""@en ;
         :rulingDate "2026-01-27"^^xsd:date ;
         :rulingText """Effects that modify the creature's power and/or toughness, such as the effect of Karai's Technique, will apply to the creature no matter when they started to take effect. The same is true for counters that change its power and/or toughness and effects that switch its power and toughness."""@en ] .
 
-:Negate rdf:type owl:NamedIndividual ,
+:NegateMagicTheGatheringTeenageMutantNinjaTurtles47 rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Negate" ;
     :manaCost "{1}{U}" ;

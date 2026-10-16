@@ -52,6 +52,66 @@ subtype, format and legality definitions."""@en .
 #
 ################################################################################
 
+:CaseOfTheUneatenFeast rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Case of the Uneaten Feast" ;
+    :manaCost "{W}" ;
+    :manaValue "1"^^xsd:nonNegativeInteger ;
+    :hasCardType :Enchantment ;
+    :hasSubType :Case ;
+    :hasRarity :Rare ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :MurdersAtKarlovManor ;
+    :cardNumber "10"^^xsd:integer ;
+    :artist "Titus Lunter" ;
+    :hasLanguage :English ;
+    :hasKeywordAbility :Solved ;
+    :printedText """Whenever a creature you control enters, you gain 1 life.
+To solve — You've gained 5 or more life this turn. (If unsolved, solve at the beginning of your end step.)
+Solved — Sacrifice this Case: Creature cards in your graveyard gain "You may cast this card from your graveyard" until end of turn."""@en ;
+    :oracleText """Whenever a creature you control enters, you gain 1 life.
+To solve — You've gained 5 or more life this turn. (If unsolved, solve at the beginning of your end step.)
+Solved — Sacrifice this Case: Creature cards in your graveyard gain "You may cast this card from your graveyard" until end of turn."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=646573"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mkm/10/case-of-the-uneaten-feast"^^xsd:anyURI ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """Once a Case becomes solved, it stays solved until it leaves the battlefield."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """"To Solve — [condition]" means "At the beginning of your end step, if [condition] and this Case is not solved, it becomes solved.\""""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """"To solve" abilities will check for their condition twice: once when the ability would trigger, and once when it resolves. If the condition isn't true at the beginning of your end step, the ability won't trigger at all. If the condition isn't true when the ability resolves, the Case won't become solved."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """The meaning of "solved" differs based on what type of ability follows it. "Solved — [activated ability]" means "[Activated ability]. Activate only if this Case is solved." Activated abilities contain a colon. They're generally written "[Cost]: [Effect]." """@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """Being solved is not part of a permanent's copiable values. A permanent that becomes a copy of a solved Case is not solved. A solved Case that somehow becomes a copy of a different Case stays solved."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """Cases don't lose their other abilities when they become solved."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """"Solved — [static ability]" means "As long as this Case is solved, [static ability]." Static abilities are written as statements, such as "Creatures you control get +1/+1" or "Instant and sorcery spells you cast cost {1} less to cast.\""""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """Each Case has two special keyword abilities: to solve and solved."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """"Solved — [Triggered ability]" means "[Triggered ability]. This ability triggers only if this Case is solved." Triggered abilities use the word "when," "whenever," or "at." They're often written as "[Trigger condition], [effect].\""""@en ] .
+
 :CovetedFalcon rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Coveted Falcon" ;

@@ -432,12 +432,16 @@ def parse_type_line(
     """Parse a Scryfall type_line into (supertypes, card types, subtypes).
 
     Multi-face type lines ("A // B") are unioned, EXCEPT for the
-    adventure layout: per CR 715.2 an adventurer card has only its
-    primary (left) face's characteristics anywhere except on the stack
-    as an Adventure, so the right face contributes its subtypes (the
-    Adventure spell type) but neither its card types nor supertypes.
-    Unioning them (e.g. Creature + Instant for "Legendary Creature -
-    Human Scientist // Instant - Adventure") makes the knowledge graph
+    adventure and prepare layouts: per CR 715.2 an adventurer card has
+    only its primary (left) face's characteristics anywhere except on
+    the stack as an Adventure, and per CR 722.2-722.3 a preparation
+    card's inset "prepare spell" defines alternative characteristics
+    used only by the copies it lets you cast. In both layouts the
+    secondary face contributes its subtypes (e.g. the Adventure spell
+    type) but neither its card types nor supertypes. Unioning them
+    (e.g. Creature + Instant for "Legendary Creature - Human Scientist
+    // Instant - Adventure", or Creature + Sorcery for "Creature -
+    Human Warlock // Sorcery") makes the knowledge graph
     OWL-inconsistent: SpellCardConstraint forbids creature subtypes on
     instants/sorceries (CreatureTypes and SpellTypes are disjoint).
     """
@@ -446,8 +450,8 @@ def parse_type_line(
     subs: list[str] = []
     for idx, part in enumerate(tl.split(" // ")):
         left, _, right = part.partition("\u2014")
-        secondary_adventure_face = layout == "adventure" and idx > 0
-        if not secondary_adventure_face:
+        secondary_spell_face = layout in ("adventure", "prepare") and idx > 0
+        if not secondary_spell_face:
             for w in left.split():
                 word = "Kindred" if w == "Tribal" else w
                 if word in vocab["SuperType"] and word not in supers:

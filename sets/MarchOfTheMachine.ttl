@@ -476,7 +476,7 @@ This creature can't be blocked by creatures with power 2 or less."""@en ;
         :rulingDate "2023-04-14"^^xsd:date ;
         :rulingText """If some of the creatures are illegal targets as Storm the Seedcore tries to resolve, the original distribution of counters still applies and the counters that would have been put on the illegal targets are lost. They won’t be put instead on a legal target."""@en ] .
 
-:BlossomingSands rdf:type owl:NamedIndividual ,
+:BlossomingSandsMarchOfTheMachine268 rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Blossoming Sands" ;
     :manaValue "0"^^xsd:nonNegativeInteger ;
@@ -509,7 +509,7 @@ When this land enters, you gain 1 life.
       [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] .
 
-:SwiftwaterCliffs rdf:type owl:NamedIndividual ,
+:SwiftwaterCliffsMarchOfTheMachine273 rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Swiftwater Cliffs" ;
     :manaValue "0"^^xsd:nonNegativeInteger ;
