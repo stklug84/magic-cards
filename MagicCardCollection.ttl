@@ -64,6 +64,7 @@ condition."""@en ;
   :LootThePathfinderEntryNonfoilNearMint ,
   :MountainAetherdrift288EntryNonfoilNearMint ,
   :PyrewoodGearhulkEntryNonfoilNearMint ,
+  :ScouredBarrensAetherdrift263EntryNonfoilNearMint ,
   :SkyseersChariotEntryNonfoilNearMint ,
   :UnstoppablePlanEntryNonfoilNearMint ,
   :AcademyRuinsEntryNonfoilNearMint ,
@@ -90,7 +91,7 @@ condition."""@en ;
   :CommandersSphereAetherdriftCommander125EntryNonfoilNearMint ,
   :ConfiscationCoupAetherdriftCommander73EntryNonfoilNearMint ,
   :ConjurersClosetEntryNonfoilNearMint ,
-  :CultivatorsCaravanEntryNonfoilNearMint ,
+  :CultivatorsCaravanAetherdriftCommander127EntryNonfoilNearMint ,
   :DecoctionModuleAetherdriftCommander128EntryNonfoilNearMint ,
   :DisallowEntryNonfoilNearMint ,
   :DruidOfPurificationEntryNonfoilNearMint ,
@@ -151,9 +152,12 @@ condition."""@en ;
   :WhirlerVirtuosoAetherdriftCommander122EntryNonfoilNearMint ,
   :YavimayaCoastEntryNonfoilNearMint ,
   :BywayBartererEntryNonfoilNearMint ,
+  :EssenceChannelerEntryNonfoilNearMint ,
   :MountainBloomburrow375EntryNonfoilNearMint ,
   :MountainBloomburrow376EntryNonfoilNearMint ,
+  :MudflatVillageEntryNonfoilNearMint ,
   :StarscapeClericEntryNonfoilNearMint ,
+  :ZoralineCosmosCallerEntryNonfoilNearMint ,
   :CombatCelebrantEntryNonfoilNearMint ,
   :OctomancerEntryNonfoilNearMint ,
   :ReliquaryTowerBloomburrowCommander132EntryNonfoilNearMint ,
@@ -245,7 +249,7 @@ condition."""@en ;
   :ExploreEntryNonfoilNearMint ,
   :ExterminateEntryNonfoilNearMint ,
   :FarewellDoctorWhoCommander465EntryNonfoilNearMint ,
-  :FeedTheSwarmEntryNonfoilNearMint ,
+  :FeedTheSwarmDoctorWhoCommander221EntryNonfoilNearMint ,
   :FetidPoolsEntryNonfoilNearMint ,
   :FieryIsletEntryNonfoilNearMint ,
   :FiveHundredYearDiaryEntryNonfoilNearMint ,
@@ -272,6 +276,7 @@ condition."""@en ;
   :IslandDoctorWhoCommander198EntryNonfoilNearMint ,
   :IslandDoctorWhoCommander199EntryNonfoilNearMint ,
   :JamieMcCrimmonEntryNonfoilNearMint ,
+  :JennyFlintEntryNonfoilNearMint ,
   :JoGrantEntryNonfoilNearMint ,
   :K9MarkIEntryNonfoilNearMint ,
   :LaserScrewdriverEntryNonfoilNearMint ,
@@ -333,12 +338,12 @@ condition."""@en ;
   :TalismanOfProgressDoctorWhoCommander253EntryNonfoilNearMint ,
   :TalismanOfUnityEntryNonfoilNearMint ,
   :TeganJovankaEntryNonfoilNearMint ,
-  :TempleOfDeceitEntryNonfoilNearMint ,
+  :TempleOfDeceitDoctorWhoCommander314EntryNonfoilNearMint ,
   :TempleOfEnlightenmentDoctorWhoCommander315EntryNonfoilNearMint ,
   :TempleOfEpiphanyDoctorWhoCommander316EntryNonfoilNearMint ,
-  :TempleOfMaliceEntryNonfoilNearMint ,
+  :TempleOfMaliceDoctorWhoCommander317EntryNonfoilNearMint ,
   :TempleOfMysteryDoctorWhoCommander318EntryNonfoilNearMint ,
-  :TempleOfPlentyEntryNonfoilNearMint ,
+  :TempleOfPlentyDoctorWhoCommander319EntryNonfoilNearMint ,
   :TempleOfTheFalseGodEntryNonfoilNearMint ,
   :TerramorphicExpanseDoctorWhoCommander322EntryNonfoilNearMint ,
   :TheBeastDeathlessPrinceEntryNonfoilNearMint ,
@@ -402,7 +407,7 @@ condition."""@en ;
   :WoundReflectionEntryNonfoilNearMint ,
   :ZygonInfiltratorEntryNonfoilNearMint ,
   :AetherChannelerEntryNonfoilNearMint ,
-  :BrokenWingsEntryNonfoilNearMint ,
+  :BrokenWingsDominariaUnited157EntryNonfoilNearMint ,
   :DragonWhelpEntryNonfoilNearMint ,
   :LightningStrikeEntryNonfoilNearMint ,
   :MagnigothSentryEntryNonfoilNearMint ,
@@ -414,15 +419,17 @@ condition."""@en ;
   :SilverbackElderEntryNonfoilNearMint ,
   :TemperedSteelEntryNonfoilNearMint ,
   :EzuriClawOfProgressEntryEtchedFoilNearMint ,
+  :NowhereToRunEntryNonfoilNearMint ,
   :BloodArtistEntryNonfoilNearMint ,
   :DarkmossBridgeEntryNonfoilNearMint ,
   :GrowthSpiralEntryNonfoilNearMint ,
   :HornetQueenEntryNonfoilNearMint ,
   :TreeOfTalesEntryNonfoilNearMint ,
+  :AdagiaWindsweptBastionEntryNonfoilNearMint ,
   :AlpharaelStonechosenEntryNonfoilNearMint ,
   :AtmosphericGreenhouseEntryNonfoilNearMint ,
   :AuxiliaryBoostersEntryNonfoilNearMint ,
-  :BanishingLightEntryNonfoilNearMint ,
+  :BanishingLightEdgeOfEternities6EntryNonfoilNearMint ,
   :BeamsawProspectorEntryNonfoilNearMint ,
   :BloomingStingerEntryNonfoilNearMint ,
   :BygoneColossusEntryNonfoilNearMint ,
@@ -474,6 +481,7 @@ condition."""@en ;
   :GravkillEntryNonfoilNearMint ,
   :GravpackMonoistEntryNonfoilNearMint ,
   :HaliyaAscendantCadetEntryNonfoilNearMint ,
+  :HaliyaGuidedByLightEntryNonfoilNearMint ,
   :HylderbladeEntryFoilNearMint ,
   :IcecaveCrasherEntryNonfoilNearMint ,
   :IllvoiGalebladeEntryNonfoilNearMint ,
@@ -624,7 +632,7 @@ condition."""@en ;
   :ExoticOrchardEdgeOfEternitiesCommander159EntryNonfoilNearMint ,
   :ExperimentalAuguryEntryNonfoilNearMint ,
   :ExplorationBroodshipEntryNonfoilNearMint ,
-  :FumigateEntryNonfoilNearMint ,
+  :FumigateEdgeOfEternitiesCommander65EntryNonfoilNearMint ,
   :GavelOfTheRighteousEntryNonfoilNearMint ,
   :GlacialFortressEdgeOfEternitiesCommander160EntryNonfoilNearMint ,
   :GlitteringMassifEntryNonfoilNearMint ,
@@ -719,8 +727,8 @@ condition."""@en ;
   :ClearShotEntryNonfoilNearMint ,
   :CobbledWingsEntryNonfoilNearMint ,
   :ConduitOfStormsEntryNonfoilNearMint ,
-  :CrusaderOfOdricEntryNonfoilNearMint ,
-  :CrusaderOfOdricEntryFoilNearMint ,
+  :CrusaderOfOdricInnistradRemastered18EntryNonfoilNearMint ,
+  :CrusaderOfOdricInnistradRemastered18EntryFoilNearMint ,
   :DauntlessCatharEntryNonfoilNearMint ,
   :DawnhartDiscipleEntryNonfoilNearMint ,
   :DelverOfSecretsEntryNonfoilNearMint ,
@@ -776,8 +784,8 @@ condition."""@en ;
   :LumberknotEntryNonfoilNearMint ,
   :LunarchMantleEntryNonfoilNearMint ,
   :LunarchVeteranEntryNonfoilNearMint ,
-  :MaelstromPulseEntryNonfoilNearMint ,
-  :MentorOfTheMeekEntryNonfoilNearMint ,
+  :MaelstromPulseInnistradRemastered244EntryNonfoilNearMint ,
+  :MentorOfTheMeekInnistradRemastered34EntryNonfoilNearMint ,
   :MistRavenInnistradRemastered362EntryNonfoilNearMint ,
   :MistRavenInnistradRemastered76EntryNonfoilNearMint ,
   :MoldgrafMillipedeEntryNonfoilNearMint ,
@@ -829,6 +837,7 @@ condition."""@en ;
   :ForestJumpstart202593EntryNonfoilNearMint ,
   :ForestJumpstart202594EntryNonfoilNearMint ,
   :ForestJumpstart202595EntryNonfoilNearMint ,
+  :HinterlandSanctifierJumpstart20255EntryNonfoilNearMint ,
   :IslandJumpstart202584EntryNonfoilNearMint ,
   :IslandJumpstart202585EntryNonfoilNearMint ,
   :IslandJumpstart202586EntryNonfoilNearMint ,
@@ -847,6 +856,7 @@ condition."""@en ;
   :WoodweaversPuzzleknotEntryFoilNearMint ,
   :KayaTheInexorableEntryNonfoilNearMint ,
   :ReckonerBankbusterEntryNonfoilNearMint ,
+  :RequitingHexEntryNonfoilNearMint ,
   :AbundantGrowthEntryNonfoilNearMint ,
   :ContagionClaspEntryNonfoilNearMint ,
   :EvolutionSageEntryNonfoilNearMint ,
@@ -960,84 +970,360 @@ condition."""@en ;
   :TromellSeymoursButlerEntryNonfoilNearMint ,
   :VineglimmerSnarlMagicTheGatheringFinalFantasyCommander440EntryNonfoilNearMint ,
   :YunaGrandSummonerEntryNonfoilNearMint ,
+  :AbradeEntryNonfoilNearMint ,
   :AbyssalHarvesterEntryNonfoilNearMint ,
+  :AdaptiveAutomatonEntryFoilNearMint ,
+  :AegisTurtleEntryNonfoilNearMint ,
+  :AjanisPridemateMagicTheGatheringFoundations135EntryNonfoilNearMint ,
+  :AjanisPridemateMagicTheGatheringFoundations293EntryNonfoilNearMint ,
+  :AngelOfFinalityEntryNonfoilNearMint ,
+  :AngelOfVitalityEntryFoilNearMint ,
+  :AngelicDestinyEntryNonfoilNearMint ,
+  :ArbiterOfWoeEntryNonfoilNearMint ,
+  :ArcanisTheOmnipotentEntryNonfoilNearMint ,
+  :ArchwayAngelEntryNonfoilNearMint ,
+  :AureliaTheWarleaderEntryNonfoilNearMint ,
   :AxgardCavalryEntryNonfoilNearMint ,
+  :AyliEternalPilgrimEntryNonfoilNearMint ,
+  :AzoriusGuildgateEntryNonfoilNearMint ,
+  :BakeIntoAPieEntryNonfoilNearMint ,
+  :BallLightningEntryNonfoilNearMint ,
+  :BallyrushBanneretEntryNonfoilNearMint ,
+  :BanishingLightMagicTheGatheringFoundations138EntryNonfoilNearMint ,
+  :BasiliskCollarEntryNonfoilNearMint ,
   :BattlesongBerserkerEntryNonfoilNearMint ,
   :BeastKinRangerEntryNonfoilNearMint ,
   :BiteDownEntryNonfoilNearMint ,
+  :BloodfellCavesEntryNonfoilNearMint ,
   :BloodfellCavesEntryFoilNearMint ,
+  :BlossomingSandsMagicTheGatheringFoundations260EntryNonfoilNearMint ,
+  :BoltBendEntryNonfoilNearMint ,
   :BoltwaveEntryNonfoilNearMint ,
+  :BorosCharmEntryFoilNearMint ,
+  :BorosGuildgateEntryNonfoilNearMint ,
   :BrinebornCutthroatEntryNonfoilNearMint ,
+  :BrokenWingsMagicTheGatheringFoundations214EntryNonfoilNearMint ,
+  :BurglarRatEntryNonfoilNearMint ,
+  :BurnishedHartMagicTheGatheringFoundations250EntryNonfoilNearMint ,
   :BurstLightningEntryNonfoilNearMint ,
+  :BushwhackEntryNonfoilNearMint ,
   :CacklingProwlerEntryNonfoilNearMint ,
   :CampusGuideEntryNonfoilNearMint ,
+  :CatCollectorEntryNonfoilNearMint ,
   :CatharCommandoMagicTheGatheringFoundations139EntryNonfoilNearMint ,
   :CelestialArmorEntryNonfoilNearMint ,
   :CephalidInkmageEntryFoilNearMint ,
+  :ChandraFlameshaperEntryNonfoilNearMint ,
+  :CharmingPrinceEntryNonfoilNearMint ,
+  :ChartACourseEntryNonfoilNearMint ,
+  :CircuitousRouteEntryNonfoilNearMint ,
+  :ClinquantSkymageEntryNonfoilNearMint ,
+  :CloudblazerEntryNonfoilNearMint ,
+  :ConfiscateEntryFoilNearMint ,
+  :ConsumingAberrationEntryNonfoilNearMint ,
+  :CracklingCyclopsEntryNonfoilNearMint ,
+  :CrashThroughEntryNonfoilNearMint ,
+  :CrawlingBarrensEntryNonfoilNearMint ,
+  :CrusaderOfOdricMagicTheGatheringFoundations569EntryNonfoilNearMint ,
+  :CrypticCavesEntryNonfoilNearMint ,
+  :CultivatorsCaravanMagicTheGatheringFoundations670EntryNonfoilNearMint ,
+  :DarksteelColossusEntryNonfoilNearMint ,
+  :DawnwingMarshalEntryNonfoilNearMint ,
   :DazzlingAngelEntryNonfoilNearMint ,
+  :DeadlyBrewEntryNonfoilNearMint ,
+  :DeathmarkEntryNonfoilNearMint ,
+  :DemolitionFieldMagicTheGatheringFoundations687EntryNonfoilNearMint ,
+  :DemonicPactEntryNonfoilNearMint ,
+  :DesecrationDemonEntryNonfoilNearMint ,
+  :DevoutDecreeEntryNonfoilNearMint ,
+  :DiamondMareEntryNonfoilNearMint ,
+  :DictateOfKruphixEntryNonfoilNearMint ,
+  :DimirGuildgateEntryNonfoilNearMint ,
+  :DisenchantEntryNonfoilNearMint ,
+  :DismalBackwaterEntryNonfoilNearMint ,
+  :DiveDownEntryNonfoilNearMint ,
+  :DivineResilienceEntryNonfoilNearMint ,
+  :DragonFodderEntryNonfoilNearMint ,
+  :DragonMageEntryNonfoilNearMint ,
   :DragonTrainerEntryNonfoilNearMint ,
+  :DragonmasterOutcastEntryNonfoilNearMint ,
+  :DreadSummonsEntryNonfoilNearMint ,
+  :DreadwingScavengerEntryNonfoilNearMint ,
+  :DriverOfTheDeadEntryNonfoilNearMint ,
+  :DrogskolReaverEntryNonfoilNearMint ,
+  :DryadMilitantEntryNonfoilNearMint ,
+  :DuressEntryNonfoilNearMint ,
+  :DwynensEliteEntryNonfoilNearMint ,
+  :EagerTrufflesnoutEntryNonfoilNearMint ,
   :EatenAliveEntryNonfoilNearMint ,
   :ElementalistAdeptEntryNonfoilNearMint ,
   :ElfswornGiantEntryNonfoilNearMint ,
+  :ElvishRegrowerEntryNonfoilNearMint ,
   :EmpyreanEagleEntryNonfoilNearMint ,
+  :EnigmaDrakeEntryNonfoilNearMint ,
   :EruditeWizardEntryFoilNearMint ,
   :EssenceScatterEntryNonfoilNearMint ,
+  :EvolvingWildsMagicTheGatheringFoundations262EntryNonfoilNearMint ,
+  :ExpeditionMapEntryFoilNearMint ,
+  :ExsanguinateEntryNonfoilNearMint ,
   :ExtravagantReplicationEntryNonfoilNearMint ,
+  :FaebloomTrickEntryNonfoilNearMint ,
   :FanaticalFirebrandEntryNonfoilNearMint ,
+  :FeedTheSwarmMagicTheGatheringFoundations712EntryFoilNearMint ,
+  :FeldonsCaneEntryNonfoilNearMint ,
+  :FelidarCubEntryNonfoilNearMint ,
+  :FelidarRetreatEntryNonfoilNearMint ,
+  :FelidarSaviorEntryNonfoilNearMint ,
   :FellingBlowEntryNonfoilNearMint ,
+  :FiendishPandaEntryNonfoilNearMint ,
+  :FierceEmpathEntryNonfoilNearMint ,
+  :FinaleOfRevelationEntryNonfoilNearMint ,
   :FirebrandArcherEntryNonfoilNearMint ,
+  :FireshriekerEntryNonfoilNearMint ,
   :FishingPoleEntryNonfoilNearMint ,
+  :FlashfreezeEntryNonfoilNearMint ,
+  :FleetingFlightEntryFoilNearMint ,
+  :FogBankEntryNonfoilNearMint ,
+  :ForestMagicTheGatheringFoundations280EntryNonfoilNearMint ,
+  :ForestMagicTheGatheringFoundations281EntryNonfoilNearMint ,
   :ForestMagicTheGatheringFoundations290EntryNonfoilNearMint ,
+  :ForestMagicTheGatheringFoundations291EntryNonfoilNearMint ,
+  :FumigateMagicTheGatheringFoundations575EntryNonfoilNearMint ,
+  :FynnTheFangbearerEntryNonfoilNearMint ,
+  :GarnaBloodfistOfKeldEntryNonfoilNearMint ,
+  :GarruksUprisingEntryNonfoilNearMint ,
+  :GateColossusEntryNonfoilNearMint ,
+  :GatekeeperOfMalakirEntryFoilNearMint ,
+  :GatewaySneakEntryNonfoilNearMint ,
   :GhaltaPrimalHungerEntryNonfoilNearMint ,
+  :GhituLavarunnerEntryNonfoilNearMint ,
+  :GiantCindermawEntryNonfoilNearMint ,
   :GiantGrowthMagicTheGatheringFoundations223EntryNonfoilNearMint ,
+  :GigantosaurusEntryFoilNearMint ,
+  :GildedLotusEntryFoilNearMint ,
   :GleamingBarrierEntryNonfoilNearMint ,
   :GleamingBarrierEntryFoilNearMint ,
+  :GnarlbackRhinoEntryNonfoilNearMint ,
+  :GoblinBoardersEntryNonfoilNearMint ,
+  :GoblinNegotiationEntryNonfoilNearMint ,
+  :GoldveinPickEntryNonfoilNearMint ,
+  :GolgariGuildgateEntryNonfoilNearMint ,
+  :GoodFortuneUnicornEntryNonfoilNearMint ,
   :GorehornRaiderEntryNonfoilNearMint ,
+  :GrapplingKrakenEntryFoilNearMint ,
+  :GratuitousViolenceEntryFoilNearMint ,
+  :GruulGuildgateEntryNonfoilNearMint ,
+  :GutlessPlundererEntryNonfoilNearMint ,
+  :GuttersnipeEntryFoilNearMint ,
+  :HalanaAndAlenaPartnersEntryNonfoilNearMint ,
+  :HarbingerOfTheTidesEntryNonfoilNearMint ,
+  :HarmlessOfferingEntryNonfoilNearMint ,
   :HeartfireImmolatorEntryNonfoilNearMint ,
+  :HedronArchiveEntryFoilNearMint ,
   :HelpfulHunterEntryNonfoilNearMint ,
   :HeraldOfEternalDawnEntryNonfoilNearMint ,
+  :HeraldicBannerEntryNonfoilNearMint ,
+  :HeroesBaneEntryNonfoilNearMint ,
   :HeroicReinforcementsEntryNonfoilNearMint ,
   :HerosDownfallEntryNonfoilNearMint ,
+  :HidetsugusSecondRiteEntryNonfoilNearMint ,
+  :HighSocietyHunterEntryNonfoilNearMint ,
+  :HinterlandSanctifierMagicTheGatheringFoundations730EntryNonfoilNearMint ,
+  :HoardingDragonEntryNonfoilNearMint ,
+  :IcewindElementalEntryNonfoilNearMint ,
+  :ImmersturmPredatorEntryNonfoilNearMint ,
+  :ImpactTremorsEntryFoilNearMint ,
+  :ImperiousPerfectEntryFoilNearMint ,
   :ImprisonedInTheMoonMagicTheGatheringFoundations156EntryNonfoilNearMint ,
   :IncineratingBlastEntryNonfoilNearMint ,
   :InfestationSageEntryNonfoilNearMint ,
+  :InspiringOverseerEntryNonfoilNearMint ,
   :InspiringPaladinEntryNonfoilNearMint ,
+  :IntoTheRoilEntryNonfoilNearMint ,
   :InvoluntaryEmploymentEntryNonfoilNearMint ,
+  :IslandMagicTheGatheringFoundations274EntryNonfoilNearMint ,
+  :IslandMagicTheGatheringFoundations275EntryNonfoilNearMint ,
+  :IslandMagicTheGatheringFoundations284EntryNonfoilNearMint ,
+  :IslandMagicTheGatheringFoundations285EntryNonfoilNearMint ,
+  :IzzetGuildgateEntryNonfoilNearMint ,
+  :JoustThroughEntryNonfoilNearMint ,
+  :JungleHollowEntryNonfoilNearMint ,
+  :KalastriaHighbornEntryNonfoilNearMint ,
+  :KnightOfGraceEntryNonfoilNearMint ,
+  :KnightOfMaliceEntryNonfoilNearMint ,
   :KykarZephyrAwakenerEntryNonfoilNearMint ,
+  :LathlissDragonQueenEntryNonfoilNearMint ,
   :LathrilBladeOfTheElvesEntryNonfoilNearMint ,
   :LightshellDuoEntryNonfoilNearMint ,
+  :LindenTheSteadfastQueenEntryNonfoilNearMint ,
+  :LlanowarElvesEntryNonfoilNearMint ,
   :LunarInsightEntryNonfoilNearMint ,
+  :LyraDawnbringerEntryFoilNearMint ,
   :MacabreWaltzEntryNonfoilNearMint ,
+  :MaelstromPulseMagicTheGatheringFoundations661EntryNonfoilNearMint ,
+  :MakeAStandEntryFoilNearMint ,
   :MaraudingBlightPriestMagicTheGatheringFoundations178EntryNonfoilNearMint ,
   :MaraudingBlightPriestMagicTheGatheringFoundations178EntryFoilNearMint ,
+  :MassacreWurmEntryFoilNearMint ,
+  :MazemindTomeEntryNonfoilNearMint ,
+  :MazesEndEntryFoilNearMint ,
+  :MentorOfTheMeekMagicTheGatheringFoundations578EntryNonfoilNearMint ,
+  :MeteorGolemEntryNonfoilNearMint ,
+  :MicromancerEntryNonfoilNearMint ,
+  :MidnightReaperEntryNonfoilNearMint ,
+  :MidnightSnackEntryNonfoilNearMint ,
+  :MindsparkerEntryNonfoilNearMint ,
+  :MischievousMysticEntryNonfoilNearMint ,
   :MischievousPupEntryNonfoilNearMint ,
   :MockingSpriteEntryNonfoilNearMint ,
+  :MoldAdderEntryNonfoilNearMint ,
+  :MomentOfCravingEntryNonfoilNearMint ,
+  :MortifyEntryNonfoilNearMint ,
+  :MountainMagicTheGatheringFoundations278EntryNonfoilNearMint ,
+  :MountainMagicTheGatheringFoundations279EntryNonfoilNearMint ,
+  :MountainMagicTheGatheringFoundations288EntryNonfoilNearMint ,
+  :MountainMagicTheGatheringFoundations289EntryNonfoilNearMint ,
+  :MyojinOfNightsReachEntryNonfoilNearMint ,
+  :MysticalTeachingsEntryNonfoilNearMint ,
+  :NegateMagicTheGatheringFoundations710EntryFoilNearMint ,
+  :NineLivesFamiliarEntryNonfoilNearMint ,
+  :NullpriestOfOblivionEntryNonfoilNearMint ,
+  :ObliteratingBoltEntryNonfoilNearMint ,
+  :OptEntryNonfoilNearMint ,
+  :OrdealOfNyleaEntryNonfoilNearMint ,
+  :OrzhovGuildgateEntryNonfoilNearMint ,
   :OverrunEntryNonfoilNearMint ,
+  :OvikaEnigmaGoliathEntryNonfoilNearMint ,
+  :PelakkaWurmEntryFoilNearMint ,
+  :PerforatingArtistEntryNonfoilNearMint ,
   :PilferEntryNonfoilNearMint ,
   :PlainsMagicTheGatheringFoundations272EntryNonfoilNearMint ,
   :PlainsMagicTheGatheringFoundations273EntryNonfoilNearMint ,
+  :PlainsMagicTheGatheringFoundations282EntryNonfoilNearMint ,
+  :PlainsMagicTheGatheringFoundations283EntryNonfoilNearMint ,
+  :PredatorOozeEntryNonfoilNearMint ,
   :PridefulParentEntryNonfoilNearMint ,
+  :PrimalMightEntryNonfoilNearMint ,
+  :PrimeSpeakerZeganaEntryNonfoilNearMint ,
+  :PrimevalBountyEntryNonfoilNearMint ,
+  :PulseTrackerEntryNonfoilNearMint ,
+  :PyromancersGogglesEntryNonfoilNearMint ,
+  :QuakestriderCeratopsEntryNonfoilNearMint ,
+  :RakdosGuildgateEntryNonfoilNearMint ,
+  :RamosDragonEngineEntryNonfoilNearMint ,
+  :RampagingBalothsEntryNonfoilNearMint ,
+  :RavenousAmuletEntryNonfoilNearMint ,
+  :RavenousGiantEntryNonfoilNearMint ,
+  :ReclamationSageMagicTheGatheringFoundations231EntryNonfoilNearMint ,
+  :ReclamationSageMagicTheGatheringFoundations340EntryNonfoilNearMint ,
+  :RedcapGutterDwellerEntryNonfoilNearMint ,
+  :RefuteEntryNonfoilNearMint ,
+  :RegalCaracalEntryNonfoilNearMint ,
+  :ReleaseTheDogsEntryNonfoilNearMint ,
+  :ResoluteReinforcementsEntryNonfoilNearMint ,
+  :RiteOfReplicationEntryFoilNearMint ,
+  :RiversRebukeEntryNonfoilNearMint ,
+  :RoguesPassageEntryNonfoilNearMint ,
+  :RubyDaringTrackerEntryNonfoilNearMint ,
+  :RuggedHighlandsMagicTheGatheringFoundations265EntryNonfoilNearMint ,
+  :RuggedHighlandsMagicTheGatheringFoundations265EntryFoilNearMint ,
   :RunAwayTogetherEntryNonfoilNearMint ,
+  :SanguineIndulgenceEntryNonfoilNearMint ,
+  :SavageVentmawEntryNonfoilNearMint ,
   :SavannahLionsEntryNonfoilNearMint ,
+  :ScouredBarrensMagicTheGatheringFoundations266EntryNonfoilNearMint ,
+  :SeekersFollyEntryNonfoilNearMint ,
+  :SeismicRuptureEntryNonfoilNearMint ,
+  :SelesnyaGuildgateEntryNonfoilNearMint ,
   :SelfReflectionEntryNonfoilNearMint ,
+  :ShipwreckDowserEntryNonfoilNearMint ,
+  :SimicGuildgateEntryNonfoilNearMint ,
+  :SnakeskinVeilEntryNonfoilNearMint ,
   :SnakeskinVeilEntryFoilNearMint ,
+  :SolemnSimulacrumMagicTheGatheringFoundations257EntryNonfoilNearMint ,
+  :SorcerousSpyglassEntryNonfoilNearMint ,
+  :SoulGuideLanternMagicTheGatheringFoundations680EntryNonfoilNearMint ,
   :SoulShackledZombieEntryNonfoilNearMint ,
   :SowerOfChaosEntryNonfoilNearMint ,
+  :SpectralSailorEntryNonfoilNearMint ,
+  :SphinxOfTheFinalWordEntryNonfoilNearMint ,
   :SpitfireLagacEntryNonfoilNearMint ,
+  :SpringbloomDruidEntryNonfoilNearMint ,
   :StabEntryNonfoilNearMint ,
+  :StasisSnareEntryNonfoilNearMint ,
+  :SteelHellkiteEntryNonfoilNearMint ,
   :StrixLookoutEntryNonfoilNearMint ,
+  :StrokeOfMidnightEntryNonfoilNearMint ,
+  :StromkirkBloodthiefEntryNonfoilNearMint ,
+  :StromkirkNobleEntryNonfoilNearMint ,
+  :StrongboxRaiderEntryNonfoilNearMint ,
+  :SurrakTheHuntCallerEntryNonfoilNearMint ,
+  :SuspiciousShamblerEntryNonfoilNearMint ,
+  :SwampMagicTheGatheringFoundations276EntryNonfoilNearMint ,
+  :SwampMagicTheGatheringFoundations277EntryNonfoilNearMint ,
   :SwampMagicTheGatheringFoundations277EntryFoilNearMint ,
+  :SwampMagicTheGatheringFoundations286EntryNonfoilNearMint ,
   :SwampMagicTheGatheringFoundations287EntryNonfoilNearMint ,
-  :SwiftfootBootsEntryNonfoilNearMint ,
+  :SwiftfootBootsMagicTheGatheringFoundations258EntryNonfoilNearMint ,
+  :SwiftfootBootsMagicTheGatheringFoundations355EntryNonfoilNearMint ,
+  :SwiftwaterCliffsMagicTheGatheringFoundations268EntryNonfoilNearMint ,
+  :SyrAlinTheLionsClawEntryNonfoilNearMint ,
+  :TatyovaBenthicDruidEntryNonfoilNearMint ,
+  :TaureanMaulerEntryNonfoilNearMint ,
+  :TeachByExampleEntryNonfoilNearMint ,
+  :TempestDjinnEntryNonfoilNearMint ,
+  :TempleOfAbandonMagicTheGatheringFoundations696EntryNonfoilNearMint ,
+  :TempleOfDeceitMagicTheGatheringFoundations697EntryNonfoilNearMint ,
+  :TempleOfEnlightenmentMagicTheGatheringFoundations698EntryNonfoilNearMint ,
+  :TempleOfEpiphanyMagicTheGatheringFoundations699EntryNonfoilNearMint ,
+  :TempleOfMaladyEntryNonfoilNearMint ,
+  :TempleOfMaliceMagicTheGatheringFoundations701EntryNonfoilNearMint ,
+  :TempleOfMysteryMagicTheGatheringFoundations702EntryNonfoilNearMint ,
+  :TempleOfPlentyMagicTheGatheringFoundations703EntryNonfoilNearMint ,
+  :TempleOfSilenceEntryNonfoilNearMint ,
+  :TempleOfTriumphMagicTheGatheringFoundations705EntryNonfoilNearMint ,
+  :ThinkTwiceEntryNonfoilNearMint ,
+  :ThornwealdArcherEntryNonfoilNearMint ,
+  :ThornwoodFallsEntryNonfoilNearMint ,
+  :ThreeTreeMascotEntryNonfoilNearMint ,
+  :ThrillOfPossibilityEntryNonfoilNearMint ,
   :TolarianTerrorEntryNonfoilNearMint ,
+  :TragicBansheeEntryNonfoilNearMint ,
   :TranquilCoveEntryNonfoilNearMint ,
   :TreetopSnarespinnerEntryNonfoilNearMint ,
+  :TributeToHungerEntryNonfoilNearMint ,
+  :TrygonPredatorEntryNonfoilNearMint ,
   :TwinbladeBlessingEntryNonfoilNearMint ,
+  :UnchartedVoyageEntryNonfoilNearMint ,
+  :UndyingMaliceEntryNonfoilNearMint ,
+  :UnflinchingCourageEntryFoilNearMint ,
+  :UnsummonEntryNonfoilNearMint ,
+  :ValorousStanceEntryNonfoilNearMint ,
   :VampireGourmandEntryNonfoilNearMint ,
-  :VengefulBloodwitchEntryNonfoilNearMint ,
+  :VampireNighthawkEntryNonfoilNearMint ,
+  :VampiricRitesEntryNonfoilNearMint ,
+  :VanguardSeraphEntryNonfoilNearMint ,
+  :VengefulBloodwitchMagicTheGatheringFoundations325EntryNonfoilNearMint ,
+  :VengefulBloodwitchMagicTheGatheringFoundations76EntryNonfoilNearMint ,
+  :VenomConnoisseurEntryNonfoilNearMint ,
+  :ViashinoPyromancerEntryNonfoilNearMint ,
+  :VileEntomberEntryNonfoilNearMint ,
+  :VizierOfTheMenagerieEntryNonfoilNearMint ,
+  :VoraciousGreatsharkEntryNonfoilNearMint ,
+  :WardensOfTheCycleEntryNonfoilNearMint ,
   :WaryThespianEntryNonfoilNearMint ,
+  :WildbornPreserverEntryNonfoilNearMint ,
   :WildwoodScourgeEntryNonfoilNearMint ,
+  :WiltLeafLiegeEntryNonfoilNearMint ,
+  :WindScarredCragEntryNonfoilNearMint ,
+  :WishclawTalismanEntryNonfoilNearMint ,
+  :WitnessProtectionEntryNonfoilNearMint ,
   :YouthfulValkyrieEntryFoilNearMint ,
+  :ZetalpaPrimalDawnEntryNonfoilNearMint ,
+  :ZombifyEntryNonfoilNearMint ,
+  :ArcaneSignetMagicTheGatheringFoundationsCommander1EntryFoilNearMint ,
+  :CommandTowerMagicTheGatheringFoundationsCommander3EntryFoilNearMint ,
+  :SolRingMagicTheGatheringFoundationsCommander2EntryFoilNearMint ,
   :ActionNewsCrewEntryNonfoilNearMint ,
   :AnchovyBananaPizzaEntryNonfoilNearMint ,
   :AprilONeilKunoichiTraineeEntryNonfoilNearMint ,
@@ -1109,7 +1395,7 @@ condition."""@en ;
   :MutantChainReactionEntryNonfoilNearMint ,
   :MutantTownEntryNonfoilNearMint ,
   :MutantTownMusiciansEntryNonfoilNearMint ,
-  :NegateEntryNonfoilNearMint ,
+  :NegateMagicTheGatheringTeenageMutantNinjaTurtles47EntryNonfoilNearMint ,
   :NobodyEntryNonfoilNearMint ,
   :NovelNunchakuEntryNonfoilNearMint ,
   :NullGroupBiologicalAssetsEntryNonfoilNearMint ,
@@ -1171,7 +1457,7 @@ condition."""@en ;
   :ZooEscapeesEntryNonfoilNearMint ,
   :ChromaticLanternMagicTheGatheringTeenageMutantNinjaTurtlesCommander58EntryNonfoilNearMint ,
   :AncientImperiosaurEntryNonfoilNearMint ,
-  :BlossomingSandsEntryNonfoilNearMint ,
+  :BlossomingSandsMarchOfTheMachine268EntryNonfoilNearMint ,
   :BoonBringerValkyrieEntryFoilNearMint ,
   :ChompingKavuEntryNonfoilNearMint ,
   :DuskLegionDuelistEntryNonfoilNearMint ,
@@ -1184,7 +1470,7 @@ condition."""@en ;
   :SigiledSentinelEntryNonfoilNearMint ,
   :StasisFieldEntryNonfoilNearMint ,
   :StormTheSeedcoreEntryNonfoilNearMint ,
-  :SwiftwaterCliffsEntryNonfoilNearMint ,
+  :SwiftwaterCliffsMarchOfTheMachine273EntryNonfoilNearMint ,
   :AcademyManufactorEntryNonfoilNearMint ,
   :AidFromTheCowlEntryNonfoilNearMint ,
   :ArcaneSignetMarchOfTheMachineCommander348EntryNonfoilNearMint ,
@@ -1258,7 +1544,7 @@ condition."""@en ;
   :StrokeOfGeniusEntryNonfoilNearMint ,
   :StrongholdFurnaceEntryNonfoilNearMint ,
   :StruggleEntryNonfoilNearMint ,
-  :TempleOfAbandonEntryNonfoilNearMint ,
+  :TempleOfAbandonMarchOfTheMachineCommander430EntryNonfoilNearMint ,
   :TempleOfEpiphanyMarchOfTheMachineCommander433EntryNonfoilNearMint ,
   :TempleOfMysteryMarchOfTheMachineCommander434EntryNonfoilNearMint ,
   :TenWizardsMountainEntryNonfoilNearMint ,
@@ -1342,7 +1628,7 @@ condition."""@en ;
   :BidentOfThassaEntryNonfoilNearMint ,
   :BlasterHulkEntryNonfoilNearMint ,
   :BrudicladTelchorEngineerEntryNonfoilNearMint ,
-  :BurnishedHartEntryNonfoilNearMint ,
+  :BurnishedHartModernHorizons3Commander284EntryNonfoilNearMint ,
   :CastleVantressEntryNonfoilNearMint ,
   :CaythFamedMechanistEntryFoilNearMint ,
   :CoalitionRelicEntryNonfoilNearMint ,
@@ -1352,7 +1638,7 @@ condition."""@en ;
   :ConversionApparatusEntryNonfoilNearMint ,
   :CovetedJewelEntryNonfoilNearMint ,
   :DecoctionModuleModernHorizons3Commander288EntryNonfoilNearMint ,
-  :DemolitionFieldEntryNonfoilNearMint ,
+  :DemolitionFieldModernHorizons3Commander335EntryNonfoilNearMint ,
   :EraOfInnovationModernHorizons3Commander183EntryNonfoilNearMint ,
   :ExterminatorMagmarchEntryNonfoilNearMint ,
   :FarewellModernHorizons3Commander170EntryNonfoilNearMint ,
@@ -1398,6 +1684,7 @@ condition."""@en ;
   :WayfarersBaubleModernHorizons3Commander315EntryNonfoilNearMint ,
   :WhirlerVirtuosoModernHorizons3Commander278EntryNonfoilNearMint ,
   :ArcboundWandererModernMasters200EntryNonfoilNearMint ,
+  :CaseOfTheUneatenFeastEntryNonfoilNearMint ,
   :CovetedFalconEntryNonfoilNearMint ,
   :KayaSpiritsJusticeEntryFoilNearMint ,
   :AdrixAndNevTwincastersEntryNonfoilNearMint ,
@@ -1419,42 +1706,82 @@ condition."""@en ;
   :NeyaliSunsVanguardEntryNonfoilNearMint ,
   :KayasWrathEntryFoilNearMint ,
   :KayaOrzhovUsurperEntryNonfoilNearMint ,
+  :ArtisticProcessEntryNonfoilNearMint ,
+  :AscendantDustspeakerEntryNonfoilNearMint ,
+  :BlazingFiresingerEntryNonfoilNearMint ,
+  :DiaryOfDreamsEntryNonfoilNearMint ,
+  :DinasGuidanceEntryNonfoilNearMint ,
+  :EfflorescenceEntryNonfoilNearMint ,
+  :ElementalMascotEntryNonfoilNearMint ,
+  :EnvironmentalScientistEntryFoilNearMint ,
+  :ExpressiveFiredancerEntryNonfoilNearMint ,
   :FieldsOfStrifeEntryNonfoilNearMint ,
+  :FoolishFateEntryNonfoilNearMint ,
   :ForestSecretsOfStrixhaven271EntryNonfoilNearMint ,
   :ForestSecretsOfStrixhaven271EntryFoilNearMint ,
   :ForestSecretsOfStrixhaven280EntryNonfoilNearMint ,
   :ForestSecretsOfStrixhaven280EntryFoilNearMint ,
   :ForestSecretsOfStrixhaven281EntryNonfoilNearMint ,
   :ForestSecretsOfStrixhaven281EntryFoilNearMint ,
+  :ForumNecroscribeEntryNonfoilNearMint ,
+  :GoblinGlasswrightEntryNonfoilNearMint ,
+  :GrappleWithDeathEntryNonfoilNearMint ,
+  :HeatedArgumentEntryNonfoilNearMint ,
   :IslandSecretsOfStrixhaven268EntryNonfoilNearMint ,
   :IslandSecretsOfStrixhaven268EntryFoilNearMint ,
   :IslandSecretsOfStrixhaven274EntryNonfoilNearMint ,
   :IslandSecretsOfStrixhaven274EntryFoilNearMint ,
   :IslandSecretsOfStrixhaven275EntryNonfoilNearMint ,
   :IslandSecretsOfStrixhaven275EntryFoilNearMint ,
+  :LeechCollectorEntryFoilNearMint ,
+  :MageTowerRefereeEntryNonfoilNearMint ,
   :MountainSecretsOfStrixhaven270EntryNonfoilNearMint ,
   :MountainSecretsOfStrixhaven270EntryFoilNearMint ,
   :MountainSecretsOfStrixhaven278EntryNonfoilNearMint ,
   :MountainSecretsOfStrixhaven278EntryFoilNearMint ,
   :MountainSecretsOfStrixhaven279EntryNonfoilNearMint ,
   :MountainSecretsOfStrixhaven279EntryFoilNearMint ,
+  :OraclesRestorationEntryNonfoilNearMint ,
+  :OrysaTideChoreographerEntryNonfoilNearMint ,
+  :PestMascotEntryNonfoilNearMint ,
   :PlainsSecretsOfStrixhaven267EntryNonfoilNearMint ,
   :PlainsSecretsOfStrixhaven267EntryFoilNearMint ,
   :PlainsSecretsOfStrixhaven272EntryNonfoilNearMint ,
   :PlainsSecretsOfStrixhaven272EntryFoilNearMint ,
   :PlainsSecretsOfStrixhaven273EntryNonfoilNearMint ,
   :PlainsSecretsOfStrixhaven273EntryFoilNearMint ,
+  :PostmortemProfessorEntryNonfoilNearMint ,
+  :PrimaryResearchEntryNonfoilNearMint ,
+  :PrismariTheInspirationEntryNonfoilNearMint ,
+  :PullFromTheGraveEntryNonfoilNearMint ,
+  :QuandrixCharmEntryNonfoilNearMint ,
+  :RehearsedDebaterEntryNonfoilNearMint ,
+  :RenderSpeechlessEntryNonfoilNearMint ,
+  :ResonatingLuteEntryNonfoilNearMint ,
+  :RunBehindEntryNonfoilNearMint ,
+  :SilverquillCharmEntryNonfoilNearMint ,
+  :SneeringShadewriterEntryNonfoilNearMint ,
+  :StoneDocentEntryNonfoilNearMint ,
+  :StudiousFirstYearEntryNonfoilNearMint ,
   :SwampSecretsOfStrixhaven269EntryNonfoilNearMint ,
   :SwampSecretsOfStrixhaven269EntryFoilNearMint ,
   :SwampSecretsOfStrixhaven276EntryNonfoilNearMint ,
   :SwampSecretsOfStrixhaven276EntryFoilNearMint ,
   :SwampSecretsOfStrixhaven277EntryNonfoilNearMint ,
   :SwampSecretsOfStrixhaven277EntryFoilNearMint ,
+  :TamObservantSequencerEntryNonfoilNearMint ,
   :TerramorphicExpanseSecretsOfStrixhaven265EntryNonfoilNearMint ,
+  :TextbookTabulatorEntryNonfoilNearMint ,
+  :TopiaryLecturerEntryNonfoilNearMint ,
   :WisdomOfAgesEntryFoilNearMint ,
   :DinaSoulSteeperEntryNonfoilNearMint ,
   :ZulaportCutthroatEntryNonfoilNearMint ,
+  :BigScoreEntryNonfoilNearMint ,
+  :DeduceEntryFoilNearMint ,
+  :DutyBeyondDeathEntryNonfoilNearMint ,
+  :FeedTheSwarmSecretsOfStrixhavenMysticalArchive29EntryNonfoilNearMint ,
   :DarknessEntryNonfoilNearMint ,
+  :SphinxsTutelageEntryNonfoilNearMint ,
   :BrokersAscendancyEntryNonfoilNearMint ,
   :LagrellaTheMagpieEntryNonfoilNearMint ,
   :BrokersConfluenceEntryNonfoilNearMint ,
@@ -1464,7 +1791,7 @@ condition."""@en ;
   :ForestTarkirDragonstorm286EntryNonfoilNearMint ,
   :PlainsTarkirDragonstorm277EntryNonfoilNearMint ,
   :PlainsTarkirDragonstorm278EntryNonfoilNearMint ,
-  :RuggedHighlandsEntryNonfoilNearMint ,
+  :RuggedHighlandsTarkirDragonstorm265EntryNonfoilNearMint ,
   :SwampTarkirDragonstorm281EntryNonfoilNearMint ,
   :SwampTarkirDragonstorm282EntryNonfoilNearMint ,
   :KayaGeistHunterTarkirDragonstormCommander294EntryNonfoilNearMint ,
@@ -1477,7 +1804,9 @@ condition."""@en ;
   :SimianSimulacrumEntryNonfoilNearMint ,
   :TyrantOfKherRidgesEntryFoilNearMint ,
   :IslandTheBrothersWarCommander32EntryNonfoilNearMint ,
+  :AmaliaBenavidesAguirreEntryNonfoilNearMint ,
   :AnimPakalThousandthMoonEntryNonfoilNearMint ,
+  :DeepCavernBatEntryNonfoilNearMint ,
   :OjerTaqDeepestFoundationEntryFoilNearMint ,
   :RoamingThroneEntryNonfoilNearMint ,
   :SaheeliTheSunsBrillianceTheLostCavernsOfIxalan239EntryNonfoilNearMint ,
@@ -1587,6 +1916,13 @@ condition."""@en ;
                   :CollectionEntry ;
     :entryCard :PyrewoodGearhulk ;
     :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:ScouredBarrensAetherdrift263EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :ScouredBarrensAetherdrift263 ;
+    :quantity "4"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
@@ -1774,9 +2110,9 @@ condition."""@en ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
-:CultivatorsCaravanEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+:CultivatorsCaravanAetherdriftCommander127EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
-    :entryCard :CultivatorsCaravan ;
+    :entryCard :CultivatorsCaravanAetherdriftCommander127 ;
     :quantity "2"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
@@ -2203,6 +2539,13 @@ condition."""@en ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
+:EssenceChannelerEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :EssenceChanneler ;
+    :quantity "3"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
 :MountainBloomburrow375EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :MountainBloomburrow375 ;
@@ -2217,10 +2560,24 @@ condition."""@en ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
+:MudflatVillageEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :MudflatVillage ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
 :StarscapeClericEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :StarscapeCleric ;
-    :quantity "1"^^xsd:positiveInteger ;
+    :quantity "4"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:ZoralineCosmosCallerEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :ZoralineCosmosCaller ;
+    :quantity "3"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
@@ -2883,9 +3240,9 @@ condition."""@en ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
-:FeedTheSwarmEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+:FeedTheSwarmDoctorWhoCommander221EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
-    :entryCard :FeedTheSwarm ;
+    :entryCard :FeedTheSwarmDoctorWhoCommander221 ;
     :quantity "2"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
@@ -3068,6 +3425,13 @@ condition."""@en ;
 :JamieMcCrimmonEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :JamieMcCrimmon ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:JennyFlintEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :JennyFlint ;
     :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
@@ -3499,9 +3863,9 @@ condition."""@en ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
-:TempleOfDeceitEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+:TempleOfDeceitDoctorWhoCommander314EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
-    :entryCard :TempleOfDeceit ;
+    :entryCard :TempleOfDeceitDoctorWhoCommander314 ;
     :quantity "2"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
@@ -3520,9 +3884,9 @@ condition."""@en ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
-:TempleOfMaliceEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+:TempleOfMaliceDoctorWhoCommander317EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
-    :entryCard :TempleOfMalice ;
+    :entryCard :TempleOfMaliceDoctorWhoCommander317 ;
     :quantity "2"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
@@ -3534,9 +3898,9 @@ condition."""@en ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
-:TempleOfPlentyEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+:TempleOfPlentyDoctorWhoCommander319EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
-    :entryCard :TempleOfPlenty ;
+    :entryCard :TempleOfPlentyDoctorWhoCommander319 ;
     :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
@@ -3984,9 +4348,9 @@ condition."""@en ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
-:BrokenWingsEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+:BrokenWingsDominariaUnited157EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
-    :entryCard :BrokenWings ;
+    :entryCard :BrokenWingsDominariaUnited157 ;
     :quantity "2"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
@@ -4072,6 +4436,15 @@ condition."""@en ;
     :hasFinish :EtchedFoil ;
     :hasCondition :NearMint .
 
+# --- sets/DuskmournHouseOfHorror.ttl ---
+
+:NowhereToRunEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :NowhereToRun ;
+    :quantity "2"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
 # --- sets/DuskmournHouseOfHorrorCommander.ttl ---
 
 :BloodArtistEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
@@ -4111,6 +4484,13 @@ condition."""@en ;
 
 # --- sets/EdgeOfEternities.ttl ---
 
+:AdagiaWindsweptBastionEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :AdagiaWindsweptBastion ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
 :AlpharaelStonechosenEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :AlpharaelStonechosen ;
@@ -4132,9 +4512,9 @@ condition."""@en ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
-:BanishingLightEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+:BanishingLightEdgeOfEternities6EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
-    :entryCard :BanishingLight ;
+    :entryCard :BanishingLightEdgeOfEternities6 ;
     :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
@@ -4493,6 +4873,13 @@ condition."""@en ;
                   :CollectionEntry ;
     :entryCard :HaliyaAscendantCadet ;
     :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:HaliyaGuidedByLightEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :HaliyaGuidedByLight ;
+    :quantity "2"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
@@ -5548,9 +5935,9 @@ condition."""@en ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
-:FumigateEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+:FumigateEdgeOfEternitiesCommander65EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
-    :entryCard :Fumigate ;
+    :entryCard :FumigateEdgeOfEternitiesCommander65 ;
     :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
@@ -6223,16 +6610,16 @@ condition."""@en ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
-:CrusaderOfOdricEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+:CrusaderOfOdricInnistradRemastered18EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
-    :entryCard :CrusaderOfOdric ;
+    :entryCard :CrusaderOfOdricInnistradRemastered18 ;
     :quantity "2"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
-:CrusaderOfOdricEntryFoilNearMint rdf:type owl:NamedIndividual ,
+:CrusaderOfOdricInnistradRemastered18EntryFoilNearMint rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
-    :entryCard :CrusaderOfOdric ;
+    :entryCard :CrusaderOfOdricInnistradRemastered18 ;
     :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Foil ;
     :hasCondition :NearMint .
@@ -6622,16 +7009,16 @@ condition."""@en ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
-:MaelstromPulseEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+:MaelstromPulseInnistradRemastered244EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
-    :entryCard :MaelstromPulse ;
+    :entryCard :MaelstromPulseInnistradRemastered244 ;
     :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
-:MentorOfTheMeekEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+:MentorOfTheMeekInnistradRemastered34EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
-    :entryCard :MentorOfTheMeek ;
+    :entryCard :MentorOfTheMeekInnistradRemastered34 ;
     :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
@@ -7003,6 +7390,13 @@ condition."""@en ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
+:HinterlandSanctifierJumpstart20255EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :HinterlandSanctifierJumpstart20255 ;
+    :quantity "4"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
 :IslandJumpstart202584EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :IslandJumpstart202584 ;
@@ -7132,6 +7526,15 @@ condition."""@en ;
                   :CollectionEntry ;
     :entryCard :ReckonerBankbuster ;
     :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+# --- sets/LorwynEclipsed.ttl ---
+
+:RequitingHexEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :RequitingHex ;
+    :quantity "2"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
@@ -7938,9 +8341,93 @@ condition."""@en ;
 
 # --- sets/MagicTheGatheringFoundations.ttl ---
 
+:AbradeEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :Abrade ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
 :AbyssalHarvesterEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :AbyssalHarvester ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:AdaptiveAutomatonEntryFoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :AdaptiveAutomaton ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Foil ;
+    :hasCondition :NearMint .
+
+:AegisTurtleEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :AegisTurtle ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:AjanisPridemateMagicTheGatheringFoundations135EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :AjanisPridemateMagicTheGatheringFoundations135 ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:AjanisPridemateMagicTheGatheringFoundations293EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :AjanisPridemateMagicTheGatheringFoundations293 ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:AngelOfFinalityEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :AngelOfFinality ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:AngelOfVitalityEntryFoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :AngelOfVitality ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Foil ;
+    :hasCondition :NearMint .
+
+:AngelicDestinyEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :AngelicDestiny ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:ArbiterOfWoeEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :ArbiterOfWoe ;
+    :quantity "2"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:ArcanisTheOmnipotentEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :ArcanisTheOmnipotent ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:ArchwayAngelEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :ArchwayAngel ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:AureliaTheWarleaderEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :AureliaTheWarleader ;
     :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
@@ -7949,6 +8436,55 @@ condition."""@en ;
                   :CollectionEntry ;
     :entryCard :AxgardCavalry ;
     :quantity "2"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:AyliEternalPilgrimEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :AyliEternalPilgrim ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:AzoriusGuildgateEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :AzoriusGuildgate ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:BakeIntoAPieEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :BakeIntoAPie ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:BallLightningEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :BallLightning ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:BallyrushBanneretEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :BallyrushBanneret ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:BanishingLightMagicTheGatheringFoundations138EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :BanishingLightMagicTheGatheringFoundations138 ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:BasiliskCollarEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :BasiliskCollar ;
+    :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
@@ -7969,7 +8505,14 @@ condition."""@en ;
 :BiteDownEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :BiteDown ;
-    :quantity "1"^^xsd:positiveInteger ;
+    :quantity "2"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:BloodfellCavesEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :BloodfellCaves ;
+    :quantity "3"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
@@ -7980,6 +8523,20 @@ condition."""@en ;
     :hasFinish :Foil ;
     :hasCondition :NearMint .
 
+:BlossomingSandsMagicTheGatheringFoundations260EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :BlossomingSandsMagicTheGatheringFoundations260 ;
+    :quantity "2"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:BoltBendEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :BoltBend ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
 :BoltwaveEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :Boltwave ;
@@ -7987,9 +8544,44 @@ condition."""@en ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
+:BorosCharmEntryFoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :BorosCharm ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Foil ;
+    :hasCondition :NearMint .
+
+:BorosGuildgateEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :BorosGuildgate ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
 :BrinebornCutthroatEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :BrinebornCutthroat ;
+    :quantity "3"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:BrokenWingsMagicTheGatheringFoundations214EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :BrokenWingsMagicTheGatheringFoundations214 ;
+    :quantity "2"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:BurglarRatEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :BurglarRat ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:BurnishedHartMagicTheGatheringFoundations250EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :BurnishedHartMagicTheGatheringFoundations250 ;
     :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
@@ -7997,6 +8589,13 @@ condition."""@en ;
 :BurstLightningEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :BurstLightning ;
+    :quantity "5"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:BushwhackEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :Bushwhack ;
     :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
@@ -8012,6 +8611,13 @@ condition."""@en ;
                   :CollectionEntry ;
     :entryCard :CampusGuide ;
     :quantity "2"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:CatCollectorEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :CatCollector ;
+    :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
@@ -8036,6 +8642,118 @@ condition."""@en ;
     :hasFinish :Foil ;
     :hasCondition :NearMint .
 
+:ChandraFlameshaperEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :ChandraFlameshaper ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:CharmingPrinceEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :CharmingPrince ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:ChartACourseEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :ChartACourse ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:CircuitousRouteEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :CircuitousRoute ;
+    :quantity "2"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:ClinquantSkymageEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :ClinquantSkymage ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:CloudblazerEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :Cloudblazer ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:ConfiscateEntryFoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :Confiscate ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Foil ;
+    :hasCondition :NearMint .
+
+:ConsumingAberrationEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :ConsumingAberration ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:CracklingCyclopsEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :CracklingCyclops ;
+    :quantity "2"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:CrashThroughEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :CrashThrough ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:CrawlingBarrensEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :CrawlingBarrens ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:CrusaderOfOdricMagicTheGatheringFoundations569EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :CrusaderOfOdricMagicTheGatheringFoundations569 ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:CrypticCavesEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :CrypticCaves ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:CultivatorsCaravanMagicTheGatheringFoundations670EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :CultivatorsCaravanMagicTheGatheringFoundations670 ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:DarksteelColossusEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :DarksteelColossus ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:DawnwingMarshalEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :DawnwingMarshal ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
 :DazzlingAngelEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :DazzlingAngel ;
@@ -8043,9 +8761,177 @@ condition."""@en ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
+:DeadlyBrewEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :DeadlyBrew ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:DeathmarkEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :Deathmark ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:DemolitionFieldMagicTheGatheringFoundations687EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :DemolitionFieldMagicTheGatheringFoundations687 ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:DemonicPactEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :DemonicPact ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:DesecrationDemonEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :DesecrationDemon ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:DevoutDecreeEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :DevoutDecree ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:DiamondMareEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :DiamondMare ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:DictateOfKruphixEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :DictateOfKruphix ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:DimirGuildgateEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :DimirGuildgate ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:DisenchantEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :Disenchant ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:DismalBackwaterEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :DismalBackwater ;
+    :quantity "3"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:DiveDownEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :DiveDown ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:DivineResilienceEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :DivineResilience ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:DragonFodderEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :DragonFodder ;
+    :quantity "2"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:DragonMageEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :DragonMage ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
 :DragonTrainerEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :DragonTrainer ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:DragonmasterOutcastEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :DragonmasterOutcast ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:DreadSummonsEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :DreadSummons ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:DreadwingScavengerEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :DreadwingScavenger ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:DriverOfTheDeadEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :DriverOfTheDead ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:DrogskolReaverEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :DrogskolReaver ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:DryadMilitantEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :DryadMilitant ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:DuressEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :Duress ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:DwynensEliteEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :DwynensElite ;
+    :quantity "3"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:EagerTrufflesnoutEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :EagerTrufflesnout ;
     :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
@@ -8071,9 +8957,23 @@ condition."""@en ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
+:ElvishRegrowerEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :ElvishRegrower ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
 :EmpyreanEagleEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :EmpyreanEagle ;
+    :quantity "2"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:EnigmaDrakeEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :EnigmaDrake ;
     :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
@@ -8088,6 +8988,27 @@ condition."""@en ;
 :EssenceScatterEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :EssenceScatter ;
+    :quantity "2"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:EvolvingWildsMagicTheGatheringFoundations262EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :EvolvingWildsMagicTheGatheringFoundations262 ;
+    :quantity "2"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:ExpeditionMapEntryFoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :ExpeditionMap ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Foil ;
+    :hasCondition :NearMint .
+
+:ExsanguinateEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :Exsanguinate ;
     :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
@@ -8099,9 +9020,51 @@ condition."""@en ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
+:FaebloomTrickEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :FaebloomTrick ;
+    :quantity "2"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
 :FanaticalFirebrandEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :FanaticalFirebrand ;
+    :quantity "2"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:FeedTheSwarmMagicTheGatheringFoundations712EntryFoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :FeedTheSwarmMagicTheGatheringFoundations712 ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Foil ;
+    :hasCondition :NearMint .
+
+:FeldonsCaneEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :FeldonsCane ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:FelidarCubEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :FelidarCub ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:FelidarRetreatEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :FelidarRetreat ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:FelidarSaviorEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :FelidarSavior ;
     :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
@@ -8113,9 +9076,37 @@ condition."""@en ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
+:FiendishPandaEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :FiendishPanda ;
+    :quantity "3"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:FierceEmpathEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :FierceEmpath ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:FinaleOfRevelationEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :FinaleOfRevelation ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
 :FirebrandArcherEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :FirebrandArcher ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:FireshriekerEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :Fireshrieker ;
     :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
@@ -8127,9 +9118,100 @@ condition."""@en ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
+:FlashfreezeEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :Flashfreeze ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:FleetingFlightEntryFoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :FleetingFlight ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Foil ;
+    :hasCondition :NearMint .
+
+:FogBankEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :FogBank ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:ForestMagicTheGatheringFoundations280EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :ForestMagicTheGatheringFoundations280 ;
+    :quantity "8"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:ForestMagicTheGatheringFoundations281EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :ForestMagicTheGatheringFoundations281 ;
+    :quantity "8"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
 :ForestMagicTheGatheringFoundations290EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :ForestMagicTheGatheringFoundations290 ;
+    :quantity "2"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:ForestMagicTheGatheringFoundations291EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :ForestMagicTheGatheringFoundations291 ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:FumigateMagicTheGatheringFoundations575EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :FumigateMagicTheGatheringFoundations575 ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:FynnTheFangbearerEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :FynnTheFangbearer ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:GarnaBloodfistOfKeldEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :GarnaBloodfistOfKeld ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:GarruksUprisingEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :GarruksUprising ;
+    :quantity "2"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:GateColossusEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :GateColossus ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:GatekeeperOfMalakirEntryFoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :GatekeeperOfMalakir ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Foil ;
+    :hasCondition :NearMint .
+
+:GatewaySneakEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :GatewaySneak ;
     :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
@@ -8141,11 +9223,39 @@ condition."""@en ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
+:GhituLavarunnerEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :GhituLavarunner ;
+    :quantity "2"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:GiantCindermawEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :GiantCindermaw ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
 :GiantGrowthMagicTheGatheringFoundations223EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :GiantGrowthMagicTheGatheringFoundations223 ;
-    :quantity "1"^^xsd:positiveInteger ;
+    :quantity "2"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:GigantosaurusEntryFoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :Gigantosaurus ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Foil ;
+    :hasCondition :NearMint .
+
+:GildedLotusEntryFoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :GildedLotus ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Foil ;
     :hasCondition :NearMint .
 
 :GleamingBarrierEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
@@ -8158,8 +9268,50 @@ condition."""@en ;
 :GleamingBarrierEntryFoilNearMint rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :GleamingBarrier ;
-    :quantity "1"^^xsd:positiveInteger ;
+    :quantity "2"^^xsd:positiveInteger ;
     :hasFinish :Foil ;
+    :hasCondition :NearMint .
+
+:GnarlbackRhinoEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :GnarlbackRhino ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:GoblinBoardersEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :GoblinBoarders ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:GoblinNegotiationEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :GoblinNegotiation ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:GoldveinPickEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :GoldveinPick ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:GolgariGuildgateEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :GolgariGuildgate ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:GoodFortuneUnicornEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :GoodFortuneUnicorn ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
 :GorehornRaiderEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
@@ -8169,11 +9321,74 @@ condition."""@en ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
+:GrapplingKrakenEntryFoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :GrapplingKraken ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Foil ;
+    :hasCondition :NearMint .
+
+:GratuitousViolenceEntryFoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :GratuitousViolence ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Foil ;
+    :hasCondition :NearMint .
+
+:GruulGuildgateEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :GruulGuildgate ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:GutlessPlundererEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :GutlessPlunderer ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:GuttersnipeEntryFoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :Guttersnipe ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Foil ;
+    :hasCondition :NearMint .
+
+:HalanaAndAlenaPartnersEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :HalanaAndAlenaPartners ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:HarbingerOfTheTidesEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :HarbingerOfTheTides ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:HarmlessOfferingEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :HarmlessOffering ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
 :HeartfireImmolatorEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :HeartfireImmolator ;
-    :quantity "1"^^xsd:positiveInteger ;
+    :quantity "3"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:HedronArchiveEntryFoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :HedronArchive ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Foil ;
     :hasCondition :NearMint .
 
 :HelpfulHunterEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
@@ -8190,18 +9405,88 @@ condition."""@en ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
+:HeraldicBannerEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :HeraldicBanner ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:HeroesBaneEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :HeroesBane ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
 :HeroicReinforcementsEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :HeroicReinforcements ;
-    :quantity "1"^^xsd:positiveInteger ;
+    :quantity "2"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
 :HerosDownfallEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :HerosDownfall ;
+    :quantity "3"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:HidetsugusSecondRiteEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :HidetsugusSecondRite ;
     :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:HighSocietyHunterEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :HighSocietyHunter ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:HinterlandSanctifierMagicTheGatheringFoundations730EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :HinterlandSanctifierMagicTheGatheringFoundations730 ;
+    :quantity "4"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:HoardingDragonEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :HoardingDragon ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:IcewindElementalEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :IcewindElemental ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:ImmersturmPredatorEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :ImmersturmPredator ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:ImpactTremorsEntryFoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :ImpactTremors ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Foil ;
+    :hasCondition :NearMint .
+
+:ImperiousPerfectEntryFoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :ImperiousPerfect ;
+    :quantity "2"^^xsd:positiveInteger ;
+    :hasFinish :Foil ;
     :hasCondition :NearMint .
 
 :ImprisonedInTheMoonMagicTheGatheringFoundations156EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
@@ -8221,13 +9506,27 @@ condition."""@en ;
 :InfestationSageEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :InfestationSage ;
-    :quantity "2"^^xsd:positiveInteger ;
+    :quantity "4"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:InspiringOverseerEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :InspiringOverseer ;
+    :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
 :InspiringPaladinEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :InspiringPaladin ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:IntoTheRoilEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :IntoTheRoil ;
     :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
@@ -8239,9 +9538,86 @@ condition."""@en ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
+:IslandMagicTheGatheringFoundations274EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :IslandMagicTheGatheringFoundations274 ;
+    :quantity "8"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:IslandMagicTheGatheringFoundations275EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :IslandMagicTheGatheringFoundations275 ;
+    :quantity "8"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:IslandMagicTheGatheringFoundations284EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :IslandMagicTheGatheringFoundations284 ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:IslandMagicTheGatheringFoundations285EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :IslandMagicTheGatheringFoundations285 ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:IzzetGuildgateEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :IzzetGuildgate ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:JoustThroughEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :JoustThrough ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:JungleHollowEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :JungleHollow ;
+    :quantity "2"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:KalastriaHighbornEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :KalastriaHighborn ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:KnightOfGraceEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :KnightOfGrace ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:KnightOfMaliceEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :KnightOfMalice ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
 :KykarZephyrAwakenerEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :KykarZephyrAwakener ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:LathlissDragonQueenEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :LathlissDragonQueen ;
     :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
@@ -8260,11 +9636,32 @@ condition."""@en ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
+:LindenTheSteadfastQueenEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :LindenTheSteadfastQueen ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:LlanowarElvesEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :LlanowarElves ;
+    :quantity "5"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
 :LunarInsightEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :LunarInsight ;
     :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:LyraDawnbringerEntryFoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :LyraDawnbringer ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Foil ;
     :hasCondition :NearMint .
 
 :MacabreWaltzEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
@@ -8274,10 +9671,24 @@ condition."""@en ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
+:MaelstromPulseMagicTheGatheringFoundations661EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :MaelstromPulseMagicTheGatheringFoundations661 ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:MakeAStandEntryFoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :MakeAStand ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Foil ;
+    :hasCondition :NearMint .
+
 :MaraudingBlightPriestMagicTheGatheringFoundations178EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :MaraudingBlightPriestMagicTheGatheringFoundations178 ;
-    :quantity "1"^^xsd:positiveInteger ;
+    :quantity "2"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
@@ -8288,16 +9699,198 @@ condition."""@en ;
     :hasFinish :Foil ;
     :hasCondition :NearMint .
 
+:MassacreWurmEntryFoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :MassacreWurm ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Foil ;
+    :hasCondition :NearMint .
+
+:MazemindTomeEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :MazemindTome ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:MazesEndEntryFoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :MazesEnd ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Foil ;
+    :hasCondition :NearMint .
+
+:MentorOfTheMeekMagicTheGatheringFoundations578EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :MentorOfTheMeekMagicTheGatheringFoundations578 ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:MeteorGolemEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :MeteorGolem ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:MicromancerEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :Micromancer ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:MidnightReaperEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :MidnightReaper ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:MidnightSnackEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :MidnightSnack ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:MindsparkerEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :Mindsparker ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:MischievousMysticEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :MischievousMystic ;
+    :quantity "2"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
 :MischievousPupEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :MischievousPup ;
-    :quantity "1"^^xsd:positiveInteger ;
+    :quantity "2"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
 :MockingSpriteEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :MockingSprite ;
+    :quantity "2"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:MoldAdderEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :MoldAdder ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:MomentOfCravingEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :MomentOfCraving ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:MortifyEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :Mortify ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:MountainMagicTheGatheringFoundations278EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :MountainMagicTheGatheringFoundations278 ;
+    :quantity "8"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:MountainMagicTheGatheringFoundations279EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :MountainMagicTheGatheringFoundations279 ;
+    :quantity "8"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:MountainMagicTheGatheringFoundations288EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :MountainMagicTheGatheringFoundations288 ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:MountainMagicTheGatheringFoundations289EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :MountainMagicTheGatheringFoundations289 ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:MyojinOfNightsReachEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :MyojinOfNightsReach ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:MysticalTeachingsEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :MysticalTeachings ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:NegateMagicTheGatheringFoundations710EntryFoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :NegateMagicTheGatheringFoundations710 ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Foil ;
+    :hasCondition :NearMint .
+
+:NineLivesFamiliarEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :NineLivesFamiliar ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:NullpriestOfOblivionEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :NullpriestOfOblivion ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:ObliteratingBoltEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :ObliteratingBolt ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:OptEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :Opt ;
+    :quantity "4"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:OrdealOfNyleaEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :OrdealOfNylea ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:OrzhovGuildgateEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :OrzhovGuildgate ;
     :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
@@ -8305,6 +9898,27 @@ condition."""@en ;
 :OverrunEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :Overrun ;
+    :quantity "2"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:OvikaEnigmaGoliathEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :OvikaEnigmaGoliath ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:PelakkaWurmEntryFoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :PelakkaWurm ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Foil ;
+    :hasCondition :NearMint .
+
+:PerforatingArtistEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :PerforatingArtist ;
     :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
@@ -8319,27 +9933,230 @@ condition."""@en ;
 :PlainsMagicTheGatheringFoundations272EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :PlainsMagicTheGatheringFoundations272 ;
-    :quantity "4"^^xsd:positiveInteger ;
+    :quantity "12"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
 :PlainsMagicTheGatheringFoundations273EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :PlainsMagicTheGatheringFoundations273 ;
-    :quantity "6"^^xsd:positiveInteger ;
+    :quantity "14"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:PlainsMagicTheGatheringFoundations282EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :PlainsMagicTheGatheringFoundations282 ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:PlainsMagicTheGatheringFoundations283EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :PlainsMagicTheGatheringFoundations283 ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:PredatorOozeEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :PredatorOoze ;
+    :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
 :PridefulParentEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :PridefulParent ;
+    :quantity "2"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:PrimalMightEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :PrimalMight ;
     :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:PrimeSpeakerZeganaEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :PrimeSpeakerZegana ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:PrimevalBountyEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :PrimevalBounty ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:PulseTrackerEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :PulseTracker ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:PyromancersGogglesEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :PyromancersGoggles ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:QuakestriderCeratopsEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :QuakestriderCeratops ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:RakdosGuildgateEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :RakdosGuildgate ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:RamosDragonEngineEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :RamosDragonEngine ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:RampagingBalothsEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :RampagingBaloths ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:RavenousAmuletEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :RavenousAmulet ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:RavenousGiantEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :RavenousGiant ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:ReclamationSageMagicTheGatheringFoundations231EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :ReclamationSageMagicTheGatheringFoundations231 ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:ReclamationSageMagicTheGatheringFoundations340EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :ReclamationSageMagicTheGatheringFoundations340 ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:RedcapGutterDwellerEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :RedcapGutterDweller ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:RefuteEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :Refute ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:RegalCaracalEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :RegalCaracal ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:ReleaseTheDogsEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :ReleaseTheDogs ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:ResoluteReinforcementsEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :ResoluteReinforcements ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:RiteOfReplicationEntryFoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :RiteOfReplication ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Foil ;
+    :hasCondition :NearMint .
+
+:RiversRebukeEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :RiversRebuke ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:RoguesPassageEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :RoguesPassage ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:RubyDaringTrackerEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :RubyDaringTracker ;
+    :quantity "2"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:RuggedHighlandsMagicTheGatheringFoundations265EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :RuggedHighlandsMagicTheGatheringFoundations265 ;
+    :quantity "2"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:RuggedHighlandsMagicTheGatheringFoundations265EntryFoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :RuggedHighlandsMagicTheGatheringFoundations265 ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Foil ;
     :hasCondition :NearMint .
 
 :RunAwayTogetherEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :RunAwayTogether ;
+    :quantity "2"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:SanguineIndulgenceEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :SanguineIndulgence ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:SavageVentmawEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :SavageVentmaw ;
     :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
@@ -8347,6 +10164,34 @@ condition."""@en ;
 :SavannahLionsEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :SavannahLions ;
+    :quantity "2"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:ScouredBarrensMagicTheGatheringFoundations266EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :ScouredBarrensMagicTheGatheringFoundations266 ;
+    :quantity "2"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:SeekersFollyEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :SeekersFolly ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:SeismicRuptureEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :SeismicRupture ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:SelesnyaGuildgateEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :SelesnyaGuildgate ;
     :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
@@ -8358,11 +10203,53 @@ condition."""@en ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
+:ShipwreckDowserEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :ShipwreckDowser ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:SimicGuildgateEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :SimicGuildgate ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:SnakeskinVeilEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :SnakeskinVeil ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
 :SnakeskinVeilEntryFoilNearMint rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :SnakeskinVeil ;
     :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Foil ;
+    :hasCondition :NearMint .
+
+:SolemnSimulacrumMagicTheGatheringFoundations257EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :SolemnSimulacrumMagicTheGatheringFoundations257 ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:SorcerousSpyglassEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :SorcerousSpyglass ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:SoulGuideLanternMagicTheGatheringFoundations680EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :SoulGuideLanternMagicTheGatheringFoundations680 ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
 :SoulShackledZombieEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
@@ -8379,9 +10266,30 @@ condition."""@en ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
+:SpectralSailorEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :SpectralSailor ;
+    :quantity "2"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:SphinxOfTheFinalWordEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :SphinxOfTheFinalWord ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
 :SpitfireLagacEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :SpitfireLagac ;
+    :quantity "2"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:SpringbloomDruidEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :SpringbloomDruid ;
     :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
@@ -8393,10 +10301,80 @@ condition."""@en ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
+:StasisSnareEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :StasisSnare ;
+    :quantity "2"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:SteelHellkiteEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :SteelHellkite ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
 :StrixLookoutEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :StrixLookout ;
-    :quantity "2"^^xsd:positiveInteger ;
+    :quantity "3"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:StrokeOfMidnightEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :StrokeOfMidnight ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:StromkirkBloodthiefEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :StromkirkBloodthief ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:StromkirkNobleEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :StromkirkNoble ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:StrongboxRaiderEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :StrongboxRaider ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:SurrakTheHuntCallerEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :SurrakTheHuntCaller ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:SuspiciousShamblerEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :SuspiciousShambler ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:SwampMagicTheGatheringFoundations276EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :SwampMagicTheGatheringFoundations276 ;
+    :quantity "8"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:SwampMagicTheGatheringFoundations277EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :SwampMagicTheGatheringFoundations277 ;
+    :quantity "8"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
@@ -8407,23 +10385,191 @@ condition."""@en ;
     :hasFinish :Foil ;
     :hasCondition :NearMint .
 
-:SwampMagicTheGatheringFoundations287EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+:SwampMagicTheGatheringFoundations286EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
-    :entryCard :SwampMagicTheGatheringFoundations287 ;
+    :entryCard :SwampMagicTheGatheringFoundations286 ;
     :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
-:SwiftfootBootsEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+:SwampMagicTheGatheringFoundations287EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
-    :entryCard :SwiftfootBoots ;
+    :entryCard :SwampMagicTheGatheringFoundations287 ;
+    :quantity "2"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:SwiftfootBootsMagicTheGatheringFoundations258EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :SwiftfootBootsMagicTheGatheringFoundations258 ;
     :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:SwiftfootBootsMagicTheGatheringFoundations355EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :SwiftfootBootsMagicTheGatheringFoundations355 ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:SwiftwaterCliffsMagicTheGatheringFoundations268EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :SwiftwaterCliffsMagicTheGatheringFoundations268 ;
+    :quantity "2"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:SyrAlinTheLionsClawEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :SyrAlinTheLionsClaw ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:TatyovaBenthicDruidEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :TatyovaBenthicDruid ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:TaureanMaulerEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :TaureanMauler ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:TeachByExampleEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :TeachByExample ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:TempestDjinnEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :TempestDjinn ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:TempleOfAbandonMagicTheGatheringFoundations696EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :TempleOfAbandonMagicTheGatheringFoundations696 ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:TempleOfDeceitMagicTheGatheringFoundations697EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :TempleOfDeceitMagicTheGatheringFoundations697 ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:TempleOfEnlightenmentMagicTheGatheringFoundations698EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :TempleOfEnlightenmentMagicTheGatheringFoundations698 ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:TempleOfEpiphanyMagicTheGatheringFoundations699EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :TempleOfEpiphanyMagicTheGatheringFoundations699 ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:TempleOfMaladyEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :TempleOfMalady ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:TempleOfMaliceMagicTheGatheringFoundations701EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :TempleOfMaliceMagicTheGatheringFoundations701 ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:TempleOfMysteryMagicTheGatheringFoundations702EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :TempleOfMysteryMagicTheGatheringFoundations702 ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:TempleOfPlentyMagicTheGatheringFoundations703EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :TempleOfPlentyMagicTheGatheringFoundations703 ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:TempleOfSilenceEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :TempleOfSilence ;
+    :quantity "3"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:TempleOfTriumphMagicTheGatheringFoundations705EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :TempleOfTriumphMagicTheGatheringFoundations705 ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:ThinkTwiceEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :ThinkTwice ;
+    :quantity "2"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:ThornwealdArcherEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :ThornwealdArcher ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:ThornwoodFallsEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :ThornwoodFalls ;
+    :quantity "2"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:ThreeTreeMascotEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :ThreeTreeMascot ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:ThrillOfPossibilityEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :ThrillOfPossibility ;
+    :quantity "2"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
 :TolarianTerrorEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :TolarianTerror ;
+    :quantity "2"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:TragicBansheeEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :TragicBanshee ;
     :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
@@ -8431,13 +10577,27 @@ condition."""@en ;
 :TranquilCoveEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :TranquilCove ;
-    :quantity "1"^^xsd:positiveInteger ;
+    :quantity "3"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
 :TreetopSnarespinnerEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :TreetopSnarespinner ;
+    :quantity "2"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:TributeToHungerEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :TributeToHunger ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:TrygonPredatorEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :TrygonPredator ;
     :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
@@ -8445,6 +10605,41 @@ condition."""@en ;
 :TwinbladeBlessingEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :TwinbladeBlessing ;
+    :quantity "3"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:UnchartedVoyageEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :UnchartedVoyage ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:UndyingMaliceEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :UndyingMalice ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:UnflinchingCourageEntryFoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :UnflinchingCourage ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Foil ;
+    :hasCondition :NearMint .
+
+:UnsummonEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :Unsummon ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:ValorousStanceEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :ValorousStance ;
     :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
@@ -8456,9 +10651,79 @@ condition."""@en ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
-:VengefulBloodwitchEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+:VampireNighthawkEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
-    :entryCard :VengefulBloodwitch ;
+    :entryCard :VampireNighthawk ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:VampiricRitesEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :VampiricRites ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:VanguardSeraphEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :VanguardSeraph ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:VengefulBloodwitchMagicTheGatheringFoundations325EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :VengefulBloodwitchMagicTheGatheringFoundations325 ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:VengefulBloodwitchMagicTheGatheringFoundations76EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :VengefulBloodwitchMagicTheGatheringFoundations76 ;
+    :quantity "4"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:VenomConnoisseurEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :VenomConnoisseur ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:ViashinoPyromancerEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :ViashinoPyromancer ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:VileEntomberEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :VileEntomber ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:VizierOfTheMenagerieEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :VizierOfTheMenagerie ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:VoraciousGreatsharkEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :VoraciousGreatshark ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:WardensOfTheCycleEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :WardensOfTheCycle ;
     :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
@@ -8470,9 +10735,44 @@ condition."""@en ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
+:WildbornPreserverEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :WildbornPreserver ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
 :WildwoodScourgeEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :WildwoodScourge ;
+    :quantity "2"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:WiltLeafLiegeEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :WiltLeafLiege ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:WindScarredCragEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :WindScarredCrag ;
+    :quantity "2"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:WishclawTalismanEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :WishclawTalisman ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:WitnessProtectionEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :WitnessProtection ;
     :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
@@ -8480,6 +10780,43 @@ condition."""@en ;
 :YouthfulValkyrieEntryFoilNearMint rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :YouthfulValkyrie ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Foil ;
+    :hasCondition :NearMint .
+
+:ZetalpaPrimalDawnEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :ZetalpaPrimalDawn ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:ZombifyEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :Zombify ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+# --- sets/MagicTheGatheringFoundationsCommander.ttl ---
+
+:ArcaneSignetMagicTheGatheringFoundationsCommander1EntryFoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :ArcaneSignetMagicTheGatheringFoundationsCommander1 ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Foil ;
+    :hasCondition :NearMint .
+
+:CommandTowerMagicTheGatheringFoundationsCommander3EntryFoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :CommandTowerMagicTheGatheringFoundationsCommander3 ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Foil ;
+    :hasCondition :NearMint .
+
+:SolRingMagicTheGatheringFoundationsCommander2EntryFoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :SolRingMagicTheGatheringFoundationsCommander2 ;
     :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Foil ;
     :hasCondition :NearMint .
@@ -8983,9 +11320,9 @@ condition."""@en ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
-:NegateEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+:NegateMagicTheGatheringTeenageMutantNinjaTurtles47EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
-    :entryCard :Negate ;
+    :entryCard :NegateMagicTheGatheringTeenageMutantNinjaTurtles47 ;
     :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
@@ -9421,9 +11758,9 @@ condition."""@en ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
-:BlossomingSandsEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+:BlossomingSandsMarchOfTheMachine268EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
-    :entryCard :BlossomingSands ;
+    :entryCard :BlossomingSandsMarchOfTheMachine268 ;
     :quantity "4"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
@@ -9512,9 +11849,9 @@ condition."""@en ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
-:SwiftwaterCliffsEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+:SwiftwaterCliffsMarchOfTheMachine273EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
-    :entryCard :SwiftwaterCliffs ;
+    :entryCard :SwiftwaterCliffsMarchOfTheMachine273 ;
     :quantity "4"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
@@ -10032,9 +12369,9 @@ condition."""@en ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
-:TempleOfAbandonEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+:TempleOfAbandonMarchOfTheMachineCommander430EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
-    :entryCard :TempleOfAbandon ;
+    :entryCard :TempleOfAbandonMarchOfTheMachineCommander430 ;
     :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
@@ -10636,9 +12973,9 @@ condition."""@en ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
-:BurnishedHartEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+:BurnishedHartModernHorizons3Commander284EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
-    :entryCard :BurnishedHart ;
+    :entryCard :BurnishedHartModernHorizons3Commander284 ;
     :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
@@ -10706,9 +13043,9 @@ condition."""@en ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
-:DemolitionFieldEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+:DemolitionFieldModernHorizons3Commander335EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
-    :entryCard :DemolitionField ;
+    :entryCard :DemolitionFieldModernHorizons3Commander335 ;
     :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
@@ -11032,6 +13369,13 @@ condition."""@en ;
 
 # --- sets/MurdersAtKarlovManor.ttl ---
 
+:CaseOfTheUneatenFeastEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :CaseOfTheUneatenFeast ;
+    :quantity "3"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
 :CovetedFalconEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :CovetedFalcon ;
@@ -11197,10 +13541,80 @@ condition."""@en ;
 
 # --- sets/SecretsOfStrixhaven.ttl ---
 
+:ArtisticProcessEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :ArtisticProcess ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:AscendantDustspeakerEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :AscendantDustspeaker ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:BlazingFiresingerEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :BlazingFiresinger ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:DiaryOfDreamsEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :DiaryOfDreams ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:DinasGuidanceEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :DinasGuidance ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:EfflorescenceEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :Efflorescence ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:ElementalMascotEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :ElementalMascot ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:EnvironmentalScientistEntryFoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :EnvironmentalScientist ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Foil ;
+    :hasCondition :NearMint .
+
+:ExpressiveFiredancerEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :ExpressiveFiredancer ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
 :FieldsOfStrifeEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :FieldsOfStrife ;
     :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:FoolishFateEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :FoolishFate ;
+    :quantity "4"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
@@ -11246,6 +13660,34 @@ condition."""@en ;
     :hasFinish :Foil ;
     :hasCondition :NearMint .
 
+:ForumNecroscribeEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :ForumNecroscribe ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:GoblinGlasswrightEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :GoblinGlasswright ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:GrappleWithDeathEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :GrappleWithDeath ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:HeatedArgumentEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :HeatedArgument ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
 :IslandSecretsOfStrixhaven268EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :IslandSecretsOfStrixhaven268 ;
@@ -11286,6 +13728,20 @@ condition."""@en ;
     :entryCard :IslandSecretsOfStrixhaven275 ;
     :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Foil ;
+    :hasCondition :NearMint .
+
+:LeechCollectorEntryFoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :LeechCollector ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Foil ;
+    :hasCondition :NearMint .
+
+:MageTowerRefereeEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :MageTowerReferee ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
 :MountainSecretsOfStrixhaven270EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
@@ -11330,6 +13786,27 @@ condition."""@en ;
     :hasFinish :Foil ;
     :hasCondition :NearMint .
 
+:OraclesRestorationEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :OraclesRestoration ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:OrysaTideChoreographerEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :OrysaTideChoreographer ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:PestMascotEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :PestMascot ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
 :PlainsSecretsOfStrixhaven267EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :PlainsSecretsOfStrixhaven267 ;
@@ -11361,7 +13838,7 @@ condition."""@en ;
 :PlainsSecretsOfStrixhaven273EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :PlainsSecretsOfStrixhaven273 ;
-    :quantity "1"^^xsd:positiveInteger ;
+    :quantity "10"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
@@ -11370,6 +13847,97 @@ condition."""@en ;
     :entryCard :PlainsSecretsOfStrixhaven273 ;
     :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Foil ;
+    :hasCondition :NearMint .
+
+:PostmortemProfessorEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :PostmortemProfessor ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:PrimaryResearchEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :PrimaryResearch ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:PrismariTheInspirationEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :PrismariTheInspiration ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:PullFromTheGraveEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :PullFromTheGrave ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:QuandrixCharmEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :QuandrixCharm ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:RehearsedDebaterEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :RehearsedDebater ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:RenderSpeechlessEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :RenderSpeechless ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:ResonatingLuteEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :ResonatingLute ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:RunBehindEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :RunBehind ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:SilverquillCharmEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :SilverquillCharm ;
+    :quantity "2"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:SneeringShadewriterEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :SneeringShadewriter ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:StoneDocentEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :StoneDocent ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:StudiousFirstYearEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :StudiousFirstYear ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
 :SwampSecretsOfStrixhaven269EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
@@ -11403,7 +13971,7 @@ condition."""@en ;
 :SwampSecretsOfStrixhaven277EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :SwampSecretsOfStrixhaven277 ;
-    :quantity "1"^^xsd:positiveInteger ;
+    :quantity "9"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
@@ -11414,9 +13982,30 @@ condition."""@en ;
     :hasFinish :Foil ;
     :hasCondition :NearMint .
 
+:TamObservantSequencerEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :TamObservantSequencer ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
 :TerramorphicExpanseSecretsOfStrixhaven265EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :TerramorphicExpanseSecretsOfStrixhaven265 ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:TextbookTabulatorEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :TextbookTabulator ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:TopiaryLecturerEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :TopiaryLecturer ;
     :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
@@ -11444,11 +14033,48 @@ condition."""@en ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
+# --- sets/SecretsOfStrixhavenMysticalArchive.ttl ---
+
+:BigScoreEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :BigScore ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:DeduceEntryFoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :Deduce ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Foil ;
+    :hasCondition :NearMint .
+
+:DutyBeyondDeathEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :DutyBeyondDeath ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:FeedTheSwarmSecretsOfStrixhavenMysticalArchive29EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :FeedTheSwarmSecretsOfStrixhavenMysticalArchive29 ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
 # --- sets/SpecialGuests.ttl ---
 
 :DarknessEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :Darkness ;
+    :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:SphinxsTutelageEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :SphinxsTutelage ;
     :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
@@ -11522,9 +14148,9 @@ condition."""@en ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
-:RuggedHighlandsEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+:RuggedHighlandsTarkirDragonstorm265EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
-    :entryCard :RuggedHighlands ;
+    :entryCard :RuggedHighlandsTarkirDragonstorm265 ;
     :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
@@ -11621,10 +14247,24 @@ condition."""@en ;
 
 # --- sets/TheLostCavernsOfIxalan.ttl ---
 
+:AmaliaBenavidesAguirreEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :AmaliaBenavidesAguirre ;
+    :quantity "3"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
 :AnimPakalThousandthMoonEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
     :entryCard :AnimPakalThousandthMoon ;
     :quantity "1"^^xsd:positiveInteger ;
+    :hasFinish :Nonfoil ;
+    :hasCondition :NearMint .
+
+:DeepCavernBatEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+                  :CollectionEntry ;
+    :entryCard :DeepCavernBat ;
+    :quantity "4"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 

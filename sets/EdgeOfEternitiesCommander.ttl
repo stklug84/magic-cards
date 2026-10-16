@@ -889,19 +889,19 @@ Draw two cards, then proliferate. (Choose any number of permanents and/or player
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2011-09-22"^^xsd:date ;
-        :rulingText """The owner of a token is the player under whose control the token was put onto the battlefield. If a token is shuffled into a player's library this way, that player shuffles before revealing the top card of that library."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2011-09-22"^^xsd:date ;
-        :rulingText """A permanent card is a card with one or more of the following card types: artifact, creature, enchantment, land, or planeswalker."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2011-09-22"^^xsd:date ;
         :rulingText """If the revealed card is not a permanent card, it remains on top of that library."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2011-09-22"^^xsd:date ;
+        :rulingText """The owner of a token is the player under whose control the token was put onto the battlefield. If a token is shuffled into a player's library this way, that player shuffles before revealing the top card of that library."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2011-09-22"^^xsd:date ;
         :rulingText """If the revealed card is a permanent card but can't enter (perhaps because it's an Aura with nothing to enchant), it remains on top of that library."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2011-09-22"^^xsd:date ;
-        :rulingText """If the permanent is an illegal target by the time Chaos Warp tries to resolve, it won't resolve and none of its effects will occur. No library will be shuffled and no card will be revealed."""@en ] .
+        :rulingText """If the permanent is an illegal target by the time Chaos Warp tries to resolve, it won't resolve and none of its effects will occur. No library will be shuffled and no card will be revealed."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2011-09-22"^^xsd:date ;
+        :rulingText """A permanent card is a card with one or more of the following card types: artifact, creature, enchantment, land, or planeswalker."""@en ] .
 
 :ArcaneSignetEdgeOfEternitiesCommander53 rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -935,13 +935,13 @@ Draw two cards, then proliferate. (Choose any number of permanents and/or player
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2020-11-10"^^xsd:date ;
+        :rulingText """If you don't have a commander, Arcane Signet's ability produces no mana."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2020-11-10"^^xsd:date ;
         :rulingText """If you have two commanders, the ability adds one mana of any color in their combined color identities."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2020-11-10"^^xsd:date ;
-        :rulingText """If your commander is a card that has no colors in its color identity, Arcane Signet's ability produces no mana. It doesn't produce {C}."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2020-11-10"^^xsd:date ;
-        :rulingText """If you don't have a commander, Arcane Signet's ability produces no mana."""@en ] .
+        :rulingText """If your commander is a card that has no colors in its color identity, Arcane Signet's ability produces no mana. It doesn't produce {C}."""@en ] .
 
 :CloudKey rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -1105,10 +1105,10 @@ Remove a charge counter from this artifact: Add one mana of any color."""@en ;
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2015-06-22"^^xsd:date ;
-        :rulingText """Like most lands, each land in this cycle is colorless. The damage dealt to you is dealt by a colorless source."""@en ] ,
+        :rulingText """The damage dealt to you is part of the second mana ability. It doesn't use the stack and can't be responded to."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2015-06-22"^^xsd:date ;
-        :rulingText """The damage dealt to you is part of the second mana ability. It doesn't use the stack and can't be responded to."""@en ] .
+        :rulingText """Like most lands, each land in this cycle is colorless. The damage dealt to you is dealt by a colorless source."""@en ] .
 
 :CommandTowerEdgeOfEternitiesCommander59 rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -1144,10 +1144,10 @@ Remove a charge counter from this artifact: Add one mana of any color."""@en ;
         :rulingText """If you don't have a commander, Command Tower's ability produces no mana."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2020-11-10"^^xsd:date ;
-        :rulingText """If you have two commanders, the ability adds one mana of any color in their combined color identities."""@en ] ,
+        :rulingText """If your commander is a card that has no colors in its color identity, Command Tower's ability produces no mana. It doesn't produce {C}."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2020-11-10"^^xsd:date ;
-        :rulingText """If your commander is a card that has no colors in its color identity, Command Tower's ability produces no mana. It doesn't produce {C}."""@en ] .
+        :rulingText """If you have two commanders, the ability adds one mana of any color in their combined color identities."""@en ] .
 
 :AngelOfTheRuins rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -1216,13 +1216,13 @@ Metalcraft — If you control three or more artifacts, exile that creature."""@e
       [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :NotLegal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ;
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ;
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2011-06-01"^^xsd:date ;
         :rulingText """If you control three or more artifacts when Dispatch resolves, you'll tap the creature, then exile it."""@en ] .
 
-:Fumigate rdf:type owl:NamedIndividual ,
+:FumigateEdgeOfEternitiesCommander65 rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Fumigate" ;
     :manaCost "{3}{W}{W}" ;
@@ -2383,7 +2383,25 @@ This artifact enters with a charge counter on it for each time it was kicked.
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2021-03-19"^^xsd:date ;
-        :rulingText """You can cast Everflowing Chalice without kicking it at all if you wish. However, if Everflowing Chalice has no charge counters on it, activating its last ability won't produce any mana."""@en ] .
+        :rulingText """You can cast Everflowing Chalice without kicking it at all if you wish. However, if Everflowing Chalice has no charge counters on it, activating its last ability won't produce any mana."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-11-08"^^xsd:date ;
+        :rulingText """To determine a spell's total cost, start with the mana cost (or an alternative cost if another card's effect allows you to pay one instead), add any cost increases (such as kicker), then apply any cost reductions. The spell's mana value remains unchanged, no matter what the total cost to cast it was."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-11-08"^^xsd:date ;
+        :rulingText """If you copy a kicked spell on the stack, the copy is also kicked. If the copied spell is a permanent spell, the token the copy of that spell becomes when it enters is also kicked."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-11-08"^^xsd:date ;
+        :rulingText """If a card or token enters as a copy of a permanent, the new permanent isn't kicked, even if the original was."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-11-08"^^xsd:date ;
+        :rulingText """If you put a permanent with a kicker ability onto the battlefield without casting it, you can't kick it."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-11-08"^^xsd:date ;
+        :rulingText """If a spell's kicker cost was paid, the spell is "kicked.\""""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-11-08"^^xsd:date ;
+        :rulingText """The kicker ability doesn't let you pay a kicker cost more than once."""@en ] .
 
 :GolemFoundry rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -2574,7 +2592,7 @@ Remove two +1/+1 counters from this creature: Draw a card."""@en ;
       [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] .
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] .
 
 :SteelOverseerEdgeOfEternitiesCommander144 rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -2869,16 +2887,16 @@ Whenever this creature enters or attacks, create a number of 1/1 colorless Gnome
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2009-02-01"^^xsd:date ;
-        :rulingText """Exotic Orchard checks the effects of all mana-producing abilities of lands your opponents control, but it doesn't check their costs. For example, Vivid Crag has the ability "{T}, Remove a charge counter from Vivid Crag: Add one mana of any color." If an opponent controls Vivid Crag and you control Exotic Orchard, you can tap Exotic Orchard for any color of mana. It doesn't matter whether Vivid Crag has a charge counter on it, and it doesn't matter whether it's untapped."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2009-02-01"^^xsd:date ;
-        :rulingText """Exotic Orchard doesn't care about any restrictions or riders your opponents' lands (such as Ancient Ziggurat or Hall of the Bandit Lord) put on the mana they produce. It just cares about colors of mana."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2009-02-01"^^xsd:date ;
         :rulingText """When determining what colors of mana your opponents' lands could produce, Exotic Orchard takes into account any applicable replacement effects that would apply to those lands' mana abilities (such as Contamination's effect, for example). If there are more than one, consider them in any possible order."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2009-02-01"^^xsd:date ;
         :rulingText """The colors of mana are white, blue, black, red, and green. Exotic Orchard can't be tapped for colorless mana, even if a land an opponent controls could produce colorless mana."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2009-02-01"^^xsd:date ;
+        :rulingText """Exotic Orchard checks the effects of all mana-producing abilities of lands your opponents control, but it doesn't check their costs. For example, Vivid Crag has the ability "{T}, Remove a charge counter from Vivid Crag: Add one mana of any color." If an opponent controls Vivid Crag and you control Exotic Orchard, you can tap Exotic Orchard for any color of mana. It doesn't matter whether Vivid Crag has a charge counter on it, and it doesn't matter whether it's untapped."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2009-02-01"^^xsd:date ;
+        :rulingText """Exotic Orchard doesn't care about any restrictions or riders your opponents' lands (such as Ancient Ziggurat or Hall of the Bandit Lord) put on the mana they produce. It just cares about colors of mana."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2009-02-01"^^xsd:date ;
         :rulingText """Lands that produce mana based only on what other lands "could produce" won't help each other unless some other land allows one of them to actually produce some type of mana. For example, if you control an Exotic Orchard and your opponent controls an Exotic Orchard and a Reflecting Pool, none of those lands would produce mana if their mana abilities were activated. On the other hand, if you control a Forest and an Exotic Orchard, and your opponent controls an Exotic Orchard and a Reflecting Pool, then each of those lands can be tapped to produce {G}. Your opponent's Exotic Orchard can produce {G} because you control a Forest. Your Exotic Orchard and your opponent's Reflecting Pool can each produce {G} because your opponent's Exotic Orchard can produce {G}."""@en ] .
@@ -2914,10 +2932,10 @@ Whenever this creature enters or attacks, create a number of 1/1 colorless Gnome
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2009-10-01"^^xsd:date ;
-        :rulingText """This checks for lands you control with the land type Plains or Island, not for lands named Plains or Island. The lands it checks for don't have to be basic lands. For example, if you control Watery Grave (a nonbasic land with the land types Island and Swamp), Glacial Fortress will enter untapped."""@en ] ,
+        :rulingText """As this is entering, it checks for lands that are already on the battlefield. It won't see lands that are entering at the same time (due to Warp World, for example)."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2009-10-01"^^xsd:date ;
-        :rulingText """As this is entering, it checks for lands that are already on the battlefield. It won't see lands that are entering at the same time (due to Warp World, for example)."""@en ] .
+        :rulingText """This checks for lands you control with the land type Plains or Island, not for lands named Plains or Island. The lands it checks for don't have to be basic lands. For example, if you control Watery Grave (a nonbasic land with the land types Island and Swamp), Glacial Fortress will enter untapped."""@en ] .
 
 :GreatFurnace rdf:type owl:NamedIndividual ,
                   :Card ;

@@ -118,6 +118,39 @@ When this creature enters, other creatures you control get +2/+2 and gain vigila
       [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] .
 
+:ScouredBarrensAetherdrift263 rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Scoured Barrens" ;
+    :manaValue "0"^^xsd:nonNegativeInteger ;
+    :hasCardType :Land ;
+    :hasRarity :Common ;
+    :hasColorIdentity :White ,
+                      :Black ;
+    :isInSet :Aetherdrift ;
+    :cardNumber "263"^^xsd:integer ;
+    :artist "Eddie Mendoza" ;
+    :hasLanguage :English ;
+    :producesMana :White ,
+                  :Black ;
+    :entersTapped "true"^^xsd:boolean ;
+    :printedText """This land enters tapped.
+When this land enters, you gain 1 life.
+{T}: Add {W} or {B}."""@en ;
+    :oracleText """This land enters tapped.
+When this land enters, you gain 1 life.
+{T}: Add {W} or {B}."""@en ;
+    :flavorText """For the Champions of Amonkhet, the stakes go beyond victory. They race to show the Multiverse that their home is not a dead plane to be mourned, but a living world just beginning to awaken."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=690700"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/dft/263/scoured-barrens"^^xsd:anyURI ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] .
+
 :IslandAetherdrift282 rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Island" ;

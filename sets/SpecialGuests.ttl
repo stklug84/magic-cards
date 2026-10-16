@@ -52,6 +52,42 @@ subtype, format and legality definitions."""@en .
 #
 ################################################################################
 
+:SphinxsTutelage rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Sphinx's Tutelage" ;
+    :manaCost "{2}{U}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Enchantment ;
+    :hasRarity :MythicRare ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :SpecialGuests ;
+    :cardNumber "75"^^xsd:integer ;
+    :artist "Jason A. Engle" ;
+    :hasLanguage :English ;
+    :hasKeywordAction :Mill ;
+    :printedText """Whenever you draw a card, target opponent mills two cards. If two nonland cards that share a color were milled this way, repeat this process.
+{5}{U}: Draw a card, then discard a card."""@en ;
+    :oracleText """Whenever you draw a card, target opponent mills two cards. If two nonland cards that share a color were milled this way, repeat this process.
+{5}{U}: Draw a card, then discard a card."""@en ;
+    :flavorText """Sailors swear by the Sphinx's stars, which always seem to point the way home."""@en ;
+    :scryfallUrl "https://scryfall.com/card/spg/75/sphinxs-tutelage"^^xsd:anyURI ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2015-06-22"^^xsd:date ;
+        :rulingText """The process will keep repeating as long as both cards share a color and neither is a land card."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2015-06-22"^^xsd:date ;
+        :rulingText """Colorless is not a color, so putting two colorless cards into a graveyard won’t cause the process to repeat."""@en ] .
+
 :Darkness rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Darkness" ;

@@ -111,7 +111,7 @@ or download the distribution and add its `bin/` to `PATH`), use `arq`.
 
 `arq` does **not** follow the `owl:imports` chain in
 `MagicCardIndividuals.ttl`, so pass every data file explicitly via repeated
-`--data` flags (shell expansion covers the 81 set files):
+`--data` flags (shell expansion covers the 85 set files):
 
 ```sh
 arq --data MagicCardsOntology.ttl \

@@ -88,13 +88,13 @@ subtype, format and legality definitions."""@en .
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2020-11-10"^^xsd:date ;
-        :rulingText """If a card is exiled "until" another permanent leaves the battlefield, the exiled card returns to the battlefield immediately after that permanent leaves the battlefield during Austere Command's resolution, and it may be destroyed by a later mode."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2020-11-10"^^xsd:date ;
         :rulingText """Each of the chosen modes happens sequentially. If a permanent has an ability that triggers whenever it or another permanent is destroyed, it will see permanents destroyed at the same time as it or before it, but not permanents destroyed by later modes."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2020-11-10"^^xsd:date ;
-        :rulingText """If the first and last modes are chosen, an artifact creature with mana value 4 or greater will have to be regenerated twice to survive. This is because the modes happen sequentially, and the regeneration "shield" is used up by the first one. The same is true with any other combination of modes that covers one permanent twice."""@en ] .
+        :rulingText """If the first and last modes are chosen, an artifact creature with mana value 4 or greater will have to be regenerated twice to survive. This is because the modes happen sequentially, and the regeneration "shield" is used up by the first one. The same is true with any other combination of modes that covers one permanent twice."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2020-11-10"^^xsd:date ;
+        :rulingText """If a card is exiled "until" another permanent leaves the battlefield, the exiled card returns to the battlefield immediately after that permanent leaves the battlefield during Austere Command's resolution, and it may be destroyed by a later mode."""@en ] .
 
 :ShalaiVoiceOfPlenty rdf:type owl:NamedIndividual ,
                   :Card ;

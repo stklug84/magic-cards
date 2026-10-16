@@ -108,6 +108,46 @@ When Ojer Taq dies, return it to the battlefield tapped and transformed under it
         :rulingDate "2023-11-10"^^xsd:date ;
         :rulingText """Everything that is specified by the effect creating the original token or tokens will also be true about the additional tokens created by Ojer Taq, Deepest Foundation's replacement effect. For example, if an effect tells you to create a token "tapped and attacking," the additional tokens will also be tapped and attacking. Similarly, if an effect creates a token and puts counters on it, the additional tokens will also get those counters."""@en ] .
 
+:DeepCavernBat rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Deep-Cavern Bat" ;
+    :manaCost "{1}{B}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Bat ;
+    :hasRarity :Uncommon ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :TheLostCavernsOfIxalan ;
+    :cardNumber "102"^^xsd:integer ;
+    :artist "Campbell White" ;
+    :hasLanguage :English ;
+    :power "1" ;
+    :powerValue "1"^^xsd:integer ;
+    :toughness "1" ;
+    :toughnessValue "1"^^xsd:integer ;
+    :hasKeywordAbility :Flying ,
+                       :Lifelink ;
+    :printedText """Flying, lifelink
+When this creature enters, look at target opponent's hand. You may exile a nonland card from it until this creature leaves the battlefield."""@en ;
+    :oracleText """Flying, lifelink
+When this creature enters, look at target opponent's hand. You may exile a nonland card from it until this creature leaves the battlefield."""@en ;
+    :flavorText """The first shriek locates the prey. The second immobilizes it."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=636806"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/lci/102/deep-cavern-bat"^^xsd:anyURI ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """If Deep-Cavern Bat leaves the battlefield before its last ability resolves, you'll still look at the target opponent's hand, but you won't exile any cards from it."""@en ] .
+
 :SaheelisLattice rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Saheeli's Lattice // Mastercraft Raptor" ;
@@ -160,6 +200,76 @@ Mastercraft Raptor's power is equal to the total power of the exiled cards used 
       [ rdf:type :Ruling ;
         :rulingDate "2023-11-10"^^xsd:date ;
         :rulingText """You may exile tokens you control as part of the materials required. However, because they aren't cards and won't stay in exile, any abilities that refer to what you "used to craft" the back faces won't refer to anything."""@en ] .
+
+:AmaliaBenavidesAguirre rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Amalia Benavides Aguirre" ;
+    :manaCost "{W}{B}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasSuperType :Legendary ;
+    :hasCardType :Creature ;
+    :hasSubType :Vampire ,
+                :Scout ;
+    :hasRarity :Rare ;
+    :hasColor :White ,
+              :Black ;
+    :hasColorIdentity :White ,
+                      :Black ;
+    :isInSet :TheLostCavernsOfIxalan ;
+    :cardNumber "221"^^xsd:integer ;
+    :artist "Alix Branwyn" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    :hasKeywordAction :Explore ;
+    :hasKeywordAbility :Ward ;
+    :printedText """Ward—Pay 3 life.
+Whenever you gain life, Amalia Benavides Aguirre explores. Then destroy all other creatures if its power is exactly 20. (To have this creature explore, reveal the top card of your library. Put that card into your hand if it's a land. Otherwise, put a +1/+1 counter on this creature, then put the card back or put it into your graveyard.)"""@en ;
+    :oracleText """Ward—Pay 3 life.
+Whenever you gain life, Amalia Benavides Aguirre explores. Then destroy all other creatures if its power is exactly 20. (To have this creature explore, reveal the top card of your library. Put that card into your hand if it's a land. Otherwise, put a +1/+1 counter on this creature, then put the card back or put it into your graveyard.)"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=636941"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/lci/221/amalia-benavides-aguirre"^^xsd:anyURI ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Banned ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """In some unusual cases, noncreature permanents may explore. For example, if the creature card returned by Defossilize is somehow not a creature once it's on the battlefield, it can still explore. You'll take all the same actions, and you may end up putting a +1/+1 counter on the permanent. (Note that some effects target a creature, and those effects would still require a legal target to have it explore.)"""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """If a resolving spell or ability instructs a specific creature to explore but that creature has left the battlefield, the creature still explores. If you reveal a nonland card this way, you won't put a +1/+1 counter on anything, but you may put the revealed card into your graveyard. Effects that trigger "whenever a creature explores" trigger as appropriate."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """Once an ability that causes a creature to explore begins to resolve, no player may take any other actions until it's done. Notably, opponents can't try to remove the exploring creature after you reveal a nonland card but before it receives a counter."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """The instruction for Amalia Benavides Aguirre to explore and the effect that occurs if Amalia Benavides Aguirre's power is exactly 20 are all part of the same ability. Players do not get to chance to respond to the ability after knowing the result of the explore."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """Amalia Benavides Aguirre's power is checked only once, as the triggered ability resolves. If it is no longer on the battlefield at that point, use its power as it last existed on the battlefield."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """If no card is revealed, most likely because that player's library is empty, the exploring creature receives a +1/+1 counter."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """Some spells or abilities might cause a creature to explore multiple times in a row. If you reveal a nonland card when a creature explores and leave it on top of your library, then the creature explores again immediately afterwards, you'll reveal the same card again."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """If multiple creatures with lifelink you control deal combat damage at the same time, the damage dealt by each of those creatures is a separate life-gaining event and Amalia Benavides Aguirre's ability will trigger that many times."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """If an ability instructs a creature to explore, its controller reveals the top card of their library. If it's a land card, they'll put it into their hand. Otherwise, they'll put a +1/+1 counter on that creature, then choose to either leave that card on top of their library or put it into their graveyard."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """Amalia Benavides Aguirre's power must be exactly 20 during the resolution of its last ability after it finishes exploring in order to destroy all other creatures. If it's more or less than 20, nothing is destroyed."""@en ] .
 
 :AnimPakalThousandthMoon rdf:type owl:NamedIndividual ,
                   :Card ;

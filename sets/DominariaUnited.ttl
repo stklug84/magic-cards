@@ -278,7 +278,7 @@ This creature enters with X +1/+1 counters on it."""@en ;
       [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] .
 
-:BrokenWings rdf:type owl:NamedIndividual ,
+:BrokenWingsDominariaUnited157 rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Broken Wings" ;
     :manaCost "{2}{G}" ;

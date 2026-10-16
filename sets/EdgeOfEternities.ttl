@@ -84,7 +84,7 @@ Equip {3} ({3}: Attach to target creature you control. Equip only as a sorcery.)
       [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] .
 
-:BanishingLight rdf:type owl:NamedIndividual ,
+:BanishingLightEdgeOfEternities6 rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Banishing Light" ;
     :manaCost "{2}{W}" ;
@@ -111,21 +111,6 @@ Equip {3} ({3}: Attach to target creature you control. Equip only as a sorcery.)
       [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ;
     :hasRuling
       [ rdf:type :Ruling ;
-        :rulingDate "2021-03-19"^^xsd:date ;
-        :rulingText """Auras attached to the exiled permanent will be put into their owners' graveyards. Any Equipment will become unattached and remain on the battlefield. Any counters on the exiled permanent will cease to exist. When the card returns to the battlefield, it will be a new object with no connection to the card that was exiled."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2021-03-19"^^xsd:date ;
-        :rulingText """If Banishing Light leaves the battlefield before its triggered ability resolves, the target permanent won't be exiled."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2021-03-19"^^xsd:date ;
-        :rulingText """If a token is exiled this way, it will cease to exist and won't return to the battlefield."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2021-03-19"^^xsd:date ;
-        :rulingText """If an Aura is exiled this way, its owner chooses what it will enchant as it returns to the battlefield. An Aura put onto the battlefield this way doesn't target anything (so it could be attached to a permanent with shroud, for example), but the Aura's enchant ability restricts what it can be attached to. If the Aura can't legally be attached to anything, it remains in exile for the rest of the game."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2025-07-25"^^xsd:date ;
-        :rulingText """If a token is exiled this way, it will cease to exist and won’t return to the battlefield."""@en ] ,
-      [ rdf:type :Ruling ;
         :rulingDate "2025-07-25"^^xsd:date ;
         :rulingText """If Banishing Light leaves the battlefield before its triggered ability resolves, the target permanent won’t be exiled."""@en ] ,
       [ rdf:type :Ruling ;
@@ -133,7 +118,10 @@ Equip {3} ({3}: Attach to target creature you control. Equip only as a sorcery.)
         :rulingText """If an Aura is exiled this way, its owner chooses what it will enchant as it returns to the battlefield. An Aura put onto the battlefield this way doesn’t target anything (so it could be attached to a permanent an opponent controls with hexproof, for example), but the Aura’s enchant ability restricts what it can be attached to. If the Aura can’t legally be attached to anything, it remains in exile for the rest of the game."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2025-07-25"^^xsd:date ;
-        :rulingText """Auras attached to the exiled permanent will be put into their owners’ graveyards. Any Equipment will become unattached and remain on the battlefield. Any counters on the exiled permanent will cease to exist. When the card returns to the battlefield, it will be a new object with no connection to the card that was exiled."""@en ] .
+        :rulingText """Auras attached to the exiled permanent will be put into their owners’ graveyards. Any Equipment will become unattached and remain on the battlefield. Any counters on the exiled permanent will cease to exist. When the card returns to the battlefield, it will be a new object with no connection to the card that was exiled."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-07-25"^^xsd:date ;
+        :rulingText """If a token is exiled this way, it will cease to exist and won’t return to the battlefield."""@en ] .
 
 :DawnstrikeVanguard rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -314,6 +302,47 @@ When this creature dies, put its counters on target creature you control."""@en 
       [ rdf:type :Ruling ;
         :rulingDate "2025-07-25"^^xsd:date ;
         :rulingText """A Spacecraft you control that’s also a creature counts only once toward the value of X."""@en ] .
+
+:HaliyaGuidedByLight rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Haliya, Guided by Light" ;
+    :manaCost "{2}{W}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasSuperType :Legendary ;
+    :hasCardType :Creature ;
+    :hasSubType :Human ,
+                :Soldier ;
+    :hasRarity :Rare ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :EdgeOfEternities ;
+    :cardNumber "19"^^xsd:integer ;
+    :artist "Kieran Yanner" ;
+    :hasLanguage :English ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "3" ;
+    :toughnessValue "3"^^xsd:integer ;
+    :hasKeywordAbility :Warp ;
+    :printedText """Whenever Haliya or another creature or artifact you control enters, you gain 1 life.
+At the beginning of your end step, draw a card if you've gained 3 or more life this turn.
+Warp {W} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)"""@en ;
+    :oracleText """Whenever Haliya or another creature or artifact you control enters, you gain 1 life.
+At the beginning of your end step, draw a card if you've gained 3 or more life this turn.
+Warp {W} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)"""@en ;
+    :scryfallUrl "https://scryfall.com/card/eoe/19/haliya-guided-by-light"^^xsd:anyURI ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-07-25"^^xsd:date ;
+        :rulingText """Haliya, Guided by Light’s second ability checks how much life you’ve gained during the turn at the time it resolves, not what your life total is compared to what it was when the turn began. For example, if you start the turn at 10 life, gain 6 life during the turn, then lose 6 life later that turn, Haliya’s second ability will cause you to draw a card as it resolves."""@en ] .
 
 :LumenClassFrigate rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -2979,8 +3008,8 @@ Warp {1}{R} (You may cast this card from your hand for its warp cost. Exile this
     :cardNumber "156"^^xsd:integer ;
     :artist "Diana Franco" ;
     :hasLanguage :English ;
-    :printedText """Target creature gets +3/+0 and gains first strike and reach until end of turn."""@en ;
-    :oracleText """Target creature gets +3/+0 and gains first strike and reach until end of turn."""@en ;
+    :printedText """Target creature gets +3/+0 and gains reach and first strike until end of turn."""@en ;
+    :oracleText """Target creature gets +3/+0 and gains reach and first strike until end of turn."""@en ;
     :flavorText """"We build our beamcutters to mince bedrock. Should slice a Eumidian hull with no issues.\""""@en ;
     :scryfallUrl "https://scryfall.com/card/eoe/156/rig-for-war"^^xsd:anyURI ;
     :hasLegality
@@ -5139,6 +5168,88 @@ Station (Tap another creature you control: Put charge counters equal to its powe
       [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] .
+
+:AdagiaWindsweptBastion rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Adagia, Windswept Bastion" ;
+    :manaValue "0"^^xsd:nonNegativeInteger ;
+    :hasCardType :Land ;
+    :hasSubType :Planet ;
+    :hasRarity :MythicRare ;
+    :hasColorIdentity :White ;
+    :isInSet :EdgeOfEternities ;
+    :cardNumber "277"^^xsd:integer ;
+    :artist "Piotr Dura" ;
+    :hasLanguage :English ;
+    :producesMana :White ;
+    :entersTapped "true"^^xsd:boolean ;
+    :hasKeywordAbility :Station ;
+    :printedText """This land enters tapped.
+{T}: Add {W}.
+Station (Tap another creature you control: Put charge counters equal to its power on this Planet. Station only as a sorcery.)
+12+ | {3}{W}, {T}: Create a token that's a copy of target artifact or enchantment you control, except it's legendary. Activate only as a sorcery."""@en ;
+    :oracleText """This land enters tapped.
+{T}: Add {W}.
+Station (Tap another creature you control: Put charge counters equal to its power on this Planet. Station only as a sorcery.)
+12+ | {3}{W}, {T}: Create a token that's a copy of target artifact or enchantment you control, except it's legendary. Activate only as a sorcery."""@en ;
+    :scryfallUrl "https://scryfall.com/card/eoe/277/adagia-windswept-bastion"^^xsd:anyURI ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-07-25"^^xsd:date ;
+        :rulingText """Each station card has one or more striations in its text box. Each striation is preceded by a station symbol—a circle surrounding a number and a plus sign."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-07-25"^^xsd:date ;
+        :rulingText """Planet is a land subtype with no special meaning. It doesn’t grant the land any intrinsic abilities."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-07-25"^^xsd:date ;
+        :rulingText """Each station symbol represents an ability. A station symbol means “As long as this permanent has N or more charge counters on it, it has [abilities],” where N is the number inside the symbol and [abilities] are all the abilities found inside the same striation as that symbol."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-07-25"^^xsd:date ;
+        :rulingText """A station card is a card with the station keyword ability. The station keyword means “Tap another untapped creature you control: Put a number of charge counters on this permanent equal to the tapped creature’s power. Activate only as a sorcery.”"""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-07-25"^^xsd:date ;
+        :rulingText """If Adagia creates a token copy of an Aura, you choose what the token is enchanting as it enters the battlefield. This doesn’t target the player or permanent it will enchant, so a player or permanent with hexproof may be chosen this way. The chosen recipient must be able to legally be enchanted by the Aura, so a player or permanent with protection from one of the Aura’s qualities can’t be chosen this way. If there’s nothing legal for the Aura token to enchant, the token is never created."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-07-25"^^xsd:date ;
+        :rulingText """If a permanent with station becomes a creature, it will be able to attack if it’s been under your control continuously since the turn began. That is, it doesn’t matter how long it’s been a creature, just how long it’s been on the battlefield."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-07-25"^^xsd:date ;
+        :rulingText """If Adagia’s last ability creates a token copy of a nonlegendary permanent, you’ll control two permanents with the same name, but only one of them (the newly created token) will be legendary. You won’t put any of them into their owners’ graveyards."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-07-25"^^xsd:date ;
+        :rulingText """The abilities of a permanent with station are based on the number of charge counters it has. This means that if a permanent with station gets charge counters due to some other effect (such as proliferate) or loses charge counters somehow, its abilities change accordingly. The same is true for determining whether or not that permanent is a creature."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-07-25"^^xsd:date ;
+        :rulingText """Even if a permanent with station has equal or greater charge counters than the number in its last station symbol, you can still activate its station ability. Adding more charge counters won’t give it additional abilities, but other effects or cards might make those extra counters relevant."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-07-25"^^xsd:date ;
+        :rulingText """If the copied permanent is copying something else, then the token enters as whatever that permanent copied, with the listed exception."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-07-25"^^xsd:date ;
+        :rulingText """Use the tapped creature’s power as the station ability resolves to determine how many charge counters to put on the permanent with station. If that creature isn’t on the battlefield at that time, use its power as it last existed on the battlefield."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-07-25"^^xsd:date ;
+        :rulingText """Any enters abilities of the copied permanent will trigger when the token enters. Any “as [this permanent] enters” or “[this permanent] enters with” abilities of the copied permanent will also work."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-07-25"^^xsd:date ;
+        :rulingText """The token created by Adagia’s last ability copies exactly what was printed on the original permanent and nothing else, with the listed exception (unless that permanent is copying something else or is a token; see below). It doesn’t copy whether that permanent is tapped or untapped, whether it has any counters on it or Auras and Equipment attached to it, or any non-copy effects that have changed its power, toughness, types, color, or so on. If it is a Vehicle, it is not crewed. If it is an Equipment, it is not attached to any creature."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-07-25"^^xsd:date ;
+        :rulingText """If another permanent becomes a copy of a permanent represented by a station card, all of its printed abilities, including the ones represented by station symbols, are copied. Its current characteristics and the number of charge counters on it are not copied. The abilities (and in some cases, types, power, and toughness) are determined based on the number of charge counters on the copy."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-07-25"^^xsd:date ;
+        :rulingText """If the copied permanent is a token, the token that’s created copies the original characteristics of that token as stated by the effect that created the token, with the listed exception."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-07-25"^^xsd:date ;
+        :rulingText """If the tapped creature has negative power, no charge counters are put onto or removed from the permanent with station."""@en ] .
 
 :UthrosTitanicGodcore rdf:type owl:NamedIndividual ,
                   :Card ;

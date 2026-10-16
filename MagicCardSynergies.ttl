@@ -440,7 +440,7 @@ the card individuals it relates."""@en .
 # --- Cathar's Call ---
 :CatharsCall :enables :ColonelAutumn ,  # Token each turn is exploit fodder
                       :CombineChrysalis ,  # Steady tokens to sacrifice for Beasts
-                      :CrusaderOfOdric ,  # Tokens grow creature-count P/T
+                      :CrusaderOfOdricInnistradRemastered18 ,  # Tokens grow creature-count P/T
                       :FalkenrathTorturer ,  # Human tokens are premium sac fodder
                       :HamletCaptain .  # Human tokens sized up by tribal pump
 
@@ -577,7 +577,7 @@ the card individuals it relates."""@en .
 :CutthroatNegotiator :enables :LeelaSevateemWarrior .  # Parley opponent draws give Leela counters
 
 # --- Cyberdrive Awakener ---
-:CyberdriveAwakener :enables :CultivatorsCaravan ,  # Turns uncrewed Caravan into a 4/4 attacker
+:CyberdriveAwakener :enables :CultivatorsCaravanAetherdriftCommander127 ,  # Turns uncrewed Caravan into a 4/4 attacker
                              :Cybermat .  # Animated artifacts swell attacker count
 
 # --- Cyberman Patrol ---
@@ -1316,7 +1316,7 @@ the card individuals it relates."""@en .
 
 # --- March of the Machines ---
 :MarchOfTheMachines :enables :ApocalypseRunner ,  # Animates the Vehicle so it attacks without crewing
-                             :CultivatorsCaravan ,  # Animates the mana rock Vehicle without crewing
+                             :CultivatorsCaravanAetherdriftCommander127 ,  # Animates the mana rock Vehicle without crewing
                              :HoneymoonHearse ,  # Becomes a 3/3 attacker without tapping creatures
                              :NickValentinePrivateEye .  # Clue sac = artifact creature death, new Clue
 
@@ -1327,7 +1327,7 @@ the card individuals it relates."""@en .
 :MasterfulReplication :enables :StarfieldVocalist .  # Creates extra permanent ETBs, feeding Vocalist's trigger doubling
 
 # --- Mechanized Production ---
-:MechanizedProductionMurdersAtKarlovManorCommander109 :amplifies :CultivatorsCaravan ,  # Copies the mana-rock Vehicle every upkeep
+:MechanizedProductionMurdersAtKarlovManorCommander109 :amplifies :CultivatorsCaravanAetherdriftCommander127 ,  # Copies the mana-rock Vehicle every upkeep
                                                                  :SolarTransformerAetherdriftCommander137 .  # Copy each upkeep re-triggers 3-energy ETB, builds to name-win
 :MechanizedProductionMurdersAtKarlovManorCommander109 :enables :EraOfInnovationAetherdriftCommander75 ,  # Upkeep artifact copy entering triggers Era
                                                                :GontisAetherHeart ,  # Upkeep artifact copy triggers Heart's energy
@@ -1343,7 +1343,7 @@ the card individuals it relates."""@en .
                             :SchemingAspirant .  # Each proliferate drains opponents 2
 
 # --- Mirrodin Besieged ---
-:MirrodinBesieged :enables :MentorOfTheMeek ,  # Myr token ETBs trigger pay-1 draws
+:MirrodinBesieged :enables :MentorOfTheMeekInnistradRemastered34 ,  # Myr token ETBs trigger pay-1 draws
                            :NyssaOfTraken ,  # Myr artifact tokens are sac fodder
                            :OreplatePangolin .  # Myr token ETBs pay into +1/+1 counters
 
@@ -1371,14 +1371,14 @@ the card individuals it relates."""@en .
 
 # --- Myr Battlesphere ---
 :MyrBattlesphere :enables :ApocalypseRunner ,  # Four Myr tokens easily pay crew 3
-                          :CrusaderOfOdric ,  # Four Myr tokens boost creature-count P/T
-                          :CultivatorsCaravan ,  # Myr tokens pay crew 3 to turn the rock into a 5/5
+                          :CrusaderOfOdricInnistradRemastered18 ,  # Four Myr tokens boost creature-count P/T
+                          :CultivatorsCaravanAetherdriftCommander127 ,  # Myr tokens pay crew 3 to turn the rock into a 5/5
                           :CurieEmergentIntelligence ,  # Big nontoken artifact body to copy
                           :CybermanPatrol ,  # Myr swarm weaponized with afflict
                           :Cybermat ,  # Mass artifact attackers pump skulker
                           :LunarchVeteran ,  # Four Myr ETBs = four lifegain triggers
                           :MasterOfEtherium ,  # Five artifacts pump Master's power
-                          :MentorOfTheMeek ,  # Four 1/1 Myr = four draw triggers
+                          :MentorOfTheMeekInnistradRemastered34 ,  # Four 1/1 Myr = four draw triggers
                           :NestingDovehawk ,  # Myr tokens to populate and stack counters
                           :OverseerOfVault76 .  # Four small Myr = four quest counters
 
@@ -1440,7 +1440,7 @@ the card individuals it relates."""@en .
                          :StensiaMasquerade .  # Discard outlet turns on madness cost
 
 # --- Oltec Matterweaver ---
-:OltecMatterweaver :enables :MentorOfTheMeek .  # 1/1 Gnome per creature cast triggers draw
+:OltecMatterweaver :enables :MentorOfTheMeekInnistradRemastered34 .  # 1/1 Gnome per creature cast triggers draw
 
 # --- Panharmonicon ---
 :PanharmoniconAetherdriftCommander135 :amplifies :AetherChanneler ,  # doubles modal ETB trigger
@@ -1490,7 +1490,7 @@ the card individuals it relates."""@en .
                                                  :InspiredInventor ,  # ETB modal choice made twice
                                                  :KappaCannoneer ,  # Artifact-ETB counter trigger doubled
                                                  :KellanJoinsUp ,  # Legend ETB-caused trigger fires twice
-                                                 :MentorOfTheMeek ,  # Doubles creature-ETB draw triggers
+                                                 :MentorOfTheMeekInnistradRemastered34 ,  # Doubles creature-ETB draw triggers
                                                  :MistRavenInnistradRemastered76 ,  # ETB bounce triggers twice
                                                  :MultiformWonder ,  # ETB energy trigger yields 6 energy
                                                  :MyrBattlesphere ,  # ETB makes eight Myr tokens
@@ -1895,7 +1895,7 @@ the card individuals it relates."""@en .
 :StarfieldVocalist :amplifies :AbundantGrowth ,  # doubles Aura ETB draw trigger
                                                 :ArchitectOfTheUntamed ,  # Doubles this card's trigger from permanents entering (Vocalist rule)
                                                 :BanishToAnotherUniverse ,  # doubles ETB exile trigger
-                                                :BanishingLight ,  # doubles ETB exile trigger
+                                                :BanishingLightEdgeOfEternities6 ,  # doubles ETB exile trigger
                                                 :BloodtitheHarvesterInnistradCrimsonVow232 ,  # ETB trigger fires twice
                                                 :CampusGuide ,  # ETB trigger fires twice
                                                 :CovetedJewel ,  # ETB draw trigger fires twice
@@ -1960,7 +1960,7 @@ the card individuals it relates."""@en .
 :SurvivorsMedKit :enables :TheThirdDoctor .  # Food tokens grow his noncreature-token buff
 
 # --- Swiftfoot Boots ---
-:SwiftfootBoots :enables :CurieEmergentIntelligence ,  # Hasty protected Curie attacks to draw immediately
+:SwiftfootBootsMagicTheGatheringFoundations258 :enables :CurieEmergentIntelligence ,  # Hasty protected Curie attacks to draw immediately
                          :EmryLurkerOfTheLoch .  # Haste for instant tap ability; hexproof protects her
 
 # --- Synth Eradicator ---
@@ -2025,7 +2025,7 @@ the card individuals it relates."""@en .
                         :Thawbringer ,  # Dies-surveil trigger fires twice
                         :TheMasterGallifreysEnd ,  # Artifact-creature-death trigger fires twice
                         :TriplicateTitan ,  # Death trigger doubles to six Golem tokens
-                        :VengefulBloodwitch ,  # Death drain trigger fires twice per death
+                        :VengefulBloodwitchMagicTheGatheringFoundations76 ,  # Death drain trigger fires twice per death
                         :WaryThespian ,  # Dies-surveil trigger fires twice
                         :WretchedThrong ,  # Dies-search trigger fires twice
                         :ZulaportCutthroat .  # Death-caused drain triggers twice
@@ -2190,7 +2190,7 @@ the card individuals it relates."""@en .
 
 # --- Vampire Gourmand ---
 :VampireGourmand :enables :VashtaNerada ,  # Sacrifice guarantees morbid counter each turn
-                          :VengefulBloodwitch ,  # Attack sac forces death drain triggers
+                          :VengefulBloodwitchMagicTheGatheringFoundations76 ,  # Attack sac forces death drain triggers
                           :ZulaportCutthroat .  # Attack sac forces death drain triggers
 
 # --- Vault 112: Sadistic Simulation ---
@@ -2200,7 +2200,7 @@ the card individuals it relates."""@en .
 :Vault13DwellersJourney :amplifies :SeamRip .  # Flickers own SeamRip to re-fire its exile ETB
 
 # --- Vengeful Bloodwitch ---
-:VengefulBloodwitch :enables :CliffhavenVampire .  # Lifegain from deaths triggers drain
+:VengefulBloodwitchMagicTheGatheringFoundations76 :enables :CliffhavenVampire .  # Lifegain from deaths triggers drain
 
 # --- Vilespawn Spider ---
 :VilespawnSpider :enables :VrestinMenoptraLeader .  # Insect token army feeds attack counter trigger
@@ -2258,7 +2258,7 @@ the card individuals it relates."""@en .
                                                  :GrowingRanks ,  # Thopter tokens give populate a target
                                                  :GuideOfSouls ,  # Each Thopter ETB gives life and energy
                                                  :MasterOfEtherium ,  # Thopters boost power and get +1/+1
-                                                 :MentorOfTheMeek ,  # Thopter ETBs trigger pay-1 draws
+                                                 :MentorOfTheMeekInnistradRemastered34 ,  # Thopter ETBs trigger pay-1 draws
                                                  :NestingDovehawk ,  # Thopter tokens feed populate and counters
                                                  :Octomancer ,  # Fresh Thopter tokens to copy each end step
                                                  :OverseerOfVault76 .  # Small Thopter ETBs add quest counters
@@ -2273,7 +2273,7 @@ the card individuals it relates."""@en .
 :WorkshopElders :enables :WildwoodScourge .  # Four counters on animated artifact trigger Scourge
 
 # --- Wound Reflection ---
-:WoundReflection :amplifies :VengefulBloodwitch ,  # Repeats opponent life loss at end step
+:WoundReflection :amplifies :VengefulBloodwitchMagicTheGatheringFoundations76 ,  # Repeats opponent life loss at end step
                             :VitoThornOfTheDuskRose ,  # Repeats Vito's life-loss at end step
                             :ZulaportCutthroat .  # Death drains repeat as end-step life loss
 

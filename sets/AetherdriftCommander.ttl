@@ -749,19 +749,19 @@ If one or more artifact tokens would be created under your control, those tokens
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2011-09-22"^^xsd:date ;
-        :rulingText """The owner of a token is the player under whose control the token was put onto the battlefield. If a token is shuffled into a player's library this way, that player shuffles before revealing the top card of that library."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2011-09-22"^^xsd:date ;
-        :rulingText """A permanent card is a card with one or more of the following card types: artifact, creature, enchantment, land, or planeswalker."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2011-09-22"^^xsd:date ;
         :rulingText """If the revealed card is not a permanent card, it remains on top of that library."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2011-09-22"^^xsd:date ;
+        :rulingText """The owner of a token is the player under whose control the token was put onto the battlefield. If a token is shuffled into a player's library this way, that player shuffles before revealing the top card of that library."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2011-09-22"^^xsd:date ;
         :rulingText """If the revealed card is a permanent card but can't enter (perhaps because it's an Aura with nothing to enchant), it remains on top of that library."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2011-09-22"^^xsd:date ;
-        :rulingText """If the permanent is an illegal target by the time Chaos Warp tries to resolve, it won't resolve and none of its effects will occur. No library will be shuffled and no card will be revealed."""@en ] .
+        :rulingText """If the permanent is an illegal target by the time Chaos Warp tries to resolve, it won't resolve and none of its effects will occur. No library will be shuffled and no card will be revealed."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2011-09-22"^^xsd:date ;
+        :rulingText """A permanent card is a card with one or more of the following card types: artifact, creature, enchantment, land, or planeswalker."""@en ] .
 
 :DruidOfPurification rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -832,13 +832,13 @@ If one or more artifact tokens would be created under your control, those tokens
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2020-11-10"^^xsd:date ;
+        :rulingText """If you don't have a commander, Arcane Signet's ability produces no mana."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2020-11-10"^^xsd:date ;
         :rulingText """If you have two commanders, the ability adds one mana of any color in their combined color identities."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2020-11-10"^^xsd:date ;
-        :rulingText """If your commander is a card that has no colors in its color identity, Arcane Signet's ability produces no mana. It doesn't produce {C}."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2020-11-10"^^xsd:date ;
-        :rulingText """If you don't have a commander, Arcane Signet's ability produces no mana."""@en ] .
+        :rulingText """If your commander is a card that has no colors in its color identity, Arcane Signet's ability produces no mana. It doesn't produce {C}."""@en ] .
 
 :ChromaticLanternAetherdriftCommander53 rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -1050,10 +1050,10 @@ Equip {0}"""@en ;
         :rulingText """If you don't have a commander, Command Tower's ability produces no mana."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2020-11-10"^^xsd:date ;
-        :rulingText """If you have two commanders, the ability adds one mana of any color in their combined color identities."""@en ] ,
+        :rulingText """If your commander is a card that has no colors in its color identity, Command Tower's ability produces no mana. It doesn't produce {C}."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2020-11-10"^^xsd:date ;
-        :rulingText """If your commander is a card that has no colors in its color identity, Command Tower's ability produces no mana. It doesn't produce {C}."""@en ] .
+        :rulingText """If you have two commanders, the ability adds one mana of any color in their combined color identities."""@en ] .
 
 :AethersquallAncientAetherdriftCommander68 rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -1729,13 +1729,13 @@ Blasphemous Act deals 13 damage to each creature."""@en ;
         :rulingText """The total cost to cast Blasphemous Act is locked in before you pay that cost. For example, if there are three creatures on the battlefield, including one you can sacrifice to add {C}, the total cost of Blasphemous Act is {5}{R}. Then you can sacrifice the creature when you activate mana abilities just before paying the cost."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2020-11-10"^^xsd:date ;
-        :rulingText """Blasphemous Act's ability can't reduce the total cost to cast the spell below {R}."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2020-11-10"^^xsd:date ;
         :rulingText """To determine the total cost of a spell, start with the mana cost or alternative cost you're paying, add any cost increases, then apply any cost reductions (such as that of Blasphemous Act). The mana value of the spell is determined only by its mana cost, no matter what the total cost to cast the spell was."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2020-11-10"^^xsd:date ;
-        :rulingText """Although players may respond to Blasphemous Act once it's been cast, once it's announced, they can't respond before the cost is calculated and paid."""@en ] .
+        :rulingText """Although players may respond to Blasphemous Act once it's been cast, once it's announced, they can't respond before the cost is calculated and paid."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2020-11-10"^^xsd:date ;
+        :rulingText """Blasphemous Act's ability can't reduce the total cost to cast the spell below {R}."""@en ] .
 
 :CombustibleGearhulkAetherdriftCommander102 rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -1775,13 +1775,13 @@ When this creature enters, target opponent may have you draw three cards. If the
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2016-09-20"^^xsd:date ;
-        :rulingText """If you have fewer than three cards in your library, the opponent may choose to have you draw three cards. If so, you'll lose the game as state-based actions are performed."""@en ] ,
+        :rulingText """If any of the cards put into your graveyard have {X} in their mana cost, X is considered to be 0."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2016-09-20"^^xsd:date ;
         :rulingText """While Combustible Gearhulk's triggered ability is resolving, no player may take any actions other than those specified by the Gearhulk. Once the opponent makes a choice, players can't cast spells or activate abilities until after the cards are drawn or put into the graveyard and damage has been dealt (if applicable)."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2016-09-20"^^xsd:date ;
-        :rulingText """If any of the cards put into your graveyard have {X} in their mana cost, X is considered to be 0."""@en ] .
+        :rulingText """If you have fewer than three cards in your library, the opponent may choose to have you draw three cards. If so, you'll lose the game as state-based actions are performed."""@en ] .
 
 :LightningRunnerAetherdriftCommander103 rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -2219,12 +2219,12 @@ Pay eight {E}: Create a 6/6 colorless Beast artifact creature token."""@en ;
     :hasKeywordAbility :Reach ,
                        :Vigilance ,
                        :Trample ;
-    :printedText """Vigilance, reach, trample
+    :printedText """Reach, vigilance, trample
 Whenever this creature attacks or blocks, choose one —
 • Create a 3/3 green Beast creature token.
 • You gain 3 life.
 • Draw a card."""@en ;
-    :oracleText """Vigilance, reach, trample
+    :oracleText """Reach, vigilance, trample
 Whenever this creature attacks or blocks, choose one —
 • Create a 3/3 green Beast creature token.
 • You gain 3 life.
@@ -2704,13 +2704,13 @@ Sacrifice this artifact: Draw a card."""@en ;
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2020-11-10"^^xsd:date ;
-        :rulingText """If you don't have a commander, Commander's Sphere's first ability produces no mana."""@en ] ,
+        :rulingText """If your commander is a card that has no colors in its color identity, Commander's Sphere's first ability produces no mana. It doesn't produce {C}."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2020-11-10"^^xsd:date ;
         :rulingText """If you have two commanders, the ability adds one mana of any color in their combined color identities."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2020-11-10"^^xsd:date ;
-        :rulingText """If your commander is a card that has no colors in its color identity, Commander's Sphere's first ability produces no mana. It doesn't produce {C}."""@en ] .
+        :rulingText """If you don't have a commander, Commander's Sphere's first ability produces no mana."""@en ] .
 
 :ConjurersCloset rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -2751,7 +2751,7 @@ Sacrifice this artifact: Draw a card."""@en ;
         :rulingDate "2020-08-07"^^xsd:date ;
         :rulingText """Once the exiled creature returns, it's considered a new object with no relation to the object that it was. Auras attached to the exiled creature will be put into their owners' graveyards. Equipment attached to the exiled creature will become unattached and remain on the battlefield. Any counters on the exiled creature will cease to exist."""@en ] .
 
-:CultivatorsCaravan rdf:type owl:NamedIndividual ,
+:CultivatorsCaravanAetherdriftCommander127 rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Cultivator's Caravan" ;
     :manaCost "{3}" ;
@@ -3128,7 +3128,7 @@ When this creature dies, you may draw a card."""@en ;
       [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] .
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] .
 
 :TalismanOfCuriosity rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -3317,16 +3317,16 @@ When this creature dies, create a 3/3 colorless Golem artifact creature token wi
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2009-02-01"^^xsd:date ;
-        :rulingText """Exotic Orchard checks the effects of all mana-producing abilities of lands your opponents control, but it doesn't check their costs. For example, Vivid Crag has the ability "{T}, Remove a charge counter from Vivid Crag: Add one mana of any color." If an opponent controls Vivid Crag and you control Exotic Orchard, you can tap Exotic Orchard for any color of mana. It doesn't matter whether Vivid Crag has a charge counter on it, and it doesn't matter whether it's untapped."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2009-02-01"^^xsd:date ;
-        :rulingText """Exotic Orchard doesn't care about any restrictions or riders your opponents' lands (such as Ancient Ziggurat or Hall of the Bandit Lord) put on the mana they produce. It just cares about colors of mana."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2009-02-01"^^xsd:date ;
         :rulingText """When determining what colors of mana your opponents' lands could produce, Exotic Orchard takes into account any applicable replacement effects that would apply to those lands' mana abilities (such as Contamination's effect, for example). If there are more than one, consider them in any possible order."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2009-02-01"^^xsd:date ;
         :rulingText """The colors of mana are white, blue, black, red, and green. Exotic Orchard can't be tapped for colorless mana, even if a land an opponent controls could produce colorless mana."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2009-02-01"^^xsd:date ;
+        :rulingText """Exotic Orchard checks the effects of all mana-producing abilities of lands your opponents control, but it doesn't check their costs. For example, Vivid Crag has the ability "{T}, Remove a charge counter from Vivid Crag: Add one mana of any color." If an opponent controls Vivid Crag and you control Exotic Orchard, you can tap Exotic Orchard for any color of mana. It doesn't matter whether Vivid Crag has a charge counter on it, and it doesn't matter whether it's untapped."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2009-02-01"^^xsd:date ;
+        :rulingText """Exotic Orchard doesn't care about any restrictions or riders your opponents' lands (such as Ancient Ziggurat or Hall of the Bandit Lord) put on the mana they produce. It just cares about colors of mana."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2009-02-01"^^xsd:date ;
         :rulingText """Lands that produce mana based only on what other lands "could produce" won't help each other unless some other land allows one of them to actually produce some type of mana. For example, if you control an Exotic Orchard and your opponent controls an Exotic Orchard and a Reflecting Pool, none of those lands would produce mana if their mana abilities were activated. On the other hand, if you control a Forest and an Exotic Orchard, and your opponent controls an Exotic Orchard and a Reflecting Pool, then each of those lands can be tapped to produce {G}. Your opponent's Exotic Orchard can produce {G} because you control a Forest. Your Exotic Orchard and your opponent's Reflecting Pool can each produce {G} because your opponent's Exotic Orchard can produce {G}."""@en ] .
@@ -3548,10 +3548,10 @@ When this creature dies, create a 3/3 colorless Golem artifact creature token wi
         :rulingText """If your commander is a card that has no colors in its color identity, Path of Ancestry's ability produces no mana. It doesn't produce {C}."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2023-07-28"^^xsd:date ;
-        :rulingText """If you have two commanders, the last ability adds one mana of any color in their combined color identities. When you spend that mana on a creature spell that shares a creature type with either of your commanders, you'll scry 1."""@en ] ,
+        :rulingText """Your commander's creature types are checked immediately after you cast a creature spell spending mana from Path of Ancestry's last ability. They aren't set before the game begins, and they may not be the same types your commander had when you activated that ability."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2023-07-28"^^xsd:date ;
-        :rulingText """Your commander's creature types are checked immediately after you cast a creature spell spending mana from Path of Ancestry's last ability. They aren't set before the game begins, and they may not be the same types your commander had when you activated that ability."""@en ] .
+        :rulingText """If you have two commanders, the last ability adds one mana of any color in their combined color identities. When you spend that mana on a creature spell that shares a creature type with either of your commanders, you'll scry 1."""@en ] .
 
 :RootboundCrag rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -3585,10 +3585,10 @@ When this creature dies, create a 3/3 colorless Golem artifact creature token wi
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2009-10-01"^^xsd:date ;
-        :rulingText """This checks for lands you control with the land type Mountain or Forest, not for lands named Mountain or Forest. The lands it checks for don't have to be basic lands. For example, if you control Temple Garden (a nonbasic land with the land types Forest and Plains), Rootbound Crag will enter untapped."""@en ] ,
+        :rulingText """As this is entering, it checks for lands that are already on the battlefield. It won't see lands that are entering at the same time (due to Warp World, for example)."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2009-10-01"^^xsd:date ;
-        :rulingText """As this is entering, it checks for lands that are already on the battlefield. It won't see lands that are entering at the same time (due to Warp World, for example)."""@en ] .
+        :rulingText """This checks for lands you control with the land type Mountain or Forest, not for lands named Mountain or Forest. The lands it checks for don't have to be basic lands. For example, if you control Temple Garden (a nonbasic land with the land types Forest and Plains), Rootbound Crag will enter untapped."""@en ] .
 
 :ShelteredThicket rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -3891,16 +3891,16 @@ When this land enters, scry 1. (Look at the top card of your library. You may pu
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2021-04-16"^^xsd:date ;
-        :rulingText """You may reveal any land card with either or both of the appropriate subtypes. It doesn't have to be a basic land card."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2021-04-16"^^xsd:date ;
         :rulingText """If a land card with an appropriate subtype is entering the battlefield from your hand at the same time as one of these lands, you may reveal the other land to have the "Snarl" enter untapped."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2021-04-16"^^xsd:date ;
-        :rulingText """The "Snarl" itself doesn't have any land subtypes. You can't reveal one to satisfy the ability of another."""@en ] ,
+        :rulingText """You may reveal any land card with either or both of the appropriate subtypes. It doesn't have to be a basic land card."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2021-04-16"^^xsd:date ;
-        :rulingText """If an effect instructs you to put one of these lands onto the battlefield tapped, it will still enter the battlefield tapped even if you reveal a land card from your hand."""@en ] .
+        :rulingText """If an effect instructs you to put one of these lands onto the battlefield tapped, it will still enter the battlefield tapped even if you reveal a land card from your hand."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2021-04-16"^^xsd:date ;
+        :rulingText """The "Snarl" itself doesn't have any land subtypes. You can't reveal one to satisfy the ability of another."""@en ] .
 
 :YavimayaCoast rdf:type owl:NamedIndividual ,
                   :Card ;

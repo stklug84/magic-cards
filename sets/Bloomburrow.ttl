@@ -52,6 +52,79 @@ subtype, format and legality definitions."""@en .
 #
 ################################################################################
 
+:EssenceChanneler rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Essence Channeler" ;
+    :manaCost "{1}{W}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Bat ,
+                :Cleric ;
+    :hasRarity :Rare ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :Bloomburrow ;
+    :cardNumber "12"^^xsd:integer ;
+    :artist "Wylie Beckert" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "1" ;
+    :toughnessValue "1"^^xsd:integer ;
+    :printedText """As long as you've lost life this turn, this creature has flying and vigilance.
+Whenever you gain life, put a +1/+1 counter on this creature.
+When this creature dies, put its counters on target creature you control."""@en ;
+    :oracleText """As long as you've lost life this turn, this creature has flying and vigilance.
+Whenever you gain life, put a +1/+1 counter on this creature.
+When this creature dies, put its counters on target creature you control."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=668926"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/blb/12/essence-channeler"^^xsd:anyURI ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """Each creature with lifelink dealing combat damage causes a separate life-gaining event. For example, if two creatures you control with lifelink deal combat damage at the same time, Essence Channeler’s second ability will trigger twice. However, if a single creature you control with lifelink deals combat damage to multiple creatures, players, planeswalkers, and/or battles at the same time (perhaps because it has trample or was blocked by more than one creature), the ability will trigger only once."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """In a Two-Headed Giant game, life gained by your teammate won’t cause Essence Channeler’s second ability to trigger even though it caused your team’s life total to increase."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """If enough -1/-1 counters are put on Essence Channeler at the same time to make its toughness 0 or less, its last ability will see all of the +1/+1 counters it had when it died as well as the -1/-1 counters it had, and an equal number of each of those types of counters (plus any other applicable counters) will be put onto the target creature."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """If you gain an amount of life “for each” of something, that life is gained as one event and Essence Channeler’s second ability triggers only once."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """Once Essence Channeler has been blocked by a creature without flying or reach, losing life to give it flying and vigilance won’t cause it to become unblocked."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """Essence Channeler’s second ability triggers just once for each life-gaining event, no matter how much life was gained."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """Essence Channeler’s first ability cares whether you’ve lost life this turn, not how your life total has changed. For example, if you’ve gained 2 life and lost 1 life so far this turn, you’ve still lost life."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """Essence Channeler’s last ability doesn’t cause you to move counters from Essence Channeler onto the target creature. Rather, you put the same number of each kind of counter Essence Channeler had when it died onto the target creature."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """If Essence Channeler has -1/-1 counters on it when it dies, that ability will include those as well. This may result in the recipient of the counters also dying."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """In some unusual cases, you may end up putting the appropriate counters on more than one permanent. For example, if you control The Ozolith when Essence Channeler dies, you’ll put the appropriate number of each kind of counter onto both The Ozolith and the target creature."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """If Essence Channeler is dealt lethal damage at the same time that you gain life, it won’t receive a counter from its second ability in time to save it."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """Essence Channeler’s last ability puts all counters that were on Essence Channeler onto the target creature, not just its +1/+1 counters."""@en ] .
+
 :StarscapeCleric rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Starscape Cleric" ;
@@ -171,6 +244,93 @@ Whenever you expend 4, you may discard your hand. If you do, draw two cards. (Yo
       [ rdf:type :Ruling ;
         :rulingDate "2024-07-26"^^xsd:date ;
         :rulingText """If the cost to cast a spell is increased, decreased, or changed because of additional or alternative costs, expend counts only the mana you actually spent."""@en ] .
+
+:ZoralineCosmosCaller rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Zoraline, Cosmos Caller" ;
+    :manaCost "{1}{W}{B}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasSuperType :Legendary ;
+    :hasCardType :Creature ;
+    :hasSubType :Bat ,
+                :Cleric ;
+    :hasRarity :Rare ;
+    :hasColor :White ,
+              :Black ;
+    :hasColorIdentity :White ,
+                      :Black ;
+    :isInSet :Bloomburrow ;
+    :cardNumber "242"^^xsd:integer ;
+    :artist "Justin Gerard" ;
+    :hasLanguage :English ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "3" ;
+    :toughnessValue "3"^^xsd:integer ;
+    :hasKeywordAbility :Flying ,
+                       :Vigilance ;
+    :printedText """Flying, vigilance
+Whenever a Bat you control attacks, you gain 1 life.
+Whenever Zoraline enters or attacks, you may pay {W}{B} and 2 life. When you do, return target nonland permanent card with mana value 3 or less from your graveyard to the battlefield with a finality counter on it."""@en ;
+    :oracleText """Flying, vigilance
+Whenever a Bat you control attacks, you gain 1 life.
+Whenever Zoraline enters or attacks, you may pay {W}{B} and 2 life. When you do, return target nonland permanent card with mana value 3 or less from your graveyard to the battlefield with a finality counter on it."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=669156"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/blb/242/zoraline-cosmos-caller"^^xsd:anyURI ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """You don’t choose a target for Zoraline’s last ability at the time it triggers. Rather, a second “reflexive” ability triggers when you pay {W}{B} and 2 life this way. You choose a target for this ability as it goes on the stack. Each player may respond to this triggered ability as normal."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """Multiple finality counters on a single permanent are redundant."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """Finality counters aren’t keyword counters, and a finality counter doesn’t give any abilities to the permanent it’s on. If that permanent loses its abilities and then would go to a graveyard, it will still be exiled instead."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """If a permanent with a finality counter on it would be put into a graveyard from the battlefield, exile it instead."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """Finality counters don’t stop permanents from going to zones other than the graveyard from the battlefield. For example, if a permanent with a finality counter on it would be put into its owner’s hand from the battlefield, it does so normally."""@en ] .
+
+:MudflatVillage rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Mudflat Village" ;
+    :manaValue "0"^^xsd:nonNegativeInteger ;
+    :hasCardType :Land ;
+    :hasRarity :Uncommon ;
+    :hasColorIdentity :Black ;
+    :isInSet :Bloomburrow ;
+    :cardNumber "257"^^xsd:integer ;
+    :artist "Samuele Bandini" ;
+    :hasLanguage :English ;
+    :producesMana :Black ,
+                  :Colorless ;
+    :printedText """{T}: Add {C}.
+{T}: Add {B}. Spend this mana only to cast a creature spell.
+{1}{B}, {T}, Sacrifice this land: Return target Bat, Lizard, Rat, or Squirrel card from your graveyard to your hand."""@en ;
+    :oracleText """{T}: Add {C}.
+{T}: Add {B}. Spend this mana only to cast a creature spell.
+{1}{B}, {T}, Sacrifice this land: Return target Bat, Lizard, Rat, or Squirrel card from your graveyard to your hand."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=669171"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/blb/257/mudflat-village"^^xsd:anyURI ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] .
 
 :MountainBloomburrow375 rdf:type owl:NamedIndividual ,
                   :Card ;
