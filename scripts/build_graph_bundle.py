@@ -33,6 +33,7 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import gzip
 import json
 import re
 import sys
@@ -50,6 +51,12 @@ ROOT = Path(__file__).resolve().parent.parent
 
 #: distribution name prefix of the produced tarball
 BUNDLE_NAME = "magic-cards-graph"
+
+#: the graph version is a date: this is its format and the tag pattern
+GRAPH_VERSION_FORMAT = "%Y-%m-%d"
+
+#: mode every archive member carries (only regular files are bundled)
+MEMBER_MODE = 0o644
 
 #: files and directories copied into the bundle, in bundle order
 BUNDLE_PATHS = (
@@ -147,8 +154,25 @@ def bundle_members(root: Path) -> list[tuple[Path, str]]:
     return members
 
 
+def bundle_stamp(graph_version: str) -> int:
+    """Return the one timestamp the archive carries: the graph date, UTC.
+
+    Every member and the gzip header are stamped with midnight UTC of the
+    graph version's date rather than with the build clock, so two builds
+    of the same tree are byte-identical and the archive dates the graph,
+    not the packaging run. Raises ValueError for a version that is not a
+    ``YYYY-MM-DD`` date, which is also what release-graph.yml enforces on
+    the tag.
+    """
+    moment = datetime.strptime(graph_version, GRAPH_VERSION_FORMAT).replace(
+        tzinfo=UTC,
+    )
+    return int(moment.timestamp())
+
+
 def write_bundle(root: Path, out_dir: Path, manifest: GraphManifest) -> Path:
     """Write the manifest and the gzipped tarball; return the tarball path."""
+    stamp = bundle_stamp(manifest.graph_version)
     out_dir.mkdir(parents=True, exist_ok=True)
     stem = f"{BUNDLE_NAME}-{manifest.graph_version}"
     manifest_path = out_dir / MANIFEST_FILE
@@ -158,16 +182,23 @@ def write_bundle(root: Path, out_dir: Path, manifest: GraphManifest) -> Path:
     )
 
     archive = out_dir / f"{stem}.tar.gz"
-    # a fixed mtime keeps the tarball byte-stable for a given graph
-    stamp = int(datetime.now(tz=UTC).timestamp())
 
     def reset(info: tarfile.TarInfo) -> tarfile.TarInfo:
+        info.mode = MEMBER_MODE
         info.uid = info.gid = 0
         info.uname = info.gname = "root"
         info.mtime = stamp
         return info
 
-    with tarfile.open(archive, "w:gz") as tar:
+    # tarfile's own "w:gz" stamps the gzip header with the wall clock and
+    # the archive's file name, neither of which the member filter can
+    # reach; wrapping gzip explicitly pins the header too, so the bytes
+    # depend on the tree and the graph version alone.
+    with (
+        archive.open("wb") as raw,
+        gzip.GzipFile(filename="", mode="wb", fileobj=raw, mtime=stamp) as gz,
+        tarfile.open(fileobj=gz, mode="w") as tar,
+    ):
         tar.add(manifest_path, arcname=f"{stem}/{MANIFEST_FILE}", filter=reset)
         for source, rel in bundle_members(root):
             tar.add(source, arcname=f"{stem}/{rel}", filter=reset)
@@ -182,8 +213,8 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     )
     parser.add_argument(
         "--graph-version",
-        default=datetime.now(tz=UTC).strftime("%Y-%m-%d"),
-        help="bundle content version (default: today, UTC)",
+        default=datetime.now(tz=UTC).strftime(GRAPH_VERSION_FORMAT),
+        help="bundle content version, a YYYY-MM-DD date (default: today, UTC)",
     )
     parser.add_argument(
         "--root",

@@ -2,7 +2,7 @@
 description: Authors and maintains the SPARQL catalog under queries/ — writes new .rq files to the catalog conventions, keeps INDEX.md in sync, and smoke-runs queries with Apache Jena arq. Use when the user says "write a query", "add a SPARQL query", "query the graph for X", "how many cards ...", "update the query index", or "this query returns nothing".
 mode: all
 color: "#ef6c00"
-model: azure-anthropic/claude-fable-5
+model: azure-anthropic/claude-fable-5-1
 # Getting a SPARQL query right against a reasoner-free graph is the work;
 # the catalog bookkeeping is mechanical.
 variant: high

@@ -4,7 +4,7 @@ mode: all
 color: "#6a1b9a"
 # Opus at max: a schema mistake propagates into 1400 generated individuals
 # and every query in the catalog, and is expensive to walk back.
-model: azure-anthropic/claude-opus-5
+model: azure-anthropic/claude-opus-5-5
 variant: max
 tools:
   "github_*": false

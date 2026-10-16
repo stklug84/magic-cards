@@ -60,7 +60,7 @@ jobs:
       # using that value), and so the load smoke test can import the
       # rules engine.
       prepare-command: |
-        CR_DATE=20260619
+        CR_DATE=20260819
         curl -fsSL -o "MagicCompRules-${CR_DATE}.txt" \
           "https://media.wizards.com/2026/downloads/MagicCompRules%20${CR_DATE}.txt"
 

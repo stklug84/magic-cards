@@ -54,7 +54,7 @@ class GraphManifest:
     graph_version: str
     #: ontology namespace every graph file binds as the empty prefix
     ontology_iri: str
-    #: Comprehensive Rules edition, e.g. "20260619" (informational: the
+    #: Comprehensive Rules edition, e.g. "20260819" (informational: the
     #: CR text is not redistributable and is fetched separately)
     cr_version: str
     #: tools range that can read this bundle (informational, see module
