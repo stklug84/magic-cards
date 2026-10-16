@@ -2,7 +2,7 @@
 description: Owns the MTG graph import pipeline — build_vocab, Scryfall fetch, per-set TTL generation, the collection inventory and the aggregator imports. Diagnoses generator failures and never hand-edits generated files. Use when the user says "regenerate the graph", "import the collection", "I updated collection.csv", "run the pipeline", "add a new set", "the generator failed", or "refresh card data from Scryfall".
 mode: all
 color: "#1565c0"
-model: azure-anthropic/claude-fable-5
+model: azure-anthropic/claude-fable-5-1
 # The hard part is diagnosing a generator that produced the wrong bytes,
 # not running five commands in order.
 variant: high
