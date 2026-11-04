@@ -94,8 +94,11 @@ class LayerSystem:
         self.floating: list[ContinuousEffect] = []
         self._cache: dict[int, Characteristics] = {}
         self._tick = -1
-        #: stable ContinuousEffect instances per (source id, ability id)
-        self._static_cache: dict[tuple[int, int], list[ContinuousEffect]] = {}
+        #: stable ContinuousEffect instances per (source id, the source's
+        #: battlefield-entry timestamp, ability id). The timestamp makes a
+        #: permanent that left and returned (rule 400.7: a new object) get
+        #: fresh effects with its new timestamp (rule 613.7a, fix F13).
+        self._static_cache: dict[tuple[int, int, int], list[ContinuousEffect]] = {}
 
     # -- public API ------------------------------------------------------
     def characteristics(self, obj: GameObject) -> Characteristics:
@@ -137,7 +140,7 @@ class LayerSystem:
             abilities = use_chars[obj.id].abilities if use_chars else obj.base.abilities
             for ab in abilities:
                 if isinstance(ab, StaticAbility) and ab.continuous:
-                    key = (obj.id, id(ab))
+                    key = (obj.id, obj.timestamp, id(ab))
                     if key not in self._static_cache:
                         self._static_cache[key] = ab.continuous(self.game, obj)
                     out.extend(self._static_cache[key])

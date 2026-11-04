@@ -10,6 +10,7 @@ from mtgrules.objects import GameObject, Player, Zone
 
 if TYPE_CHECKING:
     from mtgrules.game import Game
+    from mtgrules.objects import Characteristics
 
 #: (source, target, amount) of one combat-damage assignment (rule 510.1)
 type _Assignment = tuple[GameObject, Player | GameObject, int]
@@ -29,22 +30,54 @@ def can_attack(game: Game, obj: GameObject) -> bool:
     return "shackled" not in ch.keywords
 
 
-@rule("509.1b", "702.9", "702.111")
+#: landwalk keyword -> the land subtype the defending player must control
+_LANDWALK = {
+    "plainswalk": "Plains",
+    "islandwalk": "Island",
+    "swampwalk": "Swamp",
+    "mountainwalk": "Mountain",
+    "forestwalk": "Forest",
+}
+
+
+@rule("509.1b", "702.9", "702.13b", "702.14c", "702.36b", "702.111")
 def can_block(game: Game, blocker: GameObject, attacker: GameObject) -> bool:
-    """Whether *blocker* can legally block *attacker* (rule 509.1b)."""
+    """Whether *blocker* can legally block *attacker* (rule 509.1b).
+
+    Evasion: flying (702.9c), fear (702.36b), intimidate (702.13b) and
+    landwalk (702.14c). Menace is a count restriction checked after all
+    blockers are declared (702.111b).
+    """
     ch_b = blocker.chars(game)
-    ch_a = attacker.chars(game)
-    if "Creature" not in ch_b.types or blocker.tapped:
+    if "Creature" not in ch_b.types or blocker.tapped or "shackled" in ch_b.keywords:
         return False
-    if "shackled" in ch_b.keywords:
+    return not _evades(game, attacker.chars(game), ch_b, blocker.controller)
+
+
+def _evades(
+    game: Game,
+    ch_a: Characteristics,
+    ch_b: Characteristics,
+    defender: Player,
+) -> bool:
+    """Whether an evasion keyword of the attacker rules this blocker out."""
+    kw = ch_a.keywords
+    if "flying" in kw and not (ch_b.keywords & {"flying", "reach"}):
+        return True  # rules 702.9c / 702.17
+    artifact = "Artifact" in ch_b.types
+    if "fear" in kw and not (artifact or "B" in ch_b.colors):
+        return True  # rule 702.36b
+    if "intimidate" in kw and not (artifact or ch_b.colors & ch_a.colors):
+        return True  # rule 702.13b
+    walked = {_LANDWALK[k] for k in kw if k in _LANDWALK}
+    if not walked:
         return False
-    if "flying" in ch_a.keywords and not (
-        ch_b.keywords & {"flying", "reach"}
-    ):  # rules 702.9c / 702.17
-        return False
-    if "menace" in ch_a.keywords:
-        return True  # menace is a *count* restriction, checked separately
-    return True
+    # rule 702.14c: unblockable while the defending player controls a land
+    # of the walked type
+    return any(
+        "Land" in land.chars(game).types and land.chars(game).subtypes & walked
+        for land in defender.battlefield
+    )
 
 
 class CombatPhase:
@@ -109,7 +142,7 @@ class CombatPhase:
             out.extend(a.blocked_by)
         return [o for o in out if o.zone == Zone.BATTLEFIELD]
 
-    @rule("508.1", "508.2", "702.20")
+    @rule("508.1", "508.2", "702.20", "702.83b")
     def _declare_attackers(self) -> None:
         """Rule 508.1: the active player declares attackers."""
         game = self.game
@@ -136,8 +169,15 @@ class CombatPhase:
                     else defender.base.name
                 ),
             )
+        # rule 508.1: "attacks" triggers fire once the declaration is
+        # complete; "alone" (rule 702.83b, exalted) needs the full list
+        alone = len(self.attackers) == 1
+        for obj in list(self.attackers):
             game.queue_triggers(
-                Event(EventType.ATTACKS, {"obj": obj, "defender": defender}),
+                Event(
+                    EventType.ATTACKS,
+                    {"obj": obj, "defender": obj.attacking, "alone": alone},
+                ),
             )
         game.bump()
         if self.attackers:
@@ -201,19 +241,25 @@ class CombatPhase:
 
     @rule("510.1", "510.2", "510.4", "702.2", "702.19")
     def damage_step(self, *, first_strike: bool) -> None:
-        """Assign then deal all combat damage simultaneously (510.2)."""
+        """Assign then deal all combat damage simultaneously (510.2).
+
+        Attackers and blockers are handled independently (rule 510.1):
+        a blocker strikes in the step its own keywords allow, whether or
+        not the attacker it blocks deals damage in that step (fixes F2 and
+        F3 - first-strike blockers and blockers of first-strikers or of
+        0-power attackers used to deal no damage at all).
+        """
         game = self.game
         assignments: list[_Assignment] = []
         for a in list(self.attackers):
-            if a.zone != Zone.BATTLEFIELD or not self._strikes(
-                a,
-                first_strike=first_strike,
-            ):
+            if a.zone != Zone.BATTLEFIELD:
                 continue
+            blockers = [b for b in a.blocked_by if b.zone == Zone.BATTLEFIELD]
+            if self._strikes(a, first_strike=first_strike):
+                assignments.extend(self._attacker_assignments(a, blockers))
             assignments.extend(
-                self._attacker_assignments(a, first_strike=first_strike),
+                self._blocker_strikes(a, blockers, first_strike=first_strike),
             )
-        # blockers of attackers that died before damage still don't hit
         for source, target, amount in assignments:
             if isinstance(target, Player):
                 game.deal_damage(source, target, amount, combat=True)
@@ -221,28 +267,30 @@ class CombatPhase:
             elif target.zone == Zone.BATTLEFIELD:
                 game.deal_damage(source, target, amount, combat=True)
 
-    @rule("510.1", "702.2", "702.19")
+    @rule("510.1", "510.1c", "702.2", "702.19")
     def _attacker_assignments(
         self,
         a: GameObject,
-        *,
-        first_strike: bool,
+        blockers: list[GameObject],
     ) -> list[_Assignment]:
-        """Damage assignments of one attacker and its blockers.
+        """Damage assignments of one attacker to its blockers / defender.
 
         Rule 510.1a: assignment order = policy order; rules 510.1c-d
         lethal assignment; deathtouch (702.2b) makes any nonzero amount
-        lethal; trample (702.19e) assigns the excess to the defender.
+        lethal; trample (702.19e) assigns the excess to the defender, and
+        all of it when every blocker has left combat (702.19d).
         """
         game = self.game
         out: list[_Assignment] = []
         ch = a.chars(game)
         power = max(0, ch.power or 0)
-        if not power:
+        if not power or a.attacking is None:
             return out
-        blockers = [b for b in a.blocked_by if b.zone == Zone.BATTLEFIELD]
+        trample = "trample" in ch.keywords
         if not blockers:
-            if not a.blocked_by and a.attacking is not None:  # unblocked, 510.1c
+            # unblocked (510.1c), or blocked but every blocker left and
+            # the attacker has trample (702.19d)
+            if not a.blocked_by or trample:
                 out.append((a, a.attacking, power))
             return out
         remaining = power
@@ -253,13 +301,12 @@ class CombatPhase:
             bt = b.chars(game).toughness or 0
             lethal = 1 if deathtouch else max(1, bt - b.damage)
             deal = min(remaining, lethal)
-            if b is blockers[-1] and "trample" not in ch.keywords:
+            if b is blockers[-1] and not trample:
                 deal = remaining
             out.append((a, b, deal))
             remaining -= deal
-        if remaining > 0 and "trample" in ch.keywords and a.attacking is not None:
+        if remaining > 0 and trample:
             out.append((a, a.attacking, remaining))
-        out.extend(self._blocker_strikes(a, blockers, first_strike=first_strike))
         return out
 
     @rule("510.1c")
