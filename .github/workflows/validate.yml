@@ -212,10 +212,19 @@ jobs:
           rustup toolchain install
           rustup show active-toolchain
 
+      # actions/cache rather than a third-party Rust cache action: the
+      # repository's actions policy allows GitHub-owned actions only.
       - name: Cache cargo registry and build outputs
-        uses: Swatinem/rust-cache@d1527c8f67ef9af357290475d4af4b0fab8f12e0  # v2.9.3
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9  # v6.1.0
         with:
-          workspaces: rust
+          path: |
+            ~/.cargo/registry/index
+            ~/.cargo/registry/cache
+            ~/.cargo/git/db
+            rust/target
+          key: cargo-test-${{ runner.os }}-${{ hashFiles('rust/Cargo.lock', 'rust/rust-toolchain.toml') }}
+          restore-keys: |
+            cargo-test-${{ runner.os }}-
 
       - name: Test
         working-directory: rust
