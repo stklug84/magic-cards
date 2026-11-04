@@ -1,0 +1,18 @@
+[package]
+name = "mtgrules"
+description = "CR-grounded Magic: The Gathering Commander rules engine: oracle-text compiler, card overrides, AI policy and match runner"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+authors.workspace = true
+publish.workspace = true
+
+[dependencies]
+mtgcards.workspace = true
+mtgrules-macros.workspace = true
+pycompat.workspace = true
+
+[lints]
+workspace = true

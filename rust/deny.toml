@@ -1,0 +1,51 @@
+# cargo-deny: the Rust counterpart of bandit + the licence policy.
+#
+#   cargo deny check            (from rust/)
+#
+# Advisories: any known vulnerability fails CI; unmaintained and yanked
+# crates are reported. Licences: an explicit allow-list, so a new
+# transitive dependency with an unexpected licence fails instead of
+# silently shipping in the release binaries (the repository's own code
+# is MIT, see ../LICENSE). Bans: duplicate versions are reported, not
+# denied. Sources: crates.io only.
+
+[graph]
+all-features = true
+
+[advisories]
+version = 2
+db-path = "~/.cargo/advisory-db"
+db-urls = ["https://github.com/rustsec/advisory-db"]
+yanked = "deny"
+ignore = []
+
+[licenses]
+version = 2
+allow = [
+    "MIT",
+    "Apache-2.0",
+    "Apache-2.0 WITH LLVM-exception",
+    "BSD-2-Clause",
+    "BSD-3-Clause",
+    "ISC",
+    "Unicode-3.0",
+    "Zlib",
+    "MPL-2.0",
+    "CDLA-Permissive-2.0",
+]
+confidence-threshold = 0.9
+exceptions = []
+
+[bans]
+multiple-versions = "warn"
+wildcards = "deny"
+# the workspace crates reference each other by path (publish = false)
+allow-wildcard-paths = true
+highlight = "all"
+workspace-default-features = "allow"
+external-default-features = "allow"
+
+[sources]
+unknown-registry = "deny"
+unknown-git = "deny"
+allow-registry = ["https://github.com/rust-lang/crates.io-index"]

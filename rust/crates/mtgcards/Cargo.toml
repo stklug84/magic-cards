@@ -1,0 +1,22 @@
+[package]
+name = "mtgcards"
+description = "Card data layer over the MTG knowledge graph: text-based TTL readers, deck files, behaviour annotations, statistics and the optional Scryfall client"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+authors.workspace = true
+publish.workspace = true
+
+[features]
+default = ["scryfall"]
+# Scryfall lookups for txt decklists (`mtg-simulate` without --offline).
+# Off: the only card source is the knowledge graph; no network crates.
+scryfall = []
+
+[dependencies]
+pycompat.workspace = true
+
+[lints]
+workspace = true

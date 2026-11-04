@@ -1,0 +1,15 @@
+[package]
+name = "pycompat"
+description = "CPython-compatible randomness, json.dumps, number formatting, statistics and str semantics, for byte-exact output parity with the former Python simulator"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+authors.workspace = true
+publish.workspace = true
+
+[dependencies]
+
+[lints]
+workspace = true

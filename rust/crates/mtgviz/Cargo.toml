@@ -1,0 +1,17 @@
+[package]
+name = "mtgviz"
+description = "Game visualization: JSONL recordings of events and board snapshots, replay, live watching and the terminal UI"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+authors.workspace = true
+publish.workspace = true
+
+[dependencies]
+mtgrules.workspace = true
+pycompat.workspace = true
+
+[lints]
+workspace = true

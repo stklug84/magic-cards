@@ -23,7 +23,7 @@ from mtgrules.cr import rule, unsupported
 from mtgrules.effects import AddMana, Ctx
 from mtgrules.events import Event, EventType
 from mtgrules.layers import LayerSystem
-from mtgrules.manasys import ManaPool, parse_cost
+from mtgrules.manasys import ManaPool, mana_order, parse_cost
 from mtgrules.objects import Characteristics, GameObject, Player, Zone
 from mtgrules.replacements import ReplacementEngine
 from mtgrules.stack import PendingTrigger, StackItem
@@ -146,7 +146,7 @@ class _ManaPlan:
         """Cover the hybrid pips of *cost*, scarcest option first."""
         for opts in sorted(cost.hybrid, key=len):
             hit = False
-            for c in opts:
+            for c in mana_order(opts):
                 if self.pool.get(c, 0) > 0:
                     self.pool[c] -= 1
                     hit = True
@@ -163,7 +163,7 @@ class _ManaPlan:
             got = self.take(overlaps)
             if got is None:
                 return False
-            color = next(iter(got[2] & opts))
+            color = mana_order(got[2] & opts)[0]
             self.used.append((got[0], got[1], color))
         return True
 
@@ -177,7 +177,8 @@ class _ManaPlan:
         self.avail.sort(key=lambda e: (-e[3], len(e[2])))
         while need > 0 and self.avail:
             obj, ab, colors, amount = self.avail.pop(0)
-            self.used.append((obj, ab, "C" if "C" in colors else next(iter(colors))))
+            color = "C" if "C" in colors else mana_order(colors)[0]
+            self.used.append((obj, ab, color))
             need -= amount
         return need <= 0
 
@@ -1209,9 +1210,9 @@ class Game:
                 and t.zone == Zone.BATTLEFIELD
                 and t.controller is not item.controller
             ):
-                ward = next(
+                ward = min(
                     (k for k in t.chars(self).keywords if k.startswith("ward")),
-                    None,
+                    default=None,
                 )
                 if not ward:
                     continue
