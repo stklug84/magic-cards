@@ -1932,7 +1932,10 @@ and carry subtypes from other categories. See rule 303."""@en .
     [
         rdf:type owl:Restriction ;
         owl:onProperty :hasSubType ;
-        owl:allValuesFrom :PlaneswalkerTypes
+        owl:allValuesFrom [
+            rdf:type owl:Class ;
+            owl:unionOf ( :PlaneswalkerTypes :CreatureTypes )
+        ]
     ] ;
     owl:equivalentClass [
         rdf:type owl:Class ;
@@ -1951,7 +1954,10 @@ and carry subtypes from other categories. See rule 303."""@en .
     ] ;
     rdfs:label "Planeswalker Card" ;
     rdfs:comment """A class representing planeswalker cards, which must have the Legendary
-supertype. See rules 306 and 205.4d."""@en .
+supertype. Their subtypes are planeswalker types, plus creature types when
+the card is also a creature: the individual of a double-faced card combines
+both faces, so a creature that transforms into a planeswalker carries the
+subtypes of both. See rules 306, 205.4d, 205.3d and 712."""@en .
 
 # --- Spell Constraints ---
 :SpellCardConstraint rdf:type owl:Class ;
@@ -1972,7 +1978,10 @@ supertype. See rules 306 and 205.4d."""@en .
     [
         rdf:type owl:Restriction ;
         owl:onProperty :hasSubType ;
-        owl:allValuesFrom :SpellTypes
+        owl:allValuesFrom [
+            rdf:type owl:Class ;
+            owl:unionOf ( :SpellTypes :CreatureTypes )
+        ]
     ] ;
     owl:equivalentClass [
         rdf:type owl:Restriction ;
@@ -1984,7 +1993,10 @@ supertype. See rules 306 and 205.4d."""@en .
     ] ;
     rdfs:label "Spell Card Constraint" ;
     rdfs:comment """A class representing any card with the Instant or Sorcery card type to
-enforce constraints. See rules 304 and 307."""@en .
+enforce constraints. Its subtypes are spell types, plus creature types for a
+kindred instant or sorcery (e.g. Kindred Sorcery — Eldrazi), since kindred
+subtypes are creature types. See rules 304, 307, 205.3k, 205.3m and
+308.2."""@en .
 
 # --- Basic Land Constraints ---
 :BasicLandCard rdf:type owl:Class ;
