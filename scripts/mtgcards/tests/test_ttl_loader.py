@@ -6,7 +6,9 @@ regex that captured a single object per predicate would silently keep only
 the first one, so cards would quietly lose subtypes, colour identity and
 land mana colours. These tests pin the object-list parsing and keep the
 legacy repeated-predicate form loading, so an older graph bundle still
-works.
+works. They also pin that the MTG Arena lines of a printing on Arena
+(:isAvailableOn, :arenaName, ...) leave the extracted characteristics
+untouched.
 """
 
 from __future__ import annotations
@@ -81,6 +83,33 @@ _LAND = """\
     :oracleText \"\"\"{T}: Add {C}.\"\"\"@en .
 """
 
+#: an MTG Arena printing of a transforming card: the platform object list
+#: and the Arena fields sit between the card facts and the legalities, and
+#: :arenaName holds the front face only
+_ARENA_DFC = """\
+:LunarchVeteranInnistradMidnightHunt27 rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Lunarch Veteran // Luminous Phantom" ;
+    :manaCost "{W}" ;
+    :manaValue "1"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Human ,
+                :Cleric ,
+                :Spirit ;
+    :hasColorIdentity :White ;
+    :powerValue "1"^^xsd:integer ;
+    :toughnessValue "1"^^xsd:integer ;
+    :oracleText \"\"\"Whenever another creature enters, you gain 1 life.\"\"\"@en ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "78354"^^xsd:positiveInteger ;
+    :arenaName "Lunarch Veteran" ;
+    :arenaSetCode "MID" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] .
+"""
+
 _SINGLE = """\
 :Forest rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -141,6 +170,28 @@ class TestObjectLists(unittest.TestCase):
         self.assertEqual(card.power, 2)
         self.assertEqual(card.toughness, 4)
         self.assertIn("haste", card.oracle)
+
+
+class TestArenaFields(unittest.TestCase):
+    """The MTG Arena lines of a card block leave the card facts intact."""
+
+    def test_arena_name_does_not_replace_the_card_name(self) -> None:
+        """:arenaName is not read as the card name; the DFC keeps both keys."""
+        cards = _load(_ARENA_DFC)
+        full = cards["Lunarch Veteran // Luminous Phantom"]
+        self.assertEqual(full.name, "Lunarch Veteran // Luminous Phantom")
+        self.assertIs(cards["Lunarch Veteran"], full)
+
+    def test_platform_list_does_not_leak_into_characteristics(self) -> None:
+        """The :isAvailableOn object list touches no extracted field."""
+        card = _load(_ARENA_DFC)["Lunarch Veteran // Luminous Phantom"]
+        self.assertEqual(card.types, {"Creature"})
+        self.assertEqual(card.subtypes, {"Human", "Cleric", "Spirit"})
+        self.assertEqual(card.color_identity, {"W"})
+        self.assertEqual(card.supertypes, set())
+        self.assertEqual((card.mana_cost, card.mv), ("{W}", 1))
+        self.assertEqual((card.power, card.toughness), (1, 1))
+        self.assertIn("gain 1 life", card.oracle)
 
 
 class TestLandFacts(unittest.TestCase):
