@@ -1,0 +1,35 @@
+# The collection's printings that are available on MTG Arena, rendered as
+# lines of Arena's deck and collection import format "N Name (SET) number":
+# the name and set code MTG Arena lists each printing under, its collector
+# number and the physical copies held (summed over finishes and conditions,
+# which Arena does not distinguish), plus the printing's MTG Arena ID where
+# known. Arena numbers a few promotional printings differently (Special
+# Guests cards are numbered 0 there); adjust such lines by hand.
+#
+# PARAMETERS:
+#   ?collection - the collection to query
+
+PREFIX mc: <urn:stklug84:MagicCardsOntology:2026-02-27#>
+
+SELECT ?line ?arenaId WHERE {
+  {
+    # aggregate entry quantities per printing first (a printing may have
+    # several entries, e.g. foil and non-foil lots)
+    SELECT ?c (SUM(?q) AS ?qty) WHERE {
+      VALUES ?collection { mc:MagicCardCollection }
+      ?collection mc:hasCollectionEntry ?e .
+      ?e mc:entryCard ?c ;
+         mc:quantity  ?q .
+    }
+    GROUP BY ?c
+  }
+  ?c mc:isAvailableOn mc:MTGArena ;
+     mc:arenaName     ?arenaName ;
+     mc:arenaSetCode  ?arenaSet .
+  OPTIONAL { ?c mc:arenaId ?arenaId }
+  OPTIONAL { ?c mc:cardNumber ?num }
+  OPTIONAL { ?c mc:cardNumberString ?numStr }
+  BIND(CONCAT(STR(?qty), " ", ?arenaName, " (", ?arenaSet, ") ",
+              COALESCE(STR(?num), ?numStr)) AS ?line)
+}
+ORDER BY ?arenaName ?arenaSet ?line

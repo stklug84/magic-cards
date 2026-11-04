@@ -1,9 +1,14 @@
-# All cards across all decks in the dataset that are banned in any of the
-# seven tracked formats. The commented VALUES line restricts results to
-# specific deck(s).
+# All cards across all decks in the dataset that are banned in any tracked
+# format played on the given platform. The default, paper, covers the seven
+# paper formats (Commander, Standard, Modern, Legacy, Vintage, Pioneer,
+# Pauper); mc:MTGArena covers the MTG Arena formats (Standard, Pioneer,
+# Historic, Timeless, Alchemy, Brawl, Standard Brawl). The commented VALUES
+# line restricts results to specific deck(s).
 #
 # PARAMETERS:
-#   ?deck - optional deck filter (uncomment the VALUES line to restrict)
+#   ?deck     - optional deck filter (uncomment the VALUES line to restrict)
+#   ?platform - the game platform whose formats are checked (mc:PaperMagic,
+#               mc:MTGArena or mc:MagicOnline; list several to combine them)
 
 PREFIX mc:   <urn:stklug84:MagicCardsOntology:2026-02-27#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -11,6 +16,7 @@ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 SELECT DISTINCT ?deckName ?cardName ?formatLabel WHERE {
   # To restrict to specific deck(s), uncomment and edit:
   # VALUES ?deck { mc:SomeDeck }
+  VALUES ?platform { mc:PaperMagic }
 
   ?deck mc:hasCard ?c .
   OPTIONAL { ?deck rdfs:label ?deckName }
@@ -18,6 +24,7 @@ SELECT DISTINCT ?deckName ?cardName ?formatLabel WHERE {
      mc:hasLegality ?lm .
   ?lm mc:inFormat ?fmt ;
       mc:hasLegalityStatus mc:Banned .
-  ?fmt rdfs:label ?formatLabel .
+  ?fmt mc:isPlayedOn ?platform ;
+       rdfs:label ?formatLabel .
 }
 ORDER BY ?deckName ?cardName ?formatLabel

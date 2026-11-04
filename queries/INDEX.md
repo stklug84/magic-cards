@@ -50,9 +50,10 @@ See [`README.md`](README.md) for prefix conventions, running instructions, and t
 | # | File | Use Case | Parameters |
 |---|------|----------|------------|
 | 1 | [`01_card_legality_in_format.rq`](04_legality/01_card_legality_in_format.rq) | Legality status of one card in one format | `?card`, `?format` |
-| 2 | [`02_banned_cards_in_deck.rq`](04_legality/02_banned_cards_in_deck.rq) | Cards in a deck banned in any tracked format | `?deck` (optional filter) |
-| 3 | [`03_cards_in_deck_legal_in_all_formats.rq`](04_legality/03_cards_in_deck_legal_in_all_formats.rq) | Cards legal in every tracked format | `?deck` (optional filter) |
-| 4 | [`04_cards_in_deck_with_split_legality.rq`](04_legality/04_cards_in_deck_with_split_legality.rq) | Cards legal in some formats but not others | `?deck` (optional filter) |
+| 2 | [`02_banned_cards_in_deck.rq`](04_legality/02_banned_cards_in_deck.rq) | Cards in a deck banned in any tracked format of a platform (paper or MTG Arena) | `?deck` (optional filter), `?platform` |
+| 3 | [`03_cards_in_deck_legal_in_all_formats.rq`](04_legality/03_cards_in_deck_legal_in_all_formats.rq) | Cards legal in every tracked format of a platform (paper or MTG Arena) | `?deck` (optional filter), `?platform` |
+| 4 | [`04_cards_in_deck_with_split_legality.rq`](04_legality/04_cards_in_deck_with_split_legality.rq) | Cards legal in some formats of a platform but not others | `?deck` (optional filter), `?platform` |
+| 5 | [`05_card_legality_on_platform.rq`](04_legality/05_card_legality_on_platform.rq) | Legality of one card in every MTG Arena (or paper) format, and whether its printing is on that platform | `?card`, `?platform` |
 
 ## 05 — Sets & Printings
 
@@ -111,6 +112,7 @@ See [`README.md`](README.md) for prefix conventions, running instructions, and t
 | 2 | [`02_copies_per_card.rq`](10_collection/02_copies_per_card.rq) | Tabular copies-per-card view with per-printing quantities | `?collection` |
 | 3 | [`03_foil_cards.rq`](10_collection/03_foil_cards.rq) | All foil / etched-foil cards with quantities and sets | `?collection` |
 | 4 | [`04_most_duplicated_cards.rq`](10_collection/04_most_duplicated_cards.rq) | Cards owned in the most physical copies | `?collection`, `?minCopies` |
+| 5 | [`05_arena_import_list.rq`](10_collection/05_arena_import_list.rq) | Collection printings available on MTG Arena as Arena import lines `N Name (SET) number` | `?collection` |
 
 ## 11 — Mechanic Synergies
 

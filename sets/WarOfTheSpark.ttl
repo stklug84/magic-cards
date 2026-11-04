@@ -40,10 +40,12 @@
     rdfs:comment """An instance graph describing the card individuals of a
 personal Magic: The Gathering card collection that were printed in the set
 War of the Spark (WAR). One Card individual is defined per collected
-printing, carrying its characteristics, format legalities and official
-rulings. Card data was sourced from Gatherer and Scryfall. This file imports
-MagicCardsOntology to reuse all existing class, property, set, keyword,
-subtype, format and legality definitions."""@en .
+printing, carrying its characteristics, the platforms it is available on
+(paper, MTG Arena, Magic Online) with its MTG Arena identity, its legality
+in the paper and MTG Arena formats, and official rulings. Card data was
+sourced from Gatherer and Scryfall. This file imports MagicCardsOntology to
+reuse all existing class, property, set, keyword, subtype, format and
+legality definitions."""@en .
 
 
 ################################################################################
@@ -51,6 +53,70 @@ subtype, format and legality definitions."""@en .
 # Card Individuals
 #
 ################################################################################
+
+:UginTheIneffable rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Ugin, the Ineffable" ;
+    :manaCost "{6}" ;
+    :manaValue "6"^^xsd:nonNegativeInteger ;
+    :hasSuperType :Legendary ;
+    :hasCardType :Planeswalker ;
+    :hasSubType :Ugin ;
+    :hasRarity :Rare ;
+    :isInSet :WarOfTheSpark ;
+    :cardNumber "2"^^xsd:integer ;
+    :artist "Daarken" ;
+    :hasLanguage :English ;
+    :loyalty "4"^^xsd:integer ;
+    :printedText """Colorless spells you cast cost {2} less to cast.
++1: Exile the top card of your library face down and look at it. Create a 2/2 colorless Spirit creature token. When that token leaves the battlefield, put the exiled card into your hand.
+−3: Destroy target permanent that's one or more colors."""@en ;
+    :oracleText """Colorless spells you cast cost {2} less to cast.
++1: Exile the top card of your library face down and look at it. Create a 2/2 colorless Spirit creature token. When that token leaves the battlefield, put the exiled card into your hand.
+−3: Destroy target permanent that's one or more colors."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=460929"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/war/2/ugin-the-ineffable"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "69453"^^xsd:positiveInteger ;
+    :arenaName "Ugin, the Ineffable" ;
+    :arenaSetCode "WAR" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2019-05-03"^^xsd:date ;
+        :rulingText """Once you look at the exiled face-down card once, you may look at it again any time you wish. If another player gains control of the Spirit token, that player can't look at the exiled card."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2019-05-03"^^xsd:date ;
+        :rulingText """A land normally has no color, even if it can produce one or more colors of mana."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2019-05-03"^^xsd:date ;
+        :rulingText """To determine the total cost of a spell, start with the mana cost or alternative cost you're paying, add any cost increases, then apply any cost reductions (such as that of Ugin). The mana value of the spell remains unchanged, no matter what the total cost to cast it was."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2019-05-03"^^xsd:date ;
+        :rulingText """If the Spirit leaves the battlefield for any reason, you'll put the exiled card into your hand, even if Ugin left the battlefield before that happened."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2019-05-03"^^xsd:date ;
+        :rulingText """If an effect such as that of Doubling Season causes Ugin to create two Spirit tokens, you still only exile one card from your library. You'll put that card into your hand the first time that either of the tokens leaves the battlefield."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2019-05-03"^^xsd:date ;
+        :rulingText """A colorless spell whose mana cost is {2} or {1} will cost {0} to cast."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2019-05-03"^^xsd:date ;
+        :rulingText """If you've activated Ugin's ability multiple times, you must keep track of which exiled card belongs to each Spirit token."""@en ] .
 
 :FluxChanneler rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -77,6 +143,12 @@ subtype, format and legality definitions."""@en .
     :flavorText """"Inform our allies in the Tenth and throw the circuit. It's about to get weird.\""""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=460979"^^xsd:anyURI ;
     :scryfallUrl "https://scryfall.com/card/war/52/flux-channeler"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "69503"^^xsd:positiveInteger ;
+    :arenaName "Flux Channeler" ;
+    :arenaSetCode "WAR" ;
     :hasLegality
       [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
@@ -84,7 +156,12 @@ subtype, format and legality definitions."""@en .
       [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ;
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2019-05-03"^^xsd:date ;
@@ -107,6 +184,67 @@ subtype, format and legality definitions."""@en .
       [ rdf:type :Ruling ;
         :rulingDate "2023-02-04"^^xsd:date ;
         :rulingText """Players can respond to a spell or ability whose effect includes proliferating. Once that spell or ability starts to resolve, however, and its controller chooses which permanents and players will get new counters, it's too late for anyone to respond."""@en ] .
+
+:JaceWielderOfMysteries rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Jace, Wielder of Mysteries" ;
+    :manaCost "{1}{U}{U}{U}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasSuperType :Legendary ;
+    :hasCardType :Planeswalker ;
+    :hasSubType :Jace ;
+    :hasRarity :Rare ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :WarOfTheSpark ;
+    :cardNumber "54"^^xsd:integer ;
+    :artist "Anna Steinbauer" ;
+    :hasLanguage :English ;
+    :loyalty "4"^^xsd:integer ;
+    :hasKeywordAction :Mill ;
+    :printedText """If you would draw a card while your library has no cards in it, you win the game instead.
++1: Target player mills two cards. Draw a card.
+−8: Draw seven cards. Then if your library has no cards in it, you win the game."""@en ;
+    :oracleText """If you would draw a card while your library has no cards in it, you win the game instead.
++1: Target player mills two cards. Draw a card.
+−8: Draw seven cards. Then if your library has no cards in it, you win the game."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=460981"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/war/54/jace-wielder-of-mysteries"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "69505"^^xsd:positiveInteger ;
+    :arenaName "Jace, Wielder of Mysteries" ;
+    :arenaSetCode "WAR" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2019-05-03"^^xsd:date ;
+        :rulingText """If the target player is an illegal target when Jace’s first loyalty ability tries to resolve, it doesn’t resolve. You won’t draw a card."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2019-05-03"^^xsd:date ;
+        :rulingText """If for some reason you can’t win the game (because your opponent controls Platinum Angel, for example), you won’t lose for having tried to draw a card from a library with no cards in it. The draw was still replaced."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2019-05-03"^^xsd:date ;
+        :rulingText """If two or more players control Jace, Wielder of Mysteries and each player is instructed to draw a number of cards, first the player whose turn it is draws that many cards. If this causes that player to win the game instead, the game is immediately over. If the game isn’t over yet, repeat this process for each other player in turn order."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2019-05-03"^^xsd:date ;
+        :rulingText """Follow the instructions in the order listed on Jace’s first loyalty ability: if you target yourself, you’ll put the top two cards of your library into your graveyard and then draw a card."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2019-05-03"^^xsd:date ;
+        :rulingText """If your library has fewer than seven cards in it while resolving Jace’s last ability, and Jace has already left the battlefield, you’ll draw as many cards as you can and then win the game before state-based actions would cause you to lose the game for trying to draw from an empty library."""@en ] .
 
 :KayaBaneOfTheDead rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -132,6 +270,12 @@ subtype, format and legality definitions."""@en .
 −3: Exile target creature."""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=461158"^^xsd:anyURI ;
     :scryfallUrl "https://scryfall.com/card/war/231/kaya-bane-of-the-dead"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "69682"^^xsd:positiveInteger ;
+    :arenaName "Kaya, Bane of the Dead" ;
+    :arenaSetCode "WAR" ;
     :hasLegality
       [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
@@ -139,7 +283,12 @@ subtype, format and legality definitions."""@en .
       [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ;
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2019-05-03"^^xsd:date ;
