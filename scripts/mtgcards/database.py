@@ -57,6 +57,27 @@ def _card_from_json(name: str, entry: dict[str, Any], source: str) -> CardData:
     return card
 
 
+def _load_custom_cards(path: Path) -> dict[str, CardData]:
+    """Read a --custom-cards JSON file: {card name: definition}.
+
+    Keys starting with ``_`` are comments and skipped. Every error names
+    the file so the CLI can report it without a traceback.
+    """
+    try:
+        entries = json.loads(path.read_text(encoding="utf-8"))
+    except ValueError as err:
+        msg = f"{path}: invalid custom-cards JSON: {err}"
+        raise ValueError(msg) from err
+    if not isinstance(entries, dict):
+        msg = f"{path}: expected a JSON object of card definitions"
+        raise TypeError(msg)
+    return {
+        name: _card_from_json(name, entry, "custom")
+        for name, entry in entries.items()
+        if not name.startswith("_")
+    }
+
+
 class CardDatabase:
     """Name-indexed card data, layered from graph, custom JSON, and hooks."""
 
@@ -112,11 +133,7 @@ class CardDatabase:
                     hooks_by_name.setdefault(name, {}).update(hooks)
         # custom layer (opt-in, overrides the graph)
         if custom_cards_path:
-            custom = Path(custom_cards_path)
-            for name, entry in json.loads(custom.read_text()).items():
-                if name.startswith("_"):
-                    continue
-                self.index[name] = _card_from_json(name, entry, "custom")
+            self.index.update(_load_custom_cards(Path(custom_cards_path)))
         # derivation + hooks (dedupe DFC aliases by id)
         seen: set[int] = set()
         for card in self.index.values():

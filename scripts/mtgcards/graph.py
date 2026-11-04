@@ -100,11 +100,19 @@ def load_manifest(root: str | Path) -> GraphManifest | None:
     path = Path(root) / MANIFEST_FILE
     if not path.is_file():
         return None
-    data = json.loads(path.read_text(encoding="utf-8"))
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, ValueError) as err:
+        msg = f"{path}: cannot read the graph manifest: {err}"
+        raise GraphSchemaError(msg) from err
     if not isinstance(data, dict):
         msg = f"{path}: expected a JSON object, got {type(data).__name__}"
         raise GraphSchemaError(msg)
-    return GraphManifest.from_json(data)
+    try:
+        return GraphManifest.from_json(data)
+    except (TypeError, ValueError) as err:
+        msg = f"{path}: malformed graph manifest: {err}"
+        raise GraphSchemaError(msg) from err
 
 
 def check_compatible(manifest: GraphManifest | None, root: str | Path) -> None:
