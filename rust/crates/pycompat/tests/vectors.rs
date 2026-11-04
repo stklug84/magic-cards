@@ -6,7 +6,10 @@ use std::path::PathBuf;
 
 use pycompat::json::{self, Value};
 use pycompat::pyfmt;
+use pycompat::pypath;
 use pycompat::pyrepr;
+use pycompat::pystr;
+use pycompat::pyurl;
 use pycompat::random::PyRandom;
 use pycompat::stats;
 use serde::Deserialize;
@@ -283,6 +286,102 @@ fn repr_matches_cpython() {
             v.repr,
             "repr of {:?}",
             v.value
+        );
+    }
+}
+
+// -------------------------------------------------------------------- str
+
+#[derive(Deserialize)]
+struct SplitlinesCase {
+    text: String,
+    lines: Vec<String>,
+}
+
+#[derive(Deserialize)]
+struct IntCase {
+    text: String,
+    value: Option<String>,
+    error: Option<String>,
+}
+
+#[derive(Deserialize)]
+struct PathCase {
+    text: String,
+    #[serde(rename = "str")]
+    text_str: String,
+}
+
+#[derive(Deserialize)]
+struct QuoteCase {
+    text: String,
+    quoted: String,
+}
+
+#[derive(Deserialize)]
+struct StripCase {
+    text: String,
+    stripped: String,
+}
+
+#[derive(Deserialize)]
+struct StrVectors {
+    splitlines: Vec<SplitlinesCase>,
+    int: Vec<IntCase>,
+    posix_path: Vec<PathCase>,
+    quote: Vec<QuoteCase>,
+    strip: Vec<StripCase>,
+}
+
+/// `int()` inputs CPython accepts and this port deliberately does not:
+/// non-ASCII decimal digits never occur in a manifest or a deck file.
+fn is_known_int_deviation(text: &str) -> bool {
+    text.chars().any(|c| !c.is_ascii() && c.is_numeric())
+}
+
+#[test]
+fn str_semantics_match_cpython() {
+    let vectors: StrVectors =
+        serde_json::from_str(&vector_file("str.json")).expect("str.json parses");
+    for case in &vectors.splitlines {
+        assert_eq!(
+            pystr::splitlines(&case.text),
+            case.lines,
+            "splitlines of {:?}",
+            case.text
+        );
+    }
+    for case in &vectors.int {
+        if is_known_int_deviation(&case.text) {
+            continue;
+        }
+        match pystr::parse_int(&case.text) {
+            Ok(value) => assert_eq!(Some(value.to_string()), case.value, "int({:?})", case.text),
+            Err(err) => assert_eq!(Some(err), case.error, "int({:?}) error", case.text),
+        }
+    }
+    for case in &vectors.posix_path {
+        assert_eq!(
+            pypath::posix_path_str(&case.text),
+            case.text_str,
+            "str(PurePosixPath({:?}))",
+            case.text
+        );
+    }
+    for case in &vectors.quote {
+        assert_eq!(
+            pyurl::quote(&case.text),
+            case.quoted,
+            "quote({:?})",
+            case.text
+        );
+    }
+    for case in &vectors.strip {
+        assert_eq!(
+            pystr::strip(&case.text),
+            case.stripped,
+            "strip({:?})",
+            case.text
         );
     }
 }

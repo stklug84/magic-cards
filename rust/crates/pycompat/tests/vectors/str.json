@@ -1,0 +1,313 @@
+{
+ "splitlines": [
+  {
+   "text": "",
+   "lines": []
+  },
+  {
+   "text": "one line",
+   "lines": [
+    "one line"
+   ]
+  },
+  {
+   "text": "a\nb",
+   "lines": [
+    "a",
+    "b"
+   ]
+  },
+  {
+   "text": "a\nb\n",
+   "lines": [
+    "a",
+    "b"
+   ]
+  },
+  {
+   "text": "a\r\nb\rc\n\nd",
+   "lines": [
+    "a",
+    "b",
+    "c",
+    "",
+    "d"
+   ]
+  },
+  {
+   "text": "\n",
+   "lines": [
+    ""
+   ]
+  },
+  {
+   "text": "\r\n\r\n",
+   "lines": [
+    "",
+    ""
+   ]
+  },
+  {
+   "text": "x y\fz\u001cwv",
+   "lines": [
+    "x",
+    "y",
+    "z",
+    "w",
+    "v"
+   ]
+  },
+  {
+   "text": "trailing\r",
+   "lines": [
+    "trailing"
+   ]
+  },
+  {
+   "text": "1 Sol Ring\r\n2 Island\r\n",
+   "lines": [
+    "1 Sol Ring",
+    "2 Island"
+   ]
+  }
+ ],
+ "int": [
+  {
+   "text": "1",
+   "value": "1",
+   "error": null
+  },
+  {
+   "text": " 42 ",
+   "value": "42",
+   "error": null
+  },
+  {
+   "text": "-7",
+   "value": "-7",
+   "error": null
+  },
+  {
+   "text": "+3",
+   "value": "3",
+   "error": null
+  },
+  {
+   "text": "1_000",
+   "value": "1000",
+   "error": null
+  },
+  {
+   "text": "0",
+   "value": "0",
+   "error": null
+  },
+  {
+   "text": "007",
+   "value": "7",
+   "error": null
+  },
+  {
+   "text": "\t12\n",
+   "value": "12",
+   "error": null
+  },
+  {
+   "text": "1.0",
+   "value": null,
+   "error": "invalid literal for int() with base 10: '1.0'"
+  },
+  {
+   "text": "",
+   "value": null,
+   "error": "invalid literal for int() with base 10: ''"
+  },
+  {
+   "text": " ",
+   "value": null,
+   "error": "invalid literal for int() with base 10: ' '"
+  },
+  {
+   "text": "1__0",
+   "value": null,
+   "error": "invalid literal for int() with base 10: '1__0'"
+  },
+  {
+   "text": "_1",
+   "value": null,
+   "error": "invalid literal for int() with base 10: '_1'"
+  },
+  {
+   "text": "1_",
+   "value": null,
+   "error": "invalid literal for int() with base 10: '1_'"
+  },
+  {
+   "text": "abc",
+   "value": null,
+   "error": "invalid literal for int() with base 10: 'abc'"
+  },
+  {
+   "text": "0x10",
+   "value": null,
+   "error": "invalid literal for int() with base 10: '0x10'"
+  },
+  {
+   "text": "１２",
+   "value": "12",
+   "error": null
+  },
+  {
+   "text": "True",
+   "value": null,
+   "error": "invalid literal for int() with base 10: 'True'"
+  },
+  {
+   "text": "12345678901234567890",
+   "value": "12345678901234567890",
+   "error": null
+  }
+ ],
+ "posix_path": [
+  {
+   "text": "",
+   "str": "."
+  },
+  {
+   "text": ".",
+   "str": "."
+  },
+  {
+   "text": "..",
+   "str": ".."
+  },
+  {
+   "text": "a",
+   "str": "a"
+  },
+  {
+   "text": "./a",
+   "str": "a"
+  },
+  {
+   "text": "a/./b",
+   "str": "a/b"
+  },
+  {
+   "text": "a//b",
+   "str": "a/b"
+  },
+  {
+   "text": "a/b/",
+   "str": "a/b"
+  },
+  {
+   "text": "a/b/.",
+   "str": "a/b"
+  },
+  {
+   "text": "/",
+   "str": "/"
+  },
+  {
+   "text": "//",
+   "str": "//"
+  },
+  {
+   "text": "///",
+   "str": "/"
+  },
+  {
+   "text": "//net/share",
+   "str": "//net/share"
+  },
+  {
+   "text": "///a",
+   "str": "/a"
+  },
+  {
+   "text": "/var//x/",
+   "str": "/var/x"
+  },
+  {
+   "text": "../a/../b",
+   "str": "../a/../b"
+  },
+  {
+   "text": "decks/x.ttl",
+   "str": "decks/x.ttl"
+  },
+  {
+   "text": "a/b/../c",
+   "str": "a/b/../c"
+  }
+ ],
+ "quote": [
+  {
+   "text": "",
+   "quoted": ""
+  },
+  {
+   "text": "Sol Ring",
+   "quoted": "Sol%20Ring"
+  },
+  {
+   "text": "Llanowar Elves",
+   "quoted": "Llanowar%20Elves"
+  },
+  {
+   "text": "Pia Nalaar, Chief Mechanic",
+   "quoted": "Pia%20Nalaar%2C%20Chief%20Mechanic"
+  },
+  {
+   "text": "Lim-Dûl's Vault",
+   "quoted": "Lim-D%C3%BBl%27s%20Vault"
+  },
+  {
+   "text": "a/b_c.d~e",
+   "quoted": "a/b_c.d~e"
+  },
+  {
+   "text": "+&=?#%",
+   "quoted": "%2B%26%3D%3F%23%25"
+  },
+  {
+   "text": "ünï — ok",
+   "quoted": "%C3%BCn%C3%AF%20%E2%80%94%20ok"
+  },
+  {
+   "text": "😀",
+   "quoted": "%F0%9F%98%80"
+  },
+  {
+   "text": "Fire // Ice",
+   "quoted": "Fire%20//%20Ice"
+  }
+ ],
+ "strip": [
+  {
+   "text": "  a  ",
+   "stripped": "a"
+  },
+  {
+   "text": "\t\n a b \r\n",
+   "stripped": "a b"
+  },
+  {
+   "text": "\u001c\u001dx\u001e\u001f",
+   "stripped": "x"
+  },
+  {
+   "text": " y　",
+   "stripped": "y"
+  },
+  {
+   "text": "",
+   "stripped": ""
+  },
+  {
+   "text": "   ",
+   "stripped": ""
+  }
+ ]
+}

@@ -11,12 +11,25 @@ publish.workspace = true
 
 [features]
 default = ["scryfall"]
-# Scryfall lookups for txt decklists (`mtg-simulate` without --offline).
-# Off: the only card source is the knowledge graph; no network crates.
-scryfall = []
+# The live HTTP transport of the Scryfall client (`mtg-simulate` without
+# --offline). Off: no network crates; the client's cache and retry logic
+# stays available with an injected transport, the only card source of the
+# binaries is the knowledge graph.
+scryfall = ["dep:ureq"]
 
 [dependencies]
 pycompat.workspace = true
+indexmap = "2"
+regex = "1"
+serde = { version = "1", features = ["derive"] }
+# preserve_order: custom-card JSON and the Scryfall cache keep their key
+# order; float_roundtrip: the last ulp of every number survives a round trip
+serde_json = { version = "1", features = ["preserve_order", "float_roundtrip"] }
+thiserror = "2"
+ureq = { version = "3", default-features = false, features = ["rustls", "json"], optional = true }
+
+[dev-dependencies]
+tempfile = "3"
 
 [lints]
 workspace = true

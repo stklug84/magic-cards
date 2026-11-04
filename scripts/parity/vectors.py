@@ -9,7 +9,9 @@ Every value here is produced by the CPython behaviour the simulator's
 output depends on: ``random.Random`` seeded with an int (shuffles,
 ``randrange``, ``getrandbits``, ``random``), ``json.dumps`` with its
 default separators and ``ensure_ascii``, ``format(x, spec)`` for the
-specs the reports use, ``statistics.mean/median/stdev`` and ``repr``.
+specs the reports use, ``statistics.mean/median/stdev``, ``repr``, and
+the ``str`` semantics of the data layer's readers (``str.splitlines``,
+``int()``, ``str(PurePosixPath)``, ``urllib.parse.quote``, ``str.strip``).
 """
 
 from __future__ import annotations
@@ -18,8 +20,9 @@ import json
 import random
 import statistics
 import sys
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 from typing import Any
+from urllib.parse import quote
 
 _DEFAULT_OUT = (
     Path(__file__).resolve().parent.parent.parent
@@ -271,6 +274,98 @@ def repr_vectors() -> list[dict[str, Any]]:
     return [{"value": v, "repr": repr(v)} for v in values]
 
 
+_SPLITLINES_TEXTS = [
+    "",
+    "one line",
+    "a\nb",
+    "a\nb\n",
+    "a\r\nb\rc\n\nd",
+    "\n",
+    "\r\n\r\n",
+    "x\u2028y\x0cz\x1cw\x85v",
+    "trailing\r",
+    "1 Sol Ring\r\n2 Island\r\n",
+]
+_INT_TEXTS = [
+    "1",
+    " 42 ",
+    "-7",
+    "+3",
+    "1_000",
+    "0",
+    "007",
+    "\t12\n",
+    "1.0",
+    "",
+    " ",
+    "1__0",
+    "_1",
+    "1_",
+    "abc",
+    "0x10",
+    "\uff11\uff12",  # fullwidth digits: int() accepts them, this port does not
+    "True",
+    "12345678901234567890",
+]
+_PATH_TEXTS = [
+    "",
+    ".",
+    "..",
+    "a",
+    "./a",
+    "a/./b",
+    "a//b",
+    "a/b/",
+    "a/b/.",
+    "/",
+    "//",
+    "///",
+    "//net/share",
+    "///a",
+    "/var//x/",
+    "../a/../b",
+    "decks/x.ttl",
+    "a/b/../c",
+]
+_QUOTE_TEXTS = [
+    "",
+    "Sol Ring",
+    "Llanowar Elves",
+    "Pia Nalaar, Chief Mechanic",
+    "Lim-Dûl's Vault",
+    "a/b_c.d~e",
+    "+&=?#%",
+    "ünï — ok",
+    "😀",
+    "Fire // Ice",
+]
+_STRIP_TEXTS = [
+    "  a  ",
+    "\t\n a b \r\n",
+    "\x1c\x1dx\x1e\x1f",
+    "\u2003y\u3000",
+    "",
+    "   ",
+]
+
+
+def str_vectors() -> dict[str, Any]:
+    """``str`` semantics the data layer's readers depend on."""
+    ints: list[dict[str, Any]] = []
+    for text in _INT_TEXTS:
+        try:
+            ints.append({"text": text, "value": str(int(text)), "error": None})
+        except ValueError as err:
+            ints.append({"text": text, "value": None, "error": str(err)})
+    return {
+        "splitlines": [{"text": t, "lines": t.splitlines()} for t in _SPLITLINES_TEXTS],
+        "int": ints,
+        "posix_path": [{"text": t, "str": str(PurePosixPath(t))} for t in _PATH_TEXTS],
+        "quote": [{"text": t, "quoted": quote(t)} for t in _QUOTE_TEXTS],
+        "strip": [{"text": t, "stripped": t.strip()} for t in _STRIP_TEXTS],
+    }
+
+
 def write_all(out_dir: Path) -> list[Path]:
     """Write every vector file into *out_dir*; return the paths written."""
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -280,6 +375,7 @@ def write_all(out_dir: Path) -> list[Path]:
         "format.json": format_vectors(),
         "stats.json": stats_vectors(),
         "repr.json": repr_vectors(),
+        "str.json": str_vectors(),
     }
     written = []
     for name, data in files.items():
