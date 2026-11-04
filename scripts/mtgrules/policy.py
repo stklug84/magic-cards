@@ -172,16 +172,19 @@ class DefaultPolicy:
         Returns ('cast', card, kwargs) | ('activate', obj, ab, kwargs) |
         ('land', card) | None (pass).
         """
-        main = (
-            player is game.active_player
-            and not game.stack
-            and game.phase in ("main1", "main2")
-        )
         # respond to opposing spells with counterspells
         if game.stack:
             return self._respond_to_stack(game, player)
-        if not main:
+        if player is not game.active_player or game.phase not in ("main1", "main2"):
+            # P4: the end of an opponent's turn is the window for flash
+            # creatures and non-counter instants (mana would be lost)
+            if player is not game.active_player and game.phase == "end":
+                return self._instant_speed_play(game, player)
             return None
+        return self._main_phase_action(game, player)
+
+    def _main_phase_action(self, game: Game, player: Player) -> Action | None:
+        """Pick the sorcery-speed play: land, commander, best spell, ability."""
         # 1. land drop
         if player.lands_played < 1:
             lands = [c for c in player.hand if "Land" in c.base.types]
@@ -194,7 +197,7 @@ class DefaultPolicy:
             cost = parse_cost(cmd.base.mana_cost).with_extra_generic(
                 2 * player.commander_casts,
             )
-            if game.can_pay_mana(player, cost):
+            if game.can_cast_now(player, cmd) and game.can_pay_mana(player, cost):
                 cmd_act: CastAction = ("cast", cmd, {"from_command": True})
                 return cmd_act
         # 3. best castable spell (sorcery speed)
@@ -225,17 +228,44 @@ class DefaultPolicy:
                 return counter
         return None
 
+    @rule("702.8a")
+    def _instant_speed_play(self, game: Game, player: Player) -> Action | None:
+        """P4: cast the best flash creature / non-counter instant right now.
+
+        Used at the end of an opponent's turn: whatever mana is not spent
+        here is lost at cleanup, so the reaction reserve is ignored.
+        """
+        castable = self._castable_spells(game, player, instant_speed=True)
+        if not castable:
+            return None
+        castable.sort(key=lambda t: -t[0])
+        value, card, x = castable[0]
+        if value <= 0:
+            return None
+        flash_act: CastAction = ("cast", card, {"x": x})
+        return flash_act
+
     def _castable_spells(
         self,
         game: Game,
         player: Player,
+        *,
+        instant_speed: bool = False,
     ) -> list[tuple[float, GameObject, int]]:
-        """All castable hand spells as (value, card, x) candidates."""
-        reserve = self._reaction_reserve(game, player)
+        """All castable hand spells as (value, card, x) candidates.
+
+        Every candidate passes the engine's own checks (P1): timing, the
+        additional cost, mana, and a legal target for every required
+        target. With *instant_speed* only cards castable right now
+        (instants, flash) are considered and no reaction mana is reserved.
+        """
+        reserve = 0 if instant_speed else self._reaction_reserve(game, player)
         castable: list[tuple[float, GameObject, int]] = []
         for card in player.hand:
             ch = card.base
-            if "Land" in ch.types:
+            if "Land" in ch.types or not game.can_cast_now(player, card):
+                continue
+            if not self._additional_cost_payable(player, card):
                 continue
             cost = parse_cost(ch.mana_cost)
             x = 0
@@ -249,14 +279,11 @@ class DefaultPolicy:
                 (a for a in ch.abilities if isinstance(a, SpellAbility)),
                 None,
             )
-            if (
-                sa is not None
-                and sa.targets
-                and not any(
-                    game.legal_targets(s, _ctx(player, card)) for s in sa.targets
-                )
+            if sa is not None and any(
+                s.minimum and not game.legal_targets(s, _ctx(player, card))
+                for s in sa.targets
             ):
-                continue
+                continue  # rule 601.2c: a required target is unavailable
             if self._is_counterspell(card):
                 continue  # hold for responses
             if reserve and not game.can_pay_mana(
@@ -266,6 +293,16 @@ class DefaultPolicy:
                 continue  # keep reaction mana up
             castable.append((self._cast_value(game, player, card, x), card, x))
         return castable
+
+    @staticmethod
+    def _additional_cost_payable(player: Player, card: GameObject) -> bool:
+        """Whether the card's rule 601.2b additional cost can be paid now."""
+        extra = card.base.additional_cost
+        if extra == "sacrifice_creature":
+            return any("Creature" in o.base.types for o in player.battlefield)
+        if extra == "discard_card":
+            return any(c is not card for c in player.hand)
+        return True
 
     def _find_cycling(self, game: Game, player: Player) -> Action | None:
         """Cycle a dead card when flooded (rule 702.29)."""
@@ -471,20 +508,11 @@ class DefaultPolicy:
         return None
 
     @staticmethod
-    def _loyalty_activation(
-        game: Game,
-        obj: GameObject,
-        ab: ActivatedAbility,
-    ) -> Action | None:
-        """Whether a loyalty ability is worth activating now."""
-        if ("loyalty", obj.id) in game.activated_this_turn:
-            return None
-        if ab.loyalty_cost is not None and (
-            ab.loyalty_cost < 0 and obj.counters.get("loyalty", 0) <= -ab.loyalty_cost
-        ):
-            return None  # don't suicide walkers
-        loyalty_act: ActivateAction = ("activate", obj, ab, {})
-        return loyalty_act
+    def _keeps_walker_alive(obj: GameObject, ab: ActivatedAbility) -> bool:
+        """Preference (not legality): never pay loyalty down to zero."""
+        if ab.loyalty_cost is None or ab.loyalty_cost >= 0:
+            return True
+        return obj.counters.get("loyalty", 0) + ab.loyalty_cost > 0
 
     def _activation_action(
         self,
@@ -493,25 +521,33 @@ class DefaultPolicy:
         obj: GameObject,
         ab: ActivatedAbility,
     ) -> Action | None:
-        """Whether one ability is worth (and legal) activating now."""
-        if ab.loyalty_cost is not None:
-            return self._loyalty_activation(game, obj, ab)
-        if (
-            (ab.once_per_turn and (obj.id, id(ab)) in game.activated_this_turn)
-            or (ab.tap_cost and obj.tapped)
-            or bool(ab.sac_cost)  # engine sacs need intent
-            or (ab.cost.mv and not game.can_pay_mana(player, ab.cost))
-        ):
+        """Whether one ability is worth (and legal) activating now.
+
+        Legality (timing, once per turn, tap, summoning sickness, loyalty,
+        life) is the engine's verdict (P1/P2); the policy adds its own
+        preferences on top: no sacrifice costs without intent, keep
+        planeswalkers alive, spend mana on abilities only in main2, and
+        a legal target for every required target.
+        """
+        if not game.activation_legal(player, obj, ab):
             return None
-        if ab.cost.mv or ab.tap_cost:
-            if ab.targets and not any(
-                game.legal_targets(s, _ctx(player, obj)) for s in ab.targets
-            ):
-                return None
-            if game.phase == "main2" or not ab.cost.mv:
-                utility_act: ActivateAction = ("activate", obj, ab, {})
-                return utility_act
-        return None
+        if ab.loyalty_cost is not None:
+            worth = self._keeps_walker_alive(obj, ab)
+        else:
+            worth = (
+                not ab.sac_cost  # engine sacs need intent
+                and bool(ab.cost.mv or ab.tap_cost)
+                and (game.phase == "main2" or not ab.cost.mv)
+                and (not ab.cost.mv or game.can_pay_mana(player, ab.cost))
+                and not any(
+                    s.minimum and not game.legal_targets(s, _ctx(player, obj))
+                    for s in ab.targets
+                )
+            )
+        if not worth:
+            return None
+        activate: ActivateAction = ("activate", obj, ab, {})
+        return activate
 
     # ------------------------------------------------------- choices
     @rule("115.3", "601.2c")
