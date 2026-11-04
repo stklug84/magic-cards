@@ -40,10 +40,12 @@
     rdfs:comment """An instance graph describing the card individuals of a
 personal Magic: The Gathering card collection that were printed in the set
 Double Masters 2022 (2X2). One Card individual is defined per collected
-printing, carrying its characteristics, format legalities and official
-rulings. Card data was sourced from Gatherer and Scryfall. This file imports
-MagicCardsOntology to reuse all existing class, property, set, keyword,
-subtype, format and legality definitions."""@en .
+printing, carrying its characteristics, the platforms it is available on
+(paper, MTG Arena, Magic Online) with its MTG Arena identity, its legality
+in the paper and MTG Arena formats, and official rulings. Card data was
+sourced from Gatherer and Scryfall. This file imports MagicCardsOntology to
+reuse all existing class, property, set, keyword, subtype, format and
+legality definitions."""@en .
 
 
 ################################################################################
@@ -81,6 +83,7 @@ At the beginning of combat on your turn, put X +1/+1 counters on another target 
 At the beginning of combat on your turn, put X +1/+1 counters on another target creature you control, where X is the number of experience counters you have."""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=573462"^^xsd:anyURI ;
     :scryfallUrl "https://scryfall.com/card/2x2/494/ezuri-claw-of-progress"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ;
     :hasLegality
       [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
@@ -88,7 +91,12 @@ At the beginning of combat on your turn, put X +1/+1 counters on another target 
       [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :NotLegal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ;
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2015-11-04"^^xsd:date ;

@@ -40,10 +40,12 @@
     rdfs:comment """An instance graph describing the card individuals of a
 personal Magic: The Gathering card collection that were printed in the set
 Gatecrash (GTC). One Card individual is defined per collected
-printing, carrying its characteristics, format legalities and official
-rulings. Card data was sourced from Gatherer and Scryfall. This file imports
-MagicCardsOntology to reuse all existing class, property, set, keyword,
-subtype, format and legality definitions."""@en .
+printing, carrying its characteristics, the platforms it is available on
+(paper, MTG Arena, Magic Online) with its MTG Arena identity, its legality
+in the paper and MTG Arena formats, and official rulings. Card data was
+sourced from Gatherer and Scryfall. This file imports MagicCardsOntology to
+reuse all existing class, property, set, keyword, subtype, format and
+legality definitions."""@en .
 
 
 ################################################################################
@@ -80,6 +82,8 @@ Whenever this creature deals combat damage to a player, gain control of all arti
 At the beginning of your upkeep, if you control twenty or more artifacts, you win the game."""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=366244"^^xsd:anyURI ;
     :scryfallUrl "https://scryfall.com/card/gtc/94/hellkite-tyrant"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MagicOnline ;
     :hasLegality
       [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
@@ -87,8 +91,71 @@ At the beginning of your upkeep, if you control twenty or more artifacts, you wi
       [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ;
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2013-01-24"^^xsd:date ;
         :rulingText """If you don't control twenty or more artifacts at the beginning of your upkeep, Hellkite Tyrant's last ability won't trigger. If it does trigger, it will check again when it tries to resolve. If you don't control twenty or more artifacts at that time, the ability will do nothing."""@en ] .
+
+:IllusionistsBracers rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Illusionist's Bracers" ;
+    :manaCost "{2}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ;
+    :hasSubType :Equipment ;
+    :hasRarity :Rare ;
+    :isInSet :Gatecrash ;
+    :cardNumber "231"^^xsd:integer ;
+    :artist "Svetlin Velinov" ;
+    :hasLanguage :English ;
+    :hasKeywordAbility :Equip ;
+    :printedText """Whenever an ability of equipped creature is activated, if it isn't a mana ability, copy that ability. You may choose new targets for the copy.
+Equip {3}"""@en ;
+    :oracleText """Whenever an ability of equipped creature is activated, if it isn't a mana ability, copy that ability. You may choose new targets for the copy.
+Equip {3}"""@en ;
+    :flavorText """It's easy to believe you're a god when you're twice as powerful as everyone else."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=366426"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/gtc/231/illusionists-bracers"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MagicOnline ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2013-01-24"^^xsd:date ;
+        :rulingText """If the ability has {X} in its cost, the value of X is copied."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2013-01-24"^^xsd:date ;
+        :rulingText """The copy will have the same targets as the ability it's copying unless you choose new ones. You may change any number of the targets, including all of them or none of them. If, for one of the targets, you can't choose a new legal target, then it remains unchanged (even if the current target is illegal)."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2013-01-24"^^xsd:date ;
+        :rulingText """An activated ability is written in the form "Cost: Effect.\""""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2013-01-24"^^xsd:date ;
+        :rulingText """If the ability is modal (that is, it says "Choose one —" or the like), the copy will have the same mode. You can't choose a different one."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2013-01-24"^^xsd:date ;
+        :rulingText """If Illusionist's Bracers somehow becomes equipped to a creature an opponent controls, and an activated ability (that isn't a mana ability) of that creature is activated, you will control the copy of that ability."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2013-01-24"^^xsd:date ;
+        :rulingText """If the cost of an activated ability requires Illusionist's Bracers or the equipped creature to be sacrificed, the ability won't be copied. At the time the ability is considered activated (after all costs are paid), Illusionist's Bracers is no longer equipped to that creature."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2013-04-15"^^xsd:date ;
+        :rulingText """A mana ability is an ability that (1) isn't a loyalty ability, (2) doesn't target, and (3) could add mana when it resolves."""@en ] .

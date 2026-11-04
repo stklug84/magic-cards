@@ -40,10 +40,12 @@
     rdfs:comment """An instance graph describing the card individuals of a
 personal Magic: The Gathering card collection that were printed in the set
 Special Guests (SPG). One Card individual is defined per collected
-printing, carrying its characteristics, format legalities and official
-rulings. Card data was sourced from Gatherer and Scryfall. This file imports
-MagicCardsOntology to reuse all existing class, property, set, keyword,
-subtype, format and legality definitions."""@en .
+printing, carrying its characteristics, the platforms it is available on
+(paper, MTG Arena, Magic Online) with its MTG Arena identity, its legality
+in the paper and MTG Arena formats, and official rulings. Card data was
+sourced from Gatherer and Scryfall. This file imports MagicCardsOntology to
+reuse all existing class, property, set, keyword, subtype, format and
+legality definitions."""@en .
 
 
 ################################################################################
@@ -72,6 +74,11 @@ subtype, format and legality definitions."""@en .
 {5}{U}: Draw a card, then discard a card."""@en ;
     :flavorText """Sailors swear by the Sphinx's stars, which always seem to point the way home."""@en ;
     :scryfallUrl "https://scryfall.com/card/spg/75/sphinxs-tutelage"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaName "Sphinx's Tutelage" ;
+    :arenaSetCode "SPG" ;
     :hasLegality
       [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
@@ -79,7 +86,12 @@ subtype, format and legality definitions."""@en .
       [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ;
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2015-06-22"^^xsd:date ;
@@ -104,6 +116,11 @@ subtype, format and legality definitions."""@en .
     :printedText """Prevent all combat damage that would be dealt this turn."""@en ;
     :oracleText """Prevent all combat damage that would be dealt this turn."""@en ;
     :scryfallUrl "https://scryfall.com/card/spg/124/darkness"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaName "Darkness" ;
+    :arenaSetCode "SPG" ;
     :hasLegality
       [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
@@ -111,4 +128,9 @@ subtype, format and legality definitions."""@en .
       [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :NotLegal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] .
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] .

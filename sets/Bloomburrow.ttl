@@ -40,10 +40,12 @@
     rdfs:comment """An instance graph describing the card individuals of a
 personal Magic: The Gathering card collection that were printed in the set
 Bloomburrow (BLB). One Card individual is defined per collected
-printing, carrying its characteristics, format legalities and official
-rulings. Card data was sourced from Gatherer and Scryfall. This file imports
-MagicCardsOntology to reuse all existing class, property, set, keyword,
-subtype, format and legality definitions."""@en .
+printing, carrying its characteristics, the platforms it is available on
+(paper, MTG Arena, Magic Online) with its MTG Arena identity, its legality
+in the paper and MTG Arena formats, and official rulings. Card data was
+sourced from Gatherer and Scryfall. This file imports MagicCardsOntology to
+reuse all existing class, property, set, keyword, subtype, format and
+legality definitions."""@en .
 
 
 ################################################################################
@@ -79,6 +81,12 @@ Whenever you gain life, put a +1/+1 counter on this creature.
 When this creature dies, put its counters on target creature you control."""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=668926"^^xsd:anyURI ;
     :scryfallUrl "https://scryfall.com/card/blb/12/essence-channeler"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "91548"^^xsd:positiveInteger ;
+    :arenaName "Essence Channeler" ;
+    :arenaSetCode "BLB" ;
     :hasLegality
       [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
@@ -86,7 +94,12 @@ When this creature dies, put its counters on target creature you control."""@en 
       [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ;
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2024-07-26"^^xsd:date ;
@@ -156,6 +169,12 @@ This creature can't block.
 Whenever you gain life, each opponent loses 1 life."""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=669030"^^xsd:anyURI ;
     :scryfallUrl "https://scryfall.com/card/blb/116/starscape-cleric"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "91652"^^xsd:positiveInteger ;
+    :arenaName "Starscape Cleric" ;
+    :arenaSetCode "BLB" ;
     :hasLegality
       [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
@@ -163,7 +182,12 @@ Whenever you gain life, each opponent loses 1 life."""@en ;
       [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ;
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2024-07-26"^^xsd:date ;
@@ -223,6 +247,12 @@ Whenever you expend 4, you may discard your hand. If you do, draw two cards. (Yo
     :flavorText """"This trinket has saved my hide more times than I can count. I couldn't possibly let it go for less than say . . . four acorns.\""""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=669043"^^xsd:anyURI ;
     :scryfallUrl "https://scryfall.com/card/blb/129/byway-barterer"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "91665"^^xsd:positiveInteger ;
+    :arenaName "Byway Barterer" ;
+    :arenaSetCode "BLB" ;
     :hasLegality
       [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
@@ -230,7 +260,12 @@ Whenever you expend 4, you may discard your hand. If you do, draw two cards. (Yo
       [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ;
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2024-07-26"^^xsd:date ;
@@ -277,6 +312,12 @@ Whenever a Bat you control attacks, you gain 1 life.
 Whenever Zoraline enters or attacks, you may pay {W}{B} and 2 life. When you do, return target nonland permanent card with mana value 3 or less from your graveyard to the battlefield with a finality counter on it."""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=669156"^^xsd:anyURI ;
     :scryfallUrl "https://scryfall.com/card/blb/242/zoraline-cosmos-caller"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "91778"^^xsd:positiveInteger ;
+    :arenaName "Zoraline, Cosmos Caller" ;
+    :arenaSetCode "BLB" ;
     :hasLegality
       [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
@@ -284,7 +325,12 @@ Whenever Zoraline enters or attacks, you may pay {W}{B} and 2 life. When you do,
       [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ;
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2024-07-26"^^xsd:date ;
@@ -323,6 +369,12 @@ Whenever Zoraline enters or attacks, you may pay {W}{B} and 2 life. When you do,
 {1}{B}, {T}, Sacrifice this land: Return target Bat, Lizard, Rat, or Squirrel card from your graveyard to your hand."""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=669171"^^xsd:anyURI ;
     :scryfallUrl "https://scryfall.com/card/blb/257/mudflat-village"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "91793"^^xsd:positiveInteger ;
+    :arenaName "Mudflat Village" ;
+    :arenaSetCode "BLB" ;
     :hasLegality
       [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
@@ -330,7 +382,12 @@ Whenever Zoraline enters or attacks, you may pay {W}{B} and 2 life. When you do,
       [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] .
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
 
 :MountainBloomburrow375 rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -350,6 +407,12 @@ Whenever Zoraline enters or attacks, you may pay {W}{B} and 2 life. When you do,
     :oracleText """({T}: Add {R}.)"""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=668672"^^xsd:anyURI ;
     :scryfallUrl "https://scryfall.com/card/blb/375/mountain"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "91837"^^xsd:positiveInteger ;
+    :arenaName "Mountain" ;
+    :arenaSetCode "BLB" ;
     :hasLegality
       [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
@@ -357,7 +420,12 @@ Whenever Zoraline enters or attacks, you may pay {W}{B} and 2 life. When you do,
       [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] .
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
 
 :MountainBloomburrow376 rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -377,6 +445,12 @@ Whenever Zoraline enters or attacks, you may pay {W}{B} and 2 life. When you do,
     :oracleText """({T}: Add {R}.)"""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=668673"^^xsd:anyURI ;
     :scryfallUrl "https://scryfall.com/card/blb/376/mountain"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "91838"^^xsd:positiveInteger ;
+    :arenaName "Mountain" ;
+    :arenaSetCode "BLB" ;
     :hasLegality
       [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
@@ -384,4 +458,9 @@ Whenever Zoraline enters or attacks, you may pay {W}{B} and 2 life. When you do,
       [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] .
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .

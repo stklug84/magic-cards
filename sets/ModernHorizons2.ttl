@@ -40,10 +40,12 @@
     rdfs:comment """An instance graph describing the card individuals of a
 personal Magic: The Gathering card collection that were printed in the set
 Modern Horizons 2 (MH2). One Card individual is defined per collected
-printing, carrying its characteristics, format legalities and official
-rulings. Card data was sourced from Gatherer and Scryfall. This file imports
-MagicCardsOntology to reuse all existing class, property, set, keyword,
-subtype, format and legality definitions."""@en .
+printing, carrying its characteristics, the platforms it is available on
+(paper, MTG Arena, Magic Online) with its MTG Arena identity, its legality
+in the paper and MTG Arena formats, and official rulings. Card data was
+sourced from Gatherer and Scryfall. This file imports MagicCardsOntology to
+reuse all existing class, property, set, keyword, subtype, format and
+legality definitions."""@en .
 
 
 ################################################################################
@@ -77,6 +79,8 @@ subtype, format and legality definitions."""@en .
     :flavorText """It flickered to life, saw itself alone, and began to build."""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=522080"^^xsd:anyURI ;
     :scryfallUrl "https://scryfall.com/card/mh2/4/arcbound-prototype"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MagicOnline ;
     :hasLegality
       [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
@@ -84,7 +88,12 @@ subtype, format and legality definitions."""@en .
       [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :NotLegal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] .
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] .
 
 :PowerDepot rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -115,6 +124,8 @@ Modular 1"""@en ;
 Modular 1"""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=522327"^^xsd:anyURI ;
     :scryfallUrl "https://scryfall.com/card/mh2/251/power-depot"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MagicOnline ;
     :hasLegality
       [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
@@ -122,7 +133,12 @@ Modular 1"""@en ;
       [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :NotLegal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ;
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2021-06-18"^^xsd:date ;
@@ -163,6 +179,8 @@ Indestructible
     :flavorText """The path to action is forged in confidence."""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=522332"^^xsd:anyURI ;
     :scryfallUrl "https://scryfall.com/card/mh2/256/slagwoods-bridge"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MagicOnline ;
     :hasLegality
       [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
@@ -170,7 +188,12 @@ Indestructible
       [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :NotLegal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] .
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] .
 
 :TanglepoolBridgeModernHorizons2257 rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -198,6 +221,8 @@ Indestructible
     :flavorText """The path to change is forged in insight."""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=522333"^^xsd:anyURI ;
     :scryfallUrl "https://scryfall.com/card/mh2/257/tanglepool-bridge"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MagicOnline ;
     :hasLegality
       [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
@@ -205,7 +230,12 @@ Indestructible
       [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :NotLegal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] .
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] .
 
 :ThornglintBridge rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -233,6 +263,8 @@ Indestructible
     :flavorText """The path to growth is forged in balance."""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=522334"^^xsd:anyURI ;
     :scryfallUrl "https://scryfall.com/card/mh2/258/thornglint-bridge"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MagicOnline ;
     :hasLegality
       [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
@@ -240,4 +272,9 @@ Indestructible
       [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :NotLegal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] .
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] .

@@ -1,0 +1,28 @@
+# Legality status of a card in every tracked format played on a given game
+# platform - by default the MTG Arena formats (Standard, Pioneer, Historic,
+# Timeless, Alchemy, Brawl, Standard Brawl) - and whether this printing of
+# the card is itself available on that platform. Legality belongs to the
+# card, availability to the printing: a card can be legal on MTG Arena
+# through another printing than the one collected.
+#
+# PARAMETERS:
+#   ?card     - the card printing to look up
+#   ?platform - the game platform (mc:MTGArena, mc:PaperMagic, mc:MagicOnline)
+
+PREFIX mc:   <urn:stklug84:MagicCardsOntology:2026-02-27#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?cardName ?formatLabel ?statusLabel ?printingAvailable WHERE {
+  VALUES ?card     { mc:StarfieldVocalist }
+  VALUES ?platform { mc:MTGArena }
+
+  ?card mc:cardName ?cardName ;
+        mc:hasLegality ?lm .
+  ?lm mc:inFormat ?format ;
+      mc:hasLegalityStatus ?status .
+  ?format mc:isPlayedOn ?platform .
+  BIND(EXISTS { ?card mc:isAvailableOn ?platform } AS ?printingAvailable)
+  OPTIONAL { ?format rdfs:label ?formatLabel }
+  OPTIONAL { ?status rdfs:label ?statusLabel }
+}
+ORDER BY ?formatLabel

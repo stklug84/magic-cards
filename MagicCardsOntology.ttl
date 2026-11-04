@@ -48,7 +48,8 @@ Comprehensive Rules of Magic: The Gathering, version 2026-02-27."""@en .
                  :SubType
                  :Format
                  :Language
-                 :Legality ) .
+                 :Legality
+                 :GamePlatform ) .
 
 [] rdf:type owl:AllDisjointClasses ;
    owl:members ( :ArtifactTypes
@@ -145,6 +146,7 @@ number of copies, finish and condition of each collected printing."""@en .
 # - Language
 # - Legality
 # - Format
+# - Game Platform
 # ------------------------------------------------------------------------------
 :Card rdf:type owl:Class ;
       rdfs:label "Magic Card" ;
@@ -673,6 +675,7 @@ a Format, and a Legality Status. See rules 100.6 and 206.4."""@en .
                 :Planechase
                 :SealedDeck
                 :Standard
+                :StandardBrawl
                 :TeamBoosterDraft
                 :TeamSealedDeck
                 :Timeless
@@ -690,6 +693,23 @@ See rules 100.6 and 206.4."""@en .
         rdfs:comment
         """Specific rules clarifications for a card, published
 alongside Oracle text. See rule 108.1."""@en .
+
+# --- Game Platform Attribute Class ---
+:GamePlatform rdf:type owl:Class ;
+              owl:equivalentClass [
+                  rdf:type owl:Class ;
+                  owl:oneOf (
+                      :PaperMagic
+                      :MTGArena
+                      :MagicOnline
+                  )
+              ] ;
+              rdfs:label "Game Platform" ;
+              rdfs:comment
+              """A platform Magic: The Gathering is played on: paper (tabletop)
+Magic, or one of the digital games MTG Arena and Magic Online. A card
+printing is available on one or more platforms (:isAvailableOn), and a
+format is played on one or more platforms (:isPlayedOn)."""@en .
 
 # ------------------------------------------------------------------------------
 # Card text related classes: Keyword Classes
@@ -1182,6 +1202,29 @@ See rules 100.6 and 206.4."""@en .
            """The ruling for the card, published alongside
 Oracle text. See rule 108.1."""@en .
 
+# --- Game Platforms ---
+
+:isAvailableOn rdf:type owl:ObjectProperty ;
+               rdfs:domain :Card ;
+               rdfs:range :GamePlatform ;
+               rdfs:label "Is Available On" ;
+               rdfs:comment
+               """Relates a card printing to a game platform it is available
+on: :PaperMagic for printed cards, :MTGArena and :MagicOnline when the
+printing exists in that digital game. Derived from Scryfall's games data.
+Availability belongs to the printing, not to the card name: a card can be
+playable on MTG Arena through another of its printings, which its legality
+in the MTG Arena formats reflects."""@en .
+
+:isPlayedOn rdf:type owl:ObjectProperty ;
+            rdfs:domain :Format ;
+            rdfs:range :GamePlatform ;
+            rdfs:label "Is Played On" ;
+            rdfs:comment
+            """Relates a format to a game platform it is played on. The MTG
+Arena formats are the formats played on :MTGArena; formats such as
+Historic, Timeless, Alchemy and Brawl are played on no other platform."""@en .
+
 # --- Deck, Set and Collection Membership ---
 
 :containsCard rdf:type owl:ObjectProperty ;
@@ -1567,6 +1610,42 @@ gatherer.wizards.com. See rule 108.1."""@en .
              rdfs:comment
              """The URL to the card's entry on scryfall.com."""@en .
 
+# --- MTG Arena Printing ---
+
+:arenaId rdf:type owl:DatatypeProperty ,
+                  owl:FunctionalProperty ;
+         rdfs:domain :Card ;
+         rdfs:range xsd:positiveInteger ;
+         rdfs:label "MTG Arena ID" ;
+         rdfs:comment
+         """The MTG Arena card ID of the printing (the identifier MTG Arena
+assigns to each printing, published by Scryfall as arena_id). Absent when
+the printing is not on MTG Arena or Scryfall does not know its ID."""@en .
+
+:arenaName rdf:type owl:DatatypeProperty ,
+                    owl:FunctionalProperty ;
+           rdfs:domain :Card ;
+           rdfs:range xsd:string ;
+           rdfs:label "MTG Arena Name" ;
+           rdfs:comment
+           """The name MTG Arena lists the printing under, as used in
+Arena's deck and collection import format "N Name (SET) number". Equal to
+the card name, except that MTG Arena lists a multi-faced card under its
+front face's name; split cards (such as Rooms) keep the full "A // B"
+name. Asserted only for printings available on MTG Arena."""@en .
+
+:arenaSetCode rdf:type owl:DatatypeProperty ,
+                       owl:FunctionalProperty ;
+              rdfs:domain :Card ;
+              rdfs:range xsd:string ;
+              rdfs:label "MTG Arena Set Code" ;
+              rdfs:comment
+              """The set code MTG Arena lists the printing under, as used in
+Arena's deck and collection import format "N Name (SET) number". Usually
+the code of the printing's set, but a few sets carry a different code on
+MTG Arena (Dominaria is DAR). Asserted only for printings available on MTG
+Arena."""@en .
+
 # --- Derived Card Facts ---
 
 :isPermanent rdf:type owl:DatatypeProperty ;
@@ -1853,7 +1932,10 @@ and carry subtypes from other categories. See rule 303."""@en .
     [
         rdf:type owl:Restriction ;
         owl:onProperty :hasSubType ;
-        owl:allValuesFrom :PlaneswalkerTypes
+        owl:allValuesFrom [
+            rdf:type owl:Class ;
+            owl:unionOf ( :PlaneswalkerTypes :CreatureTypes )
+        ]
     ] ;
     owl:equivalentClass [
         rdf:type owl:Class ;
@@ -1872,7 +1954,10 @@ and carry subtypes from other categories. See rule 303."""@en .
     ] ;
     rdfs:label "Planeswalker Card" ;
     rdfs:comment """A class representing planeswalker cards, which must have the Legendary
-supertype. See rules 306 and 205.4d."""@en .
+supertype. Their subtypes are planeswalker types, plus creature types when
+the card is also a creature: the individual of a double-faced card combines
+both faces, so a creature that transforms into a planeswalker carries the
+subtypes of both. See rules 306, 205.4d, 205.3d and 712."""@en .
 
 # --- Spell Constraints ---
 :SpellCardConstraint rdf:type owl:Class ;
@@ -1893,7 +1978,10 @@ supertype. See rules 306 and 205.4d."""@en .
     [
         rdf:type owl:Restriction ;
         owl:onProperty :hasSubType ;
-        owl:allValuesFrom :SpellTypes
+        owl:allValuesFrom [
+            rdf:type owl:Class ;
+            owl:unionOf ( :SpellTypes :CreatureTypes )
+        ]
     ] ;
     owl:equivalentClass [
         rdf:type owl:Restriction ;
@@ -1905,7 +1993,10 @@ supertype. See rules 306 and 205.4d."""@en .
     ] ;
     rdfs:label "Spell Card Constraint" ;
     rdfs:comment """A class representing any card with the Instant or Sorcery card type to
-enforce constraints. See rules 304 and 307."""@en .
+enforce constraints. Its subtypes are spell types, plus creature types for a
+kindred instant or sorcery (e.g. Kindred Sorcery — Eldrazi), since kindred
+subtypes are creature types. See rules 304, 307, 205.3k, 205.3m and
+308.2."""@en .
 
 # --- Basic Land Constraints ---
 :BasicLandCard rdf:type owl:Class ;
@@ -4943,7 +5034,8 @@ Urza."""@en .
 :Alchemy rdf:type owl:NamedIndividual ,
                   :Format ;
          rdfs:label "Alchemy" ;
-         rdfs:comment "Digital-only format played on MTG Arena" .
+         rdfs:comment "Digital-only format played on MTG Arena" ;
+         :isPlayedOn :MTGArena .
 :Archenemy rdf:type owl:NamedIndividual ,
                     :Format ;
            rdfs:label "Archenemy" ;
@@ -4961,11 +5053,16 @@ deck""" .
 :Brawl rdf:type owl:NamedIndividual ,
                 :Format ;
        rdfs:label "Brawl" ;
-       rdfs:comment "Commander variant played on MTG Arena" .
+       rdfs:comment
+       """Commander variant played on MTG Arena.
+See rule 903.12."""@en ;
+       :isPlayedOn :MTGArena .
 :Commander rdf:type owl:NamedIndividual ,
                     :Format ;
            rdfs:label "Commander" ;
-           rdfs:comment "100-card singleton multiplayer format" .
+           rdfs:comment "100-card singleton multiplayer format" ;
+           :isPlayedOn :PaperMagic ,
+                       :MagicOnline .
 :Commander1v1 rdf:type owl:NamedIndividual ,
                        :Format ;
               rdfs:label "Commander 1v1" ;
@@ -4987,11 +5084,14 @@ See rule 905."""@en .
 :Historic rdf:type owl:NamedIndividual ,
                    :Format ;
           rdfs:label "Historic" ;
-          rdfs:comment "Non-rotating digital format on MTG Arena" .
+          rdfs:comment "Non-rotating digital format on MTG Arena" ;
+          :isPlayedOn :MTGArena .
 :Legacy rdf:type owl:NamedIndividual ,
                  :Format ;
         rdfs:label "Legacy" ;
-        rdfs:comment "Eternal format allowing cards from all Magic sets" .
+        rdfs:comment "Eternal format allowing cards from all Magic sets" ;
+        :isPlayedOn :PaperMagic ,
+                    :MagicOnline .
 :Limited rdf:type owl:NamedIndividual ,
                   :Format ;
          rdfs:label "Limited" ;
@@ -4999,7 +5099,9 @@ See rule 905."""@en .
 :Modern rdf:type owl:NamedIndividual ,
                  :Format ;
         rdfs:label "Modern" ;
-        rdfs:comment "Non-rotating format from 8th Edition onwards" .
+        rdfs:comment "Non-rotating format from 8th Edition onwards" ;
+        :isPlayedOn :PaperMagic ,
+                    :MagicOnline .
 :MomirBasic rdf:type owl:NamedIndividual ,
                      :Format ;
             rdfs:label "Momir Basic" ;
@@ -5013,7 +5115,9 @@ spell""" .
 :Pauper rdf:type owl:NamedIndividual ,
                  :Format ;
         rdfs:label "Pauper" ;
-        rdfs:comment "Format using only common cards" .
+        rdfs:comment "Format using only common cards" ;
+        :isPlayedOn :PaperMagic ,
+                    :MagicOnline .
 :PickTwoDraft rdf:type owl:NamedIndividual ,
                        :Format ;
               rdfs:label "Pick-Two Draft" ;
@@ -5021,7 +5125,10 @@ spell""" .
 :Pioneer rdf:type owl:NamedIndividual ,
                   :Format ;
          rdfs:label "Pioneer" ;
-         rdfs:comment "Non-rotating format from Return to Ravnica onwards" .
+         rdfs:comment "Non-rotating format from Return to Ravnica onwards" ;
+         :isPlayedOn :PaperMagic ,
+                     :MTGArena ,
+                     :MagicOnline .
 :Planechase rdf:type owl:NamedIndividual ,
                      :Format ;
             rdfs:label "Planechase" ;
@@ -5035,7 +5142,17 @@ spell""" .
           rdfs:label "Standard" ;
           rdfs:comment
           """Rotating format using recent sets with 60 card decks and maximal
-four copies of any card""" .
+four copies of any card""" ;
+          :isPlayedOn :PaperMagic ,
+                      :MTGArena ,
+                      :MagicOnline .
+:StandardBrawl rdf:type owl:NamedIndividual ,
+                        :Format ;
+               rdfs:label "Standard Brawl" ;
+               rdfs:comment
+               """Brawl played on MTG Arena with cards from the Standard
+format only. See rules 903.12 and 903.12b."""@en ;
+               :isPlayedOn :MTGArena .
 :TeamBoosterDraft rdf:type owl:NamedIndividual ,
                            :Format ;
                   rdfs:label "Team Booster Draft" ;
@@ -5047,7 +5164,8 @@ four copies of any card""" .
 :Timeless rdf:type owl:NamedIndividual ,
                    :Format ;
           rdfs:label "Timeless" ;
-          rdfs:comment "Digital format with no bans on MTG Arena" .
+          rdfs:comment "Digital format with no bans on MTG Arena" ;
+          :isPlayedOn :MTGArena .
 :TwoHeadedGiant rdf:type owl:NamedIndividual ,
                          :Format ;
                 rdfs:label "Two-Headed Giant" ;
@@ -5055,7 +5173,30 @@ four copies of any card""" .
 :Vintage rdf:type owl:NamedIndividual ,
                   :Format ;
          rdfs:label "Vintage" ;
-         rdfs:comment "Eternal format allowing almost all cards" .
+         rdfs:comment "Eternal format allowing almost all cards" ;
+         :isPlayedOn :PaperMagic ,
+                     :MagicOnline .
+
+# --- Game Platforms ---
+:PaperMagic rdf:type owl:NamedIndividual ,
+                     :GamePlatform ;
+            rdfs:label "Paper" ;
+            rdfs:comment
+            """Paper Magic: printed cards played in person at the
+tabletop."""@en .
+:MTGArena rdf:type owl:NamedIndividual ,
+                   :GamePlatform ;
+          rdfs:label "MTG Arena" ;
+          rdfs:comment
+          """Magic: The Gathering Arena, Wizards of the Coast's digital game
+for desktop and mobile, home of the digital-only formats Alchemy,
+Historic, Timeless and Brawl."""@en .
+:MagicOnline rdf:type owl:NamedIndividual ,
+                      :GamePlatform ;
+             rdfs:label "Magic Online" ;
+             rdfs:comment
+             """Magic: The Gathering Online (MTGO), the digital client for
+desktop computers."""@en .
 
 # --- Languages ---
 :English rdf:type owl:NamedIndividual ,
@@ -6503,12 +6644,24 @@ hand."""@en .
 damage to a creature."""@en .
 
 # --- Sets (ordered by release date) ---
+:RealityFracture rdf:type owl:NamedIndividual ,
+                          :Set ;
+                 :setName "Reality Fracture"@en ;
+                 :setCode "FRA" ;
+                 :cardCount 461 ;
+                 :releaseDate "2026-10-02"^^xsd:date .
 :TheHobbit rdf:type owl:NamedIndividual ,
                     :Set ;
            :setName "The Hobbit"@en ;
            :setCode "HOB" ;
            :cardCount 39 ;
            :releaseDate "2026-08-14"^^xsd:date .
+:MarvelSuperHeroesCommander rdf:type owl:NamedIndividual ,
+                                     :Set ;
+                            :setName "Marvel Super Heroes Commander"@en ;
+                            :setCode "MSC" ;
+                            :cardCount 866 ;
+                            :releaseDate "2026-06-26"^^xsd:date .
 :SecretsOfStrixhavenCommander rdf:type owl:NamedIndividual ,
                                        :Set ;
                               :setName "Secrets of Strixhaven Commander"@en ;
@@ -7073,6 +7226,18 @@ Baldur's Gate"""@en ;
                      :setCode "NEO" ;
                      :cardCount 537 ;
                      :releaseDate "2022-02-04"^^xsd:date .
+:InnistradDoubleFeature rdf:type owl:NamedIndividual ,
+                                 :Set ;
+                        :setName "Innistrad: Double Feature"@en ;
+                        :setCode "DBL" ;
+                        :cardCount 535 ;
+                        :releaseDate "2022-01-28"^^xsd:date .
+:CommanderCollectionBlack rdf:type owl:NamedIndividual ,
+                                   :Set ;
+                          :setName "Commander Collection: Black"@en ;
+                          :setCode "CC2" ;
+                          :cardCount 9 ;
+                          :releaseDate "2022-01-28"^^xsd:date .
 :KamigawaNeonDynastyCommander rdf:type owl:NamedIndividual ,
                                        :Set ;
                               :setName "Kamigawa: Neon Dynasty Commander"@en ;

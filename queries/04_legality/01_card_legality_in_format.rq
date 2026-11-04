@@ -3,7 +3,9 @@
 # PARAMETERS:
 #   ?card   - the card to look up
 #   ?format - the format individual (mc:Commander, mc:Standard, mc:Modern,
-#             mc:Legacy, mc:Vintage, mc:Pioneer, mc:Pauper)
+#             mc:Legacy, mc:Vintage, mc:Pioneer, mc:Pauper, or one of the
+#             formats played only on MTG Arena: mc:Historic, mc:Timeless,
+#             mc:Alchemy, mc:Brawl, mc:StandardBrawl)
 
 PREFIX mc:   <urn:stklug84:MagicCardsOntology:2026-02-27#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>

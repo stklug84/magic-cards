@@ -40,10 +40,12 @@
     rdfs:comment """An instance graph describing the card individuals of a
 personal Magic: The Gathering card collection that were printed in the set
 Ixalan (XLN). One Card individual is defined per collected
-printing, carrying its characteristics, format legalities and official
-rulings. Card data was sourced from Gatherer and Scryfall. This file imports
-MagicCardsOntology to reuse all existing class, property, set, keyword,
-subtype, format and legality definitions."""@en .
+printing, carrying its characteristics, the platforms it is available on
+(paper, MTG Arena, Magic Online) with its MTG Arena identity, its legality
+in the paper and MTG Arena formats, and official rulings. Card data was
+sourced from Gatherer and Scryfall. This file imports MagicCardsOntology to
+reuse all existing class, property, set, keyword, subtype, format and
+legality definitions."""@en .
 
 
 ################################################################################
@@ -71,6 +73,12 @@ Creatures you control are the chosen type in addition to their other types. The 
 Creatures you control are the chosen type in addition to their other types. The same is true for creature spells you control and creature cards you own that aren't on the battlefield."""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=435198"^^xsd:anyURI ;
     :scryfallUrl "https://scryfall.com/card/xln/46/arcane-adaptation"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "66053"^^xsd:positiveInteger ;
+    :arenaName "Arcane Adaptation" ;
+    :arenaSetCode "XLN" ;
     :hasLegality
       [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
@@ -78,7 +86,12 @@ Creatures you control are the chosen type in addition to their other types. The 
       [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ;
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2017-09-29"^^xsd:date ;
@@ -86,3 +99,62 @@ Creatures you control are the chosen type in addition to their other types. The 
       [ rdf:type :Ruling ;
         :rulingDate "2018-01-19"^^xsd:date ;
         :rulingText """To choose a creature type, you must choose an existing creature type, such as Vampire or Knight. You can’t choose multiple creature types, such as “Vampire Knight.” Card types such as artifact can’t be chosen, nor can subtypes that aren’t creature types, such as Jace, Vehicle, or Treasure."""@en ] .
+
+:VraskaRelicSeeker rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Vraska, Relic Seeker" ;
+    :manaCost "{4}{B}{G}" ;
+    :manaValue "6"^^xsd:nonNegativeInteger ;
+    :hasSuperType :Legendary ;
+    :hasCardType :Planeswalker ;
+    :hasSubType :Vraska ;
+    :hasRarity :MythicRare ;
+    :hasColor :Black ,
+              :Green ;
+    :hasColorIdentity :Black ,
+                      :Green ;
+    :isInSet :Ixalan ;
+    :cardNumber "232"^^xsd:integer ;
+    :artist "Chris Rahn" ;
+    :hasLanguage :English ;
+    :producesMana :White ,
+                  :Blue ,
+                  :Black ,
+                  :Red ,
+                  :Green ;
+    :loyalty "6"^^xsd:integer ;
+    # Note: keyword "Treasure" not defined in MagicCardsOntology
+    :printedText """+2: Create a 2/2 black Pirate creature token with menace.
+−3: Destroy target artifact, creature, or enchantment. Create a Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add one mana of any color.")
+−10: Target player's life total becomes 1."""@en ;
+    :oracleText """+2: Create a 2/2 black Pirate creature token with menace.
+−3: Destroy target artifact, creature, or enchantment. Create a Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add one mana of any color.")
+−10: Target player's life total becomes 1."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=435388"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/xln/232/vraska-relic-seeker"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "66433"^^xsd:positiveInteger ;
+    :arenaName "Vraska, Relic Seeker" ;
+    :arenaSetCode "XLN" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2017-09-29"^^xsd:date ;
+        :rulingText """If the target artifact, creature, or enchantment is an illegal target by the time Vraska's second ability resolves, the entire ability doesn't resolve. You won't get a Treasure. If, on the other hand, the target is a legal target but isn't destroyed (most likely because it has indestructible), you will get a Treasure."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2017-09-29"^^xsd:date ;
+        :rulingText """For a player's life total to become 1, what actually happens is that the player loses the appropriate amount of life (or in some rare cases, gains the appropriate amount of life). For example, if the targeted player's life total is 4 when this ability resolves, that player loses 3 life. Other cards that interact with life loss will interact with this effect accordingly."""@en ] .

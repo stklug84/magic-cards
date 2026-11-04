@@ -40,10 +40,12 @@
     rdfs:comment """An instance graph describing the card individuals of a
 personal Magic: The Gathering card collection that were printed in the set
 Murders at Karlov Manor (MKM). One Card individual is defined per collected
-printing, carrying its characteristics, format legalities and official
-rulings. Card data was sourced from Gatherer and Scryfall. This file imports
-MagicCardsOntology to reuse all existing class, property, set, keyword,
-subtype, format and legality definitions."""@en .
+printing, carrying its characteristics, the platforms it is available on
+(paper, MTG Arena, Magic Online) with its MTG Arena identity, its legality
+in the paper and MTG Arena formats, and official rulings. Card data was
+sourced from Gatherer and Scryfall. This file imports MagicCardsOntology to
+reuse all existing class, property, set, keyword, subtype, format and
+legality definitions."""@en .
 
 
 ################################################################################
@@ -51,6 +53,161 @@ subtype, format and legality definitions."""@en .
 # Card Individuals
 #
 ################################################################################
+
+:CaseOfTheShatteredPact rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Case of the Shattered Pact" ;
+    :manaCost "{2}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Enchantment ;
+    :hasSubType :Case ;
+    :hasRarity :Uncommon ;
+    :isInSet :MurdersAtKarlovManor ;
+    :cardNumber "1"^^xsd:integer ;
+    :artist "Peter Polach" ;
+    :hasLanguage :English ;
+    :hasKeywordAbility :Solved ;
+    :printedText """When this Case enters, search your library for a basic land card, reveal it, put it into your hand, then shuffle.
+To solve — There are five colors among permanents you control. (If unsolved, solve at the beginning of your end step.)
+Solved — At the beginning of combat on your turn, target creature you control gains flying, double strike, and vigilance until end of turn."""@en ;
+    :oracleText """When this Case enters, search your library for a basic land card, reveal it, put it into your hand, then shuffle.
+To solve — There are five colors among permanents you control. (If unsolved, solve at the beginning of your end step.)
+Solved — At the beginning of combat on your turn, target creature you control gains flying, double strike, and vigilance until end of turn."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=646565"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mkm/1/case-of-the-shattered-pact"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "88922"^^xsd:positiveInteger ;
+    :arenaName "Case of the Shattered Pact" ;
+    :arenaSetCode "MKM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """Cases don't lose their other abilities when they become solved."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """"To solve" abilities will check for their condition twice: once when the ability would trigger, and once when it resolves. If the condition isn't true at the beginning of your end step, the ability won't trigger at all. If the condition isn't true when the ability resolves, the Case won't become solved."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """"Solved — [static ability]" means "As long as this Case is solved, [static ability]." Static abilities are written as statements, such as "Creatures you control get +1/+1" or "Instant and sorcery spells you cast cost {1} less to cast.\""""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """"Solved — [Triggered ability]" means "[Triggered ability]. This ability triggers only if this Case is solved." Triggered abilities use the word "when," "whenever," or "at." They're often written as "[Trigger condition], [effect].\""""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """The meaning of "solved" differs based on what type of ability follows it. "Solved — [activated ability]" means "[Activated ability]. Activate only if this Case is solved." Activated abilities contain a colon. They're generally written "[Cost]: [Effect]." """@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """Being solved is not part of a permanent's copiable values. A permanent that becomes a copy of a solved Case is not solved. A solved Case that somehow becomes a copy of a different Case stays solved."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """"To Solve — [condition]" means "At the beginning of your end step, if [condition] and this Case is not solved, it becomes solved.\""""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """Each Case has two special keyword abilities: to solve and solved."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """Once a Case becomes solved, it stays solved until it leaves the battlefield."""@en ] .
+
+:CaseOfThePilferedProof rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Case of the Pilfered Proof" ;
+    :manaCost "{1}{W}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Enchantment ;
+    :hasSubType :Case ;
+    :hasRarity :Uncommon ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :MurdersAtKarlovManor ;
+    :cardNumber "9"^^xsd:integer ;
+    :artist "Joshua Cairos" ;
+    :hasLanguage :English ;
+    :hasKeywordAbility :Solved ;
+    :printedText """Whenever a Detective you control enters or is turned face up, put a +1/+1 counter on it.
+To solve — You control three or more Detectives. (If unsolved, solve at the beginning of your end step.)
+Solved — If one or more tokens would be created under your control, those tokens plus a Clue token are created instead. (It's an artifact with "{2}, Sacrifice this token: Draw a card.")"""@en ;
+    :oracleText """Whenever a Detective you control enters or is turned face up, put a +1/+1 counter on it.
+To solve — You control three or more Detectives. (If unsolved, solve at the beginning of your end step.)
+Solved — If one or more tokens would be created under your control, those tokens plus a Clue token are created instead. (It's an artifact with "{2}, Sacrifice this token: Draw a card.")"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=646572"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mkm/9/case-of-the-pilfered-proof"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "88929"^^xsd:positiveInteger ;
+    :arenaName "Case of the Pilfered Proof" ;
+    :arenaSetCode "MKM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """You can't sacrifice a Clue to pay multiple costs. For example, you can't sacrifice a Clue token to activate its own ability and also to activate Alquist Proft, Master Sleuth's ability."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """The meaning of "solved" differs based on what type of ability follows it. "Solved — [activated ability]" means "[Activated ability]. Activate only if this Case is solved." Activated abilities contain a colon. They're generally written "[Cost]: [Effect]." """@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """Being solved is not part of a permanent's copiable values. A permanent that becomes a copy of a solved Case is not solved. A solved Case that somehow becomes a copy of a different Case stays solved."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """"Solved — [static ability]" means "As long as this Case is solved, [static ability]." Static abilities are written as statements, such as "Creatures you control get +1/+1" or "Instant and sorcery spells you cast cost {1} less to cast.\""""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """Some spells and abilities that investigate may require targets. If each target chosen is an illegal target as that spell or ability tries to resolve, it won't resolve. You won't create any Clue tokens."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """Cases don't lose their other abilities when they become solved."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """Some abilities trigger "whenever you sacrifice a Clue". Those abilities trigger whenever you sacrifice a Clue for any reason, not just to activate a Clue's activated ability."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """"To Solve — [condition]" means "At the beginning of your end step, if [condition] and this Case is not solved, it becomes solved.\""""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """Once a Case becomes solved, it stays solved until it leaves the battlefield."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """Each Case has two special keyword abilities: to solve and solved."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """Clue is an artifact type. Even though it appears on some cards with other permanent types, it's never a creature type, a land type, or anything but an artifact type."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """"Solved — [Triggered ability]" means "[Triggered ability]. This ability triggers only if this Case is solved." Triggered abilities use the word "when," "whenever," or "at." They're often written as "[Trigger condition], [effect].\""""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """If an effect refers to a Clue, it means any Clue artifact, not just a Clue artifact token. For example, you can sacrifice Wrench to pay for Alquist Proft, Master Sleuth's activated ability."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """"To solve" abilities will check for their condition twice: once when the ability would trigger, and once when it resolves. If the condition isn't true at the beginning of your end step, the ability won't trigger at all. If the condition isn't true when the ability resolves, the Case won't become solved."""@en ] .
 
 :CaseOfTheUneatenFeast rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -75,6 +232,12 @@ To solve — You've gained 5 or more life this turn. (If unsolved, solve at the 
 Solved — Sacrifice this Case: Creature cards in your graveyard gain "You may cast this card from your graveyard" until end of turn."""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=646573"^^xsd:anyURI ;
     :scryfallUrl "https://scryfall.com/card/mkm/10/case-of-the-uneaten-feast"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "88930"^^xsd:positiveInteger ;
+    :arenaName "Case of the Uneaten Feast" ;
+    :arenaSetCode "MKM" ;
     :hasLegality
       [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
@@ -82,7 +245,12 @@ Solved — Sacrifice this Case: Creature cards in your graveyard gain "You may c
       [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ;
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2024-02-02"^^xsd:date ;
@@ -143,6 +311,12 @@ Disguise {1}{U}
 When this creature is turned face up, target opponent gains control of any number of target permanents you control. Draw a card for each one they gained control of this way."""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=646610"^^xsd:anyURI ;
     :scryfallUrl "https://scryfall.com/card/mkm/48/coveted-falcon"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "88967"^^xsd:positiveInteger ;
+    :arenaName "Coveted Falcon" ;
+    :arenaSetCode "MKM" ;
     :hasLegality
       [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
@@ -150,7 +324,12 @@ When this creature is turned face up, target opponent gains control of any numbe
       [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ;
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2024-02-02"^^xsd:date ;
@@ -192,7 +371,66 @@ When this creature is turned face up, target opponent gains control of any numbe
         :rulingDate "2024-02-02"^^xsd:date ;
         :rulingText """The creature spell is a 2/2 creature spell with ward {2} that has no name, mana cost, or creature types. The resulting creature is a 2/2 creature with ward {2} that has no name, mana cost, or creature types. Both the spell and the resulting creature are colorless and have a mana value of 0. Other effects that apply to the spell or creature can still grant it any characteristics it doesn't have or change the characteristics it does have."""@en ] .
 
-:KayaSpiritsJustice rdf:type owl:NamedIndividual ,
+:KayaSpiritsJusticeMurdersAtKarlovManor211 rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Kaya, Spirits' Justice" ;
+    :manaCost "{2}{W}{B}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasSuperType :Legendary ;
+    :hasCardType :Planeswalker ;
+    :hasSubType :Kaya ;
+    :hasRarity :MythicRare ;
+    :hasColor :White ,
+              :Black ;
+    :hasColorIdentity :White ,
+                      :Black ;
+    :isInSet :MurdersAtKarlovManor ;
+    :cardNumber "211"^^xsd:integer ;
+    :artist "Magali Villeneuve" ;
+    :hasLanguage :English ;
+    :loyalty "3"^^xsd:integer ;
+    :hasKeywordAction :Surveil ;
+    :printedText """Whenever one or more creatures you control and/or creature cards in your graveyard are put into exile, you may choose a creature card from among them. Until end of turn, target token you control becomes a copy of it, except it has flying.
++2: Surveil 2, then exile a card from a graveyard.
++1: Create a 1/1 white and black Spirit creature token with flying.
+−2: Exile target creature you control. For each other player, exile up to one target creature that player controls."""@en ;
+    :oracleText """Whenever one or more creatures you control and/or creature cards in your graveyard are put into exile, you may choose a creature card from among them. Until end of turn, target token you control becomes a copy of it, except it has flying.
++2: Surveil 2, then exile a card from a graveyard.
++1: Create a 1/1 white and black Spirit creature token with flying.
+−2: Exile target creature you control. For each other player, exile up to one target creature that player controls."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=646767"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mkm/211/kaya-spirits-justice"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "89124"^^xsd:positiveInteger ;
+    :arenaName "Kaya, Spirits' Justice" ;
+    :arenaSetCode "MKM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """If a creature card that was exiled is no longer in exile when Kaya, Spirits' Justice's first ability resolves (perhaps because of Pull from Eternity or a similar effect), you can't choose that creature card with that ability."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """You choose all targets for Kaya, Spirits' Justice's last ability."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """The target token copies the printed values of the card in exile, with the noted exception. It doesn't matter if that card was a copy of something else when it was on the battlefield."""@en ] .
+
+:KayaSpiritsJusticeMurdersAtKarlovManor335 rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Kaya, Spirits' Justice" ;
     :manaCost "{2}{W}{B}" ;
@@ -221,6 +459,8 @@ When this creature is turned face up, target opponent gains control of any numbe
 −2: Exile target creature you control. For each other player, exile up to one target creature that player controls."""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=649712"^^xsd:anyURI ;
     :scryfallUrl "https://scryfall.com/card/mkm/335/kaya-spirits-justice"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MagicOnline ;
     :hasLegality
       [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
@@ -228,7 +468,12 @@ When this creature is turned face up, target opponent gains control of any numbe
       [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ;
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2024-02-02"^^xsd:date ;

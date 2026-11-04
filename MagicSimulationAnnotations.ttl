@@ -96,7 +96,7 @@ graphs. Keys are whitelisted in scripts/mtgcards/behaviors.py
     :hasBehaviorHook
       [ rdf:type :BehaviorHook ; :behaviorKey "wipe" ; :behaviorValue "{\"style\": \"damage\", \"dmg\": 13}" ] .
 
-:BloodArtist
+:BloodArtistDuskmournHouseOfHorrorCommander132
     :threatWeight "5"^^xsd:nonNegativeInteger ;
     :hasBehaviorHook
       [ rdf:type :BehaviorHook ; :behaviorKey "drain_any" ; :behaviorValue "true" ] .
@@ -236,7 +236,7 @@ graphs. Keys are whitelisted in scripts/mtgcards/behaviors.py
     :hasBehaviorHook
       [ rdf:type :BehaviorHook ; :behaviorKey "draw_on_tokens" ; :behaviorValue "1" ] .
 
-:MyrBattlesphere
+:MyrBattlesphereModernHorizons3Commander301
     :threatWeight "5"^^xsd:nonNegativeInteger ;
     :hasBehaviorHook
       [ rdf:type :BehaviorHook ; :behaviorKey "etb_tokens" ; :behaviorValue "[4, 1, 1, true]" ] .

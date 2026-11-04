@@ -7,7 +7,12 @@ Pipeline:
                 set metadata and WotC (Gatherer) rulings. Results are cached.
   2. generate - emit one TTL file per set under sets/, following the modelling
                 conventions of MagicCardIndividuals.ttl / MagicCardsOntology.ttl,
-                and print the owl:imports block for the master file.
+                and print the owl:imports block for the master file. Besides
+                the card's characteristics, each block records the platforms
+                the printing is available on, its MTG Arena identity (Arena
+                ID, name and set code - the fields of Arena's import line
+                "N Name (SET) number") and its legality in the paper and the
+                MTG Arena formats.
   3. collection - emit MagicCardCollection.ttl with one reified CollectionEntry
                 per collected variant, i.e. per (printing, finish, condition)
                 combination, carrying the total quantity held in that variant.
@@ -102,7 +107,15 @@ FORMATS = [
     ("vintage", "Vintage"),
     ("pioneer", "Pioneer"),
     ("pauper", "Pauper"),
+    # formats played only on MTG Arena (:isPlayedOn :MTGArena)
+    ("historic", "Historic"),
+    ("timeless", "Timeless"),
+    ("alchemy", "Alchemy"),
+    ("brawl", "Brawl"),
+    ("standardbrawl", "StandardBrawl"),
 ]
+#: Scryfall `games` value -> :GamePlatform individual, in emission order
+GAMES = {"paper": "PaperMagic", "arena": "MTGArena", "mtgo": "MagicOnline"}
 LANG = {"English": "English", "German": "German"}
 
 
@@ -136,6 +149,8 @@ class Notes:
     skipped: list[tuple[str, PrintKey]] = field(default_factory=list)
     #: printings the Scryfall cache has no data for
     missing: list[PrintKey] = field(default_factory=list)
+    #: Scryfall `games` values without a :GamePlatform individual
+    games: set[str] = field(default_factory=set)
 
 
 @dataclass
@@ -145,6 +160,8 @@ class PrintingInfo:
     set_ind: str
     language: str
     localized: ScryCard | None
+    #: the code MTG Arena lists the printing's set under (see arena_set_code)
+    arena_set_code: str
 
 
 @dataclass
@@ -677,6 +694,58 @@ def _url_lines(card: ScryCard) -> list[str]:
     return out
 
 
+def arena_name(card: ScryCard) -> str:
+    """Return the name MTG Arena lists a printing under.
+
+    Arena lists a multi-faced card under its front face's name, except
+    split-layout cards (such as Rooms), which keep the full "A // B" name:
+    "Lunarch Veteran" but "Dollmaker's Shop // Porcelain Gallery".
+    Checked against Arena's own card database for every collected printing
+    that has an Arena ID.
+    """
+    name: str = card["name"]
+    if card.get("layout") == "split":
+        return name
+    return name.split(" // ", maxsplit=1)[0]
+
+
+def arena_set_code(set_meta: ScryCard, code: str) -> str:
+    """Return the code MTG Arena lists a set's printings under.
+
+    Scryfall's arena_code where it has one (Dominaria is DAR on Arena);
+    otherwise Arena uses the set's own code - Scryfall leaves arena_code
+    empty for some sets on Arena (FIC, FIN, J25, ...).
+    """
+    arena_code: str = set_meta.get("arena_code") or code
+    return arena_code.upper()
+
+
+def _platform_lines(card: ScryCard, info: PrintingInfo, ctx: GenContext) -> list[str]:
+    """Platform availability and, on MTG Arena, the printing's Arena identity.
+
+    :isAvailableOn lists the platforms of Scryfall's games field; values
+    without a :GamePlatform individual are reported, not emitted. A
+    printing on MTG Arena also carries the name and set code Arena lists it
+    under - with the collector number, the fields of Arena's import line
+    "N Name (SET) number" - and its Arena ID when Scryfall has one.
+    """
+    games = set(card.get("games") or [])
+    arena_id = card.get("arena_id")
+    if arena_id:
+        games.add("arena")  # an Arena ID implies the printing is on Arena
+    ctx.notes.games.update(games - GAMES.keys())
+    out = object_list(
+        ":isAvailableOn",
+        [f":{ind}" for game, ind in GAMES.items() if game in games],
+    )
+    if "arena" in games:
+        if arena_id:
+            out.append(f'    :arenaId "{int(arena_id)}"^^xsd:positiveInteger ;')
+        out.append(f'    :arenaName "{esc_str(arena_name(card))}" ;')
+        out.append(f'    :arenaSetCode "{esc_str(info.arena_set_code)}" ;')
+    return out
+
+
 def _legality_lines(card: ScryCard, ctx: GenContext) -> list[str]:
     """Legality mappings and rulings; terminates the block with '.'."""
     out = []
@@ -719,6 +788,7 @@ def card_block(ind: str, card: ScryCard, info: PrintingInfo, ctx: GenContext) ->
     out.extend(_keyword_lines(card, ctx))
     out.extend(_text_lines(faces, info))
     out.extend(_url_lines(card))
+    out.extend(_platform_lines(card, info, ctx))
     out.extend(_legality_lines(card, ctx))
     return "\n".join(out)
 
@@ -766,10 +836,12 @@ HEADER = """\
     rdfs:comment \"\"\"An instance graph describing the card individuals of a
 personal Magic: The Gathering card collection that were printed in the set
 {set_name} ({set_code}). One Card individual is defined per collected
-printing, carrying its characteristics, format legalities and official
-rulings. Card data was sourced from Gatherer and Scryfall. This file imports
-MagicCardsOntology to reuse all existing class, property, set, keyword,
-subtype, format and legality definitions.\"\"\"@en .
+printing, carrying its characteristics, the platforms it is available on
+(paper, MTG Arena, Magic Online) with its MTG Arena identity, its legality
+in the paper and MTG Arena formats, and official rulings. Card data was
+sourced from Gatherer and Scryfall. This file imports MagicCardsOntology to
+reuse all existing class, property, set, keyword, subtype, format and
+legality definitions.\"\"\"@en .
 
 """
 
@@ -862,6 +934,7 @@ def _generate_blocks(
             set_ind=inputs.set_ind[key[0]],
             language=p["language"],
             localized=inputs.localized.get(f"{key[0]}|{key[1]}"),
+            arena_set_code=arena_set_code(inputs.sets_meta[key[0]], key[0]),
         )
         blocks_by_set[key[0]].append(card_block(ind, card, info, ctx))
     return blocks_by_set, used
@@ -941,6 +1014,8 @@ def _report_generate(
         print("new subtypes:", sorted(notes.subtypes))  # noqa: T201
     if notes.keywords:
         print("unknown keywords (comment notes):", sorted(notes.keywords))  # noqa: T201
+    if notes.games:
+        print("platforms without a :GamePlatform (not emitted):", sorted(notes.games))  # noqa: T201
     IMPORTS_JSON.write_text(
         json.dumps(
             [{"urn": u, "file": f, "cards": n} for u, f, n in imports],
