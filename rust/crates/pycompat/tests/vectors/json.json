@@ -1,0 +1,185 @@
+[
+ {
+  "value": null,
+  "dumps": "null"
+ },
+ {
+  "value": true,
+  "dumps": "true"
+ },
+ {
+  "value": false,
+  "dumps": "false"
+ },
+ {
+  "value": 0,
+  "dumps": "0"
+ },
+ {
+  "value": -1,
+  "dumps": "-1"
+ },
+ {
+  "value": 12345678901234567890,
+  "dumps": "12345678901234567890"
+ },
+ {
+  "value": 0.0,
+  "dumps": "0.0"
+ },
+ {
+  "value": -0.0,
+  "dumps": "-0.0"
+ },
+ {
+  "value": 1.0,
+  "dumps": "1.0"
+ },
+ {
+  "value": 0.1,
+  "dumps": "0.1"
+ },
+ {
+  "value": 0.5,
+  "dumps": "0.5"
+ },
+ {
+  "value": 2.5,
+  "dumps": "2.5"
+ },
+ {
+  "value": 1e+16,
+  "dumps": "1e+16"
+ },
+ {
+  "value": 1000000000000000.0,
+  "dumps": "1000000000000000.0"
+ },
+ {
+  "value": 123456789.123,
+  "dumps": "123456789.123"
+ },
+ {
+  "value": 1e-05,
+  "dumps": "1e-05"
+ },
+ {
+  "value": 0.0001,
+  "dumps": "0.0001"
+ },
+ {
+  "value": 1e+22,
+  "dumps": "1e+22"
+ },
+ {
+  "value": 5e-324,
+  "dumps": "5e-324"
+ },
+ {
+  "value": 1.7976931348623157e+308,
+  "dumps": "1.7976931348623157e+308"
+ },
+ {
+  "value": 3.141592653589793,
+  "dumps": "3.141592653589793"
+ },
+ {
+  "value": 33.333333333333336,
+  "dumps": "33.333333333333336"
+ },
+ {
+  "value": "",
+  "dumps": "\"\""
+ },
+ {
+  "value": "plain",
+  "dumps": "\"plain\""
+ },
+ {
+  "value": "quote\" backslash\\ slash/",
+  "dumps": "\"quote\\\" backslash\\\\ slash/\""
+ },
+ {
+  "value": "newline\n tab\t cr\r bell\u0007 nul\u0000",
+  "dumps": "\"newline\\n tab\\t cr\\r bell\\u0007 nul\\u0000\""
+ },
+ {
+  "value": "ünïcödé — “quotes” ✓",
+  "dumps": "\"\\u00fcn\\u00efc\\u00f6d\\u00e9 \\u2014 \\u201cquotes\\u201d \\u2713\""
+ },
+ {
+  "value": "emoji 😀 and 𝔘",
+  "dumps": "\"emoji \\ud83d\\ude00 and \\ud835\\udd18\""
+ },
+ {
+  "value": "− minus",
+  "dumps": "\"\\u2212 minus\""
+ },
+ {
+  "value": [],
+  "dumps": "[]"
+ },
+ {
+  "value": [
+   1,
+   2.0,
+   "x",
+   null,
+   true
+  ],
+  "dumps": "[1, 2.0, \"x\", null, true]"
+ },
+ {
+  "value": {},
+  "dumps": "{}"
+ },
+ {
+  "value": {
+   "b": 1,
+   "a": 2,
+   "c": {
+    "z": [
+     1,
+     {
+      "y": null
+     }
+    ],
+    "d": 0.25
+   }
+  },
+  "dumps": "{\"b\": 1, \"a\": 2, \"c\": {\"z\": [1, {\"y\": null}], \"d\": 0.25}}"
+ },
+ {
+  "value": {
+   "stats": {
+    "mulligans": 1,
+    "life": 40,
+    "drain": 2.5,
+    "lost": ""
+   }
+  },
+  "dumps": "{\"stats\": {\"mulligans\": 1, \"life\": 40, \"drain\": 2.5, \"lost\": \"\"}}"
+ },
+ {
+  "value": {
+   "n": 1,
+   "who": "Fixture #1",
+   "x": null,
+   "commander": true
+  },
+  "dumps": "{\"n\": 1, \"who\": \"Fixture #1\", \"x\": null, \"commander\": true}"
+ },
+ {
+  "value": [
+   [
+    1.5,
+    -2.25
+   ],
+   {
+    "k": "v"
+   },
+   "end"
+  ],
+  "dumps": "[[1.5, -2.25], {\"k\": \"v\"}, \"end\"]"
+ }
+]

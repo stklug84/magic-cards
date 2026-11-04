@@ -1,0 +1,304 @@
+"""CPython reference vectors for the Rust ``pycompat`` crate (parity L1).
+
+Writes one JSON file per topic into ``rust/crates/pycompat/tests/vectors``
+(or the directory given as the first argument). The Rust tests read them,
+so the files are committed; ``cargo xtask vectors`` regenerates them and
+``cargo xtask vectors --check`` fails when the committed files are stale.
+
+Every value here is produced by the CPython behaviour the simulator's
+output depends on: ``random.Random`` seeded with an int (shuffles,
+``randrange``, ``getrandbits``, ``random``), ``json.dumps`` with its
+default separators and ``ensure_ascii``, ``format(x, spec)`` for the
+specs the reports use, ``statistics.mean/median/stdev`` and ``repr``.
+"""
+
+from __future__ import annotations
+
+import json
+import random
+import statistics
+import sys
+from pathlib import Path
+from typing import Any
+
+_DEFAULT_OUT = (
+    Path(__file__).resolve().parent.parent.parent
+    / "rust"
+    / "crates"
+    / "pycompat"
+    / "tests"
+    / "vectors"
+)
+
+_SEEDS = [0, 1, 7, 42, 11, 123456789, 2**31 - 1, 2**32, 2**32 + 1, 2**64 - 1, -5]
+_RANDRANGE_NS = [1, 2, 3, 7, 10, 100, 1000, 65536, 2**32, 2**40]
+_SHUFFLE_SIZES = [0, 1, 2, 3, 7, 10, 40, 99]
+_GETRANDBITS_KS = [1, 5, 31, 32, 33, 53, 64, 100, 128]
+
+
+def random_vectors() -> list[dict[str, Any]]:
+    """Per seed: the first outputs of every generator method the engine uses.
+
+    Each method starts from a fresh ``Random(seed)`` so the vectors are
+    independent of one another.
+    """
+    out: list[dict[str, Any]] = []
+    for seed in _SEEDS:
+        entry: dict[str, Any] = {"seed": seed}
+        rng = random.Random(seed)
+        entry["getrandbits32"] = [rng.getrandbits(32) for _ in range(16)]
+        rng = random.Random(seed)
+        entry["random"] = [rng.random() for _ in range(6)]
+        rng = random.Random(seed)
+        entry["randrange"] = [
+            {"n": n, "value": rng.randrange(n)} for n in _RANDRANGE_NS
+        ]
+        entry["shuffles"] = []
+        for size in _SHUFFLE_SIZES:
+            rng = random.Random(seed)
+            items = list(range(size))
+            rng.shuffle(items)
+            entry["shuffles"].append({"size": size, "order": items})
+        entry["getrandbits"] = []
+        for k in _GETRANDBITS_KS:
+            rng = random.Random(seed)
+            entry["getrandbits"].append({"k": k, "value": str(rng.getrandbits(k))})
+        # the simulator's pattern: one stream shared by several shuffles
+        rng = random.Random(seed)
+        shared = []
+        for size in (7, 5, 9):
+            items = list(range(size))
+            rng.shuffle(items)
+            shared.append(items)
+        shared_pick = rng.randrange(4)
+        entry["shared_stream"] = {"shuffles": shared, "then_randrange_4": shared_pick}
+        out.append(entry)
+    return out
+
+
+def json_vectors() -> list[dict[str, Any]]:
+    """Values with their ``json.dumps(value, default=str)`` text."""
+    values: list[Any] = [
+        None,
+        True,
+        False,
+        0,
+        -1,
+        12345678901234567890,
+        0.0,
+        -0.0,
+        1.0,
+        0.1,
+        0.5,
+        2.5,
+        1e16,
+        1e15,
+        123456789.123,
+        1e-5,
+        0.0001,
+        1e22,
+        5e-324,
+        1.7976931348623157e308,
+        3.141592653589793,
+        100.0 / 3.0,
+        "",
+        "plain",
+        'quote" backslash\\ slash/',
+        "newline\n tab\t cr\r bell\x07 nul\x00",
+        "ünïcödé — “quotes” ✓",
+        "emoji 😀 and \U0001d518",  # a non-BMP letter: two UTF-16 escapes
+        "\u2212 minus",
+        [],
+        [1, 2.0, "x", None, True],
+        {},
+        {"b": 1, "a": 2, "c": {"z": [1, {"y": None}], "d": 0.25}},
+        {"stats": {"mulligans": 1, "life": 40, "drain": 2.5, "lost": ""}},
+        {"n": 1, "who": "Fixture #1", "x": None, "commander": True},
+        [[1.5, -2.25], {"k": "v"}, "end"],
+    ]
+    return [{"value": v, "dumps": json.dumps(v, default=str)} for v in values]
+
+
+_FLOAT_SPECS = [
+    ".1f",
+    ".0f",
+    ".2f",
+    "5.1f",
+    "+5.1f",
+    "17.1f",
+    "16.1f",
+    "18.2f",
+    "g",
+    ".3g",
+]
+_FLOAT_VALUES = [
+    0.0,
+    -0.0,
+    1.0,
+    2.5,
+    3.5,
+    0.5,
+    1.5,
+    0.125,
+    0.375,
+    0.25,
+    0.35,
+    0.05,
+    0.15,
+    2.675,
+    99.95,
+    99.949999,
+    100.0 / 3.0,
+    200.0 / 3.0,
+    33.35,
+    123456789.125,
+    1e16,
+    1e-5,
+    1e-7,
+    1234.5678,
+    -7.25,
+    -0.04,
+    0.25 * 100,
+    (1 / 3) * 100,
+    (7 / 9) * 100,
+    8.0,
+    0.25,
+    4.0,
+]
+_INT_SPECS = ["d", "4d", "3d", ">3", "<8d", "08d"]
+_INT_VALUES = [0, 1, -1, 7, 42, 999, 10000, -12345]
+_STR_SPECS = ["<38s", ">18s", ">14", "<14", "<20s", "^9"]
+_STR_VALUES = [
+    "",
+    "a",
+    "Fixture #1",
+    "a string longer than the field width asks for",
+    "ünï",
+]
+
+
+def format_vectors() -> list[dict[str, Any]]:
+    """``format(value, spec)`` for the specs the reports and the TUI use."""
+    out: list[dict[str, Any]] = []
+    for spec in _FLOAT_SPECS:
+        out.extend(
+            {"kind": "float", "value": v, "spec": spec, "text": format(v, spec)}
+            for v in _FLOAT_VALUES
+        )
+    for spec in _INT_SPECS:
+        out.extend(
+            {"kind": "int", "value": v, "spec": spec, "text": format(v, spec)}
+            for v in _INT_VALUES
+        )
+    for spec in _STR_SPECS:
+        out.extend(
+            {"kind": "str", "value": v, "spec": spec, "text": format(v, spec)}
+            for v in _STR_VALUES
+        )
+    out.extend(
+        {"kind": "repr", "value": v, "spec": "", "text": repr(v)} for v in _FLOAT_VALUES
+    )
+    out.extend(
+        {"kind": "repr", "value": v, "spec": "", "text": repr(v)}
+        for v in [1e100, 1e-100, 5e-324, 1.7976931348623157e308, 123456789012345680.0]
+    )
+    return out
+
+
+_STATS_CASES = [
+    ([3, 5], 10),
+    ([0, 10], 10),
+    ([1, 1, 1], 3),
+    ([1, 2, 4], 7),
+    ([0, 0, 0, 0], 20),
+    ([2, 3, 5, 7, 11], 13),
+    ([1, 1, 2, 3, 5, 8, 13], 20),
+    ([17], 20),
+    ([5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16], 50),
+    ([333, 666, 999], 1000),
+]
+
+
+def stats_vectors() -> dict[str, Any]:
+    """``statistics`` results for per-seed win rates and game lengths."""
+    rates: list[dict[str, Any]] = []
+    for wins, games in _STATS_CASES:
+        r = [w / games for w in wins]
+        rates.append(
+            {
+                "wins": wins,
+                "games": games,
+                "mean": statistics.mean(r),
+                "stdev": statistics.stdev(r) if len(r) > 1 else 0.0,
+            },
+        )
+    lengths = [
+        [12],
+        [12, 19],
+        [20, 18, 21],
+        [1, 2, 3, 4],
+        [40, 40, 40, 40, 40],
+        [7, 7, 8, 9, 10, 10],
+        [28, 19, 20, 20, 22, 17, 31],
+    ]
+    turns = [
+        {"turns": t, "mean": statistics.mean(t), "median": statistics.median(t)}
+        for t in lengths
+    ]
+    return {"rates": rates, "turns": turns}
+
+
+def repr_vectors() -> list[dict[str, Any]]:
+    """``repr`` of the event payloads the TUI falls back to printing."""
+    values: list[Any] = [
+        {"spell": "Olivia's Dragoon", "who": "Black B"},
+        {"who": "p0", "n": 2, "total": 3},
+        {"who": "p0", "card": "Sol Ring", "x": None, "commander": True},
+        {"a": 1.5, "b": [1, 2, "x"], "c": {"d": False}},
+        {},
+        [],
+        "it's",
+        'say "hi"',
+        "both ' and \"",
+        "tab\there",
+        "ünï — ok",
+        "\x07bell",
+        -0.0,
+        1e16,
+        True,
+        None,
+    ]
+    return [{"value": v, "repr": repr(v)} for v in values]
+
+
+def write_all(out_dir: Path) -> list[Path]:
+    """Write every vector file into *out_dir*; return the paths written."""
+    out_dir.mkdir(parents=True, exist_ok=True)
+    files = {
+        "random.json": random_vectors(),
+        "json.json": json_vectors(),
+        "format.json": format_vectors(),
+        "stats.json": stats_vectors(),
+        "repr.json": repr_vectors(),
+    }
+    written = []
+    for name, data in files.items():
+        path = out_dir / name
+        path.write_text(
+            json.dumps(data, indent=1, ensure_ascii=False, sort_keys=False) + "\n",
+            encoding="utf-8",
+        )
+        written.append(path)
+    return written
+
+
+def main(argv: list[str] | None = None) -> None:
+    """Write the vectors (optionally into the directory named in argv)."""
+    args = sys.argv[1:] if argv is None else argv
+    out_dir = Path(args[0]) if args else _DEFAULT_OUT
+    for path in write_all(out_dir):
+        print(path)  # noqa: T201 - CLI report
+
+
+if __name__ == "__main__":
+    main()
