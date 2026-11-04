@@ -6644,12 +6644,24 @@ hand."""@en .
 damage to a creature."""@en .
 
 # --- Sets (ordered by release date) ---
+:RealityFracture rdf:type owl:NamedIndividual ,
+                          :Set ;
+                 :setName "Reality Fracture"@en ;
+                 :setCode "FRA" ;
+                 :cardCount 461 ;
+                 :releaseDate "2026-10-02"^^xsd:date .
 :TheHobbit rdf:type owl:NamedIndividual ,
                     :Set ;
            :setName "The Hobbit"@en ;
            :setCode "HOB" ;
            :cardCount 39 ;
            :releaseDate "2026-08-14"^^xsd:date .
+:MarvelSuperHeroesCommander rdf:type owl:NamedIndividual ,
+                                     :Set ;
+                            :setName "Marvel Super Heroes Commander"@en ;
+                            :setCode "MSC" ;
+                            :cardCount 866 ;
+                            :releaseDate "2026-06-26"^^xsd:date .
 :SecretsOfStrixhavenCommander rdf:type owl:NamedIndividual ,
                                        :Set ;
                               :setName "Secrets of Strixhaven Commander"@en ;
@@ -7214,6 +7226,18 @@ Baldur's Gate"""@en ;
                      :setCode "NEO" ;
                      :cardCount 537 ;
                      :releaseDate "2022-02-04"^^xsd:date .
+:InnistradDoubleFeature rdf:type owl:NamedIndividual ,
+                                 :Set ;
+                        :setName "Innistrad: Double Feature"@en ;
+                        :setCode "DBL" ;
+                        :cardCount 535 ;
+                        :releaseDate "2022-01-28"^^xsd:date .
+:CommanderCollectionBlack rdf:type owl:NamedIndividual ,
+                                   :Set ;
+                          :setName "Commander Collection: Black"@en ;
+                          :setCode "CC2" ;
+                          :cardCount 9 ;
+                          :releaseDate "2022-01-28"^^xsd:date .
 :KamigawaNeonDynastyCommander rdf:type owl:NamedIndividual ,
                                        :Set ;
                               :setName "Kamigawa: Neon Dynasty Commander"@en ;
