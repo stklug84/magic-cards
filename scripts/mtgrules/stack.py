@@ -50,7 +50,15 @@ class StackItem:
     source: GameObject
     controller: Player
     ability: SpellAbility | ActivatedAbility | TriggeredAbility | None = None
+    #: every chosen target, in choice order (the flattening of
+    #: ``target_groups``; kept for ward checks, Aura attachment, logging)
     targets: list[Target] = field(default_factory=list)
+    #: the chosen targets per TargetSpec of the ability (rule 601.2c);
+    #: empty when the ability has no targets
+    target_groups: list[list[Target]] = field(default_factory=list)
+    #: rule 601.2d: the announced division of a "divided as you choose"
+    #: amount, aligned with the targets of the dividing effect's spec
+    division: list[int] = field(default_factory=list)
     x: int = 0
     is_spell: bool = False
 

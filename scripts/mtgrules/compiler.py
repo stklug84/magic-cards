@@ -21,6 +21,7 @@ from typing import TYPE_CHECKING
 
 from mtgrules import overrides
 from mtgrules.abilities import (
+    ANY_NUMBER,
     TREASURE,
     ActivatedAbility,
     SpellAbility,
@@ -179,19 +180,55 @@ def _parse_token_clause(m: re.Match[str]) -> tuple[int | str, TokenSpec]:
     return count, spec
 
 
-@rule("601.2c")
+_TARGET_RE = re.compile(
+    r"(?:(?P<upto>up to )?(?P<n>one|two|three|four|five|six|x|\d+) "
+    r"|(?P<anynum>any number of )"
+    r"|(?P<oneortwo>one or two )"
+    r"|(?P<onethree>one, two, or three )"
+    r"|(?P<any>any ))?"
+    r"(?P<other>other )?targets?(?: (?P<what>[a-z' ]+?))?"
+    r"(?: an opponent controls| you control| you don't control)?"
+    r"(?:$|[.,;])",
+    re.IGNORECASE,
+)
+
+#: 'target <what>' phrase -> TargetSpec.what (first match wins)
+_WHAT_MAPPING = [
+    ("creature or planeswalker", "creature_or_planeswalker"),
+    ("creature or player", "any"),
+    ("artifact or enchantment", "art_ench"),
+    ("creature or enchantment", "cre_ench"),
+    ("nonland permanent", "nonland"),
+    ("permanent", "permanent"),
+    ("creature", "creature"),
+    ("artifact", "artifact"),
+    ("enchantment", "enchantment"),
+    ("planeswalker", "creature_or_planeswalker"),
+    ("player", "player"),
+    ("opponent", "opponent"),
+    ("spell", "spell"),
+    ("land", "land"),
+]
+
+
+@rule("601.2c", "115.3")
 def _target_spec(text: str) -> TargetSpec | None:
-    """Parse one 'target <what>' phrase into a TargetSpec."""
-    m = re.search(
-        r"(?:up to (?P<upto>one|two|three) )?target (?P<what>[a-z' ]+?)"
-        r"(?: an opponent controls| you control| you don't control)?"
-        r"(?:$|[.,;])",
-        text,
-        re.IGNORECASE,
-    )
+    """Parse one '[count] target <what>' phrase into a TargetSpec.
+
+    Counts (fix F11): "up to N" (0..N), "N" (exactly N), "any number of"
+    (0..any), "one or two" (1..2), "one, two, or three" (1..3); "any
+    target" and a bare "targets" are creatures, planeswalkers or players.
+    """
+    m = _TARGET_RE.search(text)
     if not m:
         return None
-    what_raw = m.group("what").strip()
+    what_raw = (m.group("what") or "").strip().lower()
+    if m.group("any") or not what_raw:
+        what: str | None = "any"
+    else:
+        what = next((v for k, v in _WHAT_MAPPING if k in what_raw), None)
+    if what is None:
+        return None
     controller = (
         "opponent"
         if "an opponent controls" in text
@@ -201,33 +238,24 @@ def _target_spec(text: str) -> TargetSpec | None:
         if "you don't control" in text
         else "any"
     )
-    other = what_raw.startswith("another ")
-    what_raw = what_raw.removeprefix("another ")
-    mapping = [
-        ("creature or planeswalker", "creature_or_planeswalker"),
-        ("artifact or enchantment", "art_ench"),
-        ("creature or enchantment", "cre_ench"),
-        ("nonland permanent", "nonland"),
-        ("permanent", "permanent"),
-        ("creature", "creature"),
-        ("artifact", "artifact"),
-        ("enchantment", "enchantment"),
-        ("planeswalker", "creature_or_planeswalker"),
-        ("player", "player"),
-        ("opponent", "opponent"),
-        ("spell", "spell"),
-        ("land", "land"),
-    ]
-    what = next((v for k, v in mapping if k in what_raw), None)
-    if what is None:
-        return None
-    count = _num(m.group("upto") or "one")
+    count, minimum = 1, 1
+    if m.group("n"):
+        n = _num(m.group("n"))
+        count = n if isinstance(n, int) else ANY_NUMBER
+        minimum = 0 if m.group("upto") else count
+    elif m.group("anynum"):
+        count, minimum = ANY_NUMBER, 0
+    elif m.group("oneortwo"):
+        count, minimum = 2, 1
+    elif m.group("onethree"):
+        count, minimum = 3, 1
     return TargetSpec(
         what=what,
         controller=controller,
-        other=other,
-        optional=bool(m.group("upto")),
-        count=count if isinstance(count, int) else 1,
+        other=bool(m.group("other")),
+        optional=minimum == 0,
+        count=count,
+        min_count=minimum,
     )
 
 
@@ -313,25 +341,32 @@ def _p_damage_each_creature(c: _Clause) -> Effect | None:
     return DealDamage(_num(m.group(1)), "each_creature") if m else None
 
 
+@rule("601.2d")
 def _p_damage(c: _Clause) -> Effect | None:
-    """'... deals N damage to <target|divided|each opponent>'."""
-    m = re.search(r"deals? (\d+|x) damage(?:,| to)", c.low)
+    """'... deals N damage to <target|divided ... among targets|each opponent>'."""
+    m = re.search(r"deals? (\d+|x) damage(?:,| to| divided)", c.low)
     if not m:
         return None
     spec = _target_spec(c.clause)
     if spec:
         c.targets.append(spec)
-        return DealDamage(_num(m.group(1)), "target")
-    if "divided" in c.low:
-        return DealDamage(_num(m.group(1)), "divided")
+        kind = "divided" if "divided" in c.low else "target"
+        return DealDamage(_num(m.group(1)), kind, index=len(c.targets) - 1)
     if "each opponent" in c.low:
         return LoseLife(_num(m.group(1)), "each_opponent")
     return None
 
 
+#: "<verb> [up to two | any number of | one or two | another ...] target"
+_COUNTED_TARGET = (
+    r"(?:up to |any number of |one or two |one, two, or three )?"
+    r"(?:[a-z]+ )?(?:other )?target"
+)
+
+
 def _p_destroy_target(c: _Clause) -> Effect | None:
-    """'Destroy target <what>.'."""
-    if not (c.low.startswith("destroy target") or " destroy target" in c.low):
+    """'Destroy [count] target <what>.'."""
+    if not re.search(r"\bdestroy " + _COUNTED_TARGET, c.low):
         return None
     spec = _target_spec(c.clause)
     if spec:
@@ -341,8 +376,8 @@ def _p_destroy_target(c: _Clause) -> Effect | None:
 
 
 def _p_exile_target(c: _Clause) -> Effect | None:
-    """'Exile target <what>.'."""
-    if not (c.low.startswith("exile target") or " exile target" in c.low):
+    """'Exile [count] target <what>.'."""
+    if not re.search(r"\bexile " + _COUNTED_TARGET, c.low):
         return None
     spec = _target_spec(c.clause)
     if spec:
@@ -368,11 +403,11 @@ def _p_copy_spell(c: _Clause) -> Effect | None:
 
 
 def _p_tap_target(c: _Clause) -> Effect | None:
-    """'Tap target creature.'."""
-    if not re.match(r"tap target creature", c.low):
+    """'Tap [up to N | one or two | ...] target creature(s).'."""
+    if not re.match(r"tap (?:[a-z, ]+ )?target creatures?", c.low):
         return None
-    spec = _target_spec("target creature")
-    if spec is None:  # pragma: no cover - the fixed phrase always parses
+    spec = _target_spec(c.clause)
+    if spec is None or spec.what != "creature":
         return None
     c.targets.append(spec)
     return TapTarget(index=len(c.targets) - 1)
@@ -886,8 +921,37 @@ def parse_add_mana(text: str) -> AddMana:
     )
 
 
+#: the cost components the engine can charge (rule 602.1, fix F5): a run
+#: of mana symbols and/or {T}, a sacrifice, or a life payment. Anything
+#: else ("Discard a card", "{Q}", "Remove a counter", trigger text that
+#: happens to contain a colon) makes the line unmodelled instead of a
+#: cheaper-than-printed or cost-free ability.
+_COST_COMPONENT_RES = (
+    re.compile(
+        r"^(?:\{(?:T|\d+|X|C|S|[WUBRG](?:/[WUBRGP])?|\d/[WUBRG])\})+$",
+        re.IGNORECASE,
+    ),
+    re.compile(r"^sacrifice (?:a|an|another)?\s*[a-z' ]+$"),
+    re.compile(r"^pay \d+ life$"),
+)
+
+
+def _is_cost(cost_part: str) -> bool:
+    """Whether every comma-separated component of *cost_part* is chargeable."""
+    parts = [p.strip().lower() for p in cost_part.split(",")]
+    return all(parts) and all(
+        any(r.match(p) for r in _COST_COMPONENT_RES) for p in parts
+    )
+
+
+@rule("602.1")
 def parse_activated_line(line: str, name: str) -> ActivatedAbility | None:
-    """Parse one '[Cost]: [Effect]' oracle line (rule 602.1)."""
+    """Parse one '[Cost]: [Effect]' oracle line (rule 602.1).
+
+    Only lines whose whole cost the engine can charge become activated
+    abilities (see ``_COST_COMPONENT_RES``); the others are reported as
+    unmodelled by the caller.
+    """
     m = re.match(r"^cycling ((?:\{[^}]+\})+)\.?$", line, re.IGNORECASE)
     if m:  # rule 702.29a
         return ActivatedAbility(
@@ -910,6 +974,8 @@ def parse_activated_line(line: str, name: str) -> ActivatedAbility | None:
     if not m or ":" not in line:
         return None
     cost_part, body = line.split(":", 1)
+    if not _is_cost(cost_part):
+        return None
     body = body.strip()
     mana = "".join(re.findall(r"\{[^}]+\}", cost_part.replace("{T}", "")))
     tap = "{T}" in cost_part
@@ -1127,13 +1193,16 @@ def _compile_oracle_lines(
         if kws is not None:
             ch.keywords |= kws
             continue
-        ab = parse_activated_line(line, name)
-        if ab is not None:
-            ch.abilities.append(ab)
-            continue
+        # triggers before activated abilities: a trigger line may contain
+        # a colon ("When ..., choose one: ...") and must never be read as
+        # a cost-free activated ability (fix F5)
         trig = parse_trigger_line(line, name)
         if trig is not None:
             ch.abilities.append(trig)
+            continue
+        ab = parse_activated_line(line, name)
+        if ab is not None:
+            ch.abilities.append(ab)
             continue
         static = parse_static_line(line, name)
         if static is not None:

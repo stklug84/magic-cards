@@ -21,7 +21,7 @@ from mtgrules.stack import StackItem
 if TYPE_CHECKING:
     from collections.abc import Iterable
 
-    from mtgrules.abilities import TokenSpec
+    from mtgrules.abilities import TargetSpec, TokenSpec
     from mtgrules.game import Game
     from mtgrules.protocols import CountValue, OneShot
     from mtgrules.stack import Target
@@ -37,19 +37,39 @@ class Ctx:
 
     controller: Player
     source: GameObject | None = None
+    #: every chosen target in choice order (see :attr:`target_groups`)
     targets: list[Target] = field(default_factory=list)
     x: int = 0
     #: for triggered abilities: the object of the triggering event
     #: ("that creature", rule 603.10a look-back)
     event_obj: GameObject | None = None
+    #: the chosen targets per TargetSpec (rule 601.2c); when empty, each
+    #: entry of ``targets`` is its own group (one target per spec)
+    target_groups: list[list[Target]] = field(default_factory=list)
+    #: the TargetSpecs the groups were chosen for (rule 608.2b re-check)
+    specs: list[TargetSpec] = field(default_factory=list)
+    #: rule 601.2d: announced division of a "divided" amount, aligned
+    #: with the targets of the dividing effect's spec
+    division: list[int] = field(default_factory=list)
+
+    def group(self, i: int = 0) -> list[Target]:
+        """Return the targets chosen for the i-th TargetSpec."""
+        if self.target_groups:
+            return list(self.target_groups[i]) if i < len(self.target_groups) else []
+        return [self.targets[i]] if i < len(self.targets) else []
 
     def target(self, i: int = 0) -> Target | None:
-        """Return the i-th chosen target, or None when it was not chosen."""
-        return self.targets[i] if i < len(self.targets) else None
+        """Return the first target chosen for the i-th spec, or None."""
+        group = self.group(i)
+        return group[0] if group else None
+
+    def legal_group(self, game: Game, i: int = 0) -> list[Target]:
+        """Return the i-th spec's targets that are still legal (608.2b)."""
+        return [t for t in self.group(i) if game.still_legal_target(t, self, i)]
 
 
-def _n(value: CountValue, game: Game, ctx: Ctx) -> int:
-    """Count expressions: plain int, 'x', or callable(game, ctx)."""
+def count_value(value: CountValue, game: Game, ctx: Ctx) -> int:
+    """Evaluate a count expression: plain int, 'x', or callable(game, ctx)."""
     if callable(value):
         return value(game, ctx)
     if value == "x":
@@ -104,7 +124,7 @@ class CreateTokens(Effect):
         game.create_tokens(
             ctx.controller,
             self.spec,
-            _n(self.count, game, ctx),
+            count_value(self.count, game, ctx),
             source=ctx.source,
             tapped=self.tapped,
         )
@@ -122,7 +142,7 @@ class DrawCards(Effect):
         """Draw for the affected player(s)."""
         players = [ctx.controller] if self.who == "you" else game.players_apnap()
         for p in players:
-            game.draw(p, _n(self.count, game, ctx))
+            game.draw(p, count_value(self.count, game, ctx))
 
 
 @rule("119.3", "118.5")
@@ -134,7 +154,7 @@ class GainLife(Effect):
 
     def resolve(self, game: Game, ctx: Ctx) -> None:
         """Gain the life."""
-        game.gain_life(ctx.controller, _n(self.amount, game, ctx))
+        game.gain_life(ctx.controller, count_value(self.amount, game, ctx))
 
 
 @dataclass
@@ -146,11 +166,11 @@ class LoseLife(Effect):
 
     def resolve(self, game: Game, ctx: Ctx) -> None:
         """Apply the life loss to the affected player(s)."""
-        n = _n(self.amount, game, ctx)
+        n = count_value(self.amount, game, ctx)
         if self.who == "target":
-            t = ctx.target()
-            if isinstance(t, Player):
-                game.lose_life(t, n)
+            for t in ctx.legal_group(game, 0):
+                if isinstance(t, Player):
+                    game.lose_life(t, n)
             return
         players = (
             game.opponents(ctx.controller)
@@ -169,7 +189,7 @@ class Drain(Effect):
 
     def resolve(self, game: Game, ctx: Ctx) -> None:
         """Drain each opponent and gain the total."""
-        n = _n(self.amount, game, ctx)
+        n = count_value(self.amount, game, ctx)
         total = 0
         for p in game.opponents(ctx.controller):
             game.lose_life(p, n)
@@ -179,33 +199,44 @@ class Drain(Effect):
         game.gain_life(ctx.controller, total)
 
 
-@rule("120.1")
+@rule("120.1", "601.2d")
 @dataclass
 class DealDamage(Effect):
-    """The source deals N damage (rule 120.1)."""
+    """The source deals N damage (rule 120.1).
+
+    ``to="target"`` deals N to every target of the spec at ``index``;
+    ``to="divided"`` deals the division announced on casting (rule
+    601.2d, ``ctx.division``) to the targets that are still legal - a
+    vanished target's share is lost, not redistributed.
+    """
 
     amount: CountValue
-    to: str = "target"  # target|each_creature|any|divided
+    to: str = "target"  # target|each_creature|divided
+    index: int = 0
 
     def resolve(self, game: Game, ctx: Ctx) -> None:
         """Deal the damage to the chosen recipient(s)."""
-        n = _n(self.amount, game, ctx)
+        n = count_value(self.amount, game, ctx)
         if self.to == "each_creature":
             for obj in list(game.battlefield_objects()):
                 if "Creature" in obj.chars(game).types:
                     game.deal_damage(ctx.source, obj, n)
         elif self.to == "divided":
-            # policy divides among chosen targets
-            for tgt, part in game.policy(ctx.controller).divide_damage(game, ctx, n):
-                game.deal_damage(ctx.source, tgt, part)
+            self._resolve_divided(game, ctx)
         else:
-            t = ctx.target()
-            if isinstance(t, GameObject | Player) and game.still_legal_target(
-                t,
+            for t in ctx.legal_group(game, self.index):
+                if isinstance(t, GameObject | Player):
+                    game.deal_damage(ctx.source, t, n)
+
+    def _resolve_divided(self, game: Game, ctx: Ctx) -> None:
+        """Deal the announced shares to the targets that are still legal."""
+        for tgt, part in zip(ctx.group(self.index), ctx.division, strict=False):
+            if isinstance(tgt, GameObject | Player) and game.still_legal_target(
+                tgt,
                 ctx,
-                0,
+                self.index,
             ):
-                game.deal_damage(ctx.source, t, n)
+                game.deal_damage(ctx.source, tgt, part)
 
 
 @rule("701.7")
@@ -223,23 +254,23 @@ class Destroy(Effect):
                 if "Creature" in obj.chars(game).types:
                     game.destroy(obj)
             return
-        t = ctx.target(self.index)
-        if isinstance(t, GameObject) and game.still_legal_target(t, ctx, self.index):
-            game.destroy(t)
+        for t in ctx.legal_group(game, self.index):
+            if isinstance(t, GameObject):
+                game.destroy(t)
 
 
 @rule("701.9")
 @dataclass
 class ExileObj(Effect):
-    """Exile the target permanent (rule 701.9)."""
+    """Exile the target permanent(s) (rule 701.9)."""
 
     index: int = 0
 
     def resolve(self, game: Game, ctx: Ctx) -> None:
-        """Exile the target if it is still legal."""
-        t = ctx.target(self.index)
-        if isinstance(t, GameObject) and game.still_legal_target(t, ctx, self.index):
-            game.exile(t)
+        """Exile every target of the spec that is still legal."""
+        for t in ctx.legal_group(game, self.index):
+            if isinstance(t, GameObject):
+                game.exile(t)
 
 
 @rule("701.22")
@@ -272,9 +303,9 @@ class ReturnToHand(Effect):
             if pick is not None:
                 game.move_zone(pick, "hand")
             return
-        t = ctx.target(self.index)
-        if isinstance(t, GameObject) and game.still_legal_target(t, ctx, self.index):
-            game.move_zone(t, "hand")
+        for t in ctx.legal_group(game, self.index):
+            if isinstance(t, GameObject):
+                game.move_zone(t, "hand")
 
 
 @rule("122.1")
@@ -289,25 +320,22 @@ class PutCounters(Effect):
 
     def resolve(self, game: Game, ctx: Ctx) -> None:
         """Place the counters (rule 122.1)."""
-        n = _n(self.count, game, ctx)
+        n = count_value(self.count, game, ctx)
+        for obj in self._recipients(game, ctx):
+            game.put_counters(obj, self.kind, n)
+
+    def _recipients(self, game: Game, ctx: Ctx) -> list[GameObject]:
+        """Return the permanents the counters go on."""
         if self.on == "self":
-            if ctx.source is not None:
-                game.put_counters(ctx.source, self.kind, n)
-        elif self.on == "each_creature":
-            for obj in list(game.battlefield_objects()):
-                if "Creature" in obj.chars(game).types:
-                    game.put_counters(obj, self.kind, n)
-        elif self.on == "each_opponent_creature":
-            for obj in list(game.battlefield_objects()):
-                if (
-                    "Creature" in obj.chars(game).types
-                    and obj.controller is not ctx.controller
-                ):
-                    game.put_counters(obj, self.kind, n)
-        else:
-            t = ctx.target()
-            if isinstance(t, GameObject) and game.still_legal_target(t, ctx, 0):
-                game.put_counters(t, self.kind, n)
+            return [ctx.source] if ctx.source is not None else []
+        if self.on in ("each_creature", "each_opponent_creature"):
+            return [
+                obj
+                for obj in list(game.battlefield_objects())
+                if "Creature" in obj.chars(game).types
+                and (self.on == "each_creature" or obj.controller is not ctx.controller)
+            ]
+        return [t for t in ctx.legal_group(game, 0) if isinstance(t, GameObject)]
 
 
 @rule("702.87")
@@ -337,7 +365,7 @@ class SearchLands(Effect):
         """Search and put the lands where the card says."""
         game.search_lands(
             ctx.controller,
-            _n(self.count, game, ctx),
+            count_value(self.count, game, ctx),
             tapped=self.tapped,
             to_hand=self.to_hand,
             basic_only=self.basic_only,
@@ -356,11 +384,10 @@ class TargetControllerBasicLand(Effect):
     index: int = 0
 
     def resolve(self, game: Game, ctx: Ctx) -> None:
-        """Let the target's controller fetch a basic land."""
-        t = ctx.target(self.index)
-        if not isinstance(t, GameObject):
-            return
-        game.search_lands(t.controller, 1, tapped=False, basic_only=True)
+        """Let each target's controller fetch a basic land."""
+        for t in ctx.group(self.index):
+            if isinstance(t, GameObject):
+                game.search_lands(t.controller, 1, tapped=False, basic_only=True)
 
 
 @dataclass
@@ -374,11 +401,10 @@ class TargetControllerGainsPower(Effect):
     index: int = 0
 
     def resolve(self, game: Game, ctx: Ctx) -> None:
-        """Grant the life to the target's controller."""
-        t = ctx.target(self.index)
-        if not isinstance(t, GameObject):
-            return
-        game.gain_life(t.controller, t.base.power or 0)
+        """Grant the life to each target's controller."""
+        for t in ctx.group(self.index):
+            if isinstance(t, GameObject):
+                game.gain_life(t.controller, t.base.power or 0)
 
 
 @dataclass
@@ -392,10 +418,9 @@ class LoseLifeTargetMV(Effect):
 
     def resolve(self, game: Game, ctx: Ctx) -> None:
         """Pay the life."""
-        t = ctx.target(self.index)
-        if not isinstance(t, GameObject):
-            return
-        game.lose_life(ctx.controller, parse_cost(t.base.mana_cost).mv)
+        for t in ctx.group(self.index):
+            if isinstance(t, GameObject):
+                game.lose_life(ctx.controller, parse_cost(t.base.mana_cost).mv)
 
 
 @rule("707.10")
@@ -407,9 +432,9 @@ class CopySpell(Effect):
 
     def resolve(self, game: Game, ctx: Ctx) -> None:
         """Put the copy on the stack (rule 707.10)."""
-        t = ctx.target(self.index)
-        if isinstance(t, StackItem) and t in game.stack:
-            game.copy_spell(t, ctx.controller)
+        for t in ctx.group(self.index):
+            if isinstance(t, StackItem) and t in game.stack:
+                game.copy_spell(t, ctx.controller)
 
 
 @dataclass
@@ -599,7 +624,7 @@ class EnergyGain(Effect):
 
     def resolve(self, game: Game, ctx: Ctx) -> None:
         """Add the energy."""
-        ctx.controller.energy += _n(self.count, game, ctx)
+        ctx.controller.energy += count_value(self.count, game, ctx)
 
 
 @dataclass
@@ -611,7 +636,7 @@ class Scry(Effect):
     @rule("701.26")
     def resolve(self, game: Game, ctx: Ctx) -> None:
         """Scry via the controller's policy."""
-        game.scry(ctx.controller, _n(self.count, game, ctx))
+        game.scry(ctx.controller, count_value(self.count, game, ctx))
 
 
 @dataclass
@@ -630,28 +655,29 @@ class Untap(Effect):
     on: str = "self"
 
     def resolve(self, game: Game, ctx: Ctx) -> None:
-        """Untap the affected permanent."""
-        obj = ctx.source if self.on == "self" else ctx.target()
-        if isinstance(obj, GameObject) and obj.zone == "battlefield":
-            game.untap(obj)
+        """Untap the affected permanent(s)."""
+        objs = [ctx.source] if self.on == "self" else ctx.legal_group(game, 0)
+        for obj in objs:
+            if isinstance(obj, GameObject) and obj.zone == "battlefield":
+                game.untap(obj)
 
 
 @dataclass
 class TapTarget(Effect):
-    """Tap the target permanent."""
+    """Tap the target permanent(s)."""
 
     index: int = 0
 
     def resolve(self, game: Game, ctx: Ctx) -> None:
-        """Tap the target if it is still legal."""
-        t = ctx.target(self.index)
-        if isinstance(t, GameObject) and game.still_legal_target(t, ctx, self.index):
-            game.tap(t)
+        """Tap every target of the spec that is still legal."""
+        for t in ctx.legal_group(game, self.index):
+            if isinstance(t, GameObject):
+                game.tap(t)
 
 
 @dataclass
 class Blink(Effect):
-    """Exile target, return it to the battlefield.
+    """Exile target(s), return them to the battlefield.
 
     Conjurer's Closet / Restoration Angel style.
     """
@@ -659,10 +685,10 @@ class Blink(Effect):
     index: int = 0
 
     def resolve(self, game: Game, ctx: Ctx) -> None:
-        """Blink the target if it is still legal."""
-        t = ctx.target(self.index)
-        if isinstance(t, GameObject) and game.still_legal_target(t, ctx, self.index):
-            game.blink(t)
+        """Blink every target of the spec that is still legal."""
+        for t in ctx.legal_group(game, self.index):
+            if isinstance(t, GameObject):
+                game.blink(t)
 
 
 @dataclass

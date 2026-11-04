@@ -32,18 +32,40 @@ if TYPE_CHECKING:
 # ---------------------------------------------------------------- targets
 
 
-@rule("115.1")
+#: ``count`` of a spec that allows "any number of" targets
+ANY_NUMBER = 99
+
+
+@rule("115.1", "115.3")
 @dataclass
 class TargetSpec:
-    """One target requirement of a spell/ability."""
+    """One target requirement of a spell/ability.
 
-    what: str  # creature|permanent|artifact|enchantment|
-    #                           art_ench|cre_ench|nonland|player|opponent|
-    #                           spell|creature_or_planeswalker
+    One instance of the word "target" may ask for several objects
+    ("up to two target creatures", "any number of target ...", "one or
+    two target ..."): ``count`` is the maximum, :attr:`minimum` how many
+    must be chosen. The same object can be chosen only once per spec
+    (rule 115.3).
+    """
+
+    #: what may be targeted: creature, permanent, artifact, enchantment,
+    #: art_ench, cre_ench, nonland, player, opponent, spell,
+    #: creature_or_planeswalker, land, or any (creature, planeswalker or
+    #: player)
+    what: str
     controller: str = "any"  # any|opponent|you
     count: int = 1
-    optional: bool = False  # "up to N"
+    optional: bool = False  # "up to N": the minimum is zero
     other: bool = False  # "another target ..."
+    #: how many targets must be chosen; None = 0 if optional else count
+    min_count: int | None = None
+
+    @property
+    def minimum(self) -> int:
+        """Return the number of targets that must be chosen."""
+        if self.min_count is not None:
+            return self.min_count
+        return 0 if self.optional else self.count
 
     @rule("115.4")
     def legal(self, game: Game, ctx: Ctx, target: Target) -> bool:
@@ -52,6 +74,8 @@ class TargetSpec:
             if not isinstance(target, Player) or target.lost:
                 return False
             return not (self.what == "opponent" and target is ctx.controller)
+        if self.what == "any" and isinstance(target, Player):
+            return not target.lost
         if self.what == "spell":
             return (
                 isinstance(target, StackItem)
@@ -85,6 +109,7 @@ class TargetSpec:
             "art_ench": lambda: ch.types & {"Artifact", "Enchantment"},
             "cre_ench": lambda: ch.types & {"Creature", "Enchantment"},
             "creature_or_planeswalker": lambda: ch.types & {"Creature", "Planeswalker"},
+            "any": lambda: ch.types & {"Creature", "Planeswalker"},
             "land": lambda: "Land" in ch.types,
         }.get(self.what, lambda: True)
         return bool(need())
