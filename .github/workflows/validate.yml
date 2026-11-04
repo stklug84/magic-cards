@@ -41,7 +41,9 @@ on:
   push:
     branches: [main]
   pull_request:
-    branches: [main]
+    # rust-port/**: stacked pull requests of the Rust port get CI before
+    # they are retargeted to main
+    branches: [main, "rust-port/**"]
   workflow_dispatch:
 
 permissions:

@@ -28,6 +28,9 @@ on:
   pull_request:
     branches:
       - main
+      # stacked pull requests of the Rust port get CI before they are
+      # retargeted to main
+      - "rust-port/**"
   workflow_dispatch:
 
 permissions:
