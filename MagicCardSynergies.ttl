@@ -299,7 +299,7 @@ the card individuals it relates."""@en .
 
 # --- Angel of Invention ---
 :AngelOfInvention :enables :AlibouAncientWitness ,  # Servos are hasty artifact attackers
-                           :OdricLunarchMarshal ,  # Flying/vigilance/lifelink shared to team
+                           :OdricLunarchMarshalInnistradRemastered36 ,  # Flying/vigilance/lifelink shared to team
                            :YouthfulValkyrie .  # Angel ETB adds a +1/+1 counter
 
 # --- Annie Joins Up ---
@@ -340,7 +340,7 @@ the card individuals it relates."""@en .
                                 :SaheeliRadiantCreator .  # Landfall energy trickle helps pay her 3E copy trigger
 
 # --- Astral Cornucopia ---
-:AstralCornucopia :enables :LuxArtillery .  # X charge counters count toward 30-counter check
+:AstralCornucopia :enables :LuxArtilleryEdgeOfEternitiesCommander140 .  # X charge counters count toward 30-counter check
 
 # --- Atmospheric Greenhouse ---
 :AtmosphericGreenhouse :enables :DuskLegionDuelist .  # ETB counter on each creature triggers draw
@@ -379,10 +379,10 @@ the card individuals it relates."""@en .
 :Blink :enables :BrudicladTelchorEngineer .  # Alien Angel token is strong copy target
 
 # --- Blood Artist ---
-:BloodArtist :enables :CliffhavenVampire ,  # Each drain lifegain triggers extra loss
-                      :MaraudingBlightPriestZendikarRising112 ,  # Death lifegain triggers Priest drain
-                      :SphinxOfTheRevelation ,  # Death drains gain life, generating energy
-                      :VitoThornOfTheDuskRose .  # Lifegain converts to matching life loss
+:BloodArtistDuskmournHouseOfHorrorCommander132 :enables :CliffhavenVampire ,  # Each drain lifegain triggers extra loss
+                                                        :MaraudingBlightPriestZendikarRising112 ,  # Death lifegain triggers Priest drain
+                                                        :SphinxOfTheRevelation ,  # Death drains gain life, generating energy
+                                                        :VitoThornOfTheDuskRose .  # Lifegain converts to matching life loss
 
 # --- Blood Petal Celebrant ---
 :BloodPetalCelebrant :enables :BloodmadVampire .  # Blood token discard turns on madness
@@ -423,7 +423,7 @@ the card individuals it relates."""@en .
                                    :StarfieldVocalist .  # Creates extra permanent ETBs, feeding Vocalist's trigger doubling
 
 # --- Butcher Ghoul ---
-:ButcherGhoul :enables :BloodArtist ,  # Undying gives repeatable death triggers
+:ButcherGhoul :enables :BloodArtistDuskmournHouseOfHorrorCommander132 ,  # Undying gives repeatable death triggers
                        :ColonelAutumn ,  # Undying body is recurring exploit fodder
                        :CometCrawler .  # Undying gives repeatable attack-sac fodder
 
@@ -453,21 +453,21 @@ the card individuals it relates."""@en .
 
 # --- Celestial Armor ---
 :CelestialArmor :enables :EmpyreanEagle ,  # Grants flying so Eagle's flier anthem boosts the bearer
-                         :OdricLunarchMarshal .  # Granted flying gets shared to the whole team at combat
+                         :OdricLunarchMarshalInnistradRemastered36 .  # Granted flying gets shared to the whole team at combat
 
 # --- Chrome Host Seedshark ---
 :ChromeHostSeedshark :enables :BrudicladTelchorEngineer ,  # Incubator/Phyrexian tokens to copy
                               :CityOfDeath .  # Incubator tokens as copy targets
 
 # --- Coalition Relic ---
-:CoalitionRelic :enables :LuxArtillery .  # Any-color mana maximizes sunburst counters
+:CoalitionRelic :enables :LuxArtilleryEdgeOfEternitiesCommander140 .  # Any-color mana maximizes sunburst counters
 
 # --- Cobbled Wings ---
 :CobbledWings :enables :EmpyreanEagle ,  # Grants flying so Eagle's flier anthem applies
-                       :OdricLunarchMarshal .  # Granted flying is shared team-wide at each combat
+                       :OdricLunarchMarshalInnistradRemastered36 .  # Granted flying is shared team-wide at each combat
 
 # --- Colonel Autumn ---
-:ColonelAutumn :enables :BloodArtist ,  # Exploit sacrifices feed drain triggers
+:ColonelAutumn :enables :BloodArtistDuskmournHouseOfHorrorCommander132 ,  # Exploit sacrifices feed drain triggers
                         :BloodPetalCelebrant ,  # Exploit sac converts body into Blood value
                         :CacklingProwler ,  # Exploit deaths switch morbid on
                         :SiegeVeteran ,  # Exploit sacrifices Soldiers, triggering token maker
@@ -496,7 +496,7 @@ the card individuals it relates."""@en .
 :CombustibleGearhulkAetherdriftCommander102 :enables :FeldonOfTheThirdPath .  # Self-mill stocks graveyard with creatures for Feldon to copy
 
 # --- Comet Crawler ---
-:CometCrawler :enables :BloodArtist ,  # Attack sacrifices feed death drains
+:CometCrawler :enables :BloodArtistDuskmournHouseOfHorrorCommander132 ,  # Attack sacrifices feed death drains
                        :CacklingProwler .  # Attack sacrifice turns morbid on
 
 # --- Conjurer's Closet ---
@@ -554,13 +554,13 @@ the card individuals it relates."""@en .
                               :ElectrostaticPummeler .  # Three energy fuels pump activation
 
 # --- Coretapper ---
-:Coretapper :enables :AstralCornucopia ,  # Charge counters grow mana output
-                     :CoalitionRelic ,  # Adds charge counters for burst mana
-                     :DarksteelReactor ,  # Adds charge counters toward 20-counter win
-                     :EmpoweredAutogenerator ,  # Adds charge counters for more mana
-                     :EverflowingChaliceMagicTheGatheringFallout230 ,  # Charge counters grow mana output
-                     :LuxCannon ,  # Two counters per sac speeds destruction
-                     :MagistratesScepter .  # Speeds charge toward extra turns
+:CoretapperEdgeOfEternitiesCommander132 :enables :AstralCornucopia ,  # Charge counters grow mana output
+                                                 :CoalitionRelic ,  # Adds charge counters for burst mana
+                                                 :DarksteelReactor ,  # Adds charge counters toward 20-counter win
+                                                 :EmpoweredAutogenerator ,  # Adds charge counters for more mana
+                                                 :EverflowingChaliceMagicTheGatheringFallout230 ,  # Charge counters grow mana output
+                                                 :LuxCannon ,  # Two counters per sac speeds destruction
+                                                 :MagistratesScepter .  # Speeds charge toward extra turns
 
 # --- Coveted Jewel ---
 :CovetedJewel :enables :HeroesPodium .  # Taps for three mana to fuel Podium's X dig
@@ -608,7 +608,7 @@ the card individuals it relates."""@en .
                          :ThoughtMonitor .  # Indestructible artifact land cuts affinity cost
 
 # --- Darksteel Citadel ---
-:DarksteelCitadel :enables :EmryLurkerOfTheLoch .  # Indestructible artifact feeds affinity
+:DarksteelCitadelCommander2021285 :enables :EmryLurkerOfTheLoch .  # Indestructible artifact feeds affinity
 
 # --- Dauntless Cathar ---
 :DauntlessCathar :enables :DemonicTaskmaster ,  # Recurring token feeds upkeep sacrifice
@@ -658,7 +658,7 @@ the card individuals it relates."""@en .
                           :SawtoothThresher .  # Doubles sunburst counters for pump fuel
 
 # --- Demonic Taskmaster ---
-:DemonicTaskmaster :enables :BloodArtist .  # Forced upkeep sacrifices trigger drain
+:DemonicTaskmaster :enables :BloodArtistDuskmournHouseOfHorrorCommander132 .  # Forced upkeep sacrifices trigger drain
 
 # --- Depthshaker Titan ---
 :DepthshakerTitan :amplifies :CybermenSquadron ,  # Myriad artifact token copies gain melee and haste
@@ -799,7 +799,7 @@ the card individuals it relates."""@en .
 
 # --- Dragonwing Glider ---
 :DragonwingGlider :enables :EmpyreanEagle ,  # Rebel token plus flying bearer both get flier anthem
-                           :OdricLunarchMarshal .  # Granted flying and haste are shared team-wide
+                           :OdricLunarchMarshalInnistradRemastered36 .  # Granted flying and haste are shared team-wide
 
 # --- Duskwatch Recruiter // Krallenhorde Howler ---
 :DuskwatchRecruiter :enables :SilverbackElder .  # Discounts creature spells and digs for more cast triggers
@@ -820,7 +820,7 @@ the card individuals it relates."""@en .
 :EchoStorm :enables :StarfieldVocalist .  # Creates extra permanent ETBs, feeding Vocalist's trigger doubling
 
 # --- Ecstatic Awakener // Awoken Demon ---
-:EcstaticAwakener :enables :BloodArtist ,  # Sac outlet generates death drain triggers
+:EcstaticAwakener :enables :BloodArtistDuskmournHouseOfHorrorCommander132 ,  # Sac outlet generates death drain triggers
                            :DockworkerDrone ,  # Sac outlet converts body to counters plus draw
                            :EdgeRover .  # Sac outlet cashes death-trigger Lander
 
@@ -997,9 +997,9 @@ the card individuals it relates."""@en .
                         :SchemingAspirant .  # Repeated proliferate drains each opponent
 
 # --- Foundry Inspector ---
-:FoundryInspector :enables :EmryLurkerOfTheLoch ,  # Discounts artifact recasts from the graveyard
-                           :GolemFoundry ,  # Cheaper artifact casts mean more charge counters
-                           :UthrosResearchCraft .  # Cheaper artifact spells feed draw-and-charge trigger
+:FoundryInspectorCommanderLegends310 :enables :EmryLurkerOfTheLoch ,  # Discounts artifact recasts from the graveyard
+                                              :GolemFoundry ,  # Cheaper artifact casts mean more charge counters
+                                              :UthrosResearchCraft .  # Cheaper artifact spells feed draw-and-charge trigger
 
 # --- Galactic Wayfarer ---
 :GalacticWayfarer :enables :GhirapurAetherGrid ,  # Lander token is an artifact to tap for damage
@@ -1146,7 +1146,7 @@ the card individuals it relates."""@en .
 :IllvoiLightJammer :enables :EmryLurkerOfTheLoch .  # Flash hexproof saves the recursion engine from removal
 
 # --- Indulgent Aristocrat ---
-:IndulgentAristocrat :enables :BloodArtist ,  # Repeated sacs drain via death triggers
+:IndulgentAristocrat :enables :BloodArtistDuskmournHouseOfHorrorCommander132 ,  # Repeated sacs drain via death triggers
                               :InfestationSage .  # Sac outlet converts it into Insect token
 
 # --- Inexorable Tide ---
@@ -1156,7 +1156,7 @@ the card individuals it relates."""@en .
                            :InsightEngine ,  # Proliferate grows charge-counter draws
                            :LaeliaTheBladeReforged ,  # Proliferate adds more +1/+1 counters
                            :LibertyPrimeRecharged ,  # Proliferated energy pays attack tax
-                           :LuxArtillery ,  # Proliferate speeds 30-counter burn threshold
+                           :LuxArtilleryEdgeOfEternitiesCommander140 ,  # Proliferate speeds 30-counter burn threshold
                            :MagistratesScepter ,  # Spell casts proliferate charge counters
                            :Mechanozoa ,  # Proliferate re-adds stun counter, extends lock
                            :MidnightClockAetherdriftCommander79 ,  # Proliferate speeds 12th hour counter
@@ -1307,8 +1307,8 @@ the card individuals it relates."""@en .
                         :NickValentinePrivateEye .  # Sac artifact creatures to make Clues
 
 # --- Lunarch Veteran // Luminous Phantom ---
-:LunarchVeteran :enables :EpicureOfBlood ,  # Creature-ETB lifegain triggers drain
-                         :MaraudingBlightPriestZendikarRising112 .  # Each lifegain trigger drains all opponents
+:LunarchVeteranInnistradRemastered32 :enables :EpicureOfBlood ,  # Creature-ETB lifegain triggers drain
+                                              :MaraudingBlightPriestZendikarRising112 .  # Each lifegain trigger drains all opponents
 
 # --- Magda, the Hoardmaster ---
 :MagdaTheHoardmaster :enables :MarionetteApprentice ,  # Treasure sacs trigger Apprentice drain
@@ -1370,30 +1370,30 @@ the card individuals it relates."""@en .
                                   :NutrientBlock .  # Recast self-sac Food for repeat value
 
 # --- Myr Battlesphere ---
-:MyrBattlesphere :enables :ApocalypseRunner ,  # Four Myr tokens easily pay crew 3
-                          :CrusaderOfOdricInnistradRemastered18 ,  # Four Myr tokens boost creature-count P/T
-                          :CultivatorsCaravanAetherdriftCommander127 ,  # Myr tokens pay crew 3 to turn the rock into a 5/5
-                          :CurieEmergentIntelligence ,  # Big nontoken artifact body to copy
-                          :CybermanPatrol ,  # Myr swarm weaponized with afflict
-                          :Cybermat ,  # Mass artifact attackers pump skulker
-                          :LunarchVeteran ,  # Four Myr ETBs = four lifegain triggers
-                          :MasterOfEtherium ,  # Five artifacts pump Master's power
-                          :MentorOfTheMeekInnistradRemastered34 ,  # Four 1/1 Myr = four draw triggers
-                          :NestingDovehawk ,  # Myr tokens to populate and stack counters
-                          :OverseerOfVault76 .  # Four small Myr = four quest counters
+:MyrBattlesphereModernHorizons3Commander301 :enables :ApocalypseRunner ,  # Four Myr tokens easily pay crew 3
+                                                     :CrusaderOfOdricInnistradRemastered18 ,  # Four Myr tokens boost creature-count P/T
+                                                     :CultivatorsCaravanAetherdriftCommander127 ,  # Myr tokens pay crew 3 to turn the rock into a 5/5
+                                                     :CurieEmergentIntelligence ,  # Big nontoken artifact body to copy
+                                                     :CybermanPatrol ,  # Myr swarm weaponized with afflict
+                                                     :Cybermat ,  # Mass artifact attackers pump skulker
+                                                     :LunarchVeteranInnistradRemastered32 ,  # Four Myr ETBs = four lifegain triggers
+                                                     :MasterOfEtherium ,  # Five artifacts pump Master's power
+                                                     :MentorOfTheMeekInnistradRemastered34 ,  # Four 1/1 Myr = four draw triggers
+                                                     :NestingDovehawk ,  # Myr tokens to populate and stack counters
+                                                     :OverseerOfVault76 .  # Four small Myr = four quest counters
 
 # --- Mystic Forge ---
-:MysticForge :enables :DragonsRageChanneler ,  # Casting artifacts off the top adds noncreature casts for surveil
-                      :FirebrandArcher ,  # Artifact casts off the top each ping every opponent
-                      :HeartfireImmolator ,  # Extra artifact casts pump prowess before the sacrifice ability
-                      :JamieMcCrimmon ,  # Casting artifacts from library top adds historic pump triggers
-                      :JhoiraWeatherlightCaptain ,  # Artifact casts off the top chain draws with Jhoira
-                      :LightshellDuo ,  # Artifact casts off the top pump prowess repeatedly
-                      :LuxArtillery ,  # Top-deck artifact creature casts gain sunburst
-                      :MirrodinBesieged ,  # Cast artifacts off library, chain Myr tokens
-                      :MoiraAndTeshar ,  # Top-deck artifact casts chain historic triggers
-                      :SunstarLightsmith ,  # Casts off the top reliably provide the second spell
-                      :UthrosResearchCraft .  # Artifact casts off the top chain draws and charge counters
+:MysticForgeMagicTheGatheringFallout236 :enables :DragonsRageChanneler ,  # Casting artifacts off the top adds noncreature casts for surveil
+                                                 :FirebrandArcher ,  # Artifact casts off the top each ping every opponent
+                                                 :HeartfireImmolator ,  # Extra artifact casts pump prowess before the sacrifice ability
+                                                 :JamieMcCrimmon ,  # Casting artifacts from library top adds historic pump triggers
+                                                 :JhoiraWeatherlightCaptain ,  # Artifact casts off the top chain draws with Jhoira
+                                                 :LightshellDuo ,  # Artifact casts off the top pump prowess repeatedly
+                                                 :LuxArtilleryEdgeOfEternitiesCommander140 ,  # Top-deck artifact creature casts gain sunburst
+                                                 :MirrodinBesieged ,  # Cast artifacts off library, chain Myr tokens
+                                                 :MoiraAndTeshar ,  # Top-deck artifact casts chain historic triggers
+                                                 :SunstarLightsmith ,  # Casts off the top reliably provide the second spell
+                                                 :UthrosResearchCraft .  # Artifact casts off the top chain draws and charge counters
 
 # --- Nanoform Sentinel ---
 :NanoformSentinel :enables :FishingPole .  # Untaps equipped creature to cash bait counter
@@ -1429,7 +1429,7 @@ the card individuals it relates."""@en .
 
 # --- Ojer Taq, Deepest Foundation // Temple of Civilization ---
 :OjerTaqDeepestFoundation :amplifies :MirrodinBesieged ,  # Triples Myr tokens per artifact cast
-                                     :MyrBattlesphere ,  # Triples Myr tokens to twelve
+                                     :MyrBattlesphereModernHorizons3Commander301 ,  # Triples Myr tokens to twelve
                                      :Necroduality ,  # Zombie copy tokens created in triples
                                      :NestingDovehawk ,  # Populate creates three copies
                                      :Octomancer ,  # End-step copy token created in triples
@@ -1493,7 +1493,7 @@ the card individuals it relates."""@en .
                                                  :MentorOfTheMeekInnistradRemastered34 ,  # Doubles creature-ETB draw triggers
                                                  :MistRavenInnistradRemastered76 ,  # ETB bounce triggers twice
                                                  :MultiformWonder ,  # ETB energy trigger yields 6 energy
-                                                 :MyrBattlesphere ,  # ETB makes eight Myr tokens
+                                                 :MyrBattlesphereModernHorizons3Commander301 ,  # ETB makes eight Myr tokens
                                                  :NebulaDragon ,  # ETB bolt deals 6 instead of 3
                                                  :OverseerOfVault76 ,  # Creature-ETB quest triggers doubled
                                                  :PatronOfTheValiant ,  # Doubles ETB counter-spread trigger
@@ -1889,7 +1889,7 @@ the card individuals it relates."""@en .
                              :SkyclaveApparition .  # Bounces the Spirit to replay its exile ETB
 
 # --- Squire's Lightblade ---
-:SquiresLightblade :enables :OdricLunarchMarshal .  # First strike on the bearer is shared team-wide
+:SquiresLightblade :enables :OdricLunarchMarshalInnistradRemastered36 .  # First strike on the bearer is shared team-wide
 
 # --- Starfield Vocalist ---
 :StarfieldVocalist :amplifies :AbundantGrowth ,  # doubles Aura ETB draw trigger
@@ -2006,7 +2006,7 @@ the card individuals it relates."""@en .
 :TeysaKarlov :amplifies :ArchghoulOfThraben ,  # doubles Zombie death trigger
                         :BeamsawProspector ,  # doubles Lander death trigger
                         :BehemothOfVault0 ,  # doubles death destroy trigger
-                        :BloodArtist ,  # Death triggers fire an additional time
+                        :BloodArtistDuskmournHouseOfHorrorCommander132 ,  # Death triggers fire an additional time
                         :BloodPetalCelebrant ,  # Dies trigger makes two Blood tokens
                         :CyclopsSuperconductor ,  # Death damage trigger fires twice
                         :DockworkerDrone ,  # Death trigger moves counters twice

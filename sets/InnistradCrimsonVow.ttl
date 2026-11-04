@@ -40,10 +40,12 @@
     rdfs:comment """An instance graph describing the card individuals of a
 personal Magic: The Gathering card collection that were printed in the set
 Innistrad: Crimson Vow (VOW). One Card individual is defined per collected
-printing, carrying its characteristics, format legalities and official
-rulings. Card data was sourced from Gatherer and Scryfall. This file imports
-MagicCardsOntology to reuse all existing class, property, set, keyword,
-subtype, format and legality definitions."""@en .
+printing, carrying its characteristics, the platforms it is available on
+(paper, MTG Arena, Magic Online) with its MTG Arena identity, its legality
+in the paper and MTG Arena formats, and official rulings. Card data was
+sourced from Gatherer and Scryfall. This file imports MagicCardsOntology to
+reuse all existing class, property, set, keyword, subtype, format and
+legality definitions."""@en .
 
 
 ################################################################################
@@ -51,6 +53,72 @@ subtype, format and legality definitions."""@en .
 # Card Individuals
 #
 ################################################################################
+
+:VoiceOfTheBlessed rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Voice of the Blessed" ;
+    :manaCost "{W}{W}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Spirit ,
+                :Cleric ;
+    :hasRarity :Rare ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :InnistradCrimsonVow ;
+    :cardNumber "44"^^xsd:integer ;
+    :artist "Anastasia Ovchinnikova" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    :printedText """Whenever you gain life, put a +1/+1 counter on this creature.
+As long as this creature has four or more +1/+1 counters on it, it has flying and vigilance.
+As long as this creature has ten or more +1/+1 counters on it, it has indestructible."""@en ;
+    :oracleText """Whenever you gain life, put a +1/+1 counter on this creature.
+As long as this creature has four or more +1/+1 counters on it, it has flying and vigilance.
+As long as this creature has ten or more +1/+1 counters on it, it has indestructible."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=540879"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/vow/44/voice-of-the-blessed"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "78827"^^xsd:positiveInteger ;
+    :arenaName "Voice of the Blessed" ;
+    :arenaSetCode "VOW" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2021-11-19"^^xsd:date ;
+        :rulingText """In a Two-Headed Giant game, life gained by your teammate won't cause the first ability to trigger, even though it caused your team's life total to increase."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2021-11-19"^^xsd:date ;
+        :rulingText """Each creature with lifelink dealing combat damage causes a separate life-gaining event. For example, if two creatures you control with lifelink deal combat damage at the same time, Voice of the Blessed's first ability will trigger twice. However, if a single creature you control with lifelink deals combat damage to multiple creatures, players, and/or planeswalkers at the same time (perhaps because it has trample or was blocked by more than one creature), the ability will trigger only once."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2021-11-19"^^xsd:date ;
+        :rulingText """The first ability of Voice of the Blessed triggers just once for each life-gaining event, no matter how much life was gained."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2021-11-19"^^xsd:date ;
+        :rulingText """If you gain an amount of life “for each” of something, that life is gained as one event and the ability of Voice of the Blessed triggers only once."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2021-11-19"^^xsd:date ;
+        :rulingText """If Voice of the Blessed is dealt lethal damage at the same time that you gain life, it won't receive a counter from its ability in time to save it."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2021-11-19"^^xsd:date ;
+        :rulingText """Gaining flying after it has become blocked won't cause Voice of the Blessed to become unblocked."""@en ] .
 
 :BloodtitheHarvesterInnistradCrimsonVow232 rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -78,6 +146,12 @@ subtype, format and legality definitions."""@en .
 {T}, Sacrifice this creature: Target creature gets -X/-X until end of turn, where X is twice the number of Blood tokens you control. Activate only as a sorcery."""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=541102"^^xsd:anyURI ;
     :scryfallUrl "https://scryfall.com/card/vow/232/bloodtithe-harvester"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "79050"^^xsd:positiveInteger ;
+    :arenaName "Bloodtithe Harvester" ;
+    :arenaSetCode "VOW" ;
     :hasLegality
       [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
@@ -85,7 +159,12 @@ subtype, format and legality definitions."""@en .
       [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ;
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2025-01-24"^^xsd:date ;
@@ -126,6 +205,12 @@ subtype, format and legality definitions."""@en .
 −6: Exile all cards from all graveyards, then create a 1/1 white Spirit creature token with flying for each card exiled this way."""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=544416"^^xsd:anyURI ;
     :scryfallUrl "https://scryfall.com/card/vow/280/kaya-geist-hunter"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "79127"^^xsd:positiveInteger ;
+    :arenaName "Kaya, Geist Hunter" ;
+    :arenaSetCode "VOW" ;
     :hasLegality
       [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
@@ -133,8 +218,54 @@ subtype, format and legality definitions."""@en .
       [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ;
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2021-11-19"^^xsd:date ;
         :rulingText """The tokens that Kaya's second ability creates are exact copies of the tokens that were being created in the first place."""@en ] .
+
+:InvestigatorsJournalInnistradCrimsonVow396 rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Investigator's Journal" ;
+    :manaCost "{2}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ;
+    :hasSubType :Book ,
+                :Clue ;
+    :hasRarity :Rare ;
+    :isInSet :InnistradCrimsonVow ;
+    :cardNumber "396"^^xsd:integer ;
+    :artist "Yeong-Hao Han" ;
+    :hasLanguage :English ;
+    :printedText """This artifact enters with a number of suspect counters on it equal to the greatest number of creatures a player controls.
+{2}, {T}, Remove a suspect counter from this artifact: Draw a card.
+{2}, Sacrifice this artifact: Draw a card."""@en ;
+    :oracleText """This artifact enters with a number of suspect counters on it equal to the greatest number of creatures a player controls.
+{2}, {T}, Remove a suspect counter from this artifact: Draw a card.
+{2}, Sacrifice this artifact: Draw a card."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=544764"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/vow/396/investigators-journal"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MagicOnline ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2021-11-19"^^xsd:date ;
+        :rulingText """You don't choose an opponent to determine how many suspect counters are placed on Investigator's Journal as it enters the battlefield. You always use the greatest number possible."""@en ] .

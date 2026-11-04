@@ -40,10 +40,12 @@
     rdfs:comment """An instance graph describing the card individuals of a
 personal Magic: The Gathering card collection that were printed in the set
 Commander Legends: Battle for Baldur's Gate (CLB). One Card individual is defined per collected
-printing, carrying its characteristics, format legalities and official
-rulings. Card data was sourced from Gatherer and Scryfall. This file imports
-MagicCardsOntology to reuse all existing class, property, set, keyword,
-subtype, format and legality definitions."""@en .
+printing, carrying its characteristics, the platforms it is available on
+(paper, MTG Arena, Magic Online) with its MTG Arena identity, its legality
+in the paper and MTG Arena formats, and official rulings. Card data was
+sourced from Gatherer and Scryfall. This file imports MagicCardsOntology to
+reuse all existing class, property, set, keyword, subtype, format and
+legality definitions."""@en .
 
 
 ################################################################################
@@ -79,6 +81,7 @@ Choose a Background (You can have a Background as a second commander.)"""@en ;
 Choose a Background (You can have a Background as a second commander.)"""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=562912"^^xsd:anyURI ;
     :scryfallUrl "https://scryfall.com/card/clb/29/laezel-vlaakiths-champion"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ;
     :hasLegality
       [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
@@ -86,7 +89,12 @@ Choose a Background (You can have a Background as a second commander.)"""@en ;
       [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :NotLegal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ;
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2022-06-10"^^xsd:date ;
@@ -143,6 +151,7 @@ Choose a Background (You can have a Background as a second commander.)"""@en ;
     :flavorText """"Sure, you can help me calibrate the aiming mechanism. Stand over there.\""""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=563065"^^xsd:anyURI ;
     :scryfallUrl "https://scryfall.com/card/clb/182/ingenious-artillerist"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ;
     :hasLegality
       [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
@@ -150,4 +159,139 @@ Choose a Background (You can have a Background as a second commander.)"""@en ;
       [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :NotLegal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] .
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] .
+
+:ManifoldKeyCommanderLegendsBattleForBaldursGate319 rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Manifold Key" ;
+    :manaCost "{1}" ;
+    :manaValue "1"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ;
+    :hasRarity :Uncommon ;
+    :isInSet :CommanderLegendsBattleForBaldursGate ;
+    :cardNumber "319"^^xsd:integer ;
+    :artist "Gabor Szikszai" ;
+    :hasLanguage :English ;
+    :printedText """{1}, {T}: Untap another target artifact.
+{3}, {T}: Target creature can't be blocked this turn."""@en ;
+    :oracleText """{1}, {T}: Untap another target artifact.
+{3}, {T}: Target creature can't be blocked this turn."""@en ;
+    :flavorText """"Finally! It was worth the price to never have to fiddle with lockpicks ever again."
+—Davvry Mineshadow, thief"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=563202"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/clb/319/manifold-key"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2021-03-19"^^xsd:date ;
+        :rulingText """Activating Manifold Key's last ability after a creature has become blocked won't cause that creature to become unblocked."""@en ] .
+
+:StonespeakerCrystal rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Stonespeaker Crystal" ;
+    :manaCost "{4}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ;
+    :hasRarity :Uncommon ;
+    :isInSet :CommanderLegendsBattleForBaldursGate ;
+    :cardNumber "338"^^xsd:integer ;
+    :artist "Robin Olausson" ;
+    :hasLanguage :English ;
+    :producesMana :Colorless ;
+    :printedText """{T}: Add {C}{C}.
+{2}, {T}, Sacrifice this artifact: Exile any number of target players' graveyards. Draw a card."""@en ;
+    :oracleText """{T}: Add {C}{C}.
+{2}, {T}, Sacrifice this artifact: Exile any number of target players' graveyards. Draw a card."""@en ;
+    :flavorText """It whispers words spoken centuries ago, coaxing wisdom from the ghosts of civilizations past."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=563221"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/clb/338/stonespeaker-crystal"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MagicOnline ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2022-06-10"^^xsd:date ;
+        :rulingText """You choose any number of target players as you put Stonespeaker Crystal's ability on the stack and exile their graveyards as it resolves. You may not target a player and then choose not to exile their graveyard."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2022-06-10"^^xsd:date ;
+        :rulingText """You may choose to target no players while activating the last ability if you just want to draw a card."""@en ] .
+
+:StuffyDoll rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Stuffy Doll" ;
+    :manaCost "{5}" ;
+    :manaValue "5"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ,
+                 :Creature ;
+    :hasSubType :Construct ;
+    :hasRarity :Rare ;
+    :isInSet :CommanderLegendsBattleForBaldursGate ;
+    :cardNumber "875"^^xsd:integer ;
+    :artist "David Rapoza" ;
+    :hasLanguage :English ;
+    :power "0" ;
+    :powerValue "0"^^xsd:integer ;
+    :toughness "1" ;
+    :toughnessValue "1"^^xsd:integer ;
+    :hasKeywordAbility :Indestructible ;
+    :printedText """Indestructible
+As this creature enters, choose a player.
+Whenever this creature is dealt damage, it deals that much damage to the chosen player.
+{T}: This creature deals 1 damage to itself."""@en ;
+    :oracleText """Indestructible
+As this creature enters, choose a player.
+Whenever this creature is dealt damage, it deals that much damage to the chosen player.
+{T}: This creature deals 1 damage to itself."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=567692"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/clb/875/stuffy-doll"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2021-03-19"^^xsd:date ;
+        :rulingText """If your life total is brought to 0 or less at the same time that Stuffy Doll is dealt damage, you lose the game before its triggered ability goes on the stack."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2021-03-19"^^xsd:date ;
+        :rulingText """A creature can be dealt an amount of damage greater than its toughness. For example, if Stuffy Doll is dealt 3 damage, its triggered ability deals 3 damage, not 1, to the chosen player."""@en ] .

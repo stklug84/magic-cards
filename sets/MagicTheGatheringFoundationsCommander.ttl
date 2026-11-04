@@ -40,10 +40,12 @@
     rdfs:comment """An instance graph describing the card individuals of a
 personal Magic: The Gathering card collection that were printed in the set
 Foundations Commander (FDC). One Card individual is defined per collected
-printing, carrying its characteristics, format legalities and official
-rulings. Card data was sourced from Gatherer and Scryfall. This file imports
-MagicCardsOntology to reuse all existing class, property, set, keyword,
-subtype, format and legality definitions."""@en .
+printing, carrying its characteristics, the platforms it is available on
+(paper, MTG Arena, Magic Online) with its MTG Arena identity, its legality
+in the paper and MTG Arena formats, and official rulings. Card data was
+sourced from Gatherer and Scryfall. This file imports MagicCardsOntology to
+reuse all existing class, property, set, keyword, subtype, format and
+legality definitions."""@en .
 
 
 ################################################################################
@@ -72,6 +74,7 @@ subtype, format and legality definitions."""@en .
     :oracleText """{T}: Add one mana of any color in your commander's color identity."""@en ;
     :flavorText """It started as a mere drop of water. The Magic Mirror crystallized it into much more."""@en ;
     :scryfallUrl "https://scryfall.com/card/fdc/1/arcane-signet"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ;
     :hasLegality
       [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
@@ -79,17 +82,22 @@ subtype, format and legality definitions."""@en .
       [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ;
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
     :hasRuling
-      [ rdf:type :Ruling ;
-        :rulingDate "2020-11-10"^^xsd:date ;
-        :rulingText """If you don't have a commander, Arcane Signet's ability produces no mana."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2020-11-10"^^xsd:date ;
         :rulingText """If you have two commanders, the ability adds one mana of any color in their combined color identities."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2020-11-10"^^xsd:date ;
-        :rulingText """If your commander is a card that has no colors in its color identity, Arcane Signet's ability produces no mana. It doesn't produce {C}."""@en ] .
+        :rulingText """If your commander is a card that has no colors in its color identity, Arcane Signet's ability produces no mana. It doesn't produce {C}."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2020-11-10"^^xsd:date ;
+        :rulingText """If you don't have a commander, Arcane Signet's ability produces no mana."""@en ] .
 
 :SolRingMagicTheGatheringFoundationsCommander2 rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -107,6 +115,7 @@ subtype, format and legality definitions."""@en .
     :oracleText """{T}: Add {C}{C}."""@en ;
     :flavorText """Lost to time is the artificer's art of trapping light from a distant star in a ring of purest gold."""@en ;
     :scryfallUrl "https://scryfall.com/card/fdc/2/sol-ring"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ;
     :hasLegality
       [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
@@ -114,7 +123,12 @@ subtype, format and legality definitions."""@en .
       [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Banned ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Restricted ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :NotLegal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] .
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] .
 
 :CommandTowerMagicTheGatheringFoundationsCommander3 rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -135,6 +149,7 @@ subtype, format and legality definitions."""@en .
     :oracleText """{T}: Add one mana of any color in your commander's color identity."""@en ;
     :flavorText """When defeat is near and guidance is scarce, all eyes look in one direction."""@en ;
     :scryfallUrl "https://scryfall.com/card/fdc/3/command-tower"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ;
     :hasLegality
       [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
@@ -142,14 +157,216 @@ subtype, format and legality definitions."""@en .
       [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ;
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2020-11-10"^^xsd:date ;
-        :rulingText """If you don't have a commander, Command Tower's ability produces no mana."""@en ] ,
+        :rulingText """If you have two commanders, the ability adds one mana of any color in their combined color identities."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2020-11-10"^^xsd:date ;
         :rulingText """If your commander is a card that has no colors in its color identity, Command Tower's ability produces no mana. It doesn't produce {C}."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2020-11-10"^^xsd:date ;
-        :rulingText """If you have two commanders, the ability adds one mana of any color in their combined color identities."""@en ] .
+        :rulingText """If you don't have a commander, Command Tower's ability produces no mana."""@en ] .
+
+:RighteousValkyrie rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Righteous Valkyrie" ;
+    :manaCost "{2}{W}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Angel ,
+                :Cleric ;
+    :hasRarity :Rare ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :MagicTheGatheringFoundationsCommander ;
+    :cardNumber "43"^^xsd:integer ;
+    :artist "Chris Rahn" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "4" ;
+    :toughnessValue "4"^^xsd:integer ;
+    :hasKeywordAbility :Flying ;
+    :printedText """Flying
+Whenever another Angel or Cleric you control enters, you gain life equal to that creature's toughness.
+As long as you have at least 7 life more than your starting life total, creatures you control get +2/+2."""@en ;
+    :oracleText """Flying
+Whenever another Angel or Cleric you control enters, you gain life equal to that creature's toughness.
+As long as you have at least 7 life more than your starting life total, creatures you control get +2/+2."""@en ;
+    :scryfallUrl "https://scryfall.com/card/fdc/43/righteous-valkyrie"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MagicOnline ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2021-02-05"^^xsd:date ;
+        :rulingText """The amount of life you gain is equal to the Angel or Cleric's toughness as the triggered ability resolves. If the Angel or Cleric is no longer on the battlefield at that time, use its toughness from when it was last on the battlefield."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2021-02-05"^^xsd:date ;
+        :rulingText """Because damage remains marked on creatures until the damage is removed as the turn ends, nonlethal damage dealt to creatures you control may become lethal if your life total drops below 7 life more than your starting life total or if Righteous Valkyrie leaves the battlefield that turn."""@en ] .
+
+:IchorWellspring rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Ichor Wellspring" ;
+    :manaCost "{2}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ;
+    :hasRarity :Common ;
+    :isInSet :MagicTheGatheringFoundationsCommander ;
+    :cardNumber "265"^^xsd:integer ;
+    :artist "Steven Belledin" ;
+    :hasLanguage :English ;
+    :printedText """When this artifact enters or is put into a graveyard from the battlefield, draw a card."""@en ;
+    :oracleText """When this artifact enters or is put into a graveyard from the battlefield, draw a card."""@en ;
+    :flavorText """"Our glorious infection has taken hold."
+—Elesh Norn, Grand Cenobite"""@en ;
+    :scryfallUrl "https://scryfall.com/card/fdc/265/ichor-wellspring"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MagicOnline ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2011-06-01"^^xsd:date ;
+        :rulingText """The ability will trigger when Ichor Wellspring is put into a graveyard from the battlefield, even if the ability that triggered when it entered hasn't resolved yet."""@en ] .
+
+:PalladiumMyr rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Palladium Myr" ;
+    :manaCost "{3}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ,
+                 :Creature ;
+    :hasSubType :Myr ;
+    :hasRarity :Uncommon ;
+    :isInSet :MagicTheGatheringFoundationsCommander ;
+    :cardNumber "278"^^xsd:integer ;
+    :artist "Alan Pollack" ;
+    :hasLanguage :English ;
+    :producesMana :Colorless ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    :printedText """{T}: Add {C}{C}."""@en ;
+    :oracleText """{T}: Add {C}{C}."""@en ;
+    :flavorText """The myr are like the Glimmervoid: blank canvases on which to build grand creations."""@en ;
+    :scryfallUrl "https://scryfall.com/card/fdc/278/palladium-myr"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MagicOnline ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] .
+
+:DarksteelCitadelMagicTheGatheringFoundationsCommander300 rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Darksteel Citadel" ;
+    :manaValue "0"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ,
+                 :Land ;
+    :hasRarity :Uncommon ;
+    :isInSet :MagicTheGatheringFoundationsCommander ;
+    :cardNumber "300"^^xsd:integer ;
+    :artist "John Avon" ;
+    :hasLanguage :English ;
+    :producesMana :Colorless ;
+    :hasKeywordAbility :Indestructible ;
+    :printedText """Indestructible
+{T}: Add {C}."""@en ;
+    :oracleText """Indestructible
+{T}: Add {C}."""@en ;
+    :flavorText """Structures built from darksteel yield to neither assault nor age."""@en ;
+    :scryfallUrl "https://scryfall.com/card/fdc/300/darksteel-citadel"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MagicOnline ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2014-07-18"^^xsd:date ;
+        :rulingText """Although Darksteel Citadel is an artifact, it can't be cast as a spell. Playing it follows the normal rules for playing a land."""@en ] .
+
+:RadiantFountainMagicTheGatheringFoundationsCommander308 rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Radiant Fountain" ;
+    :manaValue "0"^^xsd:nonNegativeInteger ;
+    :hasCardType :Land ;
+    :hasRarity :Common ;
+    :isInSet :MagicTheGatheringFoundationsCommander ;
+    :cardNumber "308"^^xsd:integer ;
+    :artist "Adam Paquette" ;
+    :hasLanguage :English ;
+    :producesMana :Colorless ;
+    :printedText """When this land enters, you gain 2 life.
+{T}: Add {C}."""@en ;
+    :oracleText """When this land enters, you gain 2 life.
+{T}: Add {C}."""@en ;
+    :flavorText """"All peoples treasure a place where the weary traveler may drink in peace."
+—Ajani Goldmane"""@en ;
+    :scryfallUrl "https://scryfall.com/card/fdc/308/radiant-fountain"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MagicOnline ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] .

@@ -40,10 +40,12 @@
     rdfs:comment """An instance graph describing the card individuals of a
 personal Magic: The Gathering card collection that were printed in the set
 Commander Masters (CMM). One Card individual is defined per collected
-printing, carrying its characteristics, format legalities and official
-rulings. Card data was sourced from Gatherer and Scryfall. This file imports
-MagicCardsOntology to reuse all existing class, property, set, keyword,
-subtype, format and legality definitions."""@en .
+printing, carrying its characteristics, the platforms it is available on
+(paper, MTG Arena, Magic Online) with its MTG Arena identity, its legality
+in the paper and MTG Arena formats, and official rulings. Card data was
+sourced from Gatherer and Scryfall. This file imports MagicCardsOntology to
+reuse all existing class, property, set, keyword, subtype, format and
+legality definitions."""@en .
 
 
 ################################################################################
@@ -51,6 +53,112 @@ subtype, format and legality definitions."""@en .
 # Card Individuals
 #
 ################################################################################
+
+:FaerieArtisans rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Faerie Artisans" ;
+    :manaCost "{3}{U}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Faerie ,
+                :Artificer ;
+    :hasRarity :Rare ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :CommanderMasters ;
+    :cardNumber "92"^^xsd:integer ;
+    :artist "Tony Foti" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    :hasKeywordAbility :Flying ;
+    :printedText """Flying
+Whenever a nontoken creature an opponent controls enters, create a token that's a copy of that creature except it's an artifact in addition to its other types. Then exile all other tokens created with this creature."""@en ;
+    :oracleText """Flying
+Whenever a nontoken creature an opponent controls enters, create a token that's a copy of that creature except it's an artifact in addition to its other types. Then exile all other tokens created with this creature."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=622700"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/cmm/92/faerie-artisans"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MagicOnline ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2016-11-08"^^xsd:date ;
+        :rulingText """If the copied permanent has {X} in its mana cost, X is considered to be 0."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2016-11-08"^^xsd:date ;
+        :rulingText """If the copied permanent is copying something else (for example, if the copied creature is a Clone), then the token enters the battlefield as whatever that permanent copied."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2016-11-08"^^xsd:date ;
+        :rulingText """The token is an artifact in addition to its other types. This is a copiable value of the token that other effects may copy."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2016-11-08"^^xsd:date ;
+        :rulingText """If you control multiple Faerie Artisans, each one’s ability only exiles tokens created with the ability of that specific Faerie Artisans."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2016-11-08"^^xsd:date ;
+        :rulingText """If the permanent copied by the token had any “when [this permanent] enters the battlefield” abilities, then the token also has those abilities and will trigger them when it’s created. Similarly, any “as [this permanent] enters the battlefield” or “[this permanent] enters the battlefield with” abilities that the token has copied will also work."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2016-11-08"^^xsd:date ;
+        :rulingText """A token creature that’s a copy of a player’s commander isn’t a commander."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2016-11-08"^^xsd:date ;
+        :rulingText """The token copies exactly what was printed on the original permanent and nothing else (unless that permanent is copying something else; see below). It doesn’t copy whether that permanent is tapped or untapped, whether it has any counters on it or Auras and Equipment attached to it, or any non-copy effects that have changed its power, toughness, types, color, or so on."""@en ] .
+
+:ObNixilisOfTheBlackOath rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Ob Nixilis of the Black Oath" ;
+    :manaCost "{3}{B}{B}" ;
+    :manaValue "5"^^xsd:nonNegativeInteger ;
+    :hasSuperType :Legendary ;
+    :hasCardType :Planeswalker ;
+    :hasSubType :Nixilis ;
+    :hasRarity :Rare ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :CommanderMasters ;
+    :cardNumber "176"^^xsd:integer ;
+    :artist "Daarken" ;
+    :hasLanguage :English ;
+    :loyalty "3"^^xsd:integer ;
+    :printedText """+2: Each opponent loses 1 life. You gain life equal to the life lost this way.
+−2: Create a 5/5 black Demon creature token with flying. You lose 2 life.
+−8: You get an emblem with "{1}{B}, Sacrifice a creature: You gain X life and draw X cards, where X is the sacrificed creature's power."
+Ob Nixilis of the Black Oath can be your commander."""@en ;
+    :oracleText """+2: Each opponent loses 1 life. You gain life equal to the life lost this way.
+−2: Create a 5/5 black Demon creature token with flying. You lose 2 life.
+−8: You get an emblem with "{1}{B}, Sacrifice a creature: You gain X life and draw X cards, where X is the sacrificed creature's power."
+Ob Nixilis of the Black Oath can be your commander."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=622784"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/cmm/176/ob-nixilis-of-the-black-oath"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MagicOnline ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] .
 
 :DoublingSeason rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -71,6 +179,8 @@ If an effect would put one or more counters on a permanent you control, it puts 
 If an effect would put one or more counters on a permanent you control, it puts twice that many of those counters on that permanent instead."""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=627747"^^xsd:anyURI ;
     :scryfallUrl "https://scryfall.com/card/cmm/283/doubling-season"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MagicOnline ;
     :hasLegality
       [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
@@ -78,7 +188,12 @@ If an effect would put one or more counters on a permanent you control, it puts 
       [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ;
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2024-11-08"^^xsd:date ;
@@ -119,6 +234,8 @@ If an effect would put one or more counters on a permanent you control, it puts 
 • Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=627793"^^xsd:anyURI ;
     :scryfallUrl "https://scryfall.com/card/cmm/329/verdant-confluence"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MagicOnline ;
     :hasLegality
       [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
@@ -126,7 +243,12 @@ If an effect would put one or more counters on a permanent you control, it puts 
       [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :NotLegal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ;
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2015-11-04"^^xsd:date ;
@@ -179,6 +301,8 @@ Creature tokens you control have vigilance and lifelink."""@en ;
     :flavorText """While Kaya is guildmaster, Teysa waits patiently at the center of the Orzhov web of power."""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=627823"^^xsd:anyURI ;
     :scryfallUrl "https://scryfall.com/card/cmm/359/teysa-karlov"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MagicOnline ;
     :hasLegality
       [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
@@ -186,7 +310,12 @@ Creature tokens you control have vigilance and lifelink."""@en ;
       [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
-      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ;
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2019-01-25"^^xsd:date ;
@@ -215,3 +344,112 @@ Creature tokens you control have vigilance and lifelink."""@en ;
       [ rdf:type :Ruling ;
         :rulingDate "2019-01-25"^^xsd:date ;
         :rulingText """The trigger event doesn't have to specifically refer to “creatures.” In these cases, the trigger event may also refer to something being “put into a graveyard from the battlefield.” For example, an ability that triggers “whenever an artifact is put into a graveyard from the battlefield” would trigger twice if an artifact creature dies while Teysa Karlov is on the battlefield."""@en ] .
+
+:ArtisanOfKozilekCommanderMasters801 rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Artisan of Kozilek" ;
+    :manaCost "{9}" ;
+    :manaValue "9"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Eldrazi ;
+    :hasRarity :Uncommon ;
+    :isInSet :CommanderMasters ;
+    :cardNumber "801"^^xsd:integer ;
+    :artist "Jason Felix" ;
+    :hasLanguage :English ;
+    :power "10" ;
+    :powerValue "10"^^xsd:integer ;
+    :toughness "9" ;
+    :toughnessValue "9"^^xsd:integer ;
+    :hasKeywordAbility :Annihilator ;
+    :printedText """When you cast this spell, you may return target creature card from your graveyard to the battlefield.
+Annihilator 2 (Whenever this creature attacks, defending player sacrifices two permanents of their choice.)"""@en ;
+    :oracleText """When you cast this spell, you may return target creature card from your graveyard to the battlefield.
+Annihilator 2 (Whenever this creature attacks, defending player sacrifices two permanents of their choice.)"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=625206"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/cmm/801/artisan-of-kozilek"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MagicOnline ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2010-06-15"^^xsd:date ;
+        :rulingText """Annihilator abilities trigger and resolve during the declare attackers step. The defending player chooses and sacrifices the required number of permanents before they declare blockers. Any creatures sacrificed this way won't be able to block."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2010-06-15"^^xsd:date ;
+        :rulingText """If a creature with annihilator is attacking a planeswalker, and the defending player chooses to sacrifice that planeswalker, the attacking creature continues to attack. It may be blocked. If it isn't blocked, it simply won't deal combat damage to anything."""@en ] .
+
+:PhyrexianTriniformCommanderMasters969 rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Phyrexian Triniform" ;
+    :manaCost "{9}" ;
+    :manaValue "9"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ,
+                 :Creature ;
+    :hasSubType :Phyrexian ,
+                :Golem ;
+    :hasRarity :MythicRare ;
+    :isInSet :CommanderMasters ;
+    :cardNumber "969"^^xsd:integer ;
+    :artist "Adam Paquette" ;
+    :hasLanguage :English ;
+    :power "9" ;
+    :powerValue "9"^^xsd:integer ;
+    :toughness "9" ;
+    :toughnessValue "9"^^xsd:integer ;
+    :hasKeywordAbility :Encore ;
+    :printedText """When this creature dies, create three 3/3 colorless Phyrexian Golem artifact creature tokens.
+Encore {12} ({12}, Exile this card from your graveyard: For each opponent, create a token copy that attacks that opponent this turn if able. They gain haste. Sacrifice them at the beginning of the next end step. Activate only as a sorcery.)"""@en ;
+    :oracleText """When this creature dies, create three 3/3 colorless Phyrexian Golem artifact creature tokens.
+Encore {12} ({12}, Exile this card from your graveyard: For each opponent, create a token copy that attacks that opponent this turn if able. They gain haste. Sacrifice them at the beginning of the next end step. Activate only as a sorcery.)"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=625374"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/cmm/969/phyrexian-triniform"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MagicOnline ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2020-11-10"^^xsd:date ;
+        :rulingText """If one of the tokens somehow is under another player's control as the delayed triggered ability resolves, you can't sacrifice that token. It remains on the battlefield indefinitely, even if you regain control of it later."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2020-11-10"^^xsd:date ;
+        :rulingText """Exiling the card with encore is a cost to activate the ability. Once you announce that you're activating it, no player may take actions until you've finished. They can't try to remove the card from your graveyard to stop you from paying the cost."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2020-11-10"^^xsd:date ;
+        :rulingText """If one of the tokens can't attack for any reason (such as being tapped), then it doesn't attack. If there's a cost associated with having it attack, you aren't forced to pay that cost, so it doesn't have to attack in that case either."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2020-11-10"^^xsd:date ;
+        :rulingText """Opponents who have left the game aren't counted when determining how many tokens to create."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2020-11-10"^^xsd:date ;
+        :rulingText """The tokens copy only what's on the original card. Effects that modified that creature when it was previously on the battlefield won't be copied."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2020-11-10"^^xsd:date ;
+        :rulingText """Each token must attack the appropriate player if able."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-07-28"^^xsd:date ;
+        :rulingText """If an effect stops a token from attacking a specific player, that token can attack any player, planeswalker, or battle, or not attack at all. If the effect stops the token from attacking a specific player unless a cost is paid, you don't have to pay that cost unless you want to attack that player."""@en ] .
