@@ -81,10 +81,14 @@ pub(super) fn kaya_geist_hunter(ch: &mut Characteristics, _card: &CardData) {
                 .until_end_of_turn(),
         );
         game.add_floating_replacement(
-            Replacement::new(EventType::CreateToken, double_count)
-                .when(move |_g, e: &Event| e.data.controller == Some(me))
-                .with_source(ctx.source)
-                .floating(),
+            Replacement::new(EventType::CreateToken, |_g, mut event| {
+                // double the created-token count
+                event.data.count = event.data.count.map(|n| n * 2);
+                Some(event)
+            })
+            .when(move |_g, e: &Event| e.data.controller == Some(me))
+            .with_source(ctx.source)
+            .floating(),
         );
     });
     ch.abilities
@@ -93,12 +97,6 @@ pub(super) fn kaya_geist_hunter(ch: &mut Characteristics, _card: &CardData) {
         &ch.name,
         "-2 doubling persists to end of game (cleanup of floating replacement simplified)",
     );
-}
-
-/// Double the created-token count (Kaya's -2).
-fn double_count(_game: &mut Game, mut event: Event) -> Option<Event> {
-    event.data.count = event.data.count.map(|n| n * 2);
-    Some(event)
 }
 
 /// Saheeli Rai: +1 scry and ping each opponent.

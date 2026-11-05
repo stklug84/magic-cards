@@ -3,6 +3,7 @@
 mod artifacts;
 mod counters;
 mod graveyard;
+mod misc;
 mod spells;
 mod tokens;
 
@@ -135,6 +136,27 @@ pub(super) static OVERRIDES: &[(&str, OverrideFn)] = &[
     ("Restoration Angel", tokens::restoration_angel),
     ("Conjurer's Closet", tokens::conjurers_closet),
     ("Reef Worm", tokens::reef_worm),
+    ("Hangarback Walker", misc::hangarback),
+    ("Triplicate Titan", misc::triplicate_titan),
+    ("Myr Battlesphere", misc::myr_battlesphere),
+    ("Determined Iteration", misc::determined_iteration),
+    ("Growing Ranks", misc::growing_ranks),
+    ("Extravagant Replication", misc::extravagant_replication),
+    ("Imprisoned in the Moon", misc::imprisoned_in_the_moon),
+    ("Banishing Light", misc::banishing_light),
+    ("Chromatic Lantern", misc::chromatic_lantern),
+    ("Coalition Relic", misc::coalition_relic),
+    ("Channeler Initiate", misc::channeler_initiate),
+    ("Devoted Druid", misc::devoted_druid),
+    ("Evolution Sage", misc::evolution_sage),
+    ("Heroic Reinforcements", misc::heroic_reinforcements),
+    ("Swan Song", misc::swan_song),
+    ("Arcane Denial", misc::arcane_denial),
+    ("Wayfarer's Bauble", misc::wayfarers_bauble),
+    ("Myriad Landscape", misc::myriad_landscape),
+    ("Persist", misc::persist_sorcery),
+    ("Aberrant Return", misc::aberrant_return),
+    ("Grave Venerations", misc::grave_venerations),
 ];
 
 #[cfg(test)]

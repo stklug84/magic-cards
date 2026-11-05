@@ -123,7 +123,7 @@ pub(super) fn mechanized_production(ch: &mut Characteristics, _card: &CardData) 
         controller: "you".to_owned(),
         ..TargetSpec::new("artifact")
     }];
-    aura.text = "enchant artifact you control".to_owned();
+    "enchant artifact you control".clone_into(&mut aura.text);
     ch.abilities.push(aura.into());
 }
 
@@ -147,10 +147,11 @@ fn igs_station(game: &mut Game, ctx: &Ctx) {
     for o in &game.player(ctx.controller).battlefield {
         let c = game.chars(*o);
         let obj = game.obj(*o);
+        let can_tap = !obj.entered_this_turn || c.keywords.contains("haste"); // rule 302.6
         if c.types.contains("Creature")
             && !obj.tapped
             && *o != src
-            && !(obj.entered_this_turn && !c.keywords.contains("haste"))
+            && can_tap
             && best.is_none_or(|(_, bp)| c.power.unwrap_or(0) > bp)
         {
             best = Some((*o, c.power.unwrap_or(0)));
