@@ -6,7 +6,8 @@
 #                          specs, statistics, str semantics (byte-exact output)
 #   crates/mtgcards        knowledge-graph card data layer (text-based TTL
 #                          readers, decks, statistics, optional Scryfall)
-#   crates/mtgrules-macros #[rule("…")] attribute: CR traceability registry
+#   crates/mtgrules-macros #[rule("…")] attribute: CR traceability
+#   crates/mtgrules-registry the link-time registry those attributes fill
 #   crates/mtgrules        the CR-grounded rules engine, oracle compiler,
 #                          card overrides, AI policy, match runner
 #   crates/mtgviz          recorder / replay / live terminal UI
@@ -26,6 +27,7 @@ members = [
     "crates/pycompat",
     "crates/mtgcards",
     "crates/mtgrules-macros",
+    "crates/mtgrules-registry",
     "crates/mtgrules",
     "crates/mtgviz",
     "crates/mtgsim",
@@ -46,6 +48,7 @@ publish = false
 pycompat = { path = "crates/pycompat" }
 mtgcards = { path = "crates/mtgcards" }
 mtgrules-macros = { path = "crates/mtgrules-macros" }
+mtgrules-registry = { path = "crates/mtgrules-registry" }
 mtgrules = { path = "crates/mtgrules" }
 mtgviz = { path = "crates/mtgviz" }
 # the #[rule] registry: link-time distributed slices, no runtime

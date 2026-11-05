@@ -1,0 +1,16 @@
+[package]
+name = "mtgrules-registry"
+description = "The link-time registry the #[rule] attribute and unsupported! macro fill: which Comprehensive Rules an engine item implements or leaves out of scope"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+authors.workspace = true
+publish.workspace = true
+
+[dependencies]
+linkme.workspace = true
+
+[lints]
+workspace = true

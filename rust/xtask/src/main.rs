@@ -2,9 +2,10 @@
 //!
 //! The alias lives in `rust/.cargo/config.toml`. Tasks:
 //!
-//! - `vectors [--check]`: regenerate the CPython reference vectors the
-//!   `pycompat` tests read (`scripts/parity/vectors.py`), or verify that
-//!   the committed files are up to date;
+//! - `vectors [--check]`: regenerate the reference vectors the `pycompat`
+//!   tests (CPython semantics) and the `mtgrules` tests (the Python
+//!   engine's semantics) read (`scripts/parity/vectors.py`), or verify
+//!   that the committed files are up to date;
 //! - `parity [--level N]`: compare the Rust and Python implementations
 //!   level by level — L1 is `vectors --check`; L2 diffs the card-database
 //!   dumps (`scripts/parity/dump_cards.py` against the `mtgcards`
@@ -27,9 +28,9 @@ use std::process::{Command, ExitCode};
 const USAGE: &str = "usage: cargo xtask <task>
 
 tasks:
-  vectors [--check]   regenerate the CPython reference vectors under
-                      rust/crates/pycompat/tests/vectors (or check that
-                      the committed files are current)
+  vectors [--check]   regenerate the reference vectors under
+                      rust/crates/{pycompat,mtgrules}/tests/vectors (or
+                      check that the committed files are current)
   parity [--level N]  compare the Rust and Python implementations:
                       L1 = vectors --check, L2 = card-database and
                       Comprehensive Rules dumps (default: every level)
@@ -70,25 +71,49 @@ fn run(mut command: Command, what: &str) -> Result<(), String> {
     }
 }
 
-/// Run `python -m parity.vectors <out_dir>` from `scripts/`.
-fn generate_vectors(root: &Path, out_dir: &Path) -> Result<(), String> {
+/// The committed vector directories: the CPython vectors of `pycompat`
+/// and the engine vectors of `mtgrules`, relative to the repository.
+const VECTOR_DIRS: [&str; 2] = [
+    "rust/crates/pycompat/tests/vectors",
+    "rust/crates/mtgrules/tests/vectors",
+];
+
+/// Run `python -m parity.vectors <pycompat_dir> <mtgrules_dir>` from
+/// `scripts/`.
+fn generate_vectors(root: &Path, out_dirs: &[PathBuf]) -> Result<(), String> {
     let mut command = python_module(root, "vectors");
-    command.arg(out_dir);
+    command.args(out_dirs);
     run(command, "vector generation")
 }
 
 fn vectors(check: bool) -> Result<(), String> {
     let root = repo_root();
-    let committed = root.join("rust/crates/pycompat/tests/vectors");
+    let committed: Vec<PathBuf> = VECTOR_DIRS.iter().map(|d| root.join(d)).collect();
     if !check {
         generate_vectors(&root, &committed)?;
-        println!("vectors written to {}", committed.display());
+        for dir in &committed {
+            println!("vectors written to {}", dir.display());
+        }
         return Ok(());
     }
-    let scratch = std::env::temp_dir().join(format!("pycompat-vectors-{}", std::process::id()));
-    std::fs::create_dir_all(&scratch).map_err(|e| format!("{}: {e}", scratch.display()))?;
-    let result =
-        generate_vectors(&root, &scratch).and_then(|()| compare_dirs(&committed, &scratch));
+    let scratch = std::env::temp_dir().join(format!("mtg-vectors-{}", std::process::id()));
+    let fresh: Vec<PathBuf> = VECTOR_DIRS
+        .iter()
+        .map(|d| {
+            scratch
+                .join(Path::new(d).file_name().unwrap_or_default())
+                .join(d.replace('/', "-"))
+        })
+        .collect();
+    for dir in &fresh {
+        std::fs::create_dir_all(dir).map_err(|e| format!("{}: {e}", dir.display()))?;
+    }
+    let result = generate_vectors(&root, &fresh).and_then(|()| {
+        committed
+            .iter()
+            .zip(&fresh)
+            .try_for_each(|(old, new)| compare_dirs(old, new))
+    });
     let _ = std::fs::remove_dir_all(&scratch);
     result
 }
@@ -108,7 +133,7 @@ fn compare_dirs(committed: &Path, fresh: &Path) -> Result<(), String> {
         }
     }
     if stale.is_empty() {
-        println!("vectors are current");
+        println!("vectors are current: {}", committed.display());
         Ok(())
     } else {
         Err(format!(
