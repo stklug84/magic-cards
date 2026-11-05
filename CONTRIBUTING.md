@@ -76,6 +76,20 @@ publishing:
 python3 scripts/build_graph_bundle.py --graph-version "$(date -u +%F)"
 ```
 
+Tools release — a `vX.Y.Z` tag publishes the `magic-cards-tools` wheel
+and the Rust simulator binaries (`release.yml`). The tag must equal the
+version in `pyproject.toml` and the `[workspace.package]` version in
+`rust/Cargo.toml`; bump both in one commit. The binaries are built in
+release mode on each supported platform (Linux and macOS, x86_64 and
+arm64), smoke-tested against the checked-out graph and the fetched
+Comprehensive Rules, and attached as one tarball per target triple with
+a SHA-256 file. The same build locally:
+
+```sh
+cd rust
+cargo build --release --locked -p mtgsim   # target/release/mtg-{simulate,selfplay,cr}
+```
+
 OWL reasoning (CI runs this via the `rdf / owl (robot reason)` check;
 HermiT needs ~2 min for the ontology and ~8 min for the full per-set
 closure):

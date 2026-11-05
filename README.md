@@ -27,6 +27,7 @@ on which part you use:
 | Graph tooling (`scripts/generate_individuals.py`, `scripts/mtgvalidate/`) | Python 3.12+ and `pip install "rdflib>=7,<8"` | Regenerating `sets/` and `MagicCardCollection.ttl` from a Moxfield export; TTL/SPARQL/consistency validation |
 | SPARQL queries (`queries/`) | [Apache Jena](https://jena.apache.org/) (`arq`, `riot`; Java 21+) | Running the query catalog, TTL syntax validation as done in CI |
 | Released packages (`magic-cards-tools`) | Python 3.12+ — **stdlib only**; the `validate` extra adds rdflib | Using the graph outside this repository |
+| Simulator binaries (`mtg-simulate`, `mtg-selfplay`, `mtg-cr`) | None — static release binaries for Linux and macOS (x86_64 and arm64); building from source needs the Rust toolchain pinned in [`rust/rust-toolchain.toml`](./rust/rust-toolchain.toml) | Simulating Commander matchups over the graph, tuning the AI, inspecting the Comprehensive Rules coverage |
 | `MagicCompRules-YYYYMMDD.txt` | Download from Wizards of the Coast; not distributed here | Referenced by ontology comments; the released packages validate their `@rule` annotations against it at import |
 
 ## Repository layout
@@ -174,6 +175,7 @@ of tracking `main`:
 | Artifact | Tag namespace | Built by | Contents |
 |----------|---------------|----------|----------|
 | `magic_cards_tools-X.Y.Z-py3-none-any.whl` | `v*` | [`release.yml`](./.github/workflows/release.yml) | the Python packages — code only |
+| `mtg-simulate-vX.Y.Z-<target>.tar.gz` | `v*` | [`release.yml`](./.github/workflows/release.yml) | the Rust simulator binaries for one target triple, with a `.sha256` next to each archive |
 | `magic-cards-graph-YYYY-MM-DD.tar.gz` | `graph-*` | [`release-graph.yml`](./.github/workflows/release-graph.yml) | the knowledge graph — data only |
 
 The namespaces are separate because the two move at different rates: an
@@ -191,6 +193,20 @@ curl -fsSL -o graph.tar.gz \
   https://github.com/stklug84/magic-cards/releases/download/graph-2026-08-09/magic-cards-graph-2026-08-09.tar.gz
 mkdir -p .graph && tar xzf graph.tar.gz -C .graph --strip-components=1
 export MTG_GRAPH_ROOT="$PWD/.graph"
+```
+
+The simulator binaries find the graph the same way (`MTG_GRAPH_ROOT`, or
+`--graph-root`, else the checkout above the working directory) and need
+the Comprehensive Rules text next to it, because every `#[rule]`
+annotation is validated against it at startup:
+
+```sh
+target=aarch64-apple-darwin   # or x86_64-apple-darwin, x86_64-unknown-linux-gnu, aarch64-unknown-linux-gnu
+curl -fsSLO "https://github.com/stklug84/magic-cards/releases/download/v0.3.0/mtg-simulate-v0.3.0-${target}.tar.gz"
+curl -fsSLO "https://github.com/stklug84/magic-cards/releases/download/v0.3.0/mtg-simulate-v0.3.0-${target}.tar.gz.sha256"
+shasum -a 256 -c "mtg-simulate-v0.3.0-${target}.tar.gz.sha256"
+tar xzf "mtg-simulate-v0.3.0-${target}.tar.gz"
+"./mtg-simulate-v0.3.0-${target}/mtg-simulate" deck1.txt deck2.txt --offline --games 20
 ```
 
 ### The contract: `GRAPH-MANIFEST.json`
