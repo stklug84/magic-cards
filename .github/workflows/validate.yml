@@ -232,22 +232,78 @@ jobs:
         working-directory: rust
         run: cargo test --workspace --all-features
 
-      # Parity against the Python simulator (the reference until cutover):
-      # L1 regenerates the CPython vectors committed under
-      # rust/crates/pycompat/tests/vectors and requires the committed
-      # bytes; L2 dumps the card database (scripts/parity/dump_cards.py
-      # against the mtgcards dump_cards example) and the parsed
-      # Comprehensive Rules (scripts/parity/dump_cr.py against the
-      # mtgrules dump_cr example) and requires identical output over the
-      # checkout's graph and rules text and over synthetic ones. Both run
-      # the stdlib-only packages straight from scripts/, so no install.
+      # Parity against the Python simulator (the reference until cutover),
+      # level by level: L1 regenerates the CPython vectors committed under
+      # rust/crates/*/tests/vectors and requires the committed bytes; L2
+      # dumps the card database and the parsed Comprehensive Rules; L3 the
+      # compiled abilities of every card; L4 the --viz-file recording, its
+      # replay and the --watch stream; L5 the mtg-simulate / mtg-selfplay
+      # command lines - each identical to the Python module's output. The
+      # Python side runs straight from scripts/, so no install.
       - name: Set up Python
         if: runner.os == 'Linux'
         uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0  # v7
         with:
           python-version: "3.12"
 
-      - name: Parity against the Python implementation (L1 vectors, L2 card database + CR)
+      - name: Parity against the Python implementation (L1 vectors, L2 card database + CR, L3 abilities, L4 viz, L5 CLIs)
         if: runner.os == 'Linux'
         working-directory: rust
         run: cargo xtask parity
+
+  # Line coverage of the Rust workspace (xtask excluded: the parity
+  # driver is not shipped). The gate is a floor: new code arrives with
+  # its tests. cargo-llvm-cov is a pinned release asset, checksummed
+  # like cargo-deny in lint.yml (the project publishes no .sha256 files;
+  # the hash is the asset's at pinning time).
+  rust-coverage:
+    name: Rust line coverage (>= 90 %)
+    runs-on: ubuntu-latest
+    env:
+      MTG_REQUIRE_CR: "1"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7
+
+      - name: Download Comprehensive Rules
+        uses: stklug84/actions/mtg/fetch-comprehensive-rules@c6c3adbc4140cbf096c0c61c30b4fa96ff82b8dd  # v2.19.0
+        with:
+          cr-date: "20260925"
+
+      - name: Install the pinned toolchain and the LLVM tools
+        working-directory: rust
+        run: |
+          set -euo pipefail
+          rustup toolchain install
+          rustup component add llvm-tools-preview
+          rustup show active-toolchain
+
+      - name: Cache cargo registry and build outputs
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9  # v6.1.0
+        with:
+          path: |
+            ~/.cargo/registry/index
+            ~/.cargo/registry/cache
+            ~/.cargo/git/db
+            rust/target
+          key: cargo-cov-${{ runner.os }}-${{ hashFiles('rust/Cargo.lock', 'rust/rust-toolchain.toml') }}
+          restore-keys: |
+            cargo-cov-${{ runner.os }}-
+
+      - name: Install cargo-llvm-cov
+        env:
+          LLVM_COV_VERSION: "0.9.1"
+          LLVM_COV_SHA256: "b3f68e625481fed9b16444174f3fa5ebcdbde4a1878803a35eabe2dcefcdc41a"
+        run: |
+          set -euo pipefail
+          curl -fsSL -o cargo-llvm-cov.tar.gz \
+            "https://github.com/taiki-e/cargo-llvm-cov/releases/download/v${LLVM_COV_VERSION}/cargo-llvm-cov-x86_64-unknown-linux-gnu.tar.gz"
+          echo "${LLVM_COV_SHA256}  cargo-llvm-cov.tar.gz" | sha256sum -c -
+          tar xzf cargo-llvm-cov.tar.gz -C "$HOME/.cargo/bin" cargo-llvm-cov
+          cargo llvm-cov --version
+
+      - name: Coverage
+        working-directory: rust
+        run: |
+          set -euo pipefail
+          cargo llvm-cov --workspace --all-features --exclude xtask --summary-only --fail-under-lines 90

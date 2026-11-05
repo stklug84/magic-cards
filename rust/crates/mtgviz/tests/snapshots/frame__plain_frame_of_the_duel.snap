@@ -1,0 +1,18 @@
+---
+source: crates/mtgviz/tests/frame.rs
+expression: "plain_frame_lines(&view).join(\"\\n\")"
+---
+=== Turn 4 combat (active: Alice) ===
+  Alice: 34 life, hand 5, lib 60, gy 3
+      Hapatra, Vizier of Poisons 2/2
+      2x Snake 1/1
+      Snake 1/1 (T)
+      Sol Ring (T)
+      2x Swamp (T)
+      Forest
+  Bob: 11 life, hand 5, lib 60, gy 3
+      Wall of Omens 0/4
+      Thopter 1/1
+      Island
+      Mountain (T)
+  stack: Counterspell (Bob) <- Swords to Plowshares (Alice)

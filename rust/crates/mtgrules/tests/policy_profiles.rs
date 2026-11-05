@@ -184,3 +184,62 @@ fn race_life_chump_blocks() {
         vec![(small, big)]
     );
 }
+
+// ---- self-play tuning candidates
+
+use mtgrules::selfplay::{Knob, parse_tune, variant};
+
+#[test]
+fn variants_apply_every_knob_and_label_like_python() {
+    let base = PolicyProfile::default();
+    let assignment = vec![
+        ("aggression".to_owned(), Knob::Float(1.5)),
+        ("removal_key_threshold".to_owned(), Knob::Float(0.5)),
+        ("hold_reactive_mana".to_owned(), Knob::Bool(false)),
+        ("wipe_board_deficit".to_owned(), Knob::Int(9)),
+        ("counter_value_threshold".to_owned(), Knob::Int(4)),
+        ("mulligan_min_lands".to_owned(), Knob::Int(1)),
+        ("mulligan_max_lands".to_owned(), Knob::Int(6)),
+        ("max_mulligans".to_owned(), Knob::Int(2)),
+        ("race_life".to_owned(), Knob::Int(10)),
+    ];
+    let cand = variant(&base, &assignment);
+    assert_eq!(
+        cand.name,
+        "default[aggression=1.5,removal_key_threshold=0.5,hold_reactive_mana=False,wipe_board_deficit=9,counter_value_threshold=4,mulligan_min_lands=1,mulligan_max_lands=6,max_mulligans=2,race_life=10]"
+    );
+    assert_eq!(cand.aggression, 1.5);
+    assert_eq!(cand.removal_key_threshold, 0.5);
+    assert!(!cand.hold_reactive_mana);
+    assert_eq!(
+        (cand.wipe_board_deficit, cand.counter_value_threshold),
+        (9, 4)
+    );
+    assert_eq!(
+        (
+            cand.mulligan_min_lands,
+            cand.mulligan_max_lands,
+            cand.max_mulligans
+        ),
+        (1, 6, 2)
+    );
+    assert_eq!(cand.race_life, 10);
+    // a mismatched knob type is ignored, like a Python attribute of the wrong type
+    let odd = variant(&base, &[("aggression".to_owned(), Knob::Int(2))]);
+    assert_eq!(odd.aggression, 1.0);
+    assert_eq!(odd.name, "default[aggression=2]");
+}
+
+#[test]
+fn tune_values_must_parse_as_their_knob_type() {
+    assert!(parse_tune(&["race_life=ten".to_owned()]).is_err());
+    assert!(parse_tune(&["aggression=fast".to_owned()]).is_err());
+    assert_eq!(
+        parse_tune(&["hold_reactive_mana=true,0".to_owned()]).expect("parses"),
+        vec![
+            vec![("hold_reactive_mana".to_owned(), Knob::Bool(true))],
+            vec![("hold_reactive_mana".to_owned(), Knob::Bool(false))]
+        ]
+    );
+    assert_eq!(parse_tune(&[]).expect("no axes").len(), 1); // one empty assignment
+}

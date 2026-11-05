@@ -466,3 +466,70 @@ fn jobs_keep_the_output_order() {
         .assert()
         .code(2);
 }
+
+#[test]
+fn selfplay_grid_tuning_ranks_the_candidates() {
+    let Some(cr) = cr_file() else { return };
+    let tmp = tempfile::tempdir().expect("tempdir");
+    let deck = write(tmp.path(), "mirror.txt", DECK);
+    let out = binary("mtg-selfplay", &cr)
+        .arg(&deck)
+        .args([
+            "--games",
+            "1",
+            "--turn-cap",
+            "2",
+            "--tune",
+            "aggression=0.7,1.5",
+            "--tune",
+            "race_life=10",
+            "--base",
+            "control",
+        ])
+        .assert()
+        .success();
+    let text = String::from_utf8(out.get_output().stdout.clone()).unwrap();
+    assert!(
+        text.starts_with(
+            "=== grid tuning vs 'control': 2 candidates, 1 games x 1 seed(s) x 2 seatings each ==="
+        ),
+        "{text}"
+    );
+    assert!(
+        text.contains("control[aggression=0.7,race_life=10]"),
+        "{text}"
+    );
+    assert!(
+        text.trim_end()
+            .lines()
+            .last()
+            .unwrap()
+            .starts_with("best: control["),
+        "{text}"
+    );
+    // an unknown base preset and a bad axis are data errors (exit 1)
+    let out = binary("mtg-selfplay", &cr)
+        .arg(&deck)
+        .args(["--games", "1", "--turn-cap", "2", "--tune", "swagger=1"])
+        .assert()
+        .code(1);
+    let err = String::from_utf8(out.get_output().stderr.clone()).unwrap();
+    assert_eq!(
+        err,
+        "--tune expects KNOB=v1,v2 with a PolicyProfile field, got 'swagger=1'\n"
+    );
+    binary("mtg-selfplay", &cr)
+        .arg(&deck)
+        .args([
+            "--games",
+            "1",
+            "--turn-cap",
+            "2",
+            "--tune",
+            "aggression=1",
+            "--base",
+            "yolo",
+        ])
+        .assert()
+        .code(1);
+}

@@ -273,3 +273,102 @@ pub fn watch_game(
     let _ = std::io::stdout().flush();
     Ok(outcome)
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    fn state() -> LiveState {
+        LiveState {
+            view: ViewState::new(Vec::new(), Value::Null),
+            paused: false,
+            speed: 1.0,
+            pause_hl: true,
+            bf_filter: "all".to_owned(),
+            quit: false,
+            screen: None,
+        }
+    }
+
+    fn event(kind: &str) -> Record {
+        Value::dict([
+            ("t", Value::from("e")),
+            ("seq", Value::from(1_i64)),
+            ("turn", Value::from(2_i64)),
+            ("phase", Value::from("main1")),
+            ("kind", Value::from(kind)),
+            ("data", Value::dict([("who", Value::from("p0"))])),
+        ])
+    }
+
+    #[test]
+    fn status_shows_the_speed_or_the_pause() {
+        let mut st = state();
+        assert_eq!(st.status(), format!(" live x1 |{LIVE_HELP}"));
+        st.speed = 0.25;
+        assert_eq!(st.status(), format!(" live x0.25 |{LIVE_HELP}"));
+        st.paused = true;
+        assert_eq!(st.status(), format!(" PAUSED |{LIVE_HELP}"));
+    }
+
+    #[test]
+    fn keys_toggle_pause_speed_highlights_and_the_filter() {
+        let mut st = state();
+        st.key(&Key::Char('p'));
+        assert!(st.paused);
+        st.key(&Key::Char(' '));
+        assert!(!st.paused);
+        for _ in 0..5 {
+            st.key(&Key::Char('+'));
+        }
+        assert_eq!(st.speed, MAX_SPEED);
+        for _ in 0..9 {
+            st.key(&Key::Char('-'));
+        }
+        assert_eq!(st.speed, MIN_SPEED);
+        st.key(&Key::Char('h'));
+        assert!(!st.pause_hl);
+        st.key(&Key::Char('c'));
+        assert_eq!(st.bf_filter, "creatures");
+        st.key(&Key::Char('c'));
+        assert_eq!(st.bf_filter, "nonland");
+        st.key(&Key::Char('c'));
+        assert_eq!(st.bf_filter, "all");
+        st.key(&Key::Up); // unknown: no change
+        assert!(!st.quit);
+        st.key(&Key::Char('q'));
+        assert!(st.quit);
+        let mut st = state();
+        st.key(&Key::Interrupt);
+        assert!(st.quit);
+    }
+
+    #[test]
+    fn highlights_pause_the_engine_unless_disabled() {
+        let mut st = state();
+        st.view.append(event("draw"));
+        st.view.cursor = 0;
+        st.maybe_pause_on_highlight();
+        assert!(!st.paused);
+        st.view.append(event("player_loses"));
+        st.view.cursor = 1;
+        st.maybe_pause_on_highlight();
+        assert!(st.paused);
+        let mut st = state();
+        st.pause_hl = false;
+        st.view.append(event("counter"));
+        st.view.cursor = 0;
+        st.maybe_pause_on_highlight();
+        assert!(!st.paused);
+    }
+
+    #[test]
+    fn pacing_without_a_screen_is_a_no_op_once_quit() {
+        let mut st = state();
+        st.quit = true;
+        st.pace("cast"); // returns at once
+        let mut st = state();
+        st.draw(" x "); // no screen: nothing to draw, no quit
+        assert!(!st.quit);
+    }
+}

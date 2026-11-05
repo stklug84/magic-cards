@@ -368,6 +368,11 @@ pub fn counter_doubler() -> StaticAbility {
 
 // ---------------------------------------------------------------- registry
 
+/// The names with a hand-written implementation, in table order.
+pub fn names() -> impl Iterator<Item = &'static str> {
+    cards::OVERRIDES.iter().map(|(n, _)| *n)
+}
+
 /// Look up the hand-written implementation of a card by name.
 #[must_use]
 pub fn lookup(name: &str) -> Option<OverrideFn> {

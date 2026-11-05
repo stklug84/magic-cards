@@ -146,7 +146,32 @@ cargo fmt --all --check
 cargo clippy --workspace --all-targets --all-features -- -D warnings
 cargo test --workspace --all-features
 cargo deny check
+cargo llvm-cov --workspace --all-features --exclude xtask --summary-only --fail-under-lines 90
+cargo bench -p mtgrules --bench engine   # criterion: compile the graph, the mana solver, a full game
 ```
+
+The test suite has three layers. The ports of the Python engine tests
+(one file per rules topic) pin the rules of play; the parity levels
+below pin the bytes against the Python implementation; and the
+extended suite covers what neither does by construction — property
+tests (`proptest`: the compiler is total over arbitrary oracle text, the
+mana pool never overpays, the CPython-compatible formatting round-trips,
+the view state never leaves its range), snapshot tests (`insta`: the
+terminal frame rendered through ratatui's `TestBackend`, the plain text
+frame; `cargo insta review` after an intended change of the frame), the
+whole card pool dealt into decks that play four-player games under
+every AI profile (`tests/pool.rs`), and every hand-written card run
+through one battery of events and activations (`tests/overrides_drill.rs`).
+CI gates line coverage at 90 % (`rust-coverage` in `validate.yml`;
+`cargo install cargo-llvm-cov` and `rustup component add
+llvm-tools-preview` locally) — new code arrives with its tests.
+
+`mtg-simulate --jobs N` runs the seeds of a run on `N` threads (`0` =
+the available CPUs). A seed's games share one RNG stream and stay
+sequential, so the seed is the unit of parallelism and the output —
+statistics, `--verbose` lines, `--log-file` records, the `--viz-file`
+recording — is byte-identical to the sequential run; the L5 parity
+check runs the Rust side with `--jobs 2` for that reason.
 
 Rust strictness mirrors the Python rules: `unsafe` is forbidden, clippy
 runs `all` + `pedantic` and every warning is an error in CI

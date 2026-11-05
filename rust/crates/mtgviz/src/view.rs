@@ -436,3 +436,257 @@ pub fn plain_frame_lines(view: &ViewState) -> Vec<String> {
     }
     lines
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    fn ev(kind: &str, data: Vec<(&str, Value)>) -> Record {
+        Value::dict([
+            ("t", Value::from("e")),
+            ("seq", Value::from(1_i64)),
+            ("turn", Value::from(3_i64)),
+            ("phase", Value::from("main1")),
+            ("kind", Value::from(kind)),
+            ("data", Value::dict(data)),
+        ])
+    }
+
+    #[test]
+    #[expect(
+        clippy::too_many_lines,
+        reason = "one row per event kind of the Python formatter table"
+    )]
+    fn every_event_kind_formats_like_python() {
+        let who = ("who", Value::from("Ann"));
+        let cases: Vec<(Record, &str)> = vec![
+            (
+                ev("phase", vec![("phase", Value::from("upkeep")), who.clone()]),
+                "-- T3 upkeep (Ann) --",
+            ),
+            (
+                ev("turn", vec![("n", Value::from(3_i64)), who.clone()]),
+                "== Turn 3: Ann ==",
+            ),
+            (
+                ev(
+                    "cast",
+                    vec![
+                        who.clone(),
+                        ("card", Value::from("Bolt")),
+                        ("x", Value::from(2_i64)),
+                        ("commander", Value::Bool(true)),
+                    ],
+                ),
+                "Ann casts Bolt (X=2) [commander]",
+            ),
+            (
+                ev(
+                    "cast",
+                    vec![
+                        who.clone(),
+                        ("card", Value::from("Bolt")),
+                        ("x", Value::from(0_i64)),
+                    ],
+                ),
+                "Ann casts Bolt",
+            ),
+            (
+                ev("resolve", vec![("what", Value::from("Bolt"))]),
+                "resolves: Bolt",
+            ),
+            (
+                ev("trigger", vec![("what", Value::from("ETB")), who.clone()]),
+                "trigger: ETB (Ann)",
+            ),
+            (
+                ev(
+                    "activate",
+                    vec![who.clone(), ("source", Value::from("Ring"))],
+                ),
+                "Ann activates Ring",
+            ),
+            (
+                ev(
+                    "land",
+                    vec![
+                        who.clone(),
+                        ("card", Value::from("Swamp")),
+                        ("tapped", Value::Bool(true)),
+                    ],
+                ),
+                "Ann plays Swamp (tapped)",
+            ),
+            (
+                ev(
+                    "token",
+                    vec![
+                        who.clone(),
+                        ("name", Value::from("Snake")),
+                        ("pt", Value::from("1/1")),
+                    ],
+                ),
+                "Ann creates Snake 1/1 token",
+            ),
+            (
+                ev(
+                    "token",
+                    vec![who.clone(), ("name", Value::from("Treasure"))],
+                ),
+                "Ann creates Treasure token",
+            ),
+            (
+                ev(
+                    "attack",
+                    vec![
+                        ("card", Value::from("Bear")),
+                        ("target", Value::from("Bob")),
+                    ],
+                ),
+                "Bear attacks Bob",
+            ),
+            (
+                ev(
+                    "block",
+                    vec![
+                        ("blocker", Value::from("Wall")),
+                        ("attacker", Value::from("Bear")),
+                    ],
+                ),
+                "Wall blocks Bear",
+            ),
+            (
+                ev(
+                    "damage",
+                    vec![
+                        ("src", Value::from("Bear")),
+                        ("n", Value::from(2_i64)),
+                        ("target", Value::from("Bob")),
+                        ("combat", Value::Bool(true)),
+                    ],
+                ),
+                "Bear deals 2 to Bob (combat)",
+            ),
+            (
+                ev(
+                    "life",
+                    vec![
+                        who.clone(),
+                        ("delta", Value::from(3_i64)),
+                        ("total", Value::from(43_i64)),
+                    ],
+                ),
+                "Ann +3 life -> 43",
+            ),
+            (
+                ev(
+                    "dies",
+                    vec![
+                        ("card", Value::from("Snake")),
+                        ("token", Value::Bool(true)),
+                        who.clone(),
+                    ],
+                ),
+                "Snake token dies (Ann)",
+            ),
+            (
+                ev("counter", vec![("spell", Value::from("Bolt")), who.clone()]),
+                "Bolt (Ann) is countered",
+            ),
+            (
+                ev("fizzle", vec![("what", Value::from("Bolt"))]),
+                "fizzles: Bolt",
+            ),
+            (ev("draw", vec![who.clone()]), "Ann draws"),
+            (
+                ev(
+                    "player_loses",
+                    vec![who.clone(), ("why", Value::from("life 0 or less (704.5a)"))],
+                ),
+                "Ann LOSES: life 0 or less (704.5a)",
+            ),
+            (
+                ev("cycle", vec![who.clone(), ("card", Value::from("Slough"))]),
+                "cycle {'who': 'Ann', 'card': 'Slough'}",
+            ),
+        ];
+        for (rec, expected) in cases {
+            assert_eq!(format_event(&rec), expected);
+        }
+    }
+
+    #[test]
+    fn visible_events_filter_by_player_and_count() {
+        let mut view = ViewState::new(
+            vec![
+                ev("draw", vec![("who", Value::from("Ann"))]),
+                ev("draw", vec![("player", Value::from("Bob"))]),
+                ev(
+                    "damage",
+                    vec![("src", Value::from("Bear")), ("target", Value::from("Ann"))],
+                ),
+                ev("draw", vec![("who", Value::from("Bob"))]),
+            ],
+            Value::Null,
+        );
+        view.cursor = 3;
+        assert_eq!(view.visible_events(14, None).len(), 4);
+        assert_eq!(view.visible_events(14, Some("Ann")).len(), 2);
+        assert_eq!(view.visible_events(1, Some("Bob")).len(), 1);
+        assert_eq!(view.visible_events(14, Some("Cid")).len(), 0);
+        assert!(view.snapshot().is_none());
+        assert_eq!(plain_frame_lines(&view), Vec::<String>::new());
+    }
+
+    #[test]
+    fn battlefield_filters_and_grouping() {
+        let perm = |name: &str, types: &[&str], tapped: bool| {
+            Value::dict([
+                ("name", Value::from(name)),
+                (
+                    "types",
+                    Value::List(types.iter().map(|t| Value::from(*t)).collect()),
+                ),
+                ("tapped", Value::Bool(tapped)),
+            ])
+        };
+        let bf = vec![
+            perm("Snake", &["Creature"], false),
+            perm("Snake", &["Creature"], false),
+            perm("Snake", &["Creature"], true),
+            perm("Swamp", &["Land"], false),
+        ];
+        let groups = group_battlefield(&bf);
+        assert_eq!(
+            groups.iter().map(|(n, _)| *n).collect::<Vec<_>>(),
+            [2, 1, 1]
+        );
+        assert!(bf_visible(&bf[0], "creatures") && !bf_visible(&bf[3], "creatures"));
+        assert!(!bf_visible(&bf[3], "nonland") && bf_visible(&bf[0], "nonland"));
+        assert!(bf_visible(&bf[3], "all"));
+        let no_types = Value::dict([("name", Value::from("x"))]);
+        assert!(!bf_visible(&no_types, "creatures") && bf_visible(&no_types, "nonland"));
+        assert!(
+            battlefield(&no_types).is_empty()
+                && players(&no_types).is_empty()
+                && stack(&no_types).is_empty()
+        );
+    }
+
+    #[test]
+    fn append_keeps_the_end_record_aside() {
+        let mut view = ViewState::default();
+        view.append(ev("draw", vec![]));
+        view.append(Value::dict([
+            ("t", Value::from("end")),
+            ("winner", Value::from("Ann")),
+        ]));
+        assert_eq!(view.records.len(), 1);
+        assert_eq!(text(view.result.as_ref().unwrap(), "winner"), "Ann");
+        assert_eq!(view.at_end(), view.cursor >= 0);
+        view.jump_turn(99);
+        assert!(view.at_end());
+        assert!(!view.next_turn(-1));
+        assert_eq!(view.cursor, -1);
+    }
+}

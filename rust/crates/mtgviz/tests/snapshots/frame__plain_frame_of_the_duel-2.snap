@@ -1,0 +1,25 @@
+---
+source: crates/mtgviz/tests/frame.rs
+expression: "plain_frame_lines(&pod_view).join(\"\\n\")"
+---
+=== Turn 9 main2 (active: South) ===
+  North: 40 life, hand 5, lib 60, gy 3
+      Construct 0 1/1 (T)
+      Construct 1 2/2
+      Construct 2 3/3
+      Construct 3 4/4 (T)
+      Construct 4 5/5
+      Construct 5 6/6
+      Construct 6 7/7 (T)
+      Construct 7 8/8
+      Construct 8 9/9
+      Construct 9 10/10 (T)
+      Construct 10 11/11
+      Construct 11 12/12
+      Plains
+      Plains (T)
+  East: 0 life, hand 5, lib 60, gy 3  LOST: life 0 or less (704.5a)
+  South: 25 life, hand 5, lib 60, gy 3
+      Bear 2/2
+  West: 38 life, hand 5, lib 60, gy 3
+      Swamp
