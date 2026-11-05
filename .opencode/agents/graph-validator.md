@@ -68,7 +68,10 @@ later check meaningless.
 4. `python3 scripts/check_consistency.py` — cross-file invariants:
    undefined terms, dangling references, entry shape, collection variants,
    Commander decks totalling 100, synergy domains, behavior hooks.
-5. The unit suites, from `scripts/`: `mtgcards`, `mtgrules`, `mtgviz`.
+5. The `mtgcards` unit suite from `scripts/` (the generator's helpers and
+   the bundle builder); when the change touched `rust/`, the simulator's
+   `cargo test --workspace --all-features` from `rust/` (needs
+   `MagicCompRules-*.txt` at the repo root).
 6. Only when asked, or when the change touched class axioms:
    `python3 scripts/generate_catalog.py && robot reason --reasoner hermit`.
    HermiT needs ~2 min for the ontology and ~8 min for the full closure —

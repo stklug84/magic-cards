@@ -1,14 +1,19 @@
-"""Behavior hooks, loaded from the knowledge graph.
+"""The behavior-key whitelist of the simulation annotations.
 
 Oracle text cannot be executed, so cards whose effect matters to the
-simulation get explicit behavior hooks. These are stored as simulation
-annotations in MagicSimulationAnnotations.ttl (:hasBehaviorHook /
-:threatWeight, see MagicCardsOntology.ttl) and MERGE OVER anything the
-oracle parser derived (hooks win). Cards without hooks run on
-parser-derived behavior alone; cards with neither are inert bodies/spells.
+simulation get explicit behavior hooks: ``:hasBehaviorHook`` /
+``:threatWeight`` assertions in MagicSimulationAnnotations.ttl (see
+MagicCardsOntology.ttl). The simulator (the Rust workspace under
+``rust/``) reads them; this module only names the keys it understands,
+so that the graph validators (``mtgvalidate.consistency``) can reject an
+annotation the simulator would not load.
 
-Behavior key reference (BEHAVIOR_KEYS) - also the whitelist for
-:behaviorKey values and --custom-cards JSON:
+BEHAVIOR_KEYS mirrors ``BEHAVIOR_KEYS`` in
+``rust/crates/mtgcards/src/behavior.rs``; the Rust test
+``rust/crates/mtgcards/tests/behavior_keys.rs`` reads this file and
+fails when the two sets differ, so a key is added in both places.
+
+Behavior key reference:
 
   mana/ramp     rock_mana, rock_colors, ramp_lands, fetch_land, enters_tapped,
                 land_colors, treasures_per_turn, burst_treasures
@@ -30,16 +35,6 @@ Behavior key reference (BEHAVIOR_KEYS) - also the whitelist for
 """
 
 from __future__ import annotations
-
-import json
-import re
-from pathlib import Path
-from typing import TYPE_CHECKING, Any
-
-if TYPE_CHECKING:
-    from collections.abc import Mapping
-
-    from mtgcards.cards import CardData
 
 BEHAVIOR_KEYS = {
     "rock_mana",
@@ -108,81 +103,6 @@ BEHAVIOR_KEYS = {
     "anthem",
 }
 
-# hook values that the engine indexes positionally
+# hook values that the simulator indexes positionally (mirrors TUPLE_KEYS
+# in rust/crates/mtgcards/src/behavior.rs; checked by the same Rust test)
 _TUPLE_KEYS = {"etb_tokens", "death_tokens", "burst_tokens"}
-
-ANNOTATIONS_FILE = "MagicSimulationAnnotations.ttl"
-
-_SUBJECT_RE = re.compile(r"^:(\w+)\s*$|^:(\w+)\s", re.MULTILINE)
-_THREAT_RE = re.compile(r':threatWeight "(\d+)"')
-_HOOK_RE = re.compile(r':behaviorKey "([^"]+)" ; :behaviorValue "((?:[^"\\]|\\.)*)"')
-
-
-def _decode(key: str, raw: str) -> object:
-    """Decode one :behaviorValue JSON literal (tuple keys become tuples)."""
-    value = json.loads(raw.replace('\\"', '"').replace("\\\\", "\\"))
-    if key in _TUPLE_KEYS and isinstance(value, list):
-        return tuple(value)
-    return value
-
-
-def load_annotations(
-    repo_root: str | Path,
-    ind2name: Mapping[str, str],
-) -> dict[str, dict[str, Any]]:
-    """Parse MagicSimulationAnnotations.ttl -> {card name: behavior dict}.
-
-    *ind2name* maps card individual local names (as produced by
-    ttl_loader.load_graph_cards) to card names; annotation subjects that do
-    not resolve to a known card individual raise, keeping the annotation
-    graph and the card graphs consistent.
-    """
-    path = Path(repo_root) / ANNOTATIONS_FILE
-    hooks_by_name: dict[str, dict[str, Any]] = {}
-    if not path.exists():
-        return hooks_by_name
-    text = path.read_text(encoding="utf-8")
-    for raw_block in re.split(r"\n\s*\n", text):
-        block = raw_block.strip()
-        if not block.startswith(":") or "owl:Ontology" in block:
-            continue
-        m = re.match(r":(\w+)", block)
-        if not m:
-            continue
-        ind = m.group(1)
-        name = ind2name.get(ind)
-        if name is None:
-            msg = (
-                f"{ANNOTATIONS_FILE}: subject :{ind} is not a card "
-                f"individual known to the card graphs"
-            )
-            raise ValueError(
-                msg,
-            )
-        hooks = hooks_by_name.setdefault(name, {})
-        tw = _THREAT_RE.search(block)
-        if tw:
-            hooks["key"] = int(tw.group(1))
-        for key, raw in _HOOK_RE.findall(block):
-            if key not in BEHAVIOR_KEYS:
-                msg = (
-                    f"{ANNOTATIONS_FILE}: :{ind} uses unknown behavior "
-                    f"key {key!r} (see BEHAVIOR_KEYS)"
-                )
-                raise ValueError(
-                    msg,
-                )
-            hooks[key] = _decode(key, raw)
-    return hooks_by_name
-
-
-def apply_behaviors(
-    card: CardData,
-    hooks_by_name: Mapping[str, dict[str, Any]],
-) -> None:
-    """Merge graph-authored hooks over parser-derived behavior."""
-    hooks = hooks_by_name.get(card.name)
-    if not hooks and " // " in card.name:
-        hooks = hooks_by_name.get(card.name.split(" // ")[0])
-    if hooks:
-        card.behavior.update(hooks)

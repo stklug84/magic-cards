@@ -1,9 +1,10 @@
-//! Canonical dump of the card database (parity level L2).
+//! Canonical dump of the card database.
 //!
-//! The Rust twin of `scripts/parity/dump_cards.py`: loads a graph root
-//! through [`CardDatabase`] and writes one JSON line per index entry, in
-//! index order, with the same shape and the same `json.dumps` bytes.
-//! `cargo xtask parity` runs both and diffs them.
+//! Loads a graph root through [`CardDatabase`] and writes one JSON line
+//! per index entry, in index order (every card field, every behaviour
+//! key, the double-faced aliasing). Dump before and after a change to the
+//! readers or the generator and diff the two files: the shape is stable
+//! and the lines are sorted, so the diff is the change.
 //!
 //! ```text
 //! cargo run -p mtgcards --example dump_cards -- --root ../.. [--custom-cards F] [--extra-graph G]...

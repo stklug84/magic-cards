@@ -3,7 +3,8 @@
 An OWL/RDF knowledge graph of a personal Magic: The Gathering collection:
 a hand-authored schema, per-set card individuals generated from a private
 Moxfield export, card-to-card synergies, a catalog of reusable SPARQL
-queries, and a CR-grounded Commander simulator that reads the graph.
+queries, and a CR-grounded Commander simulator that reads the graph (the
+Rust workspace under `rust/`; the Python it replaced is git history).
 
 Read this before touching anything. The rules below are the ones that are
 expensive to rediscover.
@@ -69,9 +70,19 @@ Needs `rdflib` (`pip install "rdflib>=7,<8"`, or the `validate` extra).
 python3 scripts/validate_ttl.py         # syntax, prefixes, one owl:Ontology, imports resolve
 python3 scripts/validate_sparql.py      # query syntax, mc: prefix, every mc: term exists
 python3 scripts/check_consistency.py    # cross-file graph invariants
-cd scripts && python3 -m unittest discover -s mtgcards/tests -t .
-                python3 -m unittest discover -s mtgrules/tests -t .
-                python3 -m unittest discover -s mtgviz/tests -t .
+cd scripts && python3 -m unittest discover -s mtgcards/tests -t .   # generator + bundle builder
+```
+
+The simulator's gates run from `rust/` (toolchain pinned by
+`rust-toolchain.toml`; `cargo install cargo-deny cargo-llvm-cov --locked`
+and `rustup component add llvm-tools-preview` once):
+
+```sh
+cargo fmt --all --check
+cargo clippy --workspace --all-targets --all-features -- -D warnings
+cargo test --workspace --all-features     # needs MagicCompRules-*.txt at the repo root
+cargo deny check
+cargo llvm-cov --workspace --all-features --summary-only --fail-under-lines 90
 ```
 
 `validate_sparql.py` is why a term cannot be deleted from the ontology
@@ -106,22 +117,44 @@ deleting the query that used it.
 
 ## The trap: text-based readers
 
-`scripts/mtgcards/ttl_loader.py` and `scripts/mtgcards/deck_ttl.py` parse
-the generated TTL with **regexes, not rdflib**, so the simulator stays
-stdlib-only. A layout change in the generator can therefore break card
-loading while every RDF validator still passes — cards silently lose
+The simulator's readers — `rust/crates/mtgcards/src/ttl_loader.rs`,
+`deck.rs` and `behavior.rs` — parse the generated TTL with **regexes, not
+an RDF library**. A layout change in the generator can therefore break
+card loading while every RDF validator still passes — cards silently lose
 subtypes, colour identity or land mana colours.
 
 Any change to how the generator lays out a predicate must be mirrored in
-those readers and covered by `scripts/mtgcards/tests/test_ttl_loader.py`.
+those readers and covered by `rust/crates/mtgcards/tests/ttl_loader.rs`.
+`GRAPH-MANIFEST.json`'s `graph_schema` versions that predicate vocabulary:
+bump it (`scripts/mtgcards/graph.py` and `rust/crates/mtgcards/src/graph.rs`)
+when the vocabulary changes, not when a set is added.
+
+## Two lists that must not drift
+
+`BEHAVIOR_KEYS` exists twice: in `scripts/mtgcards/behaviors.py` (the
+whitelist `check_consistency.py` applies to `MagicSimulationAnnotations.ttl`)
+and in `rust/crates/mtgcards/src/behavior.rs` (what the simulator loads).
+`rust/crates/mtgcards/tests/behavior_keys.rs` reads the Python file and
+fails when they differ, so a new key lands in both in one commit.
 
 ## Python rules
 
 `ruff` runs `select = ["ALL"]`; `mypy` runs `--strict` over `scripts/`.
 No ignore baseline, no per-file-ignores — new suppressions only per line
 (`# noqa: <RULE>` / `# nosec <ID>`) with a justification comment. The
-packaged `mtgcards`/`mtgrules`/`mtgviz` must stay import-clean without
-rdflib; only `mtgvalidate` may use it, behind the `validate` extra.
+packaged `mtgcards` must stay import-clean without rdflib; only
+`mtgvalidate` may use it, behind the `validate` extra.
+
+## Rust rules
+
+`unsafe_code = "forbid"`; clippy `all` + `pedantic`, every warning an
+error; no crate-wide `allow` — a suppression is one
+`#[expect(clippy::<lint>, reason = "…")]` on one item. Every
+rules-implementing item carries `#[rule("704.5g", …)]`; the binaries
+validate the registry against the Comprehensive Rules text at startup.
+The CPython-compatible layers (`pycompat`) are pinned by frozen vectors
+under `rust/crates/*/tests/vectors/`: a seed must keep producing the
+bytes it produced before the cutover.
 
 ## Agents
 

@@ -1054,10 +1054,10 @@ variant, and never two entries with identical attributes."""@en .
               rdfs:comment
               """A reified simulation annotation attaching one machine-readable
 behavior key/value pair to a card, consumed by the Monte-Carlo matchup
-simulator (scripts/mtgrules). Behavior hooks encode card semantics that cannot
-be reliably derived from oracle text by pattern matching. They are
-house-authored simulation opinion, not Wizards of the Coast card facts, and
-therefore live in the separate instance graph
+simulator (the Rust workspace under rust/). Behavior hooks encode card
+semantics that cannot be reliably derived from oracle text by pattern
+matching. They are house-authored simulation opinion, not Wizards of the
+Coast card facts, and therefore live in the separate instance graph
 MagicSimulationAnnotations.ttl."""@en .
 
 

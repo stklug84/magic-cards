@@ -17,7 +17,7 @@ It carries only what a consumer actually reads:
   * ``GRAPH-MANIFEST.json``         the contract (see mtgcards.graph)
 
 ``MagicCardIndividuals.ttl`` is included even though the simulator never
-reads it (ttl_loader globs ``sets/`` directly): MagicCardCollection.ttl
+reads it (its reader globs ``sets/`` directly): MagicCardCollection.ttl
 imports it, so leaving it out makes the bundle fail its own owl:imports
 resolution check.
 

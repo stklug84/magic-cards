@@ -1,4 +1,4 @@
-"""Distribution version of the packaged simulator tooling.
+"""Distribution version of the packaged graph tooling.
 
 Single source of truth for the ``magic-cards-tools`` version: resolved
 from the installed distribution metadata rather than restated in each

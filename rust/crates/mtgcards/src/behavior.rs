@@ -10,7 +10,7 @@
 //! A [`Behavior`] is an insertion-ordered map (a Python `dict`) of
 //! [`Value`]s. Python sets become sorted lists, tuples become lists; the
 //! keys the engine reads have typed accessors here, the rest is kept so
-//! dumps and the parity comparison see everything.
+//! the `dump_cards` example sees everything.
 
 use std::collections::BTreeSet;
 use std::path::Path;

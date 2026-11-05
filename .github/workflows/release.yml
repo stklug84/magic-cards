@@ -5,19 +5,19 @@
 # date: 2026-08-11
 # keywords: [infrastructure, packaging, release]
 # comment: |
-#   Builds the magic-cards-tools Python artifact (wheel + sdist) on
-#   version tags (v*) and publishes it as a GitHub Release. The tag must
-#   match the version in pyproject.toml and in rust/Cargo.toml (vX.Y.Z
-#   <-> X.Y.Z); the built wheel is smoke-tested (install + CLI --help
-#   against the checked-out knowledge graph) before the release is
-#   created.
+#   Builds the magic-cards-tools Python artifact (wheel + sdist: the
+#   graph-bundle contract and the graph validators) on version tags (v*)
+#   and publishes it as a GitHub Release. The tag must match the version
+#   in pyproject.toml and in rust/Cargo.toml (vX.Y.Z <-> X.Y.Z); the
+#   built wheel is smoke-tested (install, import, mtg-validate --help)
+#   before the release is created.
 #
-#   The Rust simulator binaries (mtg-simulate, mtg-selfplay, mtg-cr) are
-#   then built in release mode on every supported platform, smoke-tested
-#   (--version against the tag, the #[rule] registry against the
-#   Comprehensive Rules, a short offline matchup over the checked-out
-#   graph) and attached to the same release as tarballs with SHA-256
-#   checksums: one archive per target triple.
+#   The simulator binaries (mtg-simulate, mtg-selfplay, mtg-cr) are then
+#   built from the Rust workspace in release mode on every supported
+#   platform, smoke-tested (--version against the tag, the #[rule]
+#   registry against the Comprehensive Rules, a short offline matchup
+#   over the checked-out graph) and attached to the same release as
+#   tarballs with SHA-256 checksums: one archive per target triple.
 #
 #   The build -> verify -> publish sequence is the reusable stklug84/
 #   github-workflows release-artifact workflow, the same one release-
@@ -54,10 +54,8 @@ jobs:
 
       install-command: "pip install build"
 
-      # The tag must agree with the packaged version, and the rules
-      # engine validates its @rule annotations against the CR text at
-      # import time -- the text is not distributed (see README), so the
-      # smoke test has to fetch it.
+      # The tag must agree with the packaged version and with the Rust
+      # workspace version the binaries report.
       prepare-command: |
         script='import tomllib; print(tomllib.load(open("pyproject.toml", "rb"))["project"]["version"])'
         pyver="$(python3 -c "$script")"
@@ -71,21 +69,17 @@ jobs:
           echo "::error::tag ${RELEASE_TAG} does not match the Rust workspace version ${rsver}"
           exit 1
         fi
-        CR_DATE=20260925
-        curl -fsSL -o "MagicCompRules-${CR_DATE}.txt" \
-          "https://media.wizards.com/2026/downloads/MagicCompRules%20${CR_DATE}.txt"
 
       build-command: "python3 -m build"
 
       # A wheel is not an archive the workflow should unpack; the smoke
-      # tests install it into throwaway virtualenvs instead.
+      # tests install it into throwaway virtualenvs instead. The default
+      # install is stdlib-only (mtgcards: the manifest contract and the
+      # behavior-key whitelist).
       smoke-command: |
-        export MTG_GRAPH_ROOT="$GITHUB_WORKSPACE"
         python3 -m venv /tmp/smoke
         /tmp/smoke/bin/pip install dist/*.whl
-        /tmp/smoke/bin/python -c "import mtgcards, mtgviz"
-        /tmp/smoke/bin/mtg-simulate --help > /dev/null
-        /tmp/smoke/bin/mtg-selfplay --help > /dev/null
+        /tmp/smoke/bin/python -c "import mtgcards.graph, mtgcards.behaviors"
 
       # mtgvalidate ships in the same wheel but needs rdflib, so it is
       # only importable once the validate extra is requested.
