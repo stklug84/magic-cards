@@ -246,7 +246,7 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Parity against the Python implementation (L1 vectors, L2 card database + CR, L3 abilities, L4 viz, L5 CLIs)
+      - name: Parity against the Python implementation (L1 vectors, L2 cards + CR, L3 abilities, L4 viz, L5 CLIs)
         if: runner.os == 'Linux'
         working-directory: rust
         run: cargo xtask parity
