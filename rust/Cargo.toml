@@ -57,6 +57,9 @@ linkme = "0.3"
 clap = { version = "4", features = ["derive", "wrap_help"] }
 indexmap = "2"
 thiserror = "2"
+# the terminal UI of mtg-simulate --watch / --replay
+ratatui = "0.30"
+crossterm = "0.29"
 # dev: the macro's compile-fail tests and the binaries' CLI tests
 trybuild = "1"
 assert_cmd = "2"

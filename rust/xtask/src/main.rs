@@ -21,10 +21,11 @@
 //!   `dump_abilities` example) over the same two graph roots; L5 runs
 //!   the `mtg-simulate` and `mtg-selfplay` command lines against the
 //!   Python modules over decks built from the checkout's graph and diffs
-//!   stdout, stderr and the per-game JSONL records.
+//!   stdout, stderr and the per-game JSONL records; L4 (run with L5)
+//!   diffs the `--viz-file` recording of that matchup, the plain replay
+//!   of two of its games and the plain `--watch` stream.
 //!
-//! The remaining parity level (L4, the `--viz-file` records) and
-//! `golden` (freeze expected outputs) arrive with the viz crate.
+//! `golden` (freeze expected outputs) is the remaining subcommand.
 //!
 //! The Python interpreter is `$PYTHON`, else `python3`.
 
@@ -41,8 +42,8 @@ tasks:
   parity [--level N]  compare the Rust and Python implementations:
                       L1 = vectors --check, L2 = card-database and
                       Comprehensive Rules dumps, L3 the compiled
-                      abilities, L5 the command lines (default: every
-                      level)
+                      abilities, L4+L5 the command lines, recordings
+                      and replays (default: every level)
   help                print this message
 ";
 
@@ -696,6 +697,72 @@ fn run_rust_cli(
     capture(rs, label, "the Rust CLI")
 }
 
+/// [`run_python_cli`] with `stdin` fed to the process.
+fn run_python_cli_with_stdin(
+    repo: &Path,
+    module: &str,
+    args: &[String],
+    label: &str,
+    stdin: &str,
+) -> Result<Captured, String> {
+    let mut py = Command::new(python());
+    py.args(["-m", module])
+        .args(args)
+        .current_dir(repo.join("scripts"))
+        .env("PYTHONDONTWRITEBYTECODE", "1")
+        .env("MTG_GRAPH_ROOT", repo);
+    capture_with_stdin(py, label, "the Python CLI", stdin)
+}
+
+/// [`run_rust_cli`] with `stdin` fed to the process.
+fn run_rust_cli_with_stdin(
+    repo: &Path,
+    binary: &str,
+    args: &[String],
+    label: &str,
+    stdin: &str,
+) -> Result<Captured, String> {
+    let cargo = std::env::var("CARGO").unwrap_or_else(|_| "cargo".to_owned());
+    let mut rs = Command::new(cargo);
+    rs.args(["run", "--quiet", "-p", "mtgsim", "--bin", binary, "--"])
+        .args(args)
+        .current_dir(repo.join("rust"))
+        .env("MTG_GRAPH_ROOT", repo);
+    capture_with_stdin(rs, label, "the Rust CLI", stdin)
+}
+
+fn capture_with_stdin(
+    mut command: Command,
+    label: &str,
+    what: &str,
+    stdin: &str,
+) -> Result<Captured, String> {
+    use std::io::Write as _;
+    let mut child = command
+        .stdin(std::process::Stdio::piped())
+        .stdout(std::process::Stdio::piped())
+        .stderr(std::process::Stdio::piped())
+        .spawn()
+        .map_err(|e| format!("L4 [{label}]: cannot run {what}: {e}"))?;
+    if let Some(mut pipe) = child.stdin.take() {
+        let _ = pipe.write_all(stdin.as_bytes());
+    }
+    let output = child
+        .wait_with_output()
+        .map_err(|e| format!("L4 [{label}]: cannot run {what}: {e}"))?;
+    if !output.status.success() {
+        return Err(format!(
+            "L4 [{label}]: {what} failed ({}):\n{}",
+            output.status,
+            String::from_utf8_lossy(&output.stderr)
+        ));
+    }
+    Ok((
+        String::from_utf8_lossy(&output.stdout).into_owned(),
+        String::from_utf8_lossy(&output.stderr).into_owned(),
+    ))
+}
+
 fn capture(mut command: Command, label: &str, what: &str) -> Result<Captured, String> {
     let output = command
         .output()
@@ -715,6 +782,180 @@ fn capture(mut command: Command, label: &str, what: &str) -> Result<Captured, St
 
 /// L5: the simulator and self-play command lines, stdout + stderr +
 /// the per-game JSONL, Python against Rust over the same decks.
+/// The L4/L5 scratch state: the repo, the scratch dir and the decks.
+struct L5Run {
+    repo: PathBuf,
+    scratch: PathBuf,
+    deck_args: Vec<String>,
+}
+
+/// The 4-player matchup (two seeds, mixed profiles, `--verbose`), its
+/// JSONL records and its `--viz-file` recording (L4); the recording
+/// paths for the replay check.
+fn l5_matchup(run: &L5Run) -> Result<(PathBuf, PathBuf), String> {
+    let (repo, scratch, deck_args) = (&run.repo, &run.scratch, &run.deck_args);
+    // the 4-player matchup: two seeds, mixed profiles, --verbose, the
+    // JSONL records and the --viz-file recording (L4)
+    let (py_log, rs_log) = (scratch.join("py.jsonl"), scratch.join("rs.jsonl"));
+    let (py_viz, rs_viz) = (scratch.join("py.viz.jsonl"), scratch.join("rs.viz.jsonl"));
+    let common: Vec<String> = [
+        "--offline",
+        "--games",
+        "2",
+        "--seeds",
+        "2",
+        "--seed",
+        "11",
+        "--turn-cap",
+        "30",
+        "--verbose",
+        "--profile",
+        "2=aggressive",
+        "--profile",
+        "3=control",
+    ]
+    .iter()
+    .map(|s| (*s).to_string())
+    .collect();
+    let with_files = |log: &Path, viz: &Path| -> Vec<String> {
+        let mut args = deck_args.clone();
+        args.extend(common.iter().cloned());
+        args.push("--log-file".to_owned());
+        args.push(log.display().to_string());
+        args.push("--viz-file".to_owned());
+        args.push(viz.display().to_string());
+        args
+    };
+    let py = run_python_cli(
+        repo,
+        "mtgrules.cli",
+        &with_files(&py_log, &py_viz),
+        "matchup",
+    )?;
+    let rs = run_rust_cli(
+        repo,
+        "mtg-simulate",
+        &with_files(&rs_log, &rs_viz),
+        "matchup",
+    )?;
+    let normalise = |text: &str, log: &Path, viz: &Path| {
+        text.replace(&log.display().to_string(), "<log>")
+            .replace(&viz.display().to_string(), "<viz>")
+    };
+    diff_lines(
+        &normalise(&py.0, &py_log, &py_viz),
+        &normalise(&rs.0, &rs_log, &rs_viz),
+    )
+    .map_err(|d| format!("L5 [matchup stdout]: {d}"))?;
+    diff_lines(&py.1, &rs.1).map_err(|d| format!("L5 [matchup stderr]: {d}"))?;
+    let read =
+        |path: &Path| std::fs::read_to_string(path).map_err(|e| format!("{}: {e}", path.display()));
+    diff_lines(&read(&py_log)?, &read(&rs_log)?).map_err(|d| format!("L5 [matchup JSONL]: {d}"))?;
+    let (py_records, rs_records) = (read(&py_viz)?, read(&rs_viz)?);
+    diff_lines(&py_records, &rs_records).map_err(|d| format!("L4 [viz recording]: {d}"))?;
+    println!(
+        "L5 [matchup]: {} stdout lines identical; L4 [viz recording]: {} records identical",
+        py.0.lines().count(),
+        py_records.lines().count()
+    );
+    Ok((py_viz, rs_viz))
+}
+
+/// The plain replay of two recorded games and the plain `--watch`
+/// stream (L4).
+fn l5_replays(run: &L5Run, py_viz: &Path, rs_viz: &Path) -> Result<(), String> {
+    let (repo, scratch, deck_args) = (&run.repo, &run.scratch, &run.deck_args);
+    let read =
+        |path: &Path| std::fs::read_to_string(path).map_err(|e| format!("{}: {e}", path.display()));
+    // the plain replay of a recorded game ('a' walks it to the end)
+    for game in ["1", "4"] {
+        let replay = |viz: &Path| -> Vec<String> {
+            vec![
+                "--replay".to_owned(),
+                viz.display().to_string(),
+                "--game".to_owned(),
+                game.to_owned(),
+            ]
+        };
+        let py = run_python_cli_with_stdin(repo, "mtgrules.cli", &replay(py_viz), "replay", "a\n")?;
+        let rs = run_rust_cli_with_stdin(repo, "mtg-simulate", &replay(rs_viz), "replay", "a\n")?;
+        diff_lines(&py.0, &rs.0).map_err(|d| format!("L4 [replay game {game}]: {d}"))?;
+        println!(
+            "L4 [replay game {game}]: {} lines identical",
+            py.0.lines().count()
+        );
+    }
+    // --watch without a terminal: the plain event stream
+    let watch = |viz: &Path| -> Vec<String> {
+        let mut args = deck_args[..2].to_vec();
+        args.extend(
+            [
+                "--offline",
+                "--watch",
+                "--seed",
+                "7",
+                "--turn-cap",
+                "8",
+                "--viz-file",
+            ]
+            .iter()
+            .map(|s| (*s).to_string()),
+        );
+        args.push(viz.display().to_string());
+        args
+    };
+    let (py_watch, rs_watch) = (
+        scratch.join("py.watch.jsonl"),
+        scratch.join("rs.watch.jsonl"),
+    );
+    let py = run_python_cli_with_stdin(repo, "mtgrules.cli", &watch(&py_watch), "watch", "")?;
+    let rs = run_rust_cli_with_stdin(repo, "mtg-simulate", &watch(&rs_watch), "watch", "")?;
+    let strip = |text: &str, viz: &Path| text.replace(&viz.display().to_string(), "<viz>");
+    diff_lines(&strip(&py.0, &py_watch), &strip(&rs.0, &rs_watch))
+        .map_err(|d| format!("L4 [watch stdout]: {d}"))?;
+    diff_lines(&read(&py_watch)?, &read(&rs_watch)?)
+        .map_err(|d| format!("L4 [watch recording]: {d}"))?;
+    println!("L4 [watch]: {} event lines identical", py.0.lines().count());
+    Ok(())
+}
+
+/// Self-play: the round-robin and a small grid (L5).
+fn l5_selfplay(run: &L5Run) -> Result<(), String> {
+    let (repo, deck_args) = (&run.repo, &run.deck_args);
+    // self-play: the round-robin and a small grid
+    let two: Vec<String> = deck_args[..2].to_vec();
+    for (label, extra) in [
+        ("round-robin", vec!["--games", "1", "--turn-cap", "12"]),
+        (
+            "grid",
+            vec![
+                "--games",
+                "1",
+                "--turn-cap",
+                "12",
+                "--tune",
+                "aggression=0.7,1.5",
+                "--tune",
+                "race_life=10",
+            ],
+        ),
+    ] {
+        let mut args = two.clone();
+        args.extend(extra.iter().map(|s| (*s).to_string()));
+        let py = run_python_cli(repo, "mtgrules.selfplay", &args, label)?;
+        let rs = run_rust_cli(repo, "mtg-selfplay", &args, label)?;
+        diff_lines(&py.0, &rs.0).map_err(|d| format!("L5 [selfplay {label} stdout]: {d}"))?;
+        diff_lines(&py.1, &rs.1).map_err(|d| format!("L5 [selfplay {label} stderr]: {d}"))?;
+        println!(
+            "L5 [selfplay {label}]: {} lines identical",
+            py.0.lines().count()
+        );
+    }
+    Ok(())
+}
+
+/// L4 + L5: the simulator and self-play command lines, their records,
+/// recordings and replays, Python against Rust over the same decks.
 fn parity_l5() -> Result<(), String> {
     let repo = repo_root();
     if !repo.join("sets").is_dir() {
@@ -734,80 +975,14 @@ fn parity_l5() -> Result<(), String> {
     std::fs::create_dir_all(&scratch).map_err(|e| format!("{}: {e}", scratch.display()))?;
     let result = (|| {
         let decks = l5_decks(&repo, &scratch, 4)?;
-        let deck_args: Vec<String> = decks.iter().map(|p| p.display().to_string()).collect();
-        // the 4-player matchup: three seeds, mixed profiles, --verbose,
-        // the JSONL records
-        let (py_log, rs_log) = (scratch.join("py.jsonl"), scratch.join("rs.jsonl"));
-        let common: Vec<String> = [
-            "--offline",
-            "--games",
-            "2",
-            "--seeds",
-            "2",
-            "--seed",
-            "11",
-            "--turn-cap",
-            "30",
-            "--verbose",
-            "--profile",
-            "2=aggressive",
-            "--profile",
-            "3=control",
-            "--log-file",
-        ]
-        .iter()
-        .map(|s| (*s).to_string())
-        .collect();
-        let mut py_args = deck_args.clone();
-        py_args.extend(common.iter().cloned());
-        py_args.push(py_log.display().to_string());
-        let mut rs_args = deck_args.clone();
-        rs_args.extend(common.iter().cloned());
-        rs_args.push(rs_log.display().to_string());
-        let py = run_python_cli(&repo, "mtgrules.cli", &py_args, "matchup")?;
-        let rs = run_rust_cli(&repo, "mtg-simulate", &rs_args, "matchup")?;
-        let normalise = |text: &str, log: &Path| text.replace(&log.display().to_string(), "<log>");
-        diff_lines(&normalise(&py.0, &py_log), &normalise(&rs.0, &rs_log))
-            .map_err(|d| format!("L5 [matchup stdout]: {d}"))?;
-        diff_lines(&py.1, &rs.1).map_err(|d| format!("L5 [matchup stderr]: {d}"))?;
-        let py_records = std::fs::read_to_string(&py_log).map_err(|e| e.to_string())?;
-        let rs_records = std::fs::read_to_string(&rs_log).map_err(|e| e.to_string())?;
-        diff_lines(&py_records, &rs_records).map_err(|d| format!("L5 [matchup JSONL]: {d}"))?;
-        println!(
-            "L5 [matchup]: {} stdout lines, {} JSONL records identical",
-            py.0.lines().count(),
-            py_records.lines().count()
-        );
-        // self-play: the round-robin and a small grid
-        let two: Vec<String> = deck_args[..2].to_vec();
-        for (label, extra) in [
-            ("round-robin", vec!["--games", "1", "--turn-cap", "12"]),
-            (
-                "grid",
-                vec![
-                    "--games",
-                    "1",
-                    "--turn-cap",
-                    "12",
-                    "--tune",
-                    "aggression=0.7,1.5",
-                    "--tune",
-                    "race_life=10",
-                ],
-            ),
-        ] {
-            let mut args = two.clone();
-            args.extend(extra.iter().map(|s| (*s).to_string()));
-            let py = run_python_cli(&repo, "mtgrules.selfplay", &args, label)?;
-            let rs = run_rust_cli(&repo, "mtg-selfplay", &args, label)?;
-            diff_lines(&py.0, &rs.0).map_err(|d| format!("L5 [selfplay {label} stdout]: {d}"))?;
-            diff_lines(&py.1, &rs.1).map_err(|d| format!("L5 [selfplay {label} stderr]: {d}"))?;
-            println!(
-                "L5 [selfplay {label}]: {} lines identical",
-                py.0.lines().count()
-            );
-        }
-        Ok(())
+        let run = L5Run {
+            deck_args: decks.iter().map(|p| p.display().to_string()).collect(),
+            repo: repo.clone(),
+            scratch: scratch.clone(),
+        };
+        let (py_viz, rs_viz) = l5_matchup(&run)?;
+        l5_replays(&run, &py_viz, &rs_viz)?;
+        l5_selfplay(&run)
     })();
     let _ = std::fs::remove_dir_all(&scratch);
     result
@@ -823,7 +998,7 @@ fn parity(level: Option<u8>) -> Result<(), String> {
         Some(1) => vectors(true),
         Some(2) => parity_graph(&[&CARDS_DUMP], true),
         Some(3) => parity_graph(&[&ABILITIES_DUMP], false),
-        Some(5) => parity_l5(),
+        Some(4 | 5) => parity_l5(),
         Some(other) => Err(format!("parity level {other} is not implemented yet")),
     }
 }

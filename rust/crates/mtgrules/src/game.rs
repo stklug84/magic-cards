@@ -188,7 +188,7 @@ impl Game {
             tick: 0,
             layers: LayerState::default(),
             replacements: ReplacementState::default(),
-            log: Box::new(|_, _| {}),
+            log: Box::new(|_, _, _| {}),
             game_over: false,
             winner: None,
             unknown_clauses: IndexMap::new(),
@@ -207,7 +207,10 @@ impl Game {
 
     /// Write one log event.
     pub fn log(&mut self, event: &str, fields: LogFields) {
-        (self.log)(event, fields);
+        // the sink borrows the game, so it is taken out for the call
+        let mut sink = std::mem::replace(&mut self.log, Box::new(|_, _, _| {}));
+        sink(self, event, fields);
+        self.log = sink;
     }
 
     // ------------------------------------------------------------ helpers

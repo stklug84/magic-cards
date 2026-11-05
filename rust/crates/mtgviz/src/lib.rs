@@ -1,10 +1,28 @@
 //! Game visualization: recordings, replay and the live terminal UI.
 //!
-//! The Rust port of the Python `mtgviz` package: `schema` (the event and
-//! snapshot records), `recorder` (attached to the engine's log stream;
-//! the `--viz-file` JSONL writer, byte-identical to the Python output so
-//! existing recordings replay), `replay` and `live` (the `--replay` and
-//! `--watch` front-ends), `tui` (the ratatui frame) and `keys`.
+//! The Rust port of the Python `mtgviz` package:
 //!
-//! The recorder and schema land in milestone M7, the user interface in
-//! M8; this is the workspace scaffold.
+//! - [`schema`]: the JSON event / snapshot records
+//! - [`recorder`]: the recorder attached to the engine's log stream and
+//!   the `--viz-file` JSONL writer (byte-identical to the Python output,
+//!   so recordings replay across the two implementations)
+//! - [`view`]: the cursor over a record stream, event formatting and the
+//!   plain text frame
+//! - [`replay`] and [`live`]: the `--replay` and `--watch` front-ends
+//! - [`tui`] and [`keys`]: the ratatui frame and the keyboard
+//!
+//! Where the Python package renders with `rich` and runs the engine on a
+//! worker thread, this crate renders with ratatui and paces the engine
+//! from the recorder sink on the main thread (the engine's arena is
+//! single-threaded by design).
+
+pub mod keys;
+pub mod live;
+pub mod recorder;
+pub mod replay;
+pub mod schema;
+pub mod tui;
+pub mod view;
+
+pub use recorder::{Recorder, VizWriter};
+pub use view::{ViewState, format_event};

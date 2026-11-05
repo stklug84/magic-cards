@@ -184,12 +184,17 @@ Until the cutover the Python simulator is the parity reference, and
   must be identical. This is the whole engine at once — the AI, the
   mulligans, every card in play — so a divergence here is the first
   sign that one side's rules of play drifted.
+- **L4** (run with L5) — the visualization: the `--viz-file` recording
+  of that matchup (every event and board snapshot), the plain
+  `--replay` of two of its games and the plain `--watch` stream must be
+  identical, so a recording made by one implementation replays in the
+  other.
 
 ```sh
 cd rust
 cargo xtask vectors          # regenerate the L1 vectors
-cargo xtask parity           # what CI runs: L1 (vectors --check) + L2 + L3 + L5
-cargo xtask parity --level 5 # one level only
+cargo xtask parity           # what CI runs: L1 (vectors --check) + L2 + L3 + L4 + L5
+cargo xtask parity --level 5 # one level only (4 and 5 run together)
 ```
 
 A behaviour the Rust side must reproduce changes in Python first (with a
@@ -215,7 +220,14 @@ binaries live in `crates/mtgsim` (`mtg-simulate`, `mtg-selfplay`,
 `mtg-cr`), the shared command-line pieces in `mtgsim::cli`. The Rust
 binaries take `--graph-root` / `--cr-file` and validate the `#[rule]`
 registry at startup; their usage text is clap's, the stdout reports and
-exit codes are Python's.
+exit codes are Python's. `crates/mtgviz` is the visualization: the
+recorder and the `--viz-file` writer (`schema`, `recorder`), the view
+state and event formatting (`view`), `--replay` and `--watch`
+(`replay`, `live`) and the ratatui frame (`tui`, `keys`). Where Python
+renders with `rich` and runs the engine on a worker thread, the Rust
+crate renders with ratatui and paces the engine from the recorder sink
+(the engine's arena is single-threaded); without a terminal both fall
+back to the same plain text viewers.
 
 Rules traceability works as in Python: every rules-implementing item
 carries `#[rule("704.5g", ...)]` (`mtgrules::rule`) and rules out of
