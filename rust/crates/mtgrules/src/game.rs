@@ -1,10 +1,18 @@
-//! The game: players, the object arena, the stack, and the CR machinery.
+//! The game: zones, events, the stack, priority, and state-based actions.
 //!
-//! This module holds the state and the kernel helpers every other module
-//! builds on (handles, zones, APNAP order, the layer and replacement
-//! engines' entry points). The rules of play themselves - zone changes,
-//! casting, damage, state-based actions, priority - are the next
-//! milestone (M6) and extend this `impl Game` from their own modules.
+//! Implements the CR machinery the heuristic simulator lacked: a real
+//! stack with priority passing (rules 117, 405, 601-608), state-based
+//! actions (rule 704), the trigger queue (rule 603), and the Commander
+//! variant rules (rule 903). Turn structure and combat live in
+//! [`crate::turns`] / [`crate::combat`].
+//!
+//! The Python `game.py` is one class; here its sections are submodules,
+//! each an `impl Game` block: `zones` (zone changes), `triggers`
+//! (the trigger queue and target choice), `actions` (tokens, draws,
+//! damage, life, counters, the keyword actions), `mana` (mana abilities
+//! and the greedy payment planner), `casting` (casting, activation,
+//! playing lands), `resolution` (resolving the stack and the one-shot
+//! effects) and `sba` (state-based actions, priority).
 //!
 //! Counters that the Python engine keeps process-wide (object ids,
 //! timestamps, effect and replacement ids) are per game here: they are
@@ -24,10 +32,31 @@ use crate::effects::Ctx;
 use crate::layers::LayerState;
 use crate::objects::{Characteristics, CustomValue, GameObject, ObjId, Player, PlayerId, Zone};
 use crate::policy::Policy;
-use crate::protocols::{LogFields, LogFn};
+use crate::protocols::{LogFields, LogFn, LogValue};
 use crate::replacements::ReplacementState;
-use crate::rule;
-use crate::stack::{PendingTrigger, StackId, StackItem, Target};
+use crate::stack::{PendingTrigger, StackId, StackItem, StackObject, Target};
+use crate::{rule, unsupported};
+
+mod actions;
+mod casting;
+mod mana;
+mod resolution;
+mod sba;
+mod triggers;
+mod zones;
+
+pub use mana::ManaSource;
+pub use zones::{LibraryPosition, MoveOptions};
+
+unsupported!(
+    "903.4",
+    "deck color-identity legality is validated by the knowledge-graph tooling, not at runtime"
+);
+
+/// Rule 704.5c: a player with ten or more poison counters loses.
+pub const POISON_LOSS_THRESHOLD: i64 = 10;
+/// Rules 903.10a / 704.6c: 21+ combat damage from one commander loses.
+pub const COMMANDER_DAMAGE_LOSS: i64 = 21;
 
 /// A key of `activated_this_turn` (rule 606.3 and once-per-turn
 /// tracking).
@@ -101,6 +130,11 @@ impl std::fmt::Debug for Game {
     }
 }
 
+/// One log field (`key=value` of the Python `log(event, **fields)`).
+pub(crate) fn field(key: &'static str, value: impl Into<LogValue>) -> (&'static str, LogValue) {
+    (key, value.into())
+}
+
 impl Game {
     /// A game of `names` (one seat per name) with `policies` (one per
     /// seat, cycled when fewer), a seeded random stream and empty zones.
@@ -110,12 +144,32 @@ impl Game {
     /// Panics when `policies` is empty.
     #[must_use]
     pub fn new(names: &[&str], rng: PyRandom, policies: &[Rc<dyn Policy>], turn_cap: u32) -> Self {
-        assert!(!policies.is_empty(), "a game needs at least one policy");
-        let players: Vec<Player> = names
+        let players = names
             .iter()
             .enumerate()
             .map(|(i, name)| Player::new(PlayerId(i), name, ""))
             .collect();
+        Self::with_players(players, rng, policies, turn_cap)
+    }
+
+    /// A game of prepared players (the adapter's, with deck names); their
+    /// seats are renumbered in order and their mana pools start fresh.
+    ///
+    /// # Panics
+    ///
+    /// Panics when `policies` is empty.
+    #[must_use]
+    pub fn with_players(
+        mut players: Vec<Player>,
+        rng: PyRandom,
+        policies: &[Rc<dyn Policy>],
+        turn_cap: u32,
+    ) -> Self {
+        assert!(!policies.is_empty(), "a game needs at least one policy");
+        for (i, p) in players.iter_mut().enumerate() {
+            p.id = PlayerId(i);
+            p.mana_pool = crate::manasys::ManaPool::new();
+        }
         let policies: Vec<Rc<dyn Policy>> = (0..players.len())
             .map(|i| Rc::clone(&policies[i % policies.len()]))
             .collect();
@@ -266,6 +320,56 @@ impl Game {
         ch.keywords.contains("hexproof") && ctx.controller != self.obj(obj).controller
     }
 
+    // ------------------------------------------------------------ names
+
+    /// The name of a player (for logs).
+    #[must_use]
+    pub fn name_of(&self, player: PlayerId) -> String {
+        self.player(player).name.clone()
+    }
+
+    /// Loggable name of an object: its printed name, or `(unnamed)`.
+    #[must_use]
+    pub fn lname_obj(&self, obj: ObjId) -> String {
+        let name = &self.obj(obj).base.name;
+        if name.is_empty() {
+            "(unnamed)".to_owned()
+        } else {
+            name.clone()
+        }
+    }
+
+    /// Loggable name of a stack item: the spell's name or
+    /// `ability of <source>`.
+    #[must_use]
+    pub fn lname_item(&self, item: &StackItem) -> String {
+        if item.is_spell
+            && let StackObject::Spell(card) = item.obj
+        {
+            return self.obj(card).base.name.clone();
+        }
+        format!("ability of {}", self.obj(item.source).base.name)
+    }
+
+    /// Loggable name of a target.
+    #[must_use]
+    pub fn lname_target(&self, target: Target) -> String {
+        match target {
+            Target::Object(o) => self.lname_obj(o),
+            Target::Player(p) => self.name_of(p),
+            Target::Spell(id) => self
+                .stack_item(id)
+                .map_or_else(|| "?".to_owned(), |i| self.lname_item(i)),
+        }
+    }
+
+    /// Loggable name of a damage source (`None` for no source, like
+    /// Python's `str(None)`).
+    #[must_use]
+    pub fn lname_source(&self, source: Option<ObjId>) -> String {
+        source.map_or_else(|| "None".to_owned(), |o| self.lname_obj(o))
+    }
+
     // ------------------------------------------------------------ arena
 
     /// The object behind a handle.
@@ -318,6 +422,12 @@ impl Game {
         self.stack.iter().find(|item| item.id == id)
     }
 
+    /// The position of the stack item with `id` (`item in self.stack`).
+    #[must_use]
+    pub fn stack_index(&self, id: StackId) -> Option<usize> {
+        self.stack.iter().position(|item| item.id == id)
+    }
+
     /// Create an object (rule 109.1) in its owner's library zone without
     /// placing it anywhere; the caller moves it (the Python
     /// `GameObject(...)` constructor).
@@ -367,7 +477,7 @@ impl Game {
 
     /// Place an object into a player's zone list directly, setting its
     /// zone (a fixture helper and the primitive of zone bookkeeping; the
-    /// rules-aware `move_zone` is the game's).
+    /// rules-aware `move_zone` is in the zones module).
     pub fn place(&mut self, id: ObjId, holder: PlayerId, zone: Zone) {
         self.obj_mut(id).zone = zone;
         self.player_mut(holder).zone_list_mut(zone).push(id);

@@ -182,6 +182,18 @@ test), then in Rust, then the parity run proves they agree. The Rust
 `BEHAVIOR_KEYS` and `KEYWORDS` lists are checked against the Python
 source by a `mtgcards` test, so the two cannot drift.
 
+The Python engine tests are ported one file per rules topic under
+`rust/crates/mtgrules/tests/` (`sba_704.rs`, `stack_601.rs`,
+`combat_510.rs`, `layers_613.rs`, ...; the shared fixtures — `make_game`,
+`creature`, `card_in_hand`, `settle` — live in `tests/common/mod.rs`
+and mirror `scripts/mtgrules/tests/helpers.py`). A Python case that
+depends on the AI policy or on the oracle-text compiler lands with that
+port; until then its Rust file says so in its module comment. The
+`Game` type itself is split by concern: `src/game.rs` holds the state
+and the shared helpers, `src/game/{zones,triggers,actions,mana,casting,
+resolution,sba}.rs` the rules of play, `src/combat.rs` the combat phase
+and `src/turns.rs` the turn structure.
+
 Rules traceability works as in Python: every rules-implementing item
 carries `#[rule("704.5g", ...)]` (`mtgrules::rule`) and rules out of
 scope are declared with `unsupported!("903.4", "reason")`. The macro

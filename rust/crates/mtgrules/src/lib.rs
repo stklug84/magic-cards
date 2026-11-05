@@ -11,11 +11,13 @@
 //!   effect AST
 //! - [`layers`], [`replacements`]: continuous effects (CR 613) and
 //!   replacement effects (CR 614-616)
-//! - [`game`]: the state and kernel helpers; the rules of play (zone
-//!   changes, casting, damage, state-based actions, priority), `combat`
-//!   and `turns` land in M6
-//! - `compiler`, `overrides` (M6): oracle text to abilities, hand-written
-//!   cards
+//! - [`game`]: the state, the kernel helpers and - in its submodules -
+//!   the rules of play: zone changes, the trigger queue, the game
+//!   actions, mana payment, casting, resolution, state-based actions and
+//!   priority
+//! - [`combat`], [`turns`]: the combat phase and the turn structure
+//! - `compiler`, `overrides`: oracle text to abilities, hand-written
+//!   cards (M6b)
 //! - [`policy`] (the interface; the AI in M7), `adapter`, `selfplay`
 //!   (M7): the decision policy, the match runner, tuning
 //! - [`protocols`]: the closure signatures card behaviour is wired with
@@ -35,6 +37,7 @@
 extern crate self as mtgrules;
 
 pub mod abilities;
+pub mod combat;
 pub mod cr;
 pub mod effects;
 pub mod events;
@@ -46,6 +49,7 @@ pub mod policy;
 pub mod protocols;
 pub mod replacements;
 pub mod stack;
+pub mod turns;
 
 pub use game::Game;
 pub use mtgrules_macros::{rule, unsupported};
