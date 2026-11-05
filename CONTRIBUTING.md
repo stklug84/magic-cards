@@ -169,12 +169,19 @@ Until the cutover the Python simulator is the parity reference, and
   entry (as length + digest — the text is not redistributable) over the
   checkout's `MagicCompRules-*.txt` when present and over a synthetic
   text.
+- **L3** — the compiled abilities: `scripts/parity/dump_abilities.py`
+  and the `mtgrules` example `dump_abilities` compile every distinct card
+  record of the same two graph roots (`compile_card`, overrides
+  included) and write one JSON line per card — every ability's kind,
+  costs, targets and effect tree, the keywords and cost modifiers, the
+  clauses the compiler could not read and the override's note. Closures
+  are reduced to their presence, dynamic counts to the tag `"dynamic"`.
 
 ```sh
 cd rust
 cargo xtask vectors          # regenerate the L1 vectors
-cargo xtask parity           # what CI runs: L1 (vectors --check) + L2
-cargo xtask parity --level 2 # one level only
+cargo xtask parity           # what CI runs: L1 (vectors --check) + L2 + L3
+cargo xtask parity --level 3 # one level only
 ```
 
 A behaviour the Rust side must reproduce changes in Python first (with a
