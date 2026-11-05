@@ -68,6 +68,7 @@ from mtgrules.effects import (
 )
 from mtgrules.events import EventType
 from mtgrules.layers import ContinuousEffect
+from mtgrules.manasys import land_mana_types
 from mtgrules.objects import Characteristics, Zone
 
 if TYPE_CHECKING:
@@ -1147,9 +1148,7 @@ def _apply_land_behavior(ch: Characteristics, ref: CardRef) -> None:
     if "Land" not in ch.types:
         return
     if ref.behavior.get("land_colors"):
-        colors = set(ref.behavior["land_colors"])
-        any_c = colors >= set("WUBRG")
-        types = tuple(c for c in colors if c in "WUBRGC") if not any_c else ()
+        types, any_c = land_mana_types(ref.behavior["land_colors"])
         if not any(
             isinstance(a, ActivatedAbility) and a.is_mana_ability for a in ch.abilities
         ):

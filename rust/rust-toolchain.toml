@@ -1,0 +1,7 @@
+# Pinned like the GitHub Actions SHAs: every developer and every CI job
+# compiles and lints with the same compiler, so `-D warnings` means the
+# same thing everywhere. Bump deliberately (clippy lints change between
+# releases).
+[toolchain]
+channel = "1.99.1"
+components = ["rustfmt", "clippy"]

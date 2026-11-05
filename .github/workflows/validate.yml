@@ -16,6 +16,9 @@
 #     - simulator-tests   : rules engine + viz unit tests, run against
 #                           synthetic fixtures from this repository's own
 #                           knowledge graph
+#     - rust-tests        : the Rust workspace (rust/) test suites on
+#                           Linux and macOS, against the same graph and
+#                           Comprehensive Rules text
 #
 #   OWL reasoning (the rdf workflow's `owl` job) reasons two roots, each
 #   over its full owl:imports closure resolved through catalog-v001.xml
@@ -38,7 +41,9 @@ on:
   push:
     branches: [main]
   pull_request:
-    branches: [main]
+    # rust-port/**: stacked pull requests of the Rust port get CI before
+    # they are retargeted to main
+    branches: [main, "rust-port/**"]
   workflow_dispatch:
 
 permissions:
@@ -156,7 +161,7 @@ jobs:
       - name: Download Comprehensive Rules
         uses: stklug84/actions/mtg/fetch-comprehensive-rules@c6c3adbc4140cbf096c0c61c30b4fa96ff82b8dd  # v2.19.0
         with:
-          cr-date: "20260819"
+          cr-date: "20260925"
 
       - name: Card data-layer tests (deck formats / Scryfall mapping)
         working-directory: scripts
@@ -175,3 +180,54 @@ jobs:
         run: |
           set -euo pipefail
           python3 -m unittest discover -s mtgviz/tests -t .
+
+  # The Rust workspace: unit, integration and property tests on the hosts
+  # of the release targets (Windows joins once the binaries exist). The
+  # Comprehensive Rules text is fetched exactly like for simulator-tests:
+  # the engine validates its #[rule] annotations against it. Tests that
+  # need the text skip with a notice when it is absent locally;
+  # MTG_REQUIRE_CR=1 turns that skip into a failure here. The compiler is
+  # pinned by rust/rust-toolchain.toml and installed by the runner's
+  # rustup.
+  rust-tests:
+    name: Rust workspace tests (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    env:
+      MTG_REQUIRE_CR: "1"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7
+
+      - name: Download Comprehensive Rules
+        uses: stklug84/actions/mtg/fetch-comprehensive-rules@c6c3adbc4140cbf096c0c61c30b4fa96ff82b8dd  # v2.19.0
+        with:
+          cr-date: "20260925"
+
+      - name: Install the pinned toolchain
+        working-directory: rust
+        run: |
+          set -euo pipefail
+          rustup toolchain install
+          rustup show active-toolchain
+
+      # actions/cache rather than a third-party Rust cache action: the
+      # repository's actions policy allows GitHub-owned actions only.
+      - name: Cache cargo registry and build outputs
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9  # v6.1.0
+        with:
+          path: |
+            ~/.cargo/registry/index
+            ~/.cargo/registry/cache
+            ~/.cargo/git/db
+            rust/target
+          key: cargo-test-${{ runner.os }}-${{ hashFiles('rust/Cargo.lock', 'rust/rust-toolchain.toml') }}
+          restore-keys: |
+            cargo-test-${{ runner.os }}-
+
+      - name: Test
+        working-directory: rust
+        run: cargo test --workspace --all-features
