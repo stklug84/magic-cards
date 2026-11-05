@@ -103,11 +103,6 @@ fn exit(e: &Exit) -> ExitCode {
 }
 
 fn run(args: &Args) -> Result<(), Exit> {
-    // the #[rule] registry against the Comprehensive Rules, like the
-    // Python decorators at import time
-    let cr = load_cr(args.graph_root.as_deref(), args.cr_file.as_deref()).map_err(Exit::error)?;
-    startup_check(&cr).map_err(Exit::error)?;
-
     // argument validation argparse cannot express: usage errors, exit 2
     let seeds = parse_seeds(args.seed, &args.seeds).map_err(|err| {
         Exit::usage(format!(
@@ -123,6 +118,11 @@ fn run(args: &Args) -> Result<(), Exit> {
     }
     let games = u64::try_from(args.games).unwrap_or(1);
     let turn_cap = u32::try_from(args.turn_cap).unwrap_or(u32::MAX);
+
+    // the #[rule] registry against the Comprehensive Rules, like the
+    // Python decorators at import time
+    let cr = load_cr(args.graph_root.as_deref(), args.cr_file.as_deref()).map_err(Exit::error)?;
+    startup_check(&cr).map_err(Exit::error)?;
 
     let paths = deck_paths(&args.decks, MIN_DECKS, MAX_DECKS)?;
     let root = resolve_graph_root(args.graph_root.as_deref()).map_err(Exit::error)?;

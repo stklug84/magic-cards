@@ -186,3 +186,27 @@ fn rule_103_8a_starting_player_skips_the_first_draw() {
         );
     }
 }
+
+#[test]
+fn starting_player_option_overrides_the_random_choice() {
+    // MatchOptions.starting_player overrides the random choice (103.1)
+    let mut db = db();
+    let decks: Vec<Deck> = (0..2)
+        .map(|i| Deck {
+            name: format!("S{i}"),
+            path: format!("s{i}.txt"),
+            cards: vec!["Swamp".to_owned(); 10],
+            commander: Some("Sol Ring".to_owned()),
+            fmt: String::new(),
+            skipped: Vec::new(),
+        })
+        .collect();
+    for start in 0..2 {
+        let options = MatchOptions {
+            starting_player: Some(start),
+            ..MatchOptions::default()
+        };
+        let game = setup_game(&decks, &mut db, PyRandom::new(3), &options, None);
+        assert_eq!(game.active_idx, start);
+    }
+}

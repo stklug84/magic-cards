@@ -66,8 +66,6 @@ fn exit(e: &Exit) -> ExitCode {
 }
 
 fn run(args: &Args) -> Result<(), Exit> {
-    let cr = load_cr(args.graph_root.as_deref(), args.cr_file.as_deref()).map_err(Exit::error)?;
-    startup_check(&cr).map_err(Exit::error)?;
     if args.games < 1 {
         return Err(Exit::usage("--games must be >= 1"));
     }
@@ -77,6 +75,8 @@ fn run(args: &Args) -> Result<(), Exit> {
     if args.turn_cap < 1 {
         return Err(Exit::usage("--turn-cap must be >= 1"));
     }
+    let cr = load_cr(args.graph_root.as_deref(), args.cr_file.as_deref()).map_err(Exit::error)?;
+    startup_check(&cr).map_err(Exit::error)?;
     let paths = deck_paths(&args.decks, 1, 2)?;
     let root = resolve_graph_root(args.graph_root.as_deref()).map_err(Exit::error)?;
     let mut db = open_database(&root, None, &args.extra_cards)?;
