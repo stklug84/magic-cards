@@ -235,9 +235,11 @@ jobs:
       # Parity against the Python simulator (the reference until cutover):
       # L1 regenerates the CPython vectors committed under
       # rust/crates/pycompat/tests/vectors and requires the committed
-      # bytes; L2 dumps the card database with scripts/parity/dump_cards.py
-      # and with the mtgcards dump_cards example and requires identical
-      # output over the checkout's graph and a synthetic root. Both run
+      # bytes; L2 dumps the card database (scripts/parity/dump_cards.py
+      # against the mtgcards dump_cards example) and the parsed
+      # Comprehensive Rules (scripts/parity/dump_cr.py against the
+      # mtgrules dump_cr example) and requires identical output over the
+      # checkout's graph and rules text and over synthetic ones. Both run
       # the stdlib-only packages straight from scripts/, so no install.
       - name: Set up Python
         if: runner.os == 'Linux'
@@ -245,7 +247,7 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Parity against the Python implementation (L1 vectors, L2 card database)
+      - name: Parity against the Python implementation (L1 vectors, L2 card database + CR)
         if: runner.os == 'Linux'
         working-directory: rust
         run: cargo xtask parity

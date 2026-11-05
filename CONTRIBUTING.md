@@ -156,7 +156,12 @@ Until the cutover the Python simulator is the parity reference, and
   `mtgcards` example `dump_cards` write one JSON line per index entry
   (every card field, every behaviour key, the double-faced aliasing) and
   must agree byte for byte over the checkout's graph and over a
-  synthetic root with custom cards, an extra graph and a manifest.
+  synthetic root with custom cards, an extra graph and a manifest. The
+  Comprehensive Rules parser likewise: `scripts/parity/dump_cr.py` and
+  the `mtgrules` example `dump_cr` dump every rule, example and glossary
+  entry (as length + digest — the text is not redistributable) over the
+  checkout's `MagicCompRules-*.txt` when present and over a synthetic
+  text.
 
 ```sh
 cd rust
@@ -169,6 +174,17 @@ A behaviour the Rust side must reproduce changes in Python first (with a
 test), then in Rust, then the parity run proves they agree. The Rust
 `BEHAVIOR_KEYS` and `KEYWORDS` lists are checked against the Python
 source by a `mtgcards` test, so the two cannot drift.
+
+Rules traceability works as in Python: every rules-implementing item
+carries `#[rule("704.5g", ...)]` (`mtgrules::rule`) and rules out of
+scope are declared with `unsupported!("903.4", "reason")`. The macro
+checks the number syntax at compile time; whether a number exists in
+the Comprehensive Rules is checked at startup by every binary
+(`mtgrules::cr::check_registry`), and `mtg-cr check` / `mtg-cr coverage`
+run that check and the implemented / unsupported / unclaimed report by
+hand. The binaries find `MagicCompRules-*.txt` at the graph root
+(`--graph-root`, `MTG_GRAPH_ROOT`, or the checkout above the working
+directory); `--help` and `--version` never need it.
 
 ## Turtle house style
 
