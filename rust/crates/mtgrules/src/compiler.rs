@@ -71,6 +71,17 @@ pub fn clear_unknown_clauses() {
     UNKNOWN_CLAUSES.with(|u| u.borrow_mut().clear());
 }
 
+/// Merge clauses recorded on another thread (the parallel game runner
+/// compiles cards on its workers; the registry is per thread).
+pub fn record_unknown_clauses(clauses: BTreeMap<String, BTreeSet<String>>) {
+    UNKNOWN_CLAUSES.with(|u| {
+        let mut mine = u.borrow_mut();
+        for (name, set) in clauses {
+            mine.entry(name).or_default().extend(set);
+        }
+    });
+}
+
 /// The keywords the compiler recognises on a keyword line.
 pub const KEYWORD_WORDS: &[&str] = &[
     "flying",

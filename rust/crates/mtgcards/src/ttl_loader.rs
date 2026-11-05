@@ -186,7 +186,7 @@ fn apply_land_facts(card: &mut CardData, block: &str) {
 
 /// What a graph load found: the cards and the issues the Python reader
 /// would have passed over silently.
-#[derive(Debug, Default)]
+#[derive(Clone, Debug, Default)]
 pub struct LoadReport {
     /// card blocks whose subject line is not `:Local rdf:type ...` and
     /// therefore have no `ind2name` entry: `(file, card name)`

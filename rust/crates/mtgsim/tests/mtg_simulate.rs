@@ -400,3 +400,69 @@ fn watch_without_a_terminal_streams_the_events() {
     assert!(text.trim_end().ends_with("after 2 turns"), "{text}");
     assert!(err.contains("note: plain event stream"), "{err}");
 }
+
+#[test]
+fn jobs_keep_the_output_order() {
+    let Some(cr) = cr_file() else { return };
+    let tmp = tempfile::tempdir().expect("tempdir");
+    let a = write(tmp.path(), "a.txt", DECK);
+    let b = write(tmp.path(), "b.txt", DECK);
+    let run = |jobs: &str, log: &Path| {
+        let out = binary("mtg-simulate", &cr)
+            .arg(&a)
+            .arg(&b)
+            .args([
+                "--offline",
+                "--games",
+                "2",
+                "--seeds",
+                "3",
+                "--turn-cap",
+                "3",
+                "--seed",
+                "5",
+                "--verbose",
+                "--jobs",
+                jobs,
+                "--log-file",
+            ])
+            .arg(log)
+            .assert()
+            .success();
+        let text = String::from_utf8(out.get_output().stdout.clone()).unwrap();
+        (
+            text.replace(&log.display().to_string(), "<log>"),
+            std::fs::read_to_string(log).expect("the JSONL"),
+        )
+    };
+    let sequential = run("1", &tmp.path().join("one.jsonl"));
+    let parallel = run("3", &tmp.path().join("three.jsonl"));
+    assert_eq!(sequential, parallel);
+    assert_eq!(sequential.1.lines().count(), 6);
+    assert!(
+        sequential.0.contains("  s5 g  1 T 3") && sequential.0.contains("  s7 g  2 T 3"),
+        "{}",
+        sequential.0
+    );
+    // --jobs 0 means the available CPUs; a negative count is a usage error
+    binary("mtg-simulate", &cr)
+        .arg(&a)
+        .arg(&b)
+        .args([
+            "--offline",
+            "--games",
+            "1",
+            "--turn-cap",
+            "2",
+            "--jobs",
+            "0",
+        ])
+        .assert()
+        .success();
+    binary("mtg-simulate", &cr)
+        .arg(&a)
+        .arg(&b)
+        .args(["--offline", "--jobs", "-1"])
+        .assert()
+        .code(2);
+}

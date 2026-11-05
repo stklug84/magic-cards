@@ -42,6 +42,12 @@ pub fn notes() -> BTreeMap<String, String> {
     NOTES.with(|n| n.borrow().clone())
 }
 
+/// Merge notes recorded on another thread (the parallel game runner
+/// compiles cards on its workers; the registry is per thread).
+pub fn record_notes(notes: BTreeMap<String, String>) {
+    NOTES.with(|n| n.borrow_mut().extend(notes));
+}
+
 /// One hand-written card implementation: mutates the compiled base.
 pub type OverrideFn = fn(&mut Characteristics, &CardData);
 
