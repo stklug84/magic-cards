@@ -18,8 +18,8 @@
 //! - [`combat`], [`turns`]: the combat phase and the turn structure
 //! - [`compiler`], [`overrides`]: oracle text to abilities, hand-written
 //!   cards
-//! - [`policy`], [`adapter`], `selfplay` (M7): the decision policy and
-//!   the AI, the match runner, tuning
+//! - [`policy`], [`adapter`], [`selfplay`]: the decision policy and the
+//!   AI, the match runner, tuning
 //! - [`protocols`]: the closure signatures card behaviour is wired with
 //!
 //! Every rules-implementing item is annotated with [`rule`]
@@ -51,6 +51,7 @@ pub mod overrides;
 pub mod policy;
 pub mod protocols;
 pub mod replacements;
+pub mod selfplay;
 pub mod stack;
 pub mod turns;
 
