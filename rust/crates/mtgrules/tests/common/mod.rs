@@ -241,6 +241,69 @@ pub(crate) fn give_mana(game: &mut Game, player: PlayerId, mana: &[(&str, i64)])
     }
 }
 
+/// A minimal card for the compiler: the Python `FakeRef` (a 1/1
+/// `{1}` Creature unless the knobs say otherwise).
+pub(crate) struct FakeRef {
+    pub name: &'static str,
+    pub oracle: &'static str,
+    pub types: Vec<&'static str>,
+    pub subtypes: Vec<&'static str>,
+    pub mana_cost: &'static str,
+    pub power: Option<i64>,
+    pub toughness: Option<i64>,
+    pub loyalty: Option<i64>,
+    pub color_identity: Vec<&'static str>,
+    pub land_colors: Vec<&'static str>,
+}
+
+impl Default for FakeRef {
+    fn default() -> Self {
+        FakeRef {
+            name: "Card",
+            oracle: "",
+            types: vec!["Creature"],
+            subtypes: Vec::new(),
+            mana_cost: "{1}",
+            power: Some(1),
+            toughness: Some(1),
+            loyalty: None,
+            color_identity: Vec::new(),
+            land_colors: Vec::new(),
+        }
+    }
+}
+
+impl FakeRef {
+    /// A creature with `oracle` text.
+    pub(crate) fn new(name: &'static str, oracle: &'static str) -> Self {
+        FakeRef {
+            name,
+            oracle,
+            ..FakeRef::default()
+        }
+    }
+
+    /// The `CardData` the compiler reads.
+    pub(crate) fn card(&self) -> mtgcards::CardData {
+        let mut card = mtgcards::CardData::new(self.name, "test");
+        self.oracle.clone_into(&mut card.oracle);
+        card.types = set(&self.types);
+        card.subtypes = set(&self.subtypes);
+        self.mana_cost.clone_into(&mut card.mana_cost);
+        card.power = self.power;
+        card.toughness = self.toughness;
+        card.loyalty = self.loyalty;
+        card.color_identity = set(&self.color_identity);
+        if !self.land_colors.is_empty() {
+            card.behavior.insert(
+                "land_colors",
+                mtgcards::behavior::set_value(self.land_colors.iter().copied()),
+            );
+        }
+        card
+    }
+}
+
 /// Put the game into `phase` without the phase log line (the Python
 /// tests assign `game.phase` directly).
 pub(crate) fn set_phase(game: &mut Game, phase: &str) {
