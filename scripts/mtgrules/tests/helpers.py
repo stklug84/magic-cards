@@ -3,7 +3,8 @@
 from __future__ import annotations
 
 import random
-from typing import TYPE_CHECKING
+from dataclasses import dataclass, field
+from typing import TYPE_CHECKING, Any
 
 from mtgrules.game import Game
 from mtgrules.objects import Characteristics, GameObject, Player, Zone
@@ -16,6 +17,23 @@ if TYPE_CHECKING:
 
 #: settle() gives up after this many SBA/trigger/resolve iterations
 _SETTLE_GUARD = 200
+
+
+@dataclass
+class FakeRef:
+    """Minimal ``CardRef`` stand-in: the fields the compiler reads."""
+
+    name: str
+    oracle: str = ""
+    types: set[str] = field(default_factory=lambda: {"Creature"})
+    subtypes: set[str] = field(default_factory=set)
+    supertypes: set[str] = field(default_factory=set)
+    mana_cost: str = "{1}"
+    power: int | None = 1
+    toughness: int | None = 1
+    loyalty: int | None = None
+    color_identity: set[str] = field(default_factory=set)
+    behavior: dict[str, Any] = field(default_factory=dict)
 
 
 def make_game(n_players: int = 2, seed: int = 7) -> Game:

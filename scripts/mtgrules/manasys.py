@@ -9,11 +9,43 @@ from __future__ import annotations
 
 import re
 from dataclasses import dataclass, field
+from typing import TYPE_CHECKING
 
 from mtgrules.cr import rule
 
+if TYPE_CHECKING:
+    from collections.abc import Iterable
+
 COLORS = "WUBRG"
 MANA_TYPES = "WUBRGC"  # rule 106.1b: five colors + colorless
+
+
+@rule("105.1")
+def mana_order(types: Iterable[str]) -> list[str]:
+    """Return *types* in the canonical WUBRG(C) order (rule 105.1).
+
+    Every choice of a colour out of a ``set`` goes through this function so
+    that results never depend on ``str`` hash randomisation
+    (``PYTHONHASHSEED``). Types outside WUBRGC sort last, alphabetically.
+    """
+    return sorted(types, key=_mana_key)
+
+
+def _mana_key(mana_type: str) -> tuple[int, str]:
+    idx = MANA_TYPES.find(mana_type)
+    return (idx if idx >= 0 else len(MANA_TYPES), mana_type)
+
+
+def land_mana_types(colors: Iterable[str]) -> tuple[tuple[str, ...], bool]:
+    """Split a land's ``land_colors`` into ``(ordered types, any_color)``.
+
+    A land producing all five colours is an "any color" source; the
+    ordered tuple is then empty.
+    """
+    cs = set(colors)
+    if cs >= set(COLORS):
+        return (), True
+    return tuple(mana_order(c for c in cs if c in MANA_TYPES)), False
 
 
 @rule("202.1", "107.4")
@@ -134,7 +166,8 @@ class ManaPool:
                 return False
             pool[color] -= n
         for opts in sorted(cost.hybrid, key=len):
-            pick = max(opts, key=lambda c: pool.get(c, 0))
+            # ties go to the canonical first colour (F0: never hash order)
+            pick = max(mana_order(opts), key=lambda c: pool.get(c, 0))
             if pool.get(pick, 0) < 1:
                 return False
             pool[pick] -= 1

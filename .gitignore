@@ -28,6 +28,10 @@ venv/
 dist/
 *.egg-info/
 
+# ignore the Rust build directory (rust/Cargo.lock IS tracked: the
+# workspace builds binaries, so the lock file pins their dependencies)
+rust/target/
+
 # ignore any structured list files — the collection inventory
 # (collection.csv) is a local, untracked generator input and is
 # deliberately not distributed

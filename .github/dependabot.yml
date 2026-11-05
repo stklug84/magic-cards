@@ -14,7 +14,11 @@
 #   SPARQL queries, so the knowledge-graph content itself cannot be
 #   tracked. The pip ecosystem below covers only the dev/CI tooling
 #   declared in pyproject.toml (rdflib for the validators); the rules
-#   engine and visualization packages are stdlib-only by design.
+#   engine and visualization packages are stdlib-only by design. The
+#   cargo ecosystem covers the Rust simulator workspace under rust/
+#   (rust/Cargo.lock is tracked because the workspace ships binaries);
+#   its bumps are grouped into one pull request like the actions. The
+#   pinned compiler in rust/rust-toolchain.toml is bumped by hand.
 #   Documentation:
 #   https://docs.github.com/code-security/dependabot/dependabot-version-updates
 # ---
@@ -33,3 +37,12 @@ updates:
     directory: "/"  # pyproject.toml — dev/CI tooling dependencies only
     schedule:
       interval: "weekly"
+
+  - package-ecosystem: "cargo"
+    directory: "/rust"  # the Rust workspace (Cargo.toml + Cargo.lock)
+    schedule:
+      interval: "weekly"
+    groups:
+      cargo:
+        patterns:
+          - "*"  # Bundle all crate bumps into a single PR

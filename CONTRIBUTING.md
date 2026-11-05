@@ -122,6 +122,27 @@ no ignore baseline and no per-file-ignore section — new suppressions are
 allowed only per line (`# noqa: <RULE>` / `# nosec <ID>`) with a
 justification comment.
 
+Rust workspace (`rust/`; the compiler is pinned by
+`rust/rust-toolchain.toml` and installed by rustup on first use;
+`cargo install cargo-deny --locked` once for the dependency check):
+
+```sh
+cd rust
+cargo fmt --all --check
+cargo clippy --workspace --all-targets --all-features -- -D warnings
+cargo test --workspace --all-features
+cargo deny check
+```
+
+Rust strictness mirrors the Python rules: `unsafe` is forbidden, clippy
+runs `all` + `pedantic` and every warning is an error in CI
+(`[workspace.lints]` in `rust/Cargo.toml`, proper nouns for
+`doc_markdown` in `rust/clippy.toml`). There is no crate-wide `allow`;
+a suppression is allowed only on a single item as
+`#[expect(clippy::<lint>, reason = "…")]`. Tests that need the
+Comprehensive Rules text skip with a notice when it is absent;
+`MTG_REQUIRE_CR=1` (set in CI) turns that into a failure.
+
 ## Turtle house style
 
 The validators enforce syntax, prefixes and imports; these conventions are

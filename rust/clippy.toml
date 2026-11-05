@@ -1,0 +1,15 @@
+# Proper nouns that clippy::doc_markdown would otherwise insist on seeing
+# in backticks. ".." keeps clippy's built-in list.
+doc-valid-idents = [
+    "..",
+    "CPython",
+    "GitHub",
+    "JSONL",
+    "SHA-256",
+    "MTG",
+    "Moxfield",
+    "OpenSSL",
+    "Scryfall",
+    "WUBRG",
+    "WUBRGC",
+]

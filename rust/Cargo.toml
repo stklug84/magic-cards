@@ -1,0 +1,67 @@
+# The Rust Commander simulator: the replacement for the Python packages
+# scripts/mtgrules, scripts/mtgviz and the simulator parts of scripts/mtgcards.
+#
+# Layout (one crate per former Python package, plus glue):
+#   crates/pycompat        CPython-compatible RNG, json.dumps writer, format
+#                          specs, statistics, str semantics (byte-exact output)
+#   crates/mtgcards        knowledge-graph card data layer (text-based TTL
+#                          readers, decks, statistics, optional Scryfall)
+#   crates/mtgrules-macros #[rule("…")] attribute: CR traceability registry
+#   crates/mtgrules        the CR-grounded rules engine, oracle compiler,
+#                          card overrides, AI policy, match runner
+#   crates/mtgviz          recorder / replay / live terminal UI
+#   crates/mtgsim          the binaries: mtg-simulate, mtg-selfplay, mtg-cr,
+#                          mtg-graph
+#   xtask                  developer tooling: parity against Python, goldens
+#
+# Lints are configured once here and inherited by every crate via
+# `[lints] workspace = true`. CI runs clippy with `-D warnings`; a
+# suppression is only allowed on a single item, as
+# `#[expect(lint, reason = "…")]` — never crate-wide (mirrors the Python
+# rule: ruff `select = ALL`, no ignore baseline).
+
+[workspace]
+resolver = "3"
+members = [
+    "crates/pycompat",
+    "crates/mtgcards",
+    "crates/mtgrules-macros",
+    "crates/mtgrules",
+    "crates/mtgviz",
+    "crates/mtgsim",
+    "xtask",
+]
+
+[workspace.package]
+# Kept equal to `version` in ../pyproject.toml; CI checks the two agree.
+version = "0.3.0"
+edition = "2024"
+rust-version = "1.99"
+license = "MIT"
+repository = "https://github.com/stklug84/magic-cards"
+authors = ["Steffen Klug <45033201+stklug84@users.noreply.github.com>"]
+publish = false
+
+[workspace.dependencies]
+pycompat = { path = "crates/pycompat" }
+mtgcards = { path = "crates/mtgcards" }
+mtgrules-macros = { path = "crates/mtgrules-macros" }
+mtgrules = { path = "crates/mtgrules" }
+mtgviz = { path = "crates/mtgviz" }
+
+[workspace.lints.rust]
+unsafe_code = "forbid"
+missing_docs = "warn"
+unreachable_pub = "warn"
+rust_2018_idioms = { level = "warn", priority = -1 }
+
+[workspace.lints.clippy]
+all = { level = "warn", priority = -1 }
+pedantic = { level = "warn", priority = -1 }
+
+[profile.release]
+# Deterministic, debuggable release binaries; LTO keeps the five release
+# targets small.
+lto = "thin"
+codegen-units = 1
+debug = "line-tables-only"
