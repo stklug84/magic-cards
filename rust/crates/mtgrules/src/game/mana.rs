@@ -235,18 +235,26 @@ impl Game {
     /// 601.2h).
     #[rule("601.2g", "601.2h")]
     #[must_use]
-    pub fn can_pay_mana(&mut self, player: PlayerId, cost: &Cost) -> bool {
-        self.solve_mana(player, cost, false)
+    pub fn can_pay_mana(&self, player: PlayerId, cost: &Cost) -> bool {
+        self.solve_mana(player, cost).is_some()
     }
 
     /// Pay `cost`, activating mana abilities as needed (rule 601.2h).
     pub fn pay_mana(&mut self, player: PlayerId, cost: &Cost) -> bool {
-        self.solve_mana(player, cost, true)
+        let Some(plan) = self.solve_mana(player, cost) else {
+            return false;
+        };
+        for (obj, ability, color) in plan.used {
+            self.activate_mana_ability(obj, &ability, &color);
+        }
+        self.player_mut(player).mana_pool.pay(cost);
+        true
     }
 
     /// Greedy scarcity-first assignment of mana sources to pips, on top
-    /// of whatever is already floating in the pool.
-    fn solve_mana(&mut self, player: PlayerId, cost: &Cost, commit: bool) -> bool {
+    /// of whatever is already floating in the pool: the plan when the
+    /// cost is coverable.
+    fn solve_mana(&self, player: PlayerId, cost: &Cost) -> Option<ManaPlan> {
         let avail: Vec<ManaSource> = self
             .mana_sources(player)
             .into_iter()
@@ -263,16 +271,8 @@ impl Game {
             avail,
             used: Vec::new(),
         };
-        if !(plan.cover_pips(cost) && plan.cover_hybrid(cost) && plan.cover_generic(cost)) {
-            return false;
-        }
-        if commit {
-            for (obj, ability, color) in plan.used {
-                self.activate_mana_ability(obj, &ability, &color);
-            }
-            self.player_mut(player).mana_pool.pay(cost);
-        }
-        true
+        (plan.cover_pips(cost) && plan.cover_hybrid(cost) && plan.cover_generic(cost))
+            .then_some(plan)
     }
 
     /// How much mana one activation of the ability produces: a source

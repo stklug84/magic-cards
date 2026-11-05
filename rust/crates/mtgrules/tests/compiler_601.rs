@@ -282,3 +282,188 @@ fn controller_change_makes_an_opponent_only_target_illegal() {
     settle(&mut game);
     assert_eq!(game.obj(stolen).zone, Zone::Battlefield);
 }
+
+// ---- the default policy's target choices (F11 at run time, F9, P3)
+
+use mtgrules::policy::is_beneficial;
+use mtgrules::protocols::CountValue;
+use mtgrules::stack::Target;
+
+#[test]
+fn up_to_two_destroys_the_two_biggest_threats() {
+    let mut game = make_game(2);
+    give_mana(&mut game, P0, &[("C", 3)]);
+    let small = enemy(&mut game, "Small", 1);
+    let mid = enemy(&mut game, "Mid", 3);
+    let big = enemy(&mut game, "Big", 6);
+    let s = spell(&mut game, "Destroy up to two target creatures.");
+    assert!(game.cast_spell(P0, s, 0, false));
+    let item = game.stack.last().expect("the spell");
+    assert_eq!(item.targets.len(), 2);
+    let mut distinct = item.targets.clone();
+    distinct.dedup();
+    assert_eq!(distinct.len(), 2); // rule 115.3
+    settle(&mut game);
+    assert_eq!(game.obj(big).zone, Zone::Graveyard);
+    assert_eq!(game.obj(mid).zone, Zone::Graveyard);
+    assert_eq!(game.obj(small).zone, Zone::Battlefield);
+}
+
+#[test]
+fn optional_targets_are_only_good_ones() {
+    let mut game = make_game(2);
+    give_mana(&mut game, P0, &[("C", 3)]);
+    creature_with(
+        &mut game,
+        P0,
+        CreatureSpec {
+            name: "Mine",
+            power: 5,
+            toughness: 5,
+            ..CreatureSpec::default()
+        },
+    );
+    let theirs = enemy(&mut game, "Theirs", 2);
+    let s = spell(&mut game, "Destroy up to two target creatures.");
+    assert!(game.cast_spell(P0, s, 0, false));
+    assert_eq!(
+        game.stack.last().expect("the spell").targets,
+        vec![Target::Object(theirs)]
+    );
+}
+
+fn forked(game: &mut mtgrules::Game) -> ObjId {
+    let (effect, targets) = parse_effect_text(FORKED_TEXT, "Forked");
+    let mut ability = SpellAbility::new(effect);
+    ability.targets = targets;
+    card_in_hand_with(
+        game,
+        P0,
+        CardSpec {
+            name: "Forked",
+            mana_cost: "{1}",
+            types: vec!["Instant"],
+            abilities: vec![Ability::from(ability)],
+            ..CardSpec::default()
+        },
+    )
+}
+
+#[test]
+fn division_is_fixed_at_casting() {
+    let mut game = make_game(2);
+    give_mana(&mut game, P0, &[("C", 2)]);
+    enemy(&mut game, "Two", 2);
+    let three = enemy(&mut game, "Three", 3);
+    let s = forked(&mut game);
+    assert!(game.cast_spell(P0, s, 0, false));
+    let item = game.stack.last().expect("the spell");
+    // 1 point can't kill the 2/2
+    assert_eq!(
+        item.targets,
+        vec![Target::Object(three), Target::Player(P1)]
+    );
+    assert_eq!(item.division, vec![3, 1]);
+}
+
+#[test]
+fn a_vanished_target_s_share_is_lost() {
+    let mut game = make_game(2);
+    give_mana(&mut game, P0, &[("C", 2)]);
+    let a = enemy(&mut game, "A", 2);
+    let b = enemy(&mut game, "B", 2);
+    let s = forked(&mut game);
+    assert!(game.cast_spell(P0, s, 0, false));
+    assert_eq!(game.stack.last().expect("the spell").division, vec![2, 2]);
+    game.move_zone(a, Zone::Hand);
+    settle(&mut game);
+    assert_eq!(game.obj(a).zone, Zone::Hand);
+    assert_eq!(game.obj(b).zone, Zone::Graveyard);
+    assert_eq!(game.player(P1).life, 40);
+}
+
+#[test]
+fn player_is_a_legal_divided_target() {
+    let mut game = make_game(2);
+    give_mana(&mut game, P0, &[("C", 2)]);
+    let s = forked(&mut game);
+    assert!(game.cast_spell(P0, s, 0, false));
+    assert_eq!(
+        game.stack.last().expect("the spell").targets,
+        vec![Target::Player(P1)]
+    );
+    settle(&mut game);
+    assert_eq!(game.player(P1).life, 36);
+}
+
+fn targeted_spell(game: &mut mtgrules::Game, name: &'static str, effect: Effect) -> ObjId {
+    let mut ability = SpellAbility::new(effect);
+    ability.targets = vec![TargetSpec::new("creature")];
+    card_in_hand_with(
+        game,
+        P0,
+        CardSpec {
+            name,
+            mana_cost: "{1}",
+            types: vec!["Instant"],
+            abilities: vec![Ability::from(ability)],
+            ..CardSpec::default()
+        },
+    )
+}
+
+#[test]
+fn forced_harmful_target_is_the_least_valuable_own_creature() {
+    let mut game = make_game(2);
+    give_mana(&mut game, P0, &[("C", 2)]);
+    let weak = creature_with(
+        &mut game,
+        P0,
+        CreatureSpec {
+            name: "Weak",
+            power: 1,
+            toughness: 1,
+            ..CreatureSpec::default()
+        },
+    );
+    let strong = creature_with(
+        &mut game,
+        P0,
+        CreatureSpec {
+            name: "Strong",
+            power: 5,
+            toughness: 5,
+            ..CreatureSpec::default()
+        },
+    );
+    let murder = targeted_spell(&mut game, "Murder", Effect::destroy());
+    assert!(game.cast_spell(P0, murder, 0, false));
+    settle(&mut game);
+    assert_eq!(game.obj(weak).zone, Zone::Graveyard);
+    assert_eq!(game.obj(strong).zone, Zone::Battlefield);
+}
+
+#[test]
+fn forced_beneficial_target_is_the_least_valuable_enemy() {
+    let mut game = make_game(2);
+    give_mana(&mut game, P0, &[("C", 2)]);
+    let weak = enemy(&mut game, "Weak", 1);
+    let strong = enemy(&mut game, "Strong", 5);
+    let grow = targeted_spell(
+        &mut game,
+        "Grow",
+        Effect::counters("+1/+1", CountValue::Fixed(1)),
+    );
+    assert!(game.cast_spell(P0, grow, 0, false));
+    settle(&mut game);
+    assert_eq!(game.obj(weak).counter("+1/+1"), 1);
+    assert_eq!(game.obj(strong).counter("+1/+1"), 0);
+}
+
+#[test]
+fn untap_is_beneficial() {
+    assert!(is_beneficial(Some(&Effect::Untap {
+        on: "target".to_owned()
+    })));
+    assert!(!is_beneficial(Some(&Effect::destroy())));
+}

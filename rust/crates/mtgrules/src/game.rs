@@ -285,6 +285,12 @@ impl Game {
         Rc::clone(&self.policies[player.0])
     }
 
+    /// Replace a player's decision policy (the Python
+    /// `game.policies[name] = ...`).
+    pub fn set_policy(&mut self, player: PlayerId, policy: Rc<dyn Policy>) {
+        self.policies[player.0] = policy;
+    }
+
     /// Every permanent on any player's battlefield, players in seat
     /// order, each battlefield in order of entry.
     #[must_use]
