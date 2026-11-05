@@ -1,8 +1,10 @@
 //! The per-card implementations and the name -> implementation table.
 
+mod artifacts;
 mod counters;
 mod graveyard;
 mod spells;
+mod tokens;
 
 use super::OverrideFn;
 use crate::abilities::{ActivatedAbility, TargetSpec, TriggerSpec, TriggeredAbility};
@@ -104,6 +106,35 @@ pub(super) static OVERRIDES: &[(&str, OverrideFn)] = &[
     ("Bootleggers' Stash", spells::bootleggers_stash),
     ("Treasure Vault", spells::treasure_vault),
     ("Retrofitter Foundry", spells::retrofitter_foundry),
+    ("Academy Manufactor", artifacts::academy_manufactor),
+    ("Mechanized Production", artifacts::mechanized_production),
+    (
+        "Infinite Guideline Station",
+        artifacts::infinite_guideline_station,
+    ),
+    ("Anim Pakal, Thousandth Moon", artifacts::anim_pakal),
+    ("Esix, Fractal Bloom", artifacts::esix),
+    ("Adrix and Nev, Twincasters", artifacts::adrix_and_nev),
+    ("Doubling Season", artifacts::doubling_season),
+    (
+        "Ojer Taq, Deepest Foundation // Temple of Civilization",
+        artifacts::ojer_taq,
+    ),
+    ("Kaya, Geist Hunter", tokens::kaya_geist_hunter),
+    ("Saheeli Rai", tokens::saheeli_rai),
+    ("Saheeli, Sublime Artificer", tokens::saheeli_sublime),
+    ("Sai, Master Thopterist", tokens::sai),
+    ("Thopter Spy Network", tokens::thopter_spy_network),
+    ("Bident of Thassa", tokens::bident),
+    ("Mentor of the Meek", tokens::mentor_of_the_meek),
+    ("Blood Artist", tokens::blood_artist),
+    ("Zulaport Cutthroat", tokens::zulaport),
+    ("Marionette Apprentice", tokens::marionette_apprentice),
+    ("Shalai, Voice of Plenty", tokens::shalai),
+    ("Skyclave Apparition", tokens::skyclave),
+    ("Restoration Angel", tokens::restoration_angel),
+    ("Conjurer's Closet", tokens::conjurers_closet),
+    ("Reef Worm", tokens::reef_worm),
 ];
 
 #[cfg(test)]
