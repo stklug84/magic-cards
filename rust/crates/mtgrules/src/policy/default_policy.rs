@@ -206,8 +206,7 @@ impl DefaultPolicy {
         }
         // 4. useful activated ability; else 5. cycle dead cards (rule
         // 702.29): excess lands, or anything when flooded and out of plays
-        Self::find_activation(game, player)
-            .or_else(|| Self::find_cycling(game, player))
+        Self::find_activation(game, player).or_else(|| Self::find_cycling(game, player))
     }
 
     /// The best candidate: a stable sort by descending value, the first.

@@ -18,8 +18,8 @@
 //! - [`combat`], [`turns`]: the combat phase and the turn structure
 //! - [`compiler`], [`overrides`]: oracle text to abilities, hand-written
 //!   cards
-//! - [`policy`] (the interface; the AI in M7), `adapter`, `selfplay`
-//!   (M7): the decision policy, the match runner, tuning
+//! - [`policy`], [`adapter`], `selfplay` (M7): the decision policy and
+//!   the AI, the match runner, tuning
 //! - [`protocols`]: the closure signatures card behaviour is wired with
 //!
 //! Every rules-implementing item is annotated with [`rule`]
@@ -37,6 +37,7 @@
 extern crate self as mtgrules;
 
 pub mod abilities;
+pub mod adapter;
 pub mod combat;
 pub mod compiler;
 pub mod cr;
