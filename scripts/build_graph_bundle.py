@@ -13,18 +13,19 @@ It carries only what a consumer actually reads:
   * ``MagicCardsOntology.ttl``      TBox, required by the validators
   * ``MagicCardIndividuals.ttl``    owl:imports aggregator over sets/
   * ``MagicCardCollection.ttl``     inventory, for collection-scoped queries
+  * ``MagicCardSynergies.ttl``      card-to-card synergies, for the synergy
+                                    queries and magic-decks' deck builder
   * ``queries/``                    the reusable SPARQL catalog
   * ``GRAPH-MANIFEST.json``         the contract (see mtgcards.graph)
 
 ``MagicCardIndividuals.ttl`` is included even though the simulator never
 reads it (its reader globs ``sets/`` directly): MagicCardCollection.ttl
-imports it, so leaving it out makes the bundle fail its own owl:imports
-resolution check.
+and MagicCardSynergies.ttl import it, so leaving it out makes the bundle
+fail its own owl:imports resolution check.
 
-Deliberately excluded: ``MagicCardSynergies.ttl`` (no consumer),
-``collection.csv`` (private, untracked) and ``MagicCompRules-*.txt`` (not
-redistributable; consumers fetch it from Wizards using the manifest's
-``cr_version``).
+Deliberately excluded: ``collection.csv`` (private, untracked) and
+``MagicCompRules-*.txt`` (not redistributable; consumers fetch it from
+Wizards using the manifest's ``cr_version``).
 
 Usage:
   python3 scripts/build_graph_bundle.py --graph-version 2026-08-09
@@ -63,6 +64,7 @@ BUNDLE_PATHS = (
     "MagicCardsOntology.ttl",
     "MagicCardIndividuals.ttl",
     "MagicCardCollection.ttl",
+    "MagicCardSynergies.ttl",
     "MagicSimulationAnnotations.ttl",
     "sets",
     "queries",
