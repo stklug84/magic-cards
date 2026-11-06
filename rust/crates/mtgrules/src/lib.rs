@@ -16,8 +16,8 @@
 //!   actions, mana payment, casting, resolution, state-based actions and
 //!   priority
 //! - [`combat`], [`turns`]: the combat phase and the turn structure
-//! - `compiler`, `overrides`: oracle text to abilities, hand-written
-//!   cards (M6b)
+//! - [`compiler`], [`overrides`]: oracle text to abilities, hand-written
+//!   cards
 //! - [`policy`] (the interface; the AI in M7), `adapter`, `selfplay`
 //!   (M7): the decision policy, the match runner, tuning
 //! - [`protocols`]: the closure signatures card behaviour is wired with
@@ -38,6 +38,7 @@ extern crate self as mtgrules;
 
 pub mod abilities;
 pub mod combat;
+pub mod compiler;
 pub mod cr;
 pub mod effects;
 pub mod events;
@@ -45,6 +46,7 @@ pub mod game;
 pub mod layers;
 pub mod manasys;
 pub mod objects;
+pub mod overrides;
 pub mod policy;
 pub mod protocols;
 pub mod replacements;

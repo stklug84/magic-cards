@@ -1,8 +1,8 @@
 //! Keyword abilities (CR 702) and casting timing (CR 117.1a, 307.1,
-//! 702.8): the engine half of the Python `test_702_keywords.py` -
-//! lifelink, the `alone` flag of the attack event, fear / intimidate /
-//! landwalk, and sorcery-speed timing. (The exalted and compiler cases
-//! land with the compiler port.)
+//! 702.8): port of the Python `test_702_keywords.py` - lifelink,
+//! exalted, the `alone` flag of the attack event, fear / intimidate /
+//! landwalk, and sorcery-speed timing. The attack declarations use a
+//! scripted all-out policy where Python relies on the default one.
 
 mod common;
 
@@ -10,12 +10,13 @@ use std::cell::RefCell;
 use std::rc::Rc;
 
 use common::{
-    CardSpec, CreatureSpec, card_in_hand_with, creature, creature_with, give_mana, make_game,
-    set_phase, settle,
+    CardSpec, CreatureSpec, FakeRef, card_in_hand_with, creature, creature_with, give_mana,
+    make_game, set_phase, settle,
 };
 use mtgrules::Game;
 use mtgrules::abilities::{Ability, SpellAbility, TriggerSpec, TriggeredAbility};
 use mtgrules::combat::{CombatPhase, can_block};
+use mtgrules::compiler::compile_card;
 use mtgrules::effects::Effect;
 use mtgrules::events::{Event, EventType};
 use mtgrules::objects::{Defender, ObjId, PlayerId};
@@ -365,4 +366,117 @@ fn flash_creature_at_instant_speed() {
     give_mana(&mut game, P1, &[("C", 1)]);
     let slow = spell(&mut game, P1, &["Creature"], &[]);
     assert!(!game.cast_spell(P1, slow, 0, false));
+}
+
+// ---- exalted (rule 702.83)
+
+fn all_out_game() -> Game {
+    let mut game = Game::new(
+        &["p0", "p1"],
+        PyRandom::new(7),
+        &[Rc::new(AllOut), Rc::new(TrivialPolicy)],
+        40,
+    );
+    set_phase(&mut game, "combat");
+    game
+}
+
+/// A compiled exalted permanent that entered this turn (cannot attack).
+fn exalted(game: &mut Game, name: &'static str) {
+    let ch = compile_card(&FakeRef::new(name, "Exalted").card());
+    let id = game.create_object(ch, P0, false, None);
+    game.obj_mut(id).controller = P0;
+    game.obj_mut(id).entered_this_turn = true;
+    game.place(id, P0, mtgrules::objects::Zone::Battlefield);
+}
+
+#[test]
+fn exalted_compiles_to_a_trigger() {
+    let ch = compile_card(&FakeRef::new("Exalted Guy", "Exalted").card());
+    assert!(ch.keywords.contains("exalted"));
+    assert_eq!(
+        ch.abilities
+            .iter()
+            .filter(|a| a.as_triggered().is_some())
+            .count(),
+        1
+    );
+}
+
+#[test]
+fn exalted_attacking_alone_gets_the_bonus() {
+    let mut game = all_out_game();
+    let attacker = creature_with(
+        &mut game,
+        P0,
+        CreatureSpec {
+            name: "Knight",
+            ..CreatureSpec::default()
+        },
+    );
+    exalted(&mut game, "Angel");
+    exalted(&mut game, "Paladin");
+    game.bump();
+    CombatPhase::new().declare_attackers(&mut game); // the declaration fires exalted
+    settle(&mut game);
+    assert_eq!(game.obj(attacker).attacking, Some(Defender::Player(P1)));
+    assert_eq!(common::pt(&game, attacker), (Some(4), Some(4)));
+    game.end_of_turn_cleanup();
+    assert_eq!(common::pt(&game, attacker), (Some(2), Some(2)));
+}
+
+#[test]
+fn exalted_two_attackers_get_nothing() {
+    let mut game = all_out_game();
+    let a = creature_with(
+        &mut game,
+        P0,
+        CreatureSpec {
+            name: "Knight",
+            ..CreatureSpec::default()
+        },
+    );
+    let b = creature_with(
+        &mut game,
+        P0,
+        CreatureSpec {
+            name: "Squire",
+            ..CreatureSpec::default()
+        },
+    );
+    exalted(&mut game, "Angel");
+    game.bump();
+    CombatPhase::new().declare_attackers(&mut game);
+    settle(&mut game);
+    assert_eq!(game.obj(a).attacking, Some(Defender::Player(P1)));
+    assert_eq!(game.obj(b).attacking, Some(Defender::Player(P1)));
+    assert_eq!(game.chars(a).power, Some(2));
+    assert_eq!(game.chars(b).power, Some(2));
+}
+
+#[test]
+fn every_basic_landwalk_parses() {
+    let ch = compile_card(
+        &FakeRef::new(
+            "Walker",
+            "Plainswalk, islandwalk, swampwalk\nMountainwalk\nForestwalk",
+        )
+        .card(),
+    );
+    let walks: Vec<&str> = ch
+        .keywords
+        .iter()
+        .map(String::as_str)
+        .filter(|k| k.ends_with("walk"))
+        .collect();
+    assert_eq!(
+        walks,
+        [
+            "forestwalk",
+            "islandwalk",
+            "mountainwalk",
+            "plainswalk",
+            "swampwalk"
+        ]
+    );
 }

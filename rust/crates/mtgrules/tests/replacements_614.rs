@@ -1,8 +1,9 @@
 //! Replacement and prevention effects (CR 614-616): the emit machinery
 //! (ordering, once-per-event bookkeeping, prevention, the affected
 //! player's choice, static-ability sources) and the Python
-//! `test_614_replacements.py` cases through the game actions - with the
-//! card overrides written inline until `overrides` lands (M6b).
+//! `test_614_replacements.py` cases through the game actions, first with
+//! the replacements written inline, then through the real card
+//! implementations (`overrides`).
 
 mod common;
 
@@ -13,7 +14,7 @@ use common::{creature, creature_named, make_game};
 use mtgrules::Game;
 use mtgrules::abilities::{Ability, StaticAbility, TokenSpec};
 use mtgrules::events::{Event, EventData, EventType};
-use mtgrules::objects::{ObjId, PlayerId};
+use mtgrules::objects::{ObjId, PlayerId, Zone};
 use mtgrules::policy::Policy;
 use mtgrules::replacements::Replacement;
 use mtgrules::stack::Target;
@@ -424,4 +425,108 @@ fn rule_614_enters_tapped_replacement_through_emit() {
     game.move_zone(land, mtgrules::objects::Zone::Battlefield);
     assert!(game.obj(land).tapped);
     assert_eq!(game.obj(land).zone, mtgrules::objects::Zone::Battlefield);
+}
+
+// ---- the same cases through the hand-written cards (compile_card)
+
+/// The compiled card on the battlefield under `player`'s control.
+fn real_card(game: &mut Game, player: PlayerId, name: &'static str) -> ObjId {
+    let card = common::FakeRef {
+        types: vec!["Enchantment"],
+        ..common::FakeRef::new(name, "")
+    }
+    .card();
+    assert!(
+        mtgrules::overrides::lookup(name).is_some(),
+        "{name} has an override"
+    );
+    let ch = mtgrules::compiler::compile_card(&card);
+    let id = game.create_object(ch, player, false, None);
+    game.obj_mut(id).controller = player;
+    game.place(id, player, Zone::Battlefield);
+    id
+}
+
+#[test]
+fn override_doubling_season_doubles_tokens_and_counters() {
+    let mut game = make_game(2);
+    real_card(&mut game, PlayerId(0), "Doubling Season");
+    assert_eq!(
+        game.create_tokens(PlayerId(0), soldier(), 2, None, None)
+            .len(),
+        4
+    );
+    assert_eq!(
+        game.create_tokens(PlayerId(1), soldier(), 2, None, None)
+            .len(),
+        2
+    );
+    let c = creature(&mut game, PlayerId(0), 2, 2);
+    game.put_counters(c, "+1/+1", 2);
+    assert_eq!(game.obj(c).counter("+1/+1"), 4);
+}
+
+#[test]
+fn override_two_doublers_stack() {
+    let mut game = make_game(2);
+    real_card(&mut game, PlayerId(0), "Doubling Season");
+    real_card(&mut game, PlayerId(0), "Adrix and Nev, Twincasters");
+    assert_eq!(
+        game.create_tokens(PlayerId(0), soldier(), 1, None, None)
+            .len(),
+        4
+    );
+}
+
+#[test]
+fn override_everlasting_torment_prevents_life_gain() {
+    let mut game = make_game(2);
+    real_card(&mut game, PlayerId(0), "Everlasting Torment");
+    game.gain_life(PlayerId(0), 5);
+    assert_eq!(game.player(PlayerId(0)).life, 40);
+}
+
+#[test]
+fn override_academy_manufactor_one_of_each() {
+    let mut game = make_game(2);
+    real_card(&mut game, PlayerId(0), "Academy Manufactor");
+    let made = game.create_tokens(PlayerId(0), Rc::new(TokenSpec::treasure()), 1, None, None);
+    let mut names: Vec<String> = made
+        .iter()
+        .map(|t| game.obj(*t).base.name.clone())
+        .collect();
+    names.sort();
+    assert_eq!(names, ["Clue", "Food", "Treasure"]);
+}
+
+#[test]
+fn override_ojer_taq_triples_creature_tokens_only() {
+    let mut game = make_game(2);
+    real_card(
+        &mut game,
+        PlayerId(0),
+        "Ojer Taq, Deepest Foundation // Temple of Civilization",
+    );
+    assert_eq!(
+        game.create_tokens(PlayerId(0), soldier(), 1, None, None)
+            .len(),
+        3
+    );
+    assert_eq!(
+        game.create_tokens(PlayerId(0), Rc::new(TokenSpec::treasure()), 1, None, None)
+            .len(),
+        1
+    );
+}
+
+#[test]
+fn override_table_matches_the_python_registry_size() {
+    // the 82 hand-written cards of overrides.py, looked up by full name
+    // and by the front face of a split name
+    assert!(mtgrules::overrides::lookup("Ojer Taq, Deepest Foundation").is_none());
+    let card = mtgcards::CardData::new("Ojer Taq, Deepest Foundation // Other Face", "test");
+    let mut ch = mtgrules::objects::Characteristics::default();
+    assert!(!mtgrules::overrides::apply_override(&mut ch, &card)); // no front-face entry
+    let card = mtgcards::CardData::new("Doubling Season // Back", "test");
+    assert!(mtgrules::overrides::apply_override(&mut ch, &card)); // front face found
 }
