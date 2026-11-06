@@ -1318,7 +1318,7 @@ class Game:
         """Activate an ability (rule 602.2); False when illegal/unpaid."""
         if ab.from_hand:
             return self._activate_from_hand(player, obj, ab)
-        if not self._activation_legal(player, obj, ab):
+        if not self.activation_legal(player, obj, ab):
             return False
         cost = ab.cost.with_x(x)
         sac_pick = None
@@ -1360,13 +1360,17 @@ class Game:
         return True
 
     @rule("602.5a", "602.5d", "606.3", "302.6")
-    def _activation_legal(
+    def activation_legal(
         self,
         player: Player,
         obj: GameObject,
         ab: ActivatedAbility,
     ) -> bool:
-        """Check timing, once-per-turn, tap, loyalty, and life legality."""
+        """Check timing, once-per-turn, tap, loyalty, and life legality.
+
+        Public so the policy can ask before proposing an activation (P1):
+        mana and target availability are checked separately.
+        """
         ch = obj.chars(self)
         sorcery_window = (
             player is self.active_player

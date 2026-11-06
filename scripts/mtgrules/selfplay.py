@@ -16,7 +16,12 @@ play/draw advantage):
           --tune aggression=0.7,1.0,1.5 --tune wipe_board_deficit=4,6,9
 
 With one deck file, a mirror match is played (the second seat gets a
-'#2'-suffixed copy).
+'#2'-suffixed copy). Deck files are txt decklists or .ttl deck instance
+graphs, like for mtg-simulate.
+
+Seat 0 always takes the first turn: a pairing is played in both seatings
+precisely so the play/draw advantage cancels, which a random starting
+player (rule 103.1, what mtg-simulate does) would blur.
 """
 
 # I001+RUF100 (on the block below): mtgcards and mtgrules are both
@@ -30,16 +35,19 @@ import itertools
 import random
 import sys
 from dataclasses import dataclass
+from pathlib import Path
 from typing import TYPE_CHECKING
 
-from mtgcards.database import CardDatabase
-from mtgcards.deck import Deck, load_deck
+from mtgcards.deck import Deck
 from mtgcards.stats import wilson_ci
-from mtgrules.adapter import REPO, MatchOptions, run_game
+from mtgrules.adapter import MatchOptions, run_game
+from mtgrules.cli import load_decks, open_database
 from mtgrules.policy import PROFILES, PolicyProfile, get_profile
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
+
+    from mtgcards.database import CardDatabase
 
 _INT_KNOBS = {
     "wipe_board_deficit",
@@ -93,7 +101,11 @@ def _pair_winrate(
                     decks,
                     db,
                     rng,
-                    MatchOptions(turn_cap=settings.turn_cap, profiles=profiles),
+                    MatchOptions(
+                        turn_cap=settings.turn_cap,
+                        profiles=profiles,
+                        starting_player=0,  # the seatings cancel play/draw
+                    ),
                 )
                 total += 1
                 if rec["winner"] == a_name:
@@ -201,7 +213,11 @@ def main(argv: list[str] | None = None) -> None:
         prog="mtgrules.selfplay",
         description="Self-play round-robin / grid tuning of AI profiles.",
     )
-    ap.add_argument("decks", nargs="+", help="1 deck (mirror) or 2 decks")
+    ap.add_argument(
+        "decks",
+        nargs="+",
+        help="1 deck (mirror) or 2 decks: txt decklists or .ttl deck graphs",
+    )
     ap.add_argument(
         "--games",
         type=int,
@@ -236,15 +252,24 @@ def main(argv: list[str] | None = None) -> None:
         help="additional card TTL graph merged on top of sets/*.ttl (repeatable)",
     )
     args = ap.parse_args(argv)
+    if args.games < 1:
+        ap.error("--games must be >= 1")
+    if args.seeds < 1:
+        ap.error("--seeds must be >= 1")
+    if args.turn_cap < 1:
+        ap.error("--turn-cap must be >= 1")
+    if len(args.decks) > _PAIR:
+        sys.exit("pass 1 (mirror) or 2 deck files (txt decklists or .ttl deck graphs)")
+    for f in args.decks:
+        if not Path(f).exists():
+            sys.exit(f"deck file not found: {f}")
 
+    db = open_database(extra_graphs=args.extra_cards)
     if len(args.decks) == 1:
-        d = load_deck(args.decks[0])
+        [d] = load_decks([Path(args.decks[0])], db)
         decks = [_clone_deck(d, "#1"), _clone_deck(d, "#2")]
-    elif len(args.decks) == _PAIR:
-        decks = [load_deck(f) for f in args.decks]
     else:
-        sys.exit("pass 1 (mirror) or 2 decklist files")
-    db = CardDatabase(REPO, extra_graphs=args.extra_cards)
+        decks = load_decks([Path(f) for f in args.decks], db)
     seeds = [args.seed + i for i in range(args.seeds)]
     settings = SelfplaySettings(
         games=args.games,

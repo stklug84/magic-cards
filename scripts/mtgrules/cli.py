@@ -46,14 +46,19 @@ def parse_seeds(base_seed: int, spec: str) -> list[int]:
     """Parse the --seeds specification into a seed list.
 
     Accepts a count ('5' -> base..base+4) or an explicit comma-separated
-    list ('1,7,100').
+    list ('1,7,100'). Raises ValueError for anything else, including a
+    count below 1 and an empty list.
     """
     if "," in spec:
-        return [int(s) for s in spec.split(",") if s.strip()]
+        seeds = [int(s) for s in spec.split(",") if s.strip()]
+        if not seeds:
+            msg = "--seeds needs at least one seed"
+            raise ValueError(msg)
+        return seeds
     count = int(spec)
     if count < 1:
         msg = "--seeds must be >= 1"
-        raise argparse.ArgumentTypeError(msg)
+        raise ValueError(msg)
     return [base_seed + i for i in range(count)]
 
 
@@ -167,22 +172,38 @@ def _deck_paths(args: argparse.Namespace) -> list[Path]:
     return deck_paths
 
 
-def _open_database(args: argparse.Namespace) -> CardDatabase:
+def open_database(
+    custom_cards: str | Path | None = None,
+    extra_graphs: Sequence[str | Path] = (),
+) -> CardDatabase:
     """Load the card data, turning every data error into a clean exit.
 
     Broken or incompatible GRAPH-MANIFEST.json files, unreadable or
     malformed --custom-cards JSON and annotation files with unknown
     behavior keys all carry their path in the message; none of them is a
-    programming error worth a traceback.
+    programming error worth a traceback. Shared with mtg-selfplay.
     """
     try:
-        return CardDatabase(REPO, args.custom_cards, extra_graphs=args.extra_cards)
+        return CardDatabase(REPO, custom_cards, extra_graphs=extra_graphs)
     except (GraphSchemaError, TypeError, ValueError, OSError) as err:
         sys.exit(f"cannot load card data: {err}")
 
 
+def _open_database(args: argparse.Namespace) -> CardDatabase:
+    return open_database(args.custom_cards, args.extra_cards)
+
+
+def load_decks(deck_paths: Sequence[Path], db: CardDatabase) -> list[Deck]:
+    """Load and validate the deck files named on the command line.
+
+    Decks that share a name (the same file twice, or two files with the
+    same stem) get '#2', '#3' ... suffixes so every seat is distinct;
+    every deck needs a commander. Shared with mtg-selfplay.
+    """
+    return _load_decks(deck_paths, db)
+
+
 def _load_decks(deck_paths: Sequence[Path], db: CardDatabase) -> list[Deck]:
-    """Load and validate the deck files named on the command line."""
     try:
         decks = [load_deck(p, db.ind2name) for p in deck_paths]
     except ValueError as err:
@@ -379,7 +400,8 @@ def _final_report(
 
 def main(argv: list[str] | None = None) -> None:
     """Entry point of the simulate_matchup CLI."""
-    args = build_parser().parse_args(argv)
+    parser = build_parser()
+    args = parser.parse_args(argv)
 
     if args.replay:
         # Deferred: see _run_watch. RUF100: PLC0415 is globally off.
@@ -388,10 +410,15 @@ def main(argv: list[str] | None = None) -> None:
         replay_file(args.replay, game=args.game)
         return
 
+    # argument validation argparse cannot express: usage errors, exit 2
     try:
         seeds = parse_seeds(args.seed, args.seeds)
-    except ValueError:
-        sys.exit(f"invalid --seeds value: {args.seeds!r}")
+    except ValueError as err:
+        parser.error(f"invalid --seeds value {args.seeds!r}: {err}")
+    if args.games < 1:
+        parser.error("--games must be >= 1")
+    if args.turn_cap < 1:
+        parser.error("--turn-cap must be >= 1")
 
     deck_paths = _deck_paths(args)
     db = _open_database(args)

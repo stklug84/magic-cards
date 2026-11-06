@@ -53,6 +53,10 @@ class MatchOptions:
     log: LogFn | None = None
     #: per-seat AI profiles (None entries use the default profile)
     profiles: Sequence[PolicyProfile | None] | None = None
+    #: seat index of the starting player; None = chosen at random
+    #: (rule 103.1). Self-play fixes it so its two seatings of a pairing
+    #: cancel the play/draw advantage.
+    starting_player: int | None = None
 
 
 def _build_library(deck: Deck, db: CardDatabase, owner: Player) -> list[GameObject]:
@@ -86,7 +90,11 @@ def setup_game(
         for p, profile in zip(players, profiles, strict=False)
     }
     game = Game(players, rng, policies, turn_cap=opts.turn_cap, log=opts.log)
-    game.active_idx = rng.randrange(len(players))  # rule 103.1
+    game.active_idx = (
+        rng.randrange(len(players))  # rule 103.1
+        if opts.starting_player is None
+        else opts.starting_player % len(players)
+    )
     order = [players[(game.active_idx + i) % len(players)] for i in range(len(players))]
 
     for p, deck in zip(players, decks, strict=False):
