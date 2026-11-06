@@ -77,6 +77,20 @@ class TestCleanExits(unittest.TestCase):
         self.assertIsInstance(cm.exception.code, str)
         self.assertIn(f"graph_schema {GRAPH_SCHEMA + 1}", str(cm.exception.code))
 
+    def test_bad_counts_are_usage_errors(self) -> None:
+        """--seeds 0, --games 0 and a non-numeric --seeds exit 2 (C1)."""
+        deck = self.root / "a.txt"
+        deck.write_text("1 Pia Nalaar, Chief Mechanic\n1 Sol Ring\n", encoding="utf-8")
+        for argv in (
+            ["--seeds", "0"],
+            ["--seeds", "abc"],
+            ["--games", "0"],
+            ["--turn-cap", "0"],
+        ):
+            with self.subTest(argv=argv), self.assertRaises(SystemExit) as cm:
+                cli.main([str(deck), str(deck), "--offline", *argv])
+            self.assertEqual(cm.exception.code, 2)
+
     def test_skipped_decklist_lines_warn(self) -> None:
         """Lines the decklist parser cannot read are reported on stderr."""
         # Deferred: keep the expensive graph load out of module import.
