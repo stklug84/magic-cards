@@ -13,12 +13,21 @@ from typing import TYPE_CHECKING
 from mtgrules.abilities import ActivatedAbility, SpellAbility
 from mtgrules.combat import can_block
 from mtgrules.cr import rule
-from mtgrules.effects import Blink, CounterSpell, Ctx, PutCounters
+from mtgrules.effects import (
+    Blink,
+    CounterSpell,
+    Ctx,
+    DealDamage,
+    PutCounters,
+    Untap,
+    count_value,
+)
 from mtgrules.manasys import parse_cost
 from mtgrules.objects import GameObject, Player, Zone
 
 if TYPE_CHECKING:
     import random
+    from collections.abc import Sequence
 
     from mtgrules.abilities import TargetSpec
     from mtgrules.events import Event
@@ -505,35 +514,138 @@ class DefaultPolicy:
         return None
 
     # ------------------------------------------------------- choices
-    def choose_target(
+    @rule("115.3", "601.2c")
+    def choose_targets(
         self,
         game: Game,
         spec: TargetSpec,
         legal: list[Target],
         ctx: Ctx,
         ability: ResolvableAbility,
-    ) -> Target | None:
-        """Pick one target: harm the enemy's best, help our own best."""
-        me = ctx.controller
-        harmful = spec.what != "player" and not _is_beneficial(ability)
-        if spec.what in ("player", "opponent"):
-            opps = [p for p in legal if isinstance(p, Player) and p is not me]
-            return (
-                min(opps, key=lambda p: p.life)
-                if opps
-                else (None if spec.optional else legal[0])
+    ) -> list[Target]:
+        """Pick the targets of one TargetSpec: its minimum, then good ones.
+
+        Each pick is distinct (rule 115.3). Slots beyond the minimum are
+        filled only with targets worth choosing (an enemy for a harmful
+        effect, our own for a beneficial one); divided damage never takes
+        more targets than it has points of damage.
+        """
+        divided = _divided_amount(game, ctx, ability)
+        if divided is not None:
+            return self._choose_divided_targets(
+                game, spec, legal, ctx, ability, total=divided
             )
+        picks: list[Target] = []
+        remaining = list(legal)
+        while remaining and len(picks) < spec.count:
+            pick = self.choose_target(
+                game,
+                spec,
+                remaining,
+                ctx,
+                ability,
+                required=len(picks) < spec.minimum,
+            )
+            if pick is None:
+                break
+            picks.append(pick)
+            remaining.remove(pick)
+        return picks
+
+    def _choose_divided_targets(  # noqa: PLR0913 - one argument per decision input, the engine's call shape
+        self,
+        game: Game,
+        spec: TargetSpec,
+        legal: list[Target],
+        ctx: Ctx,
+        ability: ResolvableAbility,
+        *,
+        total: int,
+    ) -> list[Target]:
+        """Targets of a 'divided' damage effect: kills first, then the face.
+
+        Enemy creatures by threat, each only if the damage left after the
+        earlier picks is still lethal to it; whatever is left goes to the
+        lowest-life opponent. Never more targets than the spec allows.
+        """
+        me = ctx.controller
+        picks: list[Target] = []
+        left = total
+        enemies = sorted(
+            (t for t in legal if isinstance(t, GameObject) and t.controller is not me),
+            key=lambda t: -_obj_threat(game, t),
+        )
+        for t in enemies:
+            if len(picks) >= spec.count or left <= 0:
+                break
+            need = max(1, (t.chars(game).toughness or 1) - t.damage)
+            if need <= left:
+                picks.append(t)
+                left -= need
+        opps = [p for p in legal if isinstance(p, Player) and p is not me]
+        if left > 0 and len(picks) < spec.count and opps:
+            picks.append(min(opps, key=lambda p: p.life))
+        if not picks and spec.minimum:
+            pick = self.choose_target(game, spec, legal, ctx, ability, required=True)
+            if pick is not None:
+                picks.append(pick)
+        return picks
+
+    def choose_target(  # noqa: PLR0913 - one argument per decision input, the engine's call shape
+        self,
+        game: Game,
+        spec: TargetSpec,
+        legal: list[Target],
+        ctx: Ctx,
+        ability: ResolvableAbility,
+        *,
+        required: bool = True,
+    ) -> Target | None:
+        """Pick one target: harm the enemy's best, help our own best.
+
+        With *required* a target must be returned if any is legal; the
+        fallbacks then aim a harmful effect at our *least* valuable
+        permanent and a beneficial one at the enemy's least valuable
+        (fix P3). Without it only a worthwhile target is returned.
+        """
+        if not legal:
+            return None
         if spec.what == "spell":
-            return legal[-1] if legal else None
+            return legal[-1]
+        preferred, fallback = self._target_preferences(game, spec, legal, ctx, ability)
+        if preferred is not None:
+            return preferred
+        if not required:
+            return None
+        return fallback if fallback is not None else legal[0]
+
+    def _target_preferences(
+        self,
+        game: Game,
+        spec: TargetSpec,
+        legal: list[Target],
+        ctx: Ctx,
+        ability: ResolvableAbility,
+    ) -> tuple[Target | None, Target | None]:
+        """Return (the target worth choosing, the least bad forced one)."""
+        me = ctx.controller
+        opps = [p for p in legal if isinstance(p, Player) and p is not me]
+        face = min(opps, key=lambda p: p.life) if opps else None
+        if spec.what in ("player", "opponent"):
+            return face, None
         enemy = [
             t for t in legal if isinstance(t, GameObject) and t.controller is not me
         ]
         own = [t for t in legal if isinstance(t, GameObject) and t.controller is me]
-        if harmful:
-            pool = enemy or ([] if spec.optional else legal)
-            return max(pool, key=lambda t: _obj_threat(game, t)) if pool else None
-        pool = own or ([] if spec.optional else legal)
-        return max(pool, key=lambda t: _obj_threat(game, t)) if pool else None
+        best_enemy = max(enemy, key=lambda t: _obj_threat(game, t)) if enemy else None
+        worst_enemy = min(enemy, key=lambda t: _obj_threat(game, t)) if enemy else None
+        best_own = max(own, key=lambda t: _obj_threat(game, t)) if own else None
+        worst_own = min(own, key=lambda t: _obj_threat(game, t)) if own else None
+        if _is_beneficial(ability):
+            # help our best; forced: the enemy's least valuable (P3)
+            return best_own, worst_enemy
+        # harm the enemy's best, else the face; forced: our least valuable (P3)
+        return best_enemy if best_enemy is not None else face, worst_own
 
     def order_triggers(
         self,
@@ -620,31 +732,49 @@ class DefaultPolicy:
             ),
         )
 
+    @rule("601.2d")
     def divide_damage(
         self,
         game: Game,
         ctx: Ctx,
         total: int,
-    ) -> list[tuple[GameObject, int]]:
-        """Divide damage lethally across the scariest enemy creatures."""
-        enemies = sorted(
-            (
-                o
-                for o in game.battlefield_objects()
-                if o.controller is not ctx.controller
-                and "Creature" in o.chars(game).types
+        targets: Sequence[Target],
+    ) -> list[int]:
+        """Divide *total* damage among the chosen *targets* (rule 601.2d).
+
+        Returns one amount per target, aligned with *targets*: at least 1
+        each, then lethal to the biggest threats first; whatever is left
+        goes to the last target in threat order (a player takes it all).
+        """
+        del ctx
+        if not targets:
+            return []
+        shares = [1] * len(targets)
+        left = total - len(targets)
+        order = sorted(
+            range(len(targets)),
+            key=lambda i: (
+                -(
+                    _obj_threat(game, targets[i])
+                    if isinstance(targets[i], GameObject)
+                    else -1.0
+                )
             ),
-            key=lambda o: -_threat(game, o),
         )
-        out = []
-        for o in enemies:
-            if total <= 0:
+        for i in order:
+            if left <= 0:
                 break
-            need = max(1, (o.chars(game).toughness or 1) - o.damage)
-            deal = min(total, need)
-            out.append((o, deal))
-            total -= deal
-        return out
+            t = targets[i]
+            if isinstance(t, GameObject):
+                need = max(0, (t.chars(game).toughness or 1) - t.damage - shares[i])
+                add = min(left, need)
+            else:
+                add = left
+            shares[i] += add
+            left -= add
+        if left > 0:
+            shares[order[-1]] += left
+        return shares
 
     def choose_proliferate(self, game: Game, player: Player) -> list[GameObject]:
         """Pick proliferate recipients that help us / hurt opponents."""
@@ -909,17 +1039,29 @@ def _ctx(player: Player, source: GameObject) -> Ctx:
 def _is_beneficial(ability: ResolvableAbility) -> bool:
     """Return whether a targeted effect helps its target.
 
-    Beneficial effects (pump/blink) point at our own permanents; harmful
-    ones at the opponent's.
+    Beneficial effects (pump, blink, untap) point at our own permanents;
+    harmful ones at the opponent's.
     """
     eff = ability.effect
     parts = getattr(eff, "parts", [eff]) if eff is not None else []
     for p in parts:
         if isinstance(p, Blink):
             return True
+        if isinstance(p, Untap) and p.on != "self":
+            return True
         if isinstance(p, PutCounters) and p.kind == "+1/+1":
             return True
     return False
+
+
+def _divided_amount(game: Game, ctx: Ctx, ability: ResolvableAbility) -> int | None:
+    """Return the total of a 'divided as you choose' damage effect, if any."""
+    eff = ability.effect
+    parts = getattr(eff, "parts", [eff]) if eff is not None else []
+    for p in parts:
+        if isinstance(p, DealDamage) and p.to == "divided":
+            return count_value(p.amount, game, ctx)
+    return None
 
 
 def _spell_value(item: StackItem) -> int:

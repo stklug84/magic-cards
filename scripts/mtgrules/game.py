@@ -20,7 +20,7 @@ from mtgrules.abilities import (
     TriggeredAbility,
 )
 from mtgrules.cr import rule, unsupported
-from mtgrules.effects import AddMana, Ctx
+from mtgrules.effects import AddMana, Ctx, DealDamage, count_value
 from mtgrules.events import Event, EventType
 from mtgrules.layers import LayerSystem
 from mtgrules.manasys import ManaPool, mana_order, parse_cost
@@ -356,18 +356,24 @@ class Game:
                     self.activated_this_turn.add(key)
                 if t.ability.optional and not self.policy(p).accept_optional(self, t):
                     continue
-                targets = self._choose_targets(p, t.ability, t.source)
-                if targets is None and t.ability.targets:
-                    continue  # no legal targets: fizzle
-                self.stack.append(
-                    StackItem(
-                        obj=t,
-                        source=t.source,
-                        controller=p,
-                        ability=t.ability,
-                        targets=targets or [],
-                    ),
+                groups = self._choose_targets(p, t.ability, t.source)
+                if groups is None:
+                    continue  # rule 603.3d: no legal targets, removed from the stack
+                item = StackItem(
+                    obj=t,
+                    source=t.source,
+                    controller=p,
+                    ability=t.ability,
+                    targets=self._flatten(groups),
+                    target_groups=groups,
                 )
+                item.division = self._announce_division(
+                    p,
+                    t.ability,
+                    groups,
+                    Ctx(controller=p, source=t.source),
+                )
+                self.stack.append(item)
                 self.log("trigger", who=p.name, what=t.source.base.name)
         return True
 
@@ -999,6 +1005,8 @@ class Game:
             controller=controller,
             ability=item.ability,
             targets=list(item.targets),
+            target_groups=[list(g) for g in item.target_groups],
+            division=list(item.division),
             x=item.x,
             is_spell=True,
         )
@@ -1183,10 +1191,17 @@ class Game:
             is_spell=True,
         )
         if spell_ability is not None and spell_ability.targets:
-            targets = self._choose_targets(player, spell_ability, card, x=x)
-            if targets is None:
+            groups = self._choose_targets(player, spell_ability, card, x=x)
+            if groups is None:
                 return False  # rule 601.2c: no targets
-            item.targets = targets
+            item.target_groups = groups
+            item.targets = self._flatten(groups)
+            item.division = self._announce_division(  # rule 601.2d
+                player,
+                spell_ability,
+                groups,
+                Ctx(controller=player, source=card, x=x),
+            )
         if not self.pay_mana(player, cost):
             return False  # rule 601.2h
         self._pay_additional_cost(player, card, extra, extra_sac)
@@ -1318,23 +1333,29 @@ class Game:
                 return False
         # rule 601.2c (via 602.2b): choose targets before determining and
         # paying costs
-        targets = self._choose_targets(player, ab, obj, x=x)
-        if targets is None and ab.targets:
+        groups = self._choose_targets(player, ab, obj, x=x)
+        if groups is None:
             return False
         # rules 601.2f-h: determine and pay costs
         if not self.pay_mana(player, cost):
             return False
         self._pay_activation_costs(player, obj, ab, sac_pick)
-        self.stack.append(
-            StackItem(
-                obj=ab,
-                source=obj,
-                controller=player,
-                ability=ab,
-                targets=targets or [],
-                x=x,
-            ),
+        item = StackItem(
+            obj=ab,
+            source=obj,
+            controller=player,
+            ability=ab,
+            targets=self._flatten(groups),
+            target_groups=groups,
+            x=x,
         )
+        item.division = self._announce_division(
+            player,
+            ab,
+            groups,
+            Ctx(controller=player, source=obj, x=x),
+        )
+        self.stack.append(item)
         self._record_activation(player, obj, ab)
         return True
 
@@ -1448,23 +1469,51 @@ class Game:
         ability: ResolvableAbility,
         source: GameObject,
         x: int = 0,
-    ) -> list[Target] | None:
-        """Choose all targets of the ability, or None when impossible."""
-        targets: list[Target] = []
+    ) -> list[list[Target]] | None:
+        """Choose the targets of every TargetSpec, or None when impossible.
+
+        Returns one group per spec (rule 601.2c); a spec's group holds
+        between its minimum and its count distinct targets (rule 115.3).
+        None means a required target could not be chosen.
+        """
+        groups: list[list[Target]] = []
         ctx = Ctx(controller=player, source=source, x=x)
         for spec in ability.targets:
             legal = self.legal_targets(spec, ctx)
-            if not legal:
-                if spec.optional:
-                    continue
+            picks = (
+                self.policy(player).choose_targets(self, spec, legal, ctx, ability)
+                if legal
+                else []
+            )
+            if len(picks) < spec.minimum:
                 return None
-            pick = self.policy(player).choose_target(self, spec, legal, ctx, ability)
-            if pick is None:
-                if spec.optional:
-                    continue
-                return None
-            targets.append(pick)
-        return targets
+            groups.append(picks)
+        return groups
+
+    @staticmethod
+    def _flatten(groups: list[list[Target]]) -> list[Target]:
+        """Return every chosen target of *groups* in choice order."""
+        return [t for group in groups for t in group]
+
+    @rule("601.2d")
+    def _announce_division(
+        self,
+        player: Player,
+        ability: ResolvableAbility,
+        groups: list[list[Target]],
+        ctx: Ctx,
+    ) -> list[int]:
+        """Rule 601.2d: divide a "divided as you choose" amount on casting."""
+        eff = ability.effect
+        parts = getattr(eff, "parts", [eff]) if eff is not None else []
+        for part in parts:
+            if isinstance(part, DealDamage) and part.to == "divided":
+                targets = groups[part.index] if part.index < len(groups) else []
+                if not targets:
+                    return []
+                total = count_value(part.amount, self, ctx)
+                return self.policy(player).divide_damage(self, ctx, total, targets)
+        return []
 
     def legal_targets(self, spec: TargetSpec, ctx: Ctx) -> list[Target]:
         """All currently legal targets for one TargetSpec (rule 115.4)."""
@@ -1472,15 +1521,24 @@ class Game:
             return [p for p in self.alive() if spec.legal(self, ctx, p)]
         if spec.what == "spell":
             return [i for i in self.stack if i.is_spell]
-        return [o for o in self.battlefield_objects() if spec.legal(self, ctx, o)]
+        objs: list[Target] = [
+            o for o in self.battlefield_objects() if spec.legal(self, ctx, o)
+        ]
+        if spec.what == "any":
+            objs.extend(p for p in self.alive() if spec.legal(self, ctx, p))
+        return objs
 
-    def still_legal_target(self, target: Target, _ctx: Ctx, _index: int) -> bool:
-        """Rule 608.2b: re-check target legality on resolution."""
-        return (
-            True
-            if not isinstance(target, GameObject)
-            else target.zone == Zone.BATTLEFIELD
-        )
+    @rule("608.2b")
+    def still_legal_target(self, target: Target, ctx: Ctx, index: int) -> bool:
+        """Rule 608.2b: re-check a target's legality on resolution.
+
+        The full check of the spec it was chosen for (zone, controller,
+        hexproof, type ...) runs again (fix F7); without a spec only the
+        zone is known.
+        """
+        if index < len(ctx.specs):
+            return ctx.specs[index].legal(self, ctx, target)
+        return not isinstance(target, GameObject) or target.zone == Zone.BATTLEFIELD
 
     # ------------------------------------------------------------ stack
     @rule("608.2", "608.2b", "608.3", "608.2m")
@@ -1498,21 +1556,22 @@ class Game:
             source=item.source,
             targets=item.targets,
             x=item.x,
+            target_groups=item.target_groups,
+            specs=list(item.ability.targets) if item.ability is not None else [],
+            division=item.division,
         )
         if isinstance(item.obj, PendingTrigger):
             ctx.event_obj = item.obj.event.data.get("obj")
-        if item.targets:
-            legal = [
-                t
-                for t in item.targets
-                if not isinstance(t, GameObject) or t.zone == Zone.BATTLEFIELD
-            ]
-            if not legal and not any(isinstance(t, Player) for t in item.targets):
-                # rule 608.2b: all targets illegal -> doesn't resolve
-                if item.is_spell and isinstance(item.obj, GameObject):
-                    self.move_zone(item.obj, Zone.GRAVEYARD)
-                self.log("fizzle", what=_lname(item))
-                return False
+        if item.targets and not any(
+            self.still_legal_target(t, ctx, i)
+            for i, group in enumerate(item.target_groups or [item.targets])
+            for t in group
+        ):
+            # rule 608.2b: every target illegal -> doesn't resolve
+            if item.is_spell and isinstance(item.obj, GameObject):
+                self.move_zone(item.obj, Zone.GRAVEYARD)
+            self.log("fizzle", what=_lname(item))
+            return False
         if item.is_spell:
             self._resolve_spell(item, ctx)
         else:
