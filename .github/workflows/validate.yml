@@ -6,6 +6,8 @@
 # keywords: [infrastructure, rdf, validation]
 # comment: |
 #   Validates the MTG knowledge graph on pull requests against main:
+#     - changes           : which paths the run touches; the OWL reasoning
+#                           below runs only when the reasoned graph did
 #     - rdf               : Turtle syntax (Jena riot) + SPARQL syntax
 #                           (rdflib) + OWL consistency/coherence (ROBOT
 #                           reason, HermiT) via the reusable stklug84/
@@ -51,18 +53,72 @@ permissions:
   contents: read
 
 # One run per ref: a new push supersedes the in-flight validation of the
-# same branch (the OWL reasoning job alone takes ~8 minutes). Runs on
+# same branch (the OWL reasoning job alone takes ~15 minutes). Runs on
 # main are never cancelled mid-flight.
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
 
 jobs:
+  # Which paths the run touches. HermiT over the full per-set closure
+  # takes ~15 minutes and its verdict can only change when a Turtle
+  # file, the catalog generator or this workflow changes, so the rdf
+  # job reasons only then (its turtle and sparql jobs always run; they
+  # take a minute). The owl job that `run-owl` switches off still
+  # reports its check - as skipped, which the ruleset counts as passing
+  # - whereas a workflow-level path filter would leave the required
+  # check pending forever. A pull request compares the base tip with
+  # the merge commit (what merging would change on main), a push the
+  # previous tip with the new one; a manual run always reasons.
+  changes:
+    name: Changed paths
+    runs-on: ubuntu-latest
+    outputs:
+      owl: ${{ steps.diff.outputs.owl }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7
+
+      - name: Does the change touch the reasoned graph?
+        id: diff
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before || '' }}
+        run: |
+          set -euo pipefail
+          owl=true
+          case "$EVENT_NAME" in
+            pull_request|push)
+              if [ -n "$BASE_SHA" ] \
+                 && [ "$BASE_SHA" != "0000000000000000000000000000000000000000" ] \
+                 && git fetch --no-tags --depth=1 origin "$BASE_SHA"; then
+                changed=$(git diff --name-only "$BASE_SHA" "$GITHUB_SHA" -- \
+                  '*.ttl' scripts/generate_catalog.py .github/workflows/validate.yml)
+                if [ -z "$changed" ]; then
+                  owl=false
+                  echo "No Turtle file, catalog generator or workflow change" \
+                    "between ${BASE_SHA:0:12} and ${GITHUB_SHA:0:12}: OWL reasoning is skipped."
+                else
+                  printf 'Reasoned-graph changes between %s and %s:\n%s\n' \
+                    "${BASE_SHA:0:12}" "${GITHUB_SHA:0:12}" "$changed"
+                fi
+              else
+                echo "No usable base commit for this $EVENT_NAME event: OWL reasoning runs."
+              fi
+              ;;
+            *)
+              echo "$EVENT_NAME event: OWL reasoning runs."
+              ;;
+          esac
+          echo "owl=$owl" >> "$GITHUB_OUTPUT"
+
   # Turtle syntax (riot --validate) + SPARQL grammar (rdflib) for every
   # *.ttl in the repo (root ontologies, sets/) and every query
   # under queries/, plus OWL reasoning over the ontology and the full
-  # per-set instance-graph closure (see the header comment).
+  # per-set instance-graph closure (see the header comment) when the
+  # changes job found the reasoned graph touched.
   rdf:
+    needs: changes
     # A reusable-workflow path plus a 40-character SHA cannot fit in 120
     # columns; the trailing version comment stays because that is the form
     # Dependabot reads and rewrites.
@@ -74,6 +130,7 @@ jobs:
       owl-files: "MagicCardsOntology.ttl MagicCardIndividuals.ttl"
       owl-catalog: "catalog-v001.xml"
       owl-prepare-command: "python3 scripts/generate_catalog.py"
+      run-owl: ${{ needs.changes.outputs.owl == 'true' }}
 
   ttl-lint:
     name: TTL conventions and imports (rdflib)
