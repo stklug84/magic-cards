@@ -40,6 +40,9 @@ pub enum Zone {
     Exile,
     /// the command zone
     Command,
+    /// a token that left the battlefield has ceased to exist (rule
+    /// 704.5d); the record stays in the arena with this zone
+    Ceased,
 }
 
 impl Zone {
@@ -54,6 +57,7 @@ impl Zone {
             Zone::Stack => "stack",
             Zone::Exile => "exile",
             Zone::Command => "command",
+            Zone::Ceased => "ceased",
         }
     }
 
@@ -68,6 +72,7 @@ impl Zone {
             "stack" => Zone::Stack,
             "exile" => Zone::Exile,
             "command" => Zone::Command,
+            "ceased" => Zone::Ceased,
             _ => return None,
         })
     }
@@ -149,8 +154,8 @@ pub struct Characteristics {
     pub toughness: Option<i64>,
     /// loyalty (rule 209)
     pub loyalty: Option<i64>,
-    /// abilities (rule 113), shared between copies of the set
-    pub abilities: Vec<Rc<Ability>>,
+    /// abilities (rule 113), each shared between copies of the set
+    pub abilities: Vec<Ability>,
     /// keyword abilities (rule 702)
     pub keywords: BTreeSet<String>,
     /// rule 601.2f: generic cost reduction per creature you control; set
@@ -421,8 +426,8 @@ impl Player {
     ///
     /// # Panics
     ///
-    /// Panics for [`Zone::Stack`], which no player owns (the Python
-    /// `KeyError`).
+    /// Panics for [`Zone::Stack`] and [`Zone::Ceased`], which no player
+    /// owns (the Python `KeyError`).
     #[must_use]
     pub fn zone_list(&self, zone: Zone) -> &Vec<ObjId> {
         match zone {
@@ -432,7 +437,7 @@ impl Player {
             Zone::Exile => &self.exile,
             Zone::Command => &self.command,
             Zone::Battlefield => &self.battlefield,
-            Zone::Stack => panic!("the stack is not a player's zone"),
+            Zone::Stack | Zone::Ceased => panic!("{zone} is not a player's zone"),
         }
     }
 
@@ -440,7 +445,7 @@ impl Player {
     ///
     /// # Panics
     ///
-    /// Panics for [`Zone::Stack`].
+    /// Panics for [`Zone::Stack`] and [`Zone::Ceased`].
     pub fn zone_list_mut(&mut self, zone: Zone) -> &mut Vec<ObjId> {
         match zone {
             Zone::Library => &mut self.library,
@@ -449,7 +454,7 @@ impl Player {
             Zone::Exile => &mut self.exile,
             Zone::Command => &mut self.command,
             Zone::Battlefield => &mut self.battlefield,
-            Zone::Stack => panic!("the stack is not a player's zone"),
+            Zone::Stack | Zone::Ceased => panic!("{zone} is not a player's zone"),
         }
     }
 

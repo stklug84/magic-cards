@@ -121,6 +121,19 @@ impl From<bool> for LogValue {
     }
 }
 
+impl From<&String> for LogValue {
+    fn from(s: &String) -> Self {
+        LogValue::Str(s.clone())
+    }
+}
+
+/// A Python `x or None` field: `None` is logged as `null`.
+impl<T: Into<LogValue>> From<Option<T>> for LogValue {
+    fn from(value: Option<T>) -> Self {
+        value.map_or(LogValue::Null, Into::into)
+    }
+}
+
 /// The fields of one log event, in keyword order.
 pub type LogFields = Vec<(&'static str, LogValue)>;
 

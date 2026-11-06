@@ -149,11 +149,26 @@ fn registry_has_the_annotations_of_this_file() {
     // numbers are stored without the trailing dot, as in Python
     assert!(implementations.contains_key("117"));
     assert!(!implementations.keys().any(|n| n.ends_with('.')));
+    // the engine implements 704.5g too; this file's method is among them
     let method = &implementations["704.5g"];
-    assert_eq!(method.len(), 1);
-    assert!(method[0].ends_with("::method"), "{method:?}");
-    assert!(method[0].starts_with("cr_toolchain"), "{method:?}");
-    assert_eq!(implementations["614.1a"][0], implementations["614.1"][0]);
+    assert!(
+        method.iter().any(|m| m == "cr_toolchain::method"),
+        "{method:?}"
+    );
+    assert!(
+        method
+            .iter()
+            .all(|m| m.starts_with("cr_toolchain") || m.starts_with("mtgrules::")),
+        "{method:?}"
+    );
+    let own = |n: &str| {
+        implementations[n]
+            .iter()
+            .find(|m| m.starts_with("cr_toolchain"))
+            .cloned()
+    };
+    assert_eq!(own("614.1a"), own("614.1"));
+    assert!(own("614.1").is_some());
 
     let entry = RULE_IMPLEMENTATIONS
         .iter()
@@ -167,13 +182,16 @@ fn registry_has_the_annotations_of_this_file() {
     assert!(entry.line > 0);
 
     let unsupported = unsupported_rules();
-    assert_eq!(
-        unsupported.get("903.4").map(String::as_str),
-        Some("deck legality is validated by the knowledge-graph tooling")
-    );
+    assert!(unsupported.contains_key("903.4"));
+    // this file's declaration and the engine's (src/game.rs)
     assert_eq!(
         UNSUPPORTED.iter().filter(|u| u.number == "903.4").count(),
-        1
+        2
+    );
+    assert!(
+        UNSUPPORTED
+            .iter()
+            .any(|u| u.reason == "deck legality is validated by the knowledge-graph tooling")
     );
     // the annotated items still work
     assert_eq!(
@@ -210,15 +228,13 @@ fn coverage_report_lists_this_files_annotations() {
     // a method registers as module::name (the impl type is not visible to
     // the attribute); the file:line is in the registry entry
     assert!(
-        report.contains("  OK   704.5g  <- cr_toolchain::method\n"),
+        report.contains("  OK   704.5g  <- cr_toolchain::method, "),
         "{report}"
     );
-    assert!(
-        report
-            .contains("  SKIP 903.4  (deck legality is validated by the knowledge-graph tooling)"),
-        "{report}"
-    );
-    assert!(report.contains("  ..   704.5h\n"), "{report}");
+    // both the engine and this file declare 903.4; the earlier (file,
+    // line) wins, which is the engine's game module
+    assert!(report.contains("  SKIP 903.4  ("), "{report}");
+    assert!(report.contains("  ..   704.5k\n"), "{report}");
     assert_ne!(coverage_report(cr, COVERAGE_FAMILIES), "");
 }
 
