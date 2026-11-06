@@ -1,0 +1,2612 @@
+[
+ {
+  "kind": "float",
+  "value": 0.0,
+  "spec": ".1f",
+  "text": "0.0"
+ },
+ {
+  "kind": "float",
+  "value": -0.0,
+  "spec": ".1f",
+  "text": "-0.0"
+ },
+ {
+  "kind": "float",
+  "value": 1.0,
+  "spec": ".1f",
+  "text": "1.0"
+ },
+ {
+  "kind": "float",
+  "value": 2.5,
+  "spec": ".1f",
+  "text": "2.5"
+ },
+ {
+  "kind": "float",
+  "value": 3.5,
+  "spec": ".1f",
+  "text": "3.5"
+ },
+ {
+  "kind": "float",
+  "value": 0.5,
+  "spec": ".1f",
+  "text": "0.5"
+ },
+ {
+  "kind": "float",
+  "value": 1.5,
+  "spec": ".1f",
+  "text": "1.5"
+ },
+ {
+  "kind": "float",
+  "value": 0.125,
+  "spec": ".1f",
+  "text": "0.1"
+ },
+ {
+  "kind": "float",
+  "value": 0.375,
+  "spec": ".1f",
+  "text": "0.4"
+ },
+ {
+  "kind": "float",
+  "value": 0.25,
+  "spec": ".1f",
+  "text": "0.2"
+ },
+ {
+  "kind": "float",
+  "value": 0.35,
+  "spec": ".1f",
+  "text": "0.3"
+ },
+ {
+  "kind": "float",
+  "value": 0.05,
+  "spec": ".1f",
+  "text": "0.1"
+ },
+ {
+  "kind": "float",
+  "value": 0.15,
+  "spec": ".1f",
+  "text": "0.1"
+ },
+ {
+  "kind": "float",
+  "value": 2.675,
+  "spec": ".1f",
+  "text": "2.7"
+ },
+ {
+  "kind": "float",
+  "value": 99.95,
+  "spec": ".1f",
+  "text": "100.0"
+ },
+ {
+  "kind": "float",
+  "value": 99.949999,
+  "spec": ".1f",
+  "text": "99.9"
+ },
+ {
+  "kind": "float",
+  "value": 33.333333333333336,
+  "spec": ".1f",
+  "text": "33.3"
+ },
+ {
+  "kind": "float",
+  "value": 66.66666666666667,
+  "spec": ".1f",
+  "text": "66.7"
+ },
+ {
+  "kind": "float",
+  "value": 33.35,
+  "spec": ".1f",
+  "text": "33.4"
+ },
+ {
+  "kind": "float",
+  "value": 123456789.125,
+  "spec": ".1f",
+  "text": "123456789.1"
+ },
+ {
+  "kind": "float",
+  "value": 1e+16,
+  "spec": ".1f",
+  "text": "10000000000000000.0"
+ },
+ {
+  "kind": "float",
+  "value": 1e-05,
+  "spec": ".1f",
+  "text": "0.0"
+ },
+ {
+  "kind": "float",
+  "value": 1e-07,
+  "spec": ".1f",
+  "text": "0.0"
+ },
+ {
+  "kind": "float",
+  "value": 1234.5678,
+  "spec": ".1f",
+  "text": "1234.6"
+ },
+ {
+  "kind": "float",
+  "value": -7.25,
+  "spec": ".1f",
+  "text": "-7.2"
+ },
+ {
+  "kind": "float",
+  "value": -0.04,
+  "spec": ".1f",
+  "text": "-0.0"
+ },
+ {
+  "kind": "float",
+  "value": 25.0,
+  "spec": ".1f",
+  "text": "25.0"
+ },
+ {
+  "kind": "float",
+  "value": 33.33333333333333,
+  "spec": ".1f",
+  "text": "33.3"
+ },
+ {
+  "kind": "float",
+  "value": 77.77777777777779,
+  "spec": ".1f",
+  "text": "77.8"
+ },
+ {
+  "kind": "float",
+  "value": 8.0,
+  "spec": ".1f",
+  "text": "8.0"
+ },
+ {
+  "kind": "float",
+  "value": 0.25,
+  "spec": ".1f",
+  "text": "0.2"
+ },
+ {
+  "kind": "float",
+  "value": 4.0,
+  "spec": ".1f",
+  "text": "4.0"
+ },
+ {
+  "kind": "float",
+  "value": 0.0,
+  "spec": ".0f",
+  "text": "0"
+ },
+ {
+  "kind": "float",
+  "value": -0.0,
+  "spec": ".0f",
+  "text": "-0"
+ },
+ {
+  "kind": "float",
+  "value": 1.0,
+  "spec": ".0f",
+  "text": "1"
+ },
+ {
+  "kind": "float",
+  "value": 2.5,
+  "spec": ".0f",
+  "text": "2"
+ },
+ {
+  "kind": "float",
+  "value": 3.5,
+  "spec": ".0f",
+  "text": "4"
+ },
+ {
+  "kind": "float",
+  "value": 0.5,
+  "spec": ".0f",
+  "text": "0"
+ },
+ {
+  "kind": "float",
+  "value": 1.5,
+  "spec": ".0f",
+  "text": "2"
+ },
+ {
+  "kind": "float",
+  "value": 0.125,
+  "spec": ".0f",
+  "text": "0"
+ },
+ {
+  "kind": "float",
+  "value": 0.375,
+  "spec": ".0f",
+  "text": "0"
+ },
+ {
+  "kind": "float",
+  "value": 0.25,
+  "spec": ".0f",
+  "text": "0"
+ },
+ {
+  "kind": "float",
+  "value": 0.35,
+  "spec": ".0f",
+  "text": "0"
+ },
+ {
+  "kind": "float",
+  "value": 0.05,
+  "spec": ".0f",
+  "text": "0"
+ },
+ {
+  "kind": "float",
+  "value": 0.15,
+  "spec": ".0f",
+  "text": "0"
+ },
+ {
+  "kind": "float",
+  "value": 2.675,
+  "spec": ".0f",
+  "text": "3"
+ },
+ {
+  "kind": "float",
+  "value": 99.95,
+  "spec": ".0f",
+  "text": "100"
+ },
+ {
+  "kind": "float",
+  "value": 99.949999,
+  "spec": ".0f",
+  "text": "100"
+ },
+ {
+  "kind": "float",
+  "value": 33.333333333333336,
+  "spec": ".0f",
+  "text": "33"
+ },
+ {
+  "kind": "float",
+  "value": 66.66666666666667,
+  "spec": ".0f",
+  "text": "67"
+ },
+ {
+  "kind": "float",
+  "value": 33.35,
+  "spec": ".0f",
+  "text": "33"
+ },
+ {
+  "kind": "float",
+  "value": 123456789.125,
+  "spec": ".0f",
+  "text": "123456789"
+ },
+ {
+  "kind": "float",
+  "value": 1e+16,
+  "spec": ".0f",
+  "text": "10000000000000000"
+ },
+ {
+  "kind": "float",
+  "value": 1e-05,
+  "spec": ".0f",
+  "text": "0"
+ },
+ {
+  "kind": "float",
+  "value": 1e-07,
+  "spec": ".0f",
+  "text": "0"
+ },
+ {
+  "kind": "float",
+  "value": 1234.5678,
+  "spec": ".0f",
+  "text": "1235"
+ },
+ {
+  "kind": "float",
+  "value": -7.25,
+  "spec": ".0f",
+  "text": "-7"
+ },
+ {
+  "kind": "float",
+  "value": -0.04,
+  "spec": ".0f",
+  "text": "-0"
+ },
+ {
+  "kind": "float",
+  "value": 25.0,
+  "spec": ".0f",
+  "text": "25"
+ },
+ {
+  "kind": "float",
+  "value": 33.33333333333333,
+  "spec": ".0f",
+  "text": "33"
+ },
+ {
+  "kind": "float",
+  "value": 77.77777777777779,
+  "spec": ".0f",
+  "text": "78"
+ },
+ {
+  "kind": "float",
+  "value": 8.0,
+  "spec": ".0f",
+  "text": "8"
+ },
+ {
+  "kind": "float",
+  "value": 0.25,
+  "spec": ".0f",
+  "text": "0"
+ },
+ {
+  "kind": "float",
+  "value": 4.0,
+  "spec": ".0f",
+  "text": "4"
+ },
+ {
+  "kind": "float",
+  "value": 0.0,
+  "spec": ".2f",
+  "text": "0.00"
+ },
+ {
+  "kind": "float",
+  "value": -0.0,
+  "spec": ".2f",
+  "text": "-0.00"
+ },
+ {
+  "kind": "float",
+  "value": 1.0,
+  "spec": ".2f",
+  "text": "1.00"
+ },
+ {
+  "kind": "float",
+  "value": 2.5,
+  "spec": ".2f",
+  "text": "2.50"
+ },
+ {
+  "kind": "float",
+  "value": 3.5,
+  "spec": ".2f",
+  "text": "3.50"
+ },
+ {
+  "kind": "float",
+  "value": 0.5,
+  "spec": ".2f",
+  "text": "0.50"
+ },
+ {
+  "kind": "float",
+  "value": 1.5,
+  "spec": ".2f",
+  "text": "1.50"
+ },
+ {
+  "kind": "float",
+  "value": 0.125,
+  "spec": ".2f",
+  "text": "0.12"
+ },
+ {
+  "kind": "float",
+  "value": 0.375,
+  "spec": ".2f",
+  "text": "0.38"
+ },
+ {
+  "kind": "float",
+  "value": 0.25,
+  "spec": ".2f",
+  "text": "0.25"
+ },
+ {
+  "kind": "float",
+  "value": 0.35,
+  "spec": ".2f",
+  "text": "0.35"
+ },
+ {
+  "kind": "float",
+  "value": 0.05,
+  "spec": ".2f",
+  "text": "0.05"
+ },
+ {
+  "kind": "float",
+  "value": 0.15,
+  "spec": ".2f",
+  "text": "0.15"
+ },
+ {
+  "kind": "float",
+  "value": 2.675,
+  "spec": ".2f",
+  "text": "2.67"
+ },
+ {
+  "kind": "float",
+  "value": 99.95,
+  "spec": ".2f",
+  "text": "99.95"
+ },
+ {
+  "kind": "float",
+  "value": 99.949999,
+  "spec": ".2f",
+  "text": "99.95"
+ },
+ {
+  "kind": "float",
+  "value": 33.333333333333336,
+  "spec": ".2f",
+  "text": "33.33"
+ },
+ {
+  "kind": "float",
+  "value": 66.66666666666667,
+  "spec": ".2f",
+  "text": "66.67"
+ },
+ {
+  "kind": "float",
+  "value": 33.35,
+  "spec": ".2f",
+  "text": "33.35"
+ },
+ {
+  "kind": "float",
+  "value": 123456789.125,
+  "spec": ".2f",
+  "text": "123456789.12"
+ },
+ {
+  "kind": "float",
+  "value": 1e+16,
+  "spec": ".2f",
+  "text": "10000000000000000.00"
+ },
+ {
+  "kind": "float",
+  "value": 1e-05,
+  "spec": ".2f",
+  "text": "0.00"
+ },
+ {
+  "kind": "float",
+  "value": 1e-07,
+  "spec": ".2f",
+  "text": "0.00"
+ },
+ {
+  "kind": "float",
+  "value": 1234.5678,
+  "spec": ".2f",
+  "text": "1234.57"
+ },
+ {
+  "kind": "float",
+  "value": -7.25,
+  "spec": ".2f",
+  "text": "-7.25"
+ },
+ {
+  "kind": "float",
+  "value": -0.04,
+  "spec": ".2f",
+  "text": "-0.04"
+ },
+ {
+  "kind": "float",
+  "value": 25.0,
+  "spec": ".2f",
+  "text": "25.00"
+ },
+ {
+  "kind": "float",
+  "value": 33.33333333333333,
+  "spec": ".2f",
+  "text": "33.33"
+ },
+ {
+  "kind": "float",
+  "value": 77.77777777777779,
+  "spec": ".2f",
+  "text": "77.78"
+ },
+ {
+  "kind": "float",
+  "value": 8.0,
+  "spec": ".2f",
+  "text": "8.00"
+ },
+ {
+  "kind": "float",
+  "value": 0.25,
+  "spec": ".2f",
+  "text": "0.25"
+ },
+ {
+  "kind": "float",
+  "value": 4.0,
+  "spec": ".2f",
+  "text": "4.00"
+ },
+ {
+  "kind": "float",
+  "value": 0.0,
+  "spec": "5.1f",
+  "text": "  0.0"
+ },
+ {
+  "kind": "float",
+  "value": -0.0,
+  "spec": "5.1f",
+  "text": " -0.0"
+ },
+ {
+  "kind": "float",
+  "value": 1.0,
+  "spec": "5.1f",
+  "text": "  1.0"
+ },
+ {
+  "kind": "float",
+  "value": 2.5,
+  "spec": "5.1f",
+  "text": "  2.5"
+ },
+ {
+  "kind": "float",
+  "value": 3.5,
+  "spec": "5.1f",
+  "text": "  3.5"
+ },
+ {
+  "kind": "float",
+  "value": 0.5,
+  "spec": "5.1f",
+  "text": "  0.5"
+ },
+ {
+  "kind": "float",
+  "value": 1.5,
+  "spec": "5.1f",
+  "text": "  1.5"
+ },
+ {
+  "kind": "float",
+  "value": 0.125,
+  "spec": "5.1f",
+  "text": "  0.1"
+ },
+ {
+  "kind": "float",
+  "value": 0.375,
+  "spec": "5.1f",
+  "text": "  0.4"
+ },
+ {
+  "kind": "float",
+  "value": 0.25,
+  "spec": "5.1f",
+  "text": "  0.2"
+ },
+ {
+  "kind": "float",
+  "value": 0.35,
+  "spec": "5.1f",
+  "text": "  0.3"
+ },
+ {
+  "kind": "float",
+  "value": 0.05,
+  "spec": "5.1f",
+  "text": "  0.1"
+ },
+ {
+  "kind": "float",
+  "value": 0.15,
+  "spec": "5.1f",
+  "text": "  0.1"
+ },
+ {
+  "kind": "float",
+  "value": 2.675,
+  "spec": "5.1f",
+  "text": "  2.7"
+ },
+ {
+  "kind": "float",
+  "value": 99.95,
+  "spec": "5.1f",
+  "text": "100.0"
+ },
+ {
+  "kind": "float",
+  "value": 99.949999,
+  "spec": "5.1f",
+  "text": " 99.9"
+ },
+ {
+  "kind": "float",
+  "value": 33.333333333333336,
+  "spec": "5.1f",
+  "text": " 33.3"
+ },
+ {
+  "kind": "float",
+  "value": 66.66666666666667,
+  "spec": "5.1f",
+  "text": " 66.7"
+ },
+ {
+  "kind": "float",
+  "value": 33.35,
+  "spec": "5.1f",
+  "text": " 33.4"
+ },
+ {
+  "kind": "float",
+  "value": 123456789.125,
+  "spec": "5.1f",
+  "text": "123456789.1"
+ },
+ {
+  "kind": "float",
+  "value": 1e+16,
+  "spec": "5.1f",
+  "text": "10000000000000000.0"
+ },
+ {
+  "kind": "float",
+  "value": 1e-05,
+  "spec": "5.1f",
+  "text": "  0.0"
+ },
+ {
+  "kind": "float",
+  "value": 1e-07,
+  "spec": "5.1f",
+  "text": "  0.0"
+ },
+ {
+  "kind": "float",
+  "value": 1234.5678,
+  "spec": "5.1f",
+  "text": "1234.6"
+ },
+ {
+  "kind": "float",
+  "value": -7.25,
+  "spec": "5.1f",
+  "text": " -7.2"
+ },
+ {
+  "kind": "float",
+  "value": -0.04,
+  "spec": "5.1f",
+  "text": " -0.0"
+ },
+ {
+  "kind": "float",
+  "value": 25.0,
+  "spec": "5.1f",
+  "text": " 25.0"
+ },
+ {
+  "kind": "float",
+  "value": 33.33333333333333,
+  "spec": "5.1f",
+  "text": " 33.3"
+ },
+ {
+  "kind": "float",
+  "value": 77.77777777777779,
+  "spec": "5.1f",
+  "text": " 77.8"
+ },
+ {
+  "kind": "float",
+  "value": 8.0,
+  "spec": "5.1f",
+  "text": "  8.0"
+ },
+ {
+  "kind": "float",
+  "value": 0.25,
+  "spec": "5.1f",
+  "text": "  0.2"
+ },
+ {
+  "kind": "float",
+  "value": 4.0,
+  "spec": "5.1f",
+  "text": "  4.0"
+ },
+ {
+  "kind": "float",
+  "value": 0.0,
+  "spec": "+5.1f",
+  "text": " +0.0"
+ },
+ {
+  "kind": "float",
+  "value": -0.0,
+  "spec": "+5.1f",
+  "text": " -0.0"
+ },
+ {
+  "kind": "float",
+  "value": 1.0,
+  "spec": "+5.1f",
+  "text": " +1.0"
+ },
+ {
+  "kind": "float",
+  "value": 2.5,
+  "spec": "+5.1f",
+  "text": " +2.5"
+ },
+ {
+  "kind": "float",
+  "value": 3.5,
+  "spec": "+5.1f",
+  "text": " +3.5"
+ },
+ {
+  "kind": "float",
+  "value": 0.5,
+  "spec": "+5.1f",
+  "text": " +0.5"
+ },
+ {
+  "kind": "float",
+  "value": 1.5,
+  "spec": "+5.1f",
+  "text": " +1.5"
+ },
+ {
+  "kind": "float",
+  "value": 0.125,
+  "spec": "+5.1f",
+  "text": " +0.1"
+ },
+ {
+  "kind": "float",
+  "value": 0.375,
+  "spec": "+5.1f",
+  "text": " +0.4"
+ },
+ {
+  "kind": "float",
+  "value": 0.25,
+  "spec": "+5.1f",
+  "text": " +0.2"
+ },
+ {
+  "kind": "float",
+  "value": 0.35,
+  "spec": "+5.1f",
+  "text": " +0.3"
+ },
+ {
+  "kind": "float",
+  "value": 0.05,
+  "spec": "+5.1f",
+  "text": " +0.1"
+ },
+ {
+  "kind": "float",
+  "value": 0.15,
+  "spec": "+5.1f",
+  "text": " +0.1"
+ },
+ {
+  "kind": "float",
+  "value": 2.675,
+  "spec": "+5.1f",
+  "text": " +2.7"
+ },
+ {
+  "kind": "float",
+  "value": 99.95,
+  "spec": "+5.1f",
+  "text": "+100.0"
+ },
+ {
+  "kind": "float",
+  "value": 99.949999,
+  "spec": "+5.1f",
+  "text": "+99.9"
+ },
+ {
+  "kind": "float",
+  "value": 33.333333333333336,
+  "spec": "+5.1f",
+  "text": "+33.3"
+ },
+ {
+  "kind": "float",
+  "value": 66.66666666666667,
+  "spec": "+5.1f",
+  "text": "+66.7"
+ },
+ {
+  "kind": "float",
+  "value": 33.35,
+  "spec": "+5.1f",
+  "text": "+33.4"
+ },
+ {
+  "kind": "float",
+  "value": 123456789.125,
+  "spec": "+5.1f",
+  "text": "+123456789.1"
+ },
+ {
+  "kind": "float",
+  "value": 1e+16,
+  "spec": "+5.1f",
+  "text": "+10000000000000000.0"
+ },
+ {
+  "kind": "float",
+  "value": 1e-05,
+  "spec": "+5.1f",
+  "text": " +0.0"
+ },
+ {
+  "kind": "float",
+  "value": 1e-07,
+  "spec": "+5.1f",
+  "text": " +0.0"
+ },
+ {
+  "kind": "float",
+  "value": 1234.5678,
+  "spec": "+5.1f",
+  "text": "+1234.6"
+ },
+ {
+  "kind": "float",
+  "value": -7.25,
+  "spec": "+5.1f",
+  "text": " -7.2"
+ },
+ {
+  "kind": "float",
+  "value": -0.04,
+  "spec": "+5.1f",
+  "text": " -0.0"
+ },
+ {
+  "kind": "float",
+  "value": 25.0,
+  "spec": "+5.1f",
+  "text": "+25.0"
+ },
+ {
+  "kind": "float",
+  "value": 33.33333333333333,
+  "spec": "+5.1f",
+  "text": "+33.3"
+ },
+ {
+  "kind": "float",
+  "value": 77.77777777777779,
+  "spec": "+5.1f",
+  "text": "+77.8"
+ },
+ {
+  "kind": "float",
+  "value": 8.0,
+  "spec": "+5.1f",
+  "text": " +8.0"
+ },
+ {
+  "kind": "float",
+  "value": 0.25,
+  "spec": "+5.1f",
+  "text": " +0.2"
+ },
+ {
+  "kind": "float",
+  "value": 4.0,
+  "spec": "+5.1f",
+  "text": " +4.0"
+ },
+ {
+  "kind": "float",
+  "value": 0.0,
+  "spec": "17.1f",
+  "text": "              0.0"
+ },
+ {
+  "kind": "float",
+  "value": -0.0,
+  "spec": "17.1f",
+  "text": "             -0.0"
+ },
+ {
+  "kind": "float",
+  "value": 1.0,
+  "spec": "17.1f",
+  "text": "              1.0"
+ },
+ {
+  "kind": "float",
+  "value": 2.5,
+  "spec": "17.1f",
+  "text": "              2.5"
+ },
+ {
+  "kind": "float",
+  "value": 3.5,
+  "spec": "17.1f",
+  "text": "              3.5"
+ },
+ {
+  "kind": "float",
+  "value": 0.5,
+  "spec": "17.1f",
+  "text": "              0.5"
+ },
+ {
+  "kind": "float",
+  "value": 1.5,
+  "spec": "17.1f",
+  "text": "              1.5"
+ },
+ {
+  "kind": "float",
+  "value": 0.125,
+  "spec": "17.1f",
+  "text": "              0.1"
+ },
+ {
+  "kind": "float",
+  "value": 0.375,
+  "spec": "17.1f",
+  "text": "              0.4"
+ },
+ {
+  "kind": "float",
+  "value": 0.25,
+  "spec": "17.1f",
+  "text": "              0.2"
+ },
+ {
+  "kind": "float",
+  "value": 0.35,
+  "spec": "17.1f",
+  "text": "              0.3"
+ },
+ {
+  "kind": "float",
+  "value": 0.05,
+  "spec": "17.1f",
+  "text": "              0.1"
+ },
+ {
+  "kind": "float",
+  "value": 0.15,
+  "spec": "17.1f",
+  "text": "              0.1"
+ },
+ {
+  "kind": "float",
+  "value": 2.675,
+  "spec": "17.1f",
+  "text": "              2.7"
+ },
+ {
+  "kind": "float",
+  "value": 99.95,
+  "spec": "17.1f",
+  "text": "            100.0"
+ },
+ {
+  "kind": "float",
+  "value": 99.949999,
+  "spec": "17.1f",
+  "text": "             99.9"
+ },
+ {
+  "kind": "float",
+  "value": 33.333333333333336,
+  "spec": "17.1f",
+  "text": "             33.3"
+ },
+ {
+  "kind": "float",
+  "value": 66.66666666666667,
+  "spec": "17.1f",
+  "text": "             66.7"
+ },
+ {
+  "kind": "float",
+  "value": 33.35,
+  "spec": "17.1f",
+  "text": "             33.4"
+ },
+ {
+  "kind": "float",
+  "value": 123456789.125,
+  "spec": "17.1f",
+  "text": "      123456789.1"
+ },
+ {
+  "kind": "float",
+  "value": 1e+16,
+  "spec": "17.1f",
+  "text": "10000000000000000.0"
+ },
+ {
+  "kind": "float",
+  "value": 1e-05,
+  "spec": "17.1f",
+  "text": "              0.0"
+ },
+ {
+  "kind": "float",
+  "value": 1e-07,
+  "spec": "17.1f",
+  "text": "              0.0"
+ },
+ {
+  "kind": "float",
+  "value": 1234.5678,
+  "spec": "17.1f",
+  "text": "           1234.6"
+ },
+ {
+  "kind": "float",
+  "value": -7.25,
+  "spec": "17.1f",
+  "text": "             -7.2"
+ },
+ {
+  "kind": "float",
+  "value": -0.04,
+  "spec": "17.1f",
+  "text": "             -0.0"
+ },
+ {
+  "kind": "float",
+  "value": 25.0,
+  "spec": "17.1f",
+  "text": "             25.0"
+ },
+ {
+  "kind": "float",
+  "value": 33.33333333333333,
+  "spec": "17.1f",
+  "text": "             33.3"
+ },
+ {
+  "kind": "float",
+  "value": 77.77777777777779,
+  "spec": "17.1f",
+  "text": "             77.8"
+ },
+ {
+  "kind": "float",
+  "value": 8.0,
+  "spec": "17.1f",
+  "text": "              8.0"
+ },
+ {
+  "kind": "float",
+  "value": 0.25,
+  "spec": "17.1f",
+  "text": "              0.2"
+ },
+ {
+  "kind": "float",
+  "value": 4.0,
+  "spec": "17.1f",
+  "text": "              4.0"
+ },
+ {
+  "kind": "float",
+  "value": 0.0,
+  "spec": "16.1f",
+  "text": "             0.0"
+ },
+ {
+  "kind": "float",
+  "value": -0.0,
+  "spec": "16.1f",
+  "text": "            -0.0"
+ },
+ {
+  "kind": "float",
+  "value": 1.0,
+  "spec": "16.1f",
+  "text": "             1.0"
+ },
+ {
+  "kind": "float",
+  "value": 2.5,
+  "spec": "16.1f",
+  "text": "             2.5"
+ },
+ {
+  "kind": "float",
+  "value": 3.5,
+  "spec": "16.1f",
+  "text": "             3.5"
+ },
+ {
+  "kind": "float",
+  "value": 0.5,
+  "spec": "16.1f",
+  "text": "             0.5"
+ },
+ {
+  "kind": "float",
+  "value": 1.5,
+  "spec": "16.1f",
+  "text": "             1.5"
+ },
+ {
+  "kind": "float",
+  "value": 0.125,
+  "spec": "16.1f",
+  "text": "             0.1"
+ },
+ {
+  "kind": "float",
+  "value": 0.375,
+  "spec": "16.1f",
+  "text": "             0.4"
+ },
+ {
+  "kind": "float",
+  "value": 0.25,
+  "spec": "16.1f",
+  "text": "             0.2"
+ },
+ {
+  "kind": "float",
+  "value": 0.35,
+  "spec": "16.1f",
+  "text": "             0.3"
+ },
+ {
+  "kind": "float",
+  "value": 0.05,
+  "spec": "16.1f",
+  "text": "             0.1"
+ },
+ {
+  "kind": "float",
+  "value": 0.15,
+  "spec": "16.1f",
+  "text": "             0.1"
+ },
+ {
+  "kind": "float",
+  "value": 2.675,
+  "spec": "16.1f",
+  "text": "             2.7"
+ },
+ {
+  "kind": "float",
+  "value": 99.95,
+  "spec": "16.1f",
+  "text": "           100.0"
+ },
+ {
+  "kind": "float",
+  "value": 99.949999,
+  "spec": "16.1f",
+  "text": "            99.9"
+ },
+ {
+  "kind": "float",
+  "value": 33.333333333333336,
+  "spec": "16.1f",
+  "text": "            33.3"
+ },
+ {
+  "kind": "float",
+  "value": 66.66666666666667,
+  "spec": "16.1f",
+  "text": "            66.7"
+ },
+ {
+  "kind": "float",
+  "value": 33.35,
+  "spec": "16.1f",
+  "text": "            33.4"
+ },
+ {
+  "kind": "float",
+  "value": 123456789.125,
+  "spec": "16.1f",
+  "text": "     123456789.1"
+ },
+ {
+  "kind": "float",
+  "value": 1e+16,
+  "spec": "16.1f",
+  "text": "10000000000000000.0"
+ },
+ {
+  "kind": "float",
+  "value": 1e-05,
+  "spec": "16.1f",
+  "text": "             0.0"
+ },
+ {
+  "kind": "float",
+  "value": 1e-07,
+  "spec": "16.1f",
+  "text": "             0.0"
+ },
+ {
+  "kind": "float",
+  "value": 1234.5678,
+  "spec": "16.1f",
+  "text": "          1234.6"
+ },
+ {
+  "kind": "float",
+  "value": -7.25,
+  "spec": "16.1f",
+  "text": "            -7.2"
+ },
+ {
+  "kind": "float",
+  "value": -0.04,
+  "spec": "16.1f",
+  "text": "            -0.0"
+ },
+ {
+  "kind": "float",
+  "value": 25.0,
+  "spec": "16.1f",
+  "text": "            25.0"
+ },
+ {
+  "kind": "float",
+  "value": 33.33333333333333,
+  "spec": "16.1f",
+  "text": "            33.3"
+ },
+ {
+  "kind": "float",
+  "value": 77.77777777777779,
+  "spec": "16.1f",
+  "text": "            77.8"
+ },
+ {
+  "kind": "float",
+  "value": 8.0,
+  "spec": "16.1f",
+  "text": "             8.0"
+ },
+ {
+  "kind": "float",
+  "value": 0.25,
+  "spec": "16.1f",
+  "text": "             0.2"
+ },
+ {
+  "kind": "float",
+  "value": 4.0,
+  "spec": "16.1f",
+  "text": "             4.0"
+ },
+ {
+  "kind": "float",
+  "value": 0.0,
+  "spec": "18.2f",
+  "text": "              0.00"
+ },
+ {
+  "kind": "float",
+  "value": -0.0,
+  "spec": "18.2f",
+  "text": "             -0.00"
+ },
+ {
+  "kind": "float",
+  "value": 1.0,
+  "spec": "18.2f",
+  "text": "              1.00"
+ },
+ {
+  "kind": "float",
+  "value": 2.5,
+  "spec": "18.2f",
+  "text": "              2.50"
+ },
+ {
+  "kind": "float",
+  "value": 3.5,
+  "spec": "18.2f",
+  "text": "              3.50"
+ },
+ {
+  "kind": "float",
+  "value": 0.5,
+  "spec": "18.2f",
+  "text": "              0.50"
+ },
+ {
+  "kind": "float",
+  "value": 1.5,
+  "spec": "18.2f",
+  "text": "              1.50"
+ },
+ {
+  "kind": "float",
+  "value": 0.125,
+  "spec": "18.2f",
+  "text": "              0.12"
+ },
+ {
+  "kind": "float",
+  "value": 0.375,
+  "spec": "18.2f",
+  "text": "              0.38"
+ },
+ {
+  "kind": "float",
+  "value": 0.25,
+  "spec": "18.2f",
+  "text": "              0.25"
+ },
+ {
+  "kind": "float",
+  "value": 0.35,
+  "spec": "18.2f",
+  "text": "              0.35"
+ },
+ {
+  "kind": "float",
+  "value": 0.05,
+  "spec": "18.2f",
+  "text": "              0.05"
+ },
+ {
+  "kind": "float",
+  "value": 0.15,
+  "spec": "18.2f",
+  "text": "              0.15"
+ },
+ {
+  "kind": "float",
+  "value": 2.675,
+  "spec": "18.2f",
+  "text": "              2.67"
+ },
+ {
+  "kind": "float",
+  "value": 99.95,
+  "spec": "18.2f",
+  "text": "             99.95"
+ },
+ {
+  "kind": "float",
+  "value": 99.949999,
+  "spec": "18.2f",
+  "text": "             99.95"
+ },
+ {
+  "kind": "float",
+  "value": 33.333333333333336,
+  "spec": "18.2f",
+  "text": "             33.33"
+ },
+ {
+  "kind": "float",
+  "value": 66.66666666666667,
+  "spec": "18.2f",
+  "text": "             66.67"
+ },
+ {
+  "kind": "float",
+  "value": 33.35,
+  "spec": "18.2f",
+  "text": "             33.35"
+ },
+ {
+  "kind": "float",
+  "value": 123456789.125,
+  "spec": "18.2f",
+  "text": "      123456789.12"
+ },
+ {
+  "kind": "float",
+  "value": 1e+16,
+  "spec": "18.2f",
+  "text": "10000000000000000.00"
+ },
+ {
+  "kind": "float",
+  "value": 1e-05,
+  "spec": "18.2f",
+  "text": "              0.00"
+ },
+ {
+  "kind": "float",
+  "value": 1e-07,
+  "spec": "18.2f",
+  "text": "              0.00"
+ },
+ {
+  "kind": "float",
+  "value": 1234.5678,
+  "spec": "18.2f",
+  "text": "           1234.57"
+ },
+ {
+  "kind": "float",
+  "value": -7.25,
+  "spec": "18.2f",
+  "text": "             -7.25"
+ },
+ {
+  "kind": "float",
+  "value": -0.04,
+  "spec": "18.2f",
+  "text": "             -0.04"
+ },
+ {
+  "kind": "float",
+  "value": 25.0,
+  "spec": "18.2f",
+  "text": "             25.00"
+ },
+ {
+  "kind": "float",
+  "value": 33.33333333333333,
+  "spec": "18.2f",
+  "text": "             33.33"
+ },
+ {
+  "kind": "float",
+  "value": 77.77777777777779,
+  "spec": "18.2f",
+  "text": "             77.78"
+ },
+ {
+  "kind": "float",
+  "value": 8.0,
+  "spec": "18.2f",
+  "text": "              8.00"
+ },
+ {
+  "kind": "float",
+  "value": 0.25,
+  "spec": "18.2f",
+  "text": "              0.25"
+ },
+ {
+  "kind": "float",
+  "value": 4.0,
+  "spec": "18.2f",
+  "text": "              4.00"
+ },
+ {
+  "kind": "float",
+  "value": 0.0,
+  "spec": "g",
+  "text": "0"
+ },
+ {
+  "kind": "float",
+  "value": -0.0,
+  "spec": "g",
+  "text": "-0"
+ },
+ {
+  "kind": "float",
+  "value": 1.0,
+  "spec": "g",
+  "text": "1"
+ },
+ {
+  "kind": "float",
+  "value": 2.5,
+  "spec": "g",
+  "text": "2.5"
+ },
+ {
+  "kind": "float",
+  "value": 3.5,
+  "spec": "g",
+  "text": "3.5"
+ },
+ {
+  "kind": "float",
+  "value": 0.5,
+  "spec": "g",
+  "text": "0.5"
+ },
+ {
+  "kind": "float",
+  "value": 1.5,
+  "spec": "g",
+  "text": "1.5"
+ },
+ {
+  "kind": "float",
+  "value": 0.125,
+  "spec": "g",
+  "text": "0.125"
+ },
+ {
+  "kind": "float",
+  "value": 0.375,
+  "spec": "g",
+  "text": "0.375"
+ },
+ {
+  "kind": "float",
+  "value": 0.25,
+  "spec": "g",
+  "text": "0.25"
+ },
+ {
+  "kind": "float",
+  "value": 0.35,
+  "spec": "g",
+  "text": "0.35"
+ },
+ {
+  "kind": "float",
+  "value": 0.05,
+  "spec": "g",
+  "text": "0.05"
+ },
+ {
+  "kind": "float",
+  "value": 0.15,
+  "spec": "g",
+  "text": "0.15"
+ },
+ {
+  "kind": "float",
+  "value": 2.675,
+  "spec": "g",
+  "text": "2.675"
+ },
+ {
+  "kind": "float",
+  "value": 99.95,
+  "spec": "g",
+  "text": "99.95"
+ },
+ {
+  "kind": "float",
+  "value": 99.949999,
+  "spec": "g",
+  "text": "99.95"
+ },
+ {
+  "kind": "float",
+  "value": 33.333333333333336,
+  "spec": "g",
+  "text": "33.3333"
+ },
+ {
+  "kind": "float",
+  "value": 66.66666666666667,
+  "spec": "g",
+  "text": "66.6667"
+ },
+ {
+  "kind": "float",
+  "value": 33.35,
+  "spec": "g",
+  "text": "33.35"
+ },
+ {
+  "kind": "float",
+  "value": 123456789.125,
+  "spec": "g",
+  "text": "1.23457e+08"
+ },
+ {
+  "kind": "float",
+  "value": 1e+16,
+  "spec": "g",
+  "text": "1e+16"
+ },
+ {
+  "kind": "float",
+  "value": 1e-05,
+  "spec": "g",
+  "text": "1e-05"
+ },
+ {
+  "kind": "float",
+  "value": 1e-07,
+  "spec": "g",
+  "text": "1e-07"
+ },
+ {
+  "kind": "float",
+  "value": 1234.5678,
+  "spec": "g",
+  "text": "1234.57"
+ },
+ {
+  "kind": "float",
+  "value": -7.25,
+  "spec": "g",
+  "text": "-7.25"
+ },
+ {
+  "kind": "float",
+  "value": -0.04,
+  "spec": "g",
+  "text": "-0.04"
+ },
+ {
+  "kind": "float",
+  "value": 25.0,
+  "spec": "g",
+  "text": "25"
+ },
+ {
+  "kind": "float",
+  "value": 33.33333333333333,
+  "spec": "g",
+  "text": "33.3333"
+ },
+ {
+  "kind": "float",
+  "value": 77.77777777777779,
+  "spec": "g",
+  "text": "77.7778"
+ },
+ {
+  "kind": "float",
+  "value": 8.0,
+  "spec": "g",
+  "text": "8"
+ },
+ {
+  "kind": "float",
+  "value": 0.25,
+  "spec": "g",
+  "text": "0.25"
+ },
+ {
+  "kind": "float",
+  "value": 4.0,
+  "spec": "g",
+  "text": "4"
+ },
+ {
+  "kind": "float",
+  "value": 0.0,
+  "spec": ".3g",
+  "text": "0"
+ },
+ {
+  "kind": "float",
+  "value": -0.0,
+  "spec": ".3g",
+  "text": "-0"
+ },
+ {
+  "kind": "float",
+  "value": 1.0,
+  "spec": ".3g",
+  "text": "1"
+ },
+ {
+  "kind": "float",
+  "value": 2.5,
+  "spec": ".3g",
+  "text": "2.5"
+ },
+ {
+  "kind": "float",
+  "value": 3.5,
+  "spec": ".3g",
+  "text": "3.5"
+ },
+ {
+  "kind": "float",
+  "value": 0.5,
+  "spec": ".3g",
+  "text": "0.5"
+ },
+ {
+  "kind": "float",
+  "value": 1.5,
+  "spec": ".3g",
+  "text": "1.5"
+ },
+ {
+  "kind": "float",
+  "value": 0.125,
+  "spec": ".3g",
+  "text": "0.125"
+ },
+ {
+  "kind": "float",
+  "value": 0.375,
+  "spec": ".3g",
+  "text": "0.375"
+ },
+ {
+  "kind": "float",
+  "value": 0.25,
+  "spec": ".3g",
+  "text": "0.25"
+ },
+ {
+  "kind": "float",
+  "value": 0.35,
+  "spec": ".3g",
+  "text": "0.35"
+ },
+ {
+  "kind": "float",
+  "value": 0.05,
+  "spec": ".3g",
+  "text": "0.05"
+ },
+ {
+  "kind": "float",
+  "value": 0.15,
+  "spec": ".3g",
+  "text": "0.15"
+ },
+ {
+  "kind": "float",
+  "value": 2.675,
+  "spec": ".3g",
+  "text": "2.67"
+ },
+ {
+  "kind": "float",
+  "value": 99.95,
+  "spec": ".3g",
+  "text": "100"
+ },
+ {
+  "kind": "float",
+  "value": 99.949999,
+  "spec": ".3g",
+  "text": "99.9"
+ },
+ {
+  "kind": "float",
+  "value": 33.333333333333336,
+  "spec": ".3g",
+  "text": "33.3"
+ },
+ {
+  "kind": "float",
+  "value": 66.66666666666667,
+  "spec": ".3g",
+  "text": "66.7"
+ },
+ {
+  "kind": "float",
+  "value": 33.35,
+  "spec": ".3g",
+  "text": "33.4"
+ },
+ {
+  "kind": "float",
+  "value": 123456789.125,
+  "spec": ".3g",
+  "text": "1.23e+08"
+ },
+ {
+  "kind": "float",
+  "value": 1e+16,
+  "spec": ".3g",
+  "text": "1e+16"
+ },
+ {
+  "kind": "float",
+  "value": 1e-05,
+  "spec": ".3g",
+  "text": "1e-05"
+ },
+ {
+  "kind": "float",
+  "value": 1e-07,
+  "spec": ".3g",
+  "text": "1e-07"
+ },
+ {
+  "kind": "float",
+  "value": 1234.5678,
+  "spec": ".3g",
+  "text": "1.23e+03"
+ },
+ {
+  "kind": "float",
+  "value": -7.25,
+  "spec": ".3g",
+  "text": "-7.25"
+ },
+ {
+  "kind": "float",
+  "value": -0.04,
+  "spec": ".3g",
+  "text": "-0.04"
+ },
+ {
+  "kind": "float",
+  "value": 25.0,
+  "spec": ".3g",
+  "text": "25"
+ },
+ {
+  "kind": "float",
+  "value": 33.33333333333333,
+  "spec": ".3g",
+  "text": "33.3"
+ },
+ {
+  "kind": "float",
+  "value": 77.77777777777779,
+  "spec": ".3g",
+  "text": "77.8"
+ },
+ {
+  "kind": "float",
+  "value": 8.0,
+  "spec": ".3g",
+  "text": "8"
+ },
+ {
+  "kind": "float",
+  "value": 0.25,
+  "spec": ".3g",
+  "text": "0.25"
+ },
+ {
+  "kind": "float",
+  "value": 4.0,
+  "spec": ".3g",
+  "text": "4"
+ },
+ {
+  "kind": "int",
+  "value": 0,
+  "spec": "d",
+  "text": "0"
+ },
+ {
+  "kind": "int",
+  "value": 1,
+  "spec": "d",
+  "text": "1"
+ },
+ {
+  "kind": "int",
+  "value": -1,
+  "spec": "d",
+  "text": "-1"
+ },
+ {
+  "kind": "int",
+  "value": 7,
+  "spec": "d",
+  "text": "7"
+ },
+ {
+  "kind": "int",
+  "value": 42,
+  "spec": "d",
+  "text": "42"
+ },
+ {
+  "kind": "int",
+  "value": 999,
+  "spec": "d",
+  "text": "999"
+ },
+ {
+  "kind": "int",
+  "value": 10000,
+  "spec": "d",
+  "text": "10000"
+ },
+ {
+  "kind": "int",
+  "value": -12345,
+  "spec": "d",
+  "text": "-12345"
+ },
+ {
+  "kind": "int",
+  "value": 0,
+  "spec": "4d",
+  "text": "   0"
+ },
+ {
+  "kind": "int",
+  "value": 1,
+  "spec": "4d",
+  "text": "   1"
+ },
+ {
+  "kind": "int",
+  "value": -1,
+  "spec": "4d",
+  "text": "  -1"
+ },
+ {
+  "kind": "int",
+  "value": 7,
+  "spec": "4d",
+  "text": "   7"
+ },
+ {
+  "kind": "int",
+  "value": 42,
+  "spec": "4d",
+  "text": "  42"
+ },
+ {
+  "kind": "int",
+  "value": 999,
+  "spec": "4d",
+  "text": " 999"
+ },
+ {
+  "kind": "int",
+  "value": 10000,
+  "spec": "4d",
+  "text": "10000"
+ },
+ {
+  "kind": "int",
+  "value": -12345,
+  "spec": "4d",
+  "text": "-12345"
+ },
+ {
+  "kind": "int",
+  "value": 0,
+  "spec": "3d",
+  "text": "  0"
+ },
+ {
+  "kind": "int",
+  "value": 1,
+  "spec": "3d",
+  "text": "  1"
+ },
+ {
+  "kind": "int",
+  "value": -1,
+  "spec": "3d",
+  "text": " -1"
+ },
+ {
+  "kind": "int",
+  "value": 7,
+  "spec": "3d",
+  "text": "  7"
+ },
+ {
+  "kind": "int",
+  "value": 42,
+  "spec": "3d",
+  "text": " 42"
+ },
+ {
+  "kind": "int",
+  "value": 999,
+  "spec": "3d",
+  "text": "999"
+ },
+ {
+  "kind": "int",
+  "value": 10000,
+  "spec": "3d",
+  "text": "10000"
+ },
+ {
+  "kind": "int",
+  "value": -12345,
+  "spec": "3d",
+  "text": "-12345"
+ },
+ {
+  "kind": "int",
+  "value": 0,
+  "spec": ">3",
+  "text": "  0"
+ },
+ {
+  "kind": "int",
+  "value": 1,
+  "spec": ">3",
+  "text": "  1"
+ },
+ {
+  "kind": "int",
+  "value": -1,
+  "spec": ">3",
+  "text": " -1"
+ },
+ {
+  "kind": "int",
+  "value": 7,
+  "spec": ">3",
+  "text": "  7"
+ },
+ {
+  "kind": "int",
+  "value": 42,
+  "spec": ">3",
+  "text": " 42"
+ },
+ {
+  "kind": "int",
+  "value": 999,
+  "spec": ">3",
+  "text": "999"
+ },
+ {
+  "kind": "int",
+  "value": 10000,
+  "spec": ">3",
+  "text": "10000"
+ },
+ {
+  "kind": "int",
+  "value": -12345,
+  "spec": ">3",
+  "text": "-12345"
+ },
+ {
+  "kind": "int",
+  "value": 0,
+  "spec": "<8d",
+  "text": "0       "
+ },
+ {
+  "kind": "int",
+  "value": 1,
+  "spec": "<8d",
+  "text": "1       "
+ },
+ {
+  "kind": "int",
+  "value": -1,
+  "spec": "<8d",
+  "text": "-1      "
+ },
+ {
+  "kind": "int",
+  "value": 7,
+  "spec": "<8d",
+  "text": "7       "
+ },
+ {
+  "kind": "int",
+  "value": 42,
+  "spec": "<8d",
+  "text": "42      "
+ },
+ {
+  "kind": "int",
+  "value": 999,
+  "spec": "<8d",
+  "text": "999     "
+ },
+ {
+  "kind": "int",
+  "value": 10000,
+  "spec": "<8d",
+  "text": "10000   "
+ },
+ {
+  "kind": "int",
+  "value": -12345,
+  "spec": "<8d",
+  "text": "-12345  "
+ },
+ {
+  "kind": "int",
+  "value": 0,
+  "spec": "08d",
+  "text": "00000000"
+ },
+ {
+  "kind": "int",
+  "value": 1,
+  "spec": "08d",
+  "text": "00000001"
+ },
+ {
+  "kind": "int",
+  "value": -1,
+  "spec": "08d",
+  "text": "-0000001"
+ },
+ {
+  "kind": "int",
+  "value": 7,
+  "spec": "08d",
+  "text": "00000007"
+ },
+ {
+  "kind": "int",
+  "value": 42,
+  "spec": "08d",
+  "text": "00000042"
+ },
+ {
+  "kind": "int",
+  "value": 999,
+  "spec": "08d",
+  "text": "00000999"
+ },
+ {
+  "kind": "int",
+  "value": 10000,
+  "spec": "08d",
+  "text": "00010000"
+ },
+ {
+  "kind": "int",
+  "value": -12345,
+  "spec": "08d",
+  "text": "-0012345"
+ },
+ {
+  "kind": "str",
+  "value": "",
+  "spec": "<38s",
+  "text": "                                      "
+ },
+ {
+  "kind": "str",
+  "value": "a",
+  "spec": "<38s",
+  "text": "a                                     "
+ },
+ {
+  "kind": "str",
+  "value": "Fixture #1",
+  "spec": "<38s",
+  "text": "Fixture #1                            "
+ },
+ {
+  "kind": "str",
+  "value": "a string longer than the field width asks for",
+  "spec": "<38s",
+  "text": "a string longer than the field width asks for"
+ },
+ {
+  "kind": "str",
+  "value": "ünï",
+  "spec": "<38s",
+  "text": "ünï                                   "
+ },
+ {
+  "kind": "str",
+  "value": "",
+  "spec": ">18s",
+  "text": "                  "
+ },
+ {
+  "kind": "str",
+  "value": "a",
+  "spec": ">18s",
+  "text": "                 a"
+ },
+ {
+  "kind": "str",
+  "value": "Fixture #1",
+  "spec": ">18s",
+  "text": "        Fixture #1"
+ },
+ {
+  "kind": "str",
+  "value": "a string longer than the field width asks for",
+  "spec": ">18s",
+  "text": "a string longer than the field width asks for"
+ },
+ {
+  "kind": "str",
+  "value": "ünï",
+  "spec": ">18s",
+  "text": "               ünï"
+ },
+ {
+  "kind": "str",
+  "value": "",
+  "spec": ">14",
+  "text": "              "
+ },
+ {
+  "kind": "str",
+  "value": "a",
+  "spec": ">14",
+  "text": "             a"
+ },
+ {
+  "kind": "str",
+  "value": "Fixture #1",
+  "spec": ">14",
+  "text": "    Fixture #1"
+ },
+ {
+  "kind": "str",
+  "value": "a string longer than the field width asks for",
+  "spec": ">14",
+  "text": "a string longer than the field width asks for"
+ },
+ {
+  "kind": "str",
+  "value": "ünï",
+  "spec": ">14",
+  "text": "           ünï"
+ },
+ {
+  "kind": "str",
+  "value": "",
+  "spec": "<14",
+  "text": "              "
+ },
+ {
+  "kind": "str",
+  "value": "a",
+  "spec": "<14",
+  "text": "a             "
+ },
+ {
+  "kind": "str",
+  "value": "Fixture #1",
+  "spec": "<14",
+  "text": "Fixture #1    "
+ },
+ {
+  "kind": "str",
+  "value": "a string longer than the field width asks for",
+  "spec": "<14",
+  "text": "a string longer than the field width asks for"
+ },
+ {
+  "kind": "str",
+  "value": "ünï",
+  "spec": "<14",
+  "text": "ünï           "
+ },
+ {
+  "kind": "str",
+  "value": "",
+  "spec": "<20s",
+  "text": "                    "
+ },
+ {
+  "kind": "str",
+  "value": "a",
+  "spec": "<20s",
+  "text": "a                   "
+ },
+ {
+  "kind": "str",
+  "value": "Fixture #1",
+  "spec": "<20s",
+  "text": "Fixture #1          "
+ },
+ {
+  "kind": "str",
+  "value": "a string longer than the field width asks for",
+  "spec": "<20s",
+  "text": "a string longer than the field width asks for"
+ },
+ {
+  "kind": "str",
+  "value": "ünï",
+  "spec": "<20s",
+  "text": "ünï                 "
+ },
+ {
+  "kind": "str",
+  "value": "",
+  "spec": "^9",
+  "text": "         "
+ },
+ {
+  "kind": "str",
+  "value": "a",
+  "spec": "^9",
+  "text": "    a    "
+ },
+ {
+  "kind": "str",
+  "value": "Fixture #1",
+  "spec": "^9",
+  "text": "Fixture #1"
+ },
+ {
+  "kind": "str",
+  "value": "a string longer than the field width asks for",
+  "spec": "^9",
+  "text": "a string longer than the field width asks for"
+ },
+ {
+  "kind": "str",
+  "value": "ünï",
+  "spec": "^9",
+  "text": "   ünï   "
+ },
+ {
+  "kind": "repr",
+  "value": 0.0,
+  "spec": "",
+  "text": "0.0"
+ },
+ {
+  "kind": "repr",
+  "value": -0.0,
+  "spec": "",
+  "text": "-0.0"
+ },
+ {
+  "kind": "repr",
+  "value": 1.0,
+  "spec": "",
+  "text": "1.0"
+ },
+ {
+  "kind": "repr",
+  "value": 2.5,
+  "spec": "",
+  "text": "2.5"
+ },
+ {
+  "kind": "repr",
+  "value": 3.5,
+  "spec": "",
+  "text": "3.5"
+ },
+ {
+  "kind": "repr",
+  "value": 0.5,
+  "spec": "",
+  "text": "0.5"
+ },
+ {
+  "kind": "repr",
+  "value": 1.5,
+  "spec": "",
+  "text": "1.5"
+ },
+ {
+  "kind": "repr",
+  "value": 0.125,
+  "spec": "",
+  "text": "0.125"
+ },
+ {
+  "kind": "repr",
+  "value": 0.375,
+  "spec": "",
+  "text": "0.375"
+ },
+ {
+  "kind": "repr",
+  "value": 0.25,
+  "spec": "",
+  "text": "0.25"
+ },
+ {
+  "kind": "repr",
+  "value": 0.35,
+  "spec": "",
+  "text": "0.35"
+ },
+ {
+  "kind": "repr",
+  "value": 0.05,
+  "spec": "",
+  "text": "0.05"
+ },
+ {
+  "kind": "repr",
+  "value": 0.15,
+  "spec": "",
+  "text": "0.15"
+ },
+ {
+  "kind": "repr",
+  "value": 2.675,
+  "spec": "",
+  "text": "2.675"
+ },
+ {
+  "kind": "repr",
+  "value": 99.95,
+  "spec": "",
+  "text": "99.95"
+ },
+ {
+  "kind": "repr",
+  "value": 99.949999,
+  "spec": "",
+  "text": "99.949999"
+ },
+ {
+  "kind": "repr",
+  "value": 33.333333333333336,
+  "spec": "",
+  "text": "33.333333333333336"
+ },
+ {
+  "kind": "repr",
+  "value": 66.66666666666667,
+  "spec": "",
+  "text": "66.66666666666667"
+ },
+ {
+  "kind": "repr",
+  "value": 33.35,
+  "spec": "",
+  "text": "33.35"
+ },
+ {
+  "kind": "repr",
+  "value": 123456789.125,
+  "spec": "",
+  "text": "123456789.125"
+ },
+ {
+  "kind": "repr",
+  "value": 1e+16,
+  "spec": "",
+  "text": "1e+16"
+ },
+ {
+  "kind": "repr",
+  "value": 1e-05,
+  "spec": "",
+  "text": "1e-05"
+ },
+ {
+  "kind": "repr",
+  "value": 1e-07,
+  "spec": "",
+  "text": "1e-07"
+ },
+ {
+  "kind": "repr",
+  "value": 1234.5678,
+  "spec": "",
+  "text": "1234.5678"
+ },
+ {
+  "kind": "repr",
+  "value": -7.25,
+  "spec": "",
+  "text": "-7.25"
+ },
+ {
+  "kind": "repr",
+  "value": -0.04,
+  "spec": "",
+  "text": "-0.04"
+ },
+ {
+  "kind": "repr",
+  "value": 25.0,
+  "spec": "",
+  "text": "25.0"
+ },
+ {
+  "kind": "repr",
+  "value": 33.33333333333333,
+  "spec": "",
+  "text": "33.33333333333333"
+ },
+ {
+  "kind": "repr",
+  "value": 77.77777777777779,
+  "spec": "",
+  "text": "77.77777777777779"
+ },
+ {
+  "kind": "repr",
+  "value": 8.0,
+  "spec": "",
+  "text": "8.0"
+ },
+ {
+  "kind": "repr",
+  "value": 0.25,
+  "spec": "",
+  "text": "0.25"
+ },
+ {
+  "kind": "repr",
+  "value": 4.0,
+  "spec": "",
+  "text": "4.0"
+ },
+ {
+  "kind": "repr",
+  "value": 1e+100,
+  "spec": "",
+  "text": "1e+100"
+ },
+ {
+  "kind": "repr",
+  "value": 1e-100,
+  "spec": "",
+  "text": "1e-100"
+ },
+ {
+  "kind": "repr",
+  "value": 5e-324,
+  "spec": "",
+  "text": "5e-324"
+ },
+ {
+  "kind": "repr",
+  "value": 1.7976931348623157e+308,
+  "spec": "",
+  "text": "1.7976931348623157e+308"
+ },
+ {
+  "kind": "repr",
+  "value": 1.2345678901234568e+17,
+  "spec": "",
+  "text": "1.2345678901234568e+17"
+ }
+]

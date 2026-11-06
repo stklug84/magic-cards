@@ -1,0 +1,88 @@
+[
+ {
+  "value": {
+   "spell": "Olivia's Dragoon",
+   "who": "Black B"
+  },
+  "repr": "{'spell': \"Olivia's Dragoon\", 'who': 'Black B'}"
+ },
+ {
+  "value": {
+   "who": "p0",
+   "n": 2,
+   "total": 3
+  },
+  "repr": "{'who': 'p0', 'n': 2, 'total': 3}"
+ },
+ {
+  "value": {
+   "who": "p0",
+   "card": "Sol Ring",
+   "x": null,
+   "commander": true
+  },
+  "repr": "{'who': 'p0', 'card': 'Sol Ring', 'x': None, 'commander': True}"
+ },
+ {
+  "value": {
+   "a": 1.5,
+   "b": [
+    1,
+    2,
+    "x"
+   ],
+   "c": {
+    "d": false
+   }
+  },
+  "repr": "{'a': 1.5, 'b': [1, 2, 'x'], 'c': {'d': False}}"
+ },
+ {
+  "value": {},
+  "repr": "{}"
+ },
+ {
+  "value": [],
+  "repr": "[]"
+ },
+ {
+  "value": "it's",
+  "repr": "\"it's\""
+ },
+ {
+  "value": "say \"hi\"",
+  "repr": "'say \"hi\"'"
+ },
+ {
+  "value": "both ' and \"",
+  "repr": "'both \\' and \"'"
+ },
+ {
+  "value": "tab\there",
+  "repr": "'tab\\there'"
+ },
+ {
+  "value": "ünï — ok",
+  "repr": "'ünï — ok'"
+ },
+ {
+  "value": "\u0007bell",
+  "repr": "'\\x07bell'"
+ },
+ {
+  "value": -0.0,
+  "repr": "-0.0"
+ },
+ {
+  "value": 1e+16,
+  "repr": "1e+16"
+ },
+ {
+  "value": true,
+  "repr": "True"
+ },
+ {
+  "value": null,
+  "repr": "None"
+ }
+]
