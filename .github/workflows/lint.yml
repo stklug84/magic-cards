@@ -96,15 +96,15 @@ jobs:
           pip install build
           python3 -m build
 
-      # The default install must stay stdlib-only: mtgcards/mtgrules/
-      # mtgviz import without rdflib, and mtgvalidate (which needs it)
-      # must be absent until the validate extra is requested.
+      # The default install must stay stdlib-only: mtgcards imports
+      # without rdflib, and mtgvalidate (which needs it) must be absent
+      # until the validate extra is requested.
       - name: Import smoke test
         run: |
           set -euo pipefail
           python3 -m venv /tmp/smoke
           /tmp/smoke/bin/pip install dist/*.whl
-          /tmp/smoke/bin/python -c "import mtgcards, mtgviz"
+          /tmp/smoke/bin/python -c "import mtgcards.graph, mtgcards.behaviors"
           /tmp/smoke/bin/python - <<'PY'
           try:
               import rdflib

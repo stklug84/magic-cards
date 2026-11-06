@@ -45,13 +45,15 @@ Read the repo's `AGENTS.md` first.
 |---|---|---|
 | `magic-cards-graph-YYYY-MM-DD.tar.gz` | `graph-YYYY-MM-DD` | `scripts/build_graph_bundle.py` via `release-graph.yml` |
 | `magic_cards_tools-X.Y.Z-*.whl` | `vX.Y.Z` | `python -m build` via `release.yml` |
+| `mtg-simulate-vX.Y.Z-<target>.tar.gz` | `vX.Y.Z` | `cargo build --release -p mtgsim` via `release.yml`, one per target |
 
 They move separately on purpose: an inventory update must not force a code
 release, and a code fix must not restate the graph. Never bump one because
 the other moved.
 
 `release.yml` fails the build unless the `v*` tag matches the `version` in
-`pyproject.toml`. Check that before tagging, not after.
+`pyproject.toml` and the `[workspace.package]` version in `rust/Cargo.toml`
+(bump both in one commit). Check that before tagging, not after.
 
 ## What the bundle may and may not contain
 

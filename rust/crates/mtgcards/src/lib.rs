@@ -1,6 +1,9 @@
 //! Card data layer over the MTG knowledge graph.
 //!
-//! The Rust port of the simulator parts of the Python `mtgcards` package:
+//! Ported from the simulator parts of the Python `mtgcards` package, which
+//! it replaced (what remains of that package in `scripts/mtgcards/` is the
+//! graph-bundle contract and the behavior-key whitelist the validators
+//! share with this crate):
 //!
 //! - [`graph`]: the graph root's `GRAPH-MANIFEST.json` and the enforced
 //!   `graph_schema` check;
@@ -17,10 +20,10 @@
 //!   real HTTP transport is behind the `scryfall` feature; the client's
 //!   logic is always available with an injected transport).
 //!
-//! **The TTL readers are regex-based, not RDF-based** — exactly like their
-//! Python counterparts. A layout change in `scripts/generate_individuals.py`
-//! must be mirrored here and in `scripts/mtgcards/ttl_loader.py`; see
-//! AGENTS.md, "The trap: text-based readers".
+//! **The TTL readers are regex-based, not RDF-based**, so the simulator
+//! needs no RDF library. A layout change in `scripts/generate_individuals.py`
+//! must be mirrored here (`ttl_loader`, `deck`, `behavior`) and covered by
+//! `tests/ttl_loader.rs`; see AGENTS.md, "The trap: text-based readers".
 //!
 //! Sets of strings (types, subtypes, colours, keywords) are `BTreeSet`s:
 //! Python's `set` has no observable order, and a sorted order is the

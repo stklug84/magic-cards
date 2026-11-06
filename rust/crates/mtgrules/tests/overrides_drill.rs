@@ -5,7 +5,8 @@
 //! (with mana, loyalty and a graveyard stay), and - for the spells - is
 //! cast with legal targets available. The assertion is robustness: no
 //! panic, the game settles, the state stays consistent. The per-card
-//! semantics are pinned by the L3 parity dump and the per-rule tests.
+//! semantics are pinned by the per-rule tests (and a change to them is
+//! reviewed with the `dump_abilities` example).
 
 mod common;
 

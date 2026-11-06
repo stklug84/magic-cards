@@ -1,6 +1,8 @@
 //! A CR-grounded Magic: The Gathering rules engine for Commander.
 //!
-//! The Rust port of the Python `mtgrules` package. Module map (one module
+//! Ported from the Python `mtgrules` package, which it replaced (the
+//! Python sources live in the git history up to the cutover; the doc
+//! comments that cite them describe provenance). Module map (one module
 //! per former Python module):
 //!
 //! - [`cr`]: Comprehensive Rules text parser, the `#[rule]` registry, its

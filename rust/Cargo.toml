@@ -31,7 +31,6 @@ members = [
     "crates/mtgrules",
     "crates/mtgviz",
     "crates/mtgsim",
-    "xtask",
 ]
 
 [workspace.package]

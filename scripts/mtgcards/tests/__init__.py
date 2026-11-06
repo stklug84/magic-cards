@@ -1,1 +1,1 @@
-"""Data-layer tests for mtgcards (stdlib unittest)."""
+"""Tests of the graph tooling scripts (stdlib unittest)."""

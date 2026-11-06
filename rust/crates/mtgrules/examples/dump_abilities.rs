@@ -1,12 +1,14 @@
-//! Canonical dump of the compiled abilities (parity level L3).
+//! Canonical dump of the compiled abilities.
 //!
-//! The Rust twin of `scripts/parity/dump_abilities.py`: loads a graph
-//! root through `CardDatabase`, compiles every distinct card record with
-//! `compile_card` (overrides included) and writes one JSON line per
-//! record, in index order, describing the resulting characteristics
-//! structurally - with the same keys, the same order and the same
-//! `json.dumps` bytes as the Python dump. `cargo xtask parity` runs both
-//! and diffs them.
+//! Loads a graph root through `CardDatabase`, compiles every distinct
+//! card record with `compile_card` (overrides included) and writes one
+//! JSON line per record, in index order, describing the resulting
+//! characteristics structurally: every ability's kind, costs, targets and
+//! effect tree, the keywords and cost modifiers, the clauses the compiler
+//! could not read and the override's note (closures reduced to their
+//! presence, dynamic counts to the tag `"dynamic"`). Dump before and
+//! after a change to the compiler or an override and diff the two files:
+//! the diff is exactly the cards whose compiled behaviour changed.
 //!
 //! ```text
 //! cargo run -p mtgrules --example dump_abilities -- --root ../.. [--custom-cards F] [--extra-graph G]...

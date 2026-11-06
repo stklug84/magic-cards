@@ -13,7 +13,8 @@ sweep:
 2. `python3 scripts/validate_ttl.py`
 3. `python3 scripts/validate_sparql.py`
 4. `python3 scripts/check_consistency.py`
-5. the `mtgcards`, `mtgrules` and `mtgviz` unit suites from `scripts/`
+5. the `mtgcards` unit suite from `scripts/` (plus `cargo test` from
+   `rust/` when the change touched the simulator)
 
 OWL reasoning (`robot reason --reasoner hermit`) is **not** part of the
 standard sweep — it takes ~2 min for the ontology and ~8 min for the full

@@ -8,11 +8,11 @@ Rules version its annotations were authored against, and the tools range
 that can read it.
 
 Only ``graph_schema`` is enforced. It versions the predicate vocabulary
-that :mod:`mtgcards.ttl_loader`, :mod:`mtgcards.deck_ttl` and
-:mod:`mtgcards.behaviors` extract, independently of which cards the graph
+that the simulator's readers (``rust/crates/mtgcards/src/{ttl_loader,
+deck,behavior}.rs``) extract, independently of which cards the graph
 contains: bump it when that vocabulary changes, not when a set is added.
 ``requires_tools`` is informational only - enforcing a PEP 440 specifier
-would need the ``packaging`` distribution, and these packages are
+would need the ``packaging`` distribution, and this package is
 deliberately stdlib-only.
 
 A graph root without a manifest (a plain checkout) is accepted unchanged,

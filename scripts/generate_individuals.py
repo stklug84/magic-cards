@@ -489,9 +489,9 @@ def object_list(prop: str, objects: Sequence[str], indent: str = "    ") -> list
     house style is the object list; continuation lines align under the
     first object. Returns [] when there is nothing to assert.
 
-    Consumers that read the generated files with regexes (notably
-    mtgcards.ttl_loader) must parse these lists rather than a single
-    object per predicate.
+    Consumers that read the generated files with regexes (notably the
+    simulator's reader, rust/crates/mtgcards/src/ttl_loader.rs) must
+    parse these lists rather than a single object per predicate.
     """
     if not objects:
         return []
