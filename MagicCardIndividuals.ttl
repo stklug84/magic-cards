@@ -32,7 +32,6 @@
 <urn:stklug84:MagicCardIndividuals:2026-07-19#>
     rdf:type owl:Ontology ;
     owl:imports <urn:stklug84:MagicCardsOntology:2026-02-27#> ,
-                <urn:stklug84:MagicCardIndividuals:SubTypeSupplement:2026-07-19#> ,  # sets/SubTypeSupplement.ttl (2 individuals)
                 <urn:stklug84:MagicCardIndividuals:AFR:2026-07-19#> ,  # sets/AdventuresInTheForgottenRealms.ttl (3 individuals)
                 <urn:stklug84:MagicCardIndividuals:AER:2026-07-19#> ,  # sets/AetherRevolt.ttl (4 individuals)
                 <urn:stklug84:MagicCardIndividuals:DFT:2026-07-19#> ,  # sets/Aetherdrift.ttl (10 individuals)

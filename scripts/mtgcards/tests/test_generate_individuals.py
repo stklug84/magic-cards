@@ -8,6 +8,11 @@ derivation rules, which were checked against Arena's own card database:
 Arena lists a multi-faced card under its front face unless it is a split
 card, and uses the set's own code where Scryfall has no arena_code.
 
+The keyword tests pin how Scryfall's keyword list becomes keyword and
+ability-word triples, including the Comprehensive Rules keyword variants
+(typecycling, "[type]walk", multikicker), and the subtype-supplement tests
+pin when sets/SubTypeSupplement.ttl exists.
+
 The generator is a script next to the packages in scripts/, so this module
 only runs from a checkout (``python3 -m unittest discover -s
 mtgcards/tests -t .`` in scripts/); from an installed wheel it skips.
@@ -16,8 +21,11 @@ mtgcards/tests -t .`` in scripts/); from an installed wheel it skips.
 from __future__ import annotations
 
 import importlib
+import tempfile
 import unittest
+from pathlib import Path
 from typing import TYPE_CHECKING, Any
+from unittest import mock
 
 if TYPE_CHECKING:
     from types import ModuleType
@@ -195,6 +203,119 @@ class TestArenaFormatLegalities(_GeneratorTestCase):
             with self.subTest(arena_format=fmt):
                 self.assertIn(f":inFormat :{fmt} ;", text)
         self.assertTrue(text.endswith(" ."))
+
+
+#: keyword map as load_vocab() builds it: keyed by label and by individual
+_KW_MAP = {
+    "Flying": ("hasKeywordAbility", "Flying"),
+    "Cycling": ("hasKeywordAbility", "Cycling"),
+    "Kicker": ("hasKeywordAbility", "Kicker"),
+    "Landwalk": ("hasKeywordAbility", "Landwalk"),
+    "Plainswalk": ("hasKeywordAbility", "Plainswalk"),
+    "Scry": ("hasKeywordAction", "Scry"),
+    "Landfall": ("hasAbilityWord", "Landfall"),
+    "Council's dilemma": ("hasAbilityWord", "CouncilsDilemma"),
+    "CouncilsDilemma": ("hasAbilityWord", "CouncilsDilemma"),
+}
+
+
+class TestKeywordLines(_GeneratorTestCase):
+    """Keywords, CR keyword variants and ability words on a card block."""
+
+    def setUp(self) -> None:
+        """Give the context the keyword map of a small vocabulary."""
+        super().setUp()
+        self.ctx.kw_map = dict(_KW_MAP)
+
+    def keyword_lines(self, *keywords: str) -> list[str]:
+        """Render the keyword lines of a card with *keywords*."""
+        card = _card(keywords=list(keywords))
+        lines: list[str] = self.gen._keyword_lines(card, self.ctx)  # noqa: SLF001 - the unit under test
+        return lines
+
+    def test_ability_words_follow_the_keyword_buckets(self) -> None:
+        """An ability word never moves a card's keyword lines (rule 207.2c)."""
+        self.assertEqual(
+            self.keyword_lines("Landfall", "Flying", "Scry"),
+            [
+                "    :hasKeywordAbility :Flying ;",
+                "    :hasKeywordAction :Scry ;",
+                "    :hasAbilityWord :Landfall ;",
+            ],
+        )
+
+    def test_ability_word_label_resolves_by_individual_name(self) -> None:
+        """Scryfall's sentence-case label reaches :CouncilsDilemma."""
+        self.assertEqual(
+            self.keyword_lines("Council's dilemma"),
+            ["    :hasAbilityWord :CouncilsDilemma ;"],
+        )
+
+    def test_variant_without_its_keyword_resolves_to_it(self) -> None:
+        """A multikicker cost is a kicker cost (rule 702.33c)."""
+        self.assertEqual(
+            self.keyword_lines("Multikicker"), ["    :hasKeywordAbility :Kicker ;"]
+        )
+        self.assertEqual(self.ctx.notes.keywords, set())
+
+    def test_variant_listed_with_its_keyword_adds_nothing(self) -> None:
+        """Typecycling is cycling (rule 702.29f): one :Cycling, no notes."""
+        self.assertEqual(
+            self.keyword_lines(
+                "Flying", "Plainscycling", "Landcycling", "Typecycling", "Cycling"
+            ),
+            ["    :hasKeywordAbility :Flying ,", "                       :Cycling ;"],
+        )
+        self.assertEqual(self.ctx.notes.keywords, set())
+
+    def test_variant_with_its_own_individual_keeps_it(self) -> None:
+        """:Plainswalk is not folded into :Landwalk; islandwalk is."""
+        self.assertEqual(
+            self.keyword_lines("Plainswalk", "Islandwalk"),
+            [
+                "    :hasKeywordAbility :Plainswalk ,",
+                "                       :Landwalk ;",
+            ],
+        )
+
+    def test_unknown_keyword_becomes_a_note(self) -> None:
+        """A flavor word has no individual and is reported, not emitted."""
+        note = (
+            '    # Note: keyword "Water Always Wins" not defined in MagicCardsOntology'
+        )
+        self.assertEqual(
+            self.keyword_lines("Flying", "Water Always Wins"),
+            ["    :hasKeywordAbility :Flying ;", note],
+        )
+        self.assertEqual(self.ctx.notes.keywords, {"Water Always Wins"})
+
+
+class TestSubtypeSupplement(_GeneratorTestCase):
+    """sets/SubTypeSupplement.ttl exists only while the ontology lacks a subtype."""
+
+    def test_stale_supplement_is_removed(self) -> None:
+        """No missing subtype: the supplement of an earlier run goes away."""
+        with tempfile.TemporaryDirectory() as tmp:
+            sets = Path(tmp) / "sets"
+            sets.mkdir()
+            (sets / "SubTypeSupplement.ttl").write_text("# stale\n")
+            imports: list[tuple[str, str, int]] = []
+            with mock.patch.object(self.gen, "ROOT", Path(tmp)):
+                self.gen._write_subtype_supplement(self.gen.Notes(), imports)  # noqa: SLF001 - the unit under test
+            self.assertFalse((sets / "SubTypeSupplement.ttl").exists())
+            self.assertEqual(imports, [])
+
+    def test_missing_subtype_is_supplemented_and_imported_first(self) -> None:
+        """A subtype the ontology lacks is declared and imported first."""
+        with tempfile.TemporaryDirectory() as tmp:
+            (Path(tmp) / "sets").mkdir()
+            notes = self.gen.Notes(subtypes={"Gizmo": ("Gizmo", "ArtifactTypes")})
+            imports = [("urn:x", "Aetherdrift.ttl", 3)]
+            with mock.patch.object(self.gen, "ROOT", Path(tmp)):
+                self.gen._write_subtype_supplement(notes, imports)  # noqa: SLF001 - the unit under test
+            text = (Path(tmp) / "sets" / "SubTypeSupplement.ttl").read_text()
+            self.assertIn(":Gizmo rdf:type owl:NamedIndividual ,", text)
+            self.assertEqual(imports[0][1], "SubTypeSupplement.ttl")
 
 
 if __name__ == "__main__":

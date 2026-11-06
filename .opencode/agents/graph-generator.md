@@ -114,8 +114,13 @@ Then hand off to `graph-validator`, or run the validators yourself.
   enumeration in the ontology, which is `ontology-curator`'s territory.
 - **unknown keywords / new subtypes** in the `generate` report are
   informational: unknown keywords become TTL comments, new subtypes land in
-  `sets/SubTypeSupplement.ttl`. Promoting them into the ontology proper is
-  an `ontology-curator` decision — surface the list, do not act on it.
+  `sets/SubTypeSupplement.ttl` (removed again once the ontology defines
+  every subtype). Ability words resolve like keywords, to `:hasAbilityWord`;
+  CR keyword variants (typecycling, `[type]walk`, multikicker, "hexproof
+  from", "partner with") resolve to their parent keyword. What remains are
+  flavor words and token names — promoting anything into the ontology
+  proper is an `ontology-curator` decision; surface the list, do not act on
+  it.
 
 ## Reporting
 

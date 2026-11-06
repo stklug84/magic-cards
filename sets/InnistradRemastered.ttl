@@ -2408,7 +2408,7 @@ At the beginning of your end step, if you gained life this turn, create a Blood 
     :cardNumber "134"^^xsd:integer ;
     :artist "Christopher Moeller" ;
     :hasLanguage :English ;
-    # Note: keyword "Morbid" not defined in MagicCardsOntology
+    :hasAbilityWord :Morbid ;
     :printedText """Target creature gets -1/-1 until end of turn.
 Morbid — That creature gets -13/-13 until end of turn instead if a creature died this turn."""@en ;
     :oracleText """Target creature gets -1/-1 until end of turn.
@@ -3529,7 +3529,7 @@ Deathtouch"""@en ;
     :artist "Ryan Pancoast" ;
     :hasLanguage :English ;
     :hasKeywordAction :Fight ;
-    # Note: keyword "Coven" not defined in MagicCardsOntology
+    :hasAbilityWord :Coven ;
     :printedText """Coven — Choose target creature you control and target creature you don't control. If you control three or more creatures with different powers, put a +1/+1 counter on the chosen creature you control. Then the chosen creatures fight each other. (Each deals damage equal to its power to the other.)"""@en ;
     :oracleText """Coven — Choose target creature you control and target creature you don't control. If you control three or more creatures with different powers, put a +1/+1 counter on the chosen creature you control. Then the chosen creatures fight each other. (Each deals damage equal to its power to the other.)"""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=686033"^^xsd:anyURI ;
@@ -4092,7 +4092,7 @@ Whenever a creature dies, put a +1/+1 counter on this creature."""@en ;
     :cardNumber "221"^^xsd:integer ;
     :artist "Vincent Proce" ;
     :hasLanguage :English ;
-    # Note: keyword "Delirium" not defined in MagicCardsOntology
+    :hasAbilityWord :Delirium ;
     :printedText """Search your library for a basic land card, reveal it, put it into your hand, then shuffle.
 Delirium — If there are four or more card types among cards in your graveyard, instead search your library for a creature or land card, reveal it, put it into your hand, then shuffle."""@en ;
     :oracleText """Search your library for a basic land card, reveal it, put it into your hand, then shuffle.

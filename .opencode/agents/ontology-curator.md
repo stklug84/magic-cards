@@ -43,7 +43,7 @@ Read the repo's `AGENTS.md` first.
 
 ## Context discipline
 
-`MagicCardsOntology.ttl` is ~8700 lines. Never read it whole. Locate the
+`MagicCardsOntology.ttl` is ~9500 lines. Never read it whole. Locate the
 section you need with `grep`/`rg` on the banner comments
 (`# --- Topic ---`, `#  Class Definitions`), then read that window. To
 answer questions *about* the file (counts, which section a term lives in,
