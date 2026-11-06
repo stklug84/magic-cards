@@ -1,0 +1,23 @@
+error: #[rule]: "99.1" is not a CR rule number (expected "NNN", "NNN.N" or "NNN.Nx")
+ --> tests/ui/bad_number.rs:1:1
+  |
+1 | #[mtgrules::rule("99.1")]
+  | ^^^^^^^^^^^^^^^^^^^^^^^^^
+  |
+  = note: this error originates in the attribute macro `mtgrules::rule` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error: #[rule]: "704.5G" is not a CR rule number (expected "NNN", "NNN.N" or "NNN.Nx")
+ --> tests/ui/bad_number.rs:4:1
+  |
+4 | #[mtgrules::rule("704.5G")]
+  | ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |
+  = note: this error originates in the attribute macro `mtgrules::rule` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error: #[rule]: "704.5.6" is not a CR rule number (expected "NNN", "NNN.N" or "NNN.Nx")
+ --> tests/ui/bad_number.rs:7:1
+  |
+7 | #[mtgrules::rule("704.5g", "704.5.6")]
+  | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |
+  = note: this error originates in the attribute macro `mtgrules::rule` (in Nightly builds, run with -Z macro-backtrace for more info)

@@ -13,6 +13,14 @@ publish.workspace = true
 mtgcards.workspace = true
 mtgrules-macros.workspace = true
 pycompat.workspace = true
+indexmap.workspace = true
+linkme.workspace = true
+regex = "1"
+thiserror.workspace = true
+
+[dev-dependencies]
+tempfile.workspace = true
+trybuild.workspace = true
 
 [lints]
 workspace = true

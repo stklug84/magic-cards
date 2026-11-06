@@ -1,0 +1,7 @@
+error: #[rule]: this fn has no body
+ --> tests/ui/no_body.rs:2:5
+  |
+2 |     #[mtgrules::rule("100.1")]
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |
+  = note: this error originates in the attribute macro `mtgrules::rule` (in Nightly builds, run with -Z macro-backtrace for more info)

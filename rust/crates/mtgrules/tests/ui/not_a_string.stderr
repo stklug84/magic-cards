@@ -1,0 +1,23 @@
+error: #[rule] takes plain string literals ("704.5g"), found `100.1`
+ --> tests/ui/not_a_string.rs:1:1
+  |
+1 | #[mtgrules::rule(100.1)]
+  | ^^^^^^^^^^^^^^^^^^^^^^^^
+  |
+  = note: this error originates in the attribute macro `mtgrules::rule` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error: #[rule]: expected `,`, found `"117.1"`
+ --> tests/ui/not_a_string.rs:4:1
+  |
+4 | #[mtgrules::rule("100.1" "117.1")]
+  | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |
+  = note: this error originates in the attribute macro `mtgrules::rule` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error: #[rule] needs at least one rule number
+ --> tests/ui/not_a_string.rs:7:1
+  |
+7 | #[mtgrules::rule]
+  | ^^^^^^^^^^^^^^^^^
+  |
+  = note: this error originates in the attribute macro `mtgrules::rule` (in Nightly builds, run with -Z macro-backtrace for more info)
