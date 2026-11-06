@@ -32,6 +32,29 @@ class TestSBA(unittest.TestCase):
         self.assertTrue(self.p1.lost)
         self.assertIn("704.5b", self.p1.lose_reason)
 
+    def test_104_4a_simultaneous_loss_is_a_draw(self) -> None:
+        """Both players losing to the same SBA check draws the game (F4)."""
+        self.p0.life = 0
+        self.p1.life = -3
+        settle(self.game)
+        self.assertTrue(self.p0.lost)
+        self.assertTrue(self.p1.lost)
+        self.assertTrue(self.game.game_over)
+        self.assertIsNone(self.game.winner)
+
+    def test_104_2a_sole_survivor_of_a_double_loss_wins(self) -> None:
+        """Two of three players losing at once leaves one winner (104.2a)."""
+        game = make_game(n_players=3)
+        p0, p1, p2 = game.players
+        p0.life = 0
+        p2.poison = 10
+        settle(game)
+        self.assertTrue(p0.lost)
+        self.assertTrue(p2.lost)
+        self.assertFalse(p1.lost)
+        self.assertIs(game.winner, p1)
+        self.assertTrue(game.game_over)
+
     def test_704_5f_zero_toughness_dies(self) -> None:
         """Zero toughness puts the creature in the graveyard (704.5f)."""
         c = creature(self.game, self.p0, toughness=2)

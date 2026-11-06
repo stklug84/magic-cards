@@ -210,6 +210,39 @@ class TestLayers(unittest.TestCase):
         self.game.move_zone(src, Zone.GRAVEYARD)
         self.assertEqual(c.chars(self.game).power, 2)
 
+    def test_613_7_static_effect_takes_the_new_timestamp_after_re_entry(self) -> None:
+        """A permanent that leaves and returns is a new object (400.7, 613.7a).
+
+        Its static ability's effect gets the new timestamp (fix F13: the
+        cached effect used to keep the old one).
+        """
+        c = creature(self.game, self.p0, power=2, toughness=2)
+
+        def setter(p: int, t: int) -> StaticAbility:
+            def continuous(_game: Game, src: GameObject) -> list[ContinuousEffect]:
+                def apply(_g: Game, _o: GameObject, ch: Characteristics) -> None:
+                    ch.power = p
+                    ch.toughness = t
+
+                return [
+                    ContinuousEffect(
+                        layer=7,
+                        sublayer="b",
+                        source=src,
+                        applies_to=lambda _g, o, _ch: o is c,
+                        apply=apply,
+                    ),
+                ]
+
+            return StaticAbility(continuous=continuous, text=f"sets {p}/{t}")
+
+        first = creature(self.game, self.p0, name="One", abilities=[setter(1, 1)])
+        creature(self.game, self.p0, name="Five", abilities=[setter(5, 5)])
+        self.assertEqual(c.chars(self.game).power, 5)  # later timestamp wins
+        self.game.blink(first)  # leaves and returns: newest timestamp now
+        self.assertEqual(first.zone, Zone.BATTLEFIELD)
+        self.assertEqual(c.chars(self.game).power, 1)
+
 
 if __name__ == "__main__":
     unittest.main()

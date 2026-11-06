@@ -94,23 +94,29 @@ def _lname(x: object) -> str:
     return str(x)
 
 
+#: one untapped mana source as the planner sees it: (permanent, mana
+#: ability, producible types, amount per activation, fixed production).
+#: ``fixed`` is the exact multiset of symbols a non-choosing source makes
+#: ("Add {C}{C}", "Add {U}{B}"); None for a source whose type is chosen
+#: on production ("Add {B} or {R}", "any color", the commander's identity).
+type _Source = tuple[
+    GameObject, ActivatedAbility, frozenset[str], int, tuple[str, ...] | None
+]
+
+
 @dataclass
 class _ManaPlan:
     """Working state of one greedy mana-payment search (rule 601.2g)."""
 
     pool: dict[str, int]
-    #: untapped sources: (permanent, mana ability, producible colors, amount)
-    avail: list[tuple[GameObject, ActivatedAbility, frozenset[str], int]]
+    avail: list[_Source]
     #: sources committed so far, with the mana type each will produce
     used: list[tuple[GameObject, ActivatedAbility, str]] = field(default_factory=list)
 
-    def take(
-        self,
-        pred: Callable[[frozenset[str]], object],
-    ) -> tuple[GameObject, ActivatedAbility, frozenset[str], int] | None:
+    def take(self, pred: Callable[[frozenset[str]], object]) -> _Source | None:
         """Pop the matching source with the fewest producible colors."""
         best = None
-        for i, (_obj, _ab, colors, _amount) in enumerate(self.avail):
+        for i, (_obj, _ab, colors, _amount, _fixed) in enumerate(self.avail):
             if pred(colors) and (
                 best is None or len(colors) < len(self.avail[best][2])
             ):
@@ -118,6 +124,25 @@ class _ManaPlan:
         if best is None:
             return None
         return self.avail.pop(best)
+
+    def commit(self, got: _Source, color: str) -> None:
+        """Commit *got* to produce *color*; its surplus mana floats.
+
+        A fixed-production source makes everything it lists (Sol Ring's
+        second {C}, the {B} of "Add {U}{B}"); a choosing source with
+        ``amount`` > 1 makes that many of the chosen colour ("three mana
+        of any one color"). Either way the rest is available to later
+        pips of the same payment.
+        """
+        obj, ab, _colors, amount, fixed = got
+        self.used.append((obj, ab, color))
+        if fixed is not None:
+            rest = list(fixed)
+            rest.remove(color)
+            for t in rest:
+                self.pool[t] = self.pool.get(t, 0) + 1
+        elif amount > 1:
+            self.pool[color] = self.pool.get(color, 0) + amount - 1
 
     def cover_pips(self, cost: Cost) -> bool:
         """Cover the colored and {C} pips of *cost* (rule 601.2g)."""
@@ -136,10 +161,7 @@ class _ManaPlan:
             got = self.take(has_color)
             if got is None:
                 return False
-            self.used.append((got[0], got[1], color))
-            if len(got[2]) == 1 and got[3] > 1:
-                # single-type multi-mana source (Sol Ring): surplus floats
-                self.pool[color] = self.pool.get(color, 0) + got[3] - 1
+            self.commit(got, color)
         return True
 
     def cover_hybrid(self, cost: Cost) -> bool:
@@ -163,8 +185,7 @@ class _ManaPlan:
             got = self.take(overlaps)
             if got is None:
                 return False
-            color = mana_order(got[2] & opts)[0]
-            self.used.append((got[0], got[1], color))
+            self.commit(got, mana_order(got[2] & opts)[0])
         return True
 
     def cover_generic(self, cost: Cost) -> bool:
@@ -176,7 +197,7 @@ class _ManaPlan:
             need -= take_n
         self.avail.sort(key=lambda e: (-e[3], len(e[2])))
         while need > 0 and self.avail:
-            obj, ab, colors, amount = self.avail.pop(0)
+            obj, ab, colors, amount, _fixed = self.avail.pop(0)
             color = "C" if "C" in colors else mana_order(colors)[0]
             self.used.append((obj, ab, color))
             need -= amount
@@ -580,7 +601,7 @@ class Game:
             self.log("draw", who=player.name)
         self.bump()
 
-    @rule("120.3", "119.3")
+    @rule("120.3", "119.3", "702.15b")
     def deal_damage(
         self,
         source: GameObject | Player | None,
@@ -589,7 +610,12 @@ class Game:
         *,
         combat: bool = False,
     ) -> None:
-        """Deal damage from *source* to a player or permanent (rule 120)."""
+        """Deal damage from *source* to a player or permanent (rule 120).
+
+        Damage from a source with lifelink also makes its controller gain
+        that much life (rule 702.15b), through the normal life-gain path
+        so prevention and replacement effects apply.
+        """
         if amount <= 0:
             return
         event = self.emit(
@@ -631,6 +657,12 @@ class Game:
             self._damage_player(source, src_ch, target, amount, combat=combat)
         else:
             self._damage_permanent(src_ch, target, amount)
+        if (
+            isinstance(source, GameObject)
+            and src_ch is not None
+            and "lifelink" in src_ch.keywords
+        ):
+            self.gain_life(source.controller, amount)
 
     @rule("120.3a", "702.90b", "702.164a", "903.10a")
     def _damage_player(
@@ -1008,10 +1040,12 @@ class Game:
         )
         colors: set[str] = set()
         for a in adds:
-            if a.any_color:
-                colors |= set("WUBRG")
-            elif a.commander_identity:
+            # identity first: "any color in your commander's color
+            # identity" is restricted to the identity (fix F6)
+            if a.commander_identity:
                 colors |= self.commander_identity(obj.controller) or {"C"}
+            elif a.any_color:
+                colors |= set("WUBRG")
             colors |= set(a.types)
         return frozenset(colors - {"ANY"} or {"C"})
 
@@ -1029,8 +1063,14 @@ class Game:
 
         Runs on top of whatever is already floating in the pool.
         """
-        avail = [
-            (obj, ab, self.mana_colors_of(obj, ab), self._mana_amount(ab))
+        avail: list[_Source] = [
+            (
+                obj,
+                ab,
+                self.mana_colors_of(obj, ab),
+                self._mana_amount(ab),
+                self._fixed_production(ab),
+            )
             for obj, ab in self.mana_sources(player)
         ]
         plan = _ManaPlan(pool=dict(player.mana_pool.mana), avail=avail)
@@ -1048,15 +1088,24 @@ class Game:
 
     @staticmethod
     def _mana_amount(ab: ActivatedAbility) -> int:
-        """How much mana one activation of the ability produces."""
+        """How much mana one activation of the ability produces.
+
+        A source whose type is chosen on production ("Add {B} or {R}",
+        "any color", the commander's identity) makes ``amount`` mana of
+        that one type; "Add {C}{C}" makes one per listed symbol (fix F1).
+        """
         eff = ab.effect
         if isinstance(eff, AddMana):
-            return (
-                max(1, len(eff.types))
-                if not (eff.any_color or eff.commander_identity)
-                else 1
-            )
+            return eff.amount if eff.chooses else max(1, len(eff.types))
         return 1
+
+    @staticmethod
+    def _fixed_production(ab: ActivatedAbility) -> tuple[str, ...] | None:
+        """Return the exact symbols a non-choosing mana ability produces, if any."""
+        eff = ab.effect
+        if isinstance(eff, AddMana) and not eff.chooses and eff.types:
+            return eff.types
+        return None
 
     @rule("605.3b")
     def _activate_mana_ability(
@@ -1072,18 +1121,32 @@ class Game:
         if ab.sac_cost == "self":
             self.sacrifice(player, obj)
         eff = ab.effect
-        if (
-            isinstance(eff, AddMana)
-            and not eff.any_color
-            and not eff.commander_identity
-            and eff.types
-        ):
+        if isinstance(eff, AddMana) and not eff.chooses and eff.types:
             for t in eff.types:
                 player.mana_pool.add(t)
+        elif isinstance(eff, AddMana):
+            player.mana_pool.add(color, eff.amount)  # the planner's choice
         else:
             player.mana_pool.add(color)
 
     # ------------------------------------------------------------ casting
+    @rule("117.1a", "307.1", "702.8a")
+    def can_cast_now(self, player: Player, card: GameObject) -> bool:
+        """Decide whether *player* may cast *card* right now (117.1a, 307.1).
+
+        Instants, and anything with flash (rule 702.8a), may be cast
+        whenever the player has priority; everything else only during
+        the player's own main phase while the stack is empty.
+        """
+        ch = card.base
+        if "Instant" in ch.types or "flash" in ch.keywords:
+            return True
+        return (
+            player is self.active_player
+            and self.phase in ("main1", "main2")
+            and not self.stack
+        )
+
     @rule("601.2", "601.2a", "601.2b", "601.2c", "601.2f", "601.2h", "601.2i", "903.8")
     def cast_spell(
         self,
@@ -1094,6 +1157,8 @@ class Game:
         from_command: bool = False,
     ) -> bool:
         """Cast a spell through the rule 601.2 process; False if illegal."""
+        if not self.can_cast_now(player, card):
+            return False
         ch = card.base
         cost = self._spell_cost(player, card, x)
         # rule 601.2b additional costs: verify they can be paid up front
@@ -1497,27 +1562,32 @@ class Game:
         acted = self._sba_attachments() or acted
         return self._sba_legend_rule() or acted
 
-    @rule("704.5a", "704.5b", "704.5c", "704.6c")
+    @rule("704.3", "704.5a", "704.5b", "704.5c", "704.6c")
     def _sba_players(self) -> bool:
-        """Player-loss SBAs: life, empty draw, poison, commander damage."""
-        acted = False
+        """Player-loss SBAs: life, empty draw, poison, commander damage.
+
+        All players who meet a loss condition lose simultaneously
+        (rule 704.3); only then is the game's end decided, so two players
+        losing at once draw the game instead of the second one "winning"
+        (fix F4).
+        """
+        losers: list[tuple[Player, str]] = []
         for p in self.alive():
             if p.life <= 0:  # rule 704.5a
-                self._lose(p, "life 0 or less (704.5a)")
-                acted = True
+                losers.append((p, "life 0 or less (704.5a)"))
             elif p.drew_from_empty:  # rule 704.5b
-                self._lose(p, "drew from empty library (704.5b)")
-                acted = True
+                losers.append((p, "drew from empty library (704.5b)"))
             elif p.poison >= POISON_LOSS_THRESHOLD:  # rule 704.5c
-                self._lose(p, "ten or more poison counters (704.5c)")
-                acted = True
-            else:
-                for dmg in p.commander_damage.values():
-                    if dmg >= COMMANDER_DAMAGE_LOSS:  # rules 903.10a / 704.6c
-                        self._lose(p, "21+ commander damage (903.10a)")
-                        acted = True
-                        break
-        return acted
+                losers.append((p, "ten or more poison counters (704.5c)"))
+            elif any(
+                dmg >= COMMANDER_DAMAGE_LOSS for dmg in p.commander_damage.values()
+            ):  # rules 903.10a / 704.6c
+                losers.append((p, "21+ commander damage (903.10a)"))
+        for p, reason in losers:
+            self._lose(p, reason)
+        if losers:
+            self._check_game_end()
+        return bool(losers)
 
     @rule("704.5f", "704.5g", "704.5h", "704.5i", "704.5q", "702.12b")
     def _sba_permanents(self) -> bool:
@@ -1599,18 +1669,26 @@ class Game:
         return acted
 
     def _lose(self, player: Player, reason: str) -> None:
-        """Eliminate the player; end the game on a sole survivor."""
+        """Eliminate the player (rule 104.3); the game's end is decided after."""
         if player.lost:
             return
         player.lost = True
         player.lose_reason = reason
         self.log("player_loses", who=player.name, why=reason)
-        # rule 104.2a: sole survivor wins
+
+    @rule("104.2a", "104.4a")
+    def _check_game_end(self) -> None:
+        """End the game once eliminations are complete.
+
+        A sole survivor wins (rule 104.2a); if every remaining player lost
+        at the same time, the game is a draw (rule 104.4a).
+        """
         alive = self.alive()
         if len(alive) == 1:
             self.winner = alive[0]
             self.game_over = True
         elif not alive:
+            self.winner = None
             self.game_over = True
 
     # ------------------------------------------------------------ priority

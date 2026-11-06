@@ -65,18 +65,17 @@ from mtgrules.effects import (
     TargetControllerBasicLand,
     TargetControllerGainsPower,
     TutorAny,
+    land_mana_ability,
 )
 from mtgrules.events import EventType
 from mtgrules.layers import ContinuousEffect
-from mtgrules.manasys import land_mana_types
-from mtgrules.objects import Characteristics, Zone
+from mtgrules.objects import Characteristics, GameObject, Zone
 
 if TYPE_CHECKING:
     from collections.abc import Callable
 
     from mtgrules.events import Event
     from mtgrules.game import Game
-    from mtgrules.objects import GameObject
     from mtgrules.protocols import CardRef, TriggerCondition
 
 #: filled by compile_card: card name -> set of uncompiled clauses
@@ -99,7 +98,11 @@ _KEYWORD_WORDS = {
     "double strike",
     "wither",
     "infect",
+    "plainswalk",
     "islandwalk",
+    "swampwalk",
+    "mountainwalk",
+    "forestwalk",
     "fear",
     "intimidate",
     "persist",
@@ -853,6 +856,35 @@ def parse_trigger_line(line: str, name: str) -> TriggeredAbility | None:
 
 _MINUS = "\u2212"
 
+_AMOUNT_WORDS = {"one": 1, "two": 2, "three": 3, "four": 4, "five": 5}
+
+
+@rule("106.1b", "106.2")
+def parse_add_mana(text: str) -> AddMana:
+    """Parse the body of an 'Add ...' mana ability into an AddMana.
+
+    - ``{B}{R}``: all listed symbols (two mana);
+    - ``{B} or {R}`` / ``{W}, {U}, or {B}``: ONE mana of one of them;
+    - ``one mana of any color``: one mana of any colour;
+    - ``N mana of any one color``: N mana of one chosen colour;
+    - ``... in your commander's color identity``: one mana of a colour of
+      the identity (never flagged as "any color", fix F6).
+    """
+    low = text.lower()
+    cid = "commander's color identity" in low
+    any_color = not cid and ("any color" in low or "any one color" in low)
+    amount = 1
+    if m := re.match(r"^(one|two|three|four|five) mana of any", low):
+        amount = _AMOUNT_WORDS[m.group(1)]
+    symbols = tuple(s for s in re.findall(r"\{([^}]+)\}", text) if s in "WUBRGC")
+    return AddMana(
+        types=symbols,
+        any_color=any_color,
+        commander_identity=cid,
+        choice=" or " in low and len(symbols) > 1,
+        amount=amount,
+    )
+
 
 def parse_activated_line(line: str, name: str) -> ActivatedAbility | None:
     """Parse one '[Cost]: [Effect]' oracle line (rule 602.1)."""
@@ -898,16 +930,13 @@ def parse_activated_line(line: str, name: str) -> ActivatedAbility | None:
     # mana ability?
     am = re.match(r"^add (.+)$", body, re.IGNORECASE)
     if am and tap:
-        types = tuple(s for s in re.findall(r"\{([^}]+)\}", body) if s in "WUBRGC")
-        any_color = "any color" in body.lower()
-        cid = "commander's color identity" in body.lower()
         return ActivatedAbility(
             mana_cost=mana,
             tap_cost=tap,
             sac_cost=sac,
             life_cost=life,
             is_mana_ability=True,
-            effect=AddMana(types=types, any_color=any_color, commander_identity=cid),
+            effect=parse_add_mana(am.group(1)),
             text=line,
         )
     effect, targets = parse_effect_text(body, name)
@@ -1147,19 +1176,10 @@ def _apply_land_behavior(ch: Characteristics, ref: CardRef) -> None:
     """Graph land facts -> mana abilities, tapped markers, fetches."""
     if "Land" not in ch.types:
         return
-    if ref.behavior.get("land_colors"):
-        types, any_c = land_mana_types(ref.behavior["land_colors"])
-        if not any(
-            isinstance(a, ActivatedAbility) and a.is_mana_ability for a in ch.abilities
-        ):
-            ch.abilities.append(
-                ActivatedAbility(
-                    tap_cost=True,
-                    is_mana_ability=True,
-                    effect=AddMana(types=types or ("C",), any_color=any_c),
-                    text="{T}: Add mana.",
-                ),
-            )
+    if ref.behavior.get("land_colors") and not any(
+        isinstance(a, ActivatedAbility) and a.is_mana_ability for a in ch.abilities
+    ):
+        ch.abilities.append(land_mana_ability(ref.behavior["land_colors"]))
     if ref.behavior.get("enters_tapped"):
         ch.abilities.append(
             StaticAbility(enters_tapped=True, text="enters the battlefield tapped"),
@@ -1175,9 +1195,52 @@ def _apply_land_behavior(ch: Characteristics, ref: CardRef) -> None:
         )
 
 
-@rule("702.79")
+@rule("702.79", "702.83a", "702.83b")
 def _add_keyword_abilities(ch: Characteristics) -> None:
     """Keywords that carry rules baggage beyond combat checks."""
+    if "exalted" in ch.keywords:
+        # rule 702.83a: "Whenever a creature you control attacks alone,
+        # that creature gets +1/+1 until end of turn." The ATTACKS event
+        # carries "alone" (rule 702.83b, computed once all attackers are
+        # declared).
+        def attacks_alone(_game: Game, source: GameObject, event: Event) -> bool:
+            attacker = event.data.get("obj")
+            return (
+                bool(event.data.get("alone"))
+                and isinstance(attacker, GameObject)
+                and attacker.controller is source.controller
+            )
+
+        def exalted_pump(game: Game, ctx: Ctx) -> None:
+            target = ctx.event_obj
+            if target is None or target.zone != Zone.BATTLEFIELD:
+                return
+
+            def applies(_g: Game, obj: GameObject, _ch: Characteristics) -> bool:
+                return obj is target
+
+            def pump(_g: Game, _o: GameObject, c: Characteristics) -> None:
+                c.power = (c.power or 0) + 1
+                c.toughness = (c.toughness or 0) + 1
+
+            game.add_floating_effect(
+                ContinuousEffect(
+                    layer=7,
+                    sublayer="c",
+                    source=ctx.source,
+                    applies_to=applies,
+                    apply=pump,
+                    duration="end_of_turn",
+                ),
+            )
+
+        ch.abilities.append(
+            TriggeredAbility(
+                trigger=TriggerSpec(EventType.ATTACKS, condition=attacks_alone),
+                effect=Custom(exalted_pump),
+                text="Exalted (rule 702.83): the lone attacker gets +1/+1",
+            ),
+        )
     if "persist" in ch.keywords:
 
         def persist_return(game: Game, ctx: Ctx) -> None:

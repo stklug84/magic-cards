@@ -43,10 +43,10 @@ from mtgrules.effects import (
     Scry,
     SearchLands,
     Sequence,
+    land_mana_ability,
 )
 from mtgrules.events import Event, EventType
 from mtgrules.layers import ContinuousEffect
-from mtgrules.manasys import land_mana_types
 from mtgrules.objects import Characteristics, GameObject, Player, Zone
 from mtgrules.replacements import Replacement
 
@@ -2238,13 +2238,5 @@ def apply_override(ch: Characteristics, ref: CardRef) -> bool:
             isinstance(a, ActivatedAbility) and a.is_mana_ability for a in ch.abilities
         )
     ):
-        types, any_c = land_mana_types(ref.behavior["land_colors"])
-        ch.abilities.append(
-            ActivatedAbility(
-                tap_cost=True,
-                is_mana_ability=True,
-                effect=AddMana(types=types, any_color=any_c),
-                text="{T}: Add mana.",
-            ),
-        )
+        ch.abilities.append(land_mana_ability(ref.behavior["land_colors"]))
     return True

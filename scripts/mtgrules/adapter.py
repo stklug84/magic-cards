@@ -40,6 +40,8 @@ REPO = Path(
 #: rule 103.5: a London mulligan can go down to a zero-card keep at most
 #: six times from a seven-card hand
 _MAX_MULLIGANS = 6
+#: rule 103.5c applies to multiplayer games: more players than this
+_TWO_PLAYER_GAME = 2
 
 
 @dataclass
@@ -63,14 +65,19 @@ def _build_library(deck: Deck, db: CardDatabase, owner: Player) -> list[GameObje
     return objs
 
 
-@rule("903.6", "103.4", "103.5")
+@rule("903.6", "103.1", "103.3", "103.4", "103.5")
 def setup_game(
     decks: Sequence[Deck],
     db: CardDatabase,
     rng: random.Random,
     options: MatchOptions | None = None,
 ) -> Game:
-    """Build a game: libraries, commanders, and London mulligans."""
+    """Build a game: starting player, libraries, commanders, mulligans.
+
+    Rule 103.1: the starting player is chosen at random (fix F12); every
+    following step runs in turn order from that player - the shuffles
+    (103.3) and the mulligan rounds (103.5).
+    """
     opts = options or MatchOptions()
     players = [Player(name=deck.name, deck_name=deck.name) for deck in decks]
     profiles = opts.profiles or [None] * len(players)
@@ -79,10 +86,11 @@ def setup_game(
         for p, profile in zip(players, profiles, strict=False)
     }
     game = Game(players, rng, policies, turn_cap=opts.turn_cap, log=opts.log)
+    game.active_idx = rng.randrange(len(players))  # rule 103.1
+    order = [players[(game.active_idx + i) % len(players)] for i in range(len(players))]
 
     for p, deck in zip(players, decks, strict=False):
         p.library = _build_library(deck, db, p)
-        rng.shuffle(p.library)
         if deck.commander:
             ref = db.get(deck.commander)
             base = compiler.compile_card(ref)
@@ -91,28 +99,60 @@ def setup_game(
             cmd.zone = Zone.COMMAND
             p.command.append(cmd)
             p.commander_obj = cmd
+    for p in order:
+        rng.shuffle(p.library)  # rule 103.3
+    _mulligans(game, order, policies, rng)
+    return game
 
-        # rule 103.5 London mulligan
-        pol = policies[p.name]
-        mulls = 0
-        while True:
+
+@rule("103.5", "103.5c")
+def _mulligans(
+    game: Game,
+    order: Sequence[Player],
+    policies: dict[str, DefaultPolicy],
+    rng: random.Random,
+) -> None:
+    """London mulligans in rounds, in turn order (rule 103.5).
+
+    Each round every undecided player looks at a fresh seven-card hand
+    and keeps or mulligans; a player who keeps after N counted mulligans
+    puts N cards on the bottom. In a game of three or more players the
+    first mulligan does not count (rule 103.5c, fix F8): the policy
+    never sees it and it costs no card. ``stats["mulligans"]`` records
+    the number of mulligans taken, free one included.
+    """
+    multiplayer = len(game.players) > _TWO_PLAYER_GAME
+    taken = dict.fromkeys((p.name for p in order), 0)
+    counted = dict.fromkeys((p.name for p in order), 0)
+    undecided = list(order)
+    while undecided:
+        still: list[Player] = []
+        for p in undecided:
+            pol = policies[p.name]
             hand = p.library[:7]
-            if pol.keep_hand(game, p, hand, mulls) or mulls >= _MAX_MULLIGANS:
+            if (
+                pol.keep_hand(game, p, hand, counted[p.name])
+                or taken[p.name] >= _MAX_MULLIGANS
+            ):
                 p.library = p.library[7:]
                 p.hand = hand
                 for c in hand:
                     c.zone = Zone.HAND
-                if mulls:
-                    bottom = pol.bottom_cards(game, p, hand, mulls)
-                    for c in bottom[:mulls]:
+                if counted[p.name]:
+                    bottom = pol.bottom_cards(game, p, hand, counted[p.name])
+                    for c in bottom[: counted[p.name]]:
                         p.hand.remove(c)
                         c.zone = Zone.LIBRARY
                         p.library.append(c)
-                break
-            mulls += 1
+                continue
+            taken[p.name] += 1
+            if not (multiplayer and taken[p.name] == 1):
+                counted[p.name] += 1  # rule 103.5c: the first one is free
             rng.shuffle(p.library)
-        p.stats["mulligans"] = mulls
-    return game
+            still.append(p)
+        undecided = still
+    for p in order:
+        p.stats["mulligans"] = taken[p.name]
 
 
 #: raw rules-engine loss reasons (rule citations) -> short report labels
@@ -152,6 +192,7 @@ def run_game(
             s(event, **kw)
 
     game = setup_game(decks, db, rng, dataclasses.replace(opts, log=fanout))
+    starting_player = game.active_player
     if recorder is not None:
         recorder.attach(game)
         sinks.append(recorder.on_event)
@@ -169,6 +210,7 @@ def run_game(
         "winner": winner.name if winner else "draw",
         "turns": game.turn,
         "reason": reason,
+        "starting_player": starting_player.name,
         "players": {
             p.name: dict(
                 p.stats,
