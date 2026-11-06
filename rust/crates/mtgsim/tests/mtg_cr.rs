@@ -205,14 +205,21 @@ fn coverage_and_check_over_the_synthetic_text() {
         text.contains("--- 100. General [0 implemented / 0 unsupported / 3 unclaimed of 3]\n"),
         "{text}"
     );
-    // the binary registers no #[rule] yet, so the check passes on any text
+    // the engine's #[rule] annotations do not resolve against a text of
+    // three rules: every unknown number is listed with its implementer
+    // and location, exit 1
     mtg_cr()
         .arg("--graph-root")
         .arg(root.path())
         .arg("check")
         .assert()
-        .success()
-        .stdout(predicates::str::contains(" resolve\n"));
+        .code(1)
+        .stderr(predicates::str::starts_with(
+            "mtg-cr: @rule: unknown CR rule '",
+        ))
+        .stderr(predicates::str::contains("(mtgrules::"))
+        .stderr(predicates::str::contains("crates/mtgrules/src/"))
+        .stderr(predicates::str::contains(".rs:"));
 }
 
 #[test]
@@ -277,4 +284,13 @@ fn real_rules_text_when_present() {
         .args(["show", "903.10a"])
         .assert()
         .success();
+    // every #[rule] annotation of the engine resolves against the real text
+    mtg_cr()
+        .arg("--graph-root")
+        .arg(&repo)
+        .arg("check")
+        .assert()
+        .success()
+        .stdout(predicates::str::contains(" rule annotations and "))
+        .stdout(predicates::str::contains(" resolve\n"));
 }

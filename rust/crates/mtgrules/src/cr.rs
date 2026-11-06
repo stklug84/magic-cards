@@ -302,41 +302,7 @@ impl ComprehensiveRules {
 
 // ---------------------------------------------------------------- registry
 
-/// One `#[rule(...)]` annotation.
-#[derive(Debug)]
-pub struct RuleImpl {
-    /// the rule numbers as written (a trailing dot is tolerated)
-    pub numbers: &'static [&'static str],
-    /// `module::path::name` of the annotated item
-    pub implementer: &'static str,
-    /// the item kind: `fn`, `struct`, ...
-    pub kind: &'static str,
-    /// the source file of the annotation
-    pub file: &'static str,
-    /// the line of the annotation
-    pub line: u32,
-}
-
-/// One `unsupported!(...)` declaration.
-#[derive(Debug)]
-pub struct Unsupported {
-    /// the rule number (or family)
-    pub number: &'static str,
-    /// why it is out of scope
-    pub reason: &'static str,
-    /// the source file of the declaration
-    pub file: &'static str,
-    /// the line of the declaration
-    pub line: u32,
-}
-
-/// Every `#[rule]` annotation of the linked program.
-#[linkme::distributed_slice]
-pub static RULE_IMPLEMENTATIONS: [RuleImpl];
-
-/// Every `unsupported!` declaration of the linked program.
-#[linkme::distributed_slice]
-pub static UNSUPPORTED: [Unsupported];
+pub use mtgrules_registry::{RULE_IMPLEMENTATIONS, RuleImpl, UNSUPPORTED, Unsupported};
 
 /// Rule number -> implementers (`module::path::name`), sorted; the Python
 /// `RULE_IMPLEMENTATIONS` dict.

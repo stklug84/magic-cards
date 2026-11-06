@@ -12,6 +12,7 @@ publish.workspace = true
 [dependencies]
 mtgcards.workspace = true
 mtgrules-macros.workspace = true
+mtgrules-registry.workspace = true
 pycompat.workspace = true
 indexmap.workspace = true
 linkme.workspace = true
@@ -19,6 +20,9 @@ regex = "1"
 thiserror.workspace = true
 
 [dev-dependencies]
+# reading the Python engine's reference vectors under tests/vectors
+serde = { version = "1", features = ["derive"] }
+serde_json = { version = "1", features = ["preserve_order", "float_roundtrip"] }
 tempfile.workspace = true
 trybuild.workspace = true
 
