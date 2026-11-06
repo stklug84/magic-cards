@@ -289,3 +289,45 @@ pub fn game_end(winner: Option<&str>, reason: &str, turns: u32) -> Value {
         ("turns", Value::from(i64::from(turns))),
     ])
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn record_accessors_tolerate_every_shape() {
+        let rec = Value::dict([
+            ("s", Value::from("x")),
+            ("n", Value::from(3_i64)),
+            ("f", Value::Float(0.0)),
+            ("b", Value::Bool(false)),
+            ("l", Value::List(vec![Value::Null])),
+            ("d", Value::Dict(Vec::new())),
+            ("z", Value::Null),
+        ]);
+        assert_eq!(text(&rec, "s"), "x");
+        assert_eq!(text(&rec, "n"), "");
+        assert_eq!(int(&rec, "n"), 3);
+        assert_eq!(int(&rec, "s"), 0);
+        assert!(truthy(&rec, "s") && truthy(&rec, "n") && truthy(&rec, "l"));
+        assert!(
+            !truthy(&rec, "f") && !truthy(&rec, "b") && !truthy(&rec, "d") && !truthy(&rec, "z")
+        );
+        assert!(!truthy(&rec, "missing") && field(&rec, "missing").is_none());
+        assert!(field(&Value::Null, "s").is_none());
+        assert_eq!(text(&Value::from(1_i64), "s"), "");
+    }
+
+    #[test]
+    fn header_and_footer_records() {
+        assert_eq!(
+            pycompat::json::dumps(&game_header(2, 7)),
+            "{\"t\": \"game\", \"game\": 2, \"seed\": 7}"
+        );
+        assert_eq!(
+            pycompat::json::dumps(&game_end(None, "draw", 40)),
+            "{\"t\": \"end\", \"winner\": \"draw\", \"reason\": \"draw\", \"turns\": 40}"
+        );
+        assert_eq!(text(&game_end(Some("Ann"), "life", 9), "winner"), "Ann");
+    }
+}

@@ -42,6 +42,12 @@ pub fn notes() -> BTreeMap<String, String> {
     NOTES.with(|n| n.borrow().clone())
 }
 
+/// Merge notes recorded on another thread (the parallel game runner
+/// compiles cards on its workers; the registry is per thread).
+pub fn record_notes(notes: BTreeMap<String, String>) {
+    NOTES.with(|n| n.borrow_mut().extend(notes));
+}
+
 /// One hand-written card implementation: mutates the compiled base.
 pub type OverrideFn = fn(&mut Characteristics, &CardData);
 
@@ -361,6 +367,11 @@ pub fn counter_doubler() -> StaticAbility {
 }
 
 // ---------------------------------------------------------------- registry
+
+/// The names with a hand-written implementation, in table order.
+pub fn names() -> impl Iterator<Item = &'static str> {
+    cards::OVERRIDES.iter().map(|(n, _)| *n)
+}
 
 /// Look up the hand-written implementation of a card by name.
 #[must_use]

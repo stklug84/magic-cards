@@ -12,7 +12,7 @@ use std::path::{Path, PathBuf};
 
 use mtgcards::stats::Aggregator;
 use mtgcards::{CardDatabase, Deck, load_deck};
-use mtgrules::adapter::{MatchOptions, SharedRecorder, model_coverage_lines, run_game};
+use mtgrules::adapter::{MatchOptions, model_coverage_lines, run_game};
 use mtgrules::policy::{PolicyProfile, get_profile};
 use pycompat::json::Value;
 use pycompat::pyrepr::repr_str;
@@ -331,36 +331,85 @@ pub struct RunSettings<'a> {
     pub turn_cap: u32,
     /// per-seat profiles
     pub profiles: &'a [Option<PolicyProfile>],
-    /// `--verbose`: a line per game through `out`
+    /// `--verbose`: a line per game
     pub verbose: bool,
+    /// worker threads over the seeds (`1` = sequential, Python's shape)
+    pub jobs: usize,
+    /// collect the viz records of every game (`--viz-file`, `--watch`)
+    pub record: bool,
+}
+
+/// One finished game, delivered in seed order then game order.
+pub struct GameDone {
+    /// 1-based game number over the whole run
+    pub game_no: u64,
+    /// the seed
+    pub seed: i64,
+    /// the `--verbose` line, when asked for
+    pub line: Option<String>,
+    /// the viz records, when `RunSettings::record`
+    pub viz: Vec<Value>,
+}
+
+/// Everything one seed produced.
+struct SeedDone {
+    games: Vec<(Value, Vec<Value>)>,
+    unknown: std::collections::BTreeMap<String, BTreeSet<String>>,
+    notes: std::collections::BTreeMap<String, String>,
+}
+
+/// Play the games of one seed: the records with their viz streams.
+fn run_seed(
+    decks: &[Deck],
+    db: &mut CardDatabase,
+    settings: &RunSettings<'_>,
+    seed: i64,
+) -> SeedDone {
+    let mut rng = PyRandom::new(i128::from(seed));
+    let options = MatchOptions {
+        turn_cap: settings.turn_cap,
+        profiles: settings.profiles.to_vec(),
+        starting_player: None,
+    };
+    let mut games = Vec::with_capacity(usize::try_from(settings.games).unwrap_or(0));
+    for _ in 0..settings.games {
+        let viz: std::rc::Rc<std::cell::RefCell<Vec<Value>>> = std::rc::Rc::default();
+        let recorder = settings
+            .record
+            .then(|| mtgviz::Recorder::collecting(std::rc::Rc::clone(&viz)).shared());
+        let mut rec = run_game(decks, db, &mut rng, &options, None, recorder.as_ref());
+        drop(recorder);
+        if let Value::Dict(fields) = &mut rec {
+            fields.push(("seed".to_owned(), Value::from(seed)));
+        }
+        games.push((rec, viz.take()));
+    }
+    SeedDone {
+        games,
+        unknown: mtgrules::compiler::unknown_clauses(),
+        notes: mtgrules::overrides::notes(),
+    }
 }
 
 /// Run all requested games; the pooled statistics (`None` when no game
-/// was played). `recorder_for(game_no, seed)` supplies the optional viz
-/// recorder of each game.
+/// was played). `on_game` sees every finished game in seed order, then
+/// game order, whatever `settings.jobs` is: with more than one worker
+/// the seeds run in parallel on clones of the database (a seed's games
+/// share one RNG stream, so the seed is the unit of parallelism) and
+/// the results are delivered as the next seed in order completes.
 pub fn run_matches(
     decks: &[Deck],
     db: &mut CardDatabase,
     settings: &RunSettings<'_>,
-    recorder_for: &mut dyn FnMut(u64, i64) -> Option<SharedRecorder>,
-    out: &mut dyn FnMut(&str),
+    on_game: &mut dyn FnMut(GameDone),
 ) -> Option<Aggregator> {
     let mut agg: Option<Aggregator> = None;
     let mut game_no = 0;
-    for &seed in settings.seeds {
-        let mut rng = PyRandom::new(i128::from(seed));
-        for g in 0..settings.games {
+    let mut deliver = |seed: i64, done: SeedDone, agg: &mut Option<Aggregator>| {
+        mtgrules::compiler::record_unknown_clauses(done.unknown);
+        mtgrules::overrides::record_notes(done.notes);
+        for (g, (rec, viz)) in done.games.into_iter().enumerate() {
             game_no += 1;
-            let recorder = recorder_for(game_no, seed);
-            let options = MatchOptions {
-                turn_cap: settings.turn_cap,
-                profiles: settings.profiles.to_vec(),
-                starting_player: None,
-            };
-            let mut rec = run_game(decks, db, &mut rng, &options, None, recorder.as_ref());
-            if let Value::Dict(fields) = &mut rec {
-                fields.push(("seed".to_owned(), Value::from(seed)));
-            }
             let agg = agg.get_or_insert_with(|| {
                 let names = match field(&rec, "players") {
                     Some(Value::Dict(players)) => players.iter().map(|(n, _)| n.clone()).collect(),
@@ -368,12 +417,60 @@ pub fn run_matches(
                 };
                 Aggregator::new(names)
             });
-            if settings.verbose {
-                out(&game_line(seed, g, &rec));
-            }
+            let line = settings
+                .verbose
+                .then(|| game_line(seed, u64::try_from(g).unwrap_or(u64::MAX), &rec));
+            on_game(GameDone {
+                game_no,
+                seed,
+                line,
+                viz,
+            });
             agg.add(rec);
         }
+    };
+    if settings.jobs <= 1 || settings.seeds.len() <= 1 {
+        for &seed in settings.seeds {
+            let done = run_seed(decks, db, settings, seed);
+            deliver(seed, done, &mut agg);
+        }
+        return agg;
     }
+    let workers = settings.jobs.min(settings.seeds.len());
+    let next = std::sync::atomic::AtomicUsize::new(0);
+    let (tx, rx) = std::sync::mpsc::channel::<(usize, SeedDone)>();
+    let template: &CardDatabase = db;
+    std::thread::scope(|scope| {
+        for _ in 0..workers {
+            let tx = tx.clone();
+            let next = &next;
+            scope.spawn(move || {
+                let mut mine = template.clone();
+                loop {
+                    let i = next.fetch_add(1, std::sync::atomic::Ordering::Relaxed);
+                    let Some(&seed) = settings.seeds.get(i) else {
+                        return;
+                    };
+                    let done = run_seed(decks, &mut mine, settings, seed);
+                    if tx.send((i, done)).is_err() {
+                        return;
+                    }
+                }
+            });
+        }
+        drop(tx);
+        // deliver in seed order as the results arrive
+        let mut pending: std::collections::BTreeMap<usize, SeedDone> =
+            std::collections::BTreeMap::new();
+        let mut expected = 0;
+        for (i, done) in rx {
+            pending.insert(i, done);
+            while let Some(done) = pending.remove(&expected) {
+                deliver(settings.seeds[expected], done, &mut agg);
+                expected += 1;
+            }
+        }
+    });
     agg
 }
 

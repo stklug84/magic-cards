@@ -21,6 +21,7 @@ serde = { version = "1", features = ["derive"] }
 # preserve_order: the vectors' dict order is the point; float_roundtrip:
 # serde_json's fast float parser may be off by one ulp otherwise
 serde_json = { version = "1", features = ["preserve_order", "float_roundtrip"] }
+proptest.workspace = true
 
 [lints]
 workspace = true

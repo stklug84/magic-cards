@@ -97,6 +97,16 @@ struct Args {
         allow_negative_numbers = true
     )]
     game: i64,
+    /// worker threads: the seeds run in parallel (a seed's games share
+    /// one RNG stream and stay sequential), results and recordings keep
+    /// their order; 0 = the available CPUs
+    #[arg(
+        long,
+        default_value_t = 1,
+        value_name = "N",
+        allow_negative_numbers = true
+    )]
+    jobs: i64,
     /// the knowledge-graph root (default: MTG_GRAPH_ROOT, else the
     /// checkout above the working directory)
     #[arg(long, value_name = "DIR")]
@@ -121,12 +131,16 @@ fn exit(e: &Exit) -> ExitCode {
     ExitCode::from(e.code)
 }
 
-fn run(args: &Args) -> Result<(), Exit> {
-    if let Some(path) = &args.replay {
-        return mtgviz::replay::replay_file(path, args.game).map_err(Exit::error);
-    }
+/// The validated counts of a run.
+struct Counts {
+    seeds: Vec<i64>,
+    games: u64,
+    turn_cap: u32,
+    jobs: usize,
+}
 
-    // argument validation argparse cannot express: usage errors, exit 2
+/// Argument validation argparse cannot express: usage errors, exit 2.
+fn counts(args: &Args) -> Result<Counts, Exit> {
     let seeds = parse_seeds(args.seed, &args.seeds).map_err(|err| {
         Exit::usage(format!(
             "invalid --seeds value {}: {err}",
@@ -139,8 +153,32 @@ fn run(args: &Args) -> Result<(), Exit> {
     if args.turn_cap < 1 {
         return Err(Exit::usage("--turn-cap must be >= 1"));
     }
-    let games = u64::try_from(args.games).unwrap_or(1);
-    let turn_cap = u32::try_from(args.turn_cap).unwrap_or(u32::MAX);
+    if args.jobs < 0 {
+        return Err(Exit::usage("--jobs must be >= 0"));
+    }
+    let jobs = match usize::try_from(args.jobs).unwrap_or(1) {
+        0 => std::thread::available_parallelism().map_or(1, std::num::NonZeroUsize::get),
+        n => n,
+    };
+    Ok(Counts {
+        seeds,
+        games: u64::try_from(args.games).unwrap_or(1),
+        turn_cap: u32::try_from(args.turn_cap).unwrap_or(u32::MAX),
+        jobs,
+    })
+}
+
+fn run(args: &Args) -> Result<(), Exit> {
+    if let Some(path) = &args.replay {
+        return mtgviz::replay::replay_file(path, args.game).map_err(Exit::error);
+    }
+
+    let Counts {
+        seeds,
+        games,
+        turn_cap,
+        jobs,
+    } = counts(args)?;
 
     // the #[rule] registry against the Comprehensive Rules, like the
     // Python decorators at import time
@@ -179,13 +217,6 @@ fn run(args: &Args) -> Result<(), Exit> {
         return Ok(());
     }
 
-    let settings = RunSettings {
-        seeds: &seeds,
-        games,
-        turn_cap,
-        profiles: &profiles,
-        verbose: args.verbose,
-    };
     let viz_writer = match &args.viz_file {
         Some(path) => Some(
             mtgviz::VizWriter::open(path)
@@ -193,10 +224,25 @@ fn run(args: &Args) -> Result<(), Exit> {
         ),
         None => None,
     };
-    let mut recorder_for =
-        |game_no: u64, seed: i64| viz_writer.as_ref().map(|w| w.recorder(game_no, seed));
-    let agg = run_matches(&decks, &mut db, &settings, &mut recorder_for, &mut |line| {
-        println!("{line}");
+    let settings = RunSettings {
+        seeds: &seeds,
+        games,
+        turn_cap,
+        profiles: &profiles,
+        verbose: args.verbose,
+        jobs,
+        record: viz_writer.is_some(),
+    };
+    let agg = run_matches(&decks, &mut db, &settings, &mut |done| {
+        if let Some(line) = &done.line {
+            println!("{line}");
+        }
+        if let Some(writer) = &viz_writer {
+            let mut sink = writer.game_sink(done.game_no, done.seed);
+            for rec in done.viz {
+                sink(rec);
+            }
+        }
     });
     if let (Some(writer), Some(path)) = (&viz_writer, &args.viz_file) {
         writer

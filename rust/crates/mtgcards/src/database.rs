@@ -203,7 +203,7 @@ pub fn load_custom_cards(path: &Path) -> Result<CardIndex, DatabaseError> {
 }
 
 /// Name-indexed card data, layered from graph, custom JSON and hooks.
-#[derive(Debug, Default)]
+#[derive(Clone, Debug, Default)]
 pub struct CardDatabase {
     /// declared contract of the graph root (`None` for a plain checkout)
     pub manifest: Option<GraphManifest>,
