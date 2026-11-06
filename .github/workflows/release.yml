@@ -7,19 +7,26 @@
 # comment: |
 #   Builds the magic-cards-tools Python artifact (wheel + sdist: the
 #   graph-bundle contract and the graph validators) on version tags (v*)
-#   and publishes it as a GitHub Release. The tag must match the version
-#   in pyproject.toml and in rust/Cargo.toml (vX.Y.Z <-> X.Y.Z); the
-#   built wheel is smoke-tested (install, import, mtg-validate --help)
-#   before the release is created.
+#   and creates a *draft* GitHub Release for it. The tag must match the
+#   version in pyproject.toml and in rust/Cargo.toml (vX.Y.Z <-> X.Y.Z);
+#   the built wheel is smoke-tested (install, import, mtg-validate
+#   --help) before the draft is created.
 #
 #   The simulator binaries (mtg-simulate, mtg-selfplay, mtg-cr) are then
 #   built from the Rust workspace in release mode on every supported
 #   platform, smoke-tested (--version against the tag, the #[rule]
 #   registry against the Comprehensive Rules, a short offline matchup
-#   over the checked-out graph) and attached to the same release as
-#   tarballs with SHA-256 checksums: one archive per target triple.
+#   over the checked-out graph) and attached to the draft as tarballs
+#   with SHA-256 checksums: one archive per target triple. The last job
+#   publishes the draft once every binary is attached.
 #
-#   The build -> verify -> publish sequence is the reusable stklug84/
+#   The draft is load-bearing: the repository's releases are immutable,
+#   so a published release accepts no further assets (uploading to one
+#   fails with HTTP 422) - the wheel and the binaries have to be complete
+#   before the release goes public. A failed binary build therefore
+#   leaves a draft only the maintainers see, never a half release.
+#
+#   The build -> verify -> create sequence is the reusable stklug84/
 #   github-workflows release-artifact workflow, the same one release-
 #   graph.yml uses for the knowledge graph bundle. Only the commands
 #   below are repository-specific; each runs with RELEASE_TAG and
@@ -90,11 +97,13 @@ jobs:
 
       release-assets: "dist/*"
       release-name: "magic-cards-tools"
+      # published by the `publish` job below, after the binaries
+      draft: true
 
   # The simulator binaries, one tarball per target. Runs after the
-  # Python artifact's job so the release the assets attach to exists;
-  # the matrix mirrors the platforms validate.yml tests (Linux and
-  # macOS, both architectures).
+  # Python artifact's job so the draft the assets attach to exists; the
+  # matrix mirrors the platforms validate.yml tests (Linux and macOS,
+  # both architectures).
   binaries:
     name: Rust binaries (${{ matrix.target }})
     needs: release
@@ -190,10 +199,47 @@ jobs:
           fi
           cat "dist/$name.tar.gz.sha256"
 
-      - name: Attach the archive to the release
+      # gh resolves a draft by its tag name (the tags endpoint does not
+      # list drafts; gh falls back to the release list).
+      - name: Attach the archive to the draft release
         env:
           GH_TOKEN: ${{ github.token }}
           RELEASE_TAG: ${{ github.ref_name }}
         run: |
           set -euo pipefail
           gh release upload "$RELEASE_TAG" dist/*.tar.gz dist/*.tar.gz.sha256 --clobber
+
+  # Publish once the wheel and all four binary archives are attached.
+  # Publishing makes the release immutable (see the header comment), so
+  # the asset list is checked first: a missing archive keeps the draft.
+  publish:
+    name: Publish the release
+    needs: binaries
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Check the assets and publish the draft
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: |
+          set -euo pipefail
+          assets="$(gh release view "$RELEASE_TAG" --json assets --jq '.assets[].name')"
+          echo "$assets"
+          for target in x86_64-unknown-linux-gnu aarch64-unknown-linux-gnu aarch64-apple-darwin x86_64-apple-darwin; do
+            for suffix in .tar.gz .tar.gz.sha256; do
+              name="mtg-simulate-${RELEASE_TAG}-${target}${suffix}"
+              if ! grep -qxF "$name" <<<"$assets"; then
+                echo "::error::$name is not attached to the draft; the release stays a draft"
+                exit 1
+              fi
+            done
+          done
+          if ! grep -qE '^magic_cards_tools-.*\.whl$' <<<"$assets"; then
+            echo "::error::the wheel is not attached to the draft; the release stays a draft"
+            exit 1
+          fi
+          gh release edit "$RELEASE_TAG" --draft=false
+          gh release view "$RELEASE_TAG" --json isDraft,url --jq '"published: \(.url) (draft=\(.isDraft))"'

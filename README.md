@@ -203,11 +203,11 @@ annotation is validated against it at startup:
 
 ```sh
 target=aarch64-apple-darwin   # or x86_64-apple-darwin, x86_64-unknown-linux-gnu, aarch64-unknown-linux-gnu
-curl -fsSLO "https://github.com/stklug84/magic-cards/releases/download/v0.3.0/mtg-simulate-v0.3.0-${target}.tar.gz"
-curl -fsSLO "https://github.com/stklug84/magic-cards/releases/download/v0.3.0/mtg-simulate-v0.3.0-${target}.tar.gz.sha256"
-shasum -a 256 -c "mtg-simulate-v0.3.0-${target}.tar.gz.sha256"
-tar xzf "mtg-simulate-v0.3.0-${target}.tar.gz"
-"./mtg-simulate-v0.3.0-${target}/mtg-simulate" deck1.txt deck2.txt --offline --games 20
+curl -fsSLO "https://github.com/stklug84/magic-cards/releases/download/v0.3.1/mtg-simulate-v0.3.1-${target}.tar.gz"
+curl -fsSLO "https://github.com/stklug84/magic-cards/releases/download/v0.3.1/mtg-simulate-v0.3.1-${target}.tar.gz.sha256"
+shasum -a 256 -c "mtg-simulate-v0.3.1-${target}.tar.gz.sha256"
+tar xzf "mtg-simulate-v0.3.1-${target}.tar.gz"
+"./mtg-simulate-v0.3.1-${target}/mtg-simulate" deck1.txt deck2.txt --offline --games 20
 ```
 
 ### The contract: `GRAPH-MANIFEST.json`
