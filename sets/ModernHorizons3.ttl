@@ -72,7 +72,6 @@ legality definitions."""@en .
     :toughnessValue "4"^^xsd:integer ;
     :hasKeywordAbility :Annihilator ,
                        :Hexproof ;
-    # Note: keyword "Hexproof from" not defined in MagicCardsOntology
     :printedText """When you cast this spell, you gain 1 life for each colorless permanent you control.
 Hexproof from each color
 Annihilator 2 (Whenever this creature attacks, defending player sacrifices two permanents of their choice.)"""@en ;
@@ -688,7 +687,7 @@ Crew 4"""@en ;
     :powerValue "1"^^xsd:integer ;
     :toughness "3" ;
     :toughnessValue "3"^^xsd:integer ;
-    # Note: keyword "Landfall" not defined in MagicCardsOntology
+    :hasAbilityWord :Landfall ;
     :printedText """Landfall — Whenever a land you control enters, you get {E} (an energy counter).
 {T}, Pay six {E}: Draw three cards."""@en ;
     :oracleText """Landfall — Whenever a land you control enters, you get {E} (an energy counter).
@@ -811,7 +810,6 @@ Crew 4"""@en ;
     :toughnessValue "2"^^xsd:integer ;
     :hasKeywordAbility :Flying ,
                        :Hexproof ;
-    # Note: keyword "Hexproof from" not defined in MagicCardsOntology
     :printedText """Flying, hexproof from activated and triggered abilities
 When this creature enters, exchange control of this creature and target creature an opponent controls. If you do, you get {E}{E}{E}{E}, then sacrifice that creature unless you pay an amount of {E} equal to its mana value."""@en ;
     :oracleText """Flying, hexproof from activated and triggered abilities
@@ -948,7 +946,7 @@ Whenever another creature or artifact you control is put into a graveyard from t
     :cardNumber "113"^^xsd:integer ;
     :artist "Filipe Pagliuso" ;
     :hasLanguage :English ;
-    # Note: keyword "Revolt" not defined in MagicCardsOntology
+    :hasAbilityWord :Revolt ;
     :printedText """Revolt — As long as a permanent left the battlefield under your control this turn, if a source you control would deal noncombat damage to an opponent or a permanent an opponent controls, it deals that much damage plus 2 instead.
 Whenever you get one or more {E}, this enchantment deals that much damage to any target."""@en ;
     :oracleText """Revolt — As long as a permanent left the battlefield under your control this turn, if a source you control would deal noncombat damage to an opponent or a permanent an opponent controls, it deals that much damage plus 2 instead.

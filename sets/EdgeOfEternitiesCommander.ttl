@@ -1377,9 +1377,6 @@ Remove a charge counter from this artifact: Add one mana of any color."""@en ;
     :toughnessValue "7"^^xsd:integer ;
     :hasKeywordAbility :Flying ,
                        :Cycling ;
-    # Note: keyword "Plainscycling" not defined in MagicCardsOntology
-    # Note: keyword "Landcycling" not defined in MagicCardsOntology
-    # Note: keyword "Typecycling" not defined in MagicCardsOntology
     :printedText """Flying
 When this creature enters, exile up to two target artifacts and/or enchantments.
 Plainscycling {2} ({2}, Discard this card: Search your library for a Plains card, reveal it, put it into your hand, then shuffle.)"""@en ;
@@ -1416,7 +1413,7 @@ Plainscycling {2} ({2}, Discard this card: Search your library for a Plains card
     :cardNumber "64"^^xsd:integer ;
     :artist "Erica Yang" ;
     :hasLanguage :English ;
-    # Note: keyword "Metalcraft" not defined in MagicCardsOntology
+    :hasAbilityWord :Metalcraft ;
     :printedText """Tap target creature.
 Metalcraft — If you control three or more artifacts, exile that creature."""@en ;
     :oracleText """Tap target creature.
@@ -2616,7 +2613,7 @@ Sacrifice this creature: Put two charge counters on target artifact."""@en ;
     :powerValue "1"^^xsd:integer ;
     :toughness "1" ;
     :toughnessValue "1"^^xsd:integer ;
-    # Note: keyword "Converge" not defined in MagicCardsOntology
+    :hasAbilityWord :Converge ;
     :printedText """Converge — This creature enters with a +1/+1 counter on it for each color of mana spent to cast it.
 Remove a +1/+1 counter from this creature: Add one mana of any color.
 {T}: Put a +1/+1 counter on this creature."""@en ;
@@ -2781,7 +2778,7 @@ When this artifact has twenty or more charge counters on it, you win the game.""
     :artist "Steve Argyle" ;
     :hasLanguage :English ;
     :producesMana :Colorless ;
-    # Note: keyword "Multikicker" not defined in MagicCardsOntology
+    :hasKeywordAbility :Kicker ;
     :printedText """Multikicker {2} (You may pay an additional {2} any number of times as you cast this spell.)
 This artifact enters with a charge counter on it for each time it was kicked.
 {T}: Add {C} for each charge counter on this artifact."""@en ;

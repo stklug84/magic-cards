@@ -57,16 +57,18 @@ the other moved.
 
 ## What the bundle may and may not contain
 
-`BUNDLE_PATHS` in `build_graph_bundle.py` is the allowlist. Three
+`BUNDLE_PATHS` in `build_graph_bundle.py` is the allowlist. Two
 exclusions are deliberate and must stay:
 
 - `collection.csv` — private inventory;
-- `MagicCompRules-*.txt` — not redistributable;
-- `MagicCardSynergies.ttl` — no consumer.
+- `MagicCompRules-*.txt` — not redistributable.
 
 `MagicCardIndividuals.ttl` *is* included even though the simulator ignores
-it, because `MagicCardCollection.ttl` imports it and the bundle must pass
-its own `owl:imports` check standalone. Do not "tidy" it out.
+it, because `MagicCardCollection.ttl` and `MagicCardSynergies.ttl` import
+it and the bundle must pass its own `owl:imports` check standalone. Do not
+"tidy" it out. `MagicCardSynergies.ttl` is included for the synergy
+queries and for magic-decks, whose deck builder reads the card-to-card
+synergies from the pinned bundle.
 
 ## GRAPH-MANIFEST.json is the contract
 

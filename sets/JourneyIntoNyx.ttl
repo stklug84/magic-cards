@@ -73,7 +73,7 @@ legality definitions."""@en .
     :powerValue "1"^^xsd:integer ;
     :toughness "4" ;
     :toughnessValue "4"^^xsd:integer ;
-    # Note: keyword "Constellation" not defined in MagicCardsOntology
+    :hasAbilityWord :Constellation ;
     :printedText """Constellation — Whenever this creature or another enchantment you control enters, each opponent loses 1 life."""@en ;
     :oracleText """Constellation — Whenever this creature or another enchantment you control enters, each opponent loses 1 life."""@en ;
     :flavorText """Occasionally the living wander to the Rivers, but the wardens of Athreos ensure that only the dead pass."""@en ;

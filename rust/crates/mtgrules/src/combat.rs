@@ -142,7 +142,7 @@ impl CombatPhase {
             if game.game_over {
                 return;
             }
-            // 510: combat damage; rule 510.5 - an additional first-strike
+            // 510: combat damage; rule 510.4 - an additional first-strike
             // combat damage step if any first/double strike creature
             let first_strikers = self.combatants(game).into_iter().any(|a| {
                 let kw = &game.chars(a).keywords;
@@ -321,7 +321,7 @@ impl CombatPhase {
         game.priority_loop();
     }
 
-    /// Whether `obj` deals damage in this damage step (rule 510.5).
+    /// Whether `obj` deals damage in this damage step (rule 510.4).
     fn strikes(game: &Game, obj: ObjId, first_strike: bool) -> bool {
         let kw = &game.chars(obj).keywords;
         if first_strike {

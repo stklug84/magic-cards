@@ -74,7 +74,7 @@ legality definitions."""@en .
     :toughness "2" ;
     :toughnessValue "2"^^xsd:integer ;
     :hasKeywordAbility :Vigilance ;
-    # Note: keyword "Channel" not defined in MagicCardsOntology
+    :hasAbilityWord :Channel ;
     :printedText """Vigilance
 Channel — {6}, Discard this card: Put a +1/+1 counter on each creature you control. Draw a card."""@en ;
     :oracleText """Vigilance
@@ -1273,9 +1273,6 @@ When this artifact enters or leaves the battlefield, you may tap or untap target
     :toughnessValue "4"^^xsd:integer ;
     :hasKeywordAbility :Flying ,
                        :Cycling ;
-    # Note: keyword "Islandcycling" not defined in MagicCardsOntology
-    # Note: keyword "Landcycling" not defined in MagicCardsOntology
-    # Note: keyword "Typecycling" not defined in MagicCardsOntology
     :printedText """Flying
 When Stockman enters, draw a card, then discard a card.
 Islandcycling {2} ({2}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)"""@en ;
@@ -1425,9 +1422,6 @@ Islandcycling {2} ({2}, Discard this card: Search your library for an Island car
     :toughnessValue "4"^^xsd:integer ;
     :hasKeywordAbility :Menace ,
                        :Cycling ;
-    # Note: keyword "Landcycling" not defined in MagicCardsOntology
-    # Note: keyword "Typecycling" not defined in MagicCardsOntology
-    # Note: keyword "Swampcycling" not defined in MagicCardsOntology
     :printedText """Menace (This creature can't be blocked except by two or more creatures.)
 Rhinos you control have menace.
 Swampcycling {2} ({2}, Discard this card: Search your library for a Swamp card, reveal it, put it into your hand, then shuffle.)"""@en ;
@@ -1517,7 +1511,7 @@ Swampcycling {2} ({2}, Discard this card: Search your library for a Swamp card, 
     :toughness "4" ;
     :toughnessValue "4"^^xsd:integer ;
     :hasKeywordAbility :Lifelink ;
-    # Note: keyword "Disappear" not defined in MagicCardsOntology
+    :hasAbilityWord :Disappear ;
     :printedText """Lifelink
 Disappear — When this creature enters, if a permanent left the battlefield under your control this turn, create a 1/1 black Ninja creature token."""@en ;
     :oracleText """Lifelink
@@ -1569,7 +1563,7 @@ Disappear — When this creature enters, if a permanent left the battlefield und
     :toughnessValue "2"^^xsd:integer ;
     :hasKeywordAction :Scry ;
     :hasKeywordAbility :Flying ;
-    # Note: keyword "Disappear" not defined in MagicCardsOntology
+    :hasAbilityWord :Disappear ;
     :printedText """Flying
 Disappear — At the beginning of your end step, if a permanent left the battlefield under your control this turn, scry 1. (Look at the top card of your library. You may put that card on the bottom.)"""@en ;
     :oracleText """Flying
@@ -1621,7 +1615,7 @@ Disappear — At the beginning of your end step, if a permanent left the battlef
     :toughness "2" ;
     :toughnessValue "2"^^xsd:integer ;
     :hasKeywordAbility :Flying ;
-    # Note: keyword "Disappear" not defined in MagicCardsOntology
+    :hasAbilityWord :Disappear ;
     :printedText """Flying
 Disappear — At the beginning of your end step, if a permanent left the battlefield under your control this turn, create a 1/1 black Insect Warrior creature token with flying.
 {3}{G}, Sacrifice a token: Draw a card."""@en ;
@@ -2375,7 +2369,7 @@ Jennika's Technique deals 2 damage to each creature."""@en ;
     :toughness "4" ;
     :toughnessValue "4"^^xsd:integer ;
     :hasKeywordAbility :Trample ;
-    # Note: keyword "Alliance" not defined in MagicCardsOntology
+    :hasAbilityWord :Alliance ;
     :printedText """Trample
 Alliance — Whenever another creature you control enters, this creature gets +1/+0 until end of turn."""@en ;
     :oracleText """Trample
@@ -2570,7 +2564,7 @@ Whenever this creature attacks, you may discard a card. If you do, draw a card."
     :powerValue "1"^^xsd:integer ;
     :toughness "3" ;
     :toughnessValue "3"^^xsd:integer ;
-    # Note: keyword "Alliance" not defined in MagicCardsOntology
+    :hasAbilityWord :Alliance ;
     :printedText """Alliance — Whenever another creature you control enters, Raphael deals 1 damage to target opponent."""@en ;
     :oracleText """Alliance — Whenever another creature you control enters, Raphael deals 1 damage to target opponent."""@en ;
     :flavorText """"Anger is a dangerous ally. It clouds your judgment. You need to control it, lest it control you."
@@ -2660,7 +2654,7 @@ Whenever this creature attacks, you may discard a card. If you do, draw a card."
     :powerValue "1"^^xsd:integer ;
     :toughness "2" ;
     :toughnessValue "2"^^xsd:integer ;
-    # Note: keyword "Alliance" not defined in MagicCardsOntology
+    :hasAbilityWord :Alliance ;
     :printedText """Alliance — Whenever another creature you control enters, Wingnut gains your choice of flying, menace, or haste until end of turn.
 Whenever Wingnut attacks, each other attacking creature gets +1/+0 until end of turn."""@en ;
     :oracleText """Alliance — Whenever another creature you control enters, Wingnut gains your choice of flying, menace, or haste until end of turn.
@@ -2710,9 +2704,6 @@ Whenever Wingnut attacks, each other attacking creature gets +1/+0 until end of 
     :hasKeywordAbility :Reach ,
                        :Trample ,
                        :Cycling ;
-    # Note: keyword "Mountaincycling" not defined in MagicCardsOntology
-    # Note: keyword "Landcycling" not defined in MagicCardsOntology
-    # Note: keyword "Typecycling" not defined in MagicCardsOntology
     :printedText """Reach, trample
 When Zog enters, target creature can't block this turn.
 Mountaincycling {2} ({2}, Discard this card: Search your library for a Mountain card, reveal it, put it into your hand, then shuffle.)"""@en ;
@@ -2966,7 +2957,7 @@ When this artifact enters, target creature gets +2/+2 until end of turn. Untap i
     :powerValue "3"^^xsd:integer ;
     :toughness "3" ;
     :toughnessValue "3"^^xsd:integer ;
-    # Note: keyword "Disappear" not defined in MagicCardsOntology
+    :hasAbilityWord :Disappear ;
     :printedText """Disappear — At the beginning of your end step, if a permanent left the battlefield under your control this turn, put a +1/+1 counter on Michelangelo."""@en ;
     :oracleText """Disappear — At the beginning of your end step, if a permanent left the battlefield under your control this turn, put a +1/+1 counter on Michelangelo."""@en ;
     :flavorText """"A teacher must be ready to accept responsibility for the student, especially when the student is a weirdo."
@@ -3355,9 +3346,6 @@ When this creature enters, you gain 2 life."""@en ;
     :toughness "7" ;
     :toughnessValue "7"^^xsd:integer ;
     :hasKeywordAbility :Cycling ;
-    # Note: keyword "Landcycling" not defined in MagicCardsOntology
-    # Note: keyword "Forestcycling" not defined in MagicCardsOntology
-    # Note: keyword "Typecycling" not defined in MagicCardsOntology
     :printedText """Rocksteady can't be blocked by more than one creature.
 Boars you control can't be blocked by more than one creature.
 Forestcycling {2} ({2}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)"""@en ;
@@ -3734,7 +3722,7 @@ At the beginning of your end step, exile up to one target artifact you control a
     :powerValue "2"^^xsd:integer ;
     :toughness "1" ;
     :toughnessValue "1"^^xsd:integer ;
-    # Note: keyword "Alliance" not defined in MagicCardsOntology
+    :hasAbilityWord :Alliance ;
     :printedText """Alliance — Whenever another creature you control enters, put a +1/+1 counter on this creature."""@en ;
     :oracleText """Alliance — Whenever another creature you control enters, put a +1/+1 counter on this creature."""@en ;
     :flavorText """Not all humans fear the unknown. The Earth Protection Force specializes in teaching the unknown to fear them instead."""@en ;
@@ -4248,7 +4236,7 @@ Whenever Karai deals combat damage to a player, return target creature card from
     :toughness "3" ;
     :toughnessValue "3"^^xsd:integer ;
     :hasKeywordAbility :Deathtouch ;
-    # Note: keyword "Disappear" not defined in MagicCardsOntology
+    :hasAbilityWord :Disappear ;
     :printedText """Deathtouch
 Disappear — This creature enters with two +1/+1 counters on it if a permanent left the battlefield under your control this turn."""@en ;
     :oracleText """Deathtouch
@@ -4572,7 +4560,7 @@ Whenever a player casts a spell, if the amount of mana spent to cast it was less
                   :Red ,
                   :Green ,
                   :Colorless ;
-    # Note: keyword "Landfall" not defined in MagicCardsOntology
+    :hasAbilityWord :Landfall ;
     :printedText """Landfall — Whenever a land you control enters, put a charge counter on this artifact.
 {T}: Add one mana of any color.
 {T}, Remove two charge counters from this artifact: Add {C}{C}.
@@ -5170,9 +5158,6 @@ Whenever Michelangelo enters or attacks, create a Mutagen token. (It's an artifa
     :toughness "3" ;
     :toughnessValue "3"^^xsd:integer ;
     :hasKeywordAbility :Cycling ;
-    # Note: keyword "Plainscycling" not defined in MagicCardsOntology
-    # Note: keyword "Landcycling" not defined in MagicCardsOntology
-    # Note: keyword "Typecycling" not defined in MagicCardsOntology
     :printedText """When Jennika enters, create a 2/2 red Mutant creature token.
 Plainscycling {2} ({2}, Discard this card: Search your library for a Plains card, reveal it, put it into your hand, then shuffle.)"""@en ;
     :oracleText """When Jennika enters, create a 2/2 red Mutant creature token.

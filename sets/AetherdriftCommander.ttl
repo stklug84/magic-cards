@@ -304,7 +304,7 @@ When this creature enters, you get {E}{E} (two energy counters). Then you may pa
     :powerValue "3"^^xsd:integer ;
     :toughness "3" ;
     :toughnessValue "3"^^xsd:integer ;
-    # Note: keyword "Landfall" not defined in MagicCardsOntology
+    :hasAbilityWord :Landfall ;
     :printedText """Landfall — Whenever a land you control enters, you get {E}{E} (two energy counters).
 You may pay eight {E} rather than pay the mana cost for permanent spells you cast."""@en ;
     :oracleText """Landfall — Whenever a land you control enters, you get {E}{E} (two energy counters).
@@ -1015,7 +1015,7 @@ If one or more artifact tokens would be created under your control, those tokens
     :powerValue "2"^^xsd:integer ;
     :toughness "4" ;
     :toughnessValue "4"^^xsd:integer ;
-    # Note: keyword "Imprint" not defined in MagicCardsOntology
+    :hasAbilityWord :Imprint ;
     :printedText """Imprint — When this creature enters, you may exile target nontoken creature.
 As long as a card exiled with this creature is a creature card, this creature has the power, toughness, and creature types of the last creature card exiled with it. It's still a Shapeshifter."""@en ;
     :oracleText """Imprint — When this creature enters, you may exile target nontoken creature.
@@ -2185,7 +2185,7 @@ Whenever this creature attacks, you get {E}{E} (two energy counters), then you m
     :toughness "1" ;
     :toughnessValue "1"^^xsd:integer ;
     :hasKeywordAbility :Haste ;
-    # Note: keyword "Lieutenant" not defined in MagicCardsOntology
+    :hasAbilityWord :Lieutenant ;
     :printedText """Haste
 Lieutenant — At the beginning of combat on your turn, if you control your commander, create a 1/1 colorless Thopter artifact creature token with flying. That token gains haste until end of turn."""@en ;
     :oracleText """Haste
@@ -2403,7 +2403,7 @@ Pay {E}: This creature gets +1/+1 until end of turn."""@en ;
     :powerValue "2"^^xsd:integer ;
     :toughness "3" ;
     :toughnessValue "3"^^xsd:integer ;
-    # Note: keyword "Landfall" not defined in MagicCardsOntology
+    :hasAbilityWord :Landfall ;
     :printedText """Landfall — Whenever a land you control enters, you get {E} (an energy counter).
 Pay eight {E}: Create a 6/6 colorless Beast artifact creature token."""@en ;
     :oracleText """Landfall — Whenever a land you control enters, you get {E} (an energy counter).

@@ -117,6 +117,23 @@ FORMATS = [
 #: Scryfall `games` value -> :GamePlatform individual, in emission order
 GAMES = {"paper": "PaperMagic", "arena": "MTGArena", "mtgo": "MagicOnline"}
 LANG = {"English": "English", "German": "German"}
+#: Scryfall keyword -> the keyword individual it is a variant of, for the
+#: variants the Comprehensive Rules define as that keyword: typecycling is
+#: cycling (rule 702.29f), "[type]walk" is how landwalk is written (702.14a),
+#: "hexproof from [quality]" is hexproof (702.11d), multikicker is kicker
+#: (702.33c) and "partner with [name]" is partner (702.124n). Consulted only
+#: for keywords without an individual of their own, so :Plainswalk stays.
+KEYWORD_VARIANTS: tuple[tuple[re.Pattern[str], str], ...] = (
+    (re.compile(r".+cycling", re.IGNORECASE), "Cycling"),
+    (re.compile(r".+walk", re.IGNORECASE), "Landwalk"),
+    (re.compile(r"hexproof from.*", re.IGNORECASE), "Hexproof"),
+    (re.compile(r"multikicker", re.IGNORECASE), "Kicker"),
+    (re.compile(r"partner with.*", re.IGNORECASE), "Partner"),
+)
+#: ability words (rule 207.2c) are not keywords; their bucket is emitted
+#: after the keyword buckets, so a card that gains one keeps its keyword
+#: lines where they were
+ABILITY_WORD_PROPERTY = "hasAbilityWord"
 
 
 class Printing(TypedDict):
@@ -380,7 +397,8 @@ def load_vocab() -> tuple[dict[str, Any], dict[str, str], dict[str, tuple[str, s
     """Load the build_vocab.py extract and derive the lookup tables.
 
     Returns the raw vocabulary, the normalized-label -> SubType-individual
-    map and the keyword -> (property, individual) map.
+    map and the keyword -> (property, individual) map. Ability words share
+    the keyword map: Scryfall lists them among a card's keywords.
     """
     v: dict[str, Any] = json.loads(VOCAB_JSON.read_text())
     labels = v["_labels"]
@@ -393,8 +411,9 @@ def load_vocab() -> tuple[dict[str, Any], dict[str, str], dict[str, tuple[str, s
         ("KeywordAbility", "hasKeywordAbility"),
         ("KeywordAction", "hasKeywordAction"),
         ("Keyword", "hasKeyword"),
+        ("AbilityWord", ABILITY_WORD_PROPERTY),
     ):
-        for ind in v[cls]:
+        for ind in v.get(cls, []):
             key = labels.get(ind, ind)
             kw.setdefault(key, (prop, ind))
             kw.setdefault(ind, (prop, ind))
@@ -633,28 +652,49 @@ def _stat_lines(front: ScryCard) -> list[str]:
     return out
 
 
+def keyword_variant(keyword: str) -> str | None:
+    """Return the keyword *keyword* is a CR-defined variant of, else None."""
+    for pattern, parent in KEYWORD_VARIANTS:
+        if pattern.fullmatch(keyword):
+            return parent
+    return None
+
+
 def _keyword_lines(card: ScryCard, ctx: GenContext) -> list[str]:
-    """Keyword triples; unknown keywords become comments and a note.
+    """Keyword and ability-word triples; unknown keywords become notes.
 
     Keywords are bucketed per property (:hasKeywordAbility /
     :hasKeywordAction) so each is emitted once with an object list;
-    buckets keep first-appearance order. Notes for keywords the ontology
-    does not define follow the triples.
+    buckets keep first-appearance order and never repeat an object. The
+    :hasAbilityWord bucket follows the keyword buckets. A keyword variant
+    without an individual of its own (KEYWORD_VARIANTS) resolves to the
+    keyword it is a variant of, and adds nothing when Scryfall lists that
+    keyword as well. Notes for keywords the ontology does not define
+    follow the triples.
     """
+    keywords: list[str] = card.get("keywords", [])
     buckets: dict[str, list[str]] = defaultdict(list)
     notes: list[str] = []
-    for kw in card.get("keywords", []):
+    for kw in keywords:
         hit = ctx.kw_map.get(kw) or ctx.kw_map.get(pascal(kw))
+        if hit is None:
+            parent = keyword_variant(kw)
+            if parent is not None and parent in keywords:
+                continue
+            hit = ctx.kw_map.get(parent) if parent is not None else None
         if hit:
-            buckets[hit[0]].append(f":{hit[1]}")
+            obj = f":{hit[1]}"
+            if obj not in buckets[hit[0]]:
+                buckets[hit[0]].append(obj)
         else:
             notes.append(
                 f'    # Note: keyword "{kw}" not defined in MagicCardsOntology',
             )
             ctx.notes.keywords.add(kw)
     out: list[str] = []
-    for prop, objects in buckets.items():
-        out.extend(object_list(f":{prop}", objects))
+    # sorted() is stable: keyword buckets keep their order, ability words last
+    for prop in sorted(buckets, key=lambda p: p == ABILITY_WORD_PROPERTY):
+        out.extend(object_list(f":{prop}", buckets[prop]))
     out.extend(notes)
     return out
 
@@ -976,8 +1016,14 @@ def _write_subtype_supplement(
     notes: Notes,
     imports: list[tuple[str, str, int]],
 ) -> None:
-    """Write sets/SubTypeSupplement.ttl for subtypes the ontology lacks."""
+    """Write sets/SubTypeSupplement.ttl for subtypes the ontology lacks.
+
+    Once the ontology defines every subtype the collection uses, a
+    supplement left by an earlier run is removed with nothing to replace it.
+    """
+    out = ROOT / "sets" / "SubTypeSupplement.ttl"
     if not notes.subtypes:
+        out.unlink(missing_ok=True)
         return
     urn = f"urn:stklug84:MagicCardIndividuals:SubTypeSupplement:{NS_DATE}#"
     lines = [
@@ -993,7 +1039,6 @@ def _write_subtype_supplement(
         f'    rdfs:label "{esc_str(label)}" .\n'
         for ind, (label, cls) in sorted(notes.subtypes.items())
     )
-    out = ROOT / "sets" / "SubTypeSupplement.ttl"
     out.write_text("\n".join(lines))
     imports.insert(0, (urn, out.name, len(notes.subtypes)))
 

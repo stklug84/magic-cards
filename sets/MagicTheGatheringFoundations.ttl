@@ -722,7 +722,7 @@ Whenever you gain life for the first time each turn, surveil 1. (Look at the top
     :toughness "2" ;
     :toughnessValue "2"^^xsd:integer ;
     :hasKeywordAction :Surveil ;
-    # Note: keyword "Threshold" not defined in MagicCardsOntology
+    :hasAbilityWord :Threshold ;
     :printedText """When this creature enters, surveil 3. (Look at the top three cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)
 Threshold — This creature can't be blocked as long as there are seven or more cards in your graveyard."""@en ;
     :oracleText """When this creature enters, surveil 3. (Look at the top three cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)
@@ -957,7 +957,7 @@ Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until e
     :powerValue "5"^^xsd:integer ;
     :toughness "6" ;
     :toughnessValue "6"^^xsd:integer ;
-    # Note: keyword "Landfall" not defined in MagicCardsOntology
+    :hasAbilityWord :Landfall ;
     :printedText """Landfall — Whenever a land you control enters, tap target creature an opponent controls and put a stun counter on it. (If a permanent with a stun counter would become untapped, remove one from it instead.)"""@en ;
     :oracleText """Landfall — Whenever a land you control enters, tap target creature an opponent controls and put a stun counter on it. (If a permanent with a stun counter would become untapped, remove one from it instead.)"""@en ;
     :flavorText """"Oh, settle down. She just wants a hug."
@@ -1462,7 +1462,7 @@ When this creature enters, each opponent discards a card and loses 2 life. You d
     :toughness "2" ;
     :toughnessValue "2"^^xsd:integer ;
     :hasKeywordAbility :Deathtouch ;
-    # Note: keyword "Raid" not defined in MagicCardsOntology
+    :hasAbilityWord :Raid ;
     :printedText """Deathtouch (Any amount of damage this deals to a creature is enough to destroy it.)
 Raid — When this creature enters, if you attacked this turn, look at the top three cards of your library. You may put one of those cards back on top of your library. Put the rest into your graveyard."""@en ;
     :oracleText """Deathtouch (Any amount of damage this deals to a creature is enough to destroy it.)
@@ -1609,8 +1609,8 @@ Whenever another nontoken creature dies, draw a card."""@en ;
     :cardNumber "65"^^xsd:integer ;
     :artist "Kai Carpenter" ;
     :hasLanguage :English ;
+    :hasAbilityWord :Raid ;
     # Note: keyword "Food" not defined in MagicCardsOntology
-    # Note: keyword "Raid" not defined in MagicCardsOntology
     :printedText """Raid — At the beginning of your end step, if you attacked this turn, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this token: You gain 3 life.")
 {2}{B}, Sacrifice this enchantment: Target opponent loses X life, where X is the amount of life you gained this turn."""@en ;
     :oracleText """Raid — At the beginning of your end step, if you attacked this turn, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this token: You gain 3 life.")
@@ -1833,7 +1833,7 @@ When this creature dies, if it had a revival counter on it, return it to the bat
     :powerValue "5"^^xsd:integer ;
     :toughness "3" ;
     :toughnessValue "3"^^xsd:integer ;
-    # Note: keyword "Morbid" not defined in MagicCardsOntology
+    :hasAbilityWord :Morbid ;
     :printedText """Morbid — When this creature enters, target creature an opponent controls gets -1/-1 until end of turn. If a creature died this turn, that creature gets -13/-13 until end of turn instead."""@en ;
     :oracleText """Morbid — When this creature enters, target creature an opponent controls gets -1/-1 until end of turn. If a creature died this turn, that creature gets -13/-13 until end of turn instead."""@en ;
     :flavorText """She attended her own burial service, eager for company."""@en ;
@@ -2213,7 +2213,7 @@ When this creature dies, if it had a revival counter on it, return it to the bat
     :powerValue "3"^^xsd:integer ;
     :toughness "2" ;
     :toughnessValue "2"^^xsd:integer ;
-    # Note: keyword "Raid" not defined in MagicCardsOntology
+    :hasAbilityWord :Raid ;
     :printedText """Raid — This creature enters with a +1/+1 counter on it if you attacked this turn."""@en ;
     :oracleText """Raid — This creature enters with a +1/+1 counter on it if you attacked this turn."""@en ;
     :flavorText """"SPLIT THE SKULLS AND SPLIT THE SPOILS!"
@@ -2311,7 +2311,7 @@ When this creature dies, if it had a revival counter on it, return it to the bat
     :powerValue "4"^^xsd:integer ;
     :toughness "4" ;
     :toughnessValue "4"^^xsd:integer ;
-    # Note: keyword "Raid" not defined in MagicCardsOntology
+    :hasAbilityWord :Raid ;
     :printedText """Raid — When this creature enters, if you attacked this turn, this creature deals 2 damage to any target."""@en ;
     :oracleText """Raid — When this creature enters, if you attacked this turn, this creature deals 2 damage to any target."""@en ;
     :flavorText """Anyone fast enough to dodge her horns and parry her cutlass just gets kicked overboard."""@en ;
@@ -2454,7 +2454,7 @@ You may discard a card. If you do, draw a card."""@en ;
     :powerValue "5"^^xsd:integer ;
     :toughness "2" ;
     :toughnessValue "2"^^xsd:integer ;
-    # Note: keyword "Raid" not defined in MagicCardsOntology
+    :hasAbilityWord :Raid ;
     :printedText """Raid — When this creature enters, if you attacked this turn, exile the top two cards of your library. Choose one of them. Until the end of your next turn, you may play that card."""@en ;
     :oracleText """Raid — When this creature enters, if you attacked this turn, exile the top two cards of your library. Choose one of them. Until the end of your next turn, you may play that card."""@en ;
     :flavorText """"Tonight, we feast!\""""@en ;
@@ -2561,7 +2561,7 @@ Whenever another creature you control enters, this creature gets +1/+0 until end
     :toughness "3" ;
     :toughnessValue "3"^^xsd:integer ;
     :hasKeywordAbility :Ward ;
-    # Note: keyword "Morbid" not defined in MagicCardsOntology
+    :hasAbilityWord :Morbid ;
     :printedText """Ward {2} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {2}.)
 Morbid — At the beginning of your end step, if a creature died this turn, put a +1/+1 counter on this creature."""@en ;
     :oracleText """Ward {2} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {2}.)
@@ -2657,7 +2657,7 @@ Whenever this creature deals combat damage to a player, create a Food token. (It
     :toughness "3" ;
     :toughnessValue "3"^^xsd:integer ;
     :hasKeywordAbility :Reach ;
-    # Note: keyword "Landfall" not defined in MagicCardsOntology
+    :hasAbilityWord :Landfall ;
     :printedText """Reach (This creature can block creatures with flying.)
 Landfall — Whenever a land you control enters, create a 1/1 green Elf Warrior creature token."""@en ;
     :oracleText """Reach (This creature can block creatures with flying.)
@@ -2855,7 +2855,7 @@ Landfall — Whenever a land you control enters, create a 1/1 green Elf Warrior 
     :powerValue "4"^^xsd:integer ;
     :toughness "5" ;
     :toughnessValue "5"^^xsd:integer ;
-    # Note: keyword "Morbid" not defined in MagicCardsOntology
+    :hasAbilityWord :Morbid ;
     :printedText """Morbid — At the beginning of your end step, if a creature died this turn, put two +1/+1 counters on target creature you control."""@en ;
     :oracleText """Morbid — At the beginning of your end step, if a creature died this turn, put two +1/+1 counters on target creature you control."""@en ;
     :flavorText """"Nature's greatest predators sometimes come in small packages. A lot of small packages."
@@ -2999,7 +2999,7 @@ Deathtouch (Any amount of damage this deals to a creature is enough to destroy i
     :toughness "2" ;
     :toughnessValue "2"^^xsd:integer ;
     :hasKeywordAbility :Flying ;
-    # Note: keyword "Threshold" not defined in MagicCardsOntology
+    :hasAbilityWord :Threshold ;
     :printedText """Flying
 Whenever this creature enters or attacks, draw a card, then discard a card.
 Threshold — This creature gets +1/+1 and has deathtouch as long as there are seven or more cards in your graveyard."""@en ;
@@ -3173,7 +3173,7 @@ Whenever you cast a noncreature spell, choose one —
     :toughness "2" ;
     :toughnessValue "2"^^xsd:integer ;
     :hasKeywordAbility :Deathtouch ;
-    # Note: keyword "Raid" not defined in MagicCardsOntology
+    :hasAbilityWord :Raid ;
     :printedText """Deathtouch (Any amount of damage this deals to a creature is enough to destroy it.)
 Raid — At the beginning of your end step, if you attacked this turn, each opponent loses 3 life unless that player sacrifices a nonland permanent of their choice or discards a card."""@en ;
     :oracleText """Deathtouch (Any amount of damage this deals to a creature is enough to destroy it.)
@@ -3241,7 +3241,7 @@ Raid — At the beginning of your end step, if you attacked this turn, each oppo
     :powerValue "3"^^xsd:integer ;
     :toughness "4" ;
     :toughnessValue "4"^^xsd:integer ;
-    # Note: keyword "Morbid" not defined in MagicCardsOntology
+    :hasAbilityWord :Morbid ;
     :printedText """Morbid — At the beginning of your end step, if a creature died this turn, choose one —
 • You gain 2 life.
 • You draw a card and you lose 1 life."""@en ;
@@ -5554,7 +5554,7 @@ Burst Lightning deals 2 damage to any target. If this spell was kicked, it deals
     :powerValue "3"^^xsd:integer ;
     :toughness "4" ;
     :toughnessValue "4"^^xsd:integer ;
-    # Note: keyword "Landfall" not defined in MagicCardsOntology
+    :hasAbilityWord :Landfall ;
     :printedText """Landfall — Whenever a land you control enters, this creature deals 1 damage to each opponent."""@en ;
     :oracleText """Landfall — Whenever a land you control enters, this creature deals 1 damage to each opponent."""@en ;
     :flavorText """"If you hear a choking sort of cough, it's about to get really hot."
@@ -6597,7 +6597,7 @@ Whenever Ruby attacks while you control a creature with power 4 or greater, Ruby
     :powerValue "3"^^xsd:integer ;
     :toughness "3" ;
     :toughnessValue "3"^^xsd:integer ;
-    # Note: keyword "Landfall" not defined in MagicCardsOntology
+    :hasAbilityWord :Landfall ;
     :printedText """Landfall — Whenever a land you control enters, you gain 1 life and draw a card."""@en ;
     :oracleText """Landfall — Whenever a land you control enters, you gain 1 life and draw a card."""@en ;
     :flavorText """"Yavimaya is one being—one vastness of rippling leaves, one deepness of roots, and one chatter of animals—of which I am one part.\""""@en ;
@@ -9339,7 +9339,7 @@ When this creature enters, you gain 2 life for each Gate you control."""@en ;
     :cardNumber "574"^^xsd:integer ;
     :artist "Ralph Horsley" ;
     :hasLanguage :English ;
-    # Note: keyword "Landfall" not defined in MagicCardsOntology
+    :hasAbilityWord :Landfall ;
     :printedText """Landfall — Whenever a land you control enters, choose one —
 • Create a 2/2 white Cat Beast creature token.
 • Put a +1/+1 counter on each creature you control. Those creatures gain vigilance until end of turn."""@en ;
@@ -9448,7 +9448,6 @@ When this creature enters, you gain 2 life for each Gate you control."""@en ;
     :toughnessValue "2"^^xsd:integer ;
     :hasKeywordAbility :Hexproof ,
                        :FirstStrike ;
-    # Note: keyword "Hexproof from" not defined in MagicCardsOntology
     :printedText """First strike (This creature deals combat damage before creatures without first strike.)
 Hexproof from black (This creature can't be the target of black spells or abilities your opponents control.)
 This creature gets +1/+0 as long as any player controls a black permanent."""@en ;
@@ -10972,7 +10971,6 @@ At the beginning of each combat, any opponent may sacrifice a creature of their 
     :toughnessValue "2"^^xsd:integer ;
     :hasKeywordAbility :Hexproof ,
                        :FirstStrike ;
-    # Note: keyword "Hexproof from" not defined in MagicCardsOntology
     :printedText """First strike (This creature deals combat damage before creatures without first strike.)
 Hexproof from white (This creature can't be the target of white spells or abilities your opponents control.)
 This creature gets +1/+0 as long as any player controls a white permanent."""@en ;
@@ -12766,7 +12764,7 @@ Whenever a creature dealt damage by this creature this turn dies, put a +1/+1 co
     :cardNumber "644"^^xsd:integer ;
     :artist "Christine Choi" ;
     :hasLanguage :English ;
-    # Note: keyword "Landfall" not defined in MagicCardsOntology
+    :hasAbilityWord :Landfall ;
     :printedText """Whenever you cast a creature spell, create a 3/3 green Beast creature token.
 Whenever you cast a noncreature spell, put three +1/+1 counters on target creature you control.
 Landfall — Whenever a land you control enters, you gain 3 life."""@en ;
@@ -12818,7 +12816,7 @@ Landfall — Whenever a land you control enters, you gain 3 life."""@en ;
     :toughness "6" ;
     :toughnessValue "6"^^xsd:integer ;
     :hasKeywordAbility :Trample ;
-    # Note: keyword "Landfall" not defined in MagicCardsOntology
+    :hasAbilityWord :Landfall ;
     :printedText """Trample
 Landfall — Whenever a land you control enters, create a 4/4 green Beast creature token."""@en ;
     :oracleText """Trample
@@ -12877,7 +12875,7 @@ Landfall — Whenever a land you control enters, create a 4/4 green Beast creatu
     :powerValue "5"^^xsd:integer ;
     :toughness "4" ;
     :toughnessValue "4"^^xsd:integer ;
-    # Note: keyword "Formidable" not defined in MagicCardsOntology
+    :hasAbilityWord :Formidable ;
     :printedText """Formidable — At the beginning of combat on your turn, if creatures you control have total power 8 or greater, target creature you control gains haste until end of turn. (It can attack and {T} no matter when it came under your control.)"""@en ;
     :oracleText """Formidable — At the beginning of combat on your turn, if creatures you control have total power 8 or greater, target creature you control gains haste until end of turn. (It can attack and {T} no matter when it came under your control.)"""@en ;
     :flavorText """"The greatest honor is to feed Atarka.\""""@en ;
@@ -12932,7 +12930,7 @@ Landfall — Whenever a land you control enters, create a 4/4 green Beast creatu
     :powerValue "2"^^xsd:integer ;
     :toughness "2" ;
     :toughnessValue "2"^^xsd:integer ;
-    # Note: keyword "Alliance" not defined in MagicCardsOntology
+    :hasAbilityWord :Alliance ;
     :printedText """Alliance — Whenever another creature you control enters, this creature gains deathtouch until end of turn. If this is the second time this ability has resolved this turn, all creatures you control gain deathtouch until end of turn."""@en ;
     :oracleText """Alliance — Whenever another creature you control enters, this creature gains deathtouch until end of turn. If this is the second time this ability has resolved this turn, all creatures you control gain deathtouch until end of turn."""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=680787"^^xsd:anyURI ;
