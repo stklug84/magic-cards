@@ -289,16 +289,20 @@ jobs:
         working-directory: rust
         run: cargo test --workspace --all-features
 
-      # The pycompat crate is tested against CPython reference vectors
-      # committed under rust/crates/pycompat/tests/vectors; regenerating
-      # them must produce the committed bytes (cargo xtask vectors).
+      # Parity against the Python simulator (the reference until cutover):
+      # L1 regenerates the CPython vectors committed under
+      # rust/crates/pycompat/tests/vectors and requires the committed
+      # bytes; L2 dumps the card database with scripts/parity/dump_cards.py
+      # and with the mtgcards dump_cards example and requires identical
+      # output over the checkout's graph and a synthetic root. Both run
+      # the stdlib-only packages straight from scripts/, so no install.
       - name: Set up Python
         if: runner.os == 'Linux'
         uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0  # v7
         with:
           python-version: "3.12"
 
-      - name: Check the CPython reference vectors are current
+      - name: Parity against the Python implementation (L1 vectors, L2 card database)
         if: runner.os == 'Linux'
         working-directory: rust
-        run: cargo xtask vectors --check
+        run: cargo xtask parity
