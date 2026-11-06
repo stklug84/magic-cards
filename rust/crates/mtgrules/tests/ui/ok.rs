@@ -52,6 +52,8 @@ fn main() {
     let _ = (Layered, E::A, LIMIT);
     let _: Zone = 0;
     unsafe { COUNT += 1 };
-    assert_eq!(mtgrules::cr::RULE_IMPLEMENTATIONS.len(), 11);
-    assert_eq!(mtgrules::cr::UNSUPPORTED.len(), 1);
+    // the engine registers its own rules; count this file's only
+    let own = |file: &str| file.ends_with("ok.rs");
+    assert_eq!(mtgrules::cr::RULE_IMPLEMENTATIONS.iter().filter(|r| own(r.file)).count(), 11);
+    assert_eq!(mtgrules::cr::UNSUPPORTED.iter().filter(|u| own(u.file)).count(), 1);
 }

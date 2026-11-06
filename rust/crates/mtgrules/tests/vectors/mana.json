@@ -1,0 +1,671 @@
+{
+ "costs": [
+  {
+   "cost": "",
+   "generic": 0,
+   "pips": {},
+   "hybrid": [],
+   "colorless": 0,
+   "x_count": 0,
+   "mv": 0
+  },
+  {
+   "cost": "{0}",
+   "generic": 0,
+   "pips": {},
+   "hybrid": [],
+   "colorless": 0,
+   "x_count": 0,
+   "mv": 0
+  },
+  {
+   "cost": "{2}{G}{G}",
+   "generic": 2,
+   "pips": {
+    "G": 2
+   },
+   "hybrid": [],
+   "colorless": 0,
+   "x_count": 0,
+   "mv": 4
+  },
+  {
+   "cost": "{X}{R}",
+   "generic": 0,
+   "pips": {
+    "R": 1
+   },
+   "hybrid": [],
+   "colorless": 0,
+   "x_count": 1,
+   "mv": 1
+  },
+  {
+   "cost": "{B/R}{W}",
+   "generic": 0,
+   "pips": {
+    "W": 1
+   },
+   "hybrid": [
+    [
+     "B",
+     "R"
+    ]
+   ],
+   "colorless": 0,
+   "x_count": 0,
+   "mv": 2
+  },
+  {
+   "cost": "{2/W}",
+   "generic": 0,
+   "pips": {},
+   "hybrid": [
+    [
+     "W"
+    ]
+   ],
+   "colorless": 0,
+   "x_count": 0,
+   "mv": 1
+  },
+  {
+   "cost": "{C}{S}{Q}",
+   "generic": 1,
+   "pips": {},
+   "hybrid": [],
+   "colorless": 1,
+   "x_count": 0,
+   "mv": 2
+  },
+  {
+   "cost": "{X}{X}{2}{G}{G}{B/R}{C}{S}{2/W}",
+   "generic": 3,
+   "pips": {
+    "G": 2
+   },
+   "hybrid": [
+    [
+     "B",
+     "R"
+    ],
+    [
+     "W"
+    ]
+   ],
+   "colorless": 1,
+   "x_count": 2,
+   "mv": 8
+  },
+  {
+   "cost": "{W}{U}{B}{R}{G}",
+   "generic": 0,
+   "pips": {
+    "W": 1,
+    "U": 1,
+    "B": 1,
+    "R": 1,
+    "G": 1
+   },
+   "hybrid": [],
+   "colorless": 0,
+   "x_count": 0,
+   "mv": 5
+  },
+  {
+   "cost": "{10}",
+   "generic": 10,
+   "pips": {},
+   "hybrid": [],
+   "colorless": 0,
+   "x_count": 0,
+   "mv": 10
+  },
+  {
+   "cost": "{G/U}{G/U}",
+   "generic": 0,
+   "pips": {},
+   "hybrid": [
+    [
+     "G",
+     "U"
+    ],
+    [
+     "G",
+     "U"
+    ]
+   ],
+   "colorless": 0,
+   "x_count": 0,
+   "mv": 2
+  },
+  {
+   "cost": "{W/P}",
+   "generic": 0,
+   "pips": {},
+   "hybrid": [
+    [
+     "W"
+    ]
+   ],
+   "colorless": 0,
+   "x_count": 0,
+   "mv": 1
+  },
+  {
+   "cost": "{C}{C}",
+   "generic": 0,
+   "pips": {},
+   "hybrid": [],
+   "colorless": 2,
+   "x_count": 0,
+   "mv": 2
+  }
+ ],
+ "pools": [
+  {
+   "added": [
+    [
+     "U",
+     1
+    ],
+    [
+     "R",
+     1
+    ],
+    [
+     "C",
+     1
+    ]
+   ],
+   "cost": "{U/R}",
+   "can_pay": true,
+   "paid": true,
+   "after": {
+    "W": 0,
+    "U": 0,
+    "B": 0,
+    "R": 1,
+    "G": 0,
+    "C": 1
+   }
+  },
+  {
+   "added": [
+    [
+     "U",
+     1
+    ],
+    [
+     "R",
+     2
+    ]
+   ],
+   "cost": "{U/R}",
+   "can_pay": true,
+   "paid": true,
+   "after": {
+    "W": 0,
+    "U": 1,
+    "B": 0,
+    "R": 1,
+    "G": 0,
+    "C": 0
+   }
+  },
+  {
+   "added": [
+    [
+     "R",
+     2
+    ],
+    [
+     "U",
+     1
+    ]
+   ],
+   "cost": "{U/R}",
+   "can_pay": true,
+   "paid": true,
+   "after": {
+    "W": 0,
+    "U": 1,
+    "B": 0,
+    "R": 1,
+    "G": 0,
+    "C": 0
+   }
+  },
+  {
+   "added": [
+    [
+     "W",
+     1
+    ],
+    [
+     "G",
+     3
+    ]
+   ],
+   "cost": "{2}",
+   "can_pay": true,
+   "paid": true,
+   "after": {
+    "W": 1,
+    "U": 0,
+    "B": 0,
+    "R": 0,
+    "G": 1,
+    "C": 0
+   }
+  },
+  {
+   "added": [
+    [
+     "C",
+     1
+    ],
+    [
+     "G",
+     1
+    ]
+   ],
+   "cost": "{1}",
+   "can_pay": true,
+   "paid": true,
+   "after": {
+    "W": 0,
+    "U": 0,
+    "B": 0,
+    "R": 0,
+    "G": 1,
+    "C": 0
+   }
+  },
+  {
+   "added": [
+    [
+     "G",
+     2
+    ]
+   ],
+   "cost": "{G}{G}{G}",
+   "can_pay": false,
+   "paid": false,
+   "after": {
+    "W": 0,
+    "U": 0,
+    "B": 0,
+    "R": 0,
+    "G": 2,
+    "C": 0
+   }
+  },
+  {
+   "added": [
+    [
+     "G",
+     2
+    ],
+    [
+     "C",
+     1
+    ]
+   ],
+   "cost": "{C}{C}",
+   "can_pay": false,
+   "paid": false,
+   "after": {
+    "W": 0,
+    "U": 0,
+    "B": 0,
+    "R": 0,
+    "G": 2,
+    "C": 1
+   }
+  },
+  {
+   "added": [
+    [
+     "W",
+     1
+    ],
+    [
+     "U",
+     1
+    ],
+    [
+     "B",
+     1
+    ],
+    [
+     "R",
+     1
+    ],
+    [
+     "G",
+     1
+    ],
+    [
+     "C",
+     1
+    ]
+   ],
+   "cost": "{W/U}{U/B}{B/R}{2}",
+   "can_pay": true,
+   "paid": true,
+   "after": {
+    "W": 0,
+    "U": 0,
+    "B": 0,
+    "R": 0,
+    "G": 1,
+    "C": 0
+   }
+  },
+  {
+   "added": [
+    [
+     "B",
+     1
+    ],
+    [
+     "R",
+     1
+    ],
+    [
+     "G",
+     1
+    ]
+   ],
+   "cost": "{B/G}{R/G}{G}",
+   "can_pay": true,
+   "paid": true,
+   "after": {
+    "W": 0,
+    "U": 0,
+    "B": 0,
+    "R": 0,
+    "G": 0,
+    "C": 0
+   }
+  },
+  {
+   "added": [
+    [
+     "W",
+     2
+    ],
+    [
+     "U",
+     2
+    ],
+    [
+     "B",
+     2
+    ],
+    [
+     "R",
+     2
+    ],
+    [
+     "G",
+     2
+    ]
+   ],
+   "cost": "{3}{W}{W}",
+   "can_pay": true,
+   "paid": true,
+   "after": {
+    "W": 0,
+    "U": 0,
+    "B": 1,
+    "R": 2,
+    "G": 2,
+    "C": 0
+   }
+  },
+  {
+   "added": [
+    [
+     "W",
+     1
+    ],
+    [
+     "U",
+     3
+    ],
+    [
+     "B",
+     2
+    ]
+   ],
+   "cost": "{4}",
+   "can_pay": true,
+   "paid": true,
+   "after": {
+    "W": 1,
+    "U": 0,
+    "B": 1,
+    "R": 0,
+    "G": 0,
+    "C": 0
+   }
+  },
+  {
+   "added": [
+    [
+     "R",
+     1
+    ]
+   ],
+   "cost": "{X}{R}",
+   "can_pay": true,
+   "paid": true,
+   "after": {
+    "W": 0,
+    "U": 0,
+    "B": 0,
+    "R": 0,
+    "G": 0,
+    "C": 0
+   }
+  },
+  {
+   "added": [],
+   "cost": "{0}",
+   "can_pay": true,
+   "paid": true,
+   "after": {
+    "W": 0,
+    "U": 0,
+    "B": 0,
+    "R": 0,
+    "G": 0,
+    "C": 0
+   }
+  },
+  {
+   "added": [
+    [
+     "C",
+     2
+    ]
+   ],
+   "cost": "{W}",
+   "can_pay": false,
+   "paid": false,
+   "after": {
+    "W": 0,
+    "U": 0,
+    "B": 0,
+    "R": 0,
+    "G": 0,
+    "C": 2
+   }
+  },
+  {
+   "added": [
+    [
+     "W",
+     1
+    ],
+    [
+     "U",
+     1
+    ],
+    [
+     "B",
+     1
+    ],
+    [
+     "R",
+     1
+    ],
+    [
+     "G",
+     1
+    ]
+   ],
+   "cost": "{W/U/B}{2}",
+   "can_pay": true,
+   "paid": true,
+   "after": {
+    "W": 0,
+    "U": 0,
+    "B": 0,
+    "R": 1,
+    "G": 1,
+    "C": 0
+   }
+  }
+ ],
+ "order": [
+  {
+   "types": [
+    "G",
+    "C",
+    "W",
+    "zz",
+    "B"
+   ],
+   "ordered": [
+    "W",
+    "B",
+    "G",
+    "C",
+    "zz"
+   ]
+  },
+  {
+   "types": [
+    "R",
+    "B"
+   ],
+   "ordered": [
+    "B",
+    "R"
+   ]
+  },
+  {
+   "types": [
+    "C",
+    "G",
+    "U"
+   ],
+   "ordered": [
+    "U",
+    "G",
+    "C"
+   ]
+  },
+  {
+   "types": [
+    "any",
+    "U",
+    "W"
+   ],
+   "ordered": [
+    "W",
+    "U",
+    "any"
+   ]
+  },
+  {
+   "types": [],
+   "ordered": []
+  },
+  {
+   "types": [
+    "G",
+    "G",
+    "W"
+   ],
+   "ordered": [
+    "W",
+    "G",
+    "G"
+   ]
+  }
+ ],
+ "lands": [
+  {
+   "colors": [
+    "R",
+    "B"
+   ],
+   "types": [
+    "B",
+    "R"
+   ],
+   "any": false
+  },
+  {
+   "colors": [
+    "W",
+    "U",
+    "B",
+    "R",
+    "G"
+   ],
+   "types": [],
+   "any": true
+  },
+  {
+   "colors": [
+    "C"
+   ],
+   "types": [
+    "C"
+   ],
+   "any": false
+  },
+  {
+   "colors": [],
+   "types": [],
+   "any": false
+  },
+  {
+   "colors": [
+    "G",
+    "W",
+    "U",
+    "B",
+    "R",
+    "C"
+   ],
+   "types": [],
+   "any": true
+  },
+  {
+   "colors": [
+    "U",
+    "X"
+   ],
+   "types": [
+    "U"
+   ],
+   "any": false
+  }
+ ]
+}

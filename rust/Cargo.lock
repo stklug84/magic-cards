@@ -547,8 +547,11 @@ dependencies = [
  "linkme",
  "mtgcards",
  "mtgrules-macros",
+ "mtgrules-registry",
  "pycompat",
  "regex",
+ "serde",
+ "serde_json",
  "tempfile",
  "thiserror",
  "trybuild",
@@ -557,6 +560,13 @@ dependencies = [
 [[package]]
 name = "mtgrules-macros"
 version = "0.3.0"
+
+[[package]]
+name = "mtgrules-registry"
+version = "0.3.0"
+dependencies = [
+ "linkme",
+]
 
 [[package]]
 name = "mtgsim"
