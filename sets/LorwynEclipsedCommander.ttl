@@ -160,7 +160,7 @@ Enchanted land has "{T}: Add one mana of any color.\""""@en ;
     :toughness "2" ;
     :toughnessValue "2"^^xsd:integer ;
     :hasKeywordAction :Proliferate ;
-    # Note: keyword "Landfall" not defined in MagicCardsOntology
+    :hasAbilityWord :Landfall ;
     :printedText """Landfall — Whenever a land you control enters, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)"""@en ;
     :oracleText """Landfall — Whenever a land you control enters, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)"""@en ;
     :flavorText """"To care for yourself, cultivate the world. To care for the world, cultivate yourself.\""""@en ;

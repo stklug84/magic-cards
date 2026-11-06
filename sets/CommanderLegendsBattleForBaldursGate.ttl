@@ -74,7 +74,7 @@ legality definitions."""@en .
     :powerValue "3"^^xsd:integer ;
     :toughness "3" ;
     :toughnessValue "3"^^xsd:integer ;
-    # Note: keyword "Choose a background" not defined in MagicCardsOntology
+    :hasKeywordAbility :ChooseABackground ;
     :printedText """If you would put one or more counters on a creature or planeswalker you control or on yourself, put that many plus one of each of those kinds of counters on that permanent or player instead.
 Choose a Background (You can have a Background as a second commander.)"""@en ;
     :oracleText """If you would put one or more counters on a creature or planeswalker you control or on yourself, put that many plus one of each of those kinds of counters on that permanent or player instead.

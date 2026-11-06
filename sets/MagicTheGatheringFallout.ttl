@@ -271,7 +271,7 @@ Pay {E}{E}{E}: Create a tapped 3/3 colorless Robot artifact creature token."""@e
     :powerValue "1"^^xsd:integer ;
     :toughness "3" ;
     :toughnessValue "3"^^xsd:integer ;
-    # Note: keyword "Metalcraft" not defined in MagicCardsOntology
+    :hasAbilityWord :Metalcraft ;
     :printedText """Metalcraft — {T}: You get {E} (an energy counter). Activate only if you control three or more artifacts.
 Whenever you get one or more {E} during your turn, creatures you control get +1/+1 until end of turn."""@en ;
     :oracleText """Metalcraft — {T}: You get {E} (an energy counter). Activate only if you control three or more artifacts.
@@ -1690,7 +1690,7 @@ Rex has all activated abilities of all cards in exile with brain counters on the
     :toughness "4" ;
     :toughnessValue "4"^^xsd:integer ;
     :hasKeywordAbility :Haste ;
-    # Note: keyword "Battalion" not defined in MagicCardsOntology
+    :hasAbilityWord :Battalion ;
     :printedText """Haste
 As long as an artifact entered the battlefield under your control this turn, creatures you control get +2/+2.
 Battalion — Whenever Sentinel Sarah Lyons and at least two other creatures attack, Sentinel Sarah Lyons deals damage equal to the number of artifacts you control to target player."""@en ;
@@ -2583,7 +2583,7 @@ Equip {3}"""@en ;
     :cardNumber "159"^^xsd:integer ;
     :artist "Zezhou Chen" ;
     :hasLanguage :English ;
-    # Note: keyword "Metalcraft" not defined in MagicCardsOntology
+    :hasAbilityWord :Metalcraft ;
     :printedText """Tap target creature.
 Metalcraft — If you control three or more artifacts, exile that creature."""@en ;
     :oracleText """Tap target creature.
@@ -2977,7 +2977,7 @@ Tap two untapped artifacts you control: Target creature can't be blocked this tu
     :toughness "1" ;
     :toughnessValue "1"^^xsd:integer ;
     :hasKeywordAbility :Haste ;
-    # Note: keyword "Lieutenant" not defined in MagicCardsOntology
+    :hasAbilityWord :Lieutenant ;
     :printedText """Haste
 Lieutenant — At the beginning of combat on your turn, if you control your commander, create a 1/1 colorless Thopter artifact creature token with flying. That token gains haste until end of turn."""@en ;
     :oracleText """Haste
@@ -3148,7 +3148,7 @@ Draw two cards and create two Treasure tokens. (They're artifacts with "{T}, Sac
     :artist "David Astruga" ;
     :hasLanguage :English ;
     :producesMana :Colorless ;
-    # Note: keyword "Multikicker" not defined in MagicCardsOntology
+    :hasKeywordAbility :Kicker ;
     :printedText """Multikicker {2} (You may pay an additional {2} any number of times as you cast this spell.)
 This artifact enters with a charge counter on it for each time it was kicked.
 {T}: Add {C} for each charge counter on this artifact."""@en ;
@@ -3698,9 +3698,6 @@ When this creature dies, you may draw a card."""@en ;
     :hasLanguage :English ;
     :producesMana :Colorless ;
     :hasKeywordAbility :Cycling ;
-    # Note: keyword "Landcycling" not defined in MagicCardsOntology
-    # Note: keyword "Basic landcycling" not defined in MagicCardsOntology
-    # Note: keyword "Typecycling" not defined in MagicCardsOntology
     :printedText """{T}: Add {C}.
 Basic landcycling {1} ({1}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)"""@en ;
     :oracleText """{T}: Add {C}.

@@ -310,7 +310,7 @@ At the beginning of your upkeep, if this creature has one or more +1/+1 counters
     :toughnessValue "3"^^xsd:integer ;
     :hasKeywordAbility :Flying ,
                        :Haste ;
-    # Note: keyword "Celebration" not defined in MagicCardsOntology
+    :hasAbilityWord :Celebration ;
     :printedText """Haste
 Celebration — As long as two or more nonland permanents entered the battlefield under your control this turn, Goddric is a Dragon with base power and toughness 4/4, flying, and "{R}: Dragons you control get +1/+0 until end of turn." (He loses all other creature types.)"""@en ;
     :oracleText """Haste
