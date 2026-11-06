@@ -10,14 +10,19 @@ use mtgrules::Game;
 use mtgrules::abilities::{Ability, SpellAbility, TargetSpec};
 use mtgrules::effects::Effect;
 use mtgrules::objects::{Characteristics, ObjId, PlayerId, Zone};
-use mtgrules::policy::TrivialPolicy;
+use mtgrules::policy::DefaultPolicy;
 use pycompat::random::PyRandom;
 
 /// A bare game of `n_players` seats with trivial policies and empty zones.
 pub(crate) fn make_game(n_players: usize) -> Game {
     let names: Vec<String> = (0..n_players).map(|i| format!("p{i}")).collect();
     let names: Vec<&str> = names.iter().map(String::as_str).collect();
-    Game::new(&names, PyRandom::new(7), &[Rc::new(TrivialPolicy)], 40)
+    Game::new(
+        &names,
+        PyRandom::new(7),
+        &[Rc::new(DefaultPolicy::new())],
+        40,
+    )
 }
 
 pub(crate) fn set(items: &[&str]) -> BTreeSet<String> {

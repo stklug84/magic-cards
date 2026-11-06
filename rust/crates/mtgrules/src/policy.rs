@@ -8,8 +8,14 @@
 //! so a game played with [`TrivialPolicy`] decides those exactly like
 //! Python. The choices that are board-reading heuristics - what to cast,
 //! which targets, attackers and blockers, the land to drop - default to
-//! "do nothing" / "the first option" here and are overridden by the AI
-//! policy of M7.
+//! "do nothing" / "the first option" here and are overridden by
+//! [`DefaultPolicy`], the port of the Python AI.
+
+mod default_policy;
+mod profile;
+
+pub use default_policy::{DefaultPolicy, is_beneficial};
+pub use profile::{PROFILE_NAMES, PolicyProfile, get_profile};
 
 use std::rc::Rc;
 
@@ -78,7 +84,7 @@ pub fn target_threat(game: &Game, target: Target) -> f64 {
 }
 
 /// The first element maximising `key` (Python's `max()` tie-break).
-fn first_max<T: Copy, K: PartialOrd>(items: &[T], key: impl Fn(T) -> K) -> Option<T> {
+pub(crate) fn first_max<T: Copy, K: PartialOrd>(items: &[T], key: impl Fn(T) -> K) -> Option<T> {
     let mut best: Option<(T, K)> = None;
     for &item in items {
         let k = key(item);
@@ -90,7 +96,7 @@ fn first_max<T: Copy, K: PartialOrd>(items: &[T], key: impl Fn(T) -> K) -> Optio
 }
 
 /// The first element minimising `key` (Python's `min()` tie-break).
-fn first_min<T: Copy, K: PartialOrd>(items: &[T], key: impl Fn(T) -> K) -> Option<T> {
+pub(crate) fn first_min<T: Copy, K: PartialOrd>(items: &[T], key: impl Fn(T) -> K) -> Option<T> {
     let mut best: Option<(T, K)> = None;
     for &item in items {
         let k = key(item);
@@ -103,7 +109,25 @@ fn first_min<T: Copy, K: PartialOrd>(items: &[T], key: impl Fn(T) -> K) -> Optio
 
 /// A player's decision policy.
 pub trait Policy {
-    // ---- the board-reading heuristics (the AI of M7 overrides these)
+    // ---- the board-reading heuristics (the default policy overrides these)
+
+    /// Rule 103.5: keep the seven-card `hand` after `mulls` counted
+    /// mulligans? Default: always.
+    fn keep_hand(&self, _game: &Game, _player: PlayerId, _hand: &[ObjId], _mulls: usize) -> bool {
+        true
+    }
+
+    /// London mulligan (rule 103.5c): the `n` cards of `hand` to put on
+    /// the bottom. Default: the first `n`.
+    fn bottom_cards(
+        &self,
+        _game: &Game,
+        _player: PlayerId,
+        hand: &[ObjId],
+        n: usize,
+    ) -> Vec<ObjId> {
+        hand.iter().take(n).copied().collect()
+    }
 
     /// The action to take with priority, or `None` to pass. Default:
     /// pass.

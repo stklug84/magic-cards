@@ -179,12 +179,20 @@ Until the cutover the Python simulator is the parity reference, and
   costs, targets and effect tree, the keywords and cost modifiers, the
   clauses the compiler could not read and the override's note. Closures
   are reduced to their presence, dynamic counts to the tag `"dynamic"`.
+- **L5** — the command lines: `mtg-simulate` against `python -m
+  mtgrules.cli` and `mtg-selfplay` against `python -m mtgrules.selfplay`
+  over four decks built from the checkout's graph (a 4-player matchup
+  with mixed profiles and `--verbose`, the self-play round-robin and a
+  tuning grid); stdout, stderr and the per-game `--log-file` records
+  must be identical. This is the whole engine at once — the AI, the
+  mulligans, every card in play — so a divergence here is the first
+  sign that one side's rules of play drifted.
 
 ```sh
 cd rust
 cargo xtask vectors          # regenerate the L1 vectors
-cargo xtask parity           # what CI runs: L1 (vectors --check) + L2 + L3
-cargo xtask parity --level 3 # one level only
+cargo xtask parity           # what CI runs: L1 (vectors --check) + L2 + L3 + L5
+cargo xtask parity --level 5 # one level only
 ```
 
 A behaviour the Rust side must reproduce changes in Python first (with a
@@ -202,7 +210,15 @@ port; until then its Rust file says so in its module comment. The
 `Game` type itself is split by concern: `src/game.rs` holds the state
 and the shared helpers, `src/game/{zones,triggers,actions,mana,casting,
 resolution,sba}.rs` the rules of play, `src/combat.rs` the combat phase
-and `src/turns.rs` the turn structure.
+and `src/turns.rs` the turn structure. The decision policy is the
+`Policy` trait (`src/policy.rs`; the plain-rules choices as defaults)
+with the AI in `src/policy/default_policy.rs`; `src/adapter.rs` runs a
+match from decklists and `src/selfplay.rs` the profile tuning. The
+binaries live in `crates/mtgsim` (`mtg-simulate`, `mtg-selfplay`,
+`mtg-cr`), the shared command-line pieces in `mtgsim::cli`. The Rust
+binaries take `--graph-root` / `--cr-file` and validate the `#[rule]`
+registry at startup; their usage text is clap's, the stdout reports and
+exit codes are Python's.
 
 Rules traceability works as in Python: every rules-implementing item
 carries `#[rule("704.5g", ...)]` (`mtgrules::rule`) and rules out of

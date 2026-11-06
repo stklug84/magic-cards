@@ -14,6 +14,8 @@
 //! - the exit-code conventions: 0 success, 1 a reported error, 2 a usage
 //!   error (clap's default).
 
+pub mod cli;
+
 use std::path::{Path, PathBuf};
 use std::process::ExitCode;
 
