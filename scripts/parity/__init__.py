@@ -7,8 +7,12 @@ Development-only helpers, not part of the released packages:
   ``pycompat`` crate is tested against (parity level L1).
 - ``dump_cards``: the canonical card-database dump the Rust ``mtgcards``
   crate must reproduce byte for byte (parity level L2).
+- ``dump_cr``: the canonical dump of the parsed Comprehensive Rules
+  (lengths and digests, never the text) the Rust ``mtgrules`` parser
+  must reproduce (parity level L2).
 
 Run them from ``scripts/`` (``python3 -m parity.vectors``,
-``python3 -m parity.dump_cards --root ..``) or through
+``python3 -m parity.dump_cards --root ..``, ``python3 -m parity.dump_cr``)
+or through
 ``cargo xtask vectors`` / ``cargo xtask parity`` from ``rust/``.
 """

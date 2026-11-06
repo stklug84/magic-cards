@@ -1,0 +1,23 @@
+error: unsupported!: "1.2" is not a CR rule number
+ --> tests/ui/unsupported_bad.rs:1:1
+  |
+1 | mtgrules::unsupported!("1.2", "not a rule number");
+  | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |
+  = note: this error originates in the macro `mtgrules::unsupported` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error: unsupported! takes two string literals: ("903.4", "reason")
+ --> tests/ui/unsupported_bad.rs:2:1
+  |
+2 | mtgrules::unsupported!("903.4");
+  | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |
+  = note: this error originates in the macro `mtgrules::unsupported` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error: unsupported!: the reason must be a string literal, found `42`
+ --> tests/ui/unsupported_bad.rs:3:1
+  |
+3 | mtgrules::unsupported!("903.4", 42);
+  | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |
+  = note: this error originates in the macro `mtgrules::unsupported` (in Nightly builds, run with -Z macro-backtrace for more info)

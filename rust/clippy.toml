@@ -5,6 +5,8 @@ doc-valid-idents = [
     "CPython",
     "GitHub",
     "JSONL",
+    "MagicCompRules",
+    "MTG_GRAPH_ROOT",
     "SHA-256",
     "MTG",
     "Moxfield",

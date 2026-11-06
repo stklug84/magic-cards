@@ -6,10 +6,13 @@
 //!   `pycompat` tests read (`scripts/parity/vectors.py`), or verify that
 //!   the committed files are up to date;
 //! - `parity [--level N]`: compare the Rust and Python implementations
-//!   level by level — L1 is `vectors --check`, L2 diffs the card-database
+//!   level by level — L1 is `vectors --check`; L2 diffs the card-database
 //!   dumps (`scripts/parity/dump_cards.py` against the `mtgcards`
 //!   `dump_cards` example) over the checkout's graph and over a synthetic
-//!   root with custom cards and an extra graph;
+//!   root with custom cards and an extra graph, and the Comprehensive
+//!   Rules dumps (`scripts/parity/dump_cr.py` against the `mtgrules`
+//!   `dump_cr` example) over the checkout's rules text when present and
+//!   over a synthetic text;
 //! - `help`.
 //!
 //! Higher parity levels (compiled abilities, `--viz-file` records, the
@@ -28,8 +31,8 @@ tasks:
                       rust/crates/pycompat/tests/vectors (or check that
                       the committed files are current)
   parity [--level N]  compare the Rust and Python implementations:
-                      L1 = vectors --check, L2 = card-database dumps
-                      (default: every implemented level)
+                      L1 = vectors --check, L2 = card-database and
+                      Comprehensive Rules dumps (default: every level)
   help                print this message
 ";
 
@@ -428,6 +431,69 @@ fn diff_lines(python_text: &str, rust_text: &str) -> Result<(), String> {
     }
 }
 
+/// Synthetic text in the layout of the Comprehensive Rules file (not CR
+/// text): contents lines before the body, examples, lettered sub-rules,
+/// a two-line glossary definition, trailing whitespace and CRLF endings.
+const FIXTURE_CR: &str = "Magic: The Gathering Comprehensive Rules\r\n\r\nThese rules are fake.\r\n\r\nContents\r\n\r\n1. Game Concepts\r\n100. General\r\n704. State-Based Actions\r\nGlossary\r\nCredits\r\n\r\n1. Game Concepts\r\n\r\n100. General\r\n\r\n100.1. These are the fake rules of a fake game.  \r\nExample: A worked example of 100.1.\r\n100.1a Sub-rule a of 100.1 with a — dash and “quotes”.\r\n100.1b \r\n100.2. Second rule.\r\n\r\n704. State-Based Actions\r\n\r\n704.5. The state-based actions are as follows:\r\n704.5g A fake creature dies.\r\nExample: One example for 704.5g.\r\nExample: Another example for 704.5g.\r\n704.5g A fake creature dies (duplicate, shorter wins not).\r\n\r\nGlossary\r\n\r\nAbility\r\nAn ability does things.\r\nOver two lines.\r\n\r\nAbandon\r\nTo abandon.\r\n\r\nLonely Term\r\n\r\nCredits\r\n\r\nSomeone.\r\n";
+
+/// Diff the CR dumps of `cr_file` (the Python module's `--cr-file` against
+/// the Rust example's).
+fn compare_cr_dumps(
+    repo: &Path,
+    scratch: &Path,
+    label: &str,
+    cr_file: &Path,
+) -> Result<(), String> {
+    let py_out = scratch.join("python-cr.jsonl");
+    let rs_out = scratch.join("rust-cr.jsonl");
+    let mut py = python_module(repo, "dump_cr");
+    py.arg("--cr-file").arg(cr_file).arg("--out").arg(&py_out);
+    let cargo = std::env::var("CARGO").unwrap_or_else(|_| "cargo".to_owned());
+    let mut rs = Command::new(cargo);
+    rs.args([
+        "run",
+        "--quiet",
+        "-p",
+        "mtgrules",
+        "--example",
+        "dump_cr",
+        "--",
+    ])
+    .arg("--cr-file")
+    .arg(cr_file)
+    .arg("--out")
+    .arg(&rs_out)
+    .current_dir(repo.join("rust"));
+    run(py, "the Python CR dump")?;
+    run(rs, "the Rust CR dump")?;
+    let py_text =
+        std::fs::read_to_string(&py_out).map_err(|e| format!("{}: {e}", py_out.display()))?;
+    let rs_text =
+        std::fs::read_to_string(&rs_out).map_err(|e| format!("{}: {e}", rs_out.display()))?;
+    diff_lines(&py_text, &rs_text).map_err(|detail| format!("L2 CR [{label}]: {detail}"))?;
+    println!(
+        "L2 CR [{label}]: {} lines identical",
+        py_text.lines().count()
+    );
+    Ok(())
+}
+
+/// The newest `MagicCompRules-*.txt` in `dir`, if any.
+fn newest_cr_file(dir: &Path) -> Option<PathBuf> {
+    let mut files: Vec<PathBuf> = std::fs::read_dir(dir)
+        .ok()?
+        .filter_map(Result::ok)
+        .map(|e| e.path())
+        .filter(|p| {
+            p.file_name().and_then(|n| n.to_str()).is_some_and(|n| {
+                n.starts_with("MagicCompRules-") && Path::new(n).extension() == Some("txt".as_ref())
+            })
+        })
+        .collect();
+    files.sort();
+    files.pop()
+}
+
 fn parity_l2() -> Result<(), String> {
     let repo = repo_root();
     let scratch = std::env::temp_dir().join(format!("mtg-parity-l2-{}", std::process::id()));
@@ -450,7 +516,28 @@ fn parity_l2() -> Result<(), String> {
             std::fs::create_dir_all(&out).map_err(|e| format!("{}: {e}", out.display()))?;
             compare_dumps(&repo, &out, scenario)?;
         }
-        Ok(())
+        // the Comprehensive Rules parser: the real text when present (it
+        // is fetched separately, never committed), always the synthetic one
+        match newest_cr_file(&repo) {
+            Some(file) => {
+                let out = scratch.join("cr-real");
+                std::fs::create_dir_all(&out).map_err(|e| format!("{}: {e}", out.display()))?;
+                compare_cr_dumps(&repo, &out, "checkout rules text", &file)?;
+            }
+            None if std::env::var_os("MTG_REQUIRE_CR").is_some() => {
+                return Err(
+                    "MTG_REQUIRE_CR is set but no MagicCompRules-*.txt is in the checkout"
+                        .to_owned(),
+                );
+            }
+            None => {
+                println!("L2 CR: no MagicCompRules-*.txt in the checkout, skipping the real text");
+            }
+        }
+        let out = scratch.join("cr-synthetic");
+        let file = out.join("MagicCompRules-20260101.txt");
+        write(&file, FIXTURE_CR)?;
+        compare_cr_dumps(&repo, &out, "synthetic rules text", &file)
     })();
     let _ = std::fs::remove_dir_all(&scratch);
     result

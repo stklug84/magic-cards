@@ -13,7 +13,7 @@
 //! `str(value)` for the strings. The one message that cannot be identical
 //! is the JSON decoder's own text inside "cannot read the graph manifest".
 
-use std::path::Path;
+use std::path::{Path, PathBuf};
 
 use pycompat::json::Value;
 use pycompat::pyio;
@@ -216,6 +216,69 @@ pub fn check_compatible(
 /// See [`load_manifest`].
 pub fn ontology_iri(root: &Path) -> Result<String, GraphSchemaError> {
     Ok(load_manifest(root)?.map_or_else(|| DEFAULT_ONTOLOGY_IRI.to_owned(), |m| m.ontology_iri))
+}
+
+// ------------------------------------------------------------- graph root
+
+/// The environment variable naming the graph root (a checkout or an
+/// unpacked bundle); the Python packages read the same one.
+pub const GRAPH_ROOT_ENV: &str = "MTG_GRAPH_ROOT";
+
+/// The schema file every graph root carries (checkouts and bundles).
+pub const ONTOLOGY_FILE: &str = "MagicCardsOntology.ttl";
+
+/// Whether `dir` looks like a graph root: it holds [`ONTOLOGY_FILE`] and
+/// a `sets/` directory.
+#[must_use]
+pub fn is_graph_root(dir: &Path) -> bool {
+    dir.join(ONTOLOGY_FILE).is_file() && dir.join("sets").is_dir()
+}
+
+/// The nearest graph root at or above `start`.
+#[must_use]
+pub fn find_graph_root(start: &Path) -> Option<PathBuf> {
+    start
+        .ancestors()
+        .find(|dir| is_graph_root(dir))
+        .map(Path::to_path_buf)
+}
+
+/// No usable graph root.
+#[derive(Debug, Clone, PartialEq, Eq, thiserror::Error)]
+pub enum GraphRootError {
+    /// `MTG_GRAPH_ROOT` is set but does not name a directory.
+    #[error("{GRAPH_ROOT_ENV}={0}: not a directory")]
+    EnvNotDir(String),
+    /// Neither the variable nor the working directory's ancestors give one.
+    #[error(
+        "no graph root: set {GRAPH_ROOT_ENV} to a magic-cards checkout or an unpacked graph \
+         bundle, or run inside one (a directory holding {ONTOLOGY_FILE} and sets/)"
+    )]
+    NotFound,
+}
+
+/// The graph root of this process: `MTG_GRAPH_ROOT` when set (the Python
+/// packages honour the same variable), else the nearest ancestor of the
+/// working directory that [`is_graph_root`].
+///
+/// # Errors
+///
+/// See [`GraphRootError`].
+pub fn graph_root() -> Result<PathBuf, GraphRootError> {
+    if let Some(value) = std::env::var_os(GRAPH_ROOT_ENV)
+        && !value.is_empty()
+    {
+        let dir = PathBuf::from(&value);
+        return if dir.is_dir() {
+            Ok(dir)
+        } else {
+            Err(GraphRootError::EnvNotDir(
+                value.to_string_lossy().into_owned(),
+            ))
+        };
+    }
+    let cwd = std::env::current_dir().map_err(|_| GraphRootError::NotFound)?;
+    find_graph_root(&cwd).ok_or(GraphRootError::NotFound)
 }
 
 #[cfg(test)]
