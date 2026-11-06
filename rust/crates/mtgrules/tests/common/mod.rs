@@ -7,7 +7,8 @@ use std::collections::BTreeSet;
 use std::rc::Rc;
 
 use mtgrules::Game;
-use mtgrules::abilities::Ability;
+use mtgrules::abilities::{Ability, SpellAbility, TargetSpec};
+use mtgrules::effects::Effect;
 use mtgrules::objects::{Characteristics, ObjId, PlayerId, Zone};
 use mtgrules::policy::TrivialPolicy;
 use pycompat::random::PyRandom;
@@ -67,7 +68,7 @@ pub(crate) fn creature_with(game: &mut Game, player: PlayerId, spec: CreatureSpe
         power: Some(spec.power),
         toughness: Some(spec.toughness),
         keywords: set(&spec.keywords),
-        abilities: spec.abilities.into_iter().map(Rc::new).collect(),
+        abilities: spec.abilities,
         ..Characteristics::default()
     };
     let id = game.create_object(base, player, false, None);
@@ -135,11 +136,115 @@ pub(crate) fn card_in_hand(
     id
 }
 
+/// The knobs of a synthetic card in hand (the Python `card_in_hand`
+/// keywords).
+pub(crate) struct CardSpec {
+    pub name: &'static str,
+    pub mana_cost: &'static str,
+    pub types: Vec<&'static str>,
+    pub abilities: Vec<Ability>,
+    pub power: Option<i64>,
+    pub toughness: Option<i64>,
+    pub subtypes: Vec<&'static str>,
+}
+
+impl Default for CardSpec {
+    fn default() -> Self {
+        CardSpec {
+            name: "Spell",
+            mana_cost: "{1}",
+            types: vec!["Sorcery"],
+            abilities: Vec::new(),
+            power: None,
+            toughness: None,
+            subtypes: Vec::new(),
+        }
+    }
+}
+
+/// Put a synthetic card with every knob into the player's hand.
+pub(crate) fn card_in_hand_with(game: &mut Game, player: PlayerId, spec: CardSpec) -> ObjId {
+    let base = Characteristics {
+        name: spec.name.to_owned(),
+        mana_cost: spec.mana_cost.to_owned(),
+        types: set(&spec.types),
+        subtypes: set(&spec.subtypes),
+        power: spec.power,
+        toughness: spec.toughness,
+        abilities: spec.abilities,
+        ..Characteristics::default()
+    };
+    let id = game.create_object(base, player, false, None);
+    game.place(id, player, Zone::Hand);
+    id
+}
+
+/// Put a synthetic card on top of the player's library.
+pub(crate) fn card_in_library(game: &mut Game, player: PlayerId, name: &str) -> ObjId {
+    let base = Characteristics {
+        name: name.to_owned(),
+        types: set(&["Sorcery"]),
+        ..Characteristics::default()
+    };
+    let id = game.create_object(base, player, false, None);
+    game.place(id, player, Zone::Library);
+    id
+}
+
+/// A synthetic sorcery with `effect` and `targets` in the player's hand.
+pub(crate) fn sorcery(
+    game: &mut Game,
+    player: PlayerId,
+    effect: Effect,
+    targets: Vec<TargetSpec>,
+    cost: &'static str,
+) -> ObjId {
+    let mut ability = SpellAbility::new(effect);
+    ability.targets = targets;
+    card_in_hand_with(
+        game,
+        player,
+        CardSpec {
+            name: "TestSpell",
+            mana_cost: cost,
+            abilities: vec![Ability::from(ability)],
+            ..CardSpec::default()
+        },
+    )
+}
+
+/// `settle()` gives up after this many SBA/trigger/resolve iterations.
+const SETTLE_GUARD: u32 = 200;
+
+/// Run SBAs + put triggers on the stack + resolve everything.
+pub(crate) fn settle(game: &mut Game) {
+    let mut guard = 0;
+    loop {
+        guard += 1;
+        assert!(guard < SETTLE_GUARD, "settle() did not converge");
+        let acted = game.check_state_based_actions();
+        let placed = game.put_triggers_on_stack();
+        if !game.stack.is_empty() {
+            game.resolve_top();
+            continue;
+        }
+        if !acted && !placed {
+            return;
+        }
+    }
+}
+
 /// Add floating mana to the player's pool.
 pub(crate) fn give_mana(game: &mut Game, player: PlayerId, mana: &[(&str, i64)]) {
     for (t, n) in mana {
         game.player_mut(player).mana_pool.add(t, *n);
     }
+}
+
+/// Put the game into `phase` without the phase log line (the Python
+/// tests assign `game.phase` directly).
+pub(crate) fn set_phase(game: &mut Game, phase: &str) {
+    phase.clone_into(&mut game.phase);
 }
 
 /// `(power, toughness)` of an object's current characteristics.

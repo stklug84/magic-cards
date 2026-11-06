@@ -1,8 +1,8 @@
-//! Replacement and prevention effects (CR 614-616) over the emit
-//! machinery: ordering, once-per-event bookkeeping, prevention, the
-//! affected player's choice, and static-ability sources. The Python
-//! `test_614_replacements.py` cases that go through token creation,
-//! counters and life gain follow with those game actions in M6.
+//! Replacement and prevention effects (CR 614-616): the emit machinery
+//! (ordering, once-per-event bookkeeping, prevention, the affected
+//! player's choice, static-ability sources) and the Python
+//! `test_614_replacements.py` cases through the game actions - with the
+//! card overrides written inline until `overrides` lands (M6b).
 
 mod common;
 
@@ -11,7 +11,7 @@ use std::rc::Rc;
 
 use common::{creature, creature_named, make_game};
 use mtgrules::Game;
-use mtgrules::abilities::{Ability, StaticAbility};
+use mtgrules::abilities::{Ability, StaticAbility, TokenSpec};
 use mtgrules::events::{Event, EventData, EventType};
 use mtgrules::objects::{ObjId, PlayerId};
 use mtgrules::policy::Policy;
@@ -207,7 +207,7 @@ fn static_replacement_abilities_come_from_battlefield_permanents() {
         "Doubling Season",
         1,
         1,
-        vec![Ability::Static(StaticAbility::replacement(
+        vec![Ability::from(StaticAbility::replacement(
             Rc::new(factory),
             "token doubler",
         ))],
@@ -223,4 +223,205 @@ fn static_replacement_abilities_come_from_battlefield_permanents() {
     game.bump();
     let plain = game.emit(create_token_event(p0, 3)).expect("not prevented");
     assert_eq!(plain.data.count, Some(3));
+}
+
+// ---- the Python test_614_replacements cases through the game actions
+
+/// A static replacement ability on a battlefield permanent (the Python
+/// `_hooked` fixture with the override's replacement inlined).
+fn hooked(
+    game: &mut Game,
+    player: PlayerId,
+    name: &'static str,
+    make: impl Fn(ObjId) -> Vec<Replacement> + 'static,
+) -> ObjId {
+    let factory = move |_game: &Game, src: ObjId| make(src);
+    creature_named(
+        game,
+        player,
+        name,
+        1,
+        1,
+        vec![Ability::from(StaticAbility::replacement(
+            Rc::new(factory),
+            name,
+        ))],
+    )
+}
+
+/// Doubling Season: twice the tokens and counters for its controller.
+fn doubling_season(me: PlayerId) -> impl Fn(ObjId) -> Vec<Replacement> {
+    move |src| {
+        vec![
+            Replacement::new(EventType::CreateToken, |_g, mut e| {
+                e.data.count = e.data.count.map(|n| n * 2);
+                Some(e)
+            })
+            .when(move |_g, e| e.data.controller == Some(me))
+            .with_source(Some(src)),
+            Replacement::new(EventType::PutCounters, |_g, mut e| {
+                e.data.count = e.data.count.map(|n| n * 2);
+                Some(e)
+            })
+            .when(move |_g, e| e.data.controller == Some(me))
+            .with_source(Some(src)),
+        ]
+    }
+}
+
+fn soldier() -> Rc<mtgrules::abilities::TokenSpec> {
+    Rc::new(mtgrules::abilities::TokenSpec::creature("Soldier", 1, 1))
+}
+
+#[test]
+fn rule_614_1c_token_doubler() {
+    let mut game = make_game(2);
+    hooked(
+        &mut game,
+        PlayerId(0),
+        "Doubling Season",
+        doubling_season(PlayerId(0)),
+    );
+    let made = game.create_tokens(PlayerId(0), soldier(), 2, None, None);
+    assert_eq!(made.len(), 4);
+    assert_eq!(
+        game.player(PlayerId(0)).stats.get("tokens_created"),
+        Some(&4)
+    );
+}
+
+#[test]
+fn rule_616_2_two_doublers_stack_multiplicatively() {
+    let mut game = make_game(2);
+    hooked(
+        &mut game,
+        PlayerId(0),
+        "Doubling Season",
+        doubling_season(PlayerId(0)),
+    );
+    hooked(
+        &mut game,
+        PlayerId(0),
+        "Adrix and Nev, Twincasters",
+        doubling_season(PlayerId(0)),
+    );
+    let made = game.create_tokens(PlayerId(0), soldier(), 1, None, None);
+    assert_eq!(made.len(), 4); // 1 * 2 * 2
+}
+
+#[test]
+fn rule_614_1c_doubler_ignores_opponents_tokens() {
+    let mut game = make_game(2);
+    hooked(
+        &mut game,
+        PlayerId(0),
+        "Doubling Season",
+        doubling_season(PlayerId(0)),
+    );
+    let made = game.create_tokens(PlayerId(1), soldier(), 2, None, None);
+    assert_eq!(made.len(), 2);
+}
+
+#[test]
+fn counter_doubler() {
+    let mut game = make_game(2);
+    hooked(
+        &mut game,
+        PlayerId(0),
+        "Doubling Season",
+        doubling_season(PlayerId(0)),
+    );
+    let c = creature(&mut game, PlayerId(0), 2, 2);
+    game.put_counters(c, "+1/+1", 2);
+    assert_eq!(game.obj(c).counter("+1/+1"), 4);
+    assert_eq!(game.chars(c).power, Some(6));
+}
+
+#[test]
+fn rule_615_prevention_no_life_gain() {
+    let mut game = make_game(2);
+    hooked(&mut game, PlayerId(0), "Everlasting Torment", |src| {
+        vec![Replacement::new(EventType::GainLife, |_g, _e| None).with_source(Some(src))]
+    });
+    game.gain_life(PlayerId(0), 5);
+    assert_eq!(game.player(PlayerId(0)).life, 40);
+}
+
+#[test]
+fn academy_manufactor_one_of_each() {
+    let mut game = make_game(2);
+    hooked(&mut game, PlayerId(0), "Academy Manufactor", |src| {
+        vec![
+            Replacement::new(EventType::CreateToken, |_g, mut e| {
+                // one Treasure becomes a Treasure, a Clue and a Food
+                let have = e
+                    .data
+                    .spec
+                    .as_ref()
+                    .map(|s| s.predefined.clone())
+                    .unwrap_or_default();
+                for spec in [TokenSpec::treasure(), TokenSpec::clue(), TokenSpec::food()] {
+                    if spec.predefined != have {
+                        e.data.extra_specs.push(Rc::new(spec));
+                    }
+                }
+                Some(e)
+            })
+            .when(|_g, e| {
+                e.data
+                    .spec
+                    .as_ref()
+                    .is_some_and(|s| ["treasure", "clue", "food"].contains(&s.predefined.as_str()))
+            })
+            .with_source(Some(src)),
+        ]
+    });
+    let made = game.create_tokens(PlayerId(0), Rc::new(TokenSpec::treasure()), 1, None, None);
+    let mut names: Vec<String> = made
+        .iter()
+        .map(|t| game.obj(*t).base.name.clone())
+        .collect();
+    names.sort();
+    assert_eq!(names, ["Clue", "Food", "Treasure"]);
+}
+
+#[test]
+fn ojer_taq_triples_creature_tokens_only() {
+    let mut game = make_game(2);
+    hooked(&mut game, PlayerId(0), "Ojer Taq", |src| {
+        vec![
+            Replacement::new(EventType::CreateToken, |_g, mut e| {
+                e.data.count = e.data.count.map(|n| n * 3);
+                Some(e)
+            })
+            .when(|_g, e| e.data.spec.as_ref().is_some_and(|s| s.is_creature()))
+            .with_source(Some(src)),
+        ]
+    });
+    assert_eq!(
+        game.create_tokens(PlayerId(0), soldier(), 1, None, None)
+            .len(),
+        3
+    );
+    assert_eq!(
+        game.create_tokens(PlayerId(0), Rc::new(TokenSpec::treasure()), 1, None, None)
+            .len(),
+        1
+    );
+}
+
+#[test]
+fn rule_614_enters_tapped_replacement_through_emit() {
+    let mut game = make_game(2);
+    game.add_floating_replacement(
+        Replacement::new(EventType::ZoneChange, |_g, mut e| {
+            e.data.tapped = Some(true);
+            Some(e)
+        })
+        .when(|_g, e| e.data.to == Some(mtgrules::objects::Zone::Battlefield)),
+    );
+    let land = common::card_in_hand(&mut game, PlayerId(0), "Land", "", &["Land"]);
+    game.move_zone(land, mtgrules::objects::Zone::Battlefield);
+    assert!(game.obj(land).tapped);
+    assert_eq!(game.obj(land).zone, mtgrules::objects::Zone::Battlefield);
 }

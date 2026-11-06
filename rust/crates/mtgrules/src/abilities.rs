@@ -438,16 +438,20 @@ impl StaticAbility {
 }
 
 /// Any of the four ability kinds carried by `Characteristics::abilities`.
+///
+/// Each variant is shared (`Rc`): copies of a characteristics set, the
+/// stack items and the pending triggers all refer to the same instance,
+/// whose [`AbilityId`] is its identity.
 #[derive(Clone, Debug)]
 pub enum Ability {
     /// rule 113.3b
-    Activated(ActivatedAbility),
+    Activated(Rc<ActivatedAbility>),
     /// rule 113.3a
-    Spell(SpellAbility),
+    Spell(Rc<SpellAbility>),
     /// rule 113.3d
-    Static(StaticAbility),
+    Static(Rc<StaticAbility>),
     /// rule 113.3c
-    Triggered(TriggeredAbility),
+    Triggered(Rc<TriggeredAbility>),
 }
 
 impl Ability {
@@ -487,7 +491,7 @@ impl Ability {
 
     /// The static ability, when it is one.
     #[must_use]
-    pub fn as_static(&self) -> Option<&StaticAbility> {
+    pub fn as_static(&self) -> Option<&Rc<StaticAbility>> {
         match self {
             Ability::Static(a) => Some(a),
             _ => None,
@@ -496,7 +500,7 @@ impl Ability {
 
     /// The activated ability, when it is one.
     #[must_use]
-    pub fn as_activated(&self) -> Option<&ActivatedAbility> {
+    pub fn as_activated(&self) -> Option<&Rc<ActivatedAbility>> {
         match self {
             Ability::Activated(a) => Some(a),
             _ => None,
@@ -505,7 +509,7 @@ impl Ability {
 
     /// The triggered ability, when it is one.
     #[must_use]
-    pub fn as_triggered(&self) -> Option<&TriggeredAbility> {
+    pub fn as_triggered(&self) -> Option<&Rc<TriggeredAbility>> {
         match self {
             Ability::Triggered(a) => Some(a),
             _ => None,
@@ -514,7 +518,7 @@ impl Ability {
 
     /// The spell ability, when it is one.
     #[must_use]
-    pub fn as_spell(&self) -> Option<&SpellAbility> {
+    pub fn as_spell(&self) -> Option<&Rc<SpellAbility>> {
         match self {
             Ability::Spell(a) => Some(a),
             _ => None,
@@ -524,25 +528,25 @@ impl Ability {
 
 impl From<ActivatedAbility> for Ability {
     fn from(a: ActivatedAbility) -> Self {
-        Ability::Activated(a)
+        Ability::Activated(Rc::new(a))
     }
 }
 
 impl From<SpellAbility> for Ability {
     fn from(a: SpellAbility) -> Self {
-        Ability::Spell(a)
+        Ability::Spell(Rc::new(a))
     }
 }
 
 impl From<StaticAbility> for Ability {
     fn from(a: StaticAbility) -> Self {
-        Ability::Static(a)
+        Ability::Static(Rc::new(a))
     }
 }
 
 impl From<TriggeredAbility> for Ability {
     fn from(a: TriggeredAbility) -> Self {
-        Ability::Triggered(a)
+        Ability::Triggered(Rc::new(a))
     }
 }
 

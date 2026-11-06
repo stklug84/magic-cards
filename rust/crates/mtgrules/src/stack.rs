@@ -5,7 +5,8 @@
 
 use std::rc::Rc;
 
-use crate::abilities::{ActivatedAbility, SpellAbility, TriggeredAbility};
+use crate::abilities::{ActivatedAbility, SpellAbility, TargetSpec, TriggeredAbility};
+use crate::effects::Effect;
 use crate::events::Event;
 use crate::objects::{ObjId, PlayerId};
 use crate::rule;
@@ -103,6 +104,29 @@ pub enum StackAbility {
     Activated(Rc<ActivatedAbility>),
     /// a triggered ability (rule 113.3c)
     Triggered(Rc<TriggeredAbility>),
+}
+
+impl StackAbility {
+    /// The target requirements of the ability.
+    #[must_use]
+    pub fn targets(&self) -> &[TargetSpec] {
+        match self {
+            StackAbility::Spell(a) => &a.targets,
+            StackAbility::Activated(a) => &a.targets,
+            StackAbility::Triggered(a) => &a.targets,
+        }
+    }
+
+    /// The effect the ability resolves (`None` for a cost-only activated
+    /// ability).
+    #[must_use]
+    pub fn effect(&self) -> Option<&Effect> {
+        match self {
+            StackAbility::Spell(a) => Some(&a.effect),
+            StackAbility::Activated(a) => a.effect.as_ref(),
+            StackAbility::Triggered(a) => Some(&a.effect),
+        }
+    }
 }
 
 /// A spell or ability on the stack (rules 405.1-405.2).

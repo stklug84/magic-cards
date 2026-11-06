@@ -658,6 +658,9 @@ Someone.
             report.contains("--- 704. State-Based Actions ["),
             "{report}"
         );
-        assert!(report.contains("  ..   704.5g\n"), "{report}");
+        // the synthetic "704." contents line is a rule the engine never
+        // claims; 704.5g is implemented by the state-based actions
+        assert!(report.contains("  ..   704\n"), "{report}");
+        assert!(report.contains("  OK   704.5g  <- "), "{report}");
     }
 }

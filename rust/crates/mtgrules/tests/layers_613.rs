@@ -1,7 +1,5 @@
 //! Continuous effects and the layer system (CR 611-613): port of the
-//! Python `test_613_layers.py` (the two cases that need zone changes -
-//! a static effect ending with its source, the new timestamp after a
-//! blink - follow with `move_zone` in M6).
+//! Python `test_613_layers.py`.
 
 mod common;
 
@@ -30,7 +28,7 @@ fn anthem(dp: i64, dt: i64, controller: PlayerId) -> Ability {
             .with_source(Some(src)),
         ]
     };
-    Ability::Static(StaticAbility::continuous(Rc::new(factory), "anthem"))
+    Ability::from(StaticAbility::continuous(Rc::new(factory), "anthem"))
 }
 
 #[test]
@@ -42,7 +40,7 @@ fn rule_613_3_layer7c_effects_and_counters() {
     game.obj_mut(src)
         .base_mut()
         .abilities
-        .push(Rc::new(anthem(1, 1, p0)));
+        .push(anthem(1, 1, p0));
     game.bump();
     game.obj_mut(c).counters.insert("+1/+1".to_owned(), 2);
     game.bump();
@@ -233,7 +231,7 @@ fn setter_ability(target: ObjId, p: i64, t: i64) -> Ability {
             .with_source(Some(src)),
         ]
     };
-    Ability::Static(StaticAbility::continuous(Rc::new(factory), "setter"))
+    Ability::from(StaticAbility::continuous(Rc::new(factory), "setter"))
 }
 
 #[test]
@@ -243,13 +241,13 @@ fn rule_613_6_abilities_granted_in_layer_6_contribute_later_layers() {
     let c = creature(&mut game, p0, 2, 2);
     let grantee = creature_named(&mut game, p0, "Grantee", 1, 1, vec![]);
     // layer 6: the grantee gains a static anthem ability
-    let bonus = Rc::new(anthem(3, 3, p0));
+    let bonus = anthem(3, 3, p0);
     game.add_floating_effect(
         ContinuousEffect::new(
             6,
             "",
             move |_g, o, _ch| o == grantee,
-            move |_g, _o, ch| ch.abilities.push(Rc::clone(&bonus)),
+            move |_g, _o, ch| ch.abilities.push(bonus.clone()),
         )
         .until_end_of_turn(),
     );
@@ -258,4 +256,33 @@ fn rule_613_6_abilities_granted_in_layer_6_contribute_later_layers() {
     assert_eq!(game.chars(grantee).abilities.len(), 1);
     game.end_of_turn_cleanup();
     assert_eq!(pt(&game, c), (Some(2), Some(2)));
+}
+
+#[test]
+fn rule_611_3_static_effect_ends_with_source() {
+    let mut game = make_game(2);
+    let p0 = PlayerId(0);
+    let c = creature(&mut game, p0, 2, 2);
+    let src = creature_named(&mut game, p0, "Anthem", 0, 4, vec![]);
+    game.obj_mut(src)
+        .base_mut()
+        .abilities
+        .push(anthem(2, 2, p0));
+    game.bump();
+    assert_eq!(game.chars(c).power, Some(4));
+    game.move_zone(src, mtgrules::objects::Zone::Graveyard);
+    assert_eq!(game.chars(c).power, Some(2));
+}
+
+#[test]
+fn rule_613_7_static_effect_takes_the_new_timestamp_after_re_entry() {
+    let mut game = make_game(2);
+    let p0 = PlayerId(0);
+    let c = creature(&mut game, p0, 2, 2);
+    let first = creature_named(&mut game, p0, "One", 2, 2, vec![setter_ability(c, 1, 1)]);
+    creature_named(&mut game, p0, "Five", 2, 2, vec![setter_ability(c, 5, 5)]);
+    assert_eq!(game.chars(c).power, Some(5)); // later timestamp wins
+    game.blink(first); // leaves and returns: newest timestamp now (fix F13)
+    assert_eq!(game.obj(first).zone, mtgrules::objects::Zone::Battlefield);
+    assert_eq!(game.chars(c).power, Some(1));
 }
