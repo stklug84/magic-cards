@@ -76,9 +76,12 @@ publishing:
 python3 scripts/build_graph_bundle.py --graph-version "$(date -u +%F)"
 ```
 
-OWL reasoning (CI runs this via the `rdf / owl (robot reason)` check;
-HermiT needs ~2 min for the ontology and ~8 min for the full per-set
-closure):
+OWL reasoning (CI runs this via the `rdf / owl (robot reason)` check,
+but only when a pull request changes a Turtle file,
+`scripts/generate_catalog.py` or `validate.yml` itself — HermiT needs
+~2 min for the ontology and ~12 min for the full per-set closure, and
+the verdict cannot change otherwise; the skipped job still reports its
+check as skipped, which the ruleset accepts):
 
 ```sh
 python3 scripts/generate_catalog.py
