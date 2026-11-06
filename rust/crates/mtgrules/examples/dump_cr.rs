@@ -1,9 +1,9 @@
-//! Canonical dump of the parsed Comprehensive Rules index (parity L2).
+//! Canonical dump of the parsed Comprehensive Rules index.
 //!
-//! The Rust twin of `scripts/parity/dump_cr.py`: one JSON line per rule,
-//! then one per glossary term, with texts as code-point length plus
-//! FNV-1a 64-bit digest (the CR text is not redistributable, so the dump
-//! never contains it). `cargo xtask parity` diffs the two.
+//! One JSON line per rule, then one per glossary term, with texts as
+//! code-point length plus FNV-1a 64-bit digest (the CR text is not
+//! redistributable, so the dump never contains it). Dump before and
+//! after a change to the parser - or a new CR edition - and diff.
 //!
 //! ```text
 //! cargo run -p mtgrules --example dump_cr -- [--cr-file F | --root DIR] [--out FILE]

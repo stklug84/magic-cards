@@ -5,12 +5,12 @@ build-backend = "hatchling.build"
 [project]
 name = "magic-cards-tools"
 version = "0.3.0"
-description = "Simulation tooling for the MTG knowledge graph: CR-grounded Commander matchup simulator, card data layer, game visualization, and graph validators."
+description = "Graph tooling for the MTG knowledge graph: the graph-bundle contract, the behavior-key whitelist and the graph validators (the simulator is the Rust workspace, released as binaries)."
 readme = "README.md"
 requires-python = ">=3.12"
 license = "MIT"
 license-files = ["LICENSE"]
-# the packaged simulator is stdlib-only; the knowledge graph itself is
+# the packaged mtgcards is stdlib-only; the knowledge graph itself is
 # not bundled - point MTG_GRAPH_ROOT at a magic-cards checkout or at an
 # unpacked graph bundle (see scripts/build_graph_bundle.py)
 dependencies = []
@@ -26,10 +26,9 @@ classifiers = [
 ]
 
 [project.optional-dependencies]
-tui = ["rich"]
 # the mtgvalidate package: graph/query validators for downstream repos
 # that check their own TTL files against a published graph bundle. Kept
-# out of the default install so mtgcards/mtgrules/mtgviz stay stdlib-only.
+# out of the default install so mtgcards stays stdlib-only.
 validate = ["rdflib>=7,<8"]
 # rdflib also powers the repo-only generator scripts (not packaged)
 dev = ["rdflib>=7,<8"]
@@ -40,26 +39,22 @@ Source = "https://github.com/stklug84/magic-cards"
 Issues = "https://github.com/stklug84/magic-cards/issues"
 Releases = "https://github.com/stklug84/magic-cards/releases"
 
+# the simulator command lines (mtg-simulate, mtg-selfplay, mtg-cr) are
+# the Rust binaries attached to the same release; see README.md
 [project.scripts]
-mtg-simulate = "mtgrules.cli:main"
-mtg-selfplay = "mtgrules.selfplay:main"
 # requires the [validate] extra (rdflib)
 mtg-validate = "mtgvalidate.cli:main"
 
 [tool.hatch.build.targets.wheel]
 packages = [
     "scripts/mtgcards",
-    "scripts/mtgrules",
     "scripts/mtgvalidate",
-    "scripts/mtgviz",
 ]
 
 [tool.hatch.build.targets.sdist]
 only-include = [
     "scripts/mtgcards",
-    "scripts/mtgrules",
     "scripts/mtgvalidate",
-    "scripts/mtgviz",
     "pyproject.toml",
     "README.md",
     "LICENSE",
@@ -80,7 +75,6 @@ ignore = [
     "D203", # PERMANENT: incompatible with D211 (house style: no blank line before class docstring)
     "D213", # PERMANENT: incompatible with D212 (house style: summary on the first line)
     # --- PERMANENT: genuinely wrong for this repository ---------------------
-    "S311",  # PERMANENT: random module drives game simulation, not cryptography
     "PT009", # PERMANENT: test suites deliberately use stdlib unittest, not pytest
     "PT027", # PERMANENT: unittest assertRaises is the house test idiom
     # --- PERMANENT: house style has no per-file copyright notices ---------
@@ -96,16 +90,8 @@ files = ["scripts"]
 strict = true
 warn_unreachable = false
 
-# rich is an OPTIONAL dependency of mtgviz/tui.py (guarded by
-# try/except ImportError with a HAVE_RICH fallback). GitHub runners
-# happen to preinstall it; this override keeps mypy deterministic on
-# machines without it.
-[[tool.mypy.overrides]]
-module = "rich.*"
-ignore_missing_imports = true
-
 [tool.bandit]
-# B311: the random module drives game simulation and deck shuffling, not
-# cryptography. Mirrors the permanent ruff S311 ignore.
-skips = ["B311"]
+# no global skips: the remaining Python is graph tooling without a
+# cryptographic surface; suppress per line with a justification if ever needed
+skips = []
 

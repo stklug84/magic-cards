@@ -10,7 +10,7 @@
 #     - actions : .github/workflows/* (expression injection, excessive
 #                 permissions, untrusted checkout, artifact/cache
 #                 poisoning, ...).
-#     - python  : the mtgcards/mtgrules/mtgviz packages and the graph
+#     - python  : the mtgcards/mtgvalidate packages and the graph
 #                 tooling under scripts/ — taint, unsafe
 #                 deserialization, path traversal, command/template
 #                 injection, ...

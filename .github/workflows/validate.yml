@@ -15,12 +15,13 @@
 #     - ttl-lint          : repo conventions and imports (validate_ttl.py)
 #     - sparql-lint       : prefixes and term usage (validate_sparql.py)
 #     - graph-consistency : cross-file graph checks (check_consistency.py)
-#     - simulator-tests   : rules engine + viz unit tests, run against
-#                           synthetic fixtures from this repository's own
-#                           knowledge graph
-#     - rust-tests        : the Rust workspace (rust/) test suites on
-#                           Linux and macOS, against the same graph and
+#     - tooling-tests     : the Python graph tooling (the generator's
+#                           helpers, the graph-bundle builder)
+#     - rust-tests        : the simulator, i.e. the Rust workspace (rust/)
+#                           test suites on Linux and macOS, against this
+#                           repository's own knowledge graph and the
 #                           Comprehensive Rules text
+#     - rust-coverage     : the workspace's line coverage, gated at 90 %
 #
 #   OWL reasoning (the rdf workflow's `owl` job) reasons two roots, each
 #   over its full owl:imports closure resolved through catalog-v001.xml
@@ -197,8 +198,10 @@ jobs:
           set -euo pipefail
           python3 scripts/check_consistency.py
 
-  simulator-tests:
-    name: Rules engine + viz unit tests
+  # The Python graph tooling: the generator's pure helpers and the
+  # graph-bundle builder (stdlib unittest, no rdflib needed).
+  tooling-tests:
+    name: Graph tooling tests
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -209,43 +212,21 @@ jobs:
         with:
           python-version: "3.12"
 
-      # The Comprehensive Rules text is gitignored (not distributed with
-      # the repo, see README); the rules engine validates its @rule
-      # annotations against it at import time, so CI fetches the pinned
-      # release from Wizards of the Coast.
-      # Gitignored and never distributed: fetched at run time, cached by
-      # edition (an edition is immutable, so a cache hit is always valid).
-      - name: Download Comprehensive Rules
-        uses: stklug84/actions/mtg/fetch-comprehensive-rules@c6c3adbc4140cbf096c0c61c30b4fa96ff82b8dd  # v2.19.0
-        with:
-          cr-date: "20260925"
-
-      - name: Card data-layer tests (deck formats / Scryfall mapping)
+      - name: Generator and bundle-builder tests
         working-directory: scripts
         run: |
           set -euo pipefail
           python3 -m unittest discover -s mtgcards/tests -t .
 
-      - name: Rules-engine conformance tests (stdlib only)
-        working-directory: scripts
-        run: |
-          set -euo pipefail
-          python3 -m unittest discover -s mtgrules/tests -t .
-
-      - name: Visualization tests (recorder / replay)
-        working-directory: scripts
-        run: |
-          set -euo pipefail
-          python3 -m unittest discover -s mtgviz/tests -t .
-
-  # The Rust workspace: unit, integration and property tests on the hosts
-  # of the release targets (Windows joins once the binaries exist). The
-  # Comprehensive Rules text is fetched exactly like for simulator-tests:
-  # the engine validates its #[rule] annotations against it. Tests that
-  # need the text skip with a notice when it is absent locally;
-  # MTG_REQUIRE_CR=1 turns that skip into a failure here. The compiler is
-  # pinned by rust/rust-toolchain.toml and installed by the runner's
-  # rustup.
+  # The simulator (the Rust workspace): unit, integration, property and
+  # snapshot tests on the hosts of the release targets. The Comprehensive
+  # Rules text is gitignored (not distributed with the repo, see README);
+  # the engine validates its #[rule] annotations against it, so CI fetches
+  # the pinned edition from Wizards of the Coast, cached by edition (an
+  # edition is immutable, so a cache hit is always valid). Tests that need
+  # the text skip with a notice when it is absent locally; MTG_REQUIRE_CR=1
+  # turns that skip into a failure here. The compiler is pinned by
+  # rust/rust-toolchain.toml and installed by the runner's rustup.
   rust-tests:
     name: Rust workspace tests (${{ matrix.os }})
     runs-on: ${{ matrix.os }}
@@ -289,30 +270,10 @@ jobs:
         working-directory: rust
         run: cargo test --workspace --all-features
 
-      # Parity against the Python simulator (the reference until cutover),
-      # level by level: L1 regenerates the CPython vectors committed under
-      # rust/crates/*/tests/vectors and requires the committed bytes; L2
-      # dumps the card database and the parsed Comprehensive Rules; L3 the
-      # compiled abilities of every card; L4 the --viz-file recording, its
-      # replay and the --watch stream; L5 the mtg-simulate / mtg-selfplay
-      # command lines - each identical to the Python module's output. The
-      # Python side runs straight from scripts/, so no install.
-      - name: Set up Python
-        if: runner.os == 'Linux'
-        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0  # v7
-        with:
-          python-version: "3.12"
-
-      - name: Parity against the Python implementation (L1 vectors, L2 cards + CR, L3 abilities, L4 viz, L5 CLIs)
-        if: runner.os == 'Linux'
-        working-directory: rust
-        run: cargo xtask parity
-
-  # Line coverage of the Rust workspace (xtask excluded: the parity
-  # driver is not shipped). The gate is a floor: new code arrives with
-  # its tests. cargo-llvm-cov is a pinned release asset, checksummed
-  # like cargo-deny in lint.yml (the project publishes no .sha256 files;
-  # the hash is the asset's at pinning time).
+  # Line coverage of the Rust workspace. The gate is a floor: new code
+  # arrives with its tests. cargo-llvm-cov is a pinned release asset,
+  # checksummed like cargo-deny in lint.yml (the project publishes no
+  # .sha256 files; the hash is the asset's at pinning time).
   rust-coverage:
     name: Rust line coverage (>= 90 %)
     runs-on: ubuntu-latest
@@ -363,4 +324,4 @@ jobs:
         working-directory: rust
         run: |
           set -euo pipefail
-          cargo llvm-cov --workspace --all-features --exclude xtask --summary-only --fail-under-lines 90
+          cargo llvm-cov --workspace --all-features --summary-only --fail-under-lines 90

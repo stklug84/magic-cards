@@ -25,11 +25,10 @@ to be reusable — contributions to either are welcome.
 | --- | --- |
 | `MagicCards*.ttl`, `MagicSimulationAnnotations.ttl` | Root ontologies and individuals (the knowledge graph) |
 | `queries/` | SPARQL query library, one numbered topic directory per area (see `queries/INDEX.md`) |
-| `scripts/mtgcards/` | Card data model, deck loading, TTL-backed card database |
-| `scripts/mtgrules/` | Comprehensive-Rules engine (stdlib only) + conformance tests |
-| `scripts/mtgviz/` | Game visualization: recorder, replay, live TUI + tests |
+| `rust/` | The simulator: a Cargo workspace (`pycompat`, `mtgcards`, `mtgrules`, `mtgviz`, `mtgsim` and the `#[rule]` macro crates) |
+| `scripts/mtgcards/` | The graph-bundle contract (`graph.py`) and the behavior-key whitelist (`behaviors.py`) shared with the simulator |
 | `scripts/mtgvalidate/` | Graph/query validators, root-parameterized (needs rdflib; the `validate` extra) |
-| `scripts/*.py` | Entry points: validator wrappers, generators, graph-bundle builder, matchup simulator |
+| `scripts/*.py` | Entry points: validator wrappers, generators, graph-bundle builder |
 | `sets/` | Per-set TTL slices (generated card individuals) |
 
 The reusable workflows (`rdf-validate.yml`, `python-validate.yml`) live in
@@ -119,17 +118,12 @@ graph because `xsd:date` is outside the OWL 2 datatype map (plain
 `reason` is unaffected). Strip `^^xsd:date` literals into strings on a
 scratch copy first, then explain that copy.
 
-Simulator tests and smoke matchup (must stay green after every change to
-`scripts/`):
+Graph tooling tests (the generator's helpers and the bundle builder;
+must stay green after every change to `scripts/`):
 
 ```sh
 cd scripts
 python3 -m unittest discover -s mtgcards/tests -t .
-python3 -m unittest discover -s mtgrules/tests -t .
-python3 -m unittest discover -s mtgviz/tests -t .
-cd ..
-python3 scripts/simulate_matchup.py \
-  YOUR_DECK1.txt YOUR_DECK2.txt --games 3 --seed 7
 ```
 
 Python strictness: ruff runs with `select = ["ALL"]` and only permanent,
@@ -139,9 +133,12 @@ no ignore baseline and no per-file-ignore section — new suppressions are
 allowed only per line (`# noqa: <RULE>` / `# nosec <ID>`) with a
 justification comment.
 
-Rust workspace (`rust/`; the compiler is pinned by
+The simulator (`rust/`; the compiler is pinned by
 `rust/rust-toolchain.toml` and installed by rustup on first use;
-`cargo install cargo-deny --locked` once for the dependency check):
+`cargo install cargo-deny cargo-llvm-cov --locked` and `rustup component
+add llvm-tools-preview` once). The tests that need the Comprehensive
+Rules text expect `MagicCompRules-*.txt` at the repository root (see the
+README; it is gitignored):
 
 ```sh
 cd rust
@@ -149,32 +146,40 @@ cargo fmt --all --check
 cargo clippy --workspace --all-targets --all-features -- -D warnings
 cargo test --workspace --all-features
 cargo deny check
-cargo llvm-cov --workspace --all-features --exclude xtask --summary-only --fail-under-lines 90
+cargo llvm-cov --workspace --all-features --summary-only --fail-under-lines 90
 cargo bench -p mtgrules --bench engine   # criterion: compile the graph, the mana solver, a full game
 ```
 
-The test suite has three layers. The ports of the Python engine tests
-(one file per rules topic) pin the rules of play; the parity levels
-below pin the bytes against the Python implementation; and the
-extended suite covers what neither does by construction — property
-tests (`proptest`: the compiler is total over arbitrary oracle text, the
-mana pool never overpays, the CPython-compatible formatting round-trips,
-the view state never leaves its range), snapshot tests (`insta`: the
-terminal frame rendered through ratatui's `TestBackend`, the plain text
-frame; `cargo insta review` after an intended change of the frame), the
-whole card pool dealt into decks that play four-player games under
-every AI profile (`tests/pool.rs`), and every hand-written card run
-through one battery of events and activations (`tests/overrides_drill.rs`).
-CI gates line coverage at 90 % (`rust-coverage` in `validate.yml`;
-`cargo install cargo-llvm-cov` and `rustup component add
-llvm-tools-preview` locally) — new code arrives with its tests.
+The test suite has three layers. The rules tests (one file per rules
+topic under `rust/crates/mtgrules/tests/`) pin the rules of play; the
+frozen vectors (`rust/crates/*/tests/vectors/`) pin the bytes — the
+CPython-compatible layers against CPython 3.12 and the mana solver
+against the engine the Rust one replaced, so a seed keeps producing the
+output it always did; and the extended suite covers what neither does by
+construction — property tests (`proptest`: the compiler is total over
+arbitrary oracle text, the mana pool never overpays, the
+CPython-compatible formatting round-trips, the view state never leaves
+its range), snapshot tests (`insta`: the terminal frame rendered through
+ratatui's `TestBackend`, the plain text frame; `cargo insta review` after
+an intended change of the frame), the whole card pool dealt into decks
+that play four-player games under every AI profile (`tests/pool.rs`),
+and every hand-written card run through one battery of events and
+activations (`tests/overrides_drill.rs`). CI gates line coverage at 90 %
+(`rust-coverage` in `validate.yml`) — new code arrives with its tests.
+
+Three examples dump the data layers canonically, one JSON line per
+entry, for reviewing a change by diff: `cargo run -p mtgcards --example
+dump_cards -- --root ../..` (every card field and behaviour key),
+`cargo run -p mtgrules --example dump_abilities -- --root ../..` (every
+compiled ability, overrides included) and `cargo run -p mtgrules
+--example dump_cr` (the parsed Comprehensive Rules, as lengths and
+digests). Dump before and after, diff the two files.
 
 `mtg-simulate --jobs N` runs the seeds of a run on `N` threads (`0` =
 the available CPUs). A seed's games share one RNG stream and stay
 sequential, so the seed is the unit of parallelism and the output —
 statistics, `--verbose` lines, `--log-file` records, the `--viz-file`
-recording — is byte-identical to the sequential run; the L5 parity
-check runs the Rust side with `--jobs 2` for that reason.
+recording — is byte-identical to the sequential run.
 
 Rust strictness mirrors the Python rules: `unsafe` is forbidden, clippy
 runs `all` + `pedantic` and every warning is an error in CI
@@ -189,69 +194,22 @@ crate that annotates rules, so its `#[link_section]` never trips the
 Comprehensive Rules text skip with a notice when it is absent;
 `MTG_REQUIRE_CR=1` (set in CI) turns that into a failure.
 
-Until the cutover the Python simulator is the parity reference, and
-`cargo xtask parity` compares the two implementations level by level
-(`PYTHON=...` picks the interpreter; the Python side runs straight from
-`scripts/`, no install needed):
+The workspace replaced a Python simulator of the same shape (packages
+`mtgrules`, `mtgviz` and the simulator half of `mtgcards`, removed at
+the cutover; their sources and the level-by-level parity harness that
+proved the two implementations byte-identical — `scripts/parity/`,
+`rust/xtask` — live in the git history up to that commit). The
+observable output is therefore defined by CPython behaviour and the
+`pycompat` crate keeps it so: recordings, logs and seeds from before the
+cutover replay unchanged. The Rust `BEHAVIOR_KEYS` list is checked
+against `scripts/mtgcards/behaviors.py` (the whitelist the graph
+validators apply) by a `mtgcards` test, so the two cannot drift.
 
-- **L1** — the `pycompat` crate against CPython reference vectors
-  (`rust/crates/pycompat/tests/vectors/`) and the `mtgrules` crate
-  against vectors of the Python engine's own semantics
-  (`rust/crates/mtgrules/tests/vectors/`: mana-cost parsing, the mana
-  pool's payment order), both generated by `scripts/parity/vectors.py`.
-  After changing either side, regenerate and commit them; CI fails when
-  they are stale.
-- **L2** — the card database: `scripts/parity/dump_cards.py` and the
-  `mtgcards` example `dump_cards` write one JSON line per index entry
-  (every card field, every behaviour key, the double-faced aliasing) and
-  must agree byte for byte over the checkout's graph and over a
-  synthetic root with custom cards, an extra graph and a manifest. The
-  Comprehensive Rules parser likewise: `scripts/parity/dump_cr.py` and
-  the `mtgrules` example `dump_cr` dump every rule, example and glossary
-  entry (as length + digest — the text is not redistributable) over the
-  checkout's `MagicCompRules-*.txt` when present and over a synthetic
-  text.
-- **L3** — the compiled abilities: `scripts/parity/dump_abilities.py`
-  and the `mtgrules` example `dump_abilities` compile every distinct card
-  record of the same two graph roots (`compile_card`, overrides
-  included) and write one JSON line per card — every ability's kind,
-  costs, targets and effect tree, the keywords and cost modifiers, the
-  clauses the compiler could not read and the override's note. Closures
-  are reduced to their presence, dynamic counts to the tag `"dynamic"`.
-- **L5** — the command lines: `mtg-simulate` against `python -m
-  mtgrules.cli` and `mtg-selfplay` against `python -m mtgrules.selfplay`
-  over four decks built from the checkout's graph (a 4-player matchup
-  with mixed profiles and `--verbose`, the self-play round-robin and a
-  tuning grid); stdout, stderr and the per-game `--log-file` records
-  must be identical. This is the whole engine at once — the AI, the
-  mulligans, every card in play — so a divergence here is the first
-  sign that one side's rules of play drifted.
-- **L4** (run with L5) — the visualization: the `--viz-file` recording
-  of that matchup (every event and board snapshot), the plain
-  `--replay` of two of its games and the plain `--watch` stream must be
-  identical, so a recording made by one implementation replays in the
-  other.
-
-```sh
-cd rust
-cargo xtask vectors          # regenerate the L1 vectors
-cargo xtask parity           # what CI runs: L1 (vectors --check) + L2 + L3 + L4 + L5
-cargo xtask parity --level 5 # one level only (4 and 5 run together)
-```
-
-A behaviour the Rust side must reproduce changes in Python first (with a
-test), then in Rust, then the parity run proves they agree. The Rust
-`BEHAVIOR_KEYS` and `KEYWORDS` lists are checked against the Python
-source by a `mtgcards` test, so the two cannot drift.
-
-The Python engine tests are ported one file per rules topic under
+The rules tests live one file per rules topic under
 `rust/crates/mtgrules/tests/` (`sba_704.rs`, `stack_601.rs`,
 `combat_510.rs`, `layers_613.rs`, ...; the shared fixtures — `make_game`,
-`creature`, `card_in_hand`, `settle` — live in `tests/common/mod.rs`
-and mirror `scripts/mtgrules/tests/helpers.py`). A Python case that
-depends on the AI policy or on the oracle-text compiler lands with that
-port; until then its Rust file says so in its module comment. The
-`Game` type itself is split by concern: `src/game.rs` holds the state
+`creature`, `card_in_hand`, `settle` — live in `tests/common/mod.rs`).
+The `Game` type itself is split by concern: `src/game.rs` holds the state
 and the shared helpers, `src/game/{zones,triggers,actions,mana,casting,
 resolution,sba}.rs` the rules of play, `src/combat.rs` the combat phase
 and `src/turns.rs` the turn structure. The decision policy is the
@@ -262,14 +220,13 @@ binaries live in `crates/mtgsim` (`mtg-simulate`, `mtg-selfplay`,
 `mtg-cr`), the shared command-line pieces in `mtgsim::cli`. The Rust
 binaries take `--graph-root` / `--cr-file` and validate the `#[rule]`
 registry at startup; their usage text is clap's, the stdout reports and
-exit codes are Python's. `crates/mtgviz` is the visualization: the
-recorder and the `--viz-file` writer (`schema`, `recorder`), the view
-state and event formatting (`view`), `--replay` and `--watch`
-(`replay`, `live`) and the ratatui frame (`tui`, `keys`). Where Python
-renders with `rich` and runs the engine on a worker thread, the Rust
-crate renders with ratatui and paces the engine from the recorder sink
-(the engine's arena is single-threaded); without a terminal both fall
-back to the same plain text viewers.
+exit codes those of the Python command lines they replaced.
+`crates/mtgviz` is the visualization: the recorder and the `--viz-file`
+writer (`schema`, `recorder`), the view state and event formatting
+(`view`), `--replay` and `--watch` (`replay`, `live`) and the ratatui
+frame (`tui`, `keys`). The engine is paced from the recorder sink on the
+main thread (its arena is single-threaded); without a terminal the
+front-ends fall back to plain text viewers.
 
 Rules traceability works as in Python: every rules-implementing item
 carries `#[rule("704.5g", ...)]` (`mtgrules::rule`) and rules out of
@@ -324,18 +281,20 @@ the part a reviewer checks by eye.
   assert not only_old and not only_new
   ```
 
-- **Text-based readers are coupled to the layout.**
-  `scripts/mtgcards/ttl_loader.py` and `scripts/mtgcards/deck_ttl.py`
-  parse the generated files with regexes instead of rdflib, so the
-  simulator stays stdlib-only. Any change to how the generator lays out a
-  predicate must be mirrored there and covered by a test — otherwise cards
-  silently lose facts while every validator still passes.
+- **Text-based readers are coupled to the layout.** The simulator's
+  readers (`rust/crates/mtgcards/src/ttl_loader.rs`, `deck.rs`,
+  `behavior.rs`) parse the generated files with regexes instead of an RDF
+  library. Any change to how the generator lays out a predicate must be
+  mirrored there and covered by a test
+  (`rust/crates/mtgcards/tests/ttl_loader.rs`) — otherwise cards silently
+  lose facts while every validator still passes.
 
 ## Working on the CI infrastructure
 
 - **Keep the separation of concerns**: repo-specific checks (TTL
-  conventions, graph consistency, simulator tests) live in
-  `.github/workflows/validate.yml`; generic RDF and Python validation is
+  conventions, graph consistency, the tooling tests, the Rust test and
+  coverage jobs) live in `.github/workflows/validate.yml`; generic RDF
+  and Python validation is
   consumed from the reusable workflows in
   [`stklug84/github-workflows`](https://github.com/stklug84/github-workflows).
   New generic behavior belongs over there — bump the version pin here
@@ -402,7 +361,11 @@ the two CodeQL analyze jobs from `.github/workflows/codeql.yml`):
           { "context": "TTL conventions and imports (rdflib)" },
           { "context": "SPARQL syntax, prefixes, and terms" },
           { "context": "Cross-file graph consistency" },
-          { "context": "Rules engine + viz unit tests" },
+          { "context": "Graph tooling tests" },
+          { "context": "Rust workspace tests (ubuntu-latest)" },
+          { "context": "Rust workspace tests (macos-latest)" },
+          { "context": "Rust line coverage (>= 90 %)" },
+          { "context": "Rust (fmt + clippy + deny)" },
           { "context": "Analyze (actions)" },
           { "context": "Analyze (python)" }
         ]
@@ -444,7 +407,9 @@ warnings, so verify the alert set first:
 
 - [ ] `ruff check scripts/`, `ruff format --check scripts/`, `mypy` and
       `bandit -c pyproject.toml -r scripts` clean
-- [ ] Both unittest suites and the 3-game smoke matchup pass
+- [ ] The tooling unittest suite passes
+- [ ] `cargo fmt`, `clippy`, `test`, `deny` and the coverage gate clean
+      in `rust/` for any change under `rust/`
 - [ ] `actionlint` and `yamllint --strict .` clean on any touched YAML
 - [ ] No build byproducts or unrelated changes staged
 - [ ] README updated if behavior, layout, or conventions changed

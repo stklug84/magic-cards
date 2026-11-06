@@ -9,7 +9,8 @@ only; this file defines its scope and the licences of everything else.
 
 | Path | Licence |
 |------|---------|
-| `scripts/**` (the `mtgcards`, `mtgrules`, `mtgviz` packages and all tooling) | [MIT](LICENSE) |
+| `scripts/**` (the `mtgcards` and `mtgvalidate` packages and all tooling) | [MIT](LICENSE) |
+| `rust/**` (the simulator workspace) | [MIT](LICENSE) |
 | `queries/**` (SPARQL query catalog) | [MIT](LICENSE) |
 | `.github/**`, `pyproject.toml`, lint configurations | [MIT](LICENSE) |
 | `MagicCardsOntology.ttl` | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) |

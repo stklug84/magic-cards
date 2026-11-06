@@ -16,7 +16,7 @@ carrying one or more graph roots and the ontology IRI, rather than
 assuming a fixed repository layout. The console script ``mtg-validate``
 wires them together.
 
-Unlike mtgcards/mtgrules/mtgviz this package requires rdflib; install it
+Unlike mtgcards this package requires rdflib; install it
 with the ``validate`` extra::
 
     pip install "magic-cards-tools[validate]"

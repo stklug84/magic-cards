@@ -1,3 +1,0 @@
-# `cargo xtask <task>` runs the developer-tooling crate (rust/xtask).
-[alias]
-xtask = "run --quiet --package xtask --"
