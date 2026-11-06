@@ -11,7 +11,7 @@ publish.workspace = true
 
 [dependencies]
 # exact rational arithmetic for statistics.stdev (CPython uses Fractions)
-num-bigint = "0.4"
+num-bigint = "0.5"
 num-integer = "0.1"
 num-traits = "0.2"
 
