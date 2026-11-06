@@ -16,7 +16,11 @@
 //!   over a synthetic text;
 //! - `help`.
 //!
-//! Higher parity levels (compiled abilities, `--viz-file` records, the
+//!   a synthetic text; L3 diffs the compiled-abilities dumps
+//!   (`scripts/parity/dump_abilities.py` against the `mtgrules`
+//!   `dump_abilities` example) over the same two graph roots.
+//!
+//! Higher parity levels (`--viz-file` records, the
 //! report) and `golden` (freeze expected outputs) arrive with the crates
 //! they test.
 //!
@@ -33,7 +37,8 @@ tasks:
                       check that the committed files are current)
   parity [--level N]  compare the Rust and Python implementations:
                       L1 = vectors --check, L2 = card-database and
-                      Comprehensive Rules dumps (default: every level)
+                      Comprehensive Rules dumps, L3 the compiled
+                      abilities (default: every level)
   help                print this message
 ";
 
@@ -368,10 +373,36 @@ fn synthetic_scenario(scratch: &Path) -> Result<L2Scenario, String> {
 }
 
 /// Run both dumps of `scenario` into `scratch` and compare them.
-fn compare_dumps(repo: &Path, scratch: &Path, scenario: &L2Scenario) -> Result<(), String> {
+/// One dump pair: the Python module and the Rust example of a crate.
+struct Dump {
+    level: &'static str,
+    module: &'static str,
+    krate: &'static str,
+}
+
+/// L2: the card database.
+const CARDS_DUMP: Dump = Dump {
+    level: "L2",
+    module: "dump_cards",
+    krate: "mtgcards",
+};
+
+/// L3: the compiled abilities (compiler + overrides).
+const ABILITIES_DUMP: Dump = Dump {
+    level: "L3",
+    module: "dump_abilities",
+    krate: "mtgrules",
+};
+
+fn compare_dumps(
+    repo: &Path,
+    scratch: &Path,
+    scenario: &L2Scenario,
+    dump: &Dump,
+) -> Result<(), String> {
     let py_out = scratch.join("python.jsonl");
     let rs_out = scratch.join("rust.jsonl");
-    let mut py = python_module(repo, "dump_cards");
+    let mut py = python_module(repo, dump.module);
     py.arg("--root")
         .arg(&scenario.root)
         .arg("--out")
@@ -382,9 +413,9 @@ fn compare_dumps(repo: &Path, scratch: &Path, scenario: &L2Scenario) -> Result<(
         "run",
         "--quiet",
         "-p",
-        "mtgcards",
+        dump.krate,
         "--example",
-        "dump_cards",
+        dump.module,
         "--",
     ])
     .arg("--root")
@@ -407,9 +438,10 @@ fn compare_dumps(repo: &Path, scratch: &Path, scenario: &L2Scenario) -> Result<(
     let rs_text =
         std::fs::read_to_string(&rs_out).map_err(|e| format!("{}: {e}", rs_out.display()))?;
     diff_lines(&py_text, &rs_text)
-        .map_err(|detail| format!("L2 [{}]: {detail}", scenario.label))?;
+        .map_err(|detail| format!("{} [{}]: {detail}", dump.level, scenario.label))?;
     println!(
-        "L2 [{}]: {} lines identical",
+        "{} [{}]: {} lines identical",
+        dump.level,
         scenario.label,
         py_text.lines().count()
     );
@@ -519,9 +551,11 @@ fn newest_cr_file(dir: &Path) -> Option<PathBuf> {
     files.pop()
 }
 
-fn parity_l2() -> Result<(), String> {
+/// The graph scenarios (the checkout and the synthetic root) through
+/// `dumps`; L2 adds the Comprehensive Rules dumps.
+fn parity_graph(dumps: &[&Dump], with_cr: bool) -> Result<(), String> {
     let repo = repo_root();
-    let scratch = std::env::temp_dir().join(format!("mtg-parity-l2-{}", std::process::id()));
+    let scratch = std::env::temp_dir().join(format!("mtg-parity-{}", std::process::id()));
     std::fs::create_dir_all(&scratch).map_err(|e| format!("{}: {e}", scratch.display()))?;
     let result = (|| {
         let mut scenarios = Vec::new();
@@ -533,13 +567,18 @@ fn parity_l2() -> Result<(), String> {
                 extra_graphs: Vec::new(),
             });
         } else {
-            println!("L2: no sets/ in the checkout, skipping the real graph");
+            println!("parity: no sets/ in the checkout, skipping the real graph");
         }
         scenarios.push(synthetic_scenario(&scratch)?);
         for (i, scenario) in scenarios.iter().enumerate() {
-            let out = scratch.join(format!("scenario-{i}"));
-            std::fs::create_dir_all(&out).map_err(|e| format!("{}: {e}", out.display()))?;
-            compare_dumps(&repo, &out, scenario)?;
+            for dump in dumps {
+                let out = scratch.join(format!("scenario-{i}-{}", dump.module));
+                std::fs::create_dir_all(&out).map_err(|e| format!("{}: {e}", out.display()))?;
+                compare_dumps(&repo, &out, scenario, dump)?;
+            }
+        }
+        if !with_cr {
+            return Ok(());
         }
         // the Comprehensive Rules parser: the real text when present (it
         // is fetched separately, never committed), always the synthetic one
@@ -572,10 +611,11 @@ fn parity(level: Option<u8>) -> Result<(), String> {
     match level {
         None => {
             vectors(true)?;
-            parity_l2()
+            parity_graph(&[&CARDS_DUMP, &ABILITIES_DUMP], true)
         }
         Some(1) => vectors(true),
-        Some(2) => parity_l2(),
+        Some(2) => parity_graph(&[&CARDS_DUMP], true),
+        Some(3) => parity_graph(&[&ABILITIES_DUMP], false),
         Some(other) => Err(format!("parity level {other} is not implemented yet")),
     }
 }

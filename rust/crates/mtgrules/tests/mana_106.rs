@@ -1,18 +1,18 @@
-//! Mana production (CR 106, 605), fixes F1 and F6: the engine's mana
-//! accounting for each source shape - the `TestPayment` half of the
-//! Python `test_106_mana_production.py`. (The `TestCompiledMana` half,
-//! what the compiler makes of the oracle "Add ..." templates, lands
-//! with the compiler port.)
+//! Mana production (CR 106, 605), fixes F1 and F6: what the compiler
+//! makes of the oracle "Add ..." templates, and the engine's mana
+//! accounting for each source shape. Port of the Python
+//! `test_106_mana_production.py`.
 
 mod common;
 
 use std::collections::BTreeSet;
 use std::rc::Rc;
 
-use common::{CreatureSpec, creature_with, make_game, set};
+use common::{CreatureSpec, FakeRef, creature_with, make_game, set};
 use mtgcards::CardData;
 use mtgrules::Game;
 use mtgrules::abilities::{Ability, ActivatedAbility};
+use mtgrules::compiler::compile_card;
 use mtgrules::effects::{AddMana, Ctx, Effect};
 use mtgrules::manasys::parse_cost;
 use mtgrules::objects::{Characteristics, ObjId, PlayerId, Zone};
@@ -164,4 +164,111 @@ fn no_commander_means_every_colour() {
         set(&["W", "U", "B", "R", "G"])
     );
     assert!(game.can_pay_mana(P0, &parse_cost("{U}")));
+}
+
+// ---- what the compiler makes of the oracle "Add ..." templates
+
+fn mana_abilities(card: &FakeRef) -> Vec<Rc<ActivatedAbility>> {
+    compile_card(&card.card())
+        .abilities
+        .iter()
+        .filter_map(|a| a.as_activated().filter(|ab| ab.is_mana_ability).cloned())
+        .collect()
+}
+
+fn add_mana(card: &FakeRef) -> AddMana {
+    let [ab] = &mana_abilities(card)[..] else {
+        panic!("one mana ability");
+    };
+    match &ab.effect {
+        Some(Effect::AddMana(add)) => add.clone(),
+        other => panic!("not a plain mana ability: {other:?}"),
+    }
+}
+
+fn artifact(name: &'static str, oracle: &'static str, cost: &'static str) -> FakeRef {
+    FakeRef {
+        types: vec!["Artifact"],
+        mana_cost: cost,
+        ..FakeRef::new(name, oracle)
+    }
+}
+
+fn land(name: &'static str, oracle: &'static str) -> FakeRef {
+    FakeRef {
+        types: vec!["Land"],
+        mana_cost: "",
+        ..FakeRef::new(name, oracle)
+    }
+}
+
+#[test]
+fn or_is_a_choice_of_one() {
+    let eff = add_mana(&artifact("Talisman", "{T}: Add {U} or {B}.", "{2}"));
+    assert_eq!(eff.types, ["U", "B"]);
+    assert!(eff.choice);
+    assert_eq!(eff.amount, 1);
+}
+
+#[test]
+fn three_way_choice() {
+    let eff = add_mana(&land("Tri", "{T}: Add {W}, {U}, or {B}."));
+    assert_eq!(eff.types, ["W", "U", "B"]);
+    assert!(eff.choice);
+}
+
+#[test]
+fn sequence_adds_all() {
+    let eff = add_mana(&land("Aqueduct", "{T}: Add {U}{B}."));
+    assert_eq!(eff.types, ["U", "B"]);
+    assert!(!eff.choice);
+}
+
+#[test]
+fn sol_ring_stays_two_colorless() {
+    let eff = add_mana(&artifact("Sol Ring", "{T}: Add {C}{C}.", "{1}"));
+    assert_eq!(eff.types, ["C", "C"]);
+    assert!(!eff.choice);
+}
+
+#[test]
+fn n_mana_of_any_one_color() {
+    let eff = add_mana(&artifact(
+        "Gilded Lotus",
+        "{T}: Add three mana of any one color.",
+        "{5}",
+    ));
+    assert!(eff.any_color);
+    assert_eq!(eff.amount, 3);
+}
+
+#[test]
+fn commander_identity_is_not_any_color() {
+    let eff = add_mana(&artifact(
+        "Arcane Signet",
+        "{T}: Add one mana of any color in your commander's color identity.",
+        "{2}",
+    ));
+    assert!(eff.commander_identity);
+    assert!(!eff.any_color);
+}
+
+#[test]
+fn graph_dual_land_is_a_choice() {
+    let eff = add_mana(&FakeRef {
+        land_colors: vec!["B", "R"],
+        ..land("Canyon Slough", "")
+    });
+    assert_eq!(eff.types, ["B", "R"]);
+    assert!(eff.choice);
+}
+
+#[test]
+fn graph_basic_land_is_one_colour() {
+    let eff = add_mana(&FakeRef {
+        land_colors: vec!["G"],
+        ..land("Forest", "")
+    });
+    assert_eq!(eff.types, ["G"]);
+    assert!(!eff.choice);
 }
