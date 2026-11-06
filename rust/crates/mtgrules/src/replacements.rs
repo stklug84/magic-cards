@@ -6,7 +6,7 @@
 //! (614.5), and each effect applies to a given event only once (616.2).
 //! If several would apply, the affected object's controller (or the
 //! affected player) chooses the order (616.1); self-replacement effects
-//! apply first (614.16a).
+//! (614.15) apply first (616.1a).
 //!
 //! Like the layer system, the engine is a set of [`Game`] methods over a
 //! per-game [`ReplacementState`]; `Game::emit` is the Python
@@ -51,7 +51,7 @@ pub struct Replacement {
     pub matches: Option<EventMatcher>,
     /// the source permanent
     pub source: Option<ObjId>,
-    /// rule 614.16a: self-replacement effects apply before others
+    /// rules 614.15 and 616.1a: self-replacement effects apply before others
     pub self_replacement: bool,
     /// the duration
     pub duration: ReplacementDuration,
@@ -104,7 +104,7 @@ impl Replacement {
         self
     }
 
-    /// A self-replacement effect (rule 614.16a).
+    /// A self-replacement effect (rule 614.15).
     #[must_use]
     pub fn self_replacing(mut self) -> Self {
         self.self_replacement = true;
@@ -212,7 +212,7 @@ impl Game {
             if candidates.is_empty() {
                 return Some(event);
             }
-            // rule 614.16a: self-replacements first; then rule 616.1 - the
+            // rule 616.1a: self-replacements first; then rule 616.1 - the
             // affected player/controller chooses; the default policy picks
             // the first, which is deterministic and unbiased for the pool
             // (all stacked doublers are multiplicative and commute)
