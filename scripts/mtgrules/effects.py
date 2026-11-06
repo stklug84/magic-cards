@@ -11,13 +11,16 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import TYPE_CHECKING
 
+from mtgrules.abilities import ActivatedAbility
 from mtgrules.cr import rule
 from mtgrules.layers import ContinuousEffect
-from mtgrules.manasys import parse_cost
+from mtgrules.manasys import land_mana_types, mana_order, parse_cost
 from mtgrules.objects import Characteristics, GameObject, Player, Zone
 from mtgrules.stack import StackItem
 
 if TYPE_CHECKING:
+    from collections.abc import Iterable
+
     from mtgrules.abilities import TokenSpec
     from mtgrules.game import Game
     from mtgrules.protocols import CountValue, OneShot
@@ -448,25 +451,61 @@ class TakeDeadCreature(Effect):
 @rule("106.2")
 @dataclass
 class AddMana(Effect):
-    """Add mana to the controller's pool (rule 106.2)."""
+    """Add mana to the controller's pool (rule 106.2).
 
-    types: tuple[str, ...] = ()  # e.g. ("C", "C") or ("ANY",)
+    ``types`` lists the produced mana symbols in order: "Add {B}{R}" is
+    ``("B", "R")`` and produces both. With ``choice`` the source produces
+    ONE mana of one of the listed types ("Add {B} or {R}", fix F1).
+    ``any_color`` / ``commander_identity`` produce one mana of a colour
+    chosen from WUBRG / the commander's colour identity; ``amount`` is how
+    many mana of that one chosen colour ("Add three mana of any one
+    color").
+    """
+
+    types: tuple[str, ...] = ()  # e.g. ("C", "C") or ("B", "R")
     any_color: bool = False
     commander_identity: bool = False
+    choice: bool = False
+    amount: int = 1
+
+    @property
+    def chooses(self) -> bool:
+        """Whether the produced mana's type is chosen when it is produced."""
+        return self.choice or self.any_color or self.commander_identity
+
+    def allowed(self, game: Game, controller: Player) -> str:
+        """Return the types the controller may choose from, in canonical order."""
+        if self.commander_identity:
+            return "".join(mana_order(game.commander_identity(controller))) or "C"
+        if self.any_color:
+            return "WUBRG"
+        return "".join(mana_order(self.types)) or "C"
 
     def resolve(self, game: Game, ctx: Ctx) -> None:
         """Add the produced mana."""
         pool = ctx.controller.mana_pool
-        if self.any_color or self.commander_identity:
-            allowed = (
-                "WUBRG"
-                if not self.commander_identity
-                else "".join(sorted(game.commander_identity(ctx.controller))) or "C"
-            )
+        if self.chooses:
+            allowed = self.allowed(game, ctx.controller)
             pick = game.policy(ctx.controller).choose_mana_color(game, ctx, allowed)
-            pool.add(pick)
+            pool.add(pick, self.amount)
+            return
         for t in self.types:
             pool.add(t)
+
+
+def land_mana_ability(colors: Iterable[str]) -> ActivatedAbility:
+    """Build the '{T}: Add ...' ability of a land known only by its graph colours.
+
+    A multi-colour land offers ONE mana of one of its colours (the "Add
+    {B} or {R}" reading, fix F1); all five colours mean "any color".
+    """
+    types, any_c = land_mana_types(colors)
+    return ActivatedAbility(
+        tap_cost=True,
+        is_mana_ability=True,
+        effect=AddMana(types=types or ("C",), any_color=any_c, choice=len(types) > 1),
+        text="{T}: Add mana.",
+    )
 
 
 @rule("701.5")

@@ -56,9 +56,11 @@ class ReplacementEngine:
         """Bind the game with no active floating replacements."""
         self.game = game
         self.floating: list[Replacement] = []
-        #: stable Replacement instances per (source id, ability id) so that
-        #: rule 616.2 "applies only once per event" bookkeeping works
-        self._cache: dict[tuple[int, int], list[Replacement]] = {}
+        #: stable Replacement instances per (source id, battlefield-entry
+        #: timestamp, ability id) so that rule 616.2 "applies only once per
+        #: event" bookkeeping works; the timestamp gives a permanent that
+        #: left and returned fresh instances (rule 400.7, fix F13)
+        self._cache: dict[tuple[int, int, int], list[Replacement]] = {}
 
     def clear_cache(self) -> None:
         """Drop cached per-ability Replacement instances.
@@ -78,7 +80,7 @@ class ReplacementEngine:
         for obj in self.game.battlefield_objects():
             for ab in obj.chars(self.game).abilities:
                 if isinstance(ab, StaticAbility) and ab.replacement:
-                    key = (obj.id, id(ab))
+                    key = (obj.id, obj.timestamp, id(ab))
                     if key not in self._cache:
                         self._cache[key] = ab.replacement(self.game, obj)
                     out.extend(self._cache[key])

@@ -101,7 +101,7 @@ class TestCanonicalOrder(unittest.TestCase):
             is_mana_ability=True,
             effect=AddMana(types=("U", "W")),
         )
-        plan = _ManaPlan(pool={}, avail=[(land, ab, frozenset("UW"), 1)])
+        plan = _ManaPlan(pool={}, avail=[(land, ab, frozenset("UW"), 1, None)])
         self.assertTrue(plan.cover_hybrid(parse_cost("{W/U}")))
         self.assertEqual([u[2] for u in plan.used], ["W"])
 
@@ -114,7 +114,7 @@ class TestCanonicalOrder(unittest.TestCase):
             is_mana_ability=True,
             effect=AddMana(types=("G", "R")),
         )
-        plan = _ManaPlan(pool={}, avail=[(land, ab, frozenset("GR"), 1)])
+        plan = _ManaPlan(pool={}, avail=[(land, ab, frozenset("GR"), 1, None)])
         self.assertTrue(plan.cover_generic(parse_cost("{1}")))
         self.assertEqual([u[2] for u in plan.used], ["R"])
 
