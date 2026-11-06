@@ -75,6 +75,7 @@ def _write_graph(root: Path) -> list[Path]:
         "MagicCardsOntology.ttl": _ONTOLOGY,
         "MagicCardIndividuals.ttl": "# aggregator\n",
         "MagicCardCollection.ttl": "# inventory\n",
+        "MagicCardSynergies.ttl": "# synergies\n",
         "MagicSimulationAnnotations.ttl": "# hooks\n",
         "sets/TestSet.ttl": _SET,
         "queries/00_example.rq": "SELECT * WHERE { ?s ?p ?o }\n",
@@ -136,6 +137,23 @@ class TestBundleStability(unittest.TestCase):
                 self.assertEqual((info.uname, info.gname), ("root", "root"))
                 self.assertEqual(info.mode, self.builder.MEMBER_MODE)
                 self.assertEqual(info.mtime, _STAMP)
+
+    def test_bundle_carries_the_graph_files(self) -> None:
+        """Every allowlisted file is bundled, the synergy graph included."""
+        with tarfile.open(self.first) as tar:
+            names = set(tar.getnames())
+        stem = f"{self.builder.BUNDLE_NAME}-{_GRAPH_VERSION}"
+        expected = {
+            "GRAPH-MANIFEST.json",
+            "MagicCardsOntology.ttl",
+            "MagicCardIndividuals.ttl",
+            "MagicCardCollection.ttl",
+            "MagicCardSynergies.ttl",
+            "MagicSimulationAnnotations.ttl",
+            "sets/TestSet.ttl",
+            "queries/00_example.rq",
+        }
+        self.assertEqual(names, {f"{stem}/{rel}" for rel in expected})
 
     def test_gzip_header_is_pinned(self) -> None:
         """The gzip header carries the graph date and no file name."""

@@ -185,9 +185,9 @@ inventory update must not force a code version bump, and vice versa.
 The bundle is built by
 [`scripts/build_graph_bundle.py`](./scripts/build_graph_bundle.py) and
 contains `MagicCardsOntology.ttl`, `MagicCardIndividuals.ttl`,
-`MagicCardCollection.ttl`, `MagicSimulationAnnotations.ttl`, `sets/`,
-`queries/`, and a `GRAPH-MANIFEST.json`. Unpack it and point
-`MTG_GRAPH_ROOT` at the result:
+`MagicCardCollection.ttl`, `MagicCardSynergies.ttl`,
+`MagicSimulationAnnotations.ttl`, `sets/`, `queries/`, and a
+`GRAPH-MANIFEST.json`. Unpack it and point `MTG_GRAPH_ROOT` at the result:
 
 ```sh
 curl -fsSL -o graph.tar.gz \
