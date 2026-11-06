@@ -215,7 +215,7 @@ fn all_targets_illegal_fizzles() {
     game.move_zone(a, Zone::Hand);
     let seen: Rc<RefCell<Vec<String>>> = Rc::new(RefCell::new(Vec::new()));
     let probe = Rc::clone(&seen);
-    game.set_log(Box::new(move |kind, _fields| {
+    game.set_log(Box::new(move |_game, kind, _fields| {
         probe.borrow_mut().push(kind.to_owned());
     }));
     settle(&mut game);

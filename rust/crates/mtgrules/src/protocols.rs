@@ -138,4 +138,6 @@ impl<T: Into<LogValue>> From<Option<T>> for LogValue {
 pub type LogFields = Vec<(&'static str, LogValue)>;
 
 /// Engine log sink: `log(event, **fields)` (adapter fan-out, recorders).
-pub type LogFn = Box<dyn FnMut(&str, LogFields)>;
+/// The sink also receives the game, which the Python recorder keeps a
+/// reference to from `attach`.
+pub type LogFn = Box<dyn FnMut(&Game, &str, LogFields)>;

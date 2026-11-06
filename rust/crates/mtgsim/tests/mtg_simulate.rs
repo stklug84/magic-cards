@@ -316,3 +316,87 @@ fn selfplay_same_file_name_gets_distinct_seats() {
     let text = String::from_utf8(out.get_output().stdout.clone()).unwrap();
     assert!(text.contains("deck vs deck#2"), "{text}");
 }
+
+// ---- recordings and replays
+
+#[test]
+fn viz_file_records_and_replays() {
+    let Some(cr) = cr_file() else { return };
+    let tmp = tempfile::tempdir().expect("tempdir");
+    let a = write(tmp.path(), "a.txt", DECK);
+    let b = write(tmp.path(), "b.txt", DECK);
+    let viz = tmp.path().join("games.viz.jsonl");
+    let out = binary("mtg-simulate", &cr)
+        .arg(&a)
+        .arg(&b)
+        .args([
+            "--offline",
+            "--games",
+            "2",
+            "--turn-cap",
+            "3",
+            "--seed",
+            "5",
+            "--viz-file",
+        ])
+        .arg(&viz)
+        .assert()
+        .success();
+    let text = String::from_utf8(out.get_output().stdout.clone()).unwrap();
+    assert!(text.contains(" viz recording written to "), "{text}");
+    let recording = std::fs::read_to_string(&viz).expect("the recording");
+    assert_eq!(
+        recording
+            .lines()
+            .filter(|l| l.starts_with("{\"t\": \"game\""))
+            .count(),
+        2
+    );
+    assert_eq!(
+        recording
+            .lines()
+            .filter(|l| l.starts_with("{\"t\": \"end\""))
+            .count(),
+        2
+    );
+    // the plain replay walks game 2 to its end on 'a'
+    let out = binary("mtg-simulate", &cr)
+        .args(["--replay"])
+        .arg(&viz)
+        .args(["--game", "2"])
+        .write_stdin("a\n")
+        .assert()
+        .success();
+    let text = String::from_utf8(out.get_output().stdout.clone()).unwrap();
+    assert!(text.starts_with("replaying game 2 (seed 5), "), "{text}");
+    assert!(text.contains("=== winner: "), "{text}");
+    // an unknown game number exits 1 with the available ones
+    let out = binary("mtg-simulate", &cr)
+        .args(["--replay"])
+        .arg(&viz)
+        .args(["--game", "9"])
+        .assert()
+        .code(1);
+    let err = String::from_utf8(out.get_output().stderr.clone()).unwrap();
+    assert!(err.ends_with(": no game 9; available: 1, 2\n"), "{err}");
+}
+
+#[test]
+fn watch_without_a_terminal_streams_the_events() {
+    let Some(cr) = cr_file() else { return };
+    let tmp = tempfile::tempdir().expect("tempdir");
+    let a = write(tmp.path(), "a.txt", DECK);
+    let b = write(tmp.path(), "b.txt", DECK);
+    let out = binary("mtg-simulate", &cr)
+        .arg(&a)
+        .arg(&b)
+        .args(["--offline", "--watch", "--seed", "5", "--turn-cap", "2"])
+        .write_stdin("")
+        .assert()
+        .success();
+    let text = String::from_utf8(out.get_output().stdout.clone()).unwrap();
+    let err = String::from_utf8(out.get_output().stderr.clone()).unwrap();
+    assert!(text.contains("T 1 [phase] -- T1 untap ("), "{text}");
+    assert!(text.trim_end().ends_with("after 2 turns"), "{text}");
+    assert!(err.contains("note: plain event stream"), "{err}");
+}

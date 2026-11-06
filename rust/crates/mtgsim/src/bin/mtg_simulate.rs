@@ -78,6 +78,25 @@ struct Args {
     /// AI profile per seat, e.g. 1=aggressive
     #[arg(long, value_name = "SEAT=NAME")]
     profile: Vec<String>,
+    /// watch a single game live in the TUI (implies --games 1)
+    #[arg(long)]
+    watch: bool,
+    /// record per-game visualization events + snapshots (JSONL) for
+    /// --replay
+    #[arg(long, value_name = "PATH")]
+    viz_file: Option<PathBuf>,
+    /// replay a recorded --viz-file in the TUI (deck arguments are not
+    /// needed)
+    #[arg(long, value_name = "PATH")]
+    replay: Option<PathBuf>,
+    /// game number to replay from the --replay file (1-based)
+    #[arg(
+        long,
+        default_value_t = 1,
+        value_name = "N",
+        allow_negative_numbers = true
+    )]
+    game: i64,
     /// the knowledge-graph root (default: MTG_GRAPH_ROOT, else the
     /// checkout above the working directory)
     #[arg(long, value_name = "DIR")]
@@ -103,6 +122,10 @@ fn exit(e: &Exit) -> ExitCode {
 }
 
 fn run(args: &Args) -> Result<(), Exit> {
+    if let Some(path) = &args.replay {
+        return mtgviz::replay::replay_file(path, args.game).map_err(Exit::error);
+    }
+
     // argument validation argparse cannot express: usage errors, exit 2
     let seeds = parse_seeds(args.seed, &args.seeds).map_err(|err| {
         Exit::usage(format!(
@@ -146,6 +169,16 @@ fn run(args: &Args) -> Result<(), Exit> {
         eprintln!("{warning}");
     }
 
+    if args.watch {
+        let options = mtgviz::live::WatchOptions {
+            turn_cap,
+            profiles: profiles.clone(),
+            viz_path: args.viz_file.clone(),
+        };
+        mtgviz::live::watch_game(&decks, &mut db, seeds[0], &options).map_err(Exit::error)?;
+        return Ok(());
+    }
+
     let settings = RunSettings {
         seeds: &seeds,
         games,
@@ -153,10 +186,29 @@ fn run(args: &Args) -> Result<(), Exit> {
         profiles: &profiles,
         verbose: args.verbose,
     };
-    let agg = run_matches(&decks, &mut db, &settings, &mut |_, _| None, &mut |line| {
+    let viz_writer = match &args.viz_file {
+        Some(path) => Some(
+            mtgviz::VizWriter::open(path)
+                .map_err(|e| Exit::error(pycompat::pyio::os_error(&e, path).to_string()))?,
+        ),
+        None => None,
+    };
+    let mut recorder_for =
+        |game_no: u64, seed: i64| viz_writer.as_ref().map(|w| w.recorder(game_no, seed));
+    let agg = run_matches(&decks, &mut db, &settings, &mut recorder_for, &mut |line| {
         println!("{line}");
-    })
-    .ok_or_else(|| Exit::error("no games were played (check --games)"))?;
+    });
+    if let (Some(writer), Some(path)) = (&viz_writer, &args.viz_file) {
+        writer
+            .close()
+            .map_err(|e| Exit::error(pycompat::pyio::os_error(&e, path).to_string()))?;
+        println!(
+            " viz recording written to {} (replay with --replay {})",
+            path.display(),
+            path.display()
+        );
+    }
+    let agg = agg.ok_or_else(|| Exit::error("no games were played (check --games)"))?;
     for line in final_report_lines(&decks, &mut db, &seeds, games, &agg) {
         println!("{line}");
     }
