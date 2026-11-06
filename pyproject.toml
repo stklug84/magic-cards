@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "magic-cards-tools"
-version = "0.2.0"
+version = "0.3.0"
 description = "Simulation tooling for the MTG knowledge graph: CR-grounded Commander matchup simulator, card data layer, game visualization, and graph validators."
 readme = "README.md"
 requires-python = ">=3.12"
