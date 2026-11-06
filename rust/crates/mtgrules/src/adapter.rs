@@ -59,7 +59,7 @@ pub trait Recorder {
     /// Bind the game before the first turn.
     fn attach(&mut self, game: &Game);
     /// Record one engine log event.
-    fn on_event(&mut self, kind: &str, fields: &LogFields);
+    fn on_event(&mut self, game: &Game, kind: &str, fields: &LogFields);
     /// Emit the end-of-game records.
     fn finish(&mut self, game: &Game, winner: Option<PlayerId>, reason: &str);
 }
@@ -259,7 +259,7 @@ pub fn run_game(
         let last_loss = Rc::clone(&last_loss);
         let sinks = Rc::clone(&sinks);
         let recorder = recorder.cloned();
-        Box::new(move |event: &str, fields: LogFields| {
+        Box::new(move |game: &Game, event: &str, fields: LogFields| {
             if event == "player_loses" {
                 let why = fields
                     .iter()
@@ -271,10 +271,10 @@ pub fn run_game(
                 *last_loss.borrow_mut() = why;
             }
             for sink in sinks.borrow_mut().iter_mut() {
-                sink(event, fields.clone());
+                sink(game, event, fields.clone());
             }
             if let Some(rec) = &recorder {
-                rec.borrow_mut().on_event(event, &fields);
+                rec.borrow_mut().on_event(game, event, &fields);
             }
         })
     };
