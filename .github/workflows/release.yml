@@ -7,9 +7,17 @@
 # comment: |
 #   Builds the magic-cards-tools Python artifact (wheel + sdist) on
 #   version tags (v*) and publishes it as a GitHub Release. The tag must
-#   match the version in pyproject.toml (vX.Y.Z <-> X.Y.Z); the built
-#   wheel is smoke-tested (install + CLI --help against the checked-out
-#   knowledge graph) before the release is created.
+#   match the version in pyproject.toml and in rust/Cargo.toml (vX.Y.Z
+#   <-> X.Y.Z); the built wheel is smoke-tested (install + CLI --help
+#   against the checked-out knowledge graph) before the release is
+#   created.
+#
+#   The Rust simulator binaries (mtg-simulate, mtg-selfplay, mtg-cr) are
+#   then built in release mode on every supported platform, smoke-tested
+#   (--version against the tag, the #[rule] registry against the
+#   Comprehensive Rules, a short offline matchup over the checked-out
+#   graph) and attached to the same release as tarballs with SHA-256
+#   checksums: one archive per target triple.
 #
 #   The build -> verify -> publish sequence is the reusable stklug84/
 #   github-workflows release-artifact workflow, the same one release-
@@ -57,6 +65,12 @@ jobs:
           echo "::error::tag ${RELEASE_TAG} does not match pyproject version ${pyver}"
           exit 1
         fi
+        script='import tomllib; print(tomllib.load(open("rust/Cargo.toml", "rb"))["workspace"]["package"]["version"])'
+        rsver="$(python3 -c "$script")"
+        if [ "$rsver" != "${RELEASE_VERSION#v}" ]; then
+          echo "::error::tag ${RELEASE_TAG} does not match the Rust workspace version ${rsver}"
+          exit 1
+        fi
         CR_DATE=20260925
         curl -fsSL -o "MagicCompRules-${CR_DATE}.txt" \
           "https://media.wizards.com/2026/downloads/MagicCompRules%20${CR_DATE}.txt"
@@ -82,3 +96,110 @@ jobs:
 
       release-assets: "dist/*"
       release-name: "magic-cards-tools"
+
+  # The simulator binaries, one tarball per target. Runs after the
+  # Python artifact's job so the release the assets attach to exists;
+  # the matrix mirrors the platforms validate.yml tests (Linux and
+  # macOS, both architectures).
+  binaries:
+    name: Rust binaries (${{ matrix.target }})
+    needs: release
+    runs-on: ${{ matrix.os }}
+    permissions:
+      contents: write
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            target: x86_64-unknown-linux-gnu
+          - os: ubuntu-24.04-arm
+            target: aarch64-unknown-linux-gnu
+          - os: macos-latest
+            target: aarch64-apple-darwin
+          - os: macos-15-intel
+            target: x86_64-apple-darwin
+    env:
+      MTG_REQUIRE_CR: "1"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7
+
+      - name: Download Comprehensive Rules
+        uses: stklug84/actions/mtg/fetch-comprehensive-rules@c6c3adbc4140cbf096c0c61c30b4fa96ff82b8dd  # v2.19.0
+        with:
+          cr-date: "20260925"
+
+      - name: Install the pinned toolchain
+        working-directory: rust
+        run: |
+          set -euo pipefail
+          rustup toolchain install
+          rustup show active-toolchain
+
+      - name: Cache cargo registry and build outputs
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9  # v6.1.0
+        with:
+          path: |
+            ~/.cargo/registry/index
+            ~/.cargo/registry/cache
+            ~/.cargo/git/db
+            rust/target
+          key: cargo-release-${{ matrix.target }}-${{ hashFiles('rust/Cargo.lock', 'rust/rust-toolchain.toml') }}
+          restore-keys: |
+            cargo-release-${{ matrix.target }}-
+
+      - name: Build the binaries
+        working-directory: rust
+        run: cargo build --release --locked -p mtgsim
+
+      # The binaries report the workspace version, which the release job
+      # has already checked against the tag; the registry check loads
+      # the fetched rules text; the matchup runs over the checked-out
+      # graph with two small decklists.
+      - name: Smoke-test the binaries
+        working-directory: rust
+        env:
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: |
+          set -euo pipefail
+          export MTG_GRAPH_ROOT="$GITHUB_WORKSPACE"
+          bin=target/release
+          for name in mtg-simulate mtg-selfplay mtg-cr; do
+            version="$("$bin/$name" --version | awk '{print $NF}')"
+            if [ "v$version" != "$RELEASE_TAG" ]; then
+              echo "::error::$name --version reports $version, the tag is $RELEASE_TAG"
+              exit 1
+            fi
+          done
+          "$bin/mtg-cr" check
+          printf '// Commander\n1 Pia Nalaar, Chief Mechanic\n1 Sol Ring\n30 Swamp\n' > /tmp/a.txt
+          printf '// Commander\n1 Pia Nalaar, Chief Mechanic\n1 Arcane Signet\n30 Mountain\n' > /tmp/b.txt
+          "$bin/mtg-simulate" /tmp/a.txt /tmp/b.txt --offline --games 1 --turn-cap 3 > /dev/null
+          "$bin/mtg-selfplay" /tmp/a.txt --games 1 --turn-cap 2 > /dev/null
+
+      - name: Package the archive
+        env:
+          RELEASE_TAG: ${{ github.ref_name }}
+          TARGET: ${{ matrix.target }}
+        run: |
+          set -euo pipefail
+          name="mtg-simulate-${RELEASE_TAG}-${TARGET}"
+          mkdir -p "dist/$name"
+          cp rust/target/release/mtg-simulate rust/target/release/mtg-selfplay rust/target/release/mtg-cr "dist/$name/"
+          cp LICENSE "dist/$name/"
+          tar -C dist -czf "dist/$name.tar.gz" "$name"
+          if command -v sha256sum > /dev/null; then
+            (cd dist && sha256sum "$name.tar.gz" > "$name.tar.gz.sha256")
+          else
+            (cd dist && shasum -a 256 "$name.tar.gz" > "$name.tar.gz.sha256")
+          fi
+          cat "dist/$name.tar.gz.sha256"
+
+      - name: Attach the archive to the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: |
+          set -euo pipefail
+          gh release upload "$RELEASE_TAG" dist/*.tar.gz dist/*.tar.gz.sha256 --clobber
