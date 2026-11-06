@@ -21,10 +21,11 @@
 #   tools version. See scripts/build_graph_bundle.py and mtgcards.graph.
 #
 #   The artifact is validated before it is published: the bundle is
-#   unpacked and must both load through CardDatabase and pass the full
+#   unpacked and must both serve the released simulator binaries as a
+#   graph root (mtg-cr check, a short offline matchup) and pass the full
 #   TTL + consistency check suite standalone. That build -> unpack ->
 #   verify -> release sequence lives in the reusable stklug84/
-#   github-workflows rdf-release-bundle workflow; only the commands
+#   github-workflows release-artifact workflow; only the commands
 #   below are repository-specific. Each one runs with RELEASE_TAG,
 #   RELEASE_VERSION (the tag without the graph- prefix) and BUNDLE_DIR
 #   (the unpacked bundle) exported.
@@ -57,12 +58,26 @@ jobs:
       # The CR text is gitignored and never redistributed. It is fetched
       # here only so the manifest can record which edition the simulation
       # annotations were authored against (consumers fetch it themselves
-      # using that value), and so the load smoke test can import the
-      # rules engine.
+      # using that value), and so the simulator can validate its #[rule]
+      # registry in the smoke test. The simulator itself is the released
+      # binary of the tools version this checkout declares (pyproject's
+      # version, which the manifest records as requires_tools): the smoke
+      # test exercises exactly the pairing a consumer installs. The
+      # archive is checked against the .sha256 published next to it.
       prepare-command: |
         CR_DATE=20260925
         curl -fsSL -o "MagicCompRules-${CR_DATE}.txt" \
           "https://media.wizards.com/2026/downloads/MagicCompRules%20${CR_DATE}.txt"
+        tools="$(python3 -c 'import tomllib; print(tomllib.load(open("pyproject.toml", "rb"))["project"]["version"])')"
+        name="mtg-simulate-v${tools}-x86_64-unknown-linux-gnu"
+        base="https://github.com/stklug84/magic-cards/releases/download/v${tools}"
+        mkdir -p /tmp/tools && cd /tmp/tools
+        curl -fsSLO "${base}/${name}.tar.gz"
+        curl -fsSLO "${base}/${name}.tar.gz.sha256"
+        sha256sum -c "${name}.tar.gz.sha256"
+        tar xzf "${name}.tar.gz"
+        ln -s "/tmp/tools/${name}" /tmp/tools/bin
+        /tmp/tools/bin/mtg-simulate --version
 
       build-command: 'python3 scripts/build_graph_bundle.py --graph-version "$RELEASE_VERSION"'
 
@@ -73,20 +88,17 @@ jobs:
         cat "$BUNDLE_DIR/GRAPH-MANIFEST.json"
 
       # The bundle must be usable as a graph root on its own: this is
-      # exactly what a consumer does after unpacking it.
+      # exactly what a consumer does after unpacking it. mtg-cr check
+      # resolves the #[rule] registry against the CR text staged into
+      # the bundle; the matchup loads the card index (the manifest's
+      # graph_schema is enforced on the way) and plays over it.
       smoke-command: |
         export MTG_GRAPH_ROOT="$BUNDLE_DIR"
-        python3 - <<'PY'
-        import os
-
-        from mtgcards.database import CardDatabase
-
-        db = CardDatabase(os.environ['MTG_GRAPH_ROOT'])
-        assert db.manifest is not None, 'bundle carries no manifest'
-        assert db.index, 'bundle produced an empty card index'
-        print(f'{len(db.index)} cards, {len(db.ind2name)} individuals, '
-              f'graph {db.manifest.graph_version}')
-        PY
+        test -f "$BUNDLE_DIR/GRAPH-MANIFEST.json"
+        /tmp/tools/bin/mtg-cr check
+        printf '// Commander\n1 Pia Nalaar, Chief Mechanic\n1 Sol Ring\n30 Swamp\n' > /tmp/a.txt
+        printf '// Commander\n1 Pia Nalaar, Chief Mechanic\n1 Arcane Signet\n30 Mountain\n' > /tmp/b.txt
+        /tmp/tools/bin/mtg-simulate /tmp/a.txt /tmp/b.txt --offline --games 1 --turn-cap 3
 
       # owl:imports resolution is the check that would catch a bundle
       # missing a graph its own files import.
