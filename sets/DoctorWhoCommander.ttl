@@ -201,7 +201,7 @@ Would You Like A...? — Once each turn, you may play a historic land or cast a 
     :toughness "1" ;
     :toughnessValue "1"^^xsd:integer ;
     :hasKeywordAction :Investigate ;
-    # Note: keyword "Doctor's companion" not defined in MagicCardsOntology
+    :hasKeywordAbility :DoctorsCompanion ;
     :printedText """Whenever you cast a historic spell, investigate. This ability triggers only once each turn. (Artifacts, legendaries, and Sagas are historic. To investigate, create a Clue token. It's an artifact with "{2}, Sacrifice this token: Draw a card.")
 Doctor's companion (You can have two commanders if the other is the Doctor.)"""@en ;
     :oracleText """Whenever you cast a historic spell, investigate. This ability triggers only once each turn. (Artifacts, legendaries, and Sagas are historic. To investigate, create a Clue token. It's an artifact with "{2}, Sacrifice this token: Draw a card.")
@@ -383,8 +383,8 @@ When this enchantment enters, exile target nonland permanent an opponent control
     :powerValue "1"^^xsd:integer ;
     :toughness "3" ;
     :toughnessValue "3"^^xsd:integer ;
+    :hasKeywordAbility :DoctorsCompanion ;
     # Note: keyword "History Teacher" not defined in MagicCardsOntology
-    # Note: keyword "Doctor's companion" not defined in MagicCardsOntology
     :printedText """History Teacher — Sagas you control have read ahead. (As a Saga enters, choose a chapter and start with that many lore counters. Skipped chapters don't trigger.)
 Doctor's companion (You can have two commanders if the other is the Doctor.)"""@en ;
     :oracleText """History Teacher — Sagas you control have read ahead. (As a Saga enters, choose a chapter and start with that many lore counters. Skipped chapters don't trigger.)
@@ -535,8 +535,8 @@ IV — Search your library for a Doctor card, reveal it, put it into your hand, 
     :powerValue "2"^^xsd:integer ;
     :toughness "3" ;
     :toughnessValue "3"^^xsd:integer ;
+    :hasKeywordAbility :DoctorsCompanion ;
     # Note: keyword "Science Teacher" not defined in MagicCardsOntology
-    # Note: keyword "Doctor's companion" not defined in MagicCardsOntology
     :printedText """Science Teacher — Each Saga spell you cast has replicate. The replicate cost is equal to its mana cost. (When you cast that Saga, copy it for each time you paid its replicate cost. Copies of Saga spells become tokens.)
 Doctor's companion (You can have two commanders if the other is the Doctor.)"""@en ;
     :oracleText """Science Teacher — Each Saga spell you cast has replicate. The replicate cost is equal to its mana cost. (When you cast that Saga, copy it for each time you paid its replicate cost. Copies of Saga spells become tokens.)
@@ -600,7 +600,7 @@ Doctor's companion (You can have two commanders if the other is the Doctor.)"""@
     :powerValue "3"^^xsd:integer ;
     :toughness "2" ;
     :toughnessValue "2"^^xsd:integer ;
-    # Note: keyword "Doctor's companion" not defined in MagicCardsOntology
+    :hasKeywordAbility :DoctorsCompanion ;
     :printedText """Each historic card in your hand has cycling {2}{W}. ({2}{W}, Discard that card: Draw a card.)
 Whenever you cycle a card, put a +1/+1 counter on Jo Grant.
 Doctor's companion (You can have two commanders if the other is the Doctor.)"""@en ;
@@ -702,7 +702,7 @@ II — Return target legendary creature card from your graveyard to the battlefi
     :powerValue "2"^^xsd:integer ;
     :toughness "3" ;
     :toughnessValue "3"^^xsd:integer ;
-    # Note: keyword "Doctor's companion" not defined in MagicCardsOntology
+    :hasKeywordAbility :DoctorsCompanion ;
     :printedText """The first historic spell you cast each turn has convoke. (Your creatures can help cast it. Each creature you tap while casting it pays for {1} or one mana of that creature's color.)
 Doctor's companion (You can have two commanders if the other is the Doctor.)"""@en ;
     :oracleText """The first historic spell you cast each turn has convoke. (Your creatures can help cast it. Each creature you tap while casting it pays for {1} or one mana of that creature's color.)
@@ -785,8 +785,8 @@ Doctor's companion (You can have two commanders if the other is the Doctor.)"""@
     :powerValue "3"^^xsd:integer ;
     :toughness "3" ;
     :toughnessValue "3"^^xsd:integer ;
-    :hasKeywordAbility :Vigilance ;
-    # Note: keyword "Doctor's companion" not defined in MagicCardsOntology
+    :hasKeywordAbility :Vigilance ,
+                       :DoctorsCompanion ;
     :printedText """Vigilance
 {1}, {T}: Create a tapped token that's a copy of target token that entered this turn.
 Doctor's companion (You can have two commanders if the other is the Doctor.)"""@en ;
@@ -872,8 +872,8 @@ Doctor's companion (You can have two commanders if the other is the Doctor.)"""@
     :powerValue "2"^^xsd:integer ;
     :toughness "2" ;
     :toughnessValue "2"^^xsd:integer ;
+    :hasKeywordAbility :DoctorsCompanion ;
     # Note: keyword "Brave Heart" not defined in MagicCardsOntology
-    # Note: keyword "Doctor's companion" not defined in MagicCardsOntology
     :printedText """Brave Heart — Whenever you attack, target attacking historic creature gets +1/+1 and gains indestructible until end of turn. (Artifacts, legendaries, and Sagas are historic.)
 Doctor's companion (You can have two commanders if the other is the Doctor.)"""@en ;
     :oracleText """Brave Heart — Whenever you attack, target attacking historic creature gets +1/+1 and gains indestructible until end of turn. (Artifacts, legendaries, and Sagas are historic.)
@@ -1019,8 +1019,8 @@ IV — You may exile a nontoken creature you control. When you do, exile all War
     :powerValue "1"^^xsd:integer ;
     :toughness "1" ;
     :toughnessValue "1"^^xsd:integer ;
+    :hasKeywordAbility :DoctorsCompanion ;
     # Note: keyword "Ultimate Sacrifice" not defined in MagicCardsOntology
-    # Note: keyword "Doctor's companion" not defined in MagicCardsOntology
     :printedText """{2}{U}, {T}: Copy target activated or triggered ability you control. You may choose new targets for the copy.
 Ultimate Sacrifice — {1}{U}, Sacrifice Adric: Counter target activated or triggered ability.
 Doctor's companion (You can have two commanders if the other is the Doctor.)"""@en ;
@@ -1362,7 +1362,6 @@ Cycling {2} ({2}, Discard this card: Draw a card.)"""@en ;
     :toughnessValue "3"^^xsd:integer ;
     :hasKeywordAbility :Landwalk ;
     # Note: keyword "Water Always Wins" not defined in MagicCardsOntology
-    # Note: keyword "Islandwalk" not defined in MagicCardsOntology
     :printedText """Islandwalk (This creature can't be blocked as long as defending player controls an Island.)
 Water Always Wins — Whenever this creature attacks, put a flood counter on another target creature or land. If it's a creature, it becomes a copy of this creature. If it's a land, it becomes an Island in addition to its other types."""@en ;
     :oracleText """Islandwalk (This creature can't be blocked as long as defending player controls an Island.)
@@ -1451,9 +1450,9 @@ Water Always Wins — Whenever this creature attacks, put a flood counter on ano
     :powerValue "1"^^xsd:integer ;
     :toughness "1" ;
     :toughnessValue "1"^^xsd:integer ;
+    :hasKeywordAbility :DoctorsCompanion ;
     # Note: keyword "Negative" not defined in MagicCardsOntology
     # Note: keyword "Affirmative" not defined in MagicCardsOntology
-    # Note: keyword "Doctor's companion" not defined in MagicCardsOntology
     :printedText """Negative — As long as K-9 is untapped, other legendary creatures you control have ward {1}.
 Affirmative — {1}{U}, {T}: Target legendary creature can't be blocked this turn.
 Doctor's companion (You can have two commanders if the other is the Doctor.)"""@en ;
@@ -1519,8 +1518,8 @@ Doctor's companion (You can have two commanders if the other is the Doctor.)"""@
     :powerValue "3"^^xsd:integer ;
     :toughness "4" ;
     :toughnessValue "4"^^xsd:integer ;
+    :hasKeywordAbility :DoctorsCompanion ;
     # Note: keyword "Sonic Booster" not defined in MagicCardsOntology
-    # Note: keyword "Doctor's companion" not defined in MagicCardsOntology
     :printedText """You have no maximum hand size.
 Sonic Booster — Whenever Nyssa of Traken attacks, sacrifice any number of artifacts. When you sacrifice one or more artifacts this way, tap up to that many target creatures and draw that many cards.
 Doctor's companion (You can have two commanders if the other is the Doctor.)"""@en ;
@@ -2324,7 +2323,7 @@ Consume Anomaly — Whenever this creature deals combat damage to a player, put 
     :toughnessValue "1"^^xsd:integer ;
     :hasKeywordAbility :Shadow ,
                        :Indestructible ;
-    # Note: keyword "Morbid" not defined in MagicCardsOntology
+    :hasAbilityWord :Morbid ;
     :printedText """Indestructible
 Shadow (This creature can block or be blocked by only creatures with shadow.)
 Morbid — At the beginning of each end step, if a creature died this turn, put a +1/+1 counter on this creature."""@en ;
@@ -2369,8 +2368,8 @@ Morbid — At the beginning of each end step, if a creature died this turn, put 
     :toughness "5" ;
     :toughnessValue "5"^^xsd:integer ;
     :hasKeywordAction :Goad ;
+    :hasKeywordAbility :DoctorsCompanion ;
     # Note: keyword "Deal with the Black Guardian" not defined in MagicCardsOntology
-    # Note: keyword "Doctor's companion" not defined in MagicCardsOntology
     :printedText """Deal with the Black Guardian — When Vislor Turlough enters, you may have an opponent gain control of it. If you do, it's goaded for as long as they control it.
 At the beginning of your end step, draw a card, then you lose life equal to the number of cards in your hand.
 Doctor's companion (You can have two commanders if the other is the Doctor.)"""@en ;
@@ -2552,7 +2551,7 @@ I, II, III — Choose a creature card name, then goad all creatures with a name 
     :hasKeywordAction :Goad ;
     :hasKeywordAbility :Haste ,
                        :Trample ;
-    # Note: keyword "Battalion" not defined in MagicCardsOntology
+    :hasAbilityWord :Battalion ;
     :printedText """Trample, haste
 Battalion — Whenever this creature and at least two other creatures attack, for each opponent, goad up to one target creature that player controls. Those creatures can't block this turn. (Until your next turn, they attack each combat if able and attack a player other than you if able.)"""@en ;
     :oracleText """Trample, haste
@@ -2637,8 +2636,8 @@ If enchanted creature would deal combat damage to a permanent or player, it deal
     :toughness "2" ;
     :toughnessValue "2"^^xsd:integer ;
     :hasKeywordAction :Fight ;
+    :hasKeywordAbility :DoctorsCompanion ;
     # Note: keyword "Nitro-9" not defined in MagicCardsOntology
-    # Note: keyword "Doctor's companion" not defined in MagicCardsOntology
     :printedText """Nitro-9 — Whenever Ace attacks, you may sacrifice an artifact. When you do, put a +1/+1 counter on Ace, then it fights up to one target creature defending player controls.
 Doctor's companion (You can have two commanders if the other is the Doctor.)"""@en ;
     :oracleText """Nitro-9 — Whenever Ace attacks, you may sacrifice an artifact. When you do, put a +1/+1 counter on Ace, then it fights up to one target creature defending player controls.
@@ -2857,8 +2856,8 @@ Search your library and/or graveyard for up to five Doctor cards, reveal them, a
     :powerValue "2"^^xsd:integer ;
     :toughness "2" ;
     :toughnessValue "2"^^xsd:integer ;
-    :hasKeywordAbility :Trample ;
-    # Note: keyword "Doctor's companion" not defined in MagicCardsOntology
+    :hasKeywordAbility :Trample ,
+                       :DoctorsCompanion ;
     :printedText """Trample
 Whenever you cast a historic spell, Jamie McCrimmon gets +X/+X until end of turn, where X is that spell's mana value. (Artifacts, legendaries, and Sagas are historic.)
 Doctor's companion (You can have two commanders if the other is the Doctor.)"""@en ;
@@ -2925,7 +2924,7 @@ Doctor's companion (You can have two commanders if the other is the Doctor.)"""@
     :powerValue "3"^^xsd:integer ;
     :toughness "3" ;
     :toughnessValue "3"^^xsd:integer ;
-    # Note: keyword "Doctor's companion" not defined in MagicCardsOntology
+    :hasKeywordAbility :DoctorsCompanion ;
     :printedText """Whenever an opponent draws a card except the first one they draw in each of their draw steps, put a +1/+1 counter on Leela.
 Doctor's companion (You can have two commanders if the other is the Doctor.)"""@en ;
     :oracleText """Whenever an opponent draws a card except the first one they draw in each of their draw steps, put a +1/+1 counter on Leela.
@@ -3027,7 +3026,7 @@ III — Until end of turn, whenever a Salamander deals combat damage to a player
     :powerValue "1"^^xsd:integer ;
     :toughness "1" ;
     :toughnessValue "1"^^xsd:integer ;
-    # Note: keyword "Doctor's companion" not defined in MagicCardsOntology
+    :hasKeywordAbility :DoctorsCompanion ;
     :printedText """If you would planeswalk, instead look at the top two cards of your planar deck, put one on the bottom of your planar deck and the other on top, then planeswalk.
 {T}: Add {G}.
 Doctor's companion (You can have two commanders if the other is the Doctor.)"""@en ;
@@ -3866,7 +3865,6 @@ At the beginning of your upkeep, you may put a Doctor creature card from your ha
     :hasKeywordAbility :Training ,
                        :FirstStrike ,
                        :Partner ;
-    # Note: keyword "Partner with" not defined in MagicCardsOntology
     :printedText """Partner with Madame Vastra
 First strike
 Training (Whenever this creature attacks with another creature with greater power, put a +1/+1 counter on this creature.)
@@ -7015,9 +7013,6 @@ When this creature dies, you may draw a card."""@en ;
     :hasLanguage :English ;
     :producesMana :Colorless ;
     :hasKeywordAbility :Cycling ;
-    # Note: keyword "Landcycling" not defined in MagicCardsOntology
-    # Note: keyword "Basic landcycling" not defined in MagicCardsOntology
-    # Note: keyword "Typecycling" not defined in MagicCardsOntology
     :printedText """{T}: Add {C}.
 Basic landcycling {1} ({1}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)"""@en ;
     :oracleText """{T}: Add {C}.
@@ -9388,8 +9383,8 @@ When this land enters, scry 1. (Look at the top card of your library. You may pu
     :powerValue "2"^^xsd:integer ;
     :toughness "2" ;
     :toughnessValue "2"^^xsd:integer ;
+    :hasKeywordAbility :DoctorsCompanion ;
     # Note: keyword "Bad Wolf" not defined in MagicCardsOntology
-    # Note: keyword "Doctor's companion" not defined in MagicCardsOntology
     :printedText """Rose Tyler gets +1/+1 for each time counter on it.
 Bad Wolf — Whenever Rose Tyler attacks, put a time counter on it for each suspended card you own and each other permanent you control with a time counter on it.
 Doctor's companion (You can have two commanders if the other is the Doctor.)"""@en ;

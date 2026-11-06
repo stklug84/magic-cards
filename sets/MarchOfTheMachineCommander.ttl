@@ -574,8 +574,8 @@ At the beginning of combat on your turn, bolster X, where X is the number of dif
     :powerValue "4"^^xsd:integer ;
     :toughness "3" ;
     :toughnessValue "3"^^xsd:integer ;
+    :hasAbilityWord :Parley ;
     # Note: keyword "Treasure" not defined in MagicCardsOntology
-    # Note: keyword "Parley" not defined in MagicCardsOntology
     :printedText """Parley — Whenever this creature attacks, each player reveals the top card of their library. For each nonland card revealed this way, you create a tapped Treasure token. Then each player draws a card."""@en ;
     :oracleText """Parley — Whenever this creature attacks, each player reveals the top card of their library. For each nonland card revealed this way, you create a tapped Treasure token. Then each player draws a card."""@en ;
     :flavorText """"Either you two figure out how to share, or I'm going to share these swords with the insides of your skulls.\""""@en ;
@@ -2035,7 +2035,7 @@ Draw two cards."""@en ;
     :powerValue "3"^^xsd:integer ;
     :toughness "4" ;
     :toughnessValue "4"^^xsd:integer ;
-    # Note: keyword "Metalcraft" not defined in MagicCardsOntology
+    :hasAbilityWord :Metalcraft ;
     :printedText """Metalcraft — Whenever this creature attacks, if you control three or more artifacts, creatures your opponents control lose all abilities and have base power and toughness 1/1 until end of turn."""@en ;
     :oracleText """Metalcraft — Whenever this creature attacks, if you control three or more artifacts, creatures your opponents control lose all abilities and have base power and toughness 1/1 until end of turn."""@en ;
     :flavorText """"And who will stop me? You?\""""@en ;
@@ -2671,7 +2671,7 @@ Whenever this creature mutates, create a red artifact token named Feather with "
     :cardNumber "290"^^xsd:integer ;
     :artist "Viktor Titov" ;
     :hasLanguage :English ;
-    # Note: keyword "Revolt" not defined in MagicCardsOntology
+    :hasAbilityWord :Revolt ;
     :printedText """Revolt — At the beginning of your end step, if a permanent left the battlefield under your control this turn, reveal the top card of your library. If it's a permanent card, you may put it onto the battlefield. Otherwise, you may put it on the bottom of your library."""@en ;
     :oracleText """Revolt — At the beginning of your end step, if a permanent left the battlefield under your control this turn, reveal the top card of your library. If it's a permanent card, you may put it onto the battlefield. Otherwise, you may put it on the bottom of your library."""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=612538"^^xsd:anyURI ;
@@ -2894,9 +2894,9 @@ Investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this to
     :powerValue "3"^^xsd:integer ;
     :toughness "2" ;
     :toughnessValue "2"^^xsd:integer ;
+    :hasAbilityWord :Landfall ;
     # Note: keyword "Treasure" not defined in MagicCardsOntology
     # Note: keyword "Food" not defined in MagicCardsOntology
-    # Note: keyword "Landfall" not defined in MagicCardsOntology
     :printedText """Landfall — Whenever a land you control enters, create a Food token or a Treasure token. (Food is an artifact with "{2}, {T}, Sacrifice this token: You gain 3 life." Treasure is an artifact with "{T}, Sacrifice this token: Add one mana of any color.")"""@en ;
     :oracleText """Landfall — Whenever a land you control enters, create a Food token or a Treasure token. (Food is an artifact with "{2}, {T}, Sacrifice this token: You gain 3 life." Treasure is an artifact with "{T}, Sacrifice this token: Add one mana of any color.")"""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=612561"^^xsd:anyURI ;
@@ -2947,7 +2947,7 @@ Investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this to
     :toughness "2" ;
     :toughnessValue "2"^^xsd:integer ;
     :hasKeywordAction :Investigate ;
-    # Note: keyword "Landfall" not defined in MagicCardsOntology
+    :hasAbilityWord :Landfall ;
     :printedText """Landfall — Whenever a land you control enters, investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this token: Draw a card.")
 Whenever you sacrifice a Clue, put a +1/+1 counter on this creature."""@en ;
     :oracleText """Landfall — Whenever a land you control enters, investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this token: Draw a card.")

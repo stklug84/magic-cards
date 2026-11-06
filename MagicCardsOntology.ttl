@@ -38,7 +38,10 @@
                                               rdfs:comment
                                               """A detailed ontology for Magic:
 The Gathering cards, decks, and attributes. This ontology is based on the
-Comprehensive Rules of Magic: The Gathering, version 2026-02-27."""@en .
+Comprehensive Rules of Magic: The Gathering. Its keyword, ability word, and
+subtype vocabularies and its rule references follow the edition effective
+2026-09-25; the ontology IRI keeps the 2026-02-27 date of the edition it was
+first built against."""@en .
 
 [] rdf:type owl:AllDisjointClasses ;
    owl:members ( :Color
@@ -269,12 +272,14 @@ Each word after the dash is a separate subtype. See rule 205.3."""@en .
                        :Attraction
                        :Blood
                        :Bobblehead
+                       :Book
                        :Clue
                        :Contraption
                        :Equipment
                        :Food
                        :Fortification
                        :Gold
+                       :Heartwood
                        :Incubator
                        :Infinity
                        :Junk
@@ -286,6 +291,7 @@ Each word after the dash is a separate subtype. See rule 205.3."""@en .
                        :Stone
                        :Treasure
                        :Vehicle
+                       :Vibranium
                    )
                ] ;
                rdfs:label "Artifact Types" ;
@@ -305,6 +311,7 @@ and artifacts may have multiple subtypes. See rules 301.3 and 205.3g."""@en .
                           :Case
                           :Class
                           :Curse
+                          :Plan
                           :Role
                           :Room
                           :Rune
@@ -327,7 +334,8 @@ enchantments may have multiple subtypes. See rules 303.3 and 205.3h."""@en .
                        owl:oneOf (
                            :Ajani :Aminatou :Angrath :Arlinn :Ashiok :Bahamut
                            :Basri :Bolas :Calix :Chandra :Comet :Dack :Dakkon
-                           :Daretti :Davriel :Dihada :Domri :Dovin :Ellywick
+                           :Daretti :Davriel :Dellian :Dihada :Domri :Dovin
+                           :Ellywick
                            :Elminster :Elspeth :Estrid :Freyalise :Garruk
                            :Gideon :Grist :Guff :Huatli :Jace :Jared :Jaya
                            :Jeska :Kaito :Karn :Kasmina :Kaya :Kiora :Koth
@@ -385,17 +393,19 @@ and sorceries may have multiple subtypes. See rules 304.3, 307.3, and 205.3k.
                        :Dinosaur :Djinn :Doctor :Dog :Dragon :Drake
                        :Dreadnought :Drix :Drone :Druid :Dryad :Dwarf
                        :Echidna :Efreet :Egg :Elder :Eldrazi :Elemental
-                       :Elephant :Elf :Elk :Employee :Eye :Faerie
+                       :Elephant :Elf :Elk :Employee :Eternal :Eye :Faerie
                        :Ferret :Fish :Flagbearer :Fox :Fractal :Frog
-                       :Fungus :Gamer :Gargoyle :Germ :Giant :Gith
+                       :Fungus :Gamer :Gamma :Gargoyle :Germ :Giant :Giraffe
+                       :Gith
                        :Glimmer :Gnoll :Gnome :Goat :Goblin :God
                        :Golem :Gorgon :Graveborn :Gremlin :Griffin :Guest
                        :Hag :Halfling :Hamster :Harpy :Hedgehog :Hellion
                        :Hero :Hippo :Hippogriff :Homarid :Homunculus :Horror
                        :Horse :Human :Hydra :Hyena :Illusion :Imp
-                       :Incarnation :Inkling :Inquisitor :Insect :Jackal
+                       :Incarnation :Inhuman :Inkling :Inquisitor :Insect
+                       :Jackal
                        :Jellyfish :Juggernaut :Kangaroo :Kavu :Kirin :Kithkin
-                       :Knight :Kobold :Kor :Kraken :Lamia :Lammasu :Leech
+                       :Knight :Kobold :Kor :Kraken :Kree :Lamia :Lammasu :Leech
                        :Lemur :Leviathan :Lhurgoyf :Licid :Lizard :Llama
                        :Lobster :Manticore :Masticore :Mercenary :Merfolk
                        :Metathran :Minion :Minotaur :Mite :Mole :Monger
@@ -412,10 +422,11 @@ and sorceries may have multiple subtypes. See rules 304.3, 307.3, and 205.3k.
                        :Sable :Salamander :Samurai :Sand :Saproling :Satyr
                        :Scarecrow :Scientist :Scion :Scorpion :Scout :Sculpture
                        :Seal :Serf :Serpent :Servo :Shade :Shaman
-                       :Shapeshifter :Shark :Sheep :Siren :Skeleton :Skunk
+                       :Shapeshifter :Shark :Sheep :Shiar :Siren :Skeleton
+                       :Skrull :Skunk
                        :Slith :Sliver :Sloth :Slug :Snail :Snake
                        :Soldier :Soltari :Sorcerer :Spawn :Specter :Spellshaper
-                       :Sphinx :Spider :Spike :Spirit :Splinter :Sponge
+                       :Sphinx :Spider :Spike :Spirit :Splinter :Sponge :Spy
                        :Squid :Squirrel :Starfish :Surrakar :Survivor :Symbiote
                        :Synth :Tentacle :Tetravite :Thalakos :Thopter :Thrull
                        :Tiefling :TimeLord :Toy :Treefolk :Trilobite
@@ -715,6 +726,7 @@ format is played on one or more platforms (:isPlayedOn)."""@en .
 # Card text related classes: Keyword Classes
 # - Keyword Action
 # - Keyword Ability
+# - Ability Word
 # ------------------------------------------------------------------------------
 
 :Keyword rdf:type owl:Class ;
@@ -761,6 +773,7 @@ format is played on one or more platforms (:isPlayedOn)."""@en .
                         :Discover
                         :Double
                         :Earthbend
+                        :EmpowerJace
                         :Endure
                         :Exchange
                         :Exert
@@ -772,6 +785,7 @@ format is played on one or more platforms (:isPlayedOn)."""@en .
                         :Forage
                         :Goad
                         :Harness
+                        :Heal
                         :Incubate
                         :Investigate
                         :Learn
@@ -785,6 +799,7 @@ format is played on one or more platforms (:isPlayedOn)."""@en .
                         :Play
                         :Populate
                         :Proliferate
+                        :Recruit
                         :Regenerate
                         :Reveal
                         :RollToVisitYourAttractions
@@ -810,7 +825,7 @@ format is played on one or more platforms (:isPlayedOn)."""@en .
                rdfs:label "Keyword Action" ;
                rdfs:comment
                """A keyword that represents a defined game action
-in Magic. See rules 205.3a and 205.3b."""@en .
+in Magic. See rule 701.1."""@en .
 
 :KeywordAbility rdf:type owl:Class ;
                 rdfs:subClassOf :Keyword ;
@@ -844,6 +859,7 @@ in Magic. See rules 205.3a and 205.3b."""@en .
                         :Casualty
                         :Champion
                         :Changeling
+                        :ChooseABackground
                         :Cipher
                         :Cleave
                         :Companion
@@ -866,6 +882,7 @@ in Magic. See rules 205.3a and 205.3b."""@en .
                         :Devour
                         :Disguise
                         :Disturb
+                        :DoctorsCompanion
                         :DoubleStrike
                         :Dredge
                         :Echo
@@ -914,6 +931,7 @@ in Magic. See rules 205.3a and 205.3b."""@en .
                         :Horsemanship
                         :Impending
                         :Improvise
+                        :Increment
                         :Indestructible
                         :Infect
                         :InfinityKeyword
@@ -946,12 +964,14 @@ in Magic. See rules 205.3a and 205.3b."""@en .
                         :Offspring
                         :Outlast
                         :Overload
+                        :Paradigm
                         :Partner
                         :Persist
                         :Phasing
                         :Plainswalk
                         :Plot
                         :Poisonous
+                        :PowerUp
                         :Protection
                         :Prototype
                         :Provoke
@@ -987,10 +1007,12 @@ in Magic. See rules 205.3a and 205.3b."""@en .
                         :Squad
                         :StartYourEngines
                         :Station
+                        :Storied
                         :Storm
                         :Sunburst
                         :Surge
                         :Suspend
+                        :Teamwork
                         :Tiered
                         :Toxic
                         :Training
@@ -1015,7 +1037,83 @@ in Magic. See rules 205.3a and 205.3b."""@en .
                 rdfs:label "Keyword Ability" ;
                 rdfs:comment
                  """A keyword that represents an ability with
-defined rules meaning in Magic. See rules 205.3c and 205.3d."""@en .
+defined rules meaning in Magic. See rule 702.1."""@en .
+
+:AbilityWord rdf:type owl:Class ;
+             owl:disjointWith :Keyword ;
+             owl:equivalentClass [
+                 rdf:type owl:Class ;
+                 owl:oneOf (
+                     :Adamant
+                     :Addendum
+                     :Alliance
+                     :Battalion
+                     :Bloodrush
+                     :Celebration
+                     :Channel
+                     :Chroma
+                     :Cohort
+                     :Constellation
+                     :Converge
+                     :CouncilsDilemma
+                     :Coven
+                     :Delirium
+                     :Descend4
+                     :Descend8
+                     :Disappear
+                     :Domain
+                     :Eerie
+                     :Eminence
+                     :Enrage
+                     :FatefulHour
+                     :FathomlessDescent
+                     :Ferocious
+                     :Flurry
+                     :Formidable
+                     :Grandeur
+                     :Hellbent
+                     :Heroic
+                     :Imprint
+                     :Infusion
+                     :Inspired
+                     :JoinForces
+                     :Kinship
+                     :Landfall
+                     :Lieutenant
+                     :Magecraft
+                     :Metalcraft
+                     :Morbid
+                     :Opus
+                     :PackTactics
+                     :Paradox
+                     :Parley
+                     :Radiance
+                     :Raid
+                     :Rally
+                     :Renew
+                     :Repartee
+                     :Revolt
+                     :SecretCouncil
+                     :SpellMastery
+                     :Strive
+                     :Survival
+                     :Sweep
+                     :TemptingOffer
+                     :Threshold
+                     :Undergrowth
+                     :Valiant
+                     :Vivid
+                     :Void
+                     :WillOfTheCouncil
+                 )
+             ] ;
+             rdfs:label "Ability Word" ;
+             rdfs:comment
+             """An italicized word that appears at the beginning of some
+abilities and ties together cards with similar functionality, such as
+landfall or metalcraft. Unlike a keyword, an ability word has no special rules
+meaning and no individual entry in the Comprehensive Rules, so the card's own
+text defines what the ability does. See rule 207.2c."""@en .
 
 
 # --- Card Entry Classes ---
@@ -1167,6 +1265,17 @@ See rule 702.1."""@en .
                   rdfs:comment
                   """Relates a card to a keyword action it references.
 See rule 701.1."""@en .
+
+# --- Ability Word Properties ---
+
+:hasAbilityWord rdf:type owl:ObjectProperty ;
+                rdfs:domain :Card ;
+                rdfs:range :AbilityWord ;
+                rdfs:label "Has Ability Word" ;
+                rdfs:comment
+                """Relates a card to an ability word that begins one of its
+abilities. An ability word has no rules meaning of its own, so this property
+is not a subproperty of :hasKeyword. See rule 207.2c."""@en .
 
 # --- Legality and Rulings ---
 
@@ -2227,7 +2336,7 @@ featuring alternate art."""@en .
             rdfs:label "Land Rarity" ;
             rdfs:comment
             """A rarity designation used explicitly for basic lands in booster
-packs. See rule 206.2a."""@en .
+packs. See rule 206.2."""@en .
 
 # --- Super Types ---
 :Basic rdf:type owl:NamedIndividual ,
@@ -2850,6 +2959,10 @@ magic."""@en .
           rdfs:label "Employee" ;
           rdfs:comment
        """A worker for a larger organization, often found in Un-sets."""@en .
+:Eternal rdf:type owl:NamedIndividual ,
+                  :CreatureTypes ;
+         rdfs:label "Eternal" ;
+         rdfs:comment "A creature type. See rule 205.3m."@en .
 :Eye rdf:type owl:NamedIndividual ,
               :CreatureTypes ;
      rdfs:label "Eye" ;
@@ -2899,6 +3012,10 @@ saprolings."""@en .
        rdfs:comment
        """A creature that plays games, breaking the fourth wall in
 un-sets."""@en .
+:Gamma rdf:type owl:NamedIndividual ,
+                :CreatureTypes ;
+       rdfs:label "Gamma" ;
+       rdfs:comment "A creature type. See rule 205.3m."@en .
 :Gargoyle rdf:type owl:NamedIndividual ,
                    :CreatureTypes ;
           rdfs:label "Gargoyle" ;
@@ -2915,6 +3032,11 @@ weapon."""@en .
                 :CreatureTypes ;
        rdfs:label "Giant" ;
        rdfs:comment "A massive, towering humanoid."@en .
+:Giraffe rdf:type owl:NamedIndividual ,
+                  :CreatureTypes ;
+         rdfs:label "Giraffe" ;
+         rdfs:comment """A creature type representing giraffes. See rule
+205.3m."""@en .
 :Gith rdf:type owl:NamedIndividual ,
                :CreatureTypes ;
       rdfs:label "Gith" ;
@@ -3070,6 +3192,10 @@ severed."""@en .
              rdfs:comment
              """The physical embodiment of an abstract concept, like Anger or
 Wonder."""@en .
+:Inhuman rdf:type owl:NamedIndividual ,
+                  :CreatureTypes ;
+         rdfs:label "Inhuman" ;
+         rdfs:comment "A creature type. See rule 205.3m."@en .
 :Inkling rdf:type owl:NamedIndividual ,
                   :CreatureTypes ;
          rdfs:label "Inkling" ;
@@ -3140,6 +3266,10 @@ hooks."""@en .
                  :CreatureTypes ;
         rdfs:label "Kraken" ;
         rdfs:comment "A colossal, destructive sea monster of the deep."@en .
+:Kree rdf:type owl:NamedIndividual ,
+               :CreatureTypes ;
+      rdfs:label "Kree" ;
+      rdfs:comment "A creature type. See rule 205.3m."@en .
 :Lamia rdf:type owl:NamedIndividual ,
                 :CreatureTypes ;
        rdfs:label "Lamia" ;
@@ -3627,6 +3757,10 @@ changeling."""@en .
                 :CreatureTypes ;
        rdfs:label "Sheep" ;
        rdfs:comment "A docile, woolly herd animal."@en .
+:Shiar rdf:type owl:NamedIndividual ,
+                :CreatureTypes ;
+       rdfs:label "Shi’ar" ;
+       rdfs:comment "A creature type. See rule 205.3m."@en .
 :Siren rdf:type owl:NamedIndividual ,
                 :CreatureTypes ;
        rdfs:label "Siren" ;
@@ -3637,6 +3771,10 @@ doom."""@en .
                    :CreatureTypes ;
           rdfs:label "Skeleton" ;
           rdfs:comment "An undead creature reduced to animated bones."@en .
+:Skrull rdf:type owl:NamedIndividual ,
+                 :CreatureTypes ;
+        rdfs:label "Skrull" ;
+        rdfs:comment "A creature type. See rule 205.3m."@en .
 :Skunk rdf:type owl:NamedIndividual ,
                 :CreatureTypes ;
        rdfs:label "Skunk" ;
@@ -3737,6 +3875,11 @@ being."""@en .
                  :CreatureTypes ;
         rdfs:label "Sponge" ;
         rdfs:comment "An absorbent, aquatic invertebrate."@en .
+:Spy rdf:type owl:NamedIndividual ,
+              :CreatureTypes ;
+     rdfs:label "Spy" ;
+     rdfs:comment """A creature type representing spies and covert agents. See
+rule 205.3m."""@en .
 :Squid rdf:type owl:NamedIndividual ,
                 :CreatureTypes ;
        rdfs:label "Squid" ;
@@ -3996,6 +4139,10 @@ time."""@en .
        rdfs:comment
        """An Aura enchantment type that enchants and negatively impacts a
 player."""@en .
+:Plan rdf:type owl:NamedIndividual ,
+               :EnchantmentTypes ;
+      rdfs:label "Plan" ;
+      rdfs:comment "An enchantment type. See rule 205.3h."@en .
 :Role rdf:type owl:NamedIndividual ,
                :EnchantmentTypes ;
       rdfs:label "Role" ;
@@ -4013,6 +4160,13 @@ dungeon."""@en .
       rdfs:label "Rune" ;
       rdfs:comment
       """An Aura enchantment type representing powerful Kaldheim magic."""@en .
+:Saga rdf:type owl:NamedIndividual ,
+               :EnchantmentTypes ;
+      rdfs:label "Saga" ;
+      rdfs:comment """An enchantment type representing a story told in chapters.
+A Saga enters with lore counters and gets another as its controller’s precombat
+main phase begins; each chapter ability triggers as the lore count reaches its
+chapter number. See rules 714 and 205.3h."""@en .
 :Shard rdf:type owl:NamedIndividual ,
                 :EnchantmentTypes ;
        rdfs:label "Shard" ;
@@ -4498,6 +4652,10 @@ destiny."""@en .
          rdfs:label "Davriel" ;
          rdfs:comment
          """A diabolical planeswalker who steals spells, from Innistrad."""@en .
+:Dellian rdf:type owl:NamedIndividual ,
+                  :PlaneswalkerTypes ;
+         rdfs:label "Dellian" ;
+         rdfs:comment "A planeswalker type. See rule 205.3j."@en .
 :Dihada rdf:type owl:NamedIndividual ,
                  :PlaneswalkerTypes ;
         rdfs:label "Dihada" ;
@@ -4853,6 +5011,11 @@ discard and draw a card."""@en .
             rdfs:comment
             """An artifact type originally from the *Fallout* set representing
 collectible figurines."""@en .
+:Book rdf:type owl:NamedIndividual ,
+               :ArtifactTypes ;
+      rdfs:label "Book" ;
+      rdfs:comment """An artifact type representing books, journals, and
+diaries. See rule 205.3g."""@en .
 :Clue rdf:type owl:NamedIndividual ,
                :ArtifactTypes ;
       rdfs:label "Clue" ;
@@ -4889,6 +5052,12 @@ attached to lands."""@en .
       rdfs:comment
       """An artifact type representing currency, typically sacrificed for
 mana."""@en .
+:Heartwood rdf:type owl:NamedIndividual ,
+                    :ArtifactTypes ;
+           rdfs:label "Heartwood" ;
+           rdfs:comment """An artifact type of the predefined Heartwood token, a
+red and green artifact token with “{T}: Add {R} or {G}.” See rules 111.10x and
+205.3g."""@en .
 :Incubator rdf:type owl:NamedIndividual ,
                     :ArtifactTypes ;
            rdfs:label "Incubator" ;
@@ -4946,6 +5115,12 @@ of any color."""@en .
          rdfs:comment
          """An artifact type representing modes of transport that can be crewed
 to become creatures."""@en .
+:Vibranium rdf:type owl:NamedIndividual ,
+                    :ArtifactTypes ;
+           rdfs:label "Vibranium" ;
+           rdfs:comment """An artifact type of the predefined Vibranium token, a
+colorless indestructible artifact token with “{T}: Add {C}. This mana can’t be
+spent to cast a nonartifact spell.” See rules 111.10w and 205.3g."""@en .
 
 # --- Land Types ---
 :Cave rdf:type owl:NamedIndividual ,
@@ -5253,1395 +5428,1778 @@ desktop computers."""@en .
                   :KeywordAction ;
          rdfs:label "Abandon" ;
          rdfs:comment """To turn a face-up ongoing scheme card face down and put
-it on the bottom of its owner’s scheme deck."""@en .
+it on the bottom of its owner’s scheme deck. See rule 701.33."""@en .
 :Activate rdf:type owl:NamedIndividual ,
                    :KeywordAction ;
           rdfs:label "Activate" ;
           rdfs:comment """To put an activated ability onto the stack and pay its
-costs, so that it will eventually resolve and have its effect."""@en .
+costs, so that it will eventually resolve and have its effect.
+See rule 701.2."""@en .
 :Adapt rdf:type owl:NamedIndividual ,
                 :KeywordAction ;
        rdfs:label "Adapt" ;
        rdfs:comment """A keyword action that puts +1/+1 counters on a creature
-that doesn’t have any yet."""@en .
+that doesn’t have any yet. See rule 701.46."""@en .
 :Airbend rdf:type owl:NamedIndividual ,
                   :KeywordAction ;
          rdfs:label "Airbend" ;
          rdfs:comment """A keyword action that exiles one or more permanents
 and/or spells. The owner of each card exiled with airbend may cast it from exile
-by paying {2} rather than paying its mana cost."""@en .
+by paying {2} rather than paying its mana cost. See rule 701.65."""@en .
 :Amass rdf:type owl:NamedIndividual ,
                 :KeywordAction ;
        rdfs:label "Amass" ;
        rdfs:comment """A keyword action that gives you a Zombie Army creature
-token or grows an Army you already have."""@en .
+token or grows an Army you already have. See rule 701.47."""@en .
 :Assemble rdf:type owl:NamedIndividual ,
                    :KeywordAction ;
           rdfs:label "Assemble" ;
           rdfs:comment """A keyword action that puts Contraptions onto the
-battlefield."""@en .
+battlefield. See rule 701.45."""@en .
 :Attach rdf:type owl:NamedIndividual ,
                  :KeywordAction ;
         rdfs:label "Attach" ;
         rdfs:comment """To take an Aura, Equipment, or Fortification from where
-it currently is and put it onto a specified object or player."""@en .
+it currently is and put it onto a specified object or player.
+See rule 701.3."""@en .
 :Behold rdf:type owl:NamedIndividual ,
                  :KeywordAction ;
         rdfs:label "Behold" ;
         rdfs:comment """A keyword action that allows a player to choose a
 permanent they control of a particular quality or reveal a card of that quality
-from their hand, usually to pay a cost or get an additional effect."""@en .
+from their hand, usually to pay a cost or get an additional effect.
+See rule 701.4."""@en .
 :Blight rdf:type owl:NamedIndividual ,
                  :KeywordAction ;
         rdfs:label "Blight" ;
         rdfs:comment """A keyword action. To blight N means to put N -1/-1
-counters on a creature you control."""@en .
+counters on a creature you control. See rule 701.68."""@en .
 :Bolster rdf:type owl:NamedIndividual ,
                   :KeywordAction ;
          rdfs:label "Bolster" ;
          rdfs:comment """A keyword action that puts +1/+1 counters on the
-weakest creature a player controls."""@en .
+weakest creature a player controls. See rule 701.39."""@en .
 :Cast rdf:type owl:NamedIndividual ,
                :KeywordAction ;
       rdfs:label "Cast" ;
       rdfs:comment """To take a card from where it is (usually the hand), put it
 on the stack, and pay its costs, so that it will eventually resolve and have its
-effect."""@en .
+effect. See rule 701.5."""@en .
 :Clash rdf:type owl:NamedIndividual ,
                 :KeywordAction ;
        rdfs:label "Clash" ;
        rdfs:comment """To have a mini-contest involving the top cards of
-players’ libraries."""@en .
+players’ libraries. See rule 701.30."""@en .
 :Cloak rdf:type owl:NamedIndividual ,
                 :KeywordAction ;
        rdfs:label "Cloak" ;
        rdfs:comment """A keyword action that puts a card onto the battlefield
-face down as a 2/2 creature with ward {2}."""@en .
+face down as a 2/2 creature with ward {2}. See rule 701.58."""@en .
 :CollectEvidence rdf:type owl:NamedIndividual ,
                           :KeywordAction ;
                  rdfs:label "Collect Evidence" ;
                  rdfs:comment """A keyword action. To “collect evidence N” means
 to exile any number of cards from your graveyard with total mana value N or
-greater."""@en .
+greater. See rule 701.59."""@en .
 :Connive rdf:type owl:NamedIndividual ,
                   :KeywordAction ;
          rdfs:label "Connive" ;
          rdfs:comment """A keyword action that causes a player to draw a card,
 discard a card, and then to put a +1/+1 counter on a creature if a nonland card
-was discarded this way."""@en .
+was discarded this way. See rule 701.50."""@en .
 :Convert rdf:type owl:NamedIndividual ,
                   :KeywordAction ;
          rdfs:label "Convert" ;
          rdfs:comment """To turn a double-faced card so its other face is
-up."""@en .
+up. See rule 701.28."""@en .
 :Counter rdf:type owl:NamedIndividual ,
                   :KeywordAction ;
          rdfs:label "Counter" ;
          rdfs:comment """A keyword action that cancels a spell or ability so it
-does not resolve and none of its effects occur."""@en .
+does not resolve and none of its effects occur. See rule 701.6."""@en .
 :Create rdf:type owl:NamedIndividual ,
                  :KeywordAction ;
         rdfs:label "Create" ;
         rdfs:comment """To create a token is to put a token onto the
-battlefield."""@en .
+battlefield. See rule 701.7."""@en .
 :Destroy rdf:type owl:NamedIndividual ,
                   :KeywordAction ;
          rdfs:label "Destroy" ;
          rdfs:comment """To move a permanent from the battlefield to its owner’s
-graveyard."""@en .
+graveyard. See rule 701.8."""@en .
 :Detain rdf:type owl:NamedIndividual ,
                  :KeywordAction ;
         rdfs:label "Detain" ;
         rdfs:comment """A keyword action that temporarily stops a permanent from
-attacking, blocking, or having its activated abilities activated."""@en .
+attacking, blocking, or having its activated abilities activated.
+See rule 701.35."""@en .
 :Discard rdf:type owl:NamedIndividual ,
                   :KeywordAction ;
          rdfs:label "Discard" ;
          rdfs:comment """To move a card from its owner’s hand to that player’s
-graveyard."""@en .
+graveyard. See rule 701.9."""@en .
 :Discover rdf:type owl:NamedIndividual ,
                    :KeywordAction ;
           rdfs:label "Discover" ;
           rdfs:comment """A keyword action that exiles cards from the top of
 your library until you exile a nonland card with the required mana value, then
-lets you cast it for free or put it into your hand."""@en .
+lets you cast it for free or put it into your hand. See rule 701.57."""@en .
 :Double rdf:type owl:NamedIndividual ,
                  :KeywordAction ;
         rdfs:label "Double" ;
-        rdfs:comment "A keyword action used in a variety of contexts."@en .
+        rdfs:comment """A keyword action used in a variety of contexts.
+See rule 701.10."""@en .
 :Earthbend rdf:type owl:NamedIndividual ,
                     :KeywordAction ;
            rdfs:label "Earthbend" ;
            rdfs:comment """A keyword action that makes a land you control into a
 hasty 0/0 land creature, puts N +1/+1 counters on it, and returns it tapped
-under your control when it dies or is exiled."""@en .
+under your control when it dies or is exiled. See rule 701.66."""@en .
+:EmpowerJace rdf:type owl:NamedIndividual ,
+                      :KeywordAction ;
+             rdfs:label "Empower Jace" ;
+             rdfs:comment """A keyword action that gives you a Jace planeswalker
+token and/or puts loyalty counters on a Jace token you already have. See rule
+701.71."""@en .
 :Endure rdf:type owl:NamedIndividual ,
                  :KeywordAction ;
         rdfs:label "Endure" ;
         rdfs:comment """A keyword action that lets a permanent’s controller
 either create an N/N white Spirit creature token or put N +1/+1 counters on that
-permanent."""@en .
+permanent. See rule 701.63."""@en .
 :Exchange rdf:type owl:NamedIndividual ,
                    :KeywordAction ;
           rdfs:label "Exchange" ;
           rdfs:comment """To swap two things, such as objects, sets of objects,
-or life totals."""@en .
+or life totals. See rule 701.12."""@en .
 :Exert rdf:type owl:NamedIndividual ,
                 :KeywordAction ;
        rdfs:label "Exert" ;
        rdfs:comment """A keyword action that stops a permanent from untapping
-during the next untap step of the player who exerted it."""@en .
+during the next untap step of the player who exerted it.
+See rule 701.43."""@en .
 :Exile rdf:type owl:NamedIndividual ,
                 :KeywordAction ;
        rdfs:label "Exile" ;
        rdfs:comment """A keyword action that puts an object into the exile
-zone."""@en .
+zone. See rule 701.13."""@en .
 :Explore rdf:type owl:NamedIndividual ,
                   :KeywordAction ;
          rdfs:label "Explore" ;
          rdfs:comment """A keyword action that causes a player to reveal the top
 card of their library and then to take different actions depending on whether a
-land card is revealed this way."""@en .
+land card is revealed this way. See rule 701.44."""@en .
 :FaceAVillainousChoice rdf:type owl:NamedIndividual ,
                                 :KeywordAction ;
                        rdfs:label "Face a Villainous Choice" ;
                        rdfs:comment """A keyword action that causes a player to
-choose one of two listed choices."""@en .
+choose one of two listed choices. See rule 701.55."""@en .
 :Fateseal rdf:type owl:NamedIndividual ,
                    :KeywordAction ;
           rdfs:label "Fateseal" ;
           rdfs:comment """To manipulate some of the cards on top of an
-opponent’s library."""@en .
+opponent’s library. See rule 701.29."""@en .
 :Fight rdf:type owl:NamedIndividual ,
                 :KeywordAction ;
        rdfs:label "Fight" ;
        rdfs:comment """A keyword action where each of two creatures deals damage
-equal to its power to the other."""@en .
+equal to its power to the other. See rule 701.14."""@en .
 :Forage rdf:type owl:NamedIndividual ,
                  :KeywordAction ;
         rdfs:label "Forage" ;
         rdfs:comment """To pay a cost of exiling three cards from your graveyard
-or sacrificing a Food."""@en .
+or sacrificing a Food. See rule 701.61."""@en .
 :Goad rdf:type owl:NamedIndividual ,
                :KeywordAction ;
       rdfs:label "Goad" ;
       rdfs:comment """A keyword action that causes a creature to be goaded until
-a player’s next turn."""@en .
+a player’s next turn. See rule 701.15."""@en .
 :Harness rdf:type owl:NamedIndividual ,
                   :KeywordAction ;
          rdfs:label "Harness" ;
          rdfs:comment """A keyword action that grants a permanent the harnessed
-designation."""@en .
+designation. See rule 701.64."""@en .
 :Heal rdf:type owl:NamedIndividual ,
                :KeywordAction ;
       rdfs:label "Heal" ;
-      rdfs:comment "To remove marked damage already dealt to a permanent."@en .
+      rdfs:comment """To remove marked damage already dealt to a permanent.
+See rule 701.69."""@en .
 :Incubate rdf:type owl:NamedIndividual ,
                    :KeywordAction ;
           rdfs:label "Incubate" ;
           rdfs:comment """A keyword action that creates an Incubator token with
-a specified number of +1/+1 counters on it."""@en .
+a specified number of +1/+1 counters on it. See rule 701.53."""@en .
 :Investigate rdf:type owl:NamedIndividual ,
                       :KeywordAction ;
              rdfs:label "Investigate" ;
              rdfs:comment """A keyword action that creates a Clue artifact
-token."""@en .
+token. See rule 701.16."""@en .
 :Learn rdf:type owl:NamedIndividual ,
                 :KeywordAction ;
        rdfs:label "Learn" ;
        rdfs:comment """A keyword action that lets a player add a Lesson card to
-their hand from outside the game or discard a card to draw a card."""@en .
+their hand from outside the game or discard a card to draw a card.
+See rule 701.48."""@en .
 :Manifest rdf:type owl:NamedIndividual ,
                    :KeywordAction ;
           rdfs:label "Manifest" ;
           rdfs:comment """A keyword action that puts a card onto the battlefield
-face down as a 2/2 creature."""@en .
+face down as a 2/2 creature. See rule 701.40."""@en .
 :ManifestDread rdf:type owl:NamedIndividual ,
                         :KeywordAction ;
                rdfs:label "Manifest Dread" ;
                rdfs:comment """A keyword action that puts one of the top two
-cards of your library onto the battlefield face down as a 2/2 creature."""@en .
+cards of your library onto the battlefield face down as a 2/2 creature.
+See rule 701.62."""@en .
 :Meld rdf:type owl:NamedIndividual ,
                :KeywordAction ;
       rdfs:label "Meld" ;
       rdfs:comment """To turn two members of a meld pair so their back faces are
-up and combined into one oversized Magic card."""@en .
+up and combined into one oversized Magic card. See rule 701.42."""@en .
 :Mill rdf:type owl:NamedIndividual ,
                :KeywordAction ;
       rdfs:label "Mill" ;
       rdfs:comment """To mill a number of cards, a player puts that many cards
-from the top of their library into their graveyard."""@en .
+from the top of their library into their graveyard. See rule 701.17."""@en .
 :Monstrosity rdf:type owl:NamedIndividual ,
                       :KeywordAction ;
              rdfs:label "Monstrosity" ;
              rdfs:comment """A keyword action that puts +1/+1 counters on a
-creature and makes it become monstrous."""@en .
+creature and makes it become monstrous. See rule 701.37."""@en .
 :OpenAnAttraction rdf:type owl:NamedIndividual ,
                            :KeywordAction ;
                   rdfs:label "Open an Attraction" ;
                   rdfs:comment """A keyword action that puts the top card of
-your Attraction deck onto the battlefield face up under your control."""@en .
+your Attraction deck onto the battlefield face up under your control.
+See rule 701.51."""@en .
 :Planeswalk rdf:type owl:NamedIndividual ,
                      :KeywordAction ;
             rdfs:label "Planeswalk" ;
             rdfs:comment """To put each face-up plane card or phenomenon card on
 the bottom of its owner’s planar deck face down, then move the top card of your
 planar deck off that planar deck and turn it face up in a Planechase
-game."""@en .
+game. See rule 701.31."""@en .
 :Play rdf:type owl:NamedIndividual ,
                :KeywordAction ;
       rdfs:label "Play" ;
       rdfs:comment """A keyword action that lets a player play a land or cast a
-card, whichever is appropriate."""@en .
+card, whichever is appropriate. See rule 701.18."""@en .
 :Populate rdf:type owl:NamedIndividual ,
                    :KeywordAction ;
           rdfs:label "Populate" ;
           rdfs:comment """A keyword action that creates a copy of a creature
-token you control."""@en .
+token you control. See rule 701.36."""@en .
 :Proliferate rdf:type owl:NamedIndividual ,
                       :KeywordAction ;
              rdfs:label "Proliferate" ;
              rdfs:comment """To give an additional counter to any number of
-players and/or permanents of each kind they already have."""@en .
+players and/or permanents of each kind they already have.
+See rule 701.34."""@en .
 :Recruit rdf:type owl:NamedIndividual ,
                   :KeywordAction ;
          rdfs:label "Recruit" ;
          rdfs:comment """To draw a card, then discard a card; if a
 nonland card was discarded this way, create a 1/1 white Human Soldier
-creature token."""@en .
+creature token. See rule 701.70."""@en .
 :Regenerate rdf:type owl:NamedIndividual ,
                      :KeywordAction ;
             rdfs:label "Regenerate" ;
             rdfs:comment """To replace a permanent’s destruction with an
-alternate sequence of events."""@en .
+alternate sequence of events. See rule 701.19."""@en .
 :Reveal rdf:type owl:NamedIndividual ,
                  :KeywordAction ;
         rdfs:label "Reveal" ;
-        rdfs:comment "To show a card to all players for a brief time."@en .
+        rdfs:comment """To show a card to all players for a brief time.
+See rule 701.20."""@en .
 :RollToVisitYourAttractions rdf:type owl:NamedIndividual ,
                                      :KeywordAction ;
                             rdfs:label "Roll to Visit Your Attractions" ;
                             rdfs:comment """A keyword action that rolls a
 six-sided die and visits each Attraction you control with that lit-up number,
-causing its visit ability to trigger."""@en .
+causing its visit ability to trigger. See rule 701.52."""@en .
 :Sacrifice rdf:type owl:NamedIndividual ,
                     :KeywordAction ;
            rdfs:label "Sacrifice" ;
            rdfs:comment """To move a permanent you control to its owner’s
-graveyard."""@en .
+graveyard. See rule 701.21."""@en .
 :Scry rdf:type owl:NamedIndividual ,
                :KeywordAction ;
       rdfs:label "Scry" ;
       rdfs:comment """To manipulate some of the cards on top of your
-library."""@en .
+library. See rule 701.22."""@en .
 :Search rdf:type owl:NamedIndividual ,
                  :KeywordAction ;
         rdfs:label "Search" ;
         rdfs:comment """To look at all cards in a stated zone and possibly find
-a card that matches a given description."""@en .
+a card that matches a given description. See rule 701.23."""@en .
 :SetInMotion rdf:type owl:NamedIndividual ,
                       :KeywordAction ;
              rdfs:label "Set in Motion" ;
              rdfs:comment """To move a scheme card off the top of your scheme
-deck and turn it face up."""@en .
+deck and turn it face up. See rule 701.32."""@en .
 :Shuffle rdf:type owl:NamedIndividual ,
                   :KeywordAction ;
          rdfs:label "Shuffle" ;
          rdfs:comment """To randomize the cards in a deck (before a game) or
-library (during a game)."""@en .
+library (during a game). See rule 701.24."""@en .
 :Support rdf:type owl:NamedIndividual ,
                   :KeywordAction ;
          rdfs:label "Support" ;
          rdfs:comment """A keyword action that lets you put +1/+1 counters on
-creatures."""@en .
+creatures. See rule 701.41."""@en .
 :Surveil rdf:type owl:NamedIndividual ,
                   :KeywordAction ;
          rdfs:label "Surveil" ;
          rdfs:comment """To manipulate some of the cards on top of your library,
-sending some of them to your graveyard and rearranging the rest."""@en .
+sending some of them to your graveyard and rearranging the rest.
+See rule 701.25."""@en .
 :Suspect rdf:type owl:NamedIndividual ,
                   :KeywordAction ;
          rdfs:label "Suspect" ;
          rdfs:comment """A keyword action that makes a creature suspected,
 giving it menace and preventing it from blocking for as long as it remains
-suspected."""@en .
+suspected. See rule 701.60."""@en .
 :Tap rdf:type owl:NamedIndividual ,
               :KeywordAction ;
      rdfs:label "Tap" ;
-     rdfs:comment "To turn a permanent sideways from an upright position."@en .
+     rdfs:comment """To turn a permanent sideways from an upright position.
+See rule 701.26."""@en .
 :TheRingTemptsYou rdf:type owl:NamedIndividual ,
                            :KeywordAction ;
                   rdfs:label "The Ring Tempts You" ;
                   rdfs:comment """A keyword action that causes a player to
 choose a creature they control to be their legendary Ring-bearer and may cause
-them to create an emblem called The Ring."""@en .
+them to create an emblem called The Ring. See rule 701.54."""@en .
 :TimeTravel rdf:type owl:NamedIndividual ,
                      :KeywordAction ;
             rdfs:label "Time Travel" ;
             rdfs:comment """To add a time counter to or remove a time counter
 from any number of permanents you control with a time counter on them or
-suspended cards you own in exile with time counters on them."""@en .
+suspended cards you own in exile with time counters on them.
+See rule 701.56."""@en .
 :Transform rdf:type owl:NamedIndividual ,
                     :KeywordAction ;
            rdfs:label "Transform" ;
            rdfs:comment """To turn a double-faced card so its other face is
-up."""@en .
+up. See rule 701.27."""@en .
 :Triple rdf:type owl:NamedIndividual ,
                  :KeywordAction ;
         rdfs:label "Triple" ;
         rdfs:comment """A keyword action that increases a creature’s power
-and/or toughness."""@en .
+and/or toughness. See rule 701.11."""@en .
 :Untap rdf:type owl:NamedIndividual ,
                 :KeywordAction ;
        rdfs:label "Untap" ;
        rdfs:comment """To rotate a permanent back to the upright position from a
-sideways position."""@en .
+sideways position. See rule 701.26."""@en .
 :VentureIntoTheDungeon rdf:type owl:NamedIndividual ,
                                 :KeywordAction ;
                        rdfs:label "Venture into the Dungeon" ;
                        rdfs:comment """A keyword action that can bring dungeon
 cards into the game from outside the game or move a player’s venture
-marker."""@en .
+marker. See rule 701.49."""@en .
 :Vote rdf:type owl:NamedIndividual ,
                :KeywordAction ;
       rdfs:label "Vote" ;
       rdfs:comment """A keyword action that instructs players to vote from among
-given options."""@en .
+given options. See rule 701.38."""@en .
 :Waterbend rdf:type owl:NamedIndividual ,
                     :KeywordAction ;
            rdfs:label "Waterbend" ;
            rdfs:comment """A keyword action. “Waterbend [cost]” means to pay
 that cost and, for each {1} in that cost, you may tap an untapped artifact or
-creature you control rather than pay mana."""@en .
+creature you control rather than pay mana. See rule 701.67."""@en .
 # --- Keyword Abilities ---
 :Absorb rdf:type owl:NamedIndividual ,
                  :KeywordAbility ;
         rdfs:label "Absorb" ;
-        rdfs:comment "A keyword ability that prevents damage."@en .
+        rdfs:comment """A keyword ability that prevents damage.
+See rule 702.64."""@en .
 :Affinity rdf:type owl:NamedIndividual ,
                    :KeywordAbility ;
           rdfs:label "Affinity" ;
           rdfs:comment """A keyword ability that reduces how much mana you need
-to spend to cast a spell."""@en .
+to spend to cast a spell. See rule 702.41."""@en .
 :Afflict rdf:type owl:NamedIndividual ,
                   :KeywordAbility ;
          rdfs:label "Afflict" ;
          rdfs:comment """A keyword ability that makes the defending player lose
-life for blocking."""@en .
+life for blocking. See rule 702.130."""@en .
 :Afterlife rdf:type owl:NamedIndividual ,
                     :KeywordAbility ;
            rdfs:label "Afterlife" ;
            rdfs:comment """A keyword ability that leaves behind Spirit creature
-tokens when certain creatures die."""@en .
+tokens when certain creatures die. See rule 702.135."""@en .
 :Aftermath rdf:type owl:NamedIndividual ,
                     :KeywordAbility ;
            rdfs:label "Aftermath" ;
            rdfs:comment """A keyword ability that lets a player cast one half of
-a split card only from their graveyard."""@en .
+a split card only from their graveyard. See rule 702.127."""@en .
 :Amplify rdf:type owl:NamedIndividual ,
                   :KeywordAbility ;
          rdfs:label "Amplify" ;
          rdfs:comment """A keyword ability than can have a creature enter the
-battlefield with +1/+1 counters on it."""@en .
+battlefield with +1/+1 counters on it. See rule 702.38."""@en .
 :Annihilator rdf:type owl:NamedIndividual ,
                       :KeywordAbility ;
              rdfs:label "Annihilator" ;
              rdfs:comment """A keyword ability that can make a creature
-particularly brutal when it attacks."""@en .
+particularly brutal when it attacks. See rule 702.86."""@en .
 :Ascend rdf:type owl:NamedIndividual ,
                  :KeywordAbility ;
         rdfs:label "Ascend" ;
         rdfs:comment """A keyword causing a player to get the designation of the
-city’s blessing once they control ten permanents."""@en .
+city’s blessing once they control ten permanents. See rule 702.131."""@en .
 :Assist rdf:type owl:NamedIndividual ,
                  :KeywordAbility ;
         rdfs:label "Assist" ;
         rdfs:comment """A keyword ability that lets another player help you pay
-for a spell."""@en .
+for a spell. See rule 702.132."""@en .
 :AuraSwap rdf:type owl:NamedIndividual ,
                    :KeywordAbility ;
           rdfs:label "Aura Swap" ;
           rdfs:comment """A keyword ability that lets you exchange an Aura on
-the battlefield with one in your hand."""@en .
+the battlefield with one in your hand. See rule 702.65."""@en .
 :Awaken rdf:type owl:NamedIndividual ,
                  :KeywordAbility ;
         rdfs:label "Awaken" ;
         rdfs:comment """A keyword ability that lets you turn a land you control
-into a creature."""@en .
+into a creature. See rule 702.113."""@en .
 :Backup rdf:type owl:NamedIndividual ,
                  :KeywordAbility ;
         rdfs:label "Backup" ;
         rdfs:comment """A keyword ability that lets a creature give +1/+1
 counters to itself or another when it enters the battlefield. If a different
 creature is chosen, that creature also temporarily gains one or more
-abilities."""@en .
+abilities. See rule 702.165."""@en .
 :Banding rdf:type owl:NamedIndividual ,
                   :KeywordAbility ;
          rdfs:label "Banding" ;
          rdfs:comment """A keyword ability that modifies the rules for declaring
-attackers and assigning combat damage."""@en .
+attackers and assigning combat damage. See rule 702.22."""@en .
 :BandsWithOthers rdf:type owl:NamedIndividual ,
                           :KeywordAbility ;
                  rdfs:label "Bands with Others" ;
                  rdfs:comment """A variant of banding that lets a creature band
 only with other creatures that share a specified quality (usually a creature
-type), rather than with any creature."""@en .
+type), rather than with any creature. See rule 702.22."""@en .
 :Bargain rdf:type owl:NamedIndividual ,
                   :KeywordAbility ;
          rdfs:label "Bargain" ;
          rdfs:comment """Bargain is a keyword ability that represents an
 optional additional cost of sacrificing an artifact, enchantment, or token. A
 spell has been bargained if its controller declared the intention to pay that
-cost."""@en .
+cost. See rule 702.166."""@en .
 :BattleCry rdf:type owl:NamedIndividual ,
                     :KeywordAbility ;
            rdfs:label "Battle Cry" ;
            rdfs:comment """A keyword ability that makes other attacking
-creatures better in combat."""@en .
+creatures better in combat. See rule 702.91."""@en .
 :Bestow rdf:type owl:NamedIndividual ,
                  :KeywordAbility ;
         rdfs:label "Bestow" ;
         rdfs:comment """A keyword ability that lets a creature card be cast as
-an Aura."""@en .
+an Aura. See rule 702.103."""@en .
 :Blitz rdf:type owl:NamedIndividual ,
                 :KeywordAbility ;
        rdfs:label "Blitz" ;
        rdfs:comment """A keyword ability found on creature cards that allows
-them to be cast for an alternative cost."""@en .
+them to be cast for an alternative cost. See rule 702.152."""@en .
 :Bloodthirst rdf:type owl:NamedIndividual ,
                       :KeywordAbility ;
              rdfs:label "Bloodthirst" ;
              rdfs:comment """A keyword ability that can have a creature enter
-the battlefield with +1/+1 counters on it."""@en .
+the battlefield with +1/+1 counters on it. See rule 702.54."""@en .
 :Boast rdf:type owl:NamedIndividual ,
                 :KeywordAbility ;
        rdfs:label "Boast" ;
        rdfs:comment """A special kind of activated ability that can be activated
 only once each turn if the creature with the boast ability attacked that
-turn."""@en .
+turn. See rule 702.142."""@en .
 :Bushido rdf:type owl:NamedIndividual ,
                   :KeywordAbility ;
          rdfs:label "Bushido" ;
          rdfs:comment """A keyword ability that can make a creature better in
-combat."""@en .
+combat. See rule 702.45."""@en .
 :Buyback rdf:type owl:NamedIndividual ,
                   :KeywordAbility ;
          rdfs:label "Buyback" ;
          rdfs:comment """A keyword ability of instants and sorceries that can
-let the spell return to its owner’s hand as it resolves."""@en .
+let the spell return to its owner’s hand as it resolves.
+See rule 702.27."""@en .
 :Cascade rdf:type owl:NamedIndividual ,
                   :KeywordAbility ;
          rdfs:label "Cascade" ;
          rdfs:comment """A keyword ability that may let a player cast a random
-extra spell for no cost."""@en .
+extra spell for no cost. See rule 702.85."""@en .
 :Casualty rdf:type owl:NamedIndividual ,
                    :KeywordAbility ;
           rdfs:label "Casualty" ;
           rdfs:comment """A keyword ability that lets you sacrifice a creature
-with enough power as an additional cost to copy the spell."""@en .
+with enough power as an additional cost to copy the spell.
+See rule 702.153."""@en .
 :Champion rdf:type owl:NamedIndividual ,
                    :KeywordAbility ;
           rdfs:label "Champion" ;
           rdfs:comment """A keyword ability that lets one creature temporarily
-replace another."""@en .
+replace another. See rule 702.72."""@en .
 :Changeling rdf:type owl:NamedIndividual ,
                      :KeywordAbility ;
             rdfs:label "Changeling" ;
             rdfs:comment """A characteristic-defining ability that grants the
-object it’s on every creature type."""@en .
+object it’s on every creature type. See rule 702.73."""@en .
+:ChooseABackground rdf:type owl:NamedIndividual ,
+                            :KeywordAbility ;
+                   rdfs:label "Choose a Background" ;
+                   rdfs:comment """A partner ability that lets this card and a
+legendary Background enchantment card be your two commanders. An effect that
+refers to partner does not refer to it. See rules 702.124k and 702.124n."""@en .
 :Cipher rdf:type owl:NamedIndividual ,
                  :KeywordAbility ;
         rdfs:label "Cipher" ;
         rdfs:comment """A keyword ability that allows you to encode a card on a
 creature and cast that card whenever that creature deals combat damage to a
-player."""@en .
+player. See rule 702.99."""@en .
 :Cleave rdf:type owl:NamedIndividual ,
                  :KeywordAbility ;
         rdfs:label "Cleave" ;
         rdfs:comment """A keyword ability that allows you to pay an alternative
-cost to remove some of a spell’s text."""@en .
+cost to remove some of a spell’s text. See rule 702.148."""@en .
 :Companion rdf:type owl:NamedIndividual ,
                     :KeywordAbility ;
            rdfs:label "Companion" ;
            rdfs:comment """A keyword ability that allows a player to choose one
 creature card from outside the game as a companion if the restriction of that
 card’s companion ability is met. Once a player has chosen a companion, that
-player may pay {3} to put it into their hand once during the game."""@en .
+player may pay {3} to put it into their hand once during the game.
+See rule 702.139."""@en .
 :Compleated rdf:type owl:NamedIndividual ,
                      :KeywordAbility ;
             rdfs:label "Compleated" ;
             rdfs:comment """A keyword ability that causes a planeswalker to
 enter the battlefield with fewer loyalty counters if a player chose to pay life
-for Phyrexian mana symbols in its cost."""@en .
+for Phyrexian mana symbols in its cost. See rule 702.150."""@en .
 :Conspire rdf:type owl:NamedIndividual ,
                    :KeywordAbility ;
           rdfs:label "Conspire" ;
-          rdfs:comment "A keyword ability that creates a copy of a spell."@en .
+          rdfs:comment """A keyword ability that creates a copy of a spell.
+See rule 702.78."""@en .
 :Convoke rdf:type owl:NamedIndividual ,
                   :KeywordAbility ;
          rdfs:label "Convoke" ;
          rdfs:comment """A keyword ability that lets you tap creatures rather
-than pay mana to cast a spell."""@en .
+than pay mana to cast a spell. See rule 702.51."""@en .
 :Craft rdf:type owl:NamedIndividual ,
                 :KeywordAbility ;
        rdfs:label "Craft" ;
        rdfs:comment """Craft is an activated ability that allows a player to
 exile cards from their graveyard and/or permanents they control to exile the
 permanent with the craft ability and return it onto the battlefield
-transformed."""@en .
+transformed. See rule 702.167."""@en .
 :Crew rdf:type owl:NamedIndividual ,
                :KeywordAbility ;
       rdfs:label "Crew" ;
       rdfs:comment """A keyword ability that lets you tap creatures to turn a
-Vehicle into an artifact creature."""@en .
+Vehicle into an artifact creature. See rule 702.122."""@en .
 :CumulativeUpkeep rdf:type owl:NamedIndividual ,
                            :KeywordAbility ;
                   rdfs:label "Cumulative Upkeep" ;
                   rdfs:comment """A keyword ability that imposes an increasing
-cost to keep a permanent on the battlefield."""@en .
+cost to keep a permanent on the battlefield. See rule 702.24."""@en .
 :Cycling rdf:type owl:NamedIndividual ,
                   :KeywordAbility ;
          rdfs:label "Cycling" ;
          rdfs:comment """A keyword ability that lets a card be discarded and
-replaced with a new card."""@en .
+replaced with a new card. See rule 702.29."""@en .
 :Dash rdf:type owl:NamedIndividual ,
                :KeywordAbility ;
       rdfs:label "Dash" ;
       rdfs:comment """A keyword ability found on creature cards that allows them
-to be cast for an alternative cost."""@en .
+to be cast for an alternative cost. See rule 702.109."""@en .
 :Daybound rdf:type owl:NamedIndividual ,
                    :KeywordAbility ;
           rdfs:label "Daybound" ;
           rdfs:comment """An ability found on the front faces of some
 double-faced cards. Cards with daybound and nightbound are face up when it’s day
-and face down when it’s night."""@en .
+and face down when it’s night. See rule 702.145."""@en .
 :Deathtouch rdf:type owl:NamedIndividual ,
                      :KeywordAbility ;
             rdfs:label "Deathtouch" ;
             rdfs:comment """A keyword ability that causes damage dealt by an
-object to be especially effective."""@en .
+object to be especially effective. See rule 702.2."""@en .
 :Decayed rdf:type owl:NamedIndividual ,
                   :KeywordAbility ;
          rdfs:label "Decayed" ;
          rdfs:comment """A keyword ability that means “This creature can’t
-block” and “When this creature attacks, sacrifice it at end of combat.”"""@en .
+block” and “When this creature attacks, sacrifice it at end of combat.”
+See rule 702.147."""@en .
 :Defender rdf:type owl:NamedIndividual ,
                    :KeywordAbility ;
           rdfs:label "Defender" ;
           rdfs:comment """A keyword ability that prohibits a creature from
-attacking."""@en .
+attacking. See rule 702.3."""@en .
 :Delve rdf:type owl:NamedIndividual ,
                 :KeywordAbility ;
        rdfs:label "Delve" ;
        rdfs:comment """A keyword ability that lets you exile cards from your
-graveyard rather than pay generic mana to cast a spell."""@en .
+graveyard rather than pay generic mana to cast a spell. See rule 702.66."""@en .
 :Demonstrate rdf:type owl:NamedIndividual ,
                       :KeywordAbility ;
              rdfs:label "Demonstrate" ;
              rdfs:comment """A triggered ability found on some spells that let
-its controller copy it and choose an opponent to also copy it."""@en .
+its controller copy it and choose an opponent to also copy it.
+See rule 702.144."""@en .
 :Dethrone rdf:type owl:NamedIndividual ,
                    :KeywordAbility ;
           rdfs:label "Dethrone" ;
           rdfs:comment """A keyword ability that puts a +1/+1 counter on a
-creature when it attacks the player with the most life."""@en .
+creature when it attacks the player with the most life.
+See rule 702.105."""@en .
 :Devoid rdf:type owl:NamedIndividual ,
                  :KeywordAbility ;
         rdfs:label "Devoid" ;
         rdfs:comment """A characteristic-defining ability that makes an object
-colorless."""@en .
+colorless. See rule 702.114."""@en .
 :Devour rdf:type owl:NamedIndividual ,
                  :KeywordAbility ;
         rdfs:label "Devour" ;
         rdfs:comment """A keyword ability that can have a creature enter the
-battlefield with +1/+1 counters on it."""@en .
+battlefield with +1/+1 counters on it. See rule 702.82."""@en .
 :Disguise rdf:type owl:NamedIndividual ,
                    :KeywordAbility ;
           rdfs:label "Disguise" ;
           rdfs:comment """A keyword ability that lets a card be cast face down
-as a 2/2 creature with ward {2}."""@en .
+as a 2/2 creature with ward {2}. See rule 702.168."""@en .
 :Disturb rdf:type owl:NamedIndividual ,
                   :KeywordAbility ;
          rdfs:label "Disturb" ;
          rdfs:comment """A keyword ability that allows a player to cast a
-double-faced card transformed from the graveyard."""@en .
+double-faced card transformed from the graveyard. See rule 702.146."""@en .
+:DoctorsCompanion rdf:type owl:NamedIndividual ,
+                           :KeywordAbility ;
+                  rdfs:label "Doctor’s companion" ;
+                  rdfs:comment """A partner ability that lets this legendary
+creature card and a legendary Time Lord Doctor creature card with no other
+creature types be your two commanders. An effect that refers to partner does
+not refer to it. See rules 702.124m and 702.124n."""@en .
 :DoubleStrike rdf:type owl:NamedIndividual ,
                        :KeywordAbility ;
               rdfs:label "Double Strike" ;
               rdfs:comment """A keyword ability that lets a creature deal its
-combat damage twice."""@en .
+combat damage twice. See rule 702.4."""@en .
 :Dredge rdf:type owl:NamedIndividual ,
                  :KeywordAbility ;
         rdfs:label "Dredge" ;
         rdfs:comment """A keyword ability that lets a player return a card from
-their graveyard to their hand."""@en .
+their graveyard to their hand. See rule 702.52."""@en .
 :Echo rdf:type owl:NamedIndividual ,
                :KeywordAbility ;
       rdfs:label "Echo" ;
       rdfs:comment """A keyword ability that imposes a cost to keep a permanent
-on the battlefield."""@en .
+on the battlefield. See rule 702.30."""@en .
 :Embalm rdf:type owl:NamedIndividual ,
                  :KeywordAbility ;
         rdfs:label "Embalm" ;
         rdfs:comment """A keyword ability that lets a player exile a creature
 card from their graveyard to create a mummified token version of that
-card."""@en .
+card. See rule 702.128."""@en .
 :Emerge rdf:type owl:NamedIndividual ,
                  :KeywordAbility ;
         rdfs:label "Emerge" ;
         rdfs:comment """A keyword ability that lets a player cast a spell for
-less by sacrificing a creature."""@en .
+less by sacrificing a creature. See rule 702.119."""@en .
 :Enchant rdf:type owl:NamedIndividual ,
                   :KeywordAbility ;
          rdfs:label "Enchant" ;
          rdfs:comment """A keyword ability that defines what an Aura spell can
-target and what an Aura permanent can be attached to."""@en .
+target and what an Aura permanent can be attached to. See rule 702.5."""@en .
 :Encore rdf:type owl:NamedIndividual ,
                  :KeywordAbility ;
         rdfs:label "Encore" ;
         rdfs:comment """A keyword ability that lets a player exile a creature
 card from their graveyard to, for each opponent, create a token that’s a copy of
-that card to attack that opponent."""@en .
+that card to attack that opponent. See rule 702.141."""@en .
 :Enlist rdf:type owl:NamedIndividual ,
                  :KeywordAbility ;
         rdfs:label "Enlist" ;
         rdfs:comment """A keyword ability that allows a creature that could have
-attacked to support another creature."""@en .
+attacked to support another creature. See rule 702.154."""@en .
 :Entwine rdf:type owl:NamedIndividual ,
                   :KeywordAbility ;
          rdfs:label "Entwine" ;
          rdfs:comment """A keyword ability that lets a player choose all modes
-for a spell rather than just the number specified."""@en .
+for a spell rather than just the number specified. See rule 702.42."""@en .
 :Epic rdf:type owl:NamedIndividual ,
                :KeywordAbility ;
       rdfs:label "Epic" ;
       rdfs:comment """A keyword ability that lets a player copy a spell at the
 beginning of each of their upkeeps at the expense of casting any other spells
-for the rest of the game."""@en .
+for the rest of the game. See rule 702.50."""@en .
 :Equip rdf:type owl:NamedIndividual ,
                 :KeywordAbility ;
        rdfs:label "Equip" ;
        rdfs:comment """A keyword ability that lets a player attach an Equipment
-to a creature they control."""@en .
+to a creature they control. See rule 702.6."""@en .
 :Escalate rdf:type owl:NamedIndividual ,
                    :KeywordAbility ;
           rdfs:label "Escalate" ;
           rdfs:comment """A keyword ability on some modal spells that adds a
-cost for choosing additional modes."""@en .
+cost for choosing additional modes. See rule 702.120."""@en .
 :Escape rdf:type owl:NamedIndividual ,
                  :KeywordAbility ;
         rdfs:label "Escape" ;
         rdfs:comment """A keyword ability that lets a player cast a card from
-their graveyard."""@en .
+their graveyard. See rule 702.138."""@en .
 :Eternalize rdf:type owl:NamedIndividual ,
                      :KeywordAbility ;
             rdfs:label "Eternalize" ;
             rdfs:comment """A keyword ability that lets a player exile a
 creature card from their graveyard to create an eternalized token version of
-that card."""@en .
+that card. See rule 702.129."""@en .
 :Evoke rdf:type owl:NamedIndividual ,
                 :KeywordAbility ;
        rdfs:label "Evoke" ;
        rdfs:comment """A keyword ability that causes a permanent to be
-sacrificed when it enters the battlefield."""@en .
+sacrificed when it enters the battlefield. See rule 702.74."""@en .
 :Evolve rdf:type owl:NamedIndividual ,
                  :KeywordAbility ;
         rdfs:label "Evolve" ;
         rdfs:comment """A keyword ability that lets you put a +1/+1 counter on a
 creature when a larger creature enters the battlefield under your
-control."""@en .
+control. See rule 702.100."""@en .
 :Exalted rdf:type owl:NamedIndividual ,
                   :KeywordAbility ;
          rdfs:label "Exalted" ;
          rdfs:comment """A keyword ability that can make a creature better in
-combat."""@en .
+combat. See rule 702.83."""@en .
 :Exhaust rdf:type owl:NamedIndividual ,
                   :KeywordAbility ;
          rdfs:label "Exhaust" ;
          rdfs:comment """A special kind of activated ability that may be
-activated only once."""@en .
+activated only once. See rule 702.177."""@en .
 :Exploit rdf:type owl:NamedIndividual ,
                   :KeywordAbility ;
          rdfs:label "Exploit" ;
          rdfs:comment """A keyword ability that lets you sacrifice a creature
-for a benefit."""@en .
+for a benefit. See rule 702.110."""@en .
 :Extort rdf:type owl:NamedIndividual ,
                  :KeywordAbility ;
         rdfs:label "Extort" ;
         rdfs:comment """A keyword ability that lets you gain life and have
-opponents lose life whenever you cast a spell."""@en .
+opponents lose life whenever you cast a spell. See rule 702.101."""@en .
 :Fabricate rdf:type owl:NamedIndividual ,
                     :KeywordAbility ;
            rdfs:label "Fabricate" ;
            rdfs:comment """A keyword ability that lets you choose whether to
-create Servo tokens or put +1/+1 counters on a creature."""@en .
+create Servo tokens or put +1/+1 counters on a creature.
+See rule 702.123."""@en .
 :Fading rdf:type owl:NamedIndividual ,
                  :KeywordAbility ;
         rdfs:label "Fading" ;
         rdfs:comment """A keyword ability that limits how long a permanent
-remains on the battlefield."""@en .
+remains on the battlefield. See rule 702.32."""@en .
 :Fear rdf:type owl:NamedIndividual ,
                :KeywordAbility ;
       rdfs:label "Fear" ;
       rdfs:comment """A keyword ability that restricts how a creature may be
-blocked."""@en .
+blocked. See rule 702.36."""@en .
 :Firebending rdf:type owl:NamedIndividual ,
                       :KeywordAbility ;
              rdfs:label "Firebending" ;
              rdfs:comment """A keyword ability that adds red mana until end of
-combat whenever a creature with that ability attacks."""@en .
+combat whenever a creature with that ability attacks. See rule 702.189."""@en .
 :FirstStrike rdf:type owl:NamedIndividual ,
                       :KeywordAbility ;
              rdfs:label "First Strike" ;
              rdfs:comment """A keyword ability that lets a creature deal its
-combat damage before other creatures."""@en .
+combat damage before other creatures. See rule 702.7."""@en .
 :Flanking rdf:type owl:NamedIndividual ,
                    :KeywordAbility ;
           rdfs:label "Flanking" ;
           rdfs:comment """A keyword ability that can make a creature better in
-combat."""@en .
+combat. See rule 702.25."""@en .
 :Flash rdf:type owl:NamedIndividual ,
                 :KeywordAbility ;
        rdfs:label "Flash" ;
        rdfs:comment """A keyword ability that lets a player play a card any time
-they could cast an instant."""@en .
+they could cast an instant. See rule 702.8."""@en .
 :Flashback rdf:type owl:NamedIndividual ,
                     :KeywordAbility ;
            rdfs:label "Flashback" ;
            rdfs:comment """A keyword ability that lets a player cast a card from
-their graveyard."""@en .
+their graveyard. See rule 702.34."""@en .
 :Flying rdf:type owl:NamedIndividual ,
                  :KeywordAbility ;
         rdfs:label "Flying" ;
         rdfs:comment """A keyword ability that restricts how a creature may be
-blocked."""@en .
+blocked. See rule 702.9."""@en .
 :ForMirrodin rdf:type owl:NamedIndividual ,
                       :KeywordAbility ;
              rdfs:label "For Mirrodin!" ;
              rdfs:comment """A keyword ability that creates a 2/2 red Rebel
 creature token and then attaches the Equipment with the ability to that
-token."""@en .
+token. See rule 702.163."""@en .
 :Forecast rdf:type owl:NamedIndividual ,
                    :KeywordAbility ;
           rdfs:label "Forecast" ;
           rdfs:comment """A keyword ability that allows an activated ability to
-be activated from a player’s hand."""@en .
+be activated from a player’s hand. See rule 702.57."""@en .
 :Foretell rdf:type owl:NamedIndividual ,
                    :KeywordAbility ;
           rdfs:label "Foretell" ;
           rdfs:comment """A keyword ability that lets a player exile cards from
-their hand and cast them for an alternative cost on future turns."""@en .
+their hand and cast them for an alternative cost on future turns.
+See rule 702.143."""@en .
 :Fortify rdf:type owl:NamedIndividual ,
                   :KeywordAbility ;
          rdfs:label "Fortify" ;
          rdfs:comment """A keyword ability that lets a player attach a
-Fortification to a land they control."""@en .
+Fortification to a land they control. See rule 702.67."""@en .
 :Freerunning rdf:type owl:NamedIndividual ,
                       :KeywordAbility ;
              rdfs:label "Freerunning" ;
              rdfs:comment """A keyword ability that allows certain spells to be
-cast for an alternative cost."""@en .
+cast for an alternative cost. See rule 702.173."""@en .
 :Frenzy rdf:type owl:NamedIndividual ,
                  :KeywordAbility ;
         rdfs:label "Frenzy" ;
         rdfs:comment """A keyword ability that can make a creature better in
-combat."""@en .
+combat. See rule 702.68."""@en .
 :Fuse rdf:type owl:NamedIndividual ,
                :KeywordAbility ;
       rdfs:label "Fuse" ;
       rdfs:comment """A keyword ability that allows a player to cast both halves
-of a split card."""@en .
+of a split card. See rule 702.102."""@en .
 :Gift rdf:type owl:NamedIndividual ,
                :KeywordAbility ;
       rdfs:label "Gift" ;
       rdfs:comment """A keyword ability that lets a spell’s caster choose an
 opponent to receive a benefit as the spell resolves or when the permanent with
-the ability enters."""@en .
+the ability enters. See rule 702.174."""@en .
 :Graft rdf:type owl:NamedIndividual ,
                 :KeywordAbility ;
        rdfs:label "Graft" ;
        rdfs:comment """A keyword ability that has a permanent enter the
 battlefield with +1/+1 counters on it and can move those counters to other
-creatures."""@en .
+creatures. See rule 702.58."""@en .
 :Gravestorm rdf:type owl:NamedIndividual ,
                      :KeywordAbility ;
             rdfs:label "Gravestorm" ;
             rdfs:comment """A keyword ability that creates copies of a
-spell."""@en .
+spell. See rule 702.69."""@en .
 :Harmonize rdf:type owl:NamedIndividual ,
                     :KeywordAbility ;
            rdfs:label "Harmonize" ;
            rdfs:comment """A keyword ability that lets a player cast a card from
 their graveyard for a specific cost and lets them tap a creature they control to
-reduce that cost."""@en .
+reduce that cost. See rule 702.180."""@en .
 :Haste rdf:type owl:NamedIndividual ,
                 :KeywordAbility ;
        rdfs:label "Haste" ;
        rdfs:comment """A keyword ability that lets a creature ignore the
-“summoning sickness” rule."""@en .
+“summoning sickness” rule. See rule 702.10."""@en .
 :Haunt rdf:type owl:NamedIndividual ,
                 :KeywordAbility ;
        rdfs:label "Haunt" ;
        rdfs:comment """A keyword ability that exiles cards. A card exiled this
-way “haunts” a creature targeted by the haunt ability."""@en .
+way “haunts” a creature targeted by the haunt ability. See rule 702.55."""@en .
 :Hexproof rdf:type owl:NamedIndividual ,
                    :KeywordAbility ;
           rdfs:label "Hexproof" ;
           rdfs:comment """A keyword ability that precludes a permanent or player
-from being targeted by an opponent."""@en .
+from being targeted by an opponent. See rule 702.11."""@en .
 :HiddenAgenda rdf:type owl:NamedIndividual ,
                        :KeywordAbility ;
               rdfs:label "Hidden Agenda" ;
               rdfs:comment """A keyword ability that allows a conspiracy card to
-be put into the command zone face down."""@en .
+be put into the command zone face down. See rule 702.106."""@en .
 :Hideaway rdf:type owl:NamedIndividual ,
                    :KeywordAbility ;
           rdfs:label "Hideaway" ;
           rdfs:comment """A keyword ability that lets a player store a secret
-card."""@en .
+card. See rule 702.75."""@en .
 :Horsemanship rdf:type owl:NamedIndividual ,
                        :KeywordAbility ;
               rdfs:label "Horsemanship" ;
               rdfs:comment """A keyword ability that restricts how a creature
-may be blocked."""@en .
+may be blocked. See rule 702.31."""@en .
 :Impending rdf:type owl:NamedIndividual ,
                     :KeywordAbility ;
            rdfs:label "Impending" ;
            rdfs:comment """An ability on some creatures that allows them to be
 cast for an alternative cost. If cast for its impending cost, it isn’t a
-creature for some period of time."""@en .
+creature for some period of time. See rule 702.176."""@en .
 :Improvise rdf:type owl:NamedIndividual ,
                     :KeywordAbility ;
            rdfs:label "Improvise" ;
            rdfs:comment """A keyword ability that lets you tap artifacts rather
-than pay mana to cast a spell."""@en .
+than pay mana to cast a spell. See rule 702.126."""@en .
 :Increment rdf:type owl:NamedIndividual ,
                     :KeywordAbility ;
            rdfs:label "Increment" ;
            rdfs:comment """A triggered ability that puts a +1/+1 counter on
 the creature whenever its controller casts a spell for more mana than the
-creature’s power or toughness."""@en .
+creature’s power or toughness. See rule 702.191."""@en .
 :Indestructible rdf:type owl:NamedIndividual ,
                          :KeywordAbility ;
                 rdfs:label "Indestructible" ;
                 rdfs:comment """A keyword ability that precludes a permanent
-from being destroyed."""@en .
+from being destroyed. See rule 702.12."""@en .
 :Infect rdf:type owl:NamedIndividual ,
                  :KeywordAbility ;
         rdfs:label "Infect" ;
         rdfs:comment """A keyword ability that affects how an object deals
-damage to creatures and players."""@en .
+damage to creatures and players. See rule 702.90."""@en .
 :InfinityKeyword rdf:type owl:NamedIndividual ,
                           :KeywordAbility ;
                  rdfs:label "∞ (Infinity)" ;
                  rdfs:comment """A keyword ability that grants the listed
-ability for as long as the permanent is harnessed."""@en .
+ability for as long as the permanent is harnessed. See rule 702.186."""@en .
 :Ingest rdf:type owl:NamedIndividual ,
                  :KeywordAbility ;
         rdfs:label "Ingest" ;
         rdfs:comment """A keyword ability that can exile the top card of a
-player’s library."""@en .
+player’s library. See rule 702.115."""@en .
 :Intimidate rdf:type owl:NamedIndividual ,
                      :KeywordAbility ;
             rdfs:label "Intimidate" ;
             rdfs:comment """A keyword ability that restricts how a creature may
-be blocked."""@en .
+be blocked. See rule 702.13."""@en .
 :JobSelect rdf:type owl:NamedIndividual ,
                     :KeywordAbility ;
            rdfs:label "Job Select" ;
            rdfs:comment """A keyword ability that creates a 1/1 colorless Hero
 creature token and then attaches the Equipment with the ability to that
-token."""@en .
+token. See rule 702.182."""@en .
 :JumpStart rdf:type owl:NamedIndividual ,
                     :KeywordAbility ;
            rdfs:label "Jump-Start" ;
            rdfs:comment """A keyword ability that lets a player cast a card from
-their graveyard by discarding a card."""@en .
+their graveyard by discarding a card. See rule 702.133."""@en .
 :Kicker rdf:type owl:NamedIndividual ,
                  :KeywordAbility ;
         rdfs:label "Kicker" ;
         rdfs:comment """A keyword ability that represents an optional additional
-cost."""@en .
+cost. See rule 702.33."""@en .
 :Landwalk rdf:type owl:NamedIndividual ,
                    :KeywordAbility ;
           rdfs:label "Landwalk" ;
           rdfs:comment """A generic term for a group of keyword abilities that
-restrict whether a creature may be blocked."""@en .
+restrict whether a creature may be blocked. See rule 702.14."""@en .
 :LevelUp rdf:type owl:NamedIndividual ,
                   :KeywordAbility ;
          rdfs:label "Level Up" ;
          rdfs:comment """A keyword ability that can put level counters on a
-creature."""@en .
+creature. See rule 702.87."""@en .
 :Lifelink rdf:type owl:NamedIndividual ,
                    :KeywordAbility ;
           rdfs:label "Lifelink" ;
           rdfs:comment """A keyword ability that causes a player to gain
-life."""@en .
+life. See rule 702.15."""@en .
 :LivingMetal rdf:type owl:NamedIndividual ,
                       :KeywordAbility ;
              rdfs:label "Living Metal" ;
              rdfs:comment """A keyword ability found on some Vehicles that turns
-them into a creature during your turn."""@en .
+them into a creature during your turn. See rule 702.161."""@en .
 :LivingWeapon rdf:type owl:NamedIndividual ,
                        :KeywordAbility ;
               rdfs:label "Living Weapon" ;
               rdfs:comment """A keyword ability that creates a 0/0 black
 Phyrexian Germ creature token and then attaches the Equipment with the ability
-to that token."""@en .
+to that token. See rule 702.92."""@en .
 :Madness rdf:type owl:NamedIndividual ,
                   :KeywordAbility ;
          rdfs:label "Madness" ;
          rdfs:comment """A keyword ability that lets a player cast a card they
-discard."""@en .
+discard. See rule 702.35."""@en .
 :MaxSpeed rdf:type owl:NamedIndividual ,
                    :KeywordAbility ;
           rdfs:label "Max Speed" ;
           rdfs:comment """A keyword ability that grants the listed ability as
-long as your speed is 4."""@en .
+long as your speed is 4. See rule 702.178."""@en .
 :Mayhem rdf:type owl:NamedIndividual ,
                  :KeywordAbility ;
         rdfs:label "Mayhem" ;
         rdfs:comment """A keyword ability that allows you to play cards you
-discarded this turn from your graveyard for an alternative cost."""@en .
+discarded this turn from your graveyard for an alternative cost.
+See rule 702.187."""@en .
 :Melee rdf:type owl:NamedIndividual ,
                 :KeywordAbility ;
        rdfs:label "Melee" ;
        rdfs:comment """A keyword ability that improves an attacking creature
-based on the number of opponents you attacked."""@en .
+based on the number of opponents you attacked. See rule 702.121."""@en .
 :Menace rdf:type owl:NamedIndividual ,
                  :KeywordAbility ;
         rdfs:label "Menace" ;
         rdfs:comment """An evasion ability that makes creatures unblockable by a
-single creature."""@en .
+single creature. See rule 702.111."""@en .
 :Mentor rdf:type owl:NamedIndividual ,
                  :KeywordAbility ;
         rdfs:label "Mentor" ;
         rdfs:comment """A keyword ability that lets your bigger creatures power
-up your smaller creatures when they attack together."""@en .
+up your smaller creatures when they attack together. See rule 702.134."""@en .
 :Miracle rdf:type owl:NamedIndividual ,
                   :KeywordAbility ;
          rdfs:label "Miracle" ;
          rdfs:comment """A keyword ability that lets you cast a spell for a
-reduced cost if it’s the first card you draw in a turn."""@en .
+reduced cost if it’s the first card you draw in a turn. See rule 702.94."""@en .
 :Mobilize rdf:type owl:NamedIndividual ,
                    :KeywordAbility ;
           rdfs:label "Mobilize" ;
           rdfs:comment """A keyword ability that creates a number of tapped and
 attacking red Warrior creature tokens that are sacrificed at the beginning of
-the next end step."""@en .
+the next end step. See rule 702.181."""@en .
 :Modular rdf:type owl:NamedIndividual ,
                   :KeywordAbility ;
          rdfs:label "Modular" ;
          rdfs:comment """A keyword ability that has a permanent enter the
 battlefield with +1/+1 counters on it and can move those counters to other
-artifact creatures."""@en .
+artifact creatures. See rule 702.43."""@en .
 :MoreThanMeetsTheEye rdf:type owl:NamedIndividual ,
                               :KeywordAbility ;
                      rdfs:label "More Than Meets the Eye" ;
                      rdfs:comment """A keyword ability that allows some cards to
-be cast converted."""@en .
+be cast converted. See rule 702.162."""@en .
 :Morph rdf:type owl:NamedIndividual ,
                 :KeywordAbility ;
        rdfs:label "Morph" ;
        rdfs:comment """A keyword ability that lets a card be cast face down as a
-2/2 creature."""@en .
+2/2 creature. See rule 702.37."""@en .
 :Mutate rdf:type owl:NamedIndividual ,
                  :KeywordAbility ;
         rdfs:label "Mutate" ;
         rdfs:comment """A keyword that lets a creature card be cast as a
-mutating creature spell."""@en .
+mutating creature spell. See rule 702.140."""@en .
 :Myriad rdf:type owl:NamedIndividual ,
                  :KeywordAbility ;
         rdfs:label "Myriad" ;
         rdfs:comment """Myriad is a triggered ability that effectively lets a
-creature attack in all possible directions."""@en .
+creature attack in all possible directions. See rule 702.116."""@en .
 :Nightbound rdf:type owl:NamedIndividual ,
                      :KeywordAbility ;
             rdfs:label "Nightbound" ;
             rdfs:comment """An ability found on the back faces of some
 double-faced cards. Cards with daybound and nightbound are face up when it’s day
-and face down when it’s night."""@en .
+and face down when it’s night. See rule 702.145."""@en .
 :Ninjutsu rdf:type owl:NamedIndividual ,
                    :KeywordAbility ;
           rdfs:label "Ninjutsu" ;
           rdfs:comment """A keyword ability that lets a creature suddenly enter
-combat."""@en .
+combat. See rule 702.49."""@en .
 :Offering rdf:type owl:NamedIndividual ,
                    :KeywordAbility ;
           rdfs:label "Offering" ;
           rdfs:comment """A keyword ability that modifies when you can cast a
-spell and how much mana you need to spend to do it."""@en .
+spell and how much mana you need to spend to do it. See rule 702.48."""@en .
 :Offspring rdf:type owl:NamedIndividual ,
                     :KeywordAbility ;
            rdfs:label "Offspring" ;
            rdfs:comment """A keyword ability that allows you to pay an
 additional cost as you cast a creature spell to create a 1/1 token that’s a copy
-of that permanent when it enters the battlefield."""@en .
+of that permanent when it enters the battlefield. See rule 702.175."""@en .
 :Outlast rdf:type owl:NamedIndividual ,
                   :KeywordAbility ;
          rdfs:label "Outlast" ;
          rdfs:comment """A keyword ability that allows a creature to grow larger
-over time."""@en .
+over time. See rule 702.107."""@en .
 :Overload rdf:type owl:NamedIndividual ,
                    :KeywordAbility ;
           rdfs:label "Overload" ;
           rdfs:comment """A keyword ability that allows a spell to affect either
-a single target or many objects."""@en .
+a single target or many objects. See rule 702.96."""@en .
 :Paradigm rdf:type owl:NamedIndividual ,
                    :KeywordAbility ;
           rdfs:label "Paradigm" ;
           rdfs:comment """A spell ability that, the first time a spell with
 this name resolves in a game, creates a castable copy of the spell in exile
-at the beginning of each of its controller’s precombat main phases."""@en .
+at the beginning of each of its controller’s precombat main phases.
+See rule 702.192."""@en .
 :Partner rdf:type owl:NamedIndividual ,
                   :KeywordAbility ;
          rdfs:label "Partner" ;
          rdfs:comment """A keyword ability that lets two legendary cards be your
-commander in the Commander variant rather than one."""@en .
+commander in the Commander variant rather than one. See rule 702.124."""@en .
 :Persist rdf:type owl:NamedIndividual ,
                   :KeywordAbility ;
          rdfs:label "Persist" ;
          rdfs:comment """A keyword ability that can return a creature from the
-graveyard to the battlefield."""@en .
+graveyard to the battlefield. See rule 702.79."""@en .
 :Phasing rdf:type owl:NamedIndividual ,
                   :KeywordAbility ;
          rdfs:label "Phasing" ;
          rdfs:comment """A keyword ability that causes a permanent to sometimes
-be treated as though it does not exist."""@en .
+be treated as though it does not exist. See rule 702.26."""@en .
 :Plainswalk rdf:type owl:NamedIndividual ,
                      :KeywordAbility ;
             rdfs:label "Plainswalk" ;
             rdfs:comment """A landwalk ability that makes a creature unblockable
 if the defending player controls a Plains. The snow-covered variant requires the
-defending player to control a snow-covered Plains."""@en .
+defending player to control a snow-covered Plains. See rule 702.14."""@en .
 :Plot rdf:type owl:NamedIndividual ,
                :KeywordAbility ;
       rdfs:label "Plot" ;
       rdfs:comment """A keyword ability that lets a player exile cards from
-their hand and cast them without paying their mana cost on future turns."""@en .
+their hand and cast them without paying their mana cost on future turns.
+See rule 702.170."""@en .
 :Poisonous rdf:type owl:NamedIndividual ,
                     :KeywordAbility ;
            rdfs:label "Poisonous" ;
            rdfs:comment """A keyword ability that causes a player to get poison
-counters."""@en .
+counters. See rule 702.70."""@en .
 :PowerUp rdf:type owl:NamedIndividual ,
                   :KeywordAbility ;
          rdfs:label "Power-up" ;
          rdfs:comment """A keyword that reduces the cost of the activated
 ability that follows it by the permanent’s mana cost if the permanent entered
-this turn, and limits that ability to one activation."""@en .
+this turn, and limits that ability to one activation. See rule 702.193."""@en .
 :Protection rdf:type owl:NamedIndividual ,
                      :KeywordAbility ;
             rdfs:label "Protection" ;
             rdfs:comment """A keyword ability that provides a range of benefits
-against objects with a specific quality."""@en .
+against objects with a specific quality. See rule 702.16."""@en .
 :Prototype rdf:type owl:NamedIndividual ,
                     :KeywordAbility ;
            rdfs:label "Prototype" ;
            rdfs:comment """An ability which allows a prototype card to be cast
-with a secondary set of characteristics."""@en .
+with a secondary set of characteristics. See rule 702.160."""@en .
 :Provoke rdf:type owl:NamedIndividual ,
                   :KeywordAbility ;
          rdfs:label "Provoke" ;
          rdfs:comment """A keyword ability that can force a creature to
-block."""@en .
+block. See rule 702.39."""@en .
 :Prowess rdf:type owl:NamedIndividual ,
                   :KeywordAbility ;
          rdfs:label "Prowess" ;
          rdfs:comment """A keyword ability that causes a creature to get +1/+1
-whenever its controller casts a noncreature spell."""@en .
+whenever its controller casts a noncreature spell. See rule 702.108."""@en .
 :Prowl rdf:type owl:NamedIndividual ,
                 :KeywordAbility ;
        rdfs:label "Prowl" ;
        rdfs:comment """A keyword ability that may allow a spell to be cast for
-an alternative cost."""@en .
+an alternative cost. See rule 702.76."""@en .
 :Rampage rdf:type owl:NamedIndividual ,
                   :KeywordAbility ;
          rdfs:label "Rampage" ;
          rdfs:comment """A keyword ability that can make a creature better in
-combat."""@en .
+combat. See rule 702.23."""@en .
 :Ravenous rdf:type owl:NamedIndividual ,
                    :KeywordAbility ;
           rdfs:label "Ravenous" ;
           rdfs:comment """A keyword ability found on some creature cards with
 {X} in their mana cost. The creature enters the battlefield with X +1/+1
-counters on it, and you draw a card if X is 5 or more."""@en .
+counters on it, and you draw a card if X is 5 or more. See rule 702.156."""@en .
 :Reach rdf:type owl:NamedIndividual ,
                 :KeywordAbility ;
        rdfs:label "Reach" ;
        rdfs:comment """A keyword ability that allows a creature to block an
-attacking creature with flying."""@en .
+attacking creature with flying. See rule 702.17."""@en .
 :ReadAhead rdf:type owl:NamedIndividual ,
                     :KeywordAbility ;
            rdfs:label "Read Ahead" ;
            rdfs:comment """A keyword ability found on some Sagas that allows
-their controller to choose which chapter it starts on."""@en .
+their controller to choose which chapter it starts on. See rule 702.155."""@en .
 :Rebound rdf:type owl:NamedIndividual ,
                   :KeywordAbility ;
          rdfs:label "Rebound" ;
          rdfs:comment """A keyword ability that allows an instant or sorcery
-spell to be cast a second time."""@en .
+spell to be cast a second time. See rule 702.88."""@en .
 :Reconfigure rdf:type owl:NamedIndividual ,
                       :KeywordAbility ;
              rdfs:label "Reconfigure" ;
              rdfs:comment """A keyword ability that allows an Equipment creature
 to temporarily stop being a creature and become attached to another
-creature."""@en .
+creature. See rule 702.151."""@en .
 :Recover rdf:type owl:NamedIndividual ,
                   :KeywordAbility ;
          rdfs:label "Recover" ;
          rdfs:comment """A keyword ability that lets a player return a card from
-their graveyard to their hand."""@en .
+their graveyard to their hand. See rule 702.59."""@en .
 :Reinforce rdf:type owl:NamedIndividual ,
                     :KeywordAbility ;
            rdfs:label "Reinforce" ;
            rdfs:comment """A keyword ability that lets a player put +1/+1
-counters on a creature."""@en .
+counters on a creature. See rule 702.77."""@en .
 :Renown rdf:type owl:NamedIndividual ,
                  :KeywordAbility ;
         rdfs:label "Renown" ;
         rdfs:comment """A keyword ability that makes a creature stronger after
-it deals combat damage to a player."""@en .
+it deals combat damage to a player. See rule 702.112."""@en .
 :Replicate rdf:type owl:NamedIndividual ,
                     :KeywordAbility ;
            rdfs:label "Replicate" ;
-           rdfs:comment "A keyword ability that creates copies of a spell."@en .
+           rdfs:comment """A keyword ability that creates copies of a spell.
+See rule 702.56."""@en .
 :Retrace rdf:type owl:NamedIndividual ,
                   :KeywordAbility ;
          rdfs:label "Retrace" ;
          rdfs:comment """A keyword ability that lets a player cast a card from
-their graveyard."""@en .
+their graveyard. See rule 702.81."""@en .
 :Riot rdf:type owl:NamedIndividual ,
                :KeywordAbility ;
       rdfs:label "Riot" ;
       rdfs:comment """A keyword ability that lets a player choose whether
 certain creatures enter the battlefield with haste or with a +1/+1
-counter."""@en .
+counter. See rule 702.136."""@en .
 :Ripple rdf:type owl:NamedIndividual ,
                  :KeywordAbility ;
         rdfs:label "Ripple" ;
         rdfs:comment """A keyword ability that may let a player cast extra cards
-from their library for no cost."""@en .
+from their library for no cost. See rule 702.60."""@en .
 :Saddle rdf:type owl:NamedIndividual ,
                  :KeywordAbility ;
         rdfs:label "Saddle" ;
         rdfs:comment """A keyword ability that lets you tap creatures to make
-another creature “saddled” until end of turn."""@en .
+another creature “saddled” until end of turn. See rule 702.171."""@en .
 :Scavenge rdf:type owl:NamedIndividual ,
                    :KeywordAbility ;
           rdfs:label "Scavenge" ;
           rdfs:comment """A keyword ability that allows you to exile a creature
-card from your graveyard to put +1/+1 counters on a creature."""@en .
+card from your graveyard to put +1/+1 counters on a creature.
+See rule 702.97."""@en .
 :Shadow rdf:type owl:NamedIndividual ,
                  :KeywordAbility ;
         rdfs:label "Shadow" ;
         rdfs:comment """A keyword ability that restricts how a creature may be
-blocked and which creatures it can block."""@en .
+blocked and which creatures it can block. See rule 702.28."""@en .
 :Shroud rdf:type owl:NamedIndividual ,
                  :KeywordAbility ;
         rdfs:label "Shroud" ;
         rdfs:comment """A keyword ability that precludes a permanent or player
-from being targeted."""@en .
+from being targeted. See rule 702.18."""@en .
 :Skulk rdf:type owl:NamedIndividual ,
                 :KeywordAbility ;
        rdfs:label "Skulk" ;
        rdfs:comment """A keyword ability that restricts how a creature may be
-blocked."""@en .
+blocked. See rule 702.118."""@en .
 :Sneak rdf:type owl:NamedIndividual ,
                 :KeywordAbility ;
        rdfs:label "Sneak" ;
        rdfs:comment """A keyword ability that allows a spell to be cast for an
 alternative cost, including returning an unblocked attacking creature to its
-owner’s hand. Creatures cast this way enter tapped and attacking."""@en .
+owner’s hand. Creatures cast this way enter tapped and attacking.
+See rule 702.190."""@en .
 :Solved rdf:type owl:NamedIndividual ,
                  :KeywordAbility ;
         rdfs:label "Solved" ;
         rdfs:comment """A keyword ability of Case cards that affects the game
-only if the Case has the solved designation."""@en .
+only if the Case has the solved designation. See rule 702.169."""@en .
 :Soulbond rdf:type owl:NamedIndividual ,
                    :KeywordAbility ;
           rdfs:label "Soulbond" ;
           rdfs:comment """A keyword ability that makes creatures better by
-pairing them together."""@en .
+pairing them together. See rule 702.95."""@en .
 :Soulshift rdf:type owl:NamedIndividual ,
                     :KeywordAbility ;
            rdfs:label "Soulshift" ;
            rdfs:comment """A keyword ability that lets a player return a card
-from their graveyard to their hand."""@en .
+from their graveyard to their hand. See rule 702.46."""@en .
 :SpaceSculptor rdf:type owl:NamedIndividual ,
                         :KeywordAbility ;
                rdfs:label "Space Sculptor" ;
                rdfs:comment """A keyword ability that splits creatures on the
-battlefield into sectors."""@en .
+battlefield into sectors. See rule 702.158."""@en .
 :Spectacle rdf:type owl:NamedIndividual ,
                     :KeywordAbility ;
            rdfs:label "Spectacle" ;
            rdfs:comment """A keyword ability that allows certain spells to be
-cast for an alternative cost if an opponent has lost life."""@en .
+cast for an alternative cost if an opponent has lost life.
+See rule 702.137."""@en .
 :Splice rdf:type owl:NamedIndividual ,
                  :KeywordAbility ;
         rdfs:label "Splice" ;
         rdfs:comment """A keyword ability that lets a player add a card’s rules
-text onto another spell."""@en .
+text onto another spell. See rule 702.47."""@en .
 :SplitSecond rdf:type owl:NamedIndividual ,
                       :KeywordAbility ;
              rdfs:label "Split Second" ;
              rdfs:comment """A keyword ability that makes it nearly impossible
-for a player to respond to a spell."""@en .
+for a player to respond to a spell. See rule 702.61."""@en .
 :Spree rdf:type owl:NamedIndividual ,
                 :KeywordAbility ;
        rdfs:label "Spree" ;
        rdfs:comment """An ability found on some modal spells that allows you to
 choose one or more modes and requires you to pay additional costs for those
-modes."""@en .
+modes. See rule 702.172."""@en .
 :Squad rdf:type owl:NamedIndividual ,
                 :KeywordAbility ;
        rdfs:label "Squad" ;
        rdfs:comment """A keyword ability that creates copies of a creature when
-it enters the battlefield."""@en .
+it enters the battlefield. See rule 702.157."""@en .
 :StartYourEngines rdf:type owl:NamedIndividual ,
                            :KeywordAbility ;
                   rdfs:label "Start Your Engines!" ;
                   rdfs:comment """A keyword ability that gives a player a speed
 of 1 if they have no speed. Once a player has speed, their speed increases once
-on each of their turns when an opponent loses life."""@en .
+on each of their turns when an opponent loses life. See rule 702.179."""@en .
 :Station rdf:type owl:NamedIndividual ,
                   :KeywordAbility ;
          rdfs:label "Station" ;
          rdfs:comment """A keyword ability that lets you tap creatures to add
-charge counters to station cards."""@en .
+charge counters to station cards. See rule 702.184."""@en .
 :Storied rdf:type owl:NamedIndividual ,
                   :KeywordAbility ;
          rdfs:label "Storied" ;
          rdfs:comment """A static ability that gives its controller an
 enduring story for the rest of the game once they control three or more
-permanents that are artifacts, Sagas, and/or legendary."""@en .
+permanents that are artifacts, Sagas, and/or legendary.
+See rule 702.195."""@en .
 :Storm rdf:type owl:NamedIndividual ,
                 :KeywordAbility ;
        rdfs:label "Storm" ;
-       rdfs:comment "A keyword ability that creates copies of a spell."@en .
+       rdfs:comment """A keyword ability that creates copies of a spell.
+See rule 702.40."""@en .
 :Sunburst rdf:type owl:NamedIndividual ,
                    :KeywordAbility ;
           rdfs:label "Sunburst" ;
           rdfs:comment """A keyword ability that can have a permanent enter the
-battlefield with +1/+1 counters or charge counters on it."""@en .
+battlefield with +1/+1 counters or charge counters on it.
+See rule 702.44."""@en .
 :Surge rdf:type owl:NamedIndividual ,
                 :KeywordAbility ;
        rdfs:label "Surge" ;
        rdfs:comment """A keyword ability that provides an alternative cost to
 cast a card if you or one of your teammates has cast another spell in the same
-turn."""@en .
+turn. See rule 702.117."""@en .
 :Suspend rdf:type owl:NamedIndividual ,
                   :KeywordAbility ;
          rdfs:label "Suspend" ;
          rdfs:comment """A keyword ability that provides an alternative way to
-play a card."""@en .
+play a card. See rule 702.62."""@en .
 :Teamwork rdf:type owl:NamedIndividual ,
                    :KeywordAbility ;
           rdfs:label "Teamwork" ;
           rdfs:comment """A static ability that functions while the spell is
 on the stack: as an additional cost, its caster may tap any number of
-creatures they control with total power N or more."""@en .
+creatures they control with total power N or more. See rule 702.194."""@en .
 :Tiered rdf:type owl:NamedIndividual ,
                  :KeywordAbility ;
         rdfs:label "Tiered" ;
         rdfs:comment """A keyword ability found on some modal spells that
-requires you to pay an additional cost for the mode you choose."""@en .
+requires you to pay an additional cost for the mode you choose.
+See rule 702.183."""@en .
 :Toxic rdf:type owl:NamedIndividual ,
                 :KeywordAbility ;
        rdfs:label "Toxic" ;
        rdfs:comment """A keyword ability that causes a player to get poison
-counters due to combat damage from creatures with the ability."""@en .
+counters due to combat damage from creatures with the ability.
+See rule 702.164."""@en .
 :Training rdf:type owl:NamedIndividual ,
                    :KeywordAbility ;
           rdfs:label "Training" ;
           rdfs:comment """A keyword ability that means “Whenever this creature
 and at least one other creature with power greater than this creature’s power
-attack, put a +1/+1 counter on this creature.”"""@en .
+attack, put a +1/+1 counter on this creature.” See rule 702.149."""@en .
 :Trample rdf:type owl:NamedIndividual ,
                   :KeywordAbility ;
          rdfs:label "Trample" ;
          rdfs:comment """A keyword ability that modifies how a creature assigns
-combat damage."""@en .
+combat damage. See rule 702.19."""@en .
 :Transfigure rdf:type owl:NamedIndividual ,
                       :KeywordAbility ;
              rdfs:label "Transfigure" ;
              rdfs:comment """A keyword ability that lets a player search their
-library for a replacement creature card."""@en .
+library for a replacement creature card. See rule 702.71."""@en .
 :Transmute rdf:type owl:NamedIndividual ,
                     :KeywordAbility ;
            rdfs:label "Transmute" ;
            rdfs:comment """A keyword ability that lets a player search their
-library for a replacement card."""@en .
+library for a replacement card. See rule 702.53."""@en .
 :Tribute rdf:type owl:NamedIndividual ,
                   :KeywordAbility ;
          rdfs:label "Tribute" ;
          rdfs:comment """A keyword ability that allows an opponent to choose
 between a creature entering the battlefield with +1/+1 counters or an additional
-ability."""@en .
+ability. See rule 702.104."""@en .
 :UmbraArmor rdf:type owl:NamedIndividual ,
                      :KeywordAbility ;
             rdfs:label "Umbra Armor" ;
             rdfs:comment """A keyword ability that allows an Aura to protect the
-permanent it’s enchanting."""@en .
+permanent it’s enchanting. See rule 702.89."""@en .
 :Undaunted rdf:type owl:NamedIndividual ,
                     :KeywordAbility ;
            rdfs:label "Undaunted" ;
            rdfs:comment """A keyword ability that reduces the cost of a spell
-based on the number of opponents you have."""@en .
+based on the number of opponents you have. See rule 702.125."""@en .
 :Undying rdf:type owl:NamedIndividual ,
                   :KeywordAbility ;
          rdfs:label "Undying" ;
          rdfs:comment """A keyword ability that can return a creature from the
-graveyard to the battlefield."""@en .
+graveyard to the battlefield. See rule 702.93."""@en .
 :Unearth rdf:type owl:NamedIndividual ,
                   :KeywordAbility ;
          rdfs:label "Unearth" ;
          rdfs:comment """A keyword ability that lets a player return a creature
-card from their graveyard to the battlefield."""@en .
+card from their graveyard to the battlefield. See rule 702.84."""@en .
 :Unleash rdf:type owl:NamedIndividual ,
                   :KeywordAbility ;
          rdfs:label "Unleash" ;
          rdfs:comment """A keyword ability that allows a creature to enter the
 battlefield with a +1/+1 counter on it and stops it from blocking if it has a
-+1/+1 counter on it."""@en .
++1/+1 counter on it. See rule 702.98."""@en .
 :Vanishing rdf:type owl:NamedIndividual ,
                     :KeywordAbility ;
            rdfs:label "Vanishing" ;
            rdfs:comment """A keyword ability that limits how long a permanent
-remains on the battlefield."""@en .
+remains on the battlefield. See rule 702.63."""@en .
 :Vigilance rdf:type owl:NamedIndividual ,
                     :KeywordAbility ;
            rdfs:label "Vigilance" ;
            rdfs:comment """A keyword ability that lets a creature attack without
-tapping."""@en .
+tapping. See rule 702.20."""@en .
 :Visit rdf:type owl:NamedIndividual ,
                 :KeywordAbility ;
        rdfs:label "Visit" ;
        rdfs:comment """A keyword ability found on Attraction cards. It provides
 an effect whenever you roll to visit your attractions and get certain
-results."""@en .
+results. See rule 702.159."""@en .
 :Ward rdf:type owl:NamedIndividual ,
                :KeywordAbility ;
       rdfs:label "Ward" ;
       rdfs:comment """A triggered ability that can counter spells or abilities
-that target the permanent with ward."""@en .
+that target the permanent with ward. See rule 702.21."""@en .
 :Warp rdf:type owl:NamedIndividual ,
                :KeywordAbility ;
       rdfs:label "Warp" ;
       rdfs:comment """A keyword ability found on permanent cards that allows
-them to be cast for an alternative cost."""@en .
+them to be cast for an alternative cost. See rule 702.185."""@en .
 :WebSlinging rdf:type owl:NamedIndividual ,
                       :KeywordAbility ;
              rdfs:label "Web-slinging" ;
              rdfs:comment """A keyword ability that allows spells to be cast for
 an alternative cost by returning a tapped creature you control to its owner’s
-hand."""@en .
+hand. See rule 702.188."""@en .
 :Wither rdf:type owl:NamedIndividual ,
                  :KeywordAbility ;
         rdfs:label "Wither" ;
         rdfs:comment """A keyword ability that affects how an object deals
-damage to a creature."""@en .
+damage to a creature. See rule 702.80."""@en .
+
+# --- Ability Words ---
+:Adamant rdf:type owl:NamedIndividual ,
+                  :AbilityWord ;
+         rdfs:label "Adamant" ;
+         rdfs:comment """An ability word for abilities that check whether at
+least three mana of the same color was spent to cast the spell. See rule
+207.2c."""@en .
+:Addendum rdf:type owl:NamedIndividual ,
+                   :AbilityWord ;
+          rdfs:label "Addendum" ;
+          rdfs:comment """An ability word for abilities that add an effect if
+the spell is cast during your main phase. See rule 207.2c."""@en .
+:Alliance rdf:type owl:NamedIndividual ,
+                   :AbilityWord ;
+          rdfs:label "Alliance" ;
+          rdfs:comment """An ability word for abilities that trigger whenever
+another creature you control enters. See rule 207.2c."""@en .
+:Battalion rdf:type owl:NamedIndividual ,
+                    :AbilityWord ;
+           rdfs:label "Battalion" ;
+           rdfs:comment """An ability word for abilities that trigger whenever
+the creature and at least two other creatures attack. See rule 207.2c."""@en .
+:Bloodrush rdf:type owl:NamedIndividual ,
+                    :AbilityWord ;
+           rdfs:label "Bloodrush" ;
+           rdfs:comment """An ability word for abilities that are activated from
+your hand by discarding the card to give an attacking creature a bonus. See rule
+207.2c."""@en .
+:Celebration rdf:type owl:NamedIndividual ,
+                      :AbilityWord ;
+             rdfs:label "Celebration" ;
+             rdfs:comment """An ability word for abilities that apply if two or
+more nonland permanents entered the battlefield under your control this turn.
+See rule 207.2c."""@en .
+:Channel rdf:type owl:NamedIndividual ,
+                  :AbilityWord ;
+         rdfs:label "Channel" ;
+         rdfs:comment """An ability word for abilities that are activated from
+your hand by discarding the card. See rule 207.2c."""@en .
+:Chroma rdf:type owl:NamedIndividual ,
+                 :AbilityWord ;
+        rdfs:label "Chroma" ;
+        rdfs:comment """An ability word for abilities that count the mana
+symbols of one color in the mana costs of certain cards or permanents. See rule
+207.2c."""@en .
+:Cohort rdf:type owl:NamedIndividual ,
+                 :AbilityWord ;
+        rdfs:label "Cohort" ;
+        rdfs:comment """An ability word for abilities that are activated by
+tapping the creature and an untapped Ally you control. See rule 207.2c."""@en .
+:Constellation rdf:type owl:NamedIndividual ,
+                        :AbilityWord ;
+               rdfs:label "Constellation" ;
+               rdfs:comment """An ability word for abilities that trigger
+whenever an enchantment you control enters. See rule 207.2c."""@en .
+:Converge rdf:type owl:NamedIndividual ,
+                   :AbilityWord ;
+          rdfs:label "Converge" ;
+          rdfs:comment """An ability word for abilities that count the colors of
+mana spent to cast the spell. See rule 207.2c."""@en .
+:CouncilsDilemma rdf:type owl:NamedIndividual ,
+                          :AbilityWord ;
+                 rdfs:label "Council’s dilemma" ;
+                 rdfs:comment """An ability word for abilities that have each
+player vote for one of two options, with an effect for each vote. See rule
+207.2c."""@en .
+:Coven rdf:type owl:NamedIndividual ,
+                :AbilityWord ;
+       rdfs:label "Coven" ;
+       rdfs:comment """An ability word for abilities that apply if you control
+three or more creatures with different powers. See rule 207.2c."""@en .
+:Delirium rdf:type owl:NamedIndividual ,
+                   :AbilityWord ;
+          rdfs:label "Delirium" ;
+          rdfs:comment """An ability word for abilities that apply if there are
+four or more card types among cards in your graveyard. See rule 207.2c."""@en .
+:Descend4 rdf:type owl:NamedIndividual ,
+                   :AbilityWord ;
+          rdfs:label "Descend 4" ;
+          rdfs:comment """An ability word for abilities that apply if there are
+four or more permanent cards in your graveyard. See rule 207.2c."""@en .
+:Descend8 rdf:type owl:NamedIndividual ,
+                   :AbilityWord ;
+          rdfs:label "Descend 8" ;
+          rdfs:comment """An ability word for abilities that apply if there are
+eight or more permanent cards in your graveyard. See rule 207.2c."""@en .
+:Disappear rdf:type owl:NamedIndividual ,
+                    :AbilityWord ;
+           rdfs:label "Disappear" ;
+           rdfs:comment """An ability word for abilities that apply if a
+permanent left the battlefield under your control this turn. See rule
+207.2c."""@en .
+:Domain rdf:type owl:NamedIndividual ,
+                 :AbilityWord ;
+        rdfs:label "Domain" ;
+        rdfs:comment """An ability word for abilities that count the basic land
+types among lands you control. See rule 207.2c."""@en .
+:Eerie rdf:type owl:NamedIndividual ,
+                :AbilityWord ;
+       rdfs:label "Eerie" ;
+       rdfs:comment """An ability word for abilities that trigger whenever an
+enchantment you control enters and whenever you fully unlock a Room. See rule
+207.2c."""@en .
+:Eminence rdf:type owl:NamedIndividual ,
+                   :AbilityWord ;
+          rdfs:label "Eminence" ;
+          rdfs:comment """An ability word for abilities that function while your
+commander is in the command zone or on the battlefield. See rule 207.2c."""@en .
+:Enrage rdf:type owl:NamedIndividual ,
+                 :AbilityWord ;
+        rdfs:label "Enrage" ;
+        rdfs:comment """An ability word for abilities that trigger whenever the
+creature is dealt damage. See rule 207.2c."""@en .
+:FatefulHour rdf:type owl:NamedIndividual ,
+                      :AbilityWord ;
+             rdfs:label "Fateful hour" ;
+             rdfs:comment """An ability word for abilities that apply if you
+have 5 or less life. See rule 207.2c."""@en .
+:FathomlessDescent rdf:type owl:NamedIndividual ,
+                            :AbilityWord ;
+                   rdfs:label "Fathomless descent" ;
+                   rdfs:comment """An ability word for abilities that count the
+permanent cards in your graveyard. See rule 207.2c."""@en .
+:Ferocious rdf:type owl:NamedIndividual ,
+                    :AbilityWord ;
+           rdfs:label "Ferocious" ;
+           rdfs:comment """An ability word for abilities that apply if you
+control a creature with power 4 or greater. See rule 207.2c."""@en .
+:Flurry rdf:type owl:NamedIndividual ,
+                 :AbilityWord ;
+        rdfs:label "Flurry" ;
+        rdfs:comment """An ability word for abilities that trigger whenever you
+cast your second spell each turn. See rule 207.2c."""@en .
+:Formidable rdf:type owl:NamedIndividual ,
+                     :AbilityWord ;
+            rdfs:label "Formidable" ;
+            rdfs:comment """An ability word for abilities that apply if
+creatures you control have total power 8 or greater. See rule 207.2c."""@en .
+:Grandeur rdf:type owl:NamedIndividual ,
+                   :AbilityWord ;
+          rdfs:label "Grandeur" ;
+          rdfs:comment """An ability word for abilities that are activated by
+discarding another card with the same name. See rule 207.2c."""@en .
+:Hellbent rdf:type owl:NamedIndividual ,
+                   :AbilityWord ;
+          rdfs:label "Hellbent" ;
+          rdfs:comment """An ability word for abilities that apply if you have
+no cards in hand. See rule 207.2c."""@en .
+:Heroic rdf:type owl:NamedIndividual ,
+                 :AbilityWord ;
+        rdfs:label "Heroic" ;
+        rdfs:comment """An ability word for abilities that trigger whenever you
+cast a spell that targets the creature. See rule 207.2c."""@en .
+:Imprint rdf:type owl:NamedIndividual ,
+                  :AbilityWord ;
+         rdfs:label "Imprint" ;
+         rdfs:comment """An ability word for abilities that exile a card so that
+the permanent’s other abilities can refer to it. See rule 207.2c."""@en .
+:Infusion rdf:type owl:NamedIndividual ,
+                   :AbilityWord ;
+          rdfs:label "Infusion" ;
+          rdfs:comment """An ability word for abilities that apply if you gained
+life this turn. See rule 207.2c."""@en .
+:Inspired rdf:type owl:NamedIndividual ,
+                   :AbilityWord ;
+          rdfs:label "Inspired" ;
+          rdfs:comment """An ability word for abilities that trigger whenever
+the creature becomes untapped. See rule 207.2c."""@en .
+:JoinForces rdf:type owl:NamedIndividual ,
+                     :AbilityWord ;
+            rdfs:label "Join forces" ;
+            rdfs:comment """An ability word for abilities that let each player
+pay any amount of mana toward a shared effect. See rule 207.2c."""@en .
+:Kinship rdf:type owl:NamedIndividual ,
+                  :AbilityWord ;
+         rdfs:label "Kinship" ;
+         rdfs:comment """An ability word for abilities that trigger at the
+beginning of your upkeep and reward revealing a top card of your library that
+shares a creature type with the creature. See rule 207.2c."""@en .
+:Landfall rdf:type owl:NamedIndividual ,
+                   :AbilityWord ;
+          rdfs:label "Landfall" ;
+          rdfs:comment """An ability word for abilities that trigger whenever a
+land you control enters. See rule 207.2c."""@en .
+:Lieutenant rdf:type owl:NamedIndividual ,
+                     :AbilityWord ;
+            rdfs:label "Lieutenant" ;
+            rdfs:comment """An ability word for abilities that apply if you
+control your commander. See rule 207.2c."""@en .
+:Magecraft rdf:type owl:NamedIndividual ,
+                    :AbilityWord ;
+           rdfs:label "Magecraft" ;
+           rdfs:comment """An ability word for abilities that trigger whenever
+you cast or copy an instant or sorcery spell. See rule 207.2c."""@en .
+:Metalcraft rdf:type owl:NamedIndividual ,
+                     :AbilityWord ;
+            rdfs:label "Metalcraft" ;
+            rdfs:comment """An ability word for abilities that apply if you
+control three or more artifacts. See rule 207.2c."""@en .
+:Morbid rdf:type owl:NamedIndividual ,
+                 :AbilityWord ;
+        rdfs:label "Morbid" ;
+        rdfs:comment """An ability word for abilities that apply if a creature
+died this turn. See rule 207.2c."""@en .
+:Opus rdf:type owl:NamedIndividual ,
+               :AbilityWord ;
+      rdfs:label "Opus" ;
+      rdfs:comment """An ability word for abilities that trigger whenever you
+cast an instant or sorcery spell and do more if five or more mana was spent to
+cast it. See rule 207.2c."""@en .
+:PackTactics rdf:type owl:NamedIndividual ,
+                      :AbilityWord ;
+             rdfs:label "Pack tactics" ;
+             rdfs:comment """An ability word for abilities that trigger whenever
+the creature attacks if you attacked with creatures with total power 6 or
+greater. See rule 207.2c."""@en .
+:Paradox rdf:type owl:NamedIndividual ,
+                  :AbilityWord ;
+         rdfs:label "Paradox" ;
+         rdfs:comment """An ability word for abilities that trigger whenever you
+cast a spell from anywhere other than your hand. See rule 207.2c."""@en .
+:Parley rdf:type owl:NamedIndividual ,
+                 :AbilityWord ;
+        rdfs:label "Parley" ;
+        rdfs:comment """An ability word for abilities that have each player
+reveal the top card of their library and count the nonland cards revealed. See
+rule 207.2c."""@en .
+:Radiance rdf:type owl:NamedIndividual ,
+                   :AbilityWord ;
+          rdfs:label "Radiance" ;
+          rdfs:comment """An ability word for abilities that affect a target and
+each other permanent that shares a color with it. See rule 207.2c."""@en .
+:Raid rdf:type owl:NamedIndividual ,
+               :AbilityWord ;
+      rdfs:label "Raid" ;
+      rdfs:comment """An ability word for abilities that apply if you attacked
+this turn. See rule 207.2c."""@en .
+:Rally rdf:type owl:NamedIndividual ,
+                :AbilityWord ;
+       rdfs:label "Rally" ;
+       rdfs:comment """An ability word for abilities that trigger whenever the
+creature or another Ally you control enters. See rule 207.2c."""@en .
+:Renew rdf:type owl:NamedIndividual ,
+                :AbilityWord ;
+       rdfs:label "Renew" ;
+       rdfs:comment """An ability word for abilities that are activated from
+your graveyard by exiling the card. See rule 207.2c."""@en .
+:Repartee rdf:type owl:NamedIndividual ,
+                   :AbilityWord ;
+          rdfs:label "Repartee" ;
+          rdfs:comment """An ability word for abilities that trigger whenever
+you cast an instant or sorcery spell that targets a creature. See rule
+207.2c."""@en .
+:Revolt rdf:type owl:NamedIndividual ,
+                 :AbilityWord ;
+        rdfs:label "Revolt" ;
+        rdfs:comment """An ability word for abilities that apply if a permanent
+you controlled left the battlefield this turn. See rule 207.2c."""@en .
+:SecretCouncil rdf:type owl:NamedIndividual ,
+                        :AbilityWord ;
+               rdfs:label "Secret council" ;
+               rdfs:comment """An ability word for abilities that have each
+player vote secretly, with an effect determined by the votes. See rule
+207.2c."""@en .
+:SpellMastery rdf:type owl:NamedIndividual ,
+                       :AbilityWord ;
+              rdfs:label "Spell mastery" ;
+              rdfs:comment """An ability word for abilities that apply if there
+are two or more instant and/or sorcery cards in your graveyard. See rule
+207.2c."""@en .
+:Strive rdf:type owl:NamedIndividual ,
+                 :AbilityWord ;
+        rdfs:label "Strive" ;
+        rdfs:comment """An ability word for abilities that make the spell cost
+more to cast for each target beyond the first. See rule 207.2c."""@en .
+:Survival rdf:type owl:NamedIndividual ,
+                   :AbilityWord ;
+          rdfs:label "Survival" ;
+          rdfs:comment """An ability word for abilities that trigger at the
+beginning of your second main phase if the creature is tapped. See rule
+207.2c."""@en .
+:Sweep rdf:type owl:NamedIndividual ,
+                :AbilityWord ;
+       rdfs:label "Sweep" ;
+       rdfs:comment """An ability word for abilities that return any number of
+lands of a basic land type you control to their owner’s hand for an effect that
+scales with that number. See rule 207.2c."""@en .
+:TemptingOffer rdf:type owl:NamedIndividual ,
+                        :AbilityWord ;
+               rdfs:label "Tempting offer" ;
+               rdfs:comment """An ability word for abilities that offer each
+opponent the same effect and repeat it for you once for each opponent who
+accepts. See rule 207.2c."""@en .
+:Threshold rdf:type owl:NamedIndividual ,
+                    :AbilityWord ;
+           rdfs:label "Threshold" ;
+           rdfs:comment """An ability word for abilities that apply if there are
+seven or more cards in your graveyard. See rule 207.2c."""@en .
+:Undergrowth rdf:type owl:NamedIndividual ,
+                      :AbilityWord ;
+             rdfs:label "Undergrowth" ;
+             rdfs:comment """An ability word for abilities that count the
+creature cards in your graveyard. See rule 207.2c."""@en .
+:Valiant rdf:type owl:NamedIndividual ,
+                  :AbilityWord ;
+         rdfs:label "Valiant" ;
+         rdfs:comment """An ability word for abilities that trigger whenever the
+creature becomes the target of a spell or ability you control for the first time
+each turn. See rule 207.2c."""@en .
+:Vivid rdf:type owl:NamedIndividual ,
+                :AbilityWord ;
+       rdfs:label "Vivid" ;
+       rdfs:comment """An ability word. Like every ability word, it ties
+together abilities with similar functionality but has no rules meaning of its
+own. See rule 207.2c."""@en .
+:Void rdf:type owl:NamedIndividual ,
+               :AbilityWord ;
+      rdfs:label "Void" ;
+      rdfs:comment """An ability word for abilities that apply if a nonland
+permanent left the battlefield this turn or a spell was warped this turn. See
+rule 207.2c."""@en .
+:WillOfTheCouncil rdf:type owl:NamedIndividual ,
+                           :AbilityWord ;
+                  rdfs:label "Will of the council" ;
+                  rdfs:comment """An ability word for abilities that have each
+player vote, with an effect determined by the votes. See rule 207.2c."""@en .
 
 # --- Sets (ordered by release date) ---
 :RealityFracture rdf:type owl:NamedIndividual ,

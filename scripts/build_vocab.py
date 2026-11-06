@@ -7,8 +7,9 @@ generate:
   1. /tmp/onto_vocab.json     - controlled vocabulary from
                                 MagicCardsOntology.ttl: individuals per
                                 vocabulary class (SubType, KeywordAbility,
-                                KeywordAction, Keyword, SuperType, CardType,
-                                including subclass closure), rdfs:label per
+                                KeywordAction, Keyword, AbilityWord,
+                                SuperType, CardType, including subclass
+                                closure), rdfs:label per
                                 individual (_labels) and the setCode ->
                                 Set-individual map (_setcodes).
   2. /tmp/existing_cards.json - card individuals defined outside sets/*.ttl
@@ -42,6 +43,7 @@ VOCAB_CLASSES = (
     "KeywordAbility",
     "KeywordAction",
     "Keyword",
+    "AbilityWord",
     "SuperType",
     "CardType",
 )

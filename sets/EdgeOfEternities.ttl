@@ -2266,7 +2266,7 @@ Station (Tap another creature you control: Put charge counters equal to its powe
     :toughness "3" ;
     :toughnessValue "3"^^xsd:integer ;
     :hasKeywordAbility :Ward ;
-    # Note: keyword "Void" not defined in MagicCardsOntology
+    :hasAbilityWord :Void ;
     :printedText """Ward—Discard a card at random.
 Void — Whenever Alpharael attacks, if a nonland permanent left the battlefield this turn or a spell was warped this turn, defending player loses half their life, rounded up."""@en ;
     :oracleText """Ward—Discard a card at random.
@@ -2453,7 +2453,7 @@ Target creature gets +2/+0 and gains indestructible until end of turn. (Damage a
     :cardNumber "94"^^xsd:integer ;
     :artist "Josh Hass" ;
     :hasLanguage :English ;
-    # Note: keyword "Void" not defined in MagicCardsOntology
+    :hasAbilityWord :Void ;
     :printedText """You draw two cards and lose 2 life.
 Void — If a nonland permanent left the battlefield this turn or a spell was warped this turn, instead you draw two cards and each opponent loses 2 life."""@en ;
     :oracleText """You draw two cards and lose 2 life.
@@ -2837,7 +2837,7 @@ When this creature dies, create a tapped 2/2 colorless Robot artifact creature t
     :artist "Viko Menezes" ;
     :hasLanguage :English ;
     :hasKeywordAbility :Equip ;
-    # Note: keyword "Void" not defined in MagicCardsOntology
+    :hasAbilityWord :Void ;
     :printedText """Equipped creature gets +3/+1.
 Void — At the beginning of your end step, if a nonland permanent left the battlefield this turn or a spell was warped this turn, attach this Equipment to target creature you control.
 Equip {4} ({4}: Attach to target creature you control. Equip only as a sorcery.)"""@en ;
@@ -2885,7 +2885,7 @@ Equip {4} ({4}: Attach to target creature you control. Equip only as a sorcery.)
     :toughness "2" ;
     :toughnessValue "2"^^xsd:integer ;
     :hasKeywordAbility :Menace ;
-    # Note: keyword "Void" not defined in MagicCardsOntology
+    :hasAbilityWord :Void ;
     :printedText """Menace (This creature can't be blocked except by two or more creatures.)
 Void — At the beginning of your end step, if a nonland permanent left the battlefield this turn or a spell was warped this turn, put a +1/+1 counter on this creature."""@en ;
     :oracleText """Menace (This creature can't be blocked except by two or more creatures.)
@@ -3256,7 +3256,7 @@ Station (Tap another creature you control: Put charge counters equal to its powe
     :powerValue "5"^^xsd:integer ;
     :toughness "4" ;
     :toughnessValue "4"^^xsd:integer ;
-    # Note: keyword "Void" not defined in MagicCardsOntology
+    :hasAbilityWord :Void ;
     :printedText """Void — At the beginning of your end step, if a nonland permanent left the battlefield this turn or a spell was warped this turn, you draw a card and lose 1 life."""@en ;
     :oracleText """Void — At the beginning of your end step, if a nonland permanent left the battlefield this turn or a spell was warped this turn, you draw a card and lose 1 life."""@en ;
     :flavorText """The voidforged lack the formal programming of other mechan. Instead, they are engineered to move in accordance with the hymn of the Immortal Faller."""@en ;
@@ -3533,7 +3533,7 @@ When this creature enters, create a Lander token. At the beginning of the end st
     :toughness "5" ;
     :toughnessValue "5"^^xsd:integer ;
     :hasKeywordAbility :Reach ;
-    # Note: keyword "Void" not defined in MagicCardsOntology
+    :hasAbilityWord :Void ;
     :printedText """Reach
 Void — At the beginning of your end step, if a nonland permanent left the battlefield this turn or a spell was warped this turn, put a +1/+1 counter on this creature."""@en ;
     :oracleText """Reach
@@ -3835,7 +3835,7 @@ When this creature enters, it deals 3 damage to any target."""@en ;
     :cardNumber "152"^^xsd:integer ;
     :artist "Viko Menezes" ;
     :hasLanguage :English ;
-    # Note: keyword "Void" not defined in MagicCardsOntology
+    :hasAbilityWord :Void ;
     :printedText """Plasma Bolt deals 2 damage to any target.
 Void — Plasma Bolt deals 3 damage instead if a nonland permanent left the battlefield this turn or a spell was warped this turn."""@en ;
     :oracleText """Plasma Bolt deals 2 damage to any target.
@@ -4553,7 +4553,7 @@ Warp {1}{G} (You may cast this card from your hand for its warp cost. Exile this
     :toughness "4" ;
     :toughnessValue "4"^^xsd:integer ;
     :hasKeywordAbility :Trample ;
-    # Note: keyword "Landfall" not defined in MagicCardsOntology
+    :hasAbilityWord :Landfall ;
     :printedText """Trample
 Landfall — Whenever a land you control enters, this creature gets +1/+0 until end of turn."""@en ;
     :oracleText """Trample
@@ -4821,7 +4821,7 @@ Enchanted creature gets +0/+2 and can't be blocked by more than one creature."""
     :powerValue "3"^^xsd:integer ;
     :toughness "3" ;
     :toughnessValue "3"^^xsd:integer ;
-    # Note: keyword "Landfall" not defined in MagicCardsOntology
+    :hasAbilityWord :Landfall ;
     :printedText """Whenever this creature becomes tapped, create a Lander token. (It's an artifact with "{2}, {T}, Sacrifice this token: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.")
 Landfall — Whenever a land you control enters, put a +1/+1 counter on this creature."""@en ;
     :oracleText """Whenever this creature becomes tapped, create a Lander token. (It's an artifact with "{2}, {T}, Sacrifice this token: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.")
@@ -5048,7 +5048,7 @@ Whenever this Spacecraft attacks, you may put a creature card from your hand ont
     :toughness "3" ;
     :toughnessValue "3"^^xsd:integer ;
     :hasKeywordAbility :Flying ;
-    # Note: keyword "Landfall" not defined in MagicCardsOntology
+    :hasAbilityWord :Landfall ;
     :printedText """Flying
 Landfall — Whenever a land you control enters, target creature has base power and toughness 3/3 until end of turn. If you control six or more lands, that creature has base power and toughness 6/6 until end of turn instead."""@en ;
     :oracleText """Flying
@@ -5210,7 +5210,7 @@ Whenever Infinite Guideline Station attacks, draw a card for each multicolored p
     :toughness "2" ;
     :toughnessValue "2"^^xsd:integer ;
     :hasKeywordAbility :Flying ;
-    # Note: keyword "Void" not defined in MagicCardsOntology
+    :hasAbilityWord :Void ;
     :printedText """Flying
 When this creature enters, return target artifact or creature card from your graveyard to your hand.
 Void — At the beginning of your end step, if a nonland permanent left the battlefield this turn or a spell was warped this turn, put a +1/+1 counter on this creature."""@en ;
@@ -5496,7 +5496,7 @@ Warp {U/R} (You may cast this card from your hand for its warp cost. Exile this 
     :powerValue "2"^^xsd:integer ;
     :toughness "4" ;
     :toughnessValue "4"^^xsd:integer ;
-    # Note: keyword "Landfall" not defined in MagicCardsOntology
+    :hasAbilityWord :Landfall ;
     :printedText """Landfall — Whenever a land you control enters, Tannuk deals 1 damage to each opponent. If this is the second time this ability has resolved this turn, draw a card."""@en ;
     :oracleText """Landfall — Whenever a land you control enters, Tannuk deals 1 damage to each opponent. If this is the second time this ability has resolved this turn, draw a card."""@en ;
     :flavorText """Serving in the Memorial Navy was nothing like the posters made it out to be."""@en ;
