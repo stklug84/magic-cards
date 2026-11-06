@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "magic-cards-tools"
-version = "0.3.0"
+version = "0.3.1"
 description = "Graph tooling for the MTG knowledge graph: the graph-bundle contract, the behavior-key whitelist and the graph validators (the simulator is the Rust workspace, released as binaries)."
 readme = "README.md"
 requires-python = ">=3.12"

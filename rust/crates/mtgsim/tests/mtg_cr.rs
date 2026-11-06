@@ -230,7 +230,7 @@ fn help_and_version_never_need_the_rules_text() {
         .arg("--version")
         .assert()
         .success()
-        .stdout("mtg-cr 0.3.0\n");
+        .stdout(format!("mtg-cr {}\n", env!("CARGO_PKG_VERSION")));
     mtg_cr()
         .current_dir(empty.path())
         .arg("--help")
