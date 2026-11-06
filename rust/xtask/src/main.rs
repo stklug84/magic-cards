@@ -832,12 +832,11 @@ fn l5_matchup(run: &L5Run) -> Result<(PathBuf, PathBuf), String> {
         &with_files(&py_log, &py_viz),
         "matchup",
     )?;
-    let rs = run_rust_cli(
-        repo,
-        "mtg-simulate",
-        &with_files(&rs_log, &rs_viz),
-        "matchup",
-    )?;
+    // the Rust side runs its two seeds on two workers: the parallel
+    // runner must deliver the same records, lines and recording order
+    let mut rs_args = with_files(&rs_log, &rs_viz);
+    rs_args.extend(["--jobs".to_owned(), "2".to_owned()]);
+    let rs = run_rust_cli(repo, "mtg-simulate", &rs_args, "matchup")?;
     let normalise = |text: &str, log: &Path, viz: &Path| {
         text.replace(&log.display().to_string(), "<log>")
             .replace(&viz.display().to_string(), "<viz>")

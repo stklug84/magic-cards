@@ -354,3 +354,240 @@ pub fn run_replay(stream: GameStream) {
     }
     crate::tui::replay_app(stream);
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    fn ev(seq: i64, turn: i64, kind: &str, data: Vec<(&str, Value)>) -> Record {
+        Value::dict([
+            ("t", Value::from("e")),
+            ("seq", Value::from(seq)),
+            ("turn", Value::from(turn)),
+            ("phase", Value::from("main1")),
+            ("kind", Value::from(kind)),
+            ("data", Value::dict(data)),
+        ])
+    }
+
+    fn snap(seq: i64, turn: i64) -> Record {
+        Value::dict([
+            ("t", Value::from("s")),
+            ("seq", Value::from(seq)),
+            ("turn", Value::from(turn)),
+            ("phase", Value::from("main1")),
+            ("active", Value::from("p0")),
+            ("stack", Value::List(Vec::new())),
+            ("players", Value::List(Vec::new())),
+        ])
+    }
+
+    /// Three turns of phases with a counter (a highlight) in turn 2.
+    fn stream() -> Vec<Record> {
+        let mut out = vec![snap(1, 0)];
+        let mut seq = 2;
+        for turn in 1..=3 {
+            for phase in ["untap", "main1", "combat", "end"] {
+                out.push(ev(
+                    seq,
+                    turn,
+                    "phase",
+                    vec![("phase", Value::from(phase)), ("who", Value::from("p0"))],
+                ));
+                seq += 1;
+                out.push(snap(seq, turn));
+                seq += 1;
+            }
+            if turn == 2 {
+                out.push(ev(
+                    seq,
+                    turn,
+                    "counter",
+                    vec![("spell", Value::from("Bolt")), ("who", Value::from("p1"))],
+                ));
+                seq += 1;
+            }
+        }
+        out
+    }
+
+    fn view() -> ViewState {
+        ViewState::new(
+            stream(),
+            Value::dict([("game", Value::from(1_i64)), ("seed", Value::from(5_i64))]),
+        )
+    }
+
+    #[test]
+    fn status_line_shows_mode_position_and_goto() {
+        let mut view = view();
+        let mut st = ReplaySettings::default();
+        assert!(status_line(&view, &st).starts_with(" paused  0/"));
+        view.step(1);
+        st.autoplay = true;
+        st.speed = 0.5;
+        assert!(status_line(&view, &st).starts_with(" auto x0.5  1/"));
+        st.goto = Some("12".to_owned());
+        assert!(status_line(&view, &st).contains("  goto: 12_ |"));
+    }
+
+    #[test]
+    fn autoplay_stops_at_highlights_and_at_the_end() {
+        let mut view = view();
+        let mut st = ReplaySettings {
+            autoplay: true,
+            ..ReplaySettings::default()
+        };
+        while st.autoplay {
+            autoplay_tick(&mut view, &mut st);
+        }
+        let at = &view.records[usize::try_from(view.cursor).unwrap()];
+        assert_eq!(text(at, "kind"), "counter");
+        // without the highlight pause autoplay runs to the end
+        st.autoplay = true;
+        st.pause_hl = false;
+        while st.autoplay {
+            autoplay_tick(&mut view, &mut st);
+        }
+        assert!(view.at_end());
+    }
+
+    #[test]
+    fn goto_collects_digits_and_jumps_on_enter() {
+        let mut view = view();
+        let mut st = ReplaySettings::default();
+        mode_key(&Key::Char('g'), &mut view, &mut st, &[]);
+        assert_eq!(st.goto.as_deref(), Some(""));
+        goto_key(&Key::Char('3'), &mut view, &mut st);
+        assert_eq!(st.goto.as_deref(), Some("3"));
+        goto_key(&Key::Enter, &mut view, &mut st);
+        assert!(st.goto.is_none());
+        assert_eq!(
+            int(&view.records[usize::try_from(view.cursor).unwrap()], "turn"),
+            3
+        );
+        // anything else cancels
+        st.goto = Some("2".to_owned());
+        goto_key(&Key::Esc, &mut view, &mut st);
+        assert!(st.goto.is_none());
+    }
+
+    #[test]
+    fn mode_keys_toggle_the_settings() {
+        let mut view = view();
+        let mut st = ReplaySettings::default();
+        let names = vec!["p0".to_owned(), "p1".to_owned()];
+        mode_key(&Key::Char('a'), &mut view, &mut st, &names);
+        assert!(st.autoplay);
+        for _ in 0..6 {
+            mode_key(&Key::Char('+'), &mut view, &mut st, &names);
+        }
+        assert_eq!(st.speed, 8.0);
+        for _ in 0..8 {
+            mode_key(&Key::Char('-'), &mut view, &mut st, &names);
+        }
+        assert_eq!(st.speed, 0.25);
+        mode_key(&Key::Char('h'), &mut view, &mut st, &names);
+        assert!(!st.pause_hl);
+        mode_key(&Key::Char('f'), &mut view, &mut st, &names);
+        assert_eq!(st.log_filter.as_deref(), Some("p0"));
+        mode_key(&Key::Char('f'), &mut view, &mut st, &names);
+        mode_key(&Key::Char('f'), &mut view, &mut st, &names);
+        assert_eq!(st.log_filter, None);
+        mode_key(&Key::Char('c'), &mut view, &mut st, &names);
+        assert_eq!(st.bf_filter, "creatures");
+        mode_key(&Key::Char('c'), &mut view, &mut st, &names);
+        mode_key(&Key::Char('c'), &mut view, &mut st, &names);
+        assert_eq!(st.bf_filter, "all");
+        mode_key(&Key::Char('G'), &mut view, &mut st, &names);
+        assert!(view.at_end());
+        mode_key(&Key::Char('?'), &mut view, &mut st, &names); // unknown: no change
+    }
+
+    #[test]
+    fn navigation_keys_move_the_cursor_and_q_quits() {
+        let mut view = view();
+        let mut st = ReplaySettings::default();
+        assert!(replay_key(&Key::Char(' '), &mut view, &mut st, &[]));
+        assert_eq!(view.cursor, 1);
+        assert!(replay_key(&Key::Right, &mut view, &mut st, &[]));
+        assert!(replay_key(&Key::Left, &mut view, &mut st, &[]));
+        assert!(replay_key(&Key::Char('b'), &mut view, &mut st, &[]));
+        assert_eq!(view.cursor, 0); // no event before the first: parked on the snapshot
+        assert!(replay_key(&Key::Char('n'), &mut view, &mut st, &[]));
+        assert!(replay_key(&Key::Char('t'), &mut view, &mut st, &[]));
+        assert_eq!(
+            int(&view.records[usize::try_from(view.cursor).unwrap()], "turn"),
+            2
+        );
+        assert!(replay_key(&Key::Down, &mut view, &mut st, &[]));
+        assert!(replay_key(&Key::Up, &mut view, &mut st, &[]));
+        assert!(replay_key(&Key::Char('T'), &mut view, &mut st, &[]));
+        assert!(replay_key(&Key::Char('N'), &mut view, &mut st, &[]));
+        assert!(!replay_key(&Key::Char('q'), &mut view, &mut st, &[]));
+        assert!(!replay_key(&Key::Interrupt, &mut view, &mut st, &[]));
+    }
+
+    #[test]
+    fn plain_replay_steps_phases_and_quits() {
+        let stream = GameStream {
+            meta: Value::dict([("game", Value::from(1_i64)), ("seed", Value::from(5_i64))]),
+            records: stream(),
+            result: Some(Value::dict([
+                ("t", Value::from("end")),
+                ("winner", Value::from("p0")),
+                ("reason", Value::from("life")),
+                ("turns", Value::from(3_i64)),
+            ])),
+        };
+        let n = stream.records.len();
+        let mut input = std::io::Cursor::new(b"\nq\n".to_vec());
+        let mut out = Vec::new();
+        plain_replay(stream, &mut input, &mut out);
+        let shown = String::from_utf8(out).unwrap();
+        assert!(
+            shown.starts_with(&format!("replaying game 1 (seed 5), {n} records;")),
+            "{shown}"
+        );
+        assert_eq!(shown.matches("=== Turn").count(), 2); // two phases shown, then q
+        assert!(!shown.contains("=== winner")); // quit before the end
+        // EOF on stdin ends the viewer as well
+        let stream = GameStream {
+            records: stream_records_only(),
+            ..GameStream::default()
+        };
+        let mut input = std::io::Cursor::new(Vec::new());
+        let mut out = Vec::new();
+        plain_replay(stream, &mut input, &mut out);
+        assert!(
+            String::from_utf8(out)
+                .unwrap()
+                .starts_with("replaying game 1 (seed None), ")
+        );
+    }
+
+    fn stream_records_only() -> Vec<Record> {
+        stream()
+    }
+
+    #[test]
+    fn load_games_skips_records_before_the_first_header() {
+        let tmp = tempfile::tempdir().unwrap();
+        let path = tmp.path().join("x.jsonl");
+        std::fs::write(
+            &path,
+            "{\"t\": \"e\", \"seq\": 1}\n\n{\"t\": \"game\", \"game\": 3, \"seed\": 9}\n{\"t\": \"s\", \"seq\": 2}\n{\"t\": \"end\", \"winner\": \"a\"}\n",
+        )
+        .unwrap();
+        let games = load_games(&path).unwrap();
+        assert_eq!(games.keys().copied().collect::<Vec<_>>(), [3]);
+        assert_eq!(games[&3].records.len(), 1);
+        assert_eq!(text(games[&3].result.as_ref().unwrap(), "winner"), "a");
+        std::fs::write(&path, "not json\n").unwrap();
+        assert!(
+            load_games(&path)
+                .unwrap_err()
+                .contains("invalid JSON record")
+        );
+    }
+}

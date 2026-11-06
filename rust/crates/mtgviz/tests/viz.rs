@@ -214,3 +214,79 @@ fn viz_file_round_trips_through_load_games_and_the_plain_viewer() {
         )
     );
 }
+
+#[test]
+fn snapshots_name_planeswalker_targets_ability_stack_entries_and_unknown_commanders() {
+    use mtgrules::Game;
+    use mtgrules::abilities::{Ability, ActivatedAbility};
+    use mtgrules::objects::{Characteristics, Defender, ObjId, PlayerId, Zone};
+    use mtgrules::policy::TrivialPolicy;
+    use mtgviz::schema::snapshot;
+
+    let mut game = Game::new(
+        &["p0", "p1"],
+        PyRandom::new(1),
+        &[Rc::new(TrivialPolicy)],
+        40,
+    );
+    let (p0, p1) = (PlayerId(0), PlayerId(1));
+    let creature = |name: &str| Characteristics {
+        name: name.to_owned(),
+        types: ["Creature".to_owned()].into_iter().collect(),
+        power: Some(2),
+        toughness: Some(2),
+        ..Characteristics::default()
+    };
+    let walker = game.create_object(
+        Characteristics {
+            name: "Jace".to_owned(),
+            types: ["Planeswalker".to_owned()].into_iter().collect(),
+            ..Characteristics::default()
+        },
+        p1,
+        false,
+        None,
+    );
+    game.place(walker, p1, Zone::Battlefield);
+    let attacker = game.create_object(creature("Bear"), p0, false, None);
+    game.place(attacker, p0, Zone::Battlefield);
+    game.obj_mut(attacker).attacking = Some(Defender::Object(walker));
+    let blocker = game.create_object(creature("Wall"), p1, false, None);
+    game.place(blocker, p1, Zone::Battlefield);
+    game.obj_mut(blocker).blocking.push(attacker);
+    game.obj_mut(blocker).damage = 1;
+    game.obj_mut(blocker).counters.insert("+1/+1".to_owned(), 1);
+    game.obj_mut(blocker).counters.insert("stun".to_owned(), 0); // dropped from the record
+    // an ability on the stack
+    let ability = Rc::new(ActivatedAbility {
+        effect: Some(mtgrules::effects::Effect::draw(
+            mtgrules::protocols::CountValue::Fixed(1),
+        )),
+        ..ActivatedAbility::default()
+    });
+    game.obj_mut(attacker)
+        .base_mut()
+        .abilities
+        .push(Ability::Activated(Rc::clone(&ability)));
+    assert!(game.activate_ability(p0, attacker, &ability, 0));
+    // commander damage from a commander no longer anywhere
+    game.player_mut(p1).commander_damage.insert(ObjId(999), 5);
+    game.player_mut(p1).mana_pool.add("G", 2);
+    game.player_mut(p1).mana_pool.add("W", 1);
+    let snap = snapshot(&game, 3);
+    let text = dumps(&snap);
+    assert!(text.contains("\"attacking\": \"Jace\""), "{text}");
+    assert!(text.contains("\"blocking\": [\"Bear\"]"), "{text}");
+    assert!(text.contains("\"damage\": 1"), "{text}");
+    assert!(text.contains("\"counters\": {\"+1/+1\": 1}"), "{text}");
+    assert!(
+        text.contains("\"stack\": [\"ability of Bear (p0)\"]"),
+        "{text}"
+    );
+    assert!(text.contains("\"cmd_damage\": {\"999\": 5}"), "{text}");
+    assert!(text.contains("\"mana_pool\": \"GGW\""), "{text}");
+    assert!(
+        text.contains("\"name\": \"Jace\", \"types\": [\"Planeswalker\"], \"tapped\": false}"),
+        "{text}"
+    );
+}
