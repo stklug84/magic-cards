@@ -13,11 +13,20 @@ publish.workspace = true
 name = "mtg-cr"
 path = "src/bin/mtg_cr.rs"
 
+[[bin]]
+name = "mtg-simulate"
+path = "src/bin/mtg_simulate.rs"
+
+[[bin]]
+name = "mtg-selfplay"
+path = "src/bin/mtg_selfplay.rs"
+
 [dependencies]
 clap.workspace = true
 mtgcards.workspace = true
 mtgrules.workspace = true
 mtgviz.workspace = true
+pycompat.workspace = true
 
 [dev-dependencies]
 assert_cmd.workspace = true
