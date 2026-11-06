@@ -311,8 +311,14 @@ the part a reviewer checks by eye.
 This repository is **public**, which enables repository rulesets and
 CodeQL code scanning on the free plan. The `main` branch is governed by
 the "Update main" ruleset below — it mirrors the `curriculum-vitae` and
-`actions` rulesets with this repo's required status checks (including
-the two CodeQL analyze jobs from `.github/workflows/codeql.yml`):
+`actions` rulesets with this repo's required status checks. A check
+called through a reusable workflow reports as `<caller job> / <job>`
+(`repo-lint / yamllint`, `codeql / Analyze (python)`), and the ruleset must
+name it exactly so; `CodeQL` is the code-scanning result (GitHub Advanced
+Security, integration 57789), the other contexts come from GitHub Actions
+(integration 15368). The JSON is the live ruleset as
+`gh api repos/stklug84/magic-cards/rulesets/20558567` returns it, without
+its ids and timestamps:
 
 ```json
 {
@@ -338,6 +344,7 @@ the two CodeQL analyze jobs from `.github/workflows/codeql.yml`):
         "dismiss_stale_reviews_on_push": true,
         "required_reviewers": [],
         "require_code_owner_review": true,
+        "require_extra_approval_for_unattributed_changes": true,
         "require_last_push_approval": false,
         "required_review_thread_resolution": false,
         "allowed_merge_methods": ["merge", "squash", "rebase"]
@@ -349,59 +356,61 @@ the two CodeQL analyze jobs from `.github/workflows/codeql.yml`):
         "strict_required_status_checks_policy": true,
         "do_not_enforce_on_create": false,
         "required_status_checks": [
-          { "context": "actionlint (workflows)" },
-          { "context": "yamllint" },
-          { "context": "markdownlint" },
-          { "context": "python / ruff (lint + format)" },
-          { "context": "python / mypy (strict)" },
-          { "context": "python / bandit (security)" },
-          { "context": "rdf / turtle (riot --validate)" },
-          { "context": "rdf / sparql (rdflib parse)" },
-          { "context": "rdf / owl (robot reason)" },
-          { "context": "TTL conventions and imports (rdflib)" },
-          { "context": "SPARQL syntax, prefixes, and terms" },
-          { "context": "Cross-file graph consistency" },
-          { "context": "Graph tooling tests" },
-          { "context": "Rust workspace tests (ubuntu-latest)" },
-          { "context": "Rust workspace tests (macos-latest)" },
-          { "context": "Rust line coverage (>= 90 %)" },
-          { "context": "Rust (fmt + clippy + deny)" },
-          { "context": "Analyze (actions)" },
-          { "context": "Analyze (python)" }
+          { "context": "repo-lint / actionlint (workflows)", "integration_id": 15368 },
+          { "context": "repo-lint / yamllint", "integration_id": 15368 },
+          { "context": "repo-lint / markdownlint", "integration_id": 15368 },
+          { "context": "python / ruff (lint + format)", "integration_id": 15368 },
+          { "context": "python / mypy (strict)", "integration_id": 15368 },
+          { "context": "python / bandit (security)", "integration_id": 15368 },
+          { "context": "rdf / turtle (riot --validate)", "integration_id": 15368 },
+          { "context": "rdf / sparql (rdflib parse)", "integration_id": 15368 },
+          { "context": "rdf / owl (robot reason)", "integration_id": 15368 },
+          { "context": "TTL conventions and imports (rdflib)", "integration_id": 15368 },
+          { "context": "SPARQL syntax, prefixes, and terms", "integration_id": 15368 },
+          { "context": "Cross-file graph consistency", "integration_id": 15368 },
+          { "context": "Graph tooling tests", "integration_id": 15368 },
+          { "context": "Rust workspace tests (ubuntu-latest)", "integration_id": 15368 },
+          { "context": "Rust workspace tests (macos-latest)", "integration_id": 15368 },
+          { "context": "Rust line coverage (>= 90 %)", "integration_id": 15368 },
+          { "context": "Rust (fmt + clippy + deny)", "integration_id": 15368 },
+          { "context": "codeql / Analyze (actions)", "integration_id": 15368 },
+          { "context": "codeql / Analyze (python)", "integration_id": 15368 },
+          { "context": "CodeQL", "integration_id": 57789 },
+          { "context": "Package build (wheel + sdist)" }
         ]
       }
-    }
+    },
+    {
+      "type": "code_scanning",
+      "parameters": {
+        "code_scanning_tools": [
+          {
+            "tool": "CodeQL",
+            "security_alerts_threshold": "high_or_higher",
+            "alerts_threshold": "errors_and_warnings"
+          }
+        ]
+      }
+    },
+    { "type": "code_quality", "parameters": { "severity": "warnings" } }
   ],
   "bypass_actors": []
 }
 ```
 
-Apply with:
+Apply with (`PUT .../rulesets/20558567` to update the live one):
 
 ```sh
 gh api -X POST repos/stklug84/magic-cards/rulesets --input ruleset.json
 ```
 
-Once the first CodeQL runs on `main` are clean, additionally add the
-`code_scanning` rule (mirroring `stklug84/actions`) so scanning results
-gate merges — the `security-extended` suite includes the unpinned-tag
+The `code_scanning` rule (mirroring `stklug84/actions`) gates merges on the
+CodeQL results: the `security-extended` suite includes the unpinned-tag
 query, which flags floating first-party tags (`actions/checkout@v7`) as
-warnings, so verify the alert set first:
-
-```json
-{
-  "type": "code_scanning",
-  "parameters": {
-    "code_scanning_tools": [
-      {
-        "tool": "CodeQL",
-        "security_alerts_threshold": "high_or_higher",
-        "alerts_threshold": "errors"
-      }
-    ]
-  }
-}
-```
+warnings, so every `uses:` stays pinned to a commit SHA. A job that a
+change does not need (the OWL reasoning without a Turtle change) is
+skipped by a job-level condition, which reports its check as skipped and
+satisfies the rule; a workflow-level path filter would leave it pending.
 
 ## Checklist before opening a PR
 
