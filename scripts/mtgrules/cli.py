@@ -25,6 +25,7 @@ from typing import TYPE_CHECKING
 
 from mtgcards.database import CardDatabase
 from mtgcards.deck import Deck, load_deck
+from mtgcards.graph import GraphSchemaError
 from mtgcards.stats import Aggregator
 from mtgrules.adapter import REPO, MatchOptions, report_model_coverage, run_game
 from mtgrules.policy import PROFILES, get_profile
@@ -166,12 +167,36 @@ def _deck_paths(args: argparse.Namespace) -> list[Path]:
     return deck_paths
 
 
+def _open_database(args: argparse.Namespace) -> CardDatabase:
+    """Load the card data, turning every data error into a clean exit.
+
+    Broken or incompatible GRAPH-MANIFEST.json files, unreadable or
+    malformed --custom-cards JSON and annotation files with unknown
+    behavior keys all carry their path in the message; none of them is a
+    programming error worth a traceback.
+    """
+    try:
+        return CardDatabase(REPO, args.custom_cards, extra_graphs=args.extra_cards)
+    except (GraphSchemaError, TypeError, ValueError, OSError) as err:
+        sys.exit(f"cannot load card data: {err}")
+
+
 def _load_decks(deck_paths: Sequence[Path], db: CardDatabase) -> list[Deck]:
     """Load and validate the deck files named on the command line."""
     try:
         decks = [load_deck(p, db.ind2name) for p in deck_paths]
     except ValueError as err:
         sys.exit(str(err))
+    for d in decks:
+        if d.skipped:
+            shown = d.skipped[:_STUB_PREVIEW]
+            preview = ", ".join(f"{n}: {text!r}" for n, text in shown)
+            print(  # noqa: T201 - user-facing warning on stderr
+                f"warning: {d.path}: skipped {len(d.skipped)} line(s) that are "
+                f"not 'COUNT Card Name' (line: text): {preview}"
+                f"{' ...' if len(d.skipped) > _STUB_PREVIEW else ''}",
+                file=sys.stderr,
+            )
     seen: dict[str, int] = {}
     for d in decks:  # same list twice -> unique seats
         seen[d.name] = seen.get(d.name, 0) + 1
@@ -369,7 +394,7 @@ def main(argv: list[str] | None = None) -> None:
         sys.exit(f"invalid --seeds value: {args.seeds!r}")
 
     deck_paths = _deck_paths(args)
-    db = CardDatabase(REPO, args.custom_cards, extra_graphs=args.extra_cards)
+    db = _open_database(args)
     decks = _load_decks(deck_paths, db)
     _resolve_txt_decks(decks, db, offline=args.offline)
     profiles = _parse_profiles(args.profile, len(decks))
