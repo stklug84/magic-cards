@@ -91,9 +91,10 @@ cargo build --release --locked -p mtgsim   # target/release/mtg-{simulate,selfpl
 
 OWL reasoning (CI runs this via the `rdf / owl (robot reason)` check,
 but only when a pull request changes a Turtle file,
-`scripts/generate_catalog.py` or `validate.yml` itself — HermiT needs
-~2 min for the ontology and ~12 min for the full per-set closure, and
-the verdict cannot change otherwise; the skipped job still reports its
+`scripts/generate_catalog.py` or `validate.yml` itself — on GitHub's
+runners HermiT needs 2–3 min for the ontology and 8–25 min for the full
+per-set closure, 10–28 min in all depending on the runner, and the
+verdict cannot change otherwise; the skipped job still reports its
 check as skipped, which the ruleset accepts):
 
 ```sh

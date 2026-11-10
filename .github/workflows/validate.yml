@@ -29,9 +29,11 @@
 #   The catalog is untracked and regenerated in-job from the checked-out
 #   ontologies via owl-prepare-command (scripts/generate_catalog.py):
 #     - MagicCardsOntology.ttl      : TBox + set/keyword/subtype
-#                                     individuals (~2 min with HermiT)
+#                                     individuals (2-3 min with HermiT)
 #     - MagicCardIndividuals.ttl    : + all per-set instance graphs under
-#                                     sets/ (~8 min with HermiT)
+#                                     sets/ (8-25 min with HermiT)
+#   GitHub's runners differ in speed: the same graph took 10 to 28
+#   minutes, about 16 typically (26 runs on 2026-11-05 and -06).
 #   `robot reason` certifies logical consistency and coherence (no
 #   unsatisfiable classes). Note: `robot explain` cannot be used on this
 #   graph as-is — xsd:date is outside the OWL 2 datatype map and HermiT's
@@ -53,15 +55,15 @@ permissions:
   contents: read
 
 # One run per ref: a new push supersedes the in-flight validation of the
-# same branch (the OWL reasoning job alone takes ~15 minutes). Runs on
-# main are never cancelled mid-flight.
+# same branch (the OWL reasoning job alone takes 10 to 28 minutes). Runs
+# on main are never cancelled mid-flight.
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
 
 jobs:
-  # Which paths the run touches. HermiT over the full per-set closure
-  # takes ~15 minutes and its verdict can only change when a Turtle
+  # Which paths the run touches. OWL reasoning (HermiT, both roots)
+  # takes 10 to 28 minutes and its verdict can only change when a Turtle
   # file, the catalog generator or this workflow changes, so the rdf
   # job reasons only then (its turtle and sparql jobs always run; they
   # take a minute). The owl job that `run-owl` switches off still

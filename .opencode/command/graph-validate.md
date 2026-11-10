@@ -17,9 +17,9 @@ sweep:
    `rust/` when the change touched the simulator)
 
 OWL reasoning (`robot reason --reasoner hermit`) is **not** part of the
-standard sweep — it takes ~2 min for the ontology and ~8 min for the full
-closure. Run it only when $ARGUMENTS asks for it, or when the change under
-review touched class axioms or constraints.
+standard sweep — on CI's runners it takes 2–3 min for the ontology and
+8–25 min for the full closure. Run it only when $ARGUMENTS asks for it,
+or when the change under review touched class axioms or constraints.
 
 The validators need `rdflib`. If it is missing, create a local virtualenv
 (`uv venv .venv && uv pip install --python .venv/bin/python "rdflib>=7,<8"`)

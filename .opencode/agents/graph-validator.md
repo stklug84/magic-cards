@@ -74,8 +74,8 @@ later check meaningless.
    `MagicCompRules-*.txt` at the repo root).
 6. Only when asked, or when the change touched class axioms:
    `python3 scripts/generate_catalog.py && robot reason --reasoner hermit`.
-   HermiT needs ~2 min for the ontology and ~8 min for the full closure —
-   say so before starting rather than appearing to hang.
+   HermiT needs minutes (on CI's runners 2–3 for the ontology and 8–25 for
+   the full closure) — say so before starting rather than appearing to hang.
 
 ## Triage rules
 
