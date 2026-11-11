@@ -7208,6 +7208,12 @@ player vote, with an effect determined by the votes. See rule 207.2c."""@en .
                  :setCode "FRA" ;
                  :cardCount 461 ;
                  :releaseDate "2026-10-02"^^xsd:date .
+:RealityFractureCommander rdf:type owl:NamedIndividual ,
+                                   :Set ;
+                          :setName "Reality Fracture Commander"@en ;
+                          :setCode "FRC" ;
+                          :cardCount 103 ;
+                          :releaseDate "2026-10-02"^^xsd:date .
 :TheHobbit rdf:type owl:NamedIndividual ,
                     :Set ;
            :setName "The Hobbit"@en ;
