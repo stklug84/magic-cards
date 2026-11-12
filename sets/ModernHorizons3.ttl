@@ -933,7 +933,7 @@ Whenever another creature or artifact you control is put into a graveyard from t
         :rulingDate "2024-06-07"^^xsd:date ;
         :rulingText """Fabricate doesn't cause the creature with the ability to enter the battlefield with +1/+1 counters already on it. For example, Marionette Apprentice will enter the battlefield as a 1/2 creature, then its fabricate ability goes on the stack. Players may take actions (such as casting instants) while the ability is waiting to resolve."""@en ] .
 
-:AetherRevolt rdf:type owl:NamedIndividual ,
+:AetherRevoltModernHorizons3113 rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Aether Revolt" ;
     :manaCost "{2}{R}{R}" ;

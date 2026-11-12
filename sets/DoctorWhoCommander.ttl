@@ -6279,7 +6279,7 @@ Blasphemous Act deals 13 damage to each creature."""@en ;
         :rulingDate "2020-11-10"^^xsd:date ;
         :rulingText """Blasphemous Act's ability can't reduce the total cost to cast the spell below {R}."""@en ] .
 
-:Explore rdf:type owl:NamedIndividual ,
+:ExploreDoctorWhoCommander231 rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Explore" ;
     :manaCost "{1}{G}" ;

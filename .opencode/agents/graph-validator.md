@@ -67,7 +67,8 @@ later check meaningless.
    and that every `mc:` term a query uses still exists in the ontology.
 4. `python3 scripts/check_consistency.py` — cross-file invariants:
    undefined terms, dangling references, entry shape, collection variants,
-   Commander decks totalling 100, synergy domains, behavior hooks.
+   Commander decks totalling 100, synergy domains, behavior hooks, card IRIs
+   that name nothing else (a card named like a set or a keyword).
 5. The `mtgcards` unit suite from `scripts/` (the generator's helpers and
    the bundle builder); when the change touched `rust/`, the simulator's
    `cargo test --workspace --all-features` from `rust/` (needs

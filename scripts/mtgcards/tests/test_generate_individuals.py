@@ -10,8 +10,9 @@ card, and uses the set's own code where Scryfall has no arena_code.
 
 The keyword tests pin how Scryfall's keyword list becomes keyword and
 ability-word triples, including the Comprehensive Rules keyword variants
-(typecycling, "[type]walk", multikicker), and the subtype-supplement tests
-pin when sets/SubTypeSupplement.ttl exists.
+(typecycling, "[type]walk", multikicker), the subtype-supplement tests
+pin when sets/SubTypeSupplement.ttl exists, and the naming tests pin that a
+card individual never takes the IRI of an ontology term.
 
 The generator is a script next to the packages in scripts/, so this module
 only runs from a checkout (``python3 -m unittest discover -s
@@ -316,6 +317,66 @@ class TestSubtypeSupplement(_GeneratorTestCase):
             text = (Path(tmp) / "sets" / "SubTypeSupplement.ttl").read_text()
             self.assertIn(":Gizmo rdf:type owl:NamedIndividual ,", text)
             self.assertEqual(imports[0][1], "SubTypeSupplement.ttl")
+
+
+#: the vocabulary extract as build_vocab.py writes it, cut down to a keyword
+#: action, a subtype, a class's label and two sets
+_VOCAB: dict[str, Any] = {
+    "KeywordAction": ["Explore"],
+    "SubType": ["Elf"],
+    "_labels": {"Card": "Card", "Explore": "Explore", "Elf": "Elf"},
+    "_setcodes": {"AER": "AetherRevolt", "WHO": "DoctorWhoCommander"},
+}
+
+
+class TestIndividualName(_GeneratorTestCase):
+    """A card never takes the IRI of an ontology term."""
+
+    def name(self, card: str, key: tuple[str, str]) -> str:
+        """Return the individual name of a single printing of *card*."""
+        set_ind = {"who": "DoctorWhoCommander", "mh3": "ModernHorizons3"}
+        inputs = self.gen.GenerateInputs(
+            printings={},
+            cards={},
+            localized={},
+            sets_meta={},
+            set_ind=set_ind,
+            new_sets={},
+            existing_keys=set(),
+            existing_names=self.gen.reserved_names(_VOCAB, set_ind),
+        )
+        printing = {
+            "name": card,
+            "set": key[0],
+            "num": key[1],
+            "language": "English",
+            "count": 1,
+        }
+        result: str = self.gen._individual_name(printing, key, {card: [key]}, inputs)  # noqa: SLF001 - the unit under test
+        return result
+
+    def test_reserved_names_hold_terms_and_sets(self) -> None:
+        """Vocabulary individuals, labelled terms and all Set individuals."""
+        names = self.gen.reserved_names(_VOCAB, {"zzz": "NewSet"})
+        self.assertLessEqual(
+            {"Explore", "Elf", "Card", "AetherRevolt", "DoctorWhoCommander", "NewSet"},
+            names,
+        )
+
+    def test_card_named_like_a_term_takes_set_and_number(self) -> None:
+        """Explore and Aether Revolt the cards are not the keyword and the set."""
+        self.assertEqual(
+            self.name("Explore", ("who", "231")),
+            "ExploreDoctorWhoCommander231",
+        )
+        self.assertEqual(
+            self.name("Aether Revolt", ("mh3", "113")),
+            "AetherRevoltModernHorizons3113",
+        )
+
+    def test_other_cards_keep_the_plain_name(self) -> None:
+        """A name no term has stays plain."""
+        self.assertEqual(self.name("Aether Spike", ("mh3", "50")), "AetherSpike")
 
 
 if __name__ == "__main__":
