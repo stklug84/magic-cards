@@ -95,6 +95,8 @@ fn every_card_compiles_and_the_override_table_is_used() {
     for card in records(&db) {
         let ch: Characteristics = compile_card(card);
         assert_eq!(ch.name, card.name);
+        // the card's colours (rule 105.2), never its colour identity
+        assert_eq!(ch.colors, card.colors, "{}", card.name);
         compiled += 1;
         if overrides::lookup(&card.name).is_some()
             || card

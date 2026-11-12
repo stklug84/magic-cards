@@ -292,12 +292,23 @@ pub(crate) fn parse_i64(digits: &str) -> i64 {
 
 /// `CardData` (from the knowledge graph) -> compiled [`Characteristics`]
 /// (rule 113.2). Overrides win per card.
-#[rule("113.2")]
+///
+/// The colours are the card's own (rule 105.2), never its colour
+/// identity (rule 903.4): Azorius Signet and devoid Eldrazi Displacer are
+/// colourless, Lingering Souls is only white, and a land with a colour
+/// indicator, like Dryad Arbor, is coloured.
+#[rule("113.2", "105.2")]
 #[must_use]
 pub fn compile_card(card: &CardData) -> Characteristics {
     let mut ch = Characteristics {
         name: card.name.clone(),
         mana_cost: card.mana_cost.clone(),
+        colors: card
+            .colors
+            .iter()
+            .filter(|c| ["W", "U", "B", "R", "G"].contains(&c.as_str()))
+            .cloned()
+            .collect(),
         supertypes: card.supertypes.clone(),
         types: card.types.clone(),
         subtypes: card.subtypes.clone(),
@@ -306,14 +317,6 @@ pub fn compile_card(card: &CardData) -> Characteristics {
         loyalty: card.loyalty,
         ..Characteristics::default()
     };
-    if !card.mana_cost.is_empty() {
-        ch.colors = card
-            .color_identity
-            .iter()
-            .filter(|c| ["W", "U", "B", "R", "G"].contains(&c.as_str()))
-            .cloned()
-            .collect();
-    }
 
     if crate::overrides::apply_override(&mut ch, card) {
         return ch;

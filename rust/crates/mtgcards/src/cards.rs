@@ -93,7 +93,10 @@ pub struct CardData {
     pub subtypes: BTreeSet<String>,
     /// printed loyalty
     pub loyalty: Option<i64>,
-    /// colour identity letters
+    /// colour letters (rule 105.2; empty for a colourless card)
+    pub colors: BTreeSet<String>,
+    /// colour identity letters (rule 903.4), for Commander deck building
+    /// only: a colourless card can have a coloured identity
     pub color_identity: BTreeSet<String>,
     /// printed power (None for `*` or no power)
     pub power: Option<i64>,
@@ -138,10 +141,11 @@ impl CardData {
         self.types.contains("Artifact")
     }
 
-    /// Whether the colour identity spans two or more colours.
+    /// Whether the card is two or more colours (rule 105.2b); its colour
+    /// identity does not count.
     #[must_use]
     pub fn is_multicolored(&self) -> bool {
-        self.color_identity.len() >= 2
+        self.colors.len() >= 2
     }
 
     /// The card as a JSON dict (sets as sorted lists), for dumps.
@@ -157,6 +161,7 @@ impl CardData {
             ("supertypes", set(&self.supertypes)),
             ("subtypes", set(&self.subtypes)),
             ("loyalty", opt(self.loyalty)),
+            ("colors", set(&self.colors)),
             ("color_identity", set(&self.color_identity)),
             ("power", opt(self.power)),
             ("toughness", opt(self.toughness)),

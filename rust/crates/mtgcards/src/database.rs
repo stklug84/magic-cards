@@ -120,6 +120,11 @@ fn int_field(name: &str, entry: &Value, key: &str) -> Result<Option<i64>, String
 
 /// Build a [`CardData`] from one `--custom-cards` JSON entry.
 ///
+/// `colors` defaults to the colours of the mana symbols in `mana_cost`
+/// (rule 202.2). Give it for a card whose colour comes from elsewhere: a
+/// colour indicator, or devoid (`"colors": []`). `color_identity` only
+/// matters to Commander rules and never colours the card.
+///
 /// # Errors
 ///
 /// The Python `ValueError` text for an unknown behaviour key; a clear
@@ -141,7 +146,13 @@ pub fn card_from_json(name: &str, entry: &Value, source: &str) -> Result<CardDat
     card.toughness = int_field(name, entry, "toughness")?;
     card.oracle = string_field(name, entry, "oracle")?;
     card.color_identity = string_set(name, entry, "color_identity")?;
-    card.mv = parse_cost(&card.mana_cost).mv();
+    let cost = parse_cost(&card.mana_cost);
+    card.mv = cost.mv();
+    card.colors = if entry.get("colors").is_some() {
+        string_set(name, entry, "colors")?
+    } else {
+        cost.colors()
+    };
     match entry.get("behavior") {
         None => {}
         Some(Value::Dict(pairs)) => {

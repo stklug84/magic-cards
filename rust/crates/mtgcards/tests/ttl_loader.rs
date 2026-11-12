@@ -5,11 +5,13 @@
 //! with the objects of one predicate separated by `,` across several
 //! lines. A regex that captured a single object per predicate would
 //! silently keep only the first one, so cards would quietly lose
-//! subtypes, colour identity and land mana colours. These tests pin the
-//! object-list parsing and keep the legacy repeated-predicate form
-//! loading, so an older graph bundle still works. They also pin that the
-//! MTG Arena lines of a printing on Arena (`:isAvailableOn`,
-//! `:arenaName`, ...) leave the extracted characteristics untouched.
+//! subtypes, colours, colour identity and land mana colours. These tests
+//! pin the object-list parsing and keep the legacy repeated-predicate
+//! form loading, so an older graph bundle still works. They also pin that
+//! the MTG Arena lines of a printing on Arena (`:isAvailableOn`,
+//! `:arenaName`, ...) leave the extracted characteristics untouched, and
+//! that `:hasColor` and `:hasColorIdentity`, whose names share a prefix,
+//! are read apart.
 
 mod common;
 
@@ -31,6 +33,9 @@ const OBJECT_LIST: &str = r#":PiaNalaarChiefMechanic rdf:type owl:NamedIndividua
                  :Creature ;
     :hasSubType :Human ,
                 :Artificer ;
+    :hasColor :Blue ,
+              :Red ,
+              :Green ;
     :hasColorIdentity :Blue ,
                       :Red ,
                       :Green ;
@@ -49,6 +54,9 @@ const REPEATED: &str = r#":PiaNalaarChiefMechanic rdf:type owl:NamedIndividual ,
     :hasCardType :Creature ;
     :hasSubType :Human ;
     :hasSubType :Artificer ;
+    :hasColor :Blue ;
+    :hasColor :Red ;
+    :hasColor :Green ;
     :hasColorIdentity :Blue ;
     :hasColorIdentity :Red ;
     :hasColorIdentity :Green ;
@@ -106,6 +114,37 @@ const SINGLE: &str = r#":Forest rdf:type owl:NamedIndividual ,
     :oracleText """({T}: Add {G}.)"""@en .
 "#;
 
+/// a colour identity wider than the card's colour: the flashback cost
+/// adds black
+const WIDER_IDENTITY: &str = r#":LingeringSouls rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Lingering Souls" ;
+    :manaCost "{2}{W}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Sorcery ;
+    :hasRarity :Uncommon ;
+    :hasColor :White ;
+    :hasColorIdentity :White ,
+                      :Black ;
+    :oracleText """Create two 1/1 white Spirit creature tokens with flying.
+Flashback {1}{B}"""@en .
+"#;
+
+/// a colourless card with a coloured identity: no `:hasColor` at all
+const COLORLESS: &str = r#":AzoriusSignet rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Azorius Signet" ;
+    :manaCost "{2}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ;
+    :hasRarity :Uncommon ;
+    :hasColorIdentity :White ,
+                      :Blue ;
+    :producesMana :White ,
+                  :Blue ;
+    :oracleText """{1}, {T}: Add {W}{U}."""@en .
+"#;
+
 fn set(items: &[&str]) -> BTreeSet<String> {
     items.iter().map(|s| (*s).to_owned()).collect()
 }
@@ -132,6 +171,8 @@ fn object_list_keeps_every_object() {
     let card = index.get("Pia Nalaar, Chief Mechanic").expect("card");
     assert_eq!(card.types, set(&["Artifact", "Creature"]));
     assert_eq!(card.subtypes, set(&["Human", "Artificer"]));
+    assert_eq!(card.colors, set(&["U", "R", "G"]));
+    assert!(card.is_multicolored());
     assert_eq!(card.color_identity, set(&["U", "R", "G"]));
     assert_eq!(card.supertypes, set(&["Legendary"]));
 }
@@ -144,6 +185,7 @@ fn repeated_predicate_form_still_loads() {
     let old = old.get("Pia Nalaar, Chief Mechanic").expect("card");
     assert_eq!(old.types, new.types);
     assert_eq!(old.subtypes, new.subtypes);
+    assert_eq!(old.colors, new.colors);
     assert_eq!(old.color_identity, new.color_identity);
     assert_eq!(old.supertypes, new.supertypes);
 }
@@ -167,6 +209,20 @@ fn scalar_fields_still_parse() {
     assert_eq!(card.power, Some(2));
     assert_eq!(card.toughness, Some(4));
     assert!(card.oracle.contains("haste"));
+}
+
+// ---- Colours: `:hasColor` and `:hasColorIdentity` are read apart
+
+#[test]
+fn colour_and_colour_identity_are_separate_facts() {
+    let (index, ..) = load(&[WIDER_IDENTITY, COLORLESS]);
+    let souls = index.get("Lingering Souls").expect("card");
+    assert_eq!(souls.colors, set(&["W"]));
+    assert_eq!(souls.color_identity, set(&["W", "B"]));
+    assert!(!souls.is_multicolored());
+    let signet = index.get("Azorius Signet").expect("card");
+    assert!(signet.colors.is_empty());
+    assert_eq!(signet.color_identity, set(&["W", "U"]));
 }
 
 // ---- TestArenaFields: the MTG Arena lines of a card block leave the card facts intact
