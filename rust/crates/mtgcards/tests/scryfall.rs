@@ -25,6 +25,7 @@ fn llanowar() -> serde_json::Value {
         "oracle_text": "{T}: Add {G}.",
         "power": "1",
         "toughness": "1",
+        "colors": ["G"],
         "color_identity": ["G"],
     })
 }
@@ -117,6 +118,7 @@ fn creature() {
     assert_eq!(card.types, set(&["Creature"]));
     assert_eq!(card.subtypes, set(&["Elf", "Druid"]));
     assert_eq!((card.power, card.toughness), (Some(1), Some(1)));
+    assert_eq!(card.colors, set(&["G"]));
     assert_eq!(card.color_identity, set(&["G"]));
     assert_eq!(card.source, "scryfall");
 }
@@ -144,6 +146,52 @@ fn star_power_toughness() {
     let card = card_from_scryfall(&tarmogoyf());
     assert_eq!(card.power, None);
     assert_eq!(card.toughness, None);
+}
+
+#[test]
+fn colours_are_not_the_colour_identity() {
+    let signet = card_from_scryfall(&json!({
+        "name": "Azorius Signet",
+        "mana_cost": "{2}",
+        "cmc": 2.0,
+        "type_line": "Artifact",
+        "oracle_text": "{1}, {T}: Add {W}{U}.",
+        "colors": [],
+        "color_identity": ["U", "W"],
+    }));
+    assert!(signet.colors.is_empty());
+    assert_eq!(signet.color_identity, set(&["W", "U"]));
+    // a transforming card has its colours per face: the card spans both,
+    // like `:hasColor` in the graph
+    let scholar = card_from_scryfall(&json!({
+        "name": "Civilized Scholar // Homicidal Brute",
+        "cmc": 3.0,
+        "type_line": "Creature \u{2014} Human Advisor // Creature \u{2014} Human Mutant",
+        "color_identity": ["R", "U"],
+        "card_faces": [
+            {
+                "name": "Civilized Scholar",
+                "mana_cost": "{2}{U}",
+                "type_line": "Creature \u{2014} Human Advisor",
+                "oracle_text": "{T}: Draw a card, then discard a card.",
+                "colors": ["U"],
+                "power": "0",
+                "toughness": "1",
+            },
+            {
+                "name": "Homicidal Brute",
+                "mana_cost": "",
+                "type_line": "Creature \u{2014} Human Mutant",
+                "oracle_text": "At the beginning of your end step, transform this creature.",
+                "colors": ["R"],
+                "color_indicator": ["R"],
+                "power": "5",
+                "toughness": "1",
+            },
+        ],
+    }));
+    assert_eq!(scholar.colors, set(&["U", "R"]));
+    assert_eq!(scholar.mana_cost, "{2}{U}");
 }
 
 // ---- TestScryfallClient: cache behaviour and failure handling of the client

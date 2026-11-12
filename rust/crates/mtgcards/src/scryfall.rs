@@ -13,6 +13,7 @@
 //! and retry logic is tested without a network. The real transport
 //! ([`http_json`], `ureq` over rustls) is behind the `scryfall` feature.
 
+use std::collections::BTreeSet;
 use std::path::{Path, PathBuf};
 use std::time::Duration;
 
@@ -286,11 +287,34 @@ fn str_or_empty(value: Option<&Value>) -> String {
     }
 }
 
+/// The card's colours as the generator writes `:hasColor`: the card-level
+/// `colors`, else the union of the faces' `colors` (Scryfall gives a
+/// transforming or modal double-faced card its colours per face only).
+fn colors_of(data: &Value) -> BTreeSet<String> {
+    if let Some(Value::List(colors)) = data.get("colors") {
+        return colors.iter().map(py_str).collect();
+    }
+    let Some(Value::List(faces)) = data.get("card_faces") else {
+        return BTreeSet::new();
+    };
+    faces
+        .iter()
+        .filter_map(|face| match face.get("colors") {
+            Some(Value::List(colors)) => Some(colors),
+            _ => None,
+        })
+        .flatten()
+        .map(py_str)
+        .collect()
+}
+
 /// Build a [`CardData`] from one Scryfall card JSON object.
 ///
 /// Multi-faced cards keep the canonical `Front // Back` name but take
 /// their playable characteristics from the front face, mirroring the
-/// front-face aliasing of the TTL graph loader.
+/// front-face aliasing of the TTL graph loader. Their colours span every
+/// face, as `:hasColor` does in the graph, so a card loads with the same
+/// colours from either source.
 #[must_use]
 pub fn card_from_scryfall(data: &serde_json::Value) -> CardData {
     let data = from_serde(data);
@@ -331,6 +355,7 @@ pub fn card_from_scryfall(data: &serde_json::Value) -> CardData {
     card.power = face.get("power").and_then(int_or_none);
     card.toughness = face.get("toughness").and_then(int_or_none);
     card.loyalty = face.get("loyalty").and_then(int_or_none);
+    card.colors = colors_of(&data);
     if let Some(Value::List(ci)) = data.get("color_identity") {
         card.color_identity = ci.iter().map(py_str).collect();
     }

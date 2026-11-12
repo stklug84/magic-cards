@@ -121,7 +121,7 @@ The simulator's readers — `rust/crates/mtgcards/src/ttl_loader.rs`,
 `deck.rs` and `behavior.rs` — parse the generated TTL with **regexes, not
 an RDF library**. A layout change in the generator can therefore break
 card loading while every RDF validator still passes — cards silently lose
-subtypes, colour identity or land mana colours.
+subtypes, colours, colour identity or land mana colours.
 
 Any change to how the generator lays out a predicate must be mirrored in
 those readers and covered by `rust/crates/mtgcards/tests/ttl_loader.rs`.

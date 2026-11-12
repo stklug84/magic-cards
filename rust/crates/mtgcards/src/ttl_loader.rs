@@ -2,8 +2,9 @@
 //!
 //! Reads `sets/*.ttl` plus optional extra card graphs with regex-based
 //! extraction (no RDF library) of the fields the simulator needs: name,
-//! mana cost, mana value, types, subtypes, colour identity, power /
-//! toughness, loyalty, oracle text and the graph-authored land facts.
+//! mana cost, mana value, types, subtypes, colours, colour identity,
+//! power / toughness, loyalty, oracle text and the graph-authored land
+//! facts.
 //! Results are indexed by full card name and, for double-faced cards, by
 //! the front-face name as well.
 //!
@@ -12,10 +13,12 @@
 //! predicates has to be mirrored here **and** in the Python
 //! `mtgcards/ttl_loader.py`, because both parse text rather than RDF.
 //!
-//! The regexes are the Python ones verbatim; the only addition (Rust-only
-//! hardening) is [`LoadReport`], which records card blocks whose
-//! individual line could not be read, where the Python reader silently
-//! leaves the individual out of `ind2name`.
+//! The regexes are the Python ones verbatim, plus the `:hasColor` reader:
+//! the Python reader read no colours, and its engine coloured a card by
+//! its colour identity. The other Rust-only addition is [`LoadReport`],
+//! which records card blocks whose individual line could not be read,
+//! where the Python reader silently leaves the individual out of
+//! `ind2name`.
 
 use std::collections::BTreeSet;
 use std::path::{Path, PathBuf};
@@ -54,6 +57,9 @@ const OBJECT_RUN: &str = r"\s+((?::\w+\s*,\s*)*:\w+)\s*[;.]";
 static TYPE_RE: LazyLock<Regex> = LazyLock::new(|| re(&format!(":hasCardType{OBJECT_RUN}")));
 static SUPER_RE: LazyLock<Regex> = LazyLock::new(|| re(&format!(":hasSuperType{OBJECT_RUN}")));
 static SUB_RE: LazyLock<Regex> = LazyLock::new(|| re(&format!(":hasSubType{OBJECT_RUN}")));
+// `:hasColor` prefixes `:hasColorIdentity`; the whitespace OBJECT_RUN
+// requires after the predicate keeps the two apart
+static COLOR_RE: LazyLock<Regex> = LazyLock::new(|| re(&format!(":hasColor{OBJECT_RUN}")));
 static CI_RE: LazyLock<Regex> = LazyLock::new(|| re(&format!(":hasColorIdentity{OBJECT_RUN}")));
 static PRODUCES_RE: LazyLock<Regex> = LazyLock::new(|| re(&format!(":producesMana{OBJECT_RUN}")));
 
@@ -103,6 +109,15 @@ pub fn objects(regex: &Regex, block: &str) -> Vec<String> {
     names
 }
 
+/// The colour letters of a colour-valued list predicate in `block`.
+fn color_letters(regex: &Regex, block: &str) -> BTreeSet<String> {
+    objects(regex, block)
+        .iter()
+        .filter_map(|c| color_letter(c))
+        .map(str::to_owned)
+        .collect()
+}
+
 /// Per-individual blocks of a Turtle file (blank-line separated) that
 /// carry a `:cardName`.
 pub fn card_blocks(text: &str) -> impl Iterator<Item = &str> {
@@ -142,11 +157,8 @@ pub fn parse_card(name: &str, block: &str) -> CardData {
         })
         .collect();
     card.subtypes.extend(extra);
-    card.color_identity = objects(&CI_RE, block)
-        .iter()
-        .filter_map(|c| color_letter(c))
-        .map(str::to_owned)
-        .collect();
+    card.colors = color_letters(&COLOR_RE, block);
+    card.color_identity = color_letters(&CI_RE, block);
     if let Some(caps) = ORACLE_RE.captures(block) {
         card.oracle = caps
             .get(1)

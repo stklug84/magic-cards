@@ -39,6 +39,17 @@ impl Cost {
             + self.pips.values().sum::<i64>()
             + i64::try_from(self.hybrid.len()).unwrap_or(i64::MAX)
     }
+
+    /// The colours of the cost's coloured, hybrid and Phyrexian symbols:
+    /// the card's colours when nothing else defines them (rule 202.2).
+    #[must_use]
+    pub fn colors(&self) -> BTreeSet<String> {
+        self.pips
+            .keys()
+            .chain(self.hybrid.iter().flatten())
+            .map(char::to_string)
+            .collect()
+    }
 }
 
 /// Parse a mana cost string like `{2}{G}{G}` into a [`Cost`].
@@ -109,5 +120,16 @@ mod tests {
             cost.pips.iter().collect::<Vec<_>>(),
             [(&'G', &2), (&'U', &1)]
         );
+    }
+
+    #[test]
+    fn colours_of_the_symbols() {
+        let colors = |cost: &str| parse_cost(cost).colors().into_iter().collect::<Vec<_>>();
+        assert_eq!(colors("{2}{G}{G}"), ["G"]);
+        // hybrid, Phyrexian and monocoloured hybrid symbols are coloured
+        assert_eq!(colors("{W/U}{B/P}{2/R}"), ["B", "R", "U", "W"]);
+        // generic, colourless, snow and X are not
+        assert_eq!(colors("{X}{3}{C}{S}"), Vec::<String>::new());
+        assert_eq!(colors(""), Vec::<String>::new());
     }
 }

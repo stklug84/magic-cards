@@ -75,13 +75,16 @@ fn types_of(name: &str) -> Vec<&'static str> {
 }
 
 fn compiled(name: &str) -> mtgrules::objects::Characteristics {
+    let mana_cost = if LANDS.contains(&name) {
+        String::new()
+    } else {
+        "{1}{B}".to_owned()
+    };
     let card = CardData {
         types: types_of(name).into_iter().map(str::to_owned).collect(),
-        mana_cost: if LANDS.contains(&name) {
-            String::new()
-        } else {
-            "{1}{B}".to_owned()
-        },
+        // black, as its cost says; a land is colourless
+        colors: mtgcards::mana::parse_cost(&mana_cost).colors(),
+        mana_cost,
         color_identity: ["B".to_owned()].into_iter().collect(),
         power: Some(2),
         toughness: Some(3),

@@ -5,6 +5,7 @@
 
 mod common;
 
+use std::collections::BTreeSet;
 use std::path::Path;
 
 use mtgcards::behavior::set_value;
@@ -307,13 +308,19 @@ fn custom_cards_override_the_graph_and_keep_their_behaviour() {
     let custom = common::write(
         root.path(),
         "custom.json",
-        r#"{"_comment": "ignored", "Sol Ring": {"mana_cost": "{2}{G/U}", "types": ["Artifact", "Artifact"], "oracle": "Draw two cards.", "behavior": {"draw_cards": 5, "etb_tokens": [1, 2, 2, false]}}, "New Card": {"mana_cost": "{X}{R}", "types": ["Instant"], "oracle": "Destroy target creature.", "power": null}}"#,
+        r#"{"_comment": "ignored", "Sol Ring": {"mana_cost": "{2}{G/U}", "types": ["Artifact", "Artifact"], "oracle": "Draw two cards.", "behavior": {"draw_cards": 5, "etb_tokens": [1, 2, 2, false]}}, "New Card": {"mana_cost": "{X}{R}", "types": ["Instant"], "oracle": "Destroy target creature.", "power": null, "color_identity": ["B", "R"]}, "Devoid Card": {"mana_cost": "{2}{W}", "types": ["Creature"], "colors": [], "color_identity": ["W"]}}"#,
     );
     let db = CardDatabase::load(root.path(), Some(&custom), &[]).expect("db");
     let sol = db.lookup("Sol Ring").expect("Sol Ring");
     assert_eq!(sol.source, "custom");
     assert_eq!(sol.mv, 3);
     assert_eq!(sol.types.len(), 1);
+    // without "colors", the colours of the mana cost's symbols (rule 202.2)
+    assert_eq!(sol.colors.iter().collect::<Vec<_>>(), ["G", "U"]);
+    // an explicit "colors" wins over the mana cost
+    let devoid = db.lookup("Devoid Card").expect("Devoid Card");
+    assert!(devoid.colors.is_empty());
+    assert_eq!(devoid.color_identity.iter().collect::<Vec<_>>(), ["W"]);
     // the custom behaviour wins over the oracle derivation (draw_cards 2)
     assert_eq!(sol.behavior.get("draw_cards"), Some(&Value::Int(5)));
     assert_eq!(
@@ -328,6 +335,8 @@ fn custom_cards_override_the_graph_and_keep_their_behaviour() {
     let new = db.lookup("New Card").expect("New Card");
     assert_eq!((new.mv, new.power), (1, None));
     assert!(new.behavior.removal());
+    // the colour identity never colours a card
+    assert_eq!(new.colors.iter().collect::<Vec<_>>(), ["R"]);
     assert!(!db.index.contains("_comment"));
     // the graph record is still there under the DFC alias, untouched
     assert_eq!(db.lookup("Forest").expect("Forest").source, "graph");
@@ -418,6 +427,18 @@ fn real_graph_loads_with_python_counts() {
         signet.behavior.get("rock_colors"),
         Some(&set_value(["W", "U", "B", "R", "G"]))
     );
+
+    // colours and colour identity are separate facts of the graph
+    let letters = |set: &BTreeSet<String>| set.iter().map(String::as_str).collect::<String>();
+    for (name, colors, identity) in [
+        ("Azorius Signet", "", "UW"),
+        ("Eldrazi Displacer", "", "W"), // devoid: a white cost, colourless
+        ("Lingering Souls", "W", "BW"),
+    ] {
+        let card = db.get(name);
+        assert_eq!(letters(&card.colors), colors, "{name}");
+        assert_eq!(letters(&card.color_identity), identity, "{name}");
+    }
 
     let full = "Liliana, Heretical Healer // Liliana, Defiant Necromancer";
     assert!(db.index.same_record("Liliana, Heretical Healer", full));
