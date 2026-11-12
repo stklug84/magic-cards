@@ -100,6 +100,70 @@ legality definitions."""@en .
         :rulingDate "2015-06-22"^^xsd:date ;
         :rulingText """Colorless is not a color, so putting two colorless cards into a graveyard won’t cause the process to repeat."""@en ] .
 
+:BloomTender rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Bloom Tender" ;
+    :manaCost "{1}{G}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Elf ,
+                :Druid ;
+    :hasRarity :MythicRare ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :SpecialGuests ;
+    :cardNumber "79"^^xsd:integer ;
+    :artist "Julie Dillon" ;
+    :hasLanguage :English ;
+    :producesMana :White ,
+                  :Blue ,
+                  :Black ,
+                  :Red ,
+                  :Green ;
+    :power "1" ;
+    :powerValue "1"^^xsd:integer ;
+    :toughness "1" ;
+    :toughnessValue "1"^^xsd:integer ;
+    :hasAbilityWord :Vivid ;
+    :printedText """Vivid — {T}: For each color among permanents you control, add one mana of that color."""@en ;
+    :oracleText """Vivid — {T}: For each color among permanents you control, add one mana of that color."""@en ;
+    :flavorText """Within sky-scraping gardens, New Capenna's fashionable druids maintain the last ties to the war-ravaged land their ancestors left behind."""@en ;
+    :scryfallUrl "https://scryfall.com/card/spg/79/bloom-tender"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaName "Bloom Tender" ;
+    :arenaSetCode "SPG" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """Lands are normally colorless permanents, even if they tap for mana of a certain color."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """Bloom Tender can't produce colorless mana, even if you control a colorless permanent."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """For each color (white, blue, black, red, and green), check to see if you control a permanent of that color. You can count the same permanent for multiple colors. For example, if you control a green enchantment and a white-black creature, Bloom Tender's ability produces {W}{B}{G}."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """Bloom Tender won't produce more than one mana of any particular color. At most, it will produce {W}{U}{B}{R}{G}."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """The colors are white, blue, black, red, and green. Colorless is not a color."""@en ] .
+
 :Darkness rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Darkness" ;

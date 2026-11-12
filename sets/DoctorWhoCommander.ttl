@@ -5935,7 +5935,7 @@ Would You Like A...? — Once each turn, you may play a historic land or cast a 
       [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :NotLegal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] .
 
-:PathToExile rdf:type owl:NamedIndividual ,
+:PathToExileDoctorWhoCommander210 rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Path to Exile" ;
     :manaCost "{W}" ;
@@ -6780,7 +6780,7 @@ When this creature dies, you may draw a card."""@en ;
       [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
 
-:TalismanOfDominance rdf:type owl:NamedIndividual ,
+:TalismanOfDominanceDoctorWhoCommander250 rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Talisman of Dominance" ;
     :manaCost "{2}" ;
@@ -6818,7 +6818,7 @@ When this creature dies, you may draw a card."""@en ;
       [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] .
 
-:TalismanOfIndulgence rdf:type owl:NamedIndividual ,
+:TalismanOfIndulgenceDoctorWhoCommander252 rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Talisman of Indulgence" ;
     :manaCost "{2}" ;
@@ -7563,7 +7563,7 @@ Cycling {2} ({2}, Discard this card: Draw a card.)"""@en ;
       [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
 
-:DrownedCatacomb rdf:type owl:NamedIndividual ,
+:DrownedCatacombDoctorWhoCommander274 rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Drowned Catacomb" ;
     :manaValue "0"^^xsd:nonNegativeInteger ;

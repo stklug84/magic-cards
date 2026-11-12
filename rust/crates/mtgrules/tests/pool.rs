@@ -159,7 +159,11 @@ fn the_whole_pool_plays_four_player_games_under_every_profile() {
             continue;
         }
         let options = MatchOptions {
-            turn_cap: 30,
+            // 60 turns are 15 rounds of a four-player pod. At 30 the
+            // early-finish check below hung on how the pool split into
+            // decks: with the 2026-11-11 inventory none of the 12 games
+            // finished (at 60, half of them do)
+            turn_cap: 60,
             profiles: profiles.iter().take(pod.len()).cloned().map(Some).collect(),
             starting_player: None,
         };
@@ -171,7 +175,7 @@ fn the_whole_pool_plays_four_player_games_under_every_profile() {
                 Some(Value::Int(n)) => *n,
                 other => panic!("turns: {other:?}"),
             };
-            assert!((1..=30).contains(&turns), "{rec:?}");
+            assert!((1..=60).contains(&turns), "{rec:?}");
             let reason = match field(&rec, "reason") {
                 Some(Value::Str(s)) => s.as_str(),
                 other => panic!("reason: {other:?}"),

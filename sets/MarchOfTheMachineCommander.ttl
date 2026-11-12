@@ -3524,7 +3524,7 @@ Equip {2}"""@en ;
         :rulingDate "2017-02-09"^^xsd:date ;
         :rulingText """Tapping an artifact won't cause its abilities to stop applying unless those abilities say so."""@en ] .
 
-:IzzetSignet rdf:type owl:NamedIndividual ,
+:IzzetSignetMarchOfTheMachineCommander362 rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Izzet Signet" ;
     :manaCost "{2}" ;
