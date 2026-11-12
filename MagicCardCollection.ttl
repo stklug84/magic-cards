@@ -279,7 +279,7 @@ condition."""@en ;
   :DugganPrivateDetectiveEntryNonfoilNearMint ,
   :EnsnaredByTheMaraEntryNonfoilNearMint ,
   :ExoticOrchardDoctorWhoCommander276EntryNonfoilNearMint ,
-  :ExploreEntryNonfoilNearMint ,
+  :ExploreDoctorWhoCommander231EntryNonfoilNearMint ,
   :ExterminateEntryNonfoilNearMint ,
   :FarewellDoctorWhoCommander465EntryNonfoilNearMint ,
   :FeedTheSwarmDoctorWhoCommander221EntryNonfoilNearMint ,
@@ -1672,14 +1672,14 @@ condition."""@en ;
   :LevelerEntryFoilNearMint ,
   :MarchOfTheMachinesEntryNonfoilNearMint ,
   :PowerConduitEntryNonfoilNearMint ,
-  :MirrodinBesiegedEntryNonfoilNearMint ,
+  :MirrodinBesiegedModernHorizons57EntryNonfoilNearMint ,
   :ArcboundPrototypeEntryNonfoilNearMint ,
   :PowerDepotEntryNonfoilNearMint ,
   :SlagwoodsBridgeModernHorizons2256EntryNonfoilNearMint ,
   :TanglepoolBridgeModernHorizons2257EntryNonfoilNearMint ,
   :ThornglintBridgeEntryNonfoilNearMint ,
   :DragonsRageChannelerEntryNonfoilNearMint ,
-  :AetherRevoltEntryNonfoilNearMint ,
+  :AetherRevoltModernHorizons3113EntryNonfoilNearMint ,
   :AetherSpikeEntryNonfoilNearMint ,
   :AmpedRaptorEntryNonfoilNearMint ,
   :ArchwayOfInnovationEntryNonfoilNearMint ,
@@ -3865,9 +3865,9 @@ condition."""@en ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
 
-:ExploreEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+:ExploreDoctorWhoCommander231EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
-    :entryCard :Explore ;
+    :entryCard :ExploreDoctorWhoCommander231 ;
     :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
@@ -13716,9 +13716,9 @@ condition."""@en ;
 
 # --- sets/ModernHorizons.ttl ---
 
-:MirrodinBesiegedEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+:MirrodinBesiegedModernHorizons57EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
-    :entryCard :MirrodinBesieged ;
+    :entryCard :MirrodinBesiegedModernHorizons57 ;
     :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .
@@ -13771,9 +13771,9 @@ condition."""@en ;
 
 # --- sets/ModernHorizons3.ttl ---
 
-:AetherRevoltEntryNonfoilNearMint rdf:type owl:NamedIndividual ,
+:AetherRevoltModernHorizons3113EntryNonfoilNearMint rdf:type owl:NamedIndividual ,
                   :CollectionEntry ;
-    :entryCard :AetherRevolt ;
+    :entryCard :AetherRevoltModernHorizons3113 ;
     :quantity "1"^^xsd:positiveInteger ;
     :hasFinish :Nonfoil ;
     :hasCondition :NearMint .

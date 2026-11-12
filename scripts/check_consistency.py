@@ -25,6 +25,9 @@ Checks:
                        :behaviorKey (scripts/mtgcards/behaviors.BEHAVIOR_KEYS)
                        and one JSON-parseable :behaviorValue; :threatWeight
                        is only asserted on Card individuals.
+  6. card-iris       - a card individual's IRI names nothing else: no other
+                       rdf:type, not a class or property (a card named like a
+                       set or a keyword would merge with it into one node).
 
 Exit code 0 on success, 1 on any failure.
 

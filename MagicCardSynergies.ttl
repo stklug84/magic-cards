@@ -258,7 +258,7 @@ the card individuals it relates."""@en .
                                    :LegionLoyalty ,  # Every myriad copy is doubled
                                    :MartialCoup ,  # X Soldiers become 2X, all spared by the wipe
                                    :MechanizedProductionMurdersAtKarlovManorCommander109 ,  # Doubles copies, reaching the 8-same-name win twice as fast
-                                   :MirrodinBesieged ,  # Each artifact spell makes two Myr
+                                   :MirrodinBesiegedModernHorizons57 ,  # Each artifact spell makes two Myr
                                    :NestingDovehawk ,  # Combat populate makes two copies and two counters
                                    :Octomancer ,  # End-step copy token is doubled
                                    :OverlordOfTheMistmoors ,  # Each enter or attack trigger makes four Insects
@@ -296,7 +296,7 @@ the card individuals it relates."""@en .
 
 # --- Aether Refinery ---
 :AetherRefineryModernHorizons3Commander54 :amplifies :AetherHerder ,  # Doubles ETB energy to 4, funding two Servo attack payments
-                                                     :AetherRevolt ,  # doubled E gain doubles damage trigger
+                                                     :AetherRevoltModernHorizons3113 ,  # doubled E gain doubles damage trigger
                                                      :AetherfluxConduit ,  # Doubles per-cast energy, drastically speeding the 50E payoff
                                                      :AethergeodeMiner ,  # doubles attack energy for blink loops
                                                      :AethersphereHarvester ,  # doubles ETB energy
@@ -358,14 +358,14 @@ the card individuals it relates."""@en .
                                                    :StarfieldVocalist .  # Creates extra permanent ETBs, feeding Vocalist's trigger doubling
 
 # --- Aether Revolt ---
-:AetherRevolt :enables :MasterOfBarbs .  # Each energy gain on your turn deals damage: team +1/+0
+:AetherRevoltModernHorizons3113 :enables :MasterOfBarbs .  # Each energy gain on your turn deals damage: team +1/+0
 
 # --- Aether Spike ---
 :AetherSpike :enables :BrinebornCutthroat .  # Counterspell cast on an opponent's turn adds a +1/+1 counter
 
 # --- Aetherflux Conduit ---
 :AetherfluxConduit :enables :AetherRefineryModernHorizons3Commander54 ,  # Energy income feeds Refinery's X/X Aetherborn sink
-                            :AetherRevolt ,  # Every spell's {E} gain deals damage equal to the mana spent
+                            :AetherRevoltModernHorizons3113 ,  # Every spell's {E} gain deals damage equal to the mana spent
                             :AetherSpike ,  # Its own cast adds {E}{E} first, so the tax is at least 4
                             :AethersquallAncientAetherdriftCommander68 ,  # Fuels the 8E mass bounce
                             :AetherworksMarvelAetherdriftCommander123 ,  # Fuels repeated 6E free-cast activations
@@ -401,7 +401,7 @@ the card individuals it relates."""@en .
                               :VitoThornOfTheDuskRose .  # Escalating per-spell lifegain drains a target opponent as much
 
 # --- Aethergeode Miner ---
-:AethergeodeMiner :enables :AetherRevolt ,  # attack energy triggers damage
+:AethergeodeMiner :enables :AetherRevoltModernHorizons3113 ,  # attack energy triggers damage
                            :AidFromTheCowl ,  # self-exile turns on revolt
                            :AlpharaelStonechosen ,  # self-exile turns on Void
                            :BrotherhoodScribe ,  # Its attack {E}{E} pumps the team +1/+1 before blocks
@@ -459,7 +459,7 @@ the card individuals it relates."""@en .
 
 # --- Aethersquall Ancient ---
 :AethersquallAncientAetherdriftCommander68 :enables :AetherRefineryModernHorizons3Commander54 ,  # Energy income feeds Refinery's X/X Aetherborn sink
-                                                    :AetherRevolt ,  # Upkeep {E}{E}{E} deals 3 damage every turn
+                                                    :AetherRevoltModernHorizons3113 ,  # Upkeep {E}{E}{E} deals 3 damage every turn
                                                     :AetherSpike ,  # Upkeep {E}{E}{E} builds a bank that makes the tax unpayable
                                                     :AethertideWhaleAetherdriftCommander69 ,  # Mass bounce returns Whale to hand to replay its 6E ETB
                                                     :AetherworksMarvelAetherdriftCommander123 ,  # Steady energy income funds 6E free casts
@@ -476,7 +476,7 @@ the card individuals it relates."""@en .
                                                     :SaheeliRadiantCreator .  # 3E per upkeep pays her copy trigger every combat
 
 # --- Aetherstorm Roc ---
-:AetherstormRoc :enables :AetherRevolt ,  # Each creature entering pings for 1 via the {E} it grants
+:AetherstormRoc :enables :AetherRevoltModernHorizons3113 ,  # Each creature entering pings for 1 via the {E} it grants
                          :BrotherhoodScribe ,  # Each creature entering on your turn pumps the team +1/+1
                          :Cryoshatter ,  # Tapping the enchanted creature makes Cryoshatter destroy it
                          :FabricationModule ,  # Each creature entering grants {E} and so a +1/+1 counter
@@ -484,7 +484,7 @@ the card individuals it relates."""@en .
 
 # --- Aethertide Whale ---
 :AethertideWhaleAetherdriftCommander69 :enables :AetherRefineryModernHorizons3Commander54 ,  # ETB energy feeds Refinery's X/X Aetherborn sink
-                                                :AetherRevolt ,  # 6E ETB deals 6 damage via trigger
+                                                :AetherRevoltModernHorizons3113 ,  # 6E ETB deals 6 damage via trigger
                                                 :AetherworksMarvelAetherdriftCommander123 ,  # 6E ETB fully pays one Marvel activation
                                                 :BlasterHulk ,  # 6E ETB funds 8E damage sink
                                                 :GontisAetherHeart ,  # 6E ETB burst builds toward the 8E extra turn
@@ -495,7 +495,7 @@ the card individuals it relates."""@en .
 
 # --- Aetherwind Basker ---
 :AetherwindBasker :enables :AetherRefineryModernHorizons3Commander54 ,  # Bulk energy feeds Refinery's X/X Aetherborn sink
-                           :AetherRevolt ,  # mass energy gain converts to damage
+                           :AetherRevoltModernHorizons3113 ,  # mass energy gain converts to damage
                            :AetherworksMarvelAetherdriftCommander123 ,  # Wide-board energy bursts fund 6E free casts
                            :BrotherhoodScribe ,  # Its attack {E} pumps the team +1/+1 before blocks
                            :GontisAetherHeart ,  # Wide-board energy bursts fund 8E extra turns
@@ -699,7 +699,7 @@ the card individuals it relates."""@en .
                        :GallifreyStands ,  # Doctor Human to cheat in on upkeep; counts toward thirteen
                        :GolemFoundry ,  # Graveyard artifact recast adds a charge counter
                        :JhoiraWeatherlightCaptain ,  # Graveyard artifact recast each turn draws a card
-                       :MirrodinBesieged ,  # Graveyard artifact recast each turn makes a Myr
+                       :MirrodinBesiegedModernHorizons57 ,  # Graveyard artifact recast each turn makes a Myr
                        :MischievousMystic ,  # Free tap loot supplies the second draw: a Faerie each turn
                        :MoiraAndTeshar ,  # Graveyard artifact recast triggers a reanimation
                        :PinnacleEmissaryEdgeOfEternities223 ,  # Graveyard artifact recast each turn makes a Drone
@@ -814,7 +814,7 @@ the card individuals it relates."""@en .
                                :ZulaportCutthroat .  # Death drains are lost again as end-step life loss
 
 # --- Architect of the Untamed ---
-:ArchitectOfTheUntamed :enables :AetherRevolt ,  # steady landfall E pings via trigger
+:ArchitectOfTheUntamed :enables :AetherRevoltModernHorizons3113 ,  # steady landfall E pings via trigger
                                 :BlasterHulk ,  # Paying eight {E} for a Beast makes Hulk cost {R}{R}
                                 :BrotherhoodScribe ,  # Each land drop's {E} pumps the team +1/+1
                                 :BrudicladTelchorEngineer ,  # Provides a 6/6 artifact token for Brudiclad to mass-copy
@@ -982,7 +982,7 @@ the card individuals it relates."""@en .
                               :UlamogsCrusher .  # Second combat fires annihilator 2 again
 
 # --- Aurora Shifter ---
-:AuroraShifter :enables :AetherRevolt ,  # combat energy gain converts to damage
+:AuroraShifter :enables :AetherRevoltModernHorizons3113 ,  # combat energy gain converts to damage
                         :SaheeliRadiantCreator .  # Combat-damage energy funds her copy trigger
 
 # --- Austere Command ---
@@ -1153,7 +1153,7 @@ the card individuals it relates."""@en .
                                 :VinelasherAdept .  # Rhino gains menace
 
 # --- Behemoth of Vault 0 ---
-:BehemothOfVault0 :enables :AetherRevolt .  # 4E ETB burst becomes damage
+:BehemothOfVault0 :enables :AetherRevoltModernHorizons3113 .  # 4E ETB burst becomes damage
 
 # --- Bespoke Battlewagon ---
 :BespokeBattlewagonModernHorizons352 :enables :BrotherhoodScribe ,  # Instant-speed tap for {E}{E} is a +1/+1 team trick in combat
@@ -1206,7 +1206,7 @@ the card individuals it relates."""@en .
 :BlastZone :enables :HearthhullTheWorldseed .  # Its self-sacrifice drains each opponent 2 at station 8+
 
 # --- Blaster Hulk ---
-:BlasterHulk :enables :AetherRevolt .  # attack energy gain triggers damage
+:BlasterHulk :enables :AetherRevoltModernHorizons3113 .  # attack energy gain triggers damage
 
 # --- Blazing Crescendo ---
 :BlazingCrescendo :enables :DanithaSwordOfHope ,  # Pump aimed at your creature draws a card
@@ -2033,7 +2033,7 @@ the card individuals it relates."""@en .
                                 :WeatherMaker .  # Fetch and its basic each trigger: two charge counters for mana or damage
 
 # --- Conversion Apparatus ---
-:ConversionApparatus :enables :AetherRevolt ,  # {3},{T} for {E}{E}{E} turns spare mana into 3 damage each turn
+:ConversionApparatus :enables :AetherRevoltModernHorizons3113 ,  # {3},{T} for {E}{E}{E} turns spare mana into 3 damage each turn
                               :BristlingHydra ,  # Bulk energy feeds counter/hexproof sink
                               :BrotherhoodScribe ,  # Energy on your turn triggers team pump
                               :ElectrostaticPummeler .  # Three energy fuels pump activation
@@ -2278,7 +2278,7 @@ the card individuals it relates."""@en .
                                                    :StarbreachWhale ,  # Bounce it with warp exile pending; re-warp for the ETB
                                                    :StarfieldShepherd ,  # Bounce it with warp exile pending; re-warp for the ETB
                                                    :WeftbladeEnhancer .  # Bounce it with warp exile pending; re-warp for the ETB
-:DecoctionModuleAetherdriftCommander128 :enables :AetherRevolt ,  # Creature ETB {E} pings for 1 and its bounce turns on revolt for +2
+:DecoctionModuleAetherdriftCommander128 :enables :AetherRevoltModernHorizons3113 ,  # Creature ETB {E} pings for 1 and its bounce turns on revolt for +2
                                                  :BrotherhoodScribe ,  # Each creature entering on your turn pumps the team +1/+1
                                                  :FabricationModule ,  # Each creature entering grants {E} and so a +1/+1 counter
                                                  :PrimalPrayers ,  # Each creature cast for {E} refunds that {E} as it enters
@@ -2624,7 +2624,7 @@ the card individuals it relates."""@en .
                            :MechanizedProductionMurdersAtKarlovManorCommander109 ,  # Doubled upkeep copies race to eight same-name artifacts
                            :MindlessAutomaton ,  # Each discard adds two counters, so every discard draws a card
                            :MindseekerOculus ,  # ETB empower 4 puts eight loyalty counters
-                           :MirrodinBesieged ,  # Each artifact spell makes two Myr
+                           :MirrodinBesiegedModernHorizons57 ,  # Each artifact spell makes two Myr
                            :MoxiteRefinery ,  # X counters removed come back as 2X counters
                            :MyojinOfNightsReach ,  # Enters with two divinity counters: wipe hands and stay indestructible
                            :MyrBattlesphereModernHorizons3Commander301 ,  # Four Myr become eight for its attack
@@ -2859,7 +2859,7 @@ the card individuals it relates."""@en .
 :DualSunTechnique :enables :DanithaSwordOfHope .  # Double strike aimed at your creature draws a card
 
 # --- Duchess, Wayward Tavernkeep ---
-:DuchessWaywardTavernkeep :enables :AetherRevolt ,  # Junk token sacrificed to impulse draw: Revolt adds 2 to noncombat damage
+:DuchessWaywardTavernkeep :enables :AetherRevoltModernHorizons3113 ,  # Junk token sacrificed to impulse draw: Revolt adds 2 to noncombat damage
                                    :GimbalGremlinProdigyMarchOfTheMachineCommander3 ,  # Junk adds a differently named artifact token
                                    :LaeliaTheBladeReforged ,  # Junk impulse exile puts a +1/+1 counter on Laelia
                                    :UnstableAmulet .  # Junk impulse casts are not from hand: each pings every opponent
@@ -2880,7 +2880,7 @@ the card individuals it relates."""@en .
 :DuskwatchRecruiter :enables :SilverbackElder .  # Discounts creature spells and digs for more cast triggers
 
 # --- Dynavolt Tower ---
-:DynavoltTower :enables :AetherRevolt ,  # Every instant or sorcery deals 2 damage via the Tower's {E}{E}
+:DynavoltTower :enables :AetherRevoltModernHorizons3113 ,  # Every instant or sorcery deals 2 damage via the Tower's {E}{E}
                         :AetherSpike ,  # Its own cast adds {E}{E} first, so the tax is at least 4
                         :BrotherhoodScribe ,  # Each instant or sorcery on your turn pumps the team +1/+1
                         :DeadlockTrap ,  # Spell-cast energy pays tap ability
@@ -3072,7 +3072,7 @@ the card individuals it relates."""@en .
                            :VoidforgedTitan .  # Instant-speed blink makes a permanent leave: turns on the Void draw
 
 # --- Electrosiphon ---
-:Electrosiphon :enables :AetherRevolt ,  # The countered spell's mana value in {E} is dealt as damage
+:Electrosiphon :enables :AetherRevoltModernHorizons3113 ,  # The countered spell's mana value in {E} is dealt as damage
                         :BrinebornCutthroat .  # Counterspell cast on an opponent's turn adds a +1/+1 counter
 
 # --- Elemental Mascot ---
@@ -3205,7 +3205,7 @@ the card individuals it relates."""@en .
                               :GolemFoundry ,  # Graveyard recasts add extra charge counters
                               :JhoiraWeatherlightCaptain ,  # Recasting graveyard artifacts keeps historic draws flowing
                               :MetalworkColossus ,  # Mill four and cast it from the graveyard at a discount
-                              :MirrodinBesieged ,  # Recasting graveyard artifacts makes a Myr each turn
+                              :MirrodinBesiegedModernHorizons57 ,  # Recasting graveyard artifacts makes a Myr each turn
                               :MoiraAndTeshar ,  # Graveyard artifact casts trigger reanimations
                               :MuldrothaTheGravetide ,  # Mill four stocks permanents to cast from the graveyard
                               :PinnacleEmissaryEdgeOfEternities223 ,  # Recasting graveyard artifacts makes a Drone each turn
@@ -3253,7 +3253,7 @@ the card individuals it relates."""@en .
 # --- Enthusiastic Mechanaut ---
 :EnthusiasticMechanaut :amplifies :GolemFoundry ,  # Cheaper artifact casts charge it toward Golems faster
                                   :JhoiraWeatherlightCaptain ,  # Cheaper artifacts mean more historic draws per turn
-                                  :MirrodinBesieged ,  # Discounted artifact spells mean more Myr per turn
+                                  :MirrodinBesiegedModernHorizons57 ,  # Discounted artifact spells mean more Myr per turn
                                   :PinnacleEmissaryEdgeOfEternities223 ,  # Discounted artifact spells mean more Drones per turn
                                   :SaheeliRadiantCreator ,  # Cheaper artifacts mean more energy for copy tokens
                                   :SaiMasterThopterist .  # Discounted artifact spells mean more Thopters per turn
@@ -3264,7 +3264,7 @@ the card individuals it relates."""@en .
 :EntropicBattlecruiser :enables :ImmersturmPredator .  # Stationing taps it: graveyard exile and +1/+1, so it stations more
 
 # --- Era of Innovation ---
-:EraOfInnovationAetherdriftCommander75 :enables :AetherRevolt ,  # Each artifact or Artificer entering deals 2 damage for {1}
+:EraOfInnovationAetherdriftCommander75 :enables :AetherRevoltModernHorizons3113 ,  # Each artifact or Artificer entering deals 2 damage for {1}
                                                 :BlasterHulk ,  # Paying six {E} to draw three makes Hulk cost {R}{R}
                                                 :BrotherhoodScribe ,  # Each artifact or Artificer entering on your turn pumps the team
                                                 :DeadlockTrap ,  # Energy income pays tap ability
@@ -3321,7 +3321,7 @@ the card individuals it relates."""@en .
 :EtheriumSculptor :enables :DrMadisonLiMagicTheGatheringFallout3 ,  # Cheaper artifacts mean more cast energy triggers
                            :EmryLurkerOfTheLoch ,  # Discounts artifacts cast from graveyard
                            :JhoiraWeatherlightCaptain ,  # Cheaper artifacts mean more historic casts per turn
-                           :MirrodinBesieged ,  # Cheaper artifacts = more Myr triggers
+                           :MirrodinBesiegedModernHorizons57 ,  # Cheaper artifacts = more Myr triggers
                            :MoiraAndTeshar ,  # Cheap artifact casts spam historic reanimation
                            :UthrosResearchCraft .  # Artifact discount raises artifact-cast density for draws
 
@@ -3338,7 +3338,7 @@ the card individuals it relates."""@en .
                                                         :HeartfireImmolator ,  # Free noncreature cast triggers prowess
                                                         :JhoiraWeatherlightCaptain ,  # {0} artifact cast cantrips off Jhoira
                                                         :LightshellDuo ,  # Free noncreature cast triggers prowess
-                                                        :MirrodinBesieged ,  # Zero-mana Chalice cast makes a free Myr
+                                                        :MirrodinBesiegedModernHorizons57 ,  # Zero-mana Chalice cast makes a free Myr
                                                         :MoiraAndTeshar ,  # Zero-mana Chalice cast reanimates a permanent
                                                         :PinnacleEmissaryEdgeOfEternities223 ,  # Zero-mana Chalice cast makes a free Drone
                                                         :RuricTharBiomagus ,  # Zero-mana Chalice cast triggers both prowess
@@ -3454,7 +3454,7 @@ the card individuals it relates."""@en .
                                :WeatherMaker .  # Extra land drop each turn: another charge counter
 
 # --- Explore ---
-:Explore :enables :OmnathLocusOfCreation ,  # Extra land drop this turn: a second landfall adds {R}{G}{W}{U}
+:ExploreDoctorWhoCommander231 :enables :OmnathLocusOfCreation ,  # Extra land drop this turn: a second landfall adds {R}{G}{W}{U}
                   :TannukMemorialEnsign .  # Extra land drop this turn: the second trigger draws a card
 
 # --- Explosive Vegetation ---
@@ -3821,7 +3821,7 @@ the card individuals it relates."""@en .
                      :ZulaportCutthroat .  # Sac outlet forces death drain triggers
 
 # --- Flux Channeler ---
-:FluxChanneler :amplifies :AetherRevolt ,  # Each noncreature spell proliferates banked {E}, pinging for 1
+:FluxChanneler :amplifies :AetherRevoltModernHorizons3113 ,  # Each noncreature spell proliferates banked {E}, pinging for 1
                           :AetherfluxConduit ,  # noncreature casts proliferate energy
                           :AjaniUnrelenting ,  # Noncreature casts proliferate loyalty for more -2 and -3
                           :ArcadeGannon ,  # Proliferate grows quest counters: bigger graveyard casts
@@ -3918,7 +3918,7 @@ the card individuals it relates."""@en .
 # --- Foundry Inspector ---
 :FoundryInspectorCommanderLegends310 :amplifies :DrMadisonLiMagicTheGatheringFallout3 ,  # Cheaper artifacts mean more cast energy
                                                 :JhoiraWeatherlightCaptain ,  # Cheaper artifacts mean more historic draws per turn
-                                                :MirrodinBesieged ,  # Artifact discount means more casts and more Myr
+                                                :MirrodinBesiegedModernHorizons57 ,  # Artifact discount means more casts and more Myr
                                                 :MoiraAndTeshar ,  # Cheaper artifacts mean more historic reanimations
                                                 :PinnacleEmissaryEdgeOfEternities223 ,  # Artifact discount means more casts and more Drones
                                                 :SaheeliRadiantCreator ,  # Cheaper artifacts mean more energy for copy tokens
@@ -4161,7 +4161,7 @@ the card individuals it relates."""@en .
                             :ZulaportCutthroat .  # Spawn tokens sacrificed for mana each drain every opponent
 
 # --- Glassblower's Puzzleknot ---
-:GlassblowersPuzzleknot :enables :AetherRevolt .  # Its sacrifice turns on revolt, so its {E}{E} deals 4 to a foe
+:GlassblowersPuzzleknot :enables :AetherRevoltModernHorizons3113 .  # Its sacrifice turns on revolt, so its {E}{E} deals 4 to a foe
 
 # --- Glittering Massif ---
 :GlitteringMassif :enables :JoGrant .  # Cycling it puts a +1/+1 counter on Jo Grant
@@ -4211,7 +4211,7 @@ the card individuals it relates."""@en .
                            :TirelessProvisioner ,  # Landfall Treasures tap for two mana each
                            :TreasureVaultAetherdriftCommander180 ,  # X Treasures make 2X mana
                            :UnexpectedWindfall .  # Two Treasures make four mana
-:GoldspanDragon :enables :AetherRevolt ,  # Its Treasures get sacrificed for mana: Revolt adds 2 to noncombat damage
+:GoldspanDragon :enables :AetherRevoltModernHorizons3113 ,  # Its Treasures get sacrificed for mana: Revolt adds 2 to noncombat damage
                          :AidFromTheCowl ,  # Its Treasures get sacrificed for mana: turns on the Revolt free permanent
                          :AlpharaelStonechosen ,  # Its Treasures get sacrificed for mana: turns on the Void halving
                          :GimbalGremlinProdigyMarchOfTheMachineCommander3 ,  # Treasures add a differently named artifact token
@@ -4235,7 +4235,7 @@ the card individuals it relates."""@en .
                            :MazesEnd .  # A distinct Gate to fetch toward the ten-Gate win
 
 # --- Gonti's Aether Heart ---
-:GontisAetherHeart :enables :AetherRevolt ,  # Each artifact entering deals 2 damage via its {E}{E}
+:GontisAetherHeart :enables :AetherRevoltModernHorizons3113 ,  # Each artifact entering deals 2 damage via its {E}{E}
                             :BlasterHulk ,  # Paying eight {E} for the extra turn makes Hulk cost {R}{R}
                             :BrotherhoodScribe ,  # Each artifact entering on your turn pumps the team +1/+1
                             :FabricationModule ,  # Each artifact entering grants {E}{E} and so a +1/+1 counter
@@ -4361,7 +4361,7 @@ the card individuals it relates."""@en .
                       :WeftstalkerArdent .  # Heir and two Knights ping each opponent three times
 
 # --- Guide of Souls ---
-:GuideOfSouls :enables :AetherRevolt ,  # Each creature entering pings for 1 via the {E} it grants
+:GuideOfSouls :enables :AetherRevoltModernHorizons3113 ,  # Each creature entering pings for 1 via the {E} it grants
                        :AethersquallAncientAetherdriftCommander68 ,  # energy income feeds 8E sink
                        :AjanisPridemateMagicTheGatheringFoundations135 ,  # Creature-ETB lifegain grows it a counter at a time
                        :AmaliaBenavidesAguirre ,  # Creature-ETB lifegain makes Amalia explore each time
@@ -4449,7 +4449,7 @@ the card individuals it relates."""@en .
 :HarbingerOfTheTides :enables :BrinebornCutthroat .  # Flash cast on an opponent's turn adds a +1/+1 counter
 
 # --- Hearthhull, the Worldseed ---
-:HearthhullTheWorldseed :enables :AetherRevolt ,  # Station 2+ land sacrifice each turn: Revolt adds 2 to noncombat damage
+:HearthhullTheWorldseed :enables :AetherRevoltModernHorizons3113 ,  # Station 2+ land sacrifice each turn: Revolt adds 2 to noncombat damage
                                  :AidFromTheCowl ,  # Station 2+ land sacrifice each turn: turns on the Revolt free permanent
                                  :FelidarRetreat ,  # Sac a land, draw two, play another: an extra Cat or team counter
                                  :GrapplingKraken ,  # Sac a land, draw two, play another: another creature tapped and stunned
@@ -4721,7 +4721,7 @@ the card individuals it relates."""@en .
                               :ZulaportCutthroat .  # Repeatable sac outlet makes each death drain every opponent
 
 # --- Inexorable Tide ---
-:InexorableTide :amplifies :AetherRevolt ,  # Each spell proliferates banked {E}, pinging for 1
+:InexorableTide :amplifies :AetherRevoltModernHorizons3113 ,  # Each spell proliferates banked {E}, pinging for 1
                            :AetherfluxConduit ,  # cast-proliferate grows E toward fifty
                            :AethersquallAncientAetherdriftCommander68 ,  # proliferate speeds 8E bounce
                            :AjaniUnrelenting ,  # Each spell proliferates loyalty for more -2 and -3
@@ -4857,7 +4857,7 @@ the card individuals it relates."""@en .
                              :LingeringSouls ,  # Four Spirit fliers become 2/2s with vigilance
                              :LoyalApprenticeAetherdriftCommander104 ,  # Thopter tokens buffed
                              :MartialCoup ,  # Surviving Soldiers become 2/2s with vigilance
-                             :MirrodinBesieged ,  # Myr tokens become 2/2s with vigilance
+                             :MirrodinBesiegedModernHorizons57 ,  # Myr tokens become 2/2s with vigilance
                              :MyrBattlesphereModernHorizons3Commander301 ,  # Myr tokens attack with vigilance, then still tap for its X
                              :OverlordOfTheMistmoors ,  # Insect tokens become 3/2 fliers with vigilance
                              :OvikaEnigmaGoliath ,  # Hasty Goblin swarms hit as 2/2s
@@ -4891,7 +4891,7 @@ the card individuals it relates."""@en .
 :IrrigatedFarmlandDoctorWhoCommander288 :enables :JoGrant .  # Cycling it puts a +1/+1 counter on Jo Grant
 
 # --- Izzet Generatorium ---
-:IzzetGeneratorium :amplifies :AetherRevolt ,  # Every {E} gain is one bigger, so each trigger deals 1 more damage
+:IzzetGeneratorium :amplifies :AetherRevoltModernHorizons3113 ,  # Every {E} gain is one bigger, so each trigger deals 1 more damage
                               :AetherfluxConduit ,  # +1 {E} per spell-cast energy trigger
                               :AethersquallAncientAetherdriftCommander68 ,  # Upkeep 3 {E} becomes 4, faster mass bounce
                               :AetherstormRoc ,  # Each creature entering grants {E}{E} instead of {E}
@@ -4969,7 +4969,7 @@ the card individuals it relates."""@en .
                             :GolemFoundry ,  # Historic discount on artifacts speeds charge counters
                             :JamieMcCrimmon ,  # Historic spells cost 1 less: more pumps, each at full mana value
                             :JhoiraWeatherlightCaptain ,  # Historic spells cost 1 less: more draw triggers per turn
-                            :MirrodinBesieged ,  # Historic discount covers artifact spells: more Myr
+                            :MirrodinBesiegedModernHorizons57 ,  # Historic discount covers artifact spells: more Myr
                             :MoiraAndTeshar ,  # Historic spells cost 1 less: more reanimation triggers
                             :PinnacleEmissaryEdgeOfEternities223 ,  # Historic discount covers artifact spells: more Drones
                             :SaiMasterThopterist ,  # Historic discount covers artifact spells: more Thopters
@@ -5502,7 +5502,7 @@ the card individuals it relates."""@en .
                   :LaboratoryManiac .  # Empties library so Lab Man's draw wins the game
 
 # --- Liberty Prime, Recharged ---
-:LibertyPrimeRecharged :enables :AetherRevolt ,  # Artifact sacrifice turns on revolt, so its {E}{E} deals 4 to a foe
+:LibertyPrimeRecharged :enables :AetherRevoltModernHorizons3113 ,  # Artifact sacrifice turns on revolt, so its {E}{E} deals 4 to a foe
                                 :IchorWellspring ,  # Sacrificed for energy, it draws a second card
                                 :MarionetteApprentice ,  # Artifact sacrificed for energy and a card drains 1
                                 :OdricLunarchMarshalInnistradRemastered36 ,  # Vigilance, trample and haste go team-wide
@@ -6058,7 +6058,7 @@ the card individuals it relates."""@en .
                            :KioraOfSaltAndSand .  # Four-loyalty Jace token activates before combat four turns
 
 # --- Mirrodin Besieged ---
-:MirrodinBesieged :enables :DonatelloWayWithMachines ,  # Each artifact cast adds a Myr: two counters
+:MirrodinBesiegedModernHorizons57 :enables :DonatelloWayWithMachines ,  # Each artifact cast adds a Myr: two counters
                            :EraOfInnovationAetherdriftCommander75 ,  # Myr per artifact cast: another energy trigger
                            :EruditeWizard ,  # Phyrexian end-step loot is the second draw each turn
                            :EzuriClawOfProgress ,  # Myr tokens add experience counters
@@ -6339,7 +6339,7 @@ the card individuals it relates."""@en .
                                                  :LightshellDuo ,  # Artifact casts off the top pump prowess repeatedly
                                                  :LuxArtilleryEdgeOfEternitiesCommander140 ,  # Top-deck artifact creature casts gain sunburst
                                                  :MetalworkColossus ,  # Castable off the top with Forge counting four toward the discount
-                                                 :MirrodinBesieged ,  # Cast artifacts off library, chain Myr tokens
+                                                 :MirrodinBesiegedModernHorizons57 ,  # Cast artifacts off library, chain Myr tokens
                                                  :MoiraAndTeshar ,  # Top-deck artifact casts chain historic triggers
                                                  :OvikaEnigmaGoliath ,  # Noncreature artifacts cast off the top make Goblins by MV
                                                  :PinnacleEmissaryEdgeOfEternities223 ,  # Artifact casts off the library top each make a Drone
@@ -6482,7 +6482,7 @@ the card individuals it relates."""@en .
                             :SphinxsTutelage .  # Each landfall draw mills two
 
 # --- Nissa, Worldsoul Speaker ---
-:NissaWorldsoulSpeaker :enables :AetherRevolt ,  # Each landfall {E}{E} deals 2 damage
+:NissaWorldsoulSpeaker :enables :AetherRevoltModernHorizons3113 ,  # Each landfall {E}{E} deals 2 damage
                                 :BlasterHulk ,  # Paying eight {E} for a permanent spell makes Hulk cost {R}{R}
                                 :BrotherhoodScribe ,  # Each land drop's {E}{E} pumps the team +1/+1
                                 :FabricationModule ,  # Each landfall grants {E}{E} and so a +1/+1 counter
@@ -6616,7 +6616,7 @@ the card individuals it relates."""@en .
                                      :LathrilBladeOfTheElves ,  # Combat damage makes triple the Elves
                                      :LegionLoyalty ,  # Myriad copies are tripled
                                      :MartialCoup ,  # X Soldiers become 3X, all spared by the wipe
-                                     :MirrodinBesieged ,  # Triples Myr tokens per artifact cast
+                                     :MirrodinBesiegedModernHorizons57 ,  # Triples Myr tokens per artifact cast
                                      :MyrBattlesphereModernHorizons3Commander301 ,  # Triples Myr tokens to twelve
                                      :Necroduality ,  # Zombie copy tokens created in triples
                                      :NestingDovehawk ,  # Populate creates three copies
@@ -6964,7 +6964,7 @@ the card individuals it relates."""@en .
                           :SalvationColossus .  # Energy burst toward 8-energy unearth
 
 # --- Peema Trailblazer ---
-:PeemaTrailblazer :enables :AetherRevolt ,  # Combat damage to a player is dealt again as {E} damage
+:PeemaTrailblazer :enables :AetherRevoltModernHorizons3113 ,  # Combat damage to a player is dealt again as {E} damage
                            :FabricationModule ,  # Combat damage to a player grants {E} and so a +1/+1 counter
                            :PrimalPrayers ,  # Combat energy pays creature-spell energy casts
                            :SalvationColossus .  # Combat energy toward 8-energy unearth
@@ -7223,7 +7223,7 @@ the card individuals it relates."""@en .
 :PrismariTheInspiration :enables :LathlissDragonQueen .  # Nontoken Dragon entering makes a 5/5 flying Dragon token
 
 # --- Professional Face-Breaker ---
-:ProfessionalFaceBreaker :enables :AetherRevolt ,  # Treasure sacrificed to impulse draw: Revolt adds 2 to noncombat damage
+:ProfessionalFaceBreaker :enables :AetherRevoltModernHorizons3113 ,  # Treasure sacrificed to impulse draw: Revolt adds 2 to noncombat damage
                                   :AidFromTheCowl ,  # Treasure sacrificed to impulse draw: turns on the Revolt free permanent
                                   :AlpharaelStonechosen ,  # Treasure sacrificed to impulse draw: turns on the Void halving
                                   :Hylderblade ,  # Treasure sacrificed to impulse draw: turns on the Void re-attach
@@ -7344,7 +7344,7 @@ the card individuals it relates."""@en .
                             :Suncrusher .  # WUBRG burst casts it with every color: maximum counters
 
 # --- Rampaging Aetherhood ---
-:RampagingAetherhood :enables :AetherRevolt ,  # Upkeep {E} equal to its power deals that much damage
+:RampagingAetherhood :enables :AetherRevoltModernHorizons3113 ,  # Upkeep {E} equal to its power deals that much damage
                               :BlasterHulk ,  # Upkeep {E} paid into counters discounts Hulk the same turn
                               :BrotherhoodScribe ,  # Upkeep {E} pumps the team +1/+1 for the whole turn
                               :FabricationModule ,  # Upkeep {E} adds a counter that grows the next upkeep's {E}
@@ -8559,7 +8559,7 @@ the card individuals it relates."""@en .
                                :TheUrSphinx .  # Sphinx: {1} cheaper, adds to the mill; free spells can't be countered
 
 # --- Sphinx of the Revelation ---
-:SphinxOfTheRevelation :enables :AetherRevolt ,  # Life gained becomes {E} and the same amount of damage
+:SphinxOfTheRevelation :enables :AetherRevoltModernHorizons3113 ,  # Life gained becomes {E} and the same amount of damage
                                 :ClinquantSkymage ,  # Energy-paid draw X adds X counters
                                 :FabricationModule ,  # Each life gain event grants {E} and so a +1/+1 counter
                                 :SphinxsTutelage ,  # Energy-paid draw X mills 2X or more
@@ -8746,7 +8746,7 @@ the card individuals it relates."""@en .
 :StompedByTheFoot :enables :ForumNecroscribe .  # Creature sacrificed to kick it is returned by repartee
 
 # --- Stone Idol Generator ---
-:StoneIdolGenerator :enables :AetherRevolt ,  # Each attacking creature's {E} is a separate 1-damage trigger
+:StoneIdolGenerator :enables :AetherRevoltModernHorizons3113 ,  # Each attacking creature's {E} is a separate 1-damage trigger
                              :BlasterHulk ,  # Paying six {E} for a Construct makes Hulk cost {R}{R}
                              :BrotherhoodScribe ,  # Each attacker's {E} is its own trigger: +1/+1 team per attacker
                              :BrudicladTelchorEngineer ,  # 6/12 Construct is prime target to copy across all tokens
@@ -8777,7 +8777,7 @@ the card individuals it relates."""@en .
                                   :GoldspanDragon ,  # Each attack Treasure brings a Thopter
                                   :HangarbackWalker ,  # Death Thopters gain a bonus Thopter and +1/+1
                                   :LoyalApprenticeAetherdriftCommander104 ,  # Each combat makes two pumped Thopters
-                                  :MirrodinBesieged ,  # Each artifact spell adds a Myr and a Thopter
+                                  :MirrodinBesiegedModernHorizons57 ,  # Each artifact spell adds a Myr and a Thopter
                                   :MyrBattlesphereModernHorizons3Commander301 ,  # Four Myr arrive with a bonus Thopter
                                   :PhyrexianIronworks ,  # Every Golem arrives with a bonus Thopter
                                   :PiaAndKiranNalaarAetherdriftCommander105 ,  # ETB makes three Thopters, all pumped
@@ -9172,7 +9172,7 @@ the card individuals it relates."""@en .
                           :GenesisOfTheDaleks ,  # Dalek tokens become 5/5 menace attackers
                           :GingerQueenOfSweets ,  # Hasty Gingerbrutes attack as 3/3s
                           :HangarbackWalker ,  # Pumps the Thopter tokens it leaves behind
-                          :MirrodinBesieged ,  # Myr per artifact cast arrives as a 3/3
+                          :MirrodinBesiegedModernHorizons57 ,  # Myr per artifact cast arrives as a 3/3
                           :Missy ,  # Reanimated face-down Cybermen become 4/4s
                           :MyrBattlesphereModernHorizons3Commander301 ,  # Four Myr and the Battlesphere get +2/+2 each
                           :PinnacleEmissaryEdgeOfEternities223 ,  # Drone per artifact cast arrives as a 3/3 flier
@@ -9356,7 +9356,7 @@ the card individuals it relates."""@en .
                           :JamieMcCrimmon ,  # Historic recasts from the graveyard pump Jamie each turn
                           :JhoiraWeatherlightCaptain ,  # Historic permanent recast from graveyard draws a card
                           :LilianaDeathsMajestyAetherdriftCommander94 ,  # Legendary walker is cast from the yard for another -3
-                          :MirrodinBesieged ,  # Historic permanent recast from graveyard makes a Myr
+                          :MirrodinBesiegedModernHorizons57 ,  # Historic permanent recast from graveyard makes a Myr
                           :MoiraAndTeshar ,  # Graveyard historic recast triggers a reanimation
                           :PinnacleEmissaryEdgeOfEternities223 ,  # Historic permanent recast from graveyard makes a Drone
                           :PrimaryResearch ,  # A historic play from the yard turns on the end-step draw
@@ -9401,7 +9401,7 @@ the card individuals it relates."""@en .
                                              :JamieMcCrimmon ,  # Extra historic cast off the top pumps it
                                              :JennyFlint ,  # Free-cast Food to sacrifice for counters
                                              :JhoiraWeatherlightCaptain ,  # Extra historic cast off the top draws a card
-                                             :MirrodinBesieged ,  # Historic casts off the top make a Myr and a Food
+                                             :MirrodinBesiegedModernHorizons57 ,  # Historic casts off the top make a Myr and a Food
                                              :MoiraAndTeshar ,  # Extra historic cast off the top reanimates a permanent
                                              :NukaColaVendingMachine ,  # Free-cast Food eaten becomes a Treasure
                                              :NyssaOfTraken ,  # Food tokens are artifacts to sacrifice for her attack draws
@@ -9795,7 +9795,7 @@ the card individuals it relates."""@en .
 
 # --- Tireless Provisioner ---
 :TirelessProvisioner :enables :AceFearlessRebel ,  # Treasure fodder for Nitro-9 artifact sac
-                              :AetherRevolt ,  # Landfall Treasure or Food gets sacrificed: Revolt adds 2 to noncombat damage
+                              :AetherRevoltModernHorizons3113 ,  # Landfall Treasure or Food gets sacrificed: Revolt adds 2 to noncombat damage
                               :AidFromTheCowl ,  # Landfall Treasure or Food gets sacrificed: turns on the Revolt free permanent
                               :AlpharaelStonechosen ,  # Landfall Treasure or Food gets sacrificed: turns on the Void halving
                               :CombineChrysalis ,  # Landfall Food or Treasure sac into 4/4 Beasts
@@ -10633,7 +10633,7 @@ the card individuals it relates."""@en .
 :WisdomOfAges :enables :PrismariTheInspiration .  # Returns every instant and sorcery to fuel one big storm turn
 
 # --- Woodweaver's Puzzleknot ---
-:WoodweaversPuzzleknot :enables :AetherRevolt ,  # Its sacrifice turns on revolt, so its {E}{E}{E} deals 5 to a foe
+:WoodweaversPuzzleknot :enables :AetherRevoltModernHorizons3113 ,  # Its sacrifice turns on revolt, so its {E}{E}{E} deals 5 to a foe
                                 :AetherworksMarvelAetherdriftCommander123 ,  # Sac feeds Marvel: graveyard trigger {E} plus stored energy
                                 :PrimalPrayers ,  # 3 {E} casts up to three cheap creatures free
                                 :SaheeliRadiantCreator ,  # 3 {E} on ETB exactly funds Saheeli's combat copy
@@ -11052,7 +11052,7 @@ the card individuals it relates."""@en .
 :Mechanozoa :hasSynergyWith :TheMasterFormedAnew .  # Exile the doomed warped card; The Master enters as its copy
 :MeltstridersResolve :hasSynergyWith :PredatorOoze .  # Indestructible Ooze fights safely and grows from the kill
 :MeltstridersResolve :hasSynergyWith :VenusTornBetweenWorlds .  # Fight damage Venus survives becomes +1/+1 counters
-:MetalworkColossus :hasSynergyWith :MirrodinBesieged .  # Myr pay the sac-two return; each cheap recast makes a Myr
+:MetalworkColossus :hasSynergyWith :MirrodinBesiegedModernHorizons57 .  # Myr pay the sac-two return; each cheap recast makes a Myr
 :MetalworkColossus :hasSynergyWith :PinnacleEmissaryEdgeOfEternities223 .  # Drones pay the sac-two return; each cheap recast makes a Drone
 :MetalworkColossus :hasSynergyWith :SaiMasterThopterist .  # Thopters pay the sac-two return; each cheap recast makes a Thopter
 :MetalworkColossus :hasSynergyWith :SpineOfIshSah .  # Spine pays the sac-two return and comes back to hand; MV 7 discount

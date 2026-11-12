@@ -54,7 +54,7 @@ legality definitions."""@en .
 #
 ################################################################################
 
-:MirrodinBesieged rdf:type owl:NamedIndividual ,
+:MirrodinBesiegedModernHorizons57 rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Mirrodin Besieged" ;
     :manaCost "{2}{U}" ;

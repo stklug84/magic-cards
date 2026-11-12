@@ -19,6 +19,11 @@ Loads every TTL file under the graph roots into one graph and checks:
                        BEHAVIOR_KEYS) and one JSON-parseable
                        :behaviorValue; :threatWeight is only asserted on
                        Card individuals.
+  6. card-iris       - a card individual's IRI names nothing else: no
+                       rdf:type besides the card classes, not a class or
+                       property of the ontology (a card named like a set
+                       or a keyword merges with it into one node otherwise,
+                       and no reasoner objects).
 
 Checks 2, 3 and 5 are what make this useful downstream: they catch a deck
 graph that references a card the knowledge graph no longer defines, that
@@ -387,6 +392,34 @@ def check_synergy_domain(idx: GraphIndex) -> list[str]:
     return errors
 
 
+def check_card_iris(idx: GraphIndex) -> list[str]:
+    """Check 6 (card-iris): a card individual's IRI names nothing else.
+
+    A card named like a set or a keyword (Aether Revolt, Explore) must not
+    take that individual's IRI: the two would merge into one node that is
+    both, and no reasoner objects, since the classes are not disjoint. The
+    generator suffixes such a card with its set and collector number.
+    """
+    cards = {
+        s
+        for cls in idx.card_classes
+        for s in idx.combined.subjects(RDF.type, cls)
+        if isinstance(s, URIRef)
+    }
+    errors: list[str] = []
+    for card in sorted(cards, key=str):
+        others = sorted(
+            str(t).rsplit("#", 1)[-1]
+            for t in idx.combined.objects(card, RDF.type)
+            if t not in idx.card_classes and t != OWL.NamedIndividual
+        )
+        if card in idx.declared_classes or card in idx.declared_props:
+            others.append("a term of the ontology")
+        if others:
+            errors.append(f"card-iris: {card} is a Card and also {', '.join(others)}")
+    return errors
+
+
 @dataclass
 class CheckStats:
     """Counts reported in the summary line."""
@@ -417,6 +450,7 @@ def run(ctx: ValidationContext) -> list[str]:
     hook_errors, stats.n_hooks = check_behavior_hooks(idx)
     errors.extend(hook_errors)
     errors.extend(check_synergy_domain(idx))
+    errors.extend(check_card_iris(idx))
 
     print(  # noqa: T201 - validator summary line
         f"Checked {stats.n_props} properties, {stats.n_classes} classes, "

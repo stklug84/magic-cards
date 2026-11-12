@@ -897,6 +897,7 @@ class GenerateInputs:
     set_ind: dict[str, str]
     new_sets: dict[str, str]
     existing_keys: set[tuple[str, str, str]]
+    #: names a new card must not take: master-file cards and ontology terms
     existing_names: set[str]
 
 
@@ -919,13 +920,34 @@ def _resolve_set_individuals(
     return set_ind, new_sets
 
 
+def reserved_names(vocab: dict[str, Any], set_ind: dict[str, str]) -> set[str]:
+    """Return the names a card individual must not take: the ontology's terms.
+
+    The individuals of the vocabulary classes (keywords, types, ability
+    words), every labelled term and the Set individuals, those the ontology
+    defines and those this run mints. A card named like one of them (Explore
+    the keyword action, Aether Revolt the set) would share its IRI and merge
+    with it into one node that is both, which no reasoner rejects.
+    """
+    names = set(vocab.get("_labels", {})) | set(vocab.get("_setcodes", {}).values())
+    for value in vocab.values():
+        if isinstance(value, list):
+            names.update(value)
+    return names | set(set_ind.values())
+
+
 def _individual_name(
     p: Printing,
     key: PrintKey,
     per_name: dict[str, list[PrintKey]],
     inputs: GenerateInputs,
 ) -> str:
-    """Choose the individual name; suffix set+number to avoid collisions."""
+    """Choose the individual name; suffix set+number to avoid collisions.
+
+    A card takes its plain name unless it is a basic land, has a second
+    printing, or the name is taken (existing_names: a master-file card or a
+    term of the ontology, see reserved_names).
+    """
     base = pascal(p["name"].split(" // ")[0])
     multi = len(per_name[p["name"]]) > 1
     if p["name"] in BASICS or multi or base in inputs.existing_names:
@@ -1087,9 +1109,10 @@ def cmd_generate() -> None:
     existing_keys = {
         (e["name"], (inv_sets.get(e["set"]) or "").lower(), e["num"]) for e in existing
     }
-    existing_names = {e["ind"] for e in existing}
-
     set_ind, new_sets = _resolve_set_individuals(printings, setcodes, sets_meta)
+    # names a new card individual must not take: the master files' cards and
+    # every ontology term, Set individuals included
+    existing_names = {e["ind"] for e in existing} | reserved_names(vocab, set_ind)
     inputs = GenerateInputs(
         printings=printings,
         cards=cards,
