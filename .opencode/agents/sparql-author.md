@@ -72,7 +72,10 @@ and, if the total changed, the query count quoted in the root `README.md`.
 - **Collection entries are variants**: one per (printing, finish,
   condition). A printing owned in foil and non-foil has two entries, so
   per-card totals always need `SUM(?n)`.
-- **Colorless** is the *absence* of `mc:hasColorIdentity`, not a value.
+- **Colorless** is an absence, not a value: a colorless card has no
+  `mc:hasColor`, a colorless color identity no `mc:hasColorIdentity`. They
+  differ (Azorius Signet is colorless, identity white-blue), and Commander
+  legality uses `mc:hasColorIdentity`.
 - **Basic lands** in deck graphs are printing-specific individuals
   (`mc:ForestAetherdrift291`); the bare `mc:Forest` is the subtype
   individual in the ontology.

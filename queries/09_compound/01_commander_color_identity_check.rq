@@ -1,10 +1,16 @@
-# Sanity check: for every Commander deck in the dataset, list every card whose
-# colors include a color NOT present in any commander of that deck. In a legal
-# Commander deck this result set should be empty.
+# Commander color identity check (rule 903.5c): for every Commander deck in
+# the dataset, list each card whose color identity has a color that is not in
+# the deck's color identity. In a legal Commander deck this result set is
+# empty.
 #
-# NOTE: This checks card :hasColor only, not full color identity (which would
-# also include colors of mana symbols in oracle text and color indicators).
-# For a strict check, extend the ontology with :hasColorIdentity.
+# The check reads mc:hasColorIdentity (rule 903.4), never mc:hasColor: color
+# identity also counts the mana symbols in a card's rules text and its color
+# indicator, so a colorless card can have a colored identity (Azorius Signet:
+# white-blue) and a colored card a wider one (Lingering Souls: white, identity
+# white-black). A card with a colorless identity asserts no
+# mc:hasColorIdentity and is never listed, as rule 903.5c allows. With two
+# commanders (partner, rule 702.124c) the deck's color identity is the union
+# of both commanders' identities.
 #
 # PARAMETERS:
 #   ?deck - optional: uncomment the VALUES clause in WHERE to restrict
@@ -17,14 +23,19 @@ SELECT DISTINCT ?deckName ?cardName ?offendingColor WHERE {
   # To restrict to specific deck(s), uncomment and edit:
   # VALUES ?deck { mc:SomeDeck }
 
-  OPTIONAL { ?deck rdfs:label ?deckName }
-
-  ?commander mc:isCommanderOf ?deck .
-
   ?deck mc:hasCard ?c .
   ?c mc:cardName ?cardName ;
-     mc:hasColor ?offendingColor .
+     mc:hasColorIdentity ?offendingColor .
 
-  FILTER NOT EXISTS { ?commander mc:hasColor ?offendingColor }
+  # Commander decks only; a color is allowed when any commander has it.
+  FILTER EXISTS { ?commander mc:isCommanderOf ?deck }
+  FILTER NOT EXISTS {
+    ?commander mc:isCommanderOf ?deck ;
+               mc:hasColorIdentity ?offendingColor .
+  }
+
+  # Last, not first: an OPTIONAL that opens the pattern drops every deck
+  # without a label.
+  OPTIONAL { ?deck rdfs:label ?deckName }
 }
 ORDER BY ?deckName ?cardName ?offendingColor

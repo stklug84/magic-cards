@@ -158,8 +158,11 @@ A few patterns recur across queries:
   (`?e rdf:type mc:CollectionEntry`) or traverse from the container when the
   distinction matters.
 - **Colors and color identity**: cards assert both `mc:hasColor` and
-  `mc:hasColorIdentity`. Colorless cards are recognizable by the absence of
-  any `mc:hasColorIdentity` values.
+  `mc:hasColorIdentity`, and colorless is never a value of either. A colorless
+  card asserts no `mc:hasColor`; a card with a colorless color identity asserts
+  no `mc:hasColorIdentity`. The two differ: Azorius Signet is colorless, but its
+  color identity is white-blue. Commander deck checks (rule 903.5c) use
+  `mc:hasColorIdentity`.
 - **Basic lands** in deck graphs are distinct printing-specific Card individuals named
   `mc:ForestAetherdrift291`, `mc:IslandAetherdrift282`, `mc:MountainAetherdrift288` (from the
   `sets/Aetherdrift.ttl` set graph, set code `DFT`) — the bare `mc:Forest` / `mc:Island` / `mc:Mountain`
