@@ -4436,7 +4436,7 @@ When this land enters, return a land you control to its owner's hand.
         :rulingDate "2013-04-15"^^xsd:date ;
         :rulingText """If this land enters the battlefield and you control no other lands, its ability will force you to return it to your hand."""@en ] .
 
-:MysticGate rdf:type owl:NamedIndividual ,
+:MysticGateModernHorizons3Commander359 rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Mystic Gate" ;
     :manaValue "0"^^xsd:nonNegativeInteger ;

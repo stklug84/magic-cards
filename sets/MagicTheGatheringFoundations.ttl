@@ -359,6 +359,99 @@ When this creature enters, put a +1/+1 counter on each of up to two other target
       [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
 
+:GuardedHeir rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Guarded Heir" ;
+    :manaCost "{5}{W}" ;
+    :manaValue "6"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Human ,
+                :Noble ;
+    :hasRarity :Uncommon ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :MagicTheGatheringFoundations ;
+    :cardNumber "14"^^xsd:integer ;
+    :artist "Craig J Spearing" ;
+    :hasLanguage :English ;
+    :power "1" ;
+    :powerValue "1"^^xsd:integer ;
+    :toughness "1" ;
+    :toughnessValue "1"^^xsd:integer ;
+    :hasKeywordAbility :Lifelink ;
+    :printedText """Lifelink (Damage dealt by this creature also causes you to gain that much life.)
+When this creature enters, create two 3/3 white Knight creature tokens."""@en ;
+    :oracleText """Lifelink (Damage dealt by this creature also causes you to gain that much life.)
+When this creature enters, create two 3/3 white Knight creature tokens."""@en ;
+    :flavorText """The fate of the kingdom is tied to her own. Until she's old enough to rule, her vassals will not leave her side."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=679091"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/fdn/14/guarded-heir"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "93727"^^xsd:positiveInteger ;
+    :arenaName "Guarded Heir" ;
+    :arenaSetCode "FDN" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:HareApparent rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Hare Apparent" ;
+    :manaCost "{1}{W}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Rabbit ,
+                :Noble ;
+    :hasRarity :Common ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :MagicTheGatheringFoundations ;
+    :cardNumber "15"^^xsd:integer ;
+    :artist "Milivoj Ćeran" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    :printedText """When this creature enters, create a number of 1/1 white Rabbit creature tokens equal to the number of other creatures you control named Hare Apparent.
+A deck can have any number of cards named Hare Apparent."""@en ;
+    :oracleText """When this creature enters, create a number of 1/1 white Rabbit creature tokens equal to the number of other creatures you control named Hare Apparent.
+A deck can have any number of cards named Hare Apparent."""@en ;
+    :flavorText """Most families have trees. His has an entire forest."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=679092"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/fdn/15/hare-apparent"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "93728"^^xsd:positiveInteger ;
+    :arenaName "Hare Apparent" ;
+    :arenaSetCode "FDN" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
 :HelpfulHunter rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Helpful Hunter" ;
@@ -556,6 +649,50 @@ During your turn, creatures you control with +1/+1 counters on them have first s
       [ rdf:type :Ruling ;
         :rulingDate "2024-11-08"^^xsd:date ;
         :rulingText """If the target creature is an illegal target when Joust Through tries to resolve, it won't resolve and none of its effects will happen. You won't gain life."""@en ] .
+
+:LuminousRebuke rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Luminous Rebuke" ;
+    :manaCost "{4}{W}" ;
+    :manaValue "5"^^xsd:nonNegativeInteger ;
+    :hasCardType :Instant ;
+    :hasRarity :Common ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :MagicTheGatheringFoundations ;
+    :cardNumber "20"^^xsd:integer ;
+    :artist "Mike Sass" ;
+    :hasLanguage :English ;
+    :printedText """This spell costs {3} less to cast if it targets a tapped creature.
+Destroy target creature."""@en ;
+    :oracleText """This spell costs {3} less to cast if it targets a tapped creature.
+Destroy target creature."""@en ;
+    :flavorText """The monstrous bird swooped in for the kill, only to be met by a concentrated blast of pure, searing moonlight."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=679097"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/fdn/20/luminous-rebuke"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "93733"^^xsd:positiveInteger ;
+    :arenaName "Luminous Rebuke" ;
+    :arenaSetCode "FDN" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-11-08"^^xsd:date ;
+        :rulingText """To determine the total cost of a spell, start with the mana cost or alternative cost you're paying, add any cost increases, then apply any cost reductions. The mana value of the spell remains unchanged, no matter what the total cost to cast it was."""@en ] .
 
 :PridefulParent rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -1441,6 +1578,61 @@ When this creature enters, each opponent discards a card and loses 2 life. You d
       [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:BloodthirstyConqueror rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Bloodthirsty Conqueror" ;
+    :manaCost "{3}{B}{B}" ;
+    :manaValue "5"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Vampire ,
+                :Knight ;
+    :hasRarity :MythicRare ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :MagicTheGatheringFoundations ;
+    :cardNumber "58"^^xsd:integer ;
+    :artist "Dmitry Burmak" ;
+    :hasLanguage :English ;
+    :power "5" ;
+    :powerValue "5"^^xsd:integer ;
+    :toughness "5" ;
+    :toughnessValue "5"^^xsd:integer ;
+    :hasKeywordAbility :Deathtouch ,
+                       :Flying ;
+    :printedText """Flying, deathtouch
+Whenever an opponent loses life, you gain that much life. (Damage causes loss of life.)"""@en ;
+    :oracleText """Flying, deathtouch
+Whenever an opponent loses life, you gain that much life. (Damage causes loss of life.)"""@en ;
+    :flavorText """"This town swims with such exquisite blood. I will take every drop for my own.\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=679135"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/fdn/58/bloodthirsty-conqueror"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "93771"^^xsd:positiveInteger ;
+    :arenaName "Bloodthirsty Conqueror" ;
+    :arenaSetCode "FDN" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-11-08"^^xsd:date ;
+        :rulingText """Damage dealt to an opponent causes that opponent to lose life. An opponent paying life also causes loss of life."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-11-08"^^xsd:date ;
+        :rulingText """If you and an opponent both lose life simultaneously, and this causes your life total to become 0 or less, you'll lose the game before Bloodthirsty Conqueror's triggered ability can resolve."""@en ] .
 
 :GutlessPlunderer rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -2388,6 +2580,61 @@ You may discard a card. If you do, draw a card."""@en ;
         :rulingDate "2024-11-08"^^xsd:date ;
         :rulingText """If the target creature is an illegal target when Incinerating Blast tries to resolve, it won't resolve and none of its effects will happen. You won't discard or draw."""@en ] .
 
+:SearslicerGoblin rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Searslicer Goblin" ;
+    :manaCost "{1}{R}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Goblin ,
+                :Warrior ;
+    :hasRarity :Rare ;
+    :hasColor :Red ;
+    :hasColorIdentity :Red ;
+    :isInSet :MagicTheGatheringFoundations ;
+    :cardNumber "93"^^xsd:integer ;
+    :artist "Wayne Reynolds" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "1" ;
+    :toughnessValue "1"^^xsd:integer ;
+    :hasAbilityWord :Raid ;
+    :printedText """Raid — At the beginning of your end step, if you attacked this turn, create a 1/1 red Goblin creature token."""@en ;
+    :oracleText """Raid — At the beginning of your end step, if you attacked this turn, create a 1/1 red Goblin creature token."""@en ;
+    :flavorText """Ikko hadn't intended to start a riot, but now that it was under way, he was having a lot of fun."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=679170"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/fdn/93/searslicer-goblin"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "93806"^^xsd:positiveInteger ;
+    :arenaName "Searslicer Goblin" ;
+    :arenaSetCode "FDN" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-11-08"^^xsd:date ;
+        :rulingText """Some raid abilities trigger at the beginning of your end step. These abilities trigger if you attacked with a creature that turn, even if the permanent with that raid ability wasn't on the battlefield when you attacked."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-11-08"^^xsd:date ;
+        :rulingText """Raid abilities evaluate the entire turn to see if you attacked with a creature. That creature doesn't have to still be on the battlefield. Similarly, the player, planeswalker, or battle it attacked doesn't have to still be in the game or on the battlefield."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-11-08"^^xsd:date ;
+        :rulingText """Raid abilities care only that you attacked with a creature. It doesn't matter how many creatures you attacked with or which player, planeswalker, or battle those creatures attacked."""@en ] .
+
 :SowerOfChaos rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Sower of Chaos" ;
@@ -3033,6 +3280,57 @@ Threshold — This creature gets +1/+1 and has deathtouch as long as there are s
         :rulingDate "2024-11-08"^^xsd:date ;
         :rulingText """Because damage remains marked on a creature until the damage is removed as the turn ends, nonlethal damage dealt to Dreadwing Scavenger may become lethal if the number of cards in your graveyard falls below seven."""@en ] .
 
+:ElendaSaintOfDusk rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Elenda, Saint of Dusk" ;
+    :manaCost "{2}{W}{B}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasSuperType :Legendary ;
+    :hasCardType :Creature ;
+    :hasSubType :Vampire ,
+                :Knight ;
+    :hasRarity :Rare ;
+    :hasColor :White ,
+              :Black ;
+    :hasColorIdentity :White ,
+                      :Black ;
+    :isInSet :MagicTheGatheringFoundations ;
+    :cardNumber "119"^^xsd:integer ;
+    :artist "Chris Rahn" ;
+    :hasLanguage :English ;
+    :power "4" ;
+    :powerValue "4"^^xsd:integer ;
+    :toughness "4" ;
+    :toughnessValue "4"^^xsd:integer ;
+    :hasKeywordAbility :Lifelink ,
+                       :Hexproof ;
+    :printedText """Lifelink, hexproof from instants
+As long as your life total is greater than your starting life total, Elenda gets +1/+1 and has menace. Elenda gets an additional +5/+5 as long as your life total is at least 10 greater than your starting life total."""@en ;
+    :oracleText """Lifelink, hexproof from instants
+As long as your life total is greater than your starting life total, Elenda gets +1/+1 and has menace. Elenda gets an additional +5/+5 as long as your life total is at least 10 greater than your starting life total."""@en ;
+    :flavorText """"You have learned nothing in my absence.\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=679196"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/fdn/119/elenda-saint-of-dusk"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "93832"^^xsd:positiveInteger ;
+    :arenaName "Elenda, Saint of Dusk" ;
+    :arenaSetCode "FDN" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
 :FiendishPanda rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Fiendish Panda" ;
@@ -3274,6 +3572,60 @@ Raid — At the beginning of your end step, if you attacked this turn, each oppo
       [ rdf:type :Ruling ;
         :rulingDate "2024-11-08"^^xsd:date ;
         :rulingText """Wardens of the Cycle's ability will check as the end step starts to see if a creature died this turn. If none did, the ability won't trigger at all."""@en ] .
+
+:ZimoneParadoxSculptor rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Zimone, Paradox Sculptor" ;
+    :manaCost "{2}{G}{U}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasSuperType :Legendary ;
+    :hasCardType :Creature ;
+    :hasSubType :Human ,
+                :Wizard ;
+    :hasRarity :MythicRare ;
+    :hasColor :Blue ,
+              :Green ;
+    :hasColorIdentity :Blue ,
+                      :Green ;
+    :isInSet :MagicTheGatheringFoundations ;
+    :cardNumber "126"^^xsd:integer ;
+    :artist "Nathaniel Himawan" ;
+    :hasLanguage :English ;
+    :power "1" ;
+    :powerValue "1"^^xsd:integer ;
+    :toughness "4" ;
+    :toughnessValue "4"^^xsd:integer ;
+    :hasKeywordAction :Double ;
+    :printedText """At the beginning of combat on your turn, put a +1/+1 counter on each of up to two target creatures you control.
+{G}{U}, {T}: Double the number of each kind of counter on up to two target creatures and/or artifacts you control."""@en ;
+    :oracleText """At the beginning of combat on your turn, put a +1/+1 counter on each of up to two target creatures you control.
+{G}{U}, {T}: Double the number of each kind of counter on up to two target creatures and/or artifacts you control."""@en ;
+    :flavorText """"Extraplanar geometry isn't so hard once you get used to thinking in twelve dimensions.\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=679203"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/fdn/126/zimone-paradox-sculptor"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "93839"^^xsd:positiveInteger ;
+    :arenaName "Zimone, Paradox Sculptor" ;
+    :arenaSetCode "FDN" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-11-08"^^xsd:date ;
+        :rulingText """To double the number of each kind of counter on a permanent, put another counter on it for each counter it already has. Effects that interact with counters being put onto permanents, such as the effect of Branching Evolution, apply as appropriate."""@en ] .
 
 :FishingPole rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -3745,7 +4097,7 @@ When this creature enters, create a 1/1 white Soldier creature token."""@en ;
       [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
 
-:StrokeOfMidnight rdf:type owl:NamedIndividual ,
+:StrokeOfMidnightMagicTheGatheringFoundations148 rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Stroke of Midnight" ;
     :manaCost "{2}{W}" ;
@@ -4051,6 +4403,53 @@ Whenever you cast a spell during an opponent's turn, put a +1/+1 counter on this
       [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:FleetingDistraction rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Fleeting Distraction" ;
+    :manaCost "{U}" ;
+    :manaValue "1"^^xsd:nonNegativeInteger ;
+    :hasCardType :Instant ;
+    :hasRarity :Common ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :MagicTheGatheringFoundations ;
+    :cardNumber "155"^^xsd:integer ;
+    :artist "Ryan Yee" ;
+    :hasLanguage :English ;
+    :printedText """Target creature gets -1/-0 until end of turn.
+Draw a card."""@en ;
+    :oracleText """Target creature gets -1/-0 until end of turn.
+Draw a card."""@en ;
+    :flavorText """The first spell taught to young mages, it has spared the lives of many whose hands are too small to hold a sword."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=679897"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/fdn/155/fleeting-distraction"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "93868"^^xsd:positiveInteger ;
+    :arenaName "Fleeting Distraction" ;
+    :arenaSetCode "FDN" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2010-06-15"^^xsd:date ;
+        :rulingText """If the targeted creature is an illegal target by the time Fleeting Distraction resolves, the spell doesn't resolve. You won't draw a card."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2012-05-01"^^xsd:date ;
+        :rulingText """If the targeted creature is an illegal target when Fleeting Distraction tries to resolve, it won't resolve and none of its effects will happen. You won't draw a card."""@en ] .
 
 :ImprisonedInTheMoonMagicTheGatheringFoundations156 rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -5359,6 +5758,48 @@ Burst Lightning deals 2 damage to any target. If this spell was kicked, it deals
         :rulingDate "2017-07-14"^^xsd:date ;
         :rulingText """Firebrand Archer’s ability will resolve before the spell that caused it to trigger. The ability will resolve even if that spell is countered."""@en ] .
 
+:GoblinSurprise rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Goblin Surprise" ;
+    :manaCost "{2}{R}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Instant ;
+    :hasRarity :Common ;
+    :hasColor :Red ;
+    :hasColorIdentity :Red ;
+    :isInSet :MagicTheGatheringFoundations ;
+    :cardNumber "200"^^xsd:integer ;
+    :artist "Kevin Sidharta" ;
+    :hasLanguage :English ;
+    :printedText """Choose one —
+• Creatures you control get +2/+0 until end of turn.
+• Create two 1/1 red Goblin creature tokens."""@en ;
+    :oracleText """Choose one —
+• Creatures you control get +2/+0 until end of turn.
+• Create two 1/1 red Goblin creature tokens."""@en ;
+    :flavorText """"Hey, your door's broken!\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=679942"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/fdn/200/goblin-surprise"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "93913"^^xsd:positiveInteger ;
+    :arenaName "Goblin Surprise" ;
+    :arenaSetCode "FDN" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
 :HeartfireImmolator rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Heartfire Immolator" ;
@@ -5720,6 +6161,48 @@ Draw two cards."""@en ;
         :rulingDate "2022-09-09"^^xsd:date ;
         :rulingText """If either target is an illegal target as Bite Down tries to resolve, the creature you control won't deal damage."""@en ] .
 
+:BlanchwoodArmor rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Blanchwood Armor" ;
+    :manaCost "{2}{G}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Enchantment ;
+    :hasSubType :Aura ;
+    :hasRarity :Uncommon ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :MagicTheGatheringFoundations ;
+    :cardNumber "213"^^xsd:integer ;
+    :artist "Manuel Castañón" ;
+    :hasLanguage :English ;
+    :hasKeywordAbility :Enchant ;
+    :printedText """Enchant creature
+Enchanted creature gets +1/+1 for each Forest you control."""@en ;
+    :oracleText """Enchant creature
+Enchanted creature gets +1/+1 for each Forest you control."""@en ;
+    :flavorText """Some armor is forged, some is forested."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=679955"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/fdn/213/blanchwood-armor"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "93926"^^xsd:positiveInteger ;
+    :arenaName "Blanchwood Armor" ;
+    :arenaSetCode "FDN" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
 :BrokenWingsMagicTheGatheringFoundations214 rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Broken Wings" ;
@@ -6001,6 +6484,131 @@ Trample (This creature can deal excess combat damage to the player or planeswalk
       [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
 
+:GnarlidColony rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Gnarlid Colony" ;
+    :manaCost "{1}{G}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Beast ;
+    :hasRarity :Common ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :MagicTheGatheringFoundations ;
+    :cardNumber "224"^^xsd:integer ;
+    :artist "Izzy" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    :hasKeywordAbility :Kicker ;
+    :printedText """Kicker {2}{G} (You may pay an additional {2}{G} as you cast this spell.)
+If this creature was kicked, it enters with two +1/+1 counters on it.
+Each creature you control with a +1/+1 counter on it has trample. (It can deal excess combat damage to the player or planeswalker it's attacking.)"""@en ;
+    :oracleText """Kicker {2}{G} (You may pay an additional {2}{G} as you cast this spell.)
+If this creature was kicked, it enters with two +1/+1 counters on it.
+Each creature you control with a +1/+1 counter on it has trample. (It can deal excess combat damage to the player or planeswalker it's attacking.)"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=679966"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/fdn/224/gnarlid-colony"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "94188"^^xsd:positiveInteger ;
+    :arenaName "Gnarlid Colony" ;
+    :arenaSetCode "FDN" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-11-08"^^xsd:date ;
+        :rulingText """If a spell's kicker cost was paid, the spell is "kicked.\""""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-11-08"^^xsd:date ;
+        :rulingText """If you copy a kicked spell on the stack, the copy is also kicked. If the copied spell is a permanent spell, the token the copy of that spell becomes when it enters is also kicked."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-11-08"^^xsd:date ;
+        :rulingText """The kicker ability doesn't let you pay a kicker cost more than once."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-11-08"^^xsd:date ;
+        :rulingText """If you put a permanent with a kicker ability onto the battlefield without casting it, you can't kick it."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-11-08"^^xsd:date ;
+        :rulingText """To determine a spell's total cost, start with the mana cost (or an alternative cost if another card's effect allows you to pay one instead), add any cost increases (such as kicker), then apply any cost reductions. The spell's mana value remains unchanged, no matter what the total cost to cast it was."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-11-08"^^xsd:date ;
+        :rulingText """If a card or token enters as a copy of a permanent, the new permanent isn't kicked, even if the original was."""@en ] .
+
+:GrowFromTheAshes rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Grow from the Ashes" ;
+    :manaCost "{2}{G}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Sorcery ;
+    :hasRarity :Common ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :MagicTheGatheringFoundations ;
+    :cardNumber "225"^^xsd:integer ;
+    :artist "Richard Wright" ;
+    :hasLanguage :English ;
+    :hasKeywordAbility :Kicker ;
+    :printedText """Kicker {2} (You may pay an additional {2} as you cast this spell.)
+Search your library for a basic land card, put it onto the battlefield, then shuffle. If this spell was kicked, instead search your library for two basic land cards, put them onto the battlefield, then shuffle."""@en ;
+    :oracleText """Kicker {2} (You may pay an additional {2} as you cast this spell.)
+Search your library for a basic land card, put it onto the battlefield, then shuffle. If this spell was kicked, instead search your library for two basic land cards, put them onto the battlefield, then shuffle."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=679967"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/fdn/225/grow-from-the-ashes"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "93938"^^xsd:positiveInteger ;
+    :arenaName "Grow from the Ashes" ;
+    :arenaSetCode "FDN" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-11-08"^^xsd:date ;
+        :rulingText """To determine a spell's total cost, start with the mana cost (or an alternative cost if another card's effect allows you to pay one instead), add any cost increases (such as kicker), then apply any cost reductions. The spell's mana value remains unchanged, no matter what the total cost to cast it was."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-11-08"^^xsd:date ;
+        :rulingText """If a spell's kicker cost was paid, the spell is "kicked.\""""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-11-08"^^xsd:date ;
+        :rulingText """The kicker ability doesn't let you pay a kicker cost more than once."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-11-08"^^xsd:date ;
+        :rulingText """If you put a permanent with a kicker ability onto the battlefield without casting it, you can't kick it."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-11-08"^^xsd:date ;
+        :rulingText """If you copy a kicked spell on the stack, the copy is also kicked. If the copied spell is a permanent spell, the token the copy of that spell becomes when it enters is also kicked."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-11-08"^^xsd:date ;
+        :rulingText """If a card or token enters as a copy of a permanent, the new permanent isn't kicked, even if the original was."""@en ] .
+
 :LlanowarElves rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Llanowar Elves" ;
@@ -6045,6 +6653,53 @@ Trample (This creature can deal excess combat damage to the player or planeswalk
       [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:MildManneredLibrarian rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Mild-Mannered Librarian" ;
+    :manaCost "{G}" ;
+    :manaValue "1"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Human ;
+    :hasRarity :Uncommon ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :MagicTheGatheringFoundations ;
+    :cardNumber "228"^^xsd:integer ;
+    :artist "Justyna Dura" ;
+    :hasLanguage :English ;
+    :power "1" ;
+    :powerValue "1"^^xsd:integer ;
+    :toughness "1" ;
+    :toughnessValue "1"^^xsd:integer ;
+    :printedText """{3}{G}: This creature becomes a Werewolf. Put two +1/+1 counters on it and you draw a card. Activate only once."""@en ;
+    :oracleText """{3}{G}: This creature becomes a Werewolf. Put two +1/+1 counters on it and you draw a card. Activate only once."""@en ;
+    :flavorText """She had always believed in the transformative powers of great literature."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=679970"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/fdn/228/mild-mannered-librarian"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "93941"^^xsd:positiveInteger ;
+    :arenaName "Mild-Mannered Librarian" ;
+    :arenaSetCode "FDN" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2022-12-02"^^xsd:date ;
+        :rulingText """As Mild-Mannered Librarian's last ability resolves, it loses its other creature types and becomes a Werewolf. It's no longer a Human."""@en ] .
 
 :Overrun rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -10517,7 +11172,7 @@ This creature gets +1/+0 for each basic Island you control."""@en ;
         :rulingDate "2018-04-27"^^xsd:date ;
         :rulingText """Tempest Djinn's ability that modifies its power applies only while it's on the battlefield. In all other zones, it's a 0/4 creature card."""@en ] .
 
-:Unsummon rdf:type owl:NamedIndividual ,
+:UnsummonMagicTheGatheringFoundations599 rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Unsummon" ;
     :manaCost "{U}" ;
