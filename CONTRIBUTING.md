@@ -16,8 +16,10 @@ to be reusable — contributions to either are welcome.
   `.ruff_cache/`, generated reports). They are gitignored; keep it that
   way.
 - Keep gitignored data files out of PRs; the committed TTL files are the
-  source of truth. The inventory (`collection.csv`) is a local, untracked
-  generator input containing private data — never commit it.
+  source of truth. The inventories (`collection.csv`, the paper
+  collection, and `arena-collection.json`, the MTG Arena collection) are
+  local, untracked generator inputs containing private data — never commit
+  them.
 
 ## Repository layout
 
@@ -246,9 +248,10 @@ The validators enforce syntax, prefixes and imports; these conventions are
 the part a reviewer checks by eye.
 
 - **Never hand-edit a generated file.** `sets/*.ttl`,
-  `MagicCardCollection.ttl` and the import block of
-  `MagicCardIndividuals.ttl` come from `scripts/generate_individuals.py`
-  and `scripts/update_imports.py`. Change the generator and regenerate;
+  `MagicCardCollection.ttl`, `MagicArenaCollection.ttl` and the import
+  block of `MagicCardIndividuals.ttl` come from
+  `scripts/generate_individuals.py` and `scripts/update_imports.py`.
+  Change the generator and regenerate;
   an edit made by hand is silently reverted by the next run. The
   hand-authored files are `MagicCardsOntology.ttl`,
   `MagicCardSynergies.ttl` and `MagicSimulationAnnotations.ttl`.

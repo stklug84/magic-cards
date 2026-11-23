@@ -2,8 +2,9 @@
 
 Reusable SPARQL 1.1 queries for the **Magic Cards Ontology** (`MagicCardsOntology.ttl`) and any instance graph
 that conforms to it. The reference dataset is the card collection in `sets/*.ttl` (aggregated by
-`MagicCardIndividuals.ttl`) together with the inventory graph `MagicCardCollection.ttl` and the synergy graph
-`MagicCardSynergies.ttl`. Deck-scoped queries operate on deck instance graphs, which are not part of this
+`MagicCardIndividuals.ttl`) together with the inventory graphs `MagicCardCollection.ttl` (paper) and
+`MagicArenaCollection.ttl` (MTG Arena) and the synergy graph `MagicCardSynergies.ttl`. Deck-scoped queries
+operate on deck instance graphs, which are not part of this
 repository — load your own alongside the dataset.
 
 Every query is a standalone `.rq` file with:
@@ -111,7 +112,7 @@ from rdflib import Graph
 
 g = Graph()
 for ttl in ["MagicCardsOntology.ttl", "MagicCardSynergies.ttl",
-            "MagicCardCollection.ttl",
+            "MagicCardCollection.ttl", "MagicArenaCollection.ttl",
             *Path("sets").glob("*.ttl")]:
     g.parse(ttl, format="turtle")
 
@@ -126,6 +127,7 @@ for row in g.query(query):
 arq --data MagicCardsOntology.ttl \
     --data MagicCardSynergies.ttl \
     --data MagicCardCollection.ttl \
+    --data MagicArenaCollection.ttl \
     $(printf -- '--data %s ' sets/*.ttl) \
     --query queries/01_deck_inventory/01_list_all_decks.rq
 ```
@@ -157,6 +159,13 @@ A few patterns recur across queries:
   properties via their common superclass `mc:CardEntry` — restrict by class
   (`?e rdf:type mc:CollectionEntry`) or traverse from the container when the
   distinction matters.
+- **The MTG Arena collection** is a second `Collection` in
+  `MagicArenaCollection.ttl`: `mc:MTGArenaCollection mc:hasCollectionEntry ?e .
+  ?e mc:entryCard ?c ; mc:quantity ?n .` Digital copies have no finish or
+  condition, so it has exactly one entry per printing. Each collection names
+  its platform: `?collection mc:isHeldOn mc:PaperMagic` (or `mc:MTGArena`), so
+  a query over both groups by `?platform` (`10_collection/06`). A printing
+  held in both collections is one card individual with an entry in each.
 - **Colors and color identity**: cards assert both `mc:hasColor` and
   `mc:hasColorIdentity`, and colorless is never a value of either. A colorless
   card asserts no `mc:hasColor`; a card with a colorless color identity asserts

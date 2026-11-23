@@ -17,7 +17,7 @@ any manual change.
 | Path | Produced by |
 |---|---|
 | `sets/*.ttl` | `scripts/generate_individuals.py generate` |
-| `MagicCardCollection.ttl` | `scripts/generate_individuals.py collection` |
+| `MagicCardCollection.ttl`, `MagicArenaCollection.ttl` | `scripts/generate_individuals.py collection` |
 | `MagicCardIndividuals.ttl` (import block only) | `scripts/update_imports.py` |
 | `catalog-v001.xml` | `scripts/generate_catalog.py` |
 
@@ -34,8 +34,11 @@ To change a generated file, change the generator and regenerate.
 
 ## Licensing rules that must not be relaxed
 
-- **Never commit `collection.csv`.** It is the private inventory export and
-  the sole generator input. `.gitignore`'s `*.csv` rule guards it.
+- **Never commit `collection.csv` or `arena-collection.json`.** They are the
+  private inventories and the generator's inputs: the paper collection's
+  Moxfield export, and the MTG Arena collection snapshot (a copy of
+  magic-decks' `arena/collection.json`). `.gitignore`'s `*.csv` rule and its
+  `/arena-collection.json` line guard them.
 - **Never commit `MagicCompRules-*.txt`.** Wizards' Comprehensive Rules are
   not redistributable. `.gitignore`'s `*.txt` rule is load-bearing — it is
   also why the licence file is the extensionless `LICENSE`, never
@@ -54,13 +57,16 @@ first; `collection` reads `sets/`, so it comes after `generate`.
 python3 scripts/build_vocab.py                      # ontology -> vocabulary extract
 python3 scripts/generate_individuals.py fetch       # Scryfall -> cache (network)
 python3 scripts/generate_individuals.py generate    # -> sets/*.ttl, imports.json
-python3 scripts/generate_individuals.py collection  # -> MagicCardCollection.ttl (no network)
+python3 scripts/generate_individuals.py collection  # -> both collection graphs (no network)
 python3 scripts/update_imports.py                   # -> MagicCardIndividuals.ttl imports
 ```
 
+Every step reads both inventories, and the generator stops when one is
+missing: `generate` rewrites every set file, so a run without the Arena
+snapshot would drop the individuals only the MTG Arena collection holds.
 `collection` resolves individuals from the existing `sets/*.ttl`, so it can
 run standalone after an inventory-only change. There is no CI
-regeneration: the CSV never leaves the machine.
+regeneration: the inventories never leave the machine.
 
 ## Validation
 

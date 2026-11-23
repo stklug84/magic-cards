@@ -1,13 +1,16 @@
 # The collection's printings that are available on MTG Arena, rendered as
 # lines of Arena's deck and collection import format "N Name (SET) number":
-# the name and set code MTG Arena lists each printing under, its collector
-# number and the physical copies held (summed over finishes and conditions,
-# which Arena does not distinguish), plus the printing's MTG Arena ID where
-# known. Arena numbers a few promotional printings differently (Special
-# Guests cards are numbered 0 there); adjust such lines by hand.
+# the name, set code and collector number MTG Arena lists each printing
+# under and the copies held (summed over finishes and conditions, which
+# Arena does not distinguish), plus the printing's MTG Arena ID where known.
+# Arena numbers some printings differently from their paper collector
+# number (Alchemy and anthology reprints; Special Guests promos are 0
+# there): its own number (mc:arenaCollectorNumber) is known for the
+# printings of the MTG Arena collection, so its lines need no hand edits.
 #
 # PARAMETERS:
-#   ?collection - the collection to query
+#   ?collection - the collection to query: mc:MagicCardCollection (paper)
+#                 or mc:MTGArenaCollection
 
 PREFIX mc: <urn:stklug84:MagicCardsOntology:2026-02-27#>
 
@@ -27,9 +30,10 @@ SELECT ?line ?arenaId WHERE {
      mc:arenaName     ?arenaName ;
      mc:arenaSetCode  ?arenaSet .
   OPTIONAL { ?c mc:arenaId ?arenaId }
+  OPTIONAL { ?c mc:arenaCollectorNumber ?arenaNum }
   OPTIONAL { ?c mc:cardNumber ?num }
   OPTIONAL { ?c mc:cardNumberString ?numStr }
   BIND(CONCAT(STR(?qty), " ", ?arenaName, " (", ?arenaSet, ") ",
-              COALESCE(STR(?num), ?numStr)) AS ?line)
+              COALESCE(?arenaNum, STR(?num), ?numStr)) AS ?line)
 }
 ORDER BY ?arenaName ?arenaSet ?line

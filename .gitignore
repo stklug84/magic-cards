@@ -39,6 +39,10 @@ rust/target/
 *.dsv
 *.tsv
 
+# ignore the MTG Arena collection snapshot — like collection.csv a local,
+# untracked generator input (a copy of magic-decks' arena/collection.json)
+/arena-collection.json
+
 # ignore plain text files — this rule is load-bearing: it is what keeps
 # the WotC Comprehensive Rules text (MagicCompRules-*.txt, downloaded
 # from Wizards, never redistributed) of the public repository.

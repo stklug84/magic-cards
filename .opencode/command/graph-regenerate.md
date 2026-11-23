@@ -1,8 +1,11 @@
 ---
-description: Re-run the import pipeline from collection.csv, with a drift gate and verification
+description: Re-run the import pipeline from collection.csv and arena-collection.json, with a drift gate and verification
 ---
 
-Regenerate the knowledge graph from the local `collection.csv`.
+Regenerate the knowledge graph from the local inventories: `collection.csv`
+(paper) and `arena-collection.json` (MTG Arena, a copy of magic-decks'
+`arena/collection.json`). Both must be present; the generator stops
+otherwise.
 
 Delegate via `task` to subagent `graph-generator`, then to
 `graph-validator` once regeneration completes.
@@ -40,7 +43,8 @@ Then verify, and report the numbers:
 
 - **inventory preserved** — total physical copies unchanged, every card's
   per-card total unchanged; only the entry count may fall, and only by
-  merging duplicate variants;
+  merging duplicate variants; the MTG Arena collection's entries and copies
+  match the snapshot's non-basic Scryfall-matched printings;
 - **card facts preserved** — load `sets/` through
   `mtgcards.ttl_loader.load_graph_cards` before and after, and compare the
   aggregate counts (this is what catches the regex readers silently

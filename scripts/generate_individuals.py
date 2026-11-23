@@ -1,23 +1,34 @@
 #!/usr/bin/env python3
 """Generate per-set Turtle instance files for the Magic card collection.
 
+Inputs: two local, untracked inventories - collection.csv, the paper
+collection's Moxfield export, and arena-collection.json, the MTG Arena
+collection as stklug84/magic-decks' tools/arena/collection.py pulls it from
+Untapped.gg (arena/collection.json there). A card individual is generated
+for every printing either collection holds.
+
 Pipeline:
-  1. fetch    - read collection.csv, resolve every printing via the Scryfall API
-                (batch /cards/collection endpoint), fetch localized printings,
-                set metadata and WotC (Gatherer) rulings. Results are cached.
+  1. fetch    - read both inventories, resolve every printing via the Scryfall
+                API (batch /cards/collection endpoint), fetch localized
+                printings, set metadata and WotC (Gatherer) rulings. Results
+                are cached.
   2. generate - emit one TTL file per set under sets/, following the modelling
                 conventions of MagicCardIndividuals.ttl / MagicCardsOntology.ttl,
                 and print the owl:imports block for the master file. Besides
                 the card's characteristics, each block records the platforms
                 the printing is available on, its MTG Arena identity (Arena
                 ID, name and set code - the fields of Arena's import line
-                "N Name (SET) number") and its legality in the paper and the
-                MTG Arena formats.
+                "N Name (SET) number" - taken from Arena's own card data for
+                the printings of the MTG Arena collection) and its legality in
+                the paper and the MTG Arena formats.
   3. collection - emit MagicCardCollection.ttl with one reified CollectionEntry
                 per collected variant, i.e. per (printing, finish, condition)
-                combination, carrying the total quantity held in that variant.
-                Card individuals are resolved from the existing sets/*.ttl
-                files, so this step needs no network access.
+                combination, carrying the total quantity held in that variant,
+                and MagicArenaCollection.ttl with one entry per printing of
+                the MTG Arena collection (digital copies have neither finish
+                nor condition). Card individuals are resolved from the
+                existing sets/*.ttl files, so this step needs no network
+                access.
 
 Usage:
   python3 scripts/generate_individuals.py fetch
@@ -37,7 +48,7 @@ import time
 import unicodedata
 import urllib.request
 from collections import defaultdict
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from pathlib import Path
 from typing import TYPE_CHECKING, Any, TypedDict
 
@@ -54,6 +65,8 @@ CACHE.mkdir(exist_ok=True)
 VOCAB_JSON = TMP / "onto_vocab.json"
 EXISTING_JSON = TMP / "existing_cards.json"
 IMPORTS_JSON = TMP / "imports.json"
+#: the MTG Arena collection snapshot (magic-decks' arena/collection.json)
+ARENA_JSON_NAME = "arena-collection.json"
 API = "https://api.scryfall.com"
 UA = {
     "User-Agent": "stklug84-inventory-ttl-generator/1.0",
@@ -137,13 +150,34 @@ ABILITY_WORD_PROPERTY = "hasAbilityWord"
 
 
 class Printing(TypedDict):
-    """One unique printing aggregated over its collection.csv rows."""
+    """One unique printing aggregated over its collection.csv rows.
+
+    A printing only the MTG Arena collection holds has no paper copies
+    (count 0) and is English.
+    """
 
     name: str
     set: str
     num: str
     language: str
     count: int
+
+
+@dataclass(frozen=True)
+class ArenaPrinting:
+    """A printing of the MTG Arena collection, with the identity Arena gives it."""
+
+    #: the card name as Scryfall (and collection.csv) writes it
+    name: str
+    #: MTG Arena's card ID (grpid) of the owned printing
+    arena_id: int
+    #: the name, set code and collector number MTG Arena lists the printing
+    #: under - the fields of Arena's import line "N Name (SET) number"
+    arena_name: str
+    set_code: str
+    collector_number: str
+    #: copies the MTG Arena account owns
+    quantity: int
 
 
 class RulingEntry(TypedDict):
@@ -179,6 +213,10 @@ class PrintingInfo:
     localized: ScryCard | None
     #: the code MTG Arena lists the printing's set under (see arena_set_code)
     arena_set_code: str
+    #: the printing's identity in the MTG Arena collection, when it holds it;
+    #: Arena's own data then wins over what Scryfall says (defaulted, so
+    #: callers built against an older generator keep working)
+    arena: ArenaPrinting | None = None
 
 
 @dataclass
@@ -281,6 +319,94 @@ def load_rows() -> dict[PrintKey, Printing]:
     return printings
 
 
+def arena_collection_path() -> Path:
+    """Return the MTG Arena collection snapshot path, or exit with guidance.
+
+    Like collection.csv a local, untracked input. It is required, not
+    optional: generate rewrites every set file, so a run without it would
+    drop the card individuals only the MTG Arena collection holds.
+    """
+    path = ROOT / ARENA_JSON_NAME
+    if not path.exists():
+        msg = (
+            f"{ARENA_JSON_NAME} not found - it is a local, untracked input "
+            "(not distributed with the repository): copy the MTG Arena "
+            "collection snapshot, stklug84/magic-decks' arena/collection.json, "
+            "to the repo root before regenerating."
+        )
+        raise SystemExit(msg)
+    return path
+
+
+def arena_printings(snapshot: dict[str, Any]) -> dict[PrintKey, ArenaPrinting]:
+    """Map the snapshot's printings to the identity MTG Arena gives them.
+
+    Keyed like the paper printings, by Scryfall set code and collector
+    number. Left out: basic lands, which MTG Arena grants in any number, and
+    the printings the snapshot could not match to a Scryfall printing
+    (rebalanced A- cards and others "known to Arena only"). Should two Arena
+    card IDs resolve to one printing, their copies add up and the lower ID
+    names the printing.
+    """
+    out: dict[PrintKey, ArenaPrinting] = {}
+    for entry in sorted(snapshot["cards"], key=lambda e: int(e["arena_id"])):
+        if entry["basic"] or not entry["scryfall_id"]:
+            continue
+        key = (str(entry["set"]).lower(), str(entry["collector_number"]))
+        known = out.get(key)
+        if known is not None:
+            quantity = known.quantity + int(entry["quantity"])
+            out[key] = replace(known, quantity=quantity)
+            continue
+        out[key] = ArenaPrinting(
+            name=str(entry["name"]),
+            arena_id=int(entry["arena_id"]),
+            arena_name=str(entry["arena_name"]),
+            set_code=str(entry["arena_set"]),
+            collector_number=str(entry["arena_collector_number"]),
+            quantity=int(entry["quantity"]),
+        )
+    return out
+
+
+def load_arena() -> dict[PrintKey, ArenaPrinting]:
+    """Read the MTG Arena collection snapshot (see arena_printings)."""
+    text = arena_collection_path().read_text(encoding="utf-8")
+    snapshot: dict[str, Any] = json.loads(text)
+    return arena_printings(snapshot)
+
+
+def merge_printings(
+    printings: dict[PrintKey, Printing],
+    arena: dict[PrintKey, ArenaPrinting],
+) -> dict[PrintKey, Printing]:
+    """Add the printings only the MTG Arena collection holds to *printings*.
+
+    A printing both collections hold keeps its paper row (and language); one
+    only the MTG Arena collection holds joins in English, without paper
+    copies.
+    """
+    merged = dict(printings)
+    for key, held in arena.items():
+        merged.setdefault(
+            key,
+            {
+                "name": held.name,
+                "set": key[0],
+                "num": key[1],
+                "language": "English",
+                "count": 0,
+            },
+        )
+    return merged
+
+
+def load_printings() -> tuple[dict[PrintKey, Printing], dict[PrintKey, ArenaPrinting]]:
+    """Return the printings of both collections and the MTG Arena identities."""
+    arena = load_arena()
+    return merge_printings(load_rows(), arena), arena
+
+
 def _fetch_cards(keys: list[PrintKey]) -> dict[str, ScryCard]:
     """Resolve every uncached printing via the batch collection endpoint."""
     cards_file = CACHE / "cards.json"
@@ -374,8 +500,8 @@ def _fetch_rulings(cards: dict[str, ScryCard]) -> None:
 
 
 def cmd_fetch() -> None:
-    """Resolve every collection.csv printing via Scryfall into the cache."""
-    printings = load_rows()
+    """Resolve every printing of both collections via Scryfall into the cache."""
+    printings, _ = load_printings()
     keys = sorted(printings)
     print(f"{len(printings)} unique printings")  # noqa: T201 - generator progress output
     cards = _fetch_cards(keys)
@@ -433,6 +559,19 @@ TYPE_CLASS = {
     "Dungeon": "DungeonType",
     "Kindred": "CreatureTypes",
 }
+
+
+def supplement_class(types: list[str]) -> str:
+    """Return the subtype class of a subtype the ontology lacks.
+
+    Creature types for any creature or kindred card (rule 205.3m), an
+    artifact creature included: rule 205.3g closes the list of artifact
+    types, while every set may bring new creature types ("Artifact Creature
+    - Android"). Otherwise the class of the card's first type.
+    """
+    if "Creature" in types or "Kindred" in types:
+        return "CreatureTypes"
+    return TYPE_CLASS.get(types[0] if types else "Creature", "CreatureTypes")
 
 
 def tokenize_subtypes(
@@ -593,8 +732,7 @@ def _type_lines(card: ScryCard, front: ScryCard, ctx: GenContext) -> list[str]:
         )
         if target is None:
             target = pascal(sub)
-            cls = TYPE_CLASS.get(types[0] if types else "Creature", "CreatureTypes")
-            ctx.notes.subtypes.setdefault(target, (sub, cls))
+            ctx.notes.subtypes.setdefault(target, (sub, supplement_class(types)))
         targets.append(f":{target}")
     out.extend(object_list(":hasSubType", targets))
     return out
@@ -768,10 +906,19 @@ def _platform_lines(card: ScryCard, info: PrintingInfo, ctx: GenContext) -> list
     printing on MTG Arena also carries the name and set code Arena lists it
     under - with the collector number, the fields of Arena's import line
     "N Name (SET) number" - and its Arena ID when Scryfall has one.
+
+    For a printing the MTG Arena collection holds (info.arena), Arena's own
+    card data wins: its card ID, name and set code, and its collector number
+    as :arenaCollectorNumber where Arena numbers the printing differently
+    (Alchemy and anthology reprints, promos numbered 0). Scryfall lacks the
+    Arena ID of many such printings (new sets, Alchemy) and derives no
+    Arena set code for Alchemy printings (Y22 to Y26) or reprints Arena
+    lists under their original set.
     """
     games = set(card.get("games") or [])
-    arena_id = card.get("arena_id")
-    if arena_id:
+    held = info.arena
+    arena_id = held.arena_id if held else card.get("arena_id")
+    if arena_id or held:
         games.add("arena")  # an Arena ID implies the printing is on Arena
     ctx.notes.games.update(games - GAMES.keys())
     out = object_list(
@@ -779,10 +926,15 @@ def _platform_lines(card: ScryCard, info: PrintingInfo, ctx: GenContext) -> list
         [f":{ind}" for game, ind in GAMES.items() if game in games],
     )
     if "arena" in games:
+        name = held.arena_name if held else arena_name(card)
+        code = held.set_code if held else info.arena_set_code
         if arena_id:
             out.append(f'    :arenaId "{int(arena_id)}"^^xsd:positiveInteger ;')
-        out.append(f'    :arenaName "{esc_str(arena_name(card))}" ;')
-        out.append(f'    :arenaSetCode "{esc_str(info.arena_set_code)}" ;')
+        out.append(f'    :arenaName "{esc_str(name)}" ;')
+        out.append(f'    :arenaSetCode "{esc_str(code)}" ;')
+        if held and held.collector_number != card["collector_number"]:
+            number = esc_str(held.collector_number)
+            out.append(f'    :arenaCollectorNumber "{number}" ;')
     return out
 
 
@@ -875,8 +1027,9 @@ HEADER = """\
     rdfs:label "Magic Card Collection Individuals \u2013 {set_name}"@en ;
     rdfs:comment \"\"\"An instance graph describing the card individuals of a
 personal Magic: The Gathering card collection that were printed in the set
-{set_name} ({set_code}). One Card individual is defined per collected
-printing, carrying its characteristics, the platforms it is available on
+{set_name} ({set_code}). One Card individual is defined per printing
+collected in paper or on MTG Arena, carrying its characteristics, the
+platforms it is available on
 (paper, MTG Arena, Magic Online) with its MTG Arena identity, its legality
 in the paper and MTG Arena formats, and official rulings. Card data was
 sourced from Gatherer and Scryfall. This file imports MagicCardsOntology to
@@ -899,6 +1052,8 @@ class GenerateInputs:
     existing_keys: set[tuple[str, str, str]]
     #: names a new card must not take: master-file cards and ontology terms
     existing_names: set[str]
+    #: the printings of the MTG Arena collection, with Arena's identity
+    arena: dict[PrintKey, ArenaPrinting] = field(default_factory=dict)
 
 
 def _resolve_set_individuals(
@@ -997,6 +1152,7 @@ def _generate_blocks(
             language=p["language"],
             localized=inputs.localized.get(f"{key[0]}|{key[1]}"),
             arena_set_code=arena_set_code(inputs.sets_meta[key[0]], key[0]),
+            arena=inputs.arena.get(key),
         )
         blocks_by_set[key[0]].append(card_block(ind, card, info, ctx))
     return blocks_by_set, used
@@ -1095,7 +1251,7 @@ def cmd_generate() -> None:
     """Emit the per-set TTL files from the cached fetch results."""
     vocab, sub_by_label, kw_map = load_vocab()
     setcodes: dict[str, str] = vocab["_setcodes"]  # CODE -> individual
-    printings = load_rows()
+    printings, arena = load_printings()
     cards: dict[str, ScryCard] = json.loads((CACHE / "cards.json").read_text())
     localized: dict[str, ScryCard] = json.loads((CACHE / "localized.json").read_text())
     sets_meta: dict[str, ScryCard] = json.loads((CACHE / "sets.json").read_text())
@@ -1122,6 +1278,7 @@ def cmd_generate() -> None:
         new_sets=new_sets,
         existing_keys=existing_keys,
         existing_names=existing_names,
+        arena=arena,
     )
     notes = Notes()
     ctx = GenContext(
@@ -1205,6 +1362,96 @@ in that variant. Card individuals are defined in the per-set instance
 graphs aggregated by MagicCardIndividuals.\"\"\"@en .
 """
 
+ARENA_COLLECTION_HEADER = """\
+# ==============================================================================
+# DISCLAIMER
+#
+# This file is an independent, fan-made instance graph that describes the
+# digital collection of a personal MTG Arena account. It is not produced by,
+# endorsed by, or affiliated with Wizards of the Coast LLC.
+#
+# Magic: The Gathering is a trademark of Wizards of the Coast LLC. All card
+# names, card text, rules text, and game terminology referenced herein are the
+# intellectual property of Wizards of the Coast LLC and/or their respective
+# owners. This work is made available under the Wizards of the Coast Fan
+# Content Policy (https://company.wizards.com/en/legal/fancontentpolicy).
+#
+# This file is generated by scripts/generate_individuals.py.
+# Do not edit manually.
+# ==============================================================================
+
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+
+@prefix :     <urn:stklug84:MagicCardsOntology:2026-02-27#> .
+@base         <urn:stklug84:MagicArenaCollection:{ns_date}#> .
+
+################################################################################
+#
+# Ontology Definition
+#
+################################################################################
+
+<urn:stklug84:MagicArenaCollection:{ns_date}#>
+    rdf:type owl:Ontology ;
+    owl:imports <urn:stklug84:MagicCardsOntology:2026-02-27#> ,
+                <urn:stklug84:MagicCardIndividuals:{ns_date}#> ;
+    rdfs:label "MTG Arena Collection Inventory"@en ;
+    rdfs:comment \"\"\"An instance graph describing the digital collection of a
+personal MTG Arena account, as the Untapped.gg companion syncs it. Defines
+the Collection individual, held on MTG Arena, and one reified
+CollectionEntry per owned printing, carrying the number of copies the
+account owns; digital copies have neither finish nor condition. Left out
+are basic lands, which MTG Arena grants in any number, and printings
+Scryfall does not list. Card individuals are defined in the per-set
+instance graphs aggregated by MagicCardIndividuals.\"\"\"@en .
+"""
+
+
+@dataclass(frozen=True)
+class CollectionGraph:
+    """One generated collection graph: its file and its Collection individual."""
+
+    file: str
+    ind: str
+    label: str
+    #: the rdfs:comment, wrapped as it is written
+    comment: str
+    #: the :GamePlatform individual the collection is held on
+    platform: str
+    header: str
+
+
+PAPER_COLLECTION = CollectionGraph(
+    file="MagicCardCollection.ttl",
+    ind="MagicCardCollection",
+    label="Magic Card Collection",
+    comment=(
+        "The physical card collection. Each collection\n"
+        "entry describes the copies of one printing held in one finish and\n"
+        "condition."
+    ),
+    platform="PaperMagic",
+    header=COLLECTION_HEADER,
+)
+ARENA_COLLECTION = CollectionGraph(
+    file="MagicArenaCollection.ttl",
+    ind="MTGArenaCollection",
+    label="MTG Arena Collection",
+    comment=(
+        "The digital card collection of an MTG Arena account.\n"
+        "Each collection entry describes the copies of one printing the\n"
+        "account owns."
+    ),
+    platform="MTGArena",
+    header=ARENA_COLLECTION_HEADER,
+)
+
+#: one entry of a collection graph: (entry individual, its Turtle block)
+EntryBlock = tuple[str, str]
+
 
 def load_card_map() -> dict[tuple[str, str], tuple[str, str]]:
     """Scan sets/*.ttl -> {(SETCODE, collector_number): (individual, file)}."""
@@ -1273,16 +1520,16 @@ def collection_variants(
     return variants, missing
 
 
-def cmd_collection() -> None:
-    """Emit MagicCardCollection.ttl with one entry per collected variant."""
-    with collection_csv_path().open(encoding="utf-8", newline="") as handle:
-        rows = list(csv.DictReader(handle))
-    card_map = load_card_map()
-    variants, missing = collection_variants(rows, card_map)
+def paper_entries(
+    variants: dict[VariantKey, int],
+) -> tuple[dict[str, list[EntryBlock]], int]:
+    """Render the paper collection's entries, grouped by set file.
 
-    refs: list[str] = []
+    Returns the entries per set file, in emission order, and the number of
+    physical copies they describe.
+    """
     total = 0
-    by_file: dict[str, list[str]] = defaultdict(list)
+    by_file: dict[str, list[EntryBlock]] = defaultdict(list)
     for (ind, fname, finish, condition), count in sorted(
         variants.items(),
         key=lambda item: (
@@ -1305,20 +1552,70 @@ def cmd_collection() -> None:
             f"    :hasFinish :{finish} ;",
             f"    :hasCondition :{condition} .",
         ]
-        by_file[fname].append("\n".join(lines))
-        refs.append(entry)
+        by_file[fname].append((entry, "\n".join(lines)))
+    return by_file, total
 
-    parts = [COLLECTION_HEADER.format(ns_date=NS_DATE)]
+
+def arena_entries(
+    arena: dict[PrintKey, ArenaPrinting],
+    card_map: dict[tuple[str, str], tuple[str, str]],
+) -> tuple[dict[str, list[EntryBlock]], int, list[PrintKey]]:
+    """Render the MTG Arena collection's entries, grouped by set file.
+
+    One entry per printing: digital copies have neither finish nor
+    condition, so the platform names the entry ({card}EntryMTGArena), as
+    finish and condition name a paper entry. Returns the entries per set
+    file, the number of copies and the printings without a card individual.
+    """
+    rows: list[tuple[str, str, int]] = []
+    missing: list[PrintKey] = []
+    for key, held in arena.items():
+        target = card_map.get((key[0].upper(), key[1]))
+        if target is None:
+            missing.append(key)
+            continue
+        ind, fname = target
+        rows.append((fname, ind, held.quantity))
+    total = 0
+    by_file: dict[str, list[EntryBlock]] = defaultdict(list)
+    for fname, ind, quantity in sorted(rows):
+        entry = f"{ind}Entry{ARENA_COLLECTION.platform}"
+        total += quantity
+        lines = [
+            f":{entry} rdf:type owl:NamedIndividual ,",
+            "                  :CollectionEntry ;",
+            f"    :entryCard :{ind} ;",
+            f'    :quantity "{quantity}"^^xsd:positiveInteger .',
+        ]
+        by_file[fname].append((entry, "\n".join(lines)))
+    return by_file, total, sorted(missing)
+
+
+def render_collection(
+    graph: CollectionGraph,
+    by_file: dict[str, list[EntryBlock]],
+) -> str:
+    """Render a collection graph: its Collection individual, then the entries.
+
+    The individual lists every entry of *by_file* (set files in name order)
+    and names the platform the collection is held on.
+    """
+    refs = [entry for fname in sorted(by_file) for entry, _ in by_file[fname]]
+    end = " ;" if refs else " ."
+    lines = [
+        f":{graph.ind} rdf:type owl:NamedIndividual ,",
+        "                  :Collection ;",
+        f'    rdfs:label "{graph.label}"@en ;',
+        f'    rdfs:comment """{graph.comment}"""@en ;',
+        f"    :isHeldOn :{graph.platform}{end}",
+    ]
+    if refs:
+        lines.append(
+            "    :hasCollectionEntry\n  " + " ,\n  ".join(f":{e}" for e in refs) + " .",
+        )
+    parts = [graph.header.format(ns_date=NS_DATE)]
     parts.append("#" * 80 + "\n#\n# Collection Individual\n#\n" + "#" * 80 + "\n")
-    parts.append(
-        ":MagicCardCollection rdf:type owl:NamedIndividual ,\n"
-        "                  :Collection ;\n"
-        '    rdfs:label "Magic Card Collection"@en ;\n'
-        '    rdfs:comment """The physical card collection. Each collection\n'
-        "entry describes the copies of one printing held in one finish and\n"
-        'condition."""@en ;\n'
-        "    :hasCollectionEntry\n  " + " ,\n  ".join(f":{e}" for e in refs) + " .\n",
-    )
+    parts.append("\n".join(lines) + "\n")
     parts.append(
         "#" * 80
         + "\n#\n# Collection Entries (grouped by set file)\n#\n"
@@ -1327,12 +1624,41 @@ def cmd_collection() -> None:
     )
     for fname in sorted(by_file):
         parts.append(f"# --- sets/{fname} ---\n")
-        parts.append("\n\n".join(by_file[fname]) + "\n")
-    (ROOT / "MagicCardCollection.ttl").write_text("\n".join(parts))
+        parts.append("\n\n".join(block for _, block in by_file[fname]) + "\n")
+    return "\n".join(parts)
 
-    print(f"entries written: {len(refs)}  physical cards: {total}")  # noqa: T201 - generator report output
+
+def cmd_collection() -> None:
+    """Emit the paper and the MTG Arena collection graphs.
+
+    MagicCardCollection.ttl holds one entry per collected paper variant,
+    MagicArenaCollection.ttl one entry per printing of the MTG Arena
+    collection. Both inventories are read before anything is written.
+    """
+    with collection_csv_path().open(encoding="utf-8", newline="") as handle:
+        rows = list(csv.DictReader(handle))
+    arena = load_arena()
+    card_map = load_card_map()
+
+    variants, missing = collection_variants(rows, card_map)
+    by_file, total = paper_entries(variants)
+    text = render_collection(PAPER_COLLECTION, by_file)
+    (ROOT / PAPER_COLLECTION.file).write_text(text)
+    entries = sum(len(blocks) for blocks in by_file.values())
+    print(f"entries written: {entries}  physical cards: {total}")  # noqa: T201 - generator report output
     if missing:
         print(f"NOT IN sets/*.ttl ({len(missing)}):", missing)  # noqa: T201 - generator report output
+
+    arena_by_file, arena_total, arena_missing = arena_entries(arena, card_map)
+    text = render_collection(ARENA_COLLECTION, arena_by_file)
+    (ROOT / ARENA_COLLECTION.file).write_text(text)
+    entries = sum(len(blocks) for blocks in arena_by_file.values())
+    print(f"MTG Arena entries written: {entries}  digital cards: {arena_total}")  # noqa: T201 - generator report output
+    if arena_missing:
+        print(  # noqa: T201 - generator report output
+            f"MTG Arena printings NOT IN sets/*.ttl ({len(arena_missing)}):",
+            arena_missing,
+        )
 
 
 # ---------------------------------------------------------------- augment

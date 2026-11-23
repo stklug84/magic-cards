@@ -75,6 +75,7 @@ def _write_graph(root: Path) -> list[Path]:
         "MagicCardsOntology.ttl": _ONTOLOGY,
         "MagicCardIndividuals.ttl": "# aggregator\n",
         "MagicCardCollection.ttl": "# inventory\n",
+        "MagicArenaCollection.ttl": "# MTG Arena inventory\n",
         "MagicCardSynergies.ttl": "# synergies\n",
         "MagicSimulationAnnotations.ttl": "# hooks\n",
         "sets/TestSet.ttl": _SET,
@@ -139,7 +140,7 @@ class TestBundleStability(unittest.TestCase):
                 self.assertEqual(info.mtime, _STAMP)
 
     def test_bundle_carries_the_graph_files(self) -> None:
-        """Every allowlisted file is bundled, the synergy graph included."""
+        """Every allowlisted file is bundled: both collections, the synergies."""
         with tarfile.open(self.first) as tar:
             names = set(tar.getnames())
         stem = f"{self.builder.BUNDLE_NAME}-{_GRAPH_VERSION}"
@@ -148,6 +149,7 @@ class TestBundleStability(unittest.TestCase):
             "MagicCardsOntology.ttl",
             "MagicCardIndividuals.ttl",
             "MagicCardCollection.ttl",
+            "MagicArenaCollection.ttl",
             "MagicCardSynergies.ttl",
             "MagicSimulationAnnotations.ttl",
             "sets/TestSet.ttl",

@@ -16,7 +16,7 @@ only; this file defines its scope and the licences of everything else.
 | `MagicCardsOntology.ttl` | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) |
 | `MagicCardSynergies.ttl` | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) |
 | `MagicSimulationAnnotations.ttl` | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) |
-| `sets/*.ttl`, `MagicCardIndividuals.ttl`, `MagicCardCollection.ttl` | No licence granted — see below |
+| `sets/*.ttl`, `MagicCardIndividuals.ttl`, `MagicCardCollection.ttl`, `MagicArenaCollection.ttl` | No licence granted — see below |
 
 ## Ontology and synergy graphs (CC BY-SA 4.0)
 
@@ -37,8 +37,9 @@ carve-out below).
 ## Generated card data (no licence granted)
 
 The per-set instance graphs (`sets/*.ttl`), their aggregator
-(`MagicCardIndividuals.ttl`), and the collection inventory
-(`MagicCardCollection.ttl`) are generated files containing verbatim
+(`MagicCardIndividuals.ttl`), and the collection inventories
+(`MagicCardCollection.ttl`, `MagicArenaCollection.ttl`) are generated
+files containing verbatim
 card names, oracle text, printed text, flavor text, and official
 rulings. **No copyright licence is granted for these files.** They are
 redistributed as unofficial Fan Content under the
