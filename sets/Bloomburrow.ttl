@@ -39,8 +39,9 @@
     rdfs:label "Magic Card Collection Individuals – Bloomburrow"@en ;
     rdfs:comment """An instance graph describing the card individuals of a
 personal Magic: The Gathering card collection that were printed in the set
-Bloomburrow (BLB). One Card individual is defined per collected
-printing, carrying its characteristics, the platforms it is available on
+Bloomburrow (BLB). One Card individual is defined per printing
+collected in paper or on MTG Arena, carrying its characteristics, the
+platforms it is available on
 (paper, MTG Arena, Magic Online) with its MTG Arena identity, its legality
 in the paper and MTG Arena formats, and official rulings. Card data was
 sourced from Gatherer and Scryfall. This file imports MagicCardsOntology to
@@ -53,6 +54,58 @@ legality definitions."""@en .
 # Card Individuals
 #
 ################################################################################
+
+:BanishingLightBloomburrow1 rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Banishing Light" ;
+    :manaCost "{2}{W}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Enchantment ;
+    :hasRarity :Common ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :Bloomburrow ;
+    :cardNumber "1"^^xsd:integer ;
+    :artist "Zoltan Boros" ;
+    :hasLanguage :English ;
+    :printedText """When this enchantment enters, exile target nonland permanent an opponent controls until this enchantment leaves the battlefield."""@en ;
+    :oracleText """When this enchantment enters, exile target nonland permanent an opponent controls until this enchantment leaves the battlefield."""@en ;
+    :flavorText """"If you cannot find light in the darkness, create it."
+—Aural, high cleric"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=668915"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/blb/1/banishing-light"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "91537"^^xsd:positiveInteger ;
+    :arenaName "Banishing Light" ;
+    :arenaSetCode "BLB" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-07-25"^^xsd:date ;
+        :rulingText """If Banishing Light leaves the battlefield before its triggered ability resolves, the target permanent won’t be exiled."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-07-25"^^xsd:date ;
+        :rulingText """If an Aura is exiled this way, its owner chooses what it will enchant as it returns to the battlefield. An Aura put onto the battlefield this way doesn’t target anything (so it could be attached to a permanent an opponent controls with hexproof, for example), but the Aura’s enchant ability restricts what it can be attached to. If the Aura can’t legally be attached to anything, it remains in exile for the rest of the game."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-07-25"^^xsd:date ;
+        :rulingText """Auras attached to the exiled permanent will be put into their owners’ graveyards. Any Equipment will become unattached and remain on the battlefield. Any counters on the exiled permanent will cease to exist. When the card returns to the battlefield, it will be a new object with no connection to the card that was exiled."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-07-25"^^xsd:date ;
+        :rulingText """If a token is exiled this way, it will cease to exist and won’t return to the battlefield."""@en ] .
 
 :EssenceChanneler rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -138,6 +191,941 @@ When this creature dies, put its counters on target creature you control."""@en 
         :rulingDate "2024-07-26"^^xsd:date ;
         :rulingText """Essence Channeler’s last ability puts all counters that were on Essence Channeler onto the target creature, not just its +1/+1 counters."""@en ] .
 
+:LifecreedDuo rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Lifecreed Duo" ;
+    :manaCost "{1}{W}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Bat ,
+                :Bird ;
+    :hasRarity :Common ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :Bloomburrow ;
+    :cardNumber "20"^^xsd:integer ;
+    :artist "Lorenzo Mastroianni" ;
+    :hasLanguage :English ;
+    :power "1" ;
+    :powerValue "1"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    :hasKeywordAbility :Flying ;
+    :printedText """Flying
+Whenever another creature you control enters, you gain 1 life."""@en ;
+    :oracleText """Flying
+Whenever another creature you control enters, you gain 1 life."""@en ;
+    :flavorText """"Why are you eating upside down?" asked the bird. "Why are you eating upside up?" replied the bat."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=668934"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/blb/20/lifecreed-duo"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "91556"^^xsd:positiveInteger ;
+    :arenaName "Lifecreed Duo" ;
+    :arenaSetCode "BLB" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:PileatedProvisioner rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Pileated Provisioner" ;
+    :manaCost "{4}{W}" ;
+    :manaValue "5"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Bird ,
+                :Scout ;
+    :hasRarity :Common ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :Bloomburrow ;
+    :cardNumber "25"^^xsd:integer ;
+    :artist "Eelis Kyttanen" ;
+    :hasLanguage :English ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "4" ;
+    :toughnessValue "4"^^xsd:integer ;
+    :hasKeywordAbility :Flying ;
+    :printedText """Flying
+When this creature enters, put a +1/+1 counter on target creature you control without flying."""@en ;
+    :oracleText """Flying
+When this creature enters, put a +1/+1 counter on target creature you control without flying."""@en ;
+    :flavorText """Aerial supporters train for years to make sure the weapons they drop land in the hands of mice and not on their heads."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=668939"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/blb/25/pileated-provisioner"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "91561"^^xsd:positiveInteger ;
+    :arenaName "Pileated Provisioner" ;
+    :arenaSetCode "BLB" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:WaxWaneWitness rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Wax-Wane Witness" ;
+    :manaCost "{3}{W}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Bat ,
+                :Cleric ;
+    :hasRarity :Common ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :Bloomburrow ;
+    :cardNumber "39"^^xsd:integer ;
+    :artist "Mila Pesic" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "4" ;
+    :toughnessValue "4"^^xsd:integer ;
+    :hasKeywordAbility :Flying ,
+                       :Vigilance ;
+    :printedText """Flying, vigilance
+Whenever you gain or lose life during your turn, this creature gets +1/+0 until end of turn."""@en ;
+    :oracleText """Flying, vigilance
+Whenever you gain or lose life during your turn, this creature gets +1/+0 until end of turn."""@en ;
+    :flavorText """Batfolk clerics consider the cycle of light and darkness as a sacred allegory of life and death."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=668953"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/blb/39/wax-wane-witness"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "91575"^^xsd:positiveInteger ;
+    :arenaName "Wax-Wane Witness" ;
+    :arenaSetCode "BLB" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """If you gain or lose an amount of life “for each” of something, that life is gained or lost as one event and Wax-Wane Witness’s last ability triggers only once."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """In a Two-Headed Giant game, life gained by your teammate won’t cause Wax-Wane Witness’s last ability to trigger even though it caused your team’s life total to increase."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """Wax-Wane Witness’s last ability triggers just once for each life-gaining or life-losing event, no matter how much life was gained or lost."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """Each creature with lifelink dealing combat damage causes a separate life-gaining event. For example, if two creatures you control with lifelink deal combat damage at the same time, Wax-Wane Witness’s last ability will trigger twice. However, if a single creature you control with lifelink deals combat damage to multiple creatures, players, and/or planeswalkers at the same time (perhaps because it has trample or was blocked by more than one creature), the ability will trigger only once."""@en ] .
+
+:Knightfisher rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Knightfisher" ;
+    :manaCost "{3}{U}{U}" ;
+    :manaValue "5"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Bird ,
+                :Knight ;
+    :hasRarity :Uncommon ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :Bloomburrow ;
+    :cardNumber "55"^^xsd:integer ;
+    :artist "Jakob Eirich" ;
+    :hasLanguage :English ;
+    :power "4" ;
+    :powerValue "4"^^xsd:integer ;
+    :toughness "5" ;
+    :toughnessValue "5"^^xsd:integer ;
+    :hasKeywordAbility :Flying ;
+    :printedText """Flying
+Whenever another nontoken Bird you control enters, create a 1/1 blue Fish creature token."""@en ;
+    :oracleText """Flying
+Whenever another nontoken Bird you control enters, create a 1/1 blue Fish creature token."""@en ;
+    :flavorText """His keen eyes can see the glint of scales far below the river's surface."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=668969"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/blb/55/knightfisher"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "91591"^^xsd:positiveInteger ;
+    :arenaName "Knightfisher" ;
+    :arenaSetCode "BLB" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:MindSpiral rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Mind Spiral" ;
+    :manaCost "{4}{U}" ;
+    :manaValue "5"^^xsd:nonNegativeInteger ;
+    :hasCardType :Sorcery ;
+    :hasRarity :Common ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :Bloomburrow ;
+    :cardNumber "59"^^xsd:integer ;
+    :artist "Filip Burburan" ;
+    :hasLanguage :English ;
+    :hasKeywordAbility :Gift ;
+    :printedText """Gift a tapped Fish (You may promise an opponent a gift as you cast this spell. If you do, they create a tapped 1/1 blue Fish creature token before its other effects.)
+Target player draws three cards. If the gift was promised, tap target creature an opponent controls and put a stun counter on it. (If a permanent with a stun counter would become untapped, remove one from it instead.)"""@en ;
+    :oracleText """Gift a tapped Fish (You may promise an opponent a gift as you cast this spell. If you do, they create a tapped 1/1 blue Fish creature token before its other effects.)
+Target player draws three cards. If the gift was promised, tap target creature an opponent controls and put a stun counter on it. (If a permanent with a stun counter would become untapped, remove one from it instead.)"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=668973"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/blb/59/mind-spiral"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "91595"^^xsd:positiveInteger ;
+    :arenaName "Mind Spiral" ;
+    :arenaSetCode "BLB" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """For instants and sorceries with gift, the gift is given to the appropriate opponent as part of the resolution of the spell. This happens before any of the spell’s other effects would take place."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """You can’t pay a gift cost more than once."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """If you copy a spell for which the gift was promised, the gift was also promised to the same opponent for the copy. If a card or token enters as a copy of a permanent that’s already on the battlefield, the gift isn’t promised for that new permanent, even if it was promised for the original."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """Some instant or sorcery spells require alternative or additional targets if the gift was promised. You ignore these targeting requirements if the gifts aren’t promised for those spells. On the other hand, you can promise a gift for a permanent spell even if you won’t be able to choose targets for an enters ability of that permanent once the spell resolves."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """In the main set, there are four different kinds of gifts. “Gift a Food” causes the chosen opponent to create a Food token, while “Gift a Treasure” causes the chosen opponent to create a Treasure token. “Gift a card” causes them to draw a card, and “Gift a tapped Fish” causes them to create a tapped 1/1 blue Fish creature token. The Commander decks contain two more kinds of gifts: “Gift an Octopus,” which causes the chosen opponent to create an 8/8 blue Octopus creature token, and “Gift an extra turn,” which causes them to take an extra turn after the current turn ends."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """If a spell for which the gift was promised is countered, doesn’t resolve (perhaps because all of its targets are illegal), or is otherwise removed from the stack, the gift won’t be given. None of its other effects will happen either."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """You may target a creature that is already tapped with Mind Spiral. If the target creature is already tapped as Mind Spiral resolves, you will still put a stun counter on it."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """As an additional cost to cast a spell with gift, you can promise the listed gift to an opponent. That opponent is chosen as part of that additional cost. The gift isn’t given at this time; rather, it’s given at a later time based on whether or not the spell is a permanent spell."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """For permanent spells with gift, an ability triggers when that permanent enters if the gift was promised. When that ability resolves, the gift is given to the appropriate opponent."""@en ] .
+
+:PlumecreedEscort rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Plumecreed Escort" ;
+    :manaCost "{1}{U}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Bird ,
+                :Scout ;
+    :hasRarity :Uncommon ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :Bloomburrow ;
+    :cardNumber "65"^^xsd:integer ;
+    :artist "Manuel Castañón" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "1" ;
+    :toughnessValue "1"^^xsd:integer ;
+    :hasKeywordAbility :Flying ,
+                       :Flash ;
+    :printedText """Flash
+Flying
+When this creature enters, target creature you control gains hexproof until end of turn."""@en ;
+    :oracleText """Flash
+Flying
+When this creature enters, target creature you control gains hexproof until end of turn."""@en ;
+    :flavorText """"I defend Valley and its beauty. What better weapon to wield than beauty itself?\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=668979"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/blb/65/plumecreed-escort"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "91601"^^xsd:positiveInteger ;
+    :arenaName "Plumecreed Escort" ;
+    :arenaSetCode "BLB" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:SugarCoat rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Sugar Coat" ;
+    :manaCost "{2}{U}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Enchantment ;
+    :hasSubType :Aura ;
+    :hasRarity :Uncommon ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :Bloomburrow ;
+    :cardNumber "76"^^xsd:integer ;
+    :artist "Gaboleps" ;
+    :hasLanguage :English ;
+    :hasKeywordAbility :Enchant ,
+                       :Flash ;
+    :printedText """Flash
+Enchant creature or Food
+Enchanted permanent is a colorless Food artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life" and loses all other card types and abilities."""@en ;
+    :oracleText """Flash
+Enchant creature or Food
+Enchanted permanent is a colorless Food artifact with "{2}, {T}, Sacrifice this artifact: You gain 3 life" and loses all other card types and abilities."""@en ;
+    :flavorText """Some jokes have the punchline baked in."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=668990"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/blb/76/sugar-coat"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "91612"^^xsd:positiveInteger ;
+    :arenaName "Sugar Coat" ;
+    :arenaSetCode "BLB" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """A creature enchanted with Sugar Coat stops being a creature. Equipment attached to that creature become unattached. Auras attached to that creature will be put into their owner's graveyard (unless they could also enchant a Food artifact)."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """The enchanted permanent still retains its name, mana cost, and mana value. It isn't a token unless it already was one."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-11-08"^^xsd:date ;
+        :rulingText """Whatever you do, don't eat the delicious cards."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-11-08"^^xsd:date ;
+        :rulingText """You can't sacrifice a Food to pay multiple costs. For example, you can't sacrifice a Food token to activate its own ability and also to activate Maraleaf Rider's ability."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-11-08"^^xsd:date ;
+        :rulingText """Food is an artifact type. Even though it appears on some creatures, it's never a creature type."""@en ] .
+
+:AgateBladeAssassin rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Agate-Blade Assassin" ;
+    :manaCost "{1}{B}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Lizard ,
+                :Assassin ;
+    :hasRarity :Common ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :Bloomburrow ;
+    :cardNumber "82"^^xsd:integer ;
+    :artist "Hristo D. Chukov" ;
+    :hasLanguage :English ;
+    :power "1" ;
+    :powerValue "1"^^xsd:integer ;
+    :toughness "3" ;
+    :toughnessValue "3"^^xsd:integer ;
+    :printedText """Whenever this creature attacks, defending player loses 1 life and you gain 1 life."""@en ;
+    :oracleText """Whenever this creature attacks, defending player loses 1 life and you gain 1 life."""@en ;
+    :flavorText """Some lizardfolk wield the precious agate and yearn for fire. Others wield it and thirst for blood."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=668996"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/blb/82/agate-blade-assassin"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "91618"^^xsd:positiveInteger ;
+    :arenaName "Agate-Blade Assassin" ;
+    :arenaSetCode "BLB" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:ConsumedByGreed rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Consumed by Greed" ;
+    :manaCost "{1}{B}{B}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Instant ;
+    :hasRarity :Uncommon ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :Bloomburrow ;
+    :cardNumber "87"^^xsd:integer ;
+    :artist "Mathias Kollros" ;
+    :hasLanguage :English ;
+    :hasKeywordAbility :Gift ;
+    :printedText """Gift a card (You may promise an opponent a gift as you cast this spell. If you do, they draw a card before its other effects.)
+Target opponent sacrifices a creature with the greatest power among creatures they control. If the gift was promised, return target creature card from your graveyard to your hand."""@en ;
+    :oracleText """Gift a card (You may promise an opponent a gift as you cast this spell. If you do, they draw a card before its other effects.)
+Target opponent sacrifices a creature with the greatest power among creatures they control. If the gift was promised, return target creature card from your graveyard to your hand."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=669001"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/blb/87/consumed-by-greed"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "91623"^^xsd:positiveInteger ;
+    :arenaName "Consumed by Greed" ;
+    :arenaSetCode "BLB" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """As an additional cost to cast a spell with gift, you can promise the listed gift to an opponent. That opponent is chosen as part of that additional cost. The gift isn’t given at this time; rather, it’s given at a later time based on whether or not the spell is a permanent spell."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """If you copy a spell for which the gift was promised, the gift was also promised to the same opponent for the copy. If a card or token enters as a copy of a permanent that’s already on the battlefield, the gift isn’t promised for that new permanent, even if it was promised for the original."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """For instants and sorceries with gift, the gift is given to the appropriate opponent as part of the resolution of the spell. This happens before any of the spell’s other effects would take place."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """You can’t pay a gift cost more than once."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """In the main set, there are four different kinds of gifts. “Gift a Food” causes the chosen opponent to create a Food token, while “Gift a Treasure” causes the chosen opponent to create a Treasure token. “Gift a card” causes them to draw a card, and “Gift a tapped Fish” causes them to create a tapped 1/1 blue Fish creature token. The Commander decks contain two more kinds of gifts: “Gift an Octopus,” which causes the chosen opponent to create an 8/8 blue Octopus creature token, and “Gift an extra turn,” which causes them to take an extra turn after the current turn ends."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """For permanent spells with gift, an ability triggers when that permanent enters if the gift was promised. When that ability resolves, the gift is given to the appropriate opponent."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """Some instant or sorcery spells require alternative or additional targets if the gift was promised. You ignore these targeting requirements if the gifts aren’t promised for those spells. On the other hand, you can promise a gift for a permanent spell even if you won’t be able to choose targets for an enters ability of that permanent once the spell resolves."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """If a spell for which the gift was promised is countered, doesn’t resolve (perhaps because all of its targets are illegal), or is otherwise removed from the stack, the gift won’t be given. None of its other effects will happen either."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """If the target opponent has multiple creatures tied for the greatest power, that player chooses which one to sacrifice."""@en ] .
+
+:DaggerfangDuo rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Daggerfang Duo" ;
+    :manaCost "{2}{B}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Rat ,
+                :Squirrel ;
+    :hasRarity :Common ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :Bloomburrow ;
+    :cardNumber "89"^^xsd:integer ;
+    :artist "Nereida" ;
+    :hasLanguage :English ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    :hasKeywordAction :Mill ;
+    :hasKeywordAbility :Deathtouch ;
+    :printedText """Deathtouch
+When this creature enters, you may mill two cards. (You may put the top two cards of your library into your graveyard.)"""@en ;
+    :oracleText """Deathtouch
+When this creature enters, you may mill two cards. (You may put the top two cards of your library into your graveyard.)"""@en ;
+    :flavorText """"Should we act now or later?" the rat asked. "Both," whispered the squirrel."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=669003"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/blb/89/daggerfang-duo"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "91625"^^xsd:positiveInteger ;
+    :arenaName "Daggerfang Duo" ;
+    :arenaSetCode "BLB" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """If you have one or fewer cards in your library, you can’t choose to mill two cards."""@en ] .
+
+:EarlyWinter rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Early Winter" ;
+    :manaCost "{4}{B}" ;
+    :manaValue "5"^^xsd:nonNegativeInteger ;
+    :hasCardType :Instant ;
+    :hasRarity :Common ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :Bloomburrow ;
+    :cardNumber "93"^^xsd:integer ;
+    :artist "Andrew Mar" ;
+    :hasLanguage :English ;
+    :printedText """Choose one —
+• Exile target creature.
+• Target opponent exiles an enchantment they control."""@en ;
+    :oracleText """Choose one —
+• Exile target creature.
+• Target opponent exiles an enchantment they control."""@en ;
+    :flavorText """The climate changed and the world suffered."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=669007"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/blb/93/early-winter"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "91629"^^xsd:positiveInteger ;
+    :arenaName "Early Winter" ;
+    :arenaSetCode "BLB" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:GlidediveDuo rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Glidedive Duo" ;
+    :manaCost "{4}{B}" ;
+    :manaValue "5"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Bat ,
+                :Lizard ;
+    :hasRarity :Common ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :Bloomburrow ;
+    :cardNumber "96"^^xsd:integer ;
+    :artist "Manuel Castañón" ;
+    :hasLanguage :English ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "3" ;
+    :toughnessValue "3"^^xsd:integer ;
+    :hasKeywordAbility :Flying ;
+    :printedText """Flying
+When this creature enters, each opponent loses 2 life and you gain 2 life."""@en ;
+    :oracleText """Flying
+When this creature enters, each opponent loses 2 life and you gain 2 life."""@en ;
+    :flavorText """"Catch the thermal!" called the bat.
+"What's a thermal?!" cried the lizard."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=669010"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/blb/96/glidedive-duo"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "91632"^^xsd:positiveInteger ;
+    :arenaName "Glidedive Duo" ;
+    :arenaSetCode "BLB" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:NocturnalHunger rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Nocturnal Hunger" ;
+    :manaCost "{2}{B}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Instant ;
+    :hasRarity :Common ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :Bloomburrow ;
+    :cardNumber "102"^^xsd:integer ;
+    :artist "Sam Guay" ;
+    :hasLanguage :English ;
+    :hasKeywordAbility :Gift ;
+    # Note: keyword "Food" not defined in MagicCardsOntology
+    :printedText """Gift a Food (You may promise an opponent a gift as you cast this spell. If you do, they create a Food token before its other effects. It's an artifact with "{2}, {T}, Sacrifice this token: You gain 3 life.")
+Destroy target creature. If the gift wasn't promised, you lose 2 life."""@en ;
+    :oracleText """Gift a Food (You may promise an opponent a gift as you cast this spell. If you do, they create a Food token before its other effects. It's an artifact with "{2}, {T}, Sacrifice this token: You gain 3 life.")
+Destroy target creature. If the gift wasn't promised, you lose 2 life."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=669016"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/blb/102/nocturnal-hunger"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "91638"^^xsd:positiveInteger ;
+    :arenaName "Nocturnal Hunger" ;
+    :arenaSetCode "BLB" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """For instants and sorceries with gift, the gift is given to the appropriate opponent as part of the resolution of the spell. This happens before any of the spell's other effects would take place."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """If a spell for which the gift was promised is countered, doesn't resolve (perhaps because all of its targets are illegal), or is otherwise removed from the stack, the gift won't be given. None of its other effects will happen either."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """As an additional cost to cast a spell with gift, you can promise the listed gift to an opponent. That opponent is chosen as part of that additional cost. The gift isn't given at this time; rather, it's given at a later time based on whether or not the spell is a permanent spell."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """Some instant or sorcery spells require alternative or additional targets if the gift was promised. You ignore these targeting requirements if the gifts aren't promised for those spells. On the other hand, you can promise a gift for a permanent spell even if you won't be able to choose targets for an enters ability of that permanent once the spell resolves."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """For permanent spells with gift, an ability triggers when that permanent enters if the gift was promised. When that ability resolves, the gift is given to the appropriate opponent."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """In the main set, there are four different kinds of gifts. "Gift a Food" causes the chosen opponent to create a Food token, while "Gift a Treasure" causes the chosen opponent to create a Treasure token. "Gift a card" causes them to draw a card, and "Gift a tapped Fish" causes them to create a tapped 1/1 blue Fish creature token. The Commander decks contain two more kinds of gifts: "Gift an Octopus," which causes the chosen opponent to create an 8/8 blue Octopus creature token, and "Gift an extra turn," which causes them to take an extra turn after the current turn ends."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """If you copy a spell for which the gift was promised, the gift was also promised to the same opponent for the copy. If a card or token enters as a copy of a permanent that's already on the battlefield, the gift isn't promised for that new permanent, even if it was promised for the original."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """You can't pay a gift cost more than once."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-11-08"^^xsd:date ;
+        :rulingText """You can't sacrifice a Food to pay multiple costs. For example, you can't sacrifice a Food token to activate its own ability and also to activate Maraleaf Rider's ability."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-11-08"^^xsd:date ;
+        :rulingText """Food is an artifact type. Even though it appears on some creatures, it's never a creature type."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-11-08"^^xsd:date ;
+        :rulingText """Whatever you do, don't eat the delicious cards."""@en ] .
+
+:OsteomancerAdept rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Osteomancer Adept" ;
+    :manaCost "{1}{B}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Squirrel ,
+                :Warlock ;
+    :hasRarity :Rare ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :Bloomburrow ;
+    :cardNumber "103"^^xsd:integer ;
+    :artist "Daniel Zrom" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    :hasKeywordAbility :Deathtouch ;
+    :printedText """Deathtouch
+{T}: Until end of turn, you may cast creature spells from your graveyard by foraging in addition to paying their other costs. If you cast a spell this way, that creature enters with a finality counter on it. (To forage, exile three cards from your graveyard or sacrifice a Food. If a creature with a finality counter on it would die, exile it instead.)"""@en ;
+    :oracleText """Deathtouch
+{T}: Until end of turn, you may cast creature spells from your graveyard by foraging in addition to paying their other costs. If you cast a spell this way, that creature enters with a finality counter on it. (To forage, exile three cards from your graveyard or sacrifice a Food. If a creature with a finality counter on it would die, exile it instead.)"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=669017"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/blb/103/osteomancer-adept"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "91639"^^xsd:positiveInteger ;
+    :arenaName "Osteomancer Adept" ;
+    :arenaSetCode "BLB" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """You must still follow timing restrictions and permissions for creature spells you cast with the permission granted by Osteomancer Adept's last ability. Normally, you'll be able to cast them only during your main phase while the stack is empty."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """If you don't have enough cards in your graveyard or a Food on the battlefield, you can't choose to forage."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """Multiple finality counters on a single permanent are redundant."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """Finality counters aren't keyword counters, and a finality counter doesn't give any abilities to the permanent it's on. If that permanent loses its abilities and then would go to a graveyard, it will still be exiled instead."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """If Dryad Arbor (the only card that's both a creature and a land) is in your graveyard, you can't play it this way. Dryad Arbor can't be cast as a spell."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """Finality counters work on any permanent, not only creatures. If a permanent with a finality counter on it would be put into a graveyard from the battlefield, exile it instead."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """Once you announce that you're casting a spell or activating an ability, players can't take actions until you've finished doing so. Notably, opponents can't try to remove cards from your graveyard or Foods you control to stop you from foraging."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """Finality counters don't stop permanents from going to zones other than the graveyard from the battlefield. For example, if a permanent with a finality counter on it would be put into its owner's hand from the battlefield, it does so normally."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-11-08"^^xsd:date ;
+        :rulingText """Food is an artifact type. Even though it appears on some creatures, it's never a creature type."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-11-08"^^xsd:date ;
+        :rulingText """You can't sacrifice a Food to pay multiple costs. For example, you can't sacrifice a Food token to activate its own ability and also to activate Maraleaf Rider's ability."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-11-08"^^xsd:date ;
+        :rulingText """Whatever you do, don't eat the delicious cards."""@en ] .
+
+:PsychicWhorl rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Psychic Whorl" ;
+    :manaCost "{2}{B}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Sorcery ;
+    :hasRarity :Common ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :Bloomburrow ;
+    :cardNumber "105"^^xsd:integer ;
+    :artist "Eli Minaya" ;
+    :hasLanguage :English ;
+    :hasKeywordAction :Surveil ;
+    :printedText """Target opponent discards two cards. Then if you control a Rat, surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)"""@en ;
+    :oracleText """Target opponent discards two cards. Then if you control a Rat, surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=669019"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/blb/105/psychic-whorl"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "91641"^^xsd:positiveInteger ;
+    :arenaName "Psychic Whorl" ;
+    :arenaSetCode "BLB" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:Savor rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Savor" ;
+    :manaCost "{1}{B}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Instant ;
+    :hasRarity :Common ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :Bloomburrow ;
+    :cardNumber "109"^^xsd:integer ;
+    :artist "Kev Walker" ;
+    :hasLanguage :English ;
+    # Note: keyword "Food" not defined in MagicCardsOntology
+    :printedText """Target creature gets -2/-2 until end of turn. Create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this token: You gain 3 life.")"""@en ;
+    :oracleText """Target creature gets -2/-2 until end of turn. Create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this token: You gain 3 life.")"""@en ;
+    :flavorText """Edibility is in the eye of the beholder."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=669023"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/blb/109/savor"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "91645"^^xsd:positiveInteger ;
+    :arenaName "Savor" ;
+    :arenaSetCode "BLB" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """If the target creature is an illegal target as Savor tries to resolve, it won't resolve and none of its effects will happen. You won't create a Food token."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-11-08"^^xsd:date ;
+        :rulingText """Whatever you do, don't eat the delicious cards."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-11-08"^^xsd:date ;
+        :rulingText """Food is an artifact type. Even though it appears on some creatures, it's never a creature type."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-11-08"^^xsd:date ;
+        :rulingText """You can't sacrifice a Food to pay multiple costs. For example, you can't sacrifice a Food token to activate its own ability and also to activate Maraleaf Rider's ability."""@en ] .
+
+:StarlitSoothsayer rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Starlit Soothsayer" ;
+    :manaCost "{2}{B}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Bat ,
+                :Cleric ;
+    :hasRarity :Common ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :Bloomburrow ;
+    :cardNumber "115"^^xsd:integer ;
+    :artist "Kaitlyn McCulley" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    :hasKeywordAbility :Flying ;
+    :hasKeywordAction :Surveil ;
+    :printedText """Flying
+At the beginning of your end step, if you gained or lost life this turn, surveil 1. (Look at the top card of your library. You may put it into your graveyard.)"""@en ;
+    :oracleText """Flying
+At the beginning of your end step, if you gained or lost life this turn, surveil 1. (Look at the top card of your library. You may put it into your graveyard.)"""@en ;
+    :flavorText """"The Lunar Paean is upon us. Let us turn to our ancestors for guidance, and look to our children for hope.\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=669029"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/blb/115/starlit-soothsayer"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "91651"^^xsd:positiveInteger ;
+    :arenaName "Starlit Soothsayer" ;
+    :arenaSetCode "BLB" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """If you haven’t gained or lost life during the turn when your end step begins, Starlit Soothsayer’s last ability won’t trigger at all. Gaining or losing life during your end step won’t cause the ability to trigger."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """Starlit Soothsayer’s last ability cares whether you gained or lost life this turn, not how your life total changed. For example, if you gained 2 life and lost 2 life in the same turn, you still gained and lost life that turn, even though your life total is the same as it was at the start of the turn."""@en ] .
+
 :StarscapeCleric rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Starscape Cleric" ;
@@ -220,6 +1208,159 @@ Whenever you gain life, each opponent loses 1 life."""@en ;
         :rulingDate "2024-07-26"^^xsd:date ;
         :rulingText """The token created by the offspring ability isn’t “cast”, so abilities that trigger when a creature spell is cast won’t trigger for the copy."""@en ] .
 
+:WicksPatrol rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Wick's Patrol" ;
+    :manaCost "{4}{B}{B}" ;
+    :manaValue "6"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Rat ,
+                :Warlock ;
+    :hasRarity :Uncommon ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :Bloomburrow ;
+    :cardNumber "121"^^xsd:integer ;
+    :artist "Dmitry Burmak" ;
+    :hasLanguage :English ;
+    :power "5" ;
+    :powerValue "5"^^xsd:integer ;
+    :toughness "3" ;
+    :toughnessValue "3"^^xsd:integer ;
+    :hasKeywordAction :Mill ;
+    :printedText """When this creature enters, mill three cards. When you do, target creature an opponent controls gets -X/-X until end of turn, where X is the greatest mana value among cards in your graveyard."""@en ;
+    :oracleText """When this creature enters, mill three cards. When you do, target creature an opponent controls gets -X/-X until end of turn, where X is the greatest mana value among cards in your graveyard."""@en ;
+    :flavorText """"What a hideous creature! And the worm's no looker either."
+—Grumble, rival marshstalker"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=669035"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/blb/121/wicks-patrol"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "91657"^^xsd:positiveInteger ;
+    :arenaName "Wick's Patrol" ;
+    :arenaSetCode "BLB" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """You don't choose a target for Wick's Patrol's ability at the time it triggers. Rather, a second "reflexive" ability triggers when you mill three cards this way. You choose a target for this ability as it goes on the stack. Each player may respond to this triggered ability as normal."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """If your library has two or fewer cards in it when Wick's Patrol's ability resolves, you'll mill as many cards as you can, but the reflexive ability won't trigger."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """The value of X is calculated only once, as the reflexive ability resolves."""@en ] .
+
+:AgateAssault rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Agate Assault" ;
+    :manaCost "{2}{R}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Sorcery ;
+    :hasRarity :Common ;
+    :hasColor :Red ;
+    :hasColorIdentity :Red ;
+    :isInSet :Bloomburrow ;
+    :cardNumber "122"^^xsd:integer ;
+    :artist "Slawomir Maniak" ;
+    :hasLanguage :English ;
+    :printedText """Choose one —
+• Agate Assault deals 4 damage to target creature. If that creature would die this turn, exile it instead.
+• Exile target artifact."""@en ;
+    :oracleText """Choose one —
+• Agate Assault deals 4 damage to target creature. If that creature would die this turn, exile it instead.
+• Exile target artifact."""@en ;
+    :flavorText """"Only an amateur crushes their enemies with a *cold* rock.\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=669036"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/blb/122/agate-assault"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "91658"^^xsd:positiveInteger ;
+    :arenaName "Agate Assault" ;
+    :arenaSetCode "BLB" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """The replacement effect from Agate Assault’s first mode will exile the target creature if it would die this turn for any reason, not just due to lethal damage."""@en ] .
+
+:BrambleguardCaptain rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Brambleguard Captain" ;
+    :manaCost "{3}{R}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Mouse ,
+                :Soldier ;
+    :hasRarity :Uncommon ;
+    :hasColor :Red ;
+    :hasColorIdentity :Red ;
+    :isInSet :Bloomburrow ;
+    :cardNumber "127"^^xsd:integer ;
+    :artist "Quintin Gleim" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "3" ;
+    :toughnessValue "3"^^xsd:integer ;
+    :printedText """At the beginning of combat on your turn, target creature you control gets +X/+0 until end of turn, where X is this creature's power."""@en ;
+    :oracleText """At the beginning of combat on your turn, target creature you control gets +X/+0 until end of turn, where X is this creature's power."""@en ;
+    :flavorText """"We sought adventure and found calamity. Forward, so we may meet both with courage!\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=669041"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/blb/127/brambleguard-captain"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "91663"^^xsd:positiveInteger ;
+    :arenaName "Brambleguard Captain" ;
+    :arenaSetCode "BLB" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """If Brambleguard Captain’s power is negative as its ability resolves, the target creature will get +0/+0 until end of turn. At least they’ll know Brambleguard Captain appreciates them."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """The value of X is calculated only once, as Brambleguard Captain’s ability resolves."""@en ] .
+
 :BywayBarterer rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Byway Barterer" ;
@@ -279,6 +1420,760 @@ Whenever you expend 4, you may discard your hand. If you do, draw two cards. (Yo
       [ rdf:type :Ruling ;
         :rulingDate "2024-07-26"^^xsd:date ;
         :rulingText """If the cost to cast a spell is increased, decreased, or changed because of additional or alternative costs, expend counts only the mana you actually spent."""@en ] .
+
+:FestivalOfEmbers rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Festival of Embers" ;
+    :manaCost "{4}{R}" ;
+    :manaValue "5"^^xsd:nonNegativeInteger ;
+    :hasCardType :Enchantment ;
+    :hasRarity :Rare ;
+    :hasColor :Red ;
+    :hasColorIdentity :Red ;
+    :isInSet :Bloomburrow ;
+    :cardNumber "134"^^xsd:integer ;
+    :artist "Greg Staples" ;
+    :hasLanguage :English ;
+    :printedText """During your turn, you may cast instant and sorcery spells from your graveyard by paying 1 life in addition to their other costs.
+If a card or token would be put into your graveyard from anywhere, exile it instead.
+{1}{R}: Sacrifice this enchantment."""@en ;
+    :oracleText """During your turn, you may cast instant and sorcery spells from your graveyard by paying 1 life in addition to their other costs.
+If a card or token would be put into your graveyard from anywhere, exile it instead.
+{1}{R}: Sacrifice this enchantment."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=669048"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/blb/134/festival-of-embers"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "91669"^^xsd:positiveInteger ;
+    :arenaName "Festival of Embers" ;
+    :arenaSetCode "BLB" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """While you control Festival of Embers, abilities that trigger whenever a creature you own dies won’t trigger because those cards and tokens are never put into your graveyard."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """If you discard a card while you control Festival of Embers, abilities that function when that card is discarded (such as madness) still work even though that card never reaches a graveyard. In addition, spells or abilities that check the characteristics of a discarded card can find that card in exile."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """If Festival of Embers is destroyed by a spell, Festivals of Embers will be exiled and then the spell will be put into its owner’s graveyard."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """When Festival of Embers’s last ability resolves, it will be exiled."""@en ] .
+
+:PlayfulShove rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Playful Shove" ;
+    :manaCost "{1}{R}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Sorcery ;
+    :hasRarity :Uncommon ;
+    :hasColor :Red ;
+    :hasColorIdentity :Red ;
+    :isInSet :Bloomburrow ;
+    :cardNumber "145"^^xsd:integer ;
+    :artist "Zoltan Boros" ;
+    :hasLanguage :English ;
+    :printedText """Playful Shove deals 1 damage to any target.
+Draw a card."""@en ;
+    :oracleText """Playful Shove deals 1 damage to any target.
+Draw a card."""@en ;
+    :flavorText """The boisterous pat on the back was painful, but not nearly as painful as the joke that inspired it."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=669059"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/blb/145/playful-shove"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "91681"^^xsd:positiveInteger ;
+    :arenaName "Playful Shove" ;
+    :arenaSetCode "BLB" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """If the target is illegal as Playful Shove tries to resolve, it won’t resolve and none of its effects will happen. You won’t draw a card."""@en ] .
+
+:TakeOutTheTrash rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Take Out the Trash" ;
+    :manaCost "{1}{R}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Instant ;
+    :hasRarity :Common ;
+    :hasColor :Red ;
+    :hasColorIdentity :Red ;
+    :isInSet :Bloomburrow ;
+    :cardNumber "156"^^xsd:integer ;
+    :artist "Fiona Hsieh" ;
+    :hasLanguage :English ;
+    :printedText """Take Out the Trash deals 3 damage to target creature or planeswalker. If you control a Raccoon, you may discard a card. If you do, draw a card."""@en ;
+    :oracleText """Take Out the Trash deals 3 damage to target creature or planeswalker. If you control a Raccoon, you may discard a card. If you do, draw a card."""@en ;
+    :flavorText """Disgusting. Revolting. Effective."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=669070"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/blb/156/take-out-the-trash"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "91692"^^xsd:positiveInteger ;
+    :arenaName "Take Out the Trash" ;
+    :arenaSetCode "BLB" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:WhiskerquillScribe rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Whiskerquill Scribe" ;
+    :manaCost "{1}{R}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Mouse ,
+                :Citizen ;
+    :hasRarity :Common ;
+    :hasColor :Red ;
+    :hasColorIdentity :Red ;
+    :isInSet :Bloomburrow ;
+    :cardNumber "161"^^xsd:integer ;
+    :artist "Matt Stewart" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    :hasAbilityWord :Valiant ;
+    :printedText """Valiant — Whenever this creature becomes the target of a spell or ability you control for the first time each turn, you may discard a card. If you do, draw a card."""@en ;
+    :oracleText """Valiant — Whenever this creature becomes the target of a spell or ability you control for the first time each turn, you may discard a card. If you do, draw a card."""@en ;
+    :flavorText """"Unneeded words are like dandelion seeds—cast adrift at the slightest whiff of scrutiny, only to find purchase and thrive where you least expect."
+—Myrtle, Valley scribe"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=669075"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/blb/161/whiskerquill-scribe"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "91696"^^xsd:positiveInteger ;
+    :arenaName "Whiskerquill Scribe" ;
+    :arenaSetCode "BLB" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """If you create a copy of a spell on the stack and target a creature you control with a valiant ability, that ability will trigger as long as the creature hasn't yet been the target of a spell or ability you control this turn."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """Valiant abilities will resolve before the spell or ability that caused them to trigger."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """If a spell or ability you control has one or more of its targets changed to a creature you control with a valiant ability, that ability will trigger if that creature hasn't yet been the target of a spell or ability you control this turn."""@en ] .
+
+:ForTheCommonGood rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "For the Common Good" ;
+    :manaCost "{X}{X}{G}" ;
+    :manaValue "1"^^xsd:nonNegativeInteger ;
+    :hasCardType :Sorcery ;
+    :hasRarity :Rare ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :Bloomburrow ;
+    :cardNumber "172"^^xsd:integer ;
+    :artist "Serena Malyon" ;
+    :hasLanguage :English ;
+    :printedText """Create X tokens that are copies of target token you control. Then tokens you control gain indestructible until your next turn. You gain 1 life for each token you control."""@en ;
+    :oracleText """Create X tokens that are copies of target token you control. Then tokens you control gain indestructible until your next turn. You gain 1 life for each token you control."""@en ;
+    :flavorText """Despite their differences, every creature and culture of Valley stood in unison against the threat."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=669086"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/blb/172/for-the-common-good"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "91708"^^xsd:positiveInteger ;
+    :arenaName "For the Common Good" ;
+    :arenaSetCode "BLB" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """The new tokens copy the characteristics of the original token as stated by the effect that created the original token."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """The new tokens don’t copy whether the original token is tapped or untapped, whether it has any counters on it or Auras and Equipment attached to it, or any non-copy effects that have changed its power, toughness, color, and so on."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """Any “as [this permanent] enters” or “[this permanent] enters with” abilities of the new tokens will work."""@en ] .
+
+:HeapedHarvest rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Heaped Harvest" ;
+    :manaCost "{2}{G}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ;
+    :hasSubType :Food ;
+    :hasRarity :Common ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :Bloomburrow ;
+    :cardNumber "175"^^xsd:integer ;
+    :artist "Daniel Ljunggren" ;
+    :hasLanguage :English ;
+    :printedText """When this artifact enters and when you sacrifice it, you may search your library for a basic land card, put it onto the battlefield tapped, then shuffle.
+{2}, {T}, Sacrifice this artifact: You gain 3 life."""@en ;
+    :oracleText """When this artifact enters and when you sacrifice it, you may search your library for a basic land card, put it onto the battlefield tapped, then shuffle.
+{2}, {T}, Sacrifice this artifact: You gain 3 life."""@en ;
+    :flavorText """One can travel all of Valley and never eat the same meal twice."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=669089"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/blb/175/heaped-harvest"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "91711"^^xsd:positiveInteger ;
+    :arenaName "Heaped Harvest" ;
+    :arenaSetCode "BLB" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """Heaped Harvest's first ability will trigger if it's sacrificed for any reason, not only if it's sacrificed to its last ability."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-11-08"^^xsd:date ;
+        :rulingText """Whatever you do, don't eat the delicious cards."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-11-08"^^xsd:date ;
+        :rulingText """You can't sacrifice a Food to pay multiple costs. For example, you can't sacrifice a Food token to activate its own ability and also to activate Maraleaf Rider's ability."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-11-08"^^xsd:date ;
+        :rulingText """Food is an artifact type. Even though it appears on some creatures, it's never a creature type."""@en ] .
+
+:LongstalkBrawl rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Longstalk Brawl" ;
+    :manaCost "{G}" ;
+    :manaValue "1"^^xsd:nonNegativeInteger ;
+    :hasCardType :Sorcery ;
+    :hasRarity :Common ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :Bloomburrow ;
+    :cardNumber "182"^^xsd:integer ;
+    :artist "Serena Malyon" ;
+    :hasLanguage :English ;
+    :hasKeywordAbility :Gift ;
+    :hasKeywordAction :Fight ;
+    :printedText """Gift a tapped Fish (You may promise an opponent a gift as you cast this spell. If you do, they create a tapped 1/1 blue Fish creature token before its other effects.)
+Choose target creature you control and target creature you don't control. Put a +1/+1 counter on the creature you control if the gift was promised. Then those creatures fight each other."""@en ;
+    :oracleText """Gift a tapped Fish (You may promise an opponent a gift as you cast this spell. If you do, they create a tapped 1/1 blue Fish creature token before its other effects.)
+Choose target creature you control and target creature you don't control. Put a +1/+1 counter on the creature you control if the gift was promised. Then those creatures fight each other."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=669096"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/blb/182/longstalk-brawl"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "91718"^^xsd:positiveInteger ;
+    :arenaName "Longstalk Brawl" ;
+    :arenaSetCode "BLB" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """If you copy a spell for which the gift was promised, the gift was also promised to the same opponent for the copy. If a card or token enters as a copy of a permanent that’s already on the battlefield, the gift isn’t promised for that new permanent, even if it was promised for the original."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """In the main set, there are four different kinds of gifts. “Gift a Food” causes the chosen opponent to create a Food token, while “Gift a Treasure” causes the chosen opponent to create a Treasure token. “Gift a card” causes them to draw a card, and “Gift a tapped Fish” causes them to create a tapped 1/1 blue Fish creature token. The Commander decks contain two more kinds of gifts: “Gift an Octopus,” which causes the chosen opponent to create an 8/8 blue Octopus creature token, and “Gift an extra turn,” which causes them to take an extra turn after the current turn ends."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """For instants and sorceries with gift, the gift is given to the appropriate opponent as part of the resolution of the spell. This happens before any of the spell’s other effects would take place."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """You can’t pay a gift cost more than once."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """If the creature you control is an illegal target as Longstalk Brawl tries to resolve, you won’t put a +1/+1 counter on it even if the gift was promised. If that creature is a legal target but the creature you don’t control isn’t, you’ll still put a +1/+1 counter on the creature you control if the gift was promised."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """If a spell for which the gift was promised is countered, doesn’t resolve (perhaps because all of its targets are illegal), or is otherwise removed from the stack, the gift won’t be given. None of its other effects will happen either."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """As an additional cost to cast a spell with gift, you can promise the listed gift to an opponent. That opponent is chosen as part of that additional cost. The gift isn’t given at this time; rather, it’s given at a later time based on whether or not the spell is a permanent spell."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """Some instant or sorcery spells require alternative or additional targets if the gift was promised. You ignore these targeting requirements if the gifts aren’t promised for those spells. On the other hand, you can promise a gift for a permanent spell even if you won’t be able to choose targets for an enters ability of that permanent once the spell resolves."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """For permanent spells with gift, an ability triggers when that permanent enters if the gift was promised. When that ability resolves, the gift is given to the appropriate opponent."""@en ] .
+
+:Polliwallop rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Polliwallop" ;
+    :manaCost "{3}{G}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasCardType :Instant ;
+    :hasRarity :Common ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :Bloomburrow ;
+    :cardNumber "189"^^xsd:integer ;
+    :artist "Martin Wittfooth" ;
+    :hasLanguage :English ;
+    :hasKeywordAbility :Affinity ;
+    :printedText """Affinity for Frogs (This spell costs {1} less to cast for each Frog you control.)
+Target creature you control deals damage equal to twice its power to target creature you don't control."""@en ;
+    :oracleText """Affinity for Frogs (This spell costs {1} less to cast for each Frog you control.)
+Target creature you control deals damage equal to twice its power to target creature you don't control."""@en ;
+    :flavorText """"We'll see who croaks first!\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=669103"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/blb/189/polliwallop"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "91725"^^xsd:positiveInteger ;
+    :arenaName "Polliwallop" ;
+    :arenaSetCode "BLB" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """If either creature is an illegal target as Polliwallop resolves, the creature you control won't deal damage."""@en ] .
+
+:StickytongueSentinel rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Stickytongue Sentinel" ;
+    :manaCost "{2}{G}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Frog ,
+                :Warrior ;
+    :hasRarity :Common ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :Bloomburrow ;
+    :cardNumber "193"^^xsd:integer ;
+    :artist "Lorenzo Mastroianni" ;
+    :hasLanguage :English ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "3" ;
+    :toughnessValue "3"^^xsd:integer ;
+    :hasKeywordAbility :Reach ;
+    :printedText """Reach
+When this creature enters, return up to one other target permanent you control to its owner's hand."""@en ;
+    :oracleText """Reach
+When this creature enters, return up to one other target permanent you control to its owner's hand."""@en ;
+    :flavorText """Victory doesn't have to be close for him to taste it."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=669107"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/blb/193/stickytongue-sentinel"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "91729"^^xsd:positiveInteger ;
+    :arenaName "Stickytongue Sentinel" ;
+    :arenaSetCode "BLB" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:TreeguardDuo rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Treeguard Duo" ;
+    :manaCost "{3}{G}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Frog ,
+                :Rabbit ;
+    :hasRarity :Common ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :Bloomburrow ;
+    :cardNumber "200"^^xsd:integer ;
+    :artist "Mila Pesic" ;
+    :hasLanguage :English ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "4" ;
+    :toughnessValue "4"^^xsd:integer ;
+    :printedText """When this creature enters, until end of turn, target creature you control gains vigilance and gets +X/+X, where X is the number of creatures you control."""@en ;
+    :oracleText """When this creature enters, until end of turn, target creature you control gains vigilance and gets +X/+X, where X is the number of creatures you control."""@en ;
+    :flavorText """"You shall not pass me," croaked the frog. "Nor me," growled the rabbit."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=669114"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/blb/200/treeguard-duo"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "91736"^^xsd:positiveInteger ;
+    :arenaName "Treeguard Duo" ;
+    :arenaSetCode "BLB" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """The value of X is determined only as Treeguard Duo’s triggered ability resolves, potentially including Treeguard Duo itself. It won’t change later in the turn if the number of creatures you control changes."""@en ] .
+
+:ValleyMightcaller rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Valley Mightcaller" ;
+    :manaCost "{G}" ;
+    :manaValue "1"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Frog ,
+                :Warrior ;
+    :hasRarity :Rare ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :Bloomburrow ;
+    :cardNumber "202"^^xsd:integer ;
+    :artist "Matt Stewart" ;
+    :hasLanguage :English ;
+    :power "1" ;
+    :powerValue "1"^^xsd:integer ;
+    :toughness "1" ;
+    :toughnessValue "1"^^xsd:integer ;
+    :hasKeywordAbility :Trample ;
+    :printedText """Trample
+Whenever another Frog, Rabbit, Raccoon, or Squirrel you control enters, put a +1/+1 counter on this creature."""@en ;
+    :oracleText """Trample
+Whenever another Frog, Rabbit, Raccoon, or Squirrel you control enters, put a +1/+1 counter on this creature."""@en ;
+    :flavorText """"There is no path to the Root Maze's center. Bard, sing a song while I create one.\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=669116"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/blb/202/valley-mightcaller"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "91738"^^xsd:positiveInteger ;
+    :arenaName "Valley Mightcaller" ;
+    :arenaSetCode "BLB" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """If Valley Mightcaller enters at the same time as one or more other Frogs, Rabbits, Raccoons, or Squirrels you control, its second ability will trigger for each of them."""@en ] .
+
+:JunkbladeBruiser rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Junkblade Bruiser" ;
+    :manaCost "{3}{R/G}{R/G}" ;
+    :manaValue "5"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Raccoon ,
+                :Berserker ;
+    :hasRarity :Common ;
+    :hasColor :Red ,
+              :Green ;
+    :hasColorIdentity :Red ,
+                      :Green ;
+    :isInSet :Bloomburrow ;
+    :cardNumber "220"^^xsd:integer ;
+    :artist "Omar Rayyan" ;
+    :hasLanguage :English ;
+    :power "4" ;
+    :powerValue "4"^^xsd:integer ;
+    :toughness "5" ;
+    :toughnessValue "5"^^xsd:integer ;
+    :hasKeywordAbility :Trample ;
+    :printedText """Trample
+Whenever you expend 4, this creature gets +2/+1 until end of turn. (You expend 4 as you spend your fourth total mana to cast spells during a turn.)"""@en ;
+    :oracleText """Trample
+Whenever you expend 4, this creature gets +2/+1 until end of turn. (You expend 4 as you spend your fourth total mana to cast spells during a turn.)"""@en ;
+    :flavorText """Each scrap shed from her battle-axe is more likely to end up stored permanently in an enemy's skull."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=669134"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/blb/220/junkblade-bruiser"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "91756"^^xsd:positiveInteger ;
+    :arenaName "Junkblade Bruiser" ;
+    :arenaSetCode "BLB" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """Abilities that trigger whenever you “expend N” only trigger when you reach that specific amount of mana spent on casting spells that turn. This can only happen once per turn. For example, if you’ve spent three mana on spells so far this turn and you control a permanent with an ability that triggers “whenever you expend 4,” that ability will trigger the next time you spend at least one mana to cast a spell this turn. It won’t trigger again if you spend another four mana to cast spells later in the turn."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """A permanent with an ability that triggers whenever you “expend N” will see mana you spent to cast spells the turn it enters, including mana you spent before it entered. For example, if you cast Junkblade Bruiser (a creature with a mana value of 5 and an ability that triggers whenever you expend 4) by paying its full cost of five mana, you’ll already have spent four mana on spells before Junkblade Bruiser enters, and therefore its ability that triggers whenever you expend 4 won’t be able to trigger at all that turn."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """If the cost to cast a spell is increased, decreased, or changed because of additional or alternative costs, expend counts only the mana you actually spent."""@en ] .
+
+:MoonriseCleric rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Moonrise Cleric" ;
+    :manaCost "{1}{W/B}{W/B}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Bat ,
+                :Cleric ;
+    :hasRarity :Common ;
+    :hasColor :White ,
+              :Black ;
+    :hasColorIdentity :White ,
+                      :Black ;
+    :isInSet :Bloomburrow ;
+    :cardNumber "226"^^xsd:integer ;
+    :artist "Simon Dominic" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "3" ;
+    :toughnessValue "3"^^xsd:integer ;
+    :hasKeywordAbility :Flying ;
+    :printedText """Flying
+Whenever this creature attacks, you gain 1 life."""@en ;
+    :oracleText """Flying
+Whenever this creature attacks, you gain 1 life."""@en ;
+    :flavorText """"The sunrisers have entrusted me with their life force. I intend to repay them bountifully.\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=669140"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/blb/226/moonrise-cleric"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "91762"^^xsd:positiveInteger ;
+    :arenaName "Moonrise Cleric" ;
+    :arenaSetCode "BLB" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:PondProphet rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Pond Prophet" ;
+    :manaCost "{G/U}{G/U}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Frog ,
+                :Advisor ;
+    :hasRarity :Common ;
+    :hasColor :Blue ,
+              :Green ;
+    :hasColorIdentity :Blue ,
+                      :Green ;
+    :isInSet :Bloomburrow ;
+    :cardNumber "229"^^xsd:integer ;
+    :artist "Simon Dominic" ;
+    :hasLanguage :English ;
+    :power "1" ;
+    :powerValue "1"^^xsd:integer ;
+    :toughness "1" ;
+    :toughnessValue "1"^^xsd:integer ;
+    :printedText """When this creature enters, draw a card."""@en ;
+    :oracleText """When this creature enters, draw a card."""@en ;
+    :flavorText """"The rainfall brings us news of the world around us. I've learned a lot, but most of all I've learned that it's very exciting out there!\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=669143"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/blb/229/pond-prophet"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "91765"^^xsd:positiveInteger ;
+    :arenaName "Pond Prophet" ;
+    :arenaSetCode "BLB" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:TempestAngler rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Tempest Angler" ;
+    :manaCost "{1}{U/R}{U/R}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Otter ,
+                :Wizard ;
+    :hasRarity :Common ;
+    :hasColor :Blue ,
+              :Red ;
+    :hasColorIdentity :Blue ,
+                      :Red ;
+    :isInSet :Bloomburrow ;
+    :cardNumber "235"^^xsd:integer ;
+    :artist "Raluca Marinescu" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    :printedText """Whenever you cast a noncreature spell, put a +1/+1 counter on this creature."""@en ;
+    :oracleText """Whenever you cast a noncreature spell, put a +1/+1 counter on this creature."""@en ;
+    :flavorText """"Castin' lines or castin' spells, ain't no one better than me.\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=669149"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/blb/235/tempest-angler"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "91771"^^xsd:positiveInteger ;
+    :arenaName "Tempest Angler" ;
+    :arenaSetCode "BLB" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
 
 :ZoralineCosmosCaller rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -347,6 +2242,119 @@ Whenever Zoraline enters or attacks, you may pay {W}{B} and 2 life. When you do,
       [ rdf:type :Ruling ;
         :rulingDate "2024-07-26"^^xsd:date ;
         :rulingText """Finality counters don’t stop permanents from going to zones other than the graveyard from the battlefield. For example, if a permanent with a finality counter on it would be put into its owner’s hand from the battlefield, it does so normally."""@en ] .
+
+:BumbleflowersSharepot rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Bumbleflower's Sharepot" ;
+    :manaCost "{2}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ;
+    :hasRarity :Common ;
+    :isInSet :Bloomburrow ;
+    :cardNumber "244"^^xsd:integer ;
+    :artist "J.P. Targete" ;
+    :hasLanguage :English ;
+    # Note: keyword "Food" not defined in MagicCardsOntology
+    :printedText """When this artifact enters, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this token: You gain 3 life.")
+{5}, {T}, Sacrifice this artifact: Destroy target nonland permanent. Activate only as a sorcery."""@en ;
+    :oracleText """When this artifact enters, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this token: You gain 3 life.")
+{5}, {T}, Sacrifice this artifact: Destroy target nonland permanent. Activate only as a sorcery."""@en ;
+    :flavorText """"I may have overestimated the portions.\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=669158"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/blb/244/bumbleflowers-sharepot"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "91780"^^xsd:positiveInteger ;
+    :arenaName "Bumbleflower's Sharepot" ;
+    :arenaSetCode "BLB" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-11-08"^^xsd:date ;
+        :rulingText """Whatever you do, don't eat the delicious cards."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-11-08"^^xsd:date ;
+        :rulingText """You can't sacrifice a Food to pay multiple costs. For example, you can't sacrifice a Food token to activate its own ability and also to activate Maraleaf Rider's ability."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-11-08"^^xsd:date ;
+        :rulingText """Food is an artifact type. Even though it appears on some creatures, it's never a creature type."""@en ] .
+
+:ThreeTreeMascotBloomburrow251 rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Three Tree Mascot" ;
+    :manaCost "{2}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ,
+                 :Creature ;
+    :hasSubType :Shapeshifter ;
+    :hasRarity :Common ;
+    :isInSet :Bloomburrow ;
+    :cardNumber "251"^^xsd:integer ;
+    :artist "Gina Matarazzo" ;
+    :hasLanguage :English ;
+    :producesMana :White ,
+                  :Blue ,
+                  :Black ,
+                  :Red ,
+                  :Green ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "1" ;
+    :toughnessValue "1"^^xsd:integer ;
+    :hasKeywordAbility :Changeling ;
+    :printedText """Changeling (This card is every creature type.)
+{1}: Add one mana of any color. Activate only once each turn."""@en ;
+    :oracleText """Changeling (This card is every creature type.)
+{1}: Add one mana of any color. Activate only once each turn."""@en ;
+    :flavorText """"Every paw and claw should be at the celebrations in Three Tree City! Even the float is smiling!"
+—*Valley Gazetteer*, four-acorn review"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=669165"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/blb/251/three-tree-mascot"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "91787"^^xsd:positiveInteger ;
+    :arenaName "Three Tree Mascot" ;
+    :arenaSetCode "BLB" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """The subtype Shapeshifter that appears on the type line is mostly there to reinforce the flavor. A creature card with changeling is just as much a Mouse, a Frog, a Rabbit, a Lizard, and a Brushwagg as it is a Shapeshifter."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """If an effect causes a creature with changeling to become a new creature type, it will be only that new creature type. It will still have changeling; the effect making it all creature types will simply be overwritten."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """Changeling is a characteristic-defining ability. It functions in all zones, not only while a card that has it is on the battlefield."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-07-26"^^xsd:date ;
+        :rulingText """If an effect causes a creature with changeling to lose all abilities, it will remain all creature types, even though it will no longer have changeling. This is because changeling applies before the effect that removes it."""@en ] .
 
 :MudflatVillage rdf:type owl:NamedIndividual ,
                   :Card ;

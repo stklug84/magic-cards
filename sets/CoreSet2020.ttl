@@ -39,8 +39,9 @@
     rdfs:label "Magic Card Collection Individuals – Core Set 2020"@en ;
     rdfs:comment """An instance graph describing the card individuals of a
 personal Magic: The Gathering card collection that were printed in the set
-Core Set 2020 (M20). One Card individual is defined per collected
-printing, carrying its characteristics, the platforms it is available on
+Core Set 2020 (M20). One Card individual is defined per printing
+collected in paper or on MTG Arena, carrying its characteristics, the
+platforms it is available on
 (paper, MTG Arena, Magic Online) with its MTG Arena identity, its legality
 in the paper and MTG Arena formats, and official rulings. Card data was
 sourced from Gatherer and Scryfall. This file imports MagicCardsOntology to
@@ -53,6 +54,220 @@ legality definitions."""@en .
 # Card Individuals
 #
 ################################################################################
+
+:BrinebornCutthroatCoreSet202050 rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Brineborn Cutthroat" ;
+    :manaCost "{1}{U}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Merfolk ,
+                :Pirate ;
+    :hasRarity :Uncommon ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :CoreSet2020 ;
+    :cardNumber "50"^^xsd:integer ;
+    :artist "Caio Monteiro" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "1" ;
+    :toughnessValue "1"^^xsd:integer ;
+    :hasKeywordAbility :Flash ;
+    :printedText """Flash (You may cast this spell any time you could cast an instant.)
+Whenever you cast a spell during an opponent's turn, put a +1/+1 counter on this creature."""@en ;
+    :oracleText """Flash (You may cast this spell any time you could cast an instant.)
+Whenever you cast a spell during an opponent's turn, put a +1/+1 counter on this creature."""@en ;
+    :flavorText """"I always attack from where their spyglasses can't see.\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=466804"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/m20/50/brineborn-cutthroat"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "69835"^^xsd:positiveInteger ;
+    :arenaName "Brineborn Cutthroat" ;
+    :arenaSetCode "M20" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2019-07-12"^^xsd:date ;
+        :rulingText """Brineborn Cutthroat's ability resolves before the spell that caused it to trigger. It resolves even if that spell is countered."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2019-07-12"^^xsd:date ;
+        :rulingText """Brineborn Cutthroat must be on the battlefield for its last ability to function. Notably, the ability won't trigger as you cast Brineborn Cutthroat during an opponent's turn."""@en ] .
+
+:CavalierOfGales rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Cavalier of Gales" ;
+    :manaCost "{2}{U}{U}{U}" ;
+    :manaValue "5"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Elemental ,
+                :Knight ;
+    :hasRarity :MythicRare ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :CoreSet2020 ;
+    :cardNumber "52"^^xsd:integer ;
+    :artist "Viktor Titov" ;
+    :hasLanguage :English ;
+    :power "5" ;
+    :powerValue "5"^^xsd:integer ;
+    :toughness "5" ;
+    :toughnessValue "5"^^xsd:integer ;
+    :hasKeywordAction :Scry ;
+    :hasKeywordAbility :Flying ;
+    :printedText """Flying
+When this creature enters, draw three cards, then put two cards from your hand on top of your library in any order.
+When this creature dies, shuffle it into its owner's library, then scry 2. (Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)"""@en ;
+    :oracleText """Flying
+When this creature enters, draw three cards, then put two cards from your hand on top of your library in any order.
+When this creature dies, shuffle it into its owner's library, then scry 2. (Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=466806"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/m20/52/cavalier-of-gales"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "69837"^^xsd:positiveInteger ;
+    :arenaName "Cavalier of Gales" ;
+    :arenaSetCode "M20" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] .
+
+:DungeonGeists rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Dungeon Geists" ;
+    :manaCost "{2}{U}{U}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Spirit ;
+    :hasRarity :Rare ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :CoreSet2020 ;
+    :cardNumber "57"^^xsd:integer ;
+    :artist "Nils Hamm" ;
+    :hasLanguage :English ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "3" ;
+    :toughnessValue "3"^^xsd:integer ;
+    :hasKeywordAbility :Flying ;
+    :printedText """Flying
+When this creature enters, tap target creature an opponent controls. That creature doesn't untap during its controller's untap step for as long as you control this creature."""@en ;
+    :oracleText """Flying
+When this creature enters, tap target creature an opponent controls. That creature doesn't untap during its controller's untap step for as long as you control this creature."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=466811"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/m20/57/dungeon-geists"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "69842"^^xsd:positiveInteger ;
+    :arenaName "Dungeon Geists" ;
+    :arenaSetCode "M20" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2013-04-15"^^xsd:date ;
+        :rulingText """The ability can target a tapped creature. If the targeted creature is already tapped when it resolves, that creature just remains tapped and doesn’t untap during its controller’s next untap step."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2019-07-12"^^xsd:date ;
+        :rulingText """Dungeon Geists’s triggered ability can target a tapped creature. If the targeted creature is already tapped when it resolves, that creature just remains tapped and won’t untap during its controller’s untap step."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2019-07-12"^^xsd:date ;
+        :rulingText """If another player gains control of Dungeon Geists, its effect expires. It won’t keep the creature from untapping anymore, even if you later regain control of Dungeon Geists."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2019-07-12"^^xsd:date ;
+        :rulingText """If Dungeon Geists leaves the battlefield before its triggered ability has resolved, the target creature will be tapped, but it will be able to untap as normal."""@en ] .
+
+:EmpyreanEagleCoreSet2020208 rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Empyrean Eagle" ;
+    :manaCost "{1}{W}{U}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Bird ,
+                :Spirit ;
+    :hasRarity :Uncommon ;
+    :hasColor :White ,
+              :Blue ;
+    :hasColorIdentity :White ,
+                      :Blue ;
+    :isInSet :CoreSet2020 ;
+    :cardNumber "208"^^xsd:integer ;
+    :artist "Jason A. Engle" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "3" ;
+    :toughnessValue "3"^^xsd:integer ;
+    :hasKeywordAbility :Flying ;
+    :printedText """Flying
+Other creatures you control with flying get +1/+1."""@en ;
+    :oracleText """Flying
+Other creatures you control with flying get +1/+1."""@en ;
+    :flavorText """All the birds of the skies are the spirit's brood, gathered for safety under its wings."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=466962"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/m20/208/empyrean-eagle"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "69993"^^xsd:positiveInteger ;
+    :arenaName "Empyrean Eagle" ;
+    :arenaSetCode "M20" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2019-07-12"^^xsd:date ;
+        :rulingText """Because damage remains marked on a creature until it's removed as the turn ends, nonlethal damage dealt to other creatures you control with flying may become lethal if Empyrean Eagle leaves the battlefield during that turn."""@en ] .
 
 :ManifoldKeyCoreSet2020230 rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -138,3 +353,77 @@ legality definitions."""@en .
       [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:EvolvingWildsCoreSet2020246 rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Evolving Wilds" ;
+    :manaValue "0"^^xsd:nonNegativeInteger ;
+    :hasCardType :Land ;
+    :hasRarity :Common ;
+    :isInSet :CoreSet2020 ;
+    :cardNumber "246"^^xsd:integer ;
+    :artist "Steven Belledin" ;
+    :hasLanguage :English ;
+    :isFetchLand "true"^^xsd:boolean ;
+    :printedText """{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."""@en ;
+    :oracleText """{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."""@en ;
+    :flavorText """Without the interfering hands of civilization, nature will always shape itself to its own needs."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=467000"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/m20/246/evolving-wilds"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "70031"^^xsd:positiveInteger ;
+    :arenaName "Evolving Wilds" ;
+    :arenaSetCode "M20" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:TakeVengeance rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Take Vengeance" ;
+    :manaCost "{1}{W}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Sorcery ;
+    :hasRarity :Common ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :CoreSet2020 ;
+    :cardNumber "313"^^xsd:integer ;
+    :artist "Randy Vargas" ;
+    :hasLanguage :English ;
+    :printedText """Destroy target tapped creature."""@en ;
+    :oracleText """Destroy target tapped creature."""@en ;
+    :flavorText """"Your death will be a balm, your passing a welcome revision, and all will sigh with peace to know of your demise.\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=469866"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/m20/313/take-vengeance"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "70097"^^xsd:positiveInteger ;
+    :arenaName "Take Vengeance" ;
+    :arenaSetCode "M20" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] .

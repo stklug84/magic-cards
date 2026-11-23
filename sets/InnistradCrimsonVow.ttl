@@ -39,8 +39,9 @@
     rdfs:label "Magic Card Collection Individuals – Innistrad: Crimson Vow"@en ;
     rdfs:comment """An instance graph describing the card individuals of a
 personal Magic: The Gathering card collection that were printed in the set
-Innistrad: Crimson Vow (VOW). One Card individual is defined per collected
-printing, carrying its characteristics, the platforms it is available on
+Innistrad: Crimson Vow (VOW). One Card individual is defined per printing
+collected in paper or on MTG Arena, carrying its characteristics, the
+platforms it is available on
 (paper, MTG Arena, Magic Online) with its MTG Arena identity, its legality
 in the paper and MTG Arena formats, and official rulings. Card data was
 sourced from Gatherer and Scryfall. This file imports MagicCardsOntology to
@@ -119,6 +120,65 @@ As long as this creature has ten or more +1/+1 counters on it, it has indestruct
       [ rdf:type :Ruling ;
         :rulingDate "2021-11-19"^^xsd:date ;
         :rulingText """Gaining flying after it has become blocked won't cause Voice of the Blessed to become unblocked."""@en ] .
+
+:WashAway rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Wash Away" ;
+    :manaCost "{U}" ;
+    :manaValue "1"^^xsd:nonNegativeInteger ;
+    :hasCardType :Instant ;
+    :hasRarity :Uncommon ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :InnistradCrimsonVow ;
+    :cardNumber "87"^^xsd:integer ;
+    :artist "Brian Valeza" ;
+    :hasLanguage :English ;
+    :hasKeywordAbility :Cleave ;
+    :printedText """Cleave {1}{U}{U} (You may cast this spell for its cleave cost. If you do, remove the words in square brackets.)
+Counter target spell [that wasn't cast from its owner's hand]."""@en ;
+    :oracleText """Cleave {1}{U}{U} (You may cast this spell for its cleave cost. If you do, remove the words in square brackets.)
+Counter target spell [that wasn't cast from its owner's hand]."""@en ;
+    :flavorText """"May the ocean take it"
+—Nephalia expression meaning
+"good riddance\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=540931"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/vow/87/wash-away"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "78879"^^xsd:positiveInteger ;
+    :arenaName "Wash Away" ;
+    :arenaSetCode "VOW" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Banned ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2021-11-19"^^xsd:date ;
+        :rulingText """You can't cast a spell for both its cleave cost and another alternative cost. For example, if an effect gives an Alchemist's Retrieval in your graveyard a flashback cost of {U}, you can't cast it from your graveyard for its cleave cost."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2021-11-19"^^xsd:date ;
+        :rulingText """If you cast a spell for its cleave cost, that spell doesn't have any of the text in square brackets while it's on the stack."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2021-11-19"^^xsd:date ;
+        :rulingText """A cleave cost is an alternative cost that's paid instead of the spell's mana cost. Casting a spell for its cleave cost doesn't change the spell's mana value."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2021-11-19"^^xsd:date ;
+        :rulingText """Copies of spells are never cast from a player's hand, so Wash Away can counter copies of spells even if its cleave cost wasn't paid, regardless of whether the original spell being copied was cast from a player's hand."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2021-11-19"^^xsd:date ;
+        :rulingText """If an effect allows you to “cast a spell without paying its mana cost,” you can't cast that spell for its cleave cost."""@en ] .
 
 :BloodtitheHarvesterInnistradCrimsonVow232 rdf:type owl:NamedIndividual ,
                   :Card ;

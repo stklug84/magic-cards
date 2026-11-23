@@ -39,8 +39,9 @@
     rdfs:label "Magic Card Collection Individuals – Innistrad Remastered"@en ;
     rdfs:comment """An instance graph describing the card individuals of a
 personal Magic: The Gathering card collection that were printed in the set
-Innistrad Remastered (INR). One Card individual is defined per collected
-printing, carrying its characteristics, the platforms it is available on
+Innistrad Remastered (INR). One Card individual is defined per printing
+collected in paper or on MTG Arena, carrying its characteristics, the
+platforms it is available on
 (paper, MTG Arena, Magic Online) with its MTG Arena identity, its legality
 in the paper and MTG Arena formats, and official rulings. Card data was
 sourced from Gatherer and Scryfall. This file imports MagicCardsOntology to
@@ -1546,7 +1547,7 @@ When this creature enters, tap target creature an opponent controls. That creatu
       [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :NotLegal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] .
 
-:Syncopate rdf:type owl:NamedIndividual ,
+:SyncopateInnistradRemastered89 rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Syncopate" ;
     :manaCost "{X}{U}" ;
@@ -2313,7 +2314,7 @@ At the beginning of your end step, if you gained life this turn, create a Blood 
         :rulingDate "2025-01-24"^^xsd:date ;
         :rulingText """If you haven’t gained life during the turn when your end step begins, Restless Bloodseeker’s ability (and similarly, Bloodsoaked Reveler’s ability) won’t trigger at all. Gaining life during your end step won’t cause the ability to trigger."""@en ] .
 
-:SanitariumSkeleton rdf:type owl:NamedIndividual ,
+:SanitariumSkeletonInnistradRemastered129 rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Sanitarium Skeleton" ;
     :manaCost "{B}" ;
@@ -3288,7 +3289,7 @@ Madness {2}{R} (If you discard this card, discard it into exile. When you do, ca
         :rulingDate "2022-12-08"^^xsd:date ;
         :rulingText """Madness works independently of why you're discarding the card. You could discard it to pay a cost, because a spell or ability tells you to, or because you have too many cards in your hand during your cleanup step. You can't discard a card with madness just because you want to, though."""@en ] .
 
-:UlrichsKindred rdf:type owl:NamedIndividual ,
+:UlrichsKindredInnistradRemastered176 rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Ulrich's Kindred" ;
     :manaCost "{2}{R}" ;
@@ -3854,7 +3855,7 @@ Each creature you control that's a Wolf or a Werewolf gets +1/+1 and has trample
         :rulingDate "2025-01-24"^^xsd:date ;
         :rulingText """A creature that is both a Werewolf and a Wolf will only get +1/+1 from Howlpack Resurgence’s last ability."""@en ] .
 
-:IntrepidProvisioner rdf:type owl:NamedIndividual ,
+:IntrepidProvisionerInnistradRemastered205 rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Intrepid Provisioner" ;
     :manaCost "{3}{G}" ;
@@ -4879,7 +4880,7 @@ When Helvault is put into a graveyard from the battlefield, return all cards exi
       [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
 
-:RockfallVale rdf:type owl:NamedIndividual ,
+:RockfallValeInnistradRemastered282 rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Rockfall Vale" ;
     :manaValue "0"^^xsd:nonNegativeInteger ;
@@ -5641,7 +5642,7 @@ Flashback {3}{G}{W} (You may cast this card from your graveyard for its flashbac
         :rulingDate "2025-06-06"^^xsd:date ;
         :rulingText """To determine the total cost of a spell, start with the mana cost or alternative cost (such as a flashback cost) you're paying, add any cost increases, then apply any cost reductions. The mana value of the spell is determined only by its mana cost, no matter what the total cost to cast the spell was."""@en ] .
 
-:GalvanicJuggernaut rdf:type owl:NamedIndividual ,
+:GalvanicJuggernautInnistradRemastered443 rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Galvanic Juggernaut" ;
     :manaCost "{4}" ;

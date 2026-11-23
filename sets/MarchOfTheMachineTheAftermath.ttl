@@ -39,8 +39,9 @@
     rdfs:label "Magic Card Collection Individuals – March of the Machine: The Aftermath"@en ;
     rdfs:comment """An instance graph describing the card individuals of a
 personal Magic: The Gathering card collection that were printed in the set
-March of the Machine: The Aftermath (MAT). One Card individual is defined per collected
-printing, carrying its characteristics, the platforms it is available on
+March of the Machine: The Aftermath (MAT). One Card individual is defined per printing
+collected in paper or on MTG Arena, carrying its characteristics, the
+platforms it is available on
 (paper, MTG Arena, Magic Online) with its MTG Arena identity, its legality
 in the paper and MTG Arena formats, and official rulings. Card data was
 sourced from Gatherer and Scryfall. This file imports MagicCardsOntology to
@@ -53,6 +54,139 @@ legality definitions."""@en .
 # Card Individuals
 #
 ################################################################################
+
+:FilterOut rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Filter Out" ;
+    :manaCost "{1}{U}{U}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Instant ;
+    :hasRarity :Uncommon ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :MarchOfTheMachineTheAftermath ;
+    :cardNumber "7"^^xsd:integer ;
+    :artist "Julia Metzger" ;
+    :hasLanguage :English ;
+    :printedText """Return all noncreature, nonland permanents to their owners' hands."""@en ;
+    :oracleText """Return all noncreature, nonland permanents to their owners' hands."""@en ;
+    :flavorText """The glistening oil had been rendered inert, but planes wouldn't begin to truly heal until every last drop was purged."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=615400"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mat/7/filter-out"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "85063"^^xsd:positiveInteger ;
+    :arenaName "Filter Out" ;
+    :arenaSetCode "MAT" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] .
+
+:MarkovBaron rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Markov Baron" ;
+    :manaCost "{2}{B}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Vampire ,
+                :Noble ;
+    :hasRarity :Uncommon ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :MarchOfTheMachineTheAftermath ;
+    :cardNumber "14"^^xsd:integer ;
+    :artist "Ina Wong" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    :hasKeywordAbility :Lifelink ,
+                       :Madness ,
+                       :Convoke ;
+    :printedText """Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)
+Lifelink
+Other Vampires you control get +1/+1.
+Madness {2}{B} (If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)"""@en ;
+    :oracleText """Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)
+Lifelink
+Other Vampires you control get +1/+1.
+Madness {2}{B} (If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard.)"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=615407"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mat/14/markov-baron"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "85070"^^xsd:positiveInteger ;
+    :arenaName "Markov Baron" ;
+    :arenaSetCode "MAT" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-05-12"^^xsd:date ;
+        :rulingText """Casting a spell with madness ignores the timing rules based on the card's card type. For example, you can cast a creature with madness if you discard it during an opponent's turn."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-05-12"^^xsd:date ;
+        :rulingText """A card with madness that's discarded counts as having been discarded even though it's put into exile rather than a graveyard. If it was discarded to pay a cost, that cost is still paid. Abilities that trigger when a card is discarded will still trigger."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-05-12"^^xsd:date ;
+        :rulingText """Cards are discarded in a Magic game only from a player's hand. Effects that put cards into a player's graveyard from anywhere else do not cause those cards to be discarded."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-05-12"^^xsd:date ;
+        :rulingText """Madness works independently of why you're discarding the card. You could discard it to pay a cost, because a spell or ability tells you to, or because you have too many cards in your hand during your cleanup step. You can't discard a card with madness just because you want to, though."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-05-12"^^xsd:date ;
+        :rulingText """If you discard a card with madness to pay the cost of a spell or activated ability, that card's madness triggered ability (and the spell that card becomes, if you choose to cast it) will resolve before the spell or ability the discard paid for."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-05-12"^^xsd:date ;
+        :rulingText """A spell cast for its madness cost is put onto the stack like any other spell. It can be countered, copied, and so on. As it resolves, it's put onto the battlefield if it's a permanent card or into its owner's graveyard if it's an instant or sorcery card."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-05-12"^^xsd:date ;
+        :rulingText """If you discard a card with madness while a spell or ability is resolving, it moves immediately to exile. Continue resolving that spell or ability, noting that the card you discarded is not in your graveyard at this time. Its madness triggered ability will be placed onto the stack once that spell or ability has completely resolved."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-05-12"^^xsd:date ;
+        :rulingText """If you choose not to cast a card with madness when the madness triggered ability resolves, it's put into your graveyard. Madness doesn't give you another chance to cast it later."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-01-12"^^xsd:date ;
+        :rulingText """You can tap any untapped creature you control to convoke a spell, even one you haven't controlled continuously since the beginning of your most recent turn."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-01-12"^^xsd:date ;
+        :rulingText """Because convoke isn't an alternative cost, it can be used in conjunction with alternative costs."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-01-12"^^xsd:date ;
+        :rulingText """Tapping a multicolored creature using convoke will pay for {1} or one mana of your choice of any of that creature's colors."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-01-12"^^xsd:date ;
+        :rulingText """If a creature you control has a mana ability with {T} in the cost, activating that ability while casting a spell with convoke will result in the creature being tapped before you pay the spell's costs. You won't be able to tap it again for convoke. Similarly, if you sacrifice a creature to activate a mana ability while casting a spell with convoke, that creature won't be on the battlefield when you pay the spell's costs, so you won't be able to tap it for convoke."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-01-12"^^xsd:date ;
+        :rulingText """When calculating a spell's total cost, include any alternative costs, additional costs, or anything else that increases or reduces the cost to cast the spell. Convoke applies after the total cost is calculated. Convoke doesn't change a spell's mana cost or mana value."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-01-12"^^xsd:date ;
+        :rulingText """Tapping an untapped creature that's attacking or blocking to convoke a spell won't cause that creature to stop attacking or blocking."""@en ] .
 
 :KolaghanWarmonger rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -100,6 +234,99 @@ Whenever this creature attacks, look at the top six cards of your library. You m
       [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] .
+
+:UndercityUpheaval rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Undercity Upheaval" ;
+    :manaCost "{1}{G}{G}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Sorcery ;
+    :hasRarity :Uncommon ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :MarchOfTheMachineTheAftermath ;
+    :cardNumber "25"^^xsd:integer ;
+    :artist "Grady Frederick" ;
+    :hasLanguage :English ;
+    :hasAbilityWord :Undergrowth ;
+    :printedText """Undergrowth — Distribute X +1/+1 counters among any number of target creatures you control, where X is the number of creature cards in your graveyard as you cast this spell. Creatures you control gain vigilance until end of turn."""@en ;
+    :oracleText """Undergrowth — Distribute X +1/+1 counters among any number of target creatures you control, where X is the number of creature cards in your graveyard as you cast this spell. Creatures you control gain vigilance until end of turn."""@en ;
+    :flavorText """Light shone on parts of the undercity for the first time in centuries."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=615418"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mat/25/undercity-upheaval"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "85081"^^xsd:positiveInteger ;
+    :arenaName "Undercity Upheaval" ;
+    :arenaSetCode "MAT" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-05-12"^^xsd:date ;
+        :rulingText """You choose how many targets Undercity Upheaval has and how the counters will be distributed as you cast the spell. Each target must receive at least one counter."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-05-12"^^xsd:date ;
+        :rulingText """If some of the creatures are illegal targets as Undercity Upheaval tries to resolve, the original distribution of counters still applies and the counters that would have been put on the illegal targets are lost. They won't be put instead on a legal target."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-05-12"^^xsd:date ;
+        :rulingText """If all of Undercity Upheaval's targets are illegal at the time the spell tries to resolve, it won't resolve and none of its effects will happen. Creatures you control won't gain vigilance."""@en ] .
+
+:CampusRenovation rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Campus Renovation" ;
+    :manaCost "{3}{R}{W}" ;
+    :manaValue "5"^^xsd:nonNegativeInteger ;
+    :hasCardType :Sorcery ;
+    :hasRarity :Uncommon ;
+    :hasColor :White ,
+              :Red ;
+    :hasColorIdentity :White ,
+                      :Red ;
+    :isInSet :MarchOfTheMachineTheAftermath ;
+    :cardNumber "27"^^xsd:integer ;
+    :artist "Robin Olausson" ;
+    :hasLanguage :English ;
+    :printedText """Return up to one target artifact or enchantment card from your graveyard to the battlefield. Exile the top two cards of your library. Until the end of your next turn, you may play those cards."""@en ;
+    :oracleText """Return up to one target artifact or enchantment card from your graveyard to the battlefield. Exile the top two cards of your library. Until the end of your next turn, you may play those cards."""@en ;
+    :flavorText """Reconstructing the past is Lorehold's specialty."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=615420"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mat/27/campus-renovation"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "85083"^^xsd:positiveInteger ;
+    :arenaName "Campus Renovation" ;
+    :arenaSetCode "MAT" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-05-12"^^xsd:date ;
+        :rulingText """You don't have to choose a target artifact or enchantment card to cast Campus Renovation. However, if you do, and that card is an illegal target at the time Campus Renovation tries to resolve, it won't resolve and none of its effects will happen. You won't exile any cards from your library."""@en ] .
 
 :SarkhanSoulAflame rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -170,3 +397,56 @@ Whenever a Dragon you control enters, you may have Sarkhan become a copy of it u
       [ rdf:type :Ruling ;
         :rulingDate "2023-05-12"^^xsd:date ;
         :rulingText """Sarkhan copies exactly what was printed on the original Dragon and nothing else, with the noted exceptions (unless that creature is a token; see below). It doesn't copy whether that creature is tapped or untapped, whether it has any counters on it or Auras and Equipment attached to it, or any non-copy effects that have changed its power, toughness, types, color, and so on in response to Sarkhan's ability."""@en ] .
+
+:KarnLegacyReforged rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Karn, Legacy Reforged" ;
+    :manaCost "{5}" ;
+    :manaValue "5"^^xsd:nonNegativeInteger ;
+    :hasSuperType :Legendary ;
+    :hasCardType :Artifact ,
+                 :Creature ;
+    :hasSubType :Golem ;
+    :hasRarity :MythicRare ;
+    :isInSet :MarchOfTheMachineTheAftermath ;
+    :cardNumber "49"^^xsd:integer ;
+    :artist "Grzegorz Rutkowski" ;
+    :hasLanguage :English ;
+    :producesMana :Colorless ;
+    :power "*" ;
+    :toughness "*" ;
+    :printedText """Karn's power and toughness are each equal to the greatest mana value among artifacts you control.
+At the beginning of your upkeep, add {C} for each artifact you control. This mana can't be spent to cast nonartifact spells. Until end of turn, you don't lose this mana as steps and phases end."""@en ;
+    :oracleText """Karn's power and toughness are each equal to the greatest mana value among artifacts you control.
+At the beginning of your upkeep, add {C} for each artifact you control. This mana can't be spent to cast nonartifact spells. Until end of turn, you don't lose this mana as steps and phases end."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=615442"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mat/49/karn-legacy-reforged"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "85105"^^xsd:positiveInteger ;
+    :arenaName "Karn, Legacy Reforged" ;
+    :arenaSetCode "MAT" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-05-12"^^xsd:date ;
+        :rulingText """The mana produced by Karn's last ability can be spent on anything that isn't a nonartifact spell. This includes casting artifact spells, paying costs to activate abilities of both artifact and nonartifact permanents, paying ward costs, and so on."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-05-12"^^xsd:date ;
+        :rulingText """Karn's last ability isn't a mana ability, even though it adds mana. It uses the stack and it can be responded to. Use the number of artifacts you control as the ability resolves to determine how much mana to add."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-05-12"^^xsd:date ;
+        :rulingText """The ability that defines Karn's power and toughness works in all zones, not just the battlefield. As long as Karn is under your control and still an artifact, its own mana value will count. In most cases, it'll be at least 5/5."""@en ] .

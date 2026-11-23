@@ -39,8 +39,9 @@
     rdfs:label "Magic Card Collection Individuals – Duskmourn: House of Horror"@en ;
     rdfs:comment """An instance graph describing the card individuals of a
 personal Magic: The Gathering card collection that were printed in the set
-Duskmourn: House of Horror (DSK). One Card individual is defined per collected
-printing, carrying its characteristics, the platforms it is available on
+Duskmourn: House of Horror (DSK). One Card individual is defined per printing
+collected in paper or on MTG Arena, carrying its characteristics, the
+platforms it is available on
 (paper, MTG Arena, Magic Online) with its MTG Arena identity, its legality
 in the paper and MTG Arena formats, and official rulings. Card data was
 sourced from Gatherer and Scryfall. This file imports MagicCardsOntology to
@@ -53,6 +54,1072 @@ legality definitions."""@en .
 # Card Individuals
 #
 ################################################################################
+
+:DollmakersShop rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Dollmaker's Shop // Porcelain Gallery" ;
+    :manaCost "{1}{W}" ;
+    :manaValue "8"^^xsd:nonNegativeInteger ;
+    :hasCardType :Enchantment ;
+    :hasSubType :Room ;
+    :hasRarity :MythicRare ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :DuskmournHouseOfHorror ;
+    :cardNumber "4"^^xsd:integer ;
+    :artist "Chris Cold" ;
+    :hasLanguage :English ;
+    :printedText """Whenever one or more non-Toy creatures you control attack a player, create a 1/1 white Toy artifact creature token.
+(You may cast either half. That door unlocks on the battlefield. As a sorcery, you may pay the mana cost of a locked door to unlock it.)
+//
+Creatures you control have base power and toughness each equal to the number of creatures you control.
+(You may cast either half. That door unlocks on the battlefield. As a sorcery, you may pay the mana cost of a locked door to unlock it.)"""@en ;
+    :oracleText """Whenever one or more non-Toy creatures you control attack a player, create a 1/1 white Toy artifact creature token.
+(You may cast either half. That door unlocks on the battlefield. As a sorcery, you may pay the mana cost of a locked door to unlock it.)
+//
+Creatures you control have base power and toughness each equal to the number of creatures you control.
+(You may cast either half. That door unlocks on the battlefield. As a sorcery, you may pay the mana cost of a locked door to unlock it.)"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=673409"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/dsk/4/dollmakers-shop-porcelain-gallery"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "92060"^^xsd:positiveInteger ;
+    :arenaName "Dollmaker's Shop // Porcelain Gallery" ;
+    :arenaSetCode "DSK" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """While on the battlefield, a Room's characteristics are a combination of the characteristics of its unlocked doors. For example, if Bottomless Pool // Locker Room is on the battlefield with both doors unlocked, its names are Bottomless Pool and Locker Room, its mana value is 6, it's a Room Enchantment, and it has the abilities in each door's text box."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """Any time you have priority during a main phase of your turn and the stack is empty, you may pay the mana cost of a locked door (also called its "unlock cost"). That door becomes unlocked. This is a special action. It doesn't use the stack and can't be responded to."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """If a Room enters from any zone other than the stack, it will enter with both halves locked."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """If an effect allows you to cast a spell with certain characteristics, consider only the characteristics of the door you're casting. For example, if an effect allows you to cast a permanent spell with mana value 3 or less from among cards in your graveyard, you could cast Bottomless Pool this way, but not Locker Room."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """Room cards have two card faces with a shared type line on a single card. The characteristics of the door you didn't cast are ignored while the spell is on the stack."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """An ability that triggers "when you unlock this door" triggers when that door becomes unlocked. This can happen one of two ways: (1) the door becomes unlocked on the battlefield or (2) the door becomes unlocked as the Room enters the battlefield because you cast the corresponding half. In the latter case, since the door becoming unlocked is what causes the ability to trigger, effects that cause abilities that trigger when a permanent enters to trigger an additional time (such as that of Panharmonicon) won't apply."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """While in any zone other than the stack or the battlefield, a Room card's characteristics are a combination of its two doors. For example, Bottomless Pool // Locker Room has a mana value of 6 while it's in your library. If an effect allows you to search your library for a card with mana value 4 or less, you can't find Bottomless Pool // Locker Room."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """Some abilities allow you to unlock a door of a Room you control. You can't choose to unlock a door that's already unlocked with such an ability. If such an ability requires a target, you can target a Room even if both of its doors are unlocked, but the ability won't do anything when it resolves."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """To cast a Room spell, choose a half (or "door") to cast. There's no way to cast both halves of a Room card. When the Room spell resolves, the corresponding door becomes unlocked as the Room enters."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """If neither door of a Room is unlocked, it's a Room enchantment with no name and no abilities."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """Dollmaker's Shop's ability will trigger once for each player you attack with one or more non-Toy creatures."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """Creatures that enter attacking are never declared as attackers, and as such, they won't cause Dollmaker's Shop's ability to trigger."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """Some abilities allow you to lock a door of a Room you control. You can't choose to lock a door that's already locked with such an ability. If such an ability requires a target, you can target a Room even if both of its doors are locked, but the ability won't do anything when it resolves."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """If a spell or ability would create a copy of a Room spell on the stack, the copy retains the choice of which door was cast but also retains the full characteristics of the spell. The characteristics of the door that wasn't cast are still ignored while the copy is on the stack, and when the copy resolves, the token it becomes will enter with the appropriate door unlocked."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """Each Room card is a single card. For example, if you discard a Room card, you've discarded one card, not two. If an effect counts the number of enchantment cards in your graveyard, Bottomless Pool // Locker Room counts once, not twice."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """Some doors have abilities that trigger whenever you unlock that door and require one or more targets. You can unlock that door even if there would be insufficient legal targets for that triggered ability. The triggered ability won't go on the stack."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """An ability that triggers "whenever you fully unlock a Room" triggers when a door becomes unlocked and the other door of that Room is already unlocked, or when both doors of that Room become unlocked simultaneously."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """Effects that modify a creature's power and/or toughness, such as the effect of Jump Scare, will apply to that creature no matter when they started to take effect. The same is true for any counters that change its power and/or toughness and effects that switch its power and toughness."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """Porcelain Gallery's ability overrides all previous effects that set the base power and toughness of creatures you control to specific values. Any power- or toughness-setting effects that start to apply to a creature you control after Porcelain Gallery is unlocked will overwrite this effect on that creature."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """Each Room card has two names. If an effect instructs you to choose a card name, you may choose one of those names, but not both."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """Because damage remains marked on creatures until the damage is removed as the turn ends, nonlethal damage dealt to creatures you control while Porcelain Gallery is unlocked may become lethal if other creatures you control leave the battlefield during that turn."""@en ] .
+
+:FriendlyGhost rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Friendly Ghost" ;
+    :manaCost "{3}{W}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Spirit ;
+    :hasRarity :Common ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :DuskmournHouseOfHorror ;
+    :cardNumber "12"^^xsd:integer ;
+    :artist "Sean Murray" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "4" ;
+    :toughnessValue "4"^^xsd:integer ;
+    :hasKeywordAbility :Flying ;
+    :printedText """Flying
+When this creature enters, target creature gets +2/+4 until end of turn."""@en ;
+    :oracleText """Flying
+When this creature enters, target creature gets +2/+4 until end of turn."""@en ;
+    :flavorText """In life, Marcus had been a devoted guide of new arrivals. Death simply made it easier to get around."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=673417"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/dsk/12/friendly-ghost"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "92070"^^xsd:positiveInteger ;
+    :arenaName "Friendly Ghost" ;
+    :arenaSetCode "DSK" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:GrandEntryway rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Grand Entryway // Elegant Rotunda" ;
+    :manaCost "{1}{W}" ;
+    :manaValue "5"^^xsd:nonNegativeInteger ;
+    :hasCardType :Enchantment ;
+    :hasSubType :Room ;
+    :hasRarity :Common ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :DuskmournHouseOfHorror ;
+    :cardNumber "15"^^xsd:integer ;
+    :artist "Carlos Palma Cruchaga" ;
+    :hasLanguage :English ;
+    :printedText """When you unlock this door, create a 1/1 white Glimmer enchantment creature token.
+(You may cast either half. That door unlocks on the battlefield. As a sorcery, you may pay the mana cost of a locked door to unlock it.)
+//
+When you unlock this door, put a +1/+1 counter on each of up to two target creatures.
+(You may cast either half. That door unlocks on the battlefield. As a sorcery, you may pay the mana cost of a locked door to unlock it.)"""@en ;
+    :oracleText """When you unlock this door, create a 1/1 white Glimmer enchantment creature token.
+(You may cast either half. That door unlocks on the battlefield. As a sorcery, you may pay the mana cost of a locked door to unlock it.)
+//
+When you unlock this door, put a +1/+1 counter on each of up to two target creatures.
+(You may cast either half. That door unlocks on the battlefield. As a sorcery, you may pay the mana cost of a locked door to unlock it.)"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=673420"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/dsk/15/grand-entryway-elegant-rotunda"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "92073"^^xsd:positiveInteger ;
+    :arenaName "Grand Entryway // Elegant Rotunda" ;
+    :arenaSetCode "DSK" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """While on the battlefield, a Room's characteristics are a combination of the characteristics of its unlocked doors. For example, if Bottomless Pool // Locker Room is on the battlefield with both doors unlocked, its names are Bottomless Pool and Locker Room, its mana value is 6, it's a Room Enchantment, and it has the abilities in each door's text box."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """Some abilities allow you to lock a door of a Room you control. You can't choose to lock a door that's already locked with such an ability. If such an ability requires a target, you can target a Room even if both of its doors are locked, but the ability won't do anything when it resolves."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """An ability that triggers "when you unlock this door" triggers when that door becomes unlocked. This can happen one of two ways: (1) the door becomes unlocked on the battlefield or (2) the door becomes unlocked as the Room enters the battlefield because you cast the corresponding half. In the latter case, since the door becoming unlocked is what causes the ability to trigger, effects that cause abilities that trigger when a permanent enters to trigger an additional time (such as that of Panharmonicon) won't apply."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """Each Room card is a single card. For example, if you discard a Room card, you've discarded one card, not two. If an effect counts the number of enchantment cards in your graveyard, Bottomless Pool // Locker Room counts once, not twice."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """If an effect allows you to cast a spell with certain characteristics, consider only the characteristics of the door you're casting. For example, if an effect allows you to cast a permanent spell with mana value 3 or less from among cards in your graveyard, you could cast Bottomless Pool this way, but not Locker Room."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """If a spell or ability would create a copy of a Room spell on the stack, the copy retains the choice of which door was cast but also retains the full characteristics of the spell. The characteristics of the door that wasn't cast are still ignored while the copy is on the stack, and when the copy resolves, the token it becomes will enter with the appropriate door unlocked."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """Some doors have abilities that trigger whenever you unlock that door and require one or more targets. You can unlock that door even if there would be insufficient legal targets for that triggered ability. The triggered ability won't go on the stack."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """Room cards have two card faces with a shared type line on a single card. The characteristics of the door you didn't cast are ignored while the spell is on the stack."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """Any time you have priority during a main phase of your turn and the stack is empty, you may pay the mana cost of a locked door (also called its "unlock cost"). That door becomes unlocked. This is a special action. It doesn't use the stack and can't be responded to."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """Some abilities allow you to unlock a door of a Room you control. You can't choose to unlock a door that's already unlocked with such an ability. If such an ability requires a target, you can target a Room even if both of its doors are unlocked, but the ability won't do anything when it resolves."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """To cast a Room spell, choose a half (or "door") to cast. There's no way to cast both halves of a Room card. When the Room spell resolves, the corresponding door becomes unlocked as the Room enters."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """While in any zone other than the stack or the battlefield, a Room card's characteristics are a combination of its two doors. For example, Bottomless Pool // Locker Room has a mana value of 6 while it's in your library. If an effect allows you to search your library for a card with mana value 4 or less, you can't find Bottomless Pool // Locker Room."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """Each Room card has two names. If an effect instructs you to choose a card name, you may choose one of those names, but not both."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """If neither door of a Room is unlocked, it's a Room enchantment with no name and no abilities."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """An ability that triggers "whenever you fully unlock a Room" triggers when a door becomes unlocked and the other door of that Room is already unlocked, or when both doors of that Room become unlocked simultaneously."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """If a Room enters from any zone other than the stack, it will enter with both halves locked."""@en ] .
+
+:LivingPhone rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Living Phone" ;
+    :manaCost "{2}{W}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ,
+                 :Creature ;
+    :hasSubType :Toy ;
+    :hasRarity :Common ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :DuskmournHouseOfHorror ;
+    :cardNumber "20"^^xsd:integer ;
+    :artist "Domenico Cava" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "1" ;
+    :toughnessValue "1"^^xsd:integer ;
+    :printedText """When this creature dies, look at the top five cards of your library. You may reveal a creature card with power 2 or less from among them and put it into your hand. Put the rest on the bottom of your library in a random order."""@en ;
+    :oracleText """When this creature dies, look at the top five cards of your library. You may reveal a creature card with power 2 or less from among them and put it into your hand. Put the rest on the bottom of your library in a random order."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=673425"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/dsk/20/living-phone"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "92080"^^xsd:positiveInteger ;
+    :arenaName "Living Phone" ;
+    :arenaSetCode "DSK" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:ReluctantRoleModel rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Reluctant Role Model" ;
+    :manaCost "{1}{W}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Human ,
+                :Survivor ;
+    :hasRarity :Rare ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :DuskmournHouseOfHorror ;
+    :cardNumber "26"^^xsd:integer ;
+    :artist "Chris Rallis" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    :hasKeywordAbility :Lifelink ;
+    :hasAbilityWord :Survival ;
+    :printedText """Survival — At the beginning of your second main phase, if this creature is tapped, put a flying, lifelink, or +1/+1 counter on it.
+Whenever this creature or another creature you control dies, if it had counters on it, put those counters on up to one target creature."""@en ;
+    :oracleText """Survival — At the beginning of your second main phase, if this creature is tapped, put a flying, lifelink, or +1/+1 counter on it.
+Whenever this creature or another creature you control dies, if it had counters on it, put those counters on up to one target creature."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=673431"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/dsk/26/reluctant-role-model"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "92086"^^xsd:positiveInteger ;
+    :arenaName "Reluctant Role Model" ;
+    :arenaSetCode "DSK" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """If Reluctant Role Model dies at the same time as one or more other creatures with counters on them, its last ability will trigger for each of those creatures."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """Reluctant Role Model's last ability doesn't cause you to move counters from the creature that died onto the target creature. Rather, you put the same number of each kind of counter the creature that died had when it died onto the target creature. Other effects that interact with putting counters onto that creature will interact with this effect accordingly."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """If the creature that died had -1/-1 counters on it when it died, Reluctant Role Model's last ability will include those as well. This may result in the target creature also dying."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """Survival abilities (and other abilities that trigger at the beginning of your second main phase) will trigger at the beginning of the second main phase you take in a turn. They won't trigger during your third, fourth, or other additional main phases in a single turn, if effects somehow cause you to have more than two main phases."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """If a creature's survival ability triggers but the creature leaves the battlefield before the ability resolves, use its tapped or untapped status as it last existed on the battlefield to determine whether or not the ability will do anything."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """If a creature with a survival ability isn't tapped when your second main phase begins, the ability won't trigger at all. You won't be able to tap it during your second main phase in time to have that ability trigger."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """If a creature's survival ability triggers but that creature is untapped when the ability begins to resolve, that ability won't do anything."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """In some unusual cases, you may end up putting the appropriate counters on more than one permanent. For example, if you control The Ozolith when Reluctant Role Model dies, you'll put the appropriate number of each kind of counter onto both The Ozolith and the target creature."""@en ] .
+
+:TobyBeastieBefriender rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Toby, Beastie Befriender" ;
+    :manaCost "{2}{W}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasSuperType :Legendary ;
+    :hasCardType :Creature ;
+    :hasSubType :Human ,
+                :Wizard ;
+    :hasRarity :Rare ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :DuskmournHouseOfHorror ;
+    :cardNumber "35"^^xsd:integer ;
+    :artist "Jehan Choo" ;
+    :hasLanguage :English ;
+    :power "1" ;
+    :powerValue "1"^^xsd:integer ;
+    :toughness "1" ;
+    :toughnessValue "1"^^xsd:integer ;
+    :printedText """When Toby enters, create a 4/4 white Beast creature token with "This token can't attack or block alone."
+As long as you control four or more creature tokens, creature tokens you control have flying."""@en ;
+    :oracleText """When Toby enters, create a 4/4 white Beast creature token with "This token can't attack or block alone."
+As long as you control four or more creature tokens, creature tokens you control have flying."""@en ;
+    :flavorText """"Sure, I'm pretty small, but Gribble isn't, so I don't get scared.\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=673440"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/dsk/35/toby-beastie-befriender"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "92097"^^xsd:positiveInteger ;
+    :arenaName "Toby, Beastie Befriender" ;
+    :arenaSetCode "DSK" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """Once the Beast token has attacked or blocked, removing all of your other attacking or blocking creatures won't cause it to stop attacking or blocking."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """If you control more than one creature with "This creature can't attack or block alone" they can attack or block together, even if no other creatures attack or block."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """If an effect says the Beast token attacks or blocks "if able" and you control one or more other creatures that are able to attack or block, you must attack or block with the Beast token and at least one other creature."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """Although the Beast token can't attack alone, other attacking creatures don't have to attack the same player, planeswalker, or battle. For example, the Beast token could attack an opponent and another creature could attack a planeswalker. Similarly, other blocking creatures don't have to block the same creature that the Beast token blocks."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """In a Two-Headed Giant game, the Beast token can attack or block with a creature controlled by your teammate, even if no other creatures you control are attacking or blocking."""@en ] .
+
+:UnwantedRemake rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Unwanted Remake" ;
+    :manaCost "{W}" ;
+    :manaValue "1"^^xsd:nonNegativeInteger ;
+    :hasCardType :Instant ;
+    :hasRarity :Uncommon ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :DuskmournHouseOfHorror ;
+    :cardNumber "39"^^xsd:integer ;
+    :artist "Eli Minaya" ;
+    :hasLanguage :English ;
+    :printedText """Destroy target creature. Its controller manifests dread. (That player looks at the top two cards of their library, then puts one onto the battlefield face down as a 2/2 creature and the other into their graveyard. If it's a creature card, it can be turned face up any time for its mana cost.)"""@en ;
+    :oracleText """Destroy target creature. Its controller manifests dread. (That player looks at the top two cards of their library, then puts one onto the battlefield face down as a 2/2 creature and the other into their graveyard. If it's a creature card, it can be turned face up any time for its mana cost.)"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=673444"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/dsk/39/unwanted-remake"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "92101"^^xsd:positiveInteger ;
+    :arenaName "Unwanted Remake" ;
+    :arenaSetCode "DSK" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """If your library contains only one card when you manifest dread, you'll look at that card and put it onto the battlefield face down. You won't have the option to put it into your graveyard instead. If your library contains no cards when you manifest dread, you won't do anything."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """Any time you have priority, you can turn a manifested permanent you control face up by revealing that it's a creature card (ignoring any copy effects or type-changing effects that might be applying to it) and paying its mana cost. This is a special action. It doesn't use the stack and can't be responded to."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """If a double-faced card is manifested, it will be put onto the battlefield face down. While face down, it can't transform. If the front face of the card is a creature card, you can turn it face up by paying its mana cost. If you do, its front face will be up."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """Because the permanent is on the battlefield both before and after it's turned face up, turning a permanent face up doesn't cause any enters-the-battlefield abilities to trigger."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """If a face-down spell leaves the stack and goes to any zone other than the battlefield (if it was countered, for example), you must reveal it. Similarly, if a face-down permanent leaves the battlefield, you must reveal it. You must also reveal all face-down spells and permanents you control if you leave the game or the game ends."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """Some cards in the Duskmourn release have abilities that trigger "whenever you manifest dread." In circumstances where you are instructed to manifest dread but can't perform some or all of the steps of manifesting dread (probably because your library has one or fewer cards in it), these abilities will still trigger."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """If a manifested creature would have disguise or morph if it were face up, you may also turn it face up by paying its disguise or morph cost, as appropriate."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """A permanent that turns face up or face down changes characteristics but is otherwise the same permanent. Spells and abilities that were targeting that permanent and Auras and Equipment that were attached to that permanent aren't affected unless the new characteristics of the object change the legality of those targets or attachments."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """If the target creature is an illegal target as Unwanted Remake tries to resolve, it won't resolve and none of its effects will happen. The creature's controller won't manifest dread."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """If a face-down creature loses its abilities, it can't be turned face up with a disguise or morph ability because it will no longer have that ability (or the associated cost) once face up."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """At any time, you can look at a face-down spell or permanent you control. You can't look at face-down permanents or spells you don't control unless an effect instructs or allows you to do so."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """Because face-down creatures don't have a name, they can't have the same name as any other creature, even another face-down creature."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """Turning a permanent face up or face down doesn't change whether that permanent is tapped or untapped."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """If something tries to turn a face-down instant or sorcery card on the battlefield face up, reveal that card to show all players it's an instant or sorcery card. The permanent remains on the battlefield face down. Abilities that trigger when a permanent turns face up won't trigger, because even though you revealed the card, it never turned face up."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """To manifest dread, look at the top two cards of your library. Manifest one (by putting it onto the battlefield face down) and put the other into your graveyard. The card you put onto the battlefield becomes a 2/2 face-down creature with no name, mana cost, creature types, or abilities. It's colorless and has a mana value of 0. Other effects that apply to the permanent can still grant it any characteristics it doesn't have or change the characteristics it does have."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """Unlike a face-down creature that was cast using a disguise or morph ability, a manifested creature may still be turned face up after it loses its abilities if it's a creature card."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """You must ensure that your face-down spells and permanents can be easily differentiated from each other. You're not allowed to mix up the cards that represent them on the battlefield to confuse other players. The order in which they entered should remain clear, as well as what ability caused them to be face down. (This includes manifest, disguise, cloak, morph, and a few older effects that turn cards face down.) Common methods for doing this include using markers or dice, or simply placing them in order on the battlefield."""@en ] .
+
+:CreepingPeeper rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Creeping Peeper" ;
+    :manaCost "{1}{U}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Eye ;
+    :hasRarity :Common ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :DuskmournHouseOfHorror ;
+    :cardNumber "46"^^xsd:integer ;
+    :artist "Maxime Minard" ;
+    :hasLanguage :English ;
+    :producesMana :Blue ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "1" ;
+    :toughnessValue "1"^^xsd:integer ;
+    :printedText """{T}: Add {U}. Spend this mana only to cast an enchantment spell, unlock a door, or turn a permanent face up."""@en ;
+    :oracleText """{T}: Add {U}. Spend this mana only to cast an enchantment spell, unlock a door, or turn a permanent face up."""@en ;
+    :flavorText """"Be on your guard. Valgavoth has eyes everywhere. And I don't mean that figuratively."
+—Winter"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=673451"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/dsk/46/creeping-peeper"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "92112"^^xsd:positiveInteger ;
+    :arenaName "Creeping Peeper" ;
+    :arenaSetCode "DSK" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """Mana produced by Creeping Peeper's activated ability can be used to pay morph or disguise costs when turning a face-down permanent face up or to pay costs associated with turning a manifested or cloaked permanent face up."""@en ] .
+
+:DuskmournsDomination rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Duskmourn's Domination" ;
+    :manaCost "{4}{U}{U}" ;
+    :manaValue "6"^^xsd:nonNegativeInteger ;
+    :hasCardType :Enchantment ;
+    :hasSubType :Aura ;
+    :hasRarity :Uncommon ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :DuskmournHouseOfHorror ;
+    :cardNumber "50"^^xsd:integer ;
+    :artist "Eli Minaya" ;
+    :hasLanguage :English ;
+    :hasKeywordAbility :Enchant ;
+    :printedText """Enchant creature
+You control enchanted creature.
+Enchanted creature gets -3/-0 and loses all abilities."""@en ;
+    :oracleText """Enchant creature
+You control enchanted creature.
+Enchanted creature gets -3/-0 and loses all abilities."""@en ;
+    :flavorText """All who enter the House hear Valgavoth's whispers, worming through their consciousness until they can no longer resist his influence."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=673455"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/dsk/50/duskmourns-domination"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "92116"^^xsd:positiveInteger ;
+    :arenaName "Duskmourn's Domination" ;
+    :arenaSetCode "DSK" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """If the enchanted creature gains an ability after Duskmourn's Domination becomes attached to it, it will keep that ability."""@en ] .
+
+:GetOut rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Get Out" ;
+    :manaCost "{U}{U}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Instant ;
+    :hasRarity :Uncommon ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :DuskmournHouseOfHorror ;
+    :cardNumber "60"^^xsd:integer ;
+    :artist "Mirko Failoni" ;
+    :hasLanguage :English ;
+    :printedText """Choose one —
+• Counter target creature or enchantment spell.
+• Return one or two target creatures and/or enchantments you own to your hand."""@en ;
+    :oracleText """Choose one —
+• Counter target creature or enchantment spell.
+• Return one or two target creatures and/or enchantments you own to your hand."""@en ;
+    :flavorText """Kaito's blade brought the light of another plane into Duskmourn, and with it, a brief chance to escape."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=673465"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/dsk/60/get-out"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "92126"^^xsd:positiveInteger ;
+    :arenaName "Get Out" ;
+    :arenaSetCode "DSK" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """Get Out's last mode can target any creatures and/or enchantments you own, including ones controlled by other players."""@en ] .
+
+:MeatLocker rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Meat Locker // Drowned Diner" ;
+    :manaCost "{2}{U}" ;
+    :manaValue "8"^^xsd:nonNegativeInteger ;
+    :hasCardType :Enchantment ;
+    :hasSubType :Room ;
+    :hasRarity :Common ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :DuskmournHouseOfHorror ;
+    :cardNumber "65"^^xsd:integer ;
+    :artist "Sergey Glushakov" ;
+    :hasLanguage :English ;
+    :printedText """When you unlock this door, tap up to one target creature and put two stun counters on it. (If a permanent with a stun counter would become untapped, remove one from it instead.)
+(You may cast either half. That door unlocks on the battlefield. As a sorcery, you may pay the mana cost of a locked door to unlock it.)
+//
+When you unlock this door, draw three cards, then discard a card.
+(You may cast either half. That door unlocks on the battlefield. As a sorcery, you may pay the mana cost of a locked door to unlock it.)"""@en ;
+    :oracleText """When you unlock this door, tap up to one target creature and put two stun counters on it. (If a permanent with a stun counter would become untapped, remove one from it instead.)
+(You may cast either half. That door unlocks on the battlefield. As a sorcery, you may pay the mana cost of a locked door to unlock it.)
+//
+When you unlock this door, draw three cards, then discard a card.
+(You may cast either half. That door unlocks on the battlefield. As a sorcery, you may pay the mana cost of a locked door to unlock it.)"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=673470"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/dsk/65/meat-locker-drowned-diner"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "92131"^^xsd:positiveInteger ;
+    :arenaName "Meat Locker // Drowned Diner" ;
+    :arenaSetCode "DSK" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """An ability that triggers "whenever you fully unlock a Room" triggers when a door becomes unlocked and the other door of that Room is already unlocked, or when both doors of that Room become unlocked simultaneously."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """Some abilities allow you to lock a door of a Room you control. You can't choose to lock a door that's already locked with such an ability. If such an ability requires a target, you can target a Room even if both of its doors are locked, but the ability won't do anything when it resolves."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """Some doors have abilities that trigger whenever you unlock that door and require one or more targets. You can unlock that door even if there would be insufficient legal targets for that triggered ability. The triggered ability won't go on the stack."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """Room cards have two card faces with a shared type line on a single card. The characteristics of the door you didn't cast are ignored while the spell is on the stack."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """Some abilities allow you to unlock a door of a Room you control. You can't choose to unlock a door that's already unlocked with such an ability. If such an ability requires a target, you can target a Room even if both of its doors are unlocked, but the ability won't do anything when it resolves."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """To cast a Room spell, choose a half (or "door") to cast. There's no way to cast both halves of a Room card. When the Room spell resolves, the corresponding door becomes unlocked as the Room enters."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """If a spell or ability would create a copy of a Room spell on the stack, the copy retains the choice of which door was cast but also retains the full characteristics of the spell. The characteristics of the door that wasn't cast are still ignored while the copy is on the stack, and when the copy resolves, the token it becomes will enter with the appropriate door unlocked."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """Each Room card has two names. If an effect instructs you to choose a card name, you may choose one of those names, but not both."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """While in any zone other than the stack or the battlefield, a Room card's characteristics are a combination of its two doors. For example, Bottomless Pool // Locker Room has a mana value of 6 while it's in your library. If an effect allows you to search your library for a card with mana value 4 or less, you can't find Bottomless Pool // Locker Room."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """If an effect allows you to cast a spell with certain characteristics, consider only the characteristics of the door you're casting. For example, if an effect allows you to cast a permanent spell with mana value 3 or less from among cards in your graveyard, you could cast Bottomless Pool this way, but not Locker Room."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """If a Room enters from any zone other than the stack, it will enter with both halves locked."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """Each Room card is a single card. For example, if you discard a Room card, you've discarded one card, not two. If an effect counts the number of enchantment cards in your graveyard, Bottomless Pool // Locker Room counts once, not twice."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """If neither door of a Room is unlocked, it's a Room enchantment with no name and no abilities."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """Any time you have priority during a main phase of your turn and the stack is empty, you may pay the mana cost of a locked door (also called its "unlock cost"). That door becomes unlocked. This is a special action. It doesn't use the stack and can't be responded to."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """While on the battlefield, a Room's characteristics are a combination of the characteristics of its unlocked doors. For example, if Bottomless Pool // Locker Room is on the battlefield with both doors unlocked, its names are Bottomless Pool and Locker Room, its mana value is 6, it's a Room Enchantment, and it has the abilities in each door's text box."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """An ability that triggers "when you unlock this door" triggers when that door becomes unlocked. This can happen one of two ways: (1) the door becomes unlocked on the battlefield or (2) the door becomes unlocked as the Room enters the battlefield because you cast the corresponding half. In the latter case, since the door becoming unlocked is what causes the ability to trigger, effects that cause abilities that trigger when a permanent enters to trigger an additional time (such as that of Panharmonicon) won't apply."""@en ] .
+
+:PiranhaFly rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Piranha Fly" ;
+    :manaCost "{1}{U}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Fish ,
+                :Insect ;
+    :hasRarity :Common ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :DuskmournHouseOfHorror ;
+    :cardNumber "70"^^xsd:integer ;
+    :artist "Kekai Kotaki" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "1" ;
+    :toughnessValue "1"^^xsd:integer ;
+    :hasKeywordAbility :Flying ;
+    :printedText """Flying
+This creature enters tapped."""@en ;
+    :oracleText """Flying
+This creature enters tapped."""@en ;
+    :flavorText """They thirst for blood like mosquitoes do. They just have a less dainty way of accessing it."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=673475"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/dsk/70/piranha-fly"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "92140"^^xsd:positiveInteger ;
+    :arenaName "Piranha Fly" ;
+    :arenaSetCode "DSK" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:SilentHallcreeper rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Silent Hallcreeper" ;
+    :manaCost "{1}{U}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Enchantment ,
+                 :Creature ;
+    :hasSubType :Horror ;
+    :hasRarity :Rare ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :DuskmournHouseOfHorror ;
+    :cardNumber "72"^^xsd:integer ;
+    :artist "Joshua Raphael" ;
+    :hasLanguage :English ;
+    :power "1" ;
+    :powerValue "1"^^xsd:integer ;
+    :toughness "1" ;
+    :toughnessValue "1"^^xsd:integer ;
+    :printedText """This creature can't be blocked.
+Whenever this creature deals combat damage to a player, choose one that hasn't been chosen —
+• Put two +1/+1 counters on this creature.
+• Draw a card.
+• This creature becomes a copy of another target creature you control."""@en ;
+    :oracleText """This creature can't be blocked.
+Whenever this creature deals combat damage to a player, choose one that hasn't been chosen —
+• Put two +1/+1 counters on this creature.
+• Draw a card.
+• This creature becomes a copy of another target creature you control."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=673477"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/dsk/72/silent-hallcreeper"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "92142"^^xsd:positiveInteger ;
+    :arenaName "Silent Hallcreeper" ;
+    :arenaSetCode "DSK" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """Silent Hallcreeper copies exactly what was printed on the target creature and nothing else (unless that creature is copying something else or is a token; see below). It doesn't copy whether that creature is tapped or untapped, whether it has any counters on it or Auras and Equipment attached to it, or any non-copy effects that have changed its power, toughness, types, color, and so on."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """The phrase "that hasn't been chosen" refers only to that specific Silent Hallcreeper. If Silent Hallcreeper leaves the battlefield and then returns to the battlefield later, it will be a new object with no memory of the modes that were chosen when it was last on the battlefield."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """If the copied creature is a token, Silent Hallcreeper copies the original characteristics of that token as stated by the effect that created that token."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """When Silent Hallcreeper becomes a copy of the target creature, it's neither entering nor leaving the battlefield. Any enters-the-battlefield or leaves-the-battlefield abilities won't trigger."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """If the third mode is chosen for Silent Hallcreeper's last ability but the target creature is an illegal target as the ability tries to resolve, it won't resolve and none of its effects will happen."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """While Silent Hallcreeper is a copy of another creature, it won't have any of its previous abilities."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """If the copied creature is copying something else, then Silent Hallcreeper becomes a copy of whatever that creature copied."""@en ] .
+
+:CacklingSlasher rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Cackling Slasher" ;
+    :manaCost "{3}{B}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Human ,
+                :Assassin ;
+    :hasRarity :Common ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :DuskmournHouseOfHorror ;
+    :cardNumber "85"^^xsd:integer ;
+    :artist "Johann Bodin" ;
+    :hasLanguage :English ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "3" ;
+    :toughnessValue "3"^^xsd:integer ;
+    :hasKeywordAbility :Deathtouch ;
+    :printedText """Deathtouch
+This creature enters with a +1/+1 counter on it if a creature died this turn."""@en ;
+    :oracleText """Deathtouch
+This creature enters with a +1/+1 counter on it if a creature died this turn."""@en ;
+    :flavorText """Every death was funnier than the last, until his howling laughter drowned out his victims' screams."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=673490"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/dsk/85/cackling-slasher"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "92157"^^xsd:positiveInteger ;
+    :arenaName "Cackling Slasher" ;
+    :arenaSetCode "DSK" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:FearOfLostTeeth rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Fear of Lost Teeth" ;
+    :manaCost "{B}" ;
+    :manaValue "1"^^xsd:nonNegativeInteger ;
+    :hasCardType :Enchantment ,
+                 :Creature ;
+    :hasSubType :Nightmare ;
+    :hasRarity :Common ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :DuskmournHouseOfHorror ;
+    :cardNumber "97"^^xsd:integer ;
+    :artist "Oriana Menendez" ;
+    :hasLanguage :English ;
+    :power "1" ;
+    :powerValue "1"^^xsd:integer ;
+    :toughness "1" ;
+    :toughnessValue "1"^^xsd:integer ;
+    :printedText """When this creature dies, it deals 1 damage to any target and you gain 1 life."""@en ;
+    :oracleText """When this creature dies, it deals 1 damage to any target and you gain 1 life."""@en ;
+    :flavorText """As it drew closer, Sam felt her own teeth wriggle in their sockets, as if they wanted to leap out and join the thing."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=673502"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/dsk/97/fear-of-lost-teeth"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "92173"^^xsd:positiveInteger ;
+    :arenaName "Fear of Lost Teeth" ;
+    :arenaSetCode "DSK" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """If the target of Fear of Lost Teeth's ability is an illegal target as the ability tries to resolve, it won't resolve and none of its effects will happen. You won't gain life."""@en ] .
+
+:GrievousWound rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Grievous Wound" ;
+    :manaCost "{3}{B}{B}" ;
+    :manaValue "5"^^xsd:nonNegativeInteger ;
+    :hasCardType :Enchantment ;
+    :hasSubType :Aura ;
+    :hasRarity :Rare ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :DuskmournHouseOfHorror ;
+    :cardNumber "102"^^xsd:integer ;
+    :artist "Martina Fačková" ;
+    :hasLanguage :English ;
+    :hasKeywordAbility :Enchant ;
+    :printedText """Enchant player
+Enchanted player can't gain life.
+Whenever enchanted player is dealt damage, they lose half their life, rounded up."""@en ;
+    :oracleText """Enchant player
+Enchanted player can't gain life.
+Whenever enchanted player is dealt damage, they lose half their life, rounded up."""@en ;
+    :flavorText """Vicky was so tired. The pain began to fade. "You were so brave," said her grandmother's voice from somewhere far away. "But it's time to rest now.\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=673507"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/dsk/102/grievous-wound"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "92180"^^xsd:positiveInteger ;
+    :arenaName "Grievous Wound" ;
+    :arenaSetCode "DSK" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """If an effect says to set the enchanted player's life total to a number that's higher than their current life total, that player's life total won't change."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """Grievous Wound's last ability triggers only once whenever enchanted player is dealt combat damage, no matter how many creatures deal combat damage to them at the same time."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """Spells and abilities that cause the enchanted player to gain life still resolve while Grievous Wound is on the battlefield. The enchanted player won't gain life, but any other effects of that spell or ability will still happen."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """Grievous Wound's last ability triggers and resolves after the damage is dealt. For example, if the enchanted player has 10 life and is dealt 1 damage, that damage will reduce their life total to 9. Then Grievous Wound's ability will cause that player to lose 5 life, leaving their life total at 4."""@en ] .
+
+:MurderDuskmournHouseOfHorror110 rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Murder" ;
+    :manaCost "{1}{B}{B}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Instant ;
+    :hasRarity :Common ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :DuskmournHouseOfHorror ;
+    :cardNumber "110"^^xsd:integer ;
+    :artist "Domenico Cava" ;
+    :hasLanguage :English ;
+    :printedText """Destroy target creature."""@en ;
+    :oracleText """Destroy target creature."""@en ;
+    :flavorText """Razorkin have only one hobby."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=673515"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/dsk/110/murder"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "92188"^^xsd:positiveInteger ;
+    :arenaName "Murder" ;
+    :arenaSetCode "DSK" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
 
 :NowhereToRun rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -105,3 +1172,1132 @@ Creatures your opponents control can be the targets of spells and abilities as t
       [ rdf:type :Ruling ;
         :rulingDate "2024-09-20"^^xsd:date ;
         :rulingText """Ward abilities of creatures your opponents control won't trigger as long as Nowhere to Run is on the battlefield. It doesn't matter whether or not they have hexproof."""@en ] .
+
+:ResurrectedCultist rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Resurrected Cultist" ;
+    :manaCost "{2}{B}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Human ,
+                :Cleric ;
+    :hasRarity :Common ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :DuskmournHouseOfHorror ;
+    :cardNumber "115"^^xsd:integer ;
+    :artist "Tyler Walpole" ;
+    :hasLanguage :English ;
+    :power "4" ;
+    :powerValue "4"^^xsd:integer ;
+    :toughness "1" ;
+    :toughnessValue "1"^^xsd:integer ;
+    :hasAbilityWord :Delirium ;
+    :printedText """Delirium — {2}{B}{B}: Return this card from your graveyard to the battlefield with a finality counter on it. Activate only if there are four or more card types among cards in your graveyard and only as a sorcery. (If a creature with a finality counter on it would die, exile it instead.)"""@en ;
+    :oracleText """Delirium — {2}{B}{B}: Return this card from your graveyard to the battlefield with a finality counter on it. Activate only if there are four or more card types among cards in your graveyard and only as a sorcery. (If a creature with a finality counter on it would die, exile it instead.)"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=673520"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/dsk/115/resurrected-cultist"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "92193"^^xsd:positiveInteger ;
+    :arenaName "Resurrected Cultist" ;
+    :arenaSetCode "DSK" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """Finality counters don't stop permanents from going to zones other than the graveyard from the battlefield. For example, if a permanent with a finality counter on it would be put into its owner's hand from the battlefield, it does so normally."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """Multiple finality counters on a single permanent are redundant."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """Finality counters aren't keyword counters, and a finality counter doesn't give any abilities to the permanent it's on. If that permanent loses its abilities and then would go to a graveyard, it will still be exiled instead."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """Finality counters work on any permanent, not only creatures. If a permanent with a finality counter on it would be put into a graveyard from the battlefield, exile it instead."""@en ] .
+
+:SpectralSnatcher rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Spectral Snatcher" ;
+    :manaCost "{4}{B}{B}" ;
+    :manaValue "6"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Spirit ;
+    :hasRarity :Common ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :DuskmournHouseOfHorror ;
+    :cardNumber "116"^^xsd:integer ;
+    :artist "Domenico Cava" ;
+    :hasLanguage :English ;
+    :power "6" ;
+    :powerValue "6"^^xsd:integer ;
+    :toughness "5" ;
+    :toughnessValue "5"^^xsd:integer ;
+    :hasKeywordAbility :Ward ,
+                       :Cycling ;
+    :printedText """Ward—Discard a card. (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player discards a card.)
+Swampcycling {2} ({2}, Discard this card: Search your library for a Swamp card, reveal it, put it into your hand, then shuffle.)"""@en ;
+    :oracleText """Ward—Discard a card. (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player discards a card.)
+Swampcycling {2} ({2}, Discard this card: Search your library for a Swamp card, reveal it, put it into your hand, then shuffle.)"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=673521"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/dsk/116/spectral-snatcher"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "92194"^^xsd:positiveInteger ;
+    :arenaName "Spectral Snatcher" ;
+    :arenaSetCode "DSK" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:GrabThePrize rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Grab the Prize" ;
+    :manaCost "{1}{R}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Sorcery ;
+    :hasRarity :Common ;
+    :hasColor :Red ;
+    :hasColorIdentity :Red ;
+    :isInSet :DuskmournHouseOfHorror ;
+    :cardNumber "138"^^xsd:integer ;
+    :artist "Halil Ural" ;
+    :hasLanguage :English ;
+    :printedText """As an additional cost to cast this spell, discard a card.
+Draw two cards. If the discarded card wasn't a land card, Grab the Prize deals 2 damage to each opponent."""@en ;
+    :oracleText """As an additional cost to cast this spell, discard a card.
+Draw two cards. If the discarded card wasn't a land card, Grab the Prize deals 2 damage to each opponent."""@en ;
+    :flavorText """Unfortunately, the keyhole turned out to be located in an even larger, scarier clown mouth."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=673543"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/dsk/138/grab-the-prize"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "92222"^^xsd:positiveInteger ;
+    :arenaName "Grab the Prize" ;
+    :arenaSetCode "DSK" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:ImpossibleInferno rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Impossible Inferno" ;
+    :manaCost "{4}{R}" ;
+    :manaValue "5"^^xsd:nonNegativeInteger ;
+    :hasCardType :Instant ;
+    :hasRarity :Common ;
+    :hasColor :Red ;
+    :hasColorIdentity :Red ;
+    :isInSet :DuskmournHouseOfHorror ;
+    :cardNumber "140"^^xsd:integer ;
+    :artist "Edgar Sánchez Hidalgo" ;
+    :hasLanguage :English ;
+    :hasAbilityWord :Delirium ;
+    :printedText """Impossible Inferno deals 6 damage to target creature.
+Delirium — If there are four or more card types among cards in your graveyard, exile the top card of your library. You may play it until the end of your next turn."""@en ;
+    :oracleText """Impossible Inferno deals 6 damage to target creature.
+Delirium — If there are four or more card types among cards in your graveyard, exile the top card of your library. You may play it until the end of your next turn."""@en ;
+    :flavorText """No living being, survivor or monster, is exempt from Valgavoth's wrath."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=673545"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/dsk/140/impossible-inferno"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "92224"^^xsd:positiveInteger ;
+    :arenaName "Impossible Inferno" ;
+    :arenaSetCode "DSK" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """You pay all costs and follow all timing rules for cards played this way. For example, if the exiled card is a land card, you may play it only during your main phase while the stack is empty."""@en ] .
+
+:RipchainRazorkin rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Ripchain Razorkin" ;
+    :manaCost "{3}{R}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Human ,
+                :Berserker ;
+    :hasRarity :Common ;
+    :hasColor :Red ;
+    :hasColorIdentity :Red ;
+    :isInSet :DuskmournHouseOfHorror ;
+    :cardNumber "154"^^xsd:integer ;
+    :artist "David Szabo" ;
+    :hasLanguage :English ;
+    :power "5" ;
+    :powerValue "5"^^xsd:integer ;
+    :toughness "3" ;
+    :toughnessValue "3"^^xsd:integer ;
+    :hasKeywordAbility :Reach ;
+    :printedText """Reach
+{2}{R}, Sacrifice a land: Draw a card."""@en ;
+    :oracleText """Reach
+{2}{R}, Sacrifice a land: Draw a card."""@en ;
+    :flavorText """"Listen to that tasty squelch. Good hit, good hit! Come here now, little meatbag!\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=673559"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/dsk/154/ripchain-razorkin"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "92240"^^xsd:positiveInteger ;
+    :arenaName "Ripchain Razorkin" ;
+    :arenaSetCode "DSK" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:WaltzOfRage rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Waltz of Rage" ;
+    :manaCost "{3}{R}{R}" ;
+    :manaValue "5"^^xsd:nonNegativeInteger ;
+    :hasCardType :Sorcery ;
+    :hasRarity :Rare ;
+    :hasColor :Red ;
+    :hasColorIdentity :Red ;
+    :isInSet :DuskmournHouseOfHorror ;
+    :cardNumber "165"^^xsd:integer ;
+    :artist "Mathias Kollros" ;
+    :hasLanguage :English ;
+    :printedText """Target creature you control deals damage equal to its power to each other creature. Until end of turn, whenever a creature you control dies, exile the top card of your library. You may play it until the end of your next turn."""@en ;
+    :oracleText """Target creature you control deals damage equal to its power to each other creature. Until end of turn, whenever a creature you control dies, exile the top card of your library. You may play it until the end of your next turn."""@en ;
+    :flavorText """The melody was all in her head, but she'd always preferred to dance alone."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=673570"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/dsk/165/waltz-of-rage"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "92253"^^xsd:positiveInteger ;
+    :arenaName "Waltz of Rage" ;
+    :arenaSetCode "DSK" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """If the target creature is an illegal target when Waltz of Rage tries to resolve, it won't resolve and none of its effects will happen. No damage will be dealt, and the delayed triggered ability won't trigger whenever a creature you control dies this turn."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """Use the power of the target creature as Waltz of Rage resolves to determine how much damage that creature deals to each other creature."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """You pay all costs and follow all timing rules for cards played with the permission granted by Waltz of Rage's delayed triggered ability. For example, if one of the exiled cards is a land card, you may play it only during your main phase while the stack is empty."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """The creature is the source of the damage, not Waltz of Rage."""@en ] .
+
+:AltanakTheThriceCalled rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Altanak, the Thrice-Called" ;
+    :manaCost "{5}{G}{G}" ;
+    :manaValue "7"^^xsd:nonNegativeInteger ;
+    :hasSuperType :Legendary ;
+    :hasCardType :Creature ;
+    :hasSubType :Insect ,
+                :Beast ;
+    :hasRarity :Uncommon ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :DuskmournHouseOfHorror ;
+    :cardNumber "166"^^xsd:integer ;
+    :artist "Sam Wolfe Connelly" ;
+    :hasLanguage :English ;
+    :power "9" ;
+    :powerValue "9"^^xsd:integer ;
+    :toughness "9" ;
+    :toughnessValue "9"^^xsd:integer ;
+    :hasKeywordAbility :Trample ;
+    :printedText """Trample
+Whenever Altanak becomes the target of a spell or ability an opponent controls, draw a card.
+{1}{G}, Discard this card: Return target land card from your graveyard to the battlefield tapped."""@en ;
+    :oracleText """Trample
+Whenever Altanak becomes the target of a spell or ability an opponent controls, draw a card.
+{1}{G}, Discard this card: Return target land card from your graveyard to the battlefield tapped."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=673571"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/dsk/166/altanak-the-thrice-called"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "92254"^^xsd:positiveInteger ;
+    :arenaName "Altanak, the Thrice-Called" ;
+    :arenaSetCode "DSK" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """If a spell or ability targets Altanak more than once, its second ability still triggers only once."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """Altanak's second ability resolves before the spell or ability that caused it to trigger. It resolves even if that spell or ability is countered or otherwise leaves the stack without resolving."""@en ] .
+
+:CatharticParting rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Cathartic Parting" ;
+    :manaCost "{1}{G}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Sorcery ;
+    :hasRarity :Uncommon ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :DuskmournHouseOfHorror ;
+    :cardNumber "171"^^xsd:integer ;
+    :artist "Miranda Meeks" ;
+    :hasLanguage :English ;
+    :printedText """The owner of target artifact or enchantment an opponent controls shuffles it into their library. You may shuffle up to four target cards from your graveyard into your library."""@en ;
+    :oracleText """The owner of target artifact or enchantment an opponent controls shuffles it into their library. You may shuffle up to four target cards from your graveyard into your library."""@en ;
+    :flavorText """"We got more than most people do. We got the chance to say goodbye.\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=673576"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/dsk/171/cathartic-parting"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "92259"^^xsd:positiveInteger ;
+    :arenaName "Cathartic Parting" ;
+    :arenaSetCode "DSK" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """You may target zero cards in your graveyard and still choose to shuffle your library."""@en ] .
+
+:EnduringVitality rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Enduring Vitality" ;
+    :manaCost "{1}{G}{G}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Enchantment ,
+                 :Creature ;
+    :hasSubType :Elk ,
+                :Glimmer ;
+    :hasRarity :Rare ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :DuskmournHouseOfHorror ;
+    :cardNumber "176"^^xsd:integer ;
+    :artist "Valera Lutfullina" ;
+    :hasLanguage :English ;
+    :producesMana :White ,
+                  :Blue ,
+                  :Black ,
+                  :Red ,
+                  :Green ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "3" ;
+    :toughnessValue "3"^^xsd:integer ;
+    :hasKeywordAbility :Vigilance ;
+    :printedText """Vigilance
+Creatures you control have "{T}: Add one mana of any color."
+When Enduring Vitality dies, if it was a creature, return it to the battlefield under its owner's control. It's an enchantment. (It's not a creature.)"""@en ;
+    :oracleText """Vigilance
+Creatures you control have "{T}: Add one mana of any color."
+When Enduring Vitality dies, if it was a creature, return it to the battlefield under its owner's control. It's an enchantment. (It's not a creature.)"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=673581"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/dsk/176/enduring-vitality"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "92264"^^xsd:positiveInteger ;
+    :arenaName "Enduring Vitality" ;
+    :arenaSetCode "DSK" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """Elk and Glimmer are both creature types. Enduring Vitality won't have those creature types when its last ability returns it to the battlefield because it won't be a creature."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """A token that's a copy of Enduring Vitality won't return to the battlefield when its last ability resolves."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """If a nontoken permanent that's a copy of Enduring Vitality dies while it's a creature, it will return to the battlefield as an enchantment when its last ability resolves. It won't have any card types other than enchantment."""@en ] .
+
+:GraspingLongneck rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Grasping Longneck" ;
+    :manaCost "{2}{G}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Enchantment ,
+                 :Creature ;
+    :hasSubType :Horror ;
+    :hasRarity :Common ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :DuskmournHouseOfHorror ;
+    :cardNumber "180"^^xsd:integer ;
+    :artist "Mathias Kollros" ;
+    :hasLanguage :English ;
+    :power "4" ;
+    :powerValue "4"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    :hasKeywordAbility :Reach ;
+    :printedText """Reach
+When this creature dies, you gain 2 life."""@en ;
+    :oracleText """Reach
+When this creature dies, you gain 2 life."""@en ;
+    :flavorText """"We ran, but it was all around us—like a writhing, flailing forest of rubbery limbs and stabbing talons."
+—Survivor's journal"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=673585"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/dsk/180/grasping-longneck"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "92268"^^xsd:positiveInteger ;
+    :arenaName "Grasping Longneck" ;
+    :arenaSetCode "DSK" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:HorridVigor rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Horrid Vigor" ;
+    :manaCost "{1}{G}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Instant ;
+    :hasRarity :Common ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :DuskmournHouseOfHorror ;
+    :cardNumber "184"^^xsd:integer ;
+    :artist "Chris Cold" ;
+    :hasLanguage :English ;
+    :printedText """Target creature gains deathtouch and indestructible until end of turn."""@en ;
+    :oracleText """Target creature gains deathtouch and indestructible until end of turn."""@en ;
+    :flavorText """"We set it on fire. It lived. We cut off its head. It lived. We fell to it, one by one. It lives."
+—Sunrise, survivor sentry"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=673589"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/dsk/184/horrid-vigor"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "92274"^^xsd:positiveInteger ;
+    :arenaName "Horrid Vigor" ;
+    :arenaSetCode "DSK" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:SpineseekerCentipede rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Spineseeker Centipede" ;
+    :manaCost "{2}{G}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Insect ;
+    :hasRarity :Common ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :DuskmournHouseOfHorror ;
+    :cardNumber "199"^^xsd:integer ;
+    :artist "Dave Kendall" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "1" ;
+    :toughnessValue "1"^^xsd:integer ;
+    :hasAbilityWord :Delirium ;
+    :printedText """When this creature enters, search your library for a basic land card, reveal it, put it into your hand, then shuffle.
+Delirium — This creature gets +1/+2 and has vigilance as long as there are four or more card types among cards in your graveyard."""@en ;
+    :oracleText """When this creature enters, search your library for a basic land card, reveal it, put it into your hand, then shuffle.
+Delirium — This creature gets +1/+2 and has vigilance as long as there are four or more card types among cards in your graveyard."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=673604"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/dsk/199/spineseeker-centipede"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "92291"^^xsd:positiveInteger ;
+    :arenaName "Spineseeker Centipede" ;
+    :arenaSetCode "DSK" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:ThreatsAroundEveryCorner rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Threats Around Every Corner" ;
+    :manaCost "{3}{G}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasCardType :Enchantment ;
+    :hasRarity :Uncommon ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :DuskmournHouseOfHorror ;
+    :cardNumber "200"^^xsd:integer ;
+    :artist "Andrea Piparo" ;
+    :hasLanguage :English ;
+    :hasKeywordAction :Manifest ,
+                      :ManifestDread ;
+    :printedText """When this enchantment enters, manifest dread.
+Whenever a face-down permanent you control enters, search your library for a basic land card, put it onto the battlefield tapped, then shuffle."""@en ;
+    :oracleText """When this enchantment enters, manifest dread.
+Whenever a face-down permanent you control enters, search your library for a basic land card, put it onto the battlefield tapped, then shuffle."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=673605"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/dsk/200/threats-around-every-corner"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "92292"^^xsd:positiveInteger ;
+    :arenaName "Threats Around Every Corner" ;
+    :arenaSetCode "DSK" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """If a face-down creature loses its abilities, it can't be turned face up with a disguise or morph ability because it will no longer have that ability (or the associated cost) once face up."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """At any time, you can look at a face-down spell or permanent you control. You can't look at face-down permanents or spells you don't control unless an effect instructs or allows you to do so."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """Turning a permanent face up or face down doesn't change whether that permanent is tapped or untapped."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """You must ensure that your face-down spells and permanents can be easily differentiated from each other. You're not allowed to mix up the cards that represent them on the battlefield to confuse other players. The order in which they entered should remain clear, as well as what ability caused them to be face down. (This includes manifest, disguise, cloak, morph, and a few older effects that turn cards face down.) Common methods for doing this include using markers or dice, or simply placing them in order on the battlefield."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """Because the permanent is on the battlefield both before and after it's turned face up, turning a permanent face up doesn't cause any enters-the-battlefield abilities to trigger."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """Because face-down creatures don't have a name, they can't have the same name as any other creature, even another face-down creature."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """Unlike a face-down creature that was cast using a disguise or morph ability, a manifested creature may still be turned face up after it loses its abilities if it's a creature card."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """If a double-faced card is manifested, it will be put onto the battlefield face down. While face down, it can't transform. If the front face of the card is a creature card, you can turn it face up by paying its mana cost. If you do, its front face will be up."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """To manifest dread, look at the top two cards of your library. Manifest one (by putting it onto the battlefield face down) and put the other into your graveyard. The card you put onto the battlefield becomes a 2/2 face-down creature with no name, mana cost, creature types, or abilities. It's colorless and has a mana value of 0. Other effects that apply to the permanent can still grant it any characteristics it doesn't have or change the characteristics it does have."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """If a face-down spell leaves the stack and goes to any zone other than the battlefield (if it was countered, for example), you must reveal it. Similarly, if a face-down permanent leaves the battlefield, you must reveal it. You must also reveal all face-down spells and permanents you control if you leave the game or the game ends."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """Some cards in the Duskmourn release have abilities that trigger "whenever you manifest dread." In circumstances where you are instructed to manifest dread but can't perform some or all of the steps of manifesting dread (probably because your library has one or fewer cards in it), these abilities will still trigger."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """If a manifested creature would have disguise or morph if it were face up, you may also turn it face up by paying its disguise or morph cost, as appropriate."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """If something tries to turn a face-down instant or sorcery card on the battlefield face up, reveal that card to show all players it's an instant or sorcery card. The permanent remains on the battlefield face down. Abilities that trigger when a permanent turns face up won't trigger, because even though you revealed the card, it never turned face up."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """Any time you have priority, you can turn a manifested permanent you control face up by revealing that it's a creature card (ignoring any copy effects or type-changing effects that might be applying to it) and paying its mana cost. This is a special action. It doesn't use the stack and can't be responded to."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """A permanent that turns face up or face down changes characteristics but is otherwise the same permanent. Spells and abilities that were targeting that permanent and Auras and Equipment that were attached to that permanent aren't affected unless the new characteristics of the object change the legality of those targets or attachments."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """If your library contains only one card when you manifest dread, you'll look at that card and put it onto the battlefield face down. You won't have the option to put it into your graveyard instead. If your library contains no cards when you manifest dread, you won't do anything."""@en ] .
+
+:WalkInCloset rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Walk-In Closet // Forgotten Cellar" ;
+    :manaCost "{2}{G}" ;
+    :manaValue "8"^^xsd:nonNegativeInteger ;
+    :hasCardType :Enchantment ;
+    :hasSubType :Room ;
+    :hasRarity :MythicRare ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :DuskmournHouseOfHorror ;
+    :cardNumber "205"^^xsd:integer ;
+    :artist "Miklós Ligeti" ;
+    :hasLanguage :English ;
+    :printedText """You may play lands from your graveyard.
+(You may cast either half. That door unlocks on the battlefield. As a sorcery, you may pay the mana cost of a locked door to unlock it.)
+//
+When you unlock this door, you may cast spells from your graveyard this turn, and if a card would be put into your graveyard from anywhere this turn, exile it instead.
+(You may cast either half. That door unlocks on the battlefield. As a sorcery, you may pay the mana cost of a locked door to unlock it.)"""@en ;
+    :oracleText """You may play lands from your graveyard.
+(You may cast either half. That door unlocks on the battlefield. As a sorcery, you may pay the mana cost of a locked door to unlock it.)
+//
+When you unlock this door, you may cast spells from your graveyard this turn, and if a card would be put into your graveyard from anywhere this turn, exile it instead.
+(You may cast either half. That door unlocks on the battlefield. As a sorcery, you may pay the mana cost of a locked door to unlock it.)"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=673610"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/dsk/205/walk-in-closet-forgotten-cellar"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "92297"^^xsd:positiveInteger ;
+    :arenaName "Walk-In Closet // Forgotten Cellar" ;
+    :arenaSetCode "DSK" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """To cast a Room spell, choose a half (or "door") to cast. There's no way to cast both halves of a Room card. When the Room spell resolves, the corresponding door becomes unlocked as the Room enters."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """Some doors have abilities that trigger whenever you unlock that door and require one or more targets. You can unlock that door even if there would be insufficient legal targets for that triggered ability. The triggered ability won't go on the stack."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """Forgotten Cellar's ability won't stop tokens from going to your graveyard as normal (and ceasing to exist shortly thereafter, also as normal)."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """Any time you have priority during a main phase of your turn and the stack is empty, you may pay the mana cost of a locked door (also called its "unlock cost"). That door becomes unlocked. This is a special action. It doesn't use the stack and can't be responded to."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """Some abilities allow you to lock a door of a Room you control. You can't choose to lock a door that's already locked with such an ability. If such an ability requires a target, you can target a Room even if both of its doors are locked, but the ability won't do anything when it resolves."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """Walk-In Closet's ability doesn't allow you to activate abilities (such as cycling) of land cards in your graveyard."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """An ability that triggers "whenever you fully unlock a Room" triggers when a door becomes unlocked and the other door of that Room is already unlocked, or when both doors of that Room become unlocked simultaneously."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """You pay all costs and follow all timing rules for spells cast from your graveyard with the permission granted by Forgotten Cellar's ability. You may pay alternative costs, such as impending costs, rather than the spell's mana cost. You may pay optional additional costs, such as kicker, and if there are any mandatory additional costs, those must be paid to cast the spell."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """While in any zone other than the stack or the battlefield, a Room card's characteristics are a combination of its two doors. For example, Bottomless Pool // Locker Room has a mana value of 6 while it's in your library. If an effect allows you to search your library for a card with mana value 4 or less, you can't find Bottomless Pool // Locker Room."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """Some abilities allow you to unlock a door of a Room you control. You can't choose to unlock a door that's already unlocked with such an ability. If such an ability requires a target, you can target a Room even if both of its doors are unlocked, but the ability won't do anything when it resolves."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """While on the battlefield, a Room's characteristics are a combination of the characteristics of its unlocked doors. For example, if Bottomless Pool // Locker Room is on the battlefield with both doors unlocked, its names are Bottomless Pool and Locker Room, its mana value is 6, it's a Room Enchantment, and it has the abilities in each door's text box."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """Each Room card is a single card. For example, if you discard a Room card, you've discarded one card, not two. If an effect counts the number of enchantment cards in your graveyard, Bottomless Pool // Locker Room counts once, not twice."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """An ability that triggers "when you unlock this door" triggers when that door becomes unlocked. This can happen one of two ways: (1) the door becomes unlocked on the battlefield or (2) the door becomes unlocked as the Room enters the battlefield because you cast the corresponding half. In the latter case, since the door becoming unlocked is what causes the ability to trigger, effects that cause abilities that trigger when a permanent enters to trigger an additional time (such as that of Panharmonicon) won't apply."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """If a Room enters from any zone other than the stack, it will enter with both halves locked."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """Cards that would be put into your graveyard on the turn Forgotten Cellar's ability resolves are exiled even if you didn't play them this turn."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """If a spell or ability would create a copy of a Room spell on the stack, the copy retains the choice of which door was cast but also retains the full characteristics of the spell. The characteristics of the door that wasn't cast are still ignored while the copy is on the stack, and when the copy resolves, the token it becomes will enter with the appropriate door unlocked."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """Room cards have two card faces with a shared type line on a single card. The characteristics of the door you didn't cast are ignored while the spell is on the stack."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """If an effect allows you to cast a spell with certain characteristics, consider only the characteristics of the door you're casting. For example, if an effect allows you to cast a permanent spell with mana value 3 or less from among cards in your graveyard, you could cast Bottomless Pool this way, but not Locker Room."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """Walk-In Closet's ability doesn't change the times when you can play those land cards. You can still play only one land per turn, and only during your main phase when you have priority and the stack is empty."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """Each Room card has two names. If an effect instructs you to choose a card name, you may choose one of those names, but not both."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """If neither door of a Room is unlocked, it's a Room enchantment with no name and no abilities."""@en ] .
+
+:Glimmerlight rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Glimmerlight" ;
+    :manaCost "{2}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ;
+    :hasSubType :Equipment ;
+    :hasRarity :Common ;
+    :isInSet :DuskmournHouseOfHorror ;
+    :cardNumber "249"^^xsd:integer ;
+    :artist "Wero Gallo" ;
+    :hasLanguage :English ;
+    :hasKeywordAbility :Equip ;
+    :printedText """When this Equipment enters, create a 1/1 white Glimmer enchantment creature token.
+Equipped creature gets +1/+1.
+Equip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)"""@en ;
+    :oracleText """When this Equipment enters, create a 1/1 white Glimmer enchantment creature token.
+Equipped creature gets +1/+1.
+Equip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)"""@en ;
+    :flavorText """Hope and reliable lighting are in short supply in the House. Glimmers provide both."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=673654"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/dsk/249/glimmerlight"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "92349"^^xsd:positiveInteger ;
+    :arenaName "Glimmerlight" ;
+    :arenaSetCode "DSK" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:AbandonedCampground rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Abandoned Campground" ;
+    :manaValue "0"^^xsd:nonNegativeInteger ;
+    :hasCardType :Land ;
+    :hasRarity :Common ;
+    :hasColorIdentity :White ,
+                      :Blue ;
+    :isInSet :DuskmournHouseOfHorror ;
+    :cardNumber "255"^^xsd:integer ;
+    :artist "Cristi Balanescu" ;
+    :hasLanguage :English ;
+    :producesMana :White ,
+                  :Blue ;
+    :printedText """This land enters tapped unless a player has 13 or less life.
+{T}: Add {W} or {U}."""@en ;
+    :oracleText """This land enters tapped unless a player has 13 or less life.
+{T}: Add {W} or {U}."""@en ;
+    :flavorText """They say every inhabitant vanished in a single night, leaving their belongings untouched but curiously covered in moths."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=673660"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/dsk/255/abandoned-campground"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "92355"^^xsd:positiveInteger ;
+    :arenaName "Abandoned Campground" ;
+    :arenaSetCode "DSK" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """If one of these lands is entering at the same time as a "shock land" (a cycle of lands originally from Ravnica block that allow you to pay life or have them enter tapped), use the life totals of all players before choices are made for that shock land's replacement effect to determine whether or not the land enters tapped. For example, if a Lakeside Shack and a Breeding Pool you control are entering at the same time (perhaps because of the effect of a spell like Scapeshift), your life total is 14, and your opponent's life total is 20, the Lakeside Shack will enter tapped whether or not you choose to pay life as Breeding Pool enters."""@en ] .
+
+:BleedingWoods rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Bleeding Woods" ;
+    :manaValue "0"^^xsd:nonNegativeInteger ;
+    :hasCardType :Land ;
+    :hasRarity :Common ;
+    :hasColorIdentity :Red ,
+                      :Green ;
+    :isInSet :DuskmournHouseOfHorror ;
+    :cardNumber "257"^^xsd:integer ;
+    :artist "Henry Peters" ;
+    :hasLanguage :English ;
+    :producesMana :Red ,
+                  :Green ;
+    :printedText """This land enters tapped unless a player has 13 or less life.
+{T}: Add {R} or {G}."""@en ;
+    :oracleText """This land enters tapped unless a player has 13 or less life.
+{T}: Add {R} or {G}."""@en ;
+    :flavorText """They say if someone lies down to sleep beneath the trees, in the morning nothing will remain but a few scattered bones and a bed of blood-red lilies."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=673662"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/dsk/257/bleeding-woods"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "92357"^^xsd:positiveInteger ;
+    :arenaName "Bleeding Woods" ;
+    :arenaSetCode "DSK" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """If one of these lands is entering at the same time as a "shock land" (a cycle of lands originally from Ravnica block that allow you to pay life or have them enter tapped), use the life totals of all players before choices are made for that shock land's replacement effect to determine whether or not the land enters tapped. For example, if a Lakeside Shack and a Breeding Pool you control are entering at the same time (perhaps because of the effect of a spell like Scapeshift), your life total is 14, and your opponent's life total is 20, the Lakeside Shack will enter tapped whether or not you choose to pay life as Breeding Pool enters."""@en ] .
+
+:PeculiarLighthouse rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Peculiar Lighthouse" ;
+    :manaValue "0"^^xsd:nonNegativeInteger ;
+    :hasCardType :Land ;
+    :hasRarity :Common ;
+    :hasColorIdentity :Blue ,
+                      :Red ;
+    :isInSet :DuskmournHouseOfHorror ;
+    :cardNumber "265"^^xsd:integer ;
+    :artist "Raymond Bonilla" ;
+    :hasLanguage :English ;
+    :producesMana :Blue ,
+                  :Red ;
+    :printedText """This land enters tapped unless a player has 13 or less life.
+{T}: Add {U} or {R}."""@en ;
+    :oracleText """This land enters tapped unless a player has 13 or less life.
+{T}: Add {U} or {R}."""@en ;
+    :flavorText """They say its beckoning beacon leads not to safe harbor but into the arms of the drowned."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=673670"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/dsk/265/peculiar-lighthouse"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "92365"^^xsd:positiveInteger ;
+    :arenaName "Peculiar Lighthouse" ;
+    :arenaSetCode "DSK" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """If one of these lands is entering at the same time as a "shock land" (a cycle of lands originally from Ravnica block that allow you to pay life or have them enter tapped), use the life totals of all players before choices are made for that shock land's replacement effect to determine whether or not the land enters tapped. For example, if a Lakeside Shack and a Breeding Pool you control are entering at the same time (perhaps because of the effect of a spell like Scapeshift), your life total is 14, and your opponent's life total is 20, the Lakeside Shack will enter tapped whether or not you choose to pay life as Breeding Pool enters."""@en ] .
+
+:RaucousCarnival rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Raucous Carnival" ;
+    :manaValue "0"^^xsd:nonNegativeInteger ;
+    :hasCardType :Land ;
+    :hasRarity :Common ;
+    :hasColorIdentity :White ,
+                      :Red ;
+    :isInSet :DuskmournHouseOfHorror ;
+    :cardNumber "266"^^xsd:integer ;
+    :artist "Josu Solano" ;
+    :hasLanguage :English ;
+    :producesMana :White ,
+                  :Red ;
+    :printedText """This land enters tapped unless a player has 13 or less life.
+{T}: Add {R} or {W}."""@en ;
+    :oracleText """This land enters tapped unless a player has 13 or less life.
+{T}: Add {R} or {W}."""@en ;
+    :flavorText """They say that those who enter the amusement park never come back, and their disembodied laughter joins the others on the wind."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=673671"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/dsk/266/raucous-carnival"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "92366"^^xsd:positiveInteger ;
+    :arenaName "Raucous Carnival" ;
+    :arenaSetCode "DSK" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:RazortrapGorge rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Razortrap Gorge" ;
+    :manaValue "0"^^xsd:nonNegativeInteger ;
+    :hasCardType :Land ;
+    :hasRarity :Common ;
+    :hasColorIdentity :Black ,
+                      :Red ;
+    :isInSet :DuskmournHouseOfHorror ;
+    :cardNumber "267"^^xsd:integer ;
+    :artist "Filip Burburan" ;
+    :hasLanguage :English ;
+    :producesMana :Black ,
+                  :Red ;
+    :printedText """This land enters tapped unless a player has 13 or less life.
+{T}: Add {B} or {R}."""@en ;
+    :oracleText """This land enters tapped unless a player has 13 or less life.
+{T}: Add {B} or {R}."""@en ;
+    :flavorText """They say the blades wait to bite through your skin until you've climbed too far to turn back, leaving you to cling with blood-slick hands until gravity takes you."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=673672"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/dsk/267/razortrap-gorge"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "92367"^^xsd:positiveInteger ;
+    :arenaName "Razortrap Gorge" ;
+    :arenaSetCode "DSK" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """If one of these lands is entering at the same time as a "shock land" (a cycle of lands originally from Ravnica block that allow you to pay life or have them enter tapped), use the life totals of all players before choices are made for that shock land's replacement effect to determine whether or not the land enters tapped. For example, if a Lakeside Shack and a Breeding Pool you control are entering at the same time (perhaps because of the effect of a spell like Scapeshift), your life total is 14, and your opponent's life total is 20, the Lakeside Shack will enter tapped whether or not you choose to pay life as Breeding Pool enters."""@en ] .
+
+:StrangledCemetery rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Strangled Cemetery" ;
+    :manaValue "0"^^xsd:nonNegativeInteger ;
+    :hasCardType :Land ;
+    :hasRarity :Common ;
+    :hasColorIdentity :Black ,
+                      :Green ;
+    :isInSet :DuskmournHouseOfHorror ;
+    :cardNumber "268"^^xsd:integer ;
+    :artist "Marco Gorlei" ;
+    :hasLanguage :English ;
+    :producesMana :Black ,
+                  :Green ;
+    :printedText """This land enters tapped unless a player has 13 or less life.
+{T}: Add {B} or {G}."""@en ;
+    :oracleText """This land enters tapped unless a player has 13 or less life.
+{T}: Add {B} or {G}."""@en ;
+    :flavorText """They say that with each new moon, the buried dead rise and dance from dusk to dawn, and witnesses to the revelry must join them for eternity."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=673673"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/dsk/268/strangled-cemetery"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "92368"^^xsd:positiveInteger ;
+    :arenaName "Strangled Cemetery" ;
+    :arenaSetCode "DSK" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """If one of these lands is entering at the same time as a "shock land" (a cycle of lands originally from Ravnica block that allow you to pay life or have them enter tapped), use the life totals of all players before choices are made for that shock land's replacement effect to determine whether or not the land enters tapped. For example, if a Lakeside Shack and a Breeding Pool you control are entering at the same time (perhaps because of the effect of a spell like Scapeshift), your life total is 14, and your opponent's life total is 20, the Lakeside Shack will enter tapped whether or not you choose to pay life as Breeding Pool enters."""@en ] .
+
+:ThornspireVerge rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Thornspire Verge" ;
+    :manaValue "0"^^xsd:nonNegativeInteger ;
+    :hasCardType :Land ;
+    :hasRarity :Rare ;
+    :hasColorIdentity :Red ,
+                      :Green ;
+    :isInSet :DuskmournHouseOfHorror ;
+    :cardNumber "270"^^xsd:integer ;
+    :artist "Kasia 'Kafis' Zielińska" ;
+    :hasLanguage :English ;
+    :producesMana :Red ,
+                  :Green ;
+    :printedText """{T}: Add {R}.
+{T}: Add {G}. Activate only if you control a Mountain or a Forest."""@en ;
+    :oracleText """{T}: Add {R}.
+{T}: Add {G}. Activate only if you control a Mountain or a Forest."""@en ;
+    :flavorText """Here, the Boilerbilges twitch like a trapped animal, peaks straining against the grasping roots and vines."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=673675"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/dsk/270/thornspire-verge"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "92370"^^xsd:positiveInteger ;
+    :arenaName "Thornspire Verge" ;
+    :arenaSetCode "DSK" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .

@@ -39,8 +39,9 @@
     rdfs:label "Magic Card Collection Individuals – Guilds of Ravnica"@en ;
     rdfs:comment """An instance graph describing the card individuals of a
 personal Magic: The Gathering card collection that were printed in the set
-Guilds of Ravnica (GRN). One Card individual is defined per collected
-printing, carrying its characteristics, the platforms it is available on
+Guilds of Ravnica (GRN). One Card individual is defined per printing
+collected in paper or on MTG Arena, carrying its characteristics, the
+platforms it is available on
 (paper, MTG Arena, Magic Online) with its MTG Arena identity, its legality
 in the paper and MTG Arena formats, and official rulings. Card data was
 sourced from Gatherer and Scryfall. This file imports MagicCardsOntology to
@@ -109,3 +110,67 @@ legality definitions."""@en .
       [ rdf:type :Ruling ;
         :rulingDate "2018-10-05"^^xsd:date ;
         :rulingText """Tokens that aren't a copy of something else don't have a mana cost. Anything without a mana cost normally has a mana value of 0."""@en ] .
+
+:TempleGarden rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Temple Garden" ;
+    :manaValue "0"^^xsd:nonNegativeInteger ;
+    :hasCardType :Land ;
+    :hasSubType :Forest ,
+                :Plains ;
+    :hasRarity :Rare ;
+    :hasColorIdentity :White ,
+                      :Green ;
+    :isInSet :GuildsOfRavnica ;
+    :cardNumber "258"^^xsd:integer ;
+    :artist "Titus Lunter" ;
+    :hasLanguage :English ;
+    :producesMana :White ,
+                  :Green ;
+    :entersTapped "true"^^xsd:boolean ;
+    :printedText """({T}: Add {G} or {W}.)
+As this land enters, you may pay 2 life. If you don't, it enters tapped."""@en ;
+    :oracleText """({T}: Add {G} or {W}.)
+As this land enters, you may pay 2 life. If you don't, it enters tapped."""@en ;
+    :flavorText """"Where the roots reach, there the temple rises."
+—Niszka, Selesnya evangel"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=453008"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/grn/258/temple-garden"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "68739"^^xsd:positiveInteger ;
+    :arenaName "Temple Garden" ;
+    :arenaSetCode "GRN" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2018-10-05"^^xsd:date ;
+        :rulingText """If an effect puts this land onto the battlefield tapped, you may pay 2 life, but it still enters tapped."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2018-10-05"^^xsd:date ;
+        :rulingText """Unlike most dual lands, this land has two basic land types. It's not basic, so cards such as District Guide can't find it, but it does have the appropriate land types for effects such as that of Drowned Catacomb (from the Ixalan set)."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """This land has two basic land types. It's not basic, so cards such as Tend the Sprigs can't find it, but it does have the appropriate land types for effects such as that of Great Arashin City (from the Tarkir: Dragonstorm release)."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """If an effect puts this land onto the battlefield tapped, you may pay 2 life, but it still enters tapped."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2026-10-07"^^xsd:date ;
+        :rulingText """If an effect puts this land onto the battlefield tapped, you may pay 2 life, but it still enters tapped."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2026-10-07"^^xsd:date ;
+        :rulingText """This land has two basic land types. It's not basic, so cards such as Final Frontier can't find it, but it does have the appropriate land types for effects such as that of Mistrise Village (from the Tarkir: Dragonstorm release)."""@en ] .

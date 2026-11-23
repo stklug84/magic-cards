@@ -39,8 +39,9 @@
     rdfs:label "Magic Card Collection Individuals – Wilds of Eldraine"@en ;
     rdfs:comment """An instance graph describing the card individuals of a
 personal Magic: The Gathering card collection that were printed in the set
-Wilds of Eldraine (WOE). One Card individual is defined per collected
-printing, carrying its characteristics, the platforms it is available on
+Wilds of Eldraine (WOE). One Card individual is defined per printing
+collected in paper or on MTG Arena, carrying its characteristics, the
+platforms it is available on
 (paper, MTG Arena, Magic Online) with its MTG Arena identity, its legality
 in the paper and MTG Arena formats, and official rulings. Card data was
 sourced from Gatherer and Scryfall. This file imports MagicCardsOntology to
@@ -103,6 +104,212 @@ Enchanted creature can't attack or block.
         :rulingDate "2023-09-01"^^xsd:date ;
         :rulingText """Only the controller of Cooped Up may activate its ability."""@en ] .
 
+:SaviorOfTheSleeping rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Savior of the Sleeping" ;
+    :manaCost "{2}{W}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Human ,
+                :Knight ;
+    :hasRarity :Common ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :WildsOfEldraine ;
+    :cardNumber "28"^^xsd:integer ;
+    :artist "Valera Lutfullina" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "3" ;
+    :toughnessValue "3"^^xsd:integer ;
+    :hasKeywordAbility :Vigilance ;
+    :printedText """Vigilance
+Whenever an enchantment you control is put into a graveyard from the battlefield, put a +1/+1 counter on this creature."""@en ;
+    :oracleText """Vigilance
+Whenever an enchantment you control is put into a graveyard from the battlefield, put a +1/+1 counter on this creature."""@en ;
+    :flavorText """Even lost in slumber, the citizens of Ardenvale dream of a tireless protector standing guard over their homes."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=629529"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/woe/28/savior-of-the-sleeping"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "86712"^^xsd:positiveInteger ;
+    :arenaName "Savior of the Sleeping" ;
+    :arenaSetCode "WOE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """Enchantment tokens (such as Roles) that are sacrificed, destroyed, or would otherwise go to the graveyard are put into their owner's graveyard before ceasing to exist. If you controlled the token, Savior of the Sleeping's ability will trigger."""@en ] .
+
+:SolitarySanctuary rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Solitary Sanctuary" ;
+    :manaCost "{2}{W}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Enchantment ;
+    :hasRarity :Uncommon ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :WildsOfEldraine ;
+    :cardNumber "30"^^xsd:integer ;
+    :artist "Kasia 'Kafis' Zielińska" ;
+    :hasLanguage :English ;
+    :printedText """When this enchantment enters, tap target creature an opponent controls and put a stun counter on it. (If a permanent with a stun counter would become untapped, remove one from it instead.)
+Whenever you tap an untapped creature an opponent controls, put a +1/+1 counter on target creature you control."""@en ;
+    :oracleText """When this enchantment enters, tap target creature an opponent controls and put a stun counter on it. (If a permanent with a stun counter would become untapped, remove one from it instead.)
+Whenever you tap an untapped creature an opponent controls, put a +1/+1 counter on target creature you control."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=629531"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/woe/30/solitary-sanctuary"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "86714"^^xsd:positiveInteger ;
+    :arenaName "Solitary Sanctuary" ;
+    :arenaSetCode "WOE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """Solitary Sanctuary's last ability will trigger only when an effect instructs you to tap an opponent's creature. It won't trigger if a spell or ability you control instructs an opponent to tap a creature they control. For example, if you control Tangle Wire and an opponent taps an untapped creature they control as part of the resolution of Tangle Wire's triggered ability, Solitary Sanctuary's ability won't trigger."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """You may target a creature that is already tapped with Solitary Sanctuary's first ability. If the target creature is already tapped as it resolves, you will still put a stun counter on it."""@en ] .
+
+:StockpilingCelebrant rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Stockpiling Celebrant" ;
+    :manaCost "{2}{W}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Dwarf ,
+                :Knight ;
+    :hasRarity :Common ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :WildsOfEldraine ;
+    :cardNumber "32"^^xsd:integer ;
+    :artist "Raluca Marinescu" ;
+    :hasLanguage :English ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    :hasKeywordAction :Scry ;
+    :printedText """When this creature enters, you may return another target nonland permanent you control to its owner's hand. If you do, scry 2."""@en ;
+    :oracleText """When this creature enters, you may return another target nonland permanent you control to its owner's hand. If you do, scry 2."""@en ;
+    :flavorText """"What? I'm saving it for later.\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=629533"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/woe/32/stockpiling-celebrant"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "86716"^^xsd:positiveInteger ;
+    :arenaName "Stockpiling Celebrant" ;
+    :arenaSetCode "WOE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:TuinvaleGuide rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Tuinvale Guide" ;
+    :manaCost "{3}{W}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Faerie ,
+                :Scout ;
+    :hasRarity :Common ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :WildsOfEldraine ;
+    :cardNumber "36"^^xsd:integer ;
+    :artist "Anastasia Ovchinnikova" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "3" ;
+    :toughnessValue "3"^^xsd:integer ;
+    :hasKeywordAbility :Flying ;
+    :hasAbilityWord :Celebration ;
+    :printedText """Flying
+Celebration — This creature gets +1/+0 and has lifelink as long as two or more nonland permanents entered the battlefield under your control this turn."""@en ;
+    :oracleText """Flying
+Celebration — This creature gets +1/+0 and has lifelink as long as two or more nonland permanents entered the battlefield under your control this turn."""@en ;
+    :flavorText """"Weary traveler, follow me. The night is a cage, and my light is the key.\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=629537"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/woe/36/tuinvale-guide"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "86720"^^xsd:positiveInteger ;
+    :arenaName "Tuinvale Guide" ;
+    :arenaSetCode "WOE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """Some celebration abilities trigger at specific parts of the turn and check whether two or more nonland permanents entered the battlefield under your control already in that turn."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """Each celebration ability has a different effect."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """Others are static abilities that give creatures abilities or power and toughness increases as long as two or more nonland permanents entered the battlefield under your control that turn."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """The permanents that entered the battlefield don't need to remain on the battlefield or under your control. Celebration abilities are checking for past events, not the current game state."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """Celebration abilities only care if two or more nonland permanents entered the battlefield under your control in a turn. They won't get more powerful if more than two permanents entered the battlefield under your control in a turn."""@en ] .
+
 :ArchiveDragon rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Archive Dragon" ;
@@ -154,6 +361,72 @@ When this creature enters, scry 2."""@en ;
       [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
 
+:ChancellorOfTales rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Chancellor of Tales" ;
+    :manaCost "{3}{U}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Faerie ,
+                :Advisor ;
+    :hasRarity :Uncommon ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :WildsOfEldraine ;
+    :cardNumber "45"^^xsd:integer ;
+    :artist "Joshua Raphael" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "3" ;
+    :toughnessValue "3"^^xsd:integer ;
+    :hasKeywordAbility :Flying ;
+    :printedText """Flying
+Whenever you cast an Adventure spell, you may copy it. You may choose new targets for the copy."""@en ;
+    :oracleText """Flying
+Whenever you cast an Adventure spell, you may copy it. You may choose new targets for the copy."""@en ;
+    :flavorText """"...so the knight stabbed the troll, the troll threw the knight off the bridge, and they both forgot about the sword.\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=629546"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/woe/45/chancellor-of-tales"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "86732"^^xsd:positiveInteger ;
+    :arenaName "Chancellor of Tales" ;
+    :arenaSetCode "WOE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """Chancellor of Tales's ability and the copy it creates both resolve before the Adventure spell. They resolve even if the Adventure spell is countered before the copy is created."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """If an effect copies an Adventure spell, that copy is exiled as it resolves. It ceases to exist as a state-based action; it's not possible to cast the copy as a permanent."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """An Adventure spell means an instant or sorcery spell with the Adventure spell type. Permanent spells that you cast which have an Adventure won't cause this ability to trigger."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """The copy will have the same targets as the spell it's copying unless you choose new ones. You may change any number of the targets, including all of them or none of them. If, for one of the targets, you can't choose a new legal target, then it remains unchanged (even if the current target is illegal)."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """Chancellor of Tales can copy any Adventure spell, not just one with targets."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """The copy is created on the stack, so it's not "cast." Abilities that trigger when a player casts a spell won't trigger."""@en ] .
+
 :IngeniousProdigy rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Ingenious Prodigy" ;
@@ -202,7 +475,110 @@ At the beginning of your upkeep, if this creature has one or more +1/+1 counters
       [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
 
-:QuickStudy rdf:type owl:NamedIndividual ,
+:IntoTheFaeCourt rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Into the Fae Court" ;
+    :manaCost "{3}{U}{U}" ;
+    :manaValue "5"^^xsd:nonNegativeInteger ;
+    :hasCardType :Sorcery ;
+    :hasRarity :Common ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :WildsOfEldraine ;
+    :cardNumber "57"^^xsd:integer ;
+    :artist "Anna Steinbauer" ;
+    :hasLanguage :English ;
+    :printedText """Draw three cards. Create a 1/1 blue Faerie creature token with flying and "This token can block only creatures with flying.\""""@en ;
+    :oracleText """Draw three cards. Create a 1/1 blue Faerie creature token with flying and "This token can block only creatures with flying.\""""@en ;
+    :flavorText """Kellan stepped from his village into a strange world where trees bore jeweled fruit. A regal, inhuman voice rang in his ears: "Tell me, brave hero, are you true of heart?\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=629558"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/woe/57/into-the-fae-court"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "86746"^^xsd:positiveInteger ;
+    :arenaName "Into the Fae Court" ;
+    :arenaSetCode "WOE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:JohannsStopgap rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Johann's Stopgap" ;
+    :manaCost "{3}{U}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasCardType :Sorcery ;
+    :hasRarity :Common ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :WildsOfEldraine ;
+    :cardNumber "58"^^xsd:integer ;
+    :artist "Christina Kraus" ;
+    :hasLanguage :English ;
+    :hasKeywordAbility :Bargain ;
+    :printedText """Bargain (You may sacrifice an artifact, enchantment, or token as you cast this spell.)
+This spell costs {2} less to cast if it's bargained.
+Return target nonland permanent to its owner's hand. Draw a card."""@en ;
+    :oracleText """Bargain (You may sacrifice an artifact, enchantment, or token as you cast this spell.)
+This spell costs {2} less to cast if it's bargained.
+Return target nonland permanent to its owner's hand. Draw a card."""@en ;
+    :flavorText """"Just ... stay in there ... for one ... second!\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=629559"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/woe/58/johanns-stopgap"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "86747"^^xsd:positiveInteger ;
+    :arenaName "Johann's Stopgap" ;
+    :arenaSetCode "WOE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """If you copy a bargained spell, the copy is also bargained. If a card or token enters the battlefield as a copy of a permanent that's already on the battlefield, the new permanent isn't bargained, even if the original was."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """Some instant and sorcery spells require additional targets if they're bargained. You ignore those targeting requirements if those spells aren't bargained, and you can't bargain those spells unless you can choose the appropriate targets. On the other hand, you can bargain a permanent spell even if you won't be able to choose targets for an enters-the-battlefield ability of that permanent once the spell resolves."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """Bargain means "As an additional cost to cast this spell, you may sacrifice an artifact, enchantment, or token.\""""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """Bargain represents an optional additional cost. A spell cast with that additional cost paid is "bargained.\""""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """The cost-reduction ability of Johann's Stopgap doesn't change its mana cost or mana value, only the total cost you pay. Specifically, the mana value of Johann's Stopgap is always 4."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """You may sacrifice only one artifact, enchantment, or token to pay a spell's bargain cost."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """If the permanent is an illegal target as Johann's Stopgap tries to resolve, Johann's Stopgap is removed from the stack and you won't draw a card."""@en ] .
+
+:QuickStudyWildsOfEldraine65 rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Quick Study" ;
     :manaCost "{2}{U}" ;
@@ -239,6 +615,59 @@ At the beginning of your upkeep, if this creature has one or more +1/+1 counters
       [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:SnaremasterSprite rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Snaremaster Sprite" ;
+    :manaCost "{U}" ;
+    :manaValue "1"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Faerie ,
+                :Wizard ;
+    :hasRarity :Common ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :WildsOfEldraine ;
+    :cardNumber "68"^^xsd:integer ;
+    :artist "Christina Kraus" ;
+    :hasLanguage :English ;
+    :power "1" ;
+    :powerValue "1"^^xsd:integer ;
+    :toughness "1" ;
+    :toughnessValue "1"^^xsd:integer ;
+    :hasKeywordAbility :Flying ;
+    :printedText """Flying
+When this creature enters, you may pay {2}. When you do, tap target creature an opponent controls and put a stun counter on it. (If a permanent with a stun counter would become untapped, remove one from it instead.)"""@en ;
+    :oracleText """Flying
+When this creature enters, you may pay {2}. When you do, tap target creature an opponent controls and put a stun counter on it. (If a permanent with a stun counter would become untapped, remove one from it instead.)"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=629569"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/woe/68/snaremaster-sprite"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "86759"^^xsd:positiveInteger ;
+    :arenaName "Snaremaster Sprite" ;
+    :arenaSetCode "WOE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """You may target a creature that is already tapped with the reflexive triggered ability. If the target creature is already tapped as the ability resolves, you will still put a stun counter on it."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """You don't choose a target for Snaremaster Sprite's ability at the time it triggers. Rather, a second "reflexive" ability triggers when you pay {2} this way. You choose a target for that ability as it goes on the stack. Each player may respond to this triggered ability as normal."""@en ] .
 
 :StormkeldProwler rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -287,6 +716,481 @@ At the beginning of your upkeep, if this creature has one or more +1/+1 counters
       [ rdf:type :Ruling ;
         :rulingDate "2023-09-01"^^xsd:date ;
         :rulingText """If a spell has {X} in its mana cost, use the value chosen for that X to determine the mana value of that spell."""@en ] .
+
+:Mintstrosity rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Mintstrosity" ;
+    :manaCost "{1}{B}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Horror ;
+    :hasRarity :Common ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :WildsOfEldraine ;
+    :cardNumber "100"^^xsd:integer ;
+    :artist "Slawomir Maniak" ;
+    :hasLanguage :English ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "1" ;
+    :toughnessValue "1"^^xsd:integer ;
+    # Note: keyword "Food" not defined in MagicCardsOntology
+    :printedText """When this creature dies, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this token: You gain 3 life.")"""@en ;
+    :oracleText """When this creature dies, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this token: You gain 3 life.")"""@en ;
+    :flavorText """If the sugary abominations of Sweettooth Village were ever under someone's control, that time is long past."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=629601"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/woe/100/mintstrosity"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "86796"^^xsd:positiveInteger ;
+    :arenaName "Mintstrosity" ;
+    :arenaSetCode "WOE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-11-08"^^xsd:date ;
+        :rulingText """Whatever you do, don't eat the delicious cards."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-11-08"^^xsd:date ;
+        :rulingText """You can't sacrifice a Food to pay multiple costs. For example, you can't sacrifice a Food token to activate its own ability and also to activate Maraleaf Rider's ability."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-11-08"^^xsd:date ;
+        :rulingText """Food is an artifact type. Even though it appears on some creatures, it's never a creature type."""@en ] .
+
+:NotDeadAfterAll rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Not Dead After All" ;
+    :manaCost "{B}" ;
+    :manaValue "1"^^xsd:nonNegativeInteger ;
+    :hasCardType :Instant ;
+    :hasRarity :Common ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :WildsOfEldraine ;
+    :cardNumber "101"^^xsd:integer ;
+    :artist "Randy Vargas" ;
+    :hasLanguage :English ;
+    # Note: keyword "Role token" not defined in MagicCardsOntology
+    :printedText """Until end of turn, target creature you control gains "When this creature dies, return it to the battlefield tapped under its owner's control, then create a Wicked Role token attached to it." (Enchanted creature gets +1/+1. When this token is put into a graveyard, each opponent loses 1 life.)"""@en ;
+    :oracleText """Until end of turn, target creature you control gains "When this creature dies, return it to the battlefield tapped under its owner's control, then create a Wicked Role token attached to it." (Enchanted creature gets +1/+1. When this token is put into a graveyard, each opponent loses 1 life.)"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=629602"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/woe/101/not-dead-after-all"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "86797"^^xsd:positiveInteger ;
+    :arenaName "Not Dead After All" ;
+    :arenaSetCode "WOE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """If the creature doesn't return to the battlefield or returns as a noncreature permanent, the Wicked Role token won't be created."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """Some spells and abilities that create Role tokens require targets. If each target chosen is an illegal target as that spell or ability tries to resolve, it won't resolve. The Role token won't be created."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """Roles are colorless enchantment tokens. Each one has the Aura and Role subtypes and the enchant creature ability."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """A permanent can have multiple Roles attached to it if each one is controlled by a different player."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """If two or more Roles controlled by the same player become attached to a permanent at the same time (perhaps due to an effect such as that of Doubling Season), that player chooses which one to keep and which are put into their owners' graveyards."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """Cards in the Wilds of Eldraine main set create six different Role tokens: Cursed, Monster, Royal, Sorcerer, Wicked, and Young Hero. A seventh Role token, Virtuous, is created by Ellivere of the Wild Court, the commander of the "Virtue and Valor" Commander Deck."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """If multiple creatures return to the battlefield (possibly because Not Dead After All targeted a melded permanent), a Wicked Role token will be created attached to each of them."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """If a permanent has more than one Role attached to it controlled by the same player, each of those Roles except the one with the most recent timestamp is put into its owner's graveyard. This is a state-based action."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """In rare cases, a spell or ability might attempt to create a Role token enchanting a permanent that it can't legally enchant (because of an ability like protection from enchantments). In such cases, the Role token isn't created."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """Hexproof and shroud won't prevent a Role from becoming attached to a permanent if the ability creating that Role attached to that permanent doesn't target it."""@en ] .
+
+:RowansGrimSearch rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Rowan's Grim Search" ;
+    :manaCost "{2}{B}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Instant ;
+    :hasRarity :Common ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :WildsOfEldraine ;
+    :cardNumber "104"^^xsd:integer ;
+    :artist "Aurore Folny" ;
+    :hasLanguage :English ;
+    :hasKeywordAbility :Bargain ;
+    :printedText """Bargain (You may sacrifice an artifact, enchantment, or token as you cast this spell.)
+If this spell was bargained, look at the top four cards of your library, then put up to two of them back on top of your library in any order and the rest into your graveyard.
+You draw two cards and you lose 2 life."""@en ;
+    :oracleText """Bargain (You may sacrifice an artifact, enchantment, or token as you cast this spell.)
+If this spell was bargained, look at the top four cards of your library, then put up to two of them back on top of your library in any order and the rest into your graveyard.
+You draw two cards and you lose 2 life."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=629605"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/woe/104/rowans-grim-search"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "86800"^^xsd:positiveInteger ;
+    :arenaName "Rowan's Grim Search" ;
+    :arenaSetCode "WOE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """Some instant and sorcery spells require additional targets if they're bargained. You ignore those targeting requirements if those spells aren't bargained, and you can't bargain those spells unless you can choose the appropriate targets. On the other hand, you can bargain a permanent spell even if you won't be able to choose targets for an enters-the-battlefield ability of that permanent once the spell resolves."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """You may sacrifice only one artifact, enchantment, or token to pay a spell's bargain cost."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """Bargain means "As an additional cost to cast this spell, you may sacrifice an artifact, enchantment, or token.\""""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """If you copy a bargained spell, the copy is also bargained. If a card or token enters the battlefield as a copy of a permanent that's already on the battlefield, the new permanent isn't bargained, even if the original was."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """Bargain represents an optional additional cost. A spell cast with that additional cost paid is "bargained.\""""@en ] .
+
+:ShatterTheOath rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Shatter the Oath" ;
+    :manaCost "{3}{B}{B}" ;
+    :manaValue "5"^^xsd:nonNegativeInteger ;
+    :hasCardType :Sorcery ;
+    :hasRarity :Common ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :WildsOfEldraine ;
+    :cardNumber "106"^^xsd:integer ;
+    :artist "Dominik Mayer" ;
+    :hasLanguage :English ;
+    # Note: keyword "Role token" not defined in MagicCardsOntology
+    :printedText """Destroy target creature or enchantment. Create a Wicked Role token attached to up to one target creature you control. (If you control another Role on it, put that one into the graveyard. Enchanted creature gets +1/+1. When this token is put into a graveyard, each opponent loses 1 life.)"""@en ;
+    :oracleText """Destroy target creature or enchantment. Create a Wicked Role token attached to up to one target creature you control. (If you control another Role on it, put that one into the graveyard. Enchanted creature gets +1/+1. When this token is put into a graveyard, each opponent loses 1 life.)"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=629607"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/woe/106/shatter-the-oath"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "86802"^^xsd:positiveInteger ;
+    :arenaName "Shatter the Oath" ;
+    :arenaSetCode "WOE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """In rare cases, a spell or ability might attempt to create a Role token enchanting a permanent that it can't legally enchant (because of an ability like protection from enchantments). In such cases, the Role token isn't created."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """Hexproof and shroud won't prevent a Role from becoming attached to a permanent if the ability creating that Role attached to that permanent doesn't target it."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """Some spells and abilities that create Role tokens require targets. If each target chosen is an illegal target as that spell or ability tries to resolve, it won't resolve. The Role token won't be created."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """A permanent can have multiple Roles attached to it if each one is controlled by a different player."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """If two or more Roles controlled by the same player become attached to a permanent at the same time (perhaps due to an effect such as that of Doubling Season), that player chooses which one to keep and which are put into their owners' graveyards."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """If you don't choose a second target for Shatter the Oath or that target is illegal as the spell resolves, the Wicked Role token won't be created."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """Roles are colorless enchantment tokens. Each one has the Aura and Role subtypes and the enchant creature ability."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """If a permanent has more than one Role attached to it controlled by the same player, each of those Roles except the one with the most recent timestamp is put into its owner's graveyard. This is a state-based action."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """Cards in the Wilds of Eldraine main set create six different Role tokens: Cursed, Monster, Royal, Sorcerer, Wicked, and Young Hero. A seventh Role token, Virtuous, is created by Ellivere of the Wild Court, the commander of the "Virtue and Valor" Commander Deck."""@en ] .
+
+:SpitefulHexmage rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Spiteful Hexmage" ;
+    :manaCost "{B}" ;
+    :manaValue "1"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Human ,
+                :Warlock ;
+    :hasRarity :Rare ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :WildsOfEldraine ;
+    :cardNumber "108"^^xsd:integer ;
+    :artist "Anna Steinbauer" ;
+    :hasLanguage :English ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    # Note: keyword "Role token" not defined in MagicCardsOntology
+    :printedText """When this creature enters, create a Cursed Role token attached to target creature you control. (If you control another Role on it, put that one into the graveyard. Enchanted creature is 1/1.)"""@en ;
+    :oracleText """When this creature enters, create a Cursed Role token attached to target creature you control. (If you control another Role on it, put that one into the graveyard. Enchanted creature is 1/1.)"""@en ;
+    :flavorText """"Who'll never amount to anything now, Father?\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=629609"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/woe/108/spiteful-hexmage"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "86804"^^xsd:positiveInteger ;
+    :arenaName "Spiteful Hexmage" ;
+    :arenaSetCode "WOE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """In rare cases, a spell or ability might attempt to create a Role token enchanting a permanent that it can't legally enchant (because of an ability like protection from enchantments). In such cases, the Role token isn't created."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """A permanent can have multiple Roles attached to it if each one is controlled by a different player."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """Cards in the Wilds of Eldraine main set create six different Role tokens: Cursed, Monster, Royal, Sorcerer, Wicked, and Young Hero. A seventh Role token, Virtuous, is created by Ellivere of the Wild Court, the commander of the "Virtue and Valor" Commander Deck."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """Hexproof and shroud won't prevent a Role from becoming attached to a permanent if the ability creating that Role attached to that permanent doesn't target it."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """Some spells and abilities that create Role tokens require targets. If each target chosen is an illegal target as that spell or ability tries to resolve, it won't resolve. The Role token won't be created."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """If a permanent has more than one Role attached to it controlled by the same player, each of those Roles except the one with the most recent timestamp is put into its owner's graveyard. This is a state-based action."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """Roles are colorless enchantment tokens. Each one has the Aura and Role subtypes and the enchant creature ability."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """If two or more Roles controlled by the same player become attached to a permanent at the same time (perhaps due to an effect such as that of Doubling Season), that player chooses which one to keep and which are put into their owners' graveyards."""@en ] .
+
+:SweettoothWitch rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Sweettooth Witch" ;
+    :manaCost "{2}{B}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Human ,
+                :Warlock ;
+    :hasRarity :Common ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :WildsOfEldraine ;
+    :cardNumber "111"^^xsd:integer ;
+    :artist "Konstantin Porubov" ;
+    :hasLanguage :English ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    # Note: keyword "Food" not defined in MagicCardsOntology
+    :printedText """When this creature enters, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this token: You gain 3 life.")
+{2}, Sacrifice a Food: Target player loses 2 life."""@en ;
+    :oracleText """When this creature enters, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this token: You gain 3 life.")
+{2}, Sacrifice a Food: Target player loses 2 life."""@en ;
+    :flavorText """"Try some pie! Your brother helped make it, and he really poured his heart into it.\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=629612"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/woe/111/sweettooth-witch"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "86807"^^xsd:positiveInteger ;
+    :arenaName "Sweettooth Witch" ;
+    :arenaSetCode "WOE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-11-08"^^xsd:date ;
+        :rulingText """Whatever you do, don't eat the delicious cards."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-11-08"^^xsd:date ;
+        :rulingText """You can't sacrifice a Food to pay multiple costs. For example, you can't sacrifice a Food token to activate its own ability and also to activate Maraleaf Rider's ability."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-11-08"^^xsd:date ;
+        :rulingText """If an effect refers to a Food, it means any Food artifact, not just a Food artifact token. For example, you can sacrifice Tough Cookie (an Artifact Creature — Food Golem) to activate Maraleaf Rider's ability (an ability with "Sacrifice a Food" in its cost)."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-11-08"^^xsd:date ;
+        :rulingText """Food is an artifact type. Even though it appears on some creatures, it's never a creature type."""@en ] .
+
+:FlickACoin rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Flick a Coin" ;
+    :manaCost "{2}{R}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Instant ;
+    :hasRarity :Common ;
+    :hasColor :Red ;
+    :hasColorIdentity :Red ;
+    :isInSet :WildsOfEldraine ;
+    :cardNumber "128"^^xsd:integer ;
+    :artist "Andreia Ugrai" ;
+    :hasLanguage :English ;
+    :producesMana :White ,
+                  :Blue ,
+                  :Black ,
+                  :Red ,
+                  :Green ;
+    # Note: keyword "Treasure" not defined in MagicCardsOntology
+    :printedText """Flick a Coin deals 1 damage to any target. You create a Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add one mana of any color.")
+Draw a card."""@en ;
+    :oracleText """Flick a Coin deals 1 damage to any target. You create a Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add one mana of any color.")
+Draw a card."""@en ;
+    :flavorText """"From here, hit the antique gong, ricochet off the suit of armor, and get Gunrudd on the nose? Is that all?\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=629629"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/woe/128/flick-a-coin"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "86826"^^xsd:positiveInteger ;
+    :arenaName "Flick a Coin" ;
+    :arenaSetCode "WOE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """If the target is not legal as Flick a Coin tries to resolve, Flick a Coin is removed from the stack. You won't create a Treasure token, and you won't draw a card."""@en ] .
+
+:FoodFight rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Food Fight" ;
+    :manaCost "{1}{R}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Enchantment ;
+    :hasRarity :Rare ;
+    :hasColor :Red ;
+    :hasColorIdentity :Red ;
+    :isInSet :WildsOfEldraine ;
+    :cardNumber "129"^^xsd:integer ;
+    :artist "Filipe Pagliuso" ;
+    :hasLanguage :English ;
+    :printedText """Artifacts you control have "{2}, Sacrifice this artifact: It deals damage to any target equal to 1 plus the number of permanents named Food Fight you control.\""""@en ;
+    :oracleText """Artifacts you control have "{2}, Sacrifice this artifact: It deals damage to any target equal to 1 plus the number of permanents named Food Fight you control.\""""@en ;
+    :flavorText """With no time to gather weapons, the dwarves fought the redcaps with anything within reach."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=629630"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/woe/129/food-fight"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "86827"^^xsd:positiveInteger ;
+    :arenaName "Food Fight" ;
+    :arenaSetCode "WOE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-11-08"^^xsd:date ;
+        :rulingText """Whatever you do, don't eat the delicious cards."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-11-08"^^xsd:date ;
+        :rulingText """You can't sacrifice a Food to pay multiple costs. For example, you can't sacrifice a Food token to activate its own ability and also to activate Maraleaf Rider's ability."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-11-08"^^xsd:date ;
+        :rulingText """Food is an artifact type. Even though it appears on some creatures, it's never a creature type."""@en ] .
 
 :GoddricCloakedReveler rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -359,6 +1263,115 @@ Celebration — As long as two or more nonland permanents entered the battlefiel
         :rulingDate "2023-09-01"^^xsd:date ;
         :rulingText """Goddric's activated ability affects only Dragons you control at the time it resolves. Any Dragons that come under your control later in the turn won't be affected."""@en ] .
 
+:HarriedSpearguard rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Harried Spearguard" ;
+    :manaCost "{R}" ;
+    :manaValue "1"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Human ,
+                :Soldier ;
+    :hasRarity :Common ;
+    :hasColor :Red ;
+    :hasColorIdentity :Red ;
+    :isInSet :WildsOfEldraine ;
+    :cardNumber "135"^^xsd:integer ;
+    :artist "Borja Pindado" ;
+    :hasLanguage :English ;
+    :power "1" ;
+    :powerValue "1"^^xsd:integer ;
+    :toughness "1" ;
+    :toughnessValue "1"^^xsd:integer ;
+    :hasKeywordAbility :Haste ;
+    :printedText """Haste
+When this creature dies, create a 1/1 black Rat creature token with "This token can't block.\""""@en ;
+    :oracleText """Haste
+When this creature dies, create a 1/1 black Rat creature token with "This token can't block.\""""@en ;
+    :flavorText """"Why're you vermin so daft? This is a warehouse full of bricks. BRICKS! You can't eat bricks.\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=629636"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/woe/135/harried-spearguard"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "86834"^^xsd:positiveInteger ;
+    :arenaName "Harried Spearguard" ;
+    :arenaSetCode "WOE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:TorchTheTower rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Torch the Tower" ;
+    :manaCost "{R}" ;
+    :manaValue "1"^^xsd:nonNegativeInteger ;
+    :hasCardType :Instant ;
+    :hasRarity :Common ;
+    :hasColor :Red ;
+    :hasColorIdentity :Red ;
+    :isInSet :WildsOfEldraine ;
+    :cardNumber "153"^^xsd:integer ;
+    :artist "Uriah Voth" ;
+    :hasLanguage :English ;
+    :hasKeywordAbility :Bargain ;
+    :hasKeywordAction :Scry ;
+    :printedText """Bargain (You may sacrifice an artifact, enchantment, or token as you cast this spell.)
+Torch the Tower deals 2 damage to target creature or planeswalker. If this spell was bargained, instead it deals 3 damage to that permanent and you scry 1.
+If a permanent dealt damage by Torch the Tower would die this turn, exile it instead."""@en ;
+    :oracleText """Bargain (You may sacrifice an artifact, enchantment, or token as you cast this spell.)
+Torch the Tower deals 2 damage to target creature or planeswalker. If this spell was bargained, instead it deals 3 damage to that permanent and you scry 1.
+If a permanent dealt damage by Torch the Tower would die this turn, exile it instead."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=629654"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/woe/153/torch-the-tower"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "86855"^^xsd:positiveInteger ;
+    :arenaName "Torch the Tower" ;
+    :arenaSetCode "WOE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """Some instant and sorcery spells require additional targets if they're bargained. You ignore those targeting requirements if those spells aren't bargained, and you can't bargain those spells unless you can choose the appropriate targets. On the other hand, you can bargain a permanent spell even if you won't be able to choose targets for an enters-the-battlefield ability of that permanent once the spell resolves."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """Bargain represents an optional additional cost. A spell cast with that additional cost paid is "bargained.\""""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """Bargain means "As an additional cost to cast this spell, you may sacrifice an artifact, enchantment, or token.\""""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """Torch the Tower's last replacement effect will exile the target permanent if it would die this turn for any reason, not just due to lethal damage or having 0 loyalty."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """You may sacrifice only one artifact, enchantment, or token to pay a spell's bargain cost."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """If you copy a bargained spell, the copy is also bargained. If a card or token enters the battlefield as a copy of a permanent that's already on the battlefield, the new permanent isn't bargained, even if the original was."""@en ] .
+
 :WitchstalkerFrenzy rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Witchstalker Frenzy" ;
@@ -406,6 +1419,207 @@ Witchstalker Frenzy deals 5 damage to target creature."""@en ;
         :rulingDate "2023-09-01"^^xsd:date ;
         :rulingText """Witchstalker Frenzy's first ability doesn't change its mana cost or mana value, only the total cost you pay. Specifically, the mana value of Witchstalker Frenzy is always 4."""@en ] .
 
+:HollowScavenger rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Hollow Scavenger // Bakery Raid" ;
+    :manaCost "{2}{G}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Wolf ,
+                :Adventure ;
+    :hasRarity :Common ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :WildsOfEldraine ;
+    :cardNumber "174"^^xsd:integer ;
+    :artist "Michele Giorgi" ;
+    :hasLanguage :English ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    # Note: keyword "Food" not defined in MagicCardsOntology
+    :printedText """{1}, Sacrifice a Food: This creature gets +2/+2 until end of turn. Activate only once each turn.
+//
+Create a Food token. (Then exile this card. You may cast the creature later from exile.)"""@en ;
+    :oracleText """{1}, Sacrifice a Food: This creature gets +2/+2 until end of turn. Activate only once each turn.
+//
+Create a Food token. (Then exile this card. You may cast the creature later from exile.)"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=629675"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/woe/174/hollow-scavenger-bakery-raid"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "86881"^^xsd:positiveInteger ;
+    :arenaName "Hollow Scavenger" ;
+    :arenaSetCode "WOE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """When casting a spell as an Adventure, use the alternative characteristics and ignore all of the card's normal characteristics. The spell's color, mana cost, mana value, and so on are determined by only those alternative characteristics. If the spell leaves the stack, it immediately resumes using its normal characteristics."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """If an effect instructs you to choose a card name, you may choose the alternative Adventure name. Consider only the alternative characteristics to determine whether that is an appropriate name to choose."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """If an effect refers to a card, spell, or permanent that has an Adventure, it won't find an instant or sorcery spell on the stack that's been cast as an Adventure."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """An effect may refer to a card, spell, or permanent that "has an Adventure." This refers to a card, spell, or permanent that has an adventurer card's set of alternative characteristics, even if they're not being used and even if that card was never cast as an Adventure."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """If an adventurer card ends up in exile for any other reason than by exiling itself while resolving, it won't give you permission to cast it as a permanent spell."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """If an object becomes a copy of an object that has an Adventure, the copy also has an Adventure. If it changes zones, it will either cease to exist (if it's a token) or cease to be a copy (if it's a nontoken permanent), and so you won't be able to cast it as an Adventure."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """An adventurer card is a permanent card in every zone except the stack, as well as while on the stack if not cast as an Adventure. Ignore its alternative characteristics in those cases. For example, while it's in your graveyard, Questing Druid is a green creature card whose mana value is 2. It can't be the target of Tenacious Tomeseeker's triggered ability ("return target instant or sorcery card from your graveyard to your hand")."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """If a spell is cast as an Adventure, its controller exiles it instead of putting it into its owner's graveyard as it resolves. For as long as it remains exiled, that player may cast it as a permanent spell. If an Adventure spell leaves the stack in any way other than resolving (most likely by being countered or by failing to resolve because its targets have all become illegal), that card won't be exiled and the spell's controller won't be able to cast it as a permanent later."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """Casting a card as an Adventure isn't casting it for an alternative cost. Effects that allow you to cast a spell for an alternative cost or without paying its mana cost may allow you to apply those to the Adventure."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """You must still follow any timing restrictions and permissions for the permanent spell you cast from exile. Normally, you'll be able to cast it only during your main phase while the stack is empty."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """If an effect copies an Adventure spell, that copy is exiled as it resolves. It ceases to exist as a state-based action; it's not possible to cast the copy as a permanent."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """If you cast an adventurer card as an Adventure, use only its alternative characteristics to determine whether it's legal to cast that spell. For example, if you control Johann, Apprentice Sorcerer ("Once each turn, you may cast an instant or sorcery spell from the top of your library.") and Questing Druid is on top of your library, you can cast Seek the Beast, but not Questing Druid."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-11-08"^^xsd:date ;
+        :rulingText """Food is an artifact type. Even though it appears on some creatures, it's never a creature type."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-11-08"^^xsd:date ;
+        :rulingText """If an effect refers to a Food, it means any Food artifact, not just a Food artifact token. For example, you can sacrifice Tough Cookie (an Artifact Creature — Food Golem) to activate Maraleaf Rider's ability (an ability with "Sacrifice a Food" in its cost)."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-11-08"^^xsd:date ;
+        :rulingText """You can't sacrifice a Food to pay multiple costs. For example, you can't sacrifice a Food token to activate its own ability and also to activate Maraleaf Rider's ability."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-11-08"^^xsd:date ;
+        :rulingText """Whatever you do, don't eat the delicious cards."""@en ] .
+
+:SkybeastTracker rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Skybeast Tracker" ;
+    :manaCost "{3}{G}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Giant ,
+                :Archer ;
+    :hasRarity :Common ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :WildsOfEldraine ;
+    :cardNumber "185"^^xsd:integer ;
+    :artist "Andreas Zafiratos" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "4" ;
+    :toughnessValue "4"^^xsd:integer ;
+    :hasKeywordAbility :Reach ;
+    # Note: keyword "Food" not defined in MagicCardsOntology
+    :printedText """Reach
+Whenever you cast a spell with mana value 5 or greater, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this token: You gain 3 life.")"""@en ;
+    :oracleText """Reach
+Whenever you cast a spell with mana value 5 or greater, create a Food token. (It's an artifact with "{2}, {T}, Sacrifice this token: You gain 3 life.")"""@en ;
+    :flavorText """Cloud eaters, heaven tillers, beanstalk wurms—he favors prey worthy of a giant's appetite."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=629686"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/woe/185/skybeast-tracker"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "86893"^^xsd:positiveInteger ;
+    :arenaName "Skybeast Tracker" ;
+    :arenaSetCode "WOE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """If a spell has {X} in its mana cost, use the value chosen for that X to determine the mana value of that spell."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-11-08"^^xsd:date ;
+        :rulingText """Food is an artifact type. Even though it appears on some creatures, it's never a creature type."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-11-08"^^xsd:date ;
+        :rulingText """Whatever you do, don't eat the delicious cards."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-11-08"^^xsd:date ;
+        :rulingText """You can't sacrifice a Food to pay multiple costs. For example, you can't sacrifice a Food token to activate its own ability and also to activate Maraleaf Rider's ability."""@en ] .
+
+:TanglespanLookout rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Tanglespan Lookout" ;
+    :manaCost "{2}{G}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Satyr ;
+    :hasRarity :Uncommon ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :WildsOfEldraine ;
+    :cardNumber "188"^^xsd:integer ;
+    :artist "Dmitry Burmak" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "3" ;
+    :toughnessValue "3"^^xsd:integer ;
+    :printedText """Whenever an Aura you control enters, draw a card."""@en ;
+    :oracleText """Whenever an Aura you control enters, draw a card."""@en ;
+    :flavorText """"The trolls have your scent, traveler. Hurry on, and let me take care of them.\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=629689"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/woe/188/tanglespan-lookout"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "86897"^^xsd:positiveInteger ;
+    :arenaName "Tanglespan Lookout" ;
+    :arenaSetCode "WOE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
 :TitanicGrowth rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Titanic Growth" ;
@@ -443,6 +1657,669 @@ Witchstalker Frenzy deals 5 damage to target creature."""@en ;
       [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:ToadstoolAdmirer rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Toadstool Admirer" ;
+    :manaCost "{G}" ;
+    :manaValue "1"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Ouphe ;
+    :hasRarity :Common ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :WildsOfEldraine ;
+    :cardNumber "192"^^xsd:integer ;
+    :artist "Julia Metzger" ;
+    :hasLanguage :English ;
+    :power "1" ;
+    :powerValue "1"^^xsd:integer ;
+    :toughness "1" ;
+    :toughnessValue "1"^^xsd:integer ;
+    :hasKeywordAbility :Ward ;
+    :printedText """Ward {2} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {2}.)
+{3}{G}: Put a +1/+1 counter on this creature."""@en ;
+    :oracleText """Ward {2} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {2}.)
+{3}{G}: Put a +1/+1 counter on this creature."""@en ;
+    :flavorText """Where an ouphe makes its home, the land blooms with color and joy."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=629693"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/woe/192/toadstool-admirer"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "86901"^^xsd:positiveInteger ;
+    :arenaName "Toadstool Admirer" ;
+    :arenaSetCode "WOE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:TroublemakerOuphe rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Troublemaker Ouphe" ;
+    :manaCost "{1}{G}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Ouphe ;
+    :hasRarity :Common ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :WildsOfEldraine ;
+    :cardNumber "194"^^xsd:integer ;
+    :artist "Jesper Ejsing" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    :hasKeywordAbility :Bargain ;
+    :printedText """Bargain (You may sacrifice an artifact, enchantment, or token as you cast this spell.)
+When this creature enters, if it was bargained, exile target artifact or enchantment an opponent controls."""@en ;
+    :oracleText """Bargain (You may sacrifice an artifact, enchantment, or token as you cast this spell.)
+When this creature enters, if it was bargained, exile target artifact or enchantment an opponent controls."""@en ;
+    :flavorText """Heavy is the head that wears the vase."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=629695"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/woe/194/troublemaker-ouphe"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "86903"^^xsd:positiveInteger ;
+    :arenaName "Troublemaker Ouphe" ;
+    :arenaSetCode "WOE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """You may sacrifice only one artifact, enchantment, or token to pay a spell’s bargain cost."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """Some instant and sorcery spells require additional targets if they’re bargained. You ignore those targeting requirements if those spells aren’t bargained, and you can’t bargain those spells unless you can choose the appropriate targets. On the other hand, you can bargain a permanent spell even if you won’t be able to choose targets for an enters-the-battlefield ability of that permanent once the spell resolves."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """Bargain means “As an additional cost to cast this spell, you may sacrifice an artifact, enchantment, or token.”"""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """If you copy a bargained spell, the copy is also bargained. If a card or token enters the battlefield as a copy of a permanent that’s already on the battlefield, the new permanent isn’t bargained, even if the original was."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """Bargain represents an optional additional cost. A spell cast with that additional cost paid is “bargained.”"""@en ] .
+
+:AgathaOfTheVileCauldron rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Agatha of the Vile Cauldron" ;
+    :manaCost "{R}{G}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasSuperType :Legendary ;
+    :hasCardType :Creature ;
+    :hasSubType :Human ,
+                :Warlock ;
+    :hasRarity :MythicRare ;
+    :hasColor :Red ,
+              :Green ;
+    :hasColorIdentity :Red ,
+                      :Green ;
+    :isInSet :WildsOfEldraine ;
+    :cardNumber "199"^^xsd:integer ;
+    :artist "Jason A. Engle" ;
+    :hasLanguage :English ;
+    :power "1" ;
+    :powerValue "1"^^xsd:integer ;
+    :toughness "1" ;
+    :toughnessValue "1"^^xsd:integer ;
+    :printedText """Activated abilities of creatures you control cost {X} less to activate, where X is Agatha's power. This effect can't reduce the mana in that cost to less than one mana.
+{4}{R}{G}: Other creatures you control get +1/+1 and gain trample and haste until end of turn."""@en ;
+    :oracleText """Activated abilities of creatures you control cost {X} less to activate, where X is Agatha's power. This effect can't reduce the mana in that cost to less than one mana.
+{4}{R}{G}: Other creatures you control get +1/+1 and gain trample and haste until end of turn."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=629700"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/woe/199/agatha-of-the-vile-cauldron"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "86909"^^xsd:positiveInteger ;
+    :arenaName "Agatha of the Vile Cauldron" ;
+    :arenaSetCode "WOE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """Activated abilities contain a colon. They're generally written "[Cost]: [Effect]." Some keyword abilities are activated abilities and will have colons in their reminder text. Triggered abilities (starting with "when," "whenever," or "at") are unaffected by the cost reduction ability of Agatha of the Vile Cauldron."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """Agatha of the Vile Cauldron's first ability affects only abilities of creatures you control on the battlefield. The costs of activated abilities of creature cards that work in other zones (such as cycling) won't be reduced."""@en ] .
+
+:SyrArmontTheRedeemer rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Syr Armont, the Redeemer" ;
+    :manaCost "{3}{G}{W}" ;
+    :manaValue "5"^^xsd:nonNegativeInteger ;
+    :hasSuperType :Legendary ;
+    :hasCardType :Creature ;
+    :hasSubType :Human ,
+                :Knight ;
+    :hasRarity :Uncommon ;
+    :hasColor :White ,
+              :Green ;
+    :hasColorIdentity :White ,
+                      :Green ;
+    :isInSet :WildsOfEldraine ;
+    :cardNumber "214"^^xsd:integer ;
+    :artist "Magali Villeneuve" ;
+    :hasLanguage :English ;
+    :power "4" ;
+    :powerValue "4"^^xsd:integer ;
+    :toughness "4" ;
+    :toughnessValue "4"^^xsd:integer ;
+    # Note: keyword "Role token" not defined in MagicCardsOntology
+    :printedText """When Syr Armont enters, create a Monster Role token attached to another target creature you control. (If you control another Role on it, put that one into the graveyard. Enchanted creature gets +1/+1 and has trample.)
+Enchanted creatures you control get +1/+1."""@en ;
+    :oracleText """When Syr Armont enters, create a Monster Role token attached to another target creature you control. (If you control another Role on it, put that one into the graveyard. Enchanted creature gets +1/+1 and has trample.)
+Enchanted creatures you control get +1/+1."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=629715"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/woe/214/syr-armont-the-redeemer"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "86924"^^xsd:positiveInteger ;
+    :arenaName "Syr Armont, the Redeemer" ;
+    :arenaSetCode "WOE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """Cards in the Wilds of Eldraine main set create six different Role tokens: Cursed, Monster, Royal, Sorcerer, Wicked, and Young Hero. A seventh Role token, Virtuous, is created by Ellivere of the Wild Court, the commander of the "Virtue and Valor" Commander Deck."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """Roles are colorless enchantment tokens. Each one has the Aura and Role subtypes and the enchant creature ability."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """If two or more Roles controlled by the same player become attached to a permanent at the same time (perhaps due to an effect such as that of Doubling Season), that player chooses which one to keep and which are put into their owners' graveyards."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """If a permanent has more than one Role attached to it controlled by the same player, each of those Roles except the one with the most recent timestamp is put into its owner's graveyard. This is a state-based action."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """A permanent can have multiple Roles attached to it if each one is controlled by a different player."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """Some spells and abilities that create Role tokens require targets. If each target chosen is an illegal target as that spell or ability tries to resolve, it won't resolve. The Role token won't be created."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """Hexproof and shroud won't prevent a Role from becoming attached to a permanent if the ability creating that Role attached to that permanent doesn't target it."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """In rare cases, a spell or ability might attempt to create a Role token enchanting a permanent that it can't legally enchant (because of an ability like protection from enchantments). In such cases, the Role token isn't created."""@en ] .
+
+:CruelSomnophage rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Cruel Somnophage // Can't Wake Up" ;
+    :manaCost "{1}{B}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Nightmare ,
+                :Adventure ;
+    :hasRarity :Rare ;
+    :hasColor :Black ;
+    :hasColorIdentity :Blue ,
+                      :Black ;
+    :isInSet :WildsOfEldraine ;
+    :cardNumber "222"^^xsd:integer ;
+    :artist "Jason A. Engle" ;
+    :hasLanguage :English ;
+    :power "*" ;
+    :toughness "*" ;
+    :hasKeywordAction :Mill ;
+    :printedText """Cruel Somnophage's power and toughness are each equal to the number of creature cards in all graveyards.
+//
+Target player mills four cards. (Then exile this card. You may cast the creature later from exile.)"""@en ;
+    :oracleText """Cruel Somnophage's power and toughness are each equal to the number of creature cards in all graveyards.
+//
+Target player mills four cards. (Then exile this card. You may cast the creature later from exile.)"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=629723"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/woe/222/cruel-somnophage-cant-wake-up"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "86934"^^xsd:positiveInteger ;
+    :arenaName "Cruel Somnophage" ;
+    :arenaSetCode "WOE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """If an effect copies an Adventure spell, that copy is exiled as it resolves. It ceases to exist as a state-based action; it's not possible to cast the copy as a permanent."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """An effect may refer to a card, spell, or permanent that "has an Adventure." This refers to a card, spell, or permanent that has an adventurer card's set of alternative characteristics, even if they're not being used and even if that card was never cast as an Adventure."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """If an effect instructs you to choose a card name, you may choose the alternative Adventure name. Consider only the alternative characteristics to determine whether that is an appropriate name to choose."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """When casting a spell as an Adventure, use the alternative characteristics and ignore all of the card's normal characteristics. The spell's color, mana cost, mana value, and so on are determined by only those alternative characteristics. If the spell leaves the stack, it immediately resumes using its normal characteristics."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """An adventurer card is a permanent card in every zone except the stack, as well as while on the stack if not cast as an Adventure. Ignore its alternative characteristics in those cases. For example, while it's in your graveyard, Questing Druid is a green creature card whose mana value is 2. It can't be the target of Tenacious Tomeseeker's triggered ability ("return target instant or sorcery card from your graveyard to your hand")."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """If you cast an adventurer card as an Adventure, use only its alternative characteristics to determine whether it's legal to cast that spell. For example, if you control Johann, Apprentice Sorcerer ("Once each turn, you may cast an instant or sorcery spell from the top of your library.") and Questing Druid is on top of your library, you can cast Seek the Beast, but not Questing Druid."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """If an adventurer card ends up in exile for any other reason than by exiling itself while resolving, it won't give you permission to cast it as a permanent spell."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """Casting a card as an Adventure isn't casting it for an alternative cost. Effects that allow you to cast a spell for an alternative cost or without paying its mana cost may allow you to apply those to the Adventure."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """If an object becomes a copy of an object that has an Adventure, the copy also has an Adventure. If it changes zones, it will either cease to exist (if it's a token) or cease to be a copy (if it's a nontoken permanent), and so you won't be able to cast it as an Adventure."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """The ability that defines Cruel Somnophage's power and toughness functions in all zones, not just the battlefield."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """If an effect refers to a card, spell, or permanent that has an Adventure, it won't find an instant or sorcery spell on the stack that's been cast as an Adventure."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """You must still follow any timing restrictions and permissions for the permanent spell you cast from exile. Normally, you'll be able to cast it only during your main phase while the stack is empty."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """If a spell is cast as an Adventure, its controller exiles it instead of putting it into its owner's graveyard as it resolves. For as long as it remains exiled, that player may cast it as a permanent spell. If an Adventure spell leaves the stack in any way other than resolving (most likely by being countered or by failing to resolve because its targets have all become illegal), that card won't be exiled and the spell's controller won't be able to cast it as a permanent later."""@en ] .
+
+:SpellscornCoven rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Spellscorn Coven // Take It Back" ;
+    :manaCost "{3}{B}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Faerie ,
+                :Warlock ,
+                :Adventure ;
+    :hasRarity :Uncommon ;
+    :hasColor :Black ;
+    :hasColorIdentity :Blue ,
+                      :Black ;
+    :isInSet :WildsOfEldraine ;
+    :cardNumber "237"^^xsd:integer ;
+    :artist "Uriah Voth" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "3" ;
+    :toughnessValue "3"^^xsd:integer ;
+    :hasKeywordAbility :Flying ;
+    :printedText """Flying
+When this creature enters, each opponent discards a card.
+//
+Return target spell to its owner's hand. (Then exile this card. You may cast the creature later from exile.)"""@en ;
+    :oracleText """Flying
+When this creature enters, each opponent discards a card.
+//
+Return target spell to its owner's hand. (Then exile this card. You may cast the creature later from exile.)"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=629738"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/woe/237/spellscorn-coven-take-it-back"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "86964"^^xsd:positiveInteger ;
+    :arenaName "Spellscorn Coven" ;
+    :arenaSetCode "WOE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """If an effect copies an Adventure spell, that copy is exiled as it resolves. It ceases to exist as a state-based action; it’s not possible to cast the copy as a permanent."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """Casting a card as an Adventure isn’t casting it for an alternative cost. Effects that allow you to cast a spell for an alternative cost or without paying its mana cost may allow you to apply those to the Adventure."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """If an object becomes a copy of an object that has an Adventure, the copy also has an Adventure. If it changes zones, it will either cease to exist (if it’s a token) or cease to be a copy (if it’s a nontoken permanent), and so you won’t be able to cast it as an Adventure."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """If a spell is cast as an Adventure, its controller exiles it instead of putting it into its owner’s graveyard as it resolves. For as long as it remains exiled, that player may cast it as a permanent spell. If an Adventure spell leaves the stack in any way other than resolving (most likely by being countered or by failing to resolve because its targets have all become illegal), that card won’t be exiled and the spell’s controller won’t be able to cast it as a permanent later."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """If a spell is returned to its owner's hand, it's removed from the stack and thus will not resolve. The spell isn't countered; it just no longer exists. This works even against a spell that can't be countered."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """If a copy of a spell is returned to its owner's hand, it's moved there, then it will cease to exist as a state-based action. It can't be recast."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """When casting a spell as an Adventure, use the alternative characteristics and ignore all of the card’s normal characteristics. The spell’s color, mana cost, mana value, and so on are determined by only those alternative characteristics. If the spell leaves the stack, it immediately resumes using its normal characteristics."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """You must still follow any timing restrictions and permissions for the permanent spell you cast from exile. Normally, you’ll be able to cast it only during your main phase while the stack is empty."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """If an effect instructs you to choose a card name, you may choose the alternative Adventure name. Consider only the alternative characteristics to determine whether that is an appropriate name to choose."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """If you cast an adventurer card as an Adventure, use only its alternative characteristics to determine whether it’s legal to cast that spell. For example, if you control Johann, Apprentice Sorcerer (“Once each turn, you may cast an instant or sorcery spell from the top of your library.”) and Questing Druid is on top of your library, you can cast Seek the Beast, but not Questing Druid."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """An effect may refer to a card, spell, or permanent that “has an Adventure.” This refers to a card, spell, or permanent that has an adventurer card’s set of alternative characteristics, even if they’re not being used and even if that card was never cast as an Adventure."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """An adventurer card is a permanent card in every zone except the stack, as well as while on the stack if not cast as an Adventure. Ignore its alternative characteristics in those cases. For example, while it’s in your graveyard, Questing Druid is a green creature card whose mana value is 2. It can’t be the target of Tenacious Tomeseeker’s triggered ability (“return target instant or sorcery card from your graveyard to your hand”)."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """If an effect refers to a card, spell, or permanent that has an Adventure, it won’t find an instant or sorcery spell on the stack that’s been cast as an Adventure."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """If an adventurer card ends up in exile for any other reason than by exiling itself while resolving, it won’t give you permission to cast it as a permanent spell."""@en ] .
+
+:TempestHart rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Tempest Hart // Scan the Clouds" ;
+    :manaCost "{3}{G}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Elemental ,
+                :Elk ,
+                :Adventure ;
+    :hasRarity :Uncommon ;
+    :hasColor :Green ;
+    :hasColorIdentity :Blue ,
+                      :Green ;
+    :isInSet :WildsOfEldraine ;
+    :cardNumber "238"^^xsd:integer ;
+    :artist "Aldo Domínguez" ;
+    :hasLanguage :English ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "4" ;
+    :toughnessValue "4"^^xsd:integer ;
+    :hasKeywordAbility :Trample ;
+    :printedText """Trample
+Whenever you cast a spell with mana value 5 or greater, put a +1/+1 counter on this creature.
+//
+Draw two cards, then discard two cards. (Then exile this card. You may cast the creature later from exile.)"""@en ;
+    :oracleText """Trample
+Whenever you cast a spell with mana value 5 or greater, put a +1/+1 counter on this creature.
+//
+Draw two cards, then discard two cards. (Then exile this card. You may cast the creature later from exile.)"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=629739"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/woe/238/tempest-hart-scan-the-clouds"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "86966"^^xsd:positiveInteger ;
+    :arenaName "Tempest Hart" ;
+    :arenaSetCode "WOE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """If an effect refers to a card, spell, or permanent that has an Adventure, it won’t find an instant or sorcery spell on the stack that’s been cast as an Adventure."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """If you cast an adventurer card as an Adventure, use only its alternative characteristics to determine whether it’s legal to cast that spell. For example, if you control Johann, Apprentice Sorcerer (“Once each turn, you may cast an instant or sorcery spell from the top of your library.”) and Questing Druid is on top of your library, you can cast Seek the Beast, but not Questing Druid."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """If an object becomes a copy of an object that has an Adventure, the copy also has an Adventure. If it changes zones, it will either cease to exist (if it’s a token) or cease to be a copy (if it’s a nontoken permanent), and so you won’t be able to cast it as an Adventure."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """If an effect instructs you to choose a card name, you may choose the alternative Adventure name. Consider only the alternative characteristics to determine whether that is an appropriate name to choose."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """An adventurer card is a permanent card in every zone except the stack, as well as while on the stack if not cast as an Adventure. Ignore its alternative characteristics in those cases. For example, while it’s in your graveyard, Questing Druid is a green creature card whose mana value is 2. It can’t be the target of Tenacious Tomeseeker’s triggered ability (“return target instant or sorcery card from your graveyard to your hand”)."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """If an effect copies an Adventure spell, that copy is exiled as it resolves. It ceases to exist as a state-based action; it’s not possible to cast the copy as a permanent."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """If a spell is cast as an Adventure, its controller exiles it instead of putting it into its owner’s graveyard as it resolves. For as long as it remains exiled, that player may cast it as a permanent spell. If an Adventure spell leaves the stack in any way other than resolving (most likely by being countered or by failing to resolve because its targets have all become illegal), that card won’t be exiled and the spell’s controller won’t be able to cast it as a permanent later."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """You must still follow any timing restrictions and permissions for the permanent spell you cast from exile. Normally, you’ll be able to cast it only during your main phase while the stack is empty."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """An effect may refer to a card, spell, or permanent that “has an Adventure.” This refers to a card, spell, or permanent that has an adventurer card’s set of alternative characteristics, even if they’re not being used and even if that card was never cast as an Adventure."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """Casting a card as an Adventure isn’t casting it for an alternative cost. Effects that allow you to cast a spell for an alternative cost or without paying its mana cost may allow you to apply those to the Adventure."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """When casting a spell as an Adventure, use the alternative characteristics and ignore all of the card’s normal characteristics. The spell’s color, mana cost, mana value, and so on are determined by only those alternative characteristics. If the spell leaves the stack, it immediately resumes using its normal characteristics."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """If an adventurer card ends up in exile for any other reason than by exiling itself while resolving, it won’t give you permission to cast it as a permanent spell."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """If a spell has {X} in its mana cost, use the value chosen for that X to determine the mana value of that spell."""@en ] .
+
+:ThreadbindClique rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Threadbind Clique // Rip the Seams" ;
+    :manaCost "{3}{U}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Faerie ,
+                :Adventure ;
+    :hasRarity :Uncommon ;
+    :hasColor :Blue ;
+    :hasColorIdentity :White ,
+                      :Blue ;
+    :isInSet :WildsOfEldraine ;
+    :cardNumber "239"^^xsd:integer ;
+    :artist "Michal Ivan" ;
+    :hasLanguage :English ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "3" ;
+    :toughnessValue "3"^^xsd:integer ;
+    :hasKeywordAbility :Flying ;
+    :printedText """Flying
+//
+Destroy target tapped creature. (Then exile this card. You may cast the creature later from exile.)"""@en ;
+    :oracleText """Flying
+//
+Destroy target tapped creature. (Then exile this card. You may cast the creature later from exile.)"""@en ;
+    :flavorText """Giggles of delight may be the last thing you hear."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=629740"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/woe/239/threadbind-clique-rip-the-seams"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "86968"^^xsd:positiveInteger ;
+    :arenaName "Threadbind Clique" ;
+    :arenaSetCode "WOE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """When casting a spell as an Adventure, use the alternative characteristics and ignore all of the card’s normal characteristics. The spell’s color, mana cost, mana value, and so on are determined by only those alternative characteristics. If the spell leaves the stack, it immediately resumes using its normal characteristics."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """You must still follow any timing restrictions and permissions for the permanent spell you cast from exile. Normally, you’ll be able to cast it only during your main phase while the stack is empty."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """Casting a card as an Adventure isn’t casting it for an alternative cost. Effects that allow you to cast a spell for an alternative cost or without paying its mana cost may allow you to apply those to the Adventure."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """If an adventurer card ends up in exile for any other reason than by exiling itself while resolving, it won’t give you permission to cast it as a permanent spell."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """An effect may refer to a card, spell, or permanent that “has an Adventure.” This refers to a card, spell, or permanent that has an adventurer card’s set of alternative characteristics, even if they’re not being used and even if that card was never cast as an Adventure."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """If a spell is cast as an Adventure, its controller exiles it instead of putting it into its owner’s graveyard as it resolves. For as long as it remains exiled, that player may cast it as a permanent spell. If an Adventure spell leaves the stack in any way other than resolving (most likely by being countered or by failing to resolve because its targets have all become illegal), that card won’t be exiled and the spell’s controller won’t be able to cast it as a permanent later."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """An adventurer card is a permanent card in every zone except the stack, as well as while on the stack if not cast as an Adventure. Ignore its alternative characteristics in those cases. For example, while it’s in your graveyard, Questing Druid is a green creature card whose mana value is 2. It can’t be the target of Tenacious Tomeseeker’s triggered ability (“return target instant or sorcery card from your graveyard to your hand”)."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """If an object becomes a copy of an object that has an Adventure, the copy also has an Adventure. If it changes zones, it will either cease to exist (if it’s a token) or cease to be a copy (if it’s a nontoken permanent), and so you won’t be able to cast it as an Adventure."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """If you cast an adventurer card as an Adventure, use only its alternative characteristics to determine whether it’s legal to cast that spell. For example, if you control Johann, Apprentice Sorcerer (“Once each turn, you may cast an instant or sorcery spell from the top of your library.”) and Questing Druid is on top of your library, you can cast Seek the Beast, but not Questing Druid."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """If an effect copies an Adventure spell, that copy is exiled as it resolves. It ceases to exist as a state-based action; it’s not possible to cast the copy as a permanent."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """If an effect instructs you to choose a card name, you may choose the alternative Adventure name. Consider only the alternative characteristics to determine whether that is an appropriate name to choose."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """If an effect refers to a card, spell, or permanent that has an Adventure, it won’t find an instant or sorcery spell on the stack that’s been cast as an Adventure."""@en ] .
+
+:RestlessCottage rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Restless Cottage" ;
+    :manaValue "0"^^xsd:nonNegativeInteger ;
+    :hasCardType :Land ;
+    :hasRarity :Rare ;
+    :hasColorIdentity :Black ,
+                      :Green ;
+    :isInSet :WildsOfEldraine ;
+    :cardNumber "258"^^xsd:integer ;
+    :artist "Jesper Ejsing" ;
+    :hasLanguage :English ;
+    :producesMana :Black ,
+                  :Green ;
+    :entersTapped "true"^^xsd:boolean ;
+    # Note: keyword "Food" not defined in MagicCardsOntology
+    :printedText """This land enters tapped.
+{T}: Add {B} or {G}.
+{2}{B}{G}: This land becomes a 4/4 black and green Horror creature until end of turn. It's still a land.
+Whenever this land attacks, create a Food token and exile up to one target card from a graveyard."""@en ;
+    :oracleText """This land enters tapped.
+{T}: Add {B} or {G}.
+{2}{B}{G}: This land becomes a 4/4 black and green Horror creature until end of turn. It's still a land.
+Whenever this land attacks, create a Food token and exile up to one target card from a graveyard."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=629759"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/woe/258/restless-cottage"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "86990"^^xsd:positiveInteger ;
+    :arenaName "Restless Cottage" ;
+    :arenaSetCode "WOE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """If this becomes a creature but you haven't controlled it continuously since your most recent turn began, you won't be able to activate its mana ability or attack with it that turn."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """If this becomes a creature because of an effect other than its own ability, its last ability will still trigger whenever it attacks."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-11-08"^^xsd:date ;
+        :rulingText """Food is an artifact type. Even though it appears on some creatures, it's never a creature type."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-11-08"^^xsd:date ;
+        :rulingText """You can't sacrifice a Food to pay multiple costs. For example, you can't sacrifice a Food token to activate its own ability and also to activate Maraleaf Rider's ability."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-11-08"^^xsd:date ;
+        :rulingText """Whatever you do, don't eat the delicious cards."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-11-08"^^xsd:date ;
+        :rulingText """Some spells and abilities that create Food tokens may require targets. If each target chosen is an illegal target as that spell or ability tries to resolve, it won't resolve. You won't create any Food tokens."""@en ] .
 
 :PlainsWildsOfEldraine267 rdf:type owl:NamedIndividual ,
                   :Card ;

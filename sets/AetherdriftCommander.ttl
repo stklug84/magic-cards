@@ -39,8 +39,9 @@
     rdfs:label "Magic Card Collection Individuals – Aetherdrift Commander"@en ;
     rdfs:comment """An instance graph describing the card individuals of a
 personal Magic: The Gathering card collection that were printed in the set
-Aetherdrift Commander (DRC). One Card individual is defined per collected
-printing, carrying its characteristics, the platforms it is available on
+Aetherdrift Commander (DRC). One Card individual is defined per printing
+collected in paper or on MTG Arena, carrying its characteristics, the
+platforms it is available on
 (paper, MTG Arena, Magic Online) with its MTG Arena identity, its legality
 in the paper and MTG Arena formats, and official rulings. Card data was
 sourced from Gatherer and Scryfall. This file imports MagicCardsOntology to
@@ -737,43 +738,43 @@ If one or more artifact tokens would be created under your control, those tokens
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2014-11-24"^^xsd:date ;
+        :rulingText """If a face-down permanent you control leaves the battlefield, you must reveal it. You must also reveal all face-down spells and permanents you control if you leave the game or if the game ends."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2014-11-24"^^xsd:date ;
+        :rulingText """There are no cards in the Fate Reforged set that would turn a face-down instant or sorcery card on the battlefield face up, but some older cards can try to do this. If something tries to turn a face-down instant or sorcery card on the battlefield face up, reveal that card to show all players it's an instant or sorcery card. The permanent remains on the battlefield face down. Abilities that trigger when a permanent turns face up won't trigger, because even though you revealed the card, it never turned face up."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2014-11-24"^^xsd:date ;
         :rulingText """The face-down permanent is a 2/2 creature with no name, mana cost, creature types, or abilities. It's colorless and has a mana value of 0. Other effects that apply to the permanent can still grant or change any of these characteristics."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2014-11-24"^^xsd:date ;
         :rulingText """If a double-faced card is manifested, it will be put onto the battlefield face down. While face down, it can't transform. If the front face of the card is a creature card, you can turn it face up by paying its mana cost. If you do, its front face will be up."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2014-11-24"^^xsd:date ;
-        :rulingText """Unlike a face-down creature that was cast using the morph ability, a manifested creature may still be turned face up after it loses its abilities if it's a creature card."""@en ] ,
+        :rulingText """Because the permanent is on the battlefield both before and after it's turned face up, turning a permanent face up doesn't cause any enters-the-battlefield abilities to trigger."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2014-11-24"^^xsd:date ;
         :rulingText """You must ensure that your face-down spells and permanents can easily be differentiated from each other. You're not allowed to mix up the cards that represent them on the battlefield in order to confuse other players. The order they entered the battlefield should remain clear. Common methods for indicating this include using markers or dice, or simply placing them in order on the battlefield. You must also track how each became face down (manifested, cast face down using the morph ability, and so on)."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2014-11-24"^^xsd:date ;
-        :rulingText """Turning a permanent face up or face down doesn't change whether that permanent is tapped or untapped."""@en ] ,
+        :rulingText """Any time you have priority, you may turn a manifested creature face up by revealing that it's a creature card (ignoring any copy effects or type-changing effects that might be applying to it) and paying its mana cost. This is a special action. It doesn't use the stack and can't be responded to."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2014-11-24"^^xsd:date ;
-        :rulingText """Any time you have priority, you may turn a manifested creature face up by revealing that it's a creature card (ignoring any copy effects or type-changing effects that might be applying to it) and paying its mana cost. This is a special action. It doesn't use the stack and can't be responded to."""@en ] ,
+        :rulingText """Unlike a face-down creature that was cast using the morph ability, a manifested creature may still be turned face up after it loses its abilities if it's a creature card."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2014-11-24"^^xsd:date ;
         :rulingText """A permanent that turns face up or face down changes characteristics but is otherwise the same permanent. Spells and abilities that were targeting that permanent, as well as Auras and Equipment that were attached to the permanent, aren't affected."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2014-11-24"^^xsd:date ;
-        :rulingText """Because face-down creatures don't have names, they can't have the same name as any other creature, even another face-down creature."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2014-11-24"^^xsd:date ;
         :rulingText """If a manifested creature would have morph if it were face up, you may also turn it face up by paying its morph cost."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2014-11-24"^^xsd:date ;
-        :rulingText """There are no cards in the Fate Reforged set that would turn a face-down instant or sorcery card on the battlefield face up, but some older cards can try to do this. If something tries to turn a face-down instant or sorcery card on the battlefield face up, reveal that card to show all players it's an instant or sorcery card. The permanent remains on the battlefield face down. Abilities that trigger when a permanent turns face up won't trigger, because even though you revealed the card, it never turned face up."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2014-11-24"^^xsd:date ;
-        :rulingText """If a face-down permanent you control leaves the battlefield, you must reveal it. You must also reveal all face-down spells and permanents you control if you leave the game or if the game ends."""@en ] ,
+        :rulingText """Turning a permanent face up or face down doesn't change whether that permanent is tapped or untapped."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2014-11-24"^^xsd:date ;
         :rulingText """At any time, you can look at a face-down permanent you control. You can't look at face-down permanents you don't control unless an effect allows you to or instructs you to."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2014-11-24"^^xsd:date ;
-        :rulingText """Because the permanent is on the battlefield both before and after it's turned face up, turning a permanent face up doesn't cause any enters-the-battlefield abilities to trigger."""@en ] .
+        :rulingText """Because face-down creatures don't have names, they can't have the same name as any other creature, even another face-down creature."""@en ] .
 
 :ChainReactionAetherdriftCommander47 rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -1089,10 +1090,10 @@ Equip {0}"""@en ;
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2020-08-07"^^xsd:date ;
-        :rulingText """If a creature enters the battlefield under your control and gains haste, but then loses it before attacking, it won't be able to attack that turn. This means that you can't use one Lightning Greaves to allow two new creatures to attack in the same turn."""@en ] ,
+        :rulingText """You can't simply unequip Equipment from a creature. If Lightning Greaves is attached to the only creature you control, you won't be able to attach other equipment to it (or target it with anything else) until you have another creature to which you can attach Lightning Greaves."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2020-08-07"^^xsd:date ;
-        :rulingText """You can't simply unequip Equipment from a creature. If Lightning Greaves is attached to the only creature you control, you won't be able to attach other equipment to it (or target it with anything else) until you have another creature to which you can attach Lightning Greaves."""@en ] .
+        :rulingText """If a creature enters the battlefield under your control and gains haste, but then loses it before attacking, it won't be able to attack that turn. This means that you can't use one Lightning Greaves to allow two new creatures to attack in the same turn."""@en ] .
 
 :SolRingAetherdriftCommander57 rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -1566,16 +1567,16 @@ Crew 4"""@en ;
         :rulingText """Activated abilities are written in the form "Cost: Effect." Some keyword abilities, such as equip and crew, are activated abilities and will have colons in their reminder texts."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2017-02-09"^^xsd:date ;
-        :rulingText """If you counter a delayed triggered ability that triggers at the beginning of the "next" occurrence of a specified step or phase, that ability won't trigger again the following time that phase or step occurs."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2017-02-09"^^xsd:date ;
         :rulingText """An activated mana ability is one that could add mana as it resolves, doesn't have a target, and isn't a loyalty ability. A triggered mana ability is one that could add mana and triggers on an activated mana ability."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2017-02-09"^^xsd:date ;
-        :rulingText """Abilities that create replacement effects, such as a permanent entering the battlefield tapped or with counters on it, can't be targeted. Abilities that apply "as [this creature] enters the battlefield" are also replacement effects and can't be targeted."""@en ] ,
+        :rulingText """Triggered abilities use the word "when," "whenever," or "at." They're often written as "[Trigger condition], [effect]." Some keyword abilities, such as prowess and fabricate, are triggered abilities and will have "when," "whenever," or "at" in their reminder text."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2017-02-09"^^xsd:date ;
-        :rulingText """Triggered abilities use the word "when," "whenever," or "at." They're often written as "[Trigger condition], [effect]." Some keyword abilities, such as prowess and fabricate, are triggered abilities and will have "when," "whenever," or "at" in their reminder text."""@en ] ,
+        :rulingText """If you counter a delayed triggered ability that triggers at the beginning of the "next" occurrence of a specified step or phase, that ability won't trigger again the following time that phase or step occurs."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2017-02-09"^^xsd:date ;
+        :rulingText """Abilities that create replacement effects, such as a permanent entering the battlefield tapped or with counters on it, can't be targeted. Abilities that apply "as [this creature] enters the battlefield" are also replacement effects and can't be targeted."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2018-01-19"^^xsd:date ;
         :rulingText """There are many important moments in the story, but the most crucial—called "story spotlights"—are shown on cards. These cards have the Planeswalker symbol in their text box; this symbol has no effect on gameplay. You can read more about these events in the official Magic fiction at http://www.mtgstory.com."""@en ] .
@@ -3330,7 +3331,7 @@ Crew 3 (Tap any number of creatures you control with total power 3 or more: This
         :rulingDate "2024-06-07"^^xsd:date ;
         :rulingText """Some triggered abilities that state that you "may pay" a certain amount of {E} describe an effect that happens "If you do." In that case, no player may take actions to try to stop the ability's effect after you make your choice. If the payment is followed by the phrase "When you do," then you'll choose any targets for that reflexive triggered ability and put it on the stack before players can take actions."""@en ] .
 
-:OrnithopterOfParadise rdf:type owl:NamedIndividual ,
+:OrnithopterOfParadiseAetherdriftCommander133 rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Ornithopter of Paradise" ;
     :manaCost "{2}" ;
@@ -3841,19 +3842,19 @@ When this creature dies, create a 3/3 colorless Golem artifact creature token wi
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2009-02-01"^^xsd:date ;
-        :rulingText """Exotic Orchard doesn't care about any restrictions or riders your opponents' lands (such as Ancient Ziggurat or Hall of the Bandit Lord) put on the mana they produce. It just cares about colors of mana."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2009-02-01"^^xsd:date ;
-        :rulingText """Exotic Orchard checks the effects of all mana-producing abilities of lands your opponents control, but it doesn't check their costs. For example, Vivid Crag has the ability "{T}, Remove a charge counter from Vivid Crag: Add one mana of any color." If an opponent controls Vivid Crag and you control Exotic Orchard, you can tap Exotic Orchard for any color of mana. It doesn't matter whether Vivid Crag has a charge counter on it, and it doesn't matter whether it's untapped."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2009-02-01"^^xsd:date ;
-        :rulingText """When determining what colors of mana your opponents' lands could produce, Exotic Orchard takes into account any applicable replacement effects that would apply to those lands' mana abilities (such as Contamination's effect, for example). If there are more than one, consider them in any possible order."""@en ] ,
+        :rulingText """The colors of mana are white, blue, black, red, and green. Exotic Orchard can't be tapped for colorless mana, even if a land an opponent controls could produce colorless mana."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2009-02-01"^^xsd:date ;
         :rulingText """Lands that produce mana based only on what other lands "could produce" won't help each other unless some other land allows one of them to actually produce some type of mana. For example, if you control an Exotic Orchard and your opponent controls an Exotic Orchard and a Reflecting Pool, none of those lands would produce mana if their mana abilities were activated. On the other hand, if you control a Forest and an Exotic Orchard, and your opponent controls an Exotic Orchard and a Reflecting Pool, then each of those lands can be tapped to produce {G}. Your opponent's Exotic Orchard can produce {G} because you control a Forest. Your Exotic Orchard and your opponent's Reflecting Pool can each produce {G} because your opponent's Exotic Orchard can produce {G}."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2009-02-01"^^xsd:date ;
-        :rulingText """The colors of mana are white, blue, black, red, and green. Exotic Orchard can't be tapped for colorless mana, even if a land an opponent controls could produce colorless mana."""@en ] .
+        :rulingText """Exotic Orchard doesn't care about any restrictions or riders your opponents' lands (such as Ancient Ziggurat or Hall of the Bandit Lord) put on the mana they produce. It just cares about colors of mana."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2009-02-01"^^xsd:date ;
+        :rulingText """When determining what colors of mana your opponents' lands could produce, Exotic Orchard takes into account any applicable replacement effects that would apply to those lands' mana abilities (such as Contamination's effect, for example). If there are more than one, consider them in any possible order."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2009-02-01"^^xsd:date ;
+        :rulingText """Exotic Orchard checks the effects of all mana-producing abilities of lands your opponents control, but it doesn't check their costs. For example, Vivid Crag has the ability "{T}, Remove a charge counter from Vivid Crag: Add one mana of any color." If an opponent controls Vivid Crag and you control Exotic Orchard, you can tap Exotic Orchard for any color of mana. It doesn't matter whether Vivid Crag has a charge counter on it, and it doesn't matter whether it's untapped."""@en ] .
 
 :FrontierBivouacAetherdriftCommander157 rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -3936,7 +3937,7 @@ When this creature dies, create a 3/3 colorless Golem artifact creature token wi
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2021-04-16"^^xsd:date ;
-        :rulingText """The "Snarl" itself doesn't have any land subtypes. You can't reveal one to satisfy the ability of another."""@en ] ,
+        :rulingText """You may reveal any land card with either or both of the appropriate subtypes. It doesn't have to be a basic land card."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2021-04-16"^^xsd:date ;
         :rulingText """If a land card with an appropriate subtype is entering the battlefield from your hand at the same time as one of these lands, you may reveal the other land to have the "Snarl" enter untapped."""@en ] ,
@@ -3945,7 +3946,7 @@ When this creature dies, create a 3/3 colorless Golem artifact creature token wi
         :rulingText """If an effect instructs you to put one of these lands onto the battlefield tapped, it will still enter the battlefield tapped even if you reveal a land card from your hand."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2021-04-16"^^xsd:date ;
-        :rulingText """You may reveal any land card with either or both of the appropriate subtypes. It doesn't have to be a basic land card."""@en ] .
+        :rulingText """The "Snarl" itself doesn't have any land subtypes. You can't reveal one to satisfy the ability of another."""@en ] .
 
 :HinterlandHarbor rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -4099,13 +4100,13 @@ When this creature dies, create a 3/3 colorless Golem artifact creature token wi
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2020-11-10"^^xsd:date ;
-        :rulingText """If you don't have a commander, Path of Ancestry's ability produces no mana."""@en ] ,
+        :rulingText """If Path of Ancestry's last ability produces two mana (most likely due to Mana Reflection), spending those two mana to cast creature spells that share a creature type with your commander will cause two abilities to trigger. Each of those abilities will cause you to scry 1. You won't scry 2. This is true whether you spend the mana on one creature spell or two."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2020-11-10"^^xsd:date ;
         :rulingText """If you cast your commander with mana from Path of Ancestry, and your commander hasn't somehow lost all of its creature types while on the stack, you'll scry 1."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2020-11-10"^^xsd:date ;
-        :rulingText """If Path of Ancestry's last ability produces two mana (most likely due to Mana Reflection), spending those two mana to cast creature spells that share a creature type with your commander will cause two abilities to trigger. Each of those abilities will cause you to scry 1. You won't scry 2. This is true whether you spend the mana on one creature spell or two."""@en ] ,
+        :rulingText """If you don't have a commander, Path of Ancestry's ability produces no mana."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2020-11-10"^^xsd:date ;
         :rulingText """If your commander has no creature types, it can't share a creature type with any spell that you cast."""@en ] ,
@@ -4527,16 +4528,16 @@ When this land enters, scry 1. (Look at the top card of your library. You may pu
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2021-04-16"^^xsd:date ;
-        :rulingText """If a land card with an appropriate subtype is entering the battlefield from your hand at the same time as one of these lands, you may reveal the other land to have the "Snarl" enter untapped."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2021-04-16"^^xsd:date ;
         :rulingText """You may reveal any land card with either or both of the appropriate subtypes. It doesn't have to be a basic land card."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2021-04-16"^^xsd:date ;
-        :rulingText """If an effect instructs you to put one of these lands onto the battlefield tapped, it will still enter the battlefield tapped even if you reveal a land card from your hand."""@en ] ,
+        :rulingText """The "Snarl" itself doesn't have any land subtypes. You can't reveal one to satisfy the ability of another."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2021-04-16"^^xsd:date ;
-        :rulingText """The "Snarl" itself doesn't have any land subtypes. You can't reveal one to satisfy the ability of another."""@en ] .
+        :rulingText """If a land card with an appropriate subtype is entering the battlefield from your hand at the same time as one of these lands, you may reveal the other land to have the "Snarl" enter untapped."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2021-04-16"^^xsd:date ;
+        :rulingText """If an effect instructs you to put one of these lands onto the battlefield tapped, it will still enter the battlefield tapped even if you reveal a land card from your hand."""@en ] .
 
 :YavimayaCoast rdf:type owl:NamedIndividual ,
                   :Card ;

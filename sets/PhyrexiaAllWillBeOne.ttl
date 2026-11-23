@@ -39,8 +39,9 @@
     rdfs:label "Magic Card Collection Individuals – Phyrexia: All Will Be One"@en ;
     rdfs:comment """An instance graph describing the card individuals of a
 personal Magic: The Gathering card collection that were printed in the set
-Phyrexia: All Will Be One (ONE). One Card individual is defined per collected
-printing, carrying its characteristics, the platforms it is available on
+Phyrexia: All Will Be One (ONE). One Card individual is defined per printing
+collected in paper or on MTG Arena, carrying its characteristics, the
+platforms it is available on
 (paper, MTG Arena, Magic Online) with its MTG Arena identity, its legality
 in the paper and MTG Arena formats, and official rulings. Card data was
 sourced from Gatherer and Scryfall. This file imports MagicCardsOntology to
@@ -53,6 +54,928 @@ legality definitions."""@en .
 # Card Individuals
 #
 ################################################################################
+
+:LeoninLightbringer rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Leonin Lightbringer" ;
+    :manaCost "{2}{W}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Cat ,
+                :Rebel ;
+    :hasRarity :Common ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :PhyrexiaAllWillBeOne ;
+    :cardNumber "20"^^xsd:integer ;
+    :artist "Ernanda Souza" ;
+    :hasLanguage :English ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    :hasKeywordAbility :Ward ;
+    :printedText """Ward {2} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {2}.)
+As long as this creature is equipped, it gets +1/+1."""@en ;
+    :oracleText """Ward {2} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {2}.)
+As long as this creature is equipped, it gets +1/+1."""@en ;
+    :flavorText """"It's hard to fight for the future if you can't see the way forward.\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=602550"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/one/20/leonin-lightbringer"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "83720"^^xsd:positiveInteger ;
+    :arenaName "Leonin Lightbringer" ;
+    :arenaSetCode "ONE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] .
+
+:Ossification rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Ossification" ;
+    :manaCost "{1}{W}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Enchantment ;
+    :hasSubType :Aura ;
+    :hasRarity :Uncommon ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :PhyrexiaAllWillBeOne ;
+    :cardNumber "26"^^xsd:integer ;
+    :artist "Nino Vecia" ;
+    :hasLanguage :English ;
+    :hasKeywordAbility :Enchant ;
+    :printedText """Enchant basic land you control
+When this Aura enters, exile target creature or planeswalker an opponent controls until this Aura leaves the battlefield."""@en ;
+    :oracleText """Enchant basic land you control
+When this Aura enters, exile target creature or planeswalker an opponent controls until this Aura leaves the battlefield."""@en ;
+    :flavorText """Only Elesh Norn's most loyal servants are granted the honor of becoming part of her throne."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=602556"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/one/26/ossification"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "83726"^^xsd:positiveInteger ;
+    :arenaName "Ossification" ;
+    :arenaSetCode "ONE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """If Ossification leaves the battlefield before its triggered ability resolves, the target permanent won't be exiled."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """Auras attached to the exiled permanent will be put into their owners' graveyards. Any Equipment will become unattached and remain on the battlefield. Any counters on the exiled permanent will cease to exist. When the card returns to the battlefield, it will be a new object with no connection to the card that was exiled."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """If a token is exiled this way, it will cease to exist and won't return to the battlefield."""@en ] .
+
+:PlanarDisruption rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Planar Disruption" ;
+    :manaCost "{1}{W}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Enchantment ;
+    :hasSubType :Aura ;
+    :hasRarity :Common ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :PhyrexiaAllWillBeOne ;
+    :cardNumber "28"^^xsd:integer ;
+    :artist "Campbell White" ;
+    :hasLanguage :English ;
+    :hasKeywordAbility :Enchant ;
+    :printedText """Enchant artifact, creature, or planeswalker
+Enchanted permanent can't attack or block, and its activated abilities can't be activated."""@en ;
+    :oracleText """Enchant artifact, creature, or planeswalker
+Enchanted permanent can't attack or block, and its activated abilities can't be activated."""@en ;
+    :flavorText """New Phyrexia's planar defenses scattered the Planeswalker strike team on arrival. Elesh Norn knew they were coming."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=602558"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/one/28/planar-disruption"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "83728"^^xsd:positiveInteger ;
+    :arenaName "Planar Disruption" ;
+    :arenaSetCode "ONE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """Activated abilities contain a colon. They're generally written "[Cost]: [Effect]." Some keywords are activated abilities and will have colons in their reminder text. Notably, loyalty abilities of planeswalkers are activated abilities."""@en ] .
+
+:SkrelvsHivePhyrexiaAllWillBeOne34 rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Skrelv's Hive" ;
+    :manaCost "{1}{W}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Enchantment ;
+    :hasRarity :Rare ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :PhyrexiaAllWillBeOne ;
+    :cardNumber "34"^^xsd:integer ;
+    :artist "Heonhwa" ;
+    :hasLanguage :English ;
+    # Note: keyword "Corrupted" not defined in MagicCardsOntology
+    :printedText """At the beginning of your upkeep, you lose 1 life and create a 1/1 colorless Phyrexian Mite artifact creature token with toxic 1 and "This token can't block."
+Corrupted — As long as an opponent has three or more poison counters, creatures you control with toxic have lifelink."""@en ;
+    :oracleText """At the beginning of your upkeep, you lose 1 life and create a 1/1 colorless Phyrexian Mite artifact creature token with toxic 1 and "This token can't block."
+Corrupted — As long as an opponent has three or more poison counters, creatures you control with toxic have lifelink."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=602564"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/one/34/skrelvs-hive"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "83734"^^xsd:positiveInteger ;
+    :arenaName "Skrelv's Hive" ;
+    :arenaSetCode "ONE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """A player with ten or more poison counters loses the game. This is a state-based action and doesn't use the stack. In other words, it happens immediately and players can't respond to it, just like a player losing the game due to having 0 or less life."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """Toxic doesn't change the amount of combat damage a creature deals. For example, if a 2/2 creature with toxic 1 deals combat damage to a player, that creature will deal 2 damage. The results of that damage are the player loses 2 life and gets a poison counter."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """If a creature with toxic deals combat damage to a creature or planeswalker, or if it deals noncombat damage, toxic has no effect and no player gets poison counters."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """Multiple instances of toxic are cumulative. For example, if a creature has toxic 2 and gains toxic 1 due to another effect, combat damage that creature deals to a player will cause that player to get 3 poison counters."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """Any other effects of that damage, such as life gain from lifelink, still apply."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """Damage dealt by a creature with toxic grants the same number of counters regardless of how much damage is dealt. Notably, if a replacement effect modifies the damage in some way (such as that of Gratuitous Violence), the number of counters given remains unchanged."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """Conversely, replacement effects that apply to the number of counters put on a player can modify the counters placed this way. For example, Vorinclex, Monstrous Raider's last two abilities can apply to counters placed this way."""@en ] .
+
+:BladeOfSharedSouls rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Blade of Shared Souls" ;
+    :manaCost "{2}{U}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ;
+    :hasSubType :Equipment ;
+    :hasRarity :Rare ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :PhyrexiaAllWillBeOne ;
+    :cardNumber "42"^^xsd:integer ;
+    :artist "Volkan Baǵa" ;
+    :hasLanguage :English ;
+    :hasKeywordAbility :ForMirrodin ,
+                       :Equip ;
+    :printedText """For Mirrodin! (When this Equipment enters, create a 2/2 red Rebel creature token, then attach this to it.)
+Whenever this Equipment becomes attached to a creature, for as long as this Equipment remains attached to it, you may have that creature become a copy of another target creature you control.
+Equip {2}"""@en ;
+    :oracleText """For Mirrodin! (When this Equipment enters, create a 2/2 red Rebel creature token, then attach this to it.)
+Whenever this Equipment becomes attached to a creature, for as long as this Equipment remains attached to it, you may have that creature become a copy of another target creature you control.
+Equip {2}"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=602572"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/one/42/blade-of-shared-souls"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "83742"^^xsd:positiveInteger ;
+    :arenaName "Blade of Shared Souls" ;
+    :arenaSetCode "ONE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """If the Rebel is destroyed, the Equipment stays on the battlefield. Similarly, you may pay its equip cost to move it from the Rebel token to another creature you control."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """If the ability causes two Rebel tokens to be created (due to an effect such as that of Mondrak, Glory Dominus), the Equipment becomes attached to only one of them."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """The copiable values granted by Blade of Shared Souls are locked in as its effect begins to apply. After that point, it doesn't matter if the creature that's being copied leaves the battlefield or if any of its copiable values change."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """The creature copies exactly what is printed on the chosen creature (unless that creature has additional copy effects affecting it, is copying something else, or is a token; see below). It doesn't copy whether that creature is tapped or untapped, whether it has any counters on it or any Auras and Equipment attached to it, or any non-copy effects that have changed its power, toughness, types, color, or so on."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """The Rebel enters the battlefield as a 2/2 creature, then the Equipment becomes attached to it. Abilities that trigger when a creature enters the battlefield see that a 2/2 creature entered the battlefield."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """Non-copy effects that have already applied to the equipped creature will continue to apply to it. For example, +1/+1 counters on it will still affect it."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """If the target creature is a token, the equipped creature copies the original characteristics of that token as stated by the effect that created it. If the equipped creature isn't a token, copying a token won't cause it to become a token. Similarly, if the equipped creature is a token, copying a nontoken won't cause it to become a nontoken."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """If the target creature is a double-faced or melded permanent, the equipped creature copies the face shown. If the equipped creature copies a melded permanent or the back face of a double-faced card, its mana value is 0."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """If the target creature is copying something else (for example, if that creature is equipped by another Blade of Shared Souls), then the equipped creature becomes a copy of whatever the target creature copied."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """If the target creature isn't normally a creature (for example, an animated Monument to Perfection), the equipped creature will become a copy of the noncreature permanent. Blade of Shared Souls will become unattached and the copy effect will end. The previously equipped creature will revert to whatever it was before the copy effect applied."""@en ] .
+
+:EscapedExperiment rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Escaped Experiment" ;
+    :manaCost "{1}{U}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ,
+                 :Creature ;
+    :hasSubType :Phyrexian ,
+                :Beast ;
+    :hasRarity :Common ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :PhyrexiaAllWillBeOne ;
+    :cardNumber "48"^^xsd:integer ;
+    :artist "Billy Christian" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "1" ;
+    :toughnessValue "1"^^xsd:integer ;
+    :printedText """Whenever this creature attacks, target creature an opponent controls gets -X/-0 until end of turn, where X is the number of artifacts you control."""@en ;
+    :oracleText """Whenever this creature attacks, target creature an opponent controls gets -X/-0 until end of turn, where X is the number of artifacts you control."""@en ;
+    :flavorText """One morning, the test subject decided to perform trials on the scientists."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=602578"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/one/48/escaped-experiment"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "83748"^^xsd:positiveInteger ;
+    :arenaName "Escaped Experiment" ;
+    :arenaSetCode "ONE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] .
+
+:ExperimentalAuguryPhyrexiaAllWillBeOne49 rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Experimental Augury" ;
+    :manaCost "{1}{U}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Instant ;
+    :hasRarity :Common ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :PhyrexiaAllWillBeOne ;
+    :cardNumber "49"^^xsd:integer ;
+    :artist "Donato Giancola" ;
+    :hasLanguage :English ;
+    :hasKeywordAction :Proliferate ;
+    :printedText """Look at the top three cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order. Proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)"""@en ;
+    :oracleText """Look at the top three cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order. Proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=602579"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/one/49/experimental-augury"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "83749"^^xsd:positiveInteger ;
+    :arenaName "Experimental Augury" ;
+    :arenaSetCode "ONE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """If a player or permanent has more than one kind of counter on it, and you choose for it to get additional counters, it must get one of each kind of counter it already has. You can't have it get just one kind of counter it already has and not the others."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """If a permanent ever has both +1/+1 counters and -1/-1 counters on it at the same time, they're removed in pairs as a state-based action so that the permanent has only one of those kinds of counters on it."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """An ability that triggers "Whenever you proliferate" triggers even if you chose no permanents or players while doing so."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """To proliferate, you can choose any permanent that has a counter, including ones controlled by opponents. You can choose any player who has a counter, including opponents. You can't choose cards in any zone other than the battlefield, even if they have counters on them."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """Players can respond to a spell or ability whose effect includes proliferating. Once that spell or ability starts to resolve, however, and its controller chooses which permanents and players will get new counters, it's too late for anyone to respond."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """You don't have to choose every permanent or player that has a counter, only the ones you want to add another counter to. Since "any number" includes zero, you don't have to choose any permanents at all, and you don't have to choose any players at all."""@en ] .
+
+:GitaxianAnatomist rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Gitaxian Anatomist" ;
+    :manaCost "{3}{U}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Phyrexian ,
+                :Wizard ;
+    :hasRarity :Common ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :PhyrexiaAllWillBeOne ;
+    :cardNumber "52"^^xsd:integer ;
+    :artist "Sam Wolfe Connelly" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "5" ;
+    :toughnessValue "5"^^xsd:integer ;
+    :hasKeywordAction :Proliferate ;
+    :printedText """When this creature enters, you may tap it. If you do, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)"""@en ;
+    :oracleText """When this creature enters, you may tap it. If you do, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)"""@en ;
+    :flavorText """An inconsistency in a routine vivisection sparked a revelation about the inner workings of the Orthodoxy's centurions."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=602582"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/one/52/gitaxian-anatomist"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "83752"^^xsd:positiveInteger ;
+    :arenaName "Gitaxian Anatomist" ;
+    :arenaSetCode "ONE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """To proliferate, you can choose any permanent that has a counter, including ones controlled by opponents. You can choose any player who has a counter, including opponents. You can't choose cards in any zone other than the battlefield, even if they have counters on them."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """If a permanent ever has both +1/+1 counters and -1/-1 counters on it at the same time, they're removed in pairs as a state-based action so that the permanent has only one of those kinds of counters on it."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """If a player or permanent has more than one kind of counter on it, and you choose for it to get additional counters, it must get one of each kind of counter it already has. You can't have it get just one kind of counter it already has and not the others."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """Players can respond to a spell or ability whose effect includes proliferating. Once that spell or ability starts to resolve, however, and its controller chooses which permanents and players will get new counters, it's too late for anyone to respond."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """An ability that triggers "Whenever you proliferate" triggers even if you chose no permanents or players while doing so."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """You don't have to choose every permanent or player that has a counter, only the ones you want to add another counter to. Since "any number" includes zero, you don't have to choose any permanents at all, and you don't have to choose any players at all."""@en ] .
+
+:GitaxianRaptor rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Gitaxian Raptor" ;
+    :manaCost "{2}{U}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Phyrexian ,
+                :Bird ;
+    :hasRarity :Common ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :PhyrexiaAllWillBeOne ;
+    :cardNumber "53"^^xsd:integer ;
+    :artist "Maxime Minard" ;
+    :hasLanguage :English ;
+    :power "1" ;
+    :powerValue "1"^^xsd:integer ;
+    :toughness "4" ;
+    :toughnessValue "4"^^xsd:integer ;
+    :hasKeywordAbility :Flying ;
+    :printedText """Flying
+This creature enters with three oil counters on it.
+Remove an oil counter from this creature: This creature gets +1/-1 until end of turn."""@en ;
+    :oracleText """Flying
+This creature enters with three oil counters on it.
+Remove an oil counter from this creature: This creature gets +1/-1 until end of turn."""@en ;
+    :flavorText """Bored with the ruins of Lumengrid, it migrated to the ruins of the Mephidross."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=602583"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/one/53/gitaxian-raptor"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "83753"^^xsd:positiveInteger ;
+    :arenaName "Gitaxian Raptor" ;
+    :arenaSetCode "ONE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] .
+
+:IchorSynthesizer rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Ichor Synthesizer" ;
+    :manaCost "{1}{U}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Phyrexian ,
+                :Wizard ;
+    :hasRarity :Common ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :PhyrexiaAllWillBeOne ;
+    :cardNumber "55"^^xsd:integer ;
+    :artist "Sam Wolfe Connelly" ;
+    :hasLanguage :English ;
+    :power "1" ;
+    :powerValue "1"^^xsd:integer ;
+    :toughness "3" ;
+    :toughnessValue "3"^^xsd:integer ;
+    :printedText """Whenever you cast a noncreature spell, put an oil counter on this creature.
+As long as this creature has four or more oil counters on it, it gets +2/+0 and can't be blocked."""@en ;
+    :oracleText """Whenever you cast a noncreature spell, put an oil counter on this creature.
+As long as this creature has four or more oil counters on it, it gets +2/+0 and can't be blocked."""@en ;
+    :flavorText """"I've isolated the chirality of the glistening oil, so there will be no wasted precursors.\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=602585"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/one/55/ichor-synthesizer"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "83755"^^xsd:positiveInteger ;
+    :arenaName "Ichor Synthesizer" ;
+    :arenaSetCode "ONE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """Putting a fourth oil counter on Ichor Synthesizer after it has become blocked will not cause it to become unblocked."""@en ] .
+
+:IchormoonGauntlet rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Ichormoon Gauntlet" ;
+    :manaCost "{2}{U}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ;
+    :hasRarity :MythicRare ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :PhyrexiaAllWillBeOne ;
+    :cardNumber "56"^^xsd:integer ;
+    :artist "Tiffany Turrill" ;
+    :hasLanguage :English ;
+    :hasKeywordAction :Proliferate ;
+    :printedText """Planeswalkers you control have "[0]: Proliferate" and "[−12]: Take an extra turn after this one."
+Whenever you cast a noncreature spell, choose a counter on target permanent. Put an additional counter of that kind on that permanent."""@en ;
+    :oracleText """Planeswalkers you control have "[0]: Proliferate" and "[−12]: Take an extra turn after this one."
+Whenever you cast a noncreature spell, choose a counter on target permanent. Put an additional counter of that kind on that permanent."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=602586"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/one/56/ichormoon-gauntlet"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "83756"^^xsd:positiveInteger ;
+    :arenaName "Ichormoon Gauntlet" ;
+    :arenaSetCode "ONE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """Only one loyalty ability of each planeswalker may be activated per turn, no matter how many it has gained."""@en ] .
+
+:MeldwebStrider rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Meldweb Strider" ;
+    :manaCost "{4}{U}" ;
+    :manaValue "5"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ;
+    :hasSubType :Vehicle ;
+    :hasRarity :Common ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :PhyrexiaAllWillBeOne ;
+    :cardNumber "60"^^xsd:integer ;
+    :artist "Julian Kok Joon Wen" ;
+    :hasLanguage :English ;
+    :power "5" ;
+    :powerValue "5"^^xsd:integer ;
+    :toughness "5" ;
+    :toughnessValue "5"^^xsd:integer ;
+    :hasKeywordAbility :Vigilance ,
+                       :Crew ;
+    :printedText """Vigilance
+This Vehicle enters with an oil counter on it.
+Remove an oil counter from this Vehicle: It becomes an artifact creature until end of turn.
+Crew 3 (Tap any number of creatures you control with total power 3 or more: This Vehicle becomes an artifact creature until end of turn.)"""@en ;
+    :oracleText """Vigilance
+This Vehicle enters with an oil counter on it.
+Remove an oil counter from this Vehicle: It becomes an artifact creature until end of turn.
+Crew 3 (Tap any number of creatures you control with total power 3 or more: This Vehicle becomes an artifact creature until end of turn.)"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=602590"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/one/60/meldweb-strider"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "83760"^^xsd:positiveInteger ;
+    :arenaName "Meldweb Strider" ;
+    :arenaSetCode "ONE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] .
+
+:ThrummingbirdPhyrexiaAllWillBeOne72 rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Thrummingbird" ;
+    :manaCost "{1}{U}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Phyrexian ,
+                :Bird ,
+                :Horror ;
+    :hasRarity :Uncommon ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :PhyrexiaAllWillBeOne ;
+    :cardNumber "72"^^xsd:integer ;
+    :artist "José Parodi" ;
+    :hasLanguage :English ;
+    :power "1" ;
+    :powerValue "1"^^xsd:integer ;
+    :toughness "1" ;
+    :toughnessValue "1"^^xsd:integer ;
+    :hasKeywordAbility :Flying ;
+    :hasKeywordAction :Proliferate ;
+    :printedText """Flying
+Whenever this creature deals combat damage to a player, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)"""@en ;
+    :oracleText """Flying
+Whenever this creature deals combat damage to a player, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=602602"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/one/72/thrummingbird"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "83772"^^xsd:positiveInteger ;
+    :arenaName "Thrummingbird" ;
+    :arenaSetCode "ONE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """An ability that triggers "Whenever you proliferate" triggers even if you chose no permanents or players while doing so."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """If a player or permanent has more than one kind of counter on it, and you choose for it to get additional counters, it must get one of each kind of counter it already has. You can't have it get just one kind of counter it already has and not the others."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """To proliferate, you can choose any permanent that has a counter, including ones controlled by opponents. You can choose any player who has a counter, including opponents. You can't choose cards in any zone other than the battlefield, even if they have counters on them."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """If a permanent ever has both +1/+1 counters and -1/-1 counters on it at the same time, they're removed in pairs as a state-based action so that the permanent has only one of those kinds of counters on it."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """Players can respond to a spell or ability whose effect includes proliferating. Once that spell or ability starts to resolve, however, and its controller chooses which permanents and players will get new counters, it's too late for anyone to respond."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """You don't have to choose every permanent or player that has a counter, only the ones you want to add another counter to. Since "any number" includes zero, you don't have to choose any permanents at all, and you don't have to choose any players at all."""@en ] .
+
+:AnnihilatingGlare rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Annihilating Glare" ;
+    :manaCost "{B}" ;
+    :manaValue "1"^^xsd:nonNegativeInteger ;
+    :hasCardType :Sorcery ;
+    :hasRarity :Common ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :PhyrexiaAllWillBeOne ;
+    :cardNumber "80"^^xsd:integer ;
+    :artist "Konstantin Porubov" ;
+    :hasLanguage :English ;
+    :printedText """As an additional cost to cast this spell, pay {4} or sacrifice an artifact or creature.
+Destroy target creature or planeswalker."""@en ;
+    :oracleText """As an additional cost to cast this spell, pay {4} or sacrifice an artifact or creature.
+Destroy target creature or planeswalker."""@en ;
+    :flavorText """By gaze, sting, and claw, Vraska will see the will of Phyrexia done."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=602610"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/one/80/annihilating-glare"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "83780"^^xsd:positiveInteger ;
+    :arenaName "Annihilating Glare" ;
+    :arenaSetCode "ONE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] .
+
+:DuressPhyrexiaAllWillBeOne92 rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Duress" ;
+    :manaCost "{B}" ;
+    :manaValue "1"^^xsd:nonNegativeInteger ;
+    :hasCardType :Sorcery ;
+    :hasRarity :Common ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :PhyrexiaAllWillBeOne ;
+    :cardNumber "92"^^xsd:integer ;
+    :artist "PINDURSKI" ;
+    :hasLanguage :English ;
+    :printedText """Target opponent reveals their hand. You choose a noncreature, nonland card from it. That player discards that card."""@en ;
+    :oracleText """Target opponent reveals their hand. You choose a noncreature, nonland card from it. That player discards that card."""@en ;
+    :flavorText """"Give of yourself, for compleation awaits the cleansed."
+—Nokar, priest of Sheoldred"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=602622"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/one/92/duress"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "83792"^^xsd:positiveInteger ;
+    :arenaName "Duress" ;
+    :arenaSetCode "ONE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:GulpingScraptrap rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Gulping Scraptrap" ;
+    :manaCost "{4}{B}" ;
+    :manaValue "5"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Phyrexian ,
+                :Horror ;
+    :hasRarity :Common ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :PhyrexiaAllWillBeOne ;
+    :cardNumber "96"^^xsd:integer ;
+    :artist "Mike Franchina" ;
+    :hasLanguage :English ;
+    :power "4" ;
+    :powerValue "4"^^xsd:integer ;
+    :toughness "4" ;
+    :toughnessValue "4"^^xsd:integer ;
+    :hasKeywordAction :Proliferate ;
+    :printedText """When this creature enters or dies, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)"""@en ;
+    :oracleText """When this creature enters or dies, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)"""@en ;
+    :flavorText """"Does anyone else hear that horrible crunching sound?"
+—Jace"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=602626"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/one/96/gulping-scraptrap"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "83796"^^xsd:positiveInteger ;
+    :arenaName "Gulping Scraptrap" ;
+    :arenaSetCode "ONE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """If a player or permanent has more than one kind of counter on it, and you choose for it to get additional counters, it must get one of each kind of counter it already has. You can't have it get just one kind of counter it already has and not the others."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """To proliferate, you can choose any permanent that has a counter, including ones controlled by opponents. You can choose any player who has a counter, including opponents. You can't choose cards in any zone other than the battlefield, even if they have counters on them."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """If a permanent ever has both +1/+1 counters and -1/-1 counters on it at the same time, they're removed in pairs as a state-based action so that the permanent has only one of those kinds of counters on it."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """An ability that triggers "Whenever you proliferate" triggers even if you chose no permanents or players while doing so."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """You don't have to choose every permanent or player that has a counter, only the ones you want to add another counter to. Since "any number" includes zero, you don't have to choose any permanents at all, and you don't have to choose any players at all."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """Players can respond to a spell or ability whose effect includes proliferating. Once that spell or ability starts to resolve, however, and its controller chooses which permanents and players will get new counters, it's too late for anyone to respond."""@en ] .
+
+:PestilentSyphoner rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Pestilent Syphoner" ;
+    :manaCost "{1}{B}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Phyrexian ,
+                :Insect ;
+    :hasRarity :Common ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :PhyrexiaAllWillBeOne ;
+    :cardNumber "103"^^xsd:integer ;
+    :artist "Brian Valeza" ;
+    :hasLanguage :English ;
+    :power "1" ;
+    :powerValue "1"^^xsd:integer ;
+    :toughness "1" ;
+    :toughnessValue "1"^^xsd:integer ;
+    :hasKeywordAbility :Flying ,
+                       :Toxic ;
+    :printedText """Flying
+Toxic 1 (Players dealt combat damage by this creature also get a poison counter.)"""@en ;
+    :oracleText """Flying
+Toxic 1 (Players dealt combat damage by this creature also get a poison counter.)"""@en ;
+    :flavorText """The praetors of the other Spheres privately wonder how Sheoldred always has a surplus of glistening oil at her disposal."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=602633"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/one/103/pestilent-syphoner"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "83803"^^xsd:positiveInteger ;
+    :arenaName "Pestilent Syphoner" ;
+    :arenaSetCode "ONE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """Conversely, replacement effects that apply to the number of counters put on a player can modify the counters placed this way. For example, Vorinclex, Monstrous Raider's last two abilities can apply to counters placed this way."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """Toxic doesn't change the amount of combat damage a creature deals. For example, if a 2/2 creature with toxic 1 deals combat damage to a player, that creature will deal 2 damage. The results of that damage are the player loses 2 life and gets a poison counter."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """Multiple instances of toxic are cumulative. For example, if a creature has toxic 2 and gains toxic 1 due to another effect, combat damage that creature deals to a player will cause that player to get 3 poison counters."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """If a creature with toxic deals combat damage to a creature or planeswalker, or if it deals noncombat damage, toxic has no effect and no player gets poison counters."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """A player with ten or more poison counters loses the game. This is a state-based action and doesn't use the stack. In other words, it happens immediately and players can't respond to it, just like a player losing the game due to having 0 or less life."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """Damage dealt by a creature with toxic grants the same number of counters regardless of how much damage is dealt. Notably, if a replacement effect modifies the damage in some way (such as that of Gratuitous Violence), the number of counters given remains unchanged."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """Any other effects of that damage, such as life gain from lifelink, still apply."""@en ] .
 
 :SchemingAspirant rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -93,6 +1016,155 @@ legality definitions."""@en .
       [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] .
+
+:VraskasFall rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Vraska's Fall" ;
+    :manaCost "{2}{B}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Instant ;
+    :hasRarity :Common ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :PhyrexiaAllWillBeOne ;
+    :cardNumber "116"^^xsd:integer ;
+    :artist "Dibujante Nocturno" ;
+    :hasLanguage :English ;
+    :printedText """Each opponent sacrifices a creature or planeswalker of their choice and gets a poison counter."""@en ;
+    :oracleText """Each opponent sacrifices a creature or planeswalker of their choice and gets a poison counter."""@en ;
+    :flavorText """The dull, creeping pain of phyresis curdled in Vraska's blood. She knew as soon as it took her, she would betray everything—even Jace."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=602646"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/one/116/vraskas-fall"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "83816"^^xsd:positiveInteger ;
+    :arenaName "Vraska's Fall" ;
+    :arenaSetCode "ONE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """Each opponent gets a poison counter even if they can't sacrifice any permanents."""@en ] .
+
+:WhisperOfTheDross rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Whisper of the Dross" ;
+    :manaCost "{B}" ;
+    :manaValue "1"^^xsd:nonNegativeInteger ;
+    :hasCardType :Instant ;
+    :hasRarity :Common ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :PhyrexiaAllWillBeOne ;
+    :cardNumber "117"^^xsd:integer ;
+    :artist "Eli Minaya" ;
+    :hasLanguage :English ;
+    :hasKeywordAction :Proliferate ;
+    :printedText """Target creature gets -1/-1 until end of turn. Proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)"""@en ;
+    :oracleText """Target creature gets -1/-1 until end of turn. Proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)"""@en ;
+    :flavorText """"Live or die, you serve the Steel Thanes now.\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=602647"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/one/117/whisper-of-the-dross"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "83817"^^xsd:positiveInteger ;
+    :arenaName "Whisper of the Dross" ;
+    :arenaSetCode "ONE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """To proliferate, you can choose any permanent that has a counter, including ones controlled by opponents. You can choose any player who has a counter, including opponents. You can't choose cards in any zone other than the battlefield, even if they have counters on them."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """If a player or permanent has more than one kind of counter on it, and you choose for it to get additional counters, it must get one of each kind of counter it already has. You can't have it get just one kind of counter it already has and not the others."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """You don't have to choose every permanent or player that has a counter, only the ones you want to add another counter to. Since "any number" includes zero, you don't have to choose any permanents at all, and you don't have to choose any players at all."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """Players can respond to a spell or ability whose effect includes proliferating. Once that spell or ability starts to resolve, however, and its controller chooses which permanents and players will get new counters, it's too late for anyone to respond."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """If a permanent ever has both +1/+1 counters and -1/-1 counters on it at the same time, they're removed in pairs as a state-based action so that the permanent has only one of those kinds of counters on it."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """An ability that triggers "Whenever you proliferate" triggers even if you chose no permanents or players while doing so."""@en ] .
+
+:BladegraftAspirant rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Bladegraft Aspirant" ;
+    :manaCost "{2}{R}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Phyrexian ,
+                :Warrior ;
+    :hasRarity :Common ;
+    :hasColor :Red ;
+    :hasColorIdentity :Red ;
+    :isInSet :PhyrexiaAllWillBeOne ;
+    :cardNumber "122"^^xsd:integer ;
+    :artist "Valera Lutfullina" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "3" ;
+    :toughnessValue "3"^^xsd:integer ;
+    :hasKeywordAbility :Menace ;
+    :printedText """Menace
+Equipment spells you cast cost {1} less to cast.
+Activated abilities of Equipment you control that target this creature cost {1} less to activate."""@en ;
+    :oracleText """Menace
+Equipment spells you cast cost {1} less to cast.
+Activated abilities of Equipment you control that target this creature cost {1} less to activate."""@en ;
+    :flavorText """"To dance to the music of Juex, leap like the flickering flame and hit like the hammer.\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=602652"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/one/122/bladegraft-aspirant"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "83822"^^xsd:positiveInteger ;
+    :arenaName "Bladegraft Aspirant" ;
+    :arenaSetCode "ONE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
@@ -152,6 +1224,799 @@ Equip {3}{R}{R}"""@en ;
       [ rdf:type :Ruling ;
         :rulingDate "2023-02-04"^^xsd:date ;
         :rulingText """The Rebel enters the battlefield as a 2/2 creature, then the Equipment becomes attached to it. Abilities that trigger when a creature enters the battlefield see that a 2/2 creature entered the battlefield."""@en ] .
+
+:ForgehammerCenturion rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Forgehammer Centurion" ;
+    :manaCost "{2}{R}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Phyrexian ,
+                :Warrior ;
+    :hasRarity :Common ;
+    :hasColor :Red ;
+    :hasColorIdentity :Red ;
+    :isInSet :PhyrexiaAllWillBeOne ;
+    :cardNumber "130"^^xsd:integer ;
+    :artist "Vladimir Krisetskiy" ;
+    :hasLanguage :English ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    :printedText """Whenever another creature or artifact you control is put into a graveyard from the battlefield, put an oil counter on this creature.
+Whenever this creature attacks, you may remove two oil counters from it. When you do, target creature can't block this turn."""@en ;
+    :oracleText """Whenever another creature or artifact you control is put into a graveyard from the battlefield, put an oil counter on this creature.
+Whenever this creature attacks, you may remove two oil counters from it. When you do, target creature can't block this turn."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=602660"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/one/130/forgehammer-centurion"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "83830"^^xsd:positiveInteger ;
+    :arenaName "Forgehammer Centurion" ;
+    :arenaSetCode "ONE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """You don't choose a target for Forgehammer Centurion's last ability at the time it triggers. Rather, a second "reflexive" ability triggers when you remove two oil counters this way. You choose a target for that ability as it goes on the stack. Each player may respond to this triggered ability as normal."""@en ] .
+
+:FreeFromFlesh rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Free from Flesh" ;
+    :manaCost "{R}" ;
+    :manaValue "1"^^xsd:nonNegativeInteger ;
+    :hasCardType :Instant ;
+    :hasRarity :Common ;
+    :hasColor :Red ;
+    :hasColorIdentity :Red ;
+    :isInSet :PhyrexiaAllWillBeOne ;
+    :cardNumber "131"^^xsd:integer ;
+    :artist "Isis" ;
+    :hasLanguage :English ;
+    :printedText """Target creature gets +2/+2 until end of turn. Put two oil counters on it."""@en ;
+    :oracleText """Target creature gets +2/+2 until end of turn. Put two oil counters on it."""@en ;
+    :flavorText """He finally understood that phyresis was not an ending, but a new, perfect beginning."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=602661"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/one/131/free-from-flesh"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "83831"^^xsd:positiveInteger ;
+    :arenaName "Free from Flesh" ;
+    :arenaSetCode "ONE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] .
+
+:KothFireOfResistance rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Koth, Fire of Resistance" ;
+    :manaCost "{2}{R}{R}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasSuperType :Legendary ;
+    :hasCardType :Planeswalker ;
+    :hasSubType :Koth ;
+    :hasRarity :Rare ;
+    :hasColor :Red ;
+    :hasColorIdentity :Red ;
+    :isInSet :PhyrexiaAllWillBeOne ;
+    :cardNumber "138"^^xsd:integer ;
+    :artist "Eric Wilkerson" ;
+    :hasLanguage :English ;
+    :loyalty "4"^^xsd:integer ;
+    :printedText """+2: Search your library for a basic Mountain card, reveal it, put it into your hand, then shuffle.
+−3: Koth deals damage to target creature equal to the number of Mountains you control.
+−7: You get an emblem with "Whenever a Mountain you control enters, this emblem deals 4 damage to any target.\""""@en ;
+    :oracleText """+2: Search your library for a basic Mountain card, reveal it, put it into your hand, then shuffle.
+−3: Koth deals damage to target creature equal to the number of Mountains you control.
+−7: You get an emblem with "Whenever a Mountain you control enters, this emblem deals 4 damage to any target.\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=602668"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/one/138/koth-fire-of-resistance"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "83838"^^xsd:positiveInteger ;
+    :arenaName "Koth, Fire of Resistance" ;
+    :arenaSetCode "ONE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """Koth's emblem is colorless. Notably, this means that protection from red won't stop a permanent or player from being the target of the emblem's ability, nor will it prevent the damage being dealt. Replacement effects that care about damage from a red source don't apply to it."""@en ] .
+
+:ThrillOfPossibilityPhyrexiaAllWillBeOne151 rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Thrill of Possibility" ;
+    :manaCost "{1}{R}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Instant ;
+    :hasRarity :Common ;
+    :hasColor :Red ;
+    :hasColorIdentity :Red ;
+    :isInSet :PhyrexiaAllWillBeOne ;
+    :cardNumber "151"^^xsd:integer ;
+    :artist "PINDURSKI" ;
+    :hasLanguage :English ;
+    :printedText """As an additional cost to cast this spell, discard a card.
+Draw two cards."""@en ;
+    :oracleText """As an additional cost to cast this spell, discard a card.
+Draw two cards."""@en ;
+    :flavorText """As the infection spread, Nahiri's thoughts grew tangled. She needed to protect what she loved from Phyrexia... or maybe only Phyrexia could protect what she loved."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=602681"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/one/151/thrill-of-possibility"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "83851"^^xsd:positiveInteger ;
+    :arenaName "Thrill of Possibility" ;
+    :arenaSetCode "ONE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """You must discard exactly one card to cast Thrill of Possibility; you can't cast it without discarding a card, and you can't discard additional cards."""@en ] .
+
+:BloatedContaminator rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Bloated Contaminator" ;
+    :manaCost "{2}{G}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Phyrexian ,
+                :Beast ;
+    :hasRarity :Rare ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :PhyrexiaAllWillBeOne ;
+    :cardNumber "159"^^xsd:integer ;
+    :artist "Johann Bodin" ;
+    :hasLanguage :English ;
+    :power "4" ;
+    :powerValue "4"^^xsd:integer ;
+    :toughness "4" ;
+    :toughnessValue "4"^^xsd:integer ;
+    :hasKeywordAbility :Toxic ,
+                       :Trample ;
+    :hasKeywordAction :Proliferate ;
+    :printedText """Trample
+Toxic 1 (Players dealt combat damage by this creature also get a poison counter.)
+Whenever this creature deals combat damage to a player, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)"""@en ;
+    :oracleText """Trample
+Toxic 1 (Players dealt combat damage by this creature also get a poison counter.)
+Whenever this creature deals combat damage to a player, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=602689"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/one/159/bloated-contaminator"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "83859"^^xsd:positiveInteger ;
+    :arenaName "Bloated Contaminator" ;
+    :arenaSetCode "ONE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """You don't have to choose every permanent or player that has a counter, only the ones you want to add another counter to. Since "any number" includes zero, you don't have to choose any permanents at all, and you don't have to choose any players at all."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """Players can respond to a spell or ability whose effect includes proliferating. Once that spell or ability starts to resolve, however, and its controller chooses which permanents and players will get new counters, it's too late for anyone to respond."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """If a player or permanent has more than one kind of counter on it, and you choose for it to get additional counters, it must get one of each kind of counter it already has. You can't have it get just one kind of counter it already has and not the others."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """Damage dealt by a creature with toxic grants the same number of counters regardless of how much damage is dealt. Notably, if a replacement effect modifies the damage in some way (such as that of Gratuitous Violence), the number of counters given remains unchanged."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """If a creature with toxic deals combat damage to a creature or planeswalker, or if it deals noncombat damage, toxic has no effect and no player gets poison counters."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """If a permanent ever has both +1/+1 counters and -1/-1 counters on it at the same time, they're removed in pairs as a state-based action so that the permanent has only one of those kinds of counters on it."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """Toxic doesn't change the amount of combat damage a creature deals. For example, if a 2/2 creature with toxic 1 deals combat damage to a player, that creature will deal 2 damage. The results of that damage are the player loses 2 life and gets a poison counter."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """To proliferate, you can choose any permanent that has a counter, including ones controlled by opponents. You can choose any player who has a counter, including opponents. You can't choose cards in any zone other than the battlefield, even if they have counters on them."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """Any other effects of that damage, such as life gain from lifelink, still apply."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """Conversely, replacement effects that apply to the number of counters put on a player can modify the counters placed this way. For example, Vorinclex, Monstrous Raider's last two abilities can apply to counters placed this way."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """An ability that triggers "Whenever you proliferate" triggers even if you chose no permanents or players while doing so."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """A player with ten or more poison counters loses the game. This is a state-based action and doesn't use the stack. In other words, it happens immediately and players can't respond to it, just like a player losing the game due to having 0 or less life."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """Multiple instances of toxic are cumulative. For example, if a creature has toxic 2 and gains toxic 1 due to another effect, combat damage that creature deals to a player will cause that player to get 3 poison counters."""@en ] .
+
+:ContagiousVorrac rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Contagious Vorrac" ;
+    :manaCost "{2}{G}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Phyrexian ,
+                :Boar ,
+                :Beast ;
+    :hasRarity :Common ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :PhyrexiaAllWillBeOne ;
+    :cardNumber "164"^^xsd:integer ;
+    :artist "Maxime Minard" ;
+    :hasLanguage :English ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "3" ;
+    :toughnessValue "3"^^xsd:integer ;
+    :hasKeywordAction :Proliferate ;
+    :printedText """When this creature enters, look at the top four cards of your library. You may reveal a land card from among them and put it into your hand. Put the rest on the bottom of your library in a random order. If you didn't put a card into your hand this way, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)"""@en ;
+    :oracleText """When this creature enters, look at the top four cards of your library. You may reveal a land card from among them and put it into your hand. Put the rest on the bottom of your library in a random order. If you didn't put a card into your hand this way, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=602694"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/one/164/contagious-vorrac"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "83864"^^xsd:positiveInteger ;
+    :arenaName "Contagious Vorrac" ;
+    :arenaSetCode "ONE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """Players can respond to a spell or ability whose effect includes proliferating. Once that spell or ability starts to resolve, however, and its controller chooses which permanents and players will get new counters, it's too late for anyone to respond."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """To proliferate, you can choose any permanent that has a counter, including ones controlled by opponents. You can choose any player who has a counter, including opponents. You can't choose cards in any zone other than the battlefield, even if they have counters on them."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """If a permanent ever has both +1/+1 counters and -1/-1 counters on it at the same time, they're removed in pairs as a state-based action so that the permanent has only one of those kinds of counters on it."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """An ability that triggers "Whenever you proliferate" triggers even if you chose no permanents or players while doing so."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """If a player or permanent has more than one kind of counter on it, and you choose for it to get additional counters, it must get one of each kind of counter it already has. You can't have it get just one kind of counter it already has and not the others."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """You don't have to choose every permanent or player that has a counter, only the ones you want to add another counter to. Since "any number" includes zero, you don't have to choose any permanents at all, and you don't have to choose any players at all."""@en ] .
+
+:CopperLonglegs rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Copper Longlegs" ;
+    :manaCost "{1}{G}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Phyrexian ,
+                :Spider ;
+    :hasRarity :Common ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :PhyrexiaAllWillBeOne ;
+    :cardNumber "165"^^xsd:integer ;
+    :artist "Nicholas Gregory" ;
+    :hasLanguage :English ;
+    :power "1" ;
+    :powerValue "1"^^xsd:integer ;
+    :toughness "3" ;
+    :toughnessValue "3"^^xsd:integer ;
+    :hasKeywordAbility :Reach ;
+    :hasKeywordAction :Proliferate ;
+    :printedText """Reach
+{1}{G}, Sacrifice this creature: Proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)"""@en ;
+    :oracleText """Reach
+{1}{G}, Sacrifice this creature: Proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)"""@en ;
+    :flavorText """Its webs are not true silk, but woven from thousands of delicate mycosynth strands."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=602695"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/one/165/copper-longlegs"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "83865"^^xsd:positiveInteger ;
+    :arenaName "Copper Longlegs" ;
+    :arenaSetCode "ONE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """You don't have to choose every permanent or player that has a counter, only the ones you want to add another counter to. Since "any number" includes zero, you don't have to choose any permanents at all, and you don't have to choose any players at all."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """An ability that triggers "Whenever you proliferate" triggers even if you chose no permanents or players while doing so."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """If a player or permanent has more than one kind of counter on it, and you choose for it to get additional counters, it must get one of each kind of counter it already has. You can't have it get just one kind of counter it already has and not the others."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """Players can respond to a spell or ability whose effect includes proliferating. Once that spell or ability starts to resolve, however, and its controller chooses which permanents and players will get new counters, it's too late for anyone to respond."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """To proliferate, you can choose any permanent that has a counter, including ones controlled by opponents. You can choose any player who has a counter, including opponents. You can't choose cards in any zone other than the battlefield, even if they have counters on them."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """If a permanent ever has both +1/+1 counters and -1/-1 counters on it at the same time, they're removed in pairs as a state-based action so that the permanent has only one of those kinds of counters on it."""@en ] .
+
+:ExpandTheSphere rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Expand the Sphere" ;
+    :manaCost "{3}{G}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasCardType :Sorcery ;
+    :hasRarity :Uncommon ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :PhyrexiaAllWillBeOne ;
+    :cardNumber "168"^^xsd:integer ;
+    :artist "Sergey Glushakov" ;
+    :hasLanguage :English ;
+    :hasKeywordAction :Proliferate ;
+    :printedText """Look at the top six cards of your library. Put up to two land cards from among them onto the battlefield tapped and the rest on the bottom of your library in a random order. If you put fewer than two lands onto the battlefield this way, proliferate a number of times equal to the difference. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)"""@en ;
+    :oracleText """Look at the top six cards of your library. Put up to two land cards from among them onto the battlefield tapped and the rest on the bottom of your library in a random order. If you put fewer than two lands onto the battlefield this way, proliferate a number of times equal to the difference. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=602698"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/one/168/expand-the-sphere"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "83868"^^xsd:positiveInteger ;
+    :arenaName "Expand the Sphere" ;
+    :arenaSetCode "ONE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """To proliferate, you can choose any permanent that has a counter, including ones controlled by opponents. You can choose any player who has a counter, including opponents. You can't choose cards in any zone other than the battlefield, even if they have counters on them."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """You don't have to choose every permanent or player that has a counter, only the ones you want to add another counter to. Since "any number" includes zero, you don't have to choose any permanents at all, and you don't have to choose any players at all."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """Players can respond to a spell or ability whose effect includes proliferating. Once that spell or ability starts to resolve, however, and its controller chooses which permanents and players will get new counters, it's too late for anyone to respond."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """If a player or permanent has more than one kind of counter on it, and you choose for it to get additional counters, it must get one of each kind of counter it already has. You can't have it get just one kind of counter it already has and not the others."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """If a permanent ever has both +1/+1 counters and -1/-1 counters on it at the same time, they're removed in pairs as a state-based action so that the permanent has only one of those kinds of counters on it."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """To proliferate, you can choose any permanent that has a counter, including ones controlled by opponents. You can choose any player who has a counter, including opponents. You can't choose cards in any zone other than the battlefield, even if they have counters on them."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """An ability that triggers "Whenever you proliferate" triggers even if you chose no permanents or players while doing so."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """If a permanent ever has both +1/+1 counters and -1/-1 counters on it at the same time, they're removed in pairs as a state-based action so that the permanent has only one of those kinds of counters on it."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """Players can respond to a spell or ability whose effect includes proliferating. Once that spell or ability starts to resolve, however, and its controller chooses which permanents and players will get new counters, it's too late for anyone to respond."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """You don't have to choose every permanent or player that has a counter, only the ones you want to add another counter to. Since "any number" includes zero, you don't have to choose any permanents at all, and you don't have to choose any players at all."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """An ability that triggers "Whenever you proliferate" triggers even if you chose no permanents or players while doing so."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """If a player or permanent has more than one kind of counter on it, and you choose for it to get additional counters, it must get one of each kind of counter it already has. You can't have it get just one kind of counter it already has and not the others."""@en ] .
+
+:PlagueNurse rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Plague Nurse" ;
+    :manaCost "{3}{G}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Phyrexian ,
+                :Cleric ;
+    :hasRarity :Common ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :PhyrexiaAllWillBeOne ;
+    :cardNumber "179"^^xsd:integer ;
+    :artist "Marcela Bolívar" ;
+    :hasLanguage :English ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "4" ;
+    :toughnessValue "4"^^xsd:integer ;
+    :hasKeywordAbility :Toxic ;
+    :printedText """Toxic 2
+{2}{G}: Each other creature you control with toxic gains toxic 1 until end of turn. Activate only once each turn. (A player dealt combat damage by a creature with toxic also gets poison counters equal to that creature's total toxic value.)"""@en ;
+    :oracleText """Toxic 2
+{2}{G}: Each other creature you control with toxic gains toxic 1 until end of turn. Activate only once each turn. (A player dealt combat damage by a creature with toxic also gets poison counters equal to that creature's total toxic value.)"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=602709"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/one/179/plague-nurse"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "83879"^^xsd:positiveInteger ;
+    :arenaName "Plague Nurse" ;
+    :arenaSetCode "ONE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """If a creature with toxic deals combat damage to a creature or planeswalker, or if it deals noncombat damage, toxic has no effect and no player gets poison counters."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """Multiple instances of toxic are cumulative. For example, if a creature has toxic 2 and gains toxic 1 due to another effect, combat damage that creature deals to a player will cause that player to get 3 poison counters."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """Toxic doesn't change the amount of combat damage a creature deals. For example, if a 2/2 creature with toxic 1 deals combat damage to a player, that creature will deal 2 damage. The results of that damage are the player loses 2 life and gets a poison counter."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """Conversely, replacement effects that apply to the number of counters put on a player can modify the counters placed this way. For example, Vorinclex, Monstrous Raider's last two abilities can apply to counters placed this way."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """Damage dealt by a creature with toxic grants the same number of counters regardless of how much damage is dealt. Notably, if a replacement effect modifies the damage in some way (such as that of Gratuitous Violence), the number of counters given remains unchanged."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """A player with ten or more poison counters loses the game. This is a state-based action and doesn't use the stack. In other words, it happens immediately and players can't respond to it, just like a player losing the game due to having 0 or less life."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """Any other effects of that damage, such as life gain from lifelink, still apply."""@en ] .
+
+:PredationSteward rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Predation Steward" ;
+    :manaCost "{1}{G}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Phyrexian ,
+                :Elf ,
+                :Warrior ;
+    :hasRarity :Common ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :PhyrexiaAllWillBeOne ;
+    :cardNumber "180"^^xsd:integer ;
+    :artist "Aaron J. Riley" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    :printedText """This creature enters with two oil counters on it.
+{2}{G}, {T}, Remove an oil counter from this creature: Target creature gets +2/+2 until end of turn. Activate only as a sorcery."""@en ;
+    :oracleText """This creature enters with two oil counters on it.
+{2}{G}, {T}, Remove an oil counter from this creature: Target creature gets +2/+2 until end of turn. Activate only as a sorcery."""@en ;
+    :flavorText """"Best we move on. That gurgling means it's feeding time."
+—Melira"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=602710"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/one/180/predation-steward"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "83880"^^xsd:positiveInteger ;
+    :arenaName "Predation Steward" ;
+    :arenaSetCode "ONE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] .
+
+:ThirstingRoots rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Thirsting Roots" ;
+    :manaCost "{G}" ;
+    :manaValue "1"^^xsd:nonNegativeInteger ;
+    :hasCardType :Sorcery ;
+    :hasRarity :Common ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :PhyrexiaAllWillBeOne ;
+    :cardNumber "185"^^xsd:integer ;
+    :artist "WolfSkullJack" ;
+    :hasLanguage :English ;
+    :hasKeywordAction :Proliferate ;
+    :printedText """Choose one —
+• Search your library for a basic land card, reveal it, put it into your hand, then shuffle.
+• Proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)"""@en ;
+    :oracleText """Choose one —
+• Search your library for a basic land card, reveal it, put it into your hand, then shuffle.
+• Proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=602715"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/one/185/thirsting-roots"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "83885"^^xsd:positiveInteger ;
+    :arenaName "Thirsting Roots" ;
+    :arenaSetCode "ONE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """If a player or permanent has more than one kind of counter on it, and you choose for it to get additional counters, it must get one of each kind of counter it already has. You can't have it get just one kind of counter it already has and not the others."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """You don't have to choose every permanent or player that has a counter, only the ones you want to add another counter to. Since "any number" includes zero, you don't have to choose any permanents at all, and you don't have to choose any players at all."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """An ability that triggers "Whenever you proliferate" triggers even if you chose no permanents or players while doing so."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """Players can respond to a spell or ability whose effect includes proliferating. Once that spell or ability starts to resolve, however, and its controller chooses which permanents and players will get new counters, it's too late for anyone to respond."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """To proliferate, you can choose any permanent that has a counter, including ones controlled by opponents. You can choose any player who has a counter, including opponents. You can't choose cards in any zone other than the battlefield, even if they have counters on them."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """If a permanent ever has both +1/+1 counters and -1/-1 counters on it at the same time, they're removed in pairs as a state-based action so that the permanent has only one of those kinds of counters on it."""@en ] .
+
+:TyvarsStand rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Tyvar's Stand" ;
+    :manaCost "{X}{G}" ;
+    :manaValue "1"^^xsd:nonNegativeInteger ;
+    :hasCardType :Instant ;
+    :hasRarity :Uncommon ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :PhyrexiaAllWillBeOne ;
+    :cardNumber "190"^^xsd:integer ;
+    :artist "Kieran Yanner" ;
+    :hasLanguage :English ;
+    :printedText """Target creature you control gets +X/+X and gains hexproof and indestructible until end of turn. (It can't be the target of spells or abilities your opponents control. Damage and effects that say "destroy" don't destroy it.)"""@en ;
+    :oracleText """Target creature you control gets +X/+X and gains hexproof and indestructible until end of turn. (It can't be the target of spells or abilities your opponents control. Damage and effects that say "destroy" don't destroy it.)"""@en ;
+    :flavorText """"When they write songs about this battle, I will make sure your name is forgotten, devil.\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=602720"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/one/190/tyvars-stand"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "83890"^^xsd:positiveInteger ;
+    :arenaName "Tyvar's Stand" ;
+    :arenaSetCode "ONE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] .
+
+:CephalopodSentry rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Cephalopod Sentry" ;
+    :manaCost "{2}{W}{U}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ,
+                 :Creature ;
+    :hasSubType :Phyrexian ,
+                :Squid ;
+    :hasRarity :Uncommon ;
+    :hasColor :White ,
+              :Blue ;
+    :hasColorIdentity :White ,
+                      :Blue ;
+    :isInSet :PhyrexiaAllWillBeOne ;
+    :cardNumber "198"^^xsd:integer ;
+    :artist "Mathias Kollros" ;
+    :hasLanguage :English ;
+    :power "*" ;
+    :toughness "5" ;
+    :toughnessValue "5"^^xsd:integer ;
+    :hasKeywordAbility :Flying ;
+    :printedText """Flying
+Cephalopod Sentry's power is equal to the number of artifacts you control."""@en ;
+    :oracleText """Flying
+Cephalopod Sentry's power is equal to the number of artifacts you control."""@en ;
+    :flavorText """Silent observers swim through the air of Norn's Seedcore, watching the nascent Invasion Tree for any signs of interference."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=602728"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/one/198/cephalopod-sentry"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "83898"^^xsd:positiveInteger ;
+    :arenaName "Cephalopod Sentry" ;
+    :arenaSetCode "ONE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """The ability that defines Cephalopod Sentry's power works in all zones, not just the battlefield. As long as Cephalopod Sentry is on the battlefield (and still an artifact), that ability will count Cephalopod Sentry itself."""@en ] .
+
+:CinderslashRavager rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Cinderslash Ravager" ;
+    :manaCost "{4}{R}{G}" ;
+    :manaValue "6"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Phyrexian ,
+                :Warrior ;
+    :hasRarity :Uncommon ;
+    :hasColor :Red ,
+              :Green ;
+    :hasColorIdentity :Red ,
+                      :Green ;
+    :isInSet :PhyrexiaAllWillBeOne ;
+    :cardNumber "200"^^xsd:integer ;
+    :artist "Wisnu Tan" ;
+    :hasLanguage :English ;
+    :power "5" ;
+    :powerValue "5"^^xsd:integer ;
+    :toughness "5" ;
+    :toughnessValue "5"^^xsd:integer ;
+    :hasKeywordAbility :Vigilance ;
+    :printedText """This spell costs {1} less to cast for each permanent you control with oil counters on it.
+Vigilance
+When this creature enters, it deals 1 damage to each creature your opponents control."""@en ;
+    :oracleText """This spell costs {1} less to cast for each permanent you control with oil counters on it.
+Vigilance
+When this creature enters, it deals 1 damage to each creature your opponents control."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=602730"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/one/200/cinderslash-ravager"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "83900"^^xsd:positiveInteger ;
+    :arenaName "Cinderslash Ravager" ;
+    :arenaSetCode "ONE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] .
 
 :EzuriStalkerOfSpheres rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -396,3 +2261,354 @@ Whenever you proliferate, choose one —
       [ rdf:type :Ruling ;
         :rulingDate "2023-02-04"^^xsd:date ;
         :rulingText """If a permanent ever has both +1/+1 counters and -1/-1 counters on it at the same time, they're removed in pairs as a state-based action so that the permanent has only one of those kinds of counters on it."""@en ] .
+
+:DuneMover rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Dune Mover" ;
+    :manaCost "{2}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ,
+                 :Creature ;
+    :hasSubType :Phyrexian ,
+                :Golem ;
+    :hasRarity :Common ;
+    :isInSet :PhyrexiaAllWillBeOne ;
+    :cardNumber "226"^^xsd:integer ;
+    :artist "Kev Walker" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "1" ;
+    :toughnessValue "1"^^xsd:integer ;
+    :hasKeywordAbility :Toxic ;
+    :printedText """Toxic 1 (Players dealt combat damage by this creature also get a poison counter.)
+When this creature enters, you may search your library for a basic land card, reveal it, then shuffle and put that card on top."""@en ;
+    :oracleText """Toxic 1 (Players dealt combat damage by this creature also get a poison counter.)
+When this creature enters, you may search your library for a basic land card, reveal it, then shuffle and put that card on top."""@en ;
+    :flavorText """The shifting, unpredictable sands were deemed a disobedient affront to the Flesh Singularity."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=602756"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/one/226/dune-mover"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "83926"^^xsd:positiveInteger ;
+    :arenaName "Dune Mover" ;
+    :arenaSetCode "ONE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """If a creature with toxic deals combat damage to a creature or planeswalker, or if it deals noncombat damage, toxic has no effect and no player gets poison counters."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """Conversely, replacement effects that apply to the number of counters put on a player can modify the counters placed this way. For example, Vorinclex, Monstrous Raider's last two abilities can apply to counters placed this way."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """Toxic doesn't change the amount of combat damage a creature deals. For example, if a 2/2 creature with toxic 1 deals combat damage to a player, that creature will deal 2 damage. The results of that damage are the player loses 2 life and gets a poison counter."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """Any other effects of that damage, such as life gain from lifelink, still apply."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """A player with ten or more poison counters loses the game. This is a state-based action and doesn't use the stack. In other words, it happens immediately and players can't respond to it, just like a player losing the game due to having 0 or less life."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """Damage dealt by a creature with toxic grants the same number of counters regardless of how much damage is dealt. Notably, if a replacement effect modifies the damage in some way (such as that of Gratuitous Violence), the number of counters given remains unchanged."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """Multiple instances of toxic are cumulative. For example, if a creature has toxic 2 and gains toxic 1 due to another effect, combat damage that creature deals to a player will cause that player to get 3 poison counters."""@en ] .
+
+:PhyrexianAtlas rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Phyrexian Atlas" ;
+    :manaCost "{3}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ;
+    :hasRarity :Common ;
+    :isInSet :PhyrexiaAllWillBeOne ;
+    :cardNumber "237"^^xsd:integer ;
+    :artist "Septian Fajrianto" ;
+    :hasLanguage :English ;
+    :producesMana :White ,
+                  :Blue ,
+                  :Black ,
+                  :Red ,
+                  :Green ;
+    # Note: keyword "Corrupted" not defined in MagicCardsOntology
+    :printedText """{T}: Add one mana of any color.
+Corrupted — Whenever this artifact becomes tapped, each opponent who has three or more poison counters loses 1 life."""@en ;
+    :oracleText """{T}: Add one mana of any color.
+Corrupted — Whenever this artifact becomes tapped, each opponent who has three or more poison counters loses 1 life."""@en ;
+    :flavorText """Since conquering Mirrodin, Phyrexian engineers have worked tirelessly to transform the plane's original two layers into a more fitting array of nine."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=602767"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/one/237/phyrexian-atlas"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "83937"^^xsd:positiveInteger ;
+    :arenaName "Phyrexian Atlas" ;
+    :arenaSetCode "ONE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] .
+
+:Ribskiff rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Ribskiff" ;
+    :manaCost "{4}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ;
+    :hasSubType :Vehicle ;
+    :hasRarity :Uncommon ;
+    :isInSet :PhyrexiaAllWillBeOne ;
+    :cardNumber "240"^^xsd:integer ;
+    :artist "José Parodi" ;
+    :hasLanguage :English ;
+    :power "4" ;
+    :powerValue "4"^^xsd:integer ;
+    :toughness "4" ;
+    :toughnessValue "4"^^xsd:integer ;
+    :hasKeywordAbility :Toxic ,
+                       :Crew ;
+    :printedText """Toxic 2 (Players dealt combat damage by this creature also get two poison counters.)
+When this Vehicle enters, draw a card.
+Crew 3 (Tap any number of creatures you control with total power 3 or more: This Vehicle becomes an artifact creature until end of turn.)"""@en ;
+    :oracleText """Toxic 2 (Players dealt combat damage by this creature also get two poison counters.)
+When this Vehicle enters, draw a card.
+Crew 3 (Tap any number of creatures you control with total power 3 or more: This Vehicle becomes an artifact creature until end of turn.)"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=602770"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/one/240/ribskiff"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "83940"^^xsd:positiveInteger ;
+    :arenaName "Ribskiff" ;
+    :arenaSetCode "ONE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """Toxic doesn't change the amount of combat damage a creature deals. For example, if a 2/2 creature with toxic 1 deals combat damage to a player, that creature will deal 2 damage. The results of that damage are the player loses 2 life and gets a poison counter."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """Damage dealt by a creature with toxic grants the same number of counters regardless of how much damage is dealt. Notably, if a replacement effect modifies the damage in some way (such as that of Gratuitous Violence), the number of counters given remains unchanged."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """Multiple instances of toxic are cumulative. For example, if a creature has toxic 2 and gains toxic 1 due to another effect, combat damage that creature deals to a player will cause that player to get 3 poison counters."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """A player with ten or more poison counters loses the game. This is a state-based action and doesn't use the stack. In other words, it happens immediately and players can't respond to it, just like a player losing the game due to having 0 or less life."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """If a creature with toxic deals combat damage to a creature or planeswalker, or if it deals noncombat damage, toxic has no effect and no player gets poison counters."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """Conversely, replacement effects that apply to the number of counters put on a player can modify the counters placed this way. For example, Vorinclex, Monstrous Raider's last two abilities can apply to counters placed this way."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """Any other effects of that damage, such as life gain from lifelink, still apply."""@en ] .
+
+:SurgicalSkullbomb rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Surgical Skullbomb" ;
+    :manaCost "{1}" ;
+    :manaValue "1"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ;
+    :hasRarity :Common ;
+    :hasColorIdentity :Blue ;
+    :isInSet :PhyrexiaAllWillBeOne ;
+    :cardNumber "243"^^xsd:integer ;
+    :artist "Gaboleps" ;
+    :hasLanguage :English ;
+    :printedText """{1}, Sacrifice this artifact: Draw a card.
+{2}{U}, Sacrifice this artifact: Return target creature to its owner's hand. Draw a card. Activate only as a sorcery."""@en ;
+    :oracleText """{1}, Sacrifice this artifact: Draw a card.
+{2}{U}, Sacrifice this artifact: Return target creature to its owner's hand. Draw a card. Activate only as a sorcery."""@en ;
+    :flavorText """It crackles with the intellect of a twisted genius."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=602773"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/one/243/surgical-skullbomb"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "83943"^^xsd:positiveInteger ;
+    :arenaName "Surgical Skullbomb" ;
+    :arenaSetCode "ONE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """If the target of Surgical Skullbomb's last ability isn't a legal target as the ability tries to resolve (probably because it has left the battlefield), you won't draw a card."""@en ] .
+
+:TheAutonomousFurnace rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "The Autonomous Furnace" ;
+    :manaValue "0"^^xsd:nonNegativeInteger ;
+    :hasCardType :Land ;
+    :hasSubType :Sphere ;
+    :hasRarity :Common ;
+    :hasColorIdentity :Red ;
+    :isInSet :PhyrexiaAllWillBeOne ;
+    :cardNumber "247"^^xsd:integer ;
+    :artist "Muhammad Firdaus" ;
+    :hasLanguage :English ;
+    :producesMana :Red ;
+    :entersTapped "true"^^xsd:boolean ;
+    :printedText """This land enters tapped.
+{T}: Add {R}.
+{1}{R}, {T}, Sacrifice this land: Draw a card."""@en ;
+    :oracleText """This land enters tapped.
+{T}: Add {R}.
+{1}{R}, {T}, Sacrifice this land: Draw a card."""@en ;
+    :flavorText """In Urabrask's domain, mighty forges echo day and night with the clangor of the Great Work."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=602777"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/one/247/the-autonomous-furnace"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "83947"^^xsd:positiveInteger ;
+    :arenaName "The Autonomous Furnace" ;
+    :arenaSetCode "ONE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] .
+
+:RazorvergeThicket rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Razorverge Thicket" ;
+    :manaValue "0"^^xsd:nonNegativeInteger ;
+    :hasCardType :Land ;
+    :hasRarity :Rare ;
+    :hasColorIdentity :White ,
+                      :Green ;
+    :isInSet :PhyrexiaAllWillBeOne ;
+    :cardNumber "257"^^xsd:integer ;
+    :artist "Randy Gallegos" ;
+    :hasLanguage :English ;
+    :producesMana :White ,
+                  :Green ;
+    :printedText """This land enters tapped unless you control two or fewer other lands.
+{T}: Add {G} or {W}."""@en ;
+    :oracleText """This land enters tapped unless you control two or fewer other lands.
+{T}: Add {G} or {W}."""@en ;
+    :flavorText """Where evolution meets austerity, primal might bucks against the yoke of hierarchy."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=602787"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/one/257/razorverge-thicket"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "83957"^^xsd:positiveInteger ;
+    :arenaName "Razorverge Thicket" ;
+    :arenaSetCode "ONE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """If one of these lands enters the battlefield at the same time as one or more other lands (due to Oblivion Sower or Warp World, perhaps), it doesn't take those lands into consideration when determining how many other lands you control."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """If one of these lands enters the battlefield under your control and you control zero, one, or two other lands, it enters the battlefield untapped. If you control three or more other lands, however, it enters the battlefield tapped."""@en ] .
+
+:TerramorphicExpansePhyrexiaAllWillBeOne261 rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Terramorphic Expanse" ;
+    :manaValue "0"^^xsd:nonNegativeInteger ;
+    :hasCardType :Land ;
+    :hasRarity :Common ;
+    :isInSet :PhyrexiaAllWillBeOne ;
+    :cardNumber "261"^^xsd:integer ;
+    :artist "Adam Burn" ;
+    :hasLanguage :English ;
+    :isFetchLand "true"^^xsd:boolean ;
+    :printedText """{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."""@en ;
+    :oracleText """{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."""@en ;
+    :flavorText """"The Phyrexian's monuments of today will be nothing but dust tomorrow. With enough tomorrows, so will their rule."
+—Koth"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=602791"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/one/261/terramorphic-expanse"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "83961"^^xsd:positiveInteger ;
+    :arenaName "Terramorphic Expanse" ;
+    :arenaSetCode "ONE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .

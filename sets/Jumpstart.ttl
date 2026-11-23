@@ -39,8 +39,9 @@
     rdfs:label "Magic Card Collection Individuals – Jumpstart"@en ;
     rdfs:comment """An instance graph describing the card individuals of a
 personal Magic: The Gathering card collection that were printed in the set
-Jumpstart (JMP). One Card individual is defined per collected
-printing, carrying its characteristics, the platforms it is available on
+Jumpstart (JMP). One Card individual is defined per printing
+collected in paper or on MTG Arena, carrying its characteristics, the
+platforms it is available on
 (paper, MTG Arena, Magic Online) with its MTG Arena identity, its legality
 in the paper and MTG Arena formats, and official rulings. Card data was
 sourced from Gatherer and Scryfall. This file imports MagicCardsOntology to
@@ -53,6 +54,94 @@ legality definitions."""@en .
 # Card Individuals
 #
 ################################################################################
+
+:ThrivingHeathJumpstart35 rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Thriving Heath" ;
+    :manaValue "0"^^xsd:nonNegativeInteger ;
+    :hasCardType :Land ;
+    :hasRarity :Common ;
+    :hasColorIdentity :White ;
+    :isInSet :Jumpstart ;
+    :cardNumber "35"^^xsd:integer ;
+    :artist "Alayna Danner" ;
+    :hasLanguage :English ;
+    :producesMana :White ,
+                  :Blue ,
+                  :Black ,
+                  :Red ,
+                  :Green ;
+    :entersTapped "true"^^xsd:boolean ;
+    :printedText """This land enters tapped. As it enters, choose a color other than white.
+{T}: Add {W} or one mana of the chosen color."""@en ;
+    :oracleText """This land enters tapped. As it enters, choose a color other than white.
+{T}: Add {W} or one mana of the chosen color."""@en ;
+    :flavorText """Wildflowers here bloom not with the season but with the ebb and flow of magic."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=489202"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/jmp/35/thriving-heath"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "72138"^^xsd:positiveInteger ;
+    :arenaName "Thriving Heath" ;
+    :arenaSetCode "JMP" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] .
+
+:ThrivingIsleJumpstart36 rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Thriving Isle" ;
+    :manaValue "0"^^xsd:nonNegativeInteger ;
+    :hasCardType :Land ;
+    :hasRarity :Common ;
+    :hasColorIdentity :Blue ;
+    :isInSet :Jumpstart ;
+    :cardNumber "36"^^xsd:integer ;
+    :artist "Jonas De Ro" ;
+    :hasLanguage :English ;
+    :producesMana :White ,
+                  :Blue ,
+                  :Black ,
+                  :Red ,
+                  :Green ;
+    :entersTapped "true"^^xsd:boolean ;
+    :printedText """This land enters tapped. As it enters, choose a color other than blue.
+{T}: Add {U} or one mana of the chosen color."""@en ;
+    :oracleText """This land enters tapped. As it enters, choose a color other than blue.
+{T}: Add {U} or one mana of the chosen color."""@en ;
+    :flavorText """All the wonders of the natural world in one breathtaking microcosm."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=489203"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/jmp/36/thriving-isle"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "72139"^^xsd:positiveInteger ;
+    :arenaName "Thriving Isle" ;
+    :arenaSetCode "JMP" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] .
 
 :PlainsJumpstart43 rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -90,6 +179,330 @@ legality definitions."""@en .
       [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:AngelOfTheDireHour rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Angel of the Dire Hour" ;
+    :manaCost "{5}{W}{W}" ;
+    :manaValue "7"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Angel ;
+    :hasRarity :Rare ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :Jumpstart ;
+    :cardNumber "85"^^xsd:integer ;
+    :artist "Jack Wang" ;
+    :hasLanguage :English ;
+    :power "5" ;
+    :powerValue "5"^^xsd:integer ;
+    :toughness "4" ;
+    :toughnessValue "4"^^xsd:integer ;
+    :hasKeywordAbility :Flying ,
+                       :Flash ;
+    :printedText """Flash
+Flying
+When this creature enters, if you cast it from your hand, exile all attacking creatures."""@en ;
+    :oracleText """Flash
+Flying
+When this creature enters, if you cast it from your hand, exile all attacking creatures."""@en ;
+    :flavorText """She arrived like a meteorite, and the enemy fell in a shock wave of holy vengeance."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=489569"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/jmp/85/angel-of-the-dire-hour"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ;
+    :arenaId "72147"^^xsd:positiveInteger ;
+    :arenaName "Angel of the Dire Hour" ;
+    :arenaSetCode "JMP" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2014-11-07"^^xsd:date ;
+        :rulingText """If you cast Angel of the Dire Hour outside of combat, its triggered ability will trigger but have no effect."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2014-11-07"^^xsd:date ;
+        :rulingText """If a spell or ability instructs you to put Angel of the Dire Hour onto the battlefield from your hand, that means you won’t have cast it, so its triggered ability won’t trigger."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2014-11-07"^^xsd:date ;
+        :rulingText """Creatures that were declared as attackers or entered the battlefield attacking continue to be attacking creatures until the combat phase ends. It’s possible to exile all attacking creatures after they’ve dealt combat damage if you cast Angel of the Dire Hour during the combat damage step or end of combat step."""@en ] .
+
+:AngelicEdict rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Angelic Edict" ;
+    :manaCost "{4}{W}" ;
+    :manaValue "5"^^xsd:nonNegativeInteger ;
+    :hasCardType :Sorcery ;
+    :hasRarity :Common ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :Jumpstart ;
+    :cardNumber "87"^^xsd:integer ;
+    :artist "Trevor Claxton" ;
+    :hasLanguage :English ;
+    :printedText """Exile target creature or enchantment."""@en ;
+    :oracleText """Exile target creature or enchantment."""@en ;
+    :flavorText """The Boros built a prison in the sky where Azorius statutes couldn't restrict their sense of justice."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=489571"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/jmp/87/angelic-edict"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ;
+    :arenaId "72149"^^xsd:positiveInteger ;
+    :arenaName "Angelic Edict" ;
+    :arenaSetCode "JMP" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:ChartACourseJumpstart142 rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Chart a Course" ;
+    :manaCost "{1}{U}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Sorcery ;
+    :hasRarity :Uncommon ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :Jumpstart ;
+    :cardNumber "142"^^xsd:integer ;
+    :artist "James Ryman" ;
+    :hasLanguage :English ;
+    :printedText """Draw two cards. Then discard a card unless you attacked this turn."""@en ;
+    :oracleText """Draw two cards. Then discard a card unless you attacked this turn."""@en ;
+    :flavorText """While other pirates prowl for treasure, Captain Parrish plunders secrets."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=489299"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/jmp/142/chart-a-course"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ;
+    :arenaId "72204"^^xsd:positiveInteger ;
+    :arenaName "Chart a Course" ;
+    :arenaSetCode "JMP" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:CuriousObsession rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Curious Obsession" ;
+    :manaCost "{U}" ;
+    :manaValue "1"^^xsd:nonNegativeInteger ;
+    :hasCardType :Enchantment ;
+    :hasSubType :Aura ;
+    :hasRarity :Uncommon ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :Jumpstart ;
+    :cardNumber "148"^^xsd:integer ;
+    :artist "Daniel Ljunggren" ;
+    :hasLanguage :English ;
+    :hasKeywordAbility :Enchant ;
+    :printedText """Enchant creature
+Enchanted creature gets +1/+1 and has "Whenever this creature deals combat damage to a player, you may draw a card."
+At the beginning of your end step, if you didn't attack with a creature this turn, sacrifice this Aura."""@en ;
+    :oracleText """Enchant creature
+Enchanted creature gets +1/+1 and has "Whenever this creature deals combat damage to a player, you may draw a card."
+At the beginning of your end step, if you didn't attack with a creature this turn, sacrifice this Aura."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=489305"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/jmp/148/curious-obsession"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ;
+    :arenaId "72210"^^xsd:positiveInteger ;
+    :arenaName "Curious Obsession" ;
+    :arenaSetCode "JMP" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2018-01-19"^^xsd:date ;
+        :rulingText """Curious Obsession's last ability is satisfied if any creature has attacked, similar to raid abilities. The creature it enchants doesn't have to have attacked."""@en ] .
+
+:SpectralSailorJumpstart178 rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Spectral Sailor" ;
+    :manaCost "{U}" ;
+    :manaValue "1"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Spirit ,
+                :Pirate ;
+    :hasRarity :Uncommon ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :Jumpstart ;
+    :cardNumber "178"^^xsd:integer ;
+    :artist "Cristi Balanescu" ;
+    :hasLanguage :English ;
+    :power "1" ;
+    :powerValue "1"^^xsd:integer ;
+    :toughness "1" ;
+    :toughnessValue "1"^^xsd:integer ;
+    :hasKeywordAbility :Flying ,
+                       :Flash ;
+    :printedText """Flash (You may cast this spell any time you could cast an instant.)
+Flying
+{3}{U}: Draw a card."""@en ;
+    :oracleText """Flash (You may cast this spell any time you could cast an instant.)
+Flying
+{3}{U}: Draw a card."""@en ;
+    :flavorText """"Any ship that sails on these mean seas for long is bound to pick up a ghost or two."
+—Admiral Beckett Brass"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=489335"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/jmp/178/spectral-sailor"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ;
+    :arenaId "72240"^^xsd:positiveInteger ;
+    :arenaName "Spectral Sailor" ;
+    :arenaSetCode "JMP" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:ExquisiteBloodJumpstart231 rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Exquisite Blood" ;
+    :manaCost "{4}{B}" ;
+    :manaValue "5"^^xsd:nonNegativeInteger ;
+    :hasCardType :Enchantment ;
+    :hasRarity :Rare ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :Jumpstart ;
+    :cardNumber "231"^^xsd:integer ;
+    :artist "Cynthia Sheppard" ;
+    :hasLanguage :English ;
+    :printedText """Whenever an opponent loses life, you gain that much life."""@en ;
+    :oracleText """Whenever an opponent loses life, you gain that much life."""@en ;
+    :flavorText """Even as humans regained the upper hand, some still willingly traded their lives for a chance at immortality."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=489237"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/jmp/231/exquisite-blood"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ;
+    :arenaId "72293"^^xsd:positiveInteger ;
+    :arenaName "Exquisite Blood" ;
+    :arenaSetCode "JMP" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2012-05-01"^^xsd:date ;
+        :rulingText """If you and an opponent both lose life simultaneously, and this causes your life total to become 0 or less, you'll lose the game before Exquisite Blood's triggered ability can resolve."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2012-05-01"^^xsd:date ;
+        :rulingText """Damage dealt to an opponent usually causes that opponent to lose life. An opponent paying life also causes loss of life."""@en ] .
+
+:LawmagesBinding rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Lawmage's Binding" ;
+    :manaCost "{1}{W}{U}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Enchantment ;
+    :hasSubType :Aura ;
+    :hasRarity :Common ;
+    :hasColor :White ,
+              :Blue ;
+    :hasColorIdentity :White ,
+                      :Blue ;
+    :isInSet :Jumpstart ;
+    :cardNumber "453"^^xsd:integer ;
+    :artist "Mark Behm" ;
+    :hasLanguage :English ;
+    :hasKeywordAbility :Enchant ,
+                       :Flash ;
+    :printedText """Flash
+Enchant creature
+Enchanted creature can't attack or block, and its activated abilities can't be activated."""@en ;
+    :oracleText """Flash
+Enchant creature
+Enchanted creature can't attack or block, and its activated abilities can't be activated."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=489436"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/jmp/453/lawmages-binding"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ;
+    :arenaId "72515"^^xsd:positiveInteger ;
+    :arenaName "Lawmage's Binding" ;
+    :arenaSetCode "JMP" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2019-01-25"^^xsd:date ;
+        :rulingText """Activated abilities contain a colon. They’re generally written “[Cost]: [Effect].” Some keyword abilities are activated abilities and will have colons in their reminder text. Triggered abilities (starting with “when,” “whenever,” or “at”) are unaffected by Lawmage’s Binding."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2019-01-25"^^xsd:date ;
+        :rulingText """Once a creature has attacked or blocked, casting Lawmage’s Binding won’t remove that creature from combat. Similarly, once a creature’s ability has been activated, casting Lawmage’s Binding won’t counter that ability."""@en ] .
 
 :DreamstoneHedronJumpstart464 rdf:type owl:NamedIndividual ,
                   :Card ;

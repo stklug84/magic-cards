@@ -39,8 +39,9 @@
     rdfs:label "Magic Card Collection Individuals – Lorwyn Eclipsed"@en ;
     rdfs:comment """An instance graph describing the card individuals of a
 personal Magic: The Gathering card collection that were printed in the set
-Lorwyn Eclipsed (ECL). One Card individual is defined per collected
-printing, carrying its characteristics, the platforms it is available on
+Lorwyn Eclipsed (ECL). One Card individual is defined per printing
+collected in paper or on MTG Arena, carrying its characteristics, the
+platforms it is available on
 (paper, MTG Arena, Magic Online) with its MTG Arena identity, its legality
 in the paper and MTG Arena formats, and official rulings. Card data was
 sourced from Gatherer and Scryfall. This file imports MagicCardsOntology to
@@ -53,6 +54,1203 @@ legality definitions."""@en .
 # Card Individuals
 #
 ################################################################################
+
+:ChangelingWayfinder rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Changeling Wayfinder" ;
+    :manaCost "{3}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Shapeshifter ;
+    :hasRarity :Common ;
+    :isInSet :LorwynEclipsed ;
+    :cardNumber "1"^^xsd:integer ;
+    :artist "Quintin Gleim" ;
+    :hasLanguage :English ;
+    :power "1" ;
+    :powerValue "1"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    :hasKeywordAbility :Changeling ;
+    :printedText """Changeling (This card is every creature type.)
+When this creature enters, you may search your library for a basic land card, reveal it, put it into your hand, then shuffle."""@en ;
+    :oracleText """Changeling (This card is every creature type.)
+When this creature enters, you may search your library for a basic land card, reveal it, put it into your hand, then shuffle."""@en ;
+    :flavorText """No map. No complaints."""@en ;
+    :scryfallUrl "https://scryfall.com/card/ecl/1/changeling-wayfinder"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "98316"^^xsd:positiveInteger ;
+    :arenaName "Changeling Wayfinder" ;
+    :arenaSetCode "ECL" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """If an effect causes a creature with changeling to become a new creature type, it will be only that new creature type (unless the effect says "in addition" or similar). It will still have changeling; the effect making it all creature types will simply be overwritten."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """If an effect causes a creature with changeling to lose all abilities, it will remain all creature types, even though it will no longer have changeling. This is because changeling applies before the effect that removes it."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """The subtype Shapeshifter that appears on the type line is mostly there to reinforce the flavor. A creature card with changeling is just as much a Kithkin, a Goblin, a Merfolk, and a Brushwagg as it is a Shapeshifter."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """Changeling is a characteristic-defining ability. It functions in all zones, not only while a card that has it is on the battlefield."""@en ] .
+
+:RooftopPercher rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Rooftop Percher" ;
+    :manaCost "{5}" ;
+    :manaValue "5"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Shapeshifter ;
+    :hasRarity :Common ;
+    :isInSet :LorwynEclipsed ;
+    :cardNumber "2"^^xsd:integer ;
+    :artist "Nils Hamm" ;
+    :hasLanguage :English ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "3" ;
+    :toughnessValue "3"^^xsd:integer ;
+    :hasKeywordAbility :Changeling ,
+                       :Flying ;
+    :printedText """Changeling (This card is every creature type.)
+Flying
+When this creature enters, exile up to two target cards from graveyards. You gain 3 life."""@en ;
+    :oracleText """Changeling (This card is every creature type.)
+Flying
+When this creature enters, exile up to two target cards from graveyards. You gain 3 life."""@en ;
+    :scryfallUrl "https://scryfall.com/card/ecl/2/rooftop-percher"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "98317"^^xsd:positiveInteger ;
+    :arenaName "Rooftop Percher" ;
+    :arenaSetCode "ECL" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """If an effect causes a creature with changeling to lose all abilities, it will remain all creature types, even though it will no longer have changeling. This is because changeling applies before the effect that removes it."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """If an effect causes a creature with changeling to become a new creature type, it will be only that new creature type (unless the effect says "in addition" or similar). It will still have changeling; the effect making it all creature types will simply be overwritten."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """Changeling is a characteristic-defining ability. It functions in all zones, not only while a card that has it is on the battlefield."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """The subtype Shapeshifter that appears on the type line is mostly there to reinforce the flavor. A creature card with changeling is just as much a Kithkin, a Goblin, a Merfolk, and a Brushwagg as it is a Shapeshifter."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """You don't have to choose any targets for Rooftop Percher's triggered ability. However, if you do and all of the targets are illegal as the ability tries to resolve, it won't resolve and none of its effects will happen. You won't gain life."""@en ] .
+
+:LiminalHold rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Liminal Hold" ;
+    :manaCost "{3}{W}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasCardType :Enchantment ;
+    :hasRarity :Common ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :LorwynEclipsed ;
+    :cardNumber "24"^^xsd:integer ;
+    :artist "Ovidio Cartagena" ;
+    :hasLanguage :English ;
+    :printedText """When this enchantment enters, exile up to one target nonland permanent an opponent controls until this enchantment leaves the battlefield. You gain 2 life."""@en ;
+    :oracleText """When this enchantment enters, exile up to one target nonland permanent an opponent controls until this enchantment leaves the battlefield. You gain 2 life."""@en ;
+    :flavorText """A reliquary is needed to pass through the eclipse safely. Without it, two warring selves will calcify into one."""@en ;
+    :scryfallUrl "https://scryfall.com/card/ecl/24/liminal-hold"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "98341"^^xsd:positiveInteger ;
+    :arenaName "Liminal Hold" ;
+    :arenaSetCode "ECL" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """If a token is exiled this way, it will cease to exist and won't return to the battlefield."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """Auras attached to the exiled permanent will be put into their owners' graveyards. Any Equipment will become unattached and remain on the battlefield. Any counters on the exiled permanent will cease to exist. When the card returns to the battlefield, it will be a new object with no connection to the card that was exiled."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """If an Aura is exiled this way, its owner chooses what it will enchant as it returns to the battlefield. An Aura put onto the battlefield this way doesn't target anything (so it could be attached to a permanent with shroud, for example), but the Aura's enchant ability restricts what it can be attached to. If the Aura can't legally be attached to anything, it remains in exile for the rest of the game."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """If Liminal Hold leaves the battlefield before its ability resolves, the target nonland permanent won't be exiled. You'll still gain life if that permanent remains a legal target."""@en ] .
+
+:SunDappledCelebrant rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Sun-Dappled Celebrant" ;
+    :manaCost "{4}{W}{W}" ;
+    :manaValue "6"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Treefolk ,
+                :Cleric ;
+    :hasRarity :Common ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :LorwynEclipsed ;
+    :cardNumber "37"^^xsd:integer ;
+    :artist "Steve Ellis" ;
+    :hasLanguage :English ;
+    :power "5" ;
+    :powerValue "5"^^xsd:integer ;
+    :toughness "6" ;
+    :toughnessValue "6"^^xsd:integer ;
+    :hasKeywordAbility :Vigilance ,
+                       :Convoke ;
+    :printedText """Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)
+Vigilance"""@en ;
+    :oracleText """Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)
+Vigilance"""@en ;
+    :flavorText """Eirdu's adherents celebrate the sun on cold days and create warmth through spirited dances and revelry."""@en ;
+    :scryfallUrl "https://scryfall.com/card/ecl/37/sun-dappled-celebrant"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "98354"^^xsd:positiveInteger ;
+    :arenaName "Sun-Dappled Celebrant" ;
+    :arenaSetCode "ECL" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """If a creature you control has a mana ability with {T} in the cost, activating that ability while casting a spell with convoke will result in the creature being tapped before you pay the spell's costs. You won't be able to tap it again for convoke. Similarly, if you sacrifice a creature to activate a mana ability while casting a spell with convoke, that creature won't be on the battlefield when you pay the spell's costs, so you won't be able to tap it for convoke."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """Tapping an untapped creature that's attacking or blocking to convoke a spell won't cause that creature to stop attacking or blocking."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """You can tap any untapped creature you control to convoke a spell, even one you haven't controlled continuously since the beginning of your most recent turn."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """When calculating a spell's total cost, include any alternative costs, additional costs, or anything else that increases or reduces the cost to cast the spell. Convoke applies after the total cost is calculated. Convoke doesn't change a spell's mana cost or mana value."""@en ] .
+
+:TributaryVaulter rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Tributary Vaulter" ;
+    :manaCost "{2}{W}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Merfolk ,
+                :Warrior ;
+    :hasRarity :Common ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :LorwynEclipsed ;
+    :cardNumber "40"^^xsd:integer ;
+    :artist "Tiffany Turrill" ;
+    :hasLanguage :English ;
+    :power "1" ;
+    :powerValue "1"^^xsd:integer ;
+    :toughness "3" ;
+    :toughnessValue "3"^^xsd:integer ;
+    :hasKeywordAbility :Flying ;
+    :printedText """Flying
+Whenever this creature becomes tapped, another target Merfolk you control gets +2/+0 until end of turn."""@en ;
+    :oracleText """Flying
+Whenever this creature becomes tapped, another target Merfolk you control gets +2/+0 until end of turn."""@en ;
+    :flavorText """"Other species may spread across the land all they like, but the riverways and the skies above them will always be ours.\""""@en ;
+    :scryfallUrl "https://scryfall.com/card/ecl/40/tributary-vaulter"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "98357"^^xsd:positiveInteger ;
+    :arenaName "Tributary Vaulter" ;
+    :arenaSetCode "ECL" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:DisruptorOfCurrents rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Disruptor of Currents" ;
+    :manaCost "{3}{U}{U}" ;
+    :manaValue "5"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Merfolk ,
+                :Wizard ;
+    :hasRarity :Rare ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :LorwynEclipsed ;
+    :cardNumber "47"^^xsd:integer ;
+    :artist "Pauline Voss" ;
+    :hasLanguage :English ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "3" ;
+    :toughnessValue "3"^^xsd:integer ;
+    :hasKeywordAbility :Flash ,
+                       :Convoke ;
+    :printedText """Flash
+Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)
+When this creature enters, return up to one other target nonland permanent to its owner's hand."""@en ;
+    :oracleText """Flash
+Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)
+When this creature enters, return up to one other target nonland permanent to its owner's hand."""@en ;
+    :scryfallUrl "https://scryfall.com/card/ecl/47/disruptor-of-currents"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "98364"^^xsd:positiveInteger ;
+    :arenaName "Disruptor of Currents" ;
+    :arenaSetCode "ECL" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """If a creature you control has a mana ability with {T} in the cost, activating that ability while casting a spell with convoke will result in the creature being tapped before you pay the spell's costs. You won't be able to tap it again for convoke. Similarly, if you sacrifice a creature to activate a mana ability while casting a spell with convoke, that creature won't be on the battlefield when you pay the spell's costs, so you won't be able to tap it for convoke."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """When calculating a spell's total cost, include any alternative costs, additional costs, or anything else that increases or reduces the cost to cast the spell. Convoke applies after the total cost is calculated. Convoke doesn't change a spell's mana cost or mana value."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """You can tap any untapped creature you control to convoke a spell, even one you haven't controlled continuously since the beginning of your most recent turn."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """Tapping an untapped creature that's attacking or blocking to convoke a spell won't cause that creature to stop attacking or blocking."""@en ] .
+
+:SyggWanderwineWisdom rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Sygg, Wanderwine Wisdom // Sygg, Wanderbrine Shield" ;
+    :manaCost "{1}{U}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasSuperType :Legendary ;
+    :hasCardType :Creature ;
+    :hasSubType :Merfolk ,
+                :Wizard ,
+                :Rogue ;
+    :hasRarity :Rare ;
+    :hasColor :White ,
+              :Blue ;
+    :hasColorIdentity :White ,
+                      :Blue ;
+    :isInSet :LorwynEclipsed ;
+    :cardNumber "76"^^xsd:integer ;
+    :artist "Justin Gerard" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    :hasKeywordAction :Transform ;
+    :printedText """Sygg can't be blocked.
+Whenever this creature enters or transforms into Sygg, Wanderwine Wisdom, target creature gains "Whenever this creature deals combat damage to a player or planeswalker, draw a card" until end of turn.
+At the beginning of your first main phase, you may pay {W}. If you do, transform Sygg.
+//
+Sygg can't be blocked.
+Whenever this creature transforms into Sygg, Wanderbrine Shield, target creature you control gains protection from each color until your next turn.
+At the beginning of your first main phase, you may pay {U}. If you do, transform Sygg."""@en ;
+    :oracleText """Sygg can't be blocked.
+Whenever this creature enters or transforms into Sygg, Wanderwine Wisdom, target creature gains "Whenever this creature deals combat damage to a player or planeswalker, draw a card" until end of turn.
+At the beginning of your first main phase, you may pay {W}. If you do, transform Sygg.
+//
+Sygg can't be blocked.
+Whenever this creature transforms into Sygg, Wanderbrine Shield, target creature you control gains protection from each color until your next turn.
+At the beginning of your first main phase, you may pay {U}. If you do, transform Sygg."""@en ;
+    :scryfallUrl "https://scryfall.com/card/ecl/76/sygg-wanderwine-wisdom-sygg-wanderbrine-shield"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "98394"^^xsd:positiveInteger ;
+    :arenaName "Sygg, Wanderwine Wisdom" ;
+    :arenaSetCode "ECL" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """"Protection from each color" is shorthand for protection from white, from blue, from black, from red, and from green. Colorless is not a color."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """Each nonmodal double-faced card in this release is cast face up. In every zone other than the battlefield, consider only the characteristics of its front face. If it is on the battlefield, consider only the characteristics of the face that's up; the other face's characteristics are ignored."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """The mana value of a nonmodal double-faced card is the mana value of its front face, no matter which face is up."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """The back face of a nonmodal double-faced card usually has a color indicator that defines its color."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """A nonmodal double-faced card enters with its front face up by default, unless a spell or ability instructs you to put it onto the battlefield transformed or allows you to cast it transformed, in which case it enters with its back face up."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """A token that is created as a copy of a double-faced permanent or a double-faced card in another zone is a double-faced token. It will have both the front face and back face of whatever object it's copying. If it's copying a double-faced permanent whose back face is up, the token will enter with its back face up. It can transform if instructed to do so."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """In the Commander variant, a double-faced card's color identity is determined by the mana costs and mana symbols in the rules text of both faces combined. If either face has a color indicator or basic land type, those are also considered. For example, Oko, Lorwyn Liege's color identity is green and blue, since its front face is blue, its rules text contains a green mana symbol, and its back face has a green color indicator as well as a blue mana symbol in its rules text."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """Each face of a nonmodal double-faced card has its own set of characteristics: name, types, subtypes, abilities, and so on. While a double-faced permanent is on the battlefield, consider only the characteristics of the face that's currently up. The other set of characteristics is ignored."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """If you are instructed to put a card that isn't a double-faced card onto the battlefield transformed, it will not enter at all."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """In some rare cases, this permanent might transform while its triggered ability that allows you to pay mana to transform it is still on the stack. (For example, another effect might cause that ability to trigger an additional time.) In such a case, even if you pay mana as the triggered ability resolves, this permanent won't transform because it already transformed while the triggered ability was on the stack."""@en ] .
+
+:UnexpectedAssistance rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Unexpected Assistance" ;
+    :manaCost "{3}{U}{U}" ;
+    :manaValue "5"^^xsd:nonNegativeInteger ;
+    :hasCardType :Instant ;
+    :hasRarity :Common ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :LorwynEclipsed ;
+    :cardNumber "80"^^xsd:integer ;
+    :artist "Gustavo Pelissari" ;
+    :hasLanguage :English ;
+    :hasKeywordAbility :Convoke ;
+    :printedText """Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)
+Draw three cards, then discard a card."""@en ;
+    :oracleText """Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)
+Draw three cards, then discard a card."""@en ;
+    :flavorText """In one breath, Abigale's mind turned from panic to poetry."""@en ;
+    :scryfallUrl "https://scryfall.com/card/ecl/80/unexpected-assistance"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "98399"^^xsd:positiveInteger ;
+    :arenaName "Unexpected Assistance" ;
+    :arenaSetCode "ECL" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """You can tap any untapped creature you control to convoke a spell, even one you haven't controlled continuously since the beginning of your most recent turn."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """Tapping an untapped creature that's attacking or blocking to convoke a spell won't cause that creature to stop attacking or blocking."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """When calculating a spell's total cost, include any alternative costs, additional costs, or anything else that increases or reduces the cost to cast the spell. Convoke applies after the total cost is calculated. Convoke doesn't change a spell's mana cost or mana value."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """If a creature you control has a mana ability with {T} in the cost, activating that ability while casting a spell with convoke will result in the creature being tapped before you pay the spell's costs. You won't be able to tap it again for convoke. Similarly, if you sacrifice a creature to activate a mana ability while casting a spell with convoke, that creature won't be on the battlefield when you pay the spell's costs, so you won't be able to tap it for convoke."""@en ] .
+
+:WildUnraveling rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Wild Unraveling" ;
+    :manaCost "{U}{U}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Instant ;
+    :hasRarity :Common ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :LorwynEclipsed ;
+    :cardNumber "84"^^xsd:integer ;
+    :artist "Jabari Weathers" ;
+    :hasLanguage :English ;
+    :hasKeywordAction :Blight ;
+    :printedText """As an additional cost to cast this spell, blight 2 or pay {1}. (To blight 2, put two -1/-1 counters on a creature you control.)
+Counter target spell."""@en ;
+    :oracleText """As an additional cost to cast this spell, blight 2 or pay {1}. (To blight 2, put two -1/-1 counters on a creature you control.)
+Counter target spell."""@en ;
+    :flavorText """As wild magic ripped into his arm, the path that was once so clear became shadowed by his own fear."""@en ;
+    :scryfallUrl "https://scryfall.com/card/ecl/84/wild-unraveling"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "98403"^^xsd:positiveInteger ;
+    :arenaName "Wild Unraveling" ;
+    :arenaSetCode "ECL" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """All of the -1/-1 counters must be put on a single creature. You can't choose to split them up between multiple creatures."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """If a creature that has +1/+1 counters on it receives enough -1/-1 counters to cause it to be destroyed by lethal damage or put into its owner's graveyard for having 0 or less toughness, effects that refer to the counters on that creature when it died will see all of those +1/+1 and -1/-1 counters."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """The creature you choose to put -1/-1 counters on doesn't have to have enough toughness to survive the process. For example, if you blight 2, you can choose to put the counters on a 1/1 creature you control."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """If you can't place -1/-1 counters on any creatures you control (probably because you control no creatures), you can't choose to blight."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """Once you've announced that you're casting a spell or activating an ability, players can't take actions until you've finished doing so. Notably, opponents can't try to destroy or otherwise remove your creatures to stop you from blighting as part of paying the cost of that spell or ability."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """If a creature has +1/+1 counters and -1/-1 counters on it, state-based actions remove the same number of each so that it has only one kind of those counters on it. For example, if a creature has three +1/+1 counters on it and two -1/-1 counters are put on it, state-based actions will remove two of each of those kinds of counters, leaving the creature with just one +1/+1 counter."""@en ] .
+
+:AuntiesSentence rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Auntie's Sentence" ;
+    :manaCost "{1}{B}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Sorcery ;
+    :hasRarity :Common ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :LorwynEclipsed ;
+    :cardNumber "85"^^xsd:integer ;
+    :artist "Vincent Christiaens" ;
+    :hasLanguage :English ;
+    :printedText """Choose one —
+• Target opponent reveals their hand. You choose a nonland permanent card from it. That player discards that card.
+• Target creature gets -2/-2 until end of turn."""@en ;
+    :oracleText """Choose one —
+• Target opponent reveals their hand. You choose a nonland permanent card from it. That player discards that card.
+• Target creature gets -2/-2 until end of turn."""@en ;
+    :flavorText """"Stop whining, elf. The rest of us can see that it's *perfectly* fair, heh!\""""@en ;
+    :scryfallUrl "https://scryfall.com/card/ecl/85/aunties-sentence"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "98404"^^xsd:positiveInteger ;
+    :arenaName "Auntie's Sentence" ;
+    :arenaSetCode "ECL" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:BarbedBloodletter rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Barbed Bloodletter" ;
+    :manaCost "{1}{B}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ;
+    :hasSubType :Equipment ;
+    :hasRarity :Common ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :LorwynEclipsed ;
+    :cardNumber "86"^^xsd:integer ;
+    :artist "Warren Mahy" ;
+    :hasLanguage :English ;
+    :hasKeywordAbility :Equip ,
+                       :Flash ;
+    :printedText """Flash
+When this Equipment enters, attach it to target creature you control. That creature gains wither until end of turn. (It deals damage to creatures in the form of -1/-1 counters.)
+Equipped creature gets +1/+2.
+Equip {2}"""@en ;
+    :oracleText """Flash
+When this Equipment enters, attach it to target creature you control. That creature gains wither until end of turn. (It deals damage to creatures in the form of -1/-1 counters.)
+Equipped creature gets +1/+2.
+Equip {2}"""@en ;
+    :scryfallUrl "https://scryfall.com/card/ecl/86/barbed-bloodletter"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "98405"^^xsd:positiveInteger ;
+    :arenaName "Barbed Bloodletter" ;
+    :arenaSetCode "ECL" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """Wither applies to any damage dealt to creatures by the affected creature. This includes combat damage as well as anything that causes that creature to deal noncombat damage, such as the effect of Assert Perfection."""@en ] .
+
+:BileVialBoggart rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Bile-Vial Boggart" ;
+    :manaCost "{B}" ;
+    :manaValue "1"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Goblin ,
+                :Assassin ;
+    :hasRarity :Common ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :LorwynEclipsed ;
+    :cardNumber "87"^^xsd:integer ;
+    :artist "Slawomir Maniak" ;
+    :hasLanguage :English ;
+    :power "1" ;
+    :powerValue "1"^^xsd:integer ;
+    :toughness "1" ;
+    :toughnessValue "1"^^xsd:integer ;
+    :printedText """When this creature dies, put a -1/-1 counter on up to one target creature."""@en ;
+    :oracleText """When this creature dies, put a -1/-1 counter on up to one target creature."""@en ;
+    :flavorText """It took years to finesse his potion of necroskitter slime and bogslither teeth. Finally, *he* would prank the fae."""@en ;
+    :scryfallUrl "https://scryfall.com/card/ecl/87/bile-vial-boggart"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "98406"^^xsd:positiveInteger ;
+    :arenaName "Bile-Vial Boggart" ;
+    :arenaSetCode "ECL" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:BlightRot rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Blight Rot" ;
+    :manaCost "{2}{B}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Instant ;
+    :hasRarity :Common ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :LorwynEclipsed ;
+    :cardNumber "89"^^xsd:integer ;
+    :artist "Forrest Schehl" ;
+    :hasLanguage :English ;
+    :printedText """Put four -1/-1 counters on target creature."""@en ;
+    :oracleText """Put four -1/-1 counters on target creature."""@en ;
+    :flavorText """The scratch became a sore, the sore became a wound, the wound became an infection, and the infection became a funeral."""@en ;
+    :scryfallUrl "https://scryfall.com/card/ecl/89/blight-rot"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "98408"^^xsd:positiveInteger ;
+    :arenaName "Blight Rot" ;
+    :arenaSetCode "ECL" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:BlightedBlackthorn rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Blighted Blackthorn" ;
+    :manaCost "{4}{B}" ;
+    :manaValue "5"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Treefolk ,
+                :Warlock ;
+    :hasRarity :Common ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :LorwynEclipsed ;
+    :cardNumber "90"^^xsd:integer ;
+    :artist "Omar Rayyan" ;
+    :hasLanguage :English ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "7" ;
+    :toughnessValue "7"^^xsd:integer ;
+    :hasKeywordAction :Blight ;
+    :printedText """Whenever this creature enters or attacks, you may blight 2. If you do, you draw a card and lose 1 life. (To blight 2, put two -1/-1 counters on a creature you control.)"""@en ;
+    :oracleText """Whenever this creature enters or attacks, you may blight 2. If you do, you draw a card and lose 1 life. (To blight 2, put two -1/-1 counters on a creature you control.)"""@en ;
+    :flavorText """It bears a forbidden fruit."""@en ;
+    :scryfallUrl "https://scryfall.com/card/ecl/90/blighted-blackthorn"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "98409"^^xsd:positiveInteger ;
+    :arenaName "Blighted Blackthorn" ;
+    :arenaSetCode "ECL" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """All of the -1/-1 counters must be put on a single creature. You can't choose to split them up between multiple creatures."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """If a creature that has +1/+1 counters on it receives enough -1/-1 counters to cause it to be destroyed by lethal damage or put into its owner's graveyard for having 0 or less toughness, effects that refer to the counters on that creature when it died will see all of those +1/+1 and -1/-1 counters."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """If a creature has +1/+1 counters and -1/-1 counters on it, state-based actions remove the same number of each so that it has only one kind of those counters on it. For example, if a creature has three +1/+1 counters on it and two -1/-1 counters are put on it, state-based actions will remove two of each of those kinds of counters, leaving the creature with just one +1/+1 counter."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """If you can't place -1/-1 counters on any creatures you control (probably because you control no creatures), you can't choose to blight."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """Once you've announced that you're casting a spell or activating an ability, players can't take actions until you've finished doing so. Notably, opponents can't try to destroy or otherwise remove your creatures to stop you from blighting as part of paying the cost of that spell or ability."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """The creature you choose to put -1/-1 counters on doesn't have to have enough toughness to survive the process. For example, if you blight 2, you can choose to put the counters on a 1/1 creature you control."""@en ] .
+
+:BogslithersEmbrace rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Bogslither's Embrace" ;
+    :manaCost "{1}{B}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Sorcery ;
+    :hasRarity :Common ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :LorwynEclipsed ;
+    :cardNumber "94"^^xsd:integer ;
+    :artist "Justin Gerard" ;
+    :hasLanguage :English ;
+    :hasKeywordAction :Blight ;
+    :printedText """As an additional cost to cast this spell, blight 1 or pay {3}. (To blight 1, put a -1/-1 counter on a creature you control.)
+Exile target creature."""@en ;
+    :oracleText """As an additional cost to cast this spell, blight 1 or pay {3}. (To blight 1, put a -1/-1 counter on a creature you control.)
+Exile target creature."""@en ;
+    :flavorText """Shadow creatures are untamable forces of nature—chaotic and hungry."""@en ;
+    :scryfallUrl "https://scryfall.com/card/ecl/94/bogslithers-embrace"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "98413"^^xsd:positiveInteger ;
+    :arenaName "Bogslither's Embrace" ;
+    :arenaSetCode "ECL" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """If you can't place -1/-1 counters on any creatures you control (probably because you control no creatures), you can't choose to blight."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """If a creature has +1/+1 counters and -1/-1 counters on it, state-based actions remove the same number of each so that it has only one kind of those counters on it. For example, if a creature has three +1/+1 counters on it and two -1/-1 counters are put on it, state-based actions will remove two of each of those kinds of counters, leaving the creature with just one +1/+1 counter."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """All of the -1/-1 counters must be put on a single creature. You can't choose to split them up between multiple creatures."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """Once you've announced that you're casting a spell or activating an ability, players can't take actions until you've finished doing so. Notably, opponents can't try to destroy or otherwise remove your creatures to stop you from blighting as part of paying the cost of that spell or ability."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """The creature you choose to put -1/-1 counters on doesn't have to have enough toughness to survive the process. For example, if you blight 2, you can choose to put the counters on a 1/1 creature you control."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """If a creature that has +1/+1 counters on it receives enough -1/-1 counters to cause it to be destroyed by lethal damage or put into its owner's graveyard for having 0 or less toughness, effects that refer to the counters on that creature when it died will see all of those +1/+1 and -1/-1 counters."""@en ] .
+
+:DoseOfDawnglow rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Dose of Dawnglow" ;
+    :manaCost "{4}{B}" ;
+    :manaValue "5"^^xsd:nonNegativeInteger ;
+    :hasCardType :Instant ;
+    :hasRarity :Uncommon ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :LorwynEclipsed ;
+    :cardNumber "100"^^xsd:integer ;
+    :artist "Quintin Gleim" ;
+    :hasLanguage :English ;
+    :hasKeywordAction :Blight ;
+    :printedText """Return target creature card from your graveyard to the battlefield. Then if it isn't your main phase, blight 2. (Put two -1/-1 counters on a creature you control.)"""@en ;
+    :oracleText """Return target creature card from your graveyard to the battlefield. Then if it isn't your main phase, blight 2. (Put two -1/-1 counters on a creature you control.)"""@en ;
+    :flavorText """A lifetime of mischief gave way to a moment of tenderness."""@en ;
+    :scryfallUrl "https://scryfall.com/card/ecl/100/dose-of-dawnglow"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "98419"^^xsd:positiveInteger ;
+    :arenaName "Dose of Dawnglow" ;
+    :arenaSetCode "ECL" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """If you can't place -1/-1 counters on any creatures you control (probably because you control no creatures), you can't choose to blight."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """If a creature has +1/+1 counters and -1/-1 counters on it, state-based actions remove the same number of each so that it has only one kind of those counters on it. For example, if a creature has three +1/+1 counters on it and two -1/-1 counters are put on it, state-based actions will remove two of each of those kinds of counters, leaving the creature with just one +1/+1 counter."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """If a creature that has +1/+1 counters on it receives enough -1/-1 counters to cause it to be destroyed by lethal damage or put into its owner's graveyard for having 0 or less toughness, effects that refer to the counters on that creature when it died will see all of those +1/+1 and -1/-1 counters."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """All of the -1/-1 counters must be put on a single creature. You can't choose to split them up between multiple creatures."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """Once you've announced that you're casting a spell or activating an ability, players can't take actions until you've finished doing so. Notably, opponents can't try to destroy or otherwise remove your creatures to stop you from blighting as part of paying the cost of that spell or ability."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """The creature you choose to put -1/-1 counters on doesn't have to have enough toughness to survive the process. For example, if you blight 2, you can choose to put the counters on a 1/1 creature you control."""@en ] .
+
+:DreamSeizer rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Dream Seizer" ;
+    :manaCost "{3}{B}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Faerie ,
+                :Rogue ;
+    :hasRarity :Common ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :LorwynEclipsed ;
+    :cardNumber "101"^^xsd:integer ;
+    :artist "Omar Rayyan" ;
+    :hasLanguage :English ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    :hasKeywordAction :Blight ;
+    :hasKeywordAbility :Flying ;
+    :printedText """Flying
+When this creature enters, you may blight 1. If you do, each opponent discards a card. (To blight 1, put a -1/-1 counter on a creature you control.)"""@en ;
+    :oracleText """Flying
+When this creature enters, you may blight 1. If you do, each opponent discards a card. (To blight 1, put a -1/-1 counter on a creature you control.)"""@en ;
+    :flavorText """"Every fae has their preference. Mine are the dreams most bitter and pungent.\""""@en ;
+    :scryfallUrl "https://scryfall.com/card/ecl/101/dream-seizer"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "98420"^^xsd:positiveInteger ;
+    :arenaName "Dream Seizer" ;
+    :arenaSetCode "ECL" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """If a creature that has +1/+1 counters on it receives enough -1/-1 counters to cause it to be destroyed by lethal damage or put into its owner's graveyard for having 0 or less toughness, effects that refer to the counters on that creature when it died will see all of those +1/+1 and -1/-1 counters."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """Once you've announced that you're casting a spell or activating an ability, players can't take actions until you've finished doing so. Notably, opponents can't try to destroy or otherwise remove your creatures to stop you from blighting as part of paying the cost of that spell or ability."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """If a creature has +1/+1 counters and -1/-1 counters on it, state-based actions remove the same number of each so that it has only one kind of those counters on it. For example, if a creature has three +1/+1 counters on it and two -1/-1 counters are put on it, state-based actions will remove two of each of those kinds of counters, leaving the creature with just one +1/+1 counter."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """If you can't place -1/-1 counters on any creatures you control (probably because you control no creatures), you can't choose to blight."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """The creature you choose to put -1/-1 counters on doesn't have to have enough toughness to survive the process. For example, if you blight 2, you can choose to put the counters on a 1/1 creature you control."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """All of the -1/-1 counters must be put on a single creature. You can't choose to split them up between multiple creatures."""@en ] .
+
+:GnarlbarkElm rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Gnarlbark Elm" ;
+    :manaCost "{2}{B}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Treefolk ,
+                :Warlock ;
+    :hasRarity :Uncommon ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :LorwynEclipsed ;
+    :cardNumber "103"^^xsd:integer ;
+    :artist "Loïc Canavaggia" ;
+    :hasLanguage :English ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "4" ;
+    :toughnessValue "4"^^xsd:integer ;
+    :printedText """This creature enters with two -1/-1 counters on it.
+{2}{B}, Remove two counters from this creature: Target creature gets -2/-2 until end of turn. Activate only as a sorcery."""@en ;
+    :oracleText """This creature enters with two -1/-1 counters on it.
+{2}{B}, Remove two counters from this creature: Target creature gets -2/-2 until end of turn. Activate only as a sorcery."""@en ;
+    :flavorText """It greedily drinks boggart curses and returns their pain in kind."""@en ;
+    :scryfallUrl "https://scryfall.com/card/ecl/103/gnarlbark-elm"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "98422"^^xsd:positiveInteger ;
+    :arenaName "Gnarlbark Elm" ;
+    :arenaSetCode "ECL" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:Graveshifter rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Graveshifter" ;
+    :manaCost "{3}{B}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Shapeshifter ;
+    :hasRarity :Uncommon ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :LorwynEclipsed ;
+    :cardNumber "104"^^xsd:integer ;
+    :artist "Deborah Garcia" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    :hasKeywordAbility :Changeling ;
+    :printedText """Changeling (This card is every creature type.)
+When this creature enters, you may return target creature card from your graveyard to your hand."""@en ;
+    :oracleText """Changeling (This card is every creature type.)
+When this creature enters, you may return target creature card from your graveyard to your hand."""@en ;
+    :flavorText """We'll see a changeling at their funeral
+—Kithkin saying meaning "they won't be forgotten\""""@en ;
+    :scryfallUrl "https://scryfall.com/card/ecl/104/graveshifter"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "98423"^^xsd:positiveInteger ;
+    :arenaName "Graveshifter" ;
+    :arenaSetCode "ECL" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """Changeling is a characteristic-defining ability. It functions in all zones, not only while a card that has it is on the battlefield."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """If an effect causes a creature with changeling to become a new creature type, it will be only that new creature type (unless the effect says "in addition" or similar). It will still have changeling; the effect making it all creature types will simply be overwritten."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """If an effect causes a creature with changeling to lose all abilities, it will remain all creature types, even though it will no longer have changeling. This is because changeling applies before the effect that removes it."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """The subtype Shapeshifter that appears on the type line is mostly there to reinforce the flavor. A creature card with changeling is just as much a Kithkin, a Goblin, a Merfolk, and a Brushwagg as it is a Shapeshifter."""@en ] .
+
+:HeirloomAuntie rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Heirloom Auntie" ;
+    :manaCost "{2}{B}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Goblin ,
+                :Warlock ;
+    :hasRarity :Common ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :LorwynEclipsed ;
+    :cardNumber "107"^^xsd:integer ;
+    :artist "Raph Lomotan" ;
+    :hasLanguage :English ;
+    :power "4" ;
+    :powerValue "4"^^xsd:integer ;
+    :toughness "4" ;
+    :toughnessValue "4"^^xsd:integer ;
+    :hasKeywordAction :Surveil ;
+    :printedText """This creature enters with two -1/-1 counters on it.
+Whenever another creature you control dies, surveil 1, then remove a -1/-1 counter from this creature. (To surveil 1, look at the top card of your library. You may put it into your graveyard.)"""@en ;
+    :oracleText """This creature enters with two -1/-1 counters on it.
+Whenever another creature you control dies, surveil 1, then remove a -1/-1 counter from this creature. (To surveil 1, look at the top card of your library. You may put it into your graveyard.)"""@en ;
+    :scryfallUrl "https://scryfall.com/card/ecl/107/heirloom-auntie"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "98427"^^xsd:positiveInteger ;
+    :arenaName "Heirloom Auntie" ;
+    :arenaSetCode "ECL" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """If Heirloom Auntie dies at the same time as one or more other creatures you control, its last ability will trigger for each of those other creatures."""@en ] .
+
+:IronShieldElf rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Iron-Shield Elf" ;
+    :manaCost "{1}{B}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Elf ,
+                :Warrior ;
+    :hasRarity :Uncommon ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :LorwynEclipsed ;
+    :cardNumber "108"^^xsd:integer ;
+    :artist "Adrián Rodríguez Pérez" ;
+    :hasLanguage :English ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "1" ;
+    :toughnessValue "1"^^xsd:integer ;
+    :printedText """Discard a card: This creature gains indestructible until end of turn. Tap it. (Damage and effects that say "destroy" don't destroy it. If its toughness is 0 or less, it still dies.)"""@en ;
+    :oracleText """Discard a card: This creature gains indestructible until end of turn. Tap it. (Damage and effects that say "destroy" don't destroy it. If its toughness is 0 or less, it still dies.)"""@en ;
+    :flavorText """Flamekin metalcraft saves many an elvish life but mortally wounds their pride."""@en ;
+    :scryfallUrl "https://scryfall.com/card/ecl/108/iron-shield-elf"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "98428"^^xsd:positiveInteger ;
+    :arenaName "Iron-Shield Elf" ;
+    :arenaSetCode "ECL" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """You can activate Iron-Shield Elf's ability even if Iron-Shield Elf is already tapped."""@en ] .
+
+:Moonshadow rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Moonshadow" ;
+    :manaCost "{B}" ;
+    :manaValue "1"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Elemental ;
+    :hasRarity :MythicRare ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :LorwynEclipsed ;
+    :cardNumber "110"^^xsd:integer ;
+    :artist "Olivier Bernard" ;
+    :hasLanguage :English ;
+    :power "7" ;
+    :powerValue "7"^^xsd:integer ;
+    :toughness "7" ;
+    :toughnessValue "7"^^xsd:integer ;
+    :hasKeywordAbility :Menace ;
+    :printedText """Menace
+This creature enters with six -1/-1 counters on it.
+Whenever one or more permanent cards are put into your graveyard from anywhere while this creature has a -1/-1 counter on it, remove a -1/-1 counter from this creature."""@en ;
+    :oracleText """Menace
+This creature enters with six -1/-1 counters on it.
+Whenever one or more permanent cards are put into your graveyard from anywhere while this creature has a -1/-1 counter on it, remove a -1/-1 counter from this creature."""@en ;
+    :scryfallUrl "https://scryfall.com/card/ecl/110/moonshadow"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "98430"^^xsd:positiveInteger ;
+    :arenaName "Moonshadow" ;
+    :arenaSetCode "ECL" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
 
 :RequitingHex rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -117,3 +1315,1187 @@ Destroy target creature with mana value 2 or less. If this spell's additional co
       [ rdf:type :Ruling ;
         :rulingDate "2025-11-17"^^xsd:date ;
         :rulingText """If a creature has +1/+1 counters and -1/-1 counters on it, state-based actions remove the same number of each so that it has only one kind of those counters on it. For example, if a creature has three +1/+1 counters on it and two -1/-1 counters are put on it, state-based actions will remove two of each of those kinds of counters, leaving the creature with just one +1/+1 counter."""@en ] .
+
+:ScarbladeScout rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Scarblade Scout" ;
+    :manaCost "{1}{B}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Elf ,
+                :Scout ;
+    :hasRarity :Common ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :LorwynEclipsed ;
+    :cardNumber "118"^^xsd:integer ;
+    :artist "Lorenzo Mastroianni" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    :hasKeywordAbility :Lifelink ;
+    :hasKeywordAction :Mill ;
+    :printedText """Lifelink
+When this creature enters, mill two cards. (Put the top two cards of your library into your graveyard.)"""@en ;
+    :oracleText """Lifelink
+When this creature enters, mill two cards. (Put the top two cards of your library into your graveyard.)"""@en ;
+    :flavorText """"Areas of the Gilt-Leaf that carry scars of the Invasion are too unsightly for travel. They are to be marked and avoided."
+—High Perfect's decree"""@en ;
+    :scryfallUrl "https://scryfall.com/card/ecl/118/scarblade-scout"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "98438"^^xsd:positiveInteger ;
+    :arenaName "Scarblade Scout" ;
+    :arenaSetCode "ECL" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:BramblebackBrute rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Brambleback Brute" ;
+    :manaCost "{2}{R}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Giant ,
+                :Warrior ;
+    :hasRarity :Common ;
+    :hasColor :Red ;
+    :hasColorIdentity :Red ;
+    :isInSet :LorwynEclipsed ;
+    :cardNumber "128"^^xsd:integer ;
+    :artist "Aaron Miller" ;
+    :hasLanguage :English ;
+    :power "4" ;
+    :powerValue "4"^^xsd:integer ;
+    :toughness "5" ;
+    :toughnessValue "5"^^xsd:integer ;
+    :printedText """This creature enters with two -1/-1 counters on it.
+{1}{R}, Remove a counter from this creature: Target creature can't block this turn. Activate only as a sorcery."""@en ;
+    :oracleText """This creature enters with two -1/-1 counters on it.
+{1}{R}, Remove a counter from this creature: Target creature can't block this turn. Activate only as a sorcery."""@en ;
+    :flavorText """Her tangled cape grew with every village razed."""@en ;
+    :scryfallUrl "https://scryfall.com/card/ecl/128/brambleback-brute"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "98449"^^xsd:positiveInteger ;
+    :arenaName "Brambleback Brute" ;
+    :arenaSetCode "ECL" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:BurningCuriosity rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Burning Curiosity" ;
+    :manaCost "{2}{R}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Sorcery ;
+    :hasRarity :Common ;
+    :hasColor :Red ;
+    :hasColorIdentity :Red ;
+    :isInSet :LorwynEclipsed ;
+    :cardNumber "129"^^xsd:integer ;
+    :artist "Jim Pavelec" ;
+    :hasLanguage :English ;
+    :hasKeywordAction :Blight ;
+    :printedText """As an additional cost to cast this spell, you may blight 1. (You may put a -1/-1 counter on a creature you control.)
+Exile the top two cards of your library. If this spell's additional cost was paid, exile the top three cards instead. Until the end of your next turn, you may play those cards."""@en ;
+    :oracleText """As an additional cost to cast this spell, you may blight 1. (You may put a -1/-1 counter on a creature you control.)
+Exile the top two cards of your library. If this spell's additional cost was paid, exile the top three cards instead. Until the end of your next turn, you may play those cards."""@en ;
+    :flavorText """Cinders are drawn to any heat, at any cost."""@en ;
+    :scryfallUrl "https://scryfall.com/card/ecl/129/burning-curiosity"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "98450"^^xsd:positiveInteger ;
+    :arenaName "Burning Curiosity" ;
+    :arenaSetCode "ECL" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """Once you've announced that you're casting a spell or activating an ability, players can't take actions until you've finished doing so. Notably, opponents can't try to destroy or otherwise remove your creatures to stop you from blighting as part of paying the cost of that spell or ability."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """You pay all costs and follow all timing rules for cards played this way. For example, if an exiled card is a land card, you may play it only during your main phase while the stack is empty."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """The creature you choose to put -1/-1 counters on doesn't have to have enough toughness to survive the process. For example, if you blight 2, you can choose to put the counters on a 1/1 creature you control."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """If you can't place -1/-1 counters on any creatures you control (probably because you control no creatures), you can't choose to blight."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """If a creature that has +1/+1 counters on it receives enough -1/-1 counters to cause it to be destroyed by lethal damage or put into its owner's graveyard for having 0 or less toughness, effects that refer to the counters on that creature when it died will see all of those +1/+1 and -1/-1 counters."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """All of the -1/-1 counters must be put on a single creature. You can't choose to split them up between multiple creatures."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """If a creature has +1/+1 counters and -1/-1 counters on it, state-based actions remove the same number of each so that it has only one kind of those counters on it. For example, if a creature has three +1/+1 counters on it and two -1/-1 counters are put on it, state-based actions will remove two of each of those kinds of counters, leaving the creature with just one +1/+1 counter."""@en ] .
+
+:GristleGlutton rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Gristle Glutton" ;
+    :manaCost "{1}{R}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Goblin ,
+                :Scout ;
+    :hasRarity :Common ;
+    :hasColor :Red ;
+    :hasColorIdentity :Red ;
+    :isInSet :LorwynEclipsed ;
+    :cardNumber "144"^^xsd:integer ;
+    :artist "Filip Burburan" ;
+    :hasLanguage :English ;
+    :power "1" ;
+    :powerValue "1"^^xsd:integer ;
+    :toughness "3" ;
+    :toughnessValue "3"^^xsd:integer ;
+    :hasKeywordAction :Blight ;
+    :printedText """{T}, Blight 1: Discard a card. If you do, draw a card. (To blight 1, put a -1/-1 counter on a creature you control.)"""@en ;
+    :oracleText """{T}, Blight 1: Discard a card. If you do, draw a card. (To blight 1, put a -1/-1 counter on a creature you control.)"""@en ;
+    :flavorText """"Crunch and crack! Gnaw and snap! Be the snacker or be the snack!\""""@en ;
+    :scryfallUrl "https://scryfall.com/card/ecl/144/gristle-glutton"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "98465"^^xsd:positiveInteger ;
+    :arenaName "Gristle Glutton" ;
+    :arenaSetCode "ECL" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """If a creature that has +1/+1 counters on it receives enough -1/-1 counters to cause it to be destroyed by lethal damage or put into its owner's graveyard for having 0 or less toughness, effects that refer to the counters on that creature when it died will see all of those +1/+1 and -1/-1 counters."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """The creature you choose to put -1/-1 counters on doesn't have to have enough toughness to survive the process. For example, if you blight 2, you can choose to put the counters on a 1/1 creature you control."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """All of the -1/-1 counters must be put on a single creature. You can't choose to split them up between multiple creatures."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """Once you've announced that you're casting a spell or activating an ability, players can't take actions until you've finished doing so. Notably, opponents can't try to destroy or otherwise remove your creatures to stop you from blighting as part of paying the cost of that spell or ability."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """If you can't place -1/-1 counters on any creatures you control (probably because you control no creatures), you can't choose to blight."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """If a creature has +1/+1 counters and -1/-1 counters on it, state-based actions remove the same number of each so that it has only one kind of those counters on it. For example, if a creature has three +1/+1 counters on it and two -1/-1 counters are put on it, state-based actions will remove two of each of those kinds of counters, leaving the creature with just one +1/+1 counter."""@en ] .
+
+:KulrathZealot rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Kulrath Zealot" ;
+    :manaCost "{5}{R}" ;
+    :manaValue "6"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Elemental ,
+                :Warrior ;
+    :hasRarity :Common ;
+    :hasColor :Red ;
+    :hasColorIdentity :Red ;
+    :isInSet :LorwynEclipsed ;
+    :cardNumber "148"^^xsd:integer ;
+    :artist "Karl Kopinski" ;
+    :hasLanguage :English ;
+    :power "6" ;
+    :powerValue "6"^^xsd:integer ;
+    :toughness "5" ;
+    :toughnessValue "5"^^xsd:integer ;
+    :hasKeywordAbility :Cycling ;
+    :printedText """When this creature enters, exile the top card of your library. Until the end of your next turn, you may play that card.
+Basic landcycling {1}{R} ({1}{R}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)"""@en ;
+    :oracleText """When this creature enters, exile the top card of your library. Until the end of your next turn, you may play that card.
+Basic landcycling {1}{R} ({1}{R}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)"""@en ;
+    :flavorText """The Path of Flame brought him power at the terrible cost of his own identity."""@en ;
+    :scryfallUrl "https://scryfall.com/card/ecl/148/kulrath-zealot"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "98469"^^xsd:positiveInteger ;
+    :arenaName "Kulrath Zealot" ;
+    :arenaSetCode "ECL" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """You pay all costs and follow all timing rules for cards played this way. For example, if the exiled card is a land card, you may play it only during your main phase while the stack is empty."""@en ] .
+
+:SizzlingChangeling rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Sizzling Changeling" ;
+    :manaCost "{2}{R}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Shapeshifter ;
+    :hasRarity :Uncommon ;
+    :hasColor :Red ;
+    :hasColorIdentity :Red ;
+    :isInSet :LorwynEclipsed ;
+    :cardNumber "155"^^xsd:integer ;
+    :artist "Chris Seaman" ;
+    :hasLanguage :English ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    :hasKeywordAbility :Changeling ;
+    :printedText """Changeling (This card is every creature type.)
+When this creature dies, exile the top card of your library. Until the end of your next turn, you may play that card."""@en ;
+    :oracleText """Changeling (This card is every creature type.)
+When this creature dies, exile the top card of your library. Until the end of your next turn, you may play that card."""@en ;
+    :flavorText """Burrenton's forges call to it, and it arrives whenever they need to be relit."""@en ;
+    :scryfallUrl "https://scryfall.com/card/ecl/155/sizzling-changeling"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "98476"^^xsd:positiveInteger ;
+    :arenaName "Sizzling Changeling" ;
+    :arenaSetCode "ECL" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """Changeling is a characteristic-defining ability. It functions in all zones, not only while a card that has it is on the battlefield."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """You pay all costs and follow all timing rules for cards played this way. For example, if the exiled card is a land card, you may play it only during your main phase while the stack is empty."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """The subtype Shapeshifter that appears on the type line is mostly there to reinforce the flavor. A creature card with changeling is just as much a Kithkin, a Goblin, a Merfolk, and a Brushwagg as it is a Shapeshifter."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """If an effect causes a creature with changeling to become a new creature type, it will be only that new creature type (unless the effect says "in addition" or similar). It will still have changeling; the effect making it all creature types will simply be overwritten."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """If an effect causes a creature with changeling to lose all abilities, it will remain all creature types, even though it will no longer have changeling. This is because changeling applies before the effect that removes it."""@en ] .
+
+:AssertPerfection rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Assert Perfection" ;
+    :manaCost "{1}{G}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Sorcery ;
+    :hasRarity :Common ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :LorwynEclipsed ;
+    :cardNumber "164"^^xsd:integer ;
+    :artist "Matt Stewart" ;
+    :hasLanguage :English ;
+    :printedText """Target creature you control gets +1/+0 until end of turn. It deals damage equal to its power to up to one target creature an opponent controls."""@en ;
+    :oracleText """Target creature you control gets +1/+0 until end of turn. It deals damage equal to its power to up to one target creature an opponent controls."""@en ;
+    :flavorText """Some elves still cling to the old ways of treating outsiders."""@en ;
+    :scryfallUrl "https://scryfall.com/card/ecl/164/assert-perfection"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "98485"^^xsd:positiveInteger ;
+    :arenaName "Assert Perfection" ;
+    :arenaSetCode "ECL" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """If either target is an illegal target as Assert Perfection tries to resolve, the creature you control won't deal damage."""@en ] .
+
+:BristlebaneOutrider rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Bristlebane Outrider" ;
+    :manaCost "{3}{G}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Kithkin ,
+                :Knight ;
+    :hasRarity :Uncommon ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :LorwynEclipsed ;
+    :cardNumber "169"^^xsd:integer ;
+    :artist "Ryan Pancoast" ;
+    :hasLanguage :English ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "5" ;
+    :toughnessValue "5"^^xsd:integer ;
+    :printedText """This creature can't be blocked by creatures with power 2 or less.
+As long as another creature entered the battlefield under your control this turn, this creature gets +2/+0."""@en ;
+    :oracleText """This creature can't be blocked by creatures with power 2 or less.
+As long as another creature entered the battlefield under your control this turn, this creature gets +2/+0."""@en ;
+    :flavorText """Memories of oil and blood haunt her rides. She patrols kithkin lands driven by the fear of losing another doun."""@en ;
+    :scryfallUrl "https://scryfall.com/card/ecl/169/bristlebane-outrider"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "98490"^^xsd:positiveInteger ;
+    :arenaName "Bristlebane Outrider" ;
+    :arenaSetCode "ECL" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """Once a creature with power 3 or greater has blocked Bristlebane Outrider, changing the power of the blocking creature won't cause Bristlebane Outrider to become unblocked."""@en ] .
+
+:DawnsLightArcher rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Dawn's Light Archer" ;
+    :manaCost "{2}{G}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Elf ,
+                :Archer ;
+    :hasRarity :Common ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :LorwynEclipsed ;
+    :cardNumber "174"^^xsd:integer ;
+    :artist "Scott Gustafson" ;
+    :hasLanguage :English ;
+    :power "4" ;
+    :powerValue "4"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    :hasKeywordAbility :Reach ,
+                       :Flash ;
+    :printedText """Flash
+Reach"""@en ;
+    :oracleText """Flash
+Reach"""@en ;
+    :flavorText """"Archery is beauty in action. Your stance, your draw, your aim, and your release. All must be a single harmonious motion.\""""@en ;
+    :scryfallUrl "https://scryfall.com/card/ecl/174/dawns-light-archer"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "98495"^^xsd:positiveInteger ;
+    :arenaName "Dawn's Light Archer" ;
+    :arenaSetCode "ECL" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:DundoolinWeaver rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Dundoolin Weaver" ;
+    :manaCost "{1}{G}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Kithkin ,
+                :Druid ;
+    :hasRarity :Uncommon ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :LorwynEclipsed ;
+    :cardNumber "175"^^xsd:integer ;
+    :artist "Olivier Bernard" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "1" ;
+    :toughnessValue "1"^^xsd:integer ;
+    :printedText """When this creature enters, if you control three or more creatures, return target permanent card from your graveyard to your hand."""@en ;
+    :oracleText """When this creature enters, if you control three or more creatures, return target permanent card from your graveyard to your hand."""@en ;
+    :flavorText """Stitching a mind back into the thoughtweft takes time, artistry, and the faith of an entire clachan."""@en ;
+    :scryfallUrl "https://scryfall.com/card/ecl/175/dundoolin-weaver"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "98496"^^xsd:positiveInteger ;
+    :arenaName "Dundoolin Weaver" ;
+    :arenaSetCode "ECL" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """If you don't control three or more creatures immediately after Dundoolin Weaver enters, its ability won't trigger. If you don't control three or more creatures as the ability tries to resolve, it won't resolve and none of its effects will happen. It doesn't matter if any of the creatures you control when the ability resolves are the same creatures as the ones you controlled when it triggered."""@en ] .
+
+:GreatForestDruid rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Great Forest Druid" ;
+    :manaCost "{1}{G}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Treefolk ,
+                :Druid ;
+    :hasRarity :Common ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :LorwynEclipsed ;
+    :cardNumber "178"^^xsd:integer ;
+    :artist "Pete Venters" ;
+    :hasLanguage :English ;
+    :producesMana :White ,
+                  :Blue ,
+                  :Black ,
+                  :Red ,
+                  :Green ;
+    :power "0" ;
+    :powerValue "0"^^xsd:integer ;
+    :toughness "4" ;
+    :toughnessValue "4"^^xsd:integer ;
+    :printedText """{T}: Add one mana of any color."""@en ;
+    :oracleText """{T}: Add one mana of any color."""@en ;
+    :flavorText """"Forget the elves, that meddling faerie queen, and those greasy machines. If you ask me, it's the generous who should be remembered.\""""@en ;
+    :scryfallUrl "https://scryfall.com/card/ecl/178/great-forest-druid"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "98499"^^xsd:positiveInteger ;
+    :arenaName "Great Forest Druid" ;
+    :arenaSetCode "ECL" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:MidnightTilling rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Midnight Tilling" ;
+    :manaCost "{1}{G}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Instant ;
+    :hasRarity :Common ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :LorwynEclipsed ;
+    :cardNumber "182"^^xsd:integer ;
+    :artist "Slawomir Maniak" ;
+    :hasLanguage :English ;
+    :hasKeywordAction :Mill ;
+    :printedText """Mill four cards, then you may return a permanent card from among them to your hand. (To mill four cards, put the top four cards of your library into your graveyard.)"""@en ;
+    :oracleText """Mill four cards, then you may return a permanent card from among them to your hand. (To mill four cards, put the top four cards of your library into your graveyard.)"""@en ;
+    :flavorText """The kithkin farmer awoke to find the crop ruined and a trail of rootprints leading into the forest."""@en ;
+    :scryfallUrl "https://scryfall.com/card/ecl/182/midnight-tilling"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "98503"^^xsd:positiveInteger ;
+    :arenaName "Midnight Tilling" ;
+    :arenaSetCode "ECL" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:UnforgivingAim rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Unforgiving Aim" ;
+    :manaCost "{2}{G}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Instant ;
+    :hasRarity :Common ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :LorwynEclipsed ;
+    :cardNumber "200"^^xsd:integer ;
+    :artist "Filip Burburan" ;
+    :hasLanguage :English ;
+    :printedText """Choose one —
+• Destroy target creature with flying.
+• Destroy target enchantment.
+• Create a 2/2 black and green Elf creature token."""@en ;
+    :oracleText """Choose one —
+• Destroy target creature with flying.
+• Destroy target enchantment.
+• Create a 2/2 black and green Elf creature token."""@en ;
+    :flavorText """"I tend to my field of view like a garden. Occasionally, it needs weeding.\""""@en ;
+    :scryfallUrl "https://scryfall.com/card/ecl/200/unforgiving-aim"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "98522"^^xsd:positiveInteger ;
+    :arenaName "Unforgiving Aim" ;
+    :arenaSetCode "ECL" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:FlaringCinder rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Flaring Cinder" ;
+    :manaCost "{1}{U/R}{U/R}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Elemental ,
+                :Sorcerer ;
+    :hasRarity :Common ;
+    :hasColor :Blue ,
+              :Red ;
+    :hasColorIdentity :Blue ,
+                      :Red ;
+    :isInSet :LorwynEclipsed ;
+    :cardNumber "225"^^xsd:integer ;
+    :artist "Kai Carpenter" ;
+    :hasLanguage :English ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    :printedText """When this creature enters and whenever you cast a spell with mana value 4 or greater, you may discard a card. If you do, draw a card."""@en ;
+    :oracleText """When this creature enters and whenever you cast a spell with mana value 4 or greater, you may discard a card. If you do, draw a card."""@en ;
+    :flavorText """"Am I losing myself or realizing my true nature?\""""@en ;
+    :scryfallUrl "https://scryfall.com/card/ecl/225/flaring-cinder"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "98547"^^xsd:positiveInteger ;
+    :arenaName "Flaring Cinder" ;
+    :arenaSetCode "ECL" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """If a spell has {X} in its mana cost, use the value chosen for that X to determine the mana value of that spell."""@en ] .
+
+:GanglyStompling rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Gangly Stompling" ;
+    :manaCost "{2}{R/G}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Shapeshifter ;
+    :hasRarity :Common ;
+    :hasColor :Red ,
+              :Green ;
+    :hasColorIdentity :Red ,
+                      :Green ;
+    :isInSet :LorwynEclipsed ;
+    :cardNumber "226"^^xsd:integer ;
+    :artist "Scott Murphy" ;
+    :hasLanguage :English ;
+    :power "4" ;
+    :powerValue "4"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    :hasKeywordAbility :Trample ,
+                       :Changeling ;
+    :printedText """Changeling (This card is every creature type.)
+Trample"""@en ;
+    :oracleText """Changeling (This card is every creature type.)
+Trample"""@en ;
+    :flavorText """Having manifested in the grotto at diminutive size, it now reveled in the reverberations of its own heavy footfalls."""@en ;
+    :scryfallUrl "https://scryfall.com/card/ecl/226/gangly-stompling"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "98548"^^xsd:positiveInteger ;
+    :arenaName "Gangly Stompling" ;
+    :arenaSetCode "ECL" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """If an effect causes a creature with changeling to lose all abilities, it will remain all creature types, even though it will no longer have changeling. This is because changeling applies before the effect that removes it."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """Changeling is a characteristic-defining ability. It functions in all zones, not only while a card that has it is on the battlefield."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """The subtype Shapeshifter that appears on the type line is mostly there to reinforce the flavor. A creature card with changeling is just as much a Kithkin, a Goblin, a Merfolk, and a Brushwagg as it is a Shapeshifter."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """If an effect causes a creature with changeling to become a new creature type, it will be only that new creature type (unless the effect says "in addition" or similar). It will still have changeling; the effect making it all creature types will simply be overwritten."""@en ] .
+
+:MaralenFaeAscendant rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Maralen, Fae Ascendant" ;
+    :manaCost "{2}{B}{G}{U}" ;
+    :manaValue "5"^^xsd:nonNegativeInteger ;
+    :hasSuperType :Legendary ;
+    :hasCardType :Creature ;
+    :hasSubType :Elf ,
+                :Faerie ,
+                :Noble ;
+    :hasRarity :Rare ;
+    :hasColor :Blue ,
+              :Black ,
+              :Green ;
+    :hasColorIdentity :Blue ,
+                      :Black ,
+                      :Green ;
+    :isInSet :LorwynEclipsed ;
+    :cardNumber "233"^^xsd:integer ;
+    :artist "Steve Prescott" ;
+    :hasLanguage :English ;
+    :power "4" ;
+    :powerValue "4"^^xsd:integer ;
+    :toughness "5" ;
+    :toughnessValue "5"^^xsd:integer ;
+    :hasKeywordAbility :Flying ;
+    :printedText """Flying
+Whenever Maralen or another Elf or Faerie you control enters, exile the top two cards of target opponent's library.
+Once each turn, you may cast a spell with mana value less than or equal to the number of Elves and Faeries you control from among cards exiled with Maralen this turn without paying its mana cost."""@en ;
+    :oracleText """Flying
+Whenever Maralen or another Elf or Faerie you control enters, exile the top two cards of target opponent's library.
+Once each turn, you may cast a spell with mana value less than or equal to the number of Elves and Faeries you control from among cards exiled with Maralen this turn without paying its mana cost."""@en ;
+    :scryfallUrl "https://scryfall.com/card/ecl/233/maralen-fae-ascendant"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "98555"^^xsd:positiveInteger ;
+    :arenaName "Maralen, Fae Ascendant" ;
+    :arenaSetCode "ECL" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """If an exiled card has {X} in its mana cost, X is 0 for the purpose of determining its mana value."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """Since you are using an alternative cost to cast the spell, you can't pay any other alternative costs. You can, however, pay additional costs, such as kicker costs. If the card has any mandatory additional costs, you must pay those."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """If the spell you cast has {X} in its mana cost, you must choose 0 as the value of X when casting it without paying its mana cost."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """If Maralen enters at the same time as one or more other Elves or Faeries you control, its first ability will trigger for each of those other Elves and Faeries as well as itself."""@en ] .
+
+:MerrowSkyswimmer rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Merrow Skyswimmer" ;
+    :manaCost "{3}{W/U}{W/U}" ;
+    :manaValue "5"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Merfolk ,
+                :Soldier ;
+    :hasRarity :Common ;
+    :hasColor :White ,
+              :Blue ;
+    :hasColorIdentity :White ,
+                      :Blue ;
+    :isInSet :LorwynEclipsed ;
+    :cardNumber "234"^^xsd:integer ;
+    :artist "Richard Kane Ferguson" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    :hasKeywordAbility :Flying ,
+                       :Vigilance ,
+                       :Convoke ;
+    :printedText """Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)
+Flying, vigilance
+When this creature enters, create a 1/1 white and blue Merfolk creature token."""@en ;
+    :oracleText """Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)
+Flying, vigilance
+When this creature enters, create a 1/1 white and blue Merfolk creature token."""@en ;
+    :flavorText """"Only fools believe us bound to water.\""""@en ;
+    :scryfallUrl "https://scryfall.com/card/ecl/234/merrow-skyswimmer"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "98556"^^xsd:positiveInteger ;
+    :arenaName "Merrow Skyswimmer" ;
+    :arenaSetCode "ECL" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """You can tap any untapped creature you control to convoke a spell, even one you haven't controlled continuously since the beginning of your most recent turn."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """Tapping an untapped creature that's attacking or blocking to convoke a spell won't cause that creature to stop attacking or blocking."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """When calculating a spell's total cost, include any alternative costs, additional costs, or anything else that increases or reduces the cost to cast the spell. Convoke applies after the total cost is calculated. Convoke doesn't change a spell's mana cost or mana value."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """If a creature you control has a mana ability with {T} in the cost, activating that ability while casting a spell with convoke will result in the creature being tapped before you pay the spell's costs. You won't be able to tap it again for convoke. Similarly, if you sacrifice a creature to activate a mana ability while casting a spell with convoke, that creature won't be on the battlefield when you pay the spell's costs, so you won't be able to tap it for convoke."""@en ] .
+
+:PridefulFeastling rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Prideful Feastling" ;
+    :manaCost "{2}{W/B}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Shapeshifter ;
+    :hasRarity :Common ;
+    :hasColor :White ,
+              :Black ;
+    :hasColorIdentity :White ,
+                      :Black ;
+    :isInSet :LorwynEclipsed ;
+    :cardNumber "238"^^xsd:integer ;
+    :artist "Raph Lomotan" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "3" ;
+    :toughnessValue "3"^^xsd:integer ;
+    :hasKeywordAbility :Lifelink ,
+                       :Changeling ;
+    :printedText """Changeling (This card is every creature type.)
+Lifelink"""@en ;
+    :oracleText """Changeling (This card is every creature type.)
+Lifelink"""@en ;
+    :flavorText """Changelings are friendly by nature, but some forms carry ancestral memories of carnage and hunger."""@en ;
+    :scryfallUrl "https://scryfall.com/card/ecl/238/prideful-feastling"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "98560"^^xsd:positiveInteger ;
+    :arenaName "Prideful Feastling" ;
+    :arenaSetCode "ECL" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """The subtype Shapeshifter that appears on the type line is mostly there to reinforce the flavor. A creature card with changeling is just as much a Kithkin, a Goblin, a Merfolk, and a Brushwagg as it is a Shapeshifter."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """If an effect causes a creature with changeling to lose all abilities, it will remain all creature types, even though it will no longer have changeling. This is because changeling applies before the effect that removes it."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """If an effect causes a creature with changeling to become a new creature type, it will be only that new creature type (unless the effect says "in addition" or similar). It will still have changeling; the effect making it all creature types will simply be overwritten."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """Changeling is a characteristic-defining ability. It functions in all zones, not only while a card that has it is on the battlefield."""@en ] .
+
+:ReapingWillow rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Reaping Willow" ;
+    :manaCost "{1}{W/B}{W/B}{W/B}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Treefolk ,
+                :Cleric ;
+    :hasRarity :Uncommon ;
+    :hasColor :White ,
+              :Black ;
+    :hasColorIdentity :White ,
+                      :Black ;
+    :isInSet :LorwynEclipsed ;
+    :cardNumber "240"^^xsd:integer ;
+    :artist "Igor Krstic" ;
+    :hasLanguage :English ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "6" ;
+    :toughnessValue "6"^^xsd:integer ;
+    :hasKeywordAbility :Lifelink ;
+    :printedText """Lifelink
+This creature enters with two -1/-1 counters on it.
+{1}{W/B}, Remove two counters from this creature: Return target creature card with mana value 3 or less from your graveyard to the battlefield. Activate only as a sorcery."""@en ;
+    :oracleText """Lifelink
+This creature enters with two -1/-1 counters on it.
+{1}{W/B}, Remove two counters from this creature: Return target creature card with mana value 3 or less from your graveyard to the battlefield. Activate only as a sorcery."""@en ;
+    :scryfallUrl "https://scryfall.com/card/ecl/240/reaping-willow"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "98562"^^xsd:positiveInteger ;
+    :arenaName "Reaping Willow" ;
+    :arenaSetCode "ECL" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """If a card in a graveyard has {X} in its mana cost, X is 0 for the purpose of determining its mana value."""@en ] .
+
+:ShadowUrchin rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Shadow Urchin" ;
+    :manaCost "{2}{B/R}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Ouphe ;
+    :hasRarity :Rare ;
+    :hasColor :Black ,
+              :Red ;
+    :hasColorIdentity :Black ,
+                      :Red ;
+    :isInSet :LorwynEclipsed ;
+    :cardNumber "242"^^xsd:integer ;
+    :artist "Ron Spencer" ;
+    :hasLanguage :English ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "4" ;
+    :toughnessValue "4"^^xsd:integer ;
+    :hasKeywordAction :Blight ;
+    :printedText """Whenever this creature attacks, blight 1. (Put a -1/-1 counter on a creature you control.)
+Whenever a creature you control with one or more counters on it dies, exile that many cards from the top of your library. Until your next end step, you may play those cards."""@en ;
+    :oracleText """Whenever this creature attacks, blight 1. (Put a -1/-1 counter on a creature you control.)
+Whenever a creature you control with one or more counters on it dies, exile that many cards from the top of your library. Until your next end step, you may play those cards."""@en ;
+    :scryfallUrl "https://scryfall.com/card/ecl/242/shadow-urchin"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "98564"^^xsd:positiveInteger ;
+    :arenaName "Shadow Urchin" ;
+    :arenaSetCode "ECL" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """The creature you choose to put -1/-1 counters on doesn't have to have enough toughness to survive the process. For example, if you blight 2, you can choose to put the counters on a 1/1 creature you control."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """You pay all costs and follow all timing rules for cards played this way. For example, if an exiled card is a land card, you may play it only during your main phase while the stack is empty."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """All of the -1/-1 counters must be put on a single creature. You can't choose to split them up between multiple creatures."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """If you can't place -1/-1 counters on any creatures you control (probably because you control no creatures), you can't choose to blight."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """If a creature has +1/+1 counters and -1/-1 counters on it, state-based actions remove the same number of each so that it has only one kind of those counters on it. For example, if a creature has three +1/+1 counters on it and two -1/-1 counters are put on it, state-based actions will remove two of each of those kinds of counters, leaving the creature with just one +1/+1 counter."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """If a creature that has +1/+1 counters on it receives enough -1/-1 counters to cause it to be destroyed by lethal damage or put into its owner's graveyard for having 0 or less toughness, effects that refer to the counters on that creature when it died will see all of those +1/+1 and -1/-1 counters."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-11-17"^^xsd:date ;
+        :rulingText """Once you've announced that you're casting a spell or activating an ability, players can't take actions until you've finished doing so. Notably, opponents can't try to destroy or otherwise remove your creatures to stop you from blighting as part of paying the cost of that spell or ability."""@en ] .
+
+:StoicGroveGuide rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Stoic Grove-Guide" ;
+    :manaCost "{4}{B/G}" ;
+    :manaValue "5"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Elf ,
+                :Druid ;
+    :hasRarity :Common ;
+    :hasColor :Black ,
+              :Green ;
+    :hasColorIdentity :Black ,
+                      :Green ;
+    :isInSet :LorwynEclipsed ;
+    :cardNumber "243"^^xsd:integer ;
+    :artist "Tran Nguyen" ;
+    :hasLanguage :English ;
+    :power "5" ;
+    :powerValue "5"^^xsd:integer ;
+    :toughness "4" ;
+    :toughnessValue "4"^^xsd:integer ;
+    :printedText """{1}{B/G}, Exile this card from your graveyard: Create a 2/2 black and green Elf creature token. Activate only as a sorcery."""@en ;
+    :oracleText """{1}{B/G}, Exile this card from your graveyard: Create a 2/2 black and green Elf creature token. Activate only as a sorcery."""@en ;
+    :flavorText """Safewrights stationed within the Creakwood do not fear Shadowmoor's encroaching dark. They embrace it."""@en ;
+    :scryfallUrl "https://scryfall.com/card/ecl/243/stoic-grove-guide"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "98565"^^xsd:positiveInteger ;
+    :arenaName "Stoic Grove-Guide" ;
+    :arenaSetCode "ECL" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:DawnBlessedPennant rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Dawn-Blessed Pennant" ;
+    :manaCost "{1}" ;
+    :manaValue "1"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ;
+    :hasRarity :Uncommon ;
+    :isInSet :LorwynEclipsed ;
+    :cardNumber "254"^^xsd:integer ;
+    :artist "Igor Krstic" ;
+    :hasLanguage :English ;
+    :printedText """As this artifact enters, choose Elemental, Elf, Faerie, Giant, Goblin, Kithkin, Merfolk, or Treefolk.
+Whenever a permanent you control of the chosen type enters, you gain 1 life.
+{2}, {T}, Sacrifice this artifact: Return target card of the chosen type from your graveyard to your hand."""@en ;
+    :oracleText """As this artifact enters, choose Elemental, Elf, Faerie, Giant, Goblin, Kithkin, Merfolk, or Treefolk.
+Whenever a permanent you control of the chosen type enters, you gain 1 life.
+{2}, {T}, Sacrifice this artifact: Return target card of the chosen type from your graveyard to your hand."""@en ;
+    :scryfallUrl "https://scryfall.com/card/ecl/254/dawn-blessed-pennant"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "98576"^^xsd:positiveInteger ;
+    :arenaName "Dawn-Blessed Pennant" ;
+    :arenaSetCode "ECL" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:EvolvingWildsLorwynEclipsed264 rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Evolving Wilds" ;
+    :manaValue "0"^^xsd:nonNegativeInteger ;
+    :hasCardType :Land ;
+    :hasRarity :Common ;
+    :isInSet :LorwynEclipsed ;
+    :cardNumber "264"^^xsd:integer ;
+    :artist "Alayna Danner" ;
+    :hasLanguage :English ;
+    :isFetchLand "true"^^xsd:boolean ;
+    :printedText """{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."""@en ;
+    :oracleText """{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."""@en ;
+    :flavorText """"I don't think we're going to make it back in time for Introduction to Prophecy."
+—Tam, Strixhaven first-year"""@en ;
+    :scryfallUrl "https://scryfall.com/card/ecl/264/evolving-wilds"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "98586"^^xsd:positiveInteger ;
+    :arenaName "Evolving Wilds" ;
+    :arenaSetCode "ECL" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .

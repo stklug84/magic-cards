@@ -39,8 +39,9 @@
     rdfs:label "Magic Card Collection Individuals – Throne of Eldraine"@en ;
     rdfs:comment """An instance graph describing the card individuals of a
 personal Magic: The Gathering card collection that were printed in the set
-Throne of Eldraine (ELD). One Card individual is defined per collected
-printing, carrying its characteristics, the platforms it is available on
+Throne of Eldraine (ELD). One Card individual is defined per printing
+collected in paper or on MTG Arena, carrying its characteristics, the
+platforms it is available on
 (paper, MTG Arena, Magic Online) with its MTG Arena identity, its legality
 in the paper and MTG Arena formats, and official rulings. Card data was
 sourced from Gatherer and Scryfall. This file imports MagicCardsOntology to
@@ -53,6 +54,55 @@ legality definitions."""@en .
 # Card Individuals
 #
 ################################################################################
+
+:DeafeningSilence rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Deafening Silence" ;
+    :manaCost "{W}" ;
+    :manaValue "1"^^xsd:nonNegativeInteger ;
+    :hasCardType :Enchantment ;
+    :hasRarity :Uncommon ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :ThroneOfEldraine ;
+    :cardNumber "10"^^xsd:integer ;
+    :artist "Igor Kieryluk" ;
+    :hasLanguage :English ;
+    :printedText """Each player can't cast more than one noncreature spell each turn."""@en ;
+    :oracleText """Each player can't cast more than one noncreature spell each turn."""@en ;
+    :flavorText """"They have forsaken their vows. The edict of the Circle demands their voices be silenced."
+—Syr Tasdale, knight of Ardenvale"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=472972"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/eld/10/deafening-silence"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "70157"^^xsd:positiveInteger ;
+    :arenaName "Deafening Silence" ;
+    :arenaSetCode "ELD" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2019-10-04"^^xsd:date ;
+        :rulingText """Deafening Silence will look at the entire turn to see if a player has cast a noncreature spell yet that turn, even if Deafening Silence wasn't on the battlefield when that spell was cast. Notably, you can't cast Deafening Silence and then cast another noncreature spell that turn."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2019-10-04"^^xsd:date ;
+        :rulingText """Players may cast any number of creature spells plus one noncreature spell each turn."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2019-10-04"^^xsd:date ;
+        :rulingText """If you cast a noncreature spell that was countered, you can't cast another noncreature spell that turn."""@en ] .
 
 :GingerbreadCabin rdf:type owl:NamedIndividual ,
                   :Card ;

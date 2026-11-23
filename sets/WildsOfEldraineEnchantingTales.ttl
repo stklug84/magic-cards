@@ -39,8 +39,9 @@
     rdfs:label "Magic Card Collection Individuals – Wilds of Eldraine: Enchanting Tales"@en ;
     rdfs:comment """An instance graph describing the card individuals of a
 personal Magic: The Gathering card collection that were printed in the set
-Wilds of Eldraine: Enchanting Tales (WOT). One Card individual is defined per collected
-printing, carrying its characteristics, the platforms it is available on
+Wilds of Eldraine: Enchanting Tales (WOT). One Card individual is defined per printing
+collected in paper or on MTG Arena, carrying its characteristics, the
+platforms it is available on
 (paper, MTG Arena, Magic Online) with its MTG Arena identity, its legality
 in the paper and MTG Arena formats, and official rulings. Card data was
 sourced from Gatherer and Scryfall. This file imports MagicCardsOntology to
@@ -53,6 +54,207 @@ legality definitions."""@en .
 # Card Individuals
 #
 ################################################################################
+
+:GraspOfFate rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Grasp of Fate" ;
+    :manaCost "{1}{W}{W}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Enchantment ;
+    :hasRarity :Uncommon ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :WildsOfEldraineEnchantingTales ;
+    :cardNumber "3"^^xsd:integer ;
+    :artist "WFlemming Illustration" ;
+    :hasLanguage :English ;
+    :printedText """When this enchantment enters, for each opponent, exile up to one target nonland permanent that player controls until this enchantment leaves the battlefield. (Those permanents return under their owners' control.)"""@en ;
+    :oracleText """When this enchantment enters, for each opponent, exile up to one target nonland permanent that player controls until this enchantment leaves the battlefield. (Those permanents return under their owners' control.)"""@en ;
+    :flavorText """"The witch wrapped her heart in briar vines, hid it away in the ancient keep in the depths of the forest. If none could find it, the prophecy could never come to pass."
+—*Beyond the Great Henge*"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=632431"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/wot/3/grasp-of-fate"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "87041"^^xsd:positiveInteger ;
+    :arenaName "Grasp of Fate" ;
+    :arenaSetCode "WOT" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2015-11-04"^^xsd:date ;
+        :rulingText """The exiled cards return to the battlefield immediately after Grasp of Fate leaves the battlefield. Nothing happens between the two events, including state-based actions."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2015-11-04"^^xsd:date ;
+        :rulingText """Auras attached to exiled nonland permanents will be put into their owners' graveyards. Equipment attached to exiled creatures will become unattached and remain on the battlefield. Any counters on exiled nonland permanents will cease to exist."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2015-11-04"^^xsd:date ;
+        :rulingText """In a multiplayer game, if Grasp of Fate's owner leaves the game, the exiled cards will return to the battlefield. Because the one-shot effect that returns the cards isn't an ability that goes on the stack, it won't cease to exist along with the leaving player's spells and abilities on the stack."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2015-11-04"^^xsd:date ;
+        :rulingText """If a token is exiled, it ceases to exist. It won't be returned to the battlefield."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2015-11-04"^^xsd:date ;
+        :rulingText """If Grasp of Fate leaves the battlefield before its triggered ability resolves, no nonland permanents will be exiled."""@en ] .
+
+:ForcedFruition rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Forced Fruition" ;
+    :manaCost "{4}{U}{U}" ;
+    :manaValue "6"^^xsd:nonNegativeInteger ;
+    :hasCardType :Enchantment ;
+    :hasRarity :Rare ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :WildsOfEldraineEnchantingTales ;
+    :cardNumber "18"^^xsd:integer ;
+    :artist "Shafer Brown" ;
+    :hasLanguage :English ;
+    :printedText """Whenever an opponent casts a spell, that player draws seven cards."""@en ;
+    :oracleText """Whenever an opponent casts a spell, that player draws seven cards."""@en ;
+    :flavorText """"'My kingdom for a feast!' quoth the king. A faerie appeared before him, and spoke through a wicked grin: 'As you wish.'"
+—*Tales of the Fae*"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=632446"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/wot/18/forced-fruition"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "87056"^^xsd:positiveInteger ;
+    :arenaName "Forced Fruition" ;
+    :arenaSetCode "WOT" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2007-10-01"^^xsd:date ;
+        :rulingText """Yes, the opponent draws seven cards. It’s not optional."""@en ] .
+
+:DarkTutelage rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Dark Tutelage" ;
+    :manaCost "{2}{B}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Enchantment ;
+    :hasRarity :Uncommon ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :WildsOfEldraineEnchantingTales ;
+    :cardNumber "28"^^xsd:integer ;
+    :artist "Abigail Larson" ;
+    :hasLanguage :English ;
+    :printedText """At the beginning of your upkeep, reveal the top card of your library and put that card into your hand. You lose life equal to its mana value."""@en ;
+    :oracleText """At the beginning of your upkeep, reveal the top card of your library and put that card into your hand. You lose life equal to its mana value."""@en ;
+    :flavorText """"Ours is a path of the outcast, of pain given and pain received. But for the strong, it is a path that leads to power untethered from fae riddles."
+—*The Witch's Way*"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=632456"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/wot/28/dark-tutelage"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "87066"^^xsd:positiveInteger ;
+    :arenaName "Dark Tutelage" ;
+    :arenaSetCode "WOT" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2010-08-15"^^xsd:date ;
+        :rulingText """The mana value of the revealed card is determined solely by the mana symbols printed in its upper right corner. The mana value is the total amount of mana in that cost, regardless of color. For example, a card with mana cost {3}{U}{U} has mana value 5."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2010-08-15"^^xsd:date ;
+        :rulingText """If the mana cost of the revealed card includes {X}, X is considered to be 0."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2010-08-15"^^xsd:date ;
+        :rulingText """If the revealed card has no mana symbols in its upper right corner (because it's a land card, for example), its mana value is 0."""@en ] .
+
+:LeylineOfTheVoid rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Leyline of the Void" ;
+    :manaCost "{2}{B}{B}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasCardType :Enchantment ;
+    :hasRarity :Rare ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :WildsOfEldraineEnchantingTales ;
+    :cardNumber "30"^^xsd:integer ;
+    :artist "Matteo Marjoram" ;
+    :hasLanguage :English ;
+    :printedText """If this card is in your opening hand, you may begin the game with it on the battlefield.
+If a card would be put into an opponent's graveyard from anywhere, exile it instead."""@en ;
+    :oracleText """If this card is in your opening hand, you may begin the game with it on the battlefield.
+If a card would be put into an opponent's graveyard from anywhere, exile it instead."""@en ;
+    :flavorText """"Malevolent lights pulsed around her, whispering of riches in the dark. Still she walked on."
+—*The Nameless Knight of Summer*"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=632458"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/wot/30/leyline-of-the-void"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "87068"^^xsd:positiveInteger ;
+    :arenaName "Leyline of the Void" ;
+    :arenaSetCode "WOT" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """Tokens can still die while Leyline of the Void is on the battlefield."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """A player's "opening hand" is the hand of cards the player has after all players have taken mulligans. If players have any cards in hand that allow actions to be taken with them from a player's opening hand, the starting player takes all such actions first in any order, followed by each other player in turn order. Then the first turn begins."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """If your opponent discards a card while you control Leyline of the Void, abilities that check whether a card is discarded (such as Hollow One, or a madness ability of the discarded card) still work, even though that card never reaches that player's graveyard. In addition, spells or abilities that check the characteristics of the discarded card can find that card in exile."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-09-20"^^xsd:date ;
+        :rulingText """While Leyline of the Void is on the battlefield, nontoken creatures your opponents control won't die. They'll be exiled instead. Abilities that would trigger when those creatures die won't trigger."""@en ] .
 
 :SanguineBond rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -108,3 +310,51 @@ legality definitions."""@en .
       [ rdf:type :Ruling ;
         :rulingDate "2024-04-12"^^xsd:date ;
         :rulingText """In a Two-Headed Giant game, life gained by your teammate won't cause Sanguine Bond's ability to trigger, even though it caused your team's life total to increase."""@en ] .
+
+:GroundSeal rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Ground Seal" ;
+    :manaCost "{1}{G}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Enchantment ;
+    :hasRarity :Uncommon ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :WildsOfEldraineEnchantingTales ;
+    :cardNumber "54"^^xsd:integer ;
+    :artist "BEMOCS" ;
+    :hasLanguage :English ;
+    :printedText """When this enchantment enters, draw a card.
+Cards in graveyards can't be the targets of spells or abilities."""@en ;
+    :oracleText """When this enchantment enters, draw a card.
+Cards in graveyards can't be the targets of spells or abilities."""@en ;
+    :flavorText """"They laid her to rest in the wilds, in a sacred place beyond the reach of nightmares or machines."
+—*The Nameless Knight of Summer*"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=632482"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/wot/54/ground-seal"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "87092"^^xsd:positiveInteger ;
+    :arenaName "Ground Seal" ;
+    :arenaSetCode "WOT" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2012-07-01"^^xsd:date ;
+        :rulingText """The last ability only works when Ground Seal is on the battlefield."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2012-07-01"^^xsd:date ;
+        :rulingText """Only spells and abilities that target cards in graveyards will be affected. Abilities that don’t target cards in graveyards (like the one Tormod’s Crypt has) can still affect those cards."""@en ] .

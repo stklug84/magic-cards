@@ -39,8 +39,9 @@
     rdfs:label "Magic Card Collection Individuals – Marvel Universe"@en ;
     rdfs:comment """An instance graph describing the card individuals of a
 personal Magic: The Gathering card collection that were printed in the set
-Marvel Universe (MAR). One Card individual is defined per collected
-printing, carrying its characteristics, the platforms it is available on
+Marvel Universe (MAR). One Card individual is defined per printing
+collected in paper or on MTG Arena, carrying its characteristics, the
+platforms it is available on
 (paper, MTG Arena, Magic Online) with its MTG Arena identity, its legality
 in the paper and MTG Arena formats, and official rulings. Card data was
 sourced from Gatherer and Scryfall. This file imports MagicCardsOntology to
@@ -53,6 +54,49 @@ legality definitions."""@en .
 # Card Individuals
 #
 ################################################################################
+
+:ParallelLives rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Parallel Lives" ;
+    :manaCost "{3}{G}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasCardType :Enchantment ;
+    :hasRarity :MythicRare ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :SourceMaterialCards ;
+    :cardNumber "36"^^xsd:integer ;
+    :artist "Jim Cheung & Justin Ponsor" ;
+    :hasLanguage :English ;
+    :printedText """If an effect would create one or more tokens under your control, it creates twice that many of those tokens instead."""@en ;
+    :oracleText """If an effect would create one or more tokens under your control, it creates twice that many of those tokens instead."""@en ;
+    :scryfallUrl "https://scryfall.com/card/mar/36/parallel-lives"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "104887"^^xsd:positiveInteger ;
+    :arenaName "Parallel Lives" ;
+    :arenaSetCode "MAR" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """If you control two Parallel Lives, then the number of tokens created is four times the original number. If you control three, then the number of tokens created is eight times the original number, and so on."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-09-01"^^xsd:date ;
+        :rulingText """Everything that is specified by the effect creating the original token or tokens will also be true about the additional token or tokens created by Parallel Lives's replacement effect. For example, if an effect tells you to create a token "tapped and attacking," the additional tokens will also be tapped and attacking."""@en ] .
 
 :ArchangelOfThune rdf:type owl:NamedIndividual ,
                   :Card ;

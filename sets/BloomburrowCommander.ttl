@@ -39,8 +39,9 @@
     rdfs:label "Magic Card Collection Individuals – Bloomburrow Commander"@en ;
     rdfs:comment """An instance graph describing the card individuals of a
 personal Magic: The Gathering card collection that were printed in the set
-Bloomburrow Commander (BLC). One Card individual is defined per collected
-printing, carrying its characteristics, the platforms it is available on
+Bloomburrow Commander (BLC). One Card individual is defined per printing
+collected in paper or on MTG Arena, carrying its characteristics, the
+platforms it is available on
 (paper, MTG Arena, Magic Online) with its MTG Arena identity, its legality
 in the paper and MTG Arena formats, and official rulings. Card data was
 sourced from Gatherer and Scryfall. This file imports MagicCardsOntology to
@@ -135,6 +136,70 @@ At the beginning of each end step, create a token that's a copy of target creatu
         :rulingDate "2024-07-26"^^xsd:date ;
         :rulingText """If you copy a spell for which the gift was promised, the gift was also promised to the same opponent for the copy. If a card or token enters as a copy of a permanent that's already on the battlefield, the gift isn't promised for that new permanent, even if it was promised for the original."""@en ] .
 
+:TamiyoFieldResearcher rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Tamiyo, Field Researcher" ;
+    :manaCost "{1}{G}{W}{U}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasSuperType :Legendary ;
+    :hasCardType :Planeswalker ;
+    :hasSubType :Tamiyo ;
+    :hasRarity :MythicRare ;
+    :hasColor :White ,
+              :Blue ,
+              :Green ;
+    :hasColorIdentity :White ,
+                      :Blue ,
+                      :Green ;
+    :isInSet :BloomburrowCommander ;
+    :cardNumber "100"^^xsd:integer ;
+    :artist "Justin Gerard" ;
+    :hasLanguage :English ;
+    :loyalty "4"^^xsd:integer ;
+    :printedText """+1: Choose up to two target creatures. Until your next turn, whenever either of those creatures deals combat damage, you draw a card.
+−2: Tap up to two target nonland permanents. They don't untap during their controller's next untap step.
+−7: Draw three cards. You get an emblem with "You may cast spells from your hand without paying their mana costs.\""""@en ;
+    :oracleText """+1: Choose up to two target creatures. Until your next turn, whenever either of those creatures deals combat damage, you draw a card.
+−2: Tap up to two target nonland permanents. They don't untap during their controller's next untap step.
+−7: Draw three cards. You get an emblem with "You may cast spells from your hand without paying their mana costs.\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=670863"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/blc/100/tamiyo-field-researcher"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "92709"^^xsd:positiveInteger ;
+    :arenaName "Tamiyo, Field Researcher" ;
+    :arenaSetCode "BLC" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-01-24"^^xsd:date ;
+        :rulingText """If a spell has {X} in its mana cost, you must choose 0 as the value of X when casting it without paying its mana cost."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-01-24"^^xsd:date ;
+        :rulingText """If you cast a spell “without paying its mana cost,” you can’t choose to cast it for any alternative costs. You can, however, pay additional costs. If the spell has any mandatory additional costs, those must be paid to cast the spell."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-01-24"^^xsd:date ;
+        :rulingText """Tamiyo’s first ability can target creatures you don’t control. You’ll draw a card, not their controller, if they deal combat damage."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-01-24"^^xsd:date ;
+        :rulingText """Tamiyo’s first ability sets up a delayed triggered ability that triggers even if Tamiyo has left the battlefield before those creatures deal combat damage."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-01-24"^^xsd:date ;
+        :rulingText """If Tamiyo’s first ability targets two creatures, and both deal combat damage at the same time, the delayed triggered ability triggers twice."""@en ] .
+
 :ReliquaryTowerBloomburrowCommander132 rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Reliquary Tower" ;
@@ -173,7 +238,7 @@ At the beginning of each end step, create a token that's a copy of target creatu
         :rulingDate "2009-02-01"^^xsd:date ;
         :rulingText """If multiple effects modify your hand size, apply them in timestamp order. For example, if you put Null Profusion (an enchantment that says your maximum hand size is two) onto the battlefield and then put Reliquary Tower onto the battlefield, you'll have no maximum hand size. However, if those permanents enter in the opposite order, your maximum hand size would be two."""@en ] .
 
-:RestorationAngel rdf:type owl:NamedIndividual ,
+:RestorationAngelBloomburrowCommander150 rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Restoration Angel" ;
     :manaCost "{3}{W}" ;
@@ -269,28 +334,28 @@ When this creature enters, you may exile target non-Angel creature you control, 
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2017-04-18"^^xsd:date ;
-        :rulingText """If you exert Combat Celebrant, you get an additional combat phase even if Combat Celebrant doesn't survive the first combat phase."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2017-04-18"^^xsd:date ;
-        :rulingText """You can't exert a creature unless an effect allows you to do so. Similar effects that "tap and freeze" a creature (such as that of Decision Paralysis) don't exert that creature."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2017-04-18"^^xsd:date ;
         :rulingText """If an exerted creature is already untapped during your next untap step (most likely because it had vigilance or an effect untapped it), exert's effect preventing it from untapping expires without having done anything."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2017-04-18"^^xsd:date ;
-        :rulingText """All cards in the Amonkhet set that let you exert a creature let you do so as you declare it as an attacking creature, as do some of the cards in the Hour of Devastation set. You can't do so later in combat, and creatures put onto the battlefield attacking can't be exerted. Any abilities that trigger on exerting an attacking creature will resolve before blockers are declared."""@en ] ,
+        :rulingText """If you exert Combat Celebrant, you get an additional combat phase even if Combat Celebrant doesn't survive the first combat phase."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2017-04-18"^^xsd:date ;
+        :rulingText """There's no main phase between your combat phases, so you'll have no opportunity to cast spells or activate abilities that could only be cast any time you could cast a sorcery. For example, you won't be able to cast another creature or equip Equipment between combats."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2017-04-18"^^xsd:date ;
         :rulingText """Combat Celebrant's ability untaps all of your creatures, not just the ones that are attacking."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2017-04-18"^^xsd:date ;
+        :rulingText """If you gain control of another player's creature until end of turn and exert it, it will untap during that player's untap step."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2017-04-18"^^xsd:date ;
         :rulingText """If you exert multiple Combat Celebrants in one combat phase, you'll have that many additional combat phases, but all of your creatures are untapped only during the current combat phase. You'll need to exert the Combat Celebrants one at a time, in multiple combat phases, to untap your attacking creatures and attack with them in each combat step."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2017-04-18"^^xsd:date ;
+        :rulingText """You can't exert a creature unless an effect allows you to do so. Similar effects that "tap and freeze" a creature (such as that of Decision Paralysis) don't exert that creature."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2017-04-18"^^xsd:date ;
         :rulingText """Untapping an attacking creature doesn't remove it from combat."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2017-04-18"^^xsd:date ;
-        :rulingText """If you gain control of another player's creature until end of turn and exert it, it will untap during that player's untap step."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2017-04-18"^^xsd:date ;
-        :rulingText """There's no main phase between your combat phases, so you'll have no opportunity to cast spells or activate abilities that could only be cast any time you could cast a sorcery. For example, you won't be able to cast another creature or equip Equipment between combats."""@en ] .
+        :rulingText """All cards in the Amonkhet set that let you exert a creature let you do so as you declare it as an attacking creature, as do some of the cards in the Hour of Devastation set. You can't do so later in combat, and creatures put onto the battlefield attacking can't be exerted. Any abilities that trigger on exerting an attacking creature will resolve before blockers are declared."""@en ] .

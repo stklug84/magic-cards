@@ -39,8 +39,9 @@
     rdfs:label "Magic Card Collection Individuals – Core Set 2019"@en ;
     rdfs:comment """An instance graph describing the card individuals of a
 personal Magic: The Gathering card collection that were printed in the set
-Core Set 2019 (M19). One Card individual is defined per collected
-printing, carrying its characteristics, the platforms it is available on
+Core Set 2019 (M19). One Card individual is defined per printing
+collected in paper or on MTG Arena, carrying its characteristics, the
+platforms it is available on
 (paper, MTG Arena, Magic Online) with its MTG Arena identity, its legality
 in the paper and MTG Arena formats, and official rulings. Card data was
 sourced from Gatherer and Scryfall. This file imports MagicCardsOntology to
@@ -94,3 +95,45 @@ legality definitions."""@en .
       [ rdf:type :Ruling ;
         :rulingDate "2018-07-13"^^xsd:date ;
         :rulingText """If multiple extra turns would be taken after this one, perhaps because more than one player has activated the last ability of their Magistrate’s Scepter, the most recently created one is taken first."""@en ] .
+
+:MeanderingRiver rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Meandering River" ;
+    :manaValue "0"^^xsd:nonNegativeInteger ;
+    :hasCardType :Land ;
+    :hasRarity :Common ;
+    :hasColorIdentity :White ,
+                      :Blue ;
+    :isInSet :CoreSet2019 ;
+    :cardNumber "253"^^xsd:integer ;
+    :artist "Cliff Childs" ;
+    :hasLanguage :English ;
+    :producesMana :White ,
+                  :Blue ;
+    :entersTapped "true"^^xsd:boolean ;
+    :printedText """This land enters tapped.
+{T}: Add {W} or {U}."""@en ;
+    :oracleText """This land enters tapped.
+{T}: Add {W} or {U}."""@en ;
+    :flavorText """The river split into many channels as it flowed to the Halimar Sea. Few travelers could follow the same one twice."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=447390"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/m19/253/meandering-river"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "68188"^^xsd:positiveInteger ;
+    :arenaName "Meandering River" ;
+    :arenaSetCode "M19" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] .

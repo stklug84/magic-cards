@@ -39,8 +39,9 @@
     rdfs:label "Magic Card Collection Individuals – Modern Horizons 3"@en ;
     rdfs:comment """An instance graph describing the card individuals of a
 personal Magic: The Gathering card collection that were printed in the set
-Modern Horizons 3 (MH3). One Card individual is defined per collected
-printing, carrying its characteristics, the platforms it is available on
+Modern Horizons 3 (MH3). One Card individual is defined per printing
+collected in paper or on MTG Arena, carrying its characteristics, the
+platforms it is available on
 (paper, MTG Arena, Magic Online) with its MTG Arena identity, its legality
 in the paper and MTG Arena formats, and official rulings. Card data was
 sourced from Gatherer and Scryfall. This file imports MagicCardsOntology to
@@ -159,6 +160,94 @@ Whenever another colorless creature you control enters, this creature deals 1 da
         :rulingDate "2024-06-07"^^xsd:date ;
         :rulingText """Glaring Fleshraker's first ability goes on the stack above the spell that caused it to trigger and resolves first. It resolves even if that spell is countered or otherwise leaves the stack."""@en ] .
 
+:TwistedRiddlekeeper rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Twisted Riddlekeeper" ;
+    :manaCost "{8}" ;
+    :manaValue "8"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Eldrazi ,
+                :Sphinx ;
+    :hasRarity :Uncommon ;
+    :hasColorIdentity :Blue ;
+    :isInSet :ModernHorizons3 ;
+    :cardNumber "14"^^xsd:integer ;
+    :artist "Nino Vecia" ;
+    :hasLanguage :English ;
+    :power "5" ;
+    :powerValue "5"^^xsd:integer ;
+    :toughness "5" ;
+    :toughnessValue "5"^^xsd:integer ;
+    :hasKeywordAbility :Flying ,
+                       :Emerge ;
+    :printedText """Emerge {5}{C}{U} (You may cast this spell by sacrificing a creature and paying the emerge cost reduced by that creature's mana value.)
+When you cast this spell, tap up to two target permanents. Put a stun counter on each of them. (If a permanent with a stun counter would become untapped, remove one from it instead.)
+Flying"""@en ;
+    :oracleText """Emerge {5}{C}{U} (You may cast this spell by sacrificing a creature and paying the emerge cost reduced by that creature's mana value.)
+When you cast this spell, tap up to two target permanents. Put a stun counter on each of them. (If a permanent with a stun counter would become untapped, remove one from it instead.)
+Flying"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=662166"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mh3/14/twisted-riddlekeeper"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "90863"^^xsd:positiveInteger ;
+    :arenaName "Twisted Riddlekeeper" ;
+    :arenaSetCode "MH3" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-06-07"^^xsd:date ;
+        :rulingText """The triggered ability will resolve before Twisted Riddlekeeper does. If Twisted Riddlekeeper is countered or otherwise leaves the stack in response to its triggered ability, the triggered ability will still resolve as normal."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-06-07"^^xsd:date ;
+        :rulingText """The triggered ability may target permanents that are already tapped. It will still put a stun counter on them."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-01-24"^^xsd:date ;
+        :rulingText """The mana value of a creature spell with emerge isn’t affected by whether its emerge cost is paid. For example, if you cast Decimator of the Provinces for its emerge cost and sacrifice a creature whose mana value is 3, Decimator of the Provinces’s mana value remains 10."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-01-24"^^xsd:date ;
+        :rulingText """The creature chosen to be sacrificed is still on the battlefield as the cost of the emerge spell is determined and as you activate mana abilities to cast the emerge spell. Its abilities may affect the spell’s cost, be activated to generate mana, and so on. However, if it has an ability that triggers when a spell is cast, it will have been sacrificed before that ability can trigger."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-01-24"^^xsd:date ;
+        :rulingText """Once you begin to cast a spell with emerge, no player may take actions until you’re done. Notably, opponents can’t try to remove the creature you wish to sacrifice."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-01-24"^^xsd:date ;
+        :rulingText """Emerge represents two static abilities that function while the spell with emerge is on the stack. “Emerge [cost]” means “You may cast this spell by paying [cost] and sacrificing a creature rather than paying its mana cost” and “If you chose to pay this spell’s emerge cost, its total cost is reduced by an amount of generic mana equal to the sacrificed creature’s mana value.”"""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-01-24"^^xsd:date ;
+        :rulingText """You may sacrifice a creature with mana value greater than or equal to the emerge cost. If you do, you’ll pay only the colored mana component of the emerge cost."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-01-24"^^xsd:date ;
+        :rulingText """Colored mana components of emerge costs can’t be reduced with emerge."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-01-24"^^xsd:date ;
+        :rulingText """The mana value of the back face of a double-faced card is the mana value of its front face. The mana value of a melded permanent is the sum of the mana values of its front faces. A creature that’s a copy of either has a mana value of 0."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-01-24"^^xsd:date ;
+        :rulingText """If you sacrifice a creature with {X} in its mana cost, that X is 0."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-01-24"^^xsd:date ;
+        :rulingText """A creature’s mana value is determined solely by the mana symbols printed in its upper right corner (unless that creature is the back face of a double-faced card, is a melded permanent, or is copying something else; see below). If the mana cost includes {X}, X is 0. If it’s a single-faced card with no mana symbols in its upper right corner (because it’s an animated land, for example), its mana value is 0. Ignore any alternative costs or additional costs (such as kicker) that were paid as the creature was cast."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-01-24"^^xsd:date ;
+        :rulingText """You may sacrifice a creature with a mana value of 0, such as a token creature that’s not a copy of another permanent, to cast a spell for its emerge cost. You’ll just pay the full emerge cost with no reduction."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-01-24"^^xsd:date ;
+        :rulingText """If you cast a spell for another cost “rather than paying its mana cost,” such as an emerge cost, you can’t choose to cast it for any other alternative costs. You can, however, pay additional costs, such as kicker costs. If the spell has any mandatory additional costs, those must be paid to cast it."""@en ] .
+
 :GuideOfSouls rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Guide of Souls" ;
@@ -237,6 +326,52 @@ Whenever you attack, you may pay {E}{E}{E}. When you do, put two +1/+1 counters 
       [ rdf:type :Ruling ;
         :rulingDate "2024-06-07"^^xsd:date ;
         :rulingText """You don't choose a target for Guide of Souls's last ability at the time it triggers. Rather, a second "reflexive" ability triggers when you pay {E}{E}{E} this way. You choose a target for that ability as it goes on the stack. Each player may respond to this triggered ability as normal."""@en ] .
+
+:HexgoldSlith rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Hexgold Slith" ;
+    :manaCost "{1}{W}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Slith ;
+    :hasRarity :Common ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :ModernHorizons3 ;
+    :cardNumber "30"^^xsd:integer ;
+    :artist "Michele Giorgi" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "1" ;
+    :toughnessValue "1"^^xsd:integer ;
+    :printedText """When this creature enters, you get {E}{E} (two energy counters).
+Whenever this creature attacks, you may pay {E}{E}. If you do, it gains first strike until end of turn.
+Whenever this creature deals combat damage to a player, put a +1/+1 counter on it."""@en ;
+    :oracleText """When this creature enters, you get {E}{E} (two energy counters).
+Whenever this creature attacks, you may pay {E}{E}. If you do, it gains first strike until end of turn.
+Whenever this creature deals combat damage to a player, put a +1/+1 counter on it."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=662182"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mh3/30/hexgold-slith"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "90879"^^xsd:positiveInteger ;
+    :arenaName "Hexgold Slith" ;
+    :arenaSetCode "MH3" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] .
 
 :InspiredInventor rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -668,6 +803,72 @@ Crew 4"""@en ;
         :rulingDate "2024-06-07"^^xsd:date ;
         :rulingText """As long as Bespoke Battlewagon isn't a creature, its {T} abilities can be activated even if you haven't controlled it continuously since the beginning of your most recent turn. If it is a creature, however, it's still subject to "summoning sickness" during that time period."""@en ] .
 
+:PetrifyingMeddler rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Petrifying Meddler" ;
+    :manaCost "{4}{U}" ;
+    :manaValue "5"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Eldrazi ;
+    :hasRarity :Common ;
+    :hasColorIdentity :Blue ;
+    :isInSet :ModernHorizons3 ;
+    :cardNumber "66"^^xsd:integer ;
+    :artist "Mathias Kollros" ;
+    :hasLanguage :English ;
+    :power "4" ;
+    :powerValue "4"^^xsd:integer ;
+    :toughness "5" ;
+    :toughnessValue "5"^^xsd:integer ;
+    :hasKeywordAbility :Reach ,
+                       :Devoid ;
+    :printedText """Devoid (This card has no color.)
+When you cast this spell, tap up to one target creature and put a stun counter on it. (If a permanent with a stun counter would become untapped, remove one from it instead.)
+Reach"""@en ;
+    :oracleText """Devoid (This card has no color.)
+When you cast this spell, tap up to one target creature and put a stun counter on it. (If a permanent with a stun counter would become untapped, remove one from it instead.)
+Reach"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=662218"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mh3/66/petrifying-meddler"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "90915"^^xsd:positiveInteger ;
+    :arenaName "Petrifying Meddler" ;
+    :arenaSetCode "MH3" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-06-07"^^xsd:date ;
+        :rulingText """Devoid doesn't affect the color identity of the card for the purposes of the Commander variant. For example, while Abstruse Appropriation is colorless because it has devoid, its color identity is still white and black, and it can't be included in a Commander deck where the commander's color identity doesn't include both white and black."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-06-07"^^xsd:date ;
+        :rulingText """Petrifying Meddler's triggered ability will resolve before Petrifying Meddler does. If Petrifying Meddler is countered or otherwise leaves the stack in response to that triggered ability, the triggered ability will still resolve as normal."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-06-07"^^xsd:date ;
+        :rulingText """Other cards and abilities can give a card with devoid a color. If that happens, it's just the new color, not that color and colorless."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-06-07"^^xsd:date ;
+        :rulingText """Devoid works in all zones, not just on the battlefield."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-06-07"^^xsd:date ;
+        :rulingText """If a card loses devoid, it will still be colorless. This is because effects that change an object's color (like the one created by devoid) are considered before the object loses devoid."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-06-07"^^xsd:date ;
+        :rulingText """A card with devoid is just colorless. It's not colorless and the colors of mana in its mana cost."""@en ] .
+
 :RoilCartographer rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Roil Cartographer" ;
@@ -751,6 +952,55 @@ Crew 4"""@en ;
       [ rdf:type :Ruling ;
         :rulingDate "2024-11-08"^^xsd:date ;
         :rulingText """Whenever a land you control enters, each landfall ability of the permanents you control will trigger. You can put them   on the stack in any order. The last ability you put on the stack will be the first one to resolve (As a result, you can have those abilities resolve in the order of your choosing.)."""@en ] .
+
+:SageOfTheUnknowable rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Sage of the Unknowable" ;
+    :manaCost "{1}{U}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Human ,
+                :Wizard ;
+    :hasRarity :Common ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :ModernHorizons3 ;
+    :cardNumber "68"^^xsd:integer ;
+    :artist "Josu Hernaiz" ;
+    :hasLanguage :English ;
+    :producesMana :Colorless ;
+    :power "0" ;
+    :powerValue "0"^^xsd:integer ;
+    :toughness "4" ;
+    :toughnessValue "4"^^xsd:integer ;
+    :printedText """{T}: Add {C}. Spend this mana only to cast a colorless spell or to activate an ability."""@en ;
+    :oracleText """{T}: Add {C}. Spend this mana only to cast a colorless spell or to activate an ability."""@en ;
+    :flavorText """"Someday, we will walk the Blind Eternities and see the truths that lie beyond the stifling veil of reality.\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=662220"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mh3/68/sage-of-the-unknowable"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "90917"^^xsd:positiveInteger ;
+    :arenaName "Sage of the Unknowable" ;
+    :arenaSetCode "MH3" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-06-07"^^xsd:date ;
+        :rulingText """The mana generated by Sage of the Unknowable's activated ability can be used to activate any ability, not just abilities of colorless sources."""@en ] .
 
 :TuneTheNarrative rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -876,6 +1126,160 @@ When this creature enters, exchange control of this creature and target creature
         :rulingDate "2024-06-07"^^xsd:date ;
         :rulingText """Some triggered abilities state that you "may pay" a certain amount of {E}. You can't pay that amount multiple times to multiply the effect. You simply choose whether or not to pay that amount of {E} as the ability resolves."""@en ] .
 
+:BreatheYourLast rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Breathe Your Last" ;
+    :manaCost "{1}{B}{B}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Instant ;
+    :hasRarity :Common ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :ModernHorizons3 ;
+    :cardNumber "82"^^xsd:integer ;
+    :artist "Drew Baker" ;
+    :hasLanguage :English ;
+    :printedText """Destroy target creature or planeswalker. You gain 1 life for each of its colors."""@en ;
+    :oracleText """Destroy target creature or planeswalker. You gain 1 life for each of its colors."""@en ;
+    :flavorText """"Bodies are so much more cooperative with the soul out of the way."
+—Liliana"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=662234"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mh3/82/breathe-your-last"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "90931"^^xsd:positiveInteger ;
+    :arenaName "Breathe Your Last" ;
+    :arenaSetCode "MH3" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-06-07"^^xsd:date ;
+        :rulingText """If the target is a colorless creature or planeswalker, you won't gain any life."""@en ] .
+
+:DreamdrinkerVampire rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Dreamdrinker Vampire" ;
+    :manaCost "{1}{B}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Vampire ;
+    :hasRarity :Common ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :ModernHorizons3 ;
+    :cardNumber "88"^^xsd:integer ;
+    :artist "Steve Ellis" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "1" ;
+    :toughnessValue "1"^^xsd:integer ;
+    :hasKeywordAbility :Lifelink ;
+    :hasKeywordAction :Adapt ;
+    :printedText """Lifelink
+{1}{B}: Adapt 1. (If this creature has no +1/+1 counters on it, put a +1/+1 counter on it.)
+Whenever one or more +1/+1 counters are put on this creature, it gains menace until end of turn."""@en ;
+    :oracleText """Lifelink
+{1}{B}: Adapt 1. (If this creature has no +1/+1 counters on it, put a +1/+1 counter on it.)
+Whenever one or more +1/+1 counters are put on this creature, it gains menace until end of turn."""@en ;
+    :flavorText """The dream she tastes will be your last."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=662240"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mh3/88/dreamdrinker-vampire"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "90937"^^xsd:positiveInteger ;
+    :arenaName "Dreamdrinker Vampire" ;
+    :arenaSetCode "MH3" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-06-07"^^xsd:date ;
+        :rulingText """Once Dreamdrinker Vampire becomes blocked by a creature, giving it menace by putting one or more +1/+1 counters on it won't cause it to become unblocked."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-06-07"^^xsd:date ;
+        :rulingText """If a creature somehow loses all of its +1/+1 counters, it can adapt again and get more +1/+1 counters."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-06-07"^^xsd:date ;
+        :rulingText """You can always activate an ability that will cause a creature to adapt. As that ability resolves, if the creature has a +1/+1 counter on it for any reason, you simply won't put any +1/+1 counters on it."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-06-07"^^xsd:date ;
+        :rulingText """Multiple instances of menace on the same creature are redundant."""@en ] .
+
+:LethalThrowdown rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Lethal Throwdown" ;
+    :manaCost "{B}" ;
+    :manaValue "1"^^xsd:nonNegativeInteger ;
+    :hasCardType :Sorcery ;
+    :hasRarity :Uncommon ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :ModernHorizons3 ;
+    :cardNumber "99"^^xsd:integer ;
+    :artist "Aaron J. Riley" ;
+    :hasLanguage :English ;
+    :printedText """As an additional cost to cast this spell, sacrifice a creature or sacrifice a modified creature. (Equipment, Auras you control, and counters are modifications.)
+Destroy target creature or planeswalker. If the modified creature was sacrificed, draw a card."""@en ;
+    :oracleText """As an additional cost to cast this spell, sacrifice a creature or sacrifice a modified creature. (Equipment, Auras you control, and counters are modifications.)
+Destroy target creature or planeswalker. If the modified creature was sacrificed, draw a card."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=662251"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mh3/99/lethal-throwdown"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "90948"^^xsd:positiveInteger ;
+    :arenaName "Lethal Throwdown" ;
+    :arenaSetCode "MH3" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-06-07"^^xsd:date ;
+        :rulingText """A creature with a counter on it is considered modified no matter what kind of counter it is or which player put it on that creature."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-06-07"^^xsd:date ;
+        :rulingText """A creature that is equipped is considered modified no matter who controls the Equipment that's attached to it."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-06-07"^^xsd:date ;
+        :rulingText """An Aura controlled by another player does not cause a creature you control to be modified."""@en ] .
+
 :MarionetteApprentice rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Marionette Apprentice" ;
@@ -932,6 +1336,56 @@ Whenever another creature or artifact you control is put into a graveyard from t
       [ rdf:type :Ruling ;
         :rulingDate "2024-06-07"^^xsd:date ;
         :rulingText """Fabricate doesn't cause the creature with the ability to enter the battlefield with +1/+1 counters already on it. For example, Marionette Apprentice will enter the battlefield as a 1/2 creature, then its fabricate ability goes on the stack. Players may take actions (such as casting instants) while the ability is waiting to resolve."""@en ] .
+
+:QuestForTheNecropolis rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Quest for the Necropolis" ;
+    :manaCost "{B}" ;
+    :manaValue "1"^^xsd:nonNegativeInteger ;
+    :hasCardType :Enchantment ;
+    :hasRarity :Uncommon ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :ModernHorizons3 ;
+    :cardNumber "104"^^xsd:integer ;
+    :artist "Jorge Jacinto" ;
+    :hasLanguage :English ;
+    :hasAbilityWord :Landfall ;
+    :printedText """Landfall — Whenever a land you control enters, put a quest counter on this enchantment.
+{5}{B}, Sacrifice this enchantment: Put target creature card from a graveyard onto the battlefield under your control. This ability costs {1} less to activate for each quest counter on this enchantment. Activate only as a sorcery."""@en ;
+    :oracleText """Landfall — Whenever a land you control enters, put a quest counter on this enchantment.
+{5}{B}, Sacrifice this enchantment: Put target creature card from a graveyard onto the battlefield under your control. This ability costs {1} less to activate for each quest counter on this enchantment. Activate only as a sorcery."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=662256"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mh3/104/quest-for-the-necropolis"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "90953"^^xsd:positiveInteger ;
+    :arenaName "Quest for the Necropolis" ;
+    :arenaSetCode "MH3" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-11-08"^^xsd:date ;
+        :rulingText """A landfall ability doesn't trigger if a permanent already on the battlefield becomes a land."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-11-08"^^xsd:date ;
+        :rulingText """Whenever a land you control enters, each landfall ability of the permanents you control will trigger. You can put them   on the stack in any order. The last ability you put on the stack will be the first one to resolve (As a result, you can have those abilities resolve in the order of your choosing.)."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-11-08"^^xsd:date ;
+        :rulingText """A landfall ability triggers whenever a land you control enters for any reason. It triggers whenever you play a land, as well as whenever a spell or ability puts a land onto the battlefield under your control."""@en ] .
 
 :AetherRevoltModernHorizons3113 rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -1101,6 +1555,76 @@ When this creature enters, you get {E}{E} (two energy counters). Then if you cas
         :rulingDate "2024-06-07"^^xsd:date ;
         :rulingText """Some spells and abilities that give you {E} may require targets. If each target chosen is an illegal target as that spell or ability tries to resolve, it won't resolve. You won't get any {E}."""@en ] .
 
+:GalvanicDischarge rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Galvanic Discharge" ;
+    :manaCost "{R}" ;
+    :manaValue "1"^^xsd:nonNegativeInteger ;
+    :hasCardType :Instant ;
+    :hasRarity :Common ;
+    :hasColor :Red ;
+    :hasColorIdentity :Red ;
+    :isInSet :ModernHorizons3 ;
+    :cardNumber "122"^^xsd:integer ;
+    :artist "Zoltan Boros" ;
+    :hasLanguage :English ;
+    :printedText """Choose target creature or planeswalker. You get {E}{E}{E} (three energy counters), then you may pay any amount of {E}. Galvanic Discharge deals that much damage to that permanent."""@en ;
+    :oracleText """Choose target creature or planeswalker. You get {E}{E}{E} (three energy counters), then you may pay any amount of {E}. Galvanic Discharge deals that much damage to that permanent."""@en ;
+    :flavorText """"Remember, if you find a rock making crackly noises, just put it back. Carefully."
+—Bo, Great Desert prospector"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=662274"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mh3/122/galvanic-discharge"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "90972"^^xsd:positiveInteger ;
+    :arenaName "Galvanic Discharge" ;
+    :arenaSetCode "MH3" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Banned ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-06-07"^^xsd:date ;
+        :rulingText """Energy counters are a kind of counter that a player may have. They're not associated with any specific permanents."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-06-07"^^xsd:date ;
+        :rulingText """{E} is the energy symbol. It represents one energy counter."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-06-07"^^xsd:date ;
+        :rulingText """If an effect says you get one or more {E}, you get that many energy counters. To pay one or more {E}, you lose that many energy counters. You can't pay more energy counters than you have. Any effects that interact with counters a player gets, has, or loses can interact with energy counters."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-06-07"^^xsd:date ;
+        :rulingText """You may pay zero {E}. You will get {E}{E}{E}, but Galvanic Discharge won't deal any damage."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-06-07"^^xsd:date ;
+        :rulingText """Some triggered abilities state that you "may pay" a certain amount of {E}. You can't pay that amount multiple times to multiply the effect. You simply choose whether or not to pay that amount of {E} as the ability resolves."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-06-07"^^xsd:date ;
+        :rulingText """Keep track of how many energy counters each player has. Potential ways to track this include writing theme down on paper or using dice, but any method that is clear and mutually agreeable is fine. (At higher levels of tournament play, dice may not be allowed for tracking counters that players have.)"""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-06-07"^^xsd:date ;
+        :rulingText """Some triggered abilities that state that you "may pay" a certain amount of {E} describe an effect that happens "If you do." In that case, no player may take actions to try to stop the ability's effect after you make your choice. If the payment is followed by the phrase "When you do," then you'll choose any targets for that reflexive triggered ability and put it on the stack before players can take actions."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-06-07"^^xsd:date ;
+        :rulingText """Energy counters aren't mana. They don't go away as steps, phases, and turns end, and effects that add mana "of any type" can't give you energy counters."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-06-07"^^xsd:date ;
+        :rulingText """Some spells and abilities that give you {E} may require targets. If each target chosen is an illegal target as that spell or ability tries to resolve, it won't resolve. You won't get any {E}."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-06-07"^^xsd:date ;
+        :rulingText """If a spell or ability with one or more targets states that you "may pay" some amount of {E}, and each permanent that it targets has become an illegal target, the spell or ability won't resolve. You can't pay any {E} even if you want to."""@en ] .
+
 :PhyrexianIronworks rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Phyrexian Ironworks" ;
@@ -1220,6 +1744,181 @@ Whenever you cast a spell from anywhere other than your hand, this artifact deal
       [ rdf:type :Ruling ;
         :rulingDate "2024-06-07"^^xsd:date ;
         :rulingText """Unstable Amulet's second ability counts any spells cast from zones other than your hand. These are usually spells cast from exile, the graveyard, or the command zone. It also counts spells cast from outside the game, such as spells cast with Wish or Garth One-Eye's ability."""@en ] .
+
+:BaskingBroodscale rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Basking Broodscale" ;
+    :manaCost "{1}{G}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Eldrazi ,
+                :Lizard ;
+    :hasRarity :Common ;
+    :hasColorIdentity :Green ;
+    :isInSet :ModernHorizons3 ;
+    :cardNumber "145"^^xsd:integer ;
+    :artist "Caio Monteiro" ;
+    :hasLanguage :English ;
+    :producesMana :Colorless ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    :hasKeywordAbility :Devoid ;
+    :hasKeywordAction :Adapt ;
+    :printedText """Devoid (This card has no color.)
+{1}{G}: Adapt 1. (If this creature has no +1/+1 counters on it, put a +1/+1 counter on it.)
+Whenever one or more +1/+1 counters are put on this creature, you may create a 0/1 colorless Eldrazi Spawn creature token with "Sacrifice this token: Add {C}.\""""@en ;
+    :oracleText """Devoid (This card has no color.)
+{1}{G}: Adapt 1. (If this creature has no +1/+1 counters on it, put a +1/+1 counter on it.)
+Whenever one or more +1/+1 counters are put on this creature, you may create a 0/1 colorless Eldrazi Spawn creature token with "Sacrifice this token: Add {C}.\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=662297"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mh3/145/basking-broodscale"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "90995"^^xsd:positiveInteger ;
+    :arenaName "Basking Broodscale" ;
+    :arenaSetCode "MH3" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Banned ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-06-07"^^xsd:date ;
+        :rulingText """Other cards and abilities can give a card with devoid a color. If that happens, it's just the new color, not that color and colorless."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-06-07"^^xsd:date ;
+        :rulingText """Devoid works in all zones, not just on the battlefield."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-06-07"^^xsd:date ;
+        :rulingText """If a card loses devoid, it will still be colorless. This is because effects that change an object's color (like the one created by devoid) are considered before the object loses devoid."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-06-07"^^xsd:date ;
+        :rulingText """Devoid doesn't affect the color identity of the card for the purposes of the Commander variant. For example, while Abstruse Appropriation is colorless because it has devoid, its color identity is still white and black, and it can't be included in a Commander deck where the commander's color identity doesn't include both white and black."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-06-07"^^xsd:date ;
+        :rulingText """If a creature somehow loses all of its +1/+1 counters, it can adapt again and get more +1/+1 counters."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-06-07"^^xsd:date ;
+        :rulingText """You can always activate an ability that will cause a creature to adapt. As that ability resolves, if the creature has a +1/+1 counter on it for any reason, you simply won't put any +1/+1 counters on it."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-06-07"^^xsd:date ;
+        :rulingText """A card with devoid is just colorless. It's not colorless and the colors of mana in its mana cost."""@en ] .
+
+:ColossalDreadmask rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Colossal Dreadmask" ;
+    :manaCost "{4}{G}{G}" ;
+    :manaValue "6"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ;
+    :hasSubType :Equipment ;
+    :hasRarity :Common ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :ModernHorizons3 ;
+    :cardNumber "148"^^xsd:integer ;
+    :artist "Caio Monteiro" ;
+    :hasLanguage :English ;
+    :hasKeywordAbility :Equip ,
+                       :LivingWeapon ;
+    :printedText """Living weapon (When this Equipment enters, create a 0/0 black Phyrexian Germ creature token, then attach this to it.)
+Equipped creature gets +6/+6 and has trample.
+Equip {3}{G}{G}"""@en ;
+    :oracleText """Living weapon (When this Equipment enters, create a 0/0 black Phyrexian Germ creature token, then attach this to it.)
+Equipped creature gets +6/+6 and has trample.
+Equip {3}{G}{G}"""@en ;
+    :flavorText """No legs to quake, no lungs to bellow, but if you see its teeth, it's still too late."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=662300"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mh3/148/colossal-dreadmask"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "90998"^^xsd:positiveInteger ;
+    :arenaName "Colossal Dreadmask" ;
+    :arenaSetCode "MH3" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-06-07"^^xsd:date ;
+        :rulingText """If the living weapon trigger causes two Phyrexian Germs to be created (due to an effect such as that of Doubling Season), the Equipment becomes attached to one of them. The other will be put into your graveyard and subsequently cease to exist, unless another effect raises its toughness above 0."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-06-07"^^xsd:date ;
+        :rulingText """Like other Equipment, each Equipment with living weapon has an equip cost. You can pay this cost to attach an Equipment to another creature you control. Once the Phyrexian Germ token is no longer equipped, it will be put into your graveyard and subsequently cease to exist, unless another effect raises its toughness above 0."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-06-07"^^xsd:date ;
+        :rulingText """The Phyrexian Germ token enters the battlefield as a 0/0 creature and the Equipment becomes attached to it before state-based actions would cause the token to die. Abilities that trigger as the token enters the battlefield see that a 0/0 creature entered the battlefield."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-06-07"^^xsd:date ;
+        :rulingText """If the Phyrexian Germ token is destroyed, the Equipment remains on the battlefield as with any other Equipment."""@en ] .
+
+:TheHungerTideRises rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "The Hunger Tide Rises" ;
+    :manaCost "{2}{G}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Enchantment ;
+    :hasSubType :Saga ;
+    :hasRarity :Uncommon ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :ModernHorizons3 ;
+    :cardNumber "158"^^xsd:integer ;
+    :artist "Liiga Smilshkalne" ;
+    :hasLanguage :English ;
+    :printedText """(As this Saga enters and after your draw step, add a lore counter. Sacrifice after IV.)
+I, II, III — Create a 1/1 black and green Insect creature token.
+IV — Sacrifice any number of creatures. Search your library and/or graveyard for a creature card with mana value less than or equal to the number of creatures sacrificed this way and put it onto the battlefield. If you search your library this way, shuffle."""@en ;
+    :oracleText """(As this Saga enters and after your draw step, add a lore counter. Sacrifice after IV.)
+I, II, III — Create a 1/1 black and green Insect creature token.
+IV — Sacrifice any number of creatures. Search your library and/or graveyard for a creature card with mana value less than or equal to the number of creatures sacrificed this way and put it onto the battlefield. If you search your library this way, shuffle."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=662310"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mh3/158/the-hunger-tide-rises"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "91008"^^xsd:positiveInteger ;
+    :arenaName "The Hunger Tide Rises" ;
+    :arenaSetCode "MH3" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-06-07"^^xsd:date ;
+        :rulingText """If a card in a player's library has {X} in its mana cost, X is 0 when determining its mana value."""@en ] .
 
 :PrimalPrayers rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -1479,6 +2178,69 @@ Whenever you attack, you may pay {E}{E}. When you do, target creature you contro
         :rulingDate "2024-06-07"^^xsd:date ;
         :rulingText """You don't choose a target for Riddle Gate Gargoyle's last ability at the time it triggers. Rather, a second "reflexive" ability triggers when you pay {E}{E} this way. You choose a target for that ability as it goes on the stack. Each player may respond to this triggered ability as normal."""@en ] .
 
+:RosheenRoaringProphet rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Rosheen, Roaring Prophet" ;
+    :manaCost "{2}{R}{G}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasSuperType :Legendary ;
+    :hasCardType :Creature ;
+    :hasSubType :Giant ,
+                :Shaman ;
+    :hasRarity :Rare ;
+    :hasColor :Red ,
+              :Green ;
+    :hasColorIdentity :Red ,
+                      :Green ;
+    :isInSet :ModernHorizons3 ;
+    :cardNumber "202"^^xsd:integer ;
+    :artist "Fang Xinyu" ;
+    :hasLanguage :English ;
+    :producesMana :Colorless ;
+    :power "4" ;
+    :powerValue "4"^^xsd:integer ;
+    :toughness "4" ;
+    :toughnessValue "4"^^xsd:integer ;
+    :hasKeywordAction :Mill ;
+    :printedText """When Rosheen enters, mill six cards. You may put a card with {X} in its mana cost from among them into your hand.
+{T}: Reveal any number of cards with {X} in their mana cost in your hand. Add {C}{C} for each card revealed this way. Spend this mana only on costs that contain {X}."""@en ;
+    :oracleText """When Rosheen enters, mill six cards. You may put a card with {X} in its mana cost from among them into your hand.
+{T}: Reveal any number of cards with {X} in their mana cost in your hand. Add {C}{C} for each card revealed this way. Spend this mana only on costs that contain {X}."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=662354"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mh3/202/rosheen-roaring-prophet"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "91053"^^xsd:positiveInteger ;
+    :arenaName "Rosheen, Roaring Prophet" ;
+    :arenaSetCode "MH3" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-06-07"^^xsd:date ;
+        :rulingText """You can spend mana generated with Rosheen's last ability on any part of a cost that contains {X}. You're not limited to spending it only on the {X} part."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-06-07"^^xsd:date ;
+        :rulingText """A "cost that contains {X}" may be a spell's total cost, an activated ability's cost, a suspend cost, or a cost you're asked to pay as part of the resolution of a spell or ability (such as Condescend). A spell's total cost includes either its mana cost (printed in the upper right corner) or its alternative cost (such as flashback), as well as any additional costs (such as kicker). If it's something you can spend mana on, it's a cost. If that cost includes the {X} symbol in it, you can spend mana generated by Rosheen on that cost."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-06-07"^^xsd:date ;
+        :rulingText """You don't have to spend all of the mana generated with Rosheen's last ability on the same cost."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-06-07"^^xsd:date ;
+        :rulingText """You can use the mana generated with Rosheen's last ability in any cost you pay that includes {X}, including the mana costs of spells, activation costs, and even costs for special actions (such as morph). Any time you pay mana, that's a cost."""@en ] .
+
 :ScurryOfGremlins rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Scurry of Gremlins" ;
@@ -1548,6 +2310,55 @@ Pay {E}{E}{E}{E}: Creatures you control get +1/+0 and gain haste until end of tu
       [ rdf:type :Ruling ;
         :rulingDate "2024-06-07"^^xsd:date ;
         :rulingText """Energy counters are a kind of counter that a player may have. They're not associated with any specific permanents."""@en ] .
+
+:SneakySnacker rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Sneaky Snacker" ;
+    :manaCost "{U}{B}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Faerie ,
+                :Rogue ;
+    :hasRarity :Common ;
+    :hasColor :Blue ,
+              :Black ;
+    :hasColorIdentity :Blue ,
+                      :Black ;
+    :isInSet :ModernHorizons3 ;
+    :cardNumber "205"^^xsd:integer ;
+    :artist "Irina Nordsol" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "1" ;
+    :toughnessValue "1"^^xsd:integer ;
+    :hasKeywordAbility :Flying ;
+    :printedText """Flying
+When you draw your third card in a turn, return this card from your graveyard to the battlefield tapped."""@en ;
+    :oracleText """Flying
+When you draw your third card in a turn, return this card from your graveyard to the battlefield tapped."""@en ;
+    :flavorText """Though the High Fae gave explicit instructions not to tarry, she stayed in Sweettooth Village for seconds, thirds, and then dessert."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=662357"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mh3/205/sneaky-snacker"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "91056"^^xsd:positiveInteger ;
+    :arenaName "Sneaky Snacker" ;
+    :arenaSetCode "MH3" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] .
 
 :IdolOfFalseGods rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -1688,6 +2499,51 @@ When this artifact enters, you get {E}{E}{E} (three energy counters).
         :rulingDate "2024-06-07"^^xsd:date ;
         :rulingText """Some triggered abilities state that you "may pay" a certain amount of {E}. You can't pay that amount multiple times to multiply the effect. You simply choose whether or not to pay that amount of {E} as the ability resolves."""@en ] .
 
+:VexingBauble rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Vexing Bauble" ;
+    :manaCost "{1}" ;
+    :manaValue "1"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ;
+    :hasRarity :Uncommon ;
+    :isInSet :ModernHorizons3 ;
+    :cardNumber "212"^^xsd:integer ;
+    :artist "Tony Foti" ;
+    :hasLanguage :English ;
+    :printedText """Whenever a player casts a spell, if no mana was spent to cast it, counter that spell.
+{1}, {T}, Sacrifice this artifact: Draw a card."""@en ;
+    :oracleText """Whenever a player casts a spell, if no mana was spent to cast it, counter that spell.
+{1}, {T}, Sacrifice this artifact: Draw a card."""@en ;
+    :flavorText """No one knew who invented it. No one knew its purpose. All anyone knew was they didn't like being anywhere near it."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=662364"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mh3/212/vexing-bauble"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "91063"^^xsd:positiveInteger ;
+    :arenaName "Vexing Bauble" ;
+    :arenaSetCode "MH3" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Banned ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Restricted ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-06-07"^^xsd:date ;
+        :rulingText """If a spell is cast with an alternative cost that includes mana (such as flashback), Vexing Bauble's first ability won't trigger and won't counter that spell. Similarly, if a spell is cast without paying its mana cost, but the player did pay mana for additional costs such as from kicker or from Thorn of Amethyst, Vexing Bauble's first ability won't trigger and won't counter that spell."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-06-07"^^xsd:date ;
+        :rulingText """Players may cast spells that they know Vexing Bauble will counter. Any abilities that trigger when spells are cast will still trigger and resolve if appropriate, and any effects that count how many spells are cast will still count those spells if appropriate."""@en ] .
+
 :ArchwayOfInnovation rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Archway of Innovation" ;
@@ -1747,6 +2603,61 @@ When this artifact enters, you get {E}{E}{E} (three energy counters).
         :rulingDate "2024-06-07"^^xsd:date ;
         :rulingText """When calculating a spell's total cost, include any alternative costs, additional costs, or anything else that increases or reduces the cost to cast the spell. Improvise applies after the total cost is calculated. Improvise doesn't change a spell's mana cost or mana value."""@en ] .
 
+:DistinguishedConjurer rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Distinguished Conjurer" ;
+    :manaCost "{1}{W}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Human ,
+                :Wizard ;
+    :hasRarity :Uncommon ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :ModernHorizons3 ;
+    :cardNumber "264"^^xsd:integer ;
+    :artist "Nils Hamm" ;
+    :hasLanguage :English ;
+    :power "1" ;
+    :powerValue "1"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    :printedText """Whenever another creature you control enters, you gain 1 life.
+{4}{W}, {T}: Exile another target creature you control, then return it to the battlefield under its owner's control."""@en ;
+    :oracleText """Whenever another creature you control enters, you gain 1 life.
+{4}{W}, {T}: Exile another target creature you control, then return it to the battlefield under its owner's control."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=664043"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mh3/264/distinguished-conjurer"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "91090"^^xsd:positiveInteger ;
+    :arenaName "Distinguished Conjurer" ;
+    :arenaSetCode "MH3" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2022-12-02"^^xsd:date ;
+        :rulingText """If a token is exiled this way, it will cease to exist and won't return to the battlefield."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2022-12-02"^^xsd:date ;
+        :rulingText """Distinguished Conjurer's first ability triggers whenever any creature other than itself enters the battlefield under your control, including those returned by its last ability."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2022-12-02"^^xsd:date ;
+        :rulingText """When the card exiled by the second ability returns to the battlefield, it will be a new object with no connection to the card that was exiled. Auras attached to the exiled creature will be put into their owners' graveyards. Any Equipment will become unattached and remain on the battlefield. Any counters on the exiled creature will cease to exist."""@en ] .
+
 :ReefWorm rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Reef Worm" ;
@@ -1789,6 +2700,56 @@ When this artifact enters, you get {E}{E}{E} (three energy counters).
       [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] .
 
+:WirewoodSymbiote rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Wirewood Symbiote" ;
+    :manaCost "{G}" ;
+    :manaValue "1"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Insect ;
+    :hasRarity :Uncommon ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :ModernHorizons3 ;
+    :cardNumber "288"^^xsd:integer ;
+    :artist "Thomas M. Baxa" ;
+    :hasLanguage :English ;
+    :power "1" ;
+    :powerValue "1"^^xsd:integer ;
+    :toughness "1" ;
+    :toughnessValue "1"^^xsd:integer ;
+    :printedText """Return an Elf you control to its owner's hand: Untap target creature. Activate only once each turn."""@en ;
+    :oracleText """Return an Elf you control to its owner's hand: Untap target creature. Activate only once each turn."""@en ;
+    :flavorText """It drinks fatigue."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=664067"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mh3/288/wirewood-symbiote"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "91114"^^xsd:positiveInteger ;
+    :arenaName "Wirewood Symbiote" ;
+    :arenaSetCode "MH3" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-06-07"^^xsd:date ;
+        :rulingText """Returning the Elf you control to its owner's hand is the cost to activate the ability. Once you activate the ability, no one can try to do anything to the Elf to stop you from activating the ability."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-06-07"^^xsd:date ;
+        :rulingText """You can target any creature with Wirewood Symbiote's ability, not just a tapped creature."""@en ] .
+
 :WornPowerstone rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Worn Powerstone" ;
@@ -1813,6 +2774,45 @@ When this artifact enters, you get {E}{E}{E} (three energy counters).
                    :MagicOnline ;
     :arenaId "91124"^^xsd:positiveInteger ;
     :arenaName "Worn Powerstone" ;
+    :arenaSetCode "MH3" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] .
+
+:CephalidColiseum rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Cephalid Coliseum" ;
+    :manaValue "0"^^xsd:nonNegativeInteger ;
+    :hasCardType :Land ;
+    :hasRarity :Uncommon ;
+    :hasColorIdentity :Blue ;
+    :isInSet :ModernHorizons3 ;
+    :cardNumber "300"^^xsd:integer ;
+    :artist "John Avon" ;
+    :hasLanguage :English ;
+    :producesMana :Blue ;
+    :hasAbilityWord :Threshold ;
+    :printedText """{T}: Add {U}. This land deals 1 damage to you.
+Threshold — {U}, {T}, Sacrifice this land: Target player draws three cards, then discards three cards. Activate only if there are seven or more cards in your graveyard."""@en ;
+    :oracleText """{T}: Add {U}. This land deals 1 damage to you.
+Threshold — {U}, {T}, Sacrifice this land: Target player draws three cards, then discards three cards. Activate only if there are seven or more cards in your graveyard."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=664079"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mh3/300/cephalid-coliseum"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "91126"^^xsd:positiveInteger ;
+    :arenaName "Cephalid Coliseum" ;
     :arenaSetCode "MH3" ;
     :hasLegality
       [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
