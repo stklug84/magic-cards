@@ -134,9 +134,11 @@ See rules 100.2a and 100.6."""@en .
 :Collection rdf:type owl:Class ;
             rdfs:label "Collection" ;
             rdfs:comment
-            """A physical collection of Magic cards owned by a collector.
-Relates to its contents through reified collection entries that carry the
-number of copies, finish and condition of each collected printing."""@en .
+            """A collection of Magic cards owned by a collector, held on one
+game platform (:isHeldOn): a physical collection of paper cards, or the
+digital collection of an MTG Arena account. Relates to its contents through
+reified collection entries that carry the number of copies of each collected
+printing and, for physical copies, their finish and condition."""@en .
 
 # ------------------------------------------------------------------------------
 # Card Classes (including its attribute classes)
@@ -719,8 +721,9 @@ alongside Oracle text. See rule 108.1."""@en .
               rdfs:comment
               """A platform Magic: The Gathering is played on: paper (tabletop)
 Magic, or one of the digital games MTG Arena and Magic Online. A card
-printing is available on one or more platforms (:isAvailableOn), and a
-format is played on one or more platforms (:isPlayedOn)."""@en .
+printing is available on one or more platforms (:isAvailableOn), a format
+is played on one or more platforms (:isPlayedOn), and a collection is held
+on one platform (:isHeldOn)."""@en .
 
 # ------------------------------------------------------------------------------
 # Card text related classes: Keyword Classes
@@ -1138,12 +1141,15 @@ carrying the number of copies of that card in the deck. See rule 100.2."""@en .
                  rdfs:label "Collection Entry" ;
                  rdfs:comment
                   """A reified association between a collection and a specific
-card printing, carrying the number of physical copies together with their
-finish and condition. Entries are grouped by variant, not by acquisition:
-one entry per distinct combination of printing, finish and condition, whose
-quantity is the total number of copies held in that variant. A printing
-collected in several finishes or conditions therefore has one entry per
-variant, and never two entries with identical attributes."""@en .
+card printing, carrying the number of copies held. In a physical collection
+the entry also carries the finish and condition of its copies, and entries
+are grouped by variant, not by acquisition: one entry per distinct
+combination of printing, finish and condition, whose quantity is the total
+number of copies held in that variant. A printing collected in several
+finishes or conditions therefore has one entry per variant, and never two
+entries with identical attributes. Digital copies have neither finish nor
+condition, so a digital collection (one held on MTG Arena) has exactly one
+entry per printing."""@en .
 
 # --- Simulation Annotation Classes ---
 
@@ -1334,6 +1340,19 @@ in the MTG Arena formats reflects."""@en .
 Arena formats are the formats played on :MTGArena; formats such as
 Historic, Timeless, Alchemy and Brawl are played on no other platform."""@en .
 
+:isHeldOn rdf:type owl:ObjectProperty ,
+                   owl:FunctionalProperty ;
+          rdfs:domain :Collection ;
+          rdfs:range :GamePlatform ;
+          rdfs:label "Is Held On" ;
+          rdfs:comment
+          """Relates a collection to the game platform its cards are held
+on: :PaperMagic for a physical collection of printed cards, :MTGArena for
+the digital collection of an MTG Arena account. The entries of a physical
+collection carry finish and condition; digital copies have neither. Every
+printing in a collection held on a digital platform is available on that
+platform (:isAvailableOn)."""@en .
+
 # --- Deck, Set and Collection Membership ---
 
 :containsCard rdf:type owl:ObjectProperty ;
@@ -1405,7 +1424,7 @@ See rule 100.2."""@en .
                     rdfs:comment
                     """Relates a collection to one of its reified collection
 entries, which in turn references a specific card printing and the number of
-physical copies owned."""@en .
+copies owned."""@en .
 
 :entryCard rdf:type owl:ObjectProperty ,
                     owl:FunctionalProperty ;
@@ -1728,8 +1747,10 @@ gatherer.wizards.com. See rule 108.1."""@en .
          rdfs:label "MTG Arena ID" ;
          rdfs:comment
          """The MTG Arena card ID of the printing (the identifier MTG Arena
-assigns to each printing, published by Scryfall as arena_id). Absent when
-the printing is not on MTG Arena or Scryfall does not know its ID."""@en .
+assigns to each printing, published by Scryfall as arena_id). Taken from
+MTG Arena's own card data for the printings of the MTG Arena collection,
+from Scryfall otherwise. Absent when the printing is not on MTG Arena or
+neither source knows its ID."""@en .
 
 :arenaName rdf:type owl:DatatypeProperty ,
                     owl:FunctionalProperty ;
@@ -1752,8 +1773,24 @@ name. Asserted only for printings available on MTG Arena."""@en .
               """The set code MTG Arena lists the printing under, as used in
 Arena's deck and collection import format "N Name (SET) number". Usually
 the code of the printing's set, but a few sets carry a different code on
-MTG Arena (Dominaria is DAR). Asserted only for printings available on MTG
+MTG Arena (Dominaria is DAR), Arena files Alchemy printings under yearly
+codes (Y22 to Y26) and lists anthology and Jumpstart reprints under the set
+they were first printed in. Asserted only for printings available on MTG
 Arena."""@en .
+
+:arenaCollectorNumber rdf:type owl:DatatypeProperty ,
+                               owl:FunctionalProperty ;
+                      rdfs:domain :Card ;
+                      rdfs:range xsd:string ;
+                      rdfs:label "MTG Arena Collector Number" ;
+                      rdfs:comment
+                      """The collector number MTG Arena lists the printing
+under, as used in Arena's deck and collection import format "N Name (SET)
+number", where it differs from the printing's collector number (:cardNumber
+or :cardNumberString): Alchemy printings renumbered in Arena's yearly sets,
+reprints listed under their original set, promotional printings Arena
+numbers 0. Known from MTG Arena's own card data for the printings of the
+MTG Arena collection only. See rule 213.1a."""@en .
 
 # --- Derived Card Facts ---
 
@@ -1993,12 +2030,22 @@ restrictions. See rule 309."""@en .
     [
         rdf:type owl:Restriction ;
         owl:onProperty :hasSuperType ;
-        owl:maxCardinality "0"^^xsd:nonNegativeInteger
+        owl:allValuesFrom [
+            rdf:type owl:Class ;
+            owl:oneOf ( :Legendary )
+        ]
     ] ,
     [
         rdf:type owl:Restriction ;
         owl:onProperty :hasSubType ;
-        owl:allValuesFrom :BattleType
+        owl:allValuesFrom [
+            rdf:type owl:Class ;
+            owl:unionOf ( :BattleType
+                          :CreatureTypes
+                          :ArtifactTypes
+                          :EnchantmentTypes
+                          :PlaneswalkerTypes )
+        ]
     ] ;
     owl:equivalentClass [
         rdf:type owl:Restriction ;
@@ -2007,7 +2054,13 @@ restrictions. See rule 309."""@en .
     ] ;
     rdfs:label "Battle Card" ;
     rdfs:comment """A class representing any card with the Battle card type to enforce
-restrictions. See rule 310."""@en .
+restrictions. A battle face has battle types only and no supertype, but the
+individual of a double-faced card combines both faces: a Siege's back face,
+cast transformed when its last defense counter is removed, is a creature,
+artifact, enchantment, planeswalker or sorcery, so the individual also
+carries that face's subtypes and its Legendary supertype (Invasion of
+Ulgrotha // Grandmother Ravi Sengir). See rules 310, 310.12b, 205.3d and
+712."""@en .
 
 # --- Enchantment Constraints ---
 :EnchantmentCard rdf:type owl:Class ;
@@ -7202,6 +7255,24 @@ rule 207.2c."""@en .
 player vote, with an effect determined by the votes. See rule 207.2c."""@en .
 
 # --- Sets (ordered by release date) ---
+:StarTrek rdf:type owl:NamedIndividual ,
+                   :Set ;
+          :setName "Star Trek"@en ;
+          :setCode "TRK" ;
+          :cardCount 586 ;
+          :releaseDate "2026-11-13"^^xsd:date .
+:Stardates rdf:type owl:NamedIndividual ,
+                    :Set ;
+           :setName "Stardates"@en ;
+           :setCode "SDS" ;
+           :cardCount 30 ;
+           :releaseDate "2026-11-13"^^xsd:date .
+:AlchemyRealityFracture rdf:type owl:NamedIndividual ,
+                                 :Set ;
+                        :setName "Alchemy: Reality Fracture"@en ;
+                        :setCode "YFRA" ;
+                        :cardCount 31 ;
+                        :releaseDate "2026-10-13"^^xsd:date .
 :RealityFracture rdf:type owl:NamedIndividual ,
                           :Set ;
                  :setName "Reality Fracture"@en ;
@@ -7220,12 +7291,30 @@ player vote, with an effect determined by the votes. See rule 207.2c."""@en .
            :setCode "HOB" ;
            :cardCount 39 ;
            :releaseDate "2026-08-14"^^xsd:date .
+:TheHobbitEternal rdf:type owl:NamedIndividual ,
+                           :Set ;
+                  :setName "The Hobbit Eternal"@en ;
+                  :setCode "HOC" ;
+                  :cardCount 158 ;
+                  :releaseDate "2026-08-14"^^xsd:date .
 :MarvelSuperHeroesCommander rdf:type owl:NamedIndividual ,
                                      :Set ;
                             :setName "Marvel Super Heroes Commander"@en ;
                             :setCode "MSC" ;
                             :cardCount 866 ;
                             :releaseDate "2026-06-26"^^xsd:date .
+:MarvelSuperHeroes rdf:type owl:NamedIndividual ,
+                            :Set ;
+                   :setName "Marvel Super Heroes"@en ;
+                   :setCode "MSH" ;
+                   :cardCount 453 ;
+                   :releaseDate "2026-06-26"^^xsd:date .
+:AlchemySecretsOfStrixhaven rdf:type owl:NamedIndividual ,
+                                     :Set ;
+                            :setName "Alchemy: Secrets of Strixhaven"@en ;
+                            :setCode "YSOS" ;
+                            :cardCount 32 ;
+                            :releaseDate "2026-05-19"^^xsd:date .
 :SecretsOfStrixhavenCommander rdf:type owl:NamedIndividual ,
                                        :Set ;
                               :setName "Secrets of Strixhaven Commander"@en ;
@@ -7273,6 +7362,12 @@ Teenage Mutant Ninja Turtles"""@en ;
                                :setCode "PZA" ;
                                :cardCount 20 ;
                                :releaseDate "2026-02-24"^^xsd:date .
+:AlchemyLorwynEclipsed rdf:type owl:NamedIndividual ,
+                                :Set ;
+                       :setName "Alchemy: Lorwyn Eclipsed"@en ;
+                       :setCode "YECL" ;
+                       :cardCount 33 ;
+                       :releaseDate "2026-02-03"^^xsd:date .
 :LorwynEclipsed rdf:type owl:NamedIndividual ,
                          :Set ;
                 :setName "Lorwyn Eclipsed"@en ;
@@ -7338,6 +7433,12 @@ Marvel's Spider-Man"""@en ;
                      :setCode "OMB" ;
                      :cardCount 40 ;
                      :releaseDate "2025-09-23"^^xsd:date .
+:AlchemyEdgeOfEternities rdf:type owl:NamedIndividual ,
+                                  :Set ;
+                         :setName "Alchemy: Edge of Eternities"@en ;
+                         :setCode "YEOE" ;
+                         :cardCount 41 ;
+                         :releaseDate "2025-08-19"^^xsd:date .
 :EdgeOfEternitiesBonusSheet rdf:type owl:NamedIndividual ,
                                      :Set ;
                             :setName "Edge of Eternities Bonus Sheet"@en ;
@@ -7376,6 +7477,12 @@ FANTASY"""@en ;
                                :setCode "FIN" ;
                                :cardCount 681 ;
                                :releaseDate "2025-06-13"^^xsd:date .
+:AlchemyTarkir rdf:type owl:NamedIndividual ,
+                        :Set ;
+               :setName "Alchemy: Tarkir"@en ;
+               :setCode "YTDM" ;
+               :cardCount 30 ;
+               :releaseDate "2025-04-29"^^xsd:date .
 :TarkirDragonstorm rdf:type owl:NamedIndividual ,
                             :Set ;
                    :setName "Tarkir: Dragonstorm"@en ;
@@ -7388,6 +7495,12 @@ FANTASY"""@en ;
                             :setCode "TDC" ;
                             :cardCount 411 ;
                             :releaseDate "2025-04-11"^^xsd:date .
+:AlchemyAetherdrift rdf:type owl:NamedIndividual ,
+                             :Set ;
+                    :setName "Alchemy: Aetherdrift"@en ;
+                    :setCode "YDFT" ;
+                    :cardCount 31 ;
+                    :releaseDate "2025-03-04"^^xsd:date .
 :Aetherdrift rdf:type owl:NamedIndividual ,
                       :Set ;
              :setName "Aetherdrift"@en ;
@@ -7406,12 +7519,24 @@ FANTASY"""@en ;
                      :setCode "INR" ;
                      :cardCount 567 ;
                      :releaseDate "2025-01-24"^^xsd:date .
+:PioneerMasters rdf:type owl:NamedIndividual ,
+                         :Set ;
+                :setName "Pioneer Masters"@en ;
+                :setCode "PIO" ;
+                :cardCount 398 ;
+                :releaseDate "2024-12-10"^^xsd:date .
 :Jumpstart2025 rdf:type owl:NamedIndividual ,
                         :Set ;
                :setName "Jumpstart 2025"@en ;
                :setCode "J25" ;
                :cardCount 779 ;
                :releaseDate "2024-12-04"^^xsd:date .
+:AlchemyDuskmourn rdf:type owl:NamedIndividual ,
+                           :Set ;
+                  :setName "Alchemy: Duskmourn"@en ;
+                  :setCode "YDSK" ;
+                  :cardCount 30 ;
+                  :releaseDate "2024-10-15"^^xsd:date .
 :MagicTheGatheringFoundations rdf:type owl:NamedIndividual ,
                                        :Set ;
                               :setName "Magic: The Gathering Foundations"@en ;
@@ -7439,6 +7564,12 @@ Edition"""@en ;
                                   :setCode "MB2" ;
                                   :cardCount 382 ;
                                   :releaseDate "2024-10-07"^^xsd:date .
+:AlchemyBloomburrow rdf:type owl:NamedIndividual ,
+                             :Set ;
+                    :setName "Alchemy: Bloomburrow"@en ;
+                    :setCode "YBLB" ;
+                    :cardCount 30 ;
+                    :releaseDate "2024-08-20"^^xsd:date .
 :DuskmournHouseOfHorrorCommander rdf:type owl:NamedIndividual ,
                                           :Set ;
                                  :setName """Duskmourn: House of Horror
@@ -7476,6 +7607,12 @@ Commander"""@en ;
                           :setCode "M3C" ;
                           :cardCount 396 ;
                           :releaseDate "2024-05-31"^^xsd:date .
+:AlchemyOutlawsOfThunderJunction rdf:type owl:NamedIndividual ,
+                                          :Set ;
+                                 :setName "Alchemy: Outlaws of Thunder Junction"@en ;
+                                 :setCode "YOTJ" ;
+                                 :cardCount 30 ;
+                                 :releaseDate "2024-05-07"^^xsd:date .
 :ModernHorizons3 rdf:type owl:NamedIndividual ,
                           :Set ;
                  :setName "Modern Horizons 3"@en ;
@@ -7509,6 +7646,12 @@ Commander"""@en ;
                                    :setCode "OTC" ;
                                    :cardCount 343 ;
                                    :releaseDate "2024-03-18"^^xsd:date .
+:AlchemyMurdersAtKarlovManor rdf:type owl:NamedIndividual ,
+                                      :Set ;
+                             :setName "Alchemy: Murders at Karlov Manor"@en ;
+                             :setCode "YMKM" ;
+                             :cardCount 30 ;
+                             :releaseDate "2024-03-05"^^xsd:date .
 :MagicTheGatheringFallout rdf:type owl:NamedIndividual ,
                                    :Set ;
                           :setName "Magic The Gathering\u2014Fallout"@en ;
@@ -7533,6 +7676,12 @@ Commander"""@en ;
                                :setCode "MKC" ;
                                :cardCount 357 ;
                                :releaseDate "2024-01-16"^^xsd:date .
+:AlchemyIxalan rdf:type owl:NamedIndividual ,
+                        :Set ;
+               :setName "Alchemy: Ixalan"@en ;
+               :setCode "YLCI" ;
+               :cardCount 31 ;
+               :releaseDate "2023-12-05"^^xsd:date .
 :RavnicaRemastered rdf:type owl:NamedIndividual ,
                             :Set ;
                    :setName "Ravnica Remastered"@en ;
@@ -7573,6 +7722,12 @@ Tales of Middle Earth Commander"""@en ;
                                               :cardCount 501 ;
                                               :releaseDate
                                               "2023-10-19"^^xsd:date .
+:AlchemyWildsOfEldraine rdf:type owl:NamedIndividual ,
+                                 :Set ;
+                        :setName "Alchemy: Wilds of Eldraine"@en ;
+                        :setCode "YWOE" ;
+                        :cardCount 31 ;
+                        :releaseDate "2023-10-10"^^xsd:date .
 :DoctorWhoCommander rdf:type owl:NamedIndividual ,
                              :Set ;
                     :setName "Doctor Who Commander"@en ;
@@ -7598,6 +7753,12 @@ Tales"""@en ;
                           :setCode "WOC" ;
                           :cardCount 172 ;
                           :releaseDate "2023-08-14"^^xsd:date .
+:HistoricAnthology7 rdf:type owl:NamedIndividual ,
+                             :Set ;
+                    :setName "Historic Anthology 7"@en ;
+                    :setCode "HA7" ;
+                    :cardCount 25 ;
+                    :releaseDate "2023-07-18"^^xsd:date .
 :CommanderMasters rdf:type owl:NamedIndividual ,
                            :Set ;
                   :setName "Commander Masters"@en ;
@@ -7636,6 +7797,12 @@ Legends"""@en ;
                   :setCode "SIS" ;
                   :cardCount 83 ;
                   :releaseDate "2023-03-03"^^xsd:date .
+:AlchemyPhyrexia rdf:type owl:NamedIndividual ,
+                          :Set ;
+                 :setName "Alchemy: Phyrexia"@en ;
+                 :setCode "YONE" ;
+                 :cardCount 31 ;
+                 :releaseDate "2023-02-28"^^xsd:date .
 :ShadowsOverInnistradRemastered rdf:type owl:NamedIndividual ,
                                          :Set ;
                                 :setName """Shadows Over Innistrad
@@ -7662,6 +7829,12 @@ Commander"""@en ;
                      :setCode "DMR" ;
                      :cardCount 467 ;
                      :releaseDate "2023-01-03"^^xsd:date .
+:AlchemyTheBrothersWar rdf:type owl:NamedIndividual ,
+                                :Set ;
+                       :setName "Alchemy: The Brothers' War"@en ;
+                       :setCode "YBRO" ;
+                       :cardCount 31 ;
+                       :releaseDate "2022-12-13"^^xsd:date .
 :Jumpstart2022 rdf:type owl:NamedIndividual ,
                         :Set ;
                :setName "Jumpstart 2022"@en ;
@@ -7723,6 +7896,18 @@ Cards"""@en ;
                  :setCode "DMU" ;
                  :cardCount 434 ;
                  :releaseDate "2022-08-01"^^xsd:date .
+:ExplorerAnthology1 rdf:type owl:NamedIndividual ,
+                             :Set ;
+                    :setName "Explorer Anthology 1"@en ;
+                    :setCode "EA1" ;
+                    :cardCount 20 ;
+                    :releaseDate "2022-07-28"^^xsd:date .
+:HistoricAnthology6 rdf:type owl:NamedIndividual ,
+                             :Set ;
+                    :setName "Historic Anthology 6"@en ;
+                    :setCode "HA6" ;
+                    :cardCount 20 ;
+                    :releaseDate "2022-07-28"^^xsd:date .
 :AlchemyHorizonsBaldursGate rdf:type owl:NamedIndividual ,
                                      :Set ;
                             :setName "Alchemy Horizons: Baldur's Gate"@en ;
@@ -7738,7 +7923,7 @@ Cards"""@en ;
 :StreetsOfNewCapennaAlchemy rdf:type owl:NamedIndividual ,
                                      :Set ;
                             :setName "Streets of New Capenna Alchemy"@en ;
-                            :setCode "Y22SNC" ;
+                            :setCode "YSNC" ;
                             :cardCount 30 ;
                             :releaseDate "2022-06-06"^^xsd:date .
 :CommanderLegendsBattleForBaldursGate rdf:type owl:NamedIndividual ,
@@ -7781,7 +7966,7 @@ Baldur's Gate"""@en ;
 :KamigawaNeonDynastyAlchemy rdf:type owl:NamedIndividual ,
                                      :Set ;
                             :setName "Kamigawa: Neon Dynasty Alchemy"@en ;
-                            :setCode "Y22NEO" ;
+                            :setCode "YNEO" ;
                             :cardCount 30 ;
                             :releaseDate "2022-02-23"^^xsd:date .
 :KamigawaNeonDynasty rdf:type owl:NamedIndividual ,
@@ -7811,7 +7996,7 @@ Baldur's Gate"""@en ;
 :InnistradMidnightHuntAlchemy rdf:type owl:NamedIndividual ,
                                        :Set ;
                               :setName "Innistrad: Midnight Hunt Alchemy"@en ;
-                              :setCode "Y22" ;
+                              :setCode "YMID" ;
                               :cardCount 64 ;
                               :releaseDate "2022-01-10"^^xsd:date .
 :ArenaBaseSet rdf:type owl:NamedIndividual ,

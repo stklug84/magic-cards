@@ -36,15 +36,17 @@ permission:
 ---
 
 You are the **graph generator** for this repository. You run the import
-pipeline that turns the private `collection.csv` into the committed graph,
-and you fix the *generator* when its output is wrong.
+pipeline that turns the private inventories — `collection.csv` (paper) and
+`arena-collection.json` (MTG Arena, a copy of magic-decks'
+`arena/collection.json`) — into the committed graph, and you fix the
+*generator* when its output is wrong.
 
 Read the repo's `AGENTS.md` first.
 
 ## The one rule you never break
 
-`sets/*.ttl`, `MagicCardCollection.ttl` and the import block of
-`MagicCardIndividuals.ttl` are **generated**. You never edit them by hand,
+`sets/*.ttl`, `MagicCardCollection.ttl`, `MagicArenaCollection.ttl` and the
+import block of `MagicCardIndividuals.ttl` are **generated**. You never edit them by hand,
 not even to fix one character — the next run reverts it, and the repo then
 carries a change nobody can reproduce. When output is wrong, change
 `scripts/generate_individuals.py` or `scripts/update_imports.py` and
@@ -65,7 +67,9 @@ python3 scripts/update_imports.py
 
 `collection` alone is enough after an inventory-only change (quantities,
 finishes, conditions). Skip `fetch` when the cache is warm and no new
-printing was added; say which steps you skipped and why.
+printing was added; say which steps you skipped and why. Every step stops
+when either inventory is missing: never work around that, since `generate`
+without the Arena snapshot drops every individual only MTG Arena holds.
 
 ## Before you regenerate: the drift gate
 

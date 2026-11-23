@@ -60,12 +60,13 @@ the other moved.
 `BUNDLE_PATHS` in `build_graph_bundle.py` is the allowlist. Two
 exclusions are deliberate and must stay:
 
-- `collection.csv` — private inventory;
+- `collection.csv` and `arena-collection.json` — the private inventories;
 - `MagicCompRules-*.txt` — not redistributable.
 
 `MagicCardIndividuals.ttl` *is* included even though the simulator ignores
-it, because `MagicCardCollection.ttl` and `MagicCardSynergies.ttl` import
-it and the bundle must pass its own `owl:imports` check standalone. Do not
+it, because the two collection graphs (`MagicCardCollection.ttl`,
+`MagicArenaCollection.ttl`) and `MagicCardSynergies.ttl` import it and the
+bundle must pass its own `owl:imports` check standalone. Do not
 "tidy" it out. `MagicCardSynergies.ttl` is included for the synergy
 queries and for magic-decks, whose deck builder reads the card-to-card
 synergies from the pinned bundle.
@@ -104,8 +105,8 @@ every consumer to update for nothing.
    mtg-validate --check ttl --check consistency /tmp/bundle
    ```
 
-   Expect the `collection.csv not found` notice; that is correct for a
-   bundle and not a failure.
+   Expect the `collection.csv not found` and `arena-collection.json not
+   found` notices; they are correct for a bundle and not a failure.
 
 ## Rules
 
