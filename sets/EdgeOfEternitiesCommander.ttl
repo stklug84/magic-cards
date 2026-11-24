@@ -39,8 +39,9 @@
     rdfs:label "Magic Card Collection Individuals – Edge of Eternities Commander"@en ;
     rdfs:comment """An instance graph describing the card individuals of a
 personal Magic: The Gathering card collection that were printed in the set
-Edge of Eternities Commander (EOC). One Card individual is defined per collected
-printing, carrying its characteristics, the platforms it is available on
+Edge of Eternities Commander (EOC). One Card individual is defined per printing
+collected in paper or on MTG Arena, carrying its characteristics, the
+platforms it is available on
 (paper, MTG Arena, Magic Online) with its MTG Arena identity, its legality
 in the paper and MTG Arena formats, and official rulings. Card data was
 sourced from Gatherer and Scryfall. This file imports MagicCardsOntology to
@@ -1010,6 +1011,9 @@ Draw two cards, then proliferate. (Choose any number of permanents and/or player
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2020-11-10"^^xsd:date ;
+        :rulingText """You can discard either one artifact card or two cards which may or may not be artifacts. If you really want to, you can discard two artifact cards."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2026-06-19"^^xsd:date ;
         :rulingText """You can discard either one artifact card or two cards which may or may not be artifacts. If you really want to, you can discard two artifact cards."""@en ] .
 
 :ChaosWarpEdgeOfEternitiesCommander49 rdf:type owl:NamedIndividual ,
@@ -1305,10 +1309,10 @@ Remove a charge counter from this artifact: Add one mana of any color."""@en ;
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2015-06-22"^^xsd:date ;
-        :rulingText """Like most lands, each land in this cycle is colorless. The damage dealt to you is dealt by a colorless source."""@en ] ,
+        :rulingText """The damage dealt to you is part of the second mana ability. It doesn't use the stack and can't be responded to."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2015-06-22"^^xsd:date ;
-        :rulingText """The damage dealt to you is part of the second mana ability. It doesn't use the stack and can't be responded to."""@en ] .
+        :rulingText """Like most lands, each land in this cycle is colorless. The damage dealt to you is dealt by a colorless source."""@en ] .
 
 :CommandTowerEdgeOfEternitiesCommander59 rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -1805,7 +1809,7 @@ When Emry enters, mill four cards.
         :rulingDate "2008-10-01"^^xsd:date ;
         :rulingText """This effect can reduce only the generic portion of the artifact spell's total cost."""@en ] .
 
-:ExperimentalAugury rdf:type owl:NamedIndividual ,
+:ExperimentalAuguryEdgeOfEternitiesCommander73 rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Experimental Augury" ;
     :manaCost "{1}{U}" ;
@@ -2188,7 +2192,7 @@ When this creature enters, draw two cards."""@en ;
       [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] .
 
-:Thrummingbird rdf:type owl:NamedIndividual ,
+:ThrummingbirdEdgeOfEternitiesCommander80 rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Thrummingbird" ;
     :manaCost "{1}{U}" ;
@@ -2547,10 +2551,10 @@ Artifact spells you cast cost {1} less to cast."""@en ;
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2014-02-01"^^xsd:date ;
-        :rulingText """If you choose 1 for the value of X, Astral Cornucopia will cost {3} to cast and enter the battlefield with one charge counter. If you choose 2 for the value of X, it will cost {6} to cast and enter the battlefield with two charge counters, and so on."""@en ] ,
+        :rulingText """The last ability is a mana ability. It doesn't use the stack and can't be responded to."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2014-02-01"^^xsd:date ;
-        :rulingText """The last ability is a mana ability. It doesn't use the stack and can't be responded to."""@en ] .
+        :rulingText """If you choose 1 for the value of X, Astral Cornucopia will cost {3} to cast and enter the battlefield with one charge counter. If you choose 2 for the value of X, it will cost {6} to cast and enter the battlefield with two charge counters, and so on."""@en ] .
 
 :CoretapperEdgeOfEternitiesCommander132 rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -2807,22 +2811,22 @@ This artifact enters with a charge counter on it for each time it was kicked.
         :rulingText """You can cast Everflowing Chalice without kicking it at all if you wish. However, if Everflowing Chalice has no charge counters on it, activating its last ability won't produce any mana."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2024-11-08"^^xsd:date ;
-        :rulingText """To determine a spell's total cost, start with the mana cost (or an alternative cost if another card's effect allows you to pay one instead), add any cost increases (such as kicker), then apply any cost reductions. The spell's mana value remains unchanged, no matter what the total cost to cast it was."""@en ] ,
+        :rulingText """If a spell's kicker cost was paid, the spell is "kicked.\""""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2024-11-08"^^xsd:date ;
-        :rulingText """If you copy a kicked spell on the stack, the copy is also kicked. If the copied spell is a permanent spell, the token the copy of that spell becomes when it enters is also kicked."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2024-11-08"^^xsd:date ;
-        :rulingText """If a card or token enters as a copy of a permanent, the new permanent isn't kicked, even if the original was."""@en ] ,
+        :rulingText """The kicker ability doesn't let you pay a kicker cost more than once."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2024-11-08"^^xsd:date ;
         :rulingText """If you put a permanent with a kicker ability onto the battlefield without casting it, you can't kick it."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2024-11-08"^^xsd:date ;
-        :rulingText """If a spell's kicker cost was paid, the spell is "kicked.\""""@en ] ,
+        :rulingText """If a card or token enters as a copy of a permanent, the new permanent isn't kicked, even if the original was."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2024-11-08"^^xsd:date ;
-        :rulingText """The kicker ability doesn't let you pay a kicker cost more than once."""@en ] .
+        :rulingText """If you copy a kicked spell on the stack, the copy is also kicked. If the copied spell is a permanent spell, the token the copy of that spell becomes when it enters is also kicked."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-11-08"^^xsd:date ;
+        :rulingText """To determine a spell's total cost, start with the mana cost (or an alternative cost if another card's effect allows you to pay one instead), add any cost increases (such as kicker), then apply any cost reductions. The spell's mana value remains unchanged, no matter what the total cost to cast it was."""@en ] .
 
 :GolemFoundry rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -3420,19 +3424,19 @@ Whenever this creature enters or attacks, create a number of 1/1 colorless Gnome
     :hasRuling
       [ rdf:type :Ruling ;
         :rulingDate "2009-02-01"^^xsd:date ;
-        :rulingText """Exotic Orchard doesn't care about any restrictions or riders your opponents' lands (such as Ancient Ziggurat or Hall of the Bandit Lord) put on the mana they produce. It just cares about colors of mana."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2009-02-01"^^xsd:date ;
-        :rulingText """Exotic Orchard checks the effects of all mana-producing abilities of lands your opponents control, but it doesn't check their costs. For example, Vivid Crag has the ability "{T}, Remove a charge counter from Vivid Crag: Add one mana of any color." If an opponent controls Vivid Crag and you control Exotic Orchard, you can tap Exotic Orchard for any color of mana. It doesn't matter whether Vivid Crag has a charge counter on it, and it doesn't matter whether it's untapped."""@en ] ,
-      [ rdf:type :Ruling ;
-        :rulingDate "2009-02-01"^^xsd:date ;
-        :rulingText """When determining what colors of mana your opponents' lands could produce, Exotic Orchard takes into account any applicable replacement effects that would apply to those lands' mana abilities (such as Contamination's effect, for example). If there are more than one, consider them in any possible order."""@en ] ,
+        :rulingText """The colors of mana are white, blue, black, red, and green. Exotic Orchard can't be tapped for colorless mana, even if a land an opponent controls could produce colorless mana."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2009-02-01"^^xsd:date ;
         :rulingText """Lands that produce mana based only on what other lands "could produce" won't help each other unless some other land allows one of them to actually produce some type of mana. For example, if you control an Exotic Orchard and your opponent controls an Exotic Orchard and a Reflecting Pool, none of those lands would produce mana if their mana abilities were activated. On the other hand, if you control a Forest and an Exotic Orchard, and your opponent controls an Exotic Orchard and a Reflecting Pool, then each of those lands can be tapped to produce {G}. Your opponent's Exotic Orchard can produce {G} because you control a Forest. Your Exotic Orchard and your opponent's Reflecting Pool can each produce {G} because your opponent's Exotic Orchard can produce {G}."""@en ] ,
       [ rdf:type :Ruling ;
         :rulingDate "2009-02-01"^^xsd:date ;
-        :rulingText """The colors of mana are white, blue, black, red, and green. Exotic Orchard can't be tapped for colorless mana, even if a land an opponent controls could produce colorless mana."""@en ] .
+        :rulingText """Exotic Orchard doesn't care about any restrictions or riders your opponents' lands (such as Ancient Ziggurat or Hall of the Bandit Lord) put on the mana they produce. It just cares about colors of mana."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2009-02-01"^^xsd:date ;
+        :rulingText """When determining what colors of mana your opponents' lands could produce, Exotic Orchard takes into account any applicable replacement effects that would apply to those lands' mana abilities (such as Contamination's effect, for example). If there are more than one, consider them in any possible order."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2009-02-01"^^xsd:date ;
+        :rulingText """Exotic Orchard checks the effects of all mana-producing abilities of lands your opponents control, but it doesn't check their costs. For example, Vivid Crag has the ability "{T}, Remove a charge counter from Vivid Crag: Add one mana of any color." If an opponent controls Vivid Crag and you control Exotic Orchard, you can tap Exotic Orchard for any color of mana. It doesn't matter whether Vivid Crag has a charge counter on it, and it doesn't matter whether it's untapped."""@en ] .
 
 :GlacialFortressEdgeOfEternitiesCommander160 rdf:type owl:NamedIndividual ,
                   :Card ;

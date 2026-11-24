@@ -39,8 +39,9 @@
     rdfs:label "Magic Card Collection Individuals – Kamigawa: Neon Dynasty"@en ;
     rdfs:comment """An instance graph describing the card individuals of a
 personal Magic: The Gathering card collection that were printed in the set
-Kamigawa: Neon Dynasty (NEO). One Card individual is defined per collected
-printing, carrying its characteristics, the platforms it is available on
+Kamigawa: Neon Dynasty (NEO). One Card individual is defined per printing
+collected in paper or on MTG Arena, carrying its characteristics, the
+platforms it is available on
 (paper, MTG Arena, Magic Online) with its MTG Arena identity, its legality
 in the paper and MTG Arena formats, and official rulings. Card data was
 sourced from Gatherer and Scryfall. This file imports MagicCardsOntology to
@@ -53,6 +54,111 @@ legality definitions."""@en .
 # Card Individuals
 #
 ################################################################################
+
+:FarewellKamigawaNeonDynasty13 rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Farewell" ;
+    :manaCost "{4}{W}{W}" ;
+    :manaValue "6"^^xsd:nonNegativeInteger ;
+    :hasCardType :Sorcery ;
+    :hasRarity :Rare ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :KamigawaNeonDynasty ;
+    :cardNumber "13"^^xsd:integer ;
+    :artist "Seb McKinnon" ;
+    :hasLanguage :English ;
+    :printedText """Choose one or more —
+• Exile all artifacts.
+• Exile all creatures.
+• Exile all enchantments.
+• Exile all graveyards."""@en ;
+    :oracleText """Choose one or more —
+• Exile all artifacts.
+• Exile all creatures.
+• Exile all enchantments.
+• Exile all graveyards."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=548306"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/neo/13/farewell"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "79433"^^xsd:positiveInteger ;
+    :arenaName "Farewell" ;
+    :arenaSetCode "NEO" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2022-02-18"^^xsd:date ;
+        :rulingText """If you choose more than one mode for Farewell, you perform the actions in the order written."""@en ] .
+
+:TamiyosCompleation rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Tamiyo's Compleation" ;
+    :manaCost "{3}{U}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasCardType :Enchantment ;
+    :hasSubType :Aura ;
+    :hasRarity :Common ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :KamigawaNeonDynasty ;
+    :cardNumber "83"^^xsd:integer ;
+    :artist "Dominik Mayer" ;
+    :hasLanguage :English ;
+    :hasKeywordAbility :Enchant ,
+                       :Flash ;
+    :printedText """Flash
+Enchant artifact, creature, or planeswalker
+When this Aura enters, tap enchanted permanent. If it's an Equipment, unattach it.
+Enchanted permanent loses all abilities and doesn't untap during its controller's untap step."""@en ;
+    :oracleText """Flash
+Enchant artifact, creature, or planeswalker
+When this Aura enters, tap enchanted permanent. If it's an Equipment, unattach it.
+Enchanted permanent loses all abilities and doesn't untap during its controller's untap step."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=548381"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/neo/83/tamiyos-compleation"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "79508"^^xsd:positiveInteger ;
+    :arenaName "Tamiyo's Compleation" ;
+    :arenaSetCode "NEO" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2022-02-18"^^xsd:date ;
+        :rulingText """An Equipment creature that loses its reconfigure ability cannot be attached to a creature by any effect."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2022-02-18"^^xsd:date ;
+        :rulingText """An attached Equipment with reconfigure that loses its reconfigure ability doesn't become a creature again until it becomes unattached, and it won't become unattached until the triggered ability of Tamiyo's Compleation resolves. If that ability is countered, the Equipment will stay attached to the equipped creature."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2022-02-18"^^xsd:date ;
+        :rulingText """A planeswalker with Tamiyo's Compleation attached to it may still be attacked and it will continue to lose loyalty counters if damage is dealt to it."""@en ] .
 
 :ReckonerBankbuster rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -99,3 +205,46 @@ Crew 3"""@en ;
       [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] .
+
+:TranquilCoveKamigawaNeonDynasty280 rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Tranquil Cove" ;
+    :manaValue "0"^^xsd:nonNegativeInteger ;
+    :hasCardType :Land ;
+    :hasRarity :Common ;
+    :hasColorIdentity :White ,
+                      :Blue ;
+    :isInSet :KamigawaNeonDynasty ;
+    :cardNumber "280"^^xsd:integer ;
+    :artist "Alayna Danner" ;
+    :hasLanguage :English ;
+    :producesMana :White ,
+                  :Blue ;
+    :entersTapped "true"^^xsd:boolean ;
+    :printedText """This land enters tapped.
+When this land enters, you gain 1 life.
+{T}: Add {W} or {U}."""@en ;
+    :oracleText """This land enters tapped.
+When this land enters, you gain 1 life.
+{T}: Add {W} or {U}."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=548593"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/neo/280/tranquil-cove"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "79720"^^xsd:positiveInteger ;
+    :arenaName "Tranquil Cove" ;
+    :arenaSetCode "NEO" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .

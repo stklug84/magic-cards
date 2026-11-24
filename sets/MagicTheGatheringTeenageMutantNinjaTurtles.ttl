@@ -39,8 +39,9 @@
     rdfs:label "Magic Card Collection Individuals – Teenage Mutant Ninja Turtles"@en ;
     rdfs:comment """An instance graph describing the card individuals of a
 personal Magic: The Gathering card collection that were printed in the set
-Teenage Mutant Ninja Turtles (TMT). One Card individual is defined per collected
-printing, carrying its characteristics, the platforms it is available on
+Teenage Mutant Ninja Turtles (TMT). One Card individual is defined per printing
+collected in paper or on MTG Arena, carrying its characteristics, the
+platforms it is available on
 (paper, MTG Arena, Magic Online) with its MTG Arena identity, its legality
 in the paper and MTG Arena formats, and official rulings. Card data was
 sourced from Gatherer and Scryfall. This file imports MagicCardsOntology to
@@ -155,6 +156,55 @@ April O'Neil can't be blocked by creatures with power 3 or greater."""@en ;
       [ rdf:type :Ruling ;
         :rulingDate "2026-01-27"^^xsd:date ;
         :rulingText """Once April has been blocked, changing the blocking creature's power to 3 or greater won't cause April to become unblocked."""@en ] .
+
+:EastWindAvatar rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "East Wind Avatar" ;
+    :manaCost "{3}{W}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Bird ,
+                :Spirit ,
+                :Avatar ;
+    :hasRarity :Common ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :MagicTheGatheringTeenageMutantNinjaTurtles ;
+    :cardNumber "5"^^xsd:integer ;
+    :artist "Andrea Tentori Montalto" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "4" ;
+    :toughnessValue "4"^^xsd:integer ;
+    :hasKeywordAbility :Flying ,
+                       :Vigilance ;
+    :hasAbilityWord :Alliance ;
+    :printedText """Flying, vigilance
+Alliance — Whenever another creature you control enters, this creature gets +1/+0 until end of turn."""@en ;
+    :oracleText """Flying, vigilance
+Alliance — Whenever another creature you control enters, this creature gets +1/+0 until end of turn."""@en ;
+    :flavorText """Azrael was born on the wind to guide others to new beginnings."""@en ;
+    :scryfallUrl "https://scryfall.com/card/tmt/5/east-wind-avatar"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "100462"^^xsd:positiveInteger ;
+    :arenaName "East Wind Avatar" ;
+    :arenaSetCode "TMT" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
 
 :FeatherbrainedFilcher rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -457,7 +507,7 @@ Leonardo gets +1/+0 for each other creature you control."""@en ;
         :rulingDate "2026-01-27"^^xsd:date ;
         :rulingText """Spells can only be cast for their sneak costs any time you could play an instant during the declare blockers step on your turn (after your opponent has decided whether to block)."""@en ] .
 
-:MakeYourMove rdf:type owl:NamedIndividual ,
+:MakeYourMoveMagicTheGatheringTeenageMutantNinjaTurtles20 rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Make Your Move" ;
     :manaCost "{2}{W}" ;
@@ -777,6 +827,54 @@ When this creature dies, draw a card."""@en ;
         :rulingDate "2026-01-27"^^xsd:date ;
         :rulingText """When Donatello enters the battlefield, his triggered ability will check to see if you control an artifact. If you don't, the ability won't trigger at all. If the ability does trigger, it will check again as it tries to resolve. If you no longer control any artifacts, the ability won't do anything."""@en ] .
 
+:DonatelloWayWithMachinesMagicTheGatheringTeenageMutantNinjaTurtles38 rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Donatello, Way with Machines" ;
+    :manaCost "{2}{U}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasSuperType :Legendary ;
+    :hasCardType :Creature ;
+    :hasSubType :Mutant ,
+                :Ninja ,
+                :Turtle ;
+    :hasRarity :Uncommon ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :MagicTheGatheringTeenageMutantNinjaTurtles ;
+    :cardNumber "38"^^xsd:integer ;
+    :artist "Svetlin Velinov" ;
+    :hasLanguage :English ;
+    :power "1" ;
+    :powerValue "1"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    :hasKeywordAbility :Flying ;
+    :printedText """Flying
+Whenever an artifact you control enters, put a +1/+1 counter on Donatello."""@en ;
+    :oracleText """Flying
+Whenever an artifact you control enters, put a +1/+1 counter on Donatello."""@en ;
+    :flavorText """"Unfortunately, the lowly turtle has been saddled by society with the stereotype of being velocity challenged.\""""@en ;
+    :scryfallUrl "https://scryfall.com/card/tmt/38/donatello-way-with-machines"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "100495"^^xsd:positiveInteger ;
+    :arenaName "Donatello, Way with Machines" ;
+    :arenaSetCode "TMT" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
 :DonatellosTechnique rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Donatello's Technique" ;
@@ -877,6 +975,62 @@ Target opponent mills half their library, rounded up."""@en ;
       [ rdf:type :Ruling ;
         :rulingDate "2026-01-27"^^xsd:date ;
         :rulingText """If a creature spell's sneak cost was paid, the creature it becomes enters tapped and attacking the same player, planeswalker, or battle as the creature that was returned to its owner's hand to pay its sneak cost. This is a rule specific to sneak; in other cases, when a creature is put onto the battlefield attacking, that creature's controller chooses which player, planeswalker, or battle it's attacking."""@en ] .
+
+:KrangMasterMind rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Krang, Master Mind" ;
+    :manaCost "{6}{U}{U}" ;
+    :manaValue "8"^^xsd:nonNegativeInteger ;
+    :hasSuperType :Legendary ;
+    :hasCardType :Artifact ,
+                 :Creature ;
+    :hasSubType :Utrom ,
+                :Warrior ;
+    :hasRarity :Rare ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :MagicTheGatheringTeenageMutantNinjaTurtles ;
+    :cardNumber "43"^^xsd:integer ;
+    :artist "Narendra Bintara Adi" ;
+    :hasLanguage :English ;
+    :power "1" ;
+    :powerValue "1"^^xsd:integer ;
+    :toughness "4" ;
+    :toughnessValue "4"^^xsd:integer ;
+    :hasKeywordAbility :Affinity ;
+    :printedText """Affinity for artifacts (This spell costs {1} less to cast for each artifact you control.)
+When Krang enters, if you have fewer than four cards in hand, draw cards equal to the difference.
+Krang gets +1/+0 for each other artifact you control."""@en ;
+    :oracleText """Affinity for artifacts (This spell costs {1} less to cast for each artifact you control.)
+When Krang enters, if you have fewer than four cards in hand, draw cards equal to the difference.
+Krang gets +1/+0 for each other artifact you control."""@en ;
+    :scryfallUrl "https://scryfall.com/card/tmt/43/krang-master-mind"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "100500"^^xsd:positiveInteger ;
+    :arenaName "Krang, Master Mind" ;
+    :arenaSetCode "TMT" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2026-01-27"^^xsd:date ;
+        :rulingText """To determine the total cost of a spell, start with the mana cost or alternative cost you're paying, add any cost increases, then apply any cost reductions (such as affinity for artifacts). The mana value of the spell remains unchanged, no matter what the total cost to cast it was."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2026-01-27"^^xsd:date ;
+        :rulingText """If you have four or more cards in hand when Krang enters, his second ability won't trigger at all. If it does trigger, the ability will check again as it tries to resolve. If you have four or more card in hand at that time, the ability won't resolve and none of its effects will happen."""@en ] .
 
 :Metalhead rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -1011,6 +1165,9 @@ Draw a card."""@en ;
       [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
     :hasRuling
       [ rdf:type :Ruling ;
+        :rulingDate "2024-11-08"^^xsd:date ;
+        :rulingText """A "creature spell" is any spell with the creature type, even if it has other types such as artifact or enchantment."""@en ] ,
+      [ rdf:type :Ruling ;
         :rulingDate "2026-01-27"^^xsd:date ;
         :rulingText """A "creature spell" is any spell with the creature type, even if it has other types such as artifact or enchantment."""@en ] .
 
@@ -1112,6 +1269,53 @@ When Ray Fillet enters, create a Mutagen token. (It's an artifact with "{1}, {T}
       [ rdf:type :Ruling ;
         :rulingDate "2026-01-27"^^xsd:date ;
         :rulingText """Mutagen tokens are a kind of predefined token. Each one is a colorless artifact with the artifact subtype Mutagen and the ability "{1}, {T}, Sacrifice this token: Put a +1/+1 counter on target creature. Activate only as a sorcery.\""""@en ] .
+
+:RenetTemporalApprentice rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Renet, Temporal Apprentice" ;
+    :manaCost "{3}{U}{U}" ;
+    :manaValue "5"^^xsd:nonNegativeInteger ;
+    :hasSuperType :Legendary ;
+    :hasCardType :Creature ;
+    :hasSubType :Human ,
+                :Wizard ;
+    :hasRarity :Rare ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :MagicTheGatheringTeenageMutantNinjaTurtles ;
+    :cardNumber "50"^^xsd:integer ;
+    :artist "Yuhong Ding" ;
+    :hasLanguage :English ;
+    :power "4" ;
+    :powerValue "4"^^xsd:integer ;
+    :toughness "3" ;
+    :toughnessValue "3"^^xsd:integer ;
+    :hasKeywordAbility :Flash ;
+    :printedText """Flash
+When Renet enters, return each other nonland permanent that entered this turn to its owner's hand."""@en ;
+    :oracleText """Flash
+When Renet enters, return each other nonland permanent that entered this turn to its owner's hand."""@en ;
+    :flavorText """"You guys don't get sick during time travel, do you?\""""@en ;
+    :scryfallUrl "https://scryfall.com/card/tmt/50/renet-temporal-apprentice"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "100507"^^xsd:positiveInteger ;
+    :arenaName "Renet, Temporal Apprentice" ;
+    :arenaSetCode "TMT" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
 
 :RetroMutation rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -2590,6 +2794,52 @@ Whenever this creature attacks, you may discard a card. If you do, draw a card."
       [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
 
+:RavenousRobots rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Ravenous Robots" ;
+    :manaCost "{1}{R}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ,
+                 :Creature ;
+    :hasSubType :Robot ;
+    :hasRarity :Rare ;
+    :hasColor :Red ;
+    :hasColorIdentity :Red ;
+    :isInSet :MagicTheGatheringTeenageMutantNinjaTurtles ;
+    :cardNumber "106"^^xsd:integer ;
+    :artist "Kevin Sidharta" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "1" ;
+    :toughnessValue "1"^^xsd:integer ;
+    :printedText """Whenever you cast an artifact spell, create a 1/1 colorless Robot artifact creature token.
+{R}, {T}: Creature tokens you control gain haste until end of turn."""@en ;
+    :oracleText """Whenever you cast an artifact spell, create a 1/1 colorless Robot artifact creature token.
+{R}, {T}: Creature tokens you control gain haste until end of turn."""@en ;
+    :flavorText """"The mousers have a new command: to consume everything here . . . all of you will be destroyed!"
+—Baxter Stockman"""@en ;
+    :scryfallUrl "https://scryfall.com/card/tmt/106/ravenous-robots"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "100563"^^xsd:positiveInteger ;
+    :arenaName "Ravenous Robots" ;
+    :arenaSetCode "TMT" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
 :RockSoldiers rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Rock Soldiers" ;
@@ -3048,6 +3298,58 @@ If one or more +1/+1 counters would be put on a creature you control, that many 
       [ rdf:type :Ruling ;
         :rulingDate "2026-01-27"^^xsd:date ;
         :rulingText """Some spells and abilities that create Mutagen tokens require targets. If each target chosen is an illegal target as that spell or ability tries to resolve, it won't resolve. The Mutagen token won't be created."""@en ] .
+
+:MichelangelosTechnique rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Michelangelo's Technique" ;
+    :manaCost "{4}{G}" ;
+    :manaValue "5"^^xsd:nonNegativeInteger ;
+    :hasCardType :Sorcery ;
+    :hasRarity :Rare ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :MagicTheGatheringTeenageMutantNinjaTurtles ;
+    :cardNumber "122"^^xsd:integer ;
+    :artist "Dominik Mayer" ;
+    :hasLanguage :English ;
+    :hasKeywordAbility :Sneak ;
+    :printedText """Sneak {3}{G} (You may cast this spell for {3}{G} if you also return an unblocked attacker you control to hand during the declare blockers step.)
+Look at the top eight cards of your library. Put up to two creature cards with total mana value 6 or less from among them onto the battlefield and the rest on the bottom of your library in a random order."""@en ;
+    :oracleText """Sneak {3}{G} (You may cast this spell for {3}{G} if you also return an unblocked attacker you control to hand during the declare blockers step.)
+Look at the top eight cards of your library. Put up to two creature cards with total mana value 6 or less from among them onto the battlefield and the rest on the bottom of your library in a random order."""@en ;
+    :scryfallUrl "https://scryfall.com/card/tmt/122/michelangelos-technique"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "100579"^^xsd:positiveInteger ;
+    :arenaName "Michelangelo's Technique" ;
+    :arenaSetCode "TMT" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2026-01-27"^^xsd:date ;
+        :rulingText """If a creature spell's sneak cost was paid, the creature it becomes enters tapped and attacking the same player, planeswalker, or battle as the creature that was returned to its owner's hand to pay its sneak cost. This is a rule specific to sneak; in other cases, when a creature is put onto the battlefield attacking, that creature's controller chooses which player, planeswalker, or battle it's attacking."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2026-01-27"^^xsd:date ;
+        :rulingText """Spells can only be cast for their sneak costs any time you could play an instant during the declare blockers step on your turn (after your opponent has decided whether to block)."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2026-01-27"^^xsd:date ;
+        :rulingText """Although a creature put onto the battlefield this way is attacking, it was never declared as an attacking creature. Abilities that trigger whenever a creature attacks won't trigger when that creature enters attacking."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2026-01-27"^^xsd:date ;
+        :rulingText """If a card in your library has {X} in its mana cost, X is 0 for the purpose of determining its mana value."""@en ] .
 
 :MutantChainReaction rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -3545,6 +3847,59 @@ Whenever a creature you control with a counter on it deals combat damage to a pl
       [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:WestWindAvatar rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "West Wind Avatar" ;
+    :manaCost "{5}{G}{G}" ;
+    :manaValue "7"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Cat ,
+                :Spirit ,
+                :Avatar ;
+    :hasRarity :Uncommon ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :MagicTheGatheringTeenageMutantNinjaTurtles ;
+    :cardNumber "137"^^xsd:integer ;
+    :artist "Oriana Menendez" ;
+    :hasLanguage :English ;
+    :power "7" ;
+    :powerValue "7"^^xsd:integer ;
+    :toughness "7" ;
+    :toughnessValue "7"^^xsd:integer ;
+    :hasKeywordAbility :Trample ;
+    :hasAbilityWord :Disappear ;
+    :printedText """Trample
+Whenever this creature enters or attacks, you may sacrifice a token or a land. If you do, you gain 3 life.
+Disappear — At the beginning of your end step, if a permanent left the battlefield under your control this turn, draw a card."""@en ;
+    :oracleText """Trample
+Whenever this creature enters or attacks, you may sacrifice a token or a land. If you do, you gain 3 life.
+Disappear — At the beginning of your end step, if a permanent left the battlefield under your control this turn, draw a card."""@en ;
+    :scryfallUrl "https://scryfall.com/card/tmt/137/west-wind-avatar"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "100594"^^xsd:positiveInteger ;
+    :arenaName "West Wind Avatar" ;
+    :arenaSetCode "TMT" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2026-01-27"^^xsd:date ;
+        :rulingText """Some disappear abilities, such as those of the above cards, are triggered abilities with intervening if clauses. If a permanent hasn't left the battlefield under your control that turn by the time the disappear ability would trigger, it won't trigger at all."""@en ] .
 
 :ZooEscapees rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -4543,6 +4898,94 @@ Whenever a player casts a spell, if the amount of mana spent to cast it was less
         :rulingDate "2026-01-27"^^xsd:date ;
         :rulingText """Some spells and abilities that create Food tokens may require targets. If each target chosen is an illegal target as that spell or ability tries to resolve, it won't resolve. You won't create any Food tokens."""@en ] .
 
+:Skateboard rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Skateboard" ;
+    :manaCost "{1}" ;
+    :manaValue "1"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ;
+    :hasSubType :Equipment ;
+    :hasRarity :Uncommon ;
+    :isInSet :MagicTheGatheringTeenageMutantNinjaTurtles ;
+    :cardNumber "178"^^xsd:integer ;
+    :artist "Hokyoung Kim" ;
+    :hasLanguage :English ;
+    :hasKeywordAbility :Equip ;
+    :printedText """When this Equipment enters, tap target permanent.
+Equipped creature gets +1/+0 and has haste.
+Equip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)"""@en ;
+    :oracleText """When this Equipment enters, tap target permanent.
+Equipped creature gets +1/+0 and has haste.
+Equip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)"""@en ;
+    :flavorText """"Why skate a half-pipe when you can skate a sewer pipe?\""""@en ;
+    :scryfallUrl "https://scryfall.com/card/tmt/178/skateboard"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "100635"^^xsd:positiveInteger ;
+    :arenaName "Skateboard" ;
+    :arenaSetCode "TMT" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:TurtleVan rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Turtle Van" ;
+    :manaCost "{3}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ;
+    :hasSubType :Vehicle ;
+    :hasRarity :Rare ;
+    :isInSet :MagicTheGatheringTeenageMutantNinjaTurtles ;
+    :cardNumber "181"^^xsd:integer ;
+    :artist "Jakob Eirich" ;
+    :hasLanguage :English ;
+    :power "4" ;
+    :powerValue "4"^^xsd:integer ;
+    :toughness "4" ;
+    :toughnessValue "4"^^xsd:integer ;
+    :hasKeywordAbility :Crew ;
+    :hasKeywordAction :Double ;
+    :printedText """Whenever this Vehicle attacks, put a +1/+1 counter on target creature that crewed it this turn. Then if that creature is a Mutant, Ninja, or Turtle, double the number of +1/+1 counters on it.
+Crew 1 (Tap any number of creatures you control with total power 1 or more: This Vehicle becomes an artifact creature until end of turn.)"""@en ;
+    :oracleText """Whenever this Vehicle attacks, put a +1/+1 counter on target creature that crewed it this turn. Then if that creature is a Mutant, Ninja, or Turtle, double the number of +1/+1 counters on it.
+Crew 1 (Tap any number of creatures you control with total power 1 or more: This Vehicle becomes an artifact creature until end of turn.)"""@en ;
+    :scryfallUrl "https://scryfall.com/card/tmt/181/turtle-van"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "100638"^^xsd:positiveInteger ;
+    :arenaName "Turtle Van" ;
+    :arenaSetCode "TMT" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2026-01-27"^^xsd:date ;
+        :rulingText """To double the number of +1/+1 counters on a creature, put a number of +1/+1 counters on it equal to the number it already has. Other cards that interact with putting counters on it will interact with this effect accordingly."""@en ] .
+
 :WeatherMaker rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Weather Maker" ;
@@ -5041,7 +5484,7 @@ When this land enters, you gain 1 life.
       [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
 
-:DonatelloWayWithMachines rdf:type owl:NamedIndividual ,
+:DonatelloWayWithMachinesMagicTheGatheringTeenageMutantNinjaTurtles197 rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Donatello, Way with Machines" ;
     :manaCost "{2}{U}" ;

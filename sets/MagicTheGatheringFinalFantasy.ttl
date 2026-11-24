@@ -39,8 +39,9 @@
     rdfs:label "Magic Card Collection Individuals – Final Fantasy"@en ;
     rdfs:comment """An instance graph describing the card individuals of a
 personal Magic: The Gathering card collection that were printed in the set
-Final Fantasy (FIN). One Card individual is defined per collected
-printing, carrying its characteristics, the platforms it is available on
+Final Fantasy (FIN). One Card individual is defined per printing
+collected in paper or on MTG Arena, carrying its characteristics, the
+platforms it is available on
 (paper, MTG Arena, Magic Online) with its MTG Arena identity, its legality
 in the paper and MTG Arena formats, and official rulings. Card data was
 sourced from Gatherer and Scryfall. This file imports MagicCardsOntology to
@@ -53,6 +54,1309 @@ legality definitions."""@en .
 # Card Individuals
 #
 ################################################################################
+
+:CloudboundMoogle rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Cloudbound Moogle" ;
+    :manaCost "{3}{W}{W}" ;
+    :manaValue "5"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Moogle ;
+    :hasRarity :Common ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :MagicTheGatheringFinalFantasy ;
+    :cardNumber "11"^^xsd:integer ;
+    :artist "Andrea Radeck" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "3" ;
+    :toughnessValue "3"^^xsd:integer ;
+    :hasKeywordAbility :Flying ,
+                       :Cycling ;
+    :printedText """Flying
+When this creature enters, put a +1/+1 counter on target creature.
+Plainscycling {2} ({2}, Discard this card: Search your library for a Plains card, reveal it, put it into your hand, then shuffle.)"""@en ;
+    :oracleText """Flying
+When this creature enters, put a +1/+1 counter on target creature.
+Plainscycling {2} ({2}, Discard this card: Search your library for a Plains card, reveal it, put it into your hand, then shuffle.)"""@en ;
+    :scryfallUrl "https://scryfall.com/card/fin/11/cloudbound-moogle"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "95863"^^xsd:positiveInteger ;
+    :arenaName "Cloudbound Moogle" ;
+    :arenaSetCode "FIN" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:FateOfTheSunCryst rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Fate of the Sun-Cryst" ;
+    :manaCost "{4}{W}" ;
+    :manaValue "5"^^xsd:nonNegativeInteger ;
+    :hasCardType :Instant ;
+    :hasRarity :Common ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :MagicTheGatheringFinalFantasy ;
+    :cardNumber "19"^^xsd:integer ;
+    :artist "Erikas Perl" ;
+    :hasLanguage :English ;
+    :printedText """This spell costs {2} less to cast if it targets a tapped creature.
+Destroy target nonland permanent."""@en ;
+    :oracleText """This spell costs {2} less to cast if it targets a tapped creature.
+Destroy target nonland permanent."""@en ;
+    :flavorText """"You would have me destroy the Empire? Is this my duty? Is this what you want?"
+—Ashelia B'nargin Dalmasca"""@en ;
+    :scryfallUrl "https://scryfall.com/card/fin/19/fate-of-the-sun-cryst"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "95873"^^xsd:positiveInteger ;
+    :arenaName "Fate of the Sun-Cryst" ;
+    :arenaSetCode "FIN" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:Gaelicat rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Gaelicat" ;
+    :manaCost "{2}{W}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Cat ;
+    :hasRarity :Common ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :MagicTheGatheringFinalFantasy ;
+    :cardNumber "22"^^xsd:integer ;
+    :artist "Narendra Bintara Adi" ;
+    :hasLanguage :English ;
+    :power "1" ;
+    :powerValue "1"^^xsd:integer ;
+    :toughness "3" ;
+    :toughnessValue "3"^^xsd:integer ;
+    :hasKeywordAbility :Flying ,
+                       :Vigilance ;
+    :printedText """Flying, vigilance
+As long as you control two or more artifacts, this creature gets +2/+0."""@en ;
+    :oracleText """Flying, vigilance
+As long as you control two or more artifacts, this creature gets +2/+0."""@en ;
+    :flavorText """"That's the ticket! Now, let's get moving to North Mountain!"
+—Galuf Baldesion"""@en ;
+    :scryfallUrl "https://scryfall.com/card/fin/22/gaelicat"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "95876"^^xsd:positiveInteger ;
+    :arenaName "Gaelicat" ;
+    :arenaSetCode "FIN" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:MagitekInfantry rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Magitek Infantry" ;
+    :manaCost "{W}" ;
+    :manaValue "1"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ,
+                 :Creature ;
+    :hasSubType :Robot ,
+                :Soldier ;
+    :hasRarity :Common ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :MagicTheGatheringFinalFantasy ;
+    :cardNumber "25"^^xsd:integer ;
+    :artist "John Tyler Christopher" ;
+    :hasLanguage :English ;
+    :power "1" ;
+    :powerValue "1"^^xsd:integer ;
+    :toughness "1" ;
+    :toughnessValue "1"^^xsd:integer ;
+    :printedText """This creature gets +1/+0 as long as you control another artifact.
+{2}{W}: Search your library for a card named Magitek Infantry, put it onto the battlefield tapped, then shuffle."""@en ;
+    :oracleText """This creature gets +1/+0 as long as you control another artifact.
+{2}{W}: Search your library for a card named Magitek Infantry, put it onto the battlefield tapped, then shuffle."""@en ;
+    :flavorText """These cybersoldiers were specifically engineered to excel in combat, and serve as the powerhouse of the imperial infantry."""@en ;
+    :scryfallUrl "https://scryfall.com/card/fin/25/magitek-infantry"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "95879"^^xsd:positiveInteger ;
+    :arenaName "Magitek Infantry" ;
+    :arenaSetCode "FIN" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:WhiteMagesStaff rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "White Mage's Staff" ;
+    :manaCost "{1}{W}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ;
+    :hasSubType :Equipment ;
+    :hasRarity :Common ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :MagicTheGatheringFinalFantasy ;
+    :cardNumber "42"^^xsd:integer ;
+    :artist "Kim Dingwall" ;
+    :hasLanguage :English ;
+    :hasKeywordAbility :JobSelect ,
+                       :Equip ;
+    :printedText """Job select (When this Equipment enters, create a 1/1 colorless Hero creature token, then attach this to it.)
+Equipped creature gets +1/+1, has "Whenever this creature attacks, you gain 1 life," and is a Cleric in addition to its other types.
+Equip {3} ({3}: Attach to target creature you control. Equip only as a sorcery.)"""@en ;
+    :oracleText """Job select (When this Equipment enters, create a 1/1 colorless Hero creature token, then attach this to it.)
+Equipped creature gets +1/+1, has "Whenever this creature attacks, you gain 1 life," and is a Cleric in addition to its other types.
+Equip {3} ({3}: Attach to target creature you control. Equip only as a sorcery.)"""@en ;
+    :scryfallUrl "https://scryfall.com/card/fin/42/white-mages-staff"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "95898"^^xsd:positiveInteger ;
+    :arenaName "White Mage's Staff" ;
+    :arenaSetCode "FIN" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:SyncopateMagicTheGatheringFinalFantasy80 rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Syncopate" ;
+    :manaCost "{X}{U}" ;
+    :manaValue "1"^^xsd:nonNegativeInteger ;
+    :hasCardType :Instant ;
+    :hasRarity :Common ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :MagicTheGatheringFinalFantasy ;
+    :cardNumber "80"^^xsd:integer ;
+    :artist "Nijihayashi" ;
+    :hasLanguage :English ;
+    :printedText """Counter target spell unless its controller pays {X}. If that spell is countered this way, exile it instead of putting it into its owner's graveyard."""@en ;
+    :oracleText """Counter target spell unless its controller pays {X}. If that spell is countered this way, exile it instead of putting it into its owner's graveyard."""@en ;
+    :flavorText """"Your eyes, they burn with resolve . . . beautiful.\""""@en ;
+    :scryfallUrl "https://scryfall.com/card/fin/80/syncopate"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "95938"^^xsd:positiveInteger ;
+    :arenaName "Syncopate" ;
+    :arenaSetCode "FIN" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:TravelTheOverworld rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Travel the Overworld" ;
+    :manaCost "{5}{U}{U}" ;
+    :manaValue "7"^^xsd:nonNegativeInteger ;
+    :hasCardType :Sorcery ;
+    :hasRarity :Uncommon ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :MagicTheGatheringFinalFantasy ;
+    :cardNumber "82"^^xsd:integer ;
+    :artist "Ben Wootten" ;
+    :hasLanguage :English ;
+    :hasKeywordAbility :Affinity ;
+    :printedText """Affinity for Towns (This spell costs {1} less to cast for each Town you control.)
+Draw four cards."""@en ;
+    :oracleText """Affinity for Towns (This spell costs {1} less to cast for each Town you control.)
+Draw four cards."""@en ;
+    :flavorText """"My dad always wanted me to go out and travel the world. But it also feels like ... like the wind is calling me."
+—Bartz Klauser"""@en ;
+    :scryfallUrl "https://scryfall.com/card/fin/82/travel-the-overworld"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "95940"^^xsd:positiveInteger ;
+    :arenaName "Travel the Overworld" ;
+    :arenaSetCode "FIN" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:TheFinalDays rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "The Final Days" ;
+    :manaCost "{2}{B}{B}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasCardType :Sorcery ;
+    :hasRarity :Uncommon ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :MagicTheGatheringFinalFantasy ;
+    :cardNumber "101"^^xsd:integer ;
+    :artist "Fang Xinyu" ;
+    :hasLanguage :English ;
+    :hasKeywordAbility :Flashback ;
+    :printedText """Create two tapped 2/2 black Horror creature tokens. If this spell was cast from a graveyard, instead create X of those tokens, where X is the number of creature cards in your graveyard.
+Flashback {4}{B}{B} (You may cast this card from your graveyard for its flashback cost. Then exile it.)"""@en ;
+    :oracleText """Create two tapped 2/2 black Horror creature tokens. If this spell was cast from a graveyard, instead create X of those tokens, where X is the number of creature cards in your graveyard.
+Flashback {4}{B}{B} (You may cast this card from your graveyard for its flashback cost. Then exile it.)"""@en ;
+    :scryfallUrl "https://scryfall.com/card/fin/101/the-final-days"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "95960"^^xsd:positiveInteger ;
+    :arenaName "The Final Days" ;
+    :arenaSetCode "FIN" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-06-06"^^xsd:date ;
+        :rulingText """To determine the total cost of a spell, start with the mana cost or alternative cost (such as a flashback cost) you're paying, add any cost increases, then apply any cost reductions. The mana value of the spell is determined only by its mana cost, no matter what the total cost to cast the spell was."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-06-06"^^xsd:date ;
+        :rulingText """If a card with flashback is put into your graveyard during your turn, you can cast it if it's legal to do so before any other player can take any actions."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-06-06"^^xsd:date ;
+        :rulingText """The value of X is calculated only once, as The Final Days resolves."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-06-06"^^xsd:date ;
+        :rulingText """You must still follow any timing restrictions and permissions, including those based on the card's type. For instance, you can cast a sorcery using flashback only when you could normally cast a sorcery."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-06-06"^^xsd:date ;
+        :rulingText """You can cast a spell using flashback even if it was somehow put into your graveyard without having been cast."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-06-06"^^xsd:date ;
+        :rulingText """A spell cast using flashback will always be exiled afterward, whether it resolves, is countered, or leaves the stack in some other way."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-06-06"^^xsd:date ;
+        :rulingText """"Flashback [cost]" means "You may cast this card from your graveyard if the resulting spell is an instant or sorcery spell by paying [cost] rather than paying its mana cost" and "If the flashback cost was paid, exile this card instead of putting it anywhere else any time it would leave the stack.\""""@en ] .
+
+:ShamblingCieth rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Shambling Cie'th" ;
+    :manaCost "{2}{B}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Mutant ,
+                :Horror ;
+    :hasRarity :Uncommon ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :MagicTheGatheringFinalFantasy ;
+    :cardNumber "117"^^xsd:integer ;
+    :artist "Nottsuo" ;
+    :hasLanguage :English ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "3" ;
+    :toughnessValue "3"^^xsd:integer ;
+    :printedText """This creature enters tapped.
+Whenever you cast a noncreature spell, you may pay {B}. If you do, return this card from your graveyard to your hand."""@en ;
+    :oracleText """This creature enters tapped.
+Whenever you cast a noncreature spell, you may pay {B}. If you do, return this card from your graveyard to your hand."""@en ;
+    :flavorText """Cie'th are damned to wander the world unliving and undying, until their corrupted flesh at last can move no more."""@en ;
+    :scryfallUrl "https://scryfall.com/card/fin/117/shambling-cieth"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "95978"^^xsd:positiveInteger ;
+    :arenaName "Shambling Cie'th" ;
+    :arenaSetCode "FIN" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-06-06"^^xsd:date ;
+        :rulingText """Shambling Cie'th's ability resolves before the spell that caused it to trigger. It resolves even if that spell is countered or otherwise leaves the stack."""@en ] .
+
+:VaynesTreachery rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Vayne's Treachery" ;
+    :manaCost "{1}{B}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Instant ;
+    :hasRarity :Common ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :MagicTheGatheringFinalFantasy ;
+    :cardNumber "124"^^xsd:integer ;
+    :artist "Touge369" ;
+    :hasLanguage :English ;
+    :hasKeywordAbility :Kicker ;
+    :printedText """Kicker—Sacrifice an artifact or creature. (You may sacrifice an artifact or creature in addition to any other costs as you cast this spell.)
+Target creature gets -2/-2 until end of turn. If this spell was kicked, that creature gets -6/-6 until end of turn instead."""@en ;
+    :oracleText """Kicker—Sacrifice an artifact or creature. (You may sacrifice an artifact or creature in addition to any other costs as you cast this spell.)
+Target creature gets -2/-2 until end of turn. If this spell was kicked, that creature gets -6/-6 until end of turn instead."""@en ;
+    :scryfallUrl "https://scryfall.com/card/fin/124/vaynes-treachery"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "95986"^^xsd:positiveInteger ;
+    :arenaName "Vayne's Treachery" ;
+    :arenaSetCode "FIN" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-06-06"^^xsd:date ;
+        :rulingText """If you put a permanent with a kicker ability onto the battlefield without casting it, you can't kick it."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-06-06"^^xsd:date ;
+        :rulingText """To determine a spell's total cost, start with the mana cost (or an alternative cost if another card's effect allows you to pay one instead), add any cost increases (such as kicker), then apply any cost reductions. The spell's mana value remains unchanged, no matter what the total cost to cast it was."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-06-06"^^xsd:date ;
+        :rulingText """The kicker ability doesn't let you pay a kicker cost more than once."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-06-06"^^xsd:date ;
+        :rulingText """If a spell's kicker cost was paid, the spell is "kicked.\""""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-06-06"^^xsd:date ;
+        :rulingText """If you copy a kicked spell on the stack, the copy is also kicked. If the copied spell is a permanent spell, the token the copy of that spell becomes when it enters is also kicked."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-06-06"^^xsd:date ;
+        :rulingText """If a card or token enters as a copy of a permanent, the new permanent isn't kicked, even if the original was."""@en ] .
+
+:CallTheMountainChocobo rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Call the Mountain Chocobo" ;
+    :manaCost "{3}{R}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasCardType :Sorcery ;
+    :hasRarity :Common ;
+    :hasColor :Red ;
+    :hasColorIdentity :Red ;
+    :isInSet :MagicTheGatheringFinalFantasy ;
+    :cardNumber "131"^^xsd:integer ;
+    :artist "Randy Gallegos" ;
+    :hasLanguage :English ;
+    :hasKeywordAbility :Flashback ;
+    :printedText """Search your library for a Mountain card, reveal it, put it into your hand, then shuffle. Create a 2/2 green Bird creature token with "Whenever a land you control enters, this token gets +1/+0 until end of turn."
+Flashback {5}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)"""@en ;
+    :oracleText """Search your library for a Mountain card, reveal it, put it into your hand, then shuffle. Create a 2/2 green Bird creature token with "Whenever a land you control enters, this token gets +1/+0 until end of turn."
+Flashback {5}{R} (You may cast this card from your graveyard for its flashback cost. Then exile it.)"""@en ;
+    :scryfallUrl "https://scryfall.com/card/fin/131/call-the-mountain-chocobo"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "95995"^^xsd:positiveInteger ;
+    :arenaName "Call the Mountain Chocobo" ;
+    :arenaSetCode "FIN" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-06-06"^^xsd:date ;
+        :rulingText """"Flashback [cost]" means "You may cast this card from your graveyard if the resulting spell is an instant or sorcery spell by paying [cost] rather than paying its mana cost" and "If the flashback cost was paid, exile this card instead of putting it anywhere else any time it would leave the stack.\""""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-06-06"^^xsd:date ;
+        :rulingText """You must still follow any timing restrictions and permissions, including those based on the card's type. For instance, you can cast a sorcery using flashback only when you could normally cast a sorcery."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-06-06"^^xsd:date ;
+        :rulingText """A spell cast using flashback will always be exiled afterward, whether it resolves, is countered, or leaves the stack in some other way."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-06-06"^^xsd:date ;
+        :rulingText """To determine the total cost of a spell, start with the mana cost or alternative cost (such as a flashback cost) you're paying, add any cost increases, then apply any cost reductions. The mana value of the spell is determined only by its mana cost, no matter what the total cost to cast the spell was."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-06-06"^^xsd:date ;
+        :rulingText """If a card with flashback is put into your graveyard during your turn, you can cast it if it's legal to do so before any other player can take any actions."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-06-06"^^xsd:date ;
+        :rulingText """You can cast a spell using flashback even if it was somehow put into your graveyard without having been cast."""@en ] .
+
+:CoralSword rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Coral Sword" ;
+    :manaCost "{R}" ;
+    :manaValue "1"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ;
+    :hasSubType :Equipment ;
+    :hasRarity :Uncommon ;
+    :hasColor :Red ;
+    :hasColorIdentity :Red ;
+    :isInSet :MagicTheGatheringFinalFantasy ;
+    :cardNumber "134"^^xsd:integer ;
+    :artist "Jason Kiantoro" ;
+    :hasLanguage :English ;
+    :hasKeywordAbility :Equip ,
+                       :Flash ;
+    :printedText """Flash
+When this Equipment enters, attach it to target creature you control. That creature gains first strike until end of turn.
+Equipped creature gets +1/+0.
+Equip {1}"""@en ;
+    :oracleText """Flash
+When this Equipment enters, attach it to target creature you control. That creature gains first strike until end of turn.
+Equipped creature gets +1/+0.
+Equip {1}"""@en ;
+    :scryfallUrl "https://scryfall.com/card/fin/134/coral-sword"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "95999"^^xsd:positiveInteger ;
+    :arenaName "Coral Sword" ;
+    :arenaSetCode "FIN" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:FireMagic rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Fire Magic" ;
+    :manaCost "{R}" ;
+    :manaValue "1"^^xsd:nonNegativeInteger ;
+    :hasCardType :Instant ;
+    :hasRarity :Uncommon ;
+    :hasColor :Red ;
+    :hasColorIdentity :Red ;
+    :isInSet :MagicTheGatheringFinalFantasy ;
+    :cardNumber "136"^^xsd:integer ;
+    :artist "Toni Infante" ;
+    :hasLanguage :English ;
+    :hasKeywordAbility :Tiered ;
+    # Note: keyword "Fire" not defined in MagicCardsOntology
+    # Note: keyword "Firaga" not defined in MagicCardsOntology
+    # Note: keyword "Fira" not defined in MagicCardsOntology
+    :printedText """Tiered (Choose one additional cost.)
+• Fire — {0} — Fire Magic deals 1 damage to each creature.
+• Fira — {2} — Fire Magic deals 2 damage to each creature.
+• Firaga — {5} — Fire Magic deals 3 damage to each creature."""@en ;
+    :oracleText """Tiered (Choose one additional cost.)
+• Fire — {0} — Fire Magic deals 1 damage to each creature.
+• Fira — {2} — Fire Magic deals 2 damage to each creature.
+• Firaga — {5} — Fire Magic deals 3 damage to each creature."""@en ;
+    :scryfallUrl "https://scryfall.com/card/fin/136/fire-magic"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "96001"^^xsd:positiveInteger ;
+    :arenaName "Fire Magic" ;
+    :arenaSetCode "FIN" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-06-06"^^xsd:date ;
+        :rulingText """If a mode requires a target, you can select that mode only if there's a legal target available. Ignore the targeting requirements for modes you don't choose."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-06-06"^^xsd:date ;
+        :rulingText """If a spell with tiered is copied, the effect that creates the copy may allow you to choose new targets. You cannot choose a new mode."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-06-06"^^xsd:date ;
+        :rulingText """If an effect allows you to cast a spell with tiered "without paying its mana cost," you must still choose exactly one mode and pay the associated additional cost."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-06-06"^^xsd:date ;
+        :rulingText """The mana value of a spell with tiered is determined only by its mana cost (in the upper right corner of the card). It doesn't matter which mode you choose or which additional costs you pay, including any additional costs imposed by other effects."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-06-06"^^xsd:date ;
+        :rulingText """You must choose exactly one of the listed modes and pay its associated additional cost in order to cast a spell with tiered."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-06-06"^^xsd:date ;
+        :rulingText """You choose the mode as you cast the spell with tiered. Once the mode is chosen, it can't be changed."""@en ] .
+
+:FreyaCrescent rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Freya Crescent" ;
+    :manaCost "{R}" ;
+    :manaValue "1"^^xsd:nonNegativeInteger ;
+    :hasSuperType :Legendary ;
+    :hasCardType :Creature ;
+    :hasSubType :Rat ,
+                :Knight ;
+    :hasRarity :Uncommon ;
+    :hasColor :Red ;
+    :hasColorIdentity :Red ;
+    :isInSet :MagicTheGatheringFinalFantasy ;
+    :cardNumber "138"^^xsd:integer ;
+    :artist "Nereida" ;
+    :hasLanguage :English ;
+    :producesMana :Red ;
+    :power "1" ;
+    :powerValue "1"^^xsd:integer ;
+    :toughness "1" ;
+    :toughnessValue "1"^^xsd:integer ;
+    # Note: keyword "Jump" not defined in MagicCardsOntology
+    :printedText """Jump — During your turn, Freya Crescent has flying.
+{T}: Add {R}. Spend this mana only to cast an Equipment spell or activate an equip ability."""@en ;
+    :oracleText """Jump — During your turn, Freya Crescent has flying.
+{T}: Add {R}. Spend this mana only to cast an Equipment spell or activate an equip ability."""@en ;
+    :flavorText """"We live not to forget our past, but to learn from it!\""""@en ;
+    :scryfallUrl "https://scryfall.com/card/fin/138/freya-crescent"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "96003"^^xsd:positiveInteger ;
+    :arenaName "Freya Crescent" ;
+    :arenaSetCode "FIN" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:PromptoArgentum rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Prompto Argentum" ;
+    :manaCost "{1}{R}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasSuperType :Legendary ;
+    :hasCardType :Creature ;
+    :hasSubType :Human ,
+                :Scout ;
+    :hasRarity :Uncommon ;
+    :hasColor :Red ;
+    :hasColorIdentity :Red ;
+    :isInSet :MagicTheGatheringFinalFantasy ;
+    :cardNumber "148"^^xsd:integer ;
+    :artist "Billy Christian" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    :hasKeywordAbility :Haste ;
+    # Note: keyword "Selfie Shot" not defined in MagicCardsOntology
+    # Note: keyword "Treasure" not defined in MagicCardsOntology
+    :printedText """Haste
+Selfie Shot — Whenever you cast a noncreature spell, if at least four mana was spent to cast it, create a Treasure token."""@en ;
+    :oracleText """Haste
+Selfie Shot — Whenever you cast a noncreature spell, if at least four mana was spent to cast it, create a Treasure token."""@en ;
+    :flavorText """"Look out world, here we come!\""""@en ;
+    :scryfallUrl "https://scryfall.com/card/fin/148/prompto-argentum"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "96013"^^xsd:positiveInteger ;
+    :arenaName "Prompto Argentum" ;
+    :arenaSetCode "FIN" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-06-06"^^xsd:date ;
+        :rulingText """Prompto's last ability resolves before the spell that caused it to trigger. It resolves even if that spell is countered or otherwise leaves the stack."""@en ] .
+
+:SummonEsperRamuh rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Summon: Esper Ramuh" ;
+    :manaCost "{2}{R}{R}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasCardType :Enchantment ,
+                 :Creature ;
+    :hasSubType :Saga ,
+                :Wizard ;
+    :hasRarity :Uncommon ;
+    :hasColor :Red ;
+    :hasColorIdentity :Red ;
+    :isInSet :MagicTheGatheringFinalFantasy ;
+    :cardNumber "161"^^xsd:integer ;
+    :artist "Justyna Dura" ;
+    :hasLanguage :English ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "3" ;
+    :toughnessValue "3"^^xsd:integer ;
+    :printedText """(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)
+I — Judgment Bolt — This creature deals damage equal to the number of noncreature, nonland cards in your graveyard to target creature an opponent controls.
+II, III — Wizards you control get +1/+0 until end of turn."""@en ;
+    :oracleText """(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)
+I — Judgment Bolt — This creature deals damage equal to the number of noncreature, nonland cards in your graveyard to target creature an opponent controls.
+II, III — Wizards you control get +1/+0 until end of turn."""@en ;
+    :flavorText """"I am Ramuh—the esper.\""""@en ;
+    :scryfallUrl "https://scryfall.com/card/fin/161/summon:-esper-ramuh"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "96027"^^xsd:positiveInteger ;
+    :arenaName "Summon: Esper Ramuh" ;
+    :arenaSetCode "FIN" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-06-06"^^xsd:date ;
+        :rulingText """Due to a rules change that takes effect with this release (see below for details), a Saga that somehow loses all of its chapter abilities will not be sacrificed as a state-based action. It will also not gain a lore counter at the beginning of each of its controller's first main phases."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-06-06"^^xsd:date ;
+        :rulingText """Each symbol on the left of a Saga's text box represents a chapter ability. A chapter ability is a triggered ability that triggers when a lore counter that is put on the Saga causes the number of lore counters on the Saga to become equal to or greater than the ability's chapter number. Chapter abilities are put onto the stack and may be responded to."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-06-06"^^xsd:date ;
+        :rulingText """Saga creatures have two sections to their text boxes. The first section, above the type line, contains their chapter abilities, and the second section, below the type line, contains any other abilities (or italicized flavor text). Any abilities in the latter section aren't chapter abilities and apply no matter how many lore counters are on the creature."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-06-06"^^xsd:date ;
+        :rulingText """As a Saga enters, its controller puts a lore counter on it. As your first main phase begins (immediately after your draw step), you put another lore counter on each Saga you control. Putting a lore counter on a Saga in either of these ways doesn't use the stack."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-06-06"^^xsd:date ;
+        :rulingText """Once a chapter ability has triggered, the ability on the stack won't be affected if the Saga gains or loses counters, or if it leaves the battlefield."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-06-06"^^xsd:date ;
+        :rulingText """A chapter ability doesn't trigger if a lore counter is put on a Saga that already had a number of lore counters greater than or equal to that chapter's number. For example, the third lore counter put on a Saga causes the chapter III ability to trigger, but chapters I and II won't trigger again."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-06-06"^^xsd:date ;
+        :rulingText """If multiple chapter abilities trigger at the same time, their controller puts them on the stack in any order. If any of them require targets, those targets are chosen as you put the abilities on the stack, before any of those abilities resolve."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-06-06"^^xsd:date ;
+        :rulingText """Once the number of lore counters on a Saga is greater than or equal to the greatest number among its chapter abilities, the Saga's controller sacrifices it as soon as its chapter ability has left the stack, most likely by resolving or being countered. This state-based action doesn't use the stack."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-06-06"^^xsd:date ;
+        :rulingText """Removing lore counters won't cause a previous chapter ability to trigger. If lore counters are removed from a Saga, the appropriate chapter abilities will trigger again when the Saga receives more lore counters."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-06-06"^^xsd:date ;
+        :rulingText """Use the number of noncreature, nonland cards in your graveyard as Summon: Esper Ramuh's first chapter ability resolves to determine how much damage is dealt."""@en ] .
+
+:WarriorsSword rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Warrior's Sword" ;
+    :manaCost "{3}{R}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ;
+    :hasSubType :Equipment ;
+    :hasRarity :Common ;
+    :hasColor :Red ;
+    :hasColorIdentity :Red ;
+    :isInSet :MagicTheGatheringFinalFantasy ;
+    :cardNumber "169"^^xsd:integer ;
+    :artist "Andrea Tentori Montalto" ;
+    :hasLanguage :English ;
+    :hasKeywordAbility :JobSelect ,
+                       :Equip ;
+    :printedText """Job select (When this Equipment enters, create a 1/1 colorless Hero creature token, then attach this to it.)
+Equipped creature gets +3/+2 and is a Warrior in addition to its other types.
+Equip {5} ({5}: Attach to target creature you control. Equip only as a sorcery.)"""@en ;
+    :oracleText """Job select (When this Equipment enters, create a 1/1 colorless Hero creature token, then attach this to it.)
+Equipped creature gets +3/+2 and is a Warrior in addition to its other types.
+Equip {5} ({5}: Attach to target creature you control. Equip only as a sorcery.)"""@en ;
+    :scryfallUrl "https://scryfall.com/card/fin/169/warriors-sword"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "96035"^^xsd:positiveInteger ;
+    :arenaName "Warrior's Sword" ;
+    :arenaSetCode "FIN" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-06-06"^^xsd:date ;
+        :rulingText """The Hero token enters as a 1/1 creature, then the Equipment becomes attached to it. Abilities that trigger when a creature enters the battlefield see that a 1/1 creature entered the battlefield."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-06-06"^^xsd:date ;
+        :rulingText """If the Hero token is destroyed, the Equipment stays on the battlefield."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-06-06"^^xsd:date ;
+        :rulingText """If the job select ability causes two Hero tokens to be created (due to an effect such as that of Doubling Season), the Equipment becomes attached to only one of them."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-06-06"^^xsd:date ;
+        :rulingText """You may pay the Equipment's equip cost as normal to move it from the Hero token to another creature you control."""@en ] .
+
+:TheEarthCrystal rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "The Earth Crystal" ;
+    :manaCost "{2}{G}{G}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasSuperType :Legendary ;
+    :hasCardType :Artifact ;
+    :hasRarity :Rare ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :MagicTheGatheringFinalFantasy ;
+    :cardNumber "184"^^xsd:integer ;
+    :artist "Pablo Mendoza" ;
+    :hasLanguage :English ;
+    :printedText """Green spells you cast cost {1} less to cast.
+If one or more +1/+1 counters would be put on a creature you control, twice that many +1/+1 counters are put on that creature instead.
+{4}{G}{G}, {T}: Distribute two +1/+1 counters among one or two target creatures you control."""@en ;
+    :oracleText """Green spells you cast cost {1} less to cast.
+If one or more +1/+1 counters would be put on a creature you control, twice that many +1/+1 counters are put on that creature instead.
+{4}{G}{G}, {T}: Distribute two +1/+1 counters among one or two target creatures you control."""@en ;
+    :scryfallUrl "https://scryfall.com/card/fin/184/the-earth-crystal"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "96050"^^xsd:positiveInteger ;
+    :arenaName "The Earth Crystal" ;
+    :arenaSetCode "FIN" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-06-06"^^xsd:date ;
+        :rulingText """If one of the creatures is an illegal target and the other one isn't as The Earth Crystal's last ability tries to resolve, the original distribution of counters applies and the counter that would have been put on the illegal target is lost. It won't be put on the remaining legal target instead."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-06-06"^^xsd:date ;
+        :rulingText """If the rare case where you control two of The Earth Crystal, the number of +1/+1 counters put on a creature is four times the original number. Three of The Earth Crystal multiplies the original number by eight, and so on."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-06-06"^^xsd:date ;
+        :rulingText """To determine the total cost of a spell, start with the mana cost or alternative cost you're paying (such as a flashback cost), add any cost increases (such as kicker costs), then apply any cost reductions (such as that of The Earth Crystal's first ability). The mana value of the spell is determined by only its mana cost, no matter what the total cost to cast that spell was."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-06-06"^^xsd:date ;
+        :rulingText """If a creature you control would enter the battlefield with a number of +1/+1 counters on it, it enters with twice that many instead."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-06-06"^^xsd:date ;
+        :rulingText """You choose how many targets The Earth Crystal's last ability has and how the counters are distributed as you activate it. Each target must receive at least one counter. This means, for example, that you can't target two creatures and assign them two and zero counters respectively."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-06-06"^^xsd:date ;
+        :rulingText """The cost reduction applies only to generic mana in the total cost of green spells you cast."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-06-06"^^xsd:date ;
+        :rulingText """If two or more effects attempt to modify how many counters would be put onto a creature you control, you choose the order to apply those effects, no matter who controls the sources of those effects."""@en ] .
+
+:LoporritScout rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Loporrit Scout" ;
+    :manaCost "{2}{G}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Rabbit ,
+                :Scout ;
+    :hasRarity :Common ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :MagicTheGatheringFinalFantasy ;
+    :cardNumber "192"^^xsd:integer ;
+    :artist "Andrea Radeck" ;
+    :hasLanguage :English ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    :printedText """Whenever another creature you control enters, this creature gets +1/+1 until end of turn."""@en ;
+    :oracleText """Whenever another creature you control enters, this creature gets +1/+1 until end of turn."""@en ;
+    :flavorText """"I've come to realize that it's important to put down the book every now and then, and experience some adventures for myself.\""""@en ;
+    :scryfallUrl "https://scryfall.com/card/fin/192/loporrit-scout"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "96059"^^xsd:positiveInteger ;
+    :arenaName "Loporrit Scout" ;
+    :arenaSetCode "FIN" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:IgnisScientia rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Ignis Scientia" ;
+    :manaCost "{1}{G}{U}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasSuperType :Legendary ;
+    :hasCardType :Creature ;
+    :hasSubType :Human ,
+                :Advisor ;
+    :hasRarity :Uncommon ;
+    :hasColor :Blue ,
+              :Green ;
+    :hasColorIdentity :Blue ,
+                      :Green ;
+    :isInSet :MagicTheGatheringFinalFantasy ;
+    :cardNumber "227"^^xsd:integer ;
+    :artist "Mingchen Shen" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    # Note: keyword "Food" not defined in MagicCardsOntology
+    :printedText """When Ignis Scientia enters, look at the top six cards of your library. You may put a land card from among them onto the battlefield tapped. Put the rest on the bottom of your library in a random order.
+I've Come Up with a New Recipe! — {1}{G}{U}, {T}: Exile target card from a graveyard. If a creature card was exiled this way, create a Food token."""@en ;
+    :oracleText """When Ignis Scientia enters, look at the top six cards of your library. You may put a land card from among them onto the battlefield tapped. Put the rest on the bottom of your library in a random order.
+I've Come Up with a New Recipe! — {1}{G}{U}, {T}: Exile target card from a graveyard. If a creature card was exiled this way, create a Food token."""@en ;
+    :scryfallUrl "https://scryfall.com/card/fin/227/ignis-scientia"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "96099"^^xsd:positiveInteger ;
+    :arenaName "Ignis Scientia" ;
+    :arenaSetCode "FIN" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-06-06"^^xsd:date ;
+        :rulingText """If the target card is an illegal target as Ignis Scientia's last ability resolves, it won't resolve and none of its effects will happen. You won't create a Food token even if the target card was a creature card."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-06-06"^^xsd:date ;
+        :rulingText """A Food token is an artifact token with "{2}, {T}, Sacrifice this token: You gain 3 life.\""""@en ] .
+
+:LightningArmyOfOne rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Lightning, Army of One" ;
+    :manaCost "{1}{R}{W}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasSuperType :Legendary ;
+    :hasCardType :Creature ;
+    :hasSubType :Human ,
+                :Soldier ;
+    :hasRarity :MythicRare ;
+    :hasColor :White ,
+              :Red ;
+    :hasColorIdentity :White ,
+                      :Red ;
+    :isInSet :MagicTheGatheringFinalFantasy ;
+    :cardNumber "233"^^xsd:integer ;
+    :artist "Shiyu" ;
+    :hasLanguage :English ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    :hasKeywordAbility :Lifelink ,
+                       :FirstStrike ,
+                       :Trample ;
+    :hasKeywordAction :Double ;
+    # Note: keyword "Stagger" not defined in MagicCardsOntology
+    :printedText """First strike, trample, lifelink
+Stagger — Whenever Lightning deals combat damage to a player, until your next turn, if a source would deal damage to that player or a permanent that player controls, it deals double that damage instead."""@en ;
+    :oracleText """First strike, trample, lifelink
+Stagger — Whenever Lightning deals combat damage to a player, until your next turn, if a source would deal damage to that player or a permanent that player controls, it deals double that damage instead."""@en ;
+    :flavorText """"Lightning. It flashes bright, then fades away. It can't protect. It only destroys.\""""@en ;
+    :scryfallUrl "https://scryfall.com/card/fin/233/lightning-army-of-one"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "96108"^^xsd:positiveInteger ;
+    :arenaName "Lightning, Army of One" ;
+    :arenaSetCode "FIN" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-06-06"^^xsd:date ;
+        :rulingText """The damage is dealt by the same source as the original source of damage. The doubled damage isn't dealt by Lightning unless it was the original source of damage."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-06-06"^^xsd:date ;
+        :rulingText """If damage dealt by a source you control is being divided or assigned among multiple permanents and/or players, that damage is divided or assigned before doubling. For example, if you attack with a 5/5 creature with trample and it's blocked by a 2/2 creature, you can assign 2 damage to the blocker and 3 damage to the defending player. Those amounts are then doubled to 4 and 6, respectively."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-06-06"^^xsd:date ;
+        :rulingText """If another effect (or effects) modifies how much damage a source you control would deal—by preventing some of it, for example—the player being dealt damage or the controller of the permanent being dealt damage chooses the order in which any such effects (including Lightning's) apply. If all of the damage is prevented, Lightning's effect no longer applies."""@en ] .
+
+:LockeCole rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Locke Cole" ;
+    :manaCost "{1}{U}{B}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasSuperType :Legendary ;
+    :hasCardType :Creature ;
+    :hasSubType :Human ,
+                :Rogue ;
+    :hasRarity :Uncommon ;
+    :hasColor :Blue ,
+              :Black ;
+    :hasColorIdentity :Blue ,
+                      :Black ;
+    :isInSet :MagicTheGatheringFinalFantasy ;
+    :cardNumber "234"^^xsd:integer ;
+    :artist "AKAGI" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "3" ;
+    :toughnessValue "3"^^xsd:integer ;
+    :hasKeywordAbility :Lifelink ,
+                       :Deathtouch ;
+    :printedText """Deathtouch, lifelink
+Whenever Locke Cole deals combat damage to a player, draw a card, then discard a card."""@en ;
+    :oracleText """Deathtouch, lifelink
+Whenever Locke Cole deals combat damage to a player, draw a card, then discard a card."""@en ;
+    :flavorText """"As long as there are people who need to be protected, I'll keep on fighting!\""""@en ;
+    :scryfallUrl "https://scryfall.com/card/fin/234/locke-cole"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "96109"^^xsd:positiveInteger ;
+    :arenaName "Locke Cole" ;
+    :arenaSetCode "FIN" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:TellahGreatSage rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Tellah, Great Sage" ;
+    :manaCost "{3}{U}{R}" ;
+    :manaValue "5"^^xsd:nonNegativeInteger ;
+    :hasSuperType :Legendary ;
+    :hasCardType :Creature ;
+    :hasSubType :Human ,
+                :Wizard ;
+    :hasRarity :Rare ;
+    :hasColor :Blue ,
+              :Red ;
+    :hasColorIdentity :Blue ,
+                      :Red ;
+    :isInSet :MagicTheGatheringFinalFantasy ;
+    :cardNumber "244"^^xsd:integer ;
+    :artist "Yumi Yaoshida" ;
+    :hasLanguage :English ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "3" ;
+    :toughnessValue "3"^^xsd:integer ;
+    :printedText """Whenever you cast a noncreature spell, create a 1/1 colorless Hero creature token. If four or more mana was spent to cast that spell, draw two cards. If eight or more mana was spent to cast that spell, sacrifice Tellah and it deals that much damage to each opponent."""@en ;
+    :oracleText """Whenever you cast a noncreature spell, create a 1/1 colorless Hero creature token. If four or more mana was spent to cast that spell, draw two cards. If eight or more mana was spent to cast that spell, sacrifice Tellah and it deals that much damage to each opponent."""@en ;
+    :scryfallUrl "https://scryfall.com/card/fin/244/tellah-great-sage"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "96120"^^xsd:positiveInteger ;
+    :arenaName "Tellah, Great Sage" ;
+    :arenaSetCode "FIN" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-06-06"^^xsd:date ;
+        :rulingText """If Tellah is no longer on the battlefield when its ability resolves and eight or more mana was spent to cast the spell that caused its ability to trigger, the ability will still deal damage to each opponent."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-06-06"^^xsd:date ;
+        :rulingText """Tellah's ability resolves before the spell that caused it to trigger. It resolves even if that spell is countered or otherwise leaves the stack."""@en ] .
+
+:BusterSword rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Buster Sword" ;
+    :manaCost "{3}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ;
+    :hasSubType :Equipment ;
+    :hasRarity :MythicRare ;
+    :isInSet :MagicTheGatheringFinalFantasy ;
+    :cardNumber "255"^^xsd:integer ;
+    :artist "Douzen" ;
+    :hasLanguage :English ;
+    :hasKeywordAbility :Equip ;
+    :printedText """Equipped creature gets +3/+2.
+Whenever equipped creature deals combat damage to a player, draw a card, then you may cast a spell from your hand with mana value less than or equal to that damage without paying its mana cost.
+Equip {2}"""@en ;
+    :oracleText """Equipped creature gets +3/+2.
+Whenever equipped creature deals combat damage to a player, draw a card, then you may cast a spell from your hand with mana value less than or equal to that damage without paying its mana cost.
+Equip {2}"""@en ;
+    :scryfallUrl "https://scryfall.com/card/fin/255/buster-sword"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "96133"^^xsd:positiveInteger ;
+    :arenaName "Buster Sword" ;
+    :arenaSetCode "FIN" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-06-06"^^xsd:date ;
+        :rulingText """If you cast a spell "without paying its mana cost," you can't choose to cast it for any alternative costs. You can, however, pay additional costs, such as kicker costs. If the card has any mandatory additional costs, those must be paid to cast the spell."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-06-06"^^xsd:date ;
+        :rulingText """If a spell you cast has {X} in its mana cost, you must choose 0 as the value of X when casting it without paying its mana cost."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-06-06"^^xsd:date ;
+        :rulingText """You choose whether to cast a spell from among the cards in your hand as Buster Sword's middle ability resolves. You can't wait to cast one later in the turn. Timing restrictions based on the card's types are ignored."""@en ] .
+
+:PuPuUFO rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "PuPu UFO" ;
+    :manaCost "{2}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ,
+                 :Creature ;
+    :hasSubType :Construct ,
+                :Alien ;
+    :hasRarity :Uncommon ;
+    :isInSet :MagicTheGatheringFinalFantasy ;
+    :cardNumber "266"^^xsd:integer ;
+    :artist "Racrufi" ;
+    :hasLanguage :English ;
+    :power "0" ;
+    :powerValue "0"^^xsd:integer ;
+    :toughness "4" ;
+    :toughnessValue "4"^^xsd:integer ;
+    :hasKeywordAbility :Flying ;
+    :printedText """Flying
+{T}: You may put a land card from your hand onto the battlefield.
+{3}: Until end of turn, this creature's base power becomes equal to the number of Towns you control."""@en ;
+    :oracleText """Flying
+{T}: You may put a land card from your hand onto the battlefield.
+{3}: Until end of turn, this creature's base power becomes equal to the number of Towns you control."""@en ;
+    :flavorText """"Thank you!\""""@en ;
+    :scryfallUrl "https://scryfall.com/card/fin/266/pupu-ufo"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "96144"^^xsd:positiveInteger ;
+    :arenaName "PuPu UFO" ;
+    :arenaSetCode "FIN" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-06-06"^^xsd:date ;
+        :rulingText """Putting a land card onto the battlefield with PuPu UFO's first activated ability doesn't count as playing a land. You can put a land card onto the battlefield this way even if you've already played a land for the turn."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-06-06"^^xsd:date ;
+        :rulingText """Use the number of Towns you control when PuPu UFO's last ability resolves to determine PuPu UFO's new base power."""@en ] .
 
 :AdventurersInn rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -78,6 +1382,148 @@ legality definitions."""@en .
                    :MagicOnline ;
     :arenaId "96149"^^xsd:positiveInteger ;
     :arenaName "Adventurer's Inn" ;
+    :arenaSetCode "FIN" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-06-06"^^xsd:date ;
+        :rulingText """Town is a land type with no special meaning. It doesn't grant the land any intrinsic abilities. Other cards may care about which lands are Towns."""@en ] .
+
+:CrossroadsVillage rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Crossroads Village" ;
+    :manaValue "0"^^xsd:nonNegativeInteger ;
+    :hasCardType :Land ;
+    :hasSubType :Town ;
+    :hasRarity :Common ;
+    :isInSet :MagicTheGatheringFinalFantasy ;
+    :cardNumber "276"^^xsd:integer ;
+    :artist "Hristo D. Chukov" ;
+    :hasLanguage :English ;
+    :producesMana :White ,
+                  :Blue ,
+                  :Black ,
+                  :Red ,
+                  :Green ;
+    :entersTapped "true"^^xsd:boolean ;
+    :printedText """This land enters tapped. As it enters, choose a color.
+{T}: Add one mana of the chosen color."""@en ;
+    :oracleText """This land enters tapped. As it enters, choose a color.
+{T}: Add one mana of the chosen color."""@en ;
+    :flavorText """"You've got to destroy the Dreadnought!"
+—Bafsk resident"""@en ;
+    :scryfallUrl "https://scryfall.com/card/fin/276/crossroads-village"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "96155"^^xsd:positiveInteger ;
+    :arenaName "Crossroads Village" ;
+    :arenaSetCode "FIN" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-06-06"^^xsd:date ;
+        :rulingText """Town is a land type with no special meaning. It doesn't grant the land any intrinsic abilities. Other cards may care about which lands are Towns."""@en ] .
+
+:GuadosalamFarplaneGateway rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Guadosalam, Farplane Gateway" ;
+    :manaValue "0"^^xsd:nonNegativeInteger ;
+    :hasCardType :Land ;
+    :hasSubType :Town ;
+    :hasRarity :Common ;
+    :hasColorIdentity :Blue ,
+                      :Green ;
+    :isInSet :MagicTheGatheringFinalFantasy ;
+    :cardNumber "281"^^xsd:integer ;
+    :artist "Vaigintas Pakenis" ;
+    :hasLanguage :English ;
+    :producesMana :Blue ,
+                  :Green ;
+    :entersTapped "true"^^xsd:boolean ;
+    :printedText """This land enters tapped.
+{T}: Add {G} or {U}."""@en ;
+    :oracleText """This land enters tapped.
+{T}: Add {G} or {U}."""@en ;
+    :flavorText """"We Guado protect the Farplane so the dead can rest in peace."
+—Guadosalam citizen"""@en ;
+    :scryfallUrl "https://scryfall.com/card/fin/281/guadosalam-farplane-gateway"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "96160"^^xsd:positiveInteger ;
+    :arenaName "Guadosalam, Farplane Gateway" ;
+    :arenaSetCode "FIN" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-06-06"^^xsd:date ;
+        :rulingText """Town is a land type with no special meaning. It doesn't grant the land any intrinsic abilities. Other cards may care about which lands are Towns."""@en ] .
+
+:InsomniaCrownCity rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Insomnia, Crown City" ;
+    :manaValue "0"^^xsd:nonNegativeInteger ;
+    :hasCardType :Land ;
+    :hasSubType :Town ;
+    :hasRarity :Common ;
+    :hasColorIdentity :White ,
+                      :Black ;
+    :isInSet :MagicTheGatheringFinalFantasy ;
+    :cardNumber "282"^^xsd:integer ;
+    :artist "Jonas De Ro" ;
+    :hasLanguage :English ;
+    :producesMana :White ,
+                  :Black ;
+    :entersTapped "true"^^xsd:boolean ;
+    :printedText """This land enters tapped.
+{T}: Add {W} or {B}."""@en ;
+    :oracleText """This land enters tapped.
+{T}: Add {W} or {B}."""@en ;
+    :flavorText """"I need only know that you are ready to leave home behind," said King Regis.
+"Don't know about you, but I'm ready as I'll ever be," replied Noctis."""@en ;
+    :scryfallUrl "https://scryfall.com/card/fin/282/insomnia-crown-city"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "96161"^^xsd:positiveInteger ;
+    :arenaName "Insomnia, Crown City" ;
     :arenaSetCode "FIN" ;
     :hasLegality
       [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,

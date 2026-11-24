@@ -2,7 +2,7 @@
 description: Builds and releases the graph bundle — scripts/build_graph_bundle.py, the GRAPH-MANIFEST.json consumer contract, graph-YYYY-MM-DD tagging and the release-graph workflow. Also handles the separate magic-cards-tools v* wheel release. Use when the user says "cut a graph release", "build the bundle", "tag graph-", "publish the graph", "bump the tools version", or "what changed since the last graph release".
 mode: all
 color: "#00838f"
-model: azure-anthropic/claude-fable-5-1
+model: azure-anthropic/claude-fable-5-2
 # Release mechanics are procedural; the judgement is in what the manifest
 # promises downstream and whether a schema bump is owed.
 variant: high
@@ -60,12 +60,13 @@ the other moved.
 `BUNDLE_PATHS` in `build_graph_bundle.py` is the allowlist. Two
 exclusions are deliberate and must stay:
 
-- `collection.csv` — private inventory;
+- `collection.csv` and `arena-collection.json` — the private inventories;
 - `MagicCompRules-*.txt` — not redistributable.
 
 `MagicCardIndividuals.ttl` *is* included even though the simulator ignores
-it, because `MagicCardCollection.ttl` and `MagicCardSynergies.ttl` import
-it and the bundle must pass its own `owl:imports` check standalone. Do not
+it, because the two collection graphs (`MagicCardCollection.ttl`,
+`MagicArenaCollection.ttl`) and `MagicCardSynergies.ttl` import it and the
+bundle must pass its own `owl:imports` check standalone. Do not
 "tidy" it out. `MagicCardSynergies.ttl` is included for the synergy
 queries and for magic-decks, whose deck builder reads the card-to-card
 synergies from the pinned bundle.
@@ -104,8 +105,8 @@ every consumer to update for nothing.
    mtg-validate --check ttl --check consistency /tmp/bundle
    ```
 
-   Expect the `collection.csv not found` notice; that is correct for a
-   bundle and not a failure.
+   Expect the `collection.csv not found` and `arena-collection.json not
+   found` notices; they are correct for a bundle and not a failure.
 
 ## Rules
 

@@ -8,10 +8,15 @@ Loads every TTL file under the graph roots into one graph and checks:
                        an mc: property is typed (rdf:type) somewhere.
   3. card-entries    - every DeckEntry / CollectionEntry references an
                        existing card individual and carries a positive
-                       :quantity; CollectionEntries carry finish +
-                       condition; each Commander deck's entries total 100
-                       cards (CR 903.5a); the collection's entry
-                       quantities match collection.csv when it is present.
+                       :quantity; the entries of a physical collection carry
+                       finish + condition, those of a collection held on a
+                       digital platform (:isHeldOn) neither, and hold only
+                       printings available on that platform; no collection
+                       lists a variant twice; each Commander deck's entries
+                       total 100 cards (CR 903.5a); the paper collection's
+                       entries match collection.csv and the MTG Arena
+                       collection's match arena-collection.json where those
+                       local inputs are present.
   4. synergy-domain  - synergy properties only connect card individuals.
   5. behavior-hooks  - every :hasBehaviorHook subject is a Card
                        individual, every hook carries exactly one
@@ -53,6 +58,10 @@ COMMANDER_DECK_SIZE = 100
 
 #: file declaring the TBox; required for the undefined-terms check
 ONTOLOGY_FILE = "MagicCardsOntology.ttl"
+
+#: the local inventory inputs the collection graphs are generated from
+COLLECTION_CSV = "collection.csv"
+ARENA_JSON = "arena-collection.json"
 
 #: local names of the synergy properties (check 4)
 SYNERGY_PROP_NAMES = (
@@ -223,85 +232,215 @@ def check_entry_shape(idx: GraphIndex) -> tuple[list[str], int]:
     return errors, len(entries)
 
 
-def check_collection_entries(idx: GraphIndex) -> tuple[list[str], int]:
-    """Check 3b (card-entries): collection entries are well-formed variants.
+@dataclass(frozen=True)
+class EntryPlace:
+    """Where a collection entry belongs: its collection and that one's platform."""
 
-    Every CollectionEntry must carry :hasFinish and :hasCondition, and no
-    two entries may describe the same (card, finish, condition) variant -
-    such a pair is a split stack that belongs in one entry with the
-    summed quantity. Both hold for any graph root, so they also run
-    downstream against a published bundle.
+    #: the Collection listing the entry (None: listed by none)
+    collection: Node | None
+    #: the platform the collection is held on (None: none stated, i.e. paper)
+    platform: Node | None
 
-    Where collection.csv is present the entries are additionally mirrored
-    against it: one entry per distinct variant, and quantities summing to
-    the CSV counts. The CSV is a local, untracked input; when it is absent
-    (CI checkouts, and any downstream consumer) that half is skipped with
-    a notice. Returns the errors plus the entry count.
+
+def _entry_places(idx: GraphIndex) -> tuple[dict[Node, EntryPlace], list[str]]:
+    """Map every listed collection entry to its collection and platform.
+
+    A collection states the platform it is held on with :isHeldOn, at most
+    once; one that states none is a physical collection. Returns the map
+    plus the errors for collections with several platforms.
     """
+    held_on = idx.ref("isHeldOn")
+    has_entry = idx.ref("hasCollectionEntry")
+    places: dict[Node, EntryPlace] = {}
     errors: list[str] = []
-    quantity = idx.ref("quantity")
-    has_finish = idx.ref("hasFinish")
-    has_condition = idx.ref("hasCondition")
-    entry_card = idx.ref("entryCard")
-    coll_entries = set(idx.combined.subjects(RDF.type, idx.ref("CollectionEntry")))
-    coll_total = 0
-    seen: dict[tuple[str, str, str], str] = {}
-    for entry in sorted(coll_entries, key=str):
-        errors.extend(
-            f"card-entries: {entry} has no {prop}"
-            for prop in (has_finish, has_condition)
-            if not list(idx.combined.objects(entry, prop))
-        )
-        for count in idx.combined.objects(entry, quantity):
-            coll_total += int(str(count))
-        variant = (
-            str(next(iter(idx.combined.objects(entry, entry_card)), "")),
-            str(next(iter(idx.combined.objects(entry, has_finish)), "")),
-            str(next(iter(idx.combined.objects(entry, has_condition)), "")),
-        )
-        if all(variant) and variant in seen:
+    for coll in sorted(idx.combined.subjects(RDF.type, idx.ref("Collection")), key=str):
+        platforms = sorted(idx.combined.objects(coll, held_on), key=str)
+        if len(platforms) > 1:
             errors.append(
-                f"card-entries: {entry} duplicates the variant of "
-                f"{seen[variant]} (same card, finish and condition) - merge "
-                f"them into one entry with the summed quantity",
+                f"card-entries: collection {coll} is held on {len(platforms)} "
+                f"platforms ({', '.join(map(str, platforms))})",
             )
-        elif all(variant):
-            seen[variant] = str(entry)
+        place = EntryPlace(coll, platforms[0] if platforms else None)
+        for entry in idx.combined.objects(coll, has_entry):
+            places[entry] = place
+    return places, errors
 
-    csv_path = idx.ctx.find("collection.csv")
+
+def _is_digital(idx: GraphIndex, place: EntryPlace) -> bool:
+    """Return True if the entry's collection is held on a digital platform."""
+    return place.platform is not None and place.platform != idx.ref("PaperMagic")
+
+
+def _shape_errors(idx: GraphIndex, entry: Node, place: EntryPlace) -> list[str]:
+    """Return the finish, condition and platform errors of one entry.
+
+    Physical copies carry a finish and a condition; digital copies have
+    neither, and a digital collection holds only printings available on
+    its platform.
+    """
+    attributes = (idx.ref("hasFinish"), idx.ref("hasCondition"))
+    if not _is_digital(idx, place):
+        return [
+            f"card-entries: {entry} has no {prop}"
+            for prop in attributes
+            if not list(idx.combined.objects(entry, prop))
+        ]
+    errors = [
+        f"card-entries: {entry} of {place.collection}, held on {place.platform}, "
+        f"has {prop} - digital copies have neither finish nor condition"
+        for prop in attributes
+        if list(idx.combined.objects(entry, prop))
+    ]
+    available_on = idx.ref("isAvailableOn")
+    errors.extend(
+        f"card-entries: {entry} holds {card}, which is not available on "
+        f"{place.platform}, the platform of {place.collection}"
+        for card in idx.combined.objects(entry, idx.ref("entryCard"))
+        if (card, available_on, place.platform) not in idx.combined
+    )
+    return errors
+
+
+def _variant(idx: GraphIndex, entry: Node, place: EntryPlace) -> tuple[str, ...]:
+    """Return the variant key of an entry: collection, card, finish, condition."""
+    return (
+        str(place.collection),
+        str(next(iter(idx.combined.objects(entry, idx.ref("entryCard"))), "")),
+        str(next(iter(idx.combined.objects(entry, idx.ref("hasFinish"))), "")),
+        str(next(iter(idx.combined.objects(entry, idx.ref("hasCondition"))), "")),
+    )
+
+
+def _quantity(idx: GraphIndex, entries: set[Node]) -> int:
+    """Return the summed :quantity of *entries*."""
+    quantity = idx.ref("quantity")
+    return sum(int(str(n)) for e in entries for n in idx.combined.objects(e, quantity))
+
+
+def _csv_mirror(idx: GraphIndex, physical: set[Node]) -> list[str]:
+    """Mirror the physical collection's entries against collection.csv.
+
+    One entry per distinct printing/finish/condition variant (several
+    acquisition rows of a variant collapse into one entry), and quantities
+    summing to the CSV counts.
+    """
+    csv_path = idx.ctx.find(COLLECTION_CSV)
     if csv_path is None:
         # collection.csv is a local, untracked input (not distributed);
         # the CSV mirror check only runs where the inventory is present.
         print(  # noqa: T201 - validator progress line
-            "collection.csv not found - skipping the CSV mirror check "
+            f"{COLLECTION_CSV} not found - skipping the CSV mirror check "
             "(entry shape checks still ran).",
         )
-    else:
-        with csv_path.open(encoding="utf-8", newline="") as handle:
-            csv_rows = list(csv.DictReader(handle))
-        csv_total = sum(int(r["Count"]) for r in csv_rows)
-        # entries are grouped per variant, so several acquisition rows of
-        # the same printing/finish/condition collapse into a single entry
-        csv_variants = {
-            (
-                r["Edition"].upper(),
-                r["Collector Number"],
-                r["Foil"].strip(),
-                r["Condition"].strip(),
-            )
-            for r in csv_rows
-        }
-        if coll_entries and len(coll_entries) != len(csv_variants):
+        return []
+    with csv_path.open(encoding="utf-8", newline="") as handle:
+        csv_rows = list(csv.DictReader(handle))
+    csv_total = sum(int(r["Count"]) for r in csv_rows)
+    csv_variants = {
+        (
+            r["Edition"].upper(),
+            r["Collector Number"],
+            r["Foil"].strip(),
+            r["Condition"].strip(),
+        )
+        for r in csv_rows
+    }
+    errors: list[str] = []
+    if physical and len(physical) != len(csv_variants):
+        errors.append(
+            f"card-entries: {len(physical)} physical collection entries but "
+            f"{len(csv_variants)} distinct printing/finish/condition "
+            f"variants in {COLLECTION_CSV}",
+        )
+    total = _quantity(idx, physical)
+    if physical and total != csv_total:
+        errors.append(
+            f"card-entries: physical collection quantities sum to {total} but "
+            f"{COLLECTION_CSV} counts sum to {csv_total}",
+        )
+    return errors
+
+
+def _arena_mirror(idx: GraphIndex, held: set[Node]) -> list[str]:
+    """Mirror the MTG Arena collection's entries against arena-collection.json.
+
+    The snapshot holds the printings the generator turns into entries (as
+    generate_individuals.arena_printings selects them): the non-basic
+    printings matched to Scryfall, one entry per printing, with the copies
+    summed.
+    """
+    json_path = idx.ctx.find(ARENA_JSON)
+    if json_path is None:
+        # the MTG Arena snapshot is a local, untracked input like the CSV
+        print(  # noqa: T201 - validator progress line
+            f"{ARENA_JSON} not found - skipping the MTG Arena mirror check "
+            "(entry shape checks still ran).",
+        )
+        return []
+    snapshot = json.loads(json_path.read_text(encoding="utf-8"))
+    owned = [c for c in snapshot["cards"] if c["scryfall_id"] and not c["basic"]]
+    printings = {(str(c["set"]).upper(), str(c["collector_number"])) for c in owned}
+    copies = sum(int(c["quantity"]) for c in owned)
+    errors: list[str] = []
+    if len(held) != len(printings):
+        errors.append(
+            f"card-entries: {len(held)} MTG Arena collection entries but "
+            f"{len(printings)} printings in {ARENA_JSON}",
+        )
+    total = _quantity(idx, held)
+    if total != copies:
+        errors.append(
+            f"card-entries: MTG Arena collection quantities sum to {total} but "
+            f"{ARENA_JSON} holds {copies} copies",
+        )
+    return errors
+
+
+def check_collection_entries(idx: GraphIndex) -> tuple[list[str], int]:
+    """Check 3b (card-entries): collection entries are well-formed variants.
+
+    The entries of a physical collection carry :hasFinish and :hasCondition;
+    those of a collection held on a digital platform (:isHeldOn :MTGArena)
+    carry neither and hold only printings available on that platform. No
+    collection lists the same variant twice - (card, finish, condition) in a
+    physical collection, the card in a digital one - as such a pair is a
+    split stack that belongs in one entry with the summed quantity. All of
+    this holds for any graph root, so it also runs downstream against a
+    published bundle.
+
+    Where the local inventories are present the entries are additionally
+    mirrored against them: the physical ones against collection.csv, the MTG
+    Arena collection's against arena-collection.json. Both are untracked
+    inputs; when one is absent (CI checkouts, and any downstream consumer)
+    its half is skipped with a notice. Returns the errors plus the entry
+    count.
+    """
+    places, errors = _entry_places(idx)
+    coll_entries = set(idx.combined.subjects(RDF.type, idx.ref("CollectionEntry")))
+    physical: set[Node] = set()
+    on_arena: set[Node] = set()
+    seen: dict[tuple[str, ...], str] = {}
+    for entry in sorted(coll_entries, key=str):
+        place = places.get(entry, EntryPlace(None, None))
+        errors.extend(_shape_errors(idx, entry, place))
+        if not _is_digital(idx, place):
+            physical.add(entry)
+        elif place.platform == idx.ref("MTGArena"):
+            on_arena.add(entry)
+        variant = _variant(idx, entry, place)
+        if not variant[1]:
+            continue  # no :entryCard - check 3a reports it
+        if variant in seen:
             errors.append(
-                f"card-entries: {len(coll_entries)} collection entries but "
-                f"{len(csv_variants)} distinct printing/finish/condition "
-                f"variants in collection.csv",
+                f"card-entries: {entry} duplicates the variant of "
+                f"{seen[variant]} (same collection, card, finish and "
+                f"condition) - merge them into one entry with the summed "
+                f"quantity",
             )
-        if coll_entries and coll_total != csv_total:
-            errors.append(
-                f"card-entries: collection quantities sum to {coll_total} but "
-                f"collection.csv counts sum to {csv_total}",
-            )
+        else:
+            seen[variant] = str(entry)
+    errors.extend(_csv_mirror(idx, physical))
+    errors.extend(_arena_mirror(idx, on_arena))
     return errors, len(coll_entries)
 
 

@@ -39,8 +39,9 @@
     rdfs:label "Magic Card Collection Individuals – Outlaws of Thunder Junction"@en ;
     rdfs:comment """An instance graph describing the card individuals of a
 personal Magic: The Gathering card collection that were printed in the set
-Outlaws of Thunder Junction (OTJ). One Card individual is defined per collected
-printing, carrying its characteristics, the platforms it is available on
+Outlaws of Thunder Junction (OTJ). One Card individual is defined per printing
+collected in paper or on MTG Arena, carrying its characteristics, the
+platforms it is available on
 (paper, MTG Arena, Magic Online) with its MTG Arena identity, its legality
 in the paper and MTG Arena formats, and official rulings. Card data was
 sourced from Gatherer and Scryfall. This file imports MagicCardsOntology to
@@ -53,6 +54,839 @@ legality definitions."""@en .
 # Card Individuals
 #
 ################################################################################
+
+:ArmoredArmadillo rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Armored Armadillo" ;
+    :manaCost "{W}" ;
+    :manaValue "1"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Armadillo ;
+    :hasRarity :Common ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :OutlawsOfThunderJunction ;
+    :cardNumber "3"^^xsd:integer ;
+    :artist "Leon Tukker" ;
+    :hasLanguage :English ;
+    :power "0" ;
+    :powerValue "0"^^xsd:integer ;
+    :toughness "4" ;
+    :toughnessValue "4"^^xsd:integer ;
+    :hasKeywordAbility :Ward ;
+    :printedText """Ward {1} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {1}.)
+{3}{W}: This creature gets +X/+0 until end of turn, where X is its toughness."""@en ;
+    :oracleText """Ward {1} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {1}.)
+{3}{W}: This creature gets +X/+0 until end of turn, where X is its toughness."""@en ;
+    :flavorText """"I always wanted to ride a slow cannonball with legs!"
+—Kellan"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=654944"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/otj/3/armored-armadillo"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "90349"^^xsd:positiveInteger ;
+    :arenaName "Armored Armadillo" ;
+    :arenaSetCode "OTJ" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """The value of X is determined as Armored Armadillo's activated ability resolves. It won't change later in the turn if other effects modify Armored Armadillo's toughness."""@en ] .
+
+:BridledBighorn rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Bridled Bighorn" ;
+    :manaCost "{3}{W}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Sheep ,
+                :Mount ;
+    :hasRarity :Common ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :OutlawsOfThunderJunction ;
+    :cardNumber "7"^^xsd:integer ;
+    :artist "Edgar Sánchez Hidalgo" ;
+    :hasLanguage :English ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "4" ;
+    :toughnessValue "4"^^xsd:integer ;
+    :hasKeywordAbility :Saddle ,
+                       :Vigilance ;
+    :printedText """Vigilance
+Whenever this creature attacks while saddled, create a 1/1 white Sheep creature token.
+Saddle 2 (Tap any number of other creatures you control with total power 2 or more: This Mount becomes saddled until end of turn. Saddle only as a sorcery.)"""@en ;
+    :oracleText """Vigilance
+Whenever this creature attacks while saddled, create a 1/1 white Sheep creature token.
+Saddle 2 (Tap any number of other creatures you control with total power 2 or more: This Mount becomes saddled until end of turn. Saddle only as a sorcery.)"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=654948"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/otj/7/bridled-bighorn"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "90353"^^xsd:positiveInteger ;
+    :arenaName "Bridled Bighorn" ;
+    :arenaSetCode "OTJ" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """“Saddle N” means “Tap any number of other untapped creatures you control with total power N or greater: This permanent becomes saddled until end of turn. Activate only as a sorcery.”"""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """An ability that triggers when a creature “attacks while saddled” will trigger only if that creature was saddled when it was declared as an attacker."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """You may activate a permanent’s saddle ability even if that permanent is already saddled."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """“Saddled” isn’t an ability that a creature has. It’s just something true about that creature. It won’t stop being saddled until the turn ends or it leaves the battlefield."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """Creatures with saddle can attack or block as normal even if they aren’t saddled."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """If a permanent becomes a copy of a saddled Mount, the copy won’t be saddled."""@en ] .
+
+:FortuneLoyalSteed rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Fortune, Loyal Steed" ;
+    :manaCost "{2}{W}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasSuperType :Legendary ;
+    :hasCardType :Creature ;
+    :hasSubType :Beast ,
+                :Mount ;
+    :hasRarity :Rare ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :OutlawsOfThunderJunction ;
+    :cardNumber "12"^^xsd:integer ;
+    :artist "Artur Nakhodkin" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "4" ;
+    :toughnessValue "4"^^xsd:integer ;
+    :hasKeywordAbility :Saddle ;
+    :hasKeywordAction :Scry ;
+    :printedText """When Fortune enters, scry 2.
+Whenever Fortune attacks while saddled, at end of combat, exile it and up to one creature that saddled it this turn, then return those cards to the battlefield under their owner's control.
+Saddle 1"""@en ;
+    :oracleText """When Fortune enters, scry 2.
+Whenever Fortune attacks while saddled, at end of combat, exile it and up to one creature that saddled it this turn, then return those cards to the battlefield under their owner's control.
+Saddle 1"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=654953"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/otj/12/fortune-loyal-steed"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "90358"^^xsd:positiveInteger ;
+    :arenaName "Fortune, Loyal Steed" ;
+    :arenaSetCode "OTJ" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """"Saddled" isn't an ability that a creature has. It's just something true about that creature. It won't stop being saddled until the turn ends or it leaves the battlefield."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """An ability that triggers when a creature "attacks while saddled" will trigger only if that creature was saddled when it was declared as an attacker."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """"Saddle N" means "Tap any number of other untapped creatures you control with total power N or greater: This permanent becomes saddled until end of turn. Activate only as a sorcery.\""""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """Fortune's middle ability creates a delayed triggered ability that triggers at end of combat. This ability will trigger whether or not Fortune is still on the battlefield. If it's not, you can still exile up to one creature that saddled it that turn."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """Tokens exiled by the delayed triggered ability won't return to the battlefield. It's usually not a good idea to saddle Fortune if Fortune itself is a token."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """Creatures with saddle can attack or block as normal even if they aren't saddled."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """If a permanent becomes a copy of a saddled Mount, the copy won't be saddled."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """The delayed triggered ability doesn't target any creature. You choose which other creature to exile, if any, as that ability is resolving. At that point, it's too late for any player to respond."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """You may activate a permanent's saddle ability even if that permanent is already saddled."""@en ] .
+
+:HolyCow rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Holy Cow" ;
+    :manaCost "{2}{W}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Ox ,
+                :Angel ;
+    :hasRarity :Common ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :OutlawsOfThunderJunction ;
+    :cardNumber "16"^^xsd:integer ;
+    :artist "Justyna Dura" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    :hasKeywordAction :Scry ;
+    :hasKeywordAbility :Flying ,
+                       :Flash ;
+    :printedText """Flash
+Flying
+When this creature enters, you gain 2 life and scry 1. (Look at the top card of your library. You may put that card on the bottom.)"""@en ;
+    :oracleText """Flash
+Flying
+When this creature enters, you gain 2 life and scry 1. (Look at the top card of your library. You may put that card on the bottom.)"""@en ;
+    :flavorText """After it passed by, the rancher swore she saw hope shining in the pigs' eyes."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=654957"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/otj/16/holy-cow"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "90362"^^xsd:positiveInteger ;
+    :arenaName "Holy Cow" ;
+    :arenaSetCode "OTJ" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:NurturingPixie rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Nurturing Pixie" ;
+    :manaCost "{W}" ;
+    :manaValue "1"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Faerie ,
+                :Rogue ;
+    :hasRarity :Uncommon ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :OutlawsOfThunderJunction ;
+    :cardNumber "20"^^xsd:integer ;
+    :artist "Iris Compiet" ;
+    :hasLanguage :English ;
+    :power "1" ;
+    :powerValue "1"^^xsd:integer ;
+    :toughness "1" ;
+    :toughnessValue "1"^^xsd:integer ;
+    :hasKeywordAbility :Flying ;
+    :printedText """Flying
+When this creature enters, return up to one target non-Faerie, nonland permanent you control to its owner's hand. If a permanent was returned this way, put a +1/+1 counter on this creature."""@en ;
+    :oracleText """Flying
+When this creature enters, return up to one target non-Faerie, nonland permanent you control to its owner's hand. If a permanent was returned this way, put a +1/+1 counter on this creature."""@en ;
+    :flavorText """"Count yourself lucky I came upon you. This is not a world of second chances.\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=654961"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/otj/20/nurturing-pixie"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "90366"^^xsd:positiveInteger ;
+    :arenaName "Nurturing Pixie" ;
+    :arenaSetCode "OTJ" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:TrainedArynx rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Trained Arynx" ;
+    :manaCost "{1}{W}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Cat ,
+                :Beast ,
+                :Mount ;
+    :hasRarity :Common ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :OutlawsOfThunderJunction ;
+    :cardNumber "36"^^xsd:integer ;
+    :artist "Milivoj Ćeran" ;
+    :hasLanguage :English ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "1" ;
+    :toughnessValue "1"^^xsd:integer ;
+    :hasKeywordAbility :Saddle ;
+    :hasKeywordAction :Scry ;
+    :printedText """Whenever this creature attacks while saddled, it gains first strike until end of turn. Scry 1. (Look at the top card of your library. You may put that card on the bottom.)
+Saddle 2 (Tap any number of other creatures you control with total power 2 or more: This Mount becomes saddled until end of turn. Saddle only as a sorcery.)"""@en ;
+    :oracleText """Whenever this creature attacks while saddled, it gains first strike until end of turn. Scry 1. (Look at the top card of your library. You may put that card on the bottom.)
+Saddle 2 (Tap any number of other creatures you control with total power 2 or more: This Mount becomes saddled until end of turn. Saddle only as a sorcery.)"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=654977"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/otj/36/trained-arynx"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "90382"^^xsd:positiveInteger ;
+    :arenaName "Trained Arynx" ;
+    :arenaSetCode "OTJ" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """“Saddle N” means “Tap any number of other untapped creatures you control with total power N or greater: This permanent becomes saddled until end of turn. Activate only as a sorcery.”"""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """Creatures with saddle can attack or block as normal even if they aren’t saddled."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """If a permanent becomes a copy of a saddled Mount, the copy won’t be saddled."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """You may activate a permanent’s saddle ability even if that permanent is already saddled."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """“Saddled” isn’t an ability that a creature has. It’s just something true about that creature. It won’t stop being saddled until the turn ends or it leaves the battlefield."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """An ability that triggers when a creature “attacks while saddled” will trigger only if that creature was saddled when it was declared as an attacker."""@en ] .
+
+:WantedGriffin rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Wanted Griffin" ;
+    :manaCost "{3}{W}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Griffin ;
+    :hasRarity :Common ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :OutlawsOfThunderJunction ;
+    :cardNumber "38"^^xsd:integer ;
+    :artist "Alexandre Honoré" ;
+    :hasLanguage :English ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    :hasKeywordAbility :Flying ;
+    :printedText """Flying
+When this creature dies, create a 1/1 red Mercenary creature token with "{T}: Target creature you control gets +1/+0 until end of turn. Activate only as a sorcery.\""""@en ;
+    :oracleText """Flying
+When this creature dies, create a 1/1 red Mercenary creature token with "{T}: Target creature you control gets +1/+0 until end of turn. Activate only as a sorcery.\""""@en ;
+    :flavorText """Many a would-be captor has gotten close enough to count its feathers, only to be left behind with nothing but regret and a dangling rope."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=654979"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/otj/38/wanted-griffin"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "90384"^^xsd:positiveInteger ;
+    :arenaName "Wanted Griffin" ;
+    :arenaSetCode "OTJ" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:DaringThunderThief rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Daring Thunder-Thief" ;
+    :manaCost "{3}{U}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Turtle ,
+                :Rogue ;
+    :hasRarity :Common ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :OutlawsOfThunderJunction ;
+    :cardNumber "41"^^xsd:integer ;
+    :artist "Inkognit" ;
+    :hasLanguage :English ;
+    :power "4" ;
+    :powerValue "4"^^xsd:integer ;
+    :toughness "4" ;
+    :toughnessValue "4"^^xsd:integer ;
+    :hasKeywordAbility :Flash ;
+    :printedText """Flash
+This creature enters tapped."""@en ;
+    :oracleText """Flash
+This creature enters tapped."""@en ;
+    :flavorText """It's amazing how many sticky situations you can get out of simply by being ten times faster than anyone expects."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=654982"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/otj/41/daring-thunder-thief"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "90387"^^xsd:positiveInteger ;
+    :arenaName "Daring Thunder-Thief" ;
+    :arenaSetCode "OTJ" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:DjinnOfFoolsFall rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Djinn of Fool's Fall" ;
+    :manaCost "{4}{U}" ;
+    :manaValue "5"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Djinn ;
+    :hasRarity :Common ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :OutlawsOfThunderJunction ;
+    :cardNumber "43"^^xsd:integer ;
+    :artist "Inkognit" ;
+    :hasLanguage :English ;
+    :power "4" ;
+    :powerValue "4"^^xsd:integer ;
+    :toughness "3" ;
+    :toughnessValue "3"^^xsd:integer ;
+    :hasKeywordAbility :Flying ,
+                       :Plot ;
+    :printedText """Flying
+Plot {3}{U} (You may pay {3}{U} and exile this card from your hand. Cast it as a sorcery on a later turn without paying its mana cost. Plot only as a sorcery.)"""@en ;
+    :oracleText """Flying
+Plot {3}{U} (You may pay {3}{U} and exile this card from your hand. Cast it as a sorcery on a later turn without paying its mana cost. Plot only as a sorcery.)"""@en ;
+    :flavorText """No one knew if the waterfall was a natural wonder the djinn guarded or if he'd conjured it to hide something even greater."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=654984"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/otj/43/djinn-of-fools-fall"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "90389"^^xsd:positiveInteger ;
+    :arenaName "Djinn of Fool's Fall" ;
+    :arenaSetCode "OTJ" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """Plot abilities are written "Plot [cost]," which means "Any time you have priority during your main phase while the stack is empty, you may pay [cost] and exile this card from your hand. It becomes plotted.\""""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """You can't cast a plotted card on the same turn it became plotted. On any future turn, you may cast that card from exile without paying its mana cost during your main phase while the stack is empty."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """If a plotted card has {X} in its mana cost, you must choose 0 as the value of X when casting it without paying its mana cost."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """If you're casting a plotted card from exile without paying its mana cost, you can't choose to cast it for any other alternative costs. You can, however, pay additional costs, such as kicker costs. If the plotted card has any mandatory additional costs, those must still be paid to cast the spell."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """Exiling a card using its plot ability is a special action. Once you announce you're taking that action, no other player can respond by trying to remove that card from your hand."""@en ] .
+
+:SlickshotVaultBuster rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Slickshot Vault-Buster" ;
+    :manaCost "{2}{U}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Human ,
+                :Rogue ;
+    :hasRarity :Common ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :OutlawsOfThunderJunction ;
+    :cardNumber "68"^^xsd:integer ;
+    :artist "Julia Metzger" ;
+    :hasLanguage :English ;
+    :power "1" ;
+    :powerValue "1"^^xsd:integer ;
+    :toughness "4" ;
+    :toughnessValue "4"^^xsd:integer ;
+    :hasKeywordAbility :Vigilance ;
+    :printedText """Vigilance
+This creature gets +2/+0 as long as you've committed a crime this turn. (Targeting opponents, anything they control, and/or cards in their graveyards is a crime.)"""@en ;
+    :oracleText """Vigilance
+This creature gets +2/+0 as long as you've committed a crime this turn. (Targeting opponents, anything they control, and/or cards in their graveyards is a crime.)"""@en ;
+    :flavorText """"Sure it's risky, but that's what makes it fun! That and the money. And the bankers' faces.\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=655009"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/otj/68/slickshot-vault-buster"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "90414"^^xsd:positiveInteger ;
+    :arenaName "Slickshot Vault-Buster" ;
+    :arenaSetCode "OTJ" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """A player commits a crime as they cast a spell, activate an ability, or put a triggered ability on the stack that targets at least one opponent, at least one permanent, spell, or ability an opponent controls, and/or at least one card in an opponent's graveyard."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """A player can commit only one crime per spell or ability they control. Targeting multiple opponents, permanents, spells, abilities, and/or cards with the same spell or ability doesn't constitute committing multiple crimes."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """Changing the target or targets of a spell or ability won't affect whether or not the controller of that spell or ability has committed a crime. Only the initial targets chosen for that spell or ability are used to determine whether or not its controller committed a crime."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """For example, an ability that triggers when you cast a spell that targets an opponent will trigger at the same time as an ability that triggers whenever you commit a crime. Those abilities can be put on the stack in either order (if you control them both), and they'll both resolve before the spell that caused them to trigger."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """The spell or ability that constituted a crime doesn't have to have resolved yet or at all. As soon as you're finished casting the spell, activating the ability, or putting the triggered ability on the stack, you've committed a crime."""@en ] .
+
+:StopCold rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Stop Cold" ;
+    :manaCost "{3}{U}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasCardType :Enchantment ;
+    :hasSubType :Aura ;
+    :hasRarity :Common ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :OutlawsOfThunderJunction ;
+    :cardNumber "72"^^xsd:integer ;
+    :artist "David Astruga" ;
+    :hasLanguage :English ;
+    :hasKeywordAbility :Enchant ,
+                       :Flash ;
+    :printedText """Flash
+Enchant artifact or creature
+When this Aura enters, tap enchanted permanent.
+Enchanted permanent loses all abilities and doesn't untap during its controller's untap step."""@en ;
+    :oracleText """Flash
+Enchant artifact or creature
+When this Aura enters, tap enchanted permanent.
+Enchanted permanent loses all abilities and doesn't untap during its controller's untap step."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=655013"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/otj/72/stop-cold"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "90418"^^xsd:positiveInteger ;
+    :arenaName "Stop Cold" ;
+    :arenaSetCode "OTJ" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """If the affected permanent gains an ability after Stop Cold becomes attached to it, it will keep that ability."""@en ] .
+
+:TakeTheFall rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Take the Fall" ;
+    :manaCost "{U}" ;
+    :manaValue "1"^^xsd:nonNegativeInteger ;
+    :hasCardType :Instant ;
+    :hasRarity :Common ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :OutlawsOfThunderJunction ;
+    :cardNumber "73"^^xsd:integer ;
+    :artist "Eduardo Francisco" ;
+    :hasLanguage :English ;
+    :printedText """Target creature gets -1/-0 until end of turn. It gets -4/-0 until end of turn instead if you control an outlaw. (Assassins, Mercenaries, Pirates, Rogues, and Warlocks are outlaws.)
+Draw a card."""@en ;
+    :oracleText """Target creature gets -1/-0 until end of turn. It gets -4/-0 until end of turn instead if you control an outlaw. (Assassins, Mercenaries, Pirates, Rogues, and Warlocks are outlaws.)
+Draw a card."""@en ;
+    :flavorText """Dewey had been briefed on every aspect of the plan... except the bit where he was left holding the bag."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=655014"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/otj/73/take-the-fall"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "90419"^^xsd:positiveInteger ;
+    :arenaName "Take the Fall" ;
+    :arenaSetCode "OTJ" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """Outlaw is not a creature type. If an effect asks you to choose a creature type, you can’t choose outlaw."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """A card, spell, or permanent is an outlaw if it has the Assassin, Mercenary, Pirate, Rogue, or Warlock creature type. It doesn’t matter if it has more than one of those creature types; as long as it has at least one, it’s an outlaw."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """If an ability refers to an outlaw or whether a player controls an outlaw, it’s referring only to permanents with one or more of the creature types specified above. Notably, it’s not referring to any spell or card not on the battlefield. However, other abilities may refer to an “outlaw spell” or “outlaw card” in a zone other than the battlefield. Those abilities refer to spells and cards with one or more of the specified creature types."""@en ] .
+
+:ThreeStepsAhead rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Three Steps Ahead" ;
+    :manaCost "{U}" ;
+    :manaValue "1"^^xsd:nonNegativeInteger ;
+    :hasCardType :Instant ;
+    :hasRarity :Rare ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :OutlawsOfThunderJunction ;
+    :cardNumber "75"^^xsd:integer ;
+    :artist "Francisco Miyara" ;
+    :hasLanguage :English ;
+    :hasKeywordAbility :Spree ;
+    :printedText """Spree (Choose one or more additional costs.)
++ {1}{U} — Counter target spell.
++ {3} — Create a token that's a copy of target artifact or creature you control.
++ {2} — Draw two cards, then discard a card."""@en ;
+    :oracleText """Spree (Choose one or more additional costs.)
++ {1}{U} — Counter target spell.
++ {3} — Create a token that's a copy of target artifact or creature you control.
++ {2} — Draw two cards, then discard a card."""@en ;
+    :flavorText """She'd planned for every eventuality, with the obvious exception of failure."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=655016"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/otj/75/three-steps-ahead"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "90421"^^xsd:positiveInteger ;
+    :arenaName "Three Steps Ahead" ;
+    :arenaSetCode "OTJ" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """If an effect allows you to cast a spell with spree “without paying its mana cost,” you must still choose at least one mode and pay the associated additional costs."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """You can’t choose the same mode more than once."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """Each additional cost and associated mode in the text box is also preceded with a + indicator. These symbols also have no rules meaning and serve only to remind players that the listed costs are additional costs."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """The token copies exactly what was printed on the original permanent and nothing else (unless that permanent is copying something else or is a token; see below). It doesn’t copy whether that permanent is tapped or untapped, whether it has any counters on it or Auras and Equipment attached to it, or any non-copy effects that have changed its power, toughness, types, color, and so on."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """No player can cast spells or activate abilities in between the modes of a resolving spell. Any abilities that trigger won’t be put onto the stack until the spell is done resolving."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """If the copied permanent is a token, the token that’s created copies the original characteristics of that token as stated by the effect that created that token."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """If a mode requires a target, you can select that mode only if there’s a legal target available. Ignore the targeting requirements for modes you don’t choose."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """If the first and/or second modes are chosen, then Three Steps Ahead has one or more targets. If so, and all its targets are illegal as it tries to resolve, Three Steps Ahead won’t resolve and none of its effects will happen. If at least one target is still legal, the spell will resolve and modes with legal targets (and the third mode, if chosen) will have their effects."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """If a spell with spree is copied, the effect that creates the copy may allow you to choose new targets. You cannot choose new modes."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """If the copied permanent is copying something else, then the token enters the battlefield as whatever that permanent copied."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """No matter which modes you choose, you always follow the instructions in the order they are written."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """You must choose at least one of the listed modes and pay its associated additional cost in order to cast a spell with spree."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """Spells with spree have a + (plus sign) indicator in the upper right corner of the card frame. This has no rules meaning and serves only to remind players that at least one additional cost is required to cast the spell."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """The mana value of a spell with spree is determined only by its mana cost (in the upper right corner of the card). It doesn’t matter which modes you choose or which additional costs you pay, including any additional costs imposed by other effects."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """You choose the modes as you cast the spell with spree. Once modes are chosen, they can’t be changed."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """If the copied permanent has {X} in its mana cost, X is 0."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """Any enters-the-battlefield abilities of the copied permanent will trigger when the token enters the battlefield. Any “as [this permanent] enters the battlefield” or “[this permanent] enters the battlefield with” abilities of the copied permanent will also work."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """If all targets for the chosen modes become illegal before a spell with spree resolves, the spell won’t resolve and none of its effects will happen. If at least one target is still legal, the spell will resolve but will have no effect on any illegal targets."""@en ] .
+
+:FakeYourOwnDeathOutlawsOfThunderJunction87 rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Fake Your Own Death" ;
+    :manaCost "{1}{B}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Instant ;
+    :hasRarity :Common ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :OutlawsOfThunderJunction ;
+    :cardNumber "87"^^xsd:integer ;
+    :artist "Monztre" ;
+    :hasLanguage :English ;
+    :producesMana :White ,
+                  :Blue ,
+                  :Black ,
+                  :Red ,
+                  :Green ;
+    # Note: keyword "Treasure" not defined in MagicCardsOntology
+    :printedText """Until end of turn, target creature gets +2/+0 and gains "When this creature dies, return it to the battlefield tapped under its owner's control and you create a Treasure token." (It's an artifact with "{T}, Sacrifice this token: Add one mana of any color.")"""@en ;
+    :oracleText """Until end of turn, target creature gets +2/+0 and gains "When this creature dies, return it to the battlefield tapped under its owner's control and you create a Treasure token." (It's an artifact with "{T}, Sacrifice this token: Add one mana of any color.")"""@en ;
+    :flavorText """"Oh, he's done bothering us. Trust me."
+—Dwayne, Hellspur guard"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=655028"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/otj/87/fake-your-own-death"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "90433"^^xsd:positiveInteger ;
+    :arenaName "Fake Your Own Death" ;
+    :arenaSetCode "OTJ" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2022-04-29"^^xsd:date ;
+        :rulingText """The Treasure token is created by the creature's controller, who may be different from Fake Your Own Death's controller and may be different from the creature's owner."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2022-04-29"^^xsd:date ;
+        :rulingText """If the target creature is a token, the ability still triggers when it dies. Its controller won't return the token to the battlefield, but they will creature a Treasure token."""@en ] .
 
 :GisaTheHellraiser rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -119,6 +953,154 @@ Whenever you commit a crime, create two tapped 2/2 blue and black Zombie Rogue c
         :rulingDate "2024-04-12"^^xsd:date ;
         :rulingText """The spell or ability that constituted a crime doesn’t have to have resolved yet or at all. As soon as you’re finished casting the spell, activating the ability, or putting the triggered ability on the stack, you’ve committed a crime."""@en ] .
 
+:VaultPlunderer rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Vault Plunderer" ;
+    :manaCost "{2}{B}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Human ,
+                :Rogue ;
+    :hasRarity :Common ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :OutlawsOfThunderJunction ;
+    :cardNumber "114"^^xsd:integer ;
+    :artist "Evyn Fong" ;
+    :hasLanguage :English ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "1" ;
+    :toughnessValue "1"^^xsd:integer ;
+    :printedText """When this creature enters, target player draws a card and loses 1 life."""@en ;
+    :oracleText """When this creature enters, target player draws a card and loses 1 life."""@en ;
+    :flavorText """"Kind of them to put all their valuables in the same place.\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=655055"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/otj/114/vault-plunderer"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "90460"^^xsd:positiveInteger ;
+    :arenaName "Vault Plunderer" ;
+    :arenaSetCode "OTJ" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:DiscerningPeddler rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Discerning Peddler" ;
+    :manaCost "{1}{R}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Human ,
+                :Rogue ;
+    :hasRarity :Common ;
+    :hasColor :Red ;
+    :hasColorIdentity :Red ;
+    :isInSet :OutlawsOfThunderJunction ;
+    :cardNumber "121"^^xsd:integer ;
+    :artist "Josu Hernaiz" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    :printedText """When this creature enters, you may discard a card. If you do, draw a card."""@en ;
+    :oracleText """When this creature enters, you may discard a card. If you do, draw a card."""@en ;
+    :flavorText """"Can I interest you in some herbs from Naktamun? Fresh from the Omenpath! Or a set of Fioran cookware? Finest in the Multiverse!\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=655062"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/otj/121/discerning-peddler"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "90467"^^xsd:positiveInteger ;
+    :arenaName "Discerning Peddler" ;
+    :arenaSetCode "OTJ" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:HighwayRobbery rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Highway Robbery" ;
+    :manaCost "{1}{R}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Sorcery ;
+    :hasRarity :Common ;
+    :hasColor :Red ;
+    :hasColorIdentity :Red ;
+    :isInSet :OutlawsOfThunderJunction ;
+    :cardNumber "129"^^xsd:integer ;
+    :artist "Scott Murphy" ;
+    :hasLanguage :English ;
+    :hasKeywordAbility :Plot ;
+    :printedText """You may discard a card or sacrifice a land. If you do, draw two cards.
+Plot {1}{R} (You may pay {1}{R} and exile this card from your hand. Cast it as a sorcery on a later turn without paying its mana cost. Plot only as a sorcery.)"""@en ;
+    :oracleText """You may discard a card or sacrifice a land. If you do, draw two cards.
+Plot {1}{R} (You may pay {1}{R} and exile this card from your hand. Cast it as a sorcery on a later turn without paying its mana cost. Plot only as a sorcery.)"""@en ;
+    :flavorText """The fires weren't even out before the backstabbing began."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=655070"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/otj/129/highway-robbery"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "90475"^^xsd:positiveInteger ;
+    :arenaName "Highway Robbery" ;
+    :arenaSetCode "OTJ" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """Plot abilities are written “Plot [cost],” which means “Any time you have priority during your main phase while the stack is empty, you may pay [cost] and exile this card from your hand. It becomes plotted.”"""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """If you’re casting a plotted card from exile without paying its mana cost, you can’t choose to cast it for any other alternative costs. You can, however, pay additional costs, such as kicker costs. If the plotted card has any mandatory additional costs, those must still be paid to cast the spell."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """You can’t cast a plotted card on the same turn it became plotted. On any future turn, you may cast that card from exile without paying its mana cost during your main phase while the stack is empty."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """You can’t choose to discard a card if you have no cards in hand. Similarly, you can’t choose to sacrifice a land if you control no lands."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """Exiling a card using its plot ability is a special action. Once you announce you’re taking that action, no other player can respond by trying to remove that card from your hand."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """If a plotted card has {X} in its mana cost, you must choose 0 as the value of X when casting it without paying its mana cost."""@en ] .
+
 :MagdaTheHoardmaster rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Magda, the Hoardmaster" ;
@@ -181,6 +1163,574 @@ Sacrifice three Treasures: Create a 4/4 red Scorpion Dragon creature token with 
       [ rdf:type :Ruling ;
         :rulingDate "2024-04-12"^^xsd:date ;
         :rulingText """A player can commit only one crime per spell or ability they control. Targeting multiple opponents, permanents, spells, abilities, and/or cards with the same spell or ability doesn’t constitute committing multiple crimes."""@en ] .
+
+:MineRaider rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Mine Raider" ;
+    :manaCost "{2}{R}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Human ,
+                :Rogue ;
+    :hasRarity :Common ;
+    :hasColor :Red ;
+    :hasColorIdentity :Red ;
+    :isInSet :OutlawsOfThunderJunction ;
+    :cardNumber "135"^^xsd:integer ;
+    :artist "Warren Mahy" ;
+    :hasLanguage :English ;
+    :producesMana :White ,
+                  :Blue ,
+                  :Black ,
+                  :Red ,
+                  :Green ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    :hasKeywordAbility :Trample ;
+    # Note: keyword "Treasure" not defined in MagicCardsOntology
+    :printedText """Trample
+When this creature enters, if you control another outlaw, create a Treasure token. (Assassins, Mercenaries, Pirates, Rogues, and Warlocks are outlaws. A Treasure token is an artifact with "{T}, Sacrifice this token: Add one mana of any color.")"""@en ;
+    :oracleText """Trample
+When this creature enters, if you control another outlaw, create a Treasure token. (Assassins, Mercenaries, Pirates, Rogues, and Warlocks are outlaws. A Treasure token is an artifact with "{T}, Sacrifice this token: Add one mana of any color.")"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=655076"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/otj/135/mine-raider"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "90481"^^xsd:positiveInteger ;
+    :arenaName "Mine Raider" ;
+    :arenaSetCode "OTJ" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """If an ability refers to an outlaw or whether a player controls an outlaw, it's referring only to permanents with one or more of the creature types specified above. Notably, it's not referring to any spell or card not on the battlefield. However, other abilities may refer to an "outlaw spell" or "outlaw card" in a zone other than the battlefield. Those abilities refer to spells and cards with one or more of the specified creature types."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """Outlaw is not a creature type. If an effect asks you to choose a creature type, you can't choose outlaw."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """A card, spell, or permanent is an outlaw if it has the Assassin, Mercenary, Pirate, Rogue, or Warlock creature type. It doesn't matter if it has more than one of those creature types; as long as it has at least one, it's an outlaw."""@en ] .
+
+:OutlawsFury rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Outlaws' Fury" ;
+    :manaCost "{2}{R}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Instant ;
+    :hasRarity :Common ;
+    :hasColor :Red ;
+    :hasColorIdentity :Red ;
+    :isInSet :OutlawsOfThunderJunction ;
+    :cardNumber "136"^^xsd:integer ;
+    :artist "Diego Gisbert" ;
+    :hasLanguage :English ;
+    :printedText """Creatures you control get +2/+0 until end of turn. If you control an outlaw, exile the top card of your library. Until the end of your next turn, you may play that card. (Assassins, Mercenaries, Pirates, Rogues, and Warlocks are outlaws.)"""@en ;
+    :oracleText """Creatures you control get +2/+0 until end of turn. If you control an outlaw, exile the top card of your library. Until the end of your next turn, you may play that card. (Assassins, Mercenaries, Pirates, Rogues, and Warlocks are outlaws.)"""@en ;
+    :flavorText """The only witness to their rampage was the stoic visage of the moon."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=655077"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/otj/136/outlaws-fury"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "90482"^^xsd:positiveInteger ;
+    :arenaName "Outlaws' Fury" ;
+    :arenaSetCode "OTJ" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """A card, spell, or permanent is an outlaw if it has the Assassin, Mercenary, Pirate, Rogue, or Warlock creature type. It doesn't matter if it has more than one of those creature types; as long as it has at least one, it's an outlaw."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """You pay all costs and follow all normal timing rules for a card played from exile this way. For example, if the exiled card is a land card, you may play it only during your main phase while the stack is empty."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """If an ability refers to an outlaw or whether a player controls an outlaw, it's referring only to permanents with one or more of the creature types specified above. Notably, it's not referring to any spell or card not on the battlefield. However, other abilities may refer to an "outlaw spell" or "outlaw card" in a zone other than the battlefield. Those abilities refer to spells and cards with one or more of the specified creature types."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """Outlaws' Fury affects only creatures you control at the time it resolves. Creatures you begin to control later in the turn and noncreature permanents that become creatures later in the turn won't get +2/+0."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """Outlaw is not a creature type. If an effect asks you to choose a creature type, you can't choose outlaw."""@en ] .
+
+:RodeoPyromancers rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Rodeo Pyromancers" ;
+    :manaCost "{3}{R}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Human ,
+                :Mercenary ;
+    :hasRarity :Common ;
+    :hasColor :Red ;
+    :hasColorIdentity :Red ;
+    :isInSet :OutlawsOfThunderJunction ;
+    :cardNumber "143"^^xsd:integer ;
+    :artist "Kim Sokol" ;
+    :hasLanguage :English ;
+    :producesMana :Red ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "4" ;
+    :toughnessValue "4"^^xsd:integer ;
+    :printedText """Whenever you cast your first spell each turn, add {R}{R}."""@en ;
+    :oracleText """Whenever you cast your first spell each turn, add {R}{R}."""@en ;
+    :flavorText """"My citizens throw good money at them, and for what? Cheap tricks and collateral damage. Damnable Slickshot charlatans."
+—Baron Bertram Graywater"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=655084"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/otj/143/rodeo-pyromancers"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "90489"^^xsd:positiveInteger ;
+    :arenaName "Rodeo Pyromancers" ;
+    :arenaSetCode "OTJ" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """Rodeo Pyromancers’s ability isn’t a mana ability. It uses the stack and can be responded to."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """That ability triggers only while Rodeo Pyromancers is on the battlefield. Notably, it won’t trigger on a turn you cast Rodeo Pyromancers, no matter which spell it was."""@en ] .
+
+:ScalestormSummoner rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Scalestorm Summoner" ;
+    :manaCost "{2}{R}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Human ,
+                :Warlock ;
+    :hasRarity :Uncommon ;
+    :hasColor :Red ;
+    :hasColorIdentity :Red ;
+    :isInSet :OutlawsOfThunderJunction ;
+    :cardNumber "144"^^xsd:integer ;
+    :artist "Xabi Gaztelua" ;
+    :hasLanguage :English ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "3" ;
+    :toughnessValue "3"^^xsd:integer ;
+    :printedText """Whenever this creature attacks, create a 3/1 red Dinosaur creature token if you control a creature with power 4 or greater."""@en ;
+    :oracleText """Whenever this creature attacks, create a 3/1 red Dinosaur creature token if you control a creature with power 4 or greater."""@en ;
+    :flavorText """The herd followed him through an Omenpath and found their curiosity rewarded with an untamed world rich with unsuspecting prey."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=655085"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/otj/144/scalestorm-summoner"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "90490"^^xsd:positiveInteger ;
+    :arenaName "Scalestorm Summoner" ;
+    :arenaSetCode "OTJ" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """Scalestorm Summoner’s ability triggers even if you don’t control any creatures with power 4 or greater. It checks only as it resolves to see if you do. You can respond to the ability by raising the power of a creature you control so you can create a Dinosaur token."""@en ] .
+
+:Cactarantula rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Cactarantula" ;
+    :manaCost "{4}{G}{G}" ;
+    :manaValue "6"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Plant ,
+                :Spider ;
+    :hasRarity :Common ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :OutlawsOfThunderJunction ;
+    :cardNumber "158"^^xsd:integer ;
+    :artist "Filip Burburan" ;
+    :hasLanguage :English ;
+    :power "6" ;
+    :powerValue "6"^^xsd:integer ;
+    :toughness "5" ;
+    :toughnessValue "5"^^xsd:integer ;
+    :hasKeywordAbility :Reach ;
+    :printedText """This spell costs {1} less to cast if you control a Desert.
+Reach
+Whenever this creature becomes the target of a spell or ability an opponent controls, you may draw a card."""@en ;
+    :oracleText """This spell costs {1} less to cast if you control a Desert.
+Reach
+Whenever this creature becomes the target of a spell or ability an opponent controls, you may draw a card."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=655099"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/otj/158/cactarantula"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "90504"^^xsd:positiveInteger ;
+    :arenaName "Cactarantula" ;
+    :arenaSetCode "OTJ" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """If a spell or ability targets Cactarantula more than once, its last ability still triggers only once."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """Cactarantula still costs only {1} less to cast if you control multiple Deserts."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """Cactarantula’s last ability resolves before the spell or ability that caused it to trigger. It resolves even if that spell is countered."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """Once you announce that you’re casting Cactarantula, no player may take actions until the spell has been paid for. Notably, opponents can’t try to change whether you control a Desert."""@en ] .
+
+:FreestriderCommando rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Freestrider Commando" ;
+    :manaCost "{2}{G}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Centaur ,
+                :Mercenary ;
+    :hasRarity :Common ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :OutlawsOfThunderJunction ;
+    :cardNumber "162"^^xsd:integer ;
+    :artist "Adrián Rodríguez Pérez" ;
+    :hasLanguage :English ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "3" ;
+    :toughnessValue "3"^^xsd:integer ;
+    :hasKeywordAbility :Plot ;
+    :printedText """This creature enters with two +1/+1 counters on it if it wasn't cast or no mana was spent to cast it.
+Plot {3}{G} (You may pay {3}{G} and exile this card from your hand. Cast it as a sorcery on a later turn without paying its mana cost. Plot only as a sorcery.)"""@en ;
+    :oracleText """This creature enters with two +1/+1 counters on it if it wasn't cast or no mana was spent to cast it.
+Plot {3}{G} (You may pay {3}{G} and exile this card from your hand. Cast it as a sorcery on a later turn without paying its mana cost. Plot only as a sorcery.)"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=655103"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/otj/162/freestrider-commando"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "90508"^^xsd:positiveInteger ;
+    :arenaName "Freestrider Commando" ;
+    :arenaSetCode "OTJ" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """Plot abilities are written “Plot [cost],” which means “Any time you have priority during your main phase while the stack is empty, you may pay [cost] and exile this card from your hand. It becomes plotted.”"""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """You can’t cast a plotted card on the same turn it became plotted. On any future turn, you may cast that card from exile without paying its mana cost during your main phase while the stack is empty."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """Exiling a card using its plot ability is a special action. Once you announce you’re taking that action, no other player can respond by trying to remove that card from your hand."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """If you’re casting a plotted card from exile without paying its mana cost, you can’t choose to cast it for any other alternative costs. You can, however, pay additional costs, such as kicker costs. If the plotted card has any mandatory additional costs, those must still be paid to cast the spell."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """If a plotted card has {X} in its mana cost, you must choose 0 as the value of X when casting it without paying its mana cost."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """If Freestrider Commando is cast without paying its mana cost but you paid mana for additional costs or cost increases (such as from Aven Interrupter), Freestrider Commando won’t enter with +1/+1 counters."""@en ] .
+
+:GiantBeaver rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Giant Beaver" ;
+    :manaCost "{3}{G}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Beaver ,
+                :Mount ;
+    :hasRarity :Common ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :OutlawsOfThunderJunction ;
+    :cardNumber "165"^^xsd:integer ;
+    :artist "Lars Grant-West" ;
+    :hasLanguage :English ;
+    :power "4" ;
+    :powerValue "4"^^xsd:integer ;
+    :toughness "4" ;
+    :toughnessValue "4"^^xsd:integer ;
+    :hasKeywordAbility :Saddle ,
+                       :Vigilance ;
+    :printedText """Vigilance
+Whenever this creature attacks while saddled, put a +1/+1 counter on target creature that saddled it this turn.
+Saddle 3 (Tap any number of other creatures you control with total power 3 or more: This Mount becomes saddled until end of turn. Saddle only as a sorcery.)"""@en ;
+    :oracleText """Vigilance
+Whenever this creature attacks while saddled, put a +1/+1 counter on target creature that saddled it this turn.
+Saddle 3 (Tap any number of other creatures you control with total power 3 or more: This Mount becomes saddled until end of turn. Saddle only as a sorcery.)"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=655106"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/otj/165/giant-beaver"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "90511"^^xsd:positiveInteger ;
+    :arenaName "Giant Beaver" ;
+    :arenaSetCode "OTJ" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """Creatures with saddle can attack or block as normal even if they aren’t saddled."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """You may activate a permanent’s saddle ability even if that permanent is already saddled."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """“Saddled” isn’t an ability that a creature has. It’s just something true about that creature. It won’t stop being saddled until the turn ends or it leaves the battlefield."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """If a permanent becomes a copy of a saddled Mount, the copy won’t be saddled."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """An ability that triggers when a creature “attacks while saddled” will trigger only if that creature was saddled when it was declared as an attacker."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """“Saddle N” means “Tap any number of other untapped creatures you control with total power N or greater: This permanent becomes saddled until end of turn. Activate only as a sorcery.”"""@en ] .
+
+:RamblingPossum rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Rambling Possum" ;
+    :manaCost "{2}{G}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Possum ,
+                :Mount ;
+    :hasRarity :Uncommon ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :OutlawsOfThunderJunction ;
+    :cardNumber "176"^^xsd:integer ;
+    :artist "Adrián Rodríguez Pérez" ;
+    :hasLanguage :English ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "3" ;
+    :toughnessValue "3"^^xsd:integer ;
+    :hasKeywordAbility :Saddle ;
+    :printedText """Whenever this creature attacks while saddled, it gets +1/+2 until end of turn. Then you may return any number of creatures that saddled it this turn to their owner's hand.
+Saddle 1 (Tap any number of other creatures you control with total power 1 or more: This Mount becomes saddled until end of turn. Saddle only as a sorcery.)"""@en ;
+    :oracleText """Whenever this creature attacks while saddled, it gets +1/+2 until end of turn. Then you may return any number of creatures that saddled it this turn to their owner's hand.
+Saddle 1 (Tap any number of other creatures you control with total power 1 or more: This Mount becomes saddled until end of turn. Saddle only as a sorcery.)"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=655117"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/otj/176/rambling-possum"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "90522"^^xsd:positiveInteger ;
+    :arenaName "Rambling Possum" ;
+    :arenaSetCode "OTJ" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """An ability that triggers when a creature “attacks while saddled” will trigger only if that creature was saddled when it was declared as an attacker."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """You may activate a permanent’s saddle ability even if that permanent is already saddled."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """Creatures with saddle can attack or block as normal even if they aren’t saddled."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """“Saddle N” means “Tap any number of other untapped creatures you control with total power N or greater: This permanent becomes saddled until end of turn. Activate only as a sorcery.”"""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """If a permanent becomes a copy of a saddled Mount, the copy won’t be saddled."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """“Saddled” isn’t an ability that a creature has. It’s just something true about that creature. It won’t stop being saddled until the turn ends or it leaves the battlefield."""@en ] .
+
+:RaucousEntertainer rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Raucous Entertainer" ;
+    :manaCost "{1}{G}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Plant ,
+                :Bard ;
+    :hasRarity :Uncommon ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :OutlawsOfThunderJunction ;
+    :cardNumber "177"^^xsd:integer ;
+    :artist "Forrest Imel" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    :printedText """{1}, {T}: Put a +1/+1 counter on each creature you control that entered this turn."""@en ;
+    :oracleText """{1}, {T}: Put a +1/+1 counter on each creature you control that entered this turn."""@en ;
+    :flavorText """It's not hard to know the right song for the occasion when most occasions are saloon brawls."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=655118"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/otj/177/raucous-entertainer"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "90523"^^xsd:positiveInteger ;
+    :arenaName "Raucous Entertainer" ;
+    :arenaSetCode "OTJ" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:SpinewoodsArmadillo rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Spinewoods Armadillo" ;
+    :manaCost "{4}{G}{G}" ;
+    :manaValue "6"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Armadillo ;
+    :hasRarity :Uncommon ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :OutlawsOfThunderJunction ;
+    :cardNumber "182"^^xsd:integer ;
+    :artist "Iris Compiet" ;
+    :hasLanguage :English ;
+    :power "7" ;
+    :powerValue "7"^^xsd:integer ;
+    :toughness "7" ;
+    :toughnessValue "7"^^xsd:integer ;
+    :hasKeywordAbility :Reach ,
+                       :Ward ;
+    :printedText """Reach
+Ward {3} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {3}.)
+{1}{G}, Discard this card: Search your library for a basic land card or a Desert card, reveal it, put it into your hand, then shuffle. You gain 3 life."""@en ;
+    :oracleText """Reach
+Ward {3} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {3}.)
+{1}{G}, Discard this card: Search your library for a basic land card or a Desert card, reveal it, put it into your hand, then shuffle. You gain 3 life."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=655123"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/otj/182/spinewoods-armadillo"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "90528"^^xsd:positiveInteger ;
+    :arenaName "Spinewoods Armadillo" ;
+    :arenaSetCode "OTJ" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
 
 :AnnieJoinsUp rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -251,6 +1801,59 @@ If a triggered ability of a legendary creature you control triggers, that abilit
       [ rdf:type :Ruling ;
         :rulingDate "2024-04-12"^^xsd:date ;
         :rulingText """Abilities that apply “when [this creature] is turned face up” will trigger an additional time only if that creature is legendary once it has been turned face up."""@en ] .
+
+:BaronBertramGraywater rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Baron Bertram Graywater" ;
+    :manaCost "{2}{W}{B}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasSuperType :Legendary ;
+    :hasCardType :Creature ;
+    :hasSubType :Vampire ,
+                :Noble ;
+    :hasRarity :Uncommon ;
+    :hasColor :White ,
+              :Black ;
+    :hasColorIdentity :White ,
+                      :Black ;
+    :isInSet :OutlawsOfThunderJunction ;
+    :cardNumber "195"^^xsd:integer ;
+    :artist "Johan Grenier" ;
+    :hasLanguage :English ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "4" ;
+    :toughnessValue "4"^^xsd:integer ;
+    :printedText """Whenever one or more tokens you control enter, create a 1/1 black Vampire Rogue creature token with lifelink. This ability triggers only once each turn.
+{1}{B}, Sacrifice another creature or artifact: Draw a card."""@en ;
+    :oracleText """Whenever one or more tokens you control enter, create a 1/1 black Vampire Rogue creature token with lifelink. This ability triggers only once each turn.
+{1}{B}, Sacrifice another creature or artifact: Draw a card."""@en ;
+    :flavorText """"Of course the law's on my side. I wrote it.\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=655136"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/otj/195/baron-bertram-graywater"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "90541"^^xsd:positiveInteger ;
+    :arenaName "Baron Bertram Graywater" ;
+    :arenaSetCode "OTJ" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-04-12"^^xsd:date ;
+        :rulingText """If Baron Bertram Graywater enters under your control and is itself a token, its own ability will trigger and you’ll create a Vampire Rogue token. If you also control a nontoken Baron Bertram Graywater, that one’s ability will also trigger, netting you another Vampire Rogue. Of course, both Barons Bertram Graywater are legendary, so one Baron Bertram Graywater will soon be taking their leave. Farewell, Baron Bertram Graywater."""@en ] .
 
 :KellanJoinsUp rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -429,3 +2032,50 @@ Whenever a legendary creature you control deals combat damage to a player, draw 
       [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:ConcealedCourtyard rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Concealed Courtyard" ;
+    :manaValue "0"^^xsd:nonNegativeInteger ;
+    :hasCardType :Land ;
+    :hasRarity :Rare ;
+    :hasColorIdentity :White ,
+                      :Black ;
+    :isInSet :OutlawsOfThunderJunction ;
+    :cardNumber "268"^^xsd:integer ;
+    :artist "Rockey Chen" ;
+    :hasLanguage :English ;
+    :producesMana :White ,
+                  :Black ;
+    :printedText """This land enters tapped unless you control two or fewer other lands.
+{T}: Add {W} or {B}."""@en ;
+    :oracleText """This land enters tapped unless you control two or fewer other lands.
+{T}: Add {W} or {B}."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=657177"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/otj/268/concealed-courtyard"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "90615"^^xsd:positiveInteger ;
+    :arenaName "Concealed Courtyard" ;
+    :arenaSetCode "OTJ" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2016-09-20"^^xsd:date ;
+        :rulingText """If one of these lands enters the battlefield at the same time as one or more other lands (due to Oblivion Sower or Warp World, perhaps), it doesn't take those lands into consideration when determining how many other lands you control."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2016-09-20"^^xsd:date ;
+        :rulingText """If one of these lands is your first, second, or third land, it enters the battlefield untapped. If you control three or more other lands, however, it enters the battlefield tapped."""@en ] .

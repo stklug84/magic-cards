@@ -39,8 +39,9 @@
     rdfs:label "Magic Card Collection Individuals – Kaldheim"@en ;
     rdfs:comment """An instance graph describing the card individuals of a
 personal Magic: The Gathering card collection that were printed in the set
-Kaldheim (KHM). One Card individual is defined per collected
-printing, carrying its characteristics, the platforms it is available on
+Kaldheim (KHM). One Card individual is defined per printing
+collected in paper or on MTG Arena, carrying its characteristics, the
+platforms it is available on
 (paper, MTG Arena, Magic Online) with its MTG Arena identity, its legality
 in the paper and MTG Arena formats, and official rulings. Card data was
 sourced from Gatherer and Scryfall. This file imports MagicCardsOntology to
@@ -53,6 +54,183 @@ legality definitions."""@en .
 # Card Individuals
 #
 ################################################################################
+
+:RighteousValkyrieKaldheim24 rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Righteous Valkyrie" ;
+    :manaCost "{2}{W}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Angel ,
+                :Cleric ;
+    :hasRarity :Rare ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :Kaldheim ;
+    :cardNumber "24"^^xsd:integer ;
+    :artist "Chris Rahn" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "4" ;
+    :toughnessValue "4"^^xsd:integer ;
+    :hasKeywordAbility :Flying ;
+    :printedText """Flying
+Whenever another Angel or Cleric you control enters, you gain life equal to that creature's toughness.
+As long as you have at least 7 life more than your starting life total, creatures you control get +2/+2."""@en ;
+    :oracleText """Flying
+Whenever another Angel or Cleric you control enters, you gain life equal to that creature's toughness.
+As long as you have at least 7 life more than your starting life total, creatures you control get +2/+2."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=503630"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/khm/24/righteous-valkyrie"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "75061"^^xsd:positiveInteger ;
+    :arenaName "Righteous Valkyrie" ;
+    :arenaSetCode "KHM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2021-02-05"^^xsd:date ;
+        :rulingText """The amount of life you gain is equal to the Angel or Cleric's toughness as the triggered ability resolves. If the Angel or Cleric is no longer on the battlefield at that time, use its toughness from when it was last on the battlefield."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2021-02-05"^^xsd:date ;
+        :rulingText """Because damage remains marked on creatures until the damage is removed as the turn ends, nonlethal damage dealt to creatures you control may become lethal if your life total drops below 7 life more than your starting life total or if Righteous Valkyrie leaves the battlefield that turn."""@en ] .
+
+:VorinclexMonstrousRaider rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Vorinclex, Monstrous Raider" ;
+    :manaCost "{4}{G}{G}" ;
+    :manaValue "6"^^xsd:nonNegativeInteger ;
+    :hasSuperType :Legendary ;
+    :hasCardType :Creature ;
+    :hasSubType :Phyrexian ,
+                :Praetor ;
+    :hasRarity :MythicRare ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :Kaldheim ;
+    :cardNumber "199"^^xsd:integer ;
+    :artist "Daarken" ;
+    :hasLanguage :English ;
+    :power "6" ;
+    :powerValue "6"^^xsd:integer ;
+    :toughness "6" ;
+    :toughnessValue "6"^^xsd:integer ;
+    :hasKeywordAbility :Haste ,
+                       :Trample ;
+    :printedText """Trample, haste
+If you would put one or more counters on a permanent or player, put twice that many of each of those kinds of counters on that permanent or player instead.
+If an opponent would put one or more counters on a permanent or player, they put half that many of each of those kinds of counters on that permanent or player instead, rounded down."""@en ;
+    :oracleText """Trample, haste
+If you would put one or more counters on a permanent or player, put twice that many of each of those kinds of counters on that permanent or player instead.
+If an opponent would put one or more counters on a permanent or player, they put half that many of each of those kinds of counters on that permanent or player instead, rounded down."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=503815"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/khm/199/vorinclex-monstrous-raider"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "75246"^^xsd:positiveInteger ;
+    :arenaName "Vorinclex, Monstrous Raider" ;
+    :arenaSetCode "KHM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2021-02-05"^^xsd:date ;
+        :rulingText """If two or more effects attempt to modify how many counters would be put onto a permanent you control, you choose the order to apply those effects, no matter who controls the sources of those effects."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2021-02-05"^^xsd:date ;
+        :rulingText """Unlike many similar effects, Vorinclex cares deeply about who is putting the counters on the permanent or player to determine which of its two last abilities applies."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2021-02-05"^^xsd:date ;
+        :rulingText """If a permanent enters the battlefield with counters on it, the effect causing the permanent to be given counters may specify which player puts those counters on it. If the effect doesn’t specify a player, the object’s controller puts those counters on it."""@en ] .
+
+:GlacialFloodplain rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Glacial Floodplain" ;
+    :manaValue "0"^^xsd:nonNegativeInteger ;
+    :hasSuperType :Snow ;
+    :hasCardType :Land ;
+    :hasSubType :Plains ,
+                :Island ;
+    :hasRarity :Common ;
+    :hasColorIdentity :White ,
+                      :Blue ;
+    :isInSet :Kaldheim ;
+    :cardNumber "257"^^xsd:integer ;
+    :artist "Sarah Finnigan" ;
+    :hasLanguage :English ;
+    :producesMana :White ,
+                  :Blue ;
+    :entersTapped "true"^^xsd:boolean ;
+    :printedText """({T}: Add {W} or {U}.)
+This land enters tapped."""@en ;
+    :oracleText """({T}: Add {W} or {U}.)
+This land enters tapped."""@en ;
+    :flavorText """"A cliff once rose from the surf here—until Bjora Dawn-Greeter declared that it was blocking her view and pulled it down bare-handed."
+—Iskene, Kannah storyteller"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=503876"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/khm/257/glacial-floodplain"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "75307"^^xsd:positiveInteger ;
+    :arenaName "Glacial Floodplain" ;
+    :arenaSetCode "KHM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2021-02-05"^^xsd:date ;
+        :rulingText """Snow is a supertype, not a card type. It has no rules meaning or function by itself, but spells and abilities may refer to it."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2021-02-05"^^xsd:date ;
+        :rulingText """The {S} symbol is a generic mana symbol. It represents a cost that can be paid by one mana that was produced by a snow source. That mana can be any color or colorless."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2021-02-05"^^xsd:date ;
+        :rulingText """Some cards have additional effects for each {S} spent to cast them. You can cast these spells even if you don't spend any snow mana to cast them; their additional effects simply won't do anything."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2021-02-05"^^xsd:date ;
+        :rulingText """The Kaldheim set doesn't have any cards with mana costs that include {S}, but some previous sets do. If an effect says such a spell costs {1} less to cast, that reduction doesn't apply to any {S} costs. This is also true for activated abilities that include {S} in their activation costs and effects that reduce those costs."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2021-02-05"^^xsd:date ;
+        :rulingText """Snow isn't a type of mana. If an effect says you may spend mana as though it were any type, you can't pay for {S} using mana that wasn't produced by a snow source."""@en ] .
 
 :KayaTheInexorable rdf:type owl:NamedIndividual ,
                   :Card ;

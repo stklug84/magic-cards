@@ -39,8 +39,9 @@
     rdfs:label "Magic Card Collection Individuals – Aetherdrift"@en ;
     rdfs:comment """An instance graph describing the card individuals of a
 personal Magic: The Gathering card collection that were printed in the set
-Aetherdrift (DFT). One Card individual is defined per collected
-printing, carrying its characteristics, the platforms it is available on
+Aetherdrift (DFT). One Card individual is defined per printing
+collected in paper or on MTG Arena, carrying its characteristics, the
+platforms it is available on
 (paper, MTG Arena, Magic Online) with its MTG Arena identity, its legality
 in the paper and MTG Arena formats, and official rulings. Card data was
 sourced from Gatherer and Scryfall. This file imports MagicCardsOntology to
@@ -53,6 +54,629 @@ legality definitions."""@en .
 # Card Individuals
 #
 ################################################################################
+
+:BrightfieldMustang rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Brightfield Mustang" ;
+    :manaCost "{3}{W}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Horse ,
+                :Mount ;
+    :hasRarity :Common ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :Aetherdrift ;
+    :cardNumber "5"^^xsd:integer ;
+    :artist "Slawomir Maniak" ;
+    :hasLanguage :English ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "3" ;
+    :toughnessValue "3"^^xsd:integer ;
+    :hasKeywordAbility :Saddle ;
+    :printedText """Whenever this creature attacks while saddled, untap it and put a +1/+1 counter on it.
+Saddle 1 (Tap any number of other creatures you control with total power 1 or more: This Mount becomes saddled until end of turn. Saddle only as a sorcery.)"""@en ;
+    :oracleText """Whenever this creature attacks while saddled, untap it and put a +1/+1 counter on it.
+Saddle 1 (Tap any number of other creatures you control with total power 1 or more: This Mount becomes saddled until end of turn. Saddle only as a sorcery.)"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=690442"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/dft/5/brightfield-mustang"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "94807"^^xsd:positiveInteger ;
+    :arenaName "Brightfield Mustang" ;
+    :arenaSetCode "DFT" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-02-07"^^xsd:date ;
+        :rulingText """You may activate a permanent’s saddle ability even if that permanent is already saddled."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-02-07"^^xsd:date ;
+        :rulingText """An ability that triggers when a creature “attacks while saddled” will trigger only if that creature was saddled when it was declared as an attacker."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-02-07"^^xsd:date ;
+        :rulingText """“Saddled” isn’t an ability that a creature has. It’s just something true about that creature. It won’t stop being saddled until the turn ends or it leaves the battlefield."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-02-07"^^xsd:date ;
+        :rulingText """“Saddle N” means “Tap any number of other untapped creatures you control with total power N or greater: This permanent becomes saddled until end of turn. Activate only as a sorcery.”"""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-02-07"^^xsd:date ;
+        :rulingText """Creatures with saddle can attack or block as normal even if they aren’t saddled."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-02-07"^^xsd:date ;
+        :rulingText """If a permanent becomes a copy of a saddled Mount, the copy won’t be saddled."""@en ] .
+
+:BroadcastRambler rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Broadcast Rambler" ;
+    :manaCost "{4}{W}" ;
+    :manaValue "5"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ;
+    :hasSubType :Vehicle ;
+    :hasRarity :Common ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :Aetherdrift ;
+    :cardNumber "6"^^xsd:integer ;
+    :artist "Ioannis Fiore" ;
+    :hasLanguage :English ;
+    :power "5" ;
+    :powerValue "5"^^xsd:integer ;
+    :toughness "4" ;
+    :toughnessValue "4"^^xsd:integer ;
+    :hasKeywordAbility :Crew ;
+    :printedText """When this Vehicle enters, create a 1/1 colorless Thopter artifact creature token with flying.
+Crew 1 (Tap any number of creatures you control with total power 1 or more: This Vehicle becomes an artifact creature until end of turn.)"""@en ;
+    :oracleText """When this Vehicle enters, create a 1/1 colorless Thopter artifact creature token with flying.
+Crew 1 (Tap any number of creatures you control with total power 1 or more: This Vehicle becomes an artifact creature until end of turn.)"""@en ;
+    :flavorText """To keep up with the Grand Prix, reporters trained just as hard as the racers themselves."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=690443"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/dft/6/broadcast-rambler"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "94808"^^xsd:positiveInteger ;
+    :arenaName "Broadcast Rambler" ;
+    :arenaSetCode "DFT" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:DaringMechanic rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Daring Mechanic" ;
+    :manaCost "{2}{W}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Human ,
+                :Artificer ;
+    :hasRarity :Common ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :Aetherdrift ;
+    :cardNumber "11"^^xsd:integer ;
+    :artist "Elizabeth Peiró" ;
+    :hasLanguage :English ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "3" ;
+    :toughnessValue "3"^^xsd:integer ;
+    :printedText """{3}{W}: Put a +1/+1 counter on target Mount or Vehicle."""@en ;
+    :oracleText """{3}{W}: Put a +1/+1 counter on target Mount or Vehicle."""@en ;
+    :flavorText """"Just a few more bolts—SHARK ON YOUR RIGHT—and we should be good to go.\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=690448"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/dft/11/daring-mechanic"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "94813"^^xsd:positiveInteger ;
+    :arenaName "Daring Mechanic" ;
+    :arenaSetCode "DFT" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:GallantStrike rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Gallant Strike" ;
+    :manaCost "{1}{W}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Instant ;
+    :hasRarity :Uncommon ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :Aetherdrift ;
+    :cardNumber "13"^^xsd:integer ;
+    :artist "Brent Hollowell" ;
+    :hasLanguage :English ;
+    :hasKeywordAbility :Cycling ;
+    :printedText """Destroy target creature with toughness 4 or greater.
+Cycling {2} ({2}, Discard this card: Draw a card.)"""@en ;
+    :oracleText """Destroy target creature with toughness 4 or greater.
+Cycling {2} ({2}, Discard this card: Draw a card.)"""@en ;
+    :flavorText """The ghost shrieked as Terrin's blade sank deep. Perhaps a second death would teach it not to mess with his dog."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=690450"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/dft/13/gallant-strike"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "94815"^^xsd:positiveInteger ;
+    :arenaName "Gallant Strike" ;
+    :arenaSetCode "DFT" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:GuidelightSynergist rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Guidelight Synergist" ;
+    :manaCost "{3}{W}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ,
+                 :Creature ;
+    :hasSubType :Robot ,
+                :Artificer ;
+    :hasRarity :Uncommon ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :Aetherdrift ;
+    :cardNumber "16"^^xsd:integer ;
+    :artist "Camille Alquier" ;
+    :hasLanguage :English ;
+    :power "0" ;
+    :powerValue "0"^^xsd:integer ;
+    :toughness "4" ;
+    :toughnessValue "4"^^xsd:integer ;
+    :hasKeywordAbility :Flying ;
+    :printedText """Flying
+This creature gets +1/+0 for each artifact you control."""@en ;
+    :oracleText """Flying
+This creature gets +1/+0 for each artifact you control."""@en ;
+    :flavorText """"Declarative: A unit is only as strong as its network.\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=690453"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/dft/16/guidelight-synergist"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "94818"^^xsd:positiveInteger ;
+    :arenaName "Guidelight Synergist" ;
+    :arenaSetCode "DFT" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:InterfaceAce rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Interface Ace" ;
+    :manaCost "{1}{W}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ,
+                 :Creature ;
+    :hasSubType :Robot ,
+                :Pilot ;
+    :hasRarity :Common ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :Aetherdrift ;
+    :cardNumber "17"^^xsd:integer ;
+    :artist "Wonchun Choi" ;
+    :hasLanguage :English ;
+    :power "0" ;
+    :powerValue "0"^^xsd:integer ;
+    :toughness "4" ;
+    :toughnessValue "4"^^xsd:integer ;
+    :printedText """This creature saddles Mounts and crews Vehicles using its toughness rather than its power.
+Whenever this creature becomes tapped during your turn, untap it. This ability triggers only once each turn."""@en ;
+    :oracleText """This creature saddles Mounts and crews Vehicles using its toughness rather than its power.
+Whenever this creature becomes tapped during your turn, untap it. This ability triggers only once each turn."""@en ;
+    :flavorText """To the Guidelight Voyagers, a vehicle is just another hardware upgrade."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=690454"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/dft/17/interface-ace"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "94819"^^xsd:positiveInteger ;
+    :arenaName "Interface Ace" ;
+    :arenaSetCode "DFT" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:LotusguardDisciple rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Lotusguard Disciple" ;
+    :manaCost "{2}{W}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Bird ,
+                :Cleric ;
+    :hasRarity :Common ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :Aetherdrift ;
+    :cardNumber "21"^^xsd:integer ;
+    :artist "Josiah \"Jo\" Cameron" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    :hasKeywordAbility :Flying ;
+    :printedText """Flying
+When this creature enters, target creature or Vehicle gains lifelink and indestructible until end of turn."""@en ;
+    :oracleText """Flying
+When this creature enters, target creature or Vehicle gains lifelink and indestructible until end of turn."""@en ;
+    :flavorText """"No one dies under my watch."
+—Sektem, Lotusguard veteran"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=690458"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/dft/21/lotusguard-disciple"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "94823"^^xsd:positiveInteger ;
+    :arenaName "Lotusguard Disciple" ;
+    :arenaSetCode "DFT" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:SpotcycleScouter rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Spotcycle Scouter" ;
+    :manaCost "{1}{W}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ;
+    :hasSubType :Vehicle ;
+    :hasRarity :Common ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :Aetherdrift ;
+    :cardNumber "30"^^xsd:integer ;
+    :artist "Josiah \"Jo\" Cameron" ;
+    :hasLanguage :English ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    :hasKeywordAbility :Crew ;
+    :hasKeywordAction :Scry ;
+    :printedText """When this Vehicle enters, scry 2. (Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)
+Crew 1 (Tap any number of creatures you control with total power 1 or more: This Vehicle becomes an artifact creature until end of turn.)"""@en ;
+    :oracleText """When this Vehicle enters, scry 2. (Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)
+Crew 1 (Tap any number of creatures you control with total power 1 or more: This Vehicle becomes an artifact creature until end of turn.)"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=690467"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/dft/30/spotcycle-scouter"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "94832"^^xsd:positiveInteger ;
+    :arenaName "Spotcycle Scouter" ;
+    :arenaSetCode "DFT" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:CaelornaCoralTyrant rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Caelorna, Coral Tyrant" ;
+    :manaCost "{1}{U}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasSuperType :Legendary ;
+    :hasCardType :Creature ;
+    :hasSubType :Octopus ;
+    :hasRarity :Uncommon ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :Aetherdrift ;
+    :cardNumber "40"^^xsd:integer ;
+    :artist "Deruchenko Alexander" ;
+    :hasLanguage :English ;
+    :power "0" ;
+    :powerValue "0"^^xsd:integer ;
+    :toughness "8" ;
+    :toughnessValue "8"^^xsd:integer ;
+    :flavorText """For centuries, she grew in her benthic home, safe from Muraganda's moonfalls, feeding on the raw leylines that run below the water. When she emerged, the coral depths she called home came with her."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=690477"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/dft/40/caelorna-coral-tyrant"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "94842"^^xsd:positiveInteger ;
+    :arenaName "Caelorna, Coral Tyrant" ;
+    :arenaSetCode "DFT" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:GuidelightOptimizer rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Guidelight Optimizer" ;
+    :manaCost "{1}{U}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ,
+                 :Creature ;
+    :hasSubType :Robot ;
+    :hasRarity :Common ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :Aetherdrift ;
+    :cardNumber "45"^^xsd:integer ;
+    :artist "Mirko Failoni" ;
+    :hasLanguage :English ;
+    :producesMana :Blue ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "1" ;
+    :toughnessValue "1"^^xsd:integer ;
+    :printedText """{T}: Add {U}. Spend this mana only to cast an artifact spell or activate an ability."""@en ;
+    :oracleText """{T}: Add {U}. Spend this mana only to cast an artifact spell or activate an ability."""@en ;
+    :flavorText """"Analysis: Systems operating at 125% efficiency. Stress within expected tolerances. Exclamatory: Punch it.\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=690482"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/dft/45/guidelight-optimizer"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "94847"^^xsd:positiveInteger ;
+    :arenaName "Guidelight Optimizer" ;
+    :arenaSetCode "DFT" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-02-07"^^xsd:date ;
+        :rulingText """You may use mana from this creature to pay the cost of any activated ability, not just abilities of artifacts."""@en ] .
+
+:Hulldrifter rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Hulldrifter" ;
+    :manaCost "{3}{U}{U}" ;
+    :manaValue "5"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ;
+    :hasSubType :Vehicle ;
+    :hasRarity :Common ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :Aetherdrift ;
+    :cardNumber "47"^^xsd:integer ;
+    :artist "Alexandre Honoré" ;
+    :hasLanguage :English ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    :hasKeywordAbility :Flying ,
+                       :Crew ;
+    :printedText """Flying
+When this Vehicle enters, draw two cards.
+Crew 3 (Tap any number of creatures you control with total power 3 or more: This Vehicle becomes an artifact creature until end of turn.)"""@en ;
+    :oracleText """Flying
+When this Vehicle enters, draw two cards.
+Crew 3 (Tap any number of creatures you control with total power 3 or more: This Vehicle becomes an artifact creature until end of turn.)"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=690484"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/dft/47/hulldrifter"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "94849"^^xsd:positiveInteger ;
+    :arenaName "Hulldrifter" ;
+    :arenaSetCode "DFT" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:SkystreakEngineer rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Skystreak Engineer" ;
+    :manaCost "{1}{U}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Human ,
+                :Pilot ;
+    :hasRarity :Common ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :Aetherdrift ;
+    :cardNumber "61"^^xsd:integer ;
+    :artist "Elizabeth Peiró" ;
+    :hasLanguage :English ;
+    :power "1" ;
+    :powerValue "1"^^xsd:integer ;
+    :toughness "3" ;
+    :toughnessValue "3"^^xsd:integer ;
+    :hasKeywordAbility :Flying ,
+                       :Exhaust ;
+    :printedText """Flying
+Exhaust — {4}{U}: Put two +1/+1 counters on this creature. (Activate each exhaust ability only once.)"""@en ;
+    :oracleText """Flying
+Exhaust — {4}{U}: Put two +1/+1 counters on this creature. (Activate each exhaust ability only once.)"""@en ;
+    :flavorText """Garima was delighted to finally test out her design. The amazing views were a bonus."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=690498"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/dft/61/skystreak-engineer"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "94863"^^xsd:positiveInteger ;
+    :arenaName "Skystreak Engineer" ;
+    :arenaSetCode "DFT" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-02-07"^^xsd:date ;
+        :rulingText """If an exhaust ability of a permanent is activated, and then that permanent leaves the battlefield and returns to the battlefield, it becomes a new object so its exhaust ability can be activated again."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-02-07"^^xsd:date ;
+        :rulingText """If an ability triggers whenever you activate an exhaust ability, that ability resolves before the exhaust ability resolves."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-02-07"^^xsd:date ;
+        :rulingText """Exhaust abilities can be activated any time you could normally activate an ability."""@en ] .
+
+:TripUp rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Trip Up" ;
+    :manaCost "{3}{U}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasCardType :Instant ;
+    :hasRarity :Common ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :Aetherdrift ;
+    :cardNumber "71"^^xsd:integer ;
+    :artist "Josiah \"Jo\" Cameron" ;
+    :hasLanguage :English ;
+    :hasKeywordAbility :Cycling ;
+    :printedText """Target nonland permanent's owner puts it on their choice of the top or bottom of their library.
+Cycling {2} ({2}, Discard this card: Draw a card.)"""@en ;
+    :oracleText """Target nonland permanent's owner puts it on their choice of the top or bottom of their library.
+Cycling {2} ({2}, Discard this card: Draw a card.)"""@en ;
+    :flavorText """"That net was made to hold skywhales. Good luck getting to the next checkpoint!\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=690508"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/dft/71/trip-up"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "94873"^^xsd:positiveInteger ;
+    :arenaName "Trip Up" ;
+    :arenaSetCode "DFT" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
 
 :UnstoppablePlan rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -91,6 +715,856 @@ legality definitions."""@en .
       [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:GrimJavelineer rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Grim Javelineer" ;
+    :manaCost "{2}{B}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Human ,
+                :Warrior ;
+    :hasRarity :Common ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :Aetherdrift ;
+    :cardNumber "89"^^xsd:integer ;
+    :artist "Bartek Fedyczak" ;
+    :hasLanguage :English ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    :hasKeywordAction :Surveil ;
+    :printedText """Whenever you attack, target attacking creature gets +1/+0 until end of turn. When that creature dies this turn, surveil 1. (Look at the top card of your library. You may put that card into your graveyard.)"""@en ;
+    :oracleText """Whenever you attack, target attacking creature gets +1/+0 until end of turn. When that creature dies this turn, surveil 1. (Look at the top card of your library. You may put that card into your graveyard.)"""@en ;
+    :flavorText """Kheti lost everything to the Eternals and the Phyrexians. What she gained was an intimate knowledge of death in its myriad forms."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=690526"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/dft/89/grim-javelineer"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "94891"^^xsd:positiveInteger ;
+    :arenaName "Grim Javelineer" ;
+    :arenaSetCode "DFT" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:MaximumOverdrive rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Maximum Overdrive" ;
+    :manaCost "{1}{B}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Instant ;
+    :hasRarity :Common ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :Aetherdrift ;
+    :cardNumber "96"^^xsd:integer ;
+    :artist "Javier Charro" ;
+    :hasLanguage :English ;
+    :printedText """Put a +1/+1 counter on target creature. It gains deathtouch and indestructible until end of turn."""@en ;
+    :oracleText """Put a +1/+1 counter on target creature. It gains deathtouch and indestructible until end of turn."""@en ;
+    :flavorText """Compared to the Fuel Wars on Gastal, this Grand Prix is a thrilling vacation."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=690533"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/dft/96/maximum-overdrive"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "94898"^^xsd:positiveInteger ;
+    :arenaName "Maximum Overdrive" ;
+    :arenaSetCode "DFT" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:MutantSurveyor rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Mutant Surveyor" ;
+    :manaCost "{2}{B}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Mutant ,
+                :Scout ;
+    :hasRarity :Common ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :Aetherdrift ;
+    :cardNumber "98"^^xsd:integer ;
+    :artist "Nicholas Gregory" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "3" ;
+    :toughnessValue "3"^^xsd:integer ;
+    :hasKeywordAbility :MaxSpeed ,
+                       :StartYourEngines ;
+    :printedText """Start your engines! (If you have no speed, it starts at 1. It increases once on each of your turns when an opponent loses life. Max speed is 4.)
+{2}: This creature gets +1/+1 until end of turn.
+Max speed — {3}, Exile this card from your graveyard: Draw a card."""@en ;
+    :oracleText """Start your engines! (If you have no speed, it starts at 1. It increases once on each of your turns when an opponent loses life. Max speed is 4.)
+{2}: This creature gets +1/+1 until end of turn.
+Max speed — {3}, Exile this card from your graveyard: Draw a card."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=690535"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/dft/98/mutant-surveyor"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "94900"^^xsd:positiveInteger ;
+    :arenaName "Mutant Surveyor" ;
+    :arenaSetCode "DFT" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-02-07"^^xsd:date ;
+        :rulingText """If an effect needs to know what a player’s speed is and that player doesn’t have a speed, their speed is considered 0."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-02-07"^^xsd:date ;
+        :rulingText """Your speed doesn’t change until a spell or ability says so, such as the inherent triggered ability that cares about opponents losing life during your turn. Notably, losing control of permanents with start your engines! doesn’t affect your speed."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-02-07"^^xsd:date ;
+        :rulingText """Start your engines! isn’t a triggered ability. Increasing your speed to 1 is something that happens as a state-based action as soon as you control a permanent with the ability. Notably, this includes gaining control of a permanent with the ability that another player controls."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-02-07"^^xsd:date ;
+        :rulingText """Each player tracks their speed (or lack thereof) separately. Increasing your speed has no effect on whether another player has speed."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-02-07"^^xsd:date ;
+        :rulingText """A player “has max speed” if their speed is 4."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-02-07"^^xsd:date ;
+        :rulingText """“Max speed — [ability]” means “As long as you have max speed, this object has [ability].” If the granted ability functions in a zone other than the battlefield, the max speed ability does too."""@en ] .
+
+:RiskyShortcut rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Risky Shortcut" ;
+    :manaCost "{2}{B}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Sorcery ;
+    :hasRarity :Common ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :Aetherdrift ;
+    :cardNumber "103"^^xsd:integer ;
+    :artist "Ignatius Budi" ;
+    :hasLanguage :English ;
+    :printedText """Draw two cards. Each player loses 2 life."""@en ;
+    :oracleText """Draw two cards. Each player loses 2 life."""@en ;
+    :flavorText """"Don't think of it as cheating, think of it as track they forgot to lay out for us."
+—Rido, Endrider"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=690540"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/dft/103/risky-shortcut"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "94905"^^xsd:positiveInteger ;
+    :arenaName "Risky Shortcut" ;
+    :arenaSetCode "DFT" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:StreakingOilgorger rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Streaking Oilgorger" ;
+    :manaCost "{4}{B}" ;
+    :manaValue "5"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Vampire ;
+    :hasRarity :Common ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :Aetherdrift ;
+    :cardNumber "107"^^xsd:integer ;
+    :artist "Campbell White" ;
+    :hasLanguage :English ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "3" ;
+    :toughnessValue "3"^^xsd:integer ;
+    :hasKeywordAbility :Flying ,
+                       :MaxSpeed ,
+                       :Haste ,
+                       :StartYourEngines ;
+    :printedText """Flying, haste
+Start your engines! (If you have no speed, it starts at 1. It increases once on each of your turns when an opponent loses life. Max speed is 4.)
+Max speed — This creature has lifelink."""@en ;
+    :oracleText """Flying, haste
+Start your engines! (If you have no speed, it starts at 1. It increases once on each of your turns when an opponent loses life. Max speed is 4.)
+Max speed — This creature has lifelink."""@en ;
+    :flavorText """"They feed on OIL? Where were they during the Phyrexian Invasion?!"
+—Chandra Nalaar"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=690544"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/dft/107/streaking-oilgorger"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "94909"^^xsd:positiveInteger ;
+    :arenaName "Streaking Oilgorger" ;
+    :arenaSetCode "DFT" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-02-07"^^xsd:date ;
+        :rulingText """Your speed doesn’t change until a spell or ability says so, such as the inherent triggered ability that cares about opponents losing life during your turn. Notably, losing control of permanents with start your engines! doesn’t affect your speed."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-02-07"^^xsd:date ;
+        :rulingText """“Max speed — [ability]” means “As long as you have max speed, this object has [ability].” If the granted ability functions in a zone other than the battlefield, the max speed ability does too."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-02-07"^^xsd:date ;
+        :rulingText """A player “has max speed” if their speed is 4."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-02-07"^^xsd:date ;
+        :rulingText """Each player tracks their speed (or lack thereof) separately. Increasing your speed has no effect on whether another player has speed."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-02-07"^^xsd:date ;
+        :rulingText """If an effect needs to know what a player’s speed is and that player doesn’t have a speed, their speed is considered 0."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-02-07"^^xsd:date ;
+        :rulingText """Start your engines! isn’t a triggered ability. Increasing your speed to 1 is something that happens as a state-based action as soon as you control a permanent with the ability. Notably, this includes gaining control of a permanent with the ability that another player controls."""@en ] .
+
+:GastalBlockbuster rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Gastal Blockbuster" ;
+    :manaCost "{2}{R}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Human ,
+                :Berserker ;
+    :hasRarity :Common ;
+    :hasColor :Red ;
+    :hasColorIdentity :Red ;
+    :isInSet :Aetherdrift ;
+    :cardNumber "128"^^xsd:integer ;
+    :artist "Bryan Sola" ;
+    :hasLanguage :English ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    :printedText """When this creature enters, you may sacrifice a creature or Vehicle. When you do, destroy target artifact an opponent controls."""@en ;
+    :oracleText """When this creature enters, you may sacrifice a creature or Vehicle. When you do, destroy target artifact an opponent controls."""@en ;
+    :flavorText """"Consider me an accident no longer waiting to happen.\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=690565"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/dft/128/gastal-blockbuster"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "94930"^^xsd:positiveInteger ;
+    :arenaName "Gastal Blockbuster" ;
+    :arenaSetCode "DFT" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-02-07"^^xsd:date ;
+        :rulingText """You don’t choose a target for the enters ability. If you choose to sacrifice a creature or Vehicle, a second trigger, called a reflexive trigger, is put on the stack, and you choose a target for that one. Players may respond as normal to this new triggered ability."""@en ] .
+
+:HowlsquadHeavy rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Howlsquad Heavy" ;
+    :manaCost "{2}{R}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Goblin ,
+                :Mercenary ;
+    :hasRarity :Rare ;
+    :hasColor :Red ;
+    :hasColorIdentity :Red ;
+    :isInSet :Aetherdrift ;
+    :cardNumber "134"^^xsd:integer ;
+    :artist "Leonardo Santanna" ;
+    :hasLanguage :English ;
+    :producesMana :Red ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "3" ;
+    :toughnessValue "3"^^xsd:integer ;
+    :hasKeywordAbility :MaxSpeed ,
+                       :StartYourEngines ;
+    :printedText """Start your engines!
+Other Goblins you control have haste.
+At the beginning of combat on your turn, create a 1/1 red Goblin creature token. That token attacks this combat if able.
+Max speed — {T}: Add {R} for each Goblin you control."""@en ;
+    :oracleText """Start your engines!
+Other Goblins you control have haste.
+At the beginning of combat on your turn, create a 1/1 red Goblin creature token. That token attacks this combat if able.
+Max speed — {T}: Add {R} for each Goblin you control."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=690571"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/dft/134/howlsquad-heavy"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "94936"^^xsd:positiveInteger ;
+    :arenaName "Howlsquad Heavy" ;
+    :arenaSetCode "DFT" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-02-07"^^xsd:date ;
+        :rulingText """A player “has max speed” if their speed is 4."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-02-07"^^xsd:date ;
+        :rulingText """Mana abilities don’t use the stack, which means that they can’t be responded to. Notably, this means that a player can’t respond to this creature’s last ability by destroying one of your Goblins."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-02-07"^^xsd:date ;
+        :rulingText """“Max speed — [ability]” means “As long as you have max speed, this object has [ability].” If the granted ability functions in a zone other than the battlefield, the max speed ability does too."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-02-07"^^xsd:date ;
+        :rulingText """Each player tracks their speed (or lack thereof) separately. Increasing your speed has no effect on whether another player has speed."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-02-07"^^xsd:date ;
+        :rulingText """If an effect needs to know what a player’s speed is and that player doesn’t have a speed, their speed is considered 0."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-02-07"^^xsd:date ;
+        :rulingText """Your speed doesn’t change until a spell or ability says so, such as the inherent triggered ability that cares about opponents losing life during your turn. Notably, losing control of permanents with start your engines! doesn’t affect your speed."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-02-07"^^xsd:date ;
+        :rulingText """Start your engines! isn’t a triggered ability. Increasing your speed to 1 is something that happens as a state-based action as soon as you control a permanent with the ability. Notably, this includes gaining control of a permanent with the ability that another player controls."""@en ] .
+
+:BestowGreatness rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Bestow Greatness" ;
+    :manaCost "{2}{G}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Instant ;
+    :hasRarity :Common ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :Aetherdrift ;
+    :cardNumber "155"^^xsd:integer ;
+    :artist "Jeff Carpenter" ;
+    :hasLanguage :English ;
+    :printedText """Target creature gets +4/+4 and gains trample until end of turn."""@en ;
+    :oracleText """Target creature gets +4/+4 and gains trample until end of turn."""@en ;
+    :flavorText """Exercise kindness, for nothing remains small forever.
+—Alacrian proverb"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=690592"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/dft/155/bestow-greatness"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "94957"^^xsd:positiveInteger ;
+    :arenaName "Bestow Greatness" ;
+    :arenaSetCode "DFT" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:BrokenWingsAetherdrift156 rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Broken Wings" ;
+    :manaCost "{2}{G}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Instant ;
+    :hasRarity :Common ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :Aetherdrift ;
+    :cardNumber "156"^^xsd:integer ;
+    :artist "Nils Hamm" ;
+    :hasLanguage :English ;
+    :printedText """Destroy target artifact, enchantment, or creature with flying."""@en ;
+    :oracleText """Destroy target artifact, enchantment, or creature with flying."""@en ;
+    :flavorText """An early lead puts a target on your back."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=690593"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/dft/156/broken-wings"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "94958"^^xsd:positiveInteger ;
+    :arenaName "Broken Wings" ;
+    :arenaSetCode "DFT" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:DistrictMascot rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "District Mascot" ;
+    :manaCost "{G}" ;
+    :manaValue "1"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Dog ,
+                :Mount ;
+    :hasRarity :Rare ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :Aetherdrift ;
+    :cardNumber "158"^^xsd:integer ;
+    :artist "Liiga Smilshkalne" ;
+    :hasLanguage :English ;
+    :power "0" ;
+    :powerValue "0"^^xsd:integer ;
+    :toughness "0" ;
+    :toughnessValue "0"^^xsd:integer ;
+    :hasKeywordAbility :Saddle ;
+    :printedText """This creature enters with a +1/+1 counter on it.
+{1}{G}, Remove two +1/+1 counters from this creature: Destroy target artifact.
+Whenever this creature attacks while saddled, put a +1/+1 counter on it.
+Saddle 1"""@en ;
+    :oracleText """This creature enters with a +1/+1 counter on it.
+{1}{G}, Remove two +1/+1 counters from this creature: Destroy target artifact.
+Whenever this creature attacks while saddled, put a +1/+1 counter on it.
+Saddle 1"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=690595"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/dft/158/district-mascot"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "94960"^^xsd:positiveInteger ;
+    :arenaName "District Mascot" ;
+    :arenaSetCode "DFT" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-02-07"^^xsd:date ;
+        :rulingText """An ability that triggers when a creature “attacks while saddled” will trigger only if that creature was saddled when it was declared as an attacker."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-02-07"^^xsd:date ;
+        :rulingText """“Saddled” isn’t an ability that a creature has. It’s just something true about that creature. It won’t stop being saddled until the turn ends or it leaves the battlefield."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-02-07"^^xsd:date ;
+        :rulingText """You may activate a permanent’s saddle ability even if that permanent is already saddled."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-02-07"^^xsd:date ;
+        :rulingText """If a permanent becomes a copy of a saddled Mount, the copy won’t be saddled."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-02-07"^^xsd:date ;
+        :rulingText """Creatures with saddle can attack or block as normal even if they aren’t saddled."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-02-07"^^xsd:date ;
+        :rulingText """“Saddle N” means “Tap any number of other untapped creatures you control with total power N or greater: This permanent becomes saddled until end of turn. Activate only as a sorcery.”"""@en ] .
+
+:RegalImperiosaur rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Regal Imperiosaur" ;
+    :manaCost "{1}{G}{G}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Dinosaur ;
+    :hasRarity :Rare ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :Aetherdrift ;
+    :cardNumber "177"^^xsd:integer ;
+    :artist "Stephanie Cheung" ;
+    :hasLanguage :English ;
+    :power "5" ;
+    :powerValue "5"^^xsd:integer ;
+    :toughness "4" ;
+    :toughnessValue "4"^^xsd:integer ;
+    :printedText """Other Dinosaurs you control get +1/+1."""@en ;
+    :oracleText """Other Dinosaurs you control get +1/+1."""@en ;
+    :flavorText """Initially frustrated by Muraganda's inconsistent biodiversity, Avishkari researchers made a breakthrough after mapping the plane's aetheric index—the wide variety of fauna was the result of raw magic, not evolution."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=690614"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/dft/177/regal-imperiosaur"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "94979"^^xsd:positiveInteger ;
+    :arenaName "Regal Imperiosaur" ;
+    :arenaSetCode "DFT" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:VeloheartBike rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Veloheart Bike" ;
+    :manaCost "{2}{G}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ;
+    :hasSubType :Vehicle ;
+    :hasRarity :Common ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :Aetherdrift ;
+    :cardNumber "184"^^xsd:integer ;
+    :artist "Anthony Devine" ;
+    :hasLanguage :English ;
+    :producesMana :White ,
+                  :Blue ,
+                  :Black ,
+                  :Red ,
+                  :Green ;
+    :power "4" ;
+    :powerValue "4"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    :hasKeywordAbility :Crew ;
+    :printedText """When this Vehicle enters, you gain 2 life.
+{T}: Add one mana of any color.
+Crew 2 (Tap any number of creatures you control with total power 2 or more: This Vehicle becomes an artifact creature until end of turn.)"""@en ;
+    :oracleText """When this Vehicle enters, you gain 2 life.
+{T}: Add one mana of any color.
+Crew 2 (Tap any number of creatures you control with total power 2 or more: This Vehicle becomes an artifact creature until end of turn.)"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=690621"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/dft/184/veloheart-bike"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "94986"^^xsd:positiveInteger ;
+    :arenaName "Veloheart Bike" ;
+    :arenaSetCode "DFT" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:VenomsacLagac rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Venomsac Lagac" ;
+    :manaCost "{1}{G}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Lizard ,
+                :Mount ;
+    :hasRarity :Common ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :Aetherdrift ;
+    :cardNumber "185"^^xsd:integer ;
+    :artist "Andrey Kuzinskiy" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "1" ;
+    :toughnessValue "1"^^xsd:integer ;
+    :hasKeywordAbility :Saddle ,
+                       :Deathtouch ;
+    :printedText """Deathtouch
+Whenever this creature attacks while saddled, it gets +0/+3 until end of turn.
+Saddle 2 (Tap any number of other creatures you control with total power 2 or more: This Mount becomes saddled until end of turn. Saddle only as a sorcery.)"""@en ;
+    :oracleText """Deathtouch
+Whenever this creature attacks while saddled, it gets +0/+3 until end of turn.
+Saddle 2 (Tap any number of other creatures you control with total power 2 or more: This Mount becomes saddled until end of turn. Saddle only as a sorcery.)"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=690622"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/dft/185/venomsac-lagac"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "94987"^^xsd:positiveInteger ;
+    :arenaName "Venomsac Lagac" ;
+    :arenaSetCode "DFT" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-02-07"^^xsd:date ;
+        :rulingText """If a permanent becomes a copy of a saddled Mount, the copy won’t be saddled."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-02-07"^^xsd:date ;
+        :rulingText """Creatures with saddle can attack or block as normal even if they aren’t saddled."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-02-07"^^xsd:date ;
+        :rulingText """You may activate a permanent’s saddle ability even if that permanent is already saddled."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-02-07"^^xsd:date ;
+        :rulingText """An ability that triggers when a creature “attacks while saddled” will trigger only if that creature was saddled when it was declared as an attacker."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-02-07"^^xsd:date ;
+        :rulingText """“Saddled” isn’t an ability that a creature has. It’s just something true about that creature. It won’t stop being saddled until the turn ends or it leaves the battlefield."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-02-07"^^xsd:date ;
+        :rulingText """“Saddle N” means “Tap any number of other untapped creatures you control with total power N or greater: This permanent becomes saddled until end of turn. Activate only as a sorcery.”"""@en ] .
+
+:AatchikEmeraldRadian rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Aatchik, Emerald Radian" ;
+    :manaCost "{3}{B}{B}{G}" ;
+    :manaValue "6"^^xsd:nonNegativeInteger ;
+    :hasSuperType :Legendary ;
+    :hasCardType :Creature ;
+    :hasSubType :Insect ,
+                :Druid ;
+    :hasRarity :Rare ;
+    :hasColor :Black ,
+              :Green ;
+    :hasColorIdentity :Black ,
+                      :Green ;
+    :isInSet :Aetherdrift ;
+    :cardNumber "187"^^xsd:integer ;
+    :artist "Loïc Canavaggia" ;
+    :hasLanguage :English ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "3" ;
+    :toughnessValue "3"^^xsd:integer ;
+    :printedText """When Aatchik enters, create a 1/1 green Insect creature token for each artifact and/or creature card in your graveyard.
+Whenever another Insect you control dies, put a +1/+1 counter on Aatchik. Each opponent loses 1 life."""@en ;
+    :oracleText """When Aatchik enters, create a 1/1 green Insect creature token for each artifact and/or creature card in your graveyard.
+Whenever another Insect you control dies, put a +1/+1 counter on Aatchik. Each opponent loses 1 life."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=690624"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/dft/187/aatchik-emerald-radian"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "94989"^^xsd:positiveInteger ;
+    :arenaName "Aatchik, Emerald Radian" ;
+    :arenaSetCode "DFT" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-02-07"^^xsd:date ;
+        :rulingText """If a card in your graveyard is an artifact creature card, count it only once when determining how many Insect tokens to create for Aatchik’s first ability."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-02-07"^^xsd:date ;
+        :rulingText """If Aatchik is dealt lethal damage at the same time as another Insect you control, Aatchik’s last ability will still trigger, causing each opponent to lose 1 life, but Aatchik won’t get a +1/+1 counter in time to save it."""@en ] .
+
+:DebrisBeetle rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Debris Beetle" ;
+    :manaCost "{2}{B}{G}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ;
+    :hasSubType :Vehicle ;
+    :hasRarity :Rare ;
+    :hasColor :Black ,
+              :Green ;
+    :hasColorIdentity :Black ,
+                      :Green ;
+    :isInSet :Aetherdrift ;
+    :cardNumber "199"^^xsd:integer ;
+    :artist "Julie Dillon" ;
+    :hasLanguage :English ;
+    :power "6" ;
+    :powerValue "6"^^xsd:integer ;
+    :toughness "6" ;
+    :toughnessValue "6"^^xsd:integer ;
+    :hasKeywordAbility :Crew ,
+                       :Trample ;
+    :printedText """Trample
+When this Vehicle enters, each opponent loses 3 life and you gain 3 life.
+Crew 2"""@en ;
+    :oracleText """Trample
+When this Vehicle enters, each opponent loses 3 life and you gain 3 life.
+Crew 2"""@en ;
+    :flavorText """Many brought weapons to the race. This crew built theirs as they went."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=690636"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/dft/199/debris-beetle"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "95001"^^xsd:positiveInteger ;
+    :arenaName "Debris Beetle" ;
+    :arenaSetCode "DFT" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:DuneDrifter rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Dune Drifter" ;
+    :manaCost "{X}{W}{B}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ;
+    :hasSubType :Vehicle ;
+    :hasRarity :Uncommon ;
+    :hasColor :White ,
+              :Black ;
+    :hasColorIdentity :White ,
+                      :Black ;
+    :isInSet :Aetherdrift ;
+    :cardNumber "200"^^xsd:integer ;
+    :artist "Simon Dominic" ;
+    :hasLanguage :English ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "3" ;
+    :toughnessValue "3"^^xsd:integer ;
+    :hasKeywordAbility :Crew ;
+    :printedText """When this Vehicle enters, return target artifact or creature card with mana value X or less from your graveyard to the battlefield.
+Crew 2 (Tap any number of creatures you control with total power 2 or more: This Vehicle becomes an artifact creature until end of turn.)"""@en ;
+    :oracleText """When this Vehicle enters, return target artifact or creature card with mana value X or less from your graveyard to the battlefield.
+Crew 2 (Tap any number of creatures you control with total power 2 or more: This Vehicle becomes an artifact creature until end of turn.)"""@en ;
+    :flavorText """It was easy for them to replace lost crew members once they reached home turf."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=690637"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/dft/200/dune-drifter"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "95002"^^xsd:positiveInteger ;
+    :arenaName "Dune Drifter" ;
+    :arenaSetCode "DFT" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-02-07"^^xsd:date ;
+        :rulingText """If this Vehicle enters and wasn’t cast, or it was cast without paying its mana cost, X is 0."""@en ] .
 
 :PyrewoodGearhulk rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -142,6 +1616,595 @@ When this creature enters, other creatures you control get +2/+2 and gain vigila
       [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
 
+:RangersAetherhive rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Rangers' Aetherhive" ;
+    :manaCost "{1}{G}{U}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ;
+    :hasSubType :Vehicle ;
+    :hasRarity :Uncommon ;
+    :hasColor :Blue ,
+              :Green ;
+    :hasColorIdentity :Blue ,
+                      :Green ;
+    :isInSet :Aetherdrift ;
+    :cardNumber "217"^^xsd:integer ;
+    :artist "Josiah \"Jo\" Cameron" ;
+    :hasLanguage :English ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "5" ;
+    :toughnessValue "5"^^xsd:integer ;
+    :hasKeywordAbility :Vigilance ,
+                       :Crew ;
+    :printedText """Vigilance
+Whenever you activate an exhaust ability, create a 1/1 colorless Thopter artifact creature token with flying.
+Crew 1 (Tap any number of creatures you control with total power 1 or more: This Vehicle becomes an artifact creature until end of turn.)"""@en ;
+    :oracleText """Vigilance
+Whenever you activate an exhaust ability, create a 1/1 colorless Thopter artifact creature token with flying.
+Crew 1 (Tap any number of creatures you control with total power 1 or more: This Vehicle becomes an artifact creature until end of turn.)"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=690654"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/dft/217/rangers-aetherhive"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "95019"^^xsd:positiveInteger ;
+    :arenaName "Rangers' Aetherhive" ;
+    :arenaSetCode "DFT" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:SkyserpentSeeker rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Skyserpent Seeker" ;
+    :manaCost "{G}{U}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Snake ;
+    :hasRarity :Uncommon ;
+    :hasColor :Blue ,
+              :Green ;
+    :hasColorIdentity :Blue ,
+                      :Green ;
+    :isInSet :Aetherdrift ;
+    :cardNumber "224"^^xsd:integer ;
+    :artist "Johan Grenier" ;
+    :hasLanguage :English ;
+    :power "1" ;
+    :powerValue "1"^^xsd:integer ;
+    :toughness "1" ;
+    :toughnessValue "1"^^xsd:integer ;
+    :hasKeywordAbility :Deathtouch ,
+                       :Flying ,
+                       :Exhaust ;
+    :printedText """Flying, deathtouch
+Exhaust — {4}: Reveal cards from the top of your library until you reveal two land cards. Put those land cards onto the battlefield tapped and the rest on the bottom of your library in a random order. Put a +1/+1 counter on this creature. (Activate each exhaust ability only once.)"""@en ;
+    :oracleText """Flying, deathtouch
+Exhaust — {4}: Reveal cards from the top of your library until you reveal two land cards. Put those land cards onto the battlefield tapped and the rest on the bottom of your library in a random order. Put a +1/+1 counter on this creature. (Activate each exhaust ability only once.)"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=690661"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/dft/224/skyserpent-seeker"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "95026"^^xsd:positiveInteger ;
+    :arenaName "Skyserpent Seeker" ;
+    :arenaSetCode "DFT" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-02-07"^^xsd:date ;
+        :rulingText """If an exhaust ability of a permanent is activated, and then that permanent leaves the battlefield and returns to the battlefield, it becomes a new object so its exhaust ability can be activated again."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-02-07"^^xsd:date ;
+        :rulingText """If an ability triggers whenever you activate an exhaust ability, that ability resolves before the exhaust ability resolves."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-02-07"^^xsd:date ;
+        :rulingText """Exhaust abilities can be activated any time you could normally activate an ability."""@en ] .
+
+:VeteranBeastrider rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Veteran Beastrider" ;
+    :manaCost "{1}{G}{W}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Human ,
+                :Knight ;
+    :hasRarity :Uncommon ;
+    :hasColor :White ,
+              :Green ;
+    :hasColorIdentity :White ,
+                      :Green ;
+    :isInSet :Aetherdrift ;
+    :cardNumber "226"^^xsd:integer ;
+    :artist "Andreia Ugrai" ;
+    :hasLanguage :English ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "4" ;
+    :toughnessValue "4"^^xsd:integer ;
+    :printedText """At the beginning of your end step, untap each creature you control.
+{2}{G}{W}: Creatures you control get +1/+1 until end of turn."""@en ;
+    :oracleText """At the beginning of your end step, untap each creature you control.
+{2}{G}{W}: Creatures you control get +1/+1 until end of turn."""@en ;
+    :flavorText """"Your enemies will underestimate you, but you must never underestimate yourself.\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=690663"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/dft/226/veteran-beastrider"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "95028"^^xsd:positiveInteger ;
+    :arenaName "Veteran Beastrider" ;
+    :arenaSetCode "DFT" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:Aetherjacket rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Aetherjacket" ;
+    :manaCost "{3}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ,
+                 :Creature ;
+    :hasSubType :Thopter ;
+    :hasRarity :Common ;
+    :isInSet :Aetherdrift ;
+    :cardNumber "230"^^xsd:integer ;
+    :artist "Domenico Cava" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "1" ;
+    :toughnessValue "1"^^xsd:integer ;
+    :hasKeywordAbility :Flying ,
+                       :Vigilance ;
+    :printedText """Flying, vigilance
+{2}, {T}, Sacrifice this creature: Destroy another target artifact. Activate only as a sorcery."""@en ;
+    :oracleText """Flying, vigilance
+{2}, {T}, Sacrifice this creature: Destroy another target artifact. Activate only as a sorcery."""@en ;
+    :flavorText """The Sting Strike model saved thousands of lives during the Invasion and quickly became a bestseller for Shadowblayde Craftworks."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=690667"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/dft/230/aetherjacket"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "95032"^^xsd:positiveInteger ;
+    :arenaName "Aetherjacket" ;
+    :arenaSetCode "DFT" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:CameraLauncher rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Camera Launcher" ;
+    :manaCost "{3}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ,
+                 :Creature ;
+    :hasSubType :Construct ;
+    :hasRarity :Common ;
+    :isInSet :Aetherdrift ;
+    :cardNumber "232"^^xsd:integer ;
+    :artist "Ben Wootten" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    :hasKeywordAbility :Exhaust ;
+    :printedText """Exhaust — {3}: Put a +1/+1 counter on this creature. Create a 1/1 colorless Thopter artifact creature token with flying. (Activate each exhaust ability only once.)"""@en ;
+    :oracleText """Exhaust — {3}: Put a +1/+1 counter on this creature. Create a 1/1 colorless Thopter artifact creature token with flying. (Activate each exhaust ability only once.)"""@en ;
+    :flavorText """Vnwxt's contract demanded at least one dedicated camera on him at all times."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=690669"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/dft/232/camera-launcher"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "95034"^^xsd:positiveInteger ;
+    :arenaName "Camera Launcher" ;
+    :arenaSetCode "DFT" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-02-07"^^xsd:date ;
+        :rulingText """Exhaust abilities can be activated any time you could normally activate an ability."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-02-07"^^xsd:date ;
+        :rulingText """If an ability triggers whenever you activate an exhaust ability, that ability resolves before the exhaust ability resolves."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-02-07"^^xsd:date ;
+        :rulingText """If an exhaust ability of a permanent is activated, and then that permanent leaves the battlefield and returns to the battlefield, it becomes a new object so its exhaust ability can be activated again."""@en ] .
+
+:LifecraftEngine rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Lifecraft Engine" ;
+    :manaCost "{3}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ;
+    :hasSubType :Vehicle ;
+    :hasRarity :Rare ;
+    :isInSet :Aetherdrift ;
+    :cardNumber "234"^^xsd:integer ;
+    :artist "Mirko Failoni" ;
+    :hasLanguage :English ;
+    :power "4" ;
+    :powerValue "4"^^xsd:integer ;
+    :toughness "4" ;
+    :toughnessValue "4"^^xsd:integer ;
+    :hasKeywordAbility :Crew ;
+    :printedText """As this Vehicle enters, choose a creature type.
+Vehicle creatures you control are the chosen creature type in addition to their other types.
+Each creature you control of the chosen type other than this Vehicle gets +1/+1.
+Crew 3"""@en ;
+    :oracleText """As this Vehicle enters, choose a creature type.
+Vehicle creatures you control are the chosen creature type in addition to their other types.
+Each creature you control of the chosen type other than this Vehicle gets +1/+1.
+Crew 3"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=690671"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/dft/234/lifecraft-engine"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "95036"^^xsd:positiveInteger ;
+    :arenaName "Lifecraft Engine" ;
+    :arenaSetCode "DFT" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:RacersScoreboard rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Racers' Scoreboard" ;
+    :manaCost "{4}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ;
+    :hasRarity :Uncommon ;
+    :isInSet :Aetherdrift ;
+    :cardNumber "239"^^xsd:integer ;
+    :artist "Konstantin Porubov" ;
+    :hasLanguage :English ;
+    :hasKeywordAbility :MaxSpeed ,
+                       :StartYourEngines ;
+    :printedText """Start your engines! (If you have no speed, it starts at 1. It increases once on each of your turns when an opponent loses life. Max speed is 4.)
+When this artifact enters, draw two cards, then discard a card.
+Max speed — Spells you cast cost {1} less to cast."""@en ;
+    :oracleText """Start your engines! (If you have no speed, it starts at 1. It increases once on each of your turns when an opponent loses life. Max speed is 4.)
+When this artifact enters, draw two cards, then discard a card.
+Max speed — Spells you cast cost {1} less to cast."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=690676"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/dft/239/racers-scoreboard"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "95041"^^xsd:positiveInteger ;
+    :arenaName "Racers' Scoreboard" ;
+    :arenaSetCode "DFT" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:SkyboxFerry rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Skybox Ferry" ;
+    :manaCost "{5}" ;
+    :manaValue "5"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ;
+    :hasSubType :Vehicle ;
+    :hasRarity :Common ;
+    :isInSet :Aetherdrift ;
+    :cardNumber "243"^^xsd:integer ;
+    :artist "Borja Pindado" ;
+    :hasLanguage :English ;
+    :power "4" ;
+    :powerValue "4"^^xsd:integer ;
+    :toughness "4" ;
+    :toughnessValue "4"^^xsd:integer ;
+    :hasKeywordAbility :Flying ,
+                       :Crew ,
+                       :Cycling ;
+    :printedText """Flying
+Crew 2 (Tap any number of creatures you control with total power 2 or more: This Vehicle becomes an artifact creature until end of turn.)
+Cycling {2} ({2}, Discard this card: Draw a card.)"""@en ;
+    :oracleText """Flying
+Crew 2 (Tap any number of creatures you control with total power 2 or more: This Vehicle becomes an artifact creature until end of turn.)
+Cycling {2} ({2}, Discard this card: Draw a card.)"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=690680"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/dft/243/skybox-ferry"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "95045"^^xsd:positiveInteger ;
+    :arenaName "Skybox Ferry" ;
+    :arenaSetCode "DFT" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:WalkingSarcophagus rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Walking Sarcophagus" ;
+    :manaCost "{2}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ,
+                 :Creature ;
+    :hasSubType :Zombie ,
+                :Cat ;
+    :hasRarity :Common ;
+    :isInSet :Aetherdrift ;
+    :cardNumber "246"^^xsd:integer ;
+    :artist "Julia Metzger" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "1" ;
+    :toughnessValue "1"^^xsd:integer ;
+    :hasKeywordAbility :MaxSpeed ,
+                       :StartYourEngines ;
+    :printedText """Start your engines! (If you have no speed, it starts at 1. It increases once on each of your turns when an opponent loses life. Max speed is 4.)
+Max speed — This creature gets +1/+2."""@en ;
+    :oracleText """Start your engines! (If you have no speed, it starts at 1. It increases once on each of your turns when an opponent loses life. Max speed is 4.)
+Max speed — This creature gets +1/+2."""@en ;
+    :flavorText """The warrior rose in a very different world from the one he'd left behind."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=690683"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/dft/246/walking-sarcophagus"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "95048"^^xsd:positiveInteger ;
+    :arenaName "Walking Sarcophagus" ;
+    :arenaSetCode "DFT" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-02-07"^^xsd:date ;
+        :rulingText """Start your engines! isn’t a triggered ability. Increasing your speed to 1 is something that happens as a state-based action as soon as you control a permanent with the ability. Notably, this includes gaining control of a permanent with the ability that another player controls."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-02-07"^^xsd:date ;
+        :rulingText """A player “has max speed” if their speed is 4."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-02-07"^^xsd:date ;
+        :rulingText """If an effect needs to know what a player’s speed is and that player doesn’t have a speed, their speed is considered 0."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-02-07"^^xsd:date ;
+        :rulingText """Each player tracks their speed (or lack thereof) separately. Increasing your speed has no effect on whether another player has speed."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-02-07"^^xsd:date ;
+        :rulingText """Your speed doesn’t change until a spell or ability says so, such as the inherent triggered ability that cares about opponents losing life during your turn. Notably, losing control of permanents with start your engines! doesn’t affect your speed."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-02-07"^^xsd:date ;
+        :rulingText """“Max speed — [ability]” means “As long as you have max speed, this object has [ability].” If the granted ability functions in a zone other than the battlefield, the max speed ability does too."""@en ] .
+
+:BloodfellCavesAetherdrift251 rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Bloodfell Caves" ;
+    :manaValue "0"^^xsd:nonNegativeInteger ;
+    :hasCardType :Land ;
+    :hasRarity :Common ;
+    :hasColorIdentity :Black ,
+                      :Red ;
+    :isInSet :Aetherdrift ;
+    :cardNumber "251"^^xsd:integer ;
+    :artist "Ron Spencer" ;
+    :hasLanguage :English ;
+    :producesMana :Black ,
+                  :Red ;
+    :entersTapped "true"^^xsd:boolean ;
+    :printedText """This land enters tapped.
+When this land enters, you gain 1 life.
+{T}: Add {B} or {R}."""@en ;
+    :oracleText """This land enters tapped.
+When this land enters, you gain 1 life.
+{T}: Add {B} or {R}."""@en ;
+    :flavorText """To the Endriders, racing is worship. Their prayers rise on the howls of straining engines. Explosions punctuate their chorus of shouts, forming a hymn of glory to the open road and all roads to come."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=690688"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/dft/251/bloodfell-caves"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "95053"^^xsd:positiveInteger ;
+    :arenaName "Bloodfell Caves" ;
+    :arenaSetCode "DFT" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:BlossomingSandsAetherdrift252 rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Blossoming Sands" ;
+    :manaValue "0"^^xsd:nonNegativeInteger ;
+    :hasCardType :Land ;
+    :hasRarity :Common ;
+    :hasColorIdentity :White ,
+                      :Green ;
+    :isInSet :Aetherdrift ;
+    :cardNumber "252"^^xsd:integer ;
+    :artist "Valera Lutfullina" ;
+    :hasLanguage :English ;
+    :producesMana :White ,
+                  :Green ;
+    :entersTapped "true"^^xsd:boolean ;
+    :printedText """This land enters tapped.
+When this land enters, you gain 1 life.
+{T}: Add {G} or {W}."""@en ;
+    :oracleText """This land enters tapped.
+When this land enters, you gain 1 life.
+{T}: Add {G} or {W}."""@en ;
+    :flavorText """The Alacrian Quickbeasts desire not only to win, but to forge new alliances against the unknown threats of this interconnected Multiverse."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=690689"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/dft/252/blossoming-sands"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "95054"^^xsd:positiveInteger ;
+    :arenaName "Blossoming Sands" ;
+    :arenaSetCode "DFT" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:DismalBackwaterAetherdrift254 rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Dismal Backwater" ;
+    :manaValue "0"^^xsd:nonNegativeInteger ;
+    :hasCardType :Land ;
+    :hasRarity :Common ;
+    :hasColorIdentity :Blue ,
+                      :Black ;
+    :isInSet :Aetherdrift ;
+    :cardNumber "254"^^xsd:integer ;
+    :artist "Wayne Wu" ;
+    :hasLanguage :English ;
+    :producesMana :Blue ,
+                  :Black ;
+    :entersTapped "true"^^xsd:boolean ;
+    :printedText """This land enters tapped.
+When this land enters, you gain 1 life.
+{T}: Add {U} or {B}."""@en ;
+    :oracleText """This land enters tapped.
+When this land enters, you gain 1 life.
+{T}: Add {U} or {B}."""@en ;
+    :flavorText """The doomed souls of the Speed Demons race in uneasy unity, each one hoping to escape their own fate."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=690691"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/dft/254/dismal-backwater"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "95056"^^xsd:positiveInteger ;
+    :arenaName "Dismal Backwater" ;
+    :arenaSetCode "DFT" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
 :ScouredBarrensAetherdrift263 rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Scoured Barrens" ;
@@ -171,6 +2234,94 @@ When this land enters, you gain 1 life.
                    :MagicOnline ;
     :arenaId "95065"^^xsd:positiveInteger ;
     :arenaName "Scoured Barrens" ;
+    :arenaSetCode "DFT" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:ThornwoodFallsAetherdrift266 rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Thornwood Falls" ;
+    :manaValue "0"^^xsd:nonNegativeInteger ;
+    :hasCardType :Land ;
+    :hasRarity :Common ;
+    :hasColorIdentity :Blue ,
+                      :Green ;
+    :isInSet :Aetherdrift ;
+    :cardNumber "266"^^xsd:integer ;
+    :artist "Eddie Mendoza" ;
+    :hasLanguage :English ;
+    :producesMana :Blue ,
+                  :Green ;
+    :entersTapped "true"^^xsd:boolean ;
+    :printedText """This land enters tapped.
+When this land enters, you gain 1 life.
+{T}: Add {G} or {U}."""@en ;
+    :oracleText """This land enters tapped.
+When this land enters, you gain 1 life.
+{T}: Add {G} or {U}."""@en ;
+    :flavorText """The Indigo Revolution ousted the Consulate once and for all. Now the citizens of Avishkar cheer for the Aether Rangers as they try to bring victory and glory to their new nation."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=690703"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/dft/266/thornwood-falls"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "95068"^^xsd:positiveInteger ;
+    :arenaName "Thornwood Falls" ;
+    :arenaSetCode "DFT" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:TranquilCoveAetherdrift267 rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Tranquil Cove" ;
+    :manaValue "0"^^xsd:nonNegativeInteger ;
+    :hasCardType :Land ;
+    :hasRarity :Common ;
+    :hasColorIdentity :White ,
+                      :Blue ;
+    :isInSet :Aetherdrift ;
+    :cardNumber "267"^^xsd:integer ;
+    :artist "Wayne Wu" ;
+    :hasLanguage :English ;
+    :producesMana :White ,
+                  :Blue ;
+    :entersTapped "true"^^xsd:boolean ;
+    :printedText """This land enters tapped.
+When this land enters, you gain 1 life.
+{T}: Add {W} or {U}."""@en ;
+    :oracleText """This land enters tapped.
+When this land enters, you gain 1 life.
+{T}: Add {W} or {U}."""@en ;
+    :flavorText """The Guidelight Voyagers seek only a means to return home, hoping to one day discover a way back among the many worlds they race across."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=690704"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/dft/267/tranquil-cove"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "95069"^^xsd:positiveInteger ;
+    :arenaName "Tranquil Cove" ;
     :arenaSetCode "DFT" ;
     :hasLegality
       [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,

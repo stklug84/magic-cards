@@ -1,0 +1,33 @@
+# Every card name in the collections, with the copies held on each platform:
+# the paper collection (mc:isHeldOn mc:PaperMagic) and the MTG Arena
+# collection (mc:isHeldOn mc:MTGArena). Printings do not matter here - a card
+# held on paper in one printing and on MTG Arena in another counts on both
+# platforms. Shows which cards are owned on one platform only and which on
+# both, e.g. to rebuild a paper deck on MTG Arena.
+#
+# PARAMETERS:
+#   ?onlyOn - restrict to cards held on one platform only: "PaperMagic",
+#             "MTGArena", or "" for every card
+
+PREFIX mc: <urn:stklug84:MagicCardsOntology:2026-02-27#>
+
+SELECT ?cardName ?paperCopies ?arenaCopies WHERE {
+  {
+    SELECT ?cardName
+           (SUM(IF(?platform = mc:PaperMagic, ?q, 0)) AS ?paperCopies)
+           (SUM(IF(?platform = mc:MTGArena, ?q, 0)) AS ?arenaCopies)
+    WHERE {
+      ?collection mc:isHeldOn          ?platform ;
+                  mc:hasCollectionEntry ?e .
+      ?e mc:entryCard ?c ;
+         mc:quantity  ?q .
+      ?c mc:cardName  ?cardName .
+    }
+    GROUP BY ?cardName
+  }
+  VALUES ?onlyOn { "" }
+  FILTER (?onlyOn = ""
+          || (?onlyOn = "PaperMagic" && ?arenaCopies = 0)
+          || (?onlyOn = "MTGArena" && ?paperCopies = 0))
+}
+ORDER BY ?cardName

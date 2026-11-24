@@ -39,8 +39,9 @@
     rdfs:label "Magic Card Collection Individuals – Adventures in the Forgotten Realms"@en ;
     rdfs:comment """An instance graph describing the card individuals of a
 personal Magic: The Gathering card collection that were printed in the set
-Adventures in the Forgotten Realms (AFR). One Card individual is defined per collected
-printing, carrying its characteristics, the platforms it is available on
+Adventures in the Forgotten Realms (AFR). One Card individual is defined per printing
+collected in paper or on MTG Arena, carrying its characteristics, the
+platforms it is available on
 (paper, MTG Arena, Magic Online) with its MTG Arena identity, its legality
 in the paper and MTG Arena formats, and official rulings. Card data was
 sourced from Gatherer and Scryfall. This file imports MagicCardsOntology to
@@ -53,6 +54,60 @@ legality definitions."""@en .
 # Card Individuals
 #
 ################################################################################
+
+:PortableHole rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Portable Hole" ;
+    :manaCost "{W}" ;
+    :manaValue "1"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ;
+    :hasRarity :Uncommon ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :AdventuresInTheForgottenRealms ;
+    :cardNumber "33"^^xsd:integer ;
+    :artist "John Stanko" ;
+    :hasLanguage :English ;
+    :printedText """When this artifact enters, exile target nonland permanent an opponent controls with mana value 2 or less until this artifact leaves the battlefield."""@en ;
+    :oracleText """When this artifact enters, exile target nonland permanent an opponent controls with mana value 2 or less until this artifact leaves the battlefield."""@en ;
+    :flavorText """"They fall for it every time.\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=527320"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/afr/33/portable-hole"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "77138"^^xsd:positiveInteger ;
+    :arenaName "Portable Hole" ;
+    :arenaSetCode "AFR" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2021-07-23"^^xsd:date ;
+        :rulingText """If a token is exiled this way, it will cease to exist and won't return to the battlefield."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2021-07-23"^^xsd:date ;
+        :rulingText """We recommend keeping your Bag of Holding far, far away."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2021-07-23"^^xsd:date ;
+        :rulingText """If Portable Hole leaves the battlefield before its ability resolves, the target permanent won't be exiled."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2021-07-23"^^xsd:date ;
+        :rulingText """If an Aura is exiled this way, its owner chooses what it will enchant as it returns to the battlefield. An Aura put onto the battlefield this way doesn't target anything (so it could be attached to a permanent with shroud, for example), but the Aura's enchant ability restricts what it can be attached to. If the Aura can't legally be attached to anything, it remains in exile for the rest of the game."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2021-07-23"^^xsd:date ;
+        :rulingText """Auras attached to the exiled permanent will be put into their owners' graveyards. Any Equipment will become unattached and remain on the battlefield. Any counters on the exiled permanent will cease to exist. When the card returns to the battlefield, it will be a new object with no connection to the card that was exiled."""@en ] .
 
 :TeleportationCircle rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -99,6 +154,56 @@ legality definitions."""@en .
       [ rdf:type :Ruling ;
         :rulingDate "2026-01-27"^^xsd:date ;
         :rulingText """If a token is exiled this way, it will cease to exist and won't return to the battlefield."""@en ] .
+
+:WhiteDragon rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "White Dragon" ;
+    :manaCost "{4}{W}{W}" ;
+    :manaValue "6"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Dragon ;
+    :hasRarity :Uncommon ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :AdventuresInTheForgottenRealms ;
+    :cardNumber "41"^^xsd:integer ;
+    :artist "Billy Christian" ;
+    :hasLanguage :English ;
+    :power "4" ;
+    :powerValue "4"^^xsd:integer ;
+    :toughness "4" ;
+    :toughnessValue "4"^^xsd:integer ;
+    :hasKeywordAbility :Flying ;
+    :printedText """Flying
+Cold Breath — When this creature enters, tap target creature an opponent controls. That creature doesn't untap during its controller's next untap step."""@en ;
+    :oracleText """Flying
+Cold Breath — When this creature enters, tap target creature an opponent controls. That creature doesn't untap during its controller's next untap step."""@en ;
+    :flavorText """White dragons are unparalleled hunters, keenly focused on slaughtering their enemies."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=527328"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/afr/41/white-dragon"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "77146"^^xsd:positiveInteger ;
+    :arenaName "White Dragon" ;
+    :arenaSetCode "AFR" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2021-07-23"^^xsd:date ;
+        :rulingText """White Dragon's Cold Breath ability can target a tapped creature. That creature won't untap during its controller's next untap step."""@en ] .
 
 :ProsperousInnkeeper rdf:type owl:NamedIndividual ,
                   :Card ;

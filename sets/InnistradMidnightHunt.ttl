@@ -39,8 +39,9 @@
     rdfs:label "Magic Card Collection Individuals – Innistrad: Midnight Hunt"@en ;
     rdfs:comment """An instance graph describing the card individuals of a
 personal Magic: The Gathering card collection that were printed in the set
-Innistrad: Midnight Hunt (MID). One Card individual is defined per collected
-printing, carrying its characteristics, the platforms it is available on
+Innistrad: Midnight Hunt (MID). One Card individual is defined per printing
+collected in paper or on MTG Arena, carrying its characteristics, the
+platforms it is available on
 (paper, MTG Arena, Magic Online) with its MTG Arena identity, its legality
 in the paper and MTG Arena formats, and official rulings. Card data was
 sourced from Gatherer and Scryfall. This file imports MagicCardsOntology to
@@ -53,6 +54,53 @@ legality definitions."""@en .
 # Card Individuals
 #
 ################################################################################
+
+:CatharCommandoInnistradMidnightHunt10 rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Cathar Commando" ;
+    :manaCost "{1}{W}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Human ,
+                :Soldier ;
+    :hasRarity :Common ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :InnistradMidnightHunt ;
+    :cardNumber "10"^^xsd:integer ;
+    :artist "Evyn Fong" ;
+    :hasLanguage :English ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "1" ;
+    :toughnessValue "1"^^xsd:integer ;
+    :hasKeywordAbility :Flash ;
+    :printedText """Flash
+{1}, Sacrifice this creature: Destroy target artifact or enchantment."""@en ;
+    :oracleText """Flash
+{1}, Sacrifice this creature: Destroy target artifact or enchantment."""@en ;
+    :flavorText """"Honorable tactics are for honorable foes. These werewolves are preying on innocent travelers. I'll stab them in the back while they sleep if I have to.\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=534764"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mid/10/cathar-commando"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "78335"^^xsd:positiveInteger ;
+    :arenaName "Cathar Commando" ;
+    :arenaSetCode "MID" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
 
 :LunarchVeteranInnistradMidnightHunt27 rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -133,6 +181,54 @@ If Luminous Phantom would be put into a graveyard from anywhere, exile it instea
       [ rdf:type :Ruling ;
         :rulingDate "2021-09-24"^^xsd:date ;
         :rulingText """The back face of each card with disturb has an ability that instructs its controller to exile if it would be put into a graveyard from anywhere. This includes going to the graveyard from the stack, so if the spell is countered after you cast it using the disturb ability, it will be put into exile."""@en ] .
+
+:NebelgastIntruder rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Nebelgast Intruder" ;
+    :manaCost "{2}{U}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Spirit ;
+    :hasRarity :Uncommon ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :InnistradMidnightHunt ;
+    :cardNumber "64"^^xsd:integer ;
+    :artist "Volkan Baǵa" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "1" ;
+    :toughnessValue "1"^^xsd:integer ;
+    :hasKeywordAbility :Flying ,
+                       :Flash ;
+    :printedText """Flash
+Flying
+When this creature enters, up to one target creature an opponent controls gets -2/-0 until end of turn."""@en ;
+    :oracleText """Flash
+Flying
+When this creature enters, up to one target creature an opponent controls gets -2/-0 until end of turn."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=534828"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mid/64/nebelgast-intruder"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "78399"^^xsd:positiveInteger ;
+    :arenaName "Nebelgast Intruder" ;
+    :arenaSetCode "MID" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] .
 
 :GisaGloriousResurrector rdf:type owl:NamedIndividual ,
                   :Card ;

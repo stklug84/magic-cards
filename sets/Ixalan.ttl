@@ -39,8 +39,9 @@
     rdfs:label "Magic Card Collection Individuals – Ixalan"@en ;
     rdfs:comment """An instance graph describing the card individuals of a
 personal Magic: The Gathering card collection that were printed in the set
-Ixalan (XLN). One Card individual is defined per collected
-printing, carrying its characteristics, the platforms it is available on
+Ixalan (XLN). One Card individual is defined per printing
+collected in paper or on MTG Arena, carrying its characteristics, the
+platforms it is available on
 (paper, MTG Arena, Magic Online) with its MTG Arena identity, its legality
 in the paper and MTG Arena formats, and official rulings. Card data was
 sourced from Gatherer and Scryfall. This file imports MagicCardsOntology to
@@ -99,6 +100,100 @@ Creatures you control are the chosen type in addition to their other types. The 
       [ rdf:type :Ruling ;
         :rulingDate "2018-01-19"^^xsd:date ;
         :rulingText """To choose a creature type, you must choose an existing creature type, such as Vampire or Knight. You can’t choose multiple creature types, such as “Vampire Knight.” Card types such as artifact can’t be chosen, nor can subtypes that aren’t creature types, such as Jace, Vehicle, or Treasure."""@en ] .
+
+:FavorableWinds rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Favorable Winds" ;
+    :manaCost "{1}{U}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Enchantment ;
+    :hasRarity :Uncommon ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :Ixalan ;
+    :cardNumber "56"^^xsd:integer ;
+    :artist "Shreya Shetty" ;
+    :hasLanguage :English ;
+    :printedText """Creatures you control with flying get +1/+1."""@en ;
+    :oracleText """Creatures you control with flying get +1/+1."""@en ;
+    :flavorText """"Like ribbons of wind and wisdom the coatls fly, twisting mystery into truth, shaping the clouds to suit their inscrutable will."
+—Huatli"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=435208"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/xln/56/favorable-winds"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "66073"^^xsd:positiveInteger ;
+    :arenaName "Favorable Winds" ;
+    :arenaSetCode "XLN" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] .
+
+:SirenStormtamer rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Siren Stormtamer" ;
+    :manaCost "{U}" ;
+    :manaValue "1"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Siren ,
+                :Pirate ,
+                :Wizard ;
+    :hasRarity :Uncommon ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :Ixalan ;
+    :cardNumber "79"^^xsd:integer ;
+    :artist "Josu Hernaiz" ;
+    :hasLanguage :English ;
+    :power "1" ;
+    :powerValue "1"^^xsd:integer ;
+    :toughness "1" ;
+    :toughnessValue "1"^^xsd:integer ;
+    :hasKeywordAbility :Flying ;
+    :printedText """Flying
+{U}, Sacrifice this creature: Counter target spell or ability that targets you or a creature you control."""@en ;
+    :oracleText """Flying
+{U}, Sacrifice this creature: Counter target spell or ability that targets you or a creature you control."""@en ;
+    :flavorText """He's the calm that hides the coming storm."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=435232"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/xln/79/siren-stormtamer"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "66121"^^xsd:positiveInteger ;
+    :arenaName "Siren Stormtamer" ;
+    :arenaSetCode "XLN" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2020-11-10"^^xsd:date ;
+        :rulingText """Siren Stormtamer's activated ability can target a spell or ability that has multiple targets, as long as at least one of those targets is you or a creature you control."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2020-11-10"^^xsd:date ;
+        :rulingText """If the creature you control targeted by the target spell or ability leaves the battlefield, that spell or ability is no longer a legal target for Siren Stormtamer's ability. On the other hand, if that targeted creature becomes an illegal target for the target spell but remains on the battlefield under your control, the target spell or ability is still a legal target for Siren Stormtamer's ability."""@en ] .
 
 :VraskaRelicSeeker rdf:type owl:NamedIndividual ,
                   :Card ;

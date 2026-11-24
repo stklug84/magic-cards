@@ -39,8 +39,9 @@
     rdfs:label "Magic Card Collection Individuals – The Brothers' War"@en ;
     rdfs:comment """An instance graph describing the card individuals of a
 personal Magic: The Gathering card collection that were printed in the set
-The Brothers' War (BRO). One Card individual is defined per collected
-printing, carrying its characteristics, the platforms it is available on
+The Brothers' War (BRO). One Card individual is defined per printing
+collected in paper or on MTG Arena, carrying its characteristics, the
+platforms it is available on
 (paper, MTG Arena, Magic Online) with its MTG Arena identity, its legality
 in the paper and MTG Arena formats, and official rulings. Card data was
 sourced from Gatherer and Scryfall. This file imports MagicCardsOntology to
@@ -53,6 +54,98 @@ legality definitions."""@en .
 # Card Individuals
 #
 ################################################################################
+
+:AmbushParatrooper rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Ambush Paratrooper" ;
+    :manaCost "{1}{W}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Human ,
+                :Soldier ;
+    :hasRarity :Common ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :TheBrothersWar ;
+    :cardNumber "3"^^xsd:integer ;
+    :artist "Vladimir Krisetskiy" ;
+    :hasLanguage :English ;
+    :power "1" ;
+    :powerValue "1"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    :hasKeywordAbility :Flying ,
+                       :Flash ;
+    :printedText """Flash
+Flying
+{5}: Creatures you control get +1/+1 until end of turn."""@en ;
+    :oracleText """Flash
+Flying
+{5}: Creatures you control get +1/+1 until end of turn."""@en ;
+    :flavorText """"It would be folly to fight a dragon engine head-on. Let's hit it from above.\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=583588"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/bro/3/ambush-paratrooper"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "82487"^^xsd:positiveInteger ;
+    :arenaName "Ambush Paratrooper" ;
+    :arenaSetCode "BRO" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] .
+
+:DisenchantTheBrothersWar6 rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Disenchant" ;
+    :manaCost "{1}{W}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Instant ;
+    :hasRarity :Common ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :TheBrothersWar ;
+    :cardNumber "6"^^xsd:integer ;
+    :artist "Richard Kane Ferguson" ;
+    :hasLanguage :English ;
+    :printedText """Destroy target artifact or enchantment."""@en ;
+    :oracleText """Destroy target artifact or enchantment."""@en ;
+    :flavorText """"One down, several thousand more to go.\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=583591"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/bro/6/disenchant"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "82490"^^xsd:positiveInteger ;
+    :arenaName "Disenchant" ;
+    :arenaSetCode "BRO" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2004-10-04"^^xsd:date ;
+        :rulingText """This is not modal. If the target changes from an artifact to an enchantment or vice versa, this still destroys it."""@en ] .
 
 :InTheTrenches rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -210,6 +303,415 @@ Whenever another nontoken Soldier you control dies, create a 1/1 colorless Soldi
         :rulingDate "2022-10-14"^^xsd:date ;
         :rulingText """If Siege Veteran dies at the same time as one or more other nontoken Soldier creatures, its second ability will trigger for each of them."""@en ] .
 
+:RetrievalAgent rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Retrieval Agent" ;
+    :manaCost "{3}{U}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Human ,
+                :Soldier ;
+    :hasRarity :Common ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :TheBrothersWar ;
+    :cardNumber "60"^^xsd:integer ;
+    :artist "Vladimir Krisetskiy" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "5" ;
+    :toughnessValue "5"^^xsd:integer ;
+    :printedText """{2}: This creature gets +1/-1 until end of turn."""@en ;
+    :oracleText """{2}: This creature gets +1/-1 until end of turn."""@en ;
+    :flavorText """The humming tome burned his leather glove, nearly taking his hand along with it. Then a strange power coursed through him."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=583645"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/bro/60/retrieval-agent"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "82544"^^xsd:positiveInteger ;
+    :arenaName "Retrieval Agent" ;
+    :arenaSetCode "BRO" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] .
+
+:ScatterRay rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Scatter Ray" ;
+    :manaCost "{1}{U}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Instant ;
+    :hasRarity :Common ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :TheBrothersWar ;
+    :cardNumber "61"^^xsd:integer ;
+    :artist "Awanqi (Angela Wang)" ;
+    :hasLanguage :English ;
+    :printedText """Counter target artifact or creature spell unless its controller pays {4}."""@en ;
+    :oracleText """Counter target artifact or creature spell unless its controller pays {4}."""@en ;
+    :flavorText """Mishra's army demanded the secrets of the Third Path. Hurkyl's followers graciously showed them."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=583646"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/bro/61/scatter-ray"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "82545"^^xsd:positiveInteger ;
+    :arenaName "Scatter Ray" ;
+    :arenaSetCode "BRO" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] .
+
+:SternLesson rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Stern Lesson" ;
+    :manaCost "{2}{U}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Instant ;
+    :hasRarity :Common ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :TheBrothersWar ;
+    :cardNumber "64"^^xsd:integer ;
+    :artist "Lie Setiawan" ;
+    :hasLanguage :English ;
+    :producesMana :Colorless ;
+    :printedText """Draw two cards, then discard a card. Create a tapped Powerstone token. (It's an artifact with "{T}: Add {C}. This mana can't be spent to cast a nonartifact spell.")"""@en ;
+    :oracleText """Draw two cards, then discard a card. Create a tapped Powerstone token. (It's an artifact with "{T}: Add {C}. This mana can't be spent to cast a nonartifact spell.")"""@en ;
+    :flavorText """"The brothers are brilliant, but their quarreling will be the death of me."
+—Tocasia, journal entry"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=583649"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/bro/64/stern-lesson"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "82548"^^xsd:positiveInteger ;
+    :arenaName "Stern Lesson" ;
+    :arenaSetCode "BRO" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2022-10-14"^^xsd:date ;
+        :rulingText """You can use the {C} added by a Powerstone token on anything that isn't a nonartifact spell. This includes paying costs to activate abilities of both artifact and nonartifact permanents, paying ward costs, and so on."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2022-10-14"^^xsd:date ;
+        :rulingText """Powerstone tokens are a kind of predefined token. Each one has the artifact subtype "Powerstone" and the ability "{T}: Add {C}. This mana can't be spent to cast a nonartifact spell.\""""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2022-10-14"^^xsd:date ;
+        :rulingText """Although all the cards in The Brothers' War that create Powerstone tokens create a tapped Powerstone token, entering the battlefield tapped isn't part of the token's definition. Notably, if you create a token that is a copy of a Powerstone token, the token copy won't enter the battlefield tapped."""@en ] .
+
+:Disfigure rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Disfigure" ;
+    :manaCost "{B}" ;
+    :manaValue "1"^^xsd:nonNegativeInteger ;
+    :hasCardType :Instant ;
+    :hasRarity :Common ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :TheBrothersWar ;
+    :cardNumber "91"^^xsd:integer ;
+    :artist "Svetlin Velinov" ;
+    :hasLanguage :English ;
+    :printedText """Target creature gets -2/-2 until end of turn."""@en ;
+    :oracleText """Target creature gets -2/-2 until end of turn."""@en ;
+    :flavorText """With a snap of metal like a strike of lightning, the tide of war shifted in Mishra's favor."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=583676"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/bro/91/disfigure"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "82575"^^xsd:positiveInteger ;
+    :arenaName "Disfigure" ;
+    :arenaSetCode "BRO" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] .
+
+:GixsCaress rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Gix's Caress" ;
+    :manaCost "{2}{B}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Sorcery ;
+    :hasRarity :Common ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :TheBrothersWar ;
+    :cardNumber "96"^^xsd:integer ;
+    :artist "Ignatius Budi" ;
+    :hasLanguage :English ;
+    :producesMana :Colorless ;
+    :printedText """Target opponent reveals their hand. You choose a nonland card from it. That player discards that card.
+Create a tapped Powerstone token. (It's an artifact with "{T}: Add {C}. This mana can't be spent to cast a nonartifact spell.")"""@en ;
+    :oracleText """Target opponent reveals their hand. You choose a nonland card from it. That player discards that card.
+Create a tapped Powerstone token. (It's an artifact with "{T}: Add {C}. This mana can't be spent to cast a nonartifact spell.")"""@en ;
+    :flavorText """"Show me all the delicious misery you've sown.\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=583681"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/bro/96/gixs-caress"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "82580"^^xsd:positiveInteger ;
+    :arenaName "Gix's Caress" ;
+    :arenaSetCode "BRO" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2022-10-14"^^xsd:date ;
+        :rulingText """Powerstone tokens are a kind of predefined token. Each one has the artifact subtype "Powerstone" and the ability "{T}: Add {C}. This mana can't be spent to cast a nonartifact spell.\""""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2022-10-14"^^xsd:date ;
+        :rulingText """You can use the {C} added by a Powerstone token on anything that isn't a nonartifact spell. This includes paying costs to activate abilities of both artifact and nonartifact permanents, paying ward costs, and so on."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2022-10-14"^^xsd:date ;
+        :rulingText """Although all the cards in The Brothers' War that create Powerstone tokens create a tapped Powerstone token, entering the battlefield tapped isn't part of the token's definition. Notably, if you create a token that is a copy of a Powerstone token, the token copy won't enter the battlefield tapped."""@en ] .
+
+:PowerstoneFracture rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Powerstone Fracture" ;
+    :manaCost "{1}{B}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Sorcery ;
+    :hasRarity :Common ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :TheBrothersWar ;
+    :cardNumber "112"^^xsd:integer ;
+    :artist "Campbell White" ;
+    :hasLanguage :English ;
+    :printedText """As an additional cost to cast this spell, sacrifice an artifact or creature.
+Destroy target creature or planeswalker."""@en ;
+    :oracleText """As an additional cost to cast this spell, sacrifice an artifact or creature.
+Destroy target creature or planeswalker."""@en ;
+    :flavorText """"Move! When the powerstone blows, that behemoth will be nothing but a hole in the ground."
+—Ashnod, to Hajar"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=583697"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/bro/112/powerstone-fracture"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "82596"^^xsd:positiveInteger ;
+    :arenaName "Powerstone Fracture" ;
+    :arenaSetCode "BRO" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] .
+
+:DredgingClaw rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Dredging Claw" ;
+    :manaCost "{2}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ;
+    :hasSubType :Equipment ;
+    :hasRarity :Common ;
+    :hasColorIdentity :Black ;
+    :isInSet :TheBrothersWar ;
+    :cardNumber "119"^^xsd:integer ;
+    :artist "Artur Nakhodkin" ;
+    :hasLanguage :English ;
+    :hasKeywordAbility :Equip ;
+    :printedText """Equipped creature gets +1/+0 and has menace. (It can't be blocked except by two or more creatures.)
+Whenever a creature enters from your graveyard, you may attach this Equipment to it.
+Equip {1}{B} ({1}{B}: Attach to target creature you control. Equip only as a sorcery.)"""@en ;
+    :oracleText """Equipped creature gets +1/+0 and has menace. (It can't be blocked except by two or more creatures.)
+Whenever a creature enters from your graveyard, you may attach this Equipment to it.
+Equip {1}{B} ({1}{B}: Attach to target creature you control. Equip only as a sorcery.)"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=583704"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/bro/119/dredging-claw"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "82603"^^xsd:positiveInteger ;
+    :arenaName "Dredging Claw" ;
+    :arenaSetCode "BRO" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] .
+
+:ScrapworkRager rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Scrapwork Rager" ;
+    :manaCost "{4}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ,
+                 :Creature ;
+    :hasSubType :Phyrexian ,
+                :Horror ;
+    :hasRarity :Common ;
+    :hasColorIdentity :Black ;
+    :isInSet :TheBrothersWar ;
+    :cardNumber "123"^^xsd:integer ;
+    :artist "Michal Ivan" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    :hasKeywordAbility :Unearth ;
+    :printedText """When this creature enters, you draw a card and you lose 1 life.
+Unearth {3}{B} ({3}{B}: Return this card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)"""@en ;
+    :oracleText """When this creature enters, you draw a card and you lose 1 life.
+Unearth {3}{B} ({3}{B}: Return this card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=583708"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/bro/123/scrapwork-rager"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "82607"^^xsd:positiveInteger ;
+    :arenaName "Scrapwork Rager" ;
+    :arenaSetCode "BRO" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2022-10-14"^^xsd:date ;
+        :rulingText """Activating a card's unearth ability isn't the same as casting that card. The unearth ability is put on the stack, but the card is not. Spells and abilities that interact with activated abilities (such as Defabricate's second mode) will interact with unearth, but spells and abilities that interact with spells (such as Scatter Ray) will not."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2022-10-14"^^xsd:date ;
+        :rulingText """Unearth grants haste to the permanent that's returned to the battlefield (even if it's not a creature card). However, neither of the "exile" abilities is granted to that permanent. If that permanent loses all its abilities, it will still be exiled at the beginning of the next end step, and if it would leave the battlefield, it is still exiled instead."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2022-10-14"^^xsd:date ;
+        :rulingText """At the beginning of the next end step, a permanent returned to the battlefield with unearth is exiled. This is a delayed triggered ability, and it can be countered by effects such as Defabricate that counter triggered abilities. If the ability is countered, the permanent will stay on the battlefield and the delayed triggered ability won't trigger again. However, the replacement effect will still exile the permanent if it eventually leaves the battlefield."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2022-10-14"^^xsd:date ;
+        :rulingText """If a permanent returned to the battlefield with unearth would leave the battlefield for any reason, it's exiled instead—unless the spell or ability that's causing the permanent to leave the battlefield is actually trying to exile it! In that case, it succeeds at exiling it. If that spell or ability later returns the card to the battlefield (as Static Net might, for example), the permanent card will return to the battlefield as a new object with no relation to its previous existence. The unearth effects will no longer apply to it."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2022-10-14"^^xsd:date ;
+        :rulingText """If you activate a card's unearth ability but that card is removed from your graveyard before the ability resolves, that unearth ability will do nothing as it resolves."""@en ] .
+
+:PenregonStrongbull rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Penregon Strongbull" ;
+    :manaCost "{2}{R}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Minotaur ;
+    :hasRarity :Common ;
+    :hasColor :Red ;
+    :hasColorIdentity :Red ;
+    :isInSet :TheBrothersWar ;
+    :cardNumber "147"^^xsd:integer ;
+    :artist "Michael Phillippi" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "3" ;
+    :toughnessValue "3"^^xsd:integer ;
+    :printedText """{1}, Sacrifice an artifact: This creature gets +1/+1 until end of turn and deals 1 damage to each opponent."""@en ;
+    :oracleText """{1}, Sacrifice an artifact: This creature gets +1/+1 until end of turn and deals 1 damage to each opponent."""@en ;
+    :flavorText """His child-lifting act was second only to his cauldron-punting routine."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=583732"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/bro/147/penregon-strongbull"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "82631"^^xsd:positiveInteger ;
+    :arenaName "Penregon Strongbull" ;
+    :arenaSetCode "BRO" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] .
+
 :RocHunter rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Roc Hunter" ;
@@ -254,6 +756,57 @@ Whenever another nontoken Soldier you control dies, create a 1/1 colorless Soldi
       [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] .
+
+:TomakulScrapsmith rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Tomakul Scrapsmith" ;
+    :manaCost "{2}{R}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Human ,
+                :Artificer ;
+    :hasRarity :Common ;
+    :hasColor :Red ;
+    :hasColorIdentity :Red ;
+    :isInSet :TheBrothersWar ;
+    :cardNumber "153"^^xsd:integer ;
+    :artist "Caio Monteiro" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "1" ;
+    :toughnessValue "1"^^xsd:integer ;
+    :hasKeywordAction :Mill ;
+    :printedText """When this creature enters, mill three cards. You may put an artifact card from among the cards milled this way into your hand. If you don't, put a +1/+1 counter on this creature. (To mill a card, put the top card of your library into your graveyard.)"""@en ;
+    :oracleText """When this creature enters, mill three cards. You may put an artifact card from among the cards milled this way into your hand. If you don't, put a +1/+1 counter on this creature. (To mill a card, put the top card of your library into your graveyard.)"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=583738"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/bro/153/tomakul-scrapsmith"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "82637"^^xsd:positiveInteger ;
+    :arenaName "Tomakul Scrapsmith" ;
+    :arenaSetCode "BRO" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2022-10-14"^^xsd:date ;
+        :rulingText """If a replacement effect causes the milled cards to be exiled instead of going to the graveyard, this effect can still apply to the cards "milled this way" in exile."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2022-10-14"^^xsd:date ;
+        :rulingText """You put a +1/+1 counter on Tomakul Scrapsmith if you don't put an artifact card into your hand with its ability, even if there wasn't an artifact card among the milled cards."""@en ] .
 
 :TyrantOfKherRidges rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -303,6 +856,129 @@ When this creature enters, it deals 4 damage to any target.
       [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] .
 
+:BlitzAutomaton rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Blitz Automaton" ;
+    :manaCost "{7}" ;
+    :manaValue "7"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ,
+                 :Creature ;
+    :hasSubType :Construct ;
+    :hasRarity :Common ;
+    :hasColorIdentity :Red ;
+    :isInSet :TheBrothersWar ;
+    :cardNumber "158"^^xsd:integer ;
+    :artist "Simon Dominic" ;
+    :hasLanguage :English ;
+    :power "6" ;
+    :powerValue "6"^^xsd:integer ;
+    :toughness "4" ;
+    :toughnessValue "4"^^xsd:integer ;
+    :hasKeywordAbility :Haste ,
+                       :Prototype ;
+    :printedText """Prototype {2}{R} — 3/2 (You may cast this spell with different mana cost, color, and size. It keeps its abilities and types.)
+Haste"""@en ;
+    :oracleText """Prototype {2}{R} — 3/2 (You may cast this spell with different mana cost, color, and size. It keeps its abilities and types.)
+Haste"""@en ;
+    :flavorText """While Urza's machines favored defense, Mishra built his to end the war quickly."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=583743"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/bro/158/blitz-automaton"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "82642"^^xsd:positiveInteger ;
+    :arenaName "Blitz Automaton" ;
+    :arenaSetCode "BRO" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2022-10-14"^^xsd:date ;
+        :rulingText """When cast as a prototyped spell, that spell has the mana cost, power, and toughness characteristics shown in its colored, secondary text box rather than the normal values of those characteristics. Its color and mana value are determined by that mana cost. The permanent that spell becomes as it resolves has the same characteristics. If the spell leaves the stack in any other way, or the permanent it becomes leaves the battlefield, it immediately resumes using its normal characteristics."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2022-10-14"^^xsd:date ;
+        :rulingText """Regardless of how it was cast, a prototype card always has the same name, abilities, types, and so on. Only the mana cost, mana value, color, power, and toughness change depending on whether the card was cast as a prototyped spell."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2022-10-14"^^xsd:date ;
+        :rulingText """A prototype card is a colorless card in every zone except the stack or the battlefield, as well as while on the stack or the battlefield if not cast as a prototyped spell. Ignore its alternative characteristics in those cases. For example, while it's in your graveyard, Blitz Automaton is a colorless creature card with mana value 7. It can't be the target of Recommission, a spell that targets an artifact or creature card with mana value 3 or less in your graveyard."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2022-10-14"^^xsd:date ;
+        :rulingText """Casting a prototyped spell isn't the same as casting it for an alternative cost, and an alternative cost may be applied to a spell cast this way. For example, if an effect allows you to cast an artifact card without paying its mana cost, you could either cast Blitz Automaton normally, or as a prototyped spell."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2022-10-14"^^xsd:date ;
+        :rulingText """The prototype ability functions in any zone that the spell could be cast from. For example, if an effect allows you to cast artifact spells from your graveyard, you could cast a prototyped Blitz Automaton from your graveyard."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2022-10-14"^^xsd:date ;
+        :rulingText """If an effect copies a prototyped spell, that copy (as well as the token it becomes on the battlefield) will have the same characteristics as the prototyped spell. Similarly, if an effect creates a token that's a copy of a prototyped permanent or causes another permanent to become a copy of it, the copy would have the same characteristics as the prototyped permanent."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2022-10-14"^^xsd:date ;
+        :rulingText """When casting a prototyped spell, use only its prototype characteristics to determine whether it's legal to cast it. For example, if Blitz Automaton is exiled with the last ability of Chandra, Dressed to Kill, you would be able to cast it for {2}{R} (because it's a red spell), even though you wouldn't be able to cast it as a colorless spell for its normal cost."""@en ] .
+
+:CitanulStalwart rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Citanul Stalwart" ;
+    :manaCost "{G}" ;
+    :manaValue "1"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Elf ,
+                :Druid ,
+                :Soldier ;
+    :hasRarity :Common ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :TheBrothersWar ;
+    :cardNumber "175"^^xsd:integer ;
+    :artist "Alexandr Leskinen" ;
+    :hasLanguage :English ;
+    :producesMana :White ,
+                  :Blue ,
+                  :Black ,
+                  :Red ,
+                  :Green ;
+    :power "1" ;
+    :powerValue "1"^^xsd:integer ;
+    :toughness "1" ;
+    :toughnessValue "1"^^xsd:integer ;
+    :printedText """{T}, Tap an untapped artifact or creature you control: Add one mana of any color."""@en ;
+    :oracleText """{T}, Tap an untapped artifact or creature you control: Add one mana of any color."""@en ;
+    :flavorText """The endless grind of the Brothers' War had fouled Terisiare's land and blackened its skies. Argoth's defenders were determined to protect their isle from the same fate."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=583759"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/bro/175/citanul-stalwart"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "82660"^^xsd:positiveInteger ;
+    :arenaName "Citanul Stalwart" ;
+    :arenaSetCode "BRO" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2022-10-14"^^xsd:date ;
+        :rulingText """You can tap any untapped artifact or creature you control, including a creature you haven't controlled continuously since the beginning of your most recent turn, to pay the cost of Citanul Stalwart's activated ability. However, you must have controlled Citanul Stalwart continuously since the beginning of your most recent turn."""@en ] .
+
 :GiantGrowthTheBrothersWar183 rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Giant Growth" ;
@@ -341,6 +1017,53 @@ When this creature enters, it deals 4 damage to any target.
       [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:HoardingRecluse rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Hoarding Recluse" ;
+    :manaCost "{3}{G}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Spider ;
+    :hasRarity :Common ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :TheBrothersWar ;
+    :cardNumber "186"^^xsd:integer ;
+    :artist "Jorge Jacinto" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "3" ;
+    :toughnessValue "3"^^xsd:integer ;
+    :hasKeywordAbility :Reach ,
+                       :Deathtouch ;
+    :printedText """Reach, deathtouch
+When this creature dies, put up to one other target card from a graveyard on the bottom of its owner's library."""@en ;
+    :oracleText """Reach, deathtouch
+When this creature dies, put up to one other target card from a graveyard on the bottom of its owner's library."""@en ;
+    :flavorText """To the spiders of Argoth, thopters were just bigger, crunchier flies."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=583770"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/bro/186/hoarding-recluse"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "82671"^^xsd:positiveInteger ;
+    :arenaName "Hoarding Recluse" ;
+    :arenaSetCode "BRO" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] .
 
 :SimianSimulacrum rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -459,3 +1182,258 @@ Unearth {2}{G}{G} ({2}{G}{G}: Return this card from your graveyard to the battle
       [ rdf:type :Ruling ;
         :rulingDate "2022-10-14"^^xsd:date ;
         :rulingText """The cost reduction provided by Saheeli's emblem can never reduce the colored mana costs of an artifact spell."""@en ] .
+
+:EnergyRefractor rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Energy Refractor" ;
+    :manaCost "{2}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ;
+    :hasRarity :Common ;
+    :isInSet :TheBrothersWar ;
+    :cardNumber "234"^^xsd:integer ;
+    :artist "Maria Poliakova" ;
+    :hasLanguage :English ;
+    :producesMana :White ,
+                  :Blue ,
+                  :Black ,
+                  :Red ,
+                  :Green ;
+    :printedText """When this artifact enters, draw a card.
+{2}: Add one mana of any color."""@en ;
+    :oracleText """When this artifact enters, draw a card.
+{2}: Add one mana of any color."""@en ;
+    :flavorText """"Raw energy contains infinite possibility."
+—Urza"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=583815"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/bro/234/energy-refractor"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "82719"^^xsd:positiveInteger ;
+    :arenaName "Energy Refractor" ;
+    :arenaSetCode "BRO" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] .
+
+:GoblinFirebomb rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Goblin Firebomb" ;
+    :manaCost "{1}" ;
+    :manaValue "1"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ;
+    :hasRarity :Common ;
+    :isInSet :TheBrothersWar ;
+    :cardNumber "235"^^xsd:integer ;
+    :artist "Noah Thatcher" ;
+    :hasLanguage :English ;
+    :hasKeywordAbility :Flash ;
+    :printedText """Flash
+{7}, {T}, Sacrifice this artifact: Destroy target permanent."""@en ;
+    :oracleText """Flash
+{7}, {T}, Sacrifice this artifact: Destroy target permanent."""@en ;
+    :flavorText """"And if this works, Tawnos is gonna let us build the full-sized version!"
+—Tergel, goblin explosioneer"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=583816"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/bro/235/goblin-firebomb"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "82720"^^xsd:positiveInteger ;
+    :arenaName "Goblin Firebomb" ;
+    :arenaSetCode "BRO" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:MineWorker rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Mine Worker" ;
+    :manaCost "{2}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ,
+                 :Creature ;
+    :hasSubType :AssemblyWorker ;
+    :hasRarity :Common ;
+    :isInSet :TheBrothersWar ;
+    :cardNumber "239"^^xsd:integer ;
+    :artist "Raoul Vitale" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "1" ;
+    :toughnessValue "1"^^xsd:integer ;
+    :printedText """{T}: You gain 1 life. If you control creatures named Power Plant Worker and Tower Worker, you gain 3 life instead."""@en ;
+    :oracleText """{T}: You gain 1 life. If you control creatures named Power Plant Worker and Tower Worker, you gain 3 life instead."""@en ;
+    :flavorText """Following his hunger for knowledge and power from the past, Urza starved Dominaria's future."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=583819"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/bro/239/mine-worker"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "82725"^^xsd:positiveInteger ;
+    :arenaName "Mine Worker" ;
+    :arenaSetCode "BRO" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2022-10-14"^^xsd:date ;
+        :rulingText """You will gain 3 life instead of 1 if, at the time the ability resolves, you control at least one creature named Power Plant Worker and at least one creature named Tower Worker."""@en ] .
+
+:PortalToPhyrexia rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Portal to Phyrexia" ;
+    :manaCost "{9}" ;
+    :manaValue "9"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ;
+    :hasRarity :MythicRare ;
+    :isInSet :TheBrothersWar ;
+    :cardNumber "240"^^xsd:integer ;
+    :artist "Svetlin Velinov" ;
+    :hasLanguage :English ;
+    :printedText """When this artifact enters, each opponent sacrifices three creatures of their choice.
+At the beginning of your upkeep, put target creature card from a graveyard onto the battlefield under your control. It's a Phyrexian in addition to its other types."""@en ;
+    :oracleText """When this artifact enters, each opponent sacrifices three creatures of their choice.
+At the beginning of your upkeep, put target creature card from a graveyard onto the battlefield under your control. It's a Phyrexian in addition to its other types."""@en ;
+    :flavorText """After five thousand years, the nightmare returned."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=583820"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/bro/240/portal-to-phyrexia"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "82726"^^xsd:positiveInteger ;
+    :arenaName "Portal to Phyrexia" ;
+    :arenaSetCode "BRO" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] .
+
+:TowerWorker rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Tower Worker" ;
+    :manaCost "{3}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ,
+                 :Creature ;
+    :hasSubType :AssemblyWorker ;
+    :hasRarity :Common ;
+    :isInSet :TheBrothersWar ;
+    :cardNumber "255"^^xsd:integer ;
+    :artist "Gaboleps" ;
+    :hasLanguage :English ;
+    :producesMana :Colorless ;
+    :power "1" ;
+    :powerValue "1"^^xsd:integer ;
+    :toughness "3" ;
+    :toughnessValue "3"^^xsd:integer ;
+    :hasKeywordAbility :Reach ;
+    :printedText """Reach
+{T}: Add {C}. If you control creatures named Mine Worker and Power Plant Worker, add {C}{C}{C} instead."""@en ;
+    :oracleText """Reach
+{T}: Add {C}. If you control creatures named Mine Worker and Power Plant Worker, add {C}{C}{C} instead."""@en ;
+    :flavorText """Even Urza's most mundane creations shared his obsession with perfection."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=583835"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/bro/255/tower-worker"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "82741"^^xsd:positiveInteger ;
+    :arenaName "Tower Worker" ;
+    :arenaSetCode "BRO" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2022-10-14"^^xsd:date ;
+        :rulingText """You will add {C}{C}{C} instead of {C} if you control at least one creature named Mine Worker and at least one creature named Power Plant Worker."""@en ] .
+
+:EvolvingWildsTheBrothersWar261 rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Evolving Wilds" ;
+    :manaValue "0"^^xsd:nonNegativeInteger ;
+    :hasCardType :Land ;
+    :hasRarity :Common ;
+    :isInSet :TheBrothersWar ;
+    :cardNumber "261"^^xsd:integer ;
+    :artist "Sam Burley" ;
+    :hasLanguage :English ;
+    :isFetchLand "true"^^xsd:boolean ;
+    :printedText """{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."""@en ;
+    :oracleText """{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."""@en ;
+    :flavorText """"There's a certain beauty in destruction. Some will consider this war a masterpiece."
+—Ashnod"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=583840"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/bro/261/evolving-wilds"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "82748"^^xsd:positiveInteger ;
+    :arenaName "Evolving Wilds" ;
+    :arenaSetCode "BRO" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .

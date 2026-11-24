@@ -11,8 +11,15 @@ card, and uses the set's own code where Scryfall has no arena_code.
 The keyword tests pin how Scryfall's keyword list becomes keyword and
 ability-word triples, including the Comprehensive Rules keyword variants
 (typecycling, "[type]walk", multikicker), the subtype-supplement tests
-pin when sets/SubTypeSupplement.ttl exists, and the naming tests pin that a
-card individual never takes the IRI of an ontology term.
+pin when sets/SubTypeSupplement.ttl exists and which subtype class a
+supplemented subtype joins, and the naming tests pin that a card individual
+never takes the IRI of an ontology term.
+
+The MTG Arena collection tests pin how the snapshot pulled from Untapped.gg
+becomes printings (basic lands and unmatched printings left out), joins the
+paper printings, overrides Scryfall's Arena identity of the printings it
+holds, and renders as a collection held on MTG Arena with one entry per
+printing.
 
 The generator is a script next to the packages in scripts/, so this module
 only runs from a checkout (``python3 -m unittest discover -s
@@ -377,6 +384,241 @@ class TestIndividualName(_GeneratorTestCase):
     def test_other_cards_keep_the_plain_name(self) -> None:
         """A name no term has stays plain."""
         self.assertEqual(self.name("Aether Spike", ("mh3", "50")), "AetherSpike")
+
+
+class TestSupplementClass(_GeneratorTestCase):
+    """The subtype class a subtype the ontology lacks joins."""
+
+    def test_artifact_creature_subtype_is_a_creature_type(self) -> None:
+        """Rule 205.3g closes the artifact types: "Artifact Creature - Android"."""
+        self.assertEqual(
+            self.gen.supplement_class(["Artifact", "Creature"]), "CreatureTypes"
+        )
+
+    def test_kindred_subtype_is_a_creature_type(self) -> None:
+        """Kindred cards share the creature types (rule 205.3m)."""
+        self.assertEqual(
+            self.gen.supplement_class(["Kindred", "Instant"]), "CreatureTypes"
+        )
+
+    def test_other_cards_take_their_first_type(self) -> None:
+        """A noncreature artifact's new subtype is an artifact type."""
+        self.assertEqual(self.gen.supplement_class(["Artifact"]), "ArtifactTypes")
+        self.assertEqual(self.gen.supplement_class(["Land"]), "LandTypes")
+        self.assertEqual(self.gen.supplement_class([]), "CreatureTypes")
+
+
+def _owned(**fields: Any) -> dict[str, Any]:  # noqa: ANN401 - snapshot JSON values are heterogeneous
+    """Return an entry of arena/collection.json for an owned Scryfall printing."""
+    entry: dict[str, Any] = {
+        "arena_id": 96652,
+        "quantity": 2,
+        "name": "Starfield Vocalist",
+        "set": "eoe",
+        "collector_number": "81",
+        "scryfall_id": "0b2b5e1b",
+        "arena_name": "Starfield Vocalist",
+        "arena_set": "EOE",
+        "arena_collector_number": "81",
+        "basic": False,
+        "digital": False,
+        "rebalanced": False,
+        "source": "scryfall",
+    }
+    entry.update(fields)
+    return entry
+
+
+class TestArenaPrintings(_GeneratorTestCase):
+    """The MTG Arena snapshot as printings with Arena's identity."""
+
+    def test_owned_printing_keeps_arenas_identity(self) -> None:
+        """Keyed by Scryfall's set and number; Arena's ID, name, code, number."""
+        owned = _owned(
+            arena_id=91234,
+            name="Dragon Typhoon",
+            arena_name="Dragon Typhoon",
+            set="ytdm",
+            collector_number="12",
+            arena_set="Y25",
+            arena_collector_number="10",
+        )
+        printings = self.gen.arena_printings({"cards": [owned]})
+        self.assertEqual(
+            printings,
+            {
+                ("ytdm", "12"): self.gen.ArenaPrinting(
+                    name="Dragon Typhoon",
+                    arena_id=91234,
+                    arena_name="Dragon Typhoon",
+                    set_code="Y25",
+                    collector_number="10",
+                    quantity=2,
+                ),
+            },
+        )
+
+    def test_basic_lands_and_unmatched_printings_are_left_out(self) -> None:
+        """MTG Arena grants basics in any number; unmatched ones have no card."""
+        snapshot = {
+            "cards": [
+                _owned(name="Forest", basic=True),
+                _owned(arena_id=1, name="A-Galvanic Discharge", scryfall_id=None),
+            ],
+        }
+        self.assertEqual(self.gen.arena_printings(snapshot), {})
+
+    def test_two_arena_ids_of_one_printing_add_up(self) -> None:
+        """The copies add up and the lower Arena ID names the printing."""
+        snapshot = {"cards": [_owned(arena_id=9, quantity=1), _owned(arena_id=3)]}
+        printing = self.gen.arena_printings(snapshot)[("eoe", "81")]
+        self.assertEqual((printing.arena_id, printing.quantity), (3, 3))
+
+
+class TestMergePrintings(_GeneratorTestCase):
+    """Both collections' printings, each generated once."""
+
+    def test_paper_row_wins_and_arena_only_printing_joins(self) -> None:
+        """A printing both hold keeps its paper row; Arena-only ones are English."""
+        paper = {
+            ("eoe", "81"): {
+                "name": "Starfield Vocalist",
+                "set": "eoe",
+                "num": "81",
+                "language": "German",
+                "count": 1,
+            },
+        }
+        arena = self.gen.arena_printings(
+            {
+                "cards": [
+                    _owned(),
+                    _owned(
+                        arena_id=5,
+                        name="Debris Beetle",
+                        set="dft",
+                        collector_number="199",
+                    ),
+                ]
+            },
+        )
+        merged = self.gen.merge_printings(paper, arena)
+        self.assertEqual(merged[("eoe", "81")], paper[("eoe", "81")])
+        self.assertEqual(
+            merged[("dft", "199")],
+            {
+                "name": "Debris Beetle",
+                "set": "dft",
+                "num": "199",
+                "language": "English",
+                "count": 0,
+            },
+        )
+
+    def test_missing_snapshot_stops_the_run(self) -> None:
+        """No snapshot, no run: generate would drop the Arena-only individuals."""
+        with (
+            tempfile.TemporaryDirectory() as tmp,
+            mock.patch.object(self.gen, "ROOT", Path(tmp)),
+            self.assertRaises(SystemExit),
+        ):
+            self.gen.arena_collection_path()
+
+
+class TestArenaPlatformLines(_GeneratorTestCase):
+    """A printing the MTG Arena collection holds takes Arena's own identity."""
+
+    def held(self, **fields: Any) -> list[str]:  # noqa: ANN401 - the dataclass fields vary in type
+        """Render the platform lines of a printing the collection holds."""
+        values: dict[str, Any] = {
+            "name": "Starfield Vocalist",
+            "arena_id": 96652,
+            "arena_name": "Starfield Vocalist",
+            "set_code": "EOE",
+            "collector_number": "81",
+            "quantity": 1,
+        }
+        values.update(fields)
+        self.info.arena = self.gen.ArenaPrinting(**values)
+        return self.platform_lines(_card(collector_number="81", arena_id=None))
+
+    def test_arenas_id_fills_the_gap_scryfall_leaves(self) -> None:
+        """Scryfall has no Arena ID for new sets; the collection's grpid is used."""
+        self.assertIn('    :arenaId "96652"^^xsd:positiveInteger ;', self.held())
+
+    def test_same_number_adds_no_arena_collector_number(self) -> None:
+        """:arenaCollectorNumber only where Arena numbers the printing differently."""
+        self.assertFalse(any(":arenaCollectorNumber" in line for line in self.held()))
+
+    def test_alchemy_printing_takes_arenas_code_and_number(self) -> None:
+        """Alchemy: Tarkir is Y25 on MTG Arena, Dragon Typhoon its number 10."""
+        lines = self.held(arena_id=91234, set_code="Y25", collector_number="10")
+        self.assertEqual(
+            lines[-3:],
+            [
+                '    :arenaName "Starfield Vocalist" ;',
+                '    :arenaSetCode "Y25" ;',
+                '    :arenaCollectorNumber "10" ;',
+            ],
+        )
+
+    def test_held_printing_is_available_on_arena(self) -> None:
+        """Held on MTG Arena implies available there, whatever Scryfall's games say."""
+        self.info.arena = self.gen.ArenaPrinting(
+            name="Starfield Vocalist",
+            arena_id=96652,
+            arena_name="Starfield Vocalist",
+            set_code="EOE",
+            collector_number="81",
+            quantity=1,
+        )
+        lines = self.platform_lines(
+            _card(games=["paper"], arena_id=None, collector_number="81")
+        )
+        self.assertEqual(
+            lines[:2],
+            ["    :isAvailableOn :PaperMagic ,", "                   :MTGArena ;"],
+        )
+
+
+class TestCollectionGraphs(_GeneratorTestCase):
+    """The paper and the MTG Arena collection graphs."""
+
+    def test_arena_entries_have_no_finish_or_condition(self) -> None:
+        """One entry per printing, named after the platform, with its copies."""
+        arena = self.gen.arena_printings({"cards": [_owned(quantity=3)]})
+        card_map = {("EOE", "81"): ("StarfieldVocalist", "EdgeOfEternities.ttl")}
+        by_file, total, missing = self.gen.arena_entries(arena, card_map)
+        self.assertEqual((total, missing), (3, []))
+        block = (
+            ":StarfieldVocalistEntryMTGArena rdf:type owl:NamedIndividual ,\n"
+            "                  :CollectionEntry ;\n"
+            "    :entryCard :StarfieldVocalist ;\n"
+            '    :quantity "3"^^xsd:positiveInteger .'
+        )
+        self.assertEqual(
+            by_file["EdgeOfEternities.ttl"],
+            [("StarfieldVocalistEntryMTGArena", block)],
+        )
+
+    def test_printing_without_individual_is_reported(self) -> None:
+        """A printing sets/ does not define is reported, not emitted."""
+        arena = self.gen.arena_printings({"cards": [_owned()]})
+        by_file, total, missing = self.gen.arena_entries(arena, {})
+        self.assertEqual((dict(by_file), total, missing), ({}, 0, [("eoe", "81")]))
+
+    def test_collections_name_their_platform(self) -> None:
+        """Paper is held on :PaperMagic, the digital collection on :MTGArena."""
+        entries = {"EdgeOfEternities.ttl": [("XEntryMTGArena", ":XEntryMTGArena .")]}
+        arena = self.gen.render_collection(self.gen.ARENA_COLLECTION, entries)
+        self.assertIn(
+            "    :isHeldOn :MTGArena ;\n    :hasCollectionEntry\n  :XEntryMTGArena .\n",
+            arena,
+        )
+        self.assertIn("<urn:stklug84:MagicArenaCollection:", arena)
+        paper = self.gen.render_collection(self.gen.PAPER_COLLECTION, {})
+        self.assertIn("    :isHeldOn :PaperMagic .\n", paper)
+        self.assertNotIn(":hasCollectionEntry", paper)
 
 
 if __name__ == "__main__":

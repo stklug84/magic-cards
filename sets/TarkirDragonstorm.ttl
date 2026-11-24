@@ -39,8 +39,9 @@
     rdfs:label "Magic Card Collection Individuals – Tarkir: Dragonstorm"@en ;
     rdfs:comment """An instance graph describing the card individuals of a
 personal Magic: The Gathering card collection that were printed in the set
-Tarkir: Dragonstorm (TDM). One Card individual is defined per collected
-printing, carrying its characteristics, the platforms it is available on
+Tarkir: Dragonstorm (TDM). One Card individual is defined per printing
+collected in paper or on MTG Arena, carrying its characteristics, the
+platforms it is available on
 (paper, MTG Arena, Magic Online) with its MTG Arena identity, its legality
 in the paper and MTG Arena formats, and official rulings. Card data was
 sourced from Gatherer and Scryfall. This file imports MagicCardsOntology to
@@ -111,6 +112,1934 @@ Whenever you cast a colorless spell, exile up to one target permanent that's one
         :rulingDate "2025-04-04"^^xsd:date ;
         :rulingText """If a spell has {X} in its mana cost, you must choose 0 as the value of X when casting it without paying its mana cost."""@en ] .
 
+:ArashinSunshield rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Arashin Sunshield" ;
+    :manaCost "{3}{W}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Human ,
+                :Warrior ;
+    :hasRarity :Common ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :TarkirDragonstorm ;
+    :cardNumber "3"^^xsd:integer ;
+    :artist "Inkognit" ;
+    :hasLanguage :English ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "4" ;
+    :toughnessValue "4"^^xsd:integer ;
+    :printedText """When this creature enters, exile up to two target cards from a single graveyard.
+{W}, {T}: Tap target creature."""@en ;
+    :oracleText """When this creature enters, exile up to two target cards from a single graveyard.
+{W}, {T}: Tap target creature."""@en ;
+    :flavorText """"The best way to protect the citizens is to defend Arashin, not hunt dragonstorms across Tarkir."
+—Sadesh of House Mevak"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=693483"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/tdm/3/arashin-sunshield"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "95518"^^xsd:positiveInteger ;
+    :arenaName "Arashin Sunshield" ;
+    :arenaSetCode "TDM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:BearerOfGlory rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Bearer of Glory" ;
+    :manaCost "{1}{W}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Human ,
+                :Soldier ;
+    :hasRarity :Common ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :TarkirDragonstorm ;
+    :cardNumber "4"^^xsd:integer ;
+    :artist "Joshua Cairos" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "1" ;
+    :toughnessValue "1"^^xsd:integer ;
+    :printedText """During your turn, this creature has first strike.
+{4}{W}: Creatures you control get +1/+1 until end of turn."""@en ;
+    :oracleText """During your turn, this creature has first strike.
+{4}{W}: Creatures you control get +1/+1 until end of turn."""@en ;
+    :flavorText """Morale stands so long as he does."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=693484"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/tdm/4/bearer-of-glory"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "95519"^^xsd:positiveInteger ;
+    :arenaName "Bearer of Glory" ;
+    :arenaSetCode "TDM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:DragonbackLancer rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Dragonback Lancer" ;
+    :manaCost "{3}{W}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Human ,
+                :Soldier ;
+    :hasRarity :Common ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :TarkirDragonstorm ;
+    :cardNumber "9"^^xsd:integer ;
+    :artist "Diego Gisbert" ;
+    :hasLanguage :English ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "3" ;
+    :toughnessValue "3"^^xsd:integer ;
+    :hasKeywordAbility :Flying ,
+                       :Mobilize ;
+    :printedText """Flying
+Mobilize 1 (Whenever this creature attacks, create a tapped and attacking 1/1 red Warrior creature token. Sacrifice it at the beginning of the next end step.)"""@en ;
+    :oracleText """Flying
+Mobilize 1 (Whenever this creature attacks, create a tapped and attacking 1/1 red Warrior creature token. Sacrifice it at the beginning of the next end step.)"""@en ;
+    :flavorText """The Mardu's standing army need not always stand on the ground."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=693489"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/tdm/9/dragonback-lancer"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "95524"^^xsd:positiveInteger ;
+    :arenaName "Dragonback Lancer" ;
+    :arenaSetCode "TDM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """You choose the player, planeswalker, or battle each Warrior token is attacking. They don’t all have to attack the same one, and they don’t have to attack the same player, planeswalker, or battle as the creature with mobilize."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """Although the Warrior tokens enter as attacking creatures, they were never declared as attacking creatures. Abilities that trigger whenever a creature attacks won’t trigger when the tokens enter attacking."""@en ] .
+
+:FortressKinGuard rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Fortress Kin-Guard" ;
+    :manaCost "{1}{W}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Dog ,
+                :Soldier ;
+    :hasRarity :Common ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :TarkirDragonstorm ;
+    :cardNumber "12"^^xsd:integer ;
+    :artist "Daneen Wilkerson" ;
+    :hasLanguage :English ;
+    :power "1" ;
+    :powerValue "1"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    :hasKeywordAction :Endure ;
+    :printedText """When this creature enters, it endures 1. (Put a +1/+1 counter on it or create a 1/1 white Spirit creature token.)"""@en ;
+    :oracleText """When this creature enters, it endures 1. (Put a +1/+1 counter on it or create a 1/1 white Spirit creature token.)"""@en ;
+    :flavorText """All through the night, the ancestor whispered of ancient battles fought from this very rampart atop Arashin City."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=693492"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/tdm/12/fortress-kin-guard"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "95527"^^xsd:positiveInteger ;
+    :arenaName "Fortress Kin-Guard" ;
+    :arenaSetCode "TDM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """If a noncreature permanent is instructed to endure, the effect is the same. You can put +1/+1 counters on that permanent or create a Spirit token."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """You choose whether to put +1/+1 counters on the creature or create a Spirit token as the ability that includes the endure instruction is resolving. No player may take actions between the time you choose and the time that counters are added or tokens are created."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """If you can’t put +1/+1 counters on the creature for any reason as an endure ability resolves (for example, if the creature is no longer on the battlefield), you’ll just create a Spirit token."""@en ] .
+
+:MarduDevotee rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Mardu Devotee" ;
+    :manaCost "{W}" ;
+    :manaValue "1"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Human ,
+                :Scout ;
+    :hasRarity :Common ;
+    :hasColor :White ;
+    :hasColorIdentity :White ,
+                      :Black ,
+                      :Red ;
+    :isInSet :TarkirDragonstorm ;
+    :cardNumber "16"^^xsd:integer ;
+    :artist "Lorenzo Mastroianni" ;
+    :hasLanguage :English ;
+    :producesMana :White ,
+                  :Black ,
+                  :Red ;
+    :power "1" ;
+    :powerValue "1"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    :hasKeywordAction :Scry ;
+    :printedText """When this creature enters, scry 2. (Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)
+{1}: Add {R}, {W}, or {B}. Activate only once each turn."""@en ;
+    :oracleText """When this creature enters, scry 2. (Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)
+{1}: Add {R}, {W}, or {B}. Activate only once each turn."""@en ;
+    :flavorText """Eskeg and his companion stood watch, the sights of the steppe a constant inspiration."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=693496"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/tdm/16/mardu-devotee"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "95531"^^xsd:positiveInteger ;
+    :arenaName "Mardu Devotee" ;
+    :arenaSetCode "TDM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:RilingDawnbreaker rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Riling Dawnbreaker // Signaling Roar" ;
+    :manaCost "{4}{W}" ;
+    :manaValue "5"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Dragon ,
+                :Omen ;
+    :hasRarity :Common ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :TarkirDragonstorm ;
+    :cardNumber "21"^^xsd:integer ;
+    :artist "Tuan Duong Chu" ;
+    :hasLanguage :English ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "4" ;
+    :toughnessValue "4"^^xsd:integer ;
+    :hasKeywordAbility :Flying ,
+                       :Vigilance ;
+    :printedText """Flying, vigilance
+At the beginning of combat on your turn, another target creature you control gets +1/+0 until end of turn.
+//
+Create a 2/2 white Soldier creature token. (Then shuffle this card into its owner's library.)"""@en ;
+    :oracleText """Flying, vigilance
+At the beginning of combat on your turn, another target creature you control gets +1/+0 until end of turn.
+//
+Create a 2/2 white Soldier creature token. (Then shuffle this card into its owner's library.)"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=693501"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/tdm/21/riling-dawnbreaker-signaling-roar"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "95536"^^xsd:positiveInteger ;
+    :arenaName "Riling Dawnbreaker" ;
+    :arenaSetCode "TDM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """If you cast an omen card as an Omen, use only its alternative characteristics to determine whether it’s legal to cast that spell. For example, if you control Thundermane Dragon (“You may cast creature spells with power 4 or greater from the top of your library.”) and Twinmaw Stormbrood is on top of your library, you can cast Twinmaw Stormbrood, but not Charring Bite."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """If a spell is cast as an Omen, its controller shuffles it into its owner’s library instead of putting it into its owner’s graveyard as it resolves."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """If an Omen spell has one or more targets and all of those targets are illegal when the spell tries to resolve, it won’t resolve. None of its effects will happen, and it will be put into its owner’s graveyard. It won’t be shuffled into its owner’s library."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """If an Omen spell is countered or an effect causes it to otherwise leave the stack, it won’t be shuffled into its owner’s library."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """As a player casts an omen card, the player chooses whether they cast the card normally or as an Omen."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """If an Omen spell is copied, that copy is also an Omen and is shuffled into its owner’s library as it resolves. Its owner still shuffles their library, but the copy ceases to exist as a state-based action."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """Casting a card as an Omen isn’t casting it for an alternative cost. Effects that allow you to cast a spell for an alternative cost or without paying its mana cost may allow you to apply those to the Omen."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """If an effect instructs you to choose a card name, you may choose the alternative Omen name. Consider only the alternative characteristics to determine whether that is an appropriate name to choose."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """When casting a spell as an Omen, use the alternative characteristics and ignore all of the card’s normal characteristics. The spell’s color, mana cost, mana value, and so on are determined by only those alternative characteristics. If the spell leaves the stack, it immediately resumes using its normal characteristics."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """An omen card is a creature card in every zone except the stack, as well as while on the stack if not cast as an Omen. Ignore its alternative characteristics in those cases. For example, while it’s in your graveyard, Twinmaw Stormbrood is a white creature card whose mana value is 6. It can’t be the target of the reflexive ability created by Kishla Trawlers’s triggered ability (“…When you do, return target instant or sorcery card from your graveyard to your hand.”)."""@en ] .
+
+:SaltRoadPackbeast rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Salt Road Packbeast" ;
+    :manaCost "{5}{W}" ;
+    :manaValue "6"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Beast ;
+    :hasRarity :Common ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :TarkirDragonstorm ;
+    :cardNumber "23"^^xsd:integer ;
+    :artist "Ben Wootten" ;
+    :hasLanguage :English ;
+    :power "4" ;
+    :powerValue "4"^^xsd:integer ;
+    :toughness "3" ;
+    :toughnessValue "3"^^xsd:integer ;
+    :hasKeywordAbility :Affinity ;
+    :printedText """Affinity for creatures (This spell costs {1} less to cast for each creature you control.)
+When this creature enters, draw a card."""@en ;
+    :oracleText """Affinity for creatures (This spell costs {1} less to cast for each creature you control.)
+When this creature enters, draw a card."""@en ;
+    :flavorText """"She huffs like she's Queen Hellkite of the Scour, but we've been together for many journeys and she's never let me down."
+—Mandakh, Mardu scout"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=693503"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/tdm/23/salt-road-packbeast"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "95539"^^xsd:positiveInteger ;
+    :arenaName "Salt Road Packbeast" ;
+    :arenaSetCode "TDM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:StarryEyedSkyrider rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Starry-Eyed Skyrider" ;
+    :manaCost "{2}{W}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Human ,
+                :Scout ;
+    :hasRarity :Uncommon ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :TarkirDragonstorm ;
+    :cardNumber "25"^^xsd:integer ;
+    :artist "Lindsey Look" ;
+    :hasLanguage :English ;
+    :power "1" ;
+    :powerValue "1"^^xsd:integer ;
+    :toughness "3" ;
+    :toughnessValue "3"^^xsd:integer ;
+    :hasKeywordAbility :Flying ;
+    :printedText """Flying
+Whenever this creature attacks, another target creature you control gains flying until end of turn.
+Attacking tokens you control have flying."""@en ;
+    :oracleText """Flying
+Whenever this creature attacks, another target creature you control gains flying until end of turn.
+Attacking tokens you control have flying."""@en ;
+    :flavorText """Too late, the elders realized the young prodigies shared a love of adventure and mischief."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=693505"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/tdm/25/starry-eyed-skyrider"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "95541"^^xsd:positiveInteger ;
+    :arenaName "Starry-Eyed Skyrider" ;
+    :arenaSetCode "TDM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """If Starry-Eyed Skyrider leaves the battlefield, any attacking tokens will no longer be granted flying by the last ability. If that happens before the declare blockers step, it may allow those tokens to be blocked by creatures without flying."""@en ] .
+
+:StormbeaconBlade rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Stormbeacon Blade" ;
+    :manaCost "{1}{W}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ;
+    :hasSubType :Equipment ;
+    :hasRarity :Uncommon ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :TarkirDragonstorm ;
+    :cardNumber "27"^^xsd:integer ;
+    :artist "Jorge Jacinto" ;
+    :hasLanguage :English ;
+    :hasKeywordAbility :Equip ;
+    :printedText """Equipped creature gets +3/+0.
+Whenever equipped creature attacks, draw a card if you control three or more attacking creatures.
+Equip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)"""@en ;
+    :oracleText """Equipped creature gets +3/+0.
+Whenever equipped creature attacks, draw a card if you control three or more attacking creatures.
+Equip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)"""@en ;
+    :flavorText """"Sky and Ember, guide my blade!\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=693507"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/tdm/27/stormbeacon-blade"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "95543"^^xsd:positiveInteger ;
+    :arenaName "Stormbeacon Blade" ;
+    :arenaSetCode "TDM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """The second ability checks the number of attacking creatures you control only as the ability resolves. If another attack trigger (such as from the mobilize ability) puts creatures onto the battlefield attacking, you can choose to order the triggered abilities so that those creatures enter before Stormbeacon Blade’s ability resolves."""@en ] .
+
+:DispellingExhale rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Dispelling Exhale" ;
+    :manaCost "{1}{U}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Instant ;
+    :hasRarity :Common ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :TarkirDragonstorm ;
+    :cardNumber "41"^^xsd:integer ;
+    :artist "David Auden Nash" ;
+    :hasLanguage :English ;
+    :hasKeywordAction :Behold ;
+    :printedText """As an additional cost to cast this spell, you may behold a Dragon. (You may choose a Dragon you control or reveal a Dragon card from your hand.)
+Counter target spell unless its controller pays {2}. If a Dragon was beheld, counter that spell unless its controller pays {4} instead."""@en ;
+    :oracleText """As an additional cost to cast this spell, you may behold a Dragon. (You may choose a Dragon you control or reveal a Dragon card from your hand.)
+Counter target spell unless its controller pays {2}. If a Dragon was beheld, counter that spell unless its controller pays {4} instead."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=693521"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/tdm/41/dispelling-exhale"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "95558"^^xsd:positiveInteger ;
+    :arenaName "Dispelling Exhale" ;
+    :arenaSetCode "TDM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """If a cost to cast a spell includes revealing a card, that card remains revealed from the time the spell is announced until the time it leaves the stack."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """If a card in your hand is already revealed (perhaps because it was revealed to pay a cost of a spell that’s still on the stack or due to the effect of a card like Telepathy), you may reveal it again to pay the cost of another spell or ability that requires you to reveal a card from your hand."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """Effects that say “If a [quality] was beheld” only care if a card of that quality was revealed or a permanent you control of that quality was chosen. No matter what happens to that card or permanent after that, it was still beheld, and any additional effects that depend on that card or permanent being beheld will still happen."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """If an effect refers to a “[subtype] card,” it refers only to a card that has that subtype. For example, Teeming Dragonstorm is a card that cares about Dragons and features Dragons in its art, but it isn’t a Dragon card."""@en ] .
+
+:DragonstormForecaster rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Dragonstorm Forecaster" ;
+    :manaCost "{U}" ;
+    :manaValue "1"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Human ,
+                :Scout ;
+    :hasRarity :Uncommon ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :TarkirDragonstorm ;
+    :cardNumber "43"^^xsd:integer ;
+    :artist "Kev Fang" ;
+    :hasLanguage :English ;
+    :power "0" ;
+    :powerValue "0"^^xsd:integer ;
+    :toughness "3" ;
+    :toughnessValue "3"^^xsd:integer ;
+    :printedText """{2}, {T}: Search your library for a card named Dragonstorm Globe or Boulderborn Dragon, reveal it, put it into your hand, then shuffle."""@en ;
+    :oracleText """{2}, {T}: Search your library for a card named Dragonstorm Globe or Boulderborn Dragon, reveal it, put it into your hand, then shuffle."""@en ;
+    :flavorText """"This can't be right. I should cross-reference with the archives immediately.\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=693523"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/tdm/43/dragonstorm-forecaster"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "95560"^^xsd:positiveInteger ;
+    :arenaName "Dragonstorm Forecaster" ;
+    :arenaSetCode "TDM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:EssenceAnchor rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Essence Anchor" ;
+    :manaCost "{2}{U}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ;
+    :hasRarity :Uncommon ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :TarkirDragonstorm ;
+    :cardNumber "44"^^xsd:integer ;
+    :artist "David Astruga" ;
+    :hasLanguage :English ;
+    :hasKeywordAction :Surveil ;
+    :printedText """At the beginning of your upkeep, surveil 1. (Look at the top card of your library. You may put it into your graveyard.)
+{T}: Create a 2/2 black Zombie Druid creature token. Activate only during your turn and only if a card left your graveyard this turn."""@en ;
+    :oracleText """At the beginning of your upkeep, surveil 1. (Look at the top card of your library. You may put it into your graveyard.)
+{T}: Create a 2/2 black Zombie Druid creature token. Activate only during your turn and only if a card left your graveyard this turn."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=693524"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/tdm/44/essence-anchor"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "95561"^^xsd:positiveInteger ;
+    :arenaName "Essence Anchor" ;
+    :arenaSetCode "TDM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:FreshStart rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Fresh Start" ;
+    :manaCost "{1}{U}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Enchantment ;
+    :hasSubType :Aura ;
+    :hasRarity :Uncommon ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :TarkirDragonstorm ;
+    :cardNumber "46"^^xsd:integer ;
+    :artist "Joe Slucher" ;
+    :hasLanguage :English ;
+    :hasKeywordAbility :Enchant ,
+                       :Flash ;
+    :printedText """Flash
+Enchant creature
+Enchanted creature gets -5/-0 and loses all abilities."""@en ;
+    :oracleText """Flash
+Enchant creature
+Enchanted creature gets -5/-0 and loses all abilities."""@en ;
+    :flavorText """"I know leaving your old life was no easy choice. Welcome, Novice Sardul."
+—Elsha"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=693526"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/tdm/46/fresh-start"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "95563"^^xsd:positiveInteger ;
+    :arenaName "Fresh Start" ;
+    :arenaSetCode "TDM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """If the enchanted creature gains an ability after Fresh Start becomes attached to it, it will keep that ability."""@en ] .
+
+:HumblingElder rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Humbling Elder" ;
+    :manaCost "{U}" ;
+    :manaValue "1"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Human ,
+                :Monk ;
+    :hasRarity :Common ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :TarkirDragonstorm ;
+    :cardNumber "48"^^xsd:integer ;
+    :artist "Yohann Schepacz" ;
+    :hasLanguage :English ;
+    :power "1" ;
+    :powerValue "1"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    :hasKeywordAbility :Flash ;
+    :printedText """Flash
+When this creature enters, target creature an opponent controls gets -2/-0 until end of turn."""@en ;
+    :oracleText """Flash
+When this creature enters, target creature an opponent controls gets -2/-0 until end of turn."""@en ;
+    :flavorText """"There is no better way to measure a person's true character than to let them think they're above you."
+—Master Xian"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=693528"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/tdm/48/humbling-elder"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "95565"^^xsd:positiveInteger ;
+    :arenaName "Humbling Elder" ;
+    :arenaSetCode "TDM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:IceridgeSerpent rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Iceridge Serpent" ;
+    :manaCost "{4}{U}" ;
+    :manaValue "5"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Serpent ;
+    :hasRarity :Common ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :TarkirDragonstorm ;
+    :cardNumber "49"^^xsd:integer ;
+    :artist "Brian Valeza" ;
+    :hasLanguage :English ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "3" ;
+    :toughnessValue "3"^^xsd:integer ;
+    :printedText """When this creature enters, return target creature an opponent controls to its owner's hand."""@en ;
+    :oracleText """When this creature enters, return target creature an opponent controls to its owner's hand."""@en ;
+    :flavorText """"Even dragons avoid Glintglaze Lake in this season. Which of you youngsters can tell me why?"
+—Teacher Eliam"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=693529"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/tdm/49/iceridge-serpent"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "95566"^^xsd:positiveInteger ;
+    :arenaName "Iceridge Serpent" ;
+    :arenaSetCode "TDM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:KishlaTrawlers rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Kishla Trawlers" ;
+    :manaCost "{2}{U}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Human ,
+                :Citizen ;
+    :hasRarity :Uncommon ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :TarkirDragonstorm ;
+    :cardNumber "50"^^xsd:integer ;
+    :artist "Iris Compiet" ;
+    :hasLanguage :English ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    :printedText """When this creature enters, you may exile a creature card from your graveyard. When you do, return target instant or sorcery card from your graveyard to your hand."""@en ;
+    :oracleText """When this creature enters, you may exile a creature card from your graveyard. When you do, return target instant or sorcery card from your graveyard to your hand."""@en ;
+    :flavorText """"Fish are like any other crop or flock. They must be carefully tended and never overharvested."
+—Nasath, Kishla fisher"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=693530"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/tdm/50/kishla-trawlers"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "95567"^^xsd:positiveInteger ;
+    :arenaName "Kishla Trawlers" ;
+    :arenaSetCode "TDM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """You don’t choose a target for Kishla Trawlers’s ability at the time it triggers. Rather, a second “reflexive” ability triggers when you exile a creature card from your graveyard this way. You choose a target for that ability as it goes on the stack. Each player may respond to this triggered ability as normal."""@en ] .
+
+:MarangRiverRegent rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Marang River Regent // Coil and Catch" ;
+    :manaCost "{4}{U}{U}" ;
+    :manaValue "6"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Dragon ,
+                :Omen ;
+    :hasRarity :Rare ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :TarkirDragonstorm ;
+    :cardNumber "51"^^xsd:integer ;
+    :artist "John Tedrick" ;
+    :hasLanguage :English ;
+    :power "6" ;
+    :powerValue "6"^^xsd:integer ;
+    :toughness "7" ;
+    :toughnessValue "7"^^xsd:integer ;
+    :hasKeywordAbility :Flying ;
+    :printedText """Flying
+When this creature enters, return up to two other target nonland permanents to their owners' hands.
+//
+Draw three cards, then discard a card. (Then shuffle this card into its owner's library.)"""@en ;
+    :oracleText """Flying
+When this creature enters, return up to two other target nonland permanents to their owners' hands.
+//
+Draw three cards, then discard a card. (Then shuffle this card into its owner's library.)"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=693531"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/tdm/51/marang-river-regent-coil-and-catch"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "95568"^^xsd:positiveInteger ;
+    :arenaName "Marang River Regent" ;
+    :arenaSetCode "TDM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """If an effect instructs you to choose a card name, you may choose the alternative Omen name. Consider only the alternative characteristics to determine whether that is an appropriate name to choose."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """Casting a card as an Omen isn’t casting it for an alternative cost. Effects that allow you to cast a spell for an alternative cost or without paying its mana cost may allow you to apply those to the Omen."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """If an Omen spell has one or more targets and all of those targets are illegal when the spell tries to resolve, it won’t resolve. None of its effects will happen, and it will be put into its owner’s graveyard. It won’t be shuffled into its owner’s library."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """An omen card is a creature card in every zone except the stack, as well as while on the stack if not cast as an Omen. Ignore its alternative characteristics in those cases. For example, while it’s in your graveyard, Twinmaw Stormbrood is a white creature card whose mana value is 6. It can’t be the target of the reflexive ability created by Kishla Trawlers’s triggered ability (“…When you do, return target instant or sorcery card from your graveyard to your hand.”)."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """When casting a spell as an Omen, use the alternative characteristics and ignore all of the card’s normal characteristics. The spell’s color, mana cost, mana value, and so on are determined by only those alternative characteristics. If the spell leaves the stack, it immediately resumes using its normal characteristics."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """As a player casts an omen card, the player chooses whether they cast the card normally or as an Omen."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """If you cast an omen card as an Omen, use only its alternative characteristics to determine whether it’s legal to cast that spell. For example, if you control Thundermane Dragon (“You may cast creature spells with power 4 or greater from the top of your library.”) and Twinmaw Stormbrood is on top of your library, you can cast Twinmaw Stormbrood, but not Charring Bite."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """If an Omen spell is countered or an effect causes it to otherwise leave the stack, it won’t be shuffled into its owner’s library."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """If an Omen spell is copied, that copy is also an Omen and is shuffled into its owner’s library as it resolves. Its owner still shuffles their library, but the copy ceases to exist as a state-based action."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """If a spell is cast as an Omen, its controller shuffles it into its owner’s library instead of putting it into its owner’s graveyard as it resolves."""@en ] .
+
+:RingingStrikeMastery rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Ringing Strike Mastery" ;
+    :manaCost "{U}" ;
+    :manaValue "1"^^xsd:nonNegativeInteger ;
+    :hasCardType :Enchantment ;
+    :hasSubType :Aura ;
+    :hasRarity :Common ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :TarkirDragonstorm ;
+    :cardNumber "53"^^xsd:integer ;
+    :artist "Alexandre Honoré" ;
+    :hasLanguage :English ;
+    :hasKeywordAbility :Enchant ;
+    :printedText """Enchant creature
+When this Aura enters, tap enchanted creature.
+Enchanted creature doesn't untap during its controller's untap step.
+Enchanted creature has "{5}: Untap this creature.\""""@en ;
+    :oracleText """Enchant creature
+When this Aura enters, tap enchanted creature.
+Enchanted creature doesn't untap during its controller's untap step.
+Enchanted creature has "{5}: Untap this creature.\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=693533"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/tdm/53/ringing-strike-mastery"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "95571"^^xsd:positiveInteger ;
+    :arenaName "Ringing Strike Mastery" ;
+    :arenaSetCode "TDM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:UnendingWhisper rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Unending Whisper" ;
+    :manaCost "{U}" ;
+    :manaValue "1"^^xsd:nonNegativeInteger ;
+    :hasCardType :Sorcery ;
+    :hasRarity :Common ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :TarkirDragonstorm ;
+    :cardNumber "62"^^xsd:integer ;
+    :artist "Danny Schwartz" ;
+    :hasLanguage :English ;
+    :hasKeywordAbility :Harmonize ;
+    :printedText """Draw a card.
+Harmonize {5}{U} (You may cast this card from your graveyard for its harmonize cost. You may tap a creature you control to reduce that cost by {X}, where X is its power. Then exile this spell.)"""@en ;
+    :oracleText """Draw a card.
+Harmonize {5}{U} (You may cast this card from your graveyard for its harmonize cost. You may tap a creature you control to reduce that cost by {X}, where X is its power. Then exile this spell.)"""@en ;
+    :flavorText """In the Endless Song, Temur's whisperers hear spirits murmur of the past, present, and future."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=693542"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/tdm/62/unending-whisper"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "95580"^^xsd:positiveInteger ;
+    :arenaName "Unending Whisper" ;
+    :arenaSetCode "TDM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """To determine the total cost of a spell, start with the mana cost or alternative cost (such as a harmonize cost) you’re paying, add any cost increases, then apply any cost reductions (such as the cost reduction from tapping a creature). The mana value of the spell is determined only by its mana cost, no matter what the total cost to cast the spell was."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """“Harmonize [cost]” means “You may cast this card from your graveyard by paying [cost] and tapping up to one untapped creature you control rather than paying the spell’s mana cost,” “If you cast this spell using its harmonize ability, its total cost is reduced by an amount of generic mana equal to the tapped creature’s power,” and “If the harmonize cost was paid, exile this card instead of putting it anywhere else any time it would leave the stack.”"""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """A spell cast using harmonize will always be exiled afterward, whether it resolves, is countered, or leaves the stack in some other way."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """If a card with harmonize is put into your graveyard during your turn, you can cast it if it’s legal to do so before any other player can take any actions."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """Tapping a creature won’t reduce colored mana components of harmonize costs."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """You must still follow any timing restrictions and permissions, including those based on the card’s type. For instance, you can cast a sorcery using harmonize only when you could normally cast a sorcery."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """You can cast a spell using harmonize even if it was somehow put into your graveyard without having been cast."""@en ] .
+
+:VeteranIceClimber rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Veteran Ice Climber" ;
+    :manaCost "{1}{U}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Human ,
+                :Scout ;
+    :hasRarity :Uncommon ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :TarkirDragonstorm ;
+    :cardNumber "64"^^xsd:integer ;
+    :artist "Néstor Ossandón Leal" ;
+    :hasLanguage :English ;
+    :power "1" ;
+    :powerValue "1"^^xsd:integer ;
+    :toughness "3" ;
+    :toughnessValue "3"^^xsd:integer ;
+    :hasKeywordAbility :Vigilance ;
+    :hasKeywordAction :Mill ;
+    :printedText """Vigilance
+This creature can't be blocked.
+Whenever this creature attacks, up to one target player mills cards equal to this creature's power. (They put that many cards from the top of their library into their graveyard.)"""@en ;
+    :oracleText """Vigilance
+This creature can't be blocked.
+Whenever this creature attacks, up to one target player mills cards equal to this creature's power. (They put that many cards from the top of their library into their graveyard.)"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=693544"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/tdm/64/veteran-ice-climber"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "95582"^^xsd:positiveInteger ;
+    :arenaName "Veteran Ice Climber" ;
+    :arenaSetCode "TDM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:AbzanDevotee rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Abzan Devotee" ;
+    :manaCost "{1}{B}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Dog ,
+                :Cleric ;
+    :hasRarity :Common ;
+    :hasColor :Black ;
+    :hasColorIdentity :White ,
+                      :Black ,
+                      :Green ;
+    :isInSet :TarkirDragonstorm ;
+    :cardNumber "68"^^xsd:integer ;
+    :artist "Forrest Imel" ;
+    :hasLanguage :English ;
+    :producesMana :White ,
+                  :Black ,
+                  :Green ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "1" ;
+    :toughnessValue "1"^^xsd:integer ;
+    :printedText """{1}: Add {W}, {B}, or {G}. Activate only once each turn.
+{2}{B}: Return this card from your graveyard to your hand."""@en ;
+    :oracleText """{1}: Add {W}, {B}, or {G}. Activate only once each turn.
+{2}{B}: Return this card from your graveyard to your hand."""@en ;
+    :flavorText """The Kin-Trees rediscovered after Dromoka's fall are tended by carefully chosen wardens."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=693548"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/tdm/68/abzan-devotee"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "95586"^^xsd:positiveInteger ;
+    :arenaName "Abzan Devotee" ;
+    :arenaSetCode "TDM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:AleshasLegacy rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Alesha's Legacy" ;
+    :manaCost "{1}{B}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Instant ;
+    :hasRarity :Common ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :TarkirDragonstorm ;
+    :cardNumber "72"^^xsd:integer ;
+    :artist "Craig J Spearing" ;
+    :hasLanguage :English ;
+    :printedText """Target creature you control gains deathtouch and indestructible until end of turn. (Damage and effects that say "destroy" don't destroy it.)"""@en ;
+    :oracleText """Target creature you control gains deathtouch and indestructible until end of turn. (Damage and effects that say "destroy" don't destroy it.)"""@en ;
+    :flavorText """"If I die today, I will ensure my death is worthy of legend.\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=693552"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/tdm/72/aleshas-legacy"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "95590"^^xsd:positiveInteger ;
+    :arenaName "Alesha's Legacy" ;
+    :arenaSetCode "TDM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:DeltaBloodflies rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Delta Bloodflies" ;
+    :manaCost "{1}{B}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Insect ;
+    :hasRarity :Common ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :TarkirDragonstorm ;
+    :cardNumber "77"^^xsd:integer ;
+    :artist "Inkognit" ;
+    :hasLanguage :English ;
+    :power "1" ;
+    :powerValue "1"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    :hasKeywordAbility :Flying ;
+    :printedText """Flying
+Whenever this creature attacks, if you control a creature with a counter on it, each opponent loses 1 life."""@en ;
+    :oracleText """Flying
+Whenever this creature attacks, if you control a creature with a counter on it, each opponent loses 1 life."""@en ;
+    :flavorText """With the rising waters, bloodflies were found far from their usual swamps."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=693557"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/tdm/77/delta-bloodflies"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "95595"^^xsd:positiveInteger ;
+    :arenaName "Delta Bloodflies" ;
+    :arenaSetCode "TDM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """Delta Bloodflies’s last ability checks at the moment it would trigger to see if you control a creature with a counter on it. If you don’t, the ability won’t trigger at all. If it does trigger, the ability will check again as it tries to resolve. If you don’t control a creature with a counter on it at that time, the ability won’t resolve and none of its effects will happen."""@en ] .
+
+:DragonsPrey rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Dragon's Prey" ;
+    :manaCost "{2}{B}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Instant ;
+    :hasRarity :Common ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :TarkirDragonstorm ;
+    :cardNumber "79"^^xsd:integer ;
+    :artist "Johann Bodin" ;
+    :hasLanguage :English ;
+    :printedText """This spell costs {2} more to cast if it targets a Dragon.
+Destroy target creature."""@en ;
+    :oracleText """This spell costs {2} more to cast if it targets a Dragon.
+Destroy target creature."""@en ;
+    :flavorText """"To escape Teval's justice, one must have a better plan than 'run away.'"
+—Kotis, the Fangkeeper"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=693559"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/tdm/79/dragons-prey"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "95597"^^xsd:positiveInteger ;
+    :arenaName "Dragon's Prey" ;
+    :arenaSetCode "TDM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:NightbladeBrigade rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Nightblade Brigade" ;
+    :manaCost "{2}{B}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Goblin ,
+                :Soldier ;
+    :hasRarity :Common ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :TarkirDragonstorm ;
+    :cardNumber "85"^^xsd:integer ;
+    :artist "Gary Laib" ;
+    :hasLanguage :English ;
+    :power "1" ;
+    :powerValue "1"^^xsd:integer ;
+    :toughness "3" ;
+    :toughnessValue "3"^^xsd:integer ;
+    :hasKeywordAction :Surveil ;
+    :hasKeywordAbility :Mobilize ,
+                       :Deathtouch ;
+    :printedText """Deathtouch
+Mobilize 1 (Whenever this creature attacks, create a tapped and attacking 1/1 red Warrior creature token. Sacrifice it at the beginning of the next end step.)
+When this creature enters, surveil 1. (Look at the top card of your library. You may put it into your graveyard.)"""@en ;
+    :oracleText """Deathtouch
+Mobilize 1 (Whenever this creature attacks, create a tapped and attacking 1/1 red Warrior creature token. Sacrifice it at the beginning of the next end step.)
+When this creature enters, surveil 1. (Look at the top card of your library. You may put it into your graveyard.)"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=693565"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/tdm/85/nightblade-brigade"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "95604"^^xsd:positiveInteger ;
+    :arenaName "Nightblade Brigade" ;
+    :arenaSetCode "TDM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """You choose the player, planeswalker, or battle each Warrior token is attacking. They don’t all have to attack the same one, and they don’t have to attack the same player, planeswalker, or battle as the creature with mobilize."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """Although the Warrior tokens enter as attacking creatures, they were never declared as attacking creatures. Abilities that trigger whenever a creature attacks won’t trigger when the tokens enter attacking."""@en ] .
+
+:SandskitterOutrider rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Sandskitter Outrider" ;
+    :manaCost "{3}{B}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Goblin ,
+                :Soldier ;
+    :hasRarity :Common ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :TarkirDragonstorm ;
+    :cardNumber "89"^^xsd:integer ;
+    :artist "Arif Wijaya" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "1" ;
+    :toughnessValue "1"^^xsd:integer ;
+    :hasKeywordAbility :Menace ;
+    :hasKeywordAction :Endure ;
+    :printedText """Menace (This creature can't be blocked except by two or more creatures.)
+When this creature enters, it endures 2. (Put two +1/+1 counters on it or create a 2/2 white Spirit creature token.)"""@en ;
+    :oracleText """Menace (This creature can't be blocked except by two or more creatures.)
+When this creature enters, it endures 2. (Put two +1/+1 counters on it or create a 2/2 white Spirit creature token.)"""@en ;
+    :flavorText """"There's a new sinkhole, seven leagues east. I'll take Scratchy.\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=693569"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/tdm/89/sandskitter-outrider"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "95608"^^xsd:positiveInteger ;
+    :arenaName "Sandskitter Outrider" ;
+    :arenaSetCode "TDM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """You choose whether to put +1/+1 counters on the creature or create a Spirit token as the ability that includes the endure instruction is resolving. No player may take actions between the time you choose and the time that counters are added or tokens are created."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """If you can’t put +1/+1 counters on the creature for any reason as an endure ability resolves (for example, if the creature is no longer on the battlefield), you’ll just create a Spirit token."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """If a noncreature permanent is instructed to endure, the effect is the same. You can put +1/+1 counters on that permanent or create a Spirit token."""@en ] .
+
+:StrategicBetrayal rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Strategic Betrayal" ;
+    :manaCost "{1}{B}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Sorcery ;
+    :hasRarity :Uncommon ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :TarkirDragonstorm ;
+    :cardNumber "94"^^xsd:integer ;
+    :artist "Flavio Greco Paglia" ;
+    :hasLanguage :English ;
+    :printedText """Target opponent exiles a creature they control and their graveyard."""@en ;
+    :oracleText """Target opponent exiles a creature they control and their graveyard."""@en ;
+    :flavorText """As Sultai blades threatened Qatros city walls, Mehtma of House Fenzala turned her weapons on her political rivals."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=693574"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/tdm/94/strategic-betrayal"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "95614"^^xsd:positiveInteger ;
+    :arenaName "Strategic Betrayal" ;
+    :arenaSetCode "TDM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """The opponent chooses which creature to exile as Strategic Betrayal resolves. If they don’t control any creatures at that time, they simply exile their graveyard."""@en ] .
+
+:MeticulousArtisan rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Meticulous Artisan" ;
+    :manaCost "{3}{R}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Djinn ,
+                :Artificer ;
+    :hasRarity :Common ;
+    :hasColor :Red ;
+    :hasColorIdentity :Red ;
+    :isInSet :TarkirDragonstorm ;
+    :cardNumber "112"^^xsd:integer ;
+    :artist "Anna Pavleeva" ;
+    :hasLanguage :English ;
+    :producesMana :White ,
+                  :Blue ,
+                  :Black ,
+                  :Red ,
+                  :Green ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "3" ;
+    :toughnessValue "3"^^xsd:integer ;
+    :hasKeywordAbility :Prowess ;
+    # Note: keyword "Treasure" not defined in MagicCardsOntology
+    :printedText """Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)
+When this creature enters, create a Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add one mana of any color.")"""@en ;
+    :oracleText """Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)
+When this creature enters, create a Treasure token. (It's an artifact with "{T}, Sacrifice this token: Add one mana of any color.")"""@en ;
+    :flavorText """"It isn't about expression or results. Doing the thing is itself the point.\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=693592"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/tdm/112/meticulous-artisan"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "95632"^^xsd:positiveInteger ;
+    :arenaName "Meticulous Artisan" ;
+    :arenaSetCode "TDM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:StormshriekFeral rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Stormshriek Feral // Flush Out" ;
+    :manaCost "{4}{R}" ;
+    :manaValue "5"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Dragon ,
+                :Omen ;
+    :hasRarity :Common ;
+    :hasColor :Red ;
+    :hasColorIdentity :Red ;
+    :isInSet :TarkirDragonstorm ;
+    :cardNumber "124"^^xsd:integer ;
+    :artist "Joshua Raphael" ;
+    :hasLanguage :English ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "3" ;
+    :toughnessValue "3"^^xsd:integer ;
+    :hasKeywordAbility :Flying ,
+                       :Haste ;
+    :printedText """Flying, haste
+{1}{R}: This creature gets +1/+0 until end of turn.
+//
+Discard a card. If you do, draw two cards. (Then shuffle this card into its owner's library.)"""@en ;
+    :oracleText """Flying, haste
+{1}{R}: This creature gets +1/+0 until end of turn.
+//
+Discard a card. If you do, draw two cards. (Then shuffle this card into its owner's library.)"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=693604"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/tdm/124/stormshriek-feral-flush-out"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "95644"^^xsd:positiveInteger ;
+    :arenaName "Stormshriek Feral" ;
+    :arenaSetCode "TDM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """If an Omen spell has one or more targets and all of those targets are illegal when the spell tries to resolve, it won’t resolve. None of its effects will happen, and it will be put into its owner’s graveyard. It won’t be shuffled into its owner’s library."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """If an Omen spell is countered or an effect causes it to otherwise leave the stack, it won’t be shuffled into its owner’s library."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """If an effect instructs you to choose a card name, you may choose the alternative Omen name. Consider only the alternative characteristics to determine whether that is an appropriate name to choose."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """If an Omen spell is copied, that copy is also an Omen and is shuffled into its owner’s library as it resolves. Its owner still shuffles their library, but the copy ceases to exist as a state-based action."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """As a player casts an omen card, the player chooses whether they cast the card normally or as an Omen."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """If you cast an omen card as an Omen, use only its alternative characteristics to determine whether it’s legal to cast that spell. For example, if you control Thundermane Dragon (“You may cast creature spells with power 4 or greater from the top of your library.”) and Twinmaw Stormbrood is on top of your library, you can cast Twinmaw Stormbrood, but not Charring Bite."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """When casting a spell as an Omen, use the alternative characteristics and ignore all of the card’s normal characteristics. The spell’s color, mana cost, mana value, and so on are determined by only those alternative characteristics. If the spell leaves the stack, it immediately resumes using its normal characteristics."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """Casting a card as an Omen isn’t casting it for an alternative cost. Effects that allow you to cast a spell for an alternative cost or without paying its mana cost may allow you to apply those to the Omen."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """An omen card is a creature card in every zone except the stack, as well as while on the stack if not cast as an Omen. Ignore its alternative characteristics in those cases. For example, while it’s in your graveyard, Twinmaw Stormbrood is a white creature card whose mana value is 6. It can’t be the target of the reflexive ability created by Kishla Trawlers’s triggered ability (“…When you do, return target instant or sorcery card from your graveyard to your hand.”)."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """If a spell is cast as an Omen, its controller shuffles it into its owner’s library instead of putting it into its owner’s graveyard as it resolves."""@en ] .
+
+:ZurgosVanguard rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Zurgo's Vanguard" ;
+    :manaCost "{2}{R}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Dog ,
+                :Soldier ;
+    :hasRarity :Uncommon ;
+    :hasColor :Red ;
+    :hasColorIdentity :Red ;
+    :isInSet :TarkirDragonstorm ;
+    :cardNumber "133"^^xsd:integer ;
+    :artist "Michele Giorgi" ;
+    :hasLanguage :English ;
+    :power "*" ;
+    :toughness "3" ;
+    :toughnessValue "3"^^xsd:integer ;
+    :hasKeywordAbility :Mobilize ;
+    :printedText """Mobilize 1 (Whenever this creature attacks, create a tapped and attacking 1/1 red Warrior creature token. Sacrifice it at the beginning of the next end step.)
+Zurgo's Vanguard's power is equal to the number of creatures you control."""@en ;
+    :oracleText """Mobilize 1 (Whenever this creature attacks, create a tapped and attacking 1/1 red Warrior creature token. Sacrifice it at the beginning of the next end step.)
+Zurgo's Vanguard's power is equal to the number of creatures you control."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=693613"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/tdm/133/zurgos-vanguard"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "95654"^^xsd:positiveInteger ;
+    :arenaName "Zurgo's Vanguard" ;
+    :arenaSetCode "TDM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:AttunedHunter rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Attuned Hunter" ;
+    :manaCost "{2}{G}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Human ,
+                :Ranger ;
+    :hasRarity :Uncommon ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :TarkirDragonstorm ;
+    :cardNumber "135"^^xsd:integer ;
+    :artist "Scott Murphy" ;
+    :hasLanguage :English ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "3" ;
+    :toughnessValue "3"^^xsd:integer ;
+    :hasKeywordAbility :Trample ;
+    :printedText """Trample
+Whenever one or more cards leave your graveyard during your turn, put a +1/+1 counter on this creature."""@en ;
+    :oracleText """Trample
+Whenever one or more cards leave your graveyard during your turn, put a +1/+1 counter on this creature."""@en ;
+    :flavorText """"Sokran is no mere bear. She is friend, family, and confidante—and more intelligent than some of my blood relatives.\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=693615"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/tdm/135/attuned-hunter"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "95656"^^xsd:positiveInteger ;
+    :arenaName "Attuned Hunter" ;
+    :arenaSetCode "TDM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """If multiple cards leave your graveyard at the same time, Attuned Hunter’s last ability will trigger only once."""@en ] .
+
+:ChampionOfDusan rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Champion of Dusan" ;
+    :manaCost "{2}{G}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Human ,
+                :Warrior ;
+    :hasRarity :Common ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :TarkirDragonstorm ;
+    :cardNumber "137"^^xsd:integer ;
+    :artist "Bastien L. Deharme" ;
+    :hasLanguage :English ;
+    :power "4" ;
+    :powerValue "4"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    :hasKeywordAbility :Trample ;
+    :hasAbilityWord :Renew ;
+    :printedText """Trample
+Renew — {1}{G}, Exile this card from your graveyard: Put a +1/+1 counter and a trample counter on target creature. Activate only as a sorcery."""@en ;
+    :oracleText """Trample
+Renew — {1}{G}, Exile this card from your graveyard: Put a +1/+1 counter and a trample counter on target creature. Activate only as a sorcery."""@en ;
+    :flavorText """Dusan boxing matches allow contestants no weapons, no allies, and no excuses."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=693617"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/tdm/137/champion-of-dusan"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "95659"^^xsd:positiveInteger ;
+    :arenaName "Champion of Dusan" ;
+    :arenaSetCode "TDM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """If a card with a renew ability is put into your graveyard during your turn, you can activate that ability if it’s legal to do so before any other player can take any actions."""@en ] .
+
+:HeritageReclamation rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Heritage Reclamation" ;
+    :manaCost "{1}{G}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Instant ;
+    :hasRarity :Common ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :TarkirDragonstorm ;
+    :cardNumber "145"^^xsd:integer ;
+    :artist "Konstantin Porubov" ;
+    :hasLanguage :English ;
+    :printedText """Choose one —
+• Destroy target artifact.
+• Destroy target enchantment.
+• Exile up to one target card from a graveyard. Draw a card."""@en ;
+    :oracleText """Choose one —
+• Destroy target artifact.
+• Destroy target enchantment.
+• Exile up to one target card from a graveyard. Draw a card."""@en ;
+    :flavorText """With an echoing crash the effigy fell, the symbol of Atarka's tyranny expunged from Temur lands."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=693625"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/tdm/145/heritage-reclamation"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "95667"^^xsd:positiveInteger ;
+    :arenaName "Heritage Reclamation" ;
+    :arenaSetCode "TDM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """You don’t have to choose a target for Heritage Reclamation if you choose its third mode. However, if you do, and that target is illegal at the time Heritage Reclamation tries to resolve, it won’t resolve and none of its effects will happen. You won’t draw a card."""@en ] .
+
+:LasydProwler rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Lasyd Prowler" ;
+    :manaCost "{2}{G}{G}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Snake ,
+                :Ranger ;
+    :hasRarity :Rare ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :TarkirDragonstorm ;
+    :cardNumber "149"^^xsd:integer ;
+    :artist "Anna Pavleeva" ;
+    :hasLanguage :English ;
+    :power "5" ;
+    :powerValue "5"^^xsd:integer ;
+    :toughness "5" ;
+    :toughnessValue "5"^^xsd:integer ;
+    :hasKeywordAction :Mill ;
+    :hasAbilityWord :Renew ;
+    :printedText """When this creature enters, you may mill cards equal to the number of lands you control.
+Renew — {1}{G}, Exile this card from your graveyard: Put X +1/+1 counters on target creature, where X is the number of land cards in your graveyard. Activate only as a sorcery."""@en ;
+    :oracleText """When this creature enters, you may mill cards equal to the number of lands you control.
+Renew — {1}{G}, Exile this card from your graveyard: Put X +1/+1 counters on target creature, where X is the number of land cards in your graveyard. Activate only as a sorcery."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=693629"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/tdm/149/lasyd-prowler"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "95671"^^xsd:positiveInteger ;
+    :arenaName "Lasyd Prowler" ;
+    :arenaSetCode "TDM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """The value of X is calculated only once, as Lasyd Prowler’s renew ability resolves."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """If you don’t have at least as many cards in your library as lands you control when Lasyd Prowler’s first ability resolves, you can’t choose to mill that many cards."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """If a card with a renew ability is put into your graveyard during your turn, you can activate that ability if it’s legal to do so before any other player can take any actions."""@en ] .
+
+:PiercingExhale rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Piercing Exhale" ;
+    :manaCost "{1}{G}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Instant ;
+    :hasRarity :Common ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :TarkirDragonstorm ;
+    :cardNumber "151"^^xsd:integer ;
+    :artist "Jorge Jacinto" ;
+    :hasLanguage :English ;
+    :hasKeywordAction :Surveil ,
+                      :Behold ;
+    :printedText """As an additional cost to cast this spell, you may behold a Dragon. (You may choose a Dragon you control or reveal a Dragon card from your hand.)
+Target creature you control deals damage equal to its power to target creature or planeswalker. If a Dragon was beheld, surveil 2."""@en ;
+    :oracleText """As an additional cost to cast this spell, you may behold a Dragon. (You may choose a Dragon you control or reveal a Dragon card from your hand.)
+Target creature you control deals damage equal to its power to target creature or planeswalker. If a Dragon was beheld, surveil 2."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=693631"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/tdm/151/piercing-exhale"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "95673"^^xsd:positiveInteger ;
+    :arenaName "Piercing Exhale" ;
+    :arenaSetCode "TDM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """If a card in your hand is already revealed (perhaps because it was revealed to pay a cost of a spell that’s still on the stack or due to the effect of a card like Telepathy), you may reveal it again to pay the cost of another spell or ability that requires you to reveal a card from your hand."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """Effects that say “If a [quality] was beheld” only care if a card of that quality was revealed or a permanent you control of that quality was chosen. No matter what happens to that card or permanent after that, it was still beheld, and any additional effects that depend on that card or permanent being beheld will still happen."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """If a cost to cast a spell includes revealing a card, that card remains revealed from the time the spell is announced until the time it leaves the stack."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """If an effect refers to a “[subtype] card,” it refers only to a card that has that subtype. For example, Teeming Dragonstorm is a card that cares about Dragons and features Dragons in its art, but it isn’t a Dragon card."""@en ] .
+
+:SaguPummeler rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Sagu Pummeler" ;
+    :manaCost "{3}{G}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Beast ;
+    :hasRarity :Common ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :TarkirDragonstorm ;
+    :cardNumber "156"^^xsd:integer ;
+    :artist "Francisco Badilla" ;
+    :hasLanguage :English ;
+    :power "4" ;
+    :powerValue "4"^^xsd:integer ;
+    :toughness "4" ;
+    :toughnessValue "4"^^xsd:integer ;
+    :hasKeywordAbility :Reach ;
+    :hasAbilityWord :Renew ;
+    :printedText """Reach
+Renew — {4}{G}, Exile this card from your graveyard: Put two +1/+1 counters and a reach counter on target creature. Activate only as a sorcery."""@en ;
+    :oracleText """Reach
+Renew — {4}{G}, Exile this card from your graveyard: Put two +1/+1 counters and a reach counter on target creature. Activate only as a sorcery."""@en ;
+    :flavorText """Like talking to a grokmaul
+—Tarkir expression meaning "a failure of diplomacy\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=693636"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/tdm/156/sagu-pummeler"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "95678"^^xsd:positiveInteger ;
+    :arenaName "Sagu Pummeler" ;
+    :arenaSetCode "TDM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """If a card with a renew ability is put into your graveyard during your turn, you can activate that ability if it’s legal to do so before any other player can take any actions."""@en ] .
+
+:UndergrowthLeopard rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Undergrowth Leopard" ;
+    :manaCost "{1}{G}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Cat ;
+    :hasRarity :Common ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :TarkirDragonstorm ;
+    :cardNumber "165"^^xsd:integer ;
+    :artist "Iris Compiet" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    :hasKeywordAbility :Vigilance ;
+    :printedText """Vigilance
+{1}, Sacrifice this creature: Destroy target artifact or enchantment."""@en ;
+    :oracleText """Vigilance
+{1}, Sacrifice this creature: Destroy target artifact or enchantment."""@en ;
+    :flavorText """There are those who developed peculiar tastes after generations of dining upon the remains of interclan rivalry."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=693645"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/tdm/165/undergrowth-leopard"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "95688"^^xsd:positiveInteger ;
+    :arenaName "Undergrowth Leopard" ;
+    :arenaSetCode "TDM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
 :BarrensteppeSiege rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Barrensteppe Siege" ;
@@ -161,6 +2090,850 @@ Whenever you cast a colorless spell, exile up to one target permanent that's one
         :rulingDate "2025-04-04"^^xsd:date ;
         :rulingText """Barrensteppe Siege’s Mardu ability will check as the end step starts to see if a creature died under your control this turn. If none did, the ability won’t trigger at all."""@en ] .
 
+:BoneCairnButcher rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Bone-Cairn Butcher" ;
+    :manaCost "{1}{R}{W}{B}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Demon ;
+    :hasRarity :Uncommon ;
+    :hasColor :White ,
+              :Black ,
+              :Red ;
+    :hasColorIdentity :White ,
+                      :Black ,
+                      :Red ;
+    :isInSet :TarkirDragonstorm ;
+    :cardNumber "173"^^xsd:integer ;
+    :artist "David Palumbo" ;
+    :hasLanguage :English ;
+    :power "4" ;
+    :powerValue "4"^^xsd:integer ;
+    :toughness "4" ;
+    :toughnessValue "4"^^xsd:integer ;
+    :hasKeywordAbility :Mobilize ;
+    :printedText """Mobilize 2 (Whenever this creature attacks, create two tapped and attacking 1/1 red Warrior creature tokens. Sacrifice them at the beginning of the next end step.)
+Attacking tokens you control have deathtouch."""@en ;
+    :oracleText """Mobilize 2 (Whenever this creature attacks, create two tapped and attacking 1/1 red Warrior creature tokens. Sacrifice them at the beginning of the next end step.)
+Attacking tokens you control have deathtouch."""@en ;
+    :flavorText """In power, in hunger, in cruelty—insatiable."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=693653"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/tdm/173/bone-cairn-butcher"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "95696"^^xsd:positiveInteger ;
+    :arenaName "Bone-Cairn Butcher" ;
+    :arenaSetCode "TDM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """You choose the player, planeswalker, or battle each Warrior token is attacking. They don’t all have to attack the same one, and they don’t have to attack the same player, planeswalker, or battle as the creature with mobilize."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """Although the Warrior tokens enter as attacking creatures, they were never declared as attacking creatures. Abilities that trigger whenever a creature attacks won’t trigger when the tokens enter attacking."""@en ] .
+
+:CallTheSpiritDragons rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Call the Spirit Dragons" ;
+    :manaCost "{W}{U}{B}{R}{G}" ;
+    :manaValue "5"^^xsd:nonNegativeInteger ;
+    :hasCardType :Enchantment ;
+    :hasRarity :MythicRare ;
+    :hasColor :White ,
+              :Blue ,
+              :Black ,
+              :Red ,
+              :Green ;
+    :hasColorIdentity :White ,
+                      :Blue ,
+                      :Black ,
+                      :Red ,
+                      :Green ;
+    :isInSet :TarkirDragonstorm ;
+    :cardNumber "174"^^xsd:integer ;
+    :artist "Liiga Smilshkalne" ;
+    :hasLanguage :English ;
+    :printedText """Dragons you control have indestructible.
+At the beginning of your upkeep, for each color, put a +1/+1 counter on a Dragon you control of that color. If you put +1/+1 counters on five Dragons this way, you win the game."""@en ;
+    :oracleText """Dragons you control have indestructible.
+At the beginning of your upkeep, for each color, put a +1/+1 counter on a Dragon you control of that color. If you put +1/+1 counters on five Dragons this way, you win the game."""@en ;
+    :flavorText """The essence of Tarkir was shaped into draconic embodiments of the re-formed clans."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=693654"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/tdm/174/call-the-spirit-dragons"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "95697"^^xsd:positiveInteger ;
+    :arenaName "Call the Spirit Dragons" ;
+    :arenaSetCode "TDM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """The last ability will only cause you to win the game if you put a +1/+1 counter on each of five different Dragons with it."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """Because damage remains marked on a creature until the damage is removed as the turn ends, nonlethal damage dealt to a Dragon you control may become lethal if Call the Spirit Dragons leaves the battlefield during that turn."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """If you control a Dragon that is more than one color, you may put more than one +1/+1 counter on it with the last ability of Call the Spirit Dragons."""@en ] .
+
+:DefibrillatingCurrent rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Defibrillating Current" ;
+    :manaCost "{2/R}{2/W}{2/B}" ;
+    :manaValue "6"^^xsd:nonNegativeInteger ;
+    :hasCardType :Sorcery ;
+    :hasRarity :Uncommon ;
+    :hasColor :White ,
+              :Black ,
+              :Red ;
+    :hasColorIdentity :White ,
+                      :Black ,
+                      :Red ;
+    :isInSet :TarkirDragonstorm ;
+    :cardNumber "177"^^xsd:integer ;
+    :artist "Isis" ;
+    :hasLanguage :English ;
+    :printedText """Defibrillating Current deals 4 damage to target creature or planeswalker and you gain 2 life."""@en ;
+    :oracleText """Defibrillating Current deals 4 damage to target creature or planeswalker and you gain 2 life."""@en ;
+    :flavorText """A small shock to save a life, a large one to take it away.
+—Mardu healer's adage"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=693657"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/tdm/177/defibrillating-current"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "95700"^^xsd:positiveInteger ;
+    :arenaName "Defibrillating Current" ;
+    :arenaSetCode "TDM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """If the target permanent is an illegal target as Defibrillating Current tries to resolve, it won’t resolve and none of its effects will happen. You won’t gain life."""@en ] .
+
+:NerivHeartOfTheStorm rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Neriv, Heart of the Storm" ;
+    :manaCost "{1}{R}{W}{B}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasSuperType :Legendary ;
+    :hasCardType :Creature ;
+    :hasSubType :Spirit ,
+                :Dragon ;
+    :hasRarity :MythicRare ;
+    :hasColor :White ,
+              :Black ,
+              :Red ;
+    :hasColorIdentity :White ,
+                      :Black ,
+                      :Red ;
+    :isInSet :TarkirDragonstorm ;
+    :cardNumber "210"^^xsd:integer ;
+    :artist "Victor Adame Minguez" ;
+    :hasLanguage :English ;
+    :power "4" ;
+    :powerValue "4"^^xsd:integer ;
+    :toughness "5" ;
+    :toughnessValue "5"^^xsd:integer ;
+    :hasKeywordAbility :Flying ;
+    :printedText """Flying
+If a creature you control that entered this turn would deal damage, it deals twice that much damage instead."""@en ;
+    :oracleText """Flying
+If a creature you control that entered this turn would deal damage, it deals twice that much damage instead."""@en ;
+    :flavorText """Scales streaked with lightning, trailing thunder in his wake, Neriv is the living banner around which the Mardu rally."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=693690"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/tdm/210/neriv-heart-of-the-storm"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "95734"^^xsd:positiveInteger ;
+    :arenaName "Neriv, Heart of the Storm" ;
+    :arenaSetCode "TDM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """If damage dealt is being divided or assigned among multiple permanents or players, that damage is divided or assigned before any effects modify how much damage would be dealt. For example, say you control Neriv and you attack an opponent with a 5/5 creature with trample and haste that entered this turn. If it’s blocked by a 2/2 creature, you can assign 2 damage to the blocker and 3 damage to the defending player. Those amounts are then doubled to 4 and 6, respectively."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """The damage is dealt by the same source as the original source of damage. The doubled damage isn’t dealt by Neriv unless it was the original source of damage."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """If another effect (or effects) modifies how much damage a creature you control that entered this turn would deal (for example, by preventing some of that damage), the player being dealt damage or the controller of the permanent being dealt damage chooses the order in which any such effects, including the effect of Neriv’s last ability, apply. If all of the damage is prevented before the effect of Neriv’s last ability would apply, its effect no longer applies."""@en ] .
+
+:ReigningVictor rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Reigning Victor" ;
+    :manaCost "{2/R}{2/W}{2/B}" ;
+    :manaValue "6"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Orc ,
+                :Warrior ;
+    :hasRarity :Common ;
+    :hasColor :White ,
+              :Black ,
+              :Red ;
+    :hasColorIdentity :White ,
+                      :Black ,
+                      :Red ;
+    :isInSet :TarkirDragonstorm ;
+    :cardNumber "216"^^xsd:integer ;
+    :artist "Warren Mahy" ;
+    :hasLanguage :English ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "3" ;
+    :toughnessValue "3"^^xsd:integer ;
+    :hasKeywordAbility :Mobilize ;
+    :printedText """Mobilize 1 (Whenever this creature attacks, create a tapped and attacking 1/1 red Warrior creature token. Sacrifice it at the beginning of the next end step.)
+When this creature enters, target creature gets +1/+0 and gains indestructible until end of turn. (Damage and effects that say "destroy" don't destroy it.)"""@en ;
+    :oracleText """Mobilize 1 (Whenever this creature attacks, create a tapped and attacking 1/1 red Warrior creature token. Sacrifice it at the beginning of the next end step.)
+When this creature enters, target creature gets +1/+0 and gains indestructible until end of turn. (Damage and effects that say "destroy" don't destroy it.)"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=693696"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/tdm/216/reigning-victor"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "95741"^^xsd:positiveInteger ;
+    :arenaName "Reigning Victor" ;
+    :arenaSetCode "TDM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """Although the Warrior tokens enter as attacking creatures, they were never declared as attacking creatures. Abilities that trigger whenever a creature attacks won’t trigger when the tokens enter attacking."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """You choose the player, planeswalker, or battle each Warrior token is attacking. They don’t all have to attack the same one, and they don’t have to attack the same player, planeswalker, or battle as the creature with mobilize."""@en ] .
+
+:RunescaleStormbrood rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Runescale Stormbrood // Chilling Screech" ;
+    :manaCost "{3}{R}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Dragon ,
+                :Omen ;
+    :hasRarity :Uncommon ;
+    :hasColor :Red ;
+    :hasColorIdentity :Blue ,
+                      :Red ;
+    :isInSet :TarkirDragonstorm ;
+    :cardNumber "221"^^xsd:integer ;
+    :artist "Loïc Canavaggia" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "4" ;
+    :toughnessValue "4"^^xsd:integer ;
+    :hasKeywordAbility :Flying ;
+    :printedText """Flying
+Whenever you cast a noncreature spell or a Dragon spell, this creature gets +2/+0 until end of turn.
+//
+Counter target spell with mana value 2 or less. (Then shuffle this card into its owner's library.)"""@en ;
+    :oracleText """Flying
+Whenever you cast a noncreature spell or a Dragon spell, this creature gets +2/+0 until end of turn.
+//
+Counter target spell with mana value 2 or less. (Then shuffle this card into its owner's library.)"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=693701"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/tdm/221/runescale-stormbrood-chilling-screech"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "95746"^^xsd:positiveInteger ;
+    :arenaName "Runescale Stormbrood" ;
+    :arenaSetCode "TDM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """If an effect instructs you to choose a card name, you may choose the alternative Omen name. Consider only the alternative characteristics to determine whether that is an appropriate name to choose."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """If an Omen spell has one or more targets and all of those targets are illegal when the spell tries to resolve, it won’t resolve. None of its effects will happen, and it will be put into its owner’s graveyard. It won’t be shuffled into its owner’s library."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """Casting a card as an Omen isn’t casting it for an alternative cost. Effects that allow you to cast a spell for an alternative cost or without paying its mana cost may allow you to apply those to the Omen."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """As a player casts an omen card, the player chooses whether they cast the card normally or as an Omen."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """If an Omen spell is copied, that copy is also an Omen and is shuffled into its owner’s library as it resolves. Its owner still shuffles their library, but the copy ceases to exist as a state-based action."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """An omen card is a creature card in every zone except the stack, as well as while on the stack if not cast as an Omen. Ignore its alternative characteristics in those cases. For example, while it’s in your graveyard, Twinmaw Stormbrood is a white creature card whose mana value is 6. It can’t be the target of the reflexive ability created by Kishla Trawlers’s triggered ability (“…When you do, return target instant or sorcery card from your graveyard to your hand.”)."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """When casting a spell as an Omen, use the alternative characteristics and ignore all of the card’s normal characteristics. The spell’s color, mana cost, mana value, and so on are determined by only those alternative characteristics. If the spell leaves the stack, it immediately resumes using its normal characteristics."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """If you cast an omen card as an Omen, use only its alternative characteristics to determine whether it’s legal to cast that spell. For example, if you control Thundermane Dragon (“You may cast creature spells with power 4 or greater from the top of your library.”) and Twinmaw Stormbrood is on top of your library, you can cast Twinmaw Stormbrood, but not Charring Bite."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """If a spell is cast as an Omen, its controller shuffles it into its owner’s library instead of putting it into its owner’s graveyard as it resolves."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """If an Omen spell is countered or an effect causes it to otherwise leave the stack, it won’t be shuffled into its owner’s library."""@en ] .
+
+:BoulderbornDragon rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Boulderborn Dragon" ;
+    :manaCost "{5}" ;
+    :manaValue "5"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ,
+                 :Creature ;
+    :hasSubType :Dragon ;
+    :hasRarity :Common ;
+    :isInSet :TarkirDragonstorm ;
+    :cardNumber "239"^^xsd:integer ;
+    :artist "Alexander Ostrowski" ;
+    :hasLanguage :English ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "3" ;
+    :toughnessValue "3"^^xsd:integer ;
+    :hasKeywordAbility :Flying ,
+                       :Vigilance ;
+    :hasKeywordAction :Surveil ;
+    :printedText """Flying, vigilance
+Whenever this creature attacks, surveil 1. (Look at the top card of your library. You may put it into your graveyard.)"""@en ;
+    :oracleText """Flying, vigilance
+Whenever this creature attacks, surveil 1. (Look at the top card of your library. You may put it into your graveyard.)"""@en ;
+    :flavorText """The draconic power that flowed out from the dragonstorms imbued the landscape with draconic features—scales, claws, and appetites."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=693719"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/tdm/239/boulderborn-dragon"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "95767"^^xsd:positiveInteger ;
+    :arenaName "Boulderborn Dragon" ;
+    :arenaSetCode "TDM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:DragonstormGlobe rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Dragonstorm Globe" ;
+    :manaCost "{3}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ;
+    :hasRarity :Common ;
+    :isInSet :TarkirDragonstorm ;
+    :cardNumber "241"^^xsd:integer ;
+    :artist "Adrián Rodríguez Pérez" ;
+    :hasLanguage :English ;
+    :producesMana :White ,
+                  :Blue ,
+                  :Black ,
+                  :Red ,
+                  :Green ;
+    :printedText """Each Dragon you control enters with an additional +1/+1 counter on it.
+{T}: Add one mana of any color."""@en ;
+    :oracleText """Each Dragon you control enters with an additional +1/+1 counter on it.
+{T}: Add one mana of any color."""@en ;
+    :flavorText """Jeskai scholars fashioned devices to forecast the behavior of the dragonstorms."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=693721"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/tdm/241/dragonstorm-globe"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "95769"^^xsd:positiveInteger ;
+    :arenaName "Dragonstorm Globe" ;
+    :arenaSetCode "TDM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-04-04"^^xsd:date ;
+        :rulingText """Dragons you control that enter at the same time as Dragonstorm Globe won’t enter with an additional +1/+1 counter."""@en ] .
+
+:JadeCastSentinel rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Jade-Cast Sentinel" ;
+    :manaCost "{4}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ,
+                 :Creature ;
+    :hasSubType :Ape ,
+                :Snake ;
+    :hasRarity :Common ;
+    :isInSet :TarkirDragonstorm ;
+    :cardNumber "243"^^xsd:integer ;
+    :artist "David Astruga" ;
+    :hasLanguage :English ;
+    :power "1" ;
+    :powerValue "1"^^xsd:integer ;
+    :toughness "5" ;
+    :toughnessValue "5"^^xsd:integer ;
+    :hasKeywordAbility :Reach ;
+    :printedText """Reach
+{2}, {T}: Put target card from a graveyard on the bottom of its owner's library."""@en ;
+    :oracleText """Reach
+{2}, {T}: Put target card from a graveyard on the bottom of its owner's library."""@en ;
+    :flavorText """Set in motion by artificers long forgotten, it remained loyal through the ages to the occupants of Kheru City."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=693723"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/tdm/243/jade-cast-sentinel"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "95771"^^xsd:positiveInteger ;
+    :arenaName "Jade-Cast Sentinel" ;
+    :arenaSetCode "TDM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:MarduMonument rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Mardu Monument" ;
+    :manaCost "{2}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ;
+    :hasRarity :Uncommon ;
+    :hasColorIdentity :White ,
+                      :Black ,
+                      :Red ;
+    :isInSet :TarkirDragonstorm ;
+    :cardNumber "245"^^xsd:integer ;
+    :artist "Salvatorre Zee Yazzie" ;
+    :hasLanguage :English ;
+    :printedText """When this artifact enters, search your library for a basic Mountain, Plains, or Swamp card, reveal it, put it into your hand, then shuffle.
+{2}{R}{W}{B}, {T}, Sacrifice this artifact: Create three 1/1 red Warrior creature tokens. They gain menace and haste until end of turn. Activate only as a sorcery. (A creature with menace can't be blocked except by two or more creatures.)"""@en ;
+    :oracleText """When this artifact enters, search your library for a basic Mountain, Plains, or Swamp card, reveal it, put it into your hand, then shuffle.
+{2}{R}{W}{B}, {T}, Sacrifice this artifact: Create three 1/1 red Warrior creature tokens. They gain menace and haste until end of turn. Activate only as a sorcery. (A creature with menace can't be blocked except by two or more creatures.)"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=693725"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/tdm/245/mardu-monument"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "95773"^^xsd:positiveInteger ;
+    :arenaName "Mardu Monument" ;
+    :arenaSetCode "TDM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:MoxJasper rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Mox Jasper" ;
+    :manaCost "{0}" ;
+    :manaValue "0"^^xsd:nonNegativeInteger ;
+    :hasSuperType :Legendary ;
+    :hasCardType :Artifact ;
+    :hasRarity :MythicRare ;
+    :isInSet :TarkirDragonstorm ;
+    :cardNumber "246"^^xsd:integer ;
+    :artist "Steven Belledin" ;
+    :hasLanguage :English ;
+    :producesMana :White ,
+                  :Blue ,
+                  :Black ,
+                  :Red ,
+                  :Green ;
+    :printedText """{T}: Add one mana of any color. Activate only if you control a Dragon."""@en ;
+    :oracleText """{T}: Add one mana of any color. Activate only if you control a Dragon."""@en ;
+    :flavorText """"Rage. Greed. Arrogance. People only accuse dragons of what they fear in themselves."
+—Sarkhan"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=693726"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/tdm/246/mox-jasper"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "95774"^^xsd:positiveInteger ;
+    :arenaName "Mox Jasper" ;
+    :arenaSetCode "TDM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:WatcherOfTheWayside rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Watcher of the Wayside" ;
+    :manaCost "{3}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ,
+                 :Creature ;
+    :hasSubType :Golem ;
+    :hasRarity :Common ;
+    :isInSet :TarkirDragonstorm ;
+    :cardNumber "249"^^xsd:integer ;
+    :artist "Brian Valeza" ;
+    :hasLanguage :English ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    :hasKeywordAction :Mill ;
+    :printedText """When this creature enters, target player mills two cards. You gain 2 life. (To mill two cards, a player puts the top two cards of their library into their graveyard.)"""@en ;
+    :oracleText """When this creature enters, target player mills two cards. You gain 2 life. (To mill two cards, a player puts the top two cards of their library into their graveyard.)"""@en ;
+    :flavorText """Against dragonlords, khans, and Ugin himself, the golem survived. Original purpose forgotten, it awaits orders that will never come, from a world that has moved on without it."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=693729"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/tdm/249/watcher-of-the-wayside"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "95777"^^xsd:positiveInteger ;
+    :arenaName "Watcher of the Wayside" ;
+    :arenaSetCode "TDM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:BloodfellCavesTarkirDragonstorm250 rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Bloodfell Caves" ;
+    :manaValue "0"^^xsd:nonNegativeInteger ;
+    :hasCardType :Land ;
+    :hasRarity :Common ;
+    :hasColorIdentity :Black ,
+                      :Red ;
+    :isInSet :TarkirDragonstorm ;
+    :cardNumber "250"^^xsd:integer ;
+    :artist "Piotr Dura" ;
+    :hasLanguage :English ;
+    :producesMana :Black ,
+                  :Red ;
+    :entersTapped "true"^^xsd:boolean ;
+    :printedText """This land enters tapped.
+When this land enters, you gain 1 life.
+{T}: Add {B} or {R}."""@en ;
+    :oracleText """This land enters tapped.
+When this land enters, you gain 1 life.
+{T}: Add {B} or {R}."""@en ;
+    :flavorText """"These caves hide beasts above and below their waters. For safe passage, the Sultai agree a small cargo trade is fair for risking our necks."
+—Samor, Mardu border guard"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=693730"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/tdm/250/bloodfell-caves"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "95778"^^xsd:positiveInteger ;
+    :arenaName "Bloodfell Caves" ;
+    :arenaSetCode "TDM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:DismalBackwaterTarkirDragonstorm254 rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Dismal Backwater" ;
+    :manaValue "0"^^xsd:nonNegativeInteger ;
+    :hasCardType :Land ;
+    :hasRarity :Common ;
+    :hasColorIdentity :Blue ,
+                      :Black ;
+    :isInSet :TarkirDragonstorm ;
+    :cardNumber "254"^^xsd:integer ;
+    :artist "Alayna Danner" ;
+    :hasLanguage :English ;
+    :producesMana :Blue ,
+                  :Black ;
+    :entersTapped "true"^^xsd:boolean ;
+    :printedText """This land enters tapped.
+When this land enters, you gain 1 life.
+{T}: Add {U} or {B}."""@en ;
+    :oracleText """This land enters tapped.
+When this land enters, you gain 1 life.
+{T}: Add {U} or {B}."""@en ;
+    :flavorText """"I ask only that the winds return you to me as swiftly as they bear you and the Storm Crane away."
+—Samthar, Sultai merchant, to Jialing, Jeskai monk"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=693734"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/tdm/254/dismal-backwater"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "95782"^^xsd:positiveInteger ;
+    :arenaName "Dismal Backwater" ;
+    :arenaSetCode "TDM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:EvolvingWildsTarkirDragonstorm255 rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Evolving Wilds" ;
+    :manaValue "0"^^xsd:nonNegativeInteger ;
+    :hasCardType :Land ;
+    :hasRarity :Common ;
+    :isInSet :TarkirDragonstorm ;
+    :cardNumber "255"^^xsd:integer ;
+    :artist "Leon Tukker" ;
+    :hasLanguage :English ;
+    :isFetchLand "true"^^xsd:boolean ;
+    :printedText """{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."""@en ;
+    :oracleText """{T}, Sacrifice this land: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle."""@en ;
+    :flavorText """Dragonstorm chasers are not deterred by danger—they claim there is nothing like witnessing the land embracing the power of a storm."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=693735"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/tdm/255/evolving-wilds"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "95783"^^xsd:positiveInteger ;
+    :arenaName "Evolving Wilds" ;
+    :arenaSetCode "TDM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:JungleHollowTarkirDragonstorm258 rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Jungle Hollow" ;
+    :manaValue "0"^^xsd:nonNegativeInteger ;
+    :hasCardType :Land ;
+    :hasRarity :Common ;
+    :hasColorIdentity :Black ,
+                      :Green ;
+    :isInSet :TarkirDragonstorm ;
+    :cardNumber "258"^^xsd:integer ;
+    :artist "Cristi Balanescu" ;
+    :hasLanguage :English ;
+    :producesMana :Black ,
+                  :Green ;
+    :entersTapped "true"^^xsd:boolean ;
+    :printedText """This land enters tapped.
+When this land enters, you gain 1 life.
+{T}: Add {B} or {G}."""@en ;
+    :oracleText """This land enters tapped.
+When this land enters, you gain 1 life.
+{T}: Add {B} or {G}."""@en ;
+    :flavorText """Long-standing disagreements between the Sultai and Abzan about how to honor their dead have led to rare but fierce skirmishes."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=693738"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/tdm/258/jungle-hollow"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "95786"^^xsd:positiveInteger ;
+    :arenaName "Jungle Hollow" ;
+    :arenaSetCode "TDM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:NomadOutpost rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Nomad Outpost" ;
+    :manaValue "0"^^xsd:nonNegativeInteger ;
+    :hasCardType :Land ;
+    :hasRarity :Uncommon ;
+    :hasColorIdentity :White ,
+                      :Black ,
+                      :Red ;
+    :isInSet :TarkirDragonstorm ;
+    :cardNumber "263"^^xsd:integer ;
+    :artist "Alayna Danner" ;
+    :hasLanguage :English ;
+    :producesMana :White ,
+                  :Black ,
+                  :Red ;
+    :entersTapped "true"^^xsd:boolean ;
+    :printedText """This land enters tapped.
+{T}: Add {R}, {W}, or {B}."""@en ;
+    :oracleText """This land enters tapped.
+{T}: Add {R}, {W}, or {B}."""@en ;
+    :flavorText """"The Mardu breathe life into what was lost under the dragonlords. If the Abzan are upset, it should be at themselves."
+—Tersa Lightshatter"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=693743"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/tdm/263/nomad-outpost"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "95791"^^xsd:positiveInteger ;
+    :arenaName "Nomad Outpost" ;
+    :arenaSetCode "TDM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
 :RuggedHighlandsTarkirDragonstorm265 rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Rugged Highlands" ;
@@ -191,6 +2964,138 @@ When this land enters, you gain 1 life.
                    :MagicOnline ;
     :arenaId "95793"^^xsd:positiveInteger ;
     :arenaName "Rugged Highlands" ;
+    :arenaSetCode "TDM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:ScouredBarrensTarkirDragonstorm267 rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Scoured Barrens" ;
+    :manaValue "0"^^xsd:nonNegativeInteger ;
+    :hasCardType :Land ;
+    :hasRarity :Common ;
+    :hasColorIdentity :White ,
+                      :Black ;
+    :isInSet :TarkirDragonstorm ;
+    :cardNumber "267"^^xsd:integer ;
+    :artist "Brent Hollowell" ;
+    :hasLanguage :English ;
+    :producesMana :White ,
+                  :Black ;
+    :entersTapped "true"^^xsd:boolean ;
+    :printedText """This land enters tapped.
+When this land enters, you gain 1 life.
+{T}: Add {W} or {B}."""@en ;
+    :oracleText """This land enters tapped.
+When this land enters, you gain 1 life.
+{T}: Add {W} or {B}."""@en ;
+    :flavorText """By the codes of Mardu and Abzan alike, both sides allowed their enemies time to grieve after a battle."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=693747"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/tdm/267/scoured-barrens"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "95795"^^xsd:positiveInteger ;
+    :arenaName "Scoured Barrens" ;
+    :arenaSetCode "TDM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:ThornwoodFallsTarkirDragonstorm269 rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Thornwood Falls" ;
+    :manaValue "0"^^xsd:nonNegativeInteger ;
+    :hasCardType :Land ;
+    :hasRarity :Common ;
+    :hasColorIdentity :Blue ,
+                      :Green ;
+    :isInSet :TarkirDragonstorm ;
+    :cardNumber "269"^^xsd:integer ;
+    :artist "Alexander Ostrowski" ;
+    :hasLanguage :English ;
+    :producesMana :Blue ,
+                  :Green ;
+    :entersTapped "true"^^xsd:boolean ;
+    :printedText """This land enters tapped.
+When this land enters, you gain 1 life.
+{T}: Add {G} or {U}."""@en ;
+    :oracleText """This land enters tapped.
+When this land enters, you gain 1 life.
+{T}: Add {G} or {U}."""@en ;
+    :flavorText """By morning the only evidence of conflict between Temur hunters and Sultai scouts were abandoned banners in the freshly fallen snow."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=693749"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/tdm/269/thornwood-falls"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "95797"^^xsd:positiveInteger ;
+    :arenaName "Thornwood Falls" ;
+    :arenaSetCode "TDM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:WindScarredCragTarkirDragonstorm271 rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Wind-Scarred Crag" ;
+    :manaValue "0"^^xsd:nonNegativeInteger ;
+    :hasCardType :Land ;
+    :hasRarity :Common ;
+    :hasColorIdentity :White ,
+                      :Red ;
+    :isInSet :TarkirDragonstorm ;
+    :cardNumber "271"^^xsd:integer ;
+    :artist "Filip Burburan" ;
+    :hasLanguage :English ;
+    :producesMana :White ,
+                  :Red ;
+    :entersTapped "true"^^xsd:boolean ;
+    :printedText """This land enters tapped.
+When this land enters, you gain 1 life.
+{T}: Add {R} or {W}."""@en ;
+    :oracleText """This land enters tapped.
+When this land enters, you gain 1 life.
+{T}: Add {R} or {W}."""@en ;
+    :flavorText """The Mardu are centered in the present. The Jeskai look to the future. But both know when the time for talking is past."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=693751"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/tdm/271/wind-scarred-crag"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "95799"^^xsd:positiveInteger ;
+    :arenaName "Wind-Scarred Crag" ;
     :arenaSetCode "TDM" ;
     :hasLegality
       [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,

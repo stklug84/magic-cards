@@ -39,8 +39,9 @@
     rdfs:label "Magic Card Collection Individuals – Murders at Karlov Manor"@en ;
     rdfs:comment """An instance graph describing the card individuals of a
 personal Magic: The Gathering card collection that were printed in the set
-Murders at Karlov Manor (MKM). One Card individual is defined per collected
-printing, carrying its characteristics, the platforms it is available on
+Murders at Karlov Manor (MKM). One Card individual is defined per printing
+collected in paper or on MTG Arena, carrying its characteristics, the
+platforms it is available on
 (paper, MTG Arena, Magic Online) with its MTG Arena identity, its legality
 in the paper and MTG Arena formats, and official rulings. Card data was
 sourced from Gatherer and Scryfall. This file imports MagicCardsOntology to
@@ -122,6 +123,61 @@ Solved — At the beginning of combat on your turn, target creature you control 
       [ rdf:type :Ruling ;
         :rulingDate "2024-02-02"^^xsd:date ;
         :rulingText """Once a Case becomes solved, it stays solved until it leaves the battlefield."""@en ] .
+
+:AuspiciousArrival rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Auspicious Arrival" ;
+    :manaCost "{1}{W}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Instant ;
+    :hasRarity :Common ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :MurdersAtKarlovManor ;
+    :cardNumber "5"^^xsd:integer ;
+    :artist "Lie Setiawan" ;
+    :hasLanguage :English ;
+    :hasKeywordAction :Investigate ;
+    :printedText """Target creature gets +2/+2 until end of turn. Investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this token: Draw a card.")"""@en ;
+    :oracleText """Target creature gets +2/+2 until end of turn. Investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this token: Draw a card.")"""@en ;
+    :flavorText """Proft brushed past the guards and introduced himself as "the great Detective Proft" without a hint of irony, then identified the culprit within minutes."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=646569"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mkm/5/auspicious-arrival"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "88926"^^xsd:positiveInteger ;
+    :arenaName "Auspicious Arrival" ;
+    :arenaSetCode "MKM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """You can't sacrifice a Clue to pay multiple costs. For example, you can't sacrifice a Clue token to activate its own ability and also to activate Alquist Proft, Master Sleuth's ability."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """Some abilities trigger "whenever you sacrifice a Clue". Those abilities trigger whenever you sacrifice a Clue for any reason, not just to activate a Clue's activated ability."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """Clue is an artifact type. Even though it appears on some cards with other permanent types, it's never a creature type, a land type, or anything but an artifact type."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """Some spells and abilities that investigate may require targets. If each target chosen is an illegal target as that spell or ability tries to resolve, it won't resolve. You won't create any Clue tokens."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """If an effect refers to a Clue, it means any Clue artifact, not just a Clue artifact token. For example, you can sacrifice Wrench to pay for Alquist Proft, Master Sleuth's activated ability."""@en ] .
 
 :CaseOfThePilferedProof rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -280,6 +336,242 @@ Solved — Sacrifice this Case: Creature cards in your graveyard gain "You may c
         :rulingDate "2024-02-02"^^xsd:date ;
         :rulingText """"Solved — [Triggered ability]" means "[Triggered ability]. This ability triggers only if this Case is solved." Triggered abilities use the word "when," "whenever," or "at." They're often written as "[Trigger condition], [effect].\""""@en ] .
 
+:DueDiligence rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Due Diligence" ;
+    :manaCost "{2}{W}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Enchantment ;
+    :hasSubType :Aura ;
+    :hasRarity :Common ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :MurdersAtKarlovManor ;
+    :cardNumber "14"^^xsd:integer ;
+    :artist "Borja Pindado" ;
+    :hasLanguage :English ;
+    :hasKeywordAbility :Enchant ;
+    :printedText """Enchant creature
+When this Aura enters, target creature you control other than enchanted creature gets +2/+2 and gains vigilance until end of turn.
+Enchanted creature gets +2/+2 and has vigilance."""@en ;
+    :oracleText """Enchant creature
+When this Aura enters, target creature you control other than enchanted creature gets +2/+2 and gains vigilance until end of turn.
+Enchanted creature gets +2/+2 and has vigilance."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=646577"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mkm/14/due-diligence"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "88934"^^xsd:positiveInteger ;
+    :arenaName "Due Diligence" ;
+    :arenaSetCode "MKM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """In the unusual case where Due Diligence's second ability triggers and then Due Diligence becomes attached to the target of its own triggered ability before that ability resolves, when the triggered ability tries to resolve, it won't resolve and none of its effects will happen."""@en ] .
+
+:MarketwatchPhantom rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Marketwatch Phantom" ;
+    :manaCost "{1}{W}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Spirit ,
+                :Detective ;
+    :hasRarity :Common ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :MurdersAtKarlovManor ;
+    :cardNumber "24"^^xsd:integer ;
+    :artist "Bram Sels" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    :printedText """Whenever another creature you control with power 2 or less enters, this creature gains flying until end of turn."""@en ;
+    :oracleText """Whenever another creature you control with power 2 or less enters, this creature gains flying until end of turn."""@en ;
+    :flavorText """"It's amazing how efficient a detective you can be when you're not slowed down by things like self-preservation or walls.\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=646587"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mkm/24/marketwatch-phantom"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "88944"^^xsd:positiveInteger ;
+    :arenaName "Marketwatch Phantom" ;
+    :arenaSetCode "MKM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """Marketwatch Phantom's ability checks the power of a creature only at the moment it enters the battlefield. If it enters with counters, those counters are included. If that creature's power is 2 or less when it enters the battlefield but becomes greater than 2 after the ability triggers, Marketwatch Phantom will still gain flying until end of turn."""@en ] .
+
+:Wrench rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Wrench" ;
+    :manaCost "{W}" ;
+    :manaValue "1"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ;
+    :hasSubType :Clue ,
+                :Equipment ;
+    :hasRarity :Uncommon ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :MurdersAtKarlovManor ;
+    :cardNumber "37"^^xsd:integer ;
+    :artist "Edgar Sánchez Hidalgo" ;
+    :hasLanguage :English ;
+    :hasKeywordAbility :Equip ;
+    :printedText """Equipped creature gets +1/+1 and has vigilance and "{3}, {T}: Tap target creature."
+{2}, Sacrifice this Equipment: Draw a card.
+Equip {2}"""@en ;
+    :oracleText """Equipped creature gets +1/+1 and has vigilance and "{3}, {T}: Tap target creature."
+{2}, Sacrifice this Equipment: Draw a card.
+Equip {2}"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=646599"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mkm/37/wrench"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "88956"^^xsd:positiveInteger ;
+    :arenaName "Wrench" ;
+    :arenaSetCode "MKM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:BehindTheMask rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Behind the Mask" ;
+    :manaCost "{U}" ;
+    :manaValue "1"^^xsd:nonNegativeInteger ;
+    :hasCardType :Instant ;
+    :hasRarity :Common ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :MurdersAtKarlovManor ;
+    :cardNumber "39"^^xsd:integer ;
+    :artist "Caio Monteiro" ;
+    :hasLanguage :English ;
+    :hasKeywordAction :CollectEvidence ;
+    :printedText """As an additional cost to cast this spell, you may collect evidence 6. (Exile cards with total mana value 6 or greater from your graveyard.)
+Until end of turn, target artifact or creature becomes an artifact creature with base power and toughness 4/3. If evidence was collected, it has base power and toughness 1/1 until end of turn instead."""@en ;
+    :oracleText """As an additional cost to cast this spell, you may collect evidence 6. (Exile cards with total mana value 6 or greater from your graveyard.)
+Until end of turn, target artifact or creature becomes an artifact creature with base power and toughness 4/3. If evidence was collected, it has base power and toughness 1/1 until end of turn instead."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=646601"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mkm/39/behind-the-mask"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "88958"^^xsd:positiveInteger ;
+    :arenaName "Behind the Mask" ;
+    :arenaSetCode "MKM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """If Behind the Mask causes a Vehicle to become an artifact creature, it doesn't count as "crewing" that Vehicle for any ability that would trigger off of a Vehicle becoming crewed."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """Once you've announced that you're casting a spell, players can't take actions until you've finished doing so. Notably, opponents can't try to remove cards from your graveyard to stop you from collecting evidence."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """Behind the Mask will overwrite any previous effects that set a creature or Vehicle's power and toughness to specific numbers. Effects that otherwise modify its power and toughness will still apply no matter when they took effect. The same is true for +1/+1 counters."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """If you can't exile enough cards to meet or exceed the required mana value, you can't choose to collect evidence at all."""@en ] .
+
+:BenthicCriminologists rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Benthic Criminologists" ;
+    :manaCost "{4}{U}" ;
+    :manaValue "5"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Merfolk ,
+                :Wizard ;
+    :hasRarity :Common ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :MurdersAtKarlovManor ;
+    :cardNumber "40"^^xsd:integer ;
+    :artist "Johan Grenier" ;
+    :hasLanguage :English ;
+    :power "4" ;
+    :powerValue "4"^^xsd:integer ;
+    :toughness "5" ;
+    :toughnessValue "5"^^xsd:integer ;
+    :printedText """Whenever this creature enters or attacks, you may sacrifice an artifact. If you do, draw a card."""@en ;
+    :oracleText """Whenever this creature enters or attacks, you may sacrifice an artifact. If you do, draw a card."""@en ;
+    :flavorText """Scientists from the Simic Combine are regularly seconded to various detective agencies in hopes that sharing their expertise will improve the guild's tarnished reputation."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=646602"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mkm/40/benthic-criminologists"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "88959"^^xsd:positiveInteger ;
+    :arenaName "Benthic Criminologists" ;
+    :arenaSetCode "MKM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
 :CovetedFalcon rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Coveted Falcon" ;
@@ -371,6 +663,1502 @@ When this creature is turned face up, target opponent gains control of any numbe
         :rulingDate "2024-02-02"^^xsd:date ;
         :rulingText """The creature spell is a 2/2 creature spell with ward {2} that has no name, mana cost, or creature types. The resulting creature is a 2/2 creature with ward {2} that has no name, mana cost, or creature types. Both the spell and the resulting creature are colorless and have a mana value of 0. Other effects that apply to the spell or creature can still grant it any characteristics it doesn't have or change the characteristics it does have."""@en ] .
 
+:CrimestopperSprite rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Crimestopper Sprite" ;
+    :manaCost "{2}{U}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Faerie ,
+                :Detective ;
+    :hasRarity :Common ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :MurdersAtKarlovManor ;
+    :cardNumber "49"^^xsd:integer ;
+    :artist "Julia Metzger" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    :hasKeywordAbility :Flying ;
+    :hasKeywordAction :CollectEvidence ;
+    :printedText """As an additional cost to cast this spell, you may collect evidence 6. (Exile cards with total mana value 6 or greater from your graveyard.)
+Flying
+When this creature enters, tap target creature. If evidence was collected, put a stun counter on it. (If a permanent with a stun counter would become untapped, remove one from it instead.)"""@en ;
+    :oracleText """As an additional cost to cast this spell, you may collect evidence 6. (Exile cards with total mana value 6 or greater from your graveyard.)
+Flying
+When this creature enters, tap target creature. If evidence was collected, put a stun counter on it. (If a permanent with a stun counter would become untapped, remove one from it instead.)"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=646611"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mkm/49/crimestopper-sprite"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "88968"^^xsd:positiveInteger ;
+    :arenaName "Crimestopper Sprite" ;
+    :arenaSetCode "MKM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """You may target a creature that is already tapped with Crimestopper Sprite's last ability. If the target creature is already tapped as the ability resolves and evidence was collected, you will still put a stun counter on it."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """If you can't exile enough cards to meet or exceed the required mana value, you can't choose to collect evidence at all."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """Once you've announced that you're casting a spell, players can't take actions until you've finished doing so. Notably, opponents can't try to remove cards from your graveyard to stop you from collecting evidence."""@en ] .
+
+:DeduceMurdersAtKarlovManor52 rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Deduce" ;
+    :manaCost "{1}{U}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Instant ;
+    :hasRarity :Common ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :MurdersAtKarlovManor ;
+    :cardNumber "52"^^xsd:integer ;
+    :artist "Quintin Gleim" ;
+    :hasLanguage :English ;
+    :hasKeywordAction :Investigate ;
+    :printedText """Draw a card. Investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this token: Draw a card.")"""@en ;
+    :oracleText """Draw a card. Investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this token: Draw a card.")"""@en ;
+    :flavorText """Proft lit up like a man who had just been handed a glorious and unexpected gift. "I know who's responsible for this," he said. "And I can prove it.\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=646614"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mkm/52/deduce"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "88971"^^xsd:positiveInteger ;
+    :arenaName "Deduce" ;
+    :arenaSetCode "MKM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """Clue is an artifact type. Even though it appears on some cards with other permanent types, it's never a creature type, a land type, or anything but an artifact type."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """You can't sacrifice a Clue to pay multiple costs. For example, you can't sacrifice a Clue token to activate its own ability and also to activate Alquist Proft, Master Sleuth's ability."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """Some spells and abilities that investigate may require targets. If each target chosen is an illegal target as that spell or ability tries to resolve, it won't resolve. You won't create any Clue tokens."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """Some abilities trigger "whenever you sacrifice a Clue". Those abilities trigger whenever you sacrifice a Clue for any reason, not just to activate a Clue's activated ability."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """If an effect refers to a Clue, it means any Clue artifact, not just a Clue artifact token. For example, you can sacrifice Wrench to pay for Alquist Proft, Master Sleuth's activated ability."""@en ] .
+
+:ForensicResearcher rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Forensic Researcher" ;
+    :manaCost "{2}{U}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Merfolk ,
+                :Detective ;
+    :hasRarity :Uncommon ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :MurdersAtKarlovManor ;
+    :cardNumber "58"^^xsd:integer ;
+    :artist "Aldo Domínguez" ;
+    :hasLanguage :English ;
+    :power "1" ;
+    :powerValue "1"^^xsd:integer ;
+    :toughness "3" ;
+    :toughnessValue "3"^^xsd:integer ;
+    :hasKeywordAction :CollectEvidence ;
+    :printedText """{T}: Untap another target permanent you control.
+{T}, Collect evidence 3: Tap target creature you don't control. (To collect evidence 3, exile cards with total mana value 3 or greater from your graveyard.)"""@en ;
+    :oracleText """{T}: Untap another target permanent you control.
+{T}, Collect evidence 3: Tap target creature you don't control. (To collect evidence 3, exile cards with total mana value 3 or greater from your graveyard.)"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=646620"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mkm/58/forensic-researcher"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "88977"^^xsd:positiveInteger ;
+    :arenaName "Forensic Researcher" ;
+    :arenaSetCode "MKM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """If you can't exile enough cards to meet or exceed the required mana value, you can't choose to collect evidence at all."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """Once you've announced that you're casting a spell, players can't take actions until you've finished doing so. Notably, opponents can't try to remove cards from your graveyard to stop you from collecting evidence."""@en ] .
+
+:IntrudeOnTheMind rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Intrude on the Mind" ;
+    :manaCost "{3}{U}{U}" ;
+    :manaValue "5"^^xsd:nonNegativeInteger ;
+    :hasCardType :Instant ;
+    :hasRarity :MythicRare ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :MurdersAtKarlovManor ;
+    :cardNumber "61"^^xsd:integer ;
+    :artist "Magali Villeneuve" ;
+    :hasLanguage :English ;
+    :printedText """Reveal the top five cards of your library and separate them into two piles. An opponent chooses one of those piles. Put that pile into your hand and the other into your graveyard. Create a 0/0 colorless Thopter artifact creature token with flying, then put a +1/+1 counter on it for each card put into your graveyard this way."""@en ;
+    :oracleText """Reveal the top five cards of your library and separate them into two piles. An opponent chooses one of those piles. Put that pile into your hand and the other into your graveyard. Create a 0/0 colorless Thopter artifact creature token with flying, then put a +1/+1 counter on it for each card put into your graveyard this way."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=646623"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mkm/61/intrude-on-the-mind"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "88980"^^xsd:positiveInteger ;
+    :arenaName "Intrude on the Mind" ;
+    :arenaSetCode "MKM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """You may choose to put all of the cards into one pile and leave the other pile empty. If you do, the opponent will choose whether to put the revealed cards into your hand or your graveyard."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """You decide which opponent chooses the pile while resolving Intrude on the Mind."""@en ] .
+
+:OutCold rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Out Cold" ;
+    :manaCost "{3}{U}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasCardType :Instant ;
+    :hasRarity :Common ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :MurdersAtKarlovManor ;
+    :cardNumber "66"^^xsd:integer ;
+    :artist "Tuan Duong Chu" ;
+    :hasLanguage :English ;
+    :hasKeywordAction :Investigate ;
+    :printedText """This spell can't be countered. (This includes by the ward ability.)
+Tap up to two target creatures and put a stun counter on each of them. Investigate. (If a permanent with a stun counter would become untapped, remove one from it instead.)"""@en ;
+    :oracleText """This spell can't be countered. (This includes by the ward ability.)
+Tap up to two target creatures and put a stun counter on each of them. Investigate. (If a permanent with a stun counter would become untapped, remove one from it instead.)"""@en ;
+    :flavorText """"We'll get their statements after they defrost."
+—Dvika of the Foundway Associates"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=646628"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mkm/66/out-cold"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "88985"^^xsd:positiveInteger ;
+    :arenaName "Out Cold" ;
+    :arenaSetCode "MKM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """Some spells and abilities that investigate may require targets. If each target chosen is an illegal target as that spell or ability tries to resolve, it won't resolve. You won't create any Clue tokens."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """You don't have to choose any targets for Out Cold. However, if you do, and all of those creatures are illegal targets at the time Out Cold tries to resolve, it won't resolve and none of its effects will happen. You won't investigate."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """If an effect refers to a Clue, it means any Clue artifact, not just a Clue artifact token. For example, you can sacrifice Wrench to pay for Alquist Proft, Master Sleuth's activated ability."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """Clue is an artifact type. Even though it appears on some cards with other permanent types, it's never a creature type, a land type, or anything but an artifact type."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """You can't sacrifice a Clue to pay multiple costs. For example, you can't sacrifice a Clue token to activate its own ability and also to activate Alquist Proft, Master Sleuth's ability."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """Some abilities trigger "whenever you sacrifice a Clue". Those abilities trigger whenever you sacrifice a Clue for any reason, not just to activate a Clue's activated ability."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """If you target a creature with ward, you may still pay the ward cost, but Out Cold won't be countered even if you don't."""@en ] .
+
+:ProjektorInspector rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Projektor Inspector" ;
+    :manaCost "{2}{U}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Human ,
+                :Detective ;
+    :hasRarity :Common ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :MurdersAtKarlovManor ;
+    :cardNumber "68"^^xsd:integer ;
+    :artist "Leonardo Santanna" ;
+    :hasLanguage :English ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    :printedText """Whenever this creature or another Detective you control enters and whenever a Detective you control is turned face up, you may draw a card. If you do, discard a card."""@en ;
+    :oracleText """Whenever this creature or another Detective you control enters and whenever a Detective you control is turned face up, you may draw a card. If you do, discard a card."""@en ;
+    :flavorText """"Bring up the particulars from yesterday's altercation, and enhance.\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=646630"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mkm/68/projektor-inspector"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "88987"^^xsd:positiveInteger ;
+    :arenaName "Projektor Inspector" ;
+    :arenaSetCode "MKM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:ReasonableDoubt rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Reasonable Doubt" ;
+    :manaCost "{1}{U}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Instant ;
+    :hasRarity :Common ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :MurdersAtKarlovManor ;
+    :cardNumber "69"^^xsd:integer ;
+    :artist "Betty Jiang" ;
+    :hasLanguage :English ;
+    :hasKeywordAction :Suspect ;
+    :printedText """Counter target spell unless its controller pays {2}.
+Suspect up to one target creature. (A suspected creature has menace and can't block.)"""@en ;
+    :oracleText """Counter target spell unless its controller pays {2}.
+Suspect up to one target creature. (A suspected creature has menace and can't block.)"""@en ;
+    :flavorText """"Merle had the motive, but Blovinac was the one caught with the murder weapon. And who was the seven-foot-tall hooded figure? This case is a mess!\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=646631"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mkm/69/reasonable-doubt"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "88988"^^xsd:positiveInteger ;
+    :arenaName "Reasonable Doubt" ;
+    :arenaSetCode "MKM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """You can't cast Reasonable Doubt just to suspect a creature. There has to be a spell on the stack that's a legal target for Reasonable Doubt."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """There's no limit to the number of creatures that can be suspected simultaneously. Suspecting a new creature doesn't cause other creatures to stop being suspected."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """If a suspected creature loses all abilities, it will lose menace and "This creature can't block", but it won't stop being suspected."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """Being suspected isn't a copiable value. If a permanent becomes a copy of a suspected creature, it won't be suspected."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """When an effect suspects a creature, it becomes suspected. It gains menace and "This creature can't block" for as long as it's suspected. It stays suspected until it leaves the battlefield or another effect causes it to no longer be suspected."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """If a creature is already suspected, suspecting it again won't have any effect."""@en ] .
+
+:AlleyAssailant rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Alley Assailant" ;
+    :manaCost "{2}{B}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Vampire ,
+                :Rogue ;
+    :hasRarity :Common ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :MurdersAtKarlovManor ;
+    :cardNumber "76"^^xsd:integer ;
+    :artist "Warren Mahy" ;
+    :hasLanguage :English ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "3" ;
+    :toughnessValue "3"^^xsd:integer ;
+    :hasKeywordAbility :Disguise ;
+    :printedText """This creature enters tapped.
+Disguise {4}{B}{B} (You may cast this card face down for {3} as a 2/2 creature with ward {2}. Turn it face up any time for its disguise cost.)
+When this creature is turned face up, target opponent loses 3 life and you gain 3 life."""@en ;
+    :oracleText """This creature enters tapped.
+Disguise {4}{B}{B} (You may cast this card face down for {3} as a 2/2 creature with ward {2}. Turn it face up any time for its disguise cost.)
+When this creature is turned face up, target opponent loses 3 life and you gain 3 life."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=646636"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mkm/76/alley-assailant"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "88993"^^xsd:positiveInteger ;
+    :arenaName "Alley Assailant" ;
+    :arenaSetCode "MKM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """Any time you have priority, you may turn the face-down creature face up by revealing what its disguise cost is and paying that cost. This is a special action. It doesn't use the stack and can't be responded to. Only a face-down permanent can be turned face up this way; a face-down spell cannot."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """Turning a permanent face up or face down doesn't change whether that permanent is tapped or untapped."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """Because the permanent is on the battlefield both before and after it's turned face up, turning a permanent face up doesn't cause any enters-the-battlefield abilities to trigger."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """A permanent that turns face up or face down changes characteristics but is otherwise the same permanent. Spells and abilities that were targeting that permanent and Auras and Equipment that were attached to that permanent aren't affected unless the new characteristics of the object change the legality of those targets or attachments."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """The creature spell is a 2/2 creature spell with ward {2} that has no name, mana cost, or creature types. The resulting creature is a 2/2 creature with ward {2} that has no name, mana cost, or creature types. Both the spell and the resulting creature are colorless and have a mana value of 0. Other effects that apply to the spell or creature can still grant it any characteristics it doesn't have or change the characteristics it does have."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """You must ensure that your face-down spells and permanents can be easily differentiated from each other. You're not allowed to mix up the cards that represent them on the battlefield to confuse other players. The order in which they entered the battlefield should remain clear, as well as what ability caused them to be face down. (This includes disguise, cloak, and in games involving older cards, morph and manifest, as well as a few other effects that turn cards face down.) Common methods for doing this include using markers or dice, or simply placing them in order on the battlefield."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """Because face-down creatures don't have a name, they can't have the same name as any other creature, even another face-down creature."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """At any time, you can look at a face-down spell or permanent you control. You can't look at face-down permanents or spells you don't control unless an effect instructs or allows you to do so."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """A disguise ability lets you cast a card face down by paying {3} and announcing that you are using a disguise ability. Any time you have priority, you can turn a face-down permanent with disguise face up by paying its disguise cost."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """The face-down spell has no mana cost and a mana value of 0. When you cast a face-down spell, put it on the stack face down so no other player knows what it is, and pay {3} to cast it. This is an alternative cost."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """If a face-down creature loses its abilities, it can't be turned face up with a disguise ability because it will no longer have a disguise ability (or a disguise cost) once face up."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """If a face-down spell leaves the stack and goes to any zone other than the battlefield (if it was countered, for example), you must reveal it. Similarly, if a face-down permanent leaves the battlefield, you must reveal it. You must also reveal all face-down spells and permanents you control if you leave the game or the game ends."""@en ] .
+
+:CerebralConfiscation rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Cerebral Confiscation" ;
+    :manaCost "{2}{B}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Sorcery ;
+    :hasRarity :Common ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :MurdersAtKarlovManor ;
+    :cardNumber "81"^^xsd:integer ;
+    :artist "Lius Lasahido" ;
+    :hasLanguage :English ;
+    :printedText """Choose one —
+• Target opponent discards two cards.
+• Target opponent reveals their hand. You choose a nonland card from it. That player discards that card."""@en ;
+    :oracleText """Choose one —
+• Target opponent discards two cards.
+• Target opponent reveals their hand. You choose a nonland card from it. That player discards that card."""@en ;
+    :flavorText """"Never rely on secondhand description. Always review the memory yourself."
+—Lazav"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=646640"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mkm/81/cerebral-confiscation"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "88997"^^xsd:positiveInteger ;
+    :arenaName "Cerebral Confiscation" ;
+    :arenaSetCode "MKM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:TheChaseIsOn rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "The Chase Is On" ;
+    :manaCost "{2}{R}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Instant ;
+    :hasRarity :Common ;
+    :hasColor :Red ;
+    :hasColorIdentity :Red ;
+    :isInSet :MurdersAtKarlovManor ;
+    :cardNumber "116"^^xsd:integer ;
+    :artist "Diego Gisbert" ;
+    :hasLanguage :English ;
+    :hasKeywordAction :Investigate ;
+    :printedText """Target creature gets +3/+0 and gains first strike until end of turn. Investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this token: Draw a card.")"""@en ;
+    :oracleText """Target creature gets +3/+0 and gains first strike until end of turn. Investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this token: Draw a card.")"""@en ;
+    :flavorText """Etrata evaded the Boros arresters and Azorius lawmages, but not even a master assassin could give Kaya the slip."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=646674"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mkm/116/the-chase-is-on"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "89031"^^xsd:positiveInteger ;
+    :arenaName "The Chase Is On" ;
+    :arenaSetCode "MKM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """If an effect refers to a Clue, it means any Clue artifact, not just a Clue artifact token. For example, you can sacrifice Wrench to pay for Alquist Proft, Master Sleuth's activated ability."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """Clue is an artifact type. Even though it appears on some cards with other permanent types, it's never a creature type, a land type, or anything but an artifact type."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """Some abilities trigger "whenever you sacrifice a Clue". Those abilities trigger whenever you sacrifice a Clue for any reason, not just to activate a Clue's activated ability."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """Some spells and abilities that investigate may require targets. If each target chosen is an illegal target as that spell or ability tries to resolve, it won't resolve. You won't create any Clue tokens."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """You can't sacrifice a Clue to pay multiple costs. For example, you can't sacrifice a Clue token to activate its own ability and also to activate Alquist Proft, Master Sleuth's ability."""@en ] .
+
+:CrimeNovelist rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Crime Novelist" ;
+    :manaCost "{2}{R}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Goblin ,
+                :Bard ;
+    :hasRarity :Uncommon ;
+    :hasColor :Red ;
+    :hasColorIdentity :Red ;
+    :isInSet :MurdersAtKarlovManor ;
+    :cardNumber "121"^^xsd:integer ;
+    :artist "Izzy" ;
+    :hasLanguage :English ;
+    :producesMana :Red ;
+    :power "1" ;
+    :powerValue "1"^^xsd:integer ;
+    :toughness "3" ;
+    :toughnessValue "3"^^xsd:integer ;
+    :printedText """Whenever you sacrifice an artifact, put a +1/+1 counter on this creature and add {R}."""@en ;
+    :oracleText """Whenever you sacrifice an artifact, put a +1/+1 counter on this creature and add {R}."""@en ;
+    :flavorText """"But then he peeled off the mask, revealing a sight that made Groja's blood run cold—Brulu was actually Vogos in disguise!\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=646679"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mkm/121/crime-novelist"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "89036"^^xsd:positiveInteger ;
+    :arenaName "Crime Novelist" ;
+    :arenaSetCode "MKM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:DemandAnswers rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Demand Answers" ;
+    :manaCost "{1}{R}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Instant ;
+    :hasRarity :Common ;
+    :hasColor :Red ;
+    :hasColorIdentity :Red ;
+    :isInSet :MurdersAtKarlovManor ;
+    :cardNumber "122"^^xsd:integer ;
+    :artist "Justyna Dura" ;
+    :hasLanguage :English ;
+    :printedText """As an additional cost to cast this spell, sacrifice an artifact or discard a card.
+Draw two cards."""@en ;
+    :oracleText """As an additional cost to cast this spell, sacrifice an artifact or discard a card.
+Draw two cards."""@en ;
+    :flavorText """After the attempt on Aurelia's life, she gave the Agency an ultimatum: solve the case in twenty-four hours, or the Boros Legion would declare war on the Cult of Rakdos."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=646680"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mkm/122/demand-answers"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "89037"^^xsd:positiveInteger ;
+    :arenaName "Demand Answers" ;
+    :arenaSetCode "MKM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:Galvanize rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Galvanize" ;
+    :manaCost "{1}{R}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Instant ;
+    :hasRarity :Common ;
+    :hasColor :Red ;
+    :hasColorIdentity :Red ;
+    :isInSet :MurdersAtKarlovManor ;
+    :cardNumber "128"^^xsd:integer ;
+    :artist "Matt Forsyth" ;
+    :hasLanguage :English ;
+    :printedText """Galvanize deals 3 damage to target creature. If you've drawn two or more cards this turn, Galvanize deals 5 damage to that creature instead."""@en ;
+    :oracleText """Galvanize deals 3 damage to target creature. If you've drawn two or more cards this turn, Galvanize deals 5 damage to that creature instead."""@en ;
+    :flavorText """"Why doesn't Kylox put an off switch on these things?!\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=646686"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mkm/128/galvanize"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "89043"^^xsd:positiveInteger ;
+    :arenaName "Galvanize" ;
+    :arenaSetCode "MKM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:GoblinMaskmaker rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Goblin Maskmaker" ;
+    :manaCost "{R}" ;
+    :manaValue "1"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Goblin ,
+                :Citizen ;
+    :hasRarity :Common ;
+    :hasColor :Red ;
+    :hasColorIdentity :Red ;
+    :isInSet :MurdersAtKarlovManor ;
+    :cardNumber "130"^^xsd:integer ;
+    :artist "Tomas Duchek" ;
+    :hasLanguage :English ;
+    :power "1" ;
+    :powerValue "1"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    :printedText """Whenever this creature attacks, face-down spells you cast this turn cost {1} less to cast."""@en ;
+    :oracleText """Whenever this creature attacks, face-down spells you cast this turn cost {1} less to cast."""@en ;
+    :flavorText """"When you can't show your own face, try one of mine!\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=646688"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mkm/130/goblin-maskmaker"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "89045"^^xsd:positiveInteger ;
+    :arenaName "Goblin Maskmaker" ;
+    :arenaSetCode "MKM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:PersonOfInterest rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Person of Interest" ;
+    :manaCost "{3}{R}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Human ,
+                :Rogue ;
+    :hasRarity :Common ;
+    :hasColor :Red ;
+    :hasColorIdentity :Red ;
+    :isInSet :MurdersAtKarlovManor ;
+    :cardNumber "139"^^xsd:integer ;
+    :artist "Justyna Dura" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    :hasKeywordAction :Suspect ;
+    :printedText """When this creature enters, suspect it. Create a 2/2 white and blue Detective creature token. (A suspected creature has menace and can't block.)"""@en ;
+    :oracleText """When this creature enters, suspect it. Create a 2/2 white and blue Detective creature token. (A suspected creature has menace and can't block.)"""@en ;
+    :flavorText """"Maybe they're following someone else," Alvis thought to himself, despite mounting evidence to the contrary."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=646697"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mkm/139/person-of-interest"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "89054"^^xsd:positiveInteger ;
+    :arenaName "Person of Interest" ;
+    :arenaSetCode "MKM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """If Person of Interest is no longer on the battlefield when its triggered ability resolves, you'll still create a Detective token."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """If a suspected creature loses all abilities, it will lose menace and "This creature can't block", but it won't stop being suspected."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """If a creature is already suspected, suspecting it again won't have any effect."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """Being suspected isn't a copiable value. If a permanent becomes a copy of a suspected creature, it won't be suspected."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """There's no limit to the number of creatures that can be suspected simultaneously. Suspecting a new creature doesn't cause other creatures to stop being suspected."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """When an effect suspects a creature, it becomes suspected. It gains menace and "This creature can't block" for as long as it's suspected. It stays suspected until it leaves the battlefield or another effect causes it to no longer be suspected."""@en ] .
+
+:RedHerring rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Red Herring" ;
+    :manaCost "{1}{R}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ,
+                 :Creature ;
+    :hasSubType :Clue ,
+                :Fish ;
+    :hasRarity :Common ;
+    :hasColor :Red ;
+    :hasColorIdentity :Red ;
+    :isInSet :MurdersAtKarlovManor ;
+    :cardNumber "142"^^xsd:integer ;
+    :artist "Iris Compiet" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    :hasKeywordAbility :Haste ;
+    :printedText """Haste
+This creature attacks each combat if able.
+{2}, Sacrifice this creature: Draw a card."""@en ;
+    :oracleText """Haste
+This creature attacks each combat if able.
+{2}, Sacrifice this creature: Draw a card."""@en ;
+    :flavorText """"Thopters are but one option in our suite of autonomous surveillance solutions."
+—Kylox"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=646700"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mkm/142/red-herring"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "89057"^^xsd:positiveInteger ;
+    :arenaName "Red Herring" ;
+    :arenaSetCode "MKM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """If Red Herring can't attack for any reason (such as being tapped), then it doesn't attack. If there's a cost associated with having it attack, its controller isn't forced to pay that cost, so it doesn't have to attack in that case either."""@en ] .
+
+:TorchTheWitness rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Torch the Witness" ;
+    :manaCost "{X}{R}" ;
+    :manaValue "1"^^xsd:nonNegativeInteger ;
+    :hasCardType :Sorcery ;
+    :hasRarity :Uncommon ;
+    :hasColor :Red ;
+    :hasColorIdentity :Red ;
+    :isInSet :MurdersAtKarlovManor ;
+    :cardNumber "146"^^xsd:integer ;
+    :artist "Andrew Mar" ;
+    :hasLanguage :English ;
+    :hasKeywordAction :Investigate ;
+    :printedText """Torch the Witness deals twice X damage to target creature. If excess damage was dealt to that creature this way, investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this token: Draw a card.")"""@en ;
+    :oracleText """Torch the Witness deals twice X damage to target creature. If excess damage was dealt to that creature this way, investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this token: Draw a card.")"""@en ;
+    :flavorText """"He was scheduled to meet me tomorrow with something important to share. This was no coincidence."
+—Algrom of the Foundway Associates"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=646832"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mkm/146/torch-the-witness"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "89200"^^xsd:positiveInteger ;
+    :arenaName "Torch the Witness" ;
+    :arenaSetCode "MKM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """Clue is an artifact type. Even though it appears on some cards with other permanent types, it's never a creature type, a land type, or anything but an artifact type."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """A creature has been dealt excess damage if one or more sources dealt more damage to it than the minimum amount of damage required to be lethal damage. In most cases, this means damage greater than its toughness, but consider the damage already dealt to it this turn."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """Some spells and abilities that investigate may require targets. If each target chosen is an illegal target as that spell or ability tries to resolve, it won't resolve. You won't create any Clue tokens."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """If an effect refers to a Clue, it means any Clue artifact, not just a Clue artifact token. For example, you can sacrifice Wrench to pay for Alquist Proft, Master Sleuth's activated ability."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """You can't sacrifice a Clue to pay multiple costs. For example, you can't sacrifice a Clue token to activate its own ability and also to activate Alquist Proft, Master Sleuth's ability."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """Some abilities trigger "whenever you sacrifice a Clue". Those abilities trigger whenever you sacrifice a Clue for any reason, not just to activate a Clue's activated ability."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """Even 1 damage dealt to a creature from a source with deathtouch is considered lethal damage. If Torch the Witness has deathtouch (perhaps due to the effect of Judith, Carnage Connoisseur), any amount greater than 1 damage will cause excess damage to be dealt, even if the total amount of damage dealt to that creature this turn isn't greater than the creature's toughness."""@en ] .
+
+:AxebaneFerox rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Axebane Ferox" ;
+    :manaCost "{2}{G}{G}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Beast ;
+    :hasRarity :Rare ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :MurdersAtKarlovManor ;
+    :cardNumber "153"^^xsd:integer ;
+    :artist "Maxime Minard" ;
+    :hasLanguage :English ;
+    :power "4" ;
+    :powerValue "4"^^xsd:integer ;
+    :toughness "4" ;
+    :toughnessValue "4"^^xsd:integer ;
+    :hasKeywordAction :CollectEvidence ;
+    :hasKeywordAbility :Haste ,
+                       :Ward ,
+                       :Deathtouch ;
+    :printedText """Deathtouch, haste
+Ward—Collect evidence 4. (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player exiles cards with total mana value 4 or greater from their graveyard.)"""@en ;
+    :oracleText """Deathtouch, haste
+Ward—Collect evidence 4. (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player exiles cards with total mana value 4 or greater from their graveyard.)"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=646710"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mkm/153/axebane-ferox"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "89067"^^xsd:positiveInteger ;
+    :arenaName "Axebane Ferox" ;
+    :arenaSetCode "MKM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """Once you've announced that you're casting a spell, players can't take actions until you've finished doing so. Notably, opponents can't try to remove cards from your graveyard to stop you from collecting evidence."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """If you can't exile enough cards to meet or exceed the required mana value, you can't choose to collect evidence at all."""@en ] .
+
+:BiteDownOnCrime rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Bite Down on Crime" ;
+    :manaCost "{3}{G}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasCardType :Sorcery ;
+    :hasRarity :Common ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :MurdersAtKarlovManor ;
+    :cardNumber "154"^^xsd:integer ;
+    :artist "Mike Bierek" ;
+    :hasLanguage :English ;
+    :hasKeywordAction :CollectEvidence ;
+    :printedText """As an additional cost to cast this spell, you may collect evidence 6. This spell costs {2} less to cast if evidence was collected. (To collect evidence 6, exile cards with total mana value 6 or greater from your graveyard.)
+Target creature you control gets +2/+0 until end of turn. It deals damage equal to its power to target creature you don't control."""@en ;
+    :oracleText """As an additional cost to cast this spell, you may collect evidence 6. This spell costs {2} less to cast if evidence was collected. (To collect evidence 6, exile cards with total mana value 6 or greater from your graveyard.)
+Target creature you control gets +2/+0 until end of turn. It deals damage equal to its power to target creature you don't control."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=646711"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mkm/154/bite-down-on-crime"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "89068"^^xsd:positiveInteger ;
+    :arenaName "Bite Down on Crime" ;
+    :arenaSetCode "MKM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """Once you've announced that you're casting a spell, players can't take actions until you've finished doing so. Notably, opponents can't try to remove cards from your graveyard to stop you from collecting evidence."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """If either target is an illegal target as Bite Down on Crime tries to resolve, the creature you control won't deal damage."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """If you can't exile enough cards to meet or exceed the required mana value, you can't choose to collect evidence at all."""@en ] .
+
+:FlourishingBloomKin rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Flourishing Bloom-Kin" ;
+    :manaCost "{1}{G}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Plant ,
+                :Elemental ;
+    :hasRarity :Uncommon ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :MurdersAtKarlovManor ;
+    :cardNumber "160"^^xsd:integer ;
+    :artist "Ben Hill" ;
+    :hasLanguage :English ;
+    :power "0" ;
+    :powerValue "0"^^xsd:integer ;
+    :toughness "0" ;
+    :toughnessValue "0"^^xsd:integer ;
+    :hasKeywordAbility :Disguise ;
+    :printedText """This creature gets +1/+1 for each Forest you control.
+Disguise {4}{G}
+When this creature is turned face up, search your library for up to two Forest cards and reveal them. Put one of them onto the battlefield tapped and the other into your hand, then shuffle."""@en ;
+    :oracleText """This creature gets +1/+1 for each Forest you control.
+Disguise {4}{G}
+When this creature is turned face up, search your library for up to two Forest cards and reveal them. Put one of them onto the battlefield tapped and the other into your hand, then shuffle."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=646717"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mkm/160/flourishing-bloom-kin"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "89074"^^xsd:positiveInteger ;
+    :arenaName "Flourishing Bloom-Kin" ;
+    :arenaSetCode "MKM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """A disguise ability lets you cast a card face down by paying {3} and announcing that you are using a disguise ability. Any time you have priority, you can turn a face-down permanent with disguise face up by paying its disguise cost."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """If a face-down spell leaves the stack and goes to any zone other than the battlefield (if it was countered, for example), you must reveal it. Similarly, if a face-down permanent leaves the battlefield, you must reveal it. You must also reveal all face-down spells and permanents you control if you leave the game or the game ends."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """Turning a permanent face up or face down doesn't change whether that permanent is tapped or untapped."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """At any time, you can look at a face-down spell or permanent you control. You can't look at face-down permanents or spells you don't control unless an effect instructs or allows you to do so."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """The face-down spell has no mana cost and a mana value of 0. When you cast a face-down spell, put it on the stack face down so no other player knows what it is, and pay {3} to cast it. This is an alternative cost."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """Any time you have priority, you may turn the face-down creature face up by revealing what its disguise cost is and paying that cost. This is a special action. It doesn't use the stack and can't be responded to. Only a face-down permanent can be turned face up this way; a face-down spell cannot."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """Because the permanent is on the battlefield both before and after it's turned face up, turning a permanent face up doesn't cause any enters-the-battlefield abilities to trigger."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """If a face-down creature loses its abilities, it can't be turned face up with a disguise ability because it will no longer have a disguise ability (or a disguise cost) once face up."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """The creature spell is a 2/2 creature spell with ward {2} that has no name, mana cost, or creature types. The resulting creature is a 2/2 creature with ward {2} that has no name, mana cost, or creature types. Both the spell and the resulting creature are colorless and have a mana value of 0. Other effects that apply to the spell or creature can still grant it any characteristics it doesn't have or change the characteristics it does have."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """If you find only one Forest card with Flourishing Bloom-Kin's last ability, you'll put it onto the battlefield tapped. You won't have the option to put it into your hand."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """You must ensure that your face-down spells and permanents can be easily differentiated from each other. You're not allowed to mix up the cards that represent them on the battlefield to confuse other players. The order in which they entered the battlefield should remain clear, as well as what ability caused them to be face down. (This includes disguise, cloak, and in games involving older cards, morph and manifest, as well as a few other effects that turn cards face down.) Common methods for doing this include using markers or dice, or simply placing them in order on the battlefield."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """A permanent that turns face up or face down changes characteristics but is otherwise the same permanent. Spells and abilities that were targeting that permanent and Auras and Equipment that were attached to that permanent aren't affected unless the new characteristics of the object change the legality of those targets or attachments."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """Because face-down creatures don't have a name, they can't have the same name as any other creature, even another face-down creature."""@en ] .
+
+:LoxodonEavesdropper rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Loxodon Eavesdropper" ;
+    :manaCost "{3}{G}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Elephant ,
+                :Detective ;
+    :hasRarity :Common ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :MurdersAtKarlovManor ;
+    :cardNumber "168"^^xsd:integer ;
+    :artist "Jesper Ejsing" ;
+    :hasLanguage :English ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "3" ;
+    :toughnessValue "3"^^xsd:integer ;
+    :hasKeywordAction :Investigate ;
+    :printedText """When this creature enters, investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this token: Draw a card.")
+Whenever you draw your second card each turn, this creature gets +1/+1 and gains vigilance until end of turn."""@en ;
+    :oracleText """When this creature enters, investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this token: Draw a card.")
+Whenever you draw your second card each turn, this creature gets +1/+1 and gains vigilance until end of turn."""@en ;
+    :flavorText """He's all ears."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=646725"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mkm/168/loxodon-eavesdropper"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "89082"^^xsd:positiveInteger ;
+    :arenaName "Loxodon Eavesdropper" ;
+    :arenaSetCode "MKM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """If an effect refers to a Clue, it means any Clue artifact, not just a Clue artifact token. For example, you can sacrifice Wrench to pay for Alquist Proft, Master Sleuth's activated ability."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """Some spells and abilities that investigate may require targets. If each target chosen is an illegal target as that spell or ability tries to resolve, it won't resolve. You won't create any Clue tokens."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """Some abilities trigger "whenever you sacrifice a Clue". Those abilities trigger whenever you sacrifice a Clue for any reason, not just to activate a Clue's activated ability."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """You can't sacrifice a Clue to pay multiple costs. For example, you can't sacrifice a Clue token to activate its own ability and also to activate Alquist Proft, Master Sleuth's ability."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """Clue is an artifact type. Even though it appears on some cards with other permanent types, it's never a creature type, a land type, or anything but an artifact type."""@en ] .
+
+:NervousGardener rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Nervous Gardener" ;
+    :manaCost "{1}{G}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Dryad ;
+    :hasRarity :Common ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :MurdersAtKarlovManor ;
+    :cardNumber "169"^^xsd:integer ;
+    :artist "Borja Pindado" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    :hasKeywordAbility :Disguise ;
+    :printedText """Disguise {G} (You may cast this card face down for {3} as a 2/2 creature with ward {2}. Turn it face up any time for its disguise cost.)
+When this creature is turned face up, search your library for a land card with a basic land type, reveal it, put it into your hand, then shuffle."""@en ;
+    :oracleText """Disguise {G} (You may cast this card face down for {3} as a 2/2 creature with ward {2}. Turn it face up any time for its disguise cost.)
+When this creature is turned face up, search your library for a land card with a basic land type, reveal it, put it into your hand, then shuffle."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=646726"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mkm/169/nervous-gardener"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "89083"^^xsd:positiveInteger ;
+    :arenaName "Nervous Gardener" ;
+    :arenaSetCode "MKM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """The creature spell is a 2/2 creature spell with ward {2} that has no name, mana cost, or creature types. The resulting creature is a 2/2 creature with ward {2} that has no name, mana cost, or creature types. Both the spell and the resulting creature are colorless and have a mana value of 0. Other effects that apply to the spell or creature can still grant it any characteristics it doesn't have or change the characteristics it does have."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """Because the permanent is on the battlefield both before and after it's turned face up, turning a permanent face up doesn't cause any enters-the-battlefield abilities to trigger."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """If a face-down spell leaves the stack and goes to any zone other than the battlefield (if it was countered, for example), you must reveal it. Similarly, if a face-down permanent leaves the battlefield, you must reveal it. You must also reveal all face-down spells and permanents you control if you leave the game or the game ends."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """The face-down spell has no mana cost and a mana value of 0. When you cast a face-down spell, put it on the stack face down so no other player knows what it is, and pay {3} to cast it. This is an alternative cost."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """You must ensure that your face-down spells and permanents can be easily differentiated from each other. You're not allowed to mix up the cards that represent them on the battlefield to confuse other players. The order in which they entered the battlefield should remain clear, as well as what ability caused them to be face down. (This includes disguise, cloak, and in games involving older cards, morph and manifest, as well as a few other effects that turn cards face down.) Common methods for doing this include using markers or dice, or simply placing them in order on the battlefield."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """If a face-down creature loses its abilities, it can't be turned face up with a disguise ability because it will no longer have a disguise ability (or a disguise cost) once face up."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """At any time, you can look at a face-down spell or permanent you control. You can't look at face-down permanents or spells you don't control unless an effect instructs or allows you to do so."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """A disguise ability lets you cast a card face down by paying {3} and announcing that you are using a disguise ability. Any time you have priority, you can turn a face-down permanent with disguise face up by paying its disguise cost."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """Turning a permanent face up or face down doesn't change whether that permanent is tapped or untapped."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """Because face-down creatures don't have a name, they can't have the same name as any other creature, even another face-down creature."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """A permanent that turns face up or face down changes characteristics but is otherwise the same permanent. Spells and abilities that were targeting that permanent and Auras and Equipment that were attached to that permanent aren't affected unless the new characteristics of the object change the legality of those targets or attachments."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """Any time you have priority, you may turn the face-down creature face up by revealing what its disguise cost is and paying that cost. This is a special action. It doesn't use the stack and can't be responded to. Only a face-down permanent can be turned face up this way; a face-down spell cannot."""@en ] .
+
+:PickYourPoison rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Pick Your Poison" ;
+    :manaCost "{G}" ;
+    :manaValue "1"^^xsd:nonNegativeInteger ;
+    :hasCardType :Sorcery ;
+    :hasRarity :Common ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :MurdersAtKarlovManor ;
+    :cardNumber "170"^^xsd:integer ;
+    :artist "Julia Metzger" ;
+    :hasLanguage :English ;
+    :printedText """Choose one —
+• Each opponent sacrifices an artifact of their choice.
+• Each opponent sacrifices an enchantment of their choice.
+• Each opponent sacrifices a creature with flying of their choice."""@en ;
+    :oracleText """Choose one —
+• Each opponent sacrifices an artifact of their choice.
+• Each opponent sacrifices an enchantment of their choice.
+• Each opponent sacrifices a creature with flying of their choice."""@en ;
+    :flavorText """A reliable, general-purpose toxin is a handy way to save on belt space."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=646727"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mkm/170/pick-your-poison"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "89084"^^xsd:positiveInteger ;
+    :arenaName "Pick Your Poison" ;
+    :arenaSetCode "MKM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:TopiaryPanther rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Topiary Panther" ;
+    :manaCost "{4}{G}{G}" ;
+    :manaValue "6"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Plant ,
+                :Cat ;
+    :hasRarity :Common ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :MurdersAtKarlovManor ;
+    :cardNumber "179"^^xsd:integer ;
+    :artist "Xabi Gaztelua" ;
+    :hasLanguage :English ;
+    :power "6" ;
+    :powerValue "6"^^xsd:integer ;
+    :toughness "5" ;
+    :toughnessValue "5"^^xsd:integer ;
+    :hasKeywordAbility :Trample ,
+                       :Cycling ;
+    :printedText """Trample
+Basic landcycling {1}{G} ({1}{G}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)"""@en ;
+    :oracleText """Trample
+Basic landcycling {1}{G} ({1}{G}, Discard this card: Search your library for a basic land card, reveal it, put it into your hand, then shuffle.)"""@en ;
+    :flavorText """The gardens around Karlov Manor are oddly bereft of birdsong."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=646736"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mkm/179/topiary-panther"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "89093"^^xsd:positiveInteger ;
+    :arenaName "Topiary Panther" ;
+    :arenaSetCode "MKM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:DogWalker rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Dog Walker" ;
+    :manaCost "{R}{W}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Human ,
+                :Citizen ;
+    :hasRarity :Common ;
+    :hasColor :White ,
+              :Red ;
+    :hasColorIdentity :White ,
+                      :Red ;
+    :isInSet :MurdersAtKarlovManor ;
+    :cardNumber "197"^^xsd:integer ;
+    :artist "Milivoj Ćeran" ;
+    :hasLanguage :English ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "1" ;
+    :toughnessValue "1"^^xsd:integer ;
+    :hasKeywordAbility :Vigilance ,
+                       :Disguise ;
+    :printedText """Vigilance
+Disguise {R/W}{R/W} (You may cast this card face down for {3} as a 2/2 creature with ward {2}. Turn it face up any time for its disguise cost.)
+When this creature is turned face up, create two tapped 1/1 white Dog creature tokens."""@en ;
+    :oracleText """Vigilance
+Disguise {R/W}{R/W} (You may cast this card face down for {3} as a 2/2 creature with ward {2}. Turn it face up any time for its disguise cost.)
+When this creature is turned face up, create two tapped 1/1 white Dog creature tokens."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=646753"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mkm/197/dog-walker"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "89110"^^xsd:positiveInteger ;
+    :arenaName "Dog Walker" ;
+    :arenaSetCode "MKM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """If a face-down spell leaves the stack and goes to any zone other than the battlefield (if it was countered, for example), you must reveal it. Similarly, if a face-down permanent leaves the battlefield, you must reveal it. You must also reveal all face-down spells and permanents you control if you leave the game or the game ends."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """If a face-down creature loses its abilities, it can't be turned face up with a disguise ability because it will no longer have a disguise ability (or a disguise cost) once face up."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """You must ensure that your face-down spells and permanents can be easily differentiated from each other. You're not allowed to mix up the cards that represent them on the battlefield to confuse other players. The order in which they entered the battlefield should remain clear, as well as what ability caused them to be face down. (This includes disguise, cloak, and in games involving older cards, morph and manifest, as well as a few other effects that turn cards face down.) Common methods for doing this include using markers or dice, or simply placing them in order on the battlefield."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """Turning a permanent face up or face down doesn't change whether that permanent is tapped or untapped."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """The face-down spell has no mana cost and a mana value of 0. When you cast a face-down spell, put it on the stack face down so no other player knows what it is, and pay {3} to cast it. This is an alternative cost."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """Any time you have priority, you may turn the face-down creature face up by revealing what its disguise cost is and paying that cost. This is a special action. It doesn't use the stack and can't be responded to. Only a face-down permanent can be turned face up this way; a face-down spell cannot."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """The creature spell is a 2/2 creature spell with ward {2} that has no name, mana cost, or creature types. The resulting creature is a 2/2 creature with ward {2} that has no name, mana cost, or creature types. Both the spell and the resulting creature are colorless and have a mana value of 0. Other effects that apply to the spell or creature can still grant it any characteristics it doesn't have or change the characteristics it does have."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """Because face-down creatures don't have a name, they can't have the same name as any other creature, even another face-down creature."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """A disguise ability lets you cast a card face down by paying {3} and announcing that you are using a disguise ability. Any time you have priority, you can turn a face-down permanent with disguise face up by paying its disguise cost."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """A permanent that turns face up or face down changes characteristics but is otherwise the same permanent. Spells and abilities that were targeting that permanent and Auras and Equipment that were attached to that permanent aren't affected unless the new characteristics of the object change the legality of those targets or attachments."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """At any time, you can look at a face-down spell or permanent you control. You can't look at face-down permanents or spells you don't control unless an effect instructs or allows you to do so."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """Because the permanent is on the battlefield both before and after it's turned face up, turning a permanent face up doesn't cause any enters-the-battlefield abilities to trigger."""@en ] .
+
+:EzrimAgencyChief rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Ezrim, Agency Chief" ;
+    :manaCost "{1}{W}{W}{U}{U}" ;
+    :manaValue "5"^^xsd:nonNegativeInteger ;
+    :hasSuperType :Legendary ;
+    :hasCardType :Creature ;
+    :hasSubType :Archon ,
+                :Detective ;
+    :hasRarity :Rare ;
+    :hasColor :White ,
+              :Blue ;
+    :hasColorIdentity :White ,
+                      :Blue ;
+    :isInSet :MurdersAtKarlovManor ;
+    :cardNumber "202"^^xsd:integer ;
+    :artist "Jason A. Engle" ;
+    :hasLanguage :English ;
+    :power "5" ;
+    :powerValue "5"^^xsd:integer ;
+    :toughness "5" ;
+    :toughnessValue "5"^^xsd:integer ;
+    :hasKeywordAbility :Flying ;
+    :hasKeywordAction :Investigate ;
+    :printedText """Flying
+When Ezrim enters, investigate twice. (To investigate, create a Clue token. It's an artifact with "{2}, Sacrifice this token: Draw a card.")
+{1}, Sacrifice an artifact: Ezrim gains your choice of vigilance, lifelink, or hexproof until end of turn."""@en ;
+    :oracleText """Flying
+When Ezrim enters, investigate twice. (To investigate, create a Clue token. It's an artifact with "{2}, Sacrifice this token: Draw a card.")
+{1}, Sacrifice an artifact: Ezrim gains your choice of vigilance, lifelink, or hexproof until end of turn."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=646758"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mkm/202/ezrim-agency-chief"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "89115"^^xsd:positiveInteger ;
+    :arenaName "Ezrim, Agency Chief" ;
+    :arenaSetCode "MKM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """Some abilities trigger "whenever you sacrifice a Clue". Those abilities trigger whenever you sacrifice a Clue for any reason, not just to activate a Clue's activated ability."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """You can't sacrifice a Clue to pay multiple costs. For example, you can't sacrifice a Clue token to activate its own ability and also to activate Alquist Proft, Master Sleuth's ability."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """Some spells and abilities that investigate may require targets. If each target chosen is an illegal target as that spell or ability tries to resolve, it won't resolve. You won't create any Clue tokens."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """Clue is an artifact type. Even though it appears on some cards with other permanent types, it's never a creature type, a land type, or anything but an artifact type."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """If an effect refers to a Clue, it means any Clue artifact, not just a Clue artifact token. For example, you can sacrifice Wrench to pay for Alquist Proft, Master Sleuth's activated ability."""@en ] .
+
 :KayaSpiritsJusticeMurdersAtKarlovManor211 rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Kaya, Spirits' Justice" ;
@@ -429,6 +2217,399 @@ When this creature is turned face up, target opponent gains control of any numbe
       [ rdf:type :Ruling ;
         :rulingDate "2024-02-02"^^xsd:date ;
         :rulingText """The target token copies the printed values of the card in exile, with the noted exception. It doesn't matter if that card was a copy of something else when it was on the battlefield."""@en ] .
+
+:MeddlingYouths rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Meddling Youths" ;
+    :manaCost "{3}{R}{W}" ;
+    :manaValue "5"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Human ,
+                :Detective ;
+    :hasRarity :Uncommon ;
+    :hasColor :White ,
+              :Red ;
+    :hasColorIdentity :White ,
+                      :Red ;
+    :isInSet :MurdersAtKarlovManor ;
+    :cardNumber "219"^^xsd:integer ;
+    :artist "Matt Forsyth" ;
+    :hasLanguage :English ;
+    :power "4" ;
+    :powerValue "4"^^xsd:integer ;
+    :toughness "5" ;
+    :toughnessValue "5"^^xsd:integer ;
+    :hasKeywordAction :Investigate ;
+    :hasKeywordAbility :Haste ;
+    :printedText """Haste
+Whenever you attack with three or more creatures, investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this token: Draw a card.")"""@en ;
+    :oracleText """Haste
+Whenever you attack with three or more creatures, investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this token: Draw a card.")"""@en ;
+    :flavorText """"Well, if it isn't mean old Mr. Larchbottom, who's always been so eager to have the only dumpling stall in Oxblood Alley.\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=646774"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mkm/219/meddling-youths"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "89132"^^xsd:positiveInteger ;
+    :arenaName "Meddling Youths" ;
+    :arenaSetCode "MKM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """If an effect refers to a Clue, it means any Clue artifact, not just a Clue artifact token. For example, you can sacrifice Wrench to pay for Alquist Proft, Master Sleuth's activated ability."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """It doesn't matter what happens to the creatures in response. As long as you attacked with at least three creatures, you'll investigate when Meddling Youths's triggered ability resolves."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """Some abilities trigger "whenever you sacrifice a Clue". Those abilities trigger whenever you sacrifice a Clue for any reason, not just to activate a Clue's activated ability."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """You can't sacrifice a Clue to pay multiple costs. For example, you can't sacrifice a Clue token to activate its own ability and also to activate Alquist Proft, Master Sleuth's ability."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """Clue is an artifact type. Even though it appears on some cards with other permanent types, it's never a creature type, a land type, or anything but an artifact type."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """Some spells and abilities that investigate may require targets. If each target chosen is an illegal target as that spell or ability tries to resolve, it won't resolve. You won't create any Clue tokens."""@en ] .
+
+:RakishScoundrel rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Rakish Scoundrel" ;
+    :manaCost "{2}{B}{G}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Elf ,
+                :Rogue ;
+    :hasRarity :Common ;
+    :hasColor :Black ,
+              :Green ;
+    :hasColorIdentity :Black ,
+                      :Green ;
+    :isInSet :MurdersAtKarlovManor ;
+    :cardNumber "225"^^xsd:integer ;
+    :artist "Ina Wong" ;
+    :hasLanguage :English ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "3" ;
+    :toughnessValue "3"^^xsd:integer ;
+    :hasKeywordAbility :Disguise ,
+                       :Deathtouch ;
+    :printedText """Deathtouch
+When this creature enters or is turned face up, target creature gains indestructible until end of turn.
+Disguise {4}{B/G}{B/G} (You may cast this card face down for {3} as a 2/2 creature with ward {2}. Turn it face up any time for its disguise cost.)"""@en ;
+    :oracleText """Deathtouch
+When this creature enters or is turned face up, target creature gains indestructible until end of turn.
+Disguise {4}{B/G}{B/G} (You may cast this card face down for {3} as a 2/2 creature with ward {2}. Turn it face up any time for its disguise cost.)"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=646780"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mkm/225/rakish-scoundrel"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "89138"^^xsd:positiveInteger ;
+    :arenaName "Rakish Scoundrel" ;
+    :arenaSetCode "MKM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """A permanent that turns face up or face down changes characteristics but is otherwise the same permanent. Spells and abilities that were targeting that permanent and Auras and Equipment that were attached to that permanent aren't affected unless the new characteristics of the object change the legality of those targets or attachments."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """The face-down spell has no mana cost and a mana value of 0. When you cast a face-down spell, put it on the stack face down so no other player knows what it is, and pay {3} to cast it. This is an alternative cost."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """The creature spell is a 2/2 creature spell with ward {2} that has no name, mana cost, or creature types. The resulting creature is a 2/2 creature with ward {2} that has no name, mana cost, or creature types. Both the spell and the resulting creature are colorless and have a mana value of 0. Other effects that apply to the spell or creature can still grant it any characteristics it doesn't have or change the characteristics it does have."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """Because the permanent is on the battlefield both before and after it's turned face up, turning a permanent face up doesn't cause any enters-the-battlefield abilities to trigger."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """A disguise ability lets you cast a card face down by paying {3} and announcing that you are using a disguise ability. Any time you have priority, you can turn a face-down permanent with disguise face up by paying its disguise cost."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """If a face-down creature loses its abilities, it can't be turned face up with a disguise ability because it will no longer have a disguise ability (or a disguise cost) once face up."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """You must ensure that your face-down spells and permanents can be easily differentiated from each other. You're not allowed to mix up the cards that represent them on the battlefield to confuse other players. The order in which they entered the battlefield should remain clear, as well as what ability caused them to be face down. (This includes disguise, cloak, and in games involving older cards, morph and manifest, as well as a few other effects that turn cards face down.) Common methods for doing this include using markers or dice, or simply placing them in order on the battlefield."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """Turning a permanent face up or face down doesn't change whether that permanent is tapped or untapped."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """Any time you have priority, you may turn the face-down creature face up by revealing what its disguise cost is and paying that cost. This is a special action. It doesn't use the stack and can't be responded to. Only a face-down permanent can be turned face up this way; a face-down spell cannot."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """Because face-down creatures don't have a name, they can't have the same name as any other creature, even another face-down creature."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """If a face-down spell leaves the stack and goes to any zone other than the battlefield (if it was countered, for example), you must reveal it. Similarly, if a face-down permanent leaves the battlefield, you must reveal it. You must also reveal all face-down spells and permanents you control if you leave the game or the game ends."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """At any time, you can look at a face-down spell or permanent you control. You can't look at face-down permanents or spells you don't control unless an effect instructs or allows you to do so."""@en ] .
+
+:ShadyInformant rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Shady Informant" ;
+    :manaCost "{3}{B}{R}" ;
+    :manaValue "5"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Ogre ,
+                :Rogue ;
+    :hasRarity :Common ;
+    :hasColor :Black ,
+              :Red ;
+    :hasColorIdentity :Black ,
+                      :Red ;
+    :isInSet :MurdersAtKarlovManor ;
+    :cardNumber "231"^^xsd:integer ;
+    :artist "Caio Monteiro" ;
+    :hasLanguage :English ;
+    :power "4" ;
+    :powerValue "4"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    :hasKeywordAbility :Disguise ;
+    :printedText """When this creature dies, it deals 2 damage to any target.
+Disguise {2}{B/R}{B/R} (You may cast this card face down for {3} as a 2/2 creature with ward {2}. Turn it face up any time for its disguise cost.)"""@en ;
+    :oracleText """When this creature dies, it deals 2 damage to any target.
+Disguise {2}{B/R}{B/R} (You may cast this card face down for {3} as a 2/2 creature with ward {2}. Turn it face up any time for its disguise cost.)"""@en ;
+    :flavorText """Rakdos snitches rarely survive to get stitches."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=646786"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mkm/231/shady-informant"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "89144"^^xsd:positiveInteger ;
+    :arenaName "Shady Informant" ;
+    :arenaSetCode "MKM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """The face-down spell has no mana cost and a mana value of 0. When you cast a face-down spell, put it on the stack face down so no other player knows what it is, and pay {3} to cast it. This is an alternative cost."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """Because the permanent is on the battlefield both before and after it's turned face up, turning a permanent face up doesn't cause any enters-the-battlefield abilities to trigger."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """If a face-down creature loses its abilities, it can't be turned face up with a disguise ability because it will no longer have a disguise ability (or a disguise cost) once face up."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """Turning a permanent face up or face down doesn't change whether that permanent is tapped or untapped."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """A permanent that turns face up or face down changes characteristics but is otherwise the same permanent. Spells and abilities that were targeting that permanent and Auras and Equipment that were attached to that permanent aren't affected unless the new characteristics of the object change the legality of those targets or attachments."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """If a face-down spell leaves the stack and goes to any zone other than the battlefield (if it was countered, for example), you must reveal it. Similarly, if a face-down permanent leaves the battlefield, you must reveal it. You must also reveal all face-down spells and permanents you control if you leave the game or the game ends."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """At any time, you can look at a face-down spell or permanent you control. You can't look at face-down permanents or spells you don't control unless an effect instructs or allows you to do so."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """Because face-down creatures don't have a name, they can't have the same name as any other creature, even another face-down creature."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """You must ensure that your face-down spells and permanents can be easily differentiated from each other. You're not allowed to mix up the cards that represent them on the battlefield to confuse other players. The order in which they entered the battlefield should remain clear, as well as what ability caused them to be face down. (This includes disguise, cloak, and in games involving older cards, morph and manifest, as well as a few other effects that turn cards face down.) Common methods for doing this include using markers or dice, or simply placing them in order on the battlefield."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """A disguise ability lets you cast a card face down by paying {3} and announcing that you are using a disguise ability. Any time you have priority, you can turn a face-down permanent with disguise face up by paying its disguise cost."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """Any time you have priority, you may turn the face-down creature face up by revealing what its disguise cost is and paying that cost. This is a special action. It doesn't use the stack and can't be responded to. Only a face-down permanent can be turned face up this way; a face-down spell cannot."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """The creature spell is a 2/2 creature spell with ward {2} that has no name, mana cost, or creature types. The resulting creature is a 2/2 creature with ward {2} that has no name, mana cost, or creature types. Both the spell and the resulting creature are colorless and have a mana value of 0. Other effects that apply to the spell or creature can still grant it any characteristics it doesn't have or change the characteristics it does have."""@en ] .
+
+:UrgentNecropsy rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Urgent Necropsy" ;
+    :manaCost "{2}{B}{G}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasCardType :Instant ;
+    :hasRarity :MythicRare ;
+    :hasColor :Black ,
+              :Green ;
+    :hasColorIdentity :Black ,
+                      :Green ;
+    :isInSet :MurdersAtKarlovManor ;
+    :cardNumber "240"^^xsd:integer ;
+    :artist "Uriah Voth" ;
+    :hasLanguage :English ;
+    :printedText """As an additional cost to cast this spell, collect evidence X, where X is the total mana value of the permanents this spell targets.
+Destroy up to one target artifact, up to one target creature, up to one target enchantment, and up to one target planeswalker."""@en ;
+    :oracleText """As an additional cost to cast this spell, collect evidence X, where X is the total mana value of the permanents this spell targets.
+Destroy up to one target artifact, up to one target creature, up to one target enchantment, and up to one target planeswalker."""@en ;
+    :flavorText """"The Golgari can read the dead like a newspaper."
+—Taboro of the Foundway Associates"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=646794"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mkm/240/urgent-necropsy"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "89152"^^xsd:positiveInteger ;
+    :arenaName "Urgent Necropsy" ;
+    :arenaSetCode "MKM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """Once you've announced that you're casting a spell, players can't take actions until you've finished doing so. Notably, opponents can't try to remove cards from your graveyard to stop you from collecting evidence."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """The value of X is locked in after you choose targets but before you pay costs for Urgent Necropsy. In the extremely unusual case where the mana value of one or more of the targets changes while you're paying costs, the cost to cast Urgent Necropsy, including the additional cost, remains what you previously determined."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """If you can't exile enough cards to meet or exceed the required mana value, you can't choose to collect evidence at all."""@en ] .
+
+:GravestoneStrider rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Gravestone Strider" ;
+    :manaCost "{2}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ,
+                 :Creature ;
+    :hasSubType :Golem ;
+    :hasRarity :Common ;
+    :isInSet :MurdersAtKarlovManor ;
+    :cardNumber "252"^^xsd:integer ;
+    :artist "Tom Babbey" ;
+    :hasLanguage :English ;
+    :producesMana :White ,
+                  :Blue ,
+                  :Black ,
+                  :Red ,
+                  :Green ;
+    :power "1" ;
+    :powerValue "1"^^xsd:integer ;
+    :toughness "3" ;
+    :toughnessValue "3"^^xsd:integer ;
+    :printedText """{1}: Add one mana of any color. Activate only once each turn.
+{2}, Exile this card from your graveyard: Exile target card from a graveyard."""@en ;
+    :oracleText """{1}: Add one mana of any color. Activate only once each turn.
+{2}, Exile this card from your graveyard: Exile target card from a graveyard."""@en ;
+    :flavorText """The empty graves grew tired of waiting for bodies to fill them and set out to make some."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=646806"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mkm/252/gravestone-strider"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "89174"^^xsd:positiveInteger ;
+    :arenaName "Gravestone Strider" ;
+    :arenaSetCode "MKM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:PublicThoroughfare rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Public Thoroughfare" ;
+    :manaValue "0"^^xsd:nonNegativeInteger ;
+    :hasCardType :Land ;
+    :hasRarity :Common ;
+    :isInSet :MurdersAtKarlovManor ;
+    :cardNumber "265"^^xsd:integer ;
+    :artist "Anthony Devine" ;
+    :hasLanguage :English ;
+    :producesMana :White ,
+                  :Blue ,
+                  :Black ,
+                  :Red ,
+                  :Green ;
+    :entersTapped "true"^^xsd:boolean ;
+    :printedText """This land enters tapped.
+When this land enters, sacrifice it unless you tap an untapped artifact or land you control.
+{T}: Add one mana of any color."""@en ;
+    :oracleText """This land enters tapped.
+When this land enters, sacrifice it unless you tap an untapped artifact or land you control.
+{T}: Add one mana of any color."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=646819"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mkm/265/public-thoroughfare"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "89187"^^xsd:positiveInteger ;
+    :arenaName "Public Thoroughfare" ;
+    :arenaSetCode "MKM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-02-02"^^xsd:date ;
+        :rulingText """In the unusual case where Public Thoroughfare is untapped as its triggered ability is resolving, you can tap it for its own triggered ability."""@en ] .
 
 :KayaSpiritsJusticeMurdersAtKarlovManor335 rdf:type owl:NamedIndividual ,
                   :Card ;

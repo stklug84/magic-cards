@@ -39,8 +39,9 @@
     rdfs:label "Magic Card Collection Individuals – War of the Spark"@en ;
     rdfs:comment """An instance graph describing the card individuals of a
 personal Magic: The Gathering card collection that were printed in the set
-War of the Spark (WAR). One Card individual is defined per collected
-printing, carrying its characteristics, the platforms it is available on
+War of the Spark (WAR). One Card individual is defined per printing
+collected in paper or on MTG Arena, carrying its characteristics, the
+platforms it is available on
 (paper, MTG Arena, Magic Online) with its MTG Arena identity, its legality
 in the paper and MTG Arena formats, and official rulings. Card data was
 sourced from Gatherer and Scryfall. This file imports MagicCardsOntology to
@@ -117,6 +118,131 @@ legality definitions."""@en .
       [ rdf:type :Ruling ;
         :rulingDate "2019-05-03"^^xsd:date ;
         :rulingText """If you've activated Ugin's ability multiple times, you must keep track of which exiled card belongs to each Spirit token."""@en ] .
+
+:GratefulApparition rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Grateful Apparition" ;
+    :manaCost "{1}{W}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Spirit ;
+    :hasRarity :Uncommon ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :WarOfTheSpark ;
+    :cardNumber "17"^^xsd:integer ;
+    :artist "Izzy" ;
+    :hasLanguage :English ;
+    :power "1" ;
+    :powerValue "1"^^xsd:integer ;
+    :toughness "1" ;
+    :toughnessValue "1"^^xsd:integer ;
+    :hasKeywordAbility :Flying ;
+    :hasKeywordAction :Proliferate ;
+    :printedText """Flying
+Whenever this creature deals combat damage to a player or planeswalker, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)"""@en ;
+    :oracleText """Flying
+Whenever this creature deals combat damage to a player or planeswalker, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=460944"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/war/17/grateful-apparition"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "69468"^^xsd:positiveInteger ;
+    :arenaName "Grateful Apparition" ;
+    :arenaSetCode "WAR" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """You don't have to choose every permanent or player that has a counter, only the ones you want to add another counter to. Since "any number" includes zero, you don't have to choose any permanents at all, and you don't have to choose any players at all."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """If a player or permanent has more than one kind of counter on it, and you choose for it to get additional counters, it must get one of each kind of counter it already has. You can't have it get just one kind of counter it already has and not the others."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """If a permanent ever has both +1/+1 counters and -1/-1 counters on it at the same time, they're removed in pairs as a state-based action so that the permanent has only one of those kinds of counters on it."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """An ability that triggers "Whenever you proliferate" triggers even if you chose no permanents or players while doing so."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """To proliferate, you can choose any permanent that has a counter, including ones controlled by opponents. You can choose any player who has a counter, including opponents. You can't choose cards in any zone other than the battlefield, even if they have counters on them."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """Players can respond to a spell or ability whose effect includes proliferating. Once that spell or ability starts to resolve, however, and its controller chooses which permanents and players will get new counters, it's too late for anyone to respond."""@en ] .
+
+:ContentiousPlan rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Contentious Plan" ;
+    :manaCost "{1}{U}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Sorcery ;
+    :hasRarity :Common ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :WarOfTheSpark ;
+    :cardNumber "46"^^xsd:integer ;
+    :artist "Eric Deschamps" ;
+    :hasLanguage :English ;
+    :hasKeywordAction :Proliferate ;
+    :printedText """Proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)
+Draw a card."""@en ;
+    :oracleText """Proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)
+Draw a card."""@en ;
+    :flavorText """Niv-Mizzet had perfected a plan, but he had no control over the mortal minds who had to agree to implement it."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=460973"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/war/46/contentious-plan"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "69497"^^xsd:positiveInteger ;
+    :arenaName "Contentious Plan" ;
+    :arenaSetCode "WAR" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """To proliferate, you can choose any permanent that has a counter, including ones controlled by opponents. You can choose any player who has a counter, including opponents. You can't choose cards in any zone other than the battlefield, even if they have counters on them."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """Players can respond to a spell or ability whose effect includes proliferating. Once that spell or ability starts to resolve, however, and its controller chooses which permanents and players will get new counters, it's too late for anyone to respond."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """You don't have to choose every permanent or player that has a counter, only the ones you want to add another counter to. Since "any number" includes zero, you don't have to choose any permanents at all, and you don't have to choose any players at all."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """An ability that triggers "Whenever you proliferate" triggers even if you chose no permanents or players while doing so."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """If a player or permanent has more than one kind of counter on it, and you choose for it to get additional counters, it must get one of each kind of counter it already has. You can't have it get just one kind of counter it already has and not the others."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """If a permanent ever has both +1/+1 counters and -1/-1 counters on it at the same time, they're removed in pairs as a state-based action so that the permanent has only one of those kinds of counters on it."""@en ] .
 
 :FluxChanneler rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -245,6 +371,231 @@ legality definitions."""@en .
       [ rdf:type :Ruling ;
         :rulingDate "2019-05-03"^^xsd:date ;
         :rulingText """If your library has fewer than seven cards in it while resolving Jace’s last ability, and Jace has already left the battlefield, you’ll draw as many cards as you can and then win the game before state-based actions would cause you to lose the game for trying to draw from an empty library."""@en ] .
+
+:NarsetParterOfVeils rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Narset, Parter of Veils" ;
+    :manaCost "{1}{U}{U}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasSuperType :Legendary ;
+    :hasCardType :Planeswalker ;
+    :hasSubType :Narset ;
+    :hasRarity :Uncommon ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :WarOfTheSpark ;
+    :cardNumber "61"^^xsd:integer ;
+    :artist "Magali Villeneuve" ;
+    :hasLanguage :English ;
+    :loyalty "5"^^xsd:integer ;
+    :printedText """Each opponent can't draw more than one card each turn.
+−2: Look at the top four cards of your library. You may reveal a noncreature, nonland card from among them and put it into your hand. Put the rest on the bottom of your library in a random order."""@en ;
+    :oracleText """Each opponent can't draw more than one card each turn.
+−2: Look at the top four cards of your library. You may reveal a noncreature, nonland card from among them and put it into your hand. Put the rest on the bottom of your library in a random order."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=460988"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/war/61/narset-parter-of-veils"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "69512"^^xsd:positiveInteger ;
+    :arenaName "Narset, Parter of Veils" ;
+    :arenaSetCode "WAR" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Restricted ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2019-05-03"^^xsd:date ;
+        :rulingText """Replacement effects (such as that of Underrealm Lich or the first ability of Jace, Wielder of Mysteries) can't be used to replace draws that Narset disallows. However, if an opponent's first draw is replaced (by Underrealm Lich's ability, for example), that draw didn't happen and Narset won't stop the next draw (which may also be replaced by Underrealm Lich's ability)."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2019-05-03"^^xsd:date ;
+        :rulingText """If an opponent hasn't drawn any cards in a turn and a spell or ability instructs that player to draw multiple cards, that player will just draw one card. However, if the draws are optional, the player can't choose to draw, even if they could draw one card this way."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2019-05-03"^^xsd:date ;
+        :rulingText """Your opponents can each draw a maximum of one card each on each player's turn. Subsequent card draws during that turn are ignored."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2019-05-03"^^xsd:date ;
+        :rulingText """Narset will "see" cards drawn by opponents earlier in the turn she entered the battlefield, although Narset can't affect cards drawn before she entered the battlefield. For example, if an opponent draws two cards, then Narset enters the battlefield, that opponent can't draw more cards that turn, but the two drawn cards are unaffected."""@en ] .
+
+:EvolutionSageWarOfTheSpark159 rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Evolution Sage" ;
+    :manaCost "{2}{G}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Elf ,
+                :Druid ;
+    :hasRarity :Uncommon ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :WarOfTheSpark ;
+    :cardNumber "159"^^xsd:integer ;
+    :artist "Simon Dominic" ;
+    :hasLanguage :English ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    :hasKeywordAction :Proliferate ;
+    :hasAbilityWord :Landfall ;
+    :printedText """Landfall — Whenever a land you control enters, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)"""@en ;
+    :oracleText """Landfall — Whenever a land you control enters, proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)"""@en ;
+    :flavorText """"To care for yourself, cultivate the world. To care for the world, cultivate yourself.\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=461086"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/war/159/evolution-sage"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "69610"^^xsd:positiveInteger ;
+    :arenaName "Evolution Sage" ;
+    :arenaSetCode "WAR" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """If a permanent ever has both +1/+1 counters and -1/-1 counters on it at the same time, they're removed in pairs as a state-based action so that the permanent has only one of those kinds of counters on it."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """Players can respond to a spell or ability whose effect includes proliferating. Once that spell or ability starts to resolve, however, and its controller chooses which permanents and players will get new counters, it's too late for anyone to respond."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """An ability that triggers "Whenever you proliferate" triggers even if you chose no permanents or players while doing so."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """You don't have to choose every permanent or player that has a counter, only the ones you want to add another counter to. Since "any number" includes zero, you don't have to choose any permanents at all, and you don't have to choose any players at all."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """To proliferate, you can choose any permanent that has a counter, including ones controlled by opponents. You can choose any player who has a counter, including opponents. You can't choose cards in any zone other than the battlefield, even if they have counters on them."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-02-04"^^xsd:date ;
+        :rulingText """If a player or permanent has more than one kind of counter on it, and you choose for it to get additional counters, it must get one of each kind of counter it already has. You can't have it get just one kind of counter it already has and not the others."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-11-08"^^xsd:date ;
+        :rulingText """A landfall ability doesn't trigger if a permanent already on the battlefield becomes a land."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-11-08"^^xsd:date ;
+        :rulingText """Whenever a land you control enters, each landfall ability of the permanents you control will trigger. You can put them   on the stack in any order. The last ability you put on the stack will be the first one to resolve (As a result, you can have those abilities resolve in the order of your choosing.)."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-11-08"^^xsd:date ;
+        :rulingText """A landfall ability triggers whenever a land you control enters for any reason. It triggers whenever you play a land, as well as whenever a spell or ability puts a land onto the battlefield under your control."""@en ] .
+
+:DovinsVeto rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Dovin's Veto" ;
+    :manaCost "{W}{U}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Instant ;
+    :hasRarity :Uncommon ;
+    :hasColor :White ,
+              :Blue ;
+    :hasColorIdentity :White ,
+                      :Blue ;
+    :isInSet :WarOfTheSpark ;
+    :cardNumber "193"^^xsd:integer ;
+    :artist "Izzy" ;
+    :hasLanguage :English ;
+    :printedText """This spell can't be countered.
+Counter target noncreature spell."""@en ;
+    :oracleText """This spell can't be countered.
+Counter target noncreature spell."""@en ;
+    :flavorText """"I see you've learned nothing, Chandra. You'd still put a match to something rather than understand it.\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=461120"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/war/193/dovins-veto"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "69643"^^xsd:positiveInteger ;
+    :arenaName "Dovin's Veto" ;
+    :arenaSetCode "WAR" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2021-03-19"^^xsd:date ;
+        :rulingText """A spell or ability that counters spells can still target Dovin's Veto. When that spell or ability resolves, Dovin's Veto won't be countered, but any additional effects of the countering spell or ability will still happen."""@en ] .
+
+:EliteGuardmage rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Elite Guardmage" ;
+    :manaCost "{2}{W}{U}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Human ,
+                :Wizard ;
+    :hasRarity :Uncommon ;
+    :hasColor :White ,
+              :Blue ;
+    :hasColorIdentity :White ,
+                      :Blue ;
+    :isInSet :WarOfTheSpark ;
+    :cardNumber "195"^^xsd:integer ;
+    :artist "PINDURSKI" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "3" ;
+    :toughnessValue "3"^^xsd:integer ;
+    :hasKeywordAbility :Flying ;
+    :printedText """Flying
+When this creature enters, you gain 3 life and draw a card."""@en ;
+    :oracleText """Flying
+When this creature enters, you gain 3 life and draw a card."""@en ;
+    :flavorText """"Be careful. You'll have more than Dovin to contend with if you hope to breach New Prahv."
+—Lavinia, to Chandra Nalaar"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=461122"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/war/195/elite-guardmage"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "69645"^^xsd:positiveInteger ;
+    :arenaName "Elite Guardmage" ;
+    :arenaSetCode "WAR" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] .
 
 :KayaBaneOfTheDead rdf:type owl:NamedIndividual ,
                   :Card ;

@@ -39,8 +39,9 @@
     rdfs:label "Magic Card Collection Individuals – The Lost Caverns of Ixalan"@en ;
     rdfs:comment """An instance graph describing the card individuals of a
 personal Magic: The Gathering card collection that were printed in the set
-The Lost Caverns of Ixalan (LCI). One Card individual is defined per collected
-printing, carrying its characteristics, the platforms it is available on
+The Lost Caverns of Ixalan (LCI). One Card individual is defined per printing
+collected in paper or on MTG Arena, carrying its characteristics, the
+platforms it is available on
 (paper, MTG Arena, Magic Online) with its MTG Arena identity, its legality
 in the paper and MTG Arena formats, and official rulings. Card data was
 sourced from Gatherer and Scryfall. This file imports MagicCardsOntology to
@@ -53,6 +54,117 @@ legality definitions."""@en .
 # Card Individuals
 #
 ################################################################################
+
+:IronpawAspirant rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Ironpaw Aspirant" ;
+    :manaCost "{1}{W}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Cat ,
+                :Warrior ;
+    :hasRarity :Common ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :TheLostCavernsOfIxalan ;
+    :cardNumber "18"^^xsd:integer ;
+    :artist "Dan Murayama Scott" ;
+    :hasLanguage :English ;
+    :power "1" ;
+    :powerValue "1"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    :printedText """When this creature enters, put a +1/+1 counter on target creature."""@en ;
+    :oracleText """When this creature enters, put a +1/+1 counter on target creature."""@en ;
+    :flavorText """"Train your mind and your muscles with equal ferocity, cub. Without wisdom, even a mighty warrior is nothing but a bully."
+—Sovereign Okinec Ahau"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=636709"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/lci/18/ironpaw-aspirant"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "87149"^^xsd:positiveInteger ;
+    :arenaName "Ironpaw Aspirant" ;
+    :arenaSetCode "LCI" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:MinersGuidewing rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Miner's Guidewing" ;
+    :manaCost "{W}" ;
+    :manaValue "1"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Bird ;
+    :hasRarity :Common ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :TheLostCavernsOfIxalan ;
+    :cardNumber "24"^^xsd:integer ;
+    :artist "Allen Douglas" ;
+    :hasLanguage :English ;
+    :power "1" ;
+    :powerValue "1"^^xsd:integer ;
+    :toughness "1" ;
+    :toughnessValue "1"^^xsd:integer ;
+    :hasKeywordAbility :Flying ,
+                       :Vigilance ;
+    :hasKeywordAction :Explore ;
+    :printedText """Flying, vigilance
+When this creature dies, target creature you control explores. (Reveal the top card of your library. Put that card into your hand if it's a land. Otherwise, put a +1/+1 counter on that creature, then put the card back or put it into your graveyard.)"""@en ;
+    :oracleText """Flying, vigilance
+When this creature dies, target creature you control explores. (Reveal the top card of your library. Put that card into your hand if it's a land. Otherwise, put a +1/+1 counter on that creature, then put the card back or put it into your graveyard.)"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=636715"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/lci/24/miners-guidewing"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "87155"^^xsd:positiveInteger ;
+    :arenaName "Miner's Guidewing" ;
+    :arenaSetCode "LCI" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """In some unusual cases, noncreature permanents may explore. For example, if the creature card returned by Defossilize is somehow not a creature once it's on the battlefield, it can still explore. You'll take all the same actions, and you may end up putting a +1/+1 counter on the permanent. (Note that some effects target a creature, and those effects would still require a legal target to have it explore.)"""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """Once an ability that causes a creature to explore begins to resolve, no player may take any other actions until it's done. Notably, opponents can't try to remove the exploring creature after you reveal a nonland card but before it receives a counter."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """Some spells or abilities might cause a creature to explore multiple times in a row. If you reveal a nonland card when a creature explores and leave it on top of your library, then the creature explores again immediately afterwards, you'll reveal the same card again."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """If no card is revealed, most likely because that player's library is empty, the exploring creature receives a +1/+1 counter."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """If an ability instructs a creature to explore, its controller reveals the top card of their library. If it's a land card, they'll put it into their hand. Otherwise, they'll put a +1/+1 counter on that creature, then choose to either leave that card on top of their library or put it into their graveyard."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """If a resolving spell or ability instructs a specific creature to explore but that creature has left the battlefield, the creature still explores. If you reveal a nonland card this way, you won't put a +1/+1 counter on anything, but you may put the revealed card into your graveyard. Effects that trigger "whenever a creature explores" trigger as appropriate."""@en ] .
 
 :OjerTaqDeepestFoundation rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -121,6 +233,473 @@ When Ojer Taq dies, return it to the battlefield tapped and transformed under it
         :rulingDate "2023-11-10"^^xsd:date ;
         :rulingText """Everything that is specified by the effect creating the original token or tokens will also be true about the additional tokens created by Ojer Taq, Deepest Foundation's replacement effect. For example, if an effect tells you to create a token "tapped and attacking," the additional tokens will also be tapped and attacking. Similarly, if an effect creates a token and puts counters on it, the additional tokens will also get those counters."""@en ] .
 
+:OteclanLandmark rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Oteclan Landmark // Oteclan Levitator" ;
+    :manaCost "{W}" ;
+    :manaValue "1"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ,
+                 :Creature ;
+    :hasSubType :Golem ;
+    :hasRarity :Common ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :TheLostCavernsOfIxalan ;
+    :cardNumber "29"^^xsd:integer ;
+    :artist "Warren Mahy" ;
+    :hasLanguage :English ;
+    :hasKeywordAction :Scry ,
+                      :Transform ;
+    :hasKeywordAbility :Flying ,
+                       :Craft ;
+    :printedText """When this artifact enters, scry 2.
+Craft with artifact {2}{W} ({2}{W}, Exile this artifact, Exile another artifact you control or an artifact card from your graveyard: Return this card transformed under its owner's control. Craft only as a sorcery.)
+//
+Flying
+Whenever this creature attacks, target attacking creature without flying gains flying until end of turn."""@en ;
+    :oracleText """When this artifact enters, scry 2.
+Craft with artifact {2}{W} ({2}{W}, Exile this artifact, Exile another artifact you control or an artifact card from your graveyard: Return this card transformed under its owner's control. Craft only as a sorcery.)
+//
+Flying
+Whenever this creature attacks, target attacking creature without flying gains flying until end of turn."""@en ;
+    :flavorText """Dusk Legion invaders sought lone Oltec travelers to prey upon. The Core's guidestones did not approve."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=636721"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/lci/29/oteclan-landmark-oteclan-levitator"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "87161"^^xsd:positiveInteger ;
+    :arenaName "Oteclan Landmark" ;
+    :arenaSetCode "LCI" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """If the materials required include multiple objects, you may exile some of them from among permanents you control and the rest from among cards in your graveyard. You don't have to choose all permanents or all cards from your graveyard."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """If a card that isn't a transforming double-faced card becomes a copy of a card with craft, it'll stay in exile if you activate the craft ability. It won't return to the battlefield."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """The back faces of some cards with craft refer to cards "used to craft" it. This refers to the cards exiled as part of the cost of the craft ability of the front face. Those cards are considered to be "used to craft" that permanent as long as they remain exiled and the permanent remains on the battlefield, even if the permanent's controller changes or some of its characteristics change (because of a copy effect, for example.)"""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """You may exile tokens you control as part of the materials required. However, because they aren't cards and won't stay in exile, any abilities that refer to what you "used to craft" the back faces won't refer to anything."""@en ] .
+
+:AkalPakalFirstAmongEquals rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Akal Pakal, First Among Equals" ;
+    :manaCost "{2}{U}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasSuperType :Legendary ;
+    :hasCardType :Creature ;
+    :hasSubType :Human ,
+                :Advisor ;
+    :hasRarity :Rare ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :TheLostCavernsOfIxalan ;
+    :cardNumber "44"^^xsd:integer ;
+    :artist "Ryan Pancoast" ;
+    :hasLanguage :English ;
+    :power "1" ;
+    :powerValue "1"^^xsd:integer ;
+    :toughness "5" ;
+    :toughnessValue "5"^^xsd:integer ;
+    :printedText """At the beginning of each player's end step, if an artifact entered the battlefield under your control this turn, look at the top two cards of your library. Put one of them into your hand and the other into your graveyard."""@en ;
+    :oracleText """At the beginning of each player's end step, if an artifact entered the battlefield under your control this turn, look at the top two cards of your library. Put one of them into your hand and the other into your graveyard."""@en ;
+    :flavorText """"These lost children of Aclazotz are misguided, but perhaps there can be reconciliation of our ideals without war.\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=636740"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/lci/44/akal-pakal-first-among-equals"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "87180"^^xsd:positiveInteger ;
+    :arenaName "Akal Pakal, First Among Equals" ;
+    :arenaSetCode "LCI" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """If there is only one card in your library, you put it into your hand."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """The ability will trigger no matter what happened to the artifact after it entered. It may have left the battlefield, come under another player's control, or stopped being an artifact."""@en ] .
+
+:BrackishBlunder rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Brackish Blunder" ;
+    :manaCost "{1}{U}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Instant ;
+    :hasRarity :Common ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :TheLostCavernsOfIxalan ;
+    :cardNumber "46"^^xsd:integer ;
+    :artist "Daarken" ;
+    :hasLanguage :English ;
+    :hasKeywordAction :Explore ;
+    :printedText """Return target creature to its owner's hand. If it was tapped, create a Map token. (It's an artifact with "{1}, {T}, Sacrifice this token: Target creature you control explores. Activate only as a sorcery.")"""@en ;
+    :oracleText """Return target creature to its owner's hand. If it was tapped, create a Map token. (It's an artifact with "{1}, {T}, Sacrifice this token: Target creature you control explores. Activate only as a sorcery.")"""@en ;
+    :flavorText """When the Malamet told him to avoid the river, he thought they meant it wasn't safe to drink."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=636742"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/lci/46/brackish-blunder"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "87182"^^xsd:positiveInteger ;
+    :arenaName "Brackish Blunder" ;
+    :arenaSetCode "LCI" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """Map tokens are a kind of predefined token. Each one is a colorless artifact with the artifact subtype Map and the ability "{1}, {T}, Sacrifice this artifact: Target creature you control explores. Activate only as a sorcery.\""""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """Some spells or abilities might cause a creature to explore multiple times in a row. If you reveal a nonland card when a creature explores and leave it on top of your library, then the creature explores again immediately afterwards, you'll reveal the same card again."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """If no card is revealed, most likely because that player's library is empty, the exploring creature receives a +1/+1 counter."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """If a resolving spell or ability instructs a specific creature to explore but that creature has left the battlefield, the creature still explores. If you reveal a nonland card this way, you won't put a +1/+1 counter on anything, but you may put the revealed card into your graveyard. Effects that trigger "whenever a creature explores" trigger as appropriate."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """Once an ability that causes a creature to explore begins to resolve, no player may take any other actions until it's done. Notably, opponents can't try to remove the exploring creature after you reveal a nonland card but before it receives a counter."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """If an ability instructs a creature to explore, its controller reveals the top card of their library. If it's a land card, they'll put it into their hand. Otherwise, they'll put a +1/+1 counter on that creature, then choose to either leave that card on top of their library or put it into their graveyard."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """In some unusual cases, noncreature permanents may explore. For example, if the creature card returned by Defossilize is somehow not a creature once it's on the battlefield, it can still explore. You'll take all the same actions, and you may end up putting a +1/+1 counter on the permanent. (Note that some effects target a creature, and those effects would still require a legal target to have it explore.)"""@en ] .
+
+:CogworkWrestler rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Cogwork Wrestler" ;
+    :manaCost "{U}" ;
+    :manaValue "1"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ,
+                 :Creature ;
+    :hasSubType :Gnome ;
+    :hasRarity :Common ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :TheLostCavernsOfIxalan ;
+    :cardNumber "49"^^xsd:integer ;
+    :artist "Tomek Larek" ;
+    :hasLanguage :English ;
+    :power "1" ;
+    :powerValue "1"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    :hasKeywordAbility :Flash ;
+    :printedText """Flash
+When this creature enters, target creature an opponent controls gets -2/-0 until end of turn."""@en ;
+    :oracleText """Flash
+When this creature enters, target creature an opponent controls gets -2/-0 until end of turn."""@en ;
+    :flavorText """Years of adventure and adversity on the open seas did not prepare Brog for the humiliation of losing a sparring match to a cogwork doll less than half his size."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=636746"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/lci/49/cogwork-wrestler"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "87186"^^xsd:positiveInteger ;
+    :arenaName "Cogwork Wrestler" ;
+    :arenaSetCode "LCI" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:SageOfDays rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Sage of Days" ;
+    :manaCost "{2}{U}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Human ,
+                :Wizard ;
+    :hasRarity :Common ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :TheLostCavernsOfIxalan ;
+    :cardNumber "73"^^xsd:integer ;
+    :artist "Aldo Domínguez" ;
+    :hasLanguage :English ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    :printedText """When this creature enters, look at the top three cards of your library. You may put one of those cards back on top of your library. Put the rest into your graveyard."""@en ;
+    :oracleText """When this creature enters, look at the top three cards of your library. You may put one of those cards back on top of your library. Put the rest into your graveyard."""@en ;
+    :flavorText """"After this age, another.\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=636775"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/lci/73/sage-of-days"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "87215"^^xsd:positiveInteger ;
+    :arenaName "Sage of Days" ;
+    :arenaSetCode "LCI" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:UnluckyDrop rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Unlucky Drop" ;
+    :manaCost "{3}{U}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasCardType :Instant ;
+    :hasRarity :Common ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :TheLostCavernsOfIxalan ;
+    :cardNumber "82"^^xsd:integer ;
+    :artist "Patrik Hell" ;
+    :hasLanguage :English ;
+    :printedText """Target artifact or creature's owner puts it on their choice of the top or bottom of their library."""@en ;
+    :oracleText """Target artifact or creature's owner puts it on their choice of the top or bottom of their library."""@en ;
+    :flavorText """"First rule down here is the same as it is on the water: always double-check your knots."
+—Captain Lannery Storm"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=636784"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/lci/82/unlucky-drop"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "87224"^^xsd:positiveInteger ;
+    :arenaName "Unlucky Drop" ;
+    :arenaSetCode "LCI" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """The permanent's owner chooses whether to put it on the top or bottom of their library. If multiple cards are put into the library this way (such as when the spell targets a melded permanent), that permanent's owner puts all the cards on top or all the cards on the bottom. They put them in whatever order they wish, and do not need to reveal the order."""@en ] .
+
+:BloodletterOfAclazotz rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Bloodletter of Aclazotz" ;
+    :manaCost "{1}{B}{B}{B}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Vampire ,
+                :Demon ;
+    :hasRarity :MythicRare ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :TheLostCavernsOfIxalan ;
+    :cardNumber "92"^^xsd:integer ;
+    :artist "Antonio José Manzanedo" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "4" ;
+    :toughnessValue "4"^^xsd:integer ;
+    :hasKeywordAbility :Flying ;
+    :printedText """Flying
+If an opponent would lose life during your turn, they lose twice that much life instead. (Damage causes loss of life.)"""@en ;
+    :oracleText """Flying
+If an opponent would lose life during your turn, they lose twice that much life instead. (Damage causes loss of life.)"""@en ;
+    :flavorText """Its very presence rips old wounds open to bleed anew."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=636796"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/lci/92/bloodletter-of-aclazotz"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "87489"^^xsd:positiveInteger ;
+    :arenaName "Bloodletter of Aclazotz" ;
+    :arenaSetCode "LCI" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """Bloodletter of Aclazotz's last ability doesn't change the amount of damage dealt to opponents. For example, if a 1/1 creature with lifelink deals combat damage to an opponent on your turn, they would lose 2 life, but you'd still gain only 1 life."""@en ] .
+
+:BroodrageMycoid rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Broodrage Mycoid" ;
+    :manaCost "{3}{B}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Fungus ;
+    :hasRarity :Common ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :TheLostCavernsOfIxalan ;
+    :cardNumber "95"^^xsd:integer ;
+    :artist "Domenico Cava" ;
+    :hasLanguage :English ;
+    :power "4" ;
+    :powerValue "4"^^xsd:integer ;
+    :toughness "3" ;
+    :toughnessValue "3"^^xsd:integer ;
+    :printedText """At the beginning of your end step, if you descended this turn, create a 1/1 black Fungus creature token with "This token can't block." (You descended if a permanent card was put into your graveyard from anywhere.)"""@en ;
+    :oracleText """At the beginning of your end step, if you descended this turn, create a 1/1 black Fungus creature token with "This token can't block." (You descended if a permanent card was put into your graveyard from anywhere.)"""@en ;
+    :flavorText """As the massive mycoids known as rage titans charge into battle, lesser ones swarm in their wake, gobbling up any survivors."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=636799"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/lci/95/broodrage-mycoid"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "87239"^^xsd:positiveInteger ;
+    :arenaName "Broodrage Mycoid" ;
+    :arenaSetCode "LCI" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """Some cards refer to a player who has "descended this turn." This means that a permanent card has been put into that player's graveyard from anywhere this turn."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """Abilities that begin with "At the beginning of your end step, if you descended this turn" will trigger only once during your end step, no matter how many times you descended this turn. However, if you haven't descended this turn as your end step begins, the ability won't trigger at all. It's not possible to put a permanent card into your graveyard during the end step in time to have the ability trigger."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """Some cards refer to the number of times a player descended this turn. Those cards care about the number of permanent cards put into that player's graveyard from anywhere this turn."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """A permanent card is an artifact, battle, creature, enchantment, land, or planeswalker card. Tokens are not cards, and while tokens are put into the graveyard before ceasing to exist, that action doesn't count as a player having descended."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """In either case, it doesn't matter if those cards are still in that player's graveyard."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """Multiple cards have abilities that begin with "At the beginning of your end step, if you descended this turn." These cards don't need to have been under your control at the time you descended. For example, if a permanent card is put into your graveyard during your first main phase and you cast Stalactite Stalker your second main phase, its ability will trigger at the beginning of your end step."""@en ] .
+
+:DeadWeight rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Dead Weight" ;
+    :manaCost "{B}" ;
+    :manaValue "1"^^xsd:nonNegativeInteger ;
+    :hasCardType :Enchantment ;
+    :hasSubType :Aura ;
+    :hasRarity :Common ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :TheLostCavernsOfIxalan ;
+    :cardNumber "99"^^xsd:integer ;
+    :artist "Javier Charro" ;
+    :hasLanguage :English ;
+    :hasKeywordAbility :Enchant ;
+    :printedText """Enchant creature
+Enchanted creature gets -2/-2."""@en ;
+    :oracleText """Enchant creature
+Enchanted creature gets -2/-2."""@en ;
+    :flavorText """The hired goblins were not, as advertised, worth their weight in gold."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=636803"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/lci/99/dead-weight"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "87243"^^xsd:positiveInteger ;
+    :arenaName "Dead Weight" ;
+    :arenaSetCode "LCI" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
 :DeepCavernBat rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Deep-Cavern Bat" ;
@@ -171,6 +750,623 @@ When this creature enters, look at target opponent's hand. You may exile a nonla
       [ rdf:type :Ruling ;
         :rulingDate "2023-11-10"^^xsd:date ;
         :rulingText """If Deep-Cavern Bat leaves the battlefield before its last ability resolves, you'll still look at the target opponent's hand, but you won't exile any cards from it."""@en ] .
+
+:FungalFortitude rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Fungal Fortitude" ;
+    :manaCost "{1}{B}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Enchantment ;
+    :hasSubType :Aura ;
+    :hasRarity :Common ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :TheLostCavernsOfIxalan ;
+    :cardNumber "106"^^xsd:integer ;
+    :artist "Izzy" ;
+    :hasLanguage :English ;
+    :hasKeywordAbility :Enchant ,
+                       :Flash ;
+    :printedText """Flash
+Enchant creature
+Enchanted creature gets +2/+0.
+When enchanted creature dies, return it to the battlefield tapped under its owner's control."""@en ;
+    :oracleText """Flash
+Enchant creature
+Enchanted creature gets +2/+0.
+When enchanted creature dies, return it to the battlefield tapped under its owner's control."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=636810"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/lci/106/fungal-fortitude"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "87491"^^xsd:positiveInteger ;
+    :arenaName "Fungal Fortitude" ;
+    :arenaSetCode "LCI" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:MephiticDraught rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Mephitic Draught" ;
+    :manaCost "{1}{B}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ;
+    :hasRarity :Common ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :TheLostCavernsOfIxalan ;
+    :cardNumber "112"^^xsd:integer ;
+    :artist "Lauren K. Cannon" ;
+    :hasLanguage :English ;
+    :printedText """When this artifact enters or is put into a graveyard from the battlefield, you draw a card and you lose 1 life."""@en ;
+    :oracleText """When this artifact enters or is put into a graveyard from the battlefield, you draw a card and you lose 1 life."""@en ;
+    :flavorText """"Don't look at me. I'm not drinking it."
+—Dranach, Dire Fleet boatswain"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=636817"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/lci/112/mephitic-draught"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "87257"^^xsd:positiveInteger ;
+    :arenaName "Mephitic Draught" ;
+    :arenaSetCode "LCI" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:RayOfRuin rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Ray of Ruin" ;
+    :manaCost "{4}{B}" ;
+    :manaValue "5"^^xsd:nonNegativeInteger ;
+    :hasCardType :Sorcery ;
+    :hasRarity :Common ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :TheLostCavernsOfIxalan ;
+    :cardNumber "117"^^xsd:integer ;
+    :artist "Sam Rowan" ;
+    :hasLanguage :English ;
+    :hasKeywordAction :Scry ;
+    :printedText """Exile target creature, Vehicle, or nonbasic land. Scry 1. (Look at the top card of your library. You may put that card on the bottom.)"""@en ;
+    :oracleText """Exile target creature, Vehicle, or nonbasic land. Scry 1. (Look at the top card of your library. You may put that card on the bottom.)"""@en ;
+    :flavorText """"We know Chimil's light as a warming, healing presence, but make no mistake: to those who would desecrate her lands, it is a terrible force of scouring fury."
+—Akal Pakal, First Steward of Oteclan"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=636822"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/lci/117/ray-of-ruin"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "87262"^^xsd:positiveInteger ;
+    :arenaName "Ray of Ruin" ;
+    :arenaSetCode "LCI" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:SoulcoilViper rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Soulcoil Viper" ;
+    :manaCost "{2}{B}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Snake ;
+    :hasRarity :Uncommon ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :TheLostCavernsOfIxalan ;
+    :cardNumber "120"^^xsd:integer ;
+    :artist "Allen Douglas" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "3" ;
+    :toughnessValue "3"^^xsd:integer ;
+    :printedText """{B}, {T}, Sacrifice this creature: Return target creature card from your graveyard to the battlefield with a finality counter on it. Activate only as a sorcery. (If a creature with a finality counter on it would die, exile it instead.)"""@en ;
+    :oracleText """{B}, {T}, Sacrifice this creature: Return target creature card from your graveyard to the battlefield with a finality counter on it. Activate only as a sorcery. (If a creature with a finality counter on it would die, exile it instead.)"""@en ;
+    :flavorText """"As the snake sheds its skin to be born anew, we cast off death to rise as servants of Aclazotz."
+—Vito, Church of Dusk heretic"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=636825"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/lci/120/soulcoil-viper"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "87265"^^xsd:positiveInteger ;
+    :arenaName "Soulcoil Viper" ;
+    :arenaSetCode "LCI" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """Because you choose the target of Soulcoil Viper's ability before you pay the cost of sacrificing it, Soulcoil Viper can't be the target of its own ability."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """Finality counters work on any permanent, not only creatures. If a permanent with a finality counter on it would be put into a graveyard from the battlefield, exile it instead."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """Multiple finality counters on a single permanent are redundant."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """Finality counters don't stop permanents from going to zones other than the graveyard from the battlefield. For example, if a permanent with a finality counter on it would be put into its owner's hand from the battlefield, it does so normally."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """Finality counters aren't keyword counters, and a finality counter doesn't give any abilities to the permanent it's on. If that permanent loses its abilities and then would go to a graveyard, it will still be exiled instead."""@en ] .
+
+:ChildOfTheVolcano rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Child of the Volcano" ;
+    :manaCost "{3}{R}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Elemental ;
+    :hasRarity :Common ;
+    :hasColor :Red ;
+    :hasColorIdentity :Red ;
+    :isInSet :TheLostCavernsOfIxalan ;
+    :cardNumber "140"^^xsd:integer ;
+    :artist "Uriah Voth" ;
+    :hasLanguage :English ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "3" ;
+    :toughnessValue "3"^^xsd:integer ;
+    :hasKeywordAbility :Trample ;
+    :printedText """Trample
+At the beginning of your end step, if you descended this turn, put a +1/+1 counter on this creature. (You descended if a permanent card was put into your graveyard from anywhere.)"""@en ;
+    :oracleText """Trample
+At the beginning of your end step, if you descended this turn, put a +1/+1 counter on this creature. (You descended if a permanent card was put into your graveyard from anywhere.)"""@en ;
+    :flavorText """It is a living eruption, unquenchable fury given form."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=636849"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/lci/140/child-of-the-volcano"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "87289"^^xsd:positiveInteger ;
+    :arenaName "Child of the Volcano" ;
+    :arenaSetCode "LCI" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """Some cards refer to a player who has "descended this turn." This means that a permanent card has been put into that player's graveyard from anywhere this turn."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """Some cards refer to the number of times a player descended this turn. Those cards care about the number of permanent cards put into that player's graveyard from anywhere this turn."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """A permanent card is an artifact, battle, creature, enchantment, land, or planeswalker card. Tokens are not cards, and while tokens are put into the graveyard before ceasing to exist, that action doesn't count as a player having descended."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """Multiple cards have abilities that begin with "At the beginning of your end step, if you descended this turn." These cards don't need to have been under your control at the time you descended. For example, if a permanent card is put into your graveyard during your first main phase and you cast Stalactite Stalker your second main phase, its ability will trigger at the beginning of your end step."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """In either case, it doesn't matter if those cards are still in that player's graveyard."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """Abilities that begin with "At the beginning of your end step, if you descended this turn" will trigger only once during your end step, no matter how many times you descended this turn. However, if you haven't descended this turn as your end step begins, the ability won't trigger at all. It's not possible to put a permanent card into your graveyard during the end step in time to have the ability trigger."""@en ] .
+
+:Dinotomaton rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Dinotomaton" ;
+    :manaCost "{3}{R}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ,
+                 :Creature ;
+    :hasSubType :Dinosaur ,
+                :Gnome ;
+    :hasRarity :Common ;
+    :hasColor :Red ;
+    :hasColorIdentity :Red ;
+    :isInSet :TheLostCavernsOfIxalan ;
+    :cardNumber "144"^^xsd:integer ;
+    :artist "Zoltan Boros" ;
+    :hasLanguage :English ;
+    :power "4" ;
+    :powerValue "4"^^xsd:integer ;
+    :toughness "3" ;
+    :toughnessValue "3"^^xsd:integer ;
+    :hasKeywordAbility :Menace ;
+    :printedText """Menace (This creature can't be blocked except by two or more creatures.)
+When this creature enters, target creature you control gains menace until end of turn."""@en ;
+    :oracleText """Menace (This creature can't be blocked except by two or more creatures.)
+When this creature enters, target creature you control gains menace until end of turn."""@en ;
+    :flavorText """"Oh, Saheeli would *love* you."
+—Huatli"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=636853"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/lci/144/dinotomaton"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "87293"^^xsd:positiveInteger ;
+    :arenaName "Dinotomaton" ;
+    :arenaSetCode "LCI" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:DreadmawsIre rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Dreadmaw's Ire" ;
+    :manaCost "{R}" ;
+    :manaValue "1"^^xsd:nonNegativeInteger ;
+    :hasCardType :Instant ;
+    :hasRarity :Uncommon ;
+    :hasColor :Red ;
+    :hasColorIdentity :Red ;
+    :isInSet :TheLostCavernsOfIxalan ;
+    :cardNumber "147"^^xsd:integer ;
+    :artist "Crystal Sully" ;
+    :hasLanguage :English ;
+    :printedText """Until end of turn, target attacking creature gets +2/+2 and gains trample and "Whenever this creature deals combat damage to a player, destroy target artifact that player controls.\""""@en ;
+    :oracleText """Until end of turn, target attacking creature gets +2/+2 and gains trample and "Whenever this creature deals combat damage to a player, destroy target artifact that player controls.\""""@en ;
+    :flavorText """"That's the fifth ship lost in three days! Can't we build them out of something stronger?"
+—Malcolm Lee"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=636858"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/lci/147/dreadmaws-ire"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "87298"^^xsd:positiveInteger ;
+    :arenaName "Dreadmaw's Ire" ;
+    :arenaSetCode "LCI" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:EnterprisingScallywag rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Enterprising Scallywag" ;
+    :manaCost "{1}{R}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Goblin ,
+                :Pirate ;
+    :hasRarity :Uncommon ;
+    :hasColor :Red ;
+    :hasColorIdentity :Red ;
+    :isInSet :TheLostCavernsOfIxalan ;
+    :cardNumber "148"^^xsd:integer ;
+    :artist "Denman Rooke" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    # Note: keyword "Treasure" not defined in MagicCardsOntology
+    :printedText """At the beginning of your end step, if you descended this turn, create a Treasure token. (You descended if a permanent card was put into your graveyard from anywhere.)"""@en ;
+    :oracleText """At the beginning of your end step, if you descended this turn, create a Treasure token. (You descended if a permanent card was put into your graveyard from anywhere.)"""@en ;
+    :flavorText """"He would've wanted me to have it!\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=636859"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/lci/148/enterprising-scallywag"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "87299"^^xsd:positiveInteger ;
+    :arenaName "Enterprising Scallywag" ;
+    :arenaSetCode "LCI" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """In either case, it doesn't matter if those cards are still in that player's graveyard."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """Multiple cards have abilities that begin with "At the beginning of your end step, if you descended this turn." These cards don't need to have been under your control at the time you descended. For example, if a permanent card is put into your graveyard during your first main phase and you cast Stalactite Stalker your second main phase, its ability will trigger at the beginning of your end step."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """Some cards refer to the number of times a player descended this turn. Those cards care about the number of permanent cards put into that player's graveyard from anywhere this turn."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """Some cards refer to a player who has "descended this turn." This means that a permanent card has been put into that player's graveyard from anywhere this turn."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """A permanent card is an artifact, battle, creature, enchantment, land, or planeswalker card. Tokens are not cards, and while tokens are put into the graveyard before ceasing to exist, that action doesn't count as a player having descended."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """Abilities that begin with "At the beginning of your end step, if you descended this turn" will trigger only once during your end step, no matter how many times you descended this turn. However, if you haven't descended this turn as your end step begins, the ability won't trigger at all. It's not possible to put a permanent card into your graveyard during the end step in time to have the ability trigger."""@en ] .
+
+:HotfootGnome rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Hotfoot Gnome" ;
+    :manaCost "{2}{R}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ,
+                 :Creature ;
+    :hasSubType :Gnome ;
+    :hasRarity :Common ;
+    :hasColor :Red ;
+    :hasColorIdentity :Red ;
+    :isInSet :TheLostCavernsOfIxalan ;
+    :cardNumber "154"^^xsd:integer ;
+    :artist "Svetlin Velinov" ;
+    :hasLanguage :English ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "1" ;
+    :toughnessValue "1"^^xsd:integer ;
+    :hasKeywordAbility :Haste ;
+    :printedText """Haste
+{T}: Another target creature gains haste until end of turn."""@en ;
+    :oracleText """Haste
+{T}: Another target creature gains haste until end of turn."""@en ;
+    :flavorText """As the surface-dwellers became bolder in their intrusions, Oltec artificers began to repurpose courier gnomes for intelligence gathering and distraction."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=636865"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/lci/154/hotfoot-gnome"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "87305"^^xsd:positiveInteger ;
+    :arenaName "Hotfoot Gnome" ;
+    :arenaSetCode "LCI" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:OjerAxonilDeepestMight rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Ojer Axonil, Deepest Might // Temple of Power" ;
+    :manaCost "{2}{R}{R}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasSuperType :Legendary ;
+    :hasCardType :Creature ,
+                 :Land ;
+    :hasSubType :God ;
+    :hasRarity :MythicRare ;
+    :hasColor :Red ;
+    :hasColorIdentity :Red ;
+    :isInSet :TheLostCavernsOfIxalan ;
+    :cardNumber "158"^^xsd:integer ;
+    :artist "Victor Adame Minguez" ;
+    :hasLanguage :English ;
+    :producesMana :Red ;
+    :power "4" ;
+    :powerValue "4"^^xsd:integer ;
+    :toughness "4" ;
+    :toughnessValue "4"^^xsd:integer ;
+    :hasKeywordAction :Transform ;
+    :hasKeywordAbility :Trample ;
+    :printedText """Trample
+If a red source you control would deal an amount of noncombat damage less than Ojer Axonil's power to an opponent, that source deals damage equal to Ojer Axonil's power instead.
+When Ojer Axonil dies, return it to the battlefield tapped and transformed under its owner's control.
+//
+(Transforms from Ojer Axonil, Deepest Might.)
+{T}: Add {R}.
+{2}{R}, {T}: Transform this land. Activate only if red sources you controlled dealt 4 or more noncombat damage this turn and only as a sorcery."""@en ;
+    :oracleText """Trample
+If a red source you control would deal an amount of noncombat damage less than Ojer Axonil's power to an opponent, that source deals damage equal to Ojer Axonil's power instead.
+When Ojer Axonil dies, return it to the battlefield tapped and transformed under its owner's control.
+//
+(Transforms from Ojer Axonil, Deepest Might.)
+{T}: Add {R}.
+{2}{R}, {T}: Transform this land. Activate only if red sources you controlled dealt 4 or more noncombat damage this turn and only as a sorcery."""@en ;
+    :flavorText """Chimil gave the Oltec passion. Ojer Axonil challenged them to harness it."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=636870"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/lci/158/ojer-axonil-deepest-might-temple-of-power"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "87310"^^xsd:positiveInteger ;
+    :arenaName "Ojer Axonil, Deepest Might" ;
+    :arenaSetCode "LCI" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """For the purpose of Temple of Power's last ability, you need to have controlled the red source that dealt noncombat damage only at the time that the damage was dealt. If it dies or changes control after that point, that damage will still count toward Temple of Power's activation restriction."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """While you control Ojer Axonil, Deepest Might, if an effect such as that of Chandra's Pyrohelix asks you to divide damage among targets, you must divide the unmodified damage."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """The comparison between the amount of noncombat damage being dealt and Ojer Axonil's power occurs only once, when the damage would be dealt. Reducing Ojer Axonil's power before noncombat damage is dealt may cause its replacement effect not to apply to that damage."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """The 4 or more noncombat damage may be dealt by multiple red sources you controlled. For example, if you cast a red spell that dealt 3 damage to a creature and then a red artifact you controlled dealt 1 noncombat damage to a creature, you could activate Temple of Power's last ability."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """If a card that isn't a transforming double-faced card is a copy of Ojer Axonil, Deepest Might, it won't return to the battlefield when it dies."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """If Ojer Axonil's second ability and additional replacement effects would modify how damage would be dealt, the player being dealt damage chooses the order in which to apply those effects."""@en ] .
+
+:PanickedAltisaur rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Panicked Altisaur" ;
+    :manaCost "{4}{R}" ;
+    :manaValue "5"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Dinosaur ;
+    :hasRarity :Common ;
+    :hasColor :Red ;
+    :hasColorIdentity :Red ;
+    :isInSet :TheLostCavernsOfIxalan ;
+    :cardNumber "159"^^xsd:integer ;
+    :artist "Lars Grant-West" ;
+    :hasLanguage :English ;
+    :power "4" ;
+    :powerValue "4"^^xsd:integer ;
+    :toughness "5" ;
+    :toughnessValue "5"^^xsd:integer ;
+    :hasKeywordAbility :Reach ;
+    :printedText """Reach
+{T}: This creature deals 2 damage to each opponent."""@en ;
+    :oracleText """Reach
+{T}: This creature deals 2 damage to each opponent."""@en ;
+    :flavorText """Early Sun Empire expeditions learned the hard way that some surface dinosaurs were particularly ill-suited to the caverns' enclosed environments."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=636872"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/lci/159/panicked-altisaur"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "87312"^^xsd:positiveInteger ;
+    :arenaName "Panicked Altisaur" ;
+    :arenaSetCode "LCI" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:RampagingCeratops rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Rampaging Ceratops" ;
+    :manaCost "{4}{R}" ;
+    :manaValue "5"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Dinosaur ;
+    :hasRarity :Uncommon ;
+    :hasColor :Red ;
+    :hasColorIdentity :Red ;
+    :isInSet :TheLostCavernsOfIxalan ;
+    :cardNumber "162"^^xsd:integer ;
+    :artist "Nicholas Gregory" ;
+    :hasLanguage :English ;
+    :power "5" ;
+    :powerValue "5"^^xsd:integer ;
+    :toughness "4" ;
+    :toughnessValue "4"^^xsd:integer ;
+    :printedText """This creature can't be blocked except by three or more creatures."""@en ;
+    :oracleText """This creature can't be blocked except by three or more creatures."""@en ;
+    :flavorText """Anticipating tight spaces and trivial fauna, the first Dusk Legion expeditions were small, mobile, and lightly armored. Hundreds of casualties later, they started sending plate-clad platoons."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=636875"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/lci/162/rampaging-ceratops"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "87315"^^xsd:positiveInteger ;
+    :arenaName "Rampaging Ceratops" ;
+    :arenaSetCode "LCI" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
 
 :SaheelisLattice rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -235,6 +1431,390 @@ Mastercraft Raptor's power is equal to the total power of the exiled cards used 
       [ rdf:type :Ruling ;
         :rulingDate "2023-11-10"^^xsd:date ;
         :rulingText """You may exile tokens you control as part of the materials required. However, because they aren't cards and won't stay in exile, any abilities that refer to what you "used to craft" the back faces won't refer to anything."""@en ] .
+
+:InThePresenceOfAges rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "In the Presence of Ages" ;
+    :manaCost "{2}{G}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Instant ;
+    :hasRarity :Common ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :TheLostCavernsOfIxalan ;
+    :cardNumber "192"^^xsd:integer ;
+    :artist "Steve Prescott" ;
+    :hasLanguage :English ;
+    :printedText """Reveal the top four cards of your library. You may put a creature card and/or a land card from among them into your hand. Put the rest into your graveyard."""@en ;
+    :oracleText """Reveal the top four cards of your library. You may put a creature card and/or a land card from among them into your hand. Put the rest into your graveyard."""@en ;
+    :flavorText """"Finally, those glowing purple bone-monsters are gone and we can get back to the real excitement: archaeology!"
+—Quintorius Kand"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=636908"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/lci/192/in-the-presence-of-ages"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "87348"^^xsd:positiveInteger ;
+    :arenaName "In the Presence of Ages" ;
+    :arenaSetCode "LCI" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """While resolving In the Presence of Ages, you could put no cards, a creature card, a land card, or a creature card and a land card into your hand."""@en ] .
+
+:KaslemsStonetree rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Kaslem's Stonetree // Kaslem's Strider" ;
+    :manaCost "{2}{G}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ,
+                 :Creature ;
+    :hasSubType :Golem ;
+    :hasRarity :Common ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :TheLostCavernsOfIxalan ;
+    :cardNumber "197"^^xsd:integer ;
+    :artist "Victor Adame Minguez" ;
+    :hasLanguage :English ;
+    :hasKeywordAbility :Craft ;
+    :hasKeywordAction :Transform ;
+    :printedText """When this artifact enters, look at the top six cards of your library. You may put a land card from among them onto the battlefield tapped. Put the rest on the bottom in a random order.
+Craft with Cave {5}{G} ({5}{G}, Exile this artifact, Exile a Cave you control or a Cave card from your graveyard: Return this card transformed under its owner's control. Craft only as a sorcery.)
+//
+"""@en ;
+    :oracleText """When this artifact enters, look at the top six cards of your library. You may put a land card from among them onto the battlefield tapped. Put the rest on the bottom in a random order.
+Craft with Cave {5}{G} ({5}{G}, Exile this artifact, Exile a Cave you control or a Cave card from your graveyard: Return this card transformed under its owner's control. Craft only as a sorcery.)
+//
+"""@en ;
+    :flavorText """The Oltec long ago abandoned the caverns to the mycoids, but the Deep Gods still keep watch over the spore-strewn darkness."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=636914"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/lci/197/kaslems-stonetree-kaslems-strider"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "87354"^^xsd:positiveInteger ;
+    :arenaName "Kaslem's Stonetree" ;
+    :arenaSetCode "LCI" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """You may exile tokens you control as part of the materials required. However, because they aren't cards and won't stay in exile, any abilities that refer to what you "used to craft" the back faces won't refer to anything."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """If a card that isn't a transforming double-faced card becomes a copy of a card with craft, it'll stay in exile if you activate the craft ability. It won't return to the battlefield."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """The back faces of some cards with craft refer to cards "used to craft" it. This refers to the cards exiled as part of the cost of the craft ability of the front face. Those cards are considered to be "used to craft" that permanent as long as they remain exiled and the permanent remains on the battlefield, even if the permanent's controller changes or some of its characteristics change (because of a copy effect, for example.)"""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """If the materials required include multiple objects, you may exile some of them from among permanents you control and the rest from among cards in your graveyard. You don't have to choose all permanents or all cards from your graveyard."""@en ] .
+
+:MalametBrawler rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Malamet Brawler" ;
+    :manaCost "{1}{G}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Cat ,
+                :Warrior ;
+    :hasRarity :Common ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :TheLostCavernsOfIxalan ;
+    :cardNumber "199"^^xsd:integer ;
+    :artist "Oriana Menendez" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    :printedText """Whenever this creature attacks, target attacking creature gains trample until end of turn."""@en ;
+    :oracleText """Whenever this creature attacks, target attacking creature gains trample until end of turn."""@en ;
+    :flavorText """"I bear the marking of the Deep King, and in his name I will rend you to nothing but spores on the wind!\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=636917"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/lci/199/malamet-brawler"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "87357"^^xsd:positiveInteger ;
+    :arenaName "Malamet Brawler" ;
+    :arenaSetCode "LCI" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:MalametVeteran rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Malamet Veteran" ;
+    :manaCost "{4}{G}" ;
+    :manaValue "5"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Cat ,
+                :Warrior ;
+    :hasRarity :Common ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :TheLostCavernsOfIxalan ;
+    :cardNumber "201"^^xsd:integer ;
+    :artist "Steve Prescott" ;
+    :hasLanguage :English ;
+    :power "5" ;
+    :powerValue "5"^^xsd:integer ;
+    :toughness "4" ;
+    :toughnessValue "4"^^xsd:integer ;
+    :hasKeywordAbility :Trample ;
+    # Note: keyword "Descend" not defined in MagicCardsOntology
+    :printedText """Trample
+Descend 4 — Whenever this creature attacks, if there are four or more permanent cards in your graveyard, put a +1/+1 counter on target creature."""@en ;
+    :oracleText """Trample
+Descend 4 — Whenever this creature attacks, if there are four or more permanent cards in your graveyard, put a +1/+1 counter on target creature."""@en ;
+    :flavorText """The mightiest Malamet warriors train as titan-killers, elite champions capable of facing down the caverns' most fearsome beasts."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=636919"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/lci/201/malamet-veteran"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "87359"^^xsd:positiveInteger ;
+    :arenaName "Malamet Veteran" ;
+    :arenaSetCode "LCI" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """Cards with the ability word "descend N" have abilities that care if you have at least N permanent cards in your graveyard."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """Some descend triggered abilities include intervening "if" clauses (i.e. "if you have [four or eight] permanent cards in your graveyard" in the middle of the ability). Each of these abilities checks your graveyard at the moment it would trigger to see if it does. If you don't have the required number of permanent cards in your graveyard at that time, the ability doesn't trigger at all. If it does trigger, it will check again as it tries to resolve. If you don't have the required number of permanent cards in your graveyard at that time, the ability won't resolve and none of its effects will happen."""@en ] .
+
+:PathfindingAxejaw rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Pathfinding Axejaw" ;
+    :manaCost "{3}{G}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Dinosaur ;
+    :hasRarity :Common ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :TheLostCavernsOfIxalan ;
+    :cardNumber "206"^^xsd:integer ;
+    :artist "Raoul Vitale" ;
+    :hasLanguage :English ;
+    :power "4" ;
+    :powerValue "4"^^xsd:integer ;
+    :toughness "3" ;
+    :toughnessValue "3"^^xsd:integer ;
+    :hasKeywordAction :Explore ;
+    :printedText """When this creature enters, it explores. (Reveal the top card of your library. Put that card into your hand if it's a land. Otherwise, put a +1/+1 counter on this creature, then put the card back or put it into your graveyard.)"""@en ;
+    :oracleText """When this creature enters, it explores. (Reveal the top card of your library. Put that card into your hand if it's a land. Otherwise, put a +1/+1 counter on this creature, then put the card back or put it into your graveyard.)"""@en ;
+    :flavorText """When you don't know what dangers you'll face, bring the biggest danger with you."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=636925"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/lci/206/pathfinding-axejaw"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "87365"^^xsd:positiveInteger ;
+    :arenaName "Pathfinding Axejaw" ;
+    :arenaSetCode "LCI" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """If an ability instructs a creature to explore, its controller reveals the top card of their library. If it's a land card, they'll put it into their hand. Otherwise, they'll put a +1/+1 counter on that creature, then choose to either leave that card on top of their library or put it into their graveyard."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """If no card is revealed, most likely because that player's library is empty, the exploring creature receives a +1/+1 counter."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """If a resolving spell or ability instructs a specific creature to explore but that creature has left the battlefield, the creature still explores. If you reveal a nonland card this way, you won't put a +1/+1 counter on anything, but you may put the revealed card into your graveyard. Effects that trigger "whenever a creature explores" trigger as appropriate."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """Some spells or abilities might cause a creature to explore multiple times in a row. If you reveal a nonland card when a creature explores and leave it on top of your library, then the creature explores again immediately afterwards, you'll reveal the same card again."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """Once an ability that causes a creature to explore begins to resolve, no player may take any other actions until it's done. Notably, opponents can't try to remove the exploring creature after you reveal a nonland card but before it receives a counter."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """In some unusual cases, noncreature permanents may explore. For example, if the creature card returned by Defossilize is somehow not a creature once it's on the battlefield, it can still explore. You'll take all the same actions, and you may end up putting a +1/+1 counter on the permanent. (Note that some effects target a creature, and those effects would still require a legal target to have it explore.)"""@en ] .
+
+:PoisonDartFrog rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Poison Dart Frog" ;
+    :manaCost "{1}{G}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Frog ;
+    :hasRarity :Common ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :TheLostCavernsOfIxalan ;
+    :cardNumber "207"^^xsd:integer ;
+    :artist "Julia Metzger" ;
+    :hasLanguage :English ;
+    :producesMana :White ,
+                  :Blue ,
+                  :Black ,
+                  :Red ,
+                  :Green ;
+    :power "1" ;
+    :powerValue "1"^^xsd:integer ;
+    :toughness "1" ;
+    :toughnessValue "1"^^xsd:integer ;
+    :hasKeywordAbility :Reach ;
+    :printedText """Reach
+{T}: Add one mana of any color.
+{2}: This creature gains deathtouch until end of turn."""@en ;
+    :oracleText """Reach
+{T}: Add one mana of any color.
+{2}: This creature gains deathtouch until end of turn."""@en ;
+    :flavorText """"Bright as any dinosaur—and just as with other great hunters, its colors are a warning."
+—Huatli"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=636926"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/lci/207/poison-dart-frog"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "87366"^^xsd:positiveInteger ;
+    :arenaName "Poison Dart Frog" ;
+    :arenaSetCode "LCI" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:SeekerOfSunlight rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Seeker of Sunlight" ;
+    :manaCost "{G}" ;
+    :manaValue "1"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Merfolk ,
+                :Scout ;
+    :hasRarity :Common ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :TheLostCavernsOfIxalan ;
+    :cardNumber "210"^^xsd:integer ;
+    :artist "Randy Vargas" ;
+    :hasLanguage :English ;
+    :power "1" ;
+    :powerValue "1"^^xsd:integer ;
+    :toughness "1" ;
+    :toughnessValue "1"^^xsd:integer ;
+    :hasKeywordAction :Explore ;
+    :printedText """{2}{G}: This creature explores. Activate only as a sorcery. (Reveal the top card of your library. Put that card into your hand if it's a land. Otherwise, put a +1/+1 counter on this creature, then put the card back or put it into your graveyard.)"""@en ;
+    :oracleText """{2}{G}: This creature explores. Activate only as a sorcery. (Reveal the top card of your library. Put that card into your hand if it's a land. Otherwise, put a +1/+1 counter on this creature, then put the card back or put it into your graveyard.)"""@en ;
+    :flavorText """"We weren't fleeing a broken world. We were running toward paradise!\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=636929"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/lci/210/seeker-of-sunlight"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "87369"^^xsd:positiveInteger ;
+    :arenaName "Seeker of Sunlight" ;
+    :arenaSetCode "LCI" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """Some spells or abilities might cause a creature to explore multiple times in a row. If you reveal a nonland card when a creature explores and leave it on top of your library, then the creature explores again immediately afterwards, you'll reveal the same card again."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """If a resolving spell or ability instructs a specific creature to explore but that creature has left the battlefield, the creature still explores. If you reveal a nonland card this way, you won't put a +1/+1 counter on anything, but you may put the revealed card into your graveyard. Effects that trigger "whenever a creature explores" trigger as appropriate."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """Once an ability that causes a creature to explore begins to resolve, no player may take any other actions until it's done. Notably, opponents can't try to remove the exploring creature after you reveal a nonland card but before it receives a counter."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """If an ability instructs a creature to explore, its controller reveals the top card of their library. If it's a land card, they'll put it into their hand. Otherwise, they'll put a +1/+1 counter on that creature, then choose to either leave that card on top of their library or put it into their graveyard."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """If no card is revealed, most likely because that player's library is empty, the exploring creature receives a +1/+1 counter."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """In some unusual cases, noncreature permanents may explore. For example, if the creature card returned by Defossilize is somehow not a creature once it's on the battlefield, it can still explore. You'll take all the same actions, and you may end up putting a +1/+1 counter on the permanent. (Note that some effects target a creature, and those effects would still require a legal target to have it explore.)"""@en ] .
 
 :AmaliaBenavidesAguirre rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -377,6 +1957,84 @@ Whenever you gain life, Amalia Benavides Aguirre explores. Then destroy all othe
         :rulingDate "2023-11-10"^^xsd:date ;
         :rulingText """Anim Pakal, Thousandth Moon doesn't have to be one of the non-Gnome creatures you attack with in order for its ability to trigger, but it can be."""@en ] .
 
+:NicanzilCurrentConductor rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Nicanzil, Current Conductor" ;
+    :manaCost "{G}{U}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasSuperType :Legendary ;
+    :hasCardType :Creature ;
+    :hasSubType :Merfolk ,
+                :Scout ;
+    :hasRarity :Uncommon ;
+    :hasColor :Blue ,
+              :Green ;
+    :hasColorIdentity :Blue ,
+                      :Green ;
+    :isInSet :TheLostCavernsOfIxalan ;
+    :cardNumber "236"^^xsd:integer ;
+    :artist "Fariba Khamseh" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "3" ;
+    :toughnessValue "3"^^xsd:integer ;
+    :hasKeywordAction :Explore ;
+    :printedText """Whenever a creature you control explores a land card, you may put a land card from your hand onto the battlefield tapped.
+Whenever a creature you control explores a nonland card, put a +1/+1 counter on Nicanzil."""@en ;
+    :oracleText """Whenever a creature you control explores a land card, you may put a land card from your hand onto the battlefield tapped.
+Whenever a creature you control explores a nonland card, put a +1/+1 counter on Nicanzil."""@en ;
+    :flavorText """"This water can guide you anywhere, if you know how to ask.\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=636957"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/lci/236/nicanzil-current-conductor"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "87398"^^xsd:positiveInteger ;
+    :arenaName "Nicanzil, Current Conductor" ;
+    :arenaSetCode "LCI" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """If an ability instructs a creature to explore, its controller reveals the top card of their library. If it's a land card, they'll put it into their hand. Otherwise, they'll put a +1/+1 counter on that creature, then choose to either leave that card on top of their library or put it into their graveyard."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """Nicanzil's first ability won't resolve until after you're done exploring. You may put any land card from your hand onto the battlefield, including the land card you explored (if it's still in your hand) or one that was already in your hand."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """In some unusual cases, noncreature permanents may explore. For example, if the creature card returned by Defossilize is somehow not a creature once it's on the battlefield, it can still explore. You'll take all the same actions, and you may end up putting a +1/+1 counter on the permanent. (Note that some effects target a creature, and those effects would still require a legal target to have it explore.)"""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """If a resolving spell or ability instructs a specific creature to explore but that creature has left the battlefield, the creature still explores. If you reveal a nonland card this way, you won't put a +1/+1 counter on anything, but you may put the revealed card into your graveyard. Effects that trigger "whenever a creature explores" trigger as appropriate."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """Nicanzil, Current Conductor's triggered abilities care about the characteristics of the card as it was revealed while a creature explored. It doesn't matter what happened to the card after that."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """Some spells or abilities might cause a creature to explore multiple times in a row. If you reveal a nonland card when a creature explores and leave it on top of your library, then the creature explores again immediately afterwards, you'll reveal the same card again."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """Once an ability that causes a creature to explore begins to resolve, no player may take any other actions until it's done. Notably, opponents can't try to remove the exploring creature after you reveal a nonland card but before it receives a counter."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """If no card is revealed, most likely because that player's library is empty, the exploring creature receives a +1/+1 counter."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """If a creature leaves the battlefield before an effect instructs it to explore, it still explores. Abilities like Nicanzil's that trigger whenever a creature you control explores will still trigger."""@en ] .
+
 :SaheeliTheSunsBrillianceTheLostCavernsOfIxalan239 rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Saheeli, the Sun's Brilliance" ;
@@ -440,6 +2098,76 @@ Whenever you gain life, Amalia Benavides Aguirre explores. Then destroy all othe
         :rulingDate "2023-11-10"^^xsd:date ;
         :rulingText """The token copies exactly what was printed on the original permanent, with the listed exceptions (unless that permanent is copying something else or is a token; see below). It doesn't copy whether that permanent is tapped or untapped, whether it has any counters on it or any Auras or Equipment attached to it, or any non-copy effects that have changed its types, color, power and toughness, and so on."""@en ] .
 
+:UchbenbakTheGreatMistake rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Uchbenbak, the Great Mistake" ;
+    :manaCost "{3}{U}{B}" ;
+    :manaValue "5"^^xsd:nonNegativeInteger ;
+    :hasSuperType :Legendary ;
+    :hasCardType :Creature ;
+    :hasSubType :Skeleton ,
+                :Horror ;
+    :hasRarity :Uncommon ;
+    :hasColor :Blue ,
+              :Black ;
+    :hasColorIdentity :Blue ,
+                      :Black ;
+    :isInSet :TheLostCavernsOfIxalan ;
+    :cardNumber "242"^^xsd:integer ;
+    :artist "Steven Belledin" ;
+    :hasLanguage :English ;
+    :power "6" ;
+    :powerValue "6"^^xsd:integer ;
+    :toughness "4" ;
+    :toughnessValue "4"^^xsd:integer ;
+    :hasKeywordAbility :Vigilance ,
+                       :Menace ;
+    # Note: keyword "Descend" not defined in MagicCardsOntology
+    :printedText """Vigilance, menace
+Descend 8 — {4}{U}{B}: Return this card from your graveyard to the battlefield with a finality counter on it. Activate only if there are eight or more permanent cards in your graveyard and only as a sorcery. (If a creature with a finality counter on it would die, exile it instead.)"""@en ;
+    :oracleText """Vigilance, menace
+Descend 8 — {4}{U}{B}: Return this card from your graveyard to the battlefield with a finality counter on it. Activate only if there are eight or more permanent cards in your graveyard and only as a sorcery. (If a creature with a finality counter on it would die, exile it instead.)"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=636963"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/lci/242/uchbenbak-the-great-mistake"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "87404"^^xsd:positiveInteger ;
+    :arenaName "Uchbenbak, the Great Mistake" ;
+    :arenaSetCode "LCI" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """Cards with the ability word "descend N" have abilities that care if you have at least N permanent cards in your graveyard."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """Some descend triggered abilities include intervening "if" clauses (i.e. "if you have [four or eight] permanent cards in your graveyard" in the middle of the ability). Each of these abilities checks your graveyard at the moment it would trigger to see if it does. If you don't have the required number of permanent cards in your graveyard at that time, the ability doesn't trigger at all. If it does trigger, it will check again as it tries to resolve. If you don't have the required number of permanent cards in your graveyard at that time, the ability won't resolve and none of its effects will happen."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """Multiple finality counters on a single permanent are redundant."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """Finality counters work on any permanent, not only creatures. If a permanent with a finality counter on it would be put into a graveyard from the battlefield, exile it instead."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """Finality counters don't stop permanents from going to zones other than the graveyard from the battlefield. For example, if a permanent with a finality counter on it would be put into its owner's hand from the battlefield, it does so normally."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """Finality counters aren't keyword counters, and a finality counter doesn't give any abilities to the permanent it's on. If that permanent loses its abilities and then would go to a graveyard, it will still be exiled instead."""@en ] .
+
 :VitoFanaticOfAclazotz rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Vito, Fanatic of Aclazotz" ;
@@ -496,6 +2224,71 @@ Whenever you sacrifice another permanent, you gain 2 life if this is the first t
         :rulingDate "2023-11-10"^^xsd:date ;
         :rulingText """If you sacrifice Vito at the same time you sacrifice other permanents, Vito's ability will trigger for each of those other permanents."""@en ] .
 
+:CartographersCompanion rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Cartographer's Companion" ;
+    :manaCost "{3}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ,
+                 :Creature ;
+    :hasSubType :Gnome ;
+    :hasRarity :Common ;
+    :isInSet :TheLostCavernsOfIxalan ;
+    :cardNumber "248"^^xsd:integer ;
+    :artist "Chuck Lukacs" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "1" ;
+    :toughnessValue "1"^^xsd:integer ;
+    :hasKeywordAction :Explore ;
+    :printedText """When this creature enters, create a Map token. (It's an artifact with "{1}, {T}, Sacrifice this token: Target creature you control explores. Activate only as a sorcery.")"""@en ;
+    :oracleText """When this creature enters, create a Map token. (It's an artifact with "{1}, {T}, Sacrifice this token: Target creature you control explores. Activate only as a sorcery.")"""@en ;
+    :flavorText """Ever since the Fomori's attempt long ago to extinguish Chimil's light, the Oltec have taken extensive measures to never get lost in the Core."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=636969"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/lci/248/cartographers-companion"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "87410"^^xsd:positiveInteger ;
+    :arenaName "Cartographer's Companion" ;
+    :arenaSetCode "LCI" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """Some spells or abilities might cause a creature to explore multiple times in a row. If you reveal a nonland card when a creature explores and leave it on top of your library, then the creature explores again immediately afterwards, you'll reveal the same card again."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """Once an ability that causes a creature to explore begins to resolve, no player may take any other actions until it's done. Notably, opponents can't try to remove the exploring creature after you reveal a nonland card but before it receives a counter."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """If an ability instructs a creature to explore, its controller reveals the top card of their library. If it's a land card, they'll put it into their hand. Otherwise, they'll put a +1/+1 counter on that creature, then choose to either leave that card on top of their library or put it into their graveyard."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """If a resolving spell or ability instructs a specific creature to explore but that creature has left the battlefield, the creature still explores. If you reveal a nonland card this way, you won't put a +1/+1 counter on anything, but you may put the revealed card into your graveyard. Effects that trigger "whenever a creature explores" trigger as appropriate."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """If no card is revealed, most likely because that player's library is empty, the exploring creature receives a +1/+1 counter."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """Map tokens are a kind of predefined token. Each one is a colorless artifact with the artifact subtype Map and the ability "{1}, {T}, Sacrifice this artifact: Target creature you control explores. Activate only as a sorcery.\""""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """In some unusual cases, noncreature permanents may explore. For example, if the creature card returned by Defossilize is somehow not a creature once it's on the battlefield, it can still explore. You'll take all the same actions, and you may end up putting a +1/+1 counter on the permanent. (Note that some effects target a creature, and those effects would still require a legal target to have it explore.)"""@en ] .
+
 :RoamingThrone rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Roaming Throne" ;
@@ -550,6 +2343,200 @@ If a triggered ability of another creature you control of the chosen type trigge
       [ rdf:type :Ruling ;
         :rulingDate "2023-11-10"^^xsd:date ;
         :rulingText """If you control two Roaming Thrones with the same chosen creature type, triggered abilities of other creatures you control of the chosen type trigger three times. Three such Roaming Thrones result in four triggered abilities, and so on."""@en ] .
+
+:HiddenCataract rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Hidden Cataract" ;
+    :manaValue "0"^^xsd:nonNegativeInteger ;
+    :hasCardType :Land ;
+    :hasSubType :Cave ;
+    :hasRarity :Common ;
+    :hasColorIdentity :Blue ;
+    :isInSet :TheLostCavernsOfIxalan ;
+    :cardNumber "273"^^xsd:integer ;
+    :artist "Josu Solano" ;
+    :hasLanguage :English ;
+    :producesMana :Blue ;
+    :entersTapped "true"^^xsd:boolean ;
+    :hasKeywordAction :Discover ;
+    :printedText """This land enters tapped.
+{T}: Add {U}.
+{4}{U}, {T}, Sacrifice this land: Discover 4. Activate only as a sorcery. (Exile cards from the top of your library until you exile a nonland card with mana value 4 or less. Cast it without paying its mana cost or put it into your hand. Put the rest on the bottom in a random order.)"""@en ;
+    :oracleText """This land enters tapped.
+{T}: Add {U}.
+{4}{U}, {T}, Sacrifice this land: Discover 4. Activate only as a sorcery. (Exile cards from the top of your library until you exile a nonland card with mana value 4 or less. Cast it without paying its mana cost or put it into your hand. Put the rest on the bottom in a random order.)"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=636998"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/lci/273/hidden-cataract"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "87439"^^xsd:positiveInteger ;
+    :arenaName "Hidden Cataract" ;
+    :arenaSetCode "LCI" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """You exile the cards face up. All players will be able to see them."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """When you discover, you must exile cards. The only optional part of the ability is whether you cast the exiled card or put it into your hand."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """The mana value of a split card is determined by the combined mana cost of its two halves. If discover allows you to cast a split card, you may cast either half (as long as its mana value is less than or equal to the effect's discover value) but not both halves."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """If you cast a spell "without paying its mana cost", you can't choose to cast it for any alternative costs. You can, however, pay additional costs. If the spell has any mandatory additional costs, you must pay those to cast it."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """Some spells and abilities that cause you to discover may require targets. If each target chosen is an illegal target as that spell or ability tries to resolve, it won't resolve and you won't discover."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """If you can't cast the discovered card (perhaps because there are no legal targets for the spell), you'll put it into your hand."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """If the discovered card has {X} in its mana cost, you must choose 0 as the value of X when casting it without paying its mana cost."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """A spell's mana value is determined only by its mana cost. Ignore any alternative costs, additional costs, cost increases, or cost reductions."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """If you discover an adventurer card, split card, or modal double-faced card, you might be able to cast that card with either set of characteristics depending on the effect's discover value. For example, if you discover 4 and reveal Galvanic Giant (an adventurer card from Wilds of Eldraine with a mana value of 4), you could cast Galvanic Giant, but not Storm Reading (its Adventure, which has a mana value of 7). If you discover 7 and reveal Galvanic Giant, you could cast either Galvanic Giant or Storm Reading."""@en ] .
+
+:HiddenVolcano rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Hidden Volcano" ;
+    :manaValue "0"^^xsd:nonNegativeInteger ;
+    :hasCardType :Land ;
+    :hasSubType :Cave ;
+    :hasRarity :Common ;
+    :hasColorIdentity :Red ;
+    :isInSet :TheLostCavernsOfIxalan ;
+    :cardNumber "277"^^xsd:integer ;
+    :artist "Logan Feliciano" ;
+    :hasLanguage :English ;
+    :producesMana :Red ;
+    :entersTapped "true"^^xsd:boolean ;
+    :hasKeywordAction :Discover ;
+    :printedText """This land enters tapped.
+{T}: Add {R}.
+{4}{R}, {T}, Sacrifice this land: Discover 4. Activate only as a sorcery. (Exile cards from the top of your library until you exile a nonland card with mana value 4 or less. Cast it without paying its mana cost or put it into your hand. Put the rest on the bottom in a random order.)"""@en ;
+    :oracleText """This land enters tapped.
+{T}: Add {R}.
+{4}{R}, {T}, Sacrifice this land: Discover 4. Activate only as a sorcery. (Exile cards from the top of your library until you exile a nonland card with mana value 4 or less. Cast it without paying its mana cost or put it into your hand. Put the rest on the bottom in a random order.)"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=637002"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/lci/277/hidden-volcano"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "87443"^^xsd:positiveInteger ;
+    :arenaName "Hidden Volcano" ;
+    :arenaSetCode "LCI" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """The mana value of a split card is determined by the combined mana cost of its two halves. If discover allows you to cast a split card, you may cast either half (as long as its mana value is less than or equal to the effect's discover value) but not both halves."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """A spell's mana value is determined only by its mana cost. Ignore any alternative costs, additional costs, cost increases, or cost reductions."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """If you cast a spell "without paying its mana cost", you can't choose to cast it for any alternative costs. You can, however, pay additional costs. If the spell has any mandatory additional costs, you must pay those to cast it."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """When you discover, you must exile cards. The only optional part of the ability is whether you cast the exiled card or put it into your hand."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """If you discover an adventurer card, split card, or modal double-faced card, you might be able to cast that card with either set of characteristics depending on the effect's discover value. For example, if you discover 4 and reveal Galvanic Giant (an adventurer card from Wilds of Eldraine with a mana value of 4), you could cast Galvanic Giant, but not Storm Reading (its Adventure, which has a mana value of 7). If you discover 7 and reveal Galvanic Giant, you could cast either Galvanic Giant or Storm Reading."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """If the discovered card has {X} in its mana cost, you must choose 0 as the value of X when casting it without paying its mana cost."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """You exile the cards face up. All players will be able to see them."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """If you can't cast the discovered card (perhaps because there are no legal targets for the spell), you'll put it into your hand."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """Some spells and abilities that cause you to discover may require targets. If each target chosen is an illegal target as that spell or ability tries to resolve, it won't resolve and you won't discover."""@en ] .
+
+:SunkenCitadel rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Sunken Citadel" ;
+    :manaValue "0"^^xsd:nonNegativeInteger ;
+    :hasCardType :Land ;
+    :hasSubType :Cave ;
+    :hasRarity :Rare ;
+    :isInSet :TheLostCavernsOfIxalan ;
+    :cardNumber "285"^^xsd:integer ;
+    :artist "Matteo Bassini" ;
+    :hasLanguage :English ;
+    :producesMana :White ,
+                  :Blue ,
+                  :Black ,
+                  :Red ,
+                  :Green ;
+    :entersTapped "true"^^xsd:boolean ;
+    :printedText """This land enters tapped. As it enters, choose a color.
+{T}: Add one mana of the chosen color.
+{T}: Add two mana of the chosen color. Spend this mana only to activate abilities of land sources."""@en ;
+    :oracleText """This land enters tapped. As it enters, choose a color.
+{T}: Add one mana of the chosen color.
+{T}: Add two mana of the chosen color. Spend this mana only to activate abilities of land sources."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=637010"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/lci/285/sunken-citadel"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "87451"^^xsd:positiveInteger ;
+    :arenaName "Sunken Citadel" ;
+    :arenaSetCode "LCI" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """You may spend the two mana added by the last ability on the same ability or on two different abilities."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-11-10"^^xsd:date ;
+        :rulingText """"Land sources" include any objects with the card type land. This means you could spend the mana to activate an ability of a land you control or a land card in your hand or graveyard, for example."""@en ] .
 
 :SaheeliTheSunsBrillianceTheLostCavernsOfIxalan308 rdf:type owl:NamedIndividual ,
                   :Card ;

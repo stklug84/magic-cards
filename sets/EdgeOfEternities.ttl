@@ -39,8 +39,9 @@
     rdfs:label "Magic Card Collection Individuals – Edge of Eternities"@en ;
     rdfs:comment """An instance graph describing the card individuals of a
 personal Magic: The Gathering card collection that were printed in the set
-Edge of Eternities (EOE). One Card individual is defined per collected
-printing, carrying its characteristics, the platforms it is available on
+Edge of Eternities (EOE). One Card individual is defined per printing
+collected in paper or on MTG Arena, carrying its characteristics, the
+platforms it is available on
 (paper, MTG Arena, Magic Online) with its MTG Arena identity, its legality
 in the paper and MTG Arena formats, and official rulings. Card data was
 sourced from Gatherer and Scryfall. This file imports MagicCardsOntology to
@@ -258,6 +259,53 @@ When this creature dies, put its counters on target creature you control."""@en 
         :rulingDate "2025-07-25"^^xsd:date ;
         :rulingText """Dockworker Drone’s second ability doesn’t cause you to move counters from Dockworker Drone onto the target creature. Rather, you put the same number of each kind of counter Dockworker Drone had when it died onto the target creature."""@en ] .
 
+:DualSunAdepts rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Dual-Sun Adepts" ;
+    :manaCost "{2}{W}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Human ,
+                :Soldier ;
+    :hasRarity :Uncommon ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :EdgeOfEternities ;
+    :cardNumber "12"^^xsd:integer ;
+    :artist "Ioannis Fiore" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    :hasKeywordAbility :DoubleStrike ;
+    :printedText """Double strike
+{5}: Creatures you control get +1/+1 until end of turn."""@en ;
+    :oracleText """Double strike
+{5}: Creatures you control get +1/+1 until end of turn."""@en ;
+    :flavorText """"You fight beside me as brilliantly as the dawn. I have nothing more to teach you."
+—Master Iridiss"""@en ;
+    :scryfallUrl "https://scryfall.com/card/eoe/12/dual-sun-adepts"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "96586"^^xsd:positiveInteger ;
+    :arenaName "Dual-Sun Adepts" ;
+    :arenaSetCode "EOE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
 :DualSunTechnique rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Dual-Sun Technique" ;
@@ -434,6 +482,95 @@ Warp {W} (You may cast this card from your hand for its warp cost. Exile this cr
         :rulingDate "2025-07-25"^^xsd:date ;
         :rulingText """Haliya, Guided by Light’s second ability checks how much life you’ve gained during the turn at the time it resolves, not what your life total is compared to what it was when the turn began. For example, if you start the turn at 10 life, gain 6 life during the turn, then lose 6 life later that turn, Haliya’s second ability will cause you to draw a card as it resolves."""@en ] .
 
+:Honor rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Honor" ;
+    :manaCost "{W}" ;
+    :manaValue "1"^^xsd:nonNegativeInteger ;
+    :hasCardType :Sorcery ;
+    :hasRarity :Uncommon ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :EdgeOfEternities ;
+    :cardNumber "21"^^xsd:integer ;
+    :artist "Eli Minaya" ;
+    :hasLanguage :English ;
+    :printedText """Put a +1/+1 counter on target creature.
+Draw a card."""@en ;
+    :oracleText """Put a +1/+1 counter on target creature.
+Draw a card."""@en ;
+    :flavorText """"With this mantle, you carry the duty to spread light, liberty, and the grace of Taman IV to the stars.\""""@en ;
+    :scryfallUrl "https://scryfall.com/card/eoe/21/honor"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "96595"^^xsd:positiveInteger ;
+    :arenaName "Honor" ;
+    :arenaSetCode "EOE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-07-25"^^xsd:date ;
+        :rulingText """If the target creature is an illegal target as Honor tries to resolve, it won’t resolve and none of its effects will happen. You won’t draw a card."""@en ] .
+
+:KnightLuminary rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Knight Luminary" ;
+    :manaCost "{3}{W}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Human ,
+                :Knight ;
+    :hasRarity :Common ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :EdgeOfEternities ;
+    :cardNumber "23"^^xsd:integer ;
+    :artist "Aaron Miller" ;
+    :hasLanguage :English ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    :hasKeywordAbility :Warp ;
+    :printedText """When this creature enters, create a 1/1 white Human Soldier creature token.
+Warp {1}{W} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)"""@en ;
+    :oracleText """When this creature enters, create a 1/1 white Human Soldier creature token.
+Warp {1}{W} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)"""@en ;
+    :flavorText """"I thank you that I do not shine alone.\""""@en ;
+    :scryfallUrl "https://scryfall.com/card/eoe/23/knight-luminary"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "96597"^^xsd:positiveInteger ;
+    :arenaName "Knight Luminary" ;
+    :arenaSetCode "EOE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
 :LumenClassFrigate rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Lumen-Class Frigate" ;
@@ -569,6 +706,57 @@ Warp {W} (You may cast this card from your hand for its warp cost. Exile this cr
       [ rdf:type :Ruling ;
         :rulingDate "2025-07-25"^^xsd:date ;
         :rulingText """If the target permanent is an illegal target as Radiant Strike tries to resolve, it won’t resolve and none of its effects will happen. You won’t gain life."""@en ] .
+
+:RaybladeTrooper rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Rayblade Trooper" ;
+    :manaCost "{2}{W}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Human ,
+                :Soldier ;
+    :hasRarity :Uncommon ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :EdgeOfEternities ;
+    :cardNumber "30"^^xsd:integer ;
+    :artist "Cristi Balanescu" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    :hasKeywordAbility :Warp ;
+    :printedText """When this creature enters, put a +1/+1 counter on target creature you control.
+Whenever a nontoken creature you control with a +1/+1 counter on it dies, create a 1/1 white Human Soldier creature token.
+Warp {1}{W} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)"""@en ;
+    :oracleText """When this creature enters, put a +1/+1 counter on target creature you control.
+Whenever a nontoken creature you control with a +1/+1 counter on it dies, create a 1/1 white Human Soldier creature token.
+Warp {1}{W} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)"""@en ;
+    :scryfallUrl "https://scryfall.com/card/eoe/30/rayblade-trooper"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "96604"^^xsd:positiveInteger ;
+    :arenaName "Rayblade Trooper" ;
+    :arenaSetCode "EOE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-07-25"^^xsd:date ;
+        :rulingText """If Rayblade Trooper dies at the same time as one or more creatures you control with +1/+1 counters on them, its second ability will trigger for each of those creatures. This includes Rayblade Trooper itself if it had a +1/+1 counter on it when it died."""@en ] .
 
 :RerouteSystems rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -1360,6 +1548,43 @@ When enchanted creature becomes tapped or is dealt damage, destroy it."""@en ;
         :rulingDate "2025-07-25"^^xsd:date ;
         :rulingText """A creature with trample blocked by a creature enchanted with Cryoshatter still needs to assign damage equal to the enchanted creature’s toughness (minus any damage already marked on the enchanted creature) before trampling over to a player, planeswalker, or battle."""@en ] .
 
+:DivertDisaster rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Divert Disaster" ;
+    :manaCost "{1}{U}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Instant ;
+    :hasRarity :Common ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :EdgeOfEternities ;
+    :cardNumber "55"^^xsd:integer ;
+    :artist "David Álvarez" ;
+    :hasLanguage :English ;
+    :printedText """Counter target spell unless its controller pays {2}. If they do, you create a Lander token. (It's an artifact with "{2}, {T}, Sacrifice this token: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.")"""@en ;
+    :oracleText """Counter target spell unless its controller pays {2}. If they do, you create a Lander token. (It's an artifact with "{2}, {T}, Sacrifice this token: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.")"""@en ;
+    :flavorText """Illvoi hope for the best outcomes but engineer for the worst."""@en ;
+    :scryfallUrl "https://scryfall.com/card/eoe/55/divert-disaster"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "96629"^^xsd:positiveInteger ;
+    :arenaName "Divert Disaster" ;
+    :arenaSetCode "EOE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
 :IllvoiGaleblade rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Illvoi Galeblade" ;
@@ -1408,6 +1633,55 @@ Flying
       [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:IllvoiInfiltrator rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Illvoi Infiltrator" ;
+    :manaCost "{2}{U}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Jellyfish ,
+                :Rogue ;
+    :hasRarity :Uncommon ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :EdgeOfEternities ;
+    :cardNumber "59"^^xsd:integer ;
+    :artist "Paolo Parente" ;
+    :hasLanguage :English ;
+    :power "1" ;
+    :powerValue "1"^^xsd:integer ;
+    :toughness "3" ;
+    :toughnessValue "3"^^xsd:integer ;
+    :printedText """This creature can't be blocked if you've cast two or more spells this turn.
+Whenever this creature deals combat damage to a player, draw a card."""@en ;
+    :oracleText """This creature can't be blocked if you've cast two or more spells this turn.
+Whenever this creature deals combat damage to a player, draw a card."""@en ;
+    :flavorText """Cloudkill agents slip in and out like a breeze."""@en ;
+    :scryfallUrl "https://scryfall.com/card/eoe/59/illvoi-infiltrator"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "96633"^^xsd:positiveInteger ;
+    :arenaName "Illvoi Infiltrator" ;
+    :arenaSetCode "EOE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-07-25"^^xsd:date ;
+        :rulingText """Illvoi Infiltrator’s first ability will count any spells you’ve cast this turn, which may include Illvoi Infiltrator itself. It doesn’t matter if the other spells resolved, didn’t resolve, were countered, or are still on the stack."""@en ] .
 
 :IllvoiLightJammer rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -1495,6 +1769,50 @@ Equip {3}"""@en ;
       [ rdf:type :Ruling ;
         :rulingDate "2025-07-25"^^xsd:date ;
         :rulingText """If the target permanent is an illegal target as Lost in Space tries to resolve, it won’t resolve and none of its effects will happen. You won’t surveil."""@en ] .
+
+:MechanAssembler rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Mechan Assembler" ;
+    :manaCost "{4}{U}" ;
+    :manaValue "5"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ,
+                 :Creature ;
+    :hasSubType :Robot ,
+                :Artificer ;
+    :hasRarity :Uncommon ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :EdgeOfEternities ;
+    :cardNumber "63"^^xsd:integer ;
+    :artist "Mirko Failoni" ;
+    :hasLanguage :English ;
+    :power "4" ;
+    :powerValue "4"^^xsd:integer ;
+    :toughness "4" ;
+    :toughnessValue "4"^^xsd:integer ;
+    :printedText """Whenever another artifact you control enters, create a 2/2 colorless Robot artifact creature token. This ability triggers only once each turn."""@en ;
+    :oracleText """Whenever another artifact you control enters, create a 2/2 colorless Robot artifact creature token. This ability triggers only once each turn."""@en ;
+    :flavorText """Every iteration brings it closer to understanding its own creation."""@en ;
+    :scryfallUrl "https://scryfall.com/card/eoe/63/mechan-assembler"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "96637"^^xsd:positiveInteger ;
+    :arenaName "Mechan Assembler" ;
+    :arenaSetCode "EOE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
 
 :MechanNavigator rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -1637,6 +1955,54 @@ Warp {2}{U} (You may cast this card from your hand for its warp cost. Exile this
       [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:MentalModulation rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Mental Modulation" ;
+    :manaCost "{1}{U}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Instant ;
+    :hasRarity :Common ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :EdgeOfEternities ;
+    :cardNumber "67"^^xsd:integer ;
+    :artist "Andreia Ugrai" ;
+    :hasLanguage :English ;
+    :printedText """This spell costs {1} less to cast during your turn.
+Tap target artifact or creature.
+Draw a card."""@en ;
+    :oracleText """This spell costs {1} less to cast during your turn.
+Tap target artifact or creature.
+Draw a card."""@en ;
+    :flavorText """Illvoi nervous systems are decentralized. Even as one part runs calculations, another might contemplate the depths of Uthros."""@en ;
+    :scryfallUrl "https://scryfall.com/card/eoe/67/mental-modulation"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "96641"^^xsd:positiveInteger ;
+    :arenaName "Mental Modulation" ;
+    :arenaSetCode "EOE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-07-25"^^xsd:date ;
+        :rulingText """If the target permanent is an illegal target as Mental Modulation tries to resolve, it won’t resolve and none of its effects will happen. You won’t draw a card."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-07-25"^^xsd:date ;
+        :rulingText """To determine the total cost of a spell, start with the mana cost or alternative cost you’re paying, add any cost increases, then apply any cost reductions. The mana value of the spell remains unchanged, no matter what the total cost to cast it was."""@en ] .
 
 :MouthOfTheStorm rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -2517,6 +2883,58 @@ Void — If a nonland permanent left the battlefield this turn or a spell was wa
       [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
 
+:DubiousDelicacy rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Dubious Delicacy" ;
+    :manaCost "{2}{B}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ;
+    :hasSubType :Food ;
+    :hasRarity :Uncommon ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :EdgeOfEternities ;
+    :cardNumber "96"^^xsd:integer ;
+    :artist "Tianxing Xu" ;
+    :hasLanguage :English ;
+    :hasKeywordAbility :Flash ;
+    :printedText """Flash
+When this artifact enters, up to one target creature gets -3/-3 until end of turn.
+{2}, {T}, Sacrifice this artifact: You gain 3 life.
+{2}, {T}, Sacrifice this artifact: Target opponent loses 3 life."""@en ;
+    :oracleText """Flash
+When this artifact enters, up to one target creature gets -3/-3 until end of turn.
+{2}, {T}, Sacrifice this artifact: You gain 3 life.
+{2}, {T}, Sacrifice this artifact: Target opponent loses 3 life."""@en ;
+    :flavorText """It's an acquired taste."""@en ;
+    :scryfallUrl "https://scryfall.com/card/eoe/96/dubious-delicacy"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "96670"^^xsd:positiveInteger ;
+    :arenaName "Dubious Delicacy" ;
+    :arenaSetCode "EOE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-07-25"^^xsd:date ;
+        :rulingText """If an effect refers to a Food, it means any Food artifact, not just a Food token. For example, when you activate the second ability of Ragost, Deft Gastronaut (which says “{1}, {T}, Sacrifice a Food: Ragost deals 3 damage to each opponent”), you can sacrifice Dubious Delicacy to pay its cost."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-07-25"^^xsd:date ;
+        :rulingText """You can’t sacrifice a Food to pay multiple costs. For example, you can’t sacrifice Dubious Delicacy to activate one of its own abilities and also to pay the cost of Ragost, Deft Gastronaut’s second ability."""@en ] .
+
 :EmbraceOblivion rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Embrace Oblivion" ;
@@ -2807,6 +3225,52 @@ When this creature dies, create a tapped 2/2 colorless Robot artifact creature t
                    :MagicOnline ;
     :arenaId "96678"^^xsd:positiveInteger ;
     :arenaName "Gravpack Monoist" ;
+    :arenaSetCode "EOE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:Hullcarver rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Hullcarver" ;
+    :manaCost "{B}" ;
+    :manaValue "1"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ,
+                 :Creature ;
+    :hasSubType :Robot ,
+                :Assassin ;
+    :hasRarity :Common ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :EdgeOfEternities ;
+    :cardNumber "105"^^xsd:integer ;
+    :artist "Michal Ivan" ;
+    :hasLanguage :English ;
+    :power "1" ;
+    :powerValue "1"^^xsd:integer ;
+    :toughness "1" ;
+    :toughnessValue "1"^^xsd:integer ;
+    :hasKeywordAbility :Deathtouch ;
+    :printedText """Deathtouch"""@en ;
+    :oracleText """Deathtouch"""@en ;
+    :flavorText """"Sunstar thinking is too linear. While they fight head-on, we hit them everywhere else."
+—Alpharael, Stonechosen"""@en ;
+    :scryfallUrl "https://scryfall.com/card/eoe/105/hullcarver"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "96679"^^xsd:positiveInteger ;
+    :arenaName "Hullcarver" ;
     :arenaSetCode "EOE" ;
     :hasLegality
       [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
@@ -3281,6 +3745,43 @@ Station (Tap another creature you control: Put charge counters equal to its powe
       [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
 
+:CutPropulsion rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Cut Propulsion" ;
+    :manaCost "{2}{R}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Instant ;
+    :hasRarity :Uncommon ;
+    :hasColor :Red ;
+    :hasColorIdentity :Red ;
+    :isInSet :EdgeOfEternities ;
+    :cardNumber "130"^^xsd:integer ;
+    :artist "Andrea Piparo" ;
+    :hasLanguage :English ;
+    :printedText """Target creature deals damage to itself equal to its power. If that creature has flying, it deals twice that much damage to itself instead."""@en ;
+    :oracleText """Target creature deals damage to itself equal to its power. If that creature has flying, it deals twice that much damage to itself instead."""@en ;
+    :flavorText """When fighting Kav, always expect each action to have an unequal and opposite overreaction."""@en ;
+    :scryfallUrl "https://scryfall.com/card/eoe/130/cut-propulsion"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "96704"^^xsd:positiveInteger ;
+    :arenaName "Cut Propulsion" ;
+    :arenaSetCode "EOE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
 :DebrisFieldCrusher rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Debris Field Crusher" ;
@@ -3328,6 +3829,57 @@ Station (Tap another creature you control: Put charge counters equal to its powe
       [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:DevastatingOnslaught rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Devastating Onslaught" ;
+    :manaCost "{X}{X}{R}" ;
+    :manaValue "1"^^xsd:nonNegativeInteger ;
+    :hasCardType :Sorcery ;
+    :hasRarity :MythicRare ;
+    :hasColor :Red ;
+    :hasColorIdentity :Red ;
+    :isInSet :EdgeOfEternities ;
+    :cardNumber "132"^^xsd:integer ;
+    :artist "Chris Seaman" ;
+    :hasLanguage :English ;
+    :printedText """Create X tokens that are copies of target artifact or creature you control. Those tokens gain haste until end of turn. Sacrifice them at the beginning of the next end step."""@en ;
+    :oracleText """Create X tokens that are copies of target artifact or creature you control. Those tokens gain haste until end of turn. Sacrifice them at the beginning of the next end step."""@en ;
+    :flavorText """"Adapt to this, you bug-eyed planet-squatters!"
+—Admiral Scargruf, Kavaron Memorial Navy"""@en ;
+    :scryfallUrl "https://scryfall.com/card/eoe/132/devastating-onslaught"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "96706"^^xsd:positiveInteger ;
+    :arenaName "Devastating Onslaught" ;
+    :arenaSetCode "EOE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-07-25"^^xsd:date ;
+        :rulingText """The tokens copy exactly what was printed on the original permanent and nothing else (unless that permanent is itself copying something else; see below). They don’t copy whether that permanent is tapped or untapped, whether it has any counters on it or Auras attached to it, or any non-copy effects that have changed its power, toughness, types, color, and so on. If the permanent is a Vehicle, the copies are not crewed. If it is an Equipment, the copies are not attached to any creature."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-07-25"^^xsd:date ;
+        :rulingText """If the copied permanent is copying something else, then the tokens enter as whatever that permanent copied."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-07-25"^^xsd:date ;
+        :rulingText """Any enters abilities of the copied permanent will trigger when the tokens enter. Any “as [this permanent] enters” or “[this permanent] enters with” abilities of the copied permanent will also work."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-07-25"^^xsd:date ;
+        :rulingText """If the copied permanent is a token, the tokens that are created copy the original characteristics of that token as stated by the effect that created the token."""@en ] .
 
 :DrillTooDeep rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -3416,6 +3968,43 @@ Station (Tap another creature you control: Put charge counters equal to its powe
       [ rdf:type :Ruling ;
         :rulingDate "2025-07-25"^^xsd:date ;
         :rulingText """Frontline War-Rager’s ability will check as your end step starts to see if you control two or more tapped creatures. If you don’t, the ability won’t trigger at all. You won’t be able to tap anything during your end step in time to have the ability trigger. If you don’t control two or more tapped creatures when the ability resolves, the ability won’t do anything"""@en ] .
+
+:FullBore rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Full Bore" ;
+    :manaCost "{R}" ;
+    :manaValue "1"^^xsd:nonNegativeInteger ;
+    :hasCardType :Instant ;
+    :hasRarity :Uncommon ;
+    :hasColor :Red ;
+    :hasColorIdentity :Red ;
+    :isInSet :EdgeOfEternities ;
+    :cardNumber "135"^^xsd:integer ;
+    :artist "Olivier Bernard" ;
+    :hasLanguage :English ;
+    :printedText """Target creature you control gets +3/+2 until end of turn. If that creature was cast for its warp cost, it also gains trample and haste until end of turn."""@en ;
+    :oracleText """Target creature you control gets +3/+2 until end of turn. If that creature was cast for its warp cost, it also gains trample and haste until end of turn."""@en ;
+    :flavorText """The mining gear that crumbled their planet could also deal terrible damage to flesh."""@en ;
+    :scryfallUrl "https://scryfall.com/card/eoe/135/full-bore"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "96709"^^xsd:positiveInteger ;
+    :arenaName "Full Bore" ;
+    :arenaSetCode "EOE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
 
 :GalvanizingSawship rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -3513,6 +4102,57 @@ When this creature enters, create a Lander token. At the beginning of the end st
         :rulingDate "2025-07-25"^^xsd:date ;
         :rulingText """If a replacement effect (such as that of Exalted Sunborn’s second ability) causes additional tokens to be created during the resolution of Kav Landseeker’s last ability, you’ll sacrifice those tokens at the beginning of the end step on your next turn as well."""@en ] .
 
+:KavaronHarrier rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Kavaron Harrier" ;
+    :manaCost "{R}" ;
+    :manaValue "1"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ,
+                 :Creature ;
+    :hasSubType :Robot ,
+                :Soldier ;
+    :hasRarity :Uncommon ;
+    :hasColor :Red ;
+    :hasColorIdentity :Red ;
+    :isInSet :EdgeOfEternities ;
+    :cardNumber "139"^^xsd:integer ;
+    :artist "Hardy Fowler" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "1" ;
+    :toughnessValue "1"^^xsd:integer ;
+    :printedText """Whenever this creature attacks, you may pay {2}. If you do, create a 2/2 colorless Robot artifact creature token that's tapped and attacking. Sacrifice that token at end of combat."""@en ;
+    :oracleText """Whenever this creature attacks, you may pay {2}. If you do, create a 2/2 colorless Robot artifact creature token that's tapped and attacking. Sacrifice that token at end of combat."""@en ;
+    :flavorText """Once the security for a moxite mine, now a ghost in a hollowed-out cavern."""@en ;
+    :scryfallUrl "https://scryfall.com/card/eoe/139/kavaron-harrier"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "96713"^^xsd:positiveInteger ;
+    :arenaName "Kavaron Harrier" ;
+    :arenaSetCode "EOE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-07-25"^^xsd:date ;
+        :rulingText """Although the token you created is put onto the battlefield attacking, it was never declared as an attacking creature. Abilities that trigger whenever a creature attacks won’t trigger when that creature enters attacking."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-07-25"^^xsd:date ;
+        :rulingText """You choose the player, planeswalker, or battle the token is attacking. It doesn’t have to be the same player, planeswalker, or battle that Kavaron Harrier or any other attacking creatures are attacking."""@en ] .
+
 :KavaronSkywarden rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Kavaron Skywarden" ;
@@ -3599,6 +4239,44 @@ Void — At the beginning of your end step, if a nonland permanent left the batt
       [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:Lithobraking rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Lithobraking" ;
+    :manaCost "{2}{R}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Instant ;
+    :hasRarity :Uncommon ;
+    :hasColor :Red ;
+    :hasColorIdentity :Red ;
+    :isInSet :EdgeOfEternities ;
+    :cardNumber "142"^^xsd:integer ;
+    :artist "Andrew Mar" ;
+    :hasLanguage :English ;
+    :printedText """Create a Lander token. Then you may sacrifice an artifact. When you do, Lithobraking deals 2 damage to each creature. (A Lander token is an artifact with "{2}, {T}, Sacrifice this token: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.")"""@en ;
+    :oracleText """Create a Lander token. Then you may sacrifice an artifact. When you do, Lithobraking deals 2 damage to each creature. (A Lander token is an artifact with "{2}, {T}, Sacrifice this token: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.")"""@en ;
+    :flavorText """A Kav landing
+—Sotheran expression meaning "a bad time\""""@en ;
+    :scryfallUrl "https://scryfall.com/card/eoe/142/lithobraking"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "96716"^^xsd:positiveInteger ;
+    :arenaName "Lithobraking" ;
+    :arenaSetCode "EOE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
@@ -3932,6 +4610,51 @@ Warp {1}{R} (You may cast this card from your hand for its warp cost. Exile this
                    :MagicOnline ;
     :arenaId "96730"^^xsd:positiveInteger ;
     :arenaName "Rig for War" ;
+    :arenaSetCode "EOE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:SlagdrillScrapper rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Slagdrill Scrapper" ;
+    :manaCost "{R}" ;
+    :manaValue "1"^^xsd:nonNegativeInteger ;
+    :hasCardType :Artifact ,
+                 :Creature ;
+    :hasSubType :Robot ,
+                :Scout ;
+    :hasRarity :Common ;
+    :hasColor :Red ;
+    :hasColorIdentity :Red ;
+    :isInSet :EdgeOfEternities ;
+    :cardNumber "160"^^xsd:integer ;
+    :artist "Edgar Sánchez Hidalgo" ;
+    :hasLanguage :English ;
+    :power "1" ;
+    :powerValue "1"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    :printedText """{2}, {T}, Sacrifice another artifact or land: Draw a card."""@en ;
+    :oracleText """{2}, {T}, Sacrifice another artifact or land: Draw a card."""@en ;
+    :flavorText """"Who cares if it rips the asteroid apart? We got what we needed."
+—Viya, Kav moxite baron"""@en ;
+    :scryfallUrl "https://scryfall.com/card/eoe/160/slagdrill-scrapper"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "96734"^^xsd:positiveInteger ;
+    :arenaName "Slagdrill Scrapper" ;
     :arenaSetCode "EOE" ;
     :hasLegality
       [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
@@ -5026,6 +5749,58 @@ Whenever this Spacecraft attacks, you may put a creature card from your hand ont
       [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
 
+:AlpharaelDreamingAcolyte rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Alpharael, Dreaming Acolyte" ;
+    :manaCost "{1}{U}{B}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasSuperType :Legendary ;
+    :hasCardType :Creature ;
+    :hasSubType :Human ,
+                :Cleric ;
+    :hasRarity :Uncommon ;
+    :hasColor :Blue ,
+              :Black ;
+    :hasColorIdentity :Blue ,
+                      :Black ;
+    :isInSet :EdgeOfEternities ;
+    :cardNumber "212"^^xsd:integer ;
+    :artist "Cristi Balanescu" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "3" ;
+    :toughnessValue "3"^^xsd:integer ;
+    :printedText """When Alpharael enters, draw two cards. Then discard two cards unless you discard an artifact card.
+During your turn, Alpharael has deathtouch."""@en ;
+    :oracleText """When Alpharael enters, draw two cards. Then discard two cards unless you discard an artifact card.
+During your turn, Alpharael has deathtouch."""@en ;
+    :flavorText """"I am worthy of the Faller's blessing. I can prove it.\""""@en ;
+    :scryfallUrl "https://scryfall.com/card/eoe/212/alpharael-dreaming-acolyte"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "96786"^^xsd:positiveInteger ;
+    :arenaName "Alpharael, Dreaming Acolyte" ;
+    :arenaSetCode "EOE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-07-25"^^xsd:date ;
+        :rulingText """As Alpharael, Dreaming Acolyte’s first ability resolves, you can discard either one artifact card or two cards which may or may not be artifacts. If you really want to, you can discard two artifact cards."""@en ] .
+
 :GenemorphImago rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Genemorph Imago" ;
@@ -6058,6 +6833,99 @@ Station (Tap another creature you control: Put charge counters equal to its powe
       [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
 
+:AdagiaWindsweptBastionEdgeOfEternities250 rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Adagia, Windswept Bastion" ;
+    :manaValue "0"^^xsd:nonNegativeInteger ;
+    :hasCardType :Land ;
+    :hasSubType :Planet ;
+    :hasRarity :MythicRare ;
+    :hasColorIdentity :White ;
+    :isInSet :EdgeOfEternities ;
+    :cardNumber "250"^^xsd:integer ;
+    :artist "Adam Paquette" ;
+    :hasLanguage :English ;
+    :producesMana :White ;
+    :entersTapped "true"^^xsd:boolean ;
+    :hasKeywordAbility :Station ;
+    :printedText """This land enters tapped.
+{T}: Add {W}.
+Station (Tap another creature you control: Put charge counters equal to its power on this Planet. Station only as a sorcery.)
+12+ | {3}{W}, {T}: Create a token that's a copy of target artifact or enchantment you control, except it's legendary. Activate only as a sorcery."""@en ;
+    :oracleText """This land enters tapped.
+{T}: Add {W}.
+Station (Tap another creature you control: Put charge counters equal to its power on this Planet. Station only as a sorcery.)
+12+ | {3}{W}, {T}: Create a token that's a copy of target artifact or enchantment you control, except it's legendary. Activate only as a sorcery."""@en ;
+    :scryfallUrl "https://scryfall.com/card/eoe/250/adagia-windswept-bastion"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "96824"^^xsd:positiveInteger ;
+    :arenaName "Adagia, Windswept Bastion" ;
+    :arenaSetCode "EOE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-07-25"^^xsd:date ;
+        :rulingText """Each station card has one or more striations in its text box. Each striation is preceded by a station symbol—a circle surrounding a number and a plus sign."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-07-25"^^xsd:date ;
+        :rulingText """Planet is a land subtype with no special meaning. It doesn’t grant the land any intrinsic abilities."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-07-25"^^xsd:date ;
+        :rulingText """Each station symbol represents an ability. A station symbol means “As long as this permanent has N or more charge counters on it, it has [abilities],” where N is the number inside the symbol and [abilities] are all the abilities found inside the same striation as that symbol."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-07-25"^^xsd:date ;
+        :rulingText """A station card is a card with the station keyword ability. The station keyword means “Tap another untapped creature you control: Put a number of charge counters on this permanent equal to the tapped creature’s power. Activate only as a sorcery.”"""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-07-25"^^xsd:date ;
+        :rulingText """If Adagia creates a token copy of an Aura, you choose what the token is enchanting as it enters the battlefield. This doesn’t target the player or permanent it will enchant, so a player or permanent with hexproof may be chosen this way. The chosen recipient must be able to legally be enchanted by the Aura, so a player or permanent with protection from one of the Aura’s qualities can’t be chosen this way. If there’s nothing legal for the Aura token to enchant, the token is never created."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-07-25"^^xsd:date ;
+        :rulingText """If a permanent with station becomes a creature, it will be able to attack if it’s been under your control continuously since the turn began. That is, it doesn’t matter how long it’s been a creature, just how long it’s been on the battlefield."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-07-25"^^xsd:date ;
+        :rulingText """If Adagia’s last ability creates a token copy of a nonlegendary permanent, you’ll control two permanents with the same name, but only one of them (the newly created token) will be legendary. You won’t put any of them into their owners’ graveyards."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-07-25"^^xsd:date ;
+        :rulingText """The abilities of a permanent with station are based on the number of charge counters it has. This means that if a permanent with station gets charge counters due to some other effect (such as proliferate) or loses charge counters somehow, its abilities change accordingly. The same is true for determining whether or not that permanent is a creature."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-07-25"^^xsd:date ;
+        :rulingText """Even if a permanent with station has equal or greater charge counters than the number in its last station symbol, you can still activate its station ability. Adding more charge counters won’t give it additional abilities, but other effects or cards might make those extra counters relevant."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-07-25"^^xsd:date ;
+        :rulingText """If the copied permanent is copying something else, then the token enters as whatever that permanent copied, with the listed exception."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-07-25"^^xsd:date ;
+        :rulingText """Use the tapped creature’s power as the station ability resolves to determine how many charge counters to put on the permanent with station. If that creature isn’t on the battlefield at that time, use its power as it last existed on the battlefield."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-07-25"^^xsd:date ;
+        :rulingText """Any enters abilities of the copied permanent will trigger when the token enters. Any “as [this permanent] enters” or “[this permanent] enters with” abilities of the copied permanent will also work."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-07-25"^^xsd:date ;
+        :rulingText """The token created by Adagia’s last ability copies exactly what was printed on the original permanent and nothing else, with the listed exception (unless that permanent is copying something else or is a token; see below). It doesn’t copy whether that permanent is tapped or untapped, whether it has any counters on it or Auras and Equipment attached to it, or any non-copy effects that have changed its power, toughness, types, color, or so on. If it is a Vehicle, it is not crewed. If it is an Equipment, it is not attached to any creature."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-07-25"^^xsd:date ;
+        :rulingText """If another permanent becomes a copy of a permanent represented by a station card, all of its printed abilities, including the ones represented by station symbols, are copied. Its current characteristics and the number of charge counters on it are not copied. The abilities (and in some cases, types, power, and toughness) are determined based on the number of charge counters on the copy."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-07-25"^^xsd:date ;
+        :rulingText """If the copied permanent is a token, the token that’s created copies the original characteristics of that token as stated by the effect that created the token, with the listed exception."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2025-07-25"^^xsd:date ;
+        :rulingText """If the tapped creature has negative power, no charge counters are put onto or removed from the permanent with station."""@en ] .
+
 :CommandBridge rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Command Bridge" ;
@@ -6145,6 +7013,63 @@ Station (Tap another creature you control: Put charge counters equal to its powe
       [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
 
+:GodlessShrine rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Godless Shrine" ;
+    :manaValue "0"^^xsd:nonNegativeInteger ;
+    :hasCardType :Land ;
+    :hasSubType :Plains ,
+                :Swamp ;
+    :hasRarity :Rare ;
+    :hasColorIdentity :White ,
+                      :Black ;
+    :isInSet :EdgeOfEternities ;
+    :cardNumber "254"^^xsd:integer ;
+    :artist "Rob Rey" ;
+    :hasLanguage :English ;
+    :producesMana :White ,
+                  :Black ;
+    :entersTapped "true"^^xsd:boolean ;
+    :printedText """({T}: Add {W} or {B}.)
+As this land enters, you may pay 2 life. If you don't, it enters tapped."""@en ;
+    :oracleText """({T}: Add {W} or {B}.)
+As this land enters, you may pay 2 life. If you don't, it enters tapped."""@en ;
+    :flavorText """"Log 1.7.618: Starshadow, a relic of a culture lost to calamity. Its people were eradicated in a single day—but by what?"
+—*Maisie's Edge Chronicles*"""@en ;
+    :scryfallUrl "https://scryfall.com/card/eoe/254/godless-shrine"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "96828"^^xsd:positiveInteger ;
+    :arenaName "Godless Shrine" ;
+    :arenaSetCode "EOE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2018-10-05"^^xsd:date ;
+        :rulingText """Unlike most dual lands, this land has two basic land types. It's not basic, so cards such as District Guide can't find it, but it does have the appropriate land types for effects such as that of Drowned Catacomb (from the Ixalan set)."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2018-10-05"^^xsd:date ;
+        :rulingText """If an effect puts this land onto the battlefield tapped, you may pay 2 life, but it still enters tapped."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2026-10-07"^^xsd:date ;
+        :rulingText """This land has two basic land types. It's not basic, so cards such as Final Frontier can't find it, but it does have the appropriate land types for effects such as that of Kishla Village (from the Tarkir: Dragonstorm release)."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2026-10-07"^^xsd:date ;
+        :rulingText """If an effect puts this land onto the battlefield tapped, you may pay 2 life, but it still enters tapped."""@en ] .
+
 :KavaronMemorialWorld rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Kavaron, Memorial World" ;
@@ -6189,6 +7114,63 @@ Station (Tap another creature you control: Put charge counters equal to its powe
       [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
 
+:StompingGround rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Stomping Ground" ;
+    :manaValue "0"^^xsd:nonNegativeInteger ;
+    :hasCardType :Land ;
+    :hasSubType :Mountain ,
+                :Forest ;
+    :hasRarity :Rare ;
+    :hasColorIdentity :Red ,
+                      :Green ;
+    :isInSet :EdgeOfEternities ;
+    :cardNumber "258"^^xsd:integer ;
+    :artist "Bruce Brenneise" ;
+    :hasLanguage :English ;
+    :producesMana :Red ,
+                  :Green ;
+    :entersTapped "true"^^xsd:boolean ;
+    :printedText """({T}: Add {R} or {G}.)
+As this land enters, you may pay 2 life. If you don't, it enters tapped."""@en ;
+    :oracleText """({T}: Add {R} or {G}.)
+As this land enters, you may pay 2 life. If you don't, it enters tapped."""@en ;
+    :flavorText """"Log 2.5.325: A newborn moon, Aqqat still churns with the fires of creation. I'm eager to see what it will become!"
+—*Maisie's Edge Chronicles*"""@en ;
+    :scryfallUrl "https://scryfall.com/card/eoe/258/stomping-ground"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "96832"^^xsd:positiveInteger ;
+    :arenaName "Stomping Ground" ;
+    :arenaSetCode "EOE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2018-10-05"^^xsd:date ;
+        :rulingText """Unlike most dual lands, this land has two basic land types. It's not basic, so cards such as District Guide can't find it, but it does have the appropriate land types for effects such as that of Drowned Catacomb (from the Ixalan set)."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2018-10-05"^^xsd:date ;
+        :rulingText """If an effect puts this land onto the battlefield tapped, you may pay 2 life, but it still enters tapped."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2026-10-07"^^xsd:date ;
+        :rulingText """This land has two basic land types. It's not basic, so cards such as Final Frontier can't find it, but it does have the appropriate land types for effects such as that of Mistrise Village (from the Tarkir: Dragonstorm release)."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2026-10-07"^^xsd:date ;
+        :rulingText """If an effect puts this land onto the battlefield tapped, you may pay 2 life, but it still enters tapped."""@en ] .
+
 :SusurSecundiVoidAltar rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Susur Secundi, Void Altar" ;
@@ -6218,6 +7200,50 @@ Station (Tap another creature you control: Put charge counters equal to its powe
                    :MagicOnline ;
     :arenaId "96833"^^xsd:positiveInteger ;
     :arenaName "Susur Secundi, Void Altar" ;
+    :arenaSetCode "EOE" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:UthrosTitanicGodcoreEdgeOfEternities260 rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Uthros, Titanic Godcore" ;
+    :manaValue "0"^^xsd:nonNegativeInteger ;
+    :hasCardType :Land ;
+    :hasSubType :Planet ;
+    :hasRarity :MythicRare ;
+    :hasColorIdentity :Blue ;
+    :isInSet :EdgeOfEternities ;
+    :cardNumber "260"^^xsd:integer ;
+    :artist "Adam Paquette" ;
+    :hasLanguage :English ;
+    :producesMana :Blue ;
+    :entersTapped "true"^^xsd:boolean ;
+    :hasKeywordAbility :Station ;
+    :printedText """This land enters tapped.
+{T}: Add {U}.
+Station (Tap another creature you control: Put charge counters equal to its power on this Planet. Station only as a sorcery.)
+12+ | {U}, {T}: Add {U} for each artifact you control."""@en ;
+    :oracleText """This land enters tapped.
+{T}: Add {U}.
+Station (Tap another creature you control: Put charge counters equal to its power on this Planet. Station only as a sorcery.)
+12+ | {U}, {T}: Add {U} for each artifact you control."""@en ;
+    :scryfallUrl "https://scryfall.com/card/eoe/260/uthros-titanic-godcore"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "96834"^^xsd:positiveInteger ;
+    :arenaName "Uthros, Titanic Godcore" ;
     :arenaSetCode "EOE" ;
     :hasLegality
       [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
@@ -6788,7 +7814,7 @@ Station (Tap another creature you control: Put charge counters equal to its powe
       [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
 
-:AdagiaWindsweptBastion rdf:type owl:NamedIndividual ,
+:AdagiaWindsweptBastionEdgeOfEternities277 rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Adagia, Windswept Bastion" ;
     :manaValue "0"^^xsd:nonNegativeInteger ;
@@ -6877,7 +7903,7 @@ Station (Tap another creature you control: Put charge counters equal to its powe
         :rulingDate "2025-07-25"^^xsd:date ;
         :rulingText """If the tapped creature has negative power, no charge counters are put onto or removed from the permanent with station."""@en ] .
 
-:UthrosTitanicGodcore rdf:type owl:NamedIndividual ,
+:UthrosTitanicGodcoreEdgeOfEternities285 rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Uthros, Titanic Godcore" ;
     :manaValue "0"^^xsd:nonNegativeInteger ;

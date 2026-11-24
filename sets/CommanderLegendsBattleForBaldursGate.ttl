@@ -39,8 +39,9 @@
     rdfs:label "Magic Card Collection Individuals – Commander Legends: Battle for Baldur's Gate"@en ;
     rdfs:comment """An instance graph describing the card individuals of a
 personal Magic: The Gathering card collection that were printed in the set
-Commander Legends: Battle for Baldur's Gate (CLB). One Card individual is defined per collected
-printing, carrying its characteristics, the platforms it is available on
+Commander Legends: Battle for Baldur's Gate (CLB). One Card individual is defined per printing
+collected in paper or on MTG Arena, carrying its characteristics, the
+platforms it is available on
 (paper, MTG Arena, Magic Online) with its MTG Arena identity, its legality
 in the paper and MTG Arena formats, and official rulings. Card data was
 sourced from Gatherer and Scryfall. This file imports MagicCardsOntology to
@@ -81,7 +82,8 @@ Choose a Background (You can have a Background as a second commander.)"""@en ;
 Choose a Background (You can have a Background as a second commander.)"""@en ;
     :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=562912"^^xsd:anyURI ;
     :scryfallUrl "https://scryfall.com/card/clb/29/laezel-vlaakiths-champion"^^xsd:anyURI ;
-    :isAvailableOn :PaperMagic ;
+    :isAvailableOn :PaperMagic ,
+                   :MagicOnline ;
     :hasLegality
       [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,

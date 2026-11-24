@@ -39,8 +39,9 @@
     rdfs:label "Magic Card Collection Individuals – March of the Machine"@en ;
     rdfs:comment """An instance graph describing the card individuals of a
 personal Magic: The Gathering card collection that were printed in the set
-March of the Machine (MOM). One Card individual is defined per collected
-printing, carrying its characteristics, the platforms it is available on
+March of the Machine (MOM). One Card individual is defined per printing
+collected in paper or on MTG Arena, carrying its characteristics, the
+platforms it is available on
 (paper, MTG Arena, Magic Online) with its MTG Arena identity, its legality
 in the paper and MTG Arena formats, and official rulings. Card data was
 sourced from Gatherer and Scryfall. This file imports MagicCardsOntology to
@@ -167,6 +168,70 @@ Whenever one or more +1/+1 counters are put on this creature, draw a card. This 
       [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] .
 
+:GoldenScaleAeronaut rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Golden-Scale Aeronaut" ;
+    :manaCost "{4}{W}" ;
+    :manaValue "5"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Dwarf ,
+                :Pilot ;
+    :hasRarity :Common ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :MarchOfTheMachine ;
+    :cardNumber "15"^^xsd:integer ;
+    :artist "Javier Charro" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "3" ;
+    :toughnessValue "3"^^xsd:integer ;
+    :hasKeywordAbility :Flying ,
+                       :Backup ;
+    :printedText """Backup 1 (When this creature enters, put a +1/+1 counter on target creature. If that's another creature, it gains the following ability until end of turn.)
+Flying"""@en ;
+    :oracleText """Backup 1 (When this creature enters, put a +1/+1 counter on target creature. If that's another creature, it gains the following ability until end of turn.)
+Flying"""@en ;
+    :flavorText """Johar had never heard of a pterodon. He just knew Saheeli's new invention let him fly circles around the invading monsters."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=607027"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mom/15/golden-scale-aeronaut"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "84263"^^xsd:positiveInteger ;
+    :arenaName "Golden-Scale Aeronaut" ;
+    :arenaSetCode "MOM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-04-14"^^xsd:date ;
+        :rulingText """The abilities that backup grants to the target creature are determined only once, at the time the ability triggers. They won’t change if the permanent with backup loses any abilities before the backup ability resolves."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-04-14"^^xsd:date ;
+        :rulingText """If a backup ability targets the creature with backup, that creature will get +1/+1 counters, but it won’t gain additional abilities."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-04-14"^^xsd:date ;
+        :rulingText """If a backup ability causes another creature to gain abilities, the creature with backup will still have those abilities."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-04-14"^^xsd:date ;
+        :rulingText """Backup confers only abilities that are actually printed below it. Any abilities that are gained by the permanent are ignored, including abilities gained due to a resolving spell or ability or copy effects."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-04-14"^^xsd:date ;
+        :rulingText """If a permanent enters the battlefield as a copy of a card with a backup ability or a token is created that is a copy of that card, the order of the printed abilities is maintained."""@en ] .
+
 :SigiledSentinel rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Sigiled Sentinel" ;
@@ -231,6 +296,398 @@ Vigilance"""@en ;
         :rulingDate "2023-04-14"^^xsd:date ;
         :rulingText """The abilities that backup grants to the target creature are determined only once, at the time the ability triggers. They won’t change if the permanent with backup loses any abilities before the backup ability resolves."""@en ] .
 
+:SurgeOfSalvation rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Surge of Salvation" ;
+    :manaCost "{W}" ;
+    :manaValue "1"^^xsd:nonNegativeInteger ;
+    :hasCardType :Instant ;
+    :hasRarity :Uncommon ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :MarchOfTheMachine ;
+    :cardNumber "41"^^xsd:integer ;
+    :artist "Dominik Mayer" ;
+    :hasLanguage :English ;
+    :printedText """You and permanents you control gain hexproof until end of turn. Prevent all damage that black and/or red sources would deal to creatures you control this turn."""@en ;
+    :oracleText """You and permanents you control gain hexproof until end of turn. Prevent all damage that black and/or red sources would deal to creatures you control this turn."""@en ;
+    :flavorText """No Meletian had ever laid eyes on an angel, but when protective Halo flooded the Multiverse, they knew a divine blessing was at hand."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=607060"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mom/41/surge-of-salvation"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "84296"^^xsd:positiveInteger ;
+    :arenaName "Surge of Salvation" ;
+    :arenaSetCode "MOM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-04-14"^^xsd:date ;
+        :rulingText """The set of permanents that gain hexproof is determined as Surge of Salvation resolves. Permanents you begin to control later in the turn won't gain hexproof. However, the damage prevention effect will apply to all creatures you control throughout the turn, even if you didn't control them (or they weren't creatures) as Surge of Salvation resolved."""@en ] .
+
+:SwordswornCavalier rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Swordsworn Cavalier" ;
+    :manaCost "{1}{W}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Human ,
+                :Knight ;
+    :hasRarity :Common ;
+    :hasColor :White ;
+    :hasColorIdentity :White ;
+    :isInSet :MarchOfTheMachine ;
+    :cardNumber "42"^^xsd:integer ;
+    :artist "Stella Spente" ;
+    :hasLanguage :English ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "1" ;
+    :toughnessValue "1"^^xsd:integer ;
+    :printedText """This creature has first strike as long as another Knight entered the battlefield under your control this turn."""@en ;
+    :oracleText """This creature has first strike as long as another Knight entered the battlefield under your control this turn."""@en ;
+    :flavorText """The Royal Knights of Belenon are equally practiced in courtesy and combat."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=607061"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mom/42/swordsworn-cavalier"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "84297"^^xsd:positiveInteger ;
+    :arenaName "Swordsworn Cavalier" ;
+    :arenaSetCode "MOM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-04-14"^^xsd:date ;
+        :rulingText """If Swordsworn Cavalier enters the battlefield, leaves the battlefield, and returns to the battlefield all in the same turn, it will have first strike that turn. It will have no connection to the object it was and see it as “another Knight.”"""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-04-14"^^xsd:date ;
+        :rulingText """Swordsworn Cavalier will continue to have first strike even if the other Knight that entered the battlefield that turn has since left the battlefield, has since stopped being a Knight, or another player has gained control of it."""@en ] .
+
+:DisturbingConversion rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Disturbing Conversion" ;
+    :manaCost "{1}{U}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Enchantment ;
+    :hasSubType :Aura ;
+    :hasRarity :Common ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :MarchOfTheMachine ;
+    :cardNumber "54"^^xsd:integer ;
+    :artist "Anna Mitura-Laskowska" ;
+    :hasLanguage :English ;
+    :hasKeywordAbility :Enchant ,
+                       :Flash ;
+    :hasKeywordAction :Mill ;
+    :printedText """Flash
+Enchant creature
+When this Aura enters, each player mills two cards.
+Enchanted creature gets -X/-0, where X is the number of cards in its controller's graveyard."""@en ;
+    :oracleText """Flash
+Enchant creature
+When this Aura enters, each player mills two cards.
+Enchanted creature gets -X/-0, where X is the number of cards in its controller's graveyard."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=607075"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mom/54/disturbing-conversion"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "84311"^^xsd:positiveInteger ;
+    :arenaName "Disturbing Conversion" ;
+    :arenaSetCode "MOM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-04-14"^^xsd:date ;
+        :rulingText """The value of X will change as the number of cards in the appropriate graveyard changes."""@en ] .
+
+:InvasionOfKamigawa rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Invasion of Kamigawa // Rooftop Saboteurs" ;
+    :manaCost "{3}{U}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasCardType :Battle ,
+                 :Creature ;
+    :hasSubType :Siege ,
+                :Moonfolk ,
+                :Ninja ;
+    :hasRarity :Uncommon ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :MarchOfTheMachine ;
+    :cardNumber "62"^^xsd:integer ;
+    :artist "Kekai Kotaki" ;
+    :hasLanguage :English ;
+    :defenseValue "4"^^xsd:nonNegativeInteger ;
+    :hasKeywordAbility :Flying ;
+    :hasKeywordAction :Transform ;
+    :printedText """(As a Siege enters, choose an opponent to protect it. You and others can attack it. When it's defeated, exile it, then cast it transformed.)
+When this Siege enters, tap target artifact or creature an opponent controls and put a stun counter on it. (If a permanent with a stun counter would become untapped, remove one from it instead.)
+//
+Flying
+Whenever this creature deals combat damage to a player or battle, draw a card."""@en ;
+    :oracleText """(As a Siege enters, choose an opponent to protect it. You and others can attack it. When it's defeated, exile it, then cast it transformed.)
+When this Siege enters, tap target artifact or creature an opponent controls and put a stun counter on it. (If a permanent with a stun counter would become untapped, remove one from it instead.)
+//
+Flying
+Whenever this creature deals combat damage to a player or battle, draw a card."""@en ;
+    :flavorText """The pace of Kamigawa's development meant that Jin-Gitaxias's intel was already outdated when the invaders arrived."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=607084"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mom/62/invasion-of-kamigawa-rooftop-saboteurs"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "84320"^^xsd:positiveInteger ;
+    :arenaName "Invasion of Kamigawa" ;
+    :arenaSetCode "MOM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-04-14"^^xsd:date ;
+        :rulingText """If a battle that's being attacked somehow stops being a battle, it is removed from combat. Similarly, if its controller changes in the middle of combat, it is removed from combat."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-04-14"^^xsd:date ;
+        :rulingText """If a non-battle permanent that is already on the battlefield become a copy of a Siege, its controller chooses one of their opponents to be that battle's protector. However, it will most likely be put into its owner's graveyard because it has no defense counters (see below)."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-04-14"^^xsd:date ;
+        :rulingText """If a permanent that is represented by a transforming double-faced card becomes a copy of a Siege, it will be exiled as that Siege's triggered ability resolves, then it will be cast transformed. Note that this applies only to transforming double-faced cards, not to modal double-faced cards that can normally be played using either face."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-04-14"^^xsd:date ;
+        :rulingText """A Siege's controller can't be its protector. If a Siege's protector ever gains control of it, they choose a new player to be its protector. This is a state-based action."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-04-14"^^xsd:date ;
+        :rulingText """Only creatures controlled by a battle's protector can block creatures that are attacking that battle. This means a Siege's controller can never assign creatures to block for it."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-04-14"^^xsd:date ;
+        :rulingText """Battles can't attack or block, even if one also becomes a creature. If an attacking or blocking creature somehow becomes a battle in addition to being a creature, it is removed from combat."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-04-14"^^xsd:date ;
+        :rulingText """Invasion of Kamigawa's enters-the-battlefield ability can target an artifact or creature that's already tapped."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-04-14"^^xsd:date ;
+        :rulingText """Sieges each have an intrinsic triggered ability. That ability is "When the last defense counter is removed from this permanent, exile it, then you may cast it transformed without paying its mana cost.\""""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-04-14"^^xsd:date ;
+        :rulingText """If a token or a card that isn't represented by a transforming double-faced card becomes a copy of a Siege, it can't be cast as its triggered ability resolves. It will remain in exile. If it's a token, it will cease to exist the next time state-based actions are performed."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-04-14"^^xsd:date ;
+        :rulingText """Damage dealt to a battle causes that many defense counters to be removed from it."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-04-14"^^xsd:date ;
+        :rulingText """If a battle has no defense counters, and it isn't the source of a triggered ability that has triggered but not yet left the stack, that battle is put into its owner's graveyard. This is a state-based action. This doesn't cause a Siege's intrinsic triggered ability to trigger."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-04-14"^^xsd:date ;
+        :rulingText """As a Siege enters the battlefield, its controller chooses an opponent to be its protector."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-04-14"^^xsd:date ;
+        :rulingText """In a multiplayer game, if the protector of a battle leaves the game and that battle is not currently being attacked, its controller chooses a new protector for it as a state-based action. If it is being attacked, its controller chooses a new protector for it once no creatures are attacking it. This means that it continues to be attacked and can be dealt combat damage as normal."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-04-14"^^xsd:date ;
+        :rulingText """If a Siege never had defense counters on it (perhaps because a permanent became a copy of one), it can't have its last defense counter removed. It will be put into its owner's graveyard. You won't exile it or cast the other face."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-04-14"^^xsd:date ;
+        :rulingText """A battle can be attacked by all players other than its protector. Notably, this means a Siege's controller can attack it."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-04-14"^^xsd:date ;
+        :rulingText """A battle can be dealt damage and be target of spells and/or abilities that target "any target.\""""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-04-14"^^xsd:date ;
+        :rulingText """A battle's "defense" is displayed in the bottom right corner of the card. A battle enters the battlefield with that number of defense counters. If another permanent enters the battlefield as a copy of a battle, it also enters with that number of defense counters."""@en ] .
+
+:MomentOfTruth rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Moment of Truth" ;
+    :manaCost "{1}{U}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Instant ;
+    :hasRarity :Common ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :MarchOfTheMachine ;
+    :cardNumber "67"^^xsd:integer ;
+    :artist "Rovina Cai" ;
+    :hasLanguage :English ;
+    :printedText """Look at the top three cards of your library. Put one of those cards into your hand, one into your graveyard, and one on the bottom of your library."""@en ;
+    :oracleText """Look at the top three cards of your library. Put one of those cards into your hand, one into your graveyard, and one on the bottom of your library."""@en ;
+    :flavorText """On the precipice of eternity, Elspeth made a choice. The fight would not end without her."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=607093"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mom/67/moment-of-truth"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "84329"^^xsd:positiveInteger ;
+    :arenaName "Moment of Truth" ;
+    :arenaSetCode "MOM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-04-14"^^xsd:date ;
+        :rulingText """If there are fewer than three cards in your library, look at all of the cards in your library and follow the instructions in order. For example, if you had only two cards in your library, you would look at both, put one into your hand, and then put the other one in the graveyard."""@en ] .
+
+:OrderOfTheMirror rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Order of the Mirror // Order of the Alabaster Host" ;
+    :manaCost "{1}{U}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Human ,
+                :Knight ,
+                :Phyrexian ;
+    :hasRarity :Common ;
+    :hasColor :White ,
+              :Blue ;
+    :hasColorIdentity :White ,
+                      :Blue ;
+    :isInSet :MarchOfTheMachine ;
+    :cardNumber "72"^^xsd:integer ;
+    :artist "Andrew Mar" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "1" ;
+    :toughnessValue "1"^^xsd:integer ;
+    :hasKeywordAction :Transform ;
+    :printedText """{3}{W/P}: Transform this creature. Activate only as a sorcery. ({W/P} can be paid with either {W} or 2 life.)
+//
+Whenever this creature becomes blocked by a creature, the blocking creature gets -1/-1 until end of turn."""@en ;
+    :oracleText """{3}{W/P}: Transform this creature. Activate only as a sorcery. ({W/P} can be paid with either {W} or 2 life.)
+//
+Whenever this creature becomes blocked by a creature, the blocking creature gets -1/-1 until end of turn."""@en ;
+    :flavorText """The Magic Mirror of Vantress showed Catrina a twisted vision of black oil and bloody machines.
+//
+Soon she understood that it was not the vision that had been twisted, but her own mind."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=607098"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mom/72/order-of-the-mirror-order-of-the-alabaster-host"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "84334"^^xsd:positiveInteger ;
+    :arenaName "Order of the Mirror" ;
+    :arenaSetCode "MOM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] .
+
+:PreeningChampion rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Preening Champion" ;
+    :manaCost "{2}{U}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Bird ,
+                :Knight ;
+    :hasRarity :Common ;
+    :hasColor :Blue ;
+    :hasColorIdentity :Blue ;
+    :isInSet :MarchOfTheMachine ;
+    :cardNumber "73"^^xsd:integer ;
+    :artist "Alix Branwyn" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "2" ;
+    :toughnessValue "2"^^xsd:integer ;
+    :hasKeywordAbility :Flying ;
+    :printedText """Flying
+When this creature enters, create a 1/1 blue and red Elemental creature token."""@en ;
+    :oracleText """Flying
+When this creature enters, create a 1/1 blue and red Elemental creature token."""@en ;
+    :flavorText """On Kylem, the omens of impending invasion went largely unnoticed, drowned out by the everyday fanfare of Valor's Reach."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=607100"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mom/73/preening-champion"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "84336"^^xsd:positiveInteger ;
+    :arenaName "Preening Champion" ;
+    :arenaSetCode "MOM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] .
+
 :StasisField rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Stasis Field" ;
@@ -282,6 +739,440 @@ Enchanted creature has base power and toughness 0/2, has defender, and loses all
       [ rdf:type :Ruling ;
         :rulingDate "2023-04-14"^^xsd:date ;
         :rulingText """Effects that modify a creature’s power and/or toughness, such as the effect of Titanic Growth, will apply to the creature no matter when they started to take effect. The same is true for any counters that change its power and/or toughness and effects that switch its power and toughness."""@en ] .
+
+:FinalFlourish rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Final Flourish" ;
+    :manaCost "{1}{B}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Instant ;
+    :hasRarity :Common ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :MarchOfTheMachine ;
+    :cardNumber "104"^^xsd:integer ;
+    :artist "Raluca Marinescu" ;
+    :hasLanguage :English ;
+    :hasKeywordAbility :Kicker ;
+    :printedText """Kicker—Sacrifice an artifact or creature. (You may sacrifice an artifact or creature in addition to any other costs as you cast this spell.)
+Target creature gets -2/-2 until end of turn. If this spell was kicked, that creature gets -6/-6 until end of turn instead."""@en ;
+    :oracleText """Kicker—Sacrifice an artifact or creature. (You may sacrifice an artifact or creature in addition to any other costs as you cast this spell.)
+Target creature gets -2/-2 until end of turn. If this spell was kicked, that creature gets -6/-6 until end of turn instead."""@en ;
+    :flavorText """Strixhaven braced for another Oriq assault, but something far worse arrived."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=607136"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mom/104/final-flourish"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "84372"^^xsd:positiveInteger ;
+    :arenaName "Final Flourish" ;
+    :arenaSetCode "MOM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-11-08"^^xsd:date ;
+        :rulingText """If a card or token enters as a copy of a permanent, the new permanent isn't kicked, even if the original was."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-11-08"^^xsd:date ;
+        :rulingText """If you copy a kicked spell on the stack, the copy is also kicked. If the copied spell is a permanent spell, the token the copy of that spell becomes when it enters is also kicked."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-11-08"^^xsd:date ;
+        :rulingText """If a spell's kicker cost was paid, the spell is "kicked.\""""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-11-08"^^xsd:date ;
+        :rulingText """If you put a permanent with a kicker ability onto the battlefield without casting it, you can't kick it."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-11-08"^^xsd:date ;
+        :rulingText """To determine a spell's total cost, start with the mana cost (or an alternative cost if another card's effect allows you to pay one instead), add any cost increases (such as kicker), then apply any cost reductions. The spell's mana value remains unchanged, no matter what the total cost to cast it was."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-11-08"^^xsd:date ;
+        :rulingText """The kicker ability doesn't let you pay a kicker cost more than once."""@en ] .
+
+:InvasionOfUlgrotha rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Invasion of Ulgrotha // Grandmother Ravi Sengir" ;
+    :manaCost "{4}{B}" ;
+    :manaValue "5"^^xsd:nonNegativeInteger ;
+    :hasSuperType :Legendary ;
+    :hasCardType :Battle ,
+                 :Creature ;
+    :hasSubType :Siege ,
+                :Human ,
+                :Wizard ;
+    :hasRarity :Uncommon ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :MarchOfTheMachine ;
+    :cardNumber "116"^^xsd:integer ;
+    :artist "Viko Menezes" ;
+    :hasLanguage :English ;
+    :defenseValue "5"^^xsd:nonNegativeInteger ;
+    :hasKeywordAbility :Flying ;
+    :hasKeywordAction :Transform ;
+    :printedText """(As a Siege enters, choose an opponent to protect it. You and others can attack it. When it's defeated, exile it, then cast it transformed.)
+When this Siege enters, it deals 3 damage to any other target and you gain 3 life.
+//
+Flying
+Whenever a creature an opponent controls dies, put a +1/+1 counter on Grandmother Ravi Sengir and you gain 1 life."""@en ;
+    :oracleText """(As a Siege enters, choose an opponent to protect it. You and others can attack it. When it's defeated, exile it, then cast it transformed.)
+When this Siege enters, it deals 3 damage to any other target and you gain 3 life.
+//
+Flying
+Whenever a creature an opponent controls dies, put a +1/+1 counter on Grandmother Ravi Sengir and you gain 1 life."""@en ;
+    :flavorText """"I do enjoy a good apocalypse.\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=607151"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mom/116/invasion-of-ulgrotha-grandmother-ravi-sengir"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "84387"^^xsd:positiveInteger ;
+    :arenaName "Invasion of Ulgrotha" ;
+    :arenaSetCode "MOM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-04-14"^^xsd:date ;
+        :rulingText """Damage dealt to a battle causes that many defense counters to be removed from it."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-04-14"^^xsd:date ;
+        :rulingText """As a Siege enters the battlefield, its controller chooses an opponent to be its protector."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-04-14"^^xsd:date ;
+        :rulingText """A Siege’s controller can’t be its protector. If a Siege’s protector ever gains control of it, they choose a new player to be its protector. This is a state-based action."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-04-14"^^xsd:date ;
+        :rulingText """A battle can be attacked by all players other than its protector. Notably, this means a Siege’s controller can attack it."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-04-14"^^xsd:date ;
+        :rulingText """If a non-battle permanent that is already on the battlefield become a copy of a Siege, its controller chooses one of their opponents to be that battle’s protector. However, it will most likely be put into its owner’s graveyard because it has no defense counters (see below)."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-04-14"^^xsd:date ;
+        :rulingText """If a token or a card that isn’t represented by a transforming double-faced card becomes a copy of a Siege, it can’t be cast as its triggered ability resolves. It will remain in exile. If it’s a token, it will cease to exist the next time state-based actions are performed."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-04-14"^^xsd:date ;
+        :rulingText """Sieges each have an intrinsic triggered ability. That ability is “When the last defense counter is removed from this permanent, exile it, then you may cast it transformed without paying its mana cost.”"""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-04-14"^^xsd:date ;
+        :rulingText """In a multiplayer game, if the protector of a battle leaves the game and that battle is not currently being attacked, its controller chooses a new protector for it as a state-based action. If it is being attacked, its controller chooses a new protector for it once no creatures are attacking it. This means that it continues to be attacked and can be dealt combat damage as normal."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-04-14"^^xsd:date ;
+        :rulingText """A battle’s “defense” is displayed in the bottom right corner of the card. A battle enters the battlefield with that number of defense counters. If another permanent enters the battlefield as a copy of a battle, it also enters with that number of defense counters."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-04-14"^^xsd:date ;
+        :rulingText """A battle can be dealt damage and be target of spells and/or abilities that target “any target.”"""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-04-14"^^xsd:date ;
+        :rulingText """If a permanent that is represented by a transforming double-faced card becomes a copy of a Siege, it will be exiled as that Siege’s triggered ability resolves, then it will be cast transformed. Note that this applies only to transforming double-faced cards, not to modal double-faced cards that can normally be played using either face."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-04-14"^^xsd:date ;
+        :rulingText """Only creatures controlled by a battle’s protector can block creatures that are attacking that battle. This means a Siege’s controller can never assign creatures to block for it."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-04-14"^^xsd:date ;
+        :rulingText """If creatures controlled by opponents die at the same time as Grandmother Ravi Sengir, the last ability of Grandmother Ravi Sengir will trigger once for each of those creatures. You won’t put +1/+1 counters on it, but you will gain some life. So that’s nice, dear."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-04-14"^^xsd:date ;
+        :rulingText """If a battle has no defense counters, and it isn’t the source of a triggered ability that has triggered but not yet left the stack, that battle is put into its owner’s graveyard. This is a state-based action. This doesn’t cause a Siege’s intrinsic triggered ability to trigger."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-04-14"^^xsd:date ;
+        :rulingText """If a Siege never had defense counters on it (perhaps because a permanent became a copy of one), it can’t have its last defense counter removed. It will be put into its owner’s graveyard. You won’t exile it or cast the other face."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-04-14"^^xsd:date ;
+        :rulingText """If a battle that’s being attacked somehow stops being a battle, it is removed from combat. Similarly, if its controller changes in the middle of combat, it is removed from combat."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-04-14"^^xsd:date ;
+        :rulingText """Battles can’t attack or block, even if one also becomes a creature. If an attacking or blocking creature somehow becomes a battle in addition to being a creature, it is removed from combat."""@en ] .
+
+:NezumiInformant rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Nezumi Informant" ;
+    :manaCost "{1}{B}" ;
+    :manaValue "2"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Rat ,
+                :Rogue ;
+    :hasRarity :Common ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :MarchOfTheMachine ;
+    :cardNumber "120"^^xsd:integer ;
+    :artist "Steve Prescott" ;
+    :hasLanguage :English ;
+    :power "1" ;
+    :powerValue "1"^^xsd:integer ;
+    :toughness "1" ;
+    :toughnessValue "1"^^xsd:integer ;
+    :printedText """When this creature enters, each opponent discards a card."""@en ;
+    :oracleText """When this creature enters, each opponent discards a card."""@en ;
+    :flavorText """"Tell Boss Umezawa there's a new gang moving in on our territory. I'm forwarding their insignia. Watch for it elsewhere.\""""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=607157"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mom/120/nezumi-informant"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "84393"^^xsd:positiveInteger ;
+    :arenaName "Nezumi Informant" ;
+    :arenaSetCode "MOM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-04-14"^^xsd:date ;
+        :rulingText """To resolve Nezumi Informant’s ability in a multiplayer game, the next opponent in turn order (or, if it’s an opponent’s turn, the opponent whose turn it is) chooses a card in hand and sets it aside without revealing it. Then each other opponent in turn order does the same. Finally, all chosen cards are revealed and discarded at the same time."""@en ] .
+
+:PileOn rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Pile On" ;
+    :manaCost "{3}{B}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasCardType :Instant ;
+    :hasRarity :Rare ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :MarchOfTheMachine ;
+    :cardNumber "122"^^xsd:integer ;
+    :artist "Javier Charro" ;
+    :hasLanguage :English ;
+    :hasKeywordAction :Surveil ;
+    :hasKeywordAbility :Convoke ;
+    :printedText """Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)
+Destroy target creature or planeswalker. Surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)"""@en ;
+    :oracleText """Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)
+Destroy target creature or planeswalker. Surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=607159"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mom/122/pile-on"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "84395"^^xsd:positiveInteger ;
+    :arenaName "Pile On" ;
+    :arenaSetCode "MOM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-01-12"^^xsd:date ;
+        :rulingText """If a creature you control has a mana ability with {T} in the cost, activating that ability while casting a spell with convoke will result in the creature being tapped before you pay the spell's costs. You won't be able to tap it again for convoke. Similarly, if you sacrifice a creature to activate a mana ability while casting a spell with convoke, that creature won't be on the battlefield when you pay the spell's costs, so you won't be able to tap it for convoke."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-01-12"^^xsd:date ;
+        :rulingText """You perform the actions stated on a card in sequence. For some spells and abilities, you'll surveil last. For others, you'll surveil and then perform other actions."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-01-12"^^xsd:date ;
+        :rulingText """Tapping a multicolored creature using convoke will pay for {1} or one mana of your choice of any of that creature's colors."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-01-12"^^xsd:date ;
+        :rulingText """Tapping an untapped creature that's attacking or blocking to convoke a spell won't cause that creature to stop attacking or blocking."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-01-12"^^xsd:date ;
+        :rulingText """When calculating a spell's total cost, include any alternative costs, additional costs, or anything else that increases or reduces the cost to cast the spell. Convoke applies after the total cost is calculated. Convoke doesn't change a spell's mana cost or mana value."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-01-12"^^xsd:date ;
+        :rulingText """You can tap any untapped creature you control to convoke a spell, even one you haven't controlled continuously since the beginning of your most recent turn."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-01-12"^^xsd:date ;
+        :rulingText """When you surveil, you may put all the cards you look at back on top of your library, you may put all of those cards into your graveyard, or you may put some of those cards on top and the rest of them into your graveyard."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2024-01-12"^^xsd:date ;
+        :rulingText """Because convoke isn't an alternative cost, it can be used in conjunction with alternative costs."""@en ] .
+
+:TenuredOilcaster rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Tenured Oilcaster" ;
+    :manaCost "{3}{B}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Phyrexian ,
+                :Wizard ;
+    :hasRarity :Common ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :MarchOfTheMachine ;
+    :cardNumber "126"^^xsd:integer ;
+    :artist "Francisco Miyara" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "4" ;
+    :toughnessValue "4"^^xsd:integer ;
+    :hasKeywordAbility :Menace ;
+    :hasKeywordAction :Mill ;
+    :printedText """Menace (This creature can't be blocked except by two or more creatures.)
+This creature gets +3/+0 as long as an opponent has eight or more cards in their graveyard.
+Whenever this creature attacks or blocks, each player mills a card."""@en ;
+    :oracleText """Menace (This creature can't be blocked except by two or more creatures.)
+This creature gets +3/+0 as long as an opponent has eight or more cards in their graveyard.
+Whenever this creature attacks or blocks, each player mills a card."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=607164"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mom/126/tenured-oilcaster"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "84400"^^xsd:positiveInteger ;
+    :arenaName "Tenured Oilcaster" ;
+    :arenaSetCode "MOM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-04-14"^^xsd:date ;
+        :rulingText """Tenured Oilcaster's second ability will apply if any opponent has eight or more cards in their graveyard, not necessarily all of them."""@en ] .
+
+:UnsealTheNecropolis rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Unseal the Necropolis" ;
+    :manaCost "{2}{B}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Instant ;
+    :hasRarity :Common ;
+    :hasColor :Black ;
+    :hasColorIdentity :Black ;
+    :isInSet :MarchOfTheMachine ;
+    :cardNumber "128"^^xsd:integer ;
+    :artist "Isis" ;
+    :hasLanguage :English ;
+    :hasKeywordAction :Mill ;
+    :printedText """Each player mills three cards. Then you return up to two creature cards from your graveyard to your hand. (To mill three cards, a player puts the top three cards of their library into their graveyard.)"""@en ;
+    :oracleText """Each player mills three cards. Then you return up to two creature cards from your graveyard to your hand. (To mill three cards, a player puts the top three cards of their library into their graveyard.)"""@en ;
+    :flavorText """On Amonkhet, Phyrexia found a ready-made army of horrors waiting for a new master."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=607166"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mom/128/unseal-the-necropolis"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "84402"^^xsd:positiveInteger ;
+    :arenaName "Unseal the Necropolis" ;
+    :arenaSetCode "MOM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] .
+
+:HangarScrounger rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Hangar Scrounger" ;
+    :manaCost "{2}{R}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Dwarf ,
+                :Pilot ;
+    :hasRarity :Common ;
+    :hasColor :Red ;
+    :hasColorIdentity :Red ;
+    :isInSet :MarchOfTheMachine ;
+    :cardNumber "142"^^xsd:integer ;
+    :artist "Borja Pindado" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "1" ;
+    :toughnessValue "1"^^xsd:integer ;
+    :hasKeywordAbility :Backup ;
+    :printedText """Backup 1 (When this creature enters, put a +1/+1 counter on target creature. If that's another creature, it gains the following ability until end of turn.)
+Whenever this creature becomes tapped, you may discard a card. If you do, draw a card."""@en ;
+    :oracleText """Backup 1 (When this creature enters, put a +1/+1 counter on target creature. If that's another creature, it gains the following ability until end of turn.)
+Whenever this creature becomes tapped, you may discard a card. If you do, draw a card."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=607181"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mom/142/hangar-scrounger"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "84417"^^xsd:positiveInteger ;
+    :arenaName "Hangar Scrounger" ;
+    :arenaSetCode "MOM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-04-14"^^xsd:date ;
+        :rulingText """Backup confers only abilities that are actually printed below it. Any abilities that are gained by the permanent are ignored, including abilities gained due to a resolving spell or ability or copy effects."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-04-14"^^xsd:date ;
+        :rulingText """If a backup ability targets the creature with backup, that creature will get +1/+1 counters, but it won’t gain additional abilities."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-04-14"^^xsd:date ;
+        :rulingText """If a backup ability causes another creature to gain abilities, the creature with backup will still have those abilities."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-04-14"^^xsd:date ;
+        :rulingText """The abilities that backup grants to the target creature are determined only once, at the time the ability triggers. They won’t change if the permanent with backup loses any abilities before the backup ability resolves."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-04-14"^^xsd:date ;
+        :rulingText """If a permanent enters the battlefield as a copy of a card with a backup ability or a token is created that is a copy of that card, the order of the printed abilities is maintained."""@en ] .
 
 :ShivanBranchBurner rdf:type owl:NamedIndividual ,
                   :Card ;
@@ -421,6 +1312,60 @@ This creature enters with two +1/+1 counters on it for each creature that convok
         :rulingDate "2024-01-12"^^xsd:date ;
         :rulingText """Tapping a multicolored creature using convoke will pay for {1} or one mana of your choice of any of that creature's colors."""@en ] .
 
+:BondedHerdbeast rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Bonded Herdbeast // Plated Kilnbeast" ;
+    :manaCost "{4}{G}" ;
+    :manaValue "5"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Beast ,
+                :Phyrexian ;
+    :hasRarity :Common ;
+    :hasColor :Red ,
+              :Green ;
+    :hasColorIdentity :Red ,
+                      :Green ;
+    :isInSet :MarchOfTheMachine ;
+    :cardNumber "178"^^xsd:integer ;
+    :artist "Jokubas Uogintas" ;
+    :hasLanguage :English ;
+    :power "4" ;
+    :powerValue "4"^^xsd:integer ;
+    :toughness "5" ;
+    :toughnessValue "5"^^xsd:integer ;
+    :hasKeywordAction :Transform ;
+    :hasKeywordAbility :Menace ;
+    :printedText """{4}{R/P}: Transform this creature. Activate only as a sorcery. ({R/P} can be paid with either {R} or 2 life.)
+//
+Menace (This creature can't be blocked except by two or more creatures.)"""@en ;
+    :oracleText """{4}{R/P}: Transform this creature. Activate only as a sorcery. ({R/P} can be paid with either {R} or 2 life.)
+//
+Menace (This creature can't be blocked except by two or more creatures.)"""@en ;
+    :flavorText """Though both had lost their families, the *eludha*—the spiritual connection between the monsters of Ikoria and their human bonders—gave them something greater.
+//
+Now, united by the Great Work, they knew what it meant to be truly bonded."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=607226"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mom/178/bonded-herdbeast-plated-kilnbeast"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "84462"^^xsd:positiveInteger ;
+    :arenaName "Bonded Herdbeast" ;
+    :arenaSetCode "MOM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] .
+
 :ChompingKavu rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Chomping Kavu" ;
@@ -485,6 +1430,215 @@ This creature can't be blocked by creatures with power 2 or less."""@en ;
         :rulingDate "2023-04-14"^^xsd:date ;
         :rulingText """If a backup ability causes another creature to gain abilities, the creature with backup will still have those abilities."""@en ] .
 
+:FertilidsFavor rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Fertilid's Favor" ;
+    :manaCost "{3}{G}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasCardType :Instant ;
+    :hasRarity :Common ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :MarchOfTheMachine ;
+    :cardNumber "186"^^xsd:integer ;
+    :artist "Kevin Sidharta" ;
+    :hasLanguage :English ;
+    :printedText """Target player searches their library for a basic land card, puts it onto the battlefield tapped, then shuffles. Put two +1/+1 counters on up to one target artifact or creature."""@en ;
+    :oracleText """Target player searches their library for a basic land card, puts it onto the battlefield tapped, then shuffles. Put two +1/+1 counters on up to one target artifact or creature."""@en ;
+    :flavorText """The denizens of Lorwyn were accustomed to resisting darkness."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=607235"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mom/186/fertilids-favor"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "84471"^^xsd:positiveInteger ;
+    :arenaName "Fertilid's Favor" ;
+    :arenaSetCode "MOM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] .
+
+:GnottvoldHermit rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Gnottvold Hermit // Chrome Host Hulk" ;
+    :manaCost "{3}{G}" ;
+    :manaValue "4"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Troll ,
+                :Phyrexian ;
+    :hasRarity :Uncommon ;
+    :hasColor :Blue ,
+              :Green ;
+    :hasColorIdentity :Blue ,
+                      :Green ;
+    :isInSet :MarchOfTheMachine ;
+    :cardNumber "188"^^xsd:integer ;
+    :artist "Artur Nakhodkin" ;
+    :hasLanguage :English ;
+    :power "4" ;
+    :powerValue "4"^^xsd:integer ;
+    :toughness "4" ;
+    :toughnessValue "4"^^xsd:integer ;
+    :hasKeywordAction :Transform ;
+    :printedText """{5}{U/P}: Transform this creature. Activate only as a sorcery. ({U/P} can be paid with either {U} or 2 life.)
+//
+Whenever this creature attacks, up to one other target creature has base power and toughness 5/5 until end of turn."""@en ;
+    :oracleText """{5}{U/P}: Transform this creature. Activate only as a sorcery. ({U/P} can be paid with either {U} or 2 life.)
+//
+Whenever this creature attacks, up to one other target creature has base power and toughness 5/5 until end of turn."""@en ;
+    :flavorText """The Hagi trolls stood little chance against Phyrexia, having killed everyone who came to Gnottvold to warn them.
+//
+Now they saw the truth. Divisions between Hagi and Torga were meaningless. There was only Phyrexia."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=607237"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mom/188/gnottvold-hermit-chrome-host-hulk"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "84473"^^xsd:positiveInteger ;
+    :arenaName "Gnottvold Hermit" ;
+    :arenaSetCode "MOM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-04-14"^^xsd:date ;
+        :rulingText """Chrome Host Hulk’s ability overwrites all previous effects that set the affected creatures’ power and/or toughness to specific values. Other effects that set these characteristics to specific values that start to apply after the ability resolves will overwrite that part of the effect."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-04-14"^^xsd:date ;
+        :rulingText """Effects that modify the affected creature’s power or toughness without setting it will apply no matter when they started to take effect. The same is true for counters that change the creature’s power or toughness."""@en ] .
+
+:InvasionOfMuraganda rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Invasion of Muraganda // Primordial Plasm" ;
+    :manaCost "{4}{G}" ;
+    :manaValue "5"^^xsd:nonNegativeInteger ;
+    :hasCardType :Battle ,
+                 :Creature ;
+    :hasSubType :Siege ,
+                :Ooze ;
+    :hasRarity :Uncommon ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :MarchOfTheMachine ;
+    :cardNumber "192"^^xsd:integer ;
+    :artist "Adam Paquette" ;
+    :hasLanguage :English ;
+    :defenseValue "6"^^xsd:nonNegativeInteger ;
+    :hasKeywordAction :Transform ,
+                      :Fight ;
+    :printedText """(As a Siege enters, choose an opponent to protect it. You and others can attack it. When it's defeated, exile it, then cast it transformed.)
+When this Siege enters, put a +1/+1 counter on target creature you control. Then that creature fights up to one target creature you don't control.
+//
+At the beginning of combat on your turn, another target creature gets +2/+2 and loses all abilities until end of turn."""@en ;
+    :oracleText """(As a Siege enters, choose an opponent to protect it. You and others can attack it. When it's defeated, exile it, then cast it transformed.)
+When this Siege enters, put a +1/+1 counter on target creature you control. Then that creature fights up to one target creature you don't control.
+//
+At the beginning of combat on your turn, another target creature gets +2/+2 and loses all abilities until end of turn."""@en ;
+    :flavorText """Before the tree of life branched into predators and prey, there was only shapeless hunger."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=607245"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mom/192/invasion-of-muraganda-primordial-plasm"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "84481"^^xsd:positiveInteger ;
+    :arenaName "Invasion of Muraganda" ;
+    :arenaSetCode "MOM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-04-14"^^xsd:date ;
+        :rulingText """A battle can be dealt damage and be target of spells and/or abilities that target “any target.”"""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-04-14"^^xsd:date ;
+        :rulingText """Battles can’t attack or block, even if one also becomes a creature. If an attacking or blocking creature somehow becomes a battle in addition to being a creature, it is removed from combat."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-04-14"^^xsd:date ;
+        :rulingText """If a permanent that is represented by a transforming double-faced card becomes a copy of a Siege, it will be exiled as that Siege’s triggered ability resolves, then it will be cast transformed. Note that this applies only to transforming double-faced cards, not to modal double-faced cards that can normally be played using either face."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-04-14"^^xsd:date ;
+        :rulingText """If a battle has no defense counters, and it isn’t the source of a triggered ability that has triggered but not yet left the stack, that battle is put into its owner’s graveyard. This is a state-based action. This doesn’t cause a Siege’s intrinsic triggered ability to trigger."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-04-14"^^xsd:date ;
+        :rulingText """Only creatures controlled by a battle’s protector can block creatures that are attacking that battle. This means a Siege’s controller can never assign creatures to block for it."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-04-14"^^xsd:date ;
+        :rulingText """Damage dealt to a battle causes that many defense counters to be removed from it."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-04-14"^^xsd:date ;
+        :rulingText """You can choose only a creature you control as a target for Invasion of Muraganda’s enters-the-battlefield ability."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-04-14"^^xsd:date ;
+        :rulingText """A Siege’s controller can’t be its protector. If a Siege’s protector ever gains control of it, they choose a new player to be its protector. This is a state-based action."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-04-14"^^xsd:date ;
+        :rulingText """In a multiplayer game, if the protector of a battle leaves the game and that battle is not currently being attacked, its controller chooses a new protector for it as a state-based action. If it is being attacked, its controller chooses a new protector for it once no creatures are attacking it. This means that it continues to be attacked and can be dealt combat damage as normal."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-04-14"^^xsd:date ;
+        :rulingText """A creature that loses all abilities because of Primordial Plasm’s ability (slurp) may later gain abilities."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-04-14"^^xsd:date ;
+        :rulingText """If the creature affected by Primordial Plasm’s ability (slurp) had an ability defining its power and/or toughness, that base value will become 0. In many situations, having a base toughness of 0 would be a problem, but Primordial Plasm’s ability (slurp) helpfully provides +2/+2, so the creature should survive."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-04-14"^^xsd:date ;
+        :rulingText """As a Siege enters the battlefield, its controller chooses an opponent to be its protector."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-04-14"^^xsd:date ;
+        :rulingText """If a non-battle permanent that is already on the battlefield become a copy of a Siege, its controller chooses one of their opponents to be that battle’s protector. However, it will most likely be put into its owner’s graveyard because it has no defense counters (see below)."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-04-14"^^xsd:date ;
+        :rulingText """A battle can be attacked by all players other than its protector. Notably, this means a Siege’s controller can attack it."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-04-14"^^xsd:date ;
+        :rulingText """If a battle that’s being attacked somehow stops being a battle, it is removed from combat. Similarly, if its controller changes in the middle of combat, it is removed from combat."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-04-14"^^xsd:date ;
+        :rulingText """If a token or a card that isn’t represented by a transforming double-faced card becomes a copy of a Siege, it can’t be cast as its triggered ability resolves. It will remain in exile. If it’s a token, it will cease to exist the next time state-based actions are performed."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-04-14"^^xsd:date ;
+        :rulingText """Sieges each have an intrinsic triggered ability. That ability is “When the last defense counter is removed from this permanent, exile it, then you may cast it transformed without paying its mana cost.”"""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-04-14"^^xsd:date ;
+        :rulingText """A battle’s “defense” is displayed in the bottom right corner of the card. A battle enters the battlefield with that number of defense counters. If another permanent enters the battlefield as a copy of a battle, it also enters with that number of defense counters."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-04-14"^^xsd:date ;
+        :rulingText """If a Siege never had defense counters on it (perhaps because a permanent became a copy of one), it can’t have its last defense counter removed. It will be put into its owner’s graveyard. You won’t exile it or cast the other face."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-04-14"^^xsd:date ;
+        :rulingText """If the creature you control is an illegal target as the ability tries to resolve, you won’t put a +1/+1 counter on it. If that creature is a legal target but the other creature isn’t, you’ll still put the +1/+1 counter on the creature you control, but neither creature will deal or be dealt damage."""@en ] .
+
 :IridescentBlademaster rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Iridescent Blademaster" ;
@@ -514,6 +1668,53 @@ This creature can't be blocked by creatures with power 2 or less."""@en ;
                    :MagicOnline ;
     :arenaId "84487"^^xsd:positiveInteger ;
     :arenaName "Iridescent Blademaster" ;
+    :arenaSetCode "MOM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] .
+
+:PlacidRottentail rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Placid Rottentail" ;
+    :manaCost "{G}" ;
+    :manaValue "1"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Fungus ,
+                :Rabbit ;
+    :hasRarity :Common ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :MarchOfTheMachine ;
+    :cardNumber "199"^^xsd:integer ;
+    :artist "Filip Burburan" ;
+    :hasLanguage :English ;
+    :power "1" ;
+    :powerValue "1"^^xsd:integer ;
+    :toughness "1" ;
+    :toughnessValue "1"^^xsd:integer ;
+    :hasKeywordAbility :Vigilance ;
+    :printedText """Vigilance
+{2}{G}, Exile this card from your graveyard: Put two +1/+1 counters on target creature. Activate only as a sorcery."""@en ;
+    :oracleText """Vigilance
+{2}{G}, Exile this card from your graveyard: Put two +1/+1 counters on target creature. Activate only as a sorcery."""@en ;
+    :flavorText """It had always loved munching on daisies and crystalweed, but lately its favorite snacks were the strange, round roots popping up everywhere."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=607255"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mom/199/placid-rottentail"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "84491"^^xsd:positiveInteger ;
+    :arenaName "Placid Rottentail" ;
     :arenaSetCode "MOM" ;
     :hasLegality
       [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
@@ -577,6 +1778,216 @@ This creature can't be blocked by creatures with power 2 or less."""@en ;
         :rulingDate "2023-04-14"^^xsd:date ;
         :rulingText """If some of the creatures are illegal targets as Storm the Seedcore tries to resolve, the original distribution of counters still applies and the counters that would have been put on the illegal targets are lost. They won’t be put instead on a legal target."""@en ] .
 
+:TimberlandAncient rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Timberland Ancient" ;
+    :manaCost "{4}{G}{G}" ;
+    :manaValue "6"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Treefolk ;
+    :hasRarity :Common ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :MarchOfTheMachine ;
+    :cardNumber "210"^^xsd:integer ;
+    :artist "Pavel Kolomeyets" ;
+    :hasLanguage :English ;
+    :power "6" ;
+    :powerValue "6"^^xsd:integer ;
+    :toughness "5" ;
+    :toughnessValue "5"^^xsd:integer ;
+    :hasKeywordAbility :Reach ,
+                       :Trample ,
+                       :Cycling ;
+    :printedText """Reach, trample
+Forestcycling {2} ({2}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)"""@en ;
+    :oracleText """Reach, trample
+Forestcycling {2} ({2}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)"""@en ;
+    :flavorText """Only the trees were old enough to remember what happened when Moag ignored warnings of Phyrexia millennia ago. They were determined not to repeat the mistake."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=607267"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mom/210/timberland-ancient"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "84503"^^xsd:positiveInteger ;
+    :arenaName "Timberland Ancient" ;
+    :arenaSetCode "MOM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] .
+
+:WildwoodEscort rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Wildwood Escort" ;
+    :manaCost "{4}{G}" ;
+    :manaValue "5"^^xsd:nonNegativeInteger ;
+    :hasCardType :Creature ;
+    :hasSubType :Elf ,
+                :Warrior ;
+    :hasRarity :Common ;
+    :hasColor :Green ;
+    :hasColorIdentity :Green ;
+    :isInSet :MarchOfTheMachine ;
+    :cardNumber "216"^^xsd:integer ;
+    :artist "Taras Susak" ;
+    :hasLanguage :English ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "3" ;
+    :toughnessValue "3"^^xsd:integer ;
+    :printedText """When this creature enters, return target creature or battle card from your graveyard to your hand.
+If this creature would die, exile it instead."""@en ;
+    :oracleText """When this creature enters, return target creature or battle card from your graveyard to your hand.
+If this creature would die, exile it instead."""@en ;
+    :flavorText """With Eldraine's human knights called away to defend the courts, lost travelers were surprised to find themselves whisked to safety by the secretive folk of the wilds."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=607274"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mom/216/wildwood-escort"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "84510"^^xsd:positiveInteger ;
+    :arenaName "Wildwood Escort" ;
+    :arenaSetCode "MOM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] .
+
+:ErrantAndGiada rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Errant and Giada" ;
+    :manaCost "{1}{W}{U}" ;
+    :manaValue "3"^^xsd:nonNegativeInteger ;
+    :hasSuperType :Legendary ;
+    :hasCardType :Creature ;
+    :hasSubType :Human ,
+                :Angel ;
+    :hasRarity :Rare ;
+    :hasColor :White ,
+              :Blue ;
+    :hasColorIdentity :White ,
+                      :Blue ;
+    :isInSet :MarchOfTheMachine ;
+    :cardNumber "224"^^xsd:integer ;
+    :artist "Cristi Balanescu" ;
+    :hasLanguage :English ;
+    :power "2" ;
+    :powerValue "2"^^xsd:integer ;
+    :toughness "3" ;
+    :toughnessValue "3"^^xsd:integer ;
+    :hasKeywordAbility :Flying ,
+                       :Flash ;
+    :printedText """Flash
+Flying
+You may look at the top card of your library any time.
+You may cast spells with flash or flying from the top of your library."""@en ;
+    :oracleText """Flash
+Flying
+You may look at the top card of your library any time.
+You may cast spells with flash or flying from the top of your library."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=607282"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mom/224/errant-and-giada"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "84518"^^xsd:positiveInteger ;
+    :arenaName "Errant and Giada" ;
+    :arenaSetCode "MOM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-04-14"^^xsd:date ;
+        :rulingText """Errant and Giada lets you look at the top card of your library whenever you want (with one restriction—see below), even if you don’t have priority. This action doesn’t use the stack. Knowing what that card is becomes part of the information you have access to, just like you can look at the cards in your hand."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2023-04-14"^^xsd:date ;
+        :rulingText """If the top card of your library changes while you’re casting a spell, playing a land, or activating an ability, you can’t look at the new top card until you finish doing so. This means that if you cast the top card of your library, you can’t look at the next one until you’re done paying for that spell."""@en ] .
+
+:GlissaHeraldOfPredation rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Glissa, Herald of Predation" ;
+    :manaCost "{3}{B}{G}" ;
+    :manaValue "5"^^xsd:nonNegativeInteger ;
+    :hasSuperType :Legendary ;
+    :hasCardType :Creature ;
+    :hasSubType :Phyrexian ,
+                :Zombie ,
+                :Elf ;
+    :hasRarity :Rare ;
+    :hasColor :Black ,
+              :Green ;
+    :hasColorIdentity :Black ,
+                      :Green ;
+    :isInSet :MarchOfTheMachine ;
+    :cardNumber "226"^^xsd:integer ;
+    :artist "Cristi Balanescu" ;
+    :hasLanguage :English ;
+    :power "3" ;
+    :powerValue "3"^^xsd:integer ;
+    :toughness "5" ;
+    :toughnessValue "5"^^xsd:integer ;
+    :hasKeywordAction :Incubate ,
+                      :Transform ;
+    :printedText """At the beginning of combat on your turn, choose one —
+• Incubate 2 twice. (To incubate 2, create an Incubator token with two +1/+1 counters on it and "{2}: Transform this token." It transforms into a 0/0 Phyrexian artifact creature.)
+• Transform all Incubator tokens you control.
+• Phyrexians you control gain first strike and deathtouch until end of turn."""@en ;
+    :oracleText """At the beginning of combat on your turn, choose one —
+• Incubate 2 twice. (To incubate 2, create an Incubator token with two +1/+1 counters on it and "{2}: Transform this token." It transforms into a 0/0 Phyrexian artifact creature.)
+• Transform all Incubator tokens you control.
+• Phyrexians you control gain first strike and deathtouch until end of turn."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=607284"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mom/226/glissa-herald-of-predation"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "84520"^^xsd:positiveInteger ;
+    :arenaName "Glissa, Herald of Predation" ;
+    :arenaSetCode "MOM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :NotLegal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :NotLegal ] .
+
 :BlossomingSandsMarchOfTheMachine268 rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Blossoming Sands" ;
@@ -621,6 +2032,94 @@ When this land enters, you gain 1 life.
       [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
       [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
 
+:DismalBackwaterMarchOfTheMachine269 rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Dismal Backwater" ;
+    :manaValue "0"^^xsd:nonNegativeInteger ;
+    :hasCardType :Land ;
+    :hasRarity :Common ;
+    :hasColorIdentity :Blue ,
+                      :Black ;
+    :isInSet :MarchOfTheMachine ;
+    :cardNumber "269"^^xsd:integer ;
+    :artist "Chris Ostrowski" ;
+    :hasLanguage :English ;
+    :producesMana :Blue ,
+                  :Black ;
+    :entersTapped "true"^^xsd:boolean ;
+    :printedText """This land enters tapped.
+When this land enters, you gain 1 life.
+{T}: Add {U} or {B}."""@en ;
+    :oracleText """This land enters tapped.
+When this land enters, you gain 1 life.
+{T}: Add {U} or {B}."""@en ;
+    :flavorText """The Invasion Tree's branches snaked through the streets of Otawara, turning Kamigawa's soaring city into a clouded nightmare."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=607340"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mom/269/dismal-backwater"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "84576"^^xsd:positiveInteger ;
+    :arenaName "Dismal Backwater" ;
+    :arenaSetCode "MOM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:ScouredBarrensMarchOfTheMachine272 rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Scoured Barrens" ;
+    :manaValue "0"^^xsd:nonNegativeInteger ;
+    :hasCardType :Land ;
+    :hasRarity :Common ;
+    :hasColorIdentity :White ,
+                      :Black ;
+    :isInSet :MarchOfTheMachine ;
+    :cardNumber "272"^^xsd:integer ;
+    :artist "Robin Olausson" ;
+    :hasLanguage :English ;
+    :producesMana :White ,
+                  :Black ;
+    :entersTapped "true"^^xsd:boolean ;
+    :printedText """This land enters tapped.
+When this land enters, you gain 1 life.
+{T}: Add {W} or {B}."""@en ;
+    :oracleText """This land enters tapped.
+When this land enters, you gain 1 life.
+{T}: Add {W} or {B}."""@en ;
+    :flavorText """As oil seeped from Ikoria's crystals, strange metallic mutations emerged in monsters all across the plane."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=607343"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mom/272/scoured-barrens"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "84579"^^xsd:positiveInteger ;
+    :arenaName "Scoured Barrens" ;
+    :arenaSetCode "MOM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
 :SwiftwaterCliffsMarchOfTheMachine273 rdf:type owl:NamedIndividual ,
                   :Card ;
     :cardName "Swiftwater Cliffs" ;
@@ -650,6 +2149,50 @@ When this land enters, you gain 1 life.
                    :MagicOnline ;
     :arenaId "84580"^^xsd:positiveInteger ;
     :arenaName "Swiftwater Cliffs" ;
+    :arenaSetCode "MOM" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] .
+
+:TranquilCoveMarchOfTheMachine275 rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Tranquil Cove" ;
+    :manaValue "0"^^xsd:nonNegativeInteger ;
+    :hasCardType :Land ;
+    :hasRarity :Common ;
+    :hasColorIdentity :White ,
+                      :Blue ;
+    :isInSet :MarchOfTheMachine ;
+    :cardNumber "275"^^xsd:integer ;
+    :artist "Chris Ostrowski" ;
+    :hasLanguage :English ;
+    :producesMana :White ,
+                  :Blue ;
+    :entersTapped "true"^^xsd:boolean ;
+    :printedText """This land enters tapped.
+When this land enters, you gain 1 life.
+{T}: Add {W} or {U}."""@en ;
+    :oracleText """This land enters tapped.
+When this land enters, you gain 1 life.
+{T}: Add {W} or {U}."""@en ;
+    :flavorText """The sky darkened and the seas turned to oil as the gods of Theros themselves fell to New Phyrexia."""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=607346"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/mom/275/tranquil-cove"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "84582"^^xsd:positiveInteger ;
+    :arenaName "Tranquil Cove" ;
     :arenaSetCode "MOM" ;
     :hasLegality
       [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,

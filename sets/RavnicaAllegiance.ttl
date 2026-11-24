@@ -39,8 +39,9 @@
     rdfs:label "Magic Card Collection Individuals – Ravnica Allegiance"@en ;
     rdfs:comment """An instance graph describing the card individuals of a
 personal Magic: The Gathering card collection that were printed in the set
-Ravnica Allegiance (RNA). One Card individual is defined per collected
-printing, carrying its characteristics, the platforms it is available on
+Ravnica Allegiance (RNA). One Card individual is defined per printing
+collected in paper or on MTG Arena, carrying its characteristics, the
+platforms it is available on
 (paper, MTG Arena, Magic Online) with its MTG Arena identity, its legality
 in the paper and MTG Arena formats, and official rulings. Card data was
 sourced from Gatherer and Scryfall. This file imports MagicCardsOntology to
@@ -153,3 +154,54 @@ legality definitions."""@en .
       [ rdf:type :Ruling ;
         :rulingDate "2019-01-25"^^xsd:date ;
         :rulingText """If a creature you control has indestructible, it isn't destroyed this way and you won't gain life for it. If a creature you control is destroyed but put into a zone other than a graveyard, you will gain life for it."""@en ] .
+
+:AzoriusGuildgateRavnicaAllegiance244 rdf:type owl:NamedIndividual ,
+                  :Card ;
+    :cardName "Azorius Guildgate" ;
+    :manaValue "0"^^xsd:nonNegativeInteger ;
+    :hasCardType :Land ;
+    :hasSubType :Gate ;
+    :hasRarity :Common ;
+    :hasColorIdentity :White ,
+                      :Blue ;
+    :isInSet :RavnicaAllegiance ;
+    :cardNumber "244"^^xsd:integer ;
+    :artist "Titus Lunter" ;
+    :hasLanguage :English ;
+    :producesMana :White ,
+                  :Blue ;
+    :entersTapped "true"^^xsd:boolean ;
+    :printedText """This land enters tapped.
+{T}: Add {W} or {U}."""@en ;
+    :oracleText """This land enters tapped.
+{T}: Add {W} or {U}."""@en ;
+    :flavorText """"If you want to know what's really going on in any building, you don't walk in the front door. You stake out the back."
+—Lavinia"""@en ;
+    :gathererUrl "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=457388"^^xsd:anyURI ;
+    :scryfallUrl "https://scryfall.com/card/rna/244/azorius-guildgate"^^xsd:anyURI ;
+    :isAvailableOn :PaperMagic ,
+                   :MTGArena ,
+                   :MagicOnline ;
+    :arenaId "69392"^^xsd:positiveInteger ;
+    :arenaName "Azorius Guildgate" ;
+    :arenaSetCode "RNA" ;
+    :hasLegality
+      [ rdf:type :LegalityMapping ; :inFormat :Commander ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Standard ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Modern ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Legacy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Vintage ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pioneer ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Pauper ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Historic ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Timeless ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Alchemy ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :Brawl ; :hasLegalityStatus :Legal ] ,
+      [ rdf:type :LegalityMapping ; :inFormat :StandardBrawl ; :hasLegalityStatus :Legal ] ;
+    :hasRuling
+      [ rdf:type :Ruling ;
+        :rulingDate "2013-04-15"^^xsd:date ;
+        :rulingText """Gate is not a basic land type."""@en ] ,
+      [ rdf:type :Ruling ;
+        :rulingDate "2013-04-15"^^xsd:date ;
+        :rulingText """The subtype Gate has no special rules significance, but other spells and abilities may refer to it."""@en ] .

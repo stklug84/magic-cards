@@ -149,7 +149,7 @@ graphs. Keys are whitelisted in scripts/mtgcards/behaviors.py
       [ rdf:type :BehaviorHook ; :behaviorKey "removal_exile" ; :behaviorValue "true" ] ,
       [ rdf:type :BehaviorHook ; :behaviorKey "removal_scope" ; :behaviorValue "\"creature\"" ] .
 
-:DoublingSeason
+:DoublingSeasonCommanderMasters283
     :threatWeight "9"^^xsd:nonNegativeInteger ;
     :hasBehaviorHook
       [ rdf:type :BehaviorHook ; :behaviorKey "doubler" ; :behaviorValue "2" ] .
@@ -159,7 +159,7 @@ graphs. Keys are whitelisted in scripts/mtgcards/behaviors.py
     :hasBehaviorHook
       [ rdf:type :BehaviorHook ; :behaviorKey "esix" ; :behaviorValue "true" ] .
 
-:EvolutionSage
+:EvolutionSageLorwynEclipsedCommander105
     :threatWeight "5"^^xsd:nonNegativeInteger ;
     :hasBehaviorHook
       [ rdf:type :BehaviorHook ; :behaviorKey "proliferate" ; :behaviorValue "1" ] .
@@ -257,7 +257,7 @@ graphs. Keys are whitelisted in scripts/mtgcards/behaviors.py
       [ rdf:type :BehaviorHook ; :behaviorKey "death_tokens" ; :behaviorValue "[1, 3, 3, false]" ] ,
       [ rdf:type :BehaviorHook ; :behaviorKey "reef" ; :behaviorValue "true" ] .
 
-:RestorationAngel
+:RestorationAngelBloomburrowCommander150
     :hasBehaviorHook
       [ rdf:type :BehaviorHook ; :behaviorKey "blink_on_etb" ; :behaviorValue "true" ] .
 
