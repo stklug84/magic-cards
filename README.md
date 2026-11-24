@@ -301,7 +301,7 @@ contains `MagicCardsOntology.ttl`, `MagicCardIndividuals.ttl`,
 
 ```sh
 curl -fsSL -o graph.tar.gz \
-  https://github.com/stklug84/magic-cards/releases/download/graph-2026-08-09/magic-cards-graph-2026-08-09.tar.gz
+  https://github.com/stklug84/magic-cards/releases/download/graph-2026-11-24/magic-cards-graph-2026-11-24.tar.gz
 mkdir -p .graph && tar xzf graph.tar.gz -C .graph --strip-components=1
 export MTG_GRAPH_ROOT="$PWD/.graph"
 ```
@@ -313,11 +313,11 @@ annotation is validated against it at startup:
 
 ```sh
 target=aarch64-apple-darwin   # or x86_64-apple-darwin, x86_64-unknown-linux-gnu, aarch64-unknown-linux-gnu
-curl -fsSLO "https://github.com/stklug84/magic-cards/releases/download/v0.3.1/mtg-simulate-v0.3.1-${target}.tar.gz"
-curl -fsSLO "https://github.com/stklug84/magic-cards/releases/download/v0.3.1/mtg-simulate-v0.3.1-${target}.tar.gz.sha256"
-shasum -a 256 -c "mtg-simulate-v0.3.1-${target}.tar.gz.sha256"
-tar xzf "mtg-simulate-v0.3.1-${target}.tar.gz"
-"./mtg-simulate-v0.3.1-${target}/mtg-simulate" deck1.txt deck2.txt --offline --games 20
+curl -fsSLO "https://github.com/stklug84/magic-cards/releases/download/v0.4.0/mtg-simulate-v0.4.0-${target}.tar.gz"
+curl -fsSLO "https://github.com/stklug84/magic-cards/releases/download/v0.4.0/mtg-simulate-v0.4.0-${target}.tar.gz.sha256"
+shasum -a 256 -c "mtg-simulate-v0.4.0-${target}.tar.gz.sha256"
+tar xzf "mtg-simulate-v0.4.0-${target}.tar.gz"
+"./mtg-simulate-v0.4.0-${target}/mtg-simulate" deck1.txt deck2.txt --offline --games 20
 ```
 
 ### The contract: `GRAPH-MANIFEST.json`
@@ -325,12 +325,12 @@ tar xzf "mtg-simulate-v0.3.1-${target}.tar.gz"
 ```json
 {
   "graph_schema": 1,
-  "graph_version": "2026-08-09",
+  "graph_version": "2026-11-24",
   "ontology_iri": "urn:stklug84:MagicCardsOntology:2026-02-27#",
-  "cr_version": "20260619",
-  "requires_tools": ">=0.2.0",
-  "sets": 81,
-  "card_individuals": 1393
+  "cr_version": "20260925",
+  "requires_tools": ">=0.4.0",
+  "sets": 164,
+  "card_individuals": 3510
 }
 ```
 
