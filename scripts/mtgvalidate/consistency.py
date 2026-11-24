@@ -59,7 +59,9 @@ COMMANDER_DECK_SIZE = 100
 #: file declaring the TBox; required for the undefined-terms check
 ONTOLOGY_FILE = "MagicCardsOntology.ttl"
 
-#: the local inventory inputs the collection graphs are generated from
+#: the local inventory inputs the collection graphs are generated from (the
+#: wheel ships without mtgarena, so the snapshot's name is restated here;
+#: mtgarena/tests/test_contract.py keeps it equal to the tool's)
 COLLECTION_CSV = "collection.csv"
 ARENA_JSON = "arena-collection.json"
 

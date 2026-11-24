@@ -40,7 +40,9 @@ rust/target/
 *.tsv
 
 # ignore the MTG Arena collection snapshot — like collection.csv a local,
-# untracked generator input (a copy of magic-decks' arena/collection.json)
+# untracked generator input, written by scripts/arena_collection.py pull
+# (its .moxfield.csv and .txt fall under the *.csv and *.txt rules; only
+# arena-picks.json, the printings picked by hand, is tracked)
 /arena-collection.json
 
 # ignore plain text files — this rule is load-bearing: it is what keeps

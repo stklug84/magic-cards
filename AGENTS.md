@@ -29,6 +29,7 @@ any manual change.
 | `MagicCardSynergies.ttl` | Card-to-card synergy assertions |
 | `MagicSimulationAnnotations.ttl` | Behavior hooks and AI threat weights (house opinion, not card facts) |
 | `queries/**/*.rq` | The SPARQL catalog |
+| `arena-picks.json` | MTG Arena printings picked by hand where no lookup decides (read by `scripts/arena_collection.py`) |
 
 To change a generated file, change the generator and regenerate.
 
@@ -36,9 +37,11 @@ To change a generated file, change the generator and regenerate.
 
 - **Never commit `collection.csv` or `arena-collection.json`.** They are the
   private inventories and the generator's inputs: the paper collection's
-  Moxfield export, and the MTG Arena collection snapshot (a copy of
-  magic-decks' `arena/collection.json`). `.gitignore`'s `*.csv` rule and its
-  `/arena-collection.json` line guard them.
+  Moxfield export, and the MTG Arena collection that
+  `scripts/arena_collection.py pull` reads from Untapped.gg. `.gitignore`'s
+  `*.csv` rule and its `/arena-collection.json` line guard them; the `*.csv`
+  and `*.txt` rules also keep the tool's `arena-collection.moxfield.csv` and
+  `arena-collection.txt` out. Only `arena-picks.json` is tracked.
 - **Never commit `MagicCompRules-*.txt`.** Wizards' Comprehensive Rules are
   not redistributable. `.gitignore`'s `*.txt` rule is load-bearing — it is
   also why the licence file is the extensionless `LICENSE`, never
@@ -54,6 +57,7 @@ Order matters. `build_vocab.py` reads the ontology, so schema changes come
 first; `collection` reads `sets/`, so it comes after `generate`.
 
 ```sh
+uv run scripts/arena_collection.py pull             # Untapped.gg -> arena-collection.json (Chrome; when Arena changed)
 python3 scripts/build_vocab.py                      # ontology -> vocabulary extract
 python3 scripts/generate_individuals.py fetch       # Scryfall -> cache (network)
 python3 scripts/generate_individuals.py generate    # -> sets/*.ttl, imports.json
@@ -66,7 +70,8 @@ missing: `generate` rewrites every set file, so a run without the Arena
 snapshot would drop the individuals only the MTG Arena collection holds.
 `collection` resolves individuals from the existing `sets/*.ttl`, so it can
 run standalone after an inventory-only change. There is no CI
-regeneration: the inventories never leave the machine.
+regeneration: the inventories never leave the machine, and `pull` needs a
+signed-in Chrome.
 
 ## Validation
 
@@ -77,6 +82,7 @@ python3 scripts/validate_ttl.py         # syntax, prefixes, one owl:Ontology, im
 python3 scripts/validate_sparql.py      # query syntax, mc: prefix, every mc: term exists
 python3 scripts/check_consistency.py    # cross-file graph invariants
 cd scripts && python3 -m unittest discover -s mtgcards/tests -t .   # generator + bundle builder
+cd scripts && python3 -m unittest discover -s mtgarena/tests -t .   # MTG Arena collection tool (offline)
 ```
 
 The simulator's gates run from `rust/` (toolchain pinned by
@@ -149,7 +155,12 @@ fails when they differ, so a new key lands in both in one commit.
 No ignore baseline, no per-file-ignores — new suppressions only per line
 (`# noqa: <RULE>` / `# nosec <ID>`) with a justification comment. The
 packaged `mtgcards` must stay import-clean without rdflib; only
-`mtgvalidate` may use it, behind the `validate` extra.
+`mtgvalidate` may use it, behind the `validate` extra. `mtgarena` (the MTG
+Arena collection tool) is repository tooling, not part of the wheel, and
+imports Playwright only inside the live commands, so its offline tests and
+the generator run without it. The generator and the validator restate its
+snapshot's file name: `scripts/mtgarena/tests/test_contract.py` keeps the
+three in step.
 
 ## Rust rules
 

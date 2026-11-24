@@ -200,8 +200,10 @@ jobs:
           set -euo pipefail
           python3 scripts/check_consistency.py
 
-  # The Python graph tooling: the generator's pure helpers and the
-  # graph-bundle builder (stdlib unittest, no rdflib needed).
+  # The Python graph tooling: the generator's pure helpers, the
+  # graph-bundle builder and the MTG Arena collection tool (stdlib
+  # unittest, no rdflib and no Playwright needed: the arena tests are
+  # offline, on synthetic card data).
   tooling-tests:
     name: Graph tooling tests
     runs-on: ubuntu-latest
@@ -219,6 +221,12 @@ jobs:
         run: |
           set -euo pipefail
           python3 -m unittest discover -s mtgcards/tests -t .
+
+      - name: MTG Arena collection tool tests (offline)
+        working-directory: scripts
+        run: |
+          set -euo pipefail
+          python3 -m unittest discover -s mtgarena/tests -t .
 
   # The simulator (the Rust workspace): unit, integration, property and
   # snapshot tests on the hosts of the release targets. The Comprehensive

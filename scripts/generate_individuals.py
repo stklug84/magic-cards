@@ -3,9 +3,8 @@
 
 Inputs: two local, untracked inventories - collection.csv, the paper
 collection's Moxfield export, and arena-collection.json, the MTG Arena
-collection as stklug84/magic-decks' tools/arena/collection.py pulls it from
-Untapped.gg (arena/collection.json there). A card individual is generated
-for every printing either collection holds.
+collection as scripts/arena_collection.py pulls it from Untapped.gg. A card
+individual is generated for every printing either collection holds.
 
 Pipeline:
   1. fetch    - read both inventories, resolve every printing via the Scryfall
@@ -65,7 +64,9 @@ CACHE.mkdir(exist_ok=True)
 VOCAB_JSON = TMP / "onto_vocab.json"
 EXISTING_JSON = TMP / "existing_cards.json"
 IMPORTS_JSON = TMP / "imports.json"
-#: the MTG Arena collection snapshot (magic-decks' arena/collection.json)
+#: the MTG Arena collection snapshot scripts/arena_collection.py writes
+#: (restated, not imported: magic-decks imports this script on its own;
+#: mtgarena/tests/test_contract.py keeps the two names equal)
 ARENA_JSON_NAME = "arena-collection.json"
 API = "https://api.scryfall.com"
 UA = {
@@ -330,9 +331,9 @@ def arena_collection_path() -> Path:
     if not path.exists():
         msg = (
             f"{ARENA_JSON_NAME} not found - it is a local, untracked input "
-            "(not distributed with the repository): copy the MTG Arena "
-            "collection snapshot, stklug84/magic-decks' arena/collection.json, "
-            "to the repo root before regenerating."
+            "(not distributed with the repository): pull the MTG Arena "
+            "collection with `uv run scripts/arena_collection.py pull` before "
+            "regenerating."
         )
         raise SystemExit(msg)
     return path

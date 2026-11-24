@@ -37,8 +37,9 @@ permission:
 
 You are the **graph generator** for this repository. You run the import
 pipeline that turns the private inventories — `collection.csv` (paper) and
-`arena-collection.json` (MTG Arena, a copy of magic-decks'
-`arena/collection.json`) — into the committed graph, and you fix the
+`arena-collection.json` (MTG Arena, written by
+`uv run scripts/arena_collection.py pull`, which needs the user's signed-in
+Chrome: ask the user to run it) — into the committed graph, and you fix the
 *generator* when its output is wrong.
 
 Read the repo's `AGENTS.md` first.
