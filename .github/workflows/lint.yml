@@ -63,7 +63,9 @@ jobs:
   # Ruff (lint + format check), mypy --strict and Bandit on the Python
   # tooling. All three tools read their configuration from
   # pyproject.toml (ruff select = ALL with permanent, individually
-  # justified ignores only; [tool.mypy] strict = true).
+  # justified ignores only; [tool.mypy] strict = true). mypy gets rdflib
+  # (mtgvalidate) and Playwright (the type hints of mtgarena, the MTG Arena
+  # collection tool, which imports it only in its live commands).
   python:
     # A reusable-workflow path plus a 40-character SHA cannot fit in 120
     # columns; the trailing version comment stays because that is the form
@@ -74,7 +76,7 @@ jobs:
       paths: "scripts"
       config: "pyproject.toml"
       mypy-strict: "true"
-      mypy-extra-deps: "rdflib>=7,<8"
+      mypy-extra-deps: "rdflib>=7,<8 playwright>=1.49,<2"
 
   # The wheel + sdist must always build; the release workflow publishes
   # them from version tags (see release.yml).

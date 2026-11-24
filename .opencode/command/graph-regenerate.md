@@ -3,9 +3,9 @@ description: Re-run the import pipeline from collection.csv and arena-collection
 ---
 
 Regenerate the knowledge graph from the local inventories: `collection.csv`
-(paper) and `arena-collection.json` (MTG Arena, a copy of magic-decks'
-`arena/collection.json`). Both must be present; the generator stops
-otherwise.
+(paper) and `arena-collection.json` (MTG Arena, written by
+`uv run scripts/arena_collection.py pull`). Both must be present; the
+generator stops otherwise.
 
 Delegate via `task` to subagent `graph-generator`, then to
 `graph-validator` once regeneration completes.

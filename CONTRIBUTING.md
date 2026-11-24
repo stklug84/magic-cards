@@ -17,9 +17,10 @@ to be reusable — contributions to either are welcome.
   way.
 - Keep gitignored data files out of PRs; the committed TTL files are the
   source of truth. The inventories (`collection.csv`, the paper
-  collection, and `arena-collection.json`, the MTG Arena collection) are
-  local, untracked generator inputs containing private data — never commit
-  them.
+  collection, and `arena-collection.json`, the MTG Arena collection that
+  `scripts/arena_collection.py` pulls, with its `.moxfield.csv` and `.txt`)
+  are local, untracked generator inputs containing private data — never
+  commit them. `arena-picks.json` holds no private data and is tracked.
 
 ## Repository layout
 
@@ -30,6 +31,7 @@ to be reusable — contributions to either are welcome.
 | `rust/` | The simulator: a Cargo workspace (`pycompat`, `mtgcards`, `mtgrules`, `mtgviz`, `mtgsim` and the `#[rule]` macro crates) |
 | `scripts/mtgcards/` | The graph-bundle contract (`graph.py`) and the behavior-key whitelist (`behaviors.py`) shared with the simulator |
 | `scripts/mtgvalidate/` | Graph/query validators, root-parameterized (needs rdflib; the `validate` extra) |
+| `scripts/mtgarena/` | The MTG Arena collection tool behind `scripts/arena_collection.py` (repository tooling, not in the wheel) |
 | `scripts/*.py` | Entry points: validator wrappers, generators, graph-bundle builder |
 | `sets/` | Per-set TTL slices (generated card individuals) |
 
@@ -121,12 +123,14 @@ graph because `xsd:date` is outside the OWL 2 datatype map (plain
 `reason` is unaffected). Strip `^^xsd:date` literals into strings on a
 scratch copy first, then explain that copy.
 
-Graph tooling tests (the generator's helpers and the bundle builder;
-must stay green after every change to `scripts/`):
+Graph tooling tests (the generator's helpers, the bundle builder and the
+MTG Arena collection tool, offline with synthetic data; must stay green
+after every change to `scripts/`):
 
 ```sh
 cd scripts
 python3 -m unittest discover -s mtgcards/tests -t .
+python3 -m unittest discover -s mtgarena/tests -t .
 ```
 
 Python strictness: ruff runs with `select = ["ALL"]` and only permanent,
