@@ -5,6 +5,7 @@ from __future__ import annotations
 import tempfile
 import unittest
 from pathlib import Path
+from unittest import mock
 
 from mtgarena import render
 from mtgarena.tests.fixtures import PAYLOAD, make_snapshot, owned
@@ -161,9 +162,23 @@ class DerivedFileTests(unittest.TestCase):
             self.assertEqual(render.write_outputs(out, snapshot), [])
             self.assertEqual(render.load_snapshot(out / render.SNAPSHOT_NAME), snapshot)
             self.assertFalse(list(out.glob("*.tmp")))
+            self.assertEqual((out / render.SNAPSHOT_NAME).stat().st_mode & 0o777, 0o600)
             (out / render.SNAPSHOT_NAME).write_text("{not json", encoding="utf-8")
             with self.assertRaises(SystemExit):
                 render.load_snapshot(out / render.SNAPSHOT_NAME)
+
+    def test_a_failed_write_leaves_no_temporary_copy(self) -> None:
+        """An interrupted write keeps the old file and removes its temporary copy."""
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / render.SNAPSHOT_NAME
+            path.write_text("old\n", encoding="utf-8")
+            with (
+                mock.patch.object(Path, "replace", side_effect=OSError("disk full")),
+                self.assertRaises(OSError),
+            ):
+                render.write_atomic(path, "new\n")
+            self.assertEqual(path.read_text(encoding="utf-8"), "old\n")
+            self.assertEqual(sorted(p.name for p in Path(tmp).iterdir()), [path.name])
 
 
 class ChangeTests(unittest.TestCase):

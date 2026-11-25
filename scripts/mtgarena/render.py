@@ -21,12 +21,13 @@ from __future__ import annotations
 import csv
 import io
 import json
+import os
 import re
+import tempfile
+from pathlib import Path
 from typing import TYPE_CHECKING, Any
 
 if TYPE_CHECKING:
-    from pathlib import Path
-
     from mtgarena.catalog import Printing
 
 #: a collection snapshot: ``source``, ``totals`` and the ``cards`` list
@@ -361,11 +362,22 @@ def shrink(new: Snapshot, old: Snapshot | None) -> tuple[int, int] | None:
 
 
 def write_atomic(path: Path, text: str) -> None:
-    """Write *text* to *path* through a temporary file in the same directory."""
+    """Write *text* to *path* through a temporary file in the same directory.
+
+    The temporary file is created owner-only (the collection is private) and
+    removed when the write fails, so an interrupted run leaves no copy behind.
+    """
     path.parent.mkdir(parents=True, exist_ok=True)
-    tmp = path.with_suffix(path.suffix + ".tmp")
-    tmp.write_text(text, encoding="utf-8")
-    tmp.replace(path)
+    handle, name = tempfile.mkstemp(
+        dir=path.parent, prefix=f".{path.name}.", suffix=".tmp"
+    )
+    tmp = Path(name)
+    try:
+        with os.fdopen(handle, "w", encoding="utf-8") as stream:
+            stream.write(text)
+        tmp.replace(path)
+    finally:
+        tmp.unlink(missing_ok=True)
 
 
 def write_outputs(

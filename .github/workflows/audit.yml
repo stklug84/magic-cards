@@ -1,0 +1,67 @@
+---
+# title: Scheduled audit workflow
+# authors:
+#   - Steffen Klug <45033201+stklug84@users.noreply.github.com>
+# date: 2026-11-25
+# keywords: [infrastructure, security]
+# comment: |
+#   Checks the Rust workspace's locked dependencies against the RustSec
+#   advisory database every week. lint.yml runs the same cargo-deny check
+#   on pull requests only, so an advisory published against an unchanged
+#   Cargo.lock would otherwise surface with the next pull request at the
+#   earliest. Bandit is not repeated here: its version is pinned and the
+#   code does not change between pull requests, so a scheduled run could
+#   not report anything new.
+#
+#   The schedule has a workflow of its own because GitHub disables a
+#   scheduled workflow, with every trigger it has, after 60 days without
+#   repository activity: on lint.yml that would silence the pull-request
+#   checks as well.
+# ---
+name: Audit
+
+on:
+  schedule:
+    - cron: "17 6 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  advisories:
+    name: cargo-deny advisories
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7
+        with:
+          persist-credentials: false
+
+      - name: Install the pinned toolchain
+        working-directory: rust
+        run: |
+          set -euo pipefail
+          rustup toolchain install
+          rustup show active-toolchain
+
+      # The release and checksum lint.yml's rust-lint job installs: bump
+      # both together.
+      - name: Install cargo-deny
+        env:
+          CARGO_DENY_VERSION: "0.20.2"
+          CARGO_DENY_SHA256: "9f12ed4c49936e09b48bf862b595cde2fe64fcbd9d74dfacac6131ca824c8d5f"
+        run: |
+          set -euo pipefail
+          asset="cargo-deny-${CARGO_DENY_VERSION}-x86_64-unknown-linux-musl"
+          curl -fsSL -o cargo-deny.tar.gz \
+            "https://github.com/EmbarkStudios/cargo-deny/releases/download/${CARGO_DENY_VERSION}/${asset}.tar.gz"
+          echo "${CARGO_DENY_SHA256}  cargo-deny.tar.gz" | sha256sum -c -
+          tar xzf cargo-deny.tar.gz --strip-components=1 -C "$HOME/.cargo/bin" "${asset}/cargo-deny"
+          cargo deny --version
+
+      # Advisories only: the licence, ban and source checks cannot change
+      # without a change to the lock file, which lint.yml checks.
+      - name: cargo-deny advisories
+        working-directory: rust
+        run: cargo deny check advisories

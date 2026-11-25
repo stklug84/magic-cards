@@ -10,7 +10,7 @@ requests itself.  The session cookie never leaves Chrome; the account ids are
 cached outside the repository.
 
     uv run scripts/arena_collection.py login           # once: sign in, then Cmd+Q
-    uv run scripts/arena_collection.py probe           # signed in? field names only
+    uv run scripts/arena_collection.py probe           # signed in? response shape
     uv run scripts/arena_collection.py pull --dry-run  # fetch, resolve, show changes
     uv run scripts/arena_collection.py pull            # write the three files
     uv run scripts/arena_collection.py export          # offline: rewrite CSV and TXT
@@ -200,10 +200,11 @@ def cmd_login(args: argparse.Namespace) -> int:
     say(
         "A separate Chrome window opened on the tool's own profile",
         f"({cfg.profile_dir}). Sign in to Untapped.gg there (the Sign-in button top",
-        "right; Google / Discord / Twitch sign-in work in this window). Once your",
-        "avatar shows, QUIT THAT CHROME WITH Cmd+Q -- Chrome only saves the login on",
-        "a clean quit (not when the window is closed by this tool). Then run `probe`",
-        "or `pull`.",
+        "right; Google / Discord / Twitch sign-in work in this window, but then sign",
+        "out of that provider there once Untapped.gg shows your avatar: the profile",
+        "should hold the Untapped.gg session only). QUIT THAT CHROME WITH Cmd+Q --",
+        "Chrome only saves the login on a clean quit (not when the window is closed",
+        "by this tool). Then run `probe` or `pull`.",
     )
     if args.wait:
         say("waiting for that Chrome to quit ...")
@@ -241,7 +242,7 @@ def _fetch(
 
 
 def cmd_probe(args: argparse.Namespace) -> int:
-    """Check the login and print the collection response's field names."""
+    """Check the login; print the Arena account, the response's shape, card counts."""
     cfg = chrome_config(args)
     with chrome_session(cfg, untapped.ORIGIN) as page:
         account, source = _account_on_page(page, args, cfg)
@@ -611,7 +612,7 @@ def _parser() -> argparse.ArgumentParser:
 
     p_probe = sub.add_parser(
         "probe",
-        help="check the login and print the response's field names (no values)",
+        help="check the login: the Arena account, the response's shape and card counts",
     )
     _add_account_args(p_probe)
     p_probe.set_defaults(func=cmd_probe)

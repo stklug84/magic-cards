@@ -3,10 +3,13 @@
 from __future__ import annotations
 
 import gzip
+import http.client
 import io
 import json
 import tempfile
 import unittest
+import urllib.error
+import urllib.request
 from dataclasses import asdict
 from pathlib import Path
 
@@ -206,6 +209,31 @@ class ParsingTests(unittest.TestCase):
         self.assertFalse(catalog.names_agree("Jace", jace))
         self.assertFalse(catalog.names_agree("", "Anything"))
         self.assertFalse(catalog.names_agree("Anything", None))
+
+
+class DownloadTests(unittest.TestCase):
+    """Downloads stay on https, redirects included."""
+
+    def test_only_https_urls_are_fetched(self) -> None:
+        """A plain http URL is refused before any request is made."""
+        with tempfile.TemporaryDirectory() as tmp, self.assertRaises(SystemExit):
+            catalog.cached_download("http://example.org/x.json", Path(tmp) / "x.json")
+
+    def test_redirects_stay_on_https(self) -> None:
+        """A redirect to http is refused; one to another https URL is followed."""
+        handler = catalog.HttpsOnlyRedirect()
+        request = urllib.request.Request("https://api.scryfall.com/bulk-data")
+        headers = http.client.HTTPMessage()
+        with self.assertRaises(urllib.error.URLError):
+            handler.redirect_request(
+                request, io.BytesIO(), 302, "Found", headers, "http://evil.example/x"
+            )
+        followed = handler.redirect_request(
+            request, io.BytesIO(), 302, "Found", headers, "https://data.scryfall.io/x"
+        )
+        if followed is None:
+            self.fail("a redirect to https is followed")
+        self.assertEqual(followed.full_url, "https://data.scryfall.io/x")
 
 
 class ResolutionTests(unittest.TestCase):

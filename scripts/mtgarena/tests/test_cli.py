@@ -49,13 +49,14 @@ class DefaultsTests(unittest.TestCase):
         self.assertEqual(cli.PICKS_NAME, "arena-picks.json")
 
     def test_only_the_picks_are_tracked(self) -> None:
-        """The snapshot, the CSV and the TXT are ignored; the picks are not."""
+        """The outputs and temporary files are ignored anywhere; the picks are not."""
         root = Path(__file__).resolve().parents[3]
         ignore = (root / ".gitignore").read_text(encoding="utf-8").splitlines()
-        self.assertIn(f"/{render.SNAPSHOT_NAME}", ignore)
-        self.assertIn("*.csv", ignore)  # arena-collection.moxfield.csv
-        self.assertIn("*.txt", ignore)  # arena-collection.txt
-        self.assertNotIn(f"/{cli.PICKS_NAME}", ignore)
+        self.assertIn("arena-collection.*", ignore)  # the JSON, the CSV and the TXT
+        self.assertIn("*.tmp", ignore)  # an interrupted write's temporary copy
+        for name in (render.SNAPSHOT_NAME, render.CSV_NAME, render.TXT_NAME):
+            self.assertTrue(name.startswith("arena-collection."))
+        self.assertFalse(cli.PICKS_NAME.startswith("arena-collection."))
 
 
 class AccountCacheTests(unittest.TestCase):

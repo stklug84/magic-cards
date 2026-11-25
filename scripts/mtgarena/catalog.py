@@ -54,10 +54,11 @@ import urllib.request
 from dataclasses import asdict, dataclass, field
 from email.utils import formatdate, parsedate_to_datetime
 from http import HTTPStatus
-from typing import TYPE_CHECKING, Any
+from typing import IO, TYPE_CHECKING, Any
 
 if TYPE_CHECKING:
     from collections.abc import Callable, Iterable, Iterator
+    from http.client import HTTPMessage
     from pathlib import Path
 
     #: where progress and notes go (print-like, one line per call)
@@ -627,6 +628,33 @@ def _age(path: Path) -> float:
     return time.time() - path.stat().st_mtime
 
 
+class HttpsOnlyRedirect(urllib.request.HTTPRedirectHandler):
+    """Follow a redirect only to another https URL.
+
+    urllib follows redirects on its own, from https to plain http too, so the
+    scheme check of the first URL alone would not keep a download on https.
+    """
+
+    def redirect_request(  # noqa: PLR0913, PLR0917 - the signature urllib calls
+        self,
+        req: urllib.request.Request,
+        fp: IO[bytes],
+        code: int,
+        msg: str,
+        headers: HTTPMessage,
+        newurl: str,
+    ) -> urllib.request.Request | None:
+        """Refuse a redirect to anything but https; else redirect as urllib does."""
+        if not newurl.startswith("https://"):
+            reason = f"refused a redirect to a non-https URL: {newurl}"
+            raise urllib.error.URLError(reason)
+        return super().redirect_request(req, fp, code, msg, headers, newurl)
+
+
+#: opens https requests and follows https redirects only
+_OPENER = urllib.request.build_opener(HttpsOnlyRedirect)
+
+
 def _https_request(url: str, headers: dict[str, str]) -> urllib.request.Request:
     """Build a request for an https URL only.
 
@@ -668,7 +696,7 @@ def cached_download(
     headers, meta = _conditional_headers(dest)
     request = _https_request(url, headers)
     try:
-        with urllib.request.urlopen(request, timeout=DOWNLOAD_TIMEOUT) as response:  # noqa: S310 - https enforced by _https_request  # nosec B310
+        with _OPENER.open(request, timeout=DOWNLOAD_TIMEOUT) as response:
             data = response.read()
             new_meta = {
                 "url": url,
@@ -722,7 +750,7 @@ def load_arena_cards(
 def _stream_scryfall(uri: str) -> Iterator[str]:
     """Yield the bulk file's lines, without holding ~500 MB of JSON in memory."""
     request = _https_request(uri, HEADERS)
-    with urllib.request.urlopen(request, timeout=BULK_TIMEOUT) as response:  # noqa: S310 - https enforced by _https_request  # nosec B310
+    with _OPENER.open(request, timeout=BULK_TIMEOUT) as response:
         gzipped = (
             uri.endswith(".gz") or response.headers.get("Content-Encoding") == "gzip"
         )

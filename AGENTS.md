@@ -39,9 +39,10 @@ To change a generated file, change the generator and regenerate.
   private inventories and the generator's inputs: the paper collection's
   Moxfield export, and the MTG Arena collection that
   `scripts/arena_collection.py pull` reads from Untapped.gg. `.gitignore`'s
-  `*.csv` rule and its `/arena-collection.json` line guard them; the `*.csv`
-  and `*.txt` rules also keep the tool's `arena-collection.moxfield.csv` and
-  `arena-collection.txt` out. Only `arena-picks.json` is tracked.
+  `*.csv` and `arena-collection.*` rules guard them; the latter also keeps
+  the tool's `arena-collection.moxfield.csv` and `arena-collection.txt` out,
+  in any directory, and `*.tmp` an interrupted write's temporary copy. Only
+  `arena-picks.json` is tracked.
 - **Never commit `MagicCompRules-*.txt`.** Wizards' Comprehensive Rules are
   not redistributable. `.gitignore`'s `*.txt` rule is load-bearing — it is
   also why the licence file is the extensionless `LICENSE`, never
