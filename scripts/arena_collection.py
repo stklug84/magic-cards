@@ -1,7 +1,7 @@
 #!/usr/bin/env -S uv run --script
 # /// script
 # requires-python = ">=3.12"
-# dependencies = ["playwright>=1.49,<2"]
+# dependencies = ["playwright>=1.55.1,<2"]
 # ///
 """Pull the MTG Arena collection from Untapped.gg into arena-collection.json.
 

@@ -125,8 +125,12 @@ jobs:
     env:
       MTG_REQUIRE_CR: "1"
     steps:
+      # The job's token is for the upload step alone (its GH_TOKEN); it
+      # stays out of .git/config while build scripts and the smoke tests run.
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7
+        with:
+          persist-credentials: false
 
       - name: Download Comprehensive Rules
         uses: stklug84/actions/mtg/fetch-comprehensive-rules@c6c3adbc4140cbf096c0c61c30b4fa96ff82b8dd  # v2.19.0
@@ -140,18 +144,9 @@ jobs:
           rustup toolchain install
           rustup show active-toolchain
 
-      - name: Cache cargo registry and build outputs
-        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9  # v6.1.0
-        with:
-          path: |
-            ~/.cargo/registry/index
-            ~/.cargo/registry/cache
-            ~/.cargo/git/db
-            rust/target
-          key: cargo-release-${{ matrix.target }}-${{ hashFiles('rust/Cargo.lock', 'rust/rust-toolchain.toml') }}
-          restore-keys: |
-            cargo-release-${{ matrix.target }}-
-
+      # No cargo cache: a cache saved by a tag's run is restorable by runs
+      # of that tag only, so a release would write caches no later run reads
+      # and evict the ones pull requests use from the shared quota.
       - name: Build the binaries
         working-directory: rust
         run: cargo build --release --locked -p mtgsim
@@ -204,6 +199,7 @@ jobs:
       - name: Attach the archive to the draft release
         env:
           GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
           RELEASE_TAG: ${{ github.ref_name }}
         run: |
           set -euo pipefail

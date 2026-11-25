@@ -14,13 +14,17 @@
 #                      scripts/ via the reusable stklug84/github-workflows
 #                      python-validate workflow (tool config in
 #                      pyproject.toml)
-#     - package-build: the magic-cards-tools wheel + sdist build and the
+#     - package-build: the magic-cards-tools wheel + sdist build, the
 #                      wheel installs/imports (released via release.yml)
+#                      and the version pyproject.toml and rust/Cargo.toml
+#                      share
 #     - rust-lint    : rustfmt, clippy (all + pedantic, warnings are
-#                      errors) and cargo-deny (advisories, licences,
-#                      duplicate versions, sources) on the Rust workspace
-#                      under rust/ (lint config in rust/Cargo.toml,
-#                      rust/clippy.toml and rust/deny.toml)
+#                      errors, against the committed Cargo.lock) and
+#                      cargo-deny (advisories, licences, duplicate
+#                      versions, sources) on the Rust workspace under
+#                      rust/ (lint config in rust/Cargo.toml,
+#                      rust/clippy.toml and rust/deny.toml); audit.yml
+#                      repeats the advisory check weekly
 # ---
 name: Lint
 
@@ -76,7 +80,7 @@ jobs:
       paths: "scripts"
       config: "pyproject.toml"
       mypy-strict: "true"
-      mypy-extra-deps: "rdflib>=7,<8 playwright>=1.49,<2"
+      mypy-extra-deps: "rdflib>=7,<8 playwright>=1.55.1,<2"
 
   # The wheel + sdist must always build; the release workflow publishes
   # them from version tags (see release.yml).
@@ -86,11 +90,33 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7
+        with:
+          persist-credentials: false
 
       - name: Set up Python
         uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0  # v7
         with:
           python-version: "3.12"
+
+      # release.yml refuses a tag that disagrees with either version;
+      # comparing the two here fails the version-bump pull request instead
+      # of the release.
+      - name: Package versions agree
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import sys
+          import tomllib
+
+          with open("pyproject.toml", "rb") as f:
+              python = tomllib.load(f)["project"]["version"]
+          with open("rust/Cargo.toml", "rb") as f:
+              rust = tomllib.load(f)["workspace"]["package"]["version"]
+          if python != rust:
+              print(f"::error::pyproject.toml has version {python}, rust/Cargo.toml {rust}")
+              sys.exit(1)
+          print(f"pyproject.toml and rust/Cargo.toml agree on version {python}")
+          PY
 
       - name: Build wheel and sdist
         run: |
@@ -146,6 +172,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7
+        with:
+          persist-credentials: false
 
       - name: Install the pinned toolchain
         working-directory: rust
@@ -171,12 +199,16 @@ jobs:
         working-directory: rust
         run: cargo fmt --all --check
 
+      # --locked: a Cargo.lock the manifests no longer match (a version
+      # bump without `cargo update --workspace`) fails here, as it would
+      # fail the release build.
       - name: clippy
         working-directory: rust
-        run: cargo clippy --workspace --all-targets --all-features -- -D warnings
+        run: cargo clippy --locked --workspace --all-targets --all-features -- -D warnings
 
       # Pinned release of cargo-deny; the checksum is the one published
       # next to the asset (cargo-deny-<v>-x86_64-unknown-linux-musl.tar.gz.sha256).
+      # audit.yml installs the same release: bump both together.
       - name: Install cargo-deny
         env:
           CARGO_DENY_VERSION: "0.20.2"

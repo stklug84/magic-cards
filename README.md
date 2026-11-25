@@ -28,7 +28,7 @@ on which part you use:
 | MTG Arena collection (`scripts/arena_collection.py`) | [`uv`](https://docs.astral.sh/uv/), Google Chrome and an Untapped.gg login (`uv run` installs Playwright from the script's inline metadata) | Pulling the MTG Arena collection the Untapped.gg Companion syncs, as the generator's second input |
 | SPARQL queries (`queries/`) | [Apache Jena](https://jena.apache.org/) (`arq`, `riot`; Java 21+) | Running the query catalog, TTL syntax validation as done in CI |
 | Released package (`magic-cards-tools`: the graph-bundle contract and the validators) | Python 3.12+ — **stdlib only**; the `validate` extra adds rdflib | Validating your own graphs against a published bundle |
-| Simulator binaries (`mtg-simulate`, `mtg-selfplay`, `mtg-cr`) | None — static release binaries for Linux and macOS (x86_64 and arm64); building from source needs the Rust toolchain pinned in [`rust/rust-toolchain.toml`](./rust/rust-toolchain.toml) | Simulating Commander matchups over the graph, tuning the AI, inspecting the Comprehensive Rules coverage |
+| Simulator binaries (`mtg-simulate`, `mtg-selfplay`, `mtg-cr`) | None — prebuilt release binaries for Linux and macOS (x86_64 and arm64); the Linux ones link glibc dynamically (v0.4.0 needs glibc 2.34 or newer, 2.39 for `mtg-simulate` on arm64); building from source needs the Rust toolchain pinned in [`rust/rust-toolchain.toml`](./rust/rust-toolchain.toml) | Simulating Commander matchups over the graph, tuning the AI, inspecting the Comprehensive Rules coverage |
 | `MagicCompRules-YYYYMMDD.txt` | Download from Wizards of the Coast; not distributed here | Referenced by ontology comments; the simulator validates its `#[rule]` annotations against it at startup |
 
 ## Repository layout
@@ -138,7 +138,7 @@ no browser of its own).
 
 ```sh
 uv run scripts/arena_collection.py login          # once: sign in to Untapped.gg in the Chrome window that opens, then quit it with Cmd+Q
-uv run scripts/arena_collection.py probe          # signed in? which Arena account; the response's field names (no values)
+uv run scripts/arena_collection.py probe          # signed in? which Arena account (name and id); the response's shape and card counts
 uv run scripts/arena_collection.py pull --dry-run # fetch, resolve the cards, show what changed; write nothing
 uv run scripts/arena_collection.py pull           # write arena-collection.json, .moxfield.csv and .txt
 uv run scripts/arena_collection.py export         # offline: rewrite the CSV and TXT from the JSON
@@ -154,6 +154,18 @@ account ids are cached in `~/.cache/mtga-collection/account.json` — nothing
 from the account is written into the repository. If Untapped.gg links
 several Arena accounts, pick one with `--player`; if the page stops
 exposing the account, pass the collection URL once with `--profile-url`.
+`probe` prints the Arena account's name and id, the scalar fields next to
+the card list (such as its sync date) and the card counts, and saves a
+record of field names and types only; keep its output out of public
+issues.
+
+The tool's profile is not Chrome's default one, so Chrome allows remote
+debugging on it: `probe` and `pull` open a DevTools port on 127.0.0.1
+while they run, and any program running as you could start Chrome on the
+profile with debugging on and read its cookies. Keep the Untapped.gg
+session the only one in it: if you sign in through Google, Discord or
+Twitch, sign out of that provider in the same window once Untapped.gg
+shows your avatar.
 
 Each owned Arena card id (`grpid`) is resolved against Untapped's public
 dump of Arena's card database and Scryfall's bulk data (Arena's `grpid` is
