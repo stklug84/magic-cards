@@ -104,7 +104,8 @@ manylinux_2_28 image (glibc 2.28, pinned by digest in
 `rust/release/<target>.Dockerfile`) and fails when a binary needs a newer
 glibc. It needs Docker, and on an Apple Silicon Mac it builds the arm64
 binaries natively. `release.yml` runs it on each Linux runner, and
-`validate.yml` runs it on pull requests that touch `rust/`.
+`validate.yml` runs it on pull requests that touch `rust/`, reporting the
+result as the required check `Linux release build`.
 
 `validate_sparql.py` is why a term cannot be deleted from the ontology
 while a query still references it: removing `:purchasePrice` required

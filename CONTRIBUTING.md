@@ -90,8 +90,8 @@ a SHA-256 file. The tagged commit must be on `main`, or the release
 workflows stop before they build. The Linux binaries are built in PyPA's
 manylinux_2_28 image, so they run on glibc 2.28 and newer;
 `rust/release/build-linux.sh` fails when one needs a newer glibc, and
-`validate.yml` runs it on pull requests that change `rust/`. The same
-builds locally:
+`validate.yml` runs it on pull requests that change `rust/` (the required
+check `Linux release build`). The same builds locally:
 
 ```sh
 cd rust
