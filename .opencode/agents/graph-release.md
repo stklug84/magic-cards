@@ -7,6 +7,7 @@ model: azure-anthropic/claude-fable-5-2
 # promises downstream and whether a schema bump is owed.
 variant: high
 tools:
+  "ghes_*": false
   "codebase-memory-mcp_*": false
   "oreilly_*": false
   "atlassian_*": false
@@ -15,6 +16,15 @@ tools:
   "xberg_*": false
   "research_papers": false
   "websearch_*": false
+  # Tools around the permissions below: context-mode's ctx_* run shell and
+  # Python past the bash rules, html_to_markdown fetches URLs past the
+  # webfetch rule, envsitter writes files past the edit rules, and ensemble
+  # and worktree_create start other agents with their own permissions.
+  "ctx_*": false
+  "html_to_markdown_*": false
+  "envsitter_*": false
+  "ensemble": false
+  "worktree_*": false
 permission:
   read: allow
   glob: allow
@@ -23,14 +33,59 @@ permission:
   lsp: allow
   todowrite: allow
   webfetch: deny
-  "context-mode_*":
+  task:
+    # only the validator; any other subagent would run with its own, wider
+    # permissions
+    "*": deny
+    graph-validator: allow
+  edit:
     "*": allow
-  edit: allow
+    # generated: change the generator and regenerate (AGENTS.md)
+    "sets/*": deny
+    "MagicCardCollection.ttl": deny
+    "MagicArenaCollection.ttl": deny
+    "catalog-v001.xml": deny
+    # the agents' own permissions
+    ".opencode/*": deny
+    ".github/*": ask
   bash:
-    "*": allow
-    "git push*": ask
+    # An allowlist: every command not named here asks first. A deny-list
+    # of command prefixes stops nothing (`git -C . push`, `bash -c "..."`).
+    "*": ask
+    "cd *": allow
+    "ls *": allow
+    "git status*": allow
+    "git diff*": allow
+    "git log*": allow
+    "git show*": allow
+    "python3 scripts/build_graph_bundle.py*": allow
+    "date *": allow
+    "mkdir -p *": allow
+    "tar -xzf *": allow
+    "tar xzf *": allow
+    "mtg-validate *": allow
+    ".venv/bin/mtg-validate *": allow
+    "python3 -m build*": allow
+    "riot --validate *": allow
+    "python3 scripts/validate_*": allow
+    "python3 scripts/check_consistency.py*": allow
+    ".venv/bin/python* scripts/validate_*": allow
+    ".venv/bin/python* scripts/check_consistency.py*": allow
+    "python3 -m unittest *": allow
+    ".venv/bin/python* -m unittest *": allow
+    'python3 -c "import rdflib"': allow
+    "uv venv .venv*": allow
+    "gh run list*": allow
+    "gh run view*": allow
+    "gh run watch*": allow
+    # the log family writes a file with --output
+    "git *--output*": deny
+    # publishing stays the user's decision: tags, pushes and releases ask
     "git tag*": ask
+    "git push*": ask
     "gh release*": ask
+    "gh release view*": allow
+    "gh release list*": allow
 ---
 
 You are the **graph release** agent. You produce the two independently
@@ -45,7 +100,7 @@ Read the repo's `AGENTS.md` first.
 |---|---|---|
 | `magic-cards-graph-YYYY-MM-DD.tar.gz` | `graph-YYYY-MM-DD` | `scripts/build_graph_bundle.py` via `release-graph.yml` |
 | `magic_cards_tools-X.Y.Z-*.whl` | `vX.Y.Z` | `python -m build` via `release.yml` |
-| `mtg-simulate-vX.Y.Z-<target>.tar.gz` | `vX.Y.Z` | `cargo build --release -p mtgsim` via `release.yml`, one per target |
+| `mtg-simulate-vX.Y.Z-<target>.tar.gz` | `vX.Y.Z` | `release.yml`, one per target: `rust/release/build-linux.sh` on Linux (manylinux_2_28, glibc 2.28), `cargo build --release` on macOS |
 
 They move separately on purpose: an inventory update must not force a code
 release, and a code fix must not restate the graph. Never bump one because
