@@ -7,6 +7,13 @@ printed).  ``login`` starts that profile as a plain Chrome so Google /
 Discord / Twitch sign-in works; every other live command starts the same
 binary on the same profile with ``--remote-debugging-port=0`` and attaches
 Playwright over CDP.  A session always closes the Chrome it started.
+
+Because Chrome allows remote debugging on this profile, any program running
+as the user could start it with a DevTools port and read its cookies.  The
+Untapped.gg session has to stay; the sign-in providers' sessions do not, so a
+session deletes every Google, YouTube, Discord and Twitch cookie when it
+starts and again before Chrome quits (``forget_providers``): the profile
+keeps no provider login at rest.
 """
 
 from __future__ import annotations
@@ -19,13 +26,16 @@ import subprocess  # Chrome and /bin/ps only, no shell  # nosec B404
 import sys
 import time
 from contextlib import contextmanager
+from dataclasses import dataclass
 from pathlib import Path
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any, Protocol
 
 if TYPE_CHECKING:
-    from collections.abc import Iterator
+    from collections.abc import Callable, Iterator
 
-    from playwright.sync_api import BrowserContext, Page
+    from playwright.sync_api import Browser, BrowserContext, Page
+
+    Log = Callable[[str], None]
 
 DEFAULT_BINARY = Path("/Applications/Google Chrome.app/Contents/MacOS/Google Chrome")
 DEFAULT_STATE_DIR = Path("~/.cache/mtga-collection").expanduser()
@@ -39,6 +49,40 @@ CONNECT_TIMEOUT_MS = 30_000
 PAGE_TIMEOUT_MS = 60_000
 #: the exit status of a process ended by SIGTERM
 SIGTERM_STATUS = 143
+#: the sign-in providers Untapped.gg offers, by the domains of their cookies:
+#: Google (google.<country>, and youtube.com, where a Google login also sets
+#: its session), Discord and Twitch.  A domain matches with its subdomains.
+PROVIDER_DOMAINS = re.compile(
+    r"(?:^|\.)(?:google\.[a-z]{2,3}(?:\.[a-z]{2})?|youtube\.com"
+    r"|discord(?:app)?\.com|twitch\.tv)$",
+)
+
+
+class CdpSession(Protocol):
+    """The one method of a Playwright CDP session the cookie clean-up uses."""
+
+    def send(self, method: str, params: dict[str, Any] | None = None) -> dict[str, Any]:
+        """Send a DevTools protocol command; return its result."""
+        ...
+
+
+@dataclass(frozen=True)
+class Forgotten:
+    """What ``forget_providers`` deleted, and what it could not."""
+
+    removed: int
+    domains: tuple[str, ...]
+    left: int
+
+
+def _stdout(line: str) -> None:
+    """Write one line to standard output (the default log)."""
+    sys.stdout.write(line + "\n")
+
+
+def _cookies(count: int) -> str:
+    """Return *count* sign-in provider cookies, in words."""
+    return f"{count} sign-in provider cookie{'' if count == 1 else 's'}"
 
 
 class ChromeConfig:
@@ -248,6 +292,74 @@ def quit_chrome(
         _terminate_child(proc)
 
 
+# ----------------------------------------------------- sign-in provider cookies
+
+
+def is_provider_domain(domain: str) -> bool:
+    """Tell whether a cookie of *domain* belongs to a sign-in provider."""
+    return bool(PROVIDER_DOMAINS.search(domain.lstrip(".").lower()))
+
+
+def _provider_cookies(browser: CdpSession) -> list[dict[str, Any]]:
+    """Return the profile's cookies of the sign-in providers."""
+    cookies = browser.send("Storage.getCookies").get("cookies") or []
+    return [
+        cookie
+        for cookie in cookies
+        if isinstance(cookie, dict)
+        and is_provider_domain(str(cookie.get("domain", "")))
+    ]
+
+
+def forget_providers(browser: CdpSession, page: CdpSession) -> Forgotten:
+    """Delete every cookie of the sign-in providers from the profile.
+
+    *browser* is a browser-level session (it lists the profile's cookies),
+    *page* a page-level one (``Network.deleteCookies`` is a page command).
+    Each cookie is deleted by its exact name, domain, path and partition, so
+    no other cookie is touched; the profile is listed again afterwards, and
+    whatever is still there is counted as left.  Chrome writes the deletion to
+    disk when it quits cleanly, which ``quit_chrome`` makes it do.
+    """
+    doomed = _provider_cookies(browser)
+    for cookie in doomed:
+        params: dict[str, Any] = {
+            "name": cookie["name"],
+            "domain": cookie["domain"],
+            "path": cookie["path"],
+        }
+        if cookie.get("partitionKey"):
+            params["partitionKey"] = cookie["partitionKey"]
+        page.send("Network.deleteCookies", params)
+    left = len(_provider_cookies(browser)) if doomed else 0
+    domains = sorted({str(cookie["domain"]).lstrip(".") for cookie in doomed})
+    return Forgotten(removed=len(doomed) - left, domains=tuple(domains), left=left)
+
+
+def forget_providers_in_session(
+    browser: Browser, context: BrowserContext, page: Page, log: Log
+) -> None:
+    """Run ``forget_providers`` on the session; report, never raise."""
+    try:
+        result = forget_providers(
+            browser.new_browser_cdp_session(), context.new_cdp_session(page)
+        )
+    except Exception as exc:  # noqa: BLE001 - a failed clean-up must not stop the run
+        log(f"warning: could not delete the sign-in providers' cookies: {exc}")
+        return
+    if result.removed:
+        log(
+            f"deleted {_cookies(result.removed)} ({', '.join(result.domains)}) "
+            "from the tool's Chrome profile",
+        )
+    if result.left:
+        log(
+            f"warning: {_cookies(result.left)} could not be deleted from the "
+            "tool's Chrome profile; sign out of Google, Discord or Twitch in a "
+            "`login` window",
+        )
+
+
 def _first_page(context: BrowserContext) -> Page:
     """Return the page Chrome opened at start, or a new one."""
     deadline = time.monotonic() + PAGE_WAIT
@@ -262,8 +374,12 @@ def _exit_on_sigterm(*_: object) -> None:
 
 
 @contextmanager
-def chrome_session(cfg: ChromeConfig, url: str) -> Iterator[Page]:
-    """Yield a Playwright page on the tool's Chrome; always close Chrome after."""
+def chrome_session(cfg: ChromeConfig, url: str, log: Log = _stdout) -> Iterator[Page]:
+    """Yield a Playwright page on the tool's Chrome; always close Chrome after.
+
+    The sign-in providers' cookies are deleted right after Chrome starts and
+    again before it quits (see ``forget_providers``).
+    """
     # Playwright is imported here, not at the top, so the offline commands,
     # the tests and the generator run without it
     from playwright.sync_api import sync_playwright  # noqa: PLC0415
@@ -284,12 +400,20 @@ def chrome_session(cfg: ChromeConfig, url: str) -> Iterator[Page]:
                 )
                 page = _first_page(context)
                 page.set_default_timeout(PAGE_TIMEOUT_MS)
+                forget_providers_in_session(browser, context, page, log)
                 try:
                     yield page
                 finally:
+                    forget_providers_in_session(browser, context, page, log)
                     quit_chrome(context, page, proc)
             finally:
                 with contextlib.suppress(Exception):  # Chrome has already quit
                     browser.close()  # disconnects only
     finally:
         stop_chrome(cfg, proc)
+
+
+def forget_provider_logins(cfg: ChromeConfig, log: Log = _stdout) -> None:
+    """Start the tool's Chrome only to delete the sign-in providers' cookies."""
+    with chrome_session(cfg, "about:blank", log):
+        pass

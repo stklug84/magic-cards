@@ -49,6 +49,7 @@ from mtgarena.catalog import Catalog, Printing, load_catalog, load_picks
 from mtgarena.chrome import (
     ChromeConfig,
     chrome_session,
+    forget_provider_logins,
     launch_chrome,
     profile_owner,
     recorded_chrome,
@@ -200,16 +201,25 @@ def cmd_login(args: argparse.Namespace) -> int:
     say(
         "A separate Chrome window opened on the tool's own profile",
         f"({cfg.profile_dir}). Sign in to Untapped.gg there (the Sign-in button top",
-        "right; Google / Discord / Twitch sign-in work in this window, but then sign",
-        "out of that provider there once Untapped.gg shows your avatar: the profile",
-        "should hold the Untapped.gg session only). QUIT THAT CHROME WITH Cmd+Q --",
-        "Chrome only saves the login on a clean quit (not when the window is closed",
-        "by this tool). Then run `probe` or `pull`.",
+        "right; Google / Discord / Twitch sign-in work in this window). Once your",
+        "avatar shows, QUIT THAT CHROME WITH Cmd+Q -- Chrome only saves the login on",
+        "a clean quit (not when the window is closed by this tool). The tool then",
+        "deletes the Google / Discord / Twitch cookies from the profile, so it keeps",
+        "the Untapped.gg session only. Then run `probe` or `pull`.",
     )
-    if args.wait:
-        say("waiting for that Chrome to quit ...")
-        proc.wait()
-        say("Chrome quit; the login is saved if you were signed in.")
+    if not args.wait:
+        say(
+            "Not waiting: the next `probe` or `pull` deletes the sign-in providers'",
+            "cookies from the profile.",
+        )
+        return 0
+    say("waiting for that Chrome to quit ...")
+    proc.wait()
+    say(
+        "Chrome quit; the login is saved if you were signed in. Deleting the sign-in",
+        "providers' cookies (a Chrome window opens for a moment) ...",
+    )
+    forget_provider_logins(cfg, say)
     return 0
 
 
@@ -607,7 +617,14 @@ def _parser() -> argparse.ArgumentParser:
         "login",
         help="open a plain Chrome window on the tool's profile to sign in",
     )
-    p_login.add_argument("--wait", action="store_true", help="block until it exits")
+    p_login.add_argument(
+        "--wait",
+        action=argparse.BooleanOptionalAction,
+        default=True,
+        help="wait for that Chrome to quit, then delete the sign-in providers' "
+        "cookies from the profile (default); --no-wait returns at once and "
+        "leaves that to the next probe or pull",
+    )
     p_login.set_defaults(func=cmd_login)
 
     p_probe = sub.add_parser(

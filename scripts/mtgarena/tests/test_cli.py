@@ -95,6 +95,37 @@ class AccountCacheTests(unittest.TestCase):
             self.assertEqual(mode, 0o700)
 
 
+class LoginTests(unittest.TestCase):
+    """``login``: the sign-in window, then the sign-in providers' cookies."""
+
+    def _login(self, *flags: str) -> tuple[mock.MagicMock, mock.MagicMock, str]:
+        """Run ``login`` without Chrome; return the window, the clean-up, output."""
+        window = mock.MagicMock()
+        with (
+            tempfile.TemporaryDirectory() as tmp,
+            mock.patch.object(cli, "profile_owner", return_value=None),
+            mock.patch.object(cli, "recorded_chrome", return_value=None),
+            mock.patch.object(cli, "launch_chrome", return_value=window),
+            mock.patch.object(cli, "forget_provider_logins") as forget,
+        ):
+            status, printed = _quietly(["--state-dir", tmp, "login", *flags])
+        self.assertEqual(status, 0)
+        return window, forget, printed
+
+    def test_waits_then_deletes_the_providers_cookies(self) -> None:
+        """By default the cookies go as soon as the sign-in window quits."""
+        window, forget, _ = self._login()
+        window.wait.assert_called_once_with()
+        forget.assert_called_once()
+
+    def test_no_wait_leaves_the_clean_up_to_the_next_session(self) -> None:
+        """--no-wait returns at once and says when the cookies go."""
+        window, forget, printed = self._login("--no-wait")
+        window.wait.assert_not_called()
+        forget.assert_not_called()
+        self.assertIn("the next `probe` or `pull` deletes", printed)
+
+
 class ExportTests(unittest.TestCase):
     """``export``: the CSV and TXT from the snapshot as it is."""
 

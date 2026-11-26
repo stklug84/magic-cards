@@ -162,10 +162,13 @@ issues.
 The tool's profile is not Chrome's default one, so Chrome allows remote
 debugging on it: `probe` and `pull` open a DevTools port on 127.0.0.1
 while they run, and any program running as you could start Chrome on the
-profile with debugging on and read its cookies. Keep the Untapped.gg
-session the only one in it: if you sign in through Google, Discord or
-Twitch, sign out of that provider in the same window once Untapped.gg
-shows your avatar.
+profile with debugging on and read its cookies. The tool therefore keeps
+the Untapped.gg session the only login in the profile. `login` waits for
+its window to quit, then deletes every Google, YouTube, Discord and
+Twitch cookie from the profile; `--no-wait` returns at once and leaves
+that to the next command. `probe` and `pull` delete those cookies again
+when they start and before they quit. Untapped.gg keeps its own session,
+so this costs a provider password only when you sign in again.
 
 Each owned Arena card id (`grpid`) is resolved against Untapped's public
 dump of Arena's card database and Scryfall's bulk data (Arena's `grpid` is
