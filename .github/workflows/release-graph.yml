@@ -20,6 +20,9 @@
 #   the simulation annotations were authored against, and the minimum
 #   tools version. See scripts/build_graph_bundle.py and mtgcards.graph.
 #
+#   The tagged commit must be on main (require-on-branch): a tag on a
+#   commit that never went through a pull request publishes nothing.
+#
 #   The artifact is validated before it is published: the bundle is
 #   unpacked and must both serve the released simulator binaries as a
 #   graph root (mtg-cr check, a short offline matchup) and pass the full
@@ -46,12 +49,13 @@ jobs:
     # columns; the trailing version comment stays because that is the form
     # Dependabot reads and rewrites.
     # yamllint disable-line rule:line-length
-    uses: stklug84/github-workflows/.github/workflows/release-artifact.yml@e099d4771b62e7814a0206424b176b91a1747ecc  # v4.1.0
+    uses: stklug84/github-workflows/.github/workflows/release-artifact.yml@b5573d6dbca2f556219f3e4f04f664b82ad1a007  # v4.2.0
     permissions:
       contents: write
     with:
       tag-prefix: "graph-"
       version-pattern: '^[0-9]{4}-[0-9]{2}-[0-9]{2}$'
+      require-on-branch: "main"
 
       install-command: 'pip install ".[validate]"'
 

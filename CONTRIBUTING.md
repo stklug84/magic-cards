@@ -86,11 +86,18 @@ version in `pyproject.toml` and the `[workspace.package]` version in
 release mode on each supported platform (Linux and macOS, x86_64 and
 arm64), smoke-tested against the checked-out graph and the fetched
 Comprehensive Rules, and attached as one tarball per target triple with
-a SHA-256 file. The same build locally:
+a SHA-256 file. The tagged commit must be on `main`, or the release
+workflows stop before they build. The Linux binaries are built in PyPA's
+manylinux_2_28 image, so they run on glibc 2.28 and newer;
+`rust/release/build-linux.sh` fails when one needs a newer glibc, and
+`validate.yml` runs it on pull requests that change `rust/`. The same
+builds locally:
 
 ```sh
 cd rust
 cargo build --release --locked -p mtgsim   # target/release/mtg-{simulate,selfplay,cr}
+cd ..
+rust/release/build-linux.sh aarch64-unknown-linux-gnu   # needs Docker
 ```
 
 OWL reasoning (CI runs this via the `rdf / owl (robot reason)` check,

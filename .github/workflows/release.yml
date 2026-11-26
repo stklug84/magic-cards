@@ -12,12 +12,18 @@
 #   the built wheel is smoke-tested (install, import, mtg-validate
 #   --help) before the draft is created.
 #
+#   The tagged commit must be on main (require-on-branch): a tag on a
+#   commit that never went through a pull request publishes nothing.
+#
 #   The simulator binaries (mtg-simulate, mtg-selfplay, mtg-cr) are then
 #   built from the Rust workspace in release mode on every supported
 #   platform, smoke-tested (--version against the tag, the #[rule]
 #   registry against the Comprehensive Rules, a short offline matchup
 #   over the checked-out graph) and attached to the draft as tarballs
-#   with SHA-256 checksums: one archive per target triple. The last job
+#   with SHA-256 checksums: one archive per target triple. The Linux
+#   binaries are built by rust/release/build-linux.sh in PyPA's
+#   manylinux_2_28 image, so they run on any Linux with glibc 2.28 or
+#   newer; the script fails when one needs a newer glibc. The last job
 #   publishes the draft once every binary is attached.
 #
 #   The draft is load-bearing: the repository's releases are immutable,
@@ -52,12 +58,13 @@ jobs:
     # columns; the trailing version comment stays because that is the form
     # Dependabot reads and rewrites.
     # yamllint disable-line rule:line-length
-    uses: stklug84/github-workflows/.github/workflows/release-artifact.yml@e099d4771b62e7814a0206424b176b91a1747ecc  # v4.1.0
+    uses: stklug84/github-workflows/.github/workflows/release-artifact.yml@b5573d6dbca2f556219f3e4f04f664b82ad1a007  # v4.2.0
     permissions:
       contents: write
     with:
       tag-prefix: ""
       version-pattern: '^v[0-9]+\.[0-9]+\.[0-9]+$'
+      require-on-branch: "main"
 
       install-command: "pip install build"
 
@@ -133,11 +140,13 @@ jobs:
           persist-credentials: false
 
       - name: Download Comprehensive Rules
-        uses: stklug84/actions/mtg/fetch-comprehensive-rules@c6c3adbc4140cbf096c0c61c30b4fa96ff82b8dd  # v2.19.0
+        uses: stklug84/actions/mtg/fetch-comprehensive-rules@561b92c180aed0f6ce7d311d66dec7d22aa37721  # v2.19.1
         with:
           cr-date: "20260925"
 
+      # The Linux build installs its own toolchain inside the image.
       - name: Install the pinned toolchain
+        if: runner.os == 'macOS'
         working-directory: rust
         run: |
           set -euo pipefail
@@ -146,10 +155,21 @@ jobs:
 
       # No cargo cache: a cache saved by a tag's run is restorable by runs
       # of that tag only, so a release would write caches no later run reads
-      # and evict the ones pull requests use from the shared quota.
-      - name: Build the binaries
+      # and evict the ones pull requests use from the shared quota. Both
+      # builds name the target, so the binaries land in
+      # rust/target/<target>/release/.
+      - name: Build the binaries (Linux, glibc 2.28)
+        if: runner.os == 'Linux'
+        env:
+          TARGET: ${{ matrix.target }}
+        run: rust/release/build-linux.sh "$TARGET"
+
+      - name: Build the binaries (macOS)
+        if: runner.os == 'macOS'
         working-directory: rust
-        run: cargo build --release --locked -p mtgsim
+        env:
+          TARGET: ${{ matrix.target }}
+        run: cargo build --release --locked -p mtgsim --target "$TARGET"
 
       # The binaries report the workspace version, which the release job
       # has already checked against the tag; the registry check loads
@@ -159,10 +179,11 @@ jobs:
         working-directory: rust
         env:
           RELEASE_TAG: ${{ github.ref_name }}
+          TARGET: ${{ matrix.target }}
         run: |
           set -euo pipefail
           export MTG_GRAPH_ROOT="$GITHUB_WORKSPACE"
-          bin=target/release
+          bin="target/${TARGET}/release"
           for name in mtg-simulate mtg-selfplay mtg-cr; do
             version="$("$bin/$name" --version | awk '{print $NF}')"
             if [ "v$version" != "$RELEASE_TAG" ]; then
@@ -184,7 +205,9 @@ jobs:
           set -euo pipefail
           name="mtg-simulate-${RELEASE_TAG}-${TARGET}"
           mkdir -p "dist/$name"
-          cp rust/target/release/mtg-simulate rust/target/release/mtg-selfplay rust/target/release/mtg-cr "dist/$name/"
+          for binary in mtg-simulate mtg-selfplay mtg-cr; do
+            cp "rust/target/${TARGET}/release/${binary}" "dist/$name/"
+          done
           cp LICENSE "dist/$name/"
           tar -C dist -czf "dist/$name.tar.gz" "$name"
           if command -v sha256sum > /dev/null; then

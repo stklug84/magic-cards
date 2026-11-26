@@ -18,7 +18,12 @@
 #   cargo ecosystem covers the Rust simulator workspace under rust/
 #   (rust/Cargo.lock is tracked because the workspace ships binaries);
 #   its bumps are grouped into one pull request like the actions. The
-#   pinned compiler in rust/rust-toolchain.toml is bumped by hand.
+#   pinned compiler in rust/rust-toolchain.toml is bumped by hand. The
+#   docker ecosystem covers the manylinux_2_28 images the Linux release
+#   binaries are built in (rust/release/*.Dockerfile, tag and digest):
+#   monthly, because their glibc 2.28 is the point and never changes, and
+#   one pull request for both architectures, so they stay on the same
+#   image date. rust/release/build-linux.sh pins rustup-init by hand.
 #   Documentation:
 #   https://docs.github.com/code-security/dependabot/dependabot-version-updates
 # ---
@@ -46,3 +51,12 @@ updates:
       cargo:
         patterns:
           - "*"  # Bundle all crate bumps into a single PR
+
+  - package-ecosystem: "docker"
+    directory: "/rust/release"  # the Linux release build images
+    schedule:
+      interval: "monthly"
+    groups:
+      release-images:
+        patterns:
+          - "*"  # Both architectures' images in one PR
