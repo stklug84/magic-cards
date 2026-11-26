@@ -98,6 +98,14 @@ cargo deny check
 cargo llvm-cov --workspace --all-features --summary-only --fail-under-lines 90
 ```
 
+The Linux release binaries are not built with a plain `cargo build`:
+`rust/release/build-linux.sh <target>` builds them in PyPA's
+manylinux_2_28 image (glibc 2.28, pinned by digest in
+`rust/release/<target>.Dockerfile`) and fails when a binary needs a newer
+glibc. It needs Docker, and on an Apple Silicon Mac it builds the arm64
+binaries natively. `release.yml` runs it on each Linux runner, and
+`validate.yml` runs it on pull requests that touch `rust/`.
+
 `validate_sparql.py` is why a term cannot be deleted from the ontology
 while a query still references it: removing `:purchasePrice` required
 deleting the query that used it.

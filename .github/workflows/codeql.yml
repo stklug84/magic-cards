@@ -40,7 +40,7 @@ jobs:
   # Dependabot reads and rewrites.
   # yamllint disable-line rule:line-length
   codeql:
-    uses: stklug84/github-workflows/.github/workflows/repo-codeql.yml@e099d4771b62e7814a0206424b176b91a1747ecc  # v4.1.0
+    uses: stklug84/github-workflows/.github/workflows/repo-codeql.yml@b5573d6dbca2f556219f3e4f04f664b82ad1a007  # v4.2.0
     permissions:
       security-events: write
       contents: read

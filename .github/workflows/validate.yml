@@ -22,6 +22,10 @@
 #                           repository's own knowledge graph and the
 #                           Comprehensive Rules text
 #     - rust-coverage     : the workspace's line coverage, gated at 90 %
+#     - linux-release     : the Linux release binaries, built as
+#                           release.yml builds them (manylinux_2_28,
+#                           glibc 2.28) when the change touches rust/,
+#                           release.yml or this workflow
 #
 #   OWL reasoning (the rdf workflow's `owl` job) reasons two roots, each
 #   over its full owl:imports closure resolved through catalog-v001.xml
@@ -71,17 +75,20 @@ jobs:
   # - whereas a workflow-level path filter would leave the required
   # check pending forever. A pull request compares the base tip with
   # the merge commit (what merging would change on main), a push the
-  # previous tip with the new one; a manual run always reasons.
+  # previous tip with the new one; a manual run always reasons. The
+  # Linux release build is gated the same way, on rust/, release.yml and
+  # this workflow.
   changes:
     name: Changed paths
     runs-on: ubuntu-latest
     outputs:
       owl: ${{ steps.diff.outputs.owl }}
+      linux-release: ${{ steps.diff.outputs.linux_release }}
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7
 
-      - name: Does the change touch the reasoned graph?
+      - name: Does the change touch the reasoned graph or the release build?
         id: diff
         env:
           EVENT_NAME: ${{ github.event_name }}
@@ -89,6 +96,7 @@ jobs:
         run: |
           set -euo pipefail
           owl=true
+          linux_release=true
           case "$EVENT_NAME" in
             pull_request|push)
               if [ -n "$BASE_SHA" ] \
@@ -104,6 +112,12 @@ jobs:
                   printf 'Reasoned-graph changes between %s and %s:\n%s\n' \
                     "${BASE_SHA:0:12}" "${GITHUB_SHA:0:12}" "$changed"
                 fi
+                built=$(git diff --name-only "$BASE_SHA" "$GITHUB_SHA" -- \
+                  rust .github/workflows/release.yml .github/workflows/validate.yml)
+                if [ -z "$built" ]; then
+                  linux_release=false
+                  echo "No change to rust/, release.yml or this workflow: the Linux release build is skipped."
+                fi
               else
                 echo "No usable base commit for this $EVENT_NAME event: OWL reasoning runs."
               fi
@@ -113,6 +127,7 @@ jobs:
               ;;
           esac
           echo "owl=$owl" >> "$GITHUB_OUTPUT"
+          echo "linux_release=$linux_release" >> "$GITHUB_OUTPUT"
 
   # Turtle syntax (riot --validate) + SPARQL grammar (rdflib) for every
   # *.ttl in the repo (root ontologies, sets/) and every query
@@ -125,7 +140,7 @@ jobs:
     # columns; the trailing version comment stays because that is the form
     # Dependabot reads and rewrites.
     # yamllint disable-line rule:line-length
-    uses: stklug84/github-workflows/.github/workflows/rdf-validate.yml@e099d4771b62e7814a0206424b176b91a1747ecc  # v4.1.0
+    uses: stklug84/github-workflows/.github/workflows/rdf-validate.yml@b5573d6dbca2f556219f3e4f04f664b82ad1a007  # v4.2.0
     with:
       turtle-glob: "**/*.ttl"
       sparql-glob: "queries/**/*.rq"
@@ -251,7 +266,7 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7
 
       - name: Download Comprehensive Rules
-        uses: stklug84/actions/mtg/fetch-comprehensive-rules@c6c3adbc4140cbf096c0c61c30b4fa96ff82b8dd  # v2.19.0
+        uses: stklug84/actions/mtg/fetch-comprehensive-rules@561b92c180aed0f6ce7d311d66dec7d22aa37721  # v2.19.1
         with:
           cr-date: "20260925"
 
@@ -294,7 +309,7 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7
 
       - name: Download Comprehensive Rules
-        uses: stklug84/actions/mtg/fetch-comprehensive-rules@c6c3adbc4140cbf096c0c61c30b4fa96ff82b8dd  # v2.19.0
+        uses: stklug84/actions/mtg/fetch-comprehensive-rules@561b92c180aed0f6ce7d311d66dec7d22aa37721  # v2.19.1
         with:
           cr-date: "20260925"
 
@@ -335,3 +350,44 @@ jobs:
         run: |
           set -euo pipefail
           cargo llvm-cov --workspace --all-features --summary-only --fail-under-lines 90
+
+  # The Linux release binaries, built by the script release.yml runs:
+  # inside PyPA's manylinux_2_28 image (glibc 2.28, pinned by digest in
+  # rust/release/), failing when a binary needs a newer glibc. A change
+  # that would break the release build, or raise the glibc the binaries
+  # need (a dependency calling a newer libc function), fails its pull
+  # request instead of the release. Not a required check: skipped when
+  # the changes job finds no change to rust/, release.yml or this
+  # workflow.
+  linux-release:
+    name: Linux release build (${{ matrix.target }})
+    needs: changes
+    if: needs.changes.outputs.linux-release == 'true'
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            target: x86_64-unknown-linux-gnu
+          - os: ubuntu-24.04-arm
+            target: aarch64-unknown-linux-gnu
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7
+        with:
+          persist-credentials: false
+
+      - name: Build in the manylinux_2_28 image and check the glibc floor
+        env:
+          TARGET: ${{ matrix.target }}
+        run: rust/release/build-linux.sh "$TARGET"
+
+      - name: Run the binaries on the runner
+        env:
+          TARGET: ${{ matrix.target }}
+        run: |
+          set -euo pipefail
+          for name in mtg-simulate mtg-selfplay mtg-cr; do
+            "rust/target/${TARGET}/release/${name}" --version
+          done

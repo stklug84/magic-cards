@@ -18,6 +18,15 @@ tools:
   "xberg_*": false
   "research_papers": false
   "websearch_*": false
+  # Tools around the permissions below: context-mode's ctx_* run shell and
+  # Python past the bash rules, html_to_markdown fetches URLs past the
+  # webfetch rule, envsitter writes files past the edit rules, and ensemble
+  # and worktree_create start other agents with their own permissions.
+  "ctx_*": false
+  "html_to_markdown_*": false
+  "envsitter_*": false
+  "ensemble": false
+  "worktree_*": false
 permission:
   read: allow
   glob: allow
@@ -26,11 +35,34 @@ permission:
   lsp: allow
   todowrite: allow
   webfetch: deny
-  "context-mode_*":
-    "*": allow
+  # a subagent would run with its own, wider permissions
+  task: deny
   edit: deny
   bash:
-    "*": allow
+    # An allowlist: every command not named here asks first. A deny-list
+    # of command prefixes stops nothing (`git -C . push`, `bash -c "..."`).
+    "*": ask
+    "cd *": allow
+    "ls *": allow
+    "git status*": allow
+    "git diff*": allow
+    "git log*": allow
+    "git show*": allow
+    "riot --validate *": allow
+    "python3 scripts/validate_*": allow
+    "python3 scripts/check_consistency.py*": allow
+    ".venv/bin/python* scripts/validate_*": allow
+    ".venv/bin/python* scripts/check_consistency.py*": allow
+    "python3 -m unittest *": allow
+    ".venv/bin/python* -m unittest *": allow
+    'python3 -c "import rdflib"': allow
+    "uv venv .venv*": allow
+    "python3 scripts/generate_catalog.py*": allow
+    ".venv/bin/python* scripts/generate_catalog.py*": allow
+    "robot reason *": allow
+    "cargo test *": allow
+    # the log family writes a file with --output
+    "git *--output*": deny
     "git commit*": deny
     "git push*": deny
 ---

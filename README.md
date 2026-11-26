@@ -28,7 +28,7 @@ on which part you use:
 | MTG Arena collection (`scripts/arena_collection.py`) | [`uv`](https://docs.astral.sh/uv/), Google Chrome and an Untapped.gg login (`uv run` installs Playwright from the script's inline metadata) | Pulling the MTG Arena collection the Untapped.gg Companion syncs, as the generator's second input |
 | SPARQL queries (`queries/`) | [Apache Jena](https://jena.apache.org/) (`arq`, `riot`; Java 21+) | Running the query catalog, TTL syntax validation as done in CI |
 | Released package (`magic-cards-tools`: the graph-bundle contract and the validators) | Python 3.12+ — **stdlib only**; the `validate` extra adds rdflib | Validating your own graphs against a published bundle |
-| Simulator binaries (`mtg-simulate`, `mtg-selfplay`, `mtg-cr`) | None — prebuilt release binaries for Linux and macOS (x86_64 and arm64); the Linux ones link glibc dynamically (v0.4.0 needs glibc 2.34 or newer, 2.39 for `mtg-simulate` on arm64); building from source needs the Rust toolchain pinned in [`rust/rust-toolchain.toml`](./rust/rust-toolchain.toml) | Simulating Commander matchups over the graph, tuning the AI, inspecting the Comprehensive Rules coverage |
+| Simulator binaries (`mtg-simulate`, `mtg-selfplay`, `mtg-cr`) | None — prebuilt release binaries for Linux and macOS (x86_64 and arm64); the Linux ones link glibc dynamically and, from v0.4.1, run on any Linux with glibc 2.28 or newer (v0.4.0 needs 2.34, and 2.39 for `mtg-simulate` on arm64); building from source needs the Rust toolchain pinned in [`rust/rust-toolchain.toml`](./rust/rust-toolchain.toml) | Simulating Commander matchups over the graph, tuning the AI, inspecting the Comprehensive Rules coverage |
 | `MagicCompRules-YYYYMMDD.txt` | Download from Wizards of the Coast; not distributed here | Referenced by ontology comments; the simulator validates its `#[rule]` annotations against it at startup |
 
 ## Repository layout
@@ -162,10 +162,13 @@ issues.
 The tool's profile is not Chrome's default one, so Chrome allows remote
 debugging on it: `probe` and `pull` open a DevTools port on 127.0.0.1
 while they run, and any program running as you could start Chrome on the
-profile with debugging on and read its cookies. Keep the Untapped.gg
-session the only one in it: if you sign in through Google, Discord or
-Twitch, sign out of that provider in the same window once Untapped.gg
-shows your avatar.
+profile with debugging on and read its cookies. The tool therefore keeps
+the Untapped.gg session the only login in the profile. `login` waits for
+its window to quit, then deletes every Google, YouTube, Discord and
+Twitch cookie from the profile; `--no-wait` returns at once and leaves
+that to the next command. `probe` and `pull` delete those cookies again
+when they start and before they quit. Untapped.gg keeps its own session,
+so this costs a provider password only when you sign in again.
 
 Each owned Arena card id (`grpid`) is resolved against Untapped's public
 dump of Arena's card database and Scryfall's bulk data (Arena's `grpid` is
