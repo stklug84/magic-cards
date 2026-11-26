@@ -26,6 +26,9 @@
 #                           release.yml builds them (manylinux_2_28,
 #                           glibc 2.28) when the change touches rust/,
 #                           release.yml or this workflow
+#     - linux-release-gate: the required check "Linux release build":
+#                           passes when both builds passed or there was
+#                           nothing to build
 #
 #   OWL reasoning (the rdf workflow's `owl` job) reasons two roots, each
 #   over its full owl:imports closure resolved through catalog-v001.xml
@@ -356,9 +359,9 @@ jobs:
   # rust/release/), failing when a binary needs a newer glibc. A change
   # that would break the release build, or raise the glibc the binaries
   # need (a dependency calling a newer libc function), fails its pull
-  # request instead of the release. Not a required check: skipped when
-  # the changes job finds no change to rust/, release.yml or this
-  # workflow.
+  # request instead of the release. Skipped when the changes job finds no
+  # change to rust/, release.yml or this workflow; linux-release-gate
+  # below reports the outcome as the required check.
   linux-release:
     name: Linux release build (${{ matrix.target }})
     needs: changes
@@ -391,3 +394,36 @@ jobs:
           for name in mtg-simulate mtg-selfplay mtg-cr; do
             "rust/target/${TARGET}/release/${name}" --version
           done
+
+  # The required check of the Linux release build. A required check has to
+  # report under one fixed name on every pull request, and the two matrix
+  # jobs above neither run on most of them nor have a fixed name. This job
+  # always runs: it passes when both builds passed, or when the changes job
+  # found nothing to build, and fails otherwise (a failed or cancelled
+  # build, or a changes job that did not succeed).
+  linux-release-gate:
+    name: Linux release build
+    needs: [changes, linux-release]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: The Linux release build passed, or there was nothing to build
+        env:
+          CHANGES: ${{ needs.changes.result }}
+          WANTED: ${{ needs.changes.outputs.linux-release }}
+          BUILD: ${{ needs.linux-release.result }}
+        run: |
+          set -euo pipefail
+          if [ "$CHANGES" != "success" ]; then
+            echo "::error::the changes job ended with '$CHANGES'"
+            exit 1
+          fi
+          if [ "$WANTED" != "true" ]; then
+            echo "No change to rust/, release.yml or validate.yml: nothing to build."
+            exit 0
+          fi
+          if [ "$BUILD" != "success" ]; then
+            echo "::error::the Linux release build ended with '$BUILD'"
+            exit 1
+          fi
+          echo "Both Linux release builds passed."
