@@ -39,31 +39,47 @@
     rdfs:label "Magic Card Synergies"@en ;
     rdfs:comment """An instance graph capturing directional synergy relations
 (:amplifies, :enables and their OWL inverses) and mutual synergies
-(:hasSynergyWith) between the card individuals of the collection. Each
-logical synergy is asserted exactly once: directional relations use the
-forward properties, the inverse directions follow from the owl:inverseOf
-axioms in MagicCardsOntology, and the symmetric :hasSynergyWith is asserted
-once per pair. Relations are deck-independent: they hold for any deck built
-from the collection. Where a card exists in several printings, the relations
+(:hasSynergyWith) between the card individuals of the paper collection
+(MagicCardCollection.ttl). A deck is built from the cards of the paper
+collection or from those of the MTG Arena collection, never from both, so
+the synergies of the two collections are kept apart: this graph relates only
+cards the paper collection holds, MagicArenaSynergies only cards the MTG
+Arena collection holds. Each logical synergy is asserted exactly once:
+directional relations use the forward properties, the inverse directions
+follow from the owl:inverseOf axioms in MagicCardsOntology, and the
+symmetric :hasSynergyWith is asserted once per pair. Relations are
+deck-independent: they hold for any deck built from the collection. Where a
+card exists in several printings, the relations
 are asserted on one canonical individual per card name. This file imports
 MagicCardsOntology for the property definitions and MagicCardIndividuals for
 the card individuals it relates."""@en .
 
 ################################################################################
 #
-# Collection-Wide Card Synergies
+# Paper Collection Card Synergies
 #
-# Directional and mutual synergies across the named card individuals of the
-# collection aggregated by MagicCardIndividuals.ttl. The relations were
-# derived mechanic by mechanic: every keyword action (rule 701), keyword
-# ability (rule 702) and ability word (rule 207.2c) of the Comprehensive
-# Rules, edition 2026-09-25, that appears on collection cards, together with
-# the themes those mechanics feed (tokens, counters, energy, artifacts,
-# Equipment and Auras, Vehicles and Spacecraft, graveyard, enters-the-
-# battlefield and copy effects, exile and warp, sacrifice and death, combat,
-# spells, lands and mana, life, card draw, tribes and planeswalkers). Each
-# pair was checked against both cards' Oracle text. Basic lands, planes and
-# phenomena are not related.
+# Directional and mutual synergies across the card individuals of the paper
+# collection, MagicCardCollection.ttl. The MTG Arena collection has its own
+# synergy graph, MagicArenaSynergies.ttl: the two collections are separate
+# card pools, a deck is built from one of them, and each graph relates only
+# the cards its collection holds.
+#
+# The relations were derived mechanic by mechanic: every keyword action
+# (rule 701), keyword ability (rule 702) and ability word (rule 207.2c) of
+# the Comprehensive Rules, edition 2026-09-25, that appears on collection
+# cards, together with the themes those mechanics feed (tokens, counters,
+# energy, artifacts, Equipment and Auras, Vehicles and Spacecraft, graveyard,
+# enters-the-battlefield and copy effects, exile and warp, sacrifice and
+# death, combat, spells, lands and mana, life, card draw, tribes and
+# planeswalkers). Each pair was checked against both cards' Oracle text.
+# Basic lands, planes and phenomena are not related.
+#
+# The relations were reviewed against the edition of 2026-11-06: its new
+# mechanics (assimilate, beam me up, federation, strange new worlds, facing
+# a dilemma) appear on no card of this collection, and its changes to the
+# rules for transforming, double-faced and meld cards, copied spells and
+# creatures put onto the battlefield attacking leave every relation as it
+# was.
 #
 # Modelling conventions:
 #   :amplifies      - subject increases the value, frequency or magnitude of
@@ -604,7 +620,6 @@ the card individuals it relates."""@en .
 # --- Anim Pakal, Thousandth Moon ---
 :AnimPakalThousandthMoon :enables :AlibouAncientWitness ,  # Gnomes enter tapped and attacking: resolve Alibou last for bigger X
                                   :CybermanPatrol ,  # Attacking Gnomes gain afflict 3
-                                  :DepthshakerTitan ,  # Gnomes gain melee and trample
                                   :EPFPointSquad ,  # Attacking Gnomes add counters mid-combat
                                   :GoddricCloakedReveler ,  # Attack Gnomes make him a 4/4 flier mid-combat
                                   :HaliyaGuidedByLight ,  # Gnome batch each attack gains life toward the end-step draw
@@ -2359,8 +2374,7 @@ the card individuals it relates."""@en .
                             :ZulaportCutthroat .  # Forced upkeep sacrifice drains each opponent every turn
 
 # --- Depthshaker Titan ---
-:DepthshakerTitan :amplifies :CybermenSquadron ,  # Titan's hasty animated artifacts gain myriad and hit every opponent
-                             :Cybership .  # Stolen face-down Cybermen and crewed Cybership gain melee, trample, haste
+:DepthshakerTitan :amplifies :Cybership .  # Stolen face-down Cybermen and crewed Cybership gain melee, trample, haste
 :DepthshakerTitan :enables :BygoneColossus ,  # Haste lets the 9/9 warped for {3} attack before exile
                            :NickValentinePrivateEye .  # Animated artifacts sacrificed at end step die into Clues
 
