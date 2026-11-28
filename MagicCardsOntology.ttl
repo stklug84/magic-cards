@@ -40,7 +40,7 @@
 The Gathering cards, decks, and attributes. This ontology is based on the
 Comprehensive Rules of Magic: The Gathering. Its keyword, ability word, and
 subtype vocabularies and its rule references follow the edition effective
-2026-09-25; the ontology IRI keeps the 2026-02-27 date of the edition it was
+2026-11-06; the ontology IRI keeps the 2026-02-27 date of the edition it was
 first built against."""@en .
 
 [] rdf:type owl:AllDisjointClasses ;
@@ -276,6 +276,7 @@ Each word after the dash is a separate subtype. See rule 205.3."""@en .
                        :Bobblehead
                        :Book
                        :Clue
+                       :Communicator
                        :Contraption
                        :Equipment
                        :Food
@@ -334,19 +335,23 @@ enchantments may have multiple subtypes. See rules 303.3 and 205.3h."""@en .
                    owl:equivalentClass [
                        rdf:type owl:Class ;
                        owl:oneOf (
-                           :Ajani :Aminatou :Angrath :Arlinn :Ashiok :Bahamut
+                           :Ajani :Aminatou :Angrath :Arlinn
+                           :Arzakon :Ashiok :Bahamut
                            :Basri :Bolas :Calix :Chandra :Comet :Dack :Dakkon
                            :Daretti :Davriel :Dellian :Dihada :Domri :Dovin
-                           :Ellywick
-                           :Elminster :Elspeth :Estrid :Freyalise :Garruk
-                           :Gideon :Grist :Guff :Huatli :Jace :Jared :Jaya
+                           :Dyfed :Ellywick
+                           :Elminster :Elspeth :Estrid :Feroz :Freyalise :Garruk
+                           :Gideon :Greensleeves :Grist :Guff
+                           :Huatli :Jace :Jared :Jaya
                            :Jeska :Kaito :Karn :Kasmina :Kaya :Kiora :Koth
                            :Liliana :Lolth :Lukka :Minsc :Mordenkainen :Nahiri
                            :Narset :Niko :Nissa :Nixilis :Oko :Quintorius :Ral
-                           :Rowan :Saheeli :Samut :Sarkhan :Serra :Sivitri
+                           :Rowan :Saheeli :Samut :Sarkhan :Serra :Sifa :Sivitri
                            :Sorin :Szat :Tamiyo :Tasha :Teferi :Teyo :Tezzeret
-                           :Tibalt :Tyvar :Ugin :Urza :Venser :Vivien :Vraska
-                           :Vronos :Will :Windgrace :Wrenn :Xenagos :Yanggu
+                           :Thomil :Tibalt :Tyvar :Ugin
+                           :Urza :Venser :Vivien :Vraska
+                           :Vronos :Will :Windgrace :Worzel
+                           :Wrenn :Xenagos :Yanggu
                            :Yanling :Zariel
                        )
                    ] ;
@@ -381,47 +386,59 @@ and sorceries may have multiple subtypes. See rules 304.3, 307.3, and 205.3k.
                owl:equivalentClass [
                    rdf:type owl:Class ;
                    owl:oneOf (
-                       :Advisor :Aetherborn :Alien :Ally :Angel :Antelope
+                       :Advisor :Aenar :Aetherborn :Alien :Ally
+                       :Andorian :Android :Angel :Antelope
                        :Ape :Archer :Archon :Armadillo :Army :Artificer
                        :Assassin :AssemblyWorker :Astartes :Atog :Aurochs
-                       :Avatar :Azra :Badger :Balloon :Barbarian :Bard :Basilisk
+                       :Avatar :Azra :Badger :Bajoran
+                       :Balloon :Barbarian :Bard :Basilisk
                        :Bat :Bear :Beast :Beaver :Beeble :Beholder
-                       :Berserker :Bird :Bison :Blinkmoth :Boar :Bringer
-                       :Brushwagg :Camarid :Camel :Capybara :Caribou :Carrier
+                       :Berserker :Betazoid :Bird :Bison :Blinkmoth
+                       :Boar :Bolian :Borg :Brikar :Bringer
+                       :Brushwagg :Caitian :Camarid :Camel
+                       :Capybara :Cardassian :Caribou :Carrier
                        :Cat :Centaur :Child :Chimera :Citizen :Cleric
                        :Clown :Cockatrice :Construct :Coward :Coyote :Crab
                        :Crocodile :Custodes :Cyberman :Cyclops :Ctan :Dalek
-                       :Dauthi :Demigod :Demon :Deserter :Detective :Devil
+                       :Dauthi :Demigod :Demon :Denobulan
+                       :Deserter :Detective :Devil
                        :Dinosaur :Djinn :Doctor :Dog :Dragon :Drake
                        :Dreadnought :Drix :Drone :Druid :Dryad :Dwarf
-                       :Echidna :Efreet :Egg :Elder :Eldrazi :Elemental
-                       :Elephant :Elf :Elk :Employee :Eternal :Eye :Faerie
-                       :Ferret :Fish :Flagbearer :Fox :Fractal :Frog
+                       :Echidna :Edosian :Efreet :Egg
+                       :ElAurian :Elder :Eldrazi :Elemental
+                       :Elephant :Elf :Elk :Employee
+                       :Eternal :Excalbian :Eye :Faerie
+                       :Ferengi :Ferret :Fish :Flagbearer :Fox :Fractal :Frog
                        :Fungus :Gamer :Gamma :Gargoyle :Germ :Giant :Giraffe
                        :Gith
                        :Glimmer :Gnoll :Gnome :Goat :Goblin :God
-                       :Golem :Gorgon :Graveborn :Gremlin :Griffin :Guest
+                       :Golem :Gorgon :Gorn :Graveborn :Gremlin :Griffin :Guest
                        :Hag :Halfling :Hamster :Harpy :Hedgehog :Hellion
-                       :Hero :Hippo :Hippogriff :Homarid :Homunculus :Horror
-                       :Horse :Human :Hydra :Hyena :Illusion :Imp
+                       :Hero :Hippo :Hippogriff :Hirogen
+                       :Homarid :Homunculus :Horror
+                       :Horse :Human :Hydra :Hyena :Illusion :Illyrian :Imp
                        :Incarnation :Inhuman :Inkling :Inquisitor :Insect
                        :Jackal
-                       :Jellyfish :Juggernaut :Kangaroo :Kavu :Kirin :Kithkin
-                       :Knight :Kobold :Kor :Kraken :Kree :Lamia :Lammasu :Leech
+                       :Jellyfish :JemHadar :Juggernaut :Kangaroo
+                       :Kavu :Kelpien :Kirin :Kithkin
+                       :Klingon :Knight :Kobold :Kor :Kraken :Kree
+                       :Kwejian :Lamia :Lammasu :Lanthanite :Leech
                        :Lemur :Leviathan :Lhurgoyf :Licid :Lizard :Llama
-                       :Lobster :Manticore :Masticore :Mercenary :Merfolk
+                       :Lobster :Manticore :Masticore :Medusan
+                       :Melkotian :Mercenary :Merfolk
                        :Metathran :Minion :Minotaur :Mite :Mole :Monger
                        :Mongoose :Monk :Monkey :Moogle :Moonfolk :Mount :Mouse
-                       :Mutant :Myr :Mystic :Nautilus :Necron :Nephilim
+                       :Mutant :Myr :Mystic :Nakuhl :Nautilus :Necron :Nephilim
                        :Nightmare :Nightstalker :Ninja :Noble :Noggle :Nomad
-                       :Nymph :Octopus :Ogre :Ooze :Orb :Orc
-                       :Orgg :Otter :Ouphe :Ox :Oyster :Pangolin
+                       :Nymph :Ocampa :Octopus :Officer :Ogre :Ooze :Orb :Orc
+                       :Orgg :Orion :Otter :Ouphe :Ox :Oyster :Pangolin
                        :Peasant :Pegasus :Pentavite :Performer :Pest
                        :Phelddagrif :Phoenix :Phyrexian :Pilot :Pincher :Pirate
                        :Plant :Platypus :Porcupine :Possum :Praetor :Primarch
-                       :Prism :Processor :Qu :Rabbit :Raccoon :Ranger :Rat
+                       :Prism :Processor :Q :Qu :Rabbit :Raccoon :Ranger :Rat
                        :Rebel :Reflection :Rhino :Rigger :Robot :Rogue
-                       :Sable :Salamander :Samurai :Sand :Saproling :Satyr
+                       :Romulan :Sable :Salamander :Samurai
+                       :Sand :Saproling :Satyr
                        :Scarecrow :Scientist :Scion :Scorpion :Scout :Sculpture
                        :Seal :Serf :Serpent :Servo :Shade :Shaman
                        :Shapeshifter :Shark :Sheep :Shiar :Siren :Skeleton
@@ -430,13 +447,16 @@ and sorceries may have multiple subtypes. See rules 304.3, 307.3, and 205.3k.
                        :Soldier :Soltari :Sorcerer :Spawn :Specter :Spellshaper
                        :Sphinx :Spider :Spike :Spirit :Splinter :Sponge :Spy
                        :Squid :Squirrel :Starfish :Surrakar :Survivor :Symbiote
-                       :Synth :Tentacle :Tetravite :Thalakos :Thopter :Thrull
-                       :Tiefling :TimeLord :Toy :Treefolk :Trilobite
+                       :Synth :Talaxian :Talosian :Tamarian :Tellarite :Tentacle
+                       :Tetravite :Thalakos :Tholian :Thopter :Thrull
+                       :Tiefling :TimeLord :Tosk :Toy
+                       :Treefolk :Tribble :Trill :Trilobite
                        :Triskelavite :Troll :Turtle :Tyranid :Unicorn :Utrom
-                       :Vampire :Varmint :Vedalken :Villain :Volver :Wall
+                       :Vampire :Varmint :VauNAkat :Vedalken :Villain
+                       :Volver :Vorta :Vulcan :Wall
                        :Walrus :Warlock :Warrior :Weasel :Weird :Werewolf :Whale
                        :Wizard :Wolf :Wolverine :Wombat :Worm :Wraith
-                       :Wurm :Yeti :Zombie :Zubera
+                       :Wurm :Xindi :Yeti :Zombie :Zubera
                    )
                ] ;
                rdfs:label "Creature Type" ;
@@ -758,6 +778,7 @@ on one platform (:isHeldOn)."""@en .
                         :Airbend
                         :Amass
                         :Assemble
+                        :Assimilate
                         :Attach
                         :Behold
                         :Blight
@@ -852,6 +873,7 @@ in Magic. See rule 701.1."""@en .
                         :BandsWithOthers
                         :Bargain
                         :BattleCry
+                        :BeamMeUp
                         :Bestow
                         :Blitz
                         :Bloodthirst
@@ -1051,6 +1073,7 @@ defined rules meaning in Magic. See rule 702.1."""@en .
                      :Addendum
                      :Alliance
                      :Battalion
+                     :Battlefront
                      :Bloodrush
                      :Celebration
                      :Channel
@@ -1070,6 +1093,7 @@ defined rules meaning in Magic. See rule 702.1."""@en .
                      :Enrage
                      :FatefulHour
                      :FathomlessDescent
+                     :Federation
                      :Ferocious
                      :Flurry
                      :Formidable
@@ -1096,8 +1120,11 @@ defined rules meaning in Magic. See rule 702.1."""@en .
                      :Renew
                      :Repartee
                      :Revolt
+                     :Rulebreaker
                      :SecretCouncil
+                     :SeekOut
                      :SpellMastery
+                     :StrangeNewWorlds
                      :Strive
                      :Survival
                      :Sweep
@@ -2554,6 +2581,10 @@ starting life and hand size."""@en .
          rdfs:comment
          """Individuals who offer counsel, wisdom, and administrative
 guidance."""@en .
+:Aenar rdf:type owl:NamedIndividual ,
+                :CreatureTypes ;
+       rdfs:label "Aenar" ;
+       rdfs:comment "A creature type. See rule 205.3m."@en .
 :Aetherborn rdf:type owl:NamedIndividual ,
                      :CreatureTypes ;
             rdfs:label "Aetherborn" ;
@@ -2571,6 +2602,14 @@ guidance."""@en .
       rdfs:comment
       """A creature working together with others, often sharing combat
 strategies."""@en .
+:Andorian rdf:type owl:NamedIndividual ,
+                   :CreatureTypes ;
+          rdfs:label "Andorian" ;
+          rdfs:comment "A creature type. See rule 205.3m."@en .
+:Android rdf:type owl:NamedIndividual ,
+                  :CreatureTypes ;
+         rdfs:label "Android" ;
+         rdfs:comment "A creature type. See rule 205.3m."@en .
 :Angel rdf:type owl:NamedIndividual ,
                 :CreatureTypes ;
        rdfs:label "Angel" ;
@@ -2658,6 +2697,10 @@ magic, native to Kylem."""@en .
                  :CreatureTypes ;
         rdfs:label "Badger" ;
         rdfs:comment "A creature type representing a real-world badger."@en .
+:Bajoran rdf:type owl:NamedIndividual ,
+                  :CreatureTypes ;
+         rdfs:label "Bajoran" ;
+         rdfs:comment "A creature type. See rule 205.3m."@en .
 :Balloon rdf:type owl:NamedIndividual ,
                   :CreatureTypes ;
          rdfs:label "Balloon" ;
@@ -2720,6 +2763,10 @@ from Dungeons & Dragons."""@en .
            rdfs:comment
            """A warrior who fights in a state of frenzied, uncontrollable
 rage."""@en .
+:Betazoid rdf:type owl:NamedIndividual ,
+                   :CreatureTypes ;
+          rdfs:label "Betazoid" ;
+          rdfs:comment "A creature type. See rule 205.3m."@en .
 :Bird rdf:type owl:NamedIndividual ,
                :CreatureTypes ;
       rdfs:label "Bird" ;
@@ -2738,6 +2785,19 @@ rage."""@en .
                :CreatureTypes ;
       rdfs:label "Boar" ;
       rdfs:comment "A creature type representing a real-world boar."@en .
+:Bolian rdf:type owl:NamedIndividual ,
+                 :CreatureTypes ;
+        rdfs:label "Bolian" ;
+        rdfs:comment "A creature type. See rule 205.3m."@en .
+:Borg rdf:type owl:NamedIndividual ,
+               :CreatureTypes ;
+      rdfs:label "Borg" ;
+      rdfs:comment """A creature type. A permanent that is assimilated becomes a
+Borg artifact creature. See rules 205.3m and 701.72."""@en .
+:Brikar rdf:type owl:NamedIndividual ,
+                 :CreatureTypes ;
+        rdfs:label "Brikar" ;
+        rdfs:comment "A creature type. See rule 205.3m."@en .
 :Bringer rdf:type owl:NamedIndividual ,
                   :CreatureTypes ;
          rdfs:label "Bringer" ;
@@ -2750,6 +2810,10 @@ core."""@en .
            rdfs:comment
            """A bizarre creature that rolls into a ball of thorny vines for
 defense."""@en .
+:Caitian rdf:type owl:NamedIndividual ,
+                  :CreatureTypes ;
+         rdfs:label "Caitian" ;
+         rdfs:comment "A creature type. See rule 205.3m."@en .
 :Camarid rdf:type owl:NamedIndividual ,
                   :CreatureTypes ;
          rdfs:label "Camarid" ;
@@ -2764,6 +2828,10 @@ defense."""@en .
           rdfs:label "Capybara" ;
           rdfs:comment
           """A creature type representing a real-world capybara."""@en .
+:Cardassian rdf:type owl:NamedIndividual ,
+                     :CreatureTypes ;
+            rdfs:label "Cardassian" ;
+            rdfs:comment "A creature type. See rule 205.3m."@en .
 :Caribou rdf:type owl:NamedIndividual ,
                   :CreatureTypes ;
          rdfs:label "Caribou" ;
@@ -2884,6 +2952,10 @@ Rath."""@en .
        rdfs:comment
        """A malevolent entity formed of black mana, associated with ambition and
 contracts."""@en .
+:Denobulan rdf:type owl:NamedIndividual ,
+                    :CreatureTypes ;
+           rdfs:label "Denobulan" ;
+           rdfs:comment "A creature type. See rule 205.3m."@en .
 :Deserter rdf:type owl:NamedIndividual ,
                    :CreatureTypes ;
           rdfs:label "Deserter" ;
@@ -2967,6 +3039,10 @@ Eldrazi."""@en .
                   :CreatureTypes ;
          rdfs:label "Echidna" ;
          rdfs:comment "A creature type representing a real-world echidna."@en .
+:Edosian rdf:type owl:NamedIndividual ,
+                  :CreatureTypes ;
+         rdfs:label "Edosian" ;
+         rdfs:comment "A creature type. See rule 205.3m."@en .
 :Efreet rdf:type owl:NamedIndividual ,
                  :CreatureTypes ;
         rdfs:label "Efreet" ;
@@ -2975,6 +3051,10 @@ Eldrazi."""@en .
               :CreatureTypes ;
      rdfs:label "Egg" ;
      rdfs:comment "The unhatched stage of an oviparous creature."@en .
+:ElAurian rdf:type owl:NamedIndividual ,
+                   :CreatureTypes ;
+          rdfs:label "El-Aurian" ;
+          rdfs:comment "A creature type. See rule 205.3m."@en .
 :Elder rdf:type owl:NamedIndividual ,
                 :CreatureTypes ;
        rdfs:label "Elder" ;
@@ -3016,6 +3096,10 @@ magic."""@en .
                   :CreatureTypes ;
          rdfs:label "Eternal" ;
          rdfs:comment "A creature type. See rule 205.3m."@en .
+:Excalbian rdf:type owl:NamedIndividual ,
+                    :CreatureTypes ;
+           rdfs:label "Excalbian" ;
+           rdfs:comment "A creature type. See rule 205.3m."@en .
 :Eye rdf:type owl:NamedIndividual ,
               :CreatureTypes ;
      rdfs:label "Eye" ;
@@ -3025,6 +3109,10 @@ magic."""@en .
         rdfs:label "Faerie" ;
         rdfs:comment
         """A small, mischievous winged sprite associated with illusions."""@en .
+:Ferengi rdf:type owl:NamedIndividual ,
+                  :CreatureTypes ;
+         rdfs:label "Ferengi" ;
+         rdfs:comment "A creature type. See rule 205.3m."@en .
 :Ferret rdf:type owl:NamedIndividual ,
                  :CreatureTypes ;
         rdfs:label "Ferret" ;
@@ -3132,6 +3220,10 @@ weapon."""@en .
         rdfs:comment
         """A serpentine humanoid with snakes for hair and a petrifying
 gaze."""@en .
+:Gorn rdf:type owl:NamedIndividual ,
+               :CreatureTypes ;
+      rdfs:label "Gorn" ;
+      rdfs:comment "A creature type. See rule 205.3m."@en .
 :Graveborn rdf:type owl:NamedIndividual ,
                     :CreatureTypes ;
            rdfs:label "Graveborn" ;
@@ -3195,6 +3287,10 @@ rage."""@en .
             rdfs:comment
             """A flying beast combining the features of a horse and a
 griffon."""@en .
+:Hirogen rdf:type owl:NamedIndividual ,
+                  :CreatureTypes ;
+         rdfs:label "Hirogen" ;
+         rdfs:comment "A creature type. See rule 205.3m."@en .
 :Homarid rdf:type owl:NamedIndividual ,
                   :CreatureTypes ;
          rdfs:label "Homarid" ;
@@ -3235,6 +3331,10 @@ severed."""@en .
                    :CreatureTypes ;
           rdfs:label "Illusion" ;
           rdfs:comment "A phantom entity composed of magic and deceit."@en .
+:Illyrian rdf:type owl:NamedIndividual ,
+                   :CreatureTypes ;
+          rdfs:label "Illyrian" ;
+          rdfs:comment "A creature type. See rule 205.3m."@en .
 :Imp rdf:type owl:NamedIndividual ,
               :CreatureTypes ;
      rdfs:label "Imp" ;
@@ -3274,6 +3374,10 @@ monstrosities."""@en .
                     :CreatureTypes ;
            rdfs:label "Jellyfish" ;
            rdfs:comment "A gelatinous aquatic creature."@en .
+:JemHadar rdf:type owl:NamedIndividual ,
+                   :CreatureTypes ;
+          rdfs:label "Jem’Hadar" ;
+          rdfs:comment "A creature type. See rule 205.3m."@en .
 :Juggernaut rdf:type owl:NamedIndividual ,
                      :CreatureTypes ;
             rdfs:label "Juggernaut" ;
@@ -3290,6 +3394,10 @@ monstrosities."""@en .
       rdfs:comment
       """An ancient, reptilian beast created by Gaea to defend Dominaria.
 """@en .
+:Kelpien rdf:type owl:NamedIndividual ,
+                  :CreatureTypes ;
+         rdfs:label "Kelpien" ;
+         rdfs:comment "A creature type. See rule 205.3m."@en .
 :Kirin rdf:type owl:NamedIndividual ,
                 :CreatureTypes ;
        rdfs:label "Kirin" ;
@@ -3300,6 +3408,10 @@ monstrosities."""@en .
          rdfs:label "Kithkin" ;
          rdfs:comment
          """A community-focused, short-statured humanoid native to Lorwyn."""@en .
+:Klingon rdf:type owl:NamedIndividual ,
+                  :CreatureTypes ;
+         rdfs:label "Klingon" ;
+         rdfs:comment "A creature type. See rule 205.3m."@en .
 :Knight rdf:type owl:NamedIndividual ,
                  :CreatureTypes ;
         rdfs:label "Knight" ;
@@ -3323,6 +3435,10 @@ hooks."""@en .
                :CreatureTypes ;
       rdfs:label "Kree" ;
       rdfs:comment "A creature type. See rule 205.3m."@en .
+:Kwejian rdf:type owl:NamedIndividual ,
+                  :CreatureTypes ;
+         rdfs:label "Kwejian" ;
+         rdfs:comment "A creature type. See rule 205.3m."@en .
 :Lamia rdf:type owl:NamedIndividual ,
                 :CreatureTypes ;
        rdfs:label "Lamia" ;
@@ -3333,6 +3449,10 @@ beast."""@en .
                   :CreatureTypes ;
          rdfs:label "Lammasu" ;
          rdfs:comment "A majestic sphinx-like spirit beast of order."@en .
+:Lanthanite rdf:type owl:NamedIndividual ,
+                     :CreatureTypes ;
+            rdfs:label "Lanthanite" ;
+            rdfs:comment "A creature type. See rule 205.3m."@en .
 :Leech rdf:type owl:NamedIndividual ,
                 :CreatureTypes ;
        rdfs:label "Leech" ;
@@ -3383,6 +3503,14 @@ host."""@en .
            rdfs:comment
            """A metallic, manticore-like construct that constantly demands fuel
 or cards."""@en .
+:Medusan rdf:type owl:NamedIndividual ,
+                  :CreatureTypes ;
+         rdfs:label "Medusan" ;
+         rdfs:comment "A creature type. See rule 205.3m."@en .
+:Melkotian rdf:type owl:NamedIndividual ,
+                    :CreatureTypes ;
+           rdfs:label "Melkotian" ;
+           rdfs:comment "A creature type. See rule 205.3m."@en .
 :Mercenary rdf:type owl:NamedIndividual ,
                     :CreatureTypes ;
            rdfs:label "Mercenary" ;
@@ -3472,6 +3600,10 @@ Kamigawa's sky."""@en .
         rdfs:label "Mystic" ;
         rdfs:comment
         """A spellcaster who focuses on spiritual or esoteric magic."""@en .
+:Nakuhl rdf:type owl:NamedIndividual ,
+                 :CreatureTypes ;
+        rdfs:label "Na’kuhl" ;
+        rdfs:comment "A creature type. See rule 205.3m."@en .
 :Nautilus rdf:type owl:NamedIndividual ,
                    :CreatureTypes ;
           rdfs:label "Nautilus" ;
@@ -3523,10 +3655,18 @@ past."""@en .
        rdfs:label "Nymph" ;
        rdfs:comment
        """A nature spirit bound to rivers, trees, or celestial bodies."""@en .
+:Ocampa rdf:type owl:NamedIndividual ,
+                 :CreatureTypes ;
+        rdfs:label "Ocampa" ;
+        rdfs:comment "A creature type. See rule 205.3m."@en .
 :Octopus rdf:type owl:NamedIndividual ,
                   :CreatureTypes ;
          rdfs:label "Octopus" ;
          rdfs:comment "An intelligent, eight-armed cephalopod."@en .
+:Officer rdf:type owl:NamedIndividual ,
+                  :CreatureTypes ;
+         rdfs:label "Officer" ;
+         rdfs:comment "A creature type. See rule 205.3m."@en .
 :Ogre rdf:type owl:NamedIndividual ,
                :CreatureTypes ;
       rdfs:label "Ogre" ;
@@ -3548,6 +3688,10 @@ past."""@en .
                :CreatureTypes ;
       rdfs:label "Orgg" ;
       rdfs:comment "A massive, foul-tempered monstrous humanoid."@en .
+:Orion rdf:type owl:NamedIndividual ,
+                :CreatureTypes ;
+       rdfs:label "Orion" ;
+       rdfs:comment "A creature type. See rule 205.3m."@en .
 :Otter rdf:type owl:NamedIndividual ,
                 :CreatureTypes ;
        rdfs:label "Otter" ;
@@ -3661,6 +3805,10 @@ Mankind."""@en .
            rdfs:comment
            """An Eldrazi drone that interacts with exiled spells and
 permanents."""@en .
+:Q rdf:type owl:NamedIndividual ,
+            :CreatureTypes ;
+   rdfs:label "Q" ;
+   rdfs:comment "A creature type. See rule 205.3m."@en .
 :Qu rdf:type owl:NamedIndividual ,
              :CreatureTypes ;
     rdfs:label "Qu" ;
@@ -3710,6 +3858,10 @@ permanents."""@en .
        rdfs:comment
        """A stealthy, deceptive individual skilled in thievery and
 trickery."""@en .
+:Romulan rdf:type owl:NamedIndividual ,
+                  :CreatureTypes ;
+         rdfs:label "Romulan" ;
+         rdfs:comment "A creature type. See rule 205.3m."@en .
 :Sable rdf:type owl:NamedIndividual ,
                 :CreatureTypes ;
        rdfs:label "Sable" ;
@@ -3965,6 +4117,22 @@ strength."""@en .
                 :CreatureTypes ;
        rdfs:label "Synth" ;
        rdfs:comment "A synthetic humanoid."@en .
+:Talaxian rdf:type owl:NamedIndividual ,
+                   :CreatureTypes ;
+          rdfs:label "Talaxian" ;
+          rdfs:comment "A creature type. See rule 205.3m."@en .
+:Talosian rdf:type owl:NamedIndividual ,
+                   :CreatureTypes ;
+          rdfs:label "Talosian" ;
+          rdfs:comment "A creature type. See rule 205.3m."@en .
+:Tamarian rdf:type owl:NamedIndividual ,
+                   :CreatureTypes ;
+          rdfs:label "Tamarian" ;
+          rdfs:comment "A creature type. See rule 205.3m."@en .
+:Tellarite rdf:type owl:NamedIndividual ,
+                    :CreatureTypes ;
+           rdfs:label "Tellarite" ;
+           rdfs:comment "A creature type. See rule 205.3m."@en .
 :Tentacle rdf:type owl:NamedIndividual ,
                    :CreatureTypes ;
           rdfs:label "Tentacle" ;
@@ -3982,6 +4150,10 @@ creature."""@en .
           rdfs:comment
           """A deceitful, illusion-focused humanoid race trapped in Rath's shadow
 realm."""@en .
+:Tholian rdf:type owl:NamedIndividual ,
+                  :CreatureTypes ;
+         rdfs:label "Tholian" ;
+         rdfs:comment "A creature type. See rule 205.3m."@en .
 :Thopter rdf:type owl:NamedIndividual ,
                   :CreatureTypes ;
          rdfs:label "Thopter" ;
@@ -4002,6 +4174,10 @@ Orzhov."""@en .
           rdfs:comment
           """A legendary time-traveling humanoid race from Gallifrey in Doctor
 Who."""@en .
+:Tosk rdf:type owl:NamedIndividual ,
+               :CreatureTypes ;
+      rdfs:label "Tosk" ;
+      rdfs:comment "A creature type. See rule 205.3m."@en .
 :Toy rdf:type owl:NamedIndividual ,
               :CreatureTypes ;
        rdfs:label "Toy" ;
@@ -4010,6 +4186,14 @@ Who."""@en .
                    :CreatureTypes ;
           rdfs:label "Treefolk" ;
           rdfs:comment "A massive, sentient, and long-lived walking tree."@en .
+:Tribble rdf:type owl:NamedIndividual ,
+                  :CreatureTypes ;
+         rdfs:label "Tribble" ;
+         rdfs:comment "A creature type. See rule 205.3m."@en .
+:Trill rdf:type owl:NamedIndividual ,
+                :CreatureTypes ;
+       rdfs:label "Trill" ;
+       rdfs:comment "A creature type. See rule 205.3m."@en .
 :Trilobite rdf:type owl:NamedIndividual ,
                     :CreatureTypes ;
            rdfs:label "Trilobite" ;
@@ -4053,6 +4237,10 @@ others."""@en .
                   :CreatureTypes ;
          rdfs:label "Varmint" ;
          rdfs:comment "A troublesome wild animal or pest."@en .
+:VauNAkat rdf:type owl:NamedIndividual ,
+                   :CreatureTypes ;
+          rdfs:label "Vau-N’Akat" ;
+          rdfs:comment "A creature type. See rule 205.3m."@en .
 :Vedalken rdf:type owl:NamedIndividual ,
                    :CreatureTypes ;
           rdfs:label "Vedalken" ;
@@ -4068,6 +4256,14 @@ others."""@en .
         rdfs:comment
         """A mutated creature from Dominaria that adapts with extra colors of
 mana."""@en .
+:Vorta rdf:type owl:NamedIndividual ,
+                :CreatureTypes ;
+       rdfs:label "Vorta" ;
+       rdfs:comment "A creature type. See rule 205.3m."@en .
+:Vulcan rdf:type owl:NamedIndividual ,
+                 :CreatureTypes ;
+        rdfs:label "Vulcan" ;
+        rdfs:comment "A creature type. See rule 205.3m."@en .
 :Wall rdf:type owl:NamedIndividual ,
                :CreatureTypes ;
       rdfs:label "Wall" ;
@@ -4140,6 +4336,10 @@ moon."""@en .
       rdfs:comment
       """A massive, ancient, dragon-like serpent without limbs or
 wings."""@en .
+:Xindi rdf:type owl:NamedIndividual ,
+                :CreatureTypes ;
+       rdfs:label "Xindi" ;
+       rdfs:comment "A creature type. See rule 205.3m."@en .
 :Yeti rdf:type owl:NamedIndividual ,
                :CreatureTypes ;
       rdfs:label "Yeti" ;
@@ -4219,7 +4419,7 @@ dungeon."""@en .
       rdfs:comment """An enchantment type representing a story told in chapters.
 A Saga enters with lore counters and gets another as its controller’s precombat
 main phase begins; each chapter ability triggers as the lore count reaches its
-chapter number. See rules 714 and 205.3h."""@en .
+chapter number. See rules 715 and 205.3h."""@en .
 :Shard rdf:type owl:NamedIndividual ,
                 :EnchantmentTypes ;
        rdfs:label "Shard" ;
@@ -4656,6 +4856,10 @@ protect."""@en .
                  :PlaneswalkerTypes ;
         rdfs:label "Arlinn" ;
         rdfs:comment "A werewolf planeswalker from Innistrad."@en .
+:Arzakon rdf:type owl:NamedIndividual ,
+                  :PlaneswalkerTypes ;
+         rdfs:label "Arzakon" ;
+         rdfs:comment "A planeswalker type. See rule 205.3j."@en .
 :Ashiok rdf:type owl:NamedIndividual ,
                  :PlaneswalkerTypes ;
         rdfs:label "Ashiok" ;
@@ -4724,6 +4928,10 @@ destiny."""@en .
       rdfs:comment
       """A vedalken planeswalker with the ability to see the flaws in any
 system."""@en .
+:Dyfed rdf:type owl:NamedIndividual ,
+                :PlaneswalkerTypes ;
+       rdfs:label "Dyfed" ;
+       rdfs:comment "A planeswalker type. See rule 205.3j."@en .
 :Ellywick rdf:type owl:NamedIndividual ,
                    :PlaneswalkerTypes ;
           rdfs:label "Ellywick" ;
@@ -4742,6 +4950,10 @@ system."""@en .
         rdfs:label "Estrid" ;
         rdfs:comment
         """A human planeswalker who uses masks and enchantments."""@en .
+:Feroz rdf:type owl:NamedIndividual ,
+                :PlaneswalkerTypes ;
+       rdfs:label "Feroz" ;
+       rdfs:comment "A planeswalker type. See rule 205.3j."@en .
 :Freyalise rdf:type owl:NamedIndividual ,
                     :PlaneswalkerTypes ;
            rdfs:label "Freyalise" ;
@@ -4757,6 +4969,10 @@ system."""@en .
         rdfs:comment
         """A human planeswalker known for his invulnerability and sense of
 justice."""@en .
+:Greensleeves rdf:type owl:NamedIndividual ,
+                       :PlaneswalkerTypes ;
+              rdfs:label "Greensleeves" ;
+              rdfs:comment "A planeswalker type. See rule 205.3j."@en .
 :Grist rdf:type owl:NamedIndividual ,
                 :PlaneswalkerTypes ;
        rdfs:label "Grist" ;
@@ -4905,6 +5121,10 @@ nature."""@en .
        rdfs:label "Serra" ;
        rdfs:comment
        """An ancient human planeswalker who created an angelic realm."""@en .
+:Sifa rdf:type owl:NamedIndividual ,
+               :PlaneswalkerTypes ;
+      rdfs:label "Sifa" ;
+      rdfs:comment "A planeswalker type. See rule 205.3j."@en .
 :Sivitri rdf:type owl:NamedIndividual ,
                   :PlaneswalkerTypes ;
          rdfs:label "Sivitri" ;
@@ -4943,6 +5163,10 @@ magic."""@en .
           rdfs:label "Tezzeret" ;
           rdfs:comment
           """A human artificer planeswalker from Alara who bends metal."""@en .
+:Thomil rdf:type owl:NamedIndividual ,
+                 :PlaneswalkerTypes ;
+        rdfs:label "Thomil" ;
+        rdfs:comment "A planeswalker type. See rule 205.3j."@en .
 :Tibalt rdf:type owl:NamedIndividual ,
                  :PlaneswalkerTypes ;
         rdfs:label "Tibalt" ;
@@ -4992,6 +5216,10 @@ creatures."""@en .
                     :PlaneswalkerTypes ;
          rdfs:label "Windgrace" ;
          rdfs:comment "A panther warrior planeswalker from Dominaria."@en .
+:Worzel rdf:type owl:NamedIndividual ,
+                 :PlaneswalkerTypes ;
+        rdfs:label "Worzel" ;
+        rdfs:comment "A planeswalker type. See rule 205.3j."@en .
 :Wrenn rdf:type owl:NamedIndividual ,
                 :PlaneswalkerTypes ;
        rdfs:label "Wrenn" ;
@@ -5075,6 +5303,10 @@ diaries. See rule 205.3g."""@en .
       rdfs:comment
       """An artifact type representing investigative evidence, typically
 sacrificed to draw a card."""@en .
+:Communicator rdf:type owl:NamedIndividual ,
+                       :ArtifactTypes ;
+              rdfs:label "Communicator" ;
+              rdfs:comment "An artifact type. See rule 205.3g."@en .
 :Contraption rdf:type owl:NamedIndividual ,
                       :ArtifactTypes ;
              rdfs:label "Contraption" ;
@@ -5509,6 +5741,13 @@ token or grows an Army you already have. See rule 701.47."""@en .
           rdfs:label "Assemble" ;
           rdfs:comment """A keyword action that puts Contraptions onto the
 battlefield. See rule 701.45."""@en .
+:Assimilate rdf:type owl:NamedIndividual ,
+                     :KeywordAction ;
+            rdfs:label "Assimilate" ;
+            rdfs:comment """A keyword action that gains control of a permanent,
+or puts a permanent card from another zone onto the battlefield under your
+control, with a +1/+1 counter on it; it becomes a Borg artifact creature. See
+rule 701.72."""@en .
 :Attach rdf:type owl:NamedIndividual ,
                  :KeywordAction ;
         rdfs:label "Attach" ;
@@ -5948,6 +6187,13 @@ cost. See rule 702.166."""@en .
            rdfs:label "Battle Cry" ;
            rdfs:comment """A keyword ability that makes other attacking
 creatures better in combat. See rule 702.91."""@en .
+:BeamMeUp rdf:type owl:NamedIndividual ,
+                   :KeywordAbility ;
+          rdfs:label "Beam me up" ;
+          rdfs:comment """A keyword ability that lets a player cast an instant
+or sorcery card from their graveyard for an alternative cost that includes
+returning a creature they control to its owner’s hand; the card is then exiled.
+See rule 702.196."""@en .
 :Bestow rdf:type owl:NamedIndividual ,
                  :KeywordAbility ;
         rdfs:label "Bestow" ;
@@ -6949,6 +7195,12 @@ another creature you control enters. See rule 207.2c."""@en .
            rdfs:label "Battalion" ;
            rdfs:comment """An ability word for abilities that trigger whenever
 the creature and at least two other creatures attack. See rule 207.2c."""@en .
+:Battlefront rdf:type owl:NamedIndividual ,
+                      :AbilityWord ;
+             rdfs:label "Battlefront" ;
+             rdfs:comment """An ability word. Like every ability word, it ties
+together abilities with similar functionality but has no rules meaning of its
+own. See rule 207.2c."""@en .
 :Bloodrush rdf:type owl:NamedIndividual ,
                     :AbilityWord ;
            rdfs:label "Bloodrush" ;
@@ -7050,6 +7302,11 @@ have 5 or less life. See rule 207.2c."""@en .
                    rdfs:label "Fathomless descent" ;
                    rdfs:comment """An ability word for abilities that count the
 permanent cards in your graveyard. See rule 207.2c."""@en .
+:Federation rdf:type owl:NamedIndividual ,
+                     :AbilityWord ;
+            rdfs:label "Federation" ;
+            rdfs:comment """An ability word for abilities that count the
+creature types among non-Borg creatures you control. See rule 207.2c."""@en .
 :Ferocious rdf:type owl:NamedIndividual ,
                     :AbilityWord ;
            rdfs:label "Ferocious" ;
@@ -7185,18 +7442,35 @@ you cast an instant or sorcery spell that targets a creature. See rule
         rdfs:label "Revolt" ;
         rdfs:comment """An ability word for abilities that apply if a permanent
 you controlled left the battlefield this turn. See rule 207.2c."""@en .
+:Rulebreaker rdf:type owl:NamedIndividual ,
+                      :AbilityWord ;
+             rdfs:label "Rulebreaker" ;
+             rdfs:comment """An ability word for abilities that change the deck
+construction rules for a deck with the card as its commander; they function
+before the game begins. See rules 207.2c and 903.5e."""@en .
 :SecretCouncil rdf:type owl:NamedIndividual ,
                         :AbilityWord ;
                rdfs:label "Secret council" ;
                rdfs:comment """An ability word for abilities that have each
 player vote secretly, with an effect determined by the votes. See rule
 207.2c."""@en .
+:SeekOut rdf:type owl:NamedIndividual ,
+                  :AbilityWord ;
+         rdfs:label "Seek out" ;
+         rdfs:comment """An ability word. Like every ability word, it ties
+together abilities with similar functionality but has no rules meaning of its
+own. See rule 207.2c."""@en .
 :SpellMastery rdf:type owl:NamedIndividual ,
                        :AbilityWord ;
               rdfs:label "Spell mastery" ;
               rdfs:comment """An ability word for abilities that apply if there
 are two or more instant and/or sorcery cards in your graveyard. See rule
 207.2c."""@en .
+:StrangeNewWorlds rdf:type owl:NamedIndividual ,
+                           :AbilityWord ;
+                  rdfs:label "Strange new worlds" ;
+                  rdfs:comment """An ability word for abilities that count the
+differently named lands you control. See rule 207.2c."""@en .
 :Strive rdf:type owl:NamedIndividual ,
                  :AbilityWord ;
         rdfs:label "Strive" ;
