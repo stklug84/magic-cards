@@ -28,6 +28,10 @@ Checks:
   6. card-iris       - a card individual's IRI names nothing else: no other
                        rdf:type, not a class or property (a card named like a
                        set or a keyword would merge with it into one node).
+  7. synergy-pools   - MagicCardSynergies.ttl relates only cards of the paper
+                       collection, MagicArenaSynergies.ttl only cards of the
+                       MTG Arena collection, each card through one canonical
+                       individual per card name.
 
 Exit code 0 on success, 1 on any failure.
 

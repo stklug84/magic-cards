@@ -9,7 +9,7 @@ own TTL files against a published graph bundle:
   sparql       SPARQL 1.1 syntax, canonical mc: prefix, term existence
   consistency  cross-file graph checks: undefined terms, dangling refs,
                card-entry shape, Commander deck totals (CR 903.5a),
-               behavior hooks, synergy domains
+               behavior hooks, synergy domains and collection pools
 
 Every check takes a :class:`~mtgvalidate.context.ValidationContext`
 carrying one or more graph roots and the ontology IRI, rather than
