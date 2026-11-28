@@ -3,7 +3,9 @@
 Reusable SPARQL 1.1 queries for the **Magic Cards Ontology** (`MagicCardsOntology.ttl`) and any instance graph
 that conforms to it. The reference dataset is the card collection in `sets/*.ttl` (aggregated by
 `MagicCardIndividuals.ttl`) together with the inventory graphs `MagicCardCollection.ttl` (paper) and
-`MagicArenaCollection.ttl` (MTG Arena) and the synergy graph `MagicCardSynergies.ttl`. Deck-scoped queries
+`MagicArenaCollection.ttl` (MTG Arena) and one of the two synergy graphs: `MagicCardSynergies.ttl` relates the
+paper collection's cards, `MagicArenaSynergies.ttl` the MTG Arena collection's. A deck is built from one collection,
+so load the synergy graph of that collection, not both. Deck-scoped queries
 operate on deck instance graphs, which are not part of this
 repository — load your own alongside the dataset.
 
@@ -102,7 +104,8 @@ pattern is sufficient.
 ## Running the queries
 
 Most SPARQL engines do **not** follow `owl:imports` automatically, so load the ontology, the per-set instance
-files, the synergy graph, and any deck instance graphs of your own explicitly.
+files, the synergy graph of the collection you build from (the examples load the paper one;
+use `MagicArenaSynergies.ttl` for MTG Arena), and any deck instance graphs of your own explicitly.
 
 ### rdflib (Python)
 

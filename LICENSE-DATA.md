@@ -14,7 +14,7 @@ only; this file defines its scope and the licences of everything else.
 | `queries/**` (SPARQL query catalog) | [MIT](LICENSE) |
 | `.github/**`, `pyproject.toml`, lint configurations | [MIT](LICENSE) |
 | `MagicCardsOntology.ttl` | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) |
-| `MagicCardSynergies.ttl` | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) |
+| `MagicCardSynergies.ttl`, `MagicArenaSynergies.ttl` | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) |
 | `MagicSimulationAnnotations.ttl` | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) |
 | `sets/*.ttl`, `MagicCardIndividuals.ttl`, `MagicCardCollection.ttl`, `MagicArenaCollection.ttl` | No licence granted — see below |
 
@@ -22,7 +22,8 @@ only; this file defines its scope and the licences of everything else.
 
 The hand-authored knowledge modelling — the class/property schema in
 `MagicCardsOntology.ttl`, the synergy relations in
-`MagicCardSynergies.ttl`, and the simulation annotations in
+`MagicCardSynergies.ttl` and `MagicArenaSynergies.ttl`, and the simulation
+annotations in
 `MagicSimulationAnnotations.ttl` — is original creative work by
 Steffen Klug, licensed under the
 [Creative Commons Attribution-ShareAlike 4.0 International licence](https://creativecommons.org/licenses/by-sa/4.0/)
