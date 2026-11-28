@@ -142,7 +142,7 @@ jobs:
       - name: Download Comprehensive Rules
         uses: stklug84/actions/mtg/fetch-comprehensive-rules@561b92c180aed0f6ce7d311d66dec7d22aa37721  # v2.19.1
         with:
-          cr-date: "20260925"
+          cr-date: "20261106"
 
       # The Linux build installs its own toolchain inside the image.
       - name: Install the pinned toolchain
