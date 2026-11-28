@@ -120,11 +120,13 @@ exclusions are deliberate and must stay:
 
 `MagicCardIndividuals.ttl` *is* included even though the simulator ignores
 it, because the two collection graphs (`MagicCardCollection.ttl`,
-`MagicArenaCollection.ttl`) and `MagicCardSynergies.ttl` import it and the
+`MagicArenaCollection.ttl`) and the two synergy graphs import it and the
 bundle must pass its own `owl:imports` check standalone. Do not
-"tidy" it out. `MagicCardSynergies.ttl` is included for the synergy
-queries and for magic-decks, whose deck builder reads the card-to-card
-synergies from the pinned bundle.
+"tidy" it out. The synergy graphs — `MagicCardSynergies.ttl` for the paper
+collection, `MagicArenaSynergies.ttl` for the MTG Arena collection — are
+included for the synergy queries and for magic-decks, whose deck builder
+reads the card-to-card synergies of the collection a deck is built from
+out of the pinned bundle. Both are required members.
 
 ## GRAPH-MANIFEST.json is the contract
 
