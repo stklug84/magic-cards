@@ -69,7 +69,7 @@ jobs:
       # test exercises exactly the pairing a consumer installs. The
       # archive is checked against the .sha256 published next to it.
       prepare-command: |
-        CR_DATE=20260925
+        CR_DATE=20261106
         curl -fsSL -o "MagicCompRules-${CR_DATE}.txt" \
           "https://media.wizards.com/2026/downloads/MagicCompRules%20${CR_DATE}.txt"
         tools="$(python3 -c 'import tomllib; print(tomllib.load(open("pyproject.toml", "rb"))["project"]["version"])')"

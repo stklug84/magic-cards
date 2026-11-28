@@ -608,9 +608,9 @@ def parse_type_line(
     """Parse a Scryfall type_line into (supertypes, card types, subtypes).
 
     Multi-face type lines ("A // B") are unioned, EXCEPT for the
-    adventure and prepare layouts: per CR 715.2 an adventurer card has
+    adventure and prepare layouts: per CR 716.2 an adventurer card has
     only its primary (left) face's characteristics anywhere except on
-    the stack as an Adventure, and per CR 722.2-722.3 a preparation
+    the stack as an Adventure, and per CR 723.2-723.3 a preparation
     card's inset "prepare spell" defines alternative characteristics
     used only by the copies it lets you cast. In both layouts the
     secondary face contributes its subtypes (e.g. the Adventure spell

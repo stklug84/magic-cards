@@ -265,7 +265,8 @@ the part a reviewer checks by eye.
   Change the generator and regenerate;
   an edit made by hand is silently reverted by the next run. The
   hand-authored files are `MagicCardsOntology.ttl`,
-  `MagicCardSynergies.ttl` and `MagicSimulationAnnotations.ttl`.
+  `MagicCardSynergies.ttl`, `MagicArenaSynergies.ttl` and
+  `MagicSimulationAnnotations.ttl`.
 - **One predicate, one object list.** Assert a multi-valued predicate once
   and separate its objects with `,`; never repeat the predicate. Objects
   align under the first one:

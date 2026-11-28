@@ -15,15 +15,19 @@ It carries only what a consumer actually reads:
   * ``MagicCardCollection.ttl``     paper inventory, for collection-scoped
                                     queries
   * ``MagicArenaCollection.ttl``    MTG Arena inventory, likewise
-  * ``MagicCardSynergies.ttl``      card-to-card synergies, for the synergy
-                                    queries and magic-decks' deck builder
+  * ``MagicCardSynergies.ttl``      card-to-card synergies of the paper
+                                    collection, for the synergy queries and
+                                    magic-decks' deck builder
+  * ``MagicArenaSynergies.ttl``     those of the MTG Arena collection,
+                                    likewise (a deck is built from one
+                                    collection, so the two are kept apart)
   * ``queries/``                    the reusable SPARQL catalog
   * ``GRAPH-MANIFEST.json``         the contract (see mtgcards.graph)
 
 ``MagicCardIndividuals.ttl`` is included even though the simulator never
 reads it (its reader globs ``sets/`` directly): the two collection graphs
-and MagicCardSynergies.ttl import it, so leaving it out makes the bundle
-fail its own owl:imports resolution check.
+and the synergy graphs import it, so leaving it out makes the bundle fail
+its own owl:imports resolution check.
 
 Deliberately excluded: the inventories ``collection.csv`` and
 ``arena-collection.json`` (private, untracked) and ``MagicCompRules-*.txt``
@@ -69,6 +73,7 @@ BUNDLE_PATHS = (
     "MagicCardCollection.ttl",
     "MagicArenaCollection.ttl",
     "MagicCardSynergies.ttl",
+    "MagicArenaSynergies.ttl",
     "MagicSimulationAnnotations.ttl",
     "sets",
     "queries",

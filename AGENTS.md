@@ -26,7 +26,8 @@ any manual change.
 | Path | Contents |
 |---|---|
 | `MagicCardsOntology.ttl` | The schema (TBox): classes, properties, constraints, vocabulary individuals |
-| `MagicCardSynergies.ttl` | Card-to-card synergy assertions |
+| `MagicCardSynergies.ttl` | Card-to-card synergy assertions between the paper collection's cards |
+| `MagicArenaSynergies.ttl` | The same for the MTG Arena collection's cards (see below) |
 | `MagicSimulationAnnotations.ttl` | Behavior hooks and AI threat weights (house opinion, not card facts) |
 | `queries/**/*.rq` | The SPARQL catalog |
 | `arena-picks.json` | MTG Arena printings picked by hand where no lookup decides (read by `scripts/arena_collection.py`) |
@@ -159,6 +160,19 @@ and in `rust/crates/mtgcards/src/behavior.rs` (what the simulator loads).
 `rust/crates/mtgcards/tests/behavior_keys.rs` reads the Python file and
 fails when they differ, so a new key lands in both in one commit.
 
+## Two card pools, two synergy graphs
+
+The paper collection and the MTG Arena collection are separate card pools:
+a deck is built from one or the other, never from both. Their synergies
+are therefore kept apart — `MagicCardSynergies.ttl` relates only cards
+`MagicCardCollection.ttl` holds, `MagicArenaSynergies.ttl` only cards
+`MagicArenaCollection.ttl` holds — and `check_consistency.py` (check 7,
+`synergy-pools`) fails on a relation that crosses pools. A card both
+collections hold may appear in both graphs. Each graph relates one
+canonical individual per card name; after an inventory update renames an
+individual (a second printing suffixes it), move its relations in the
+graph of every collection that holds it.
+
 ## Python rules
 
 `ruff` runs `select = ["ALL"]`; `mypy` runs `--strict` over `scripts/`.
@@ -190,7 +204,7 @@ Repo-specific subagents live in `.opencode/agents/`:
 | Agent | Owns |
 |---|---|
 | `graph-generator` | Running the import pipeline and diagnosing generator failures |
-| `ontology-curator` | Hand-authored schema edits to `MagicCardsOntology.ttl` |
+| `ontology-curator` | Hand-authored schema edits to `MagicCardsOntology.ttl`, and both synergy graphs |
 | `graph-validator` | Read-only validation and failure triage |
 | `sparql-author` | The `queries/` catalog and `INDEX.md` |
 | `graph-release` | Graph bundles, `GRAPH-MANIFEST.json`, `graph-*` tags |

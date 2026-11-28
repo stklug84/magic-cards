@@ -5,7 +5,9 @@ the pipeline notices when two builds of the same tree differ - yet the
 release docs promise a byte-stable tarball, and that promise is what lets
 anyone compare a published bundle against a rebuild. These tests pin the
 normalization that makes it true: member metadata and the gzip header
-derive from the graph version, never from the clock or the checkout.
+derive from the graph version, never from the clock or the checkout. The
+member tests pin that both synergy graphs ship: a deck is built from the
+paper or the MTG Arena collection, and each has its own.
 
 The builder is a script next to the packages in scripts/, so this module
 only runs from a checkout (``python3 -m unittest discover -s
@@ -70,13 +72,14 @@ version = "0.2.0"
 
 
 def _write_graph(root: Path) -> list[Path]:
-    """Lay out the smallest tree the builder accepts; return its files."""
+    """Lay out a tree carrying every bundle member; return its files."""
     files = {
         "MagicCardsOntology.ttl": _ONTOLOGY,
         "MagicCardIndividuals.ttl": "# aggregator\n",
         "MagicCardCollection.ttl": "# inventory\n",
         "MagicArenaCollection.ttl": "# MTG Arena inventory\n",
         "MagicCardSynergies.ttl": "# synergies\n",
+        "MagicArenaSynergies.ttl": "# MTG Arena synergies\n",
         "MagicSimulationAnnotations.ttl": "# hooks\n",
         "sets/TestSet.ttl": _SET,
         "queries/00_example.rq": "SELECT * WHERE { ?s ?p ?o }\n",
@@ -140,7 +143,7 @@ class TestBundleStability(unittest.TestCase):
                 self.assertEqual(info.mtime, _STAMP)
 
     def test_bundle_carries_the_graph_files(self) -> None:
-        """Every allowlisted file is bundled: both collections, the synergies."""
+        """Every allowlisted file is bundled: both collections and synergies."""
         with tarfile.open(self.first) as tar:
             names = set(tar.getnames())
         stem = f"{self.builder.BUNDLE_NAME}-{_GRAPH_VERSION}"
@@ -151,6 +154,7 @@ class TestBundleStability(unittest.TestCase):
             "MagicCardCollection.ttl",
             "MagicArenaCollection.ttl",
             "MagicCardSynergies.ttl",
+            "MagicArenaSynergies.ttl",
             "MagicSimulationAnnotations.ttl",
             "sets/TestSet.ttl",
             "queries/00_example.rq",
@@ -172,6 +176,31 @@ class TestBundleStability(unittest.TestCase):
         """A tag that release-graph.yml would reject is rejected here too."""
         with self.assertRaises(ValueError):
             self.builder.bundle_stamp("latest")
+
+
+class TestBundleMembers(unittest.TestCase):
+    """Both synergy graphs are required members, one per collection."""
+
+    def setUp(self) -> None:
+        """Lay out a tree carrying every bundle member."""
+        if _BUILDER is None:
+            self.skipTest("build_graph_bundle.py is only importable from scripts/")
+        self.builder = _BUILDER
+        tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(tmp.cleanup)
+        self.root = Path(tmp.name)
+        _write_graph(self.root)
+
+    def test_a_missing_synergy_graph_fails_the_build(self) -> None:
+        """Neither collection's synergies may silently drop out of a bundle."""
+        for name in ("MagicCardSynergies.ttl", "MagicArenaSynergies.ttl"):
+            with self.subTest(name=name):
+                path = self.root / name
+                content = path.read_bytes()
+                path.unlink()
+                with self.assertRaises(FileNotFoundError):
+                    self.builder.bundle_members(self.root)
+                path.write_bytes(content)
 
 
 if __name__ == "__main__":

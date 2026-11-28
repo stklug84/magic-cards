@@ -29,6 +29,11 @@ Loads every TTL file under the graph roots into one graph and checks:
                        property of the ontology (a card named like a set
                        or a keyword merges with it into one node otherwise,
                        and no reasoner objects).
+  7. synergy-pools   - a synergy graph relates only the cards of the
+                       collection a deck is built from: MagicCardSynergies.ttl
+                       those of the paper collection, MagicArenaSynergies.ttl
+                       those of the MTG Arena collection, each through one
+                       canonical individual per card name.
 
 Checks 2, 3 and 5 are what make this useful downstream: they catch a deck
 graph that references a card the knowledge graph no longer defines, that
@@ -49,6 +54,8 @@ from rdflib.namespace import OWL
 from mtgcards.behaviors import BEHAVIOR_KEYS
 
 if TYPE_CHECKING:
+    from pathlib import Path
+
     from rdflib.term import Node
 
     from mtgvalidate.context import ValidationContext
@@ -73,6 +80,14 @@ SYNERGY_PROP_NAMES = (
     "enables",
     "isEnabledBy",
 )
+
+#: synergy graph file -> local name of the platform whose collection it
+#: relates (check 7): a deck is built from the paper or the MTG Arena
+#: collection, never from both, so each synergy graph keeps to one pool
+SYNERGY_POOLS = {
+    "MagicCardSynergies.ttl": "PaperMagic",
+    "MagicArenaSynergies.ttl": "MTGArena",
+}
 
 
 def load(ctx: ValidationContext) -> tuple[Graph, Graph]:
@@ -561,6 +576,91 @@ def check_card_iris(idx: GraphIndex) -> list[str]:
     return errors
 
 
+def _name_errors(idx: GraphIndex, rel: str, nodes: set[Node]) -> list[str]:
+    """Return one error per card name shared by several of *nodes*."""
+    card_name = idx.ref("cardName")
+    by_name: dict[str, set[Node]] = {}
+    for node in nodes:
+        for name in idx.combined.objects(node, card_name):
+            by_name.setdefault(str(name), set()).add(node)
+    return [
+        f"synergy-pools: {rel}: {name!r} is related through {len(group)} "
+        f"individuals ({', '.join(sorted(map(str, group)))})"
+        for name, group in sorted(by_name.items())
+        if len(group) > 1
+    ]
+
+
+def _pool_errors(
+    idx: GraphIndex,
+    places: dict[Node, EntryPlace],
+    path: Path,
+) -> list[str]:
+    """Return the synergy-pools errors of the synergy graph at *path*."""
+    rel = idx.ctx.display(path)
+    platform_name = SYNERGY_POOLS[path.name]
+    platform = idx.ref(platform_name)
+    graph = Graph()
+    graph.parse(path, format="turtle")
+    pairs = [
+        pair
+        for prop in SYNERGY_PROP_NAMES
+        for pair in graph.subject_objects(idx.ref(prop))
+    ]
+    print(  # noqa: T201 - validator progress line
+        f"Synergy graph {rel}: {len(pairs)} relations, checked against the "
+        f"collections held on {platform_name}.",
+    )
+    nodes = {node for pair in pairs for node in pair}
+    errors = _name_errors(idx, rel, nodes)
+    collection = idx.ref("Collection")
+    if not any(
+        (coll, RDF.type, collection) in idx.combined
+        for coll in idx.combined.subjects(idx.ref("isHeldOn"), platform)
+    ):
+        # every node would fail; one error names the cause instead
+        errors.append(f"synergy-pools: {rel}: no collection is held on {platform}")
+        return errors
+    entry_card = idx.ref("entryCard")
+    pool = {
+        card
+        for entry, place in places.items()
+        if place.platform == platform
+        for card in idx.combined.objects(entry, entry_card)
+    }
+    errors.extend(
+        f"synergy-pools: {rel}: {node} is not held by a collection held on {platform}"
+        for node in sorted(nodes - pool, key=str)
+    )
+    return errors
+
+
+def check_synergy_pools(idx: GraphIndex) -> list[str]:
+    """Check 7 (synergy-pools): a synergy graph keeps to one collection's cards.
+
+    A deck is built from either the paper or the MTG Arena collection, never
+    from both, so each synergy graph of SYNERGY_POOLS relates only card
+    individuals held by a collection held on its platform - listed by a
+    :hasCollectionEntry whose :entryCard they are - and each card through
+    one canonical individual per :cardName. A graph is parsed on its own,
+    as the combined graph cannot tell which file asserted a triple; the
+    collections and the card names are looked up in the combined graph.
+    Either synergy graph may be absent.
+    """
+    files = [path for path in idx.ctx.ttl_files() if path.name in SYNERGY_POOLS]
+    if not files:
+        print(  # noqa: T201 - validator progress line
+            f"No synergy graph ({', '.join(SYNERGY_POOLS)}) found - skipping "
+            "the synergy-pools check.",
+        )
+        return []
+    places, _ = _entry_places(idx)  # its errors are check 3b's to report
+    errors: list[str] = []
+    for path in files:
+        errors.extend(_pool_errors(idx, places, path))
+    return errors
+
+
 @dataclass
 class CheckStats:
     """Counts reported in the summary line."""
@@ -592,6 +692,7 @@ def run(ctx: ValidationContext) -> list[str]:
     errors.extend(hook_errors)
     errors.extend(check_synergy_domain(idx))
     errors.extend(check_card_iris(idx))
+    errors.extend(check_synergy_pools(idx))
 
     print(  # noqa: T201 - validator summary line
         f"Checked {stats.n_props} properties, {stats.n_classes} classes, "
