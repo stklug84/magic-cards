@@ -563,7 +563,7 @@ Station (Tap another creature you control: Put charge counters equal to its powe
     :cardNumber "31"^^xsd:integer ;
     :artist "Evan Shipard" ;
     :hasLanguage :English ;
-    # Note: keyword "Beam me up" not defined in MagicCardsOntology
+    :hasKeywordAbility :BeamMeUp ;
     :printedText """Distribute two +1/+1 counters among one or two target creatures.
 Beam me up {2}{W} (You may cast this card from your graveyard for {2}{W} if you also return a creature you control to its owner's hand. Then exile this spell.)"""@en ;
     :oracleText """Distribute two +1/+1 counters among one or two target creatures.
@@ -685,7 +685,7 @@ Whenever you cast a Spacecraft spell, put a +1/+1 counter on target creature."""
     :toughness "2" ;
     :toughnessValue "2"^^xsd:integer ;
     :hasKeywordAbility :Flash ;
-    # Note: keyword "Federation" not defined in MagicCardsOntology
+    :hasAbilityWord :Federation ;
     :printedText """Flash
 Federation — When Saavik enters, she deals X damage to target attacking or blocking creature an opponent controls, where X is the number of creature types among non-Borg creatures you control."""@en ;
     :oracleText """Flash
@@ -904,7 +904,7 @@ Whenever this creature becomes tapped, you gain 2 life."""@en ;
     :cardNumber "40"^^xsd:integer ;
     :artist "Pauline Voss" ;
     :hasLanguage :English ;
-    # Note: keyword "Beam me up" not defined in MagicCardsOntology
+    :hasKeywordAbility :BeamMeUp ;
     :printedText """Look at the top five cards of your library. You may reveal a Plains card or nonland permanent card with mana value 3 or less from among them and put it into your hand. Put the rest on the bottom in a random order.
 Beam me up {2}{W} (You may cast this card from your graveyard for {2}{W} if you also return a creature you control to its owner's hand. Then exile this spell.)"""@en ;
     :oracleText """Look at the top five cards of your library. You may reveal a Plains card or nonland permanent card with mana value 3 or less from among them and put it into your hand. Put the rest on the bottom in a random order.
@@ -1295,7 +1295,7 @@ When this creature enters, draw a card, then discard a card."""@en ;
     :cardNumber "56"^^xsd:integer ;
     :artist "Carlos C Diaz" ;
     :hasLanguage :English ;
-    # Note: keyword "Beam me up" not defined in MagicCardsOntology
+    :hasKeywordAbility :BeamMeUp ;
     :printedText """Return target creature an opponent controls to its owner's hand.
 Beam me up {3}{U} (You may cast this card from your graveyard for {3}{U} if you also return a creature you control to its owner's hand. Then exile this spell.)"""@en ;
     :oracleText """Return target creature an opponent controls to its owner's hand.
@@ -1891,7 +1891,7 @@ Station (Tap another creature you control: Put charge counters equal to its powe
     :powerValue "3"^^xsd:integer ;
     :toughness "2" ;
     :toughnessValue "2"^^xsd:integer ;
-    # Note: keyword "Strange new worlds" not defined in MagicCardsOntology
+    :hasAbilityWord :StrangeNewWorlds ;
     :printedText """Strange new worlds — {4}{U}, {T}: Tap target creature. This ability costs {X} less to activate, where X is the number of differently named lands you control."""@en ;
     :oracleText """Strange new worlds — {4}{U}, {T}: Tap target creature. This ability costs {X} less to activate, where X is the number of differently named lands you control."""@en ;
     :flavorText """Vulcans practice martial arts as a meditative exercise, though their physical aspects are sometimes useful."""@en ;
@@ -2571,7 +2571,7 @@ You may cast this card from exile."""@en ;
     :cardNumber "123"^^xsd:integer ;
     :artist "Alex Negrea" ;
     :hasLanguage :English ;
-    # Note: keyword "Beam me up" not defined in MagicCardsOntology
+    :hasKeywordAbility :BeamMeUp ;
     :printedText """Look at the top two cards of your library. Put one of them into your hand and the other into your graveyard.
 Beam me up {1}{B} (You may cast this card from your graveyard for {1}{B} if you also return a creature you control to its owner's hand. Then exile this spell.)"""@en ;
     :oracleText """Look at the top two cards of your library. Put one of them into your hand and the other into your graveyard.
@@ -2814,7 +2814,7 @@ Basic landcycling {2} ({2}, Discard this card: Search your library for a basic l
     :cardNumber "139"^^xsd:integer ;
     :artist "Douglas Shuler" ;
     :hasLanguage :English ;
-    # Note: keyword "Beam me up" not defined in MagicCardsOntology
+    :hasKeywordAbility :BeamMeUp ;
     :printedText """Create a 2/1 red Klingon Warrior creature token with haste.
 Beam me up {2}{R} (You may cast this card from your graveyard for {2}{R} if you also return a creature you control to its owner's hand. Then exile this spell.)"""@en ;
     :oracleText """Create a 2/1 red Klingon Warrior creature token with haste.
@@ -3073,7 +3073,7 @@ Basic landcycling {2} ({2}, Discard this card: Search your library for a basic l
     :cardNumber "153"^^xsd:integer ;
     :artist "Julie Dillon" ;
     :hasLanguage :English ;
-    # Note: keyword "Federation" not defined in MagicCardsOntology
+    :hasAbilityWord :Federation ;
     :printedText """Federation — Exile target instant or sorcery card from your graveyard. Copy that card X times, where X is the number of creature types among non-Borg creatures you control. You may cast the copies without paying their mana costs. Exile Infinite Diversity."""@en ;
     :oracleText """Federation — Exile target instant or sorcery card from your graveyard. Copy that card X times, where X is the number of creature types among non-Borg creatures you control. You may cast the copies without paying their mana costs. Exile Infinite Diversity."""@en ;
     :flavorText """Our differences make us stronger."""@en ;
@@ -3269,7 +3269,7 @@ III — Sacrifice a land."""@en ;
     :toughnessValue "4"^^xsd:integer ;
     :hasKeywordAbility :FirstStrike ,
                        :Haste ;
-    # Note: keyword "Strange new worlds" not defined in MagicCardsOntology
+    :hasAbilityWord :StrangeNewWorlds ;
     :printedText """First strike, haste
 Strange new worlds — Whenever this creature attacks, creatures you control get +X/+0 until end of turn, where X is the number of differently named lands you control."""@en ;
     :oracleText """First strike, haste
@@ -3817,7 +3817,7 @@ At the beginning of your end step, if this creature attacked this turn, sacrific
     :powerValue "2"^^xsd:integer ;
     :toughness "2" ;
     :toughnessValue "2"^^xsd:integer ;
-    # Note: keyword "Strange new worlds" not defined in MagicCardsOntology
+    :hasAbilityWord :StrangeNewWorlds ;
     :printedText """Strange new worlds — {6}: This creature gets +2/+2 until end of turn. This ability costs {X} less to activate, where X is the number of differently named lands you control. Activate only once each turn."""@en ;
     :oracleText """Strange new worlds — {6}: This creature gets +2/+2 until end of turn. This ability costs {X} less to activate, where X is the number of differently named lands you control. Activate only once each turn."""@en ;
     :flavorText """"Humans believe cataloging life as a predictable series of scientific reactions robs it of its majesty. I find this attitude belittles the majesty of science.\""""@en ;
@@ -4108,7 +4108,7 @@ Creatures you control with counters on them have trample."""@en ;
     :cardNumber "198"^^xsd:integer ;
     :artist "Jessica Rossier" ;
     :hasLanguage :English ;
-    # Note: keyword "Beam me up" not defined in MagicCardsOntology
+    :hasKeywordAbility :BeamMeUp ;
     :printedText """Search your library for a basic land card or Planet card, put it onto the battlefield tapped, then shuffle.
 Beam me up {1}{G} (You may cast this card from your graveyard for {1}{G} if you also return a creature you control to its owner's hand. Then exile this spell.)"""@en ;
     :oracleText """Search your library for a basic land card or Planet card, put it onto the battlefield tapped, then shuffle.
